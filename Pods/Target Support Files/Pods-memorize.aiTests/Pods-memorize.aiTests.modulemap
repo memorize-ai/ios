@@ -1,0 +1,6 @@
+framework module Pods_memorize_aiTests {
+  umbrella header "Pods-memorize.aiTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
