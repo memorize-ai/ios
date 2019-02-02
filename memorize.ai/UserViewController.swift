@@ -1,4 +1,6 @@
 import UIKit
+import CoreData
+import Firebase
 
 class UserViewController: UIViewController {
 	@IBOutlet weak var loadingView: UIView!
@@ -37,7 +39,7 @@ class UserViewController: UIViewController {
 									loadData()
 									self.activityIndicator.stopAnimating()
 									self.loadingView.isHidden = true
-									self.createSignOutBarButtonItem()
+									self.createSettingsBarButtonItem()
 								}
 							} else if let error = error {
 								switch error.localizedDescription {
@@ -46,20 +48,38 @@ class UserViewController: UIViewController {
 									self.offlineView.isHidden = false
 									self.navigationController?.isNavigationBarHidden = true
 								default:
-									self.showHomeVC()
+									self.signIn()
 								}
 							}
 						}
 					} else {
-						showHomeVC()
+						signIn()
 					}
 				} catch {}
 			}
 		} else {
-			createSignOutBarButtonItem()
+			createSettingsBarButtonItem()
 		}
 		navigationController?.navigationBar.tintColor = .white
 		navigationItem.title = name
 		navigationItem.setHidesBackButton(true, animated: true)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		actionsTableView.reloadData()
+	}
+	
+	func signIn() {
+		performSegue(withIdentifier: "signIn", sender: self)
+	}
+	
+	func createSettingsBarButtonItem() {
+		let settingsBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settings))
+		navigationItem.setLeftBarButton(settingsBarButtonItem, animated: false)
+	}
+	
+	@objc func settings() {
+		// MARK: show settings
 	}
 }

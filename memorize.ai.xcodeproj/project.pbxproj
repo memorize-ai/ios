@@ -31,6 +31,8 @@
 		4D64391222056528006F4F2D /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D64390422056528006F4F2D /* Nunito-Italic.ttf */; };
 		4D64391322056528006F4F2D /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D64390522056528006F4F2D /* Nunito-LightItalic.ttf */; };
 		4D64391522057886006F4F2D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391422057886006F4F2D /* Global.swift */; };
+		4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391722057D88006F4F2D /* StartUpViewController.swift */; };
+		4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391922057DBD006F4F2D /* SignUpViewController.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		8CA1776EAA9CB8113779FB44 /* Pods_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */; };
 		9DDEA990CEBD550307F274C5 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1427E8A3FFD8404A861DF9A1 /* Pods_memorize_ai.framework */; };
@@ -87,6 +89,8 @@
 		4D64390422056528006F4F2D /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
 		4D64390522056528006F4F2D /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
 		4D64391422057886006F4F2D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		4D64391722057D88006F4F2D /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
+		4D64391922057DBD006F4F2D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820C660FC7E00ECB1150FB9C /* Pods-memorize.aiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-memorize.aiUITests/Pods-memorize.aiUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				4D64391422057886006F4F2D /* Global.swift */,
 				4D052AB72204259B0093B64E /* Main.storyboard */,
 				4D052AB52204259B0093B64E /* UserViewController.swift */,
+				4D64391622057D3A006F4F2D /* Auth */,
 				4D052ABD2204259C0093B64E /* Assets.xcassets */,
 				4D052AB32204259B0093B64E /* AppDelegate.swift */,
 				4D052ABF2204259C0093B64E /* LaunchScreen.storyboard */,
@@ -222,6 +227,15 @@
 				4D64390522056528006F4F2D /* Nunito-LightItalic.ttf */,
 			);
 			path = Nunito;
+			sourceTree = "<group>";
+		};
+		4D64391622057D3A006F4F2D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				4D64391722057D88006F4F2D /* StartUpViewController.swift */,
+				4D64391922057DBD006F4F2D /* SignUpViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,6 +485,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
+				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
 				4D052ABC2204259B0093B64E /* memorize_ai.xcdatamodeld in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
