@@ -2,7 +2,7 @@ import UIKit
 import CoreData
 import Firebase
 
-class UserViewController: UIViewController {
+class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var offlineView: UIView!
