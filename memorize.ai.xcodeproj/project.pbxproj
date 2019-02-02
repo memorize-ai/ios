@@ -33,6 +33,7 @@
 		4D64391522057886006F4F2D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391422057886006F4F2D /* Global.swift */; };
 		4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391722057D88006F4F2D /* StartUpViewController.swift */; };
 		4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391922057DBD006F4F2D /* SignUpViewController.swift */; };
+		4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D85C60C220638A2005B08DD /* SignInViewController.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		8CA1776EAA9CB8113779FB44 /* Pods_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */; };
 		9DDEA990CEBD550307F274C5 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1427E8A3FFD8404A861DF9A1 /* Pods_memorize_ai.framework */; };
@@ -91,6 +92,7 @@
 		4D64391422057886006F4F2D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		4D64391722057D88006F4F2D /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
 		4D64391922057DBD006F4F2D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4D85C60C220638A2005B08DD /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820C660FC7E00ECB1150FB9C /* Pods-memorize.aiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-memorize.aiUITests/Pods-memorize.aiUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				4D64391722057D88006F4F2D /* StartUpViewController.swift */,
 				4D64391922057DBD006F4F2D /* SignUpViewController.swift */,
+				4D85C60C220638A2005B08DD /* SignInViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
 				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
