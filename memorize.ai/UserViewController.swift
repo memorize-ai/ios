@@ -9,12 +9,13 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var actionsTableView: UITableView!
 	
 	struct Action {
+		let image: UIImage?
 		let name: String
-		let action: Selector
+		let action: Selector?
 	}
 	
 	let actions = [
-		[]
+		Action(image: nil, name: "Empty Action", action: nil)
 	]
 	
 	override func viewDidLoad() {
@@ -75,11 +76,32 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	func createSettingsBarButtonItem() {
-		let settingsBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settings))
-		navigationItem.setLeftBarButton(settingsBarButtonItem, animated: false)
+		navigationItem.setLeftBarButton(UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settings)), animated: false)
 	}
 	
 	@objc func settings() {
 		// MARK: show settings
+	}
+	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return actions.count
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		let element = actions[indexPath.section]
+		cell.imageView?.image = element.image
+		cell.textLabel?.text = element.name
+		cell.accessoryView?.isHidden = element.action == nil
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		guard let action = actions[indexPath.section].action else { return }
+		performSelector(onMainThread: action, with: nil, waitUntilDone: false)
 	}
 }
