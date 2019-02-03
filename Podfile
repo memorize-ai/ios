@@ -1,7 +1,7 @@
 target 'memorize.ai' do
 	use_frameworks!
 	pod 'Firebase/Core'
-	pod 'Firebase/Database'
+	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	target 'memorize.aiTests' do
