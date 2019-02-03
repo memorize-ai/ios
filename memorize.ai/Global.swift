@@ -13,6 +13,7 @@ var decks = [Deck]()
 
 struct Deck {
 	let id: String
+	var image: UIImage?
 	var name: String
 	var cards: [Card]
 	
