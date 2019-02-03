@@ -13,6 +13,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let layout = UICollectionViewFlowLayout()
 		layout.itemSize = CGSize(width: 84, height: 102)
 		layout.minimumLineSpacing = 8
+		layout.minimumInteritemSpacing = 8
 		decksCollectionView.collectionViewLayout = layout
     }
 	
@@ -51,6 +52,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 		(collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell)?.layer.borderColor = #colorLiteral(red: 0.6, green: 0.6666666667, blue: 0.7098039216, alpha: 1)
+	}
+	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return "CARDS"
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
