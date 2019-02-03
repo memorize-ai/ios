@@ -14,9 +14,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		let action: Selector?
 	}
 	
-	let actions = [
-		Action(image: nil, name: "Empty Action", action: nil)
-	]
+	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "Decks", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "Cards", action: #selector(showCards))]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,8 +31,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "") { user, error in
 							if error == nil {
 								id = user?.user.uid
-								ref.child("users/\(id!)/name").observeSingleEvent(of: .value) { snapshot in
-									name = snapshot.value as? String
+								firestore.collection("users").document(id!).getDocument { snapshot, error in
+									guard let snapshot = snapshot?.data() else { return }
+									name = snapshot["name"] as? String ?? ""
 									self.navigationItem.title = name
 									email = localEmail
 									loadData()
@@ -83,6 +82,14 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		// MARK: show settings
 	}
 	
+	@objc func showDecks() {
+		performSegue(withIdentifier: "decks", sender: self)
+	}
+	
+	@objc func showCards() {
+		performSegue(withIdentifier: "cards", sender: self)
+	}
+	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return actions.count
 	}
@@ -96,6 +103,16 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		let element = actions[indexPath.section]
 		cell.imageView?.image = element.image
 		cell.textLabel?.text = element.name
+		switch element.name {
+		case "Decks":
+			let decksCount = decks.count
+			cell.detailTextLabel?.text = "\(decksCount) deck\(decksCount == 1 ? "" : "s")"
+		case "Cards":
+			let cardsCount = decks.reduce(0) { result, deck in result + deck.cards.count }
+			cell.detailTextLabel?.text = "\(cardsCount) card\(cardsCount == 1 ? "" : "s")"
+		default:
+			cell.detailTextLabel?.text = nil
+		}
 		cell.accessoryView?.isHidden = element.action == nil
 		return cell
 	}

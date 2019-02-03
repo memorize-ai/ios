@@ -3,7 +3,7 @@ import CoreData
 import Firebase
 import AudioToolbox
 
-var ref: DatabaseReference! = Database.database().reference()
+let firestore = Firestore.firestore()
 var changeHandler: ((Change) -> Void)?
 var startup = true
 var id: String?
@@ -43,10 +43,6 @@ enum Change {
 
 func loadData() {
 	
-}
-
-func retrieveDataValue(_ snapshot: DataSnapshot, field: String) -> Any? {
-	return (snapshot.value as? [String: AnyObject])?[field]
 }
 
 func callChangeHandler(_ change: Change) {

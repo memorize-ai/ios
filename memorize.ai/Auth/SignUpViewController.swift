@@ -92,7 +92,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		Auth.auth().createUser(withEmail: emailText, password: passwordText) { authResult, error in
 			if error == nil {
 				id = authResult?.user.uid
-				ref.child("users/\(id!)").setValue(["name": nameText, "email": emailText])
+				firestore.collection("users").document(id!).setData(["name": nameText, "email": emailText])
 				name = nameText
 				saveLogin(email: emailText, password: passwordText)
 				loadData()

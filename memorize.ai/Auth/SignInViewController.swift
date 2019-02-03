@@ -75,8 +75,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		Auth.auth().signIn(withEmail: emailText, password: passwordText) { user, error in
 			if error == nil {
 				id = user?.user.uid
-				ref.child("users/\(id!)/name").observeSingleEvent(of: .value) { snapshot in
-					name = snapshot.value as? String
+				firestore.collection("users").document(id!).getDocument { snapshot, error in
+					guard let snapshot = snapshot?.data() else { return }
+					name = snapshot["name"] as? String ?? ""
 					saveLogin(email: emailText, password: passwordText)
 					loadData()
 					self.hideActivityIndicator()
