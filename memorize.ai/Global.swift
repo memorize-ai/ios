@@ -9,7 +9,7 @@ var startup = true
 var id: String?
 var name: String?
 var email: String?
-var decks = [Deck]()
+var decks = [Deck(id: "deckId", image: nil, name: "Ken's deck", cards: [])]
 
 struct Deck {
 	let id: String
