@@ -112,6 +112,17 @@
                                             <constraint firstItem="YdV-P6-REl" firstAttribute="top" secondItem="N64-3p-3FE" secondAttribute="bottom" id="l0x-Wx-i21"/>
                                         </constraints>
                                     </view>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCb-yz-ZJR">
+                                        <rect key="frame" x="160.66666666666666" y="444.66666666666669" width="93" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93" id="XGZ-sm-n7K"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <state key="normal" title="Retry"/>
+                                        <connections>
+                                            <action selector="retry" destination="XhB-Ss-34n" eventType="touchUpInside" id="x4Z-Gz-8Fp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -119,8 +130,10 @@
                                     <constraint firstItem="waV-L4-S5d" firstAttribute="leading" secondItem="5fG-Ab-81s" secondAttribute="leading" constant="40" id="W6e-R5-Y32"/>
                                     <constraint firstItem="zjI-yq-TL3" firstAttribute="centerX" secondItem="5fG-Ab-81s" secondAttribute="centerX" id="ZYN-J6-jce"/>
                                     <constraint firstItem="waV-L4-S5d" firstAttribute="centerX" secondItem="5fG-Ab-81s" secondAttribute="centerX" id="awf-Ne-6UJ"/>
+                                    <constraint firstItem="fCb-yz-ZJR" firstAttribute="top" secondItem="waV-L4-S5d" secondAttribute="bottom" constant="20" id="eyF-TQ-rLl"/>
                                     <constraint firstAttribute="trailing" secondItem="waV-L4-S5d" secondAttribute="trailing" constant="40" id="gtR-rn-h1f"/>
                                     <constraint firstItem="waV-L4-S5d" firstAttribute="centerY" secondItem="5fG-Ab-81s" secondAttribute="centerY" id="heJ-HA-xYI"/>
+                                    <constraint firstItem="fCb-yz-ZJR" firstAttribute="centerX" secondItem="5fG-Ab-81s" secondAttribute="centerX" id="vYI-Cc-g2e"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -143,6 +156,7 @@
                         <outlet property="activityIndicator" destination="zjI-yq-TL3" id="LGZ-RW-Pa2"/>
                         <outlet property="loadingView" destination="5fG-Ab-81s" id="vWu-xD-kFM"/>
                         <outlet property="offlineView" destination="waV-L4-S5d" id="E0x-lh-zvY"/>
+                        <outlet property="retryButton" destination="fCb-yz-ZJR" id="mbL-vT-mdh"/>
                         <segue destination="P5L-vG-lcW" kind="show" identifier="signIn" animates="NO" id="1zn-0n-nWw"/>
                     </connections>
                 </viewController>

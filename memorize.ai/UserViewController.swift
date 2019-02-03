@@ -6,6 +6,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var offlineView: UIView!
+	@IBOutlet weak var retryButton: UIButton!
 	@IBOutlet weak var actionsTableView: UITableView!
 	
 	struct Action {
@@ -34,6 +35,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 								firestore.collection("users").document(id!).getDocument { snapshot, error in
 									guard let snapshot = snapshot?.data() else { return }
 									name = snapshot["name"] as? String ?? ""
+									self.navigationController?.isNavigationBarHidden = false
 									self.navigationItem.title = name
 									email = localEmail
 									loadData()
@@ -46,6 +48,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
 									self.activityIndicator.stopAnimating()
 									self.offlineView.isHidden = false
+									self.retryButton.isHidden = false
 									self.navigationController?.isNavigationBarHidden = true
 								default:
 									self.signIn()
@@ -70,12 +73,18 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		actionsTableView.reloadData()
 	}
 	
+	@IBAction func retry() {
+		offlineView.isHidden = true
+		retryButton.isHidden = true
+		viewDidLoad()
+	}
+	
 	func signIn() {
 		performSegue(withIdentifier: "signIn", sender: self)
 	}
 	
 	func createSettingsBarButtonItem() {
-		navigationItem.setLeftBarButton(UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settings)), animated: false)
+		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(settings)), animated: false)
 	}
 	
 	@objc func settings() {
