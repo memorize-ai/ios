@@ -4,16 +4,17 @@ import Firebase
 import AudioToolbox
 
 let firestore = Firestore.firestore()
+let storage = Storage.storage().reference()
 var changeHandler: ((Change) -> Void)?
 var startup = true
 var id: String?
 var name: String?
 var email: String?
-var decks = [Deck(id: "deckId", image: nil, name: "Ken's deck", cards: [])]
+var decks = [Deck(id: "deckId", image: #imageLiteral(resourceName: "Gray Deck"), name: "Ken's deck", cards: [])]
 
 struct Deck {
 	let id: String
-	var image: UIImage?
+	var image: UIImage
 	var name: String
 	var cards: [Card]
 	

@@ -18,7 +18,20 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
 	
 	@objc @IBAction func newDeck() {
-		// New Deck
+		if let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController {
+			addChild(chooseDeckTypeVC)
+			chooseDeckTypeVC.view.frame = view.frame
+			view.addSubview(chooseDeckTypeVC.view)
+			chooseDeckTypeVC.didMove(toParent: self)
+		}
+	}
+	
+	func createDeck() {
+		
+	}
+	
+	func searchDeck() {
+		
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -28,14 +41,17 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
 		let element = decks[indexPath.item]
-		cell.layer.borderColor = #colorLiteral(red: 0.6, green: 0.6666666667, blue: 0.7098039216, alpha: 1)
-		cell.imageView.image = element.image == nil ? #imageLiteral(resourceName: "Gray Deck") : element.image
+		cell.layer.borderWidth = 1
+		cell.layer.borderColor = #colorLiteral(red: 0.6626973748, green: 0.7235561013, blue: 0.7610561252, alpha: 1)
+		cell.imageView.image = element.image
 		cell.nameLabel.text = element.name
 		return cell
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		(collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell)?.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.537254902, blue: 0.8549019608, alpha: 1)
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
+		cell?.layer.borderWidth = 2
+		cell?.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.537254902, blue: 0.8549019608, alpha: 1)
 		if !startView.isHidden {
 			UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
 				self.startView.alpha = 0
@@ -51,7 +67,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-		(collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell)?.layer.borderColor = #colorLiteral(red: 0.6, green: 0.6666666667, blue: 0.7098039216, alpha: 1)
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
+		cell?.layer.borderWidth = 1
+		cell?.layer.borderColor = #colorLiteral(red: 0.6626973748, green: 0.7235561013, blue: 0.7610561252, alpha: 1)
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
