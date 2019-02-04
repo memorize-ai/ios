@@ -18,6 +18,8 @@ class DeckViewController: UIViewController {
 			storage.child("decks/\(self.deckId!)").getData(maxSize: 50000000) { data, error in
 				if let data = data, error == nil {
 					guard let snapshot = snapshot?.data() else { return }
+					self.imageView.layer.borderWidth = 1
+					self.imageView.layer.borderColor = UIColor.lightGray.cgColor
 					self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 					self.nameLabel.text = snapshot["name"] as? String ?? "Error"
 					if Deck.id(self.deckId!) != nil {
@@ -42,7 +44,9 @@ class DeckViewController: UIViewController {
 	
 	@IBAction func get() {
 		if getButton.currentTitle == "GET" {
-			// get deck
+			firestore.collection("users").document(id!).collection("decks").document(deckId!).setData(["name": nameLabel.text!, "count": ]) { error in
+				<#code#>
+			}
 		} else {
 			// delete deck
 		}

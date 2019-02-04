@@ -17,6 +17,8 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	override func viewDidLoad() {
         super.viewDidLoad()
 		disable()
+		imageView.layer.borderWidth = 1
+		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		textViewDidEndEditing(descriptionTextView)
     }
 	

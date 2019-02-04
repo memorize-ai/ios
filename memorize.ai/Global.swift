@@ -19,6 +19,7 @@ struct Deck {
 	let id: String
 	var image: UIImage
 	var name: String
+	var description: String
 	var cards: [Card]
 	
 	static func id(_ t: String) -> Int? {

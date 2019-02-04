@@ -88,7 +88,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	@objc func settings() {
-		// MARK: show settings
+		// settings
 	}
 	
 	@objc func showDecks() {

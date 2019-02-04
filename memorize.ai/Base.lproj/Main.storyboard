@@ -920,6 +920,11 @@
                                                             <constraint firstAttribute="width" constant="100" id="5je-OY-wlG"/>
                                                             <constraint firstAttribute="height" constant="100" id="djT-JS-7hF"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8e-mj-PpG">
                                                         <rect key="frame" x="120" y="0.0" width="254" height="47"/>
