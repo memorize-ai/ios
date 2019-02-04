@@ -1,0 +1,6 @@
+framework module InstantSearchClient {
+  umbrella header "InstantSearchClient-umbrella.h"
+
+  export *
+  module * { export * }
+}
