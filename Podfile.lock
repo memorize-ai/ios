@@ -115,6 +115,7 @@ PODS:
     - gRPC-Core (= 1.14.0)
     - gRPC-RxLibrary (= 1.14.0)
   - GTMSessionFetcher/Core (1.2.0)
+  - InstantSearchClient (6.1.0)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -128,6 +129,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
+  - InstantSearchClient (~> 6.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -148,6 +150,7 @@ SPEC REPOS:
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
     - GTMSessionFetcher
+    - InstantSearchClient
     - leveldb-library
     - nanopb
     - Protobuf
@@ -170,10 +173,11 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 76f6053639a842e1fb45fa82aa598bf3f4d9f66f
   gRPC-RxLibrary: 3c305f32155024b116b780f389323c73a28197e6
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  InstantSearchClient: 0f80d0a828a0b975d039aa6a20f99eb453266a33
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 4e82285b3984de809ee4c49fb12270380e004a42
+PODFILE CHECKSUM: d6180197b14a66c86df66596cab22892b7fa8406
 
 COCOAPODS: 1.5.3
