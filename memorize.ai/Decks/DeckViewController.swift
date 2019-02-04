@@ -129,6 +129,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let cardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "card") as? CardViewController {
+			cardVC.card = cards[indexPath.row]
 			addChild(cardVC)
 			cardVC.view.frame = view.frame
 			view.addSubview(cardVC.view)
