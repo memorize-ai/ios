@@ -1,11 +1,12 @@
 import UIKit
 import Firebase
 
-class CreateDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class CreateDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var resetImageButton: UIButton!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
+	@IBOutlet weak var descriptionTextView: UITextView!
 	@IBOutlet weak var publicSwitch: UISwitch!
 	@IBOutlet weak var privateSwitch: UISwitch!
 	@IBOutlet weak var createButton: UIButton!
@@ -16,6 +17,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	override func viewDidLoad() {
         super.viewDidLoad()
 		disable()
+		textViewDidEndEditing(descriptionTextView)
     }
 	
 	@IBAction func chooseImage() {
@@ -68,6 +70,16 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		nameText.isEmpty ? disable() : enable()
 	}
 	
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		textView.layer.borderWidth = 2
+		textView.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+	}
+	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		descriptionTextView.layer.borderWidth = 1
+		descriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
+	}
+	
 	@IBAction func publicSwitchChanged() {
 		privateSwitch.setOn(!privateSwitch.isOn, animated: true)
 		isPublic = !isPublic
@@ -84,7 +96,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		dismissKeyboard()
 		let metadata = StorageMetadata()
 		metadata.contentType = "image/png"
-		let deckId = firestore.collection("decks").addDocument(data: ["name": nameText, "public": isPublic, "count": 0, "owner": id!, "creator": ["id": id!, "name": name!]]).documentID
+		let deckId = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "owner": id!, "creator": ["id": id!, "name": name!]]).documentID
 		firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["name": nameText, "count": 0, "mastered": 0])
 		storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
 			if error == nil {

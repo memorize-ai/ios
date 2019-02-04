@@ -11,6 +11,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	}
 	
 	var result = [SearchResult]()
+	var selectedResult: SearchResult?
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +31,27 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 		navigationController?.popViewController(animated: true)
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard let deckVC = segue.destination as? DeckViewController, let deckId = selectedResult?.id else { return }
+		deckVC.deckId = deckId
+	}
+	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		decksIndex.search(Query(query: searchText)) { content, error in
-			if let content = content, error == nil {
-				self.result.removeAll()
-				for deck in content {
-					self.result.append(SearchResult(id: deck["id"], name: <#T##String#>))
+		result.removeAll()
+		if searchText.trim().isEmpty {
+			decksTableView.reloadData()
+		} else {
+			decksIndex.search(Query(query: searchText)) { content, error in
+				if let hits = content?["hits"] as? Array<Dictionary<String, Any>>, error == nil {
+					for hit in hits {
+						if let objectId = hit["objectID"] as? String, let objectName = hit["name"] as? String {
+							self.result.append(SearchResult(id: objectId, name: objectName))
+						}
+					}
+				} else if let error = error {
+					self.showAlert(error.localizedDescription)
 				}
 				self.decksTableView.reloadData()
-			} else if let error = error {
-				self.showAlert(error.localizedDescription)
 			}
 		}
 	}
@@ -57,8 +69,14 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			} else {
 				cell.imageView?.image = #imageLiteral(resourceName: "Gray Deck")
 			}
+			tableView.reloadData()
 		}
 		cell.textLabel?.text = element.name
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		selectedResult = result[indexPath.row]
+		performSegue(withIdentifier: "deck", sender: self)
 	}
 }

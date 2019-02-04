@@ -109,14 +109,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	
 	func enable() {
 		signInButton.isEnabled = true
-		signInButton.setTitleColor(UIColor(red: 72 / 255, green: 204 / 255, blue: 127 / 255, alpha: 1), for: .normal)
+		signInButton.setTitleColor(#colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1), for: .normal)
 		signInButton.backgroundColor = .white
 	}
 	
 	func disable() {
 		signInButton.isEnabled = false
-		signInButton.setTitleColor(UIColor(red: 240 / 255, green: 240 / 255, blue: 240 / 255, alpha: 1), for: .normal)
-		signInButton.backgroundColor = UIColor(red: 220 / 255, green: 220 / 255, blue: 220 / 255, alpha: 1)
+		signInButton.setTitleColor(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), for: .normal)
+		signInButton.backgroundColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)
 	}
 	
 	func enable(barView: UIView) {
