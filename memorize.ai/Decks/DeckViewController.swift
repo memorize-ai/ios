@@ -59,18 +59,21 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+		cardsTableView.isScrollEnabled = false
 		cardsTableView.frame.size = cardsTableView.contentSize
 	}
 	
 	@IBAction func get() {
+		let getDeck = getButton.currentTitle == "GET"
 		getButton.setTitle(nil, for: .normal)
 		getActivityIndicator.startAnimating()
-		if getButton.currentTitle == "GET" {
+		if getDeck {
 			firestore.collection("users").document(id!).collection("decks").document(deckId!).setData(["name": nameLabel.text!, "count": cards.count, "mastered": 0]) { error in
 				if error == nil {
-					self.getButtonWidthConstraint.constant = 76
-					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+					self.getButtonWidthConstraint.constant = 90
+					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 						self.view.layoutIfNeeded()
+						self.getActivityIndicator.stopAnimating()
 						self.getButton.setTitle("DELETE", for: .normal)
 						self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 					}, completion: nil)
@@ -84,8 +87,9 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			firestore.collection("users").document(id!).collection("decks").document(deckId!).delete { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 70
-					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 						self.view.layoutIfNeeded()
+						self.getActivityIndicator.stopAnimating()
 						self.getButton.setTitle("GET", for: .normal)
 						self.getButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
 					}, completion: nil)
