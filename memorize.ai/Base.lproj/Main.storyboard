@@ -1007,14 +1007,14 @@
                                                 </connections>
                                             </segmentedControl>
                                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aTc-Yy-Mx4">
-                                                <rect key="frame" x="20" y="209" width="374" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="209" width="414" height="0.0"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="bDf-cj-xvE" detailTextLabel="Oet-7t-Pnn" style="IBUITableViewCellStyleSubtitle" id="dLn-Jo-QtA">
-                                                        <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dLn-Jo-QtA" id="mQH-KR-Zfx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="348" height="43.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="368" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bDf-cj-xvE">
@@ -1051,7 +1051,7 @@
                                         <constraints>
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="0Ki-Hn-7iY"/>
                                             <constraint firstAttribute="trailing" secondItem="XmA-Sj-bhc" secondAttribute="trailing" constant="20" id="5iB-lJ-c8w"/>
-                                            <constraint firstItem="aTc-Yy-Mx4" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="F1B-Pi-I8o"/>
+                                            <constraint firstItem="aTc-Yy-Mx4" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="F1B-Pi-I8o"/>
                                             <constraint firstItem="M4j-N2-Iwa" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="MIs-Gq-ccm"/>
                                             <constraint firstAttribute="trailing" secondItem="M4j-N2-Iwa" secondAttribute="trailing" constant="20" id="QbG-uo-pui"/>
                                             <constraint firstAttribute="trailing" secondItem="NLa-Es-asw" secondAttribute="trailing" constant="20" id="RKs-cJ-JTZ"/>
@@ -1061,7 +1061,7 @@
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="bottom" constant="20" id="acr-zv-0hi"/>
                                             <constraint firstItem="M4j-N2-Iwa" firstAttribute="top" secondItem="NLa-Es-asw" secondAttribute="bottom" constant="20" id="cbB-Qu-sza"/>
                                             <constraint firstAttribute="bottom" secondItem="aTc-Yy-Mx4" secondAttribute="bottom" constant="20" id="dEt-rO-gQY"/>
-                                            <constraint firstAttribute="trailing" secondItem="aTc-Yy-Mx4" secondAttribute="trailing" constant="20" id="fuO-Cp-FlA"/>
+                                            <constraint firstAttribute="trailing" secondItem="aTc-Yy-Mx4" secondAttribute="trailing" id="fuO-Cp-FlA"/>
                                             <constraint firstAttribute="trailing" secondItem="Bpb-hs-f6E" secondAttribute="trailing" constant="20" id="jQ7-x8-TIn"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" constant="20" id="qrV-fu-9eI"/>
                                             <constraint firstAttribute="bottom" secondItem="Bpb-hs-f6E" secondAttribute="bottom" constant="20" id="spi-uM-zX1"/>
