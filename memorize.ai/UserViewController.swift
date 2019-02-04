@@ -15,7 +15,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		let action: Selector?
 	}
 	
-	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "Decks", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "Cards", action: #selector(showCards))]
+	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "Decks", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "Cards", action: #selector(showCards)), Action(image: #imageLiteral(resourceName: "Create"), name: "Create a deck", action: #selector(createDeck)), Action(image: #imageLiteral(resourceName: "Search"), name: "Search for a deck", action: #selector(searchDeck))]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -88,7 +88,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	@objc func settings() {
-		// settings
+		performSegue(withIdentifier: "settings", sender: self)
 	}
 	
 	@objc func showDecks() {
@@ -97,6 +97,14 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@objc func showCards() {
 		performSegue(withIdentifier: "cards", sender: self)
+	}
+	
+	@objc func createDeck() {
+		performSegue(withIdentifier: "createDeck", sender: self)
+	}
+	
+	@objc func searchDeck() {
+		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {

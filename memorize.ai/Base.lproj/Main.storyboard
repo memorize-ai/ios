@@ -163,16 +163,18 @@
                         <segue destination="P5L-vG-lcW" kind="show" identifier="signIn" animates="NO" id="1zn-0n-nWw"/>
                         <segue destination="wRy-Ck-hDU" kind="show" identifier="decks" id="kz7-Sb-oco"/>
                         <segue destination="8UJ-MN-Ymr" kind="show" identifier="settings" id="XDy-0K-4BY"/>
+                        <segue destination="fwd-VK-lMc" kind="show" identifier="createDeck" id="zq2-cu-WBD"/>
+                        <segue destination="YCz-Zd-eG2" kind="show" identifier="searchDeck" id="xrl-eN-ji3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4v-eo-Px5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139.13043478260872" y="133.69565217391306"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings-->
         <scene sceneID="dll-pj-F0d">
             <objects>
-                <viewController id="8UJ-MN-Ymr" sceneMemberID="viewController">
+                <viewController title="Settings" id="8UJ-MN-Ymr" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wPp-Ww-XZU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1014,7 +1016,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dLn-Jo-QtA" id="mQH-KR-Zfx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="368" height="43.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="388" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bDf-cj-xvE">
@@ -1824,6 +1826,8 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="xrl-eN-ji3"/>
+        <segue reference="zq2-cu-WBD"/>
         <segue reference="xao-oA-rKh"/>
     </inferredMetricsTieBreakers>
 </document>
