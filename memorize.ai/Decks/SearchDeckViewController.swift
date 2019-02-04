@@ -8,6 +8,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	struct SearchResult {
 		let id: String
 		let name: String
+		let creator: String
 	}
 	
 	var result = [SearchResult]()
@@ -44,8 +45,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			decksIndex.search(Query(query: searchText)) { content, error in
 				if let hits = content?["hits"] as? Array<Dictionary<String, Any>>, error == nil {
 					for hit in hits {
-						if let objectId = hit["objectID"] as? String, let objectName = hit["name"] as? String {
-							self.result.append(SearchResult(id: objectId, name: objectName))
+						if let objectId = hit["objectID"] as? String, let objectName = hit["name"] as? String, let creator = (hit["creator"] as? [String: Any])?["name"] as? String {
+							self.result.append(SearchResult(id: objectId, name: objectName, creator: creator))
 						}
 					}
 				} else if let error = error {
@@ -72,6 +73,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			tableView.reloadData()
 		}
 		cell.textLabel?.text = element.name
+		cell.detailTextLabel?.text = element.creator
 		return cell
 	}
 	

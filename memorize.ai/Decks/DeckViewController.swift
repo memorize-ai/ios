@@ -12,32 +12,34 @@ class DeckViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		loadingView.isHidden = false
-		activityIndicator.startAnimating()
+		imageView.layer.borderWidth = 1
+		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		firestore.collection("decks").document(deckId!).getDocument { snapshot, error in
-			storage.child("decks/\(self.deckId!)").getData(maxSize: 50000000) { data, error in
-				if let data = data, error == nil {
-					guard let snapshot = snapshot?.data() else { return }
-					self.imageView.layer.borderWidth = 1
-					self.imageView.layer.borderColor = UIColor.lightGray.cgColor
-					self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-					self.nameLabel.text = snapshot["name"] as? String ?? "Error"
-					if Deck.id(self.deckId!) != nil {
-						self.getButton.setTitle("DELETE", for: .normal)
-						self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
-					}
-					self.descriptionLabel.text = snapshot["description"] as? String ?? "Error"
-					self.activityIndicator.stopAnimating()
-					self.loadingView.isHidden = true
-				} else {
-					self.activityIndicator.stopAnimating()
-					let alertController = UIAlertController(title: "Error", message: "Could not load deck", preferredStyle: .alert)
-					let action = UIAlertAction(title: "OK", style: .default) { action in
-						self.navigationController?.popViewController(animated: true)
-					}
-					alertController.addAction(action)
-					self.present(alertController, animated: true, completion: nil)
+			if error == nil {
+				guard let snapshot = snapshot?.data() else { return }
+				self.nameLabel.text = snapshot["name"] as? String ?? "Error"
+				if Deck.id(self.deckId!) != nil {
+					self.getButton.setTitle("DELETE", for: .normal)
+					self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 				}
+				self.descriptionLabel.text = snapshot["description"] as? String ?? "Error"
+				self.activityIndicator.stopAnimating()
+				self.loadingView.isHidden = true
+			} else {
+				self.activityIndicator.stopAnimating()
+				let alertController = UIAlertController(title: "Error", message: "Unable to load deck", preferredStyle: .alert)
+				let action = UIAlertAction(title: "OK", style: .default) { action in
+					self.navigationController?.popViewController(animated: true)
+				}
+				alertController.addAction(action)
+				self.present(alertController, animated: true, completion: nil)
+			}
+		}
+		storage.child("decks/\(self.deckId!)").getData(maxSize: 50000000) { data, error in
+			if let data = data, error == nil {
+				self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+			} else {
+				self.showAlert("Unable to load image")
 			}
 		}
     }
