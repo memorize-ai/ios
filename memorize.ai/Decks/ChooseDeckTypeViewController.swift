@@ -40,7 +40,7 @@ class ChooseDeckTypeViewController: UIViewController {
 	}
 	
 	func clickedButton(completion: @escaping () -> Void) {
-		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 			self.chooseDeckTypeView.transform = CGAffineTransform(translationX: -self.view.bounds.width, y: 0)
 			self.view.backgroundColor = .clear
 		}) { finished in

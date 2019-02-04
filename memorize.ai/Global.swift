@@ -1,16 +1,19 @@
 import Foundation
 import CoreData
 import Firebase
+import InstantSearchClient
 import AudioToolbox
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
+let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
+let decksIndex = client.index(withName: "decks")
 var changeHandler: ((Change) -> Void)?
 var startup = true
 var id: String?
 var name: String?
 var email: String?
-var decks = [Deck(id: "deckId", image: #imageLiteral(resourceName: "Gray Deck"), name: "Ken's deck", cards: [])]
+var decks = [Deck]()
 
 struct Deck {
 	let id: String

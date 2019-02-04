@@ -27,11 +27,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func createDeck() {
-		
+		performSegue(withIdentifier: "createDeck", sender: self)
 	}
 	
 	func searchDeck() {
-		
+		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

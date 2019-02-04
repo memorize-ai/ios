@@ -1,7 +1,7 @@
 import UIKit
 import Firebase
 
-class CreateDeckViewController: UIViewController, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class CreateDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var resetImageButton: UIButton!
 	@IBOutlet weak var nameTextField: UITextField!
@@ -20,7 +20,7 @@ class CreateDeckViewController: UIViewController, UIImagePickerControllerDelegat
 	
 	@IBAction func chooseImage() {
 		let picker = UIImagePickerController()
-		picker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 		alert.addAction(UIAlertAction(title: "Camera", style: .default) { action in
 			picker.sourceType = .camera
@@ -65,16 +65,16 @@ class CreateDeckViewController: UIViewController, UIImagePickerControllerDelegat
 	
 	@IBAction func nameChanged() {
 		guard let nameText = nameTextField.text?.trim() else { return }
-		nameText.isEmpty ? enable() : disable()
+		nameText.isEmpty ? disable() : enable()
 	}
 	
 	@IBAction func publicSwitchChanged() {
-		privateSwitch.isOn = !privateSwitch.isOn
+		privateSwitch.setOn(!privateSwitch.isOn, animated: true)
 		isPublic = !isPublic
 	}
 	
 	@IBAction func privateSwitchChanged() {
-		publicSwitch.isOn = !publicSwitch.isOn
+		publicSwitch.setOn(!publicSwitch.isOn, animated: true)
 		isPublic = !isPublic
 	}
 	
