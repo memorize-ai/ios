@@ -914,7 +914,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmA-Sj-bhc">
                                                 <rect key="frame" x="20" y="20" width="374" height="100"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gray Deck" translatesAutoresizingMaskIntoConstraints="NO" id="hbD-lL-WAl">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hbD-lL-WAl">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="5je-OY-wlG"/>
@@ -969,6 +969,10 @@
                                                             <constraint firstItem="FYY-KY-7rt" firstAttribute="leading" secondItem="qQO-xD-ega" secondAttribute="leading" id="ZCu-jY-kK5"/>
                                                         </constraints>
                                                     </view>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Rm9-WX-cH2">
+                                                        <rect key="frame" x="31.666666666666664" y="31.666666666666671" width="36.999999999999993" height="37"/>
+                                                        <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -977,6 +981,8 @@
                                                     <constraint firstItem="hbD-lL-WAl" firstAttribute="leading" secondItem="XmA-Sj-bhc" secondAttribute="leading" id="Hy1-ee-EZG"/>
                                                     <constraint firstAttribute="bottom" secondItem="hbD-lL-WAl" secondAttribute="bottom" id="KBy-op-NpP"/>
                                                     <constraint firstAttribute="trailing" secondItem="h8e-mj-PpG" secondAttribute="trailing" id="KjK-zT-6Ho"/>
+                                                    <constraint firstItem="Rm9-WX-cH2" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="top" constant="31.5" id="LSz-TZ-neT"/>
+                                                    <constraint firstItem="Rm9-WX-cH2" firstAttribute="leading" secondItem="XmA-Sj-bhc" secondAttribute="leading" constant="31.5" id="ZnQ-lk-vJ5"/>
                                                     <constraint firstItem="qQO-xD-ega" firstAttribute="top" secondItem="h8e-mj-PpG" secondAttribute="bottom" constant="20" id="ciR-1W-c9U"/>
                                                     <constraint firstItem="qQO-xD-ega" firstAttribute="leading" secondItem="hbD-lL-WAl" secondAttribute="trailing" constant="20" id="hHK-Vx-WQd"/>
                                                     <constraint firstItem="h8e-mj-PpG" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="top" id="jhf-Qn-GV7"/>
@@ -1070,11 +1076,11 @@
                                     <constraint firstAttribute="trailing" secondItem="ScY-Tx-UZe" secondAttribute="trailing" id="NkT-vx-ZKn"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
+                                <rect key="frame" x="0.0" y="64" width="414" height="17"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-Gn-wa9">
-                                        <rect key="frame" x="188.66666666666666" y="317.66666666666669" width="37" height="37"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-Gn-wa9">
+                                        <rect key="frame" x="189" y="8" width="37" height="37"/>
                                         <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -1106,6 +1112,7 @@
                         <outlet property="getActivityIndicator" destination="kCP-a8-2u0" id="Kn7-Fq-QWk"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="dTb-cB-Zcc"/>
                         <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="6pp-yV-xKt"/>
+                        <outlet property="imageActivityIndicator" destination="Rm9-WX-cH2" id="fzx-bQ-Mcp"/>
                         <outlet property="imageView" destination="hbD-lL-WAl" id="5NQ-Wk-N46"/>
                         <outlet property="loadingView" destination="0P8-bg-Clx" id="ejY-Zn-d8q"/>
                         <outlet property="nameLabel" destination="h8e-mj-PpG" id="o6n-ev-U9S"/>

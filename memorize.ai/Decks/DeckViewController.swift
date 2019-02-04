@@ -4,6 +4,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var getButton: UIButton!
 	@IBOutlet weak var getButtonWidthConstraint: NSLayoutConstraint!
@@ -48,6 +49,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		storage.child("decks/\(self.deckId!)").getData(maxSize: 50000000) { data, error in
 			if let data = data, error == nil {
+				self.imageActivityIndicator.stopAnimating()
 				self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 			} else {
 				self.showAlert("Unable to load image")
