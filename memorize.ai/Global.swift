@@ -36,7 +36,6 @@ struct Card {
 	let id: String
 	var front: String
 	var back: String
-	let deck: Deck
 }
 
 enum Change {
