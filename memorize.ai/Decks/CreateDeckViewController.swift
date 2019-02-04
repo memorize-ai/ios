@@ -15,6 +15,7 @@ class CreateDeckViewController: UIViewController, UIImagePickerControllerDelegat
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		disable()
     }
 	
 	@IBAction func chooseImage() {
