@@ -6,7 +6,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	@IBOutlet weak var startView: UIView!
 	
 	var deck: Deck?
-	var card: Card?
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 							self.decksCollectionView.reloadData()
 						}
 					}
-					return Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", cards: [])
+					return Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", isPublic: deck["public"] as? Bool ?? true, owner: deck["owner"] as? String ?? "Error", cards: [])
 				}
 			}
 		}
@@ -117,7 +116,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController {
 			editCardVC.deck = deck
-			editCardVC.card = card
+			editCardVC.card = deck?.cards[indexPath.row]
 			addChild(editCardVC)
 			editCardVC.view.frame = view.frame
 			view.addSubview(editCardVC.view)

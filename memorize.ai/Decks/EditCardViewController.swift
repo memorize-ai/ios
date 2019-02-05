@@ -38,7 +38,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	@IBAction func delete() {
-		if deck?.ownerId == id {
+		if deck?.owner == id {
 			firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id).delete { error in
 				if error == nil {
 					self.hide()
@@ -52,30 +52,30 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func makeCopy() {
-		let alertController = UIAlertController(title: "Make a copy", message: "You are not the owner of this deck", preferredStyle: .alert)
-		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		let create = UIAlertAction(title: "Create", style: .default) { action in
-			let metadata = StorageMetadata()
-			metadata.contentType = "image/png"
-			let deckId = firestore.collection("decks").addDocument(data: ["name": self.deck!.name, "description": self.deck!.description, "public": self.deck!.isPublic, "count": self.deck!.cards.count, "owner": id!, "creator": ["id": id!, "name": name!]]).documentID
-			firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["name": self.deck!.name, "count": self.deck!.cards.count, "mastered": 0])
-			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
-				if error == nil {
-					hide()
-				} else if let error = error {
-					self.hideActivityIndicator()
-					switch error.localizedDescription {
-					case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-						self.showAlert("No internet")
-					default:
-						self.showAlert("There was a problem copying the deck")
-					}
-				}
-			}
-		}
-		alertController.addAction(cancel)
-		alertController.addAction(create)
-		present(alertController, animated: true, completion: nil)
+//		let alertController = UIAlertController(title: "Make a copy", message: "You are not the owner of this deck", preferredStyle: .alert)
+//		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//		let create = UIAlertAction(title: "Create", style: .default) { action in
+//			let metadata = StorageMetadata()
+//			metadata.contentType = "image/png"
+//			let deckId = firestore.collection("decks").addDocument(data: ["name": self.deck!.name, "description": self.deck!.description, "public": self.deck!.isPublic, "count": self.deck!.cards.count, "owner": id!, "creator": ["id": id!, "name": name!]]).documentID
+//			firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["name": self.deck!.name, "count": self.deck!.cards.count, "mastered": 0])
+//			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
+//				if error == nil {
+//					hide()
+//				} else if let error = error {
+//					self.hideActivityIndicator()
+//					switch error.localizedDescription {
+//					case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
+//						self.showAlert("No internet")
+//					default:
+//						self.showAlert("There was a problem copying the deck")
+//					}
+//				}
+//			}
+//		}
+//		alertController.addAction(cancel)
+//		alertController.addAction(create)
+//		present(alertController, animated: true, completion: nil)
 	}
 	
 	func resetBorder(textView: UITextView) {
@@ -104,7 +104,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
-		if deck?.ownerId == id {
+		if deck?.owner == id {
 			let firestoreCard = firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id)
 			switch textView {
 			case frontTextView:

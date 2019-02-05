@@ -1976,7 +1976,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3z-bp-TO2">
                                                         <rect key="frame" x="111.66666666666666" y="202.66666666666669" width="111" height="36"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="111" id="8Xc-Tr-7oV"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="111" id="8Xc-Tr-7oV"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                         <state key="normal" title="Delete Card">

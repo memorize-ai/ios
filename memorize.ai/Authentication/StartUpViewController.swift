@@ -11,7 +11,6 @@ class StartUpViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		updateChangeHandler(nil)
 		navigationController?.isNavigationBarHidden = true
 		startup = false
 	}

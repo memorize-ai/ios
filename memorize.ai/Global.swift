@@ -8,7 +8,6 @@ let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 let decksIndex = client.index(withName: "decks")
-var changeHandler: ((Change) -> Void)?
 var startup = true
 var id: String?
 var name: String?
@@ -21,7 +20,7 @@ struct Deck {
 	var name: String
 	var description: String
 	var isPublic: Bool
-	var ownerId: String
+	var owner: String
 	var cards: [Card]
 	
 	static func id(_ t: String) -> Int? {
@@ -43,24 +42,6 @@ struct Card {
 
 struct History {
 	// history
-}
-
-enum Change {
-	case newDeck
-	case deckName
-	case newCard
-	case cardFront
-	case cardBack
-}
-
-func callChangeHandler(_ change: Change) {
-	if let changeHandlerUnwrapped = changeHandler {
-		changeHandlerUnwrapped(change)
-	}
-}
-
-func updateChangeHandler(_ cH: ((Change) -> Void)?) {
-	changeHandler = cH
 }
 
 func saveLogin(email e: String, password p: String) {
@@ -131,13 +112,5 @@ extension UIView {
 		let mask = CAShapeLayer()
 		mask.path = path.cgPath
 		layer.mask = mask
-	}
-}
-
-extension Date {
-	func format(_ format: String) -> String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = format
-		return dateFormatter.string(from: self)
 	}
 }
