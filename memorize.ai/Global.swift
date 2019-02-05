@@ -47,7 +47,18 @@ enum Change {
 }
 
 func loadData() {
-	
+	firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
+		if let snapshot = snapshot?.documents, error == nil {
+			decks = snapshot.map { deck in
+				let deckId = deck.documentID
+				storage.child("decks/\(deckId)").getData(maxSize: 50000000) { data, error in
+					if let data = data, error == nil {
+						return Deck(id: deckId, image: UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", cards: [])
+					}
+				}
+			}
+		}
+	}
 }
 
 func callChangeHandler(_ change: Change) {

@@ -23,6 +23,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			if let snapshot = snapshot?.data(), error == nil {
 				self.nameLabel.text = snapshot["name"] as? String ?? "Error"
 				if Deck.id(self.deckId!) != nil {
+					self.getButtonWidthConstraint.constant = 90
 					self.getButton.setTitle("DELETE", for: .normal)
 					self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 				}
