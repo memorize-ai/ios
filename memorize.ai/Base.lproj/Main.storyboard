@@ -165,6 +165,7 @@
                         <segue destination="8UJ-MN-Ymr" kind="show" identifier="settings" id="XDy-0K-4BY"/>
                         <segue destination="fwd-VK-lMc" kind="show" identifier="createDeck" id="zq2-cu-WBD"/>
                         <segue destination="YCz-Zd-eG2" kind="show" identifier="searchDeck" id="xrl-eN-ji3"/>
+                        <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="p0r-eq-3dv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4v-eo-Px5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -185,6 +186,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHv-jT-Qi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="817" y="134"/>
+        </scene>
+        <!--Review-->
+        <scene sceneID="MWw-Cd-YnB">
+            <objects>
+                <viewController title="Review" id="aBN-oB-3fZ" customClass="ReviewViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bil-re-i1x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="P7i-sD-liM"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XVo-a0-67t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1500" y="134"/>
         </scene>
         <!--Decks-->
         <scene sceneID="SAJ-zz-F5f">
