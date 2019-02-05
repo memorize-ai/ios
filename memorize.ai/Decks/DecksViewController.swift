@@ -90,7 +90,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newDeck)), animated: true)
 		}
 		deck = decks[indexPath.item]
-		cardsTableView.reloadData()
+		firestore.collection("decks").document(deck!.id).collection("cards").addSnapshotListener { snapshot, error in
+			if let snapshot = snapshot?.documents, error == nil {
+				self.deck?.cards = snapshot.map { Card(id: $0.documentID, front: $0["front"] as? String ?? "Error", back: $0["back"] as? String ?? "Error", history: []) }
+				self.cardsTableView.reloadData()
+			}
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

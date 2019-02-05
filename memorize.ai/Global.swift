@@ -36,6 +36,11 @@ struct Card {
 	let id: String
 	var front: String
 	var back: String
+	var history: [History]
+}
+
+struct History {
+	
 }
 
 enum Change {

@@ -706,7 +706,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bOE-P0-fGs">
-                                                        <rect key="frame" x="325" y="17" width="51" height="31"/>
+                                                        <rect key="frame" x="325" y="17.333333333333258" width="51" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="49" id="btb-wG-nbO"/>
                                                         </constraints>
@@ -1072,7 +1072,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dLn-Jo-QtA" id="mQH-KR-Zfx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="294" height="43.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="388" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bDf-cj-xvE">
@@ -1877,7 +1877,7 @@
         <!--Card View Controller-->
         <scene sceneID="Wlc-LB-vOO">
             <objects>
-                <viewController storyboardIdentifier="card" id="ngo-Wp-CMQ" customClass="CardViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editCard" id="ngo-Wp-CMQ" customClass="CardViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zhI-nf-zJJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

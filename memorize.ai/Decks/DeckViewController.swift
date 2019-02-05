@@ -22,11 +22,6 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		firestore.collection("decks").document(deckId!).getDocument { snapshot, error in
 			if let snapshot = snapshot?.data(), error == nil {
 				self.nameLabel.text = snapshot["name"] as? String ?? "Error"
-				if Deck.id(self.deckId!) != nil {
-					self.getButtonWidthConstraint.constant = 90
-					self.getButton.setTitle("DELETE", for: .normal)
-					self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
-				}
 				self.descriptionLabel.text = snapshot["description"] as? String ?? "Error"
 				self.activityIndicator.stopAnimating()
 				self.loadingView.isHidden = true
@@ -42,7 +37,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		firestore.collection("decks").document(deckId!).collection("cards").addSnapshotListener { snapshot, error in
 			if let snapshot = snapshot?.documents, error == nil {
-				self.cards = snapshot.map { Card(id: $0.documentID, front: $0.data()["front"] as? String ?? "Error", back: $0.data()["back"] as? String ?? "Error") }
+				self.cards = snapshot.map { Card(id: $0.documentID, front: $0.data()["front"] as? String ?? "Error", back: $0.data()["back"] as? String ?? "Error", history: []) }
 				self.cardsTableView.reloadData()
 			} else if let error = error {
 				self.showAlert(error.localizedDescription)
@@ -57,6 +52,15 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			}
 		}
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if Deck.id(deckId!) != nil {
+			getButtonWidthConstraint.constant = 90
+			getButton.setTitle("DELETE", for: .normal)
+			getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
+		}
+	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
