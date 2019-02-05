@@ -15,6 +15,20 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		layout.minimumLineSpacing = 8
 		layout.minimumInteritemSpacing = 8
 		decksCollectionView.collectionViewLayout = layout
+		firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
+			if let snapshot = snapshot?.documents, error == nil {
+				decks = snapshot.map { deck in
+					let deckId = deck.documentID
+					storage.child("decks/\(deckId)").getData(maxSize: 50000000) { data, error in
+						if let data = data, error == nil {
+							decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+							self.decksCollectionView.reloadData()
+						}
+					}
+					return Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", cards: [])
+				}
+			}
+		}
     }
 	
 	@objc @IBAction func newDeck() {
@@ -42,7 +56,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
 		let element = decks[indexPath.item]
 		cell.layer.borderWidth = 1
-		cell.layer.borderColor = #colorLiteral(red: 0.6626973748, green: 0.7235561013, blue: 0.7610561252, alpha: 1)
+		cell.layer.borderColor = #colorLiteral(red: 0.198331058, green: 0.198331058, blue: 0.198331058, alpha: 1)
 		cell.imageView.image = element.image
 		cell.nameLabel.text = element.name
 		return cell
@@ -69,7 +83,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
 		cell?.layer.borderWidth = 1
-		cell?.layer.borderColor = #colorLiteral(red: 0.6626973748, green: 0.7235561013, blue: 0.7610561252, alpha: 1)
+		cell?.layer.borderColor = #colorLiteral(red: 0.1977208257, green: 0.2122347951, blue: 0.2293028235, alpha: 1)
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
