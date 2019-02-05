@@ -40,6 +40,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 	
+	@IBAction func edit() {
+		// edit
+	}
+	
+	@IBAction func review() {
+		performSegue(withIdentifier: "review", sender: self)
+	}
+	
 	func createDeck() {
 		performSegue(withIdentifier: "createDeck", sender: self)
 	}
@@ -50,6 +58,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return decks.count
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard let reviewVC = segue.destination as? ReviewViewController else { return }
+		reviewVC.deck = deck
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -86,17 +99,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		cell?.layer.borderColor = #colorLiteral(red: 0.1977208257, green: 0.2122347951, blue: 0.2293028235, alpha: 1)
 	}
 	
-	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
-	
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return "CARDS"
-	}
-	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let deck = deck else { return 0 }
-		return deck.cards.count
+		return deck?.cards.count ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
