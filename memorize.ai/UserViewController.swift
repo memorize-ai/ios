@@ -38,7 +38,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.navigationController?.isNavigationBarHidden = false
 									self.navigationItem.title = name
 									email = localEmail
-									loadData()
 									self.activityIndicator.stopAnimating()
 									self.loadingView.isHidden = true
 									self.createSettingsBarButtonItem()
