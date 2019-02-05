@@ -115,8 +115,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		card = deck?.cards[indexPath.row]
-		performSegue(withIdentifier: "card", sender: self)
+		if let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController {
+			editCardVC.deck = deck
+			editCardVC.card = card
+			addChild(editCardVC)
+			editCardVC.view.frame = view.frame
+			view.addSubview(editCardVC.view)
+			editCardVC.didMove(toParent: self)
+		}
 	}
 }
 

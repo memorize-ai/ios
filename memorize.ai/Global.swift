@@ -20,6 +20,7 @@ struct Deck {
 	var image: UIImage
 	var name: String
 	var description: String
+	var isPublic: Bool
 	var cards: [Card]
 	
 	static func id(_ t: String) -> Int? {
@@ -40,7 +41,7 @@ struct Card {
 }
 
 struct History {
-	
+	// history
 }
 
 enum Change {
