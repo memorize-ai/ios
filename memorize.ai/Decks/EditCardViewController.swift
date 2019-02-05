@@ -38,7 +38,17 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	@IBAction func delete() {
-		
+		if deck?.ownerId == id {
+			firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id).delete { error in
+				if error == nil {
+					self.hide()
+				} else if let error = error {
+					self.showAlert(error.localizedDescription)
+				}
+			}
+		} else {
+			makeCopy()
+		}
 	}
 	
 	func makeCopy() {
@@ -90,17 +100,22 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
-		textView.text.trim().isEmpty ? redBorder(textView: textView) : selectBorder(textView: textView)
+		textView.text.trim().isEmpty ? redBorder(textView: textView) : resetBorder(textView: textView)
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
-		switch textView {
-		case frontTextView:
-			
-		case backTextView:
-			
-		default:
-			return
+		if deck?.ownerId == id {
+			let firestoreCard = firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id)
+			switch textView {
+			case frontTextView:
+				firestoreCard.updateData(["front": frontTextView.text.trim()])
+			case backTextView:
+				firestoreCard.updateData(["back": backTextView.text.trim()])
+			default:
+				return
+			}
+		} else {
+			makeCopy()
 		}
 	}
 }
