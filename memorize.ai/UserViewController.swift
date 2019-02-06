@@ -41,6 +41,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.activityIndicator.stopAnimating()
 									self.loadingView.isHidden = true
 									self.createSettingsBarButtonItem()
+									startup = false
 								}
 							} else if let error = error {
 								switch error.localizedDescription {
