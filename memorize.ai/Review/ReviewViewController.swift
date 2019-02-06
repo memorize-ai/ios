@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 class ReviewViewController: UIViewController {
 	@IBOutlet weak var cardView: UIView!
@@ -24,7 +25,7 @@ class ReviewViewController: UIViewController {
     }
 	
 	@IBAction func dontKnow() {
-		// wrong
+		createHistory(false)
 		flipAnimation()
 	}
 	
@@ -32,9 +33,13 @@ class ReviewViewController: UIViewController {
 		if dontKnowButton.isHidden {
 			slideAnimation()
 		} else {
-			// correct
+			createHistory(true)
 			flipAnimation()
 		}
+	}
+	
+	func createHistory(_ correct: Bool) {
+		firestore.collection("users").document(id!).collection("cards").document(deck!.cards[card].id).collection("history").addDocument(data: ["date": Timestamp(), "correct": correct])
 	}
 	
 	func flipAnimation() {
