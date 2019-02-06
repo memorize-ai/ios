@@ -9,6 +9,7 @@ class ReviewViewController: UIViewController {
 	
 	var deck: Deck?
 	var card = 0
+	var reviewedCards = [Card]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +39,17 @@ class ReviewViewController: UIViewController {
 	
 	func flipAnimation() {
 		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
-			self.cardView.transform = CGAffineTransform(scaleX: 0, y: 1)
+			self.cardView.transform = CGAffineTransform(scaleX: 0.01, y: 1)
 		}) { finished in
 			if finished {
+				let card = self.deck!.cards[self.card]
+				self.reviewedCards.append(card)
 				self.cardBarView.isHidden = false
 				self.backLabel.isHidden = false
-				self.backLabel.text = self.deck?.cards[self.card].back
+				self.backLabel.text = card.back
 				self.dontKnowButton.isHidden = true
 				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
-					self.cardBarView.transform = .identity
+					self.cardView.transform = .identity
 				}, completion: nil)
 			}
 		}
@@ -68,6 +71,11 @@ class ReviewViewController: UIViewController {
 				}, completion: nil)
 			}
 		}
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard let recapVC = segue.destination as? RecapViewController else { return }
+		recapVC.cards = reviewedCards
 	}
 	
 	func newCard() {

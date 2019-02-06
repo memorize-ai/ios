@@ -37,6 +37,7 @@ struct Card {
 	let id: String
 	var front: String
 	var back: String
+	let deck: String
 	var history: [History]
 }
 

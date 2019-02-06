@@ -37,7 +37,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		firestore.collection("decks").document(deckId!).collection("cards").addSnapshotListener { snapshot, error in
 			if let snapshot = snapshot?.documents, error == nil {
-				self.cards = snapshot.map { Card(id: $0.documentID, front: $0.data()["front"] as? String ?? "Error", back: $0.data()["back"] as? String ?? "Error", history: []) }
+				self.cards = snapshot.map { Card(id: $0.documentID, front: $0.data()["front"] as? String ?? "Error", back: $0.data()["back"] as? String ?? "Error", deck: self.deckId!, history: []) }
 				self.cardsTableView.reloadData()
 			} else if let error = error {
 				self.showAlert(error.localizedDescription)

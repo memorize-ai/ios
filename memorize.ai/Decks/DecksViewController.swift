@@ -91,7 +91,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		deck = decks[indexPath.item]
 		firestore.collection("decks").document(deck!.id).collection("cards").addSnapshotListener { snapshot, error in
 			if let snapshot = snapshot?.documents, error == nil {
-				self.deck?.cards = snapshot.map { Card(id: $0.documentID, front: $0["front"] as? String ?? "Error", back: $0["back"] as? String ?? "Error", history: []) }
+				self.deck?.cards = snapshot.map { Card(id: $0.documentID, front: $0["front"] as? String ?? "Error", back: $0["back"] as? String ?? "Error", deck: self.deck!.id, history: []) }
 				self.cardsTableView.reloadData()
 			}
 		}
