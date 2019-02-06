@@ -36,6 +36,7 @@
 		4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391922057DBD006F4F2D /* SignUpViewController.swift */; };
 		4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D85C60C220638A2005B08DD /* SignInViewController.swift */; };
 		4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A345022090E9E0021474A /* ReviewViewController.swift */; };
+		4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D9392220A5C720049482C /* RecapViewController.swift */; };
 		4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */; };
 		4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */; };
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
@@ -103,6 +104,7 @@
 		4D64391922057DBD006F4F2D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4D85C60C220638A2005B08DD /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4D8A345022090E9E0021474A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		4D8D9392220A5C720049482C /* RecapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapViewController.swift; sourceTree = "<group>"; };
 		4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				4D8A345022090E9E0021474A /* ReviewViewController.swift */,
+				4D8D9392220A5C720049482C /* RecapViewController.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */,
 				4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
+				4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */,
 				4D052AB42204259B0093B64E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
