@@ -39,7 +39,7 @@ class ReviewViewController: UIViewController {
 	}
 	
 	func createHistory(_ correct: Bool) {
-		firestore.collection("users").document(id!).collection("cards").document(deck!.cards[card].id).collection("history").addDocument(data: ["date": Timestamp(), "correct": correct])
+		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(deck!.cards[card].id).collection("history").addDocument(data: ["date": Timestamp(), "correct": correct])
 	}
 	
 	func flipAnimation() {
