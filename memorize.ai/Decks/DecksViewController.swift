@@ -24,7 +24,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 							self.decksCollectionView.reloadData()
 						}
 					}
-					return Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", isPublic: deck["public"] as? Bool ?? true, owner: deck["owner"] as? String ?? "Error", cards: [])
+					let creator = deck["creator"] as? [String: Any]
+					return Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", isPublic: deck["public"] as? Bool ?? true, count: deck["count"] as? Int ?? 0, creator: Creator(id: creator?["id"] as? String ?? "Error", name: creator?["name"] as? String ?? "Error"), owner: deck["owner"] as? String ?? "Error", permissions: [], cards: [])
 				}
 			}
 		}

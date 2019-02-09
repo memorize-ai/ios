@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
@@ -37,7 +38,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		firestore.collection("decks").document(deckId!).collection("cards").addSnapshotListener { snapshot, error in
 			if let snapshot = snapshot?.documents, error == nil {
-				self.cards = snapshot.map { Card(id: $0.documentID, front: $0.data()["front"] as? String ?? "Error", back: $0.data()["back"] as? String ?? "Error", deck: self.deckId!, history: []) }
+				self.cards = snapshot.map { Card(id: $0.documentID, front: $0.data()["front"] as? String ?? "Error", back: $0.data()["back"] as? String ?? "Error", count: $0.data()["count"] as? Int ?? 0, correct: $0.data()["correct"] as? Int ?? 0, streak: $0.data()["streak"] as? Int ?? 0, last: $0.data()["last"] as? Timestamp ?? Timestamp(), next: $0.data()["next"] as? Timestamp ?? Timestamp(), history: [], deck: self.deckId!) }
 				self.cardsTableView.reloadData()
 			} else if let error = error {
 				self.showAlert(error.localizedDescription)

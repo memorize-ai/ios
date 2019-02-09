@@ -20,7 +20,10 @@ struct Deck {
 	var name: String
 	var description: String
 	var isPublic: Bool
+	var count: Int
+	var creator: Creator
 	var owner: String
+	var permissions: [Permission]
 	var cards: [Card]
 	
 	static func id(_ t: String) -> Int? {
@@ -37,12 +40,42 @@ struct Card {
 	let id: String
 	var front: String
 	var back: String
-	let deck: String
+	var count: Int
+	var correct: Int
+	var streak: Int
+	var last: Timestamp
+	var next: Timestamp
 	var history: [History]
+	let deck: String
+}
+
+struct Creator {
+	let id: String
+	let name: String
+}
+
+struct Permission {
+	let id: String
+	let name: String
+	let email: String
+	var role: Role
+}
+
+enum Role: String {
+	case editor = "editor"
+	case viewer = "viewer"
+	
+	init?(_ string: String) {
+		self = string == "editor" ? .editor : .viewer
+	}
 }
 
 struct History {
-	// history
+	let id: String
+	let date: Timestamp
+	let next: Timestamp
+	let correct: Bool
+	let elapsed: Int
 }
 
 func saveLogin(email e: String, password p: String) {

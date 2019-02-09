@@ -23,8 +23,9 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let element = cards[indexPath.row]
+		cell.imageView?.image = decks[Deck.id(element.deck) ?? 0].image
 		cell.textLabel?.text = element.front
-		cell.detailTextLabel?.text = decks[Deck.id(element.deck) ?? 0].name
+		cell.detailTextLabel?.text = element.next.description
 		return cell
 	}
 }
