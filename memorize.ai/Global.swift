@@ -34,6 +34,15 @@ struct Deck {
 		}
 		return nil
 	}
+	
+	func card(id t: String) -> Int? {
+		for i in 0..<cards.count {
+			if cards[i].id == t {
+				return i
+			}
+		}
+		return nil
+	}
 }
 
 struct Card {

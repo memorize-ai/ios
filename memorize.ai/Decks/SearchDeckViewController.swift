@@ -43,12 +43,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			decksTableView.reloadData()
 		} else {
 			decksIndex.search(Query(query: searchText)) { content, error in
-				if let hits = content?["hits"] as? Array<Dictionary<String, Any>>, error == nil {
-					for hit in hits {
-						if let objectId = hit["objectID"] as? String, let objectName = hit["name"] as? String, let creator = (hit["creator"] as? [String: Any])?["name"] as? String {
-							self.result.append(SearchResult(id: objectId, name: objectName, creator: creator))
-						}
-					}
+				if let hits = content?["hits"] as? [[String: Any]], error == nil {
+					self.result = hits.map { SearchResult(id: $0["objectID"] as? String ?? "", name: $0["name"] as? String ?? "", creator: ($0["creator"] as? [String: Any])?["name"] as? String ?? "") }
 				} else if let error = error {
 					self.showAlert(error.localizedDescription)
 				}

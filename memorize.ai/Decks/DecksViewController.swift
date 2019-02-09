@@ -96,9 +96,13 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			self.deck?.cards = snapshot.map { card in
 				let cardId = card.documentID
 				firestore.collection("users").document(id!).collection("decks").document(self.deck!.id).collection("cards").document(cardId).getDocument { snapshot, error in
-					<#code#>
+					guard let snapshot = snapshot?.data(), let cardIndex = self.deck?.card(id: cardId) else { return }
+					self.deck?.cards[cardIndex].correct = snapshot["correct"] as? Int ?? 0
+					self.deck?.cards[cardIndex].streak = snapshot["streak"] as? Int ?? 0
+					self.deck?.cards[cardIndex].last = snapshot["last"] as? Timestamp ?? Timestamp()
+					self.deck?.cards[cardIndex].next = snapshot["next"] as? Timestamp ?? Timestamp()
 				}
-				Card(id: card.documentID, front: card["front"] as? String ?? "Error", back: card["back"] as? String ?? "Error", count: card["count"] as? Int ?? 0, correct: $0["correct"] as? Int ?? 0, streak: $0["streak"] as? Int ?? 0, last: $0["last"] as? Timestamp ?? Timestamp(), next: $0["next"] as? Timestamp ?? Timestamp(), history: [], deck: self.deck!.id)
+				return Card(id: card.documentID, front: card["front"] as? String ?? "Error", back: card["back"] as? String ?? "Error", count: card["count"] as? Int ?? 0, correct: 0, streak: 0, last: Timestamp(), next: Timestamp(), history: [], deck: self.deck!.id)
 			}
 			self.cardsTableView.reloadData()
 		}

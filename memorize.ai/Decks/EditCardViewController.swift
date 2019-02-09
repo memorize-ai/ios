@@ -1,16 +1,18 @@
 import UIKit
 import Firebase
 
-class EditCardViewController: UIViewController, UITextViewDelegate {
+class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var editCardView: UIView!
 	@IBOutlet weak var titleBar: UIView!
 	@IBOutlet weak var frontLabel: UILabel!
 	@IBOutlet weak var frontTextView: UITextView!
 	@IBOutlet weak var backLabel: UILabel!
 	@IBOutlet weak var backTextView: UITextView!
+	@IBOutlet weak var historyTableView: UITableView!
 	
 	var deck: Deck?
 	var card: Card?
+	var history = [History]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -19,11 +21,25 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 		resetBorder(textView: backTextView)
 		frontTextView.text = card?.front
 		backTextView.text = card?.back
+		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(card!.id).collection("history").addSnapshotListener { snapshot, error in
+			if let snapshot = snapshot?.documents, error == nil {
+				self.history = snapshot.map { History(id: $0.documentID, date: $0["date"] as? Timestamp ?? Timestamp(), next: $0["next"] as? Timestamp ?? Timestamp(), correct: $0["correct"] as? Bool ?? false, elapsed: $0["elapsed"] as? Int ?? 0) }
+				self.historyTableView.reloadData()
+			} else if let error = error {
+				self.showAlert(error.localizedDescription)
+			}
+		}
 		editCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
 			self.editCardView.transform = .identity
 		}, completion: nil)
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		historyTableView.isScrollEnabled = false
+		historyTableView.frame.size = historyTableView.contentSize
 	}
 	
 	@IBAction func hide() {
@@ -117,5 +133,17 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 		} else {
 			makeCopy()
 		}
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return history.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		let element = history[indexPath.row]
+		cell.textLabel?.text = element.date.description
+		cell.detailTextLabel?.text = element.correct ? "Correct" : "Wrong"
+		return cell
 	}
 }
