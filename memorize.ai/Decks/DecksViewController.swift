@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
@@ -91,11 +92,15 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 		deck = decks[indexPath.item]
 		firestore.collection("decks").document(deck!.id).collection("cards").addSnapshotListener { snapshot, error in
-			if let snapshot = snapshot?.documents, error == nil {
-				let deckId = self.deck!.id
-				self.deck?.cards = snapshot.map { Card(id: $0.documentID, front: $0["front"] as? String ?? "Error", back: $0["back"] as? String ?? "Error", deck: deckId, history: []) }
-				self.cardsTableView.reloadData()
+			guard let snapshot = snapshot?.documents, error == nil else { return }
+			self.deck?.cards = snapshot.map { card in
+				let cardId = card.documentID
+				firestore.collection("users").document(id!).collection("decks").document(self.deck!.id).collection("cards").document(cardId).getDocument { snapshot, error in
+					<#code#>
+				}
+				Card(id: card.documentID, front: card["front"] as? String ?? "Error", back: card["back"] as? String ?? "Error", count: card["count"] as? Int ?? 0, correct: $0["correct"] as? Int ?? 0, streak: $0["streak"] as? Int ?? 0, last: $0["last"] as? Timestamp ?? Timestamp(), next: $0["next"] as? Timestamp ?? Timestamp(), history: [], deck: self.deck!.id)
 			}
+			self.cardsTableView.reloadData()
 		}
 	}
 	
@@ -111,7 +116,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		cell.textLabel?.text = deck?.cards[indexPath.row].front
+		let element = deck?.cards[indexPath.row]
+		cell.textLabel?.text = element?.front
+		cell.detailTextLabel?.text = element?.next.description
 		return cell
 	}
 	
