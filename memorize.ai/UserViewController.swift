@@ -8,6 +8,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var offlineView: UIView!
 	@IBOutlet weak var retryButton: UIButton!
 	@IBOutlet weak var actionsTableView: UITableView!
+	@IBOutlet weak var reviewButton: UIButton!
+	@IBOutlet weak var cardsLabel: UILabel!
 	
 	struct Action {
 		let image: UIImage?
@@ -105,6 +107,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@objc func searchDeck() {
 		performSegue(withIdentifier: "searchDeck", sender: self)
+	}
+	
+	@IBAction func review() {
+		performSegue(withIdentifier: "review", sender: self)
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {

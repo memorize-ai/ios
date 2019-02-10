@@ -121,15 +121,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	
 	func textViewDidChange(_ textView: UITextView) {
 		if deck?.owner == id {
-			let firestoreCard = firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id)
-			switch textView {
-			case frontTextView:
-				firestoreCard.updateData(["front": frontTextView.text.trim()])
-			case backTextView:
-				firestoreCard.updateData(["back": backTextView.text.trim()])
-			default:
-				return
-			}
+			firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id).updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()])
 		} else {
 			makeCopy()
 		}
