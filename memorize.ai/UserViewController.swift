@@ -37,7 +37,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 								firestore.collection("users").document(id!).getDocument { snapshot, error in
 									guard let snapshot = snapshot?.data() else { return }
 									name = snapshot["name"] as? String ?? ""
-									self.navigationController?.isNavigationBarHidden = false
+									self.navigationController?.setNavigationBarHidden(false, animated: true)
 									self.navigationItem.title = name
 									email = localEmail
 									link = snapshot["link"] as? String ?? ""
@@ -52,7 +52,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.activityIndicator.stopAnimating()
 									self.offlineView.isHidden = false
 									self.retryButton.isHidden = false
-									self.navigationController?.isNavigationBarHidden = true
+									self.navigationController?.setNavigationBarHidden(true, animated: true)
 								default:
 									self.signIn()
 								}

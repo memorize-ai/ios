@@ -23,7 +23,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		navigationController?.isNavigationBarHidden = false
+		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
 	@IBAction func back() {
