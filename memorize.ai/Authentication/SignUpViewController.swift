@@ -90,13 +90,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		dismissKeyboard()
 		Auth.auth().createUser(withEmail: emailText, password: passwordText) { authResult, error in
 			if error == nil {
-				id = authResult?.user.uid
-				firestore.collection("users").document(id!).setData(["name": nameText, "email": emailText])
-				name = nameText
-				saveLogin(email: emailText, password: passwordText)
-				// create link
-				self.hideActivityIndicator()
-				self.performSegue(withIdentifier: "signUp", sender: self)
+				self.findLink(nameText.replacingOccurrences(of: " ", with: ""), ext: nil, id: authResult!.user.uid, name: nameText, email: emailText, password: passwordText)
 			} else if let error = error {
 				self.hideActivityIndicator()
 				switch error.localizedDescription {
@@ -105,6 +99,23 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 				default:
 					self.showAlert("There was a problem creating a new account")
 				}
+			}
+		}
+	}
+	
+	func findLink(_ l: String, ext: Int?, id i: String, name n: String, email e: String, password p: String) {
+		let newLink = l + (ext == nil ? "" : String(ext!))
+		firestore.collection("links").document(newLink).addSnapshotListener { snapshot, error in
+			if snapshot?.exists ?? false {
+				self.findLink(l, ext: (ext ?? -1) + 1, id: i, name: n, email: e, password: p)
+			} else {
+				id = i
+				firestore.collection("users").document(id!).setData(["name": n, "email": e, "link": newLink])
+				name = n
+				saveLogin(email: e, password: p)
+				link = newLink
+				self.hideActivityIndicator()
+				self.performSegue(withIdentifier: "signUp", sender: self)
 			}
 		}
 	}
