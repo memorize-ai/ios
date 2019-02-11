@@ -6,14 +6,17 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var emailLabel: UILabel!
 	@IBOutlet weak var linkTextField: UITextField!
-	@IBOutlet weak var takenLabel: UILabel!
 	@IBOutlet weak var linkActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var linkImageView: UIImageView!
+	@IBOutlet weak var tryButton: UIButton!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		navigationItem.setRightBarButton(UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut)), animated: true)
 		textFieldDidEndEditing(linkTextField)
+		nameLabel.text = name
+		emailLabel.text = email
+		linkTextField.text = link
     }
 	
 	@objc func signOut() {
@@ -65,7 +68,44 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 	}
 	
 	@IBAction func linkChanged() {
-		// check if link is taken
+		guard let linkText = linkTextField.text?.trim() else { return }
+		linkImageView.isHidden = true
+		linkActivityIndicator.startAnimating()
+		findLink(linkText, ext: nil)
+	}
+	
+	func findLink(_ l: String, ext: Int?) {
+		let newLink = l + (ext == nil ? "" : String(ext!))
+		firestore.collection("links").document(newLink).addSnapshotListener { snapshot, error in
+			if snapshot?.exists ?? false {
+				self.findLink(l, ext: (ext ?? -1) + 1)
+			} else {
+				if ext == nil {
+					firestore.collection("links").document(link!).delete { error in
+						firestore.collection("users").document(id!).updateData(["link": newLink]) { error in
+							firestore.collection("links").document(newLink).setData(["id": id!]) { error in
+								self.linkActivityIndicator.stopAnimating()
+								self.linkImageView.isHidden = false
+								self.linkImageView.image = #imageLiteral(resourceName: "Check")
+							}
+						}
+					}
+				} else {
+					self.linkActivityIndicator.stopAnimating()
+					self.linkImageView.isHidden = false
+					self.linkImageView.image = #imageLiteral(resourceName: "Red X")
+					self.tryButton.isHidden = false
+					self.tryButton.setTitle("Try \(newLink)", for: .normal)
+				}
+			}
+		}
+	}
+	
+	@IBAction func tryLink() {
+		linkImageView.isHidden = true
+		linkActivityIndicator.startAnimating()
+		tryButton.isHidden = true
+		findLink(String(tryButton.currentTitle!.dropFirst(4)), ext: nil)
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
