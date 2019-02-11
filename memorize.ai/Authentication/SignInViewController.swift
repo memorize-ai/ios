@@ -78,6 +78,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 					guard let snapshot = snapshot?.data() else { return }
 					name = snapshot["name"] as? String ?? ""
 					saveLogin(email: emailText, password: passwordText)
+					link = snapshot["link"] as? String ?? ""
 					self.hideActivityIndicator()
 					self.performSegue(withIdentifier: "signIn", sender: self)
 				}

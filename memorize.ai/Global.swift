@@ -12,6 +12,7 @@ var startup = true
 var id: String?
 var name: String?
 var email: String?
+var link: String?
 var decks = [Deck]()
 
 struct Deck {
