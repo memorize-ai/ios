@@ -68,7 +68,8 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 	}
 	
 	@IBAction func linkChanged() {
-		guard let linkText = linkTextField.text?.trim() else { return }
+		guard let linkText = linkTextField.text?.trimAll() else { return }
+		linkTextField.text = linkText
 		linkImageView.isHidden = true
 		linkActivityIndicator.startAnimating()
 		findLink(linkText, ext: nil)
