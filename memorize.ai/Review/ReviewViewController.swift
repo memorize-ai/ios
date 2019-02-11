@@ -14,7 +14,7 @@ class ReviewViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
+		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
 		frontLabel.text = deck?.cards[card].front
