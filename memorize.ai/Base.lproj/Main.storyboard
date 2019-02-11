@@ -2296,7 +2296,7 @@
                                         <rect key="frame" x="0.0" y="40" width="334" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyb-jX-XY8">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="298"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="340"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zl-IX-G0b">
                                                         <rect key="frame" x="20" y="20" width="44" height="18"/>
@@ -2354,7 +2354,7 @@
                                                         </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0qR-8k-uus">
-                                                        <rect key="frame" x="0.0" y="258" width="334" height="20"/>
+                                                        <rect key="frame" x="0.0" y="300" width="334" height="20"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" placeholder="YES" id="Pia-LQ-uXL"/>
@@ -2390,6 +2390,12 @@
                                                             <outlet property="delegate" destination="ngo-Wp-CMQ" id="L5e-BH-1dj"/>
                                                         </connections>
                                                     </tableView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HISTORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEn-Mg-89R">
+                                                        <rect key="frame" x="20" y="278" width="56" height="18"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="13"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2405,12 +2411,15 @@
                                                     <constraint firstItem="twy-MA-Qyy" firstAttribute="leading" secondItem="oyb-jX-XY8" secondAttribute="leading" constant="20" id="N44-Bj-WMS"/>
                                                     <constraint firstItem="2zl-IX-G0b" firstAttribute="leading" secondItem="oyb-jX-XY8" secondAttribute="leading" constant="20" id="YjT-AL-t5V"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dyo-ua-YCe" secondAttribute="trailing" constant="20" id="bxG-Np-M9C"/>
-                                                    <constraint firstItem="0qR-8k-uus" firstAttribute="top" secondItem="O3z-bp-TO2" secondAttribute="bottom" constant="20" id="fx6-od-Nrc"/>
+                                                    <constraint firstItem="0qR-8k-uus" firstAttribute="top" secondItem="zEn-Mg-89R" secondAttribute="bottom" constant="4" id="cqs-67-btN"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2zl-IX-G0b" secondAttribute="trailing" constant="20" id="gNR-Av-0XW"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zEn-Mg-89R" secondAttribute="trailing" constant="20" id="ibn-Og-jp8"/>
                                                     <constraint firstItem="JQv-pA-7c5" firstAttribute="leading" secondItem="oyb-jX-XY8" secondAttribute="leading" constant="20" id="itr-3P-Q5H"/>
                                                     <constraint firstAttribute="trailing" secondItem="JQv-pA-7c5" secondAttribute="trailing" constant="20" id="kXx-sh-5cG"/>
                                                     <constraint firstItem="JQv-pA-7c5" firstAttribute="top" secondItem="dyo-ua-YCe" secondAttribute="bottom" constant="4" id="na1-md-GI8"/>
+                                                    <constraint firstItem="zEn-Mg-89R" firstAttribute="leading" secondItem="oyb-jX-XY8" secondAttribute="leading" constant="20" id="wcp-ec-KiO"/>
                                                     <constraint firstItem="0qR-8k-uus" firstAttribute="leading" secondItem="oyb-jX-XY8" secondAttribute="leading" id="xeA-hV-ko3"/>
+                                                    <constraint firstItem="zEn-Mg-89R" firstAttribute="top" secondItem="O3z-bp-TO2" secondAttribute="bottom" constant="40" id="zvq-pR-FXh"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
