@@ -17,7 +17,7 @@ class ReviewViewController: UIViewController {
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
-		frontLabel.text = deck?.cards[card].front
+		frontLabel.text = deck?.cards[card].front ?? decks[0].cards[card].front
 		cardView.layer.borderWidth = 1
 		cardView.layer.borderColor = UIColor.lightGray.cgColor
 		dontKnowButton.layer.borderWidth = 1

@@ -162,3 +162,16 @@ extension UIView {
 		layer.mask = mask
 	}
 }
+
+extension Timestamp {
+	func beautify() -> String {
+		let date = dateValue()
+		let totalSeconds = Int(date.timeIntervalSinceNow)
+		let hours = Int(totalSeconds / 3600)
+		let minutes = totalSeconds - hours * 3600
+		let seconds = totalSeconds - hours * 3600 - minutes * 60
+		if hours < 2 {
+			return hours < 1
+		}
+	}
+}
