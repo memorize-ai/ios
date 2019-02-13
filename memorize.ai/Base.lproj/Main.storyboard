@@ -344,6 +344,10 @@
                                                     <action selector="tryLink" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="qUd-qz-gG2"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="toE-Gb-dNw">
+                                                <rect key="frame" x="77" y="102" width="37" height="37"/>
+                                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -361,11 +365,13 @@
                                             <constraint firstItem="EuI-wK-u4H" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="GDX-Uj-cgS"/>
                                             <constraint firstItem="ZIw-RN-t5s" firstAttribute="top" secondItem="Nls-MU-fig" secondAttribute="bottom" constant="4" id="GqH-0Q-n3U"/>
                                             <constraint firstAttribute="bottom" secondItem="EuI-wK-u4H" secondAttribute="bottom" constant="20" id="IxI-s5-pfb"/>
+                                            <constraint firstItem="toE-Gb-dNw" firstAttribute="top" secondItem="zZy-q0-HzQ" secondAttribute="bottom" constant="61" id="Mdp-OS-6jT"/>
                                             <constraint firstItem="iGa-Xb-sd8" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="OAu-NJ-X80"/>
                                             <constraint firstItem="flm-BK-sjT" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="Ofp-Pv-aQZ"/>
                                             <constraint firstAttribute="trailing" secondItem="rIZ-2b-g0C" secondAttribute="trailing" constant="20" id="PSD-p8-pHP"/>
                                             <constraint firstItem="rIZ-2b-g0C" firstAttribute="top" secondItem="flm-BK-sjT" secondAttribute="bottom" constant="4" id="QiL-zy-H8r"/>
                                             <constraint firstItem="EuI-wK-u4H" firstAttribute="top" secondItem="iGa-Xb-sd8" secondAttribute="bottom" constant="4" id="RSV-DS-FOf"/>
+                                            <constraint firstItem="toE-Gb-dNw" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="77" id="Teg-du-CiU"/>
                                             <constraint firstItem="kBk-A6-MRH" firstAttribute="top" secondItem="8Ex-Xq-gD5" secondAttribute="bottom" constant="40" id="WgP-lN-WaE"/>
                                             <constraint firstItem="1Mx-Rk-n4C" firstAttribute="top" secondItem="rIZ-2b-g0C" secondAttribute="bottom" constant="40" id="XKg-6w-mjQ"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EuI-wK-u4H" secondAttribute="trailing" constant="20" id="XsH-Rv-dKs"/>
@@ -405,6 +411,7 @@
                         <outlet property="linkImageView" destination="D4e-ue-TAi" id="QvE-wG-Nne"/>
                         <outlet property="linkTextField" destination="Inv-2A-pc2" id="vQU-TP-bmR"/>
                         <outlet property="nameLabel" destination="rIZ-2b-g0C" id="Hyb-X5-pk9"/>
+                        <outlet property="pictureActivityIndicator" destination="toE-Gb-dNw" id="fwl-ei-y5H"/>
                         <outlet property="pictureImageView" destination="Nls-MU-fig" id="llr-yK-JgO"/>
                         <outlet property="tryButton" destination="EuI-wK-u4H" id="GWW-CB-dhK"/>
                     </connections>

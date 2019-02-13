@@ -3,6 +3,7 @@ import Firebase
 
 class SettingsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 	@IBOutlet weak var pictureImageView: UIImageView!
+	@IBOutlet weak var pictureActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var emailLabel: UILabel!
 	@IBOutlet weak var linkTextField: UITextField!
@@ -52,9 +53,19 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 		present(alert, animated: true, completion: nil)
 	}
 	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			pictureImageView.image = image
+			pictureImageView.image = nil
+			pictureActivityIndicator.startAnimating()
+			uploadImage(image) { metadata, error in
+				if error == nil {
+					self.pictureActivityIndicator.stopAnimating()
+					self.pictureImageView.image = image
+				} else if let error = error {
+					self.pictureActivityIndicator.stopAnimating()
+					self.showAlert(error.localizedDescription)
+				}
+			}
 		}
 		dismiss(animated: true, completion: nil)
 	}
@@ -64,7 +75,17 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 	}
 	
 	@IBAction func resetImage() {
-		pictureImageView.image = #imageLiteral(resourceName: "Person")
+		pictureImageView.image = nil
+		pictureActivityIndicator.startAnimating()
+		uploadImage(#imageLiteral(resourceName: "Person")) { metadata, error in
+			if error == nil {
+				self.pictureActivityIndicator.stopAnimating()
+				self.pictureImageView.image = #imageLiteral(resourceName: "Person")
+			} else if let error = error {
+				self.pictureActivityIndicator.stopAnimating()
+				self.showAlert(error.localizedDescription)
+			}
+		}
 	}
 	
 	@IBAction func linkChanged() {
@@ -73,6 +94,16 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 		linkImageView.isHidden = true
 		linkActivityIndicator.startAnimating()
 		findLink(linkText, ext: nil)
+	}
+	
+	func uploadImage(_ image: UIImage, completion: ((StorageMetadata?, Error?) -> Void)?) {
+		if let data = image.pngData() {
+			let metadata = StorageMetadata()
+			metadata.contentType = "image/png"
+			storage.child("users/\(id!)").putData(data, metadata: metadata, completion: completion)
+		} else {
+			showAlert("Unable to set profile picture")
+		}
 	}
 	
 	func findLink(_ l: String, ext: Int?) {
