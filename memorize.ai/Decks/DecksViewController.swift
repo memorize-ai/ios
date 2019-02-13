@@ -92,17 +92,17 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 		deck = decks[indexPath.item]
 		firestore.collection("decks").document(deck!.id).collection("cards").addSnapshotListener { snapshot, error in
-			guard let snapshot = snapshot?.documents, error == nil else { return }
+			guard let snapshot = snapshot?.documents, let deckId = self.deck?.id, error == nil else { return }
 			self.deck?.cards = snapshot.map { card in
 				let cardId = card.documentID
-				firestore.collection("users").document(id!).collection("decks").document(self.deck!.id).collection("cards").document(cardId).getDocument { snapshot, error in
+				firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).getDocument { snapshot, error in
 					guard let snapshot = snapshot?.data(), let cardIndex = self.deck?.card(id: cardId) else { return }
 					self.deck?.cards[cardIndex].correct = snapshot["correct"] as? Int ?? 0
 					self.deck?.cards[cardIndex].streak = snapshot["streak"] as? Int ?? 0
 					self.deck?.cards[cardIndex].last = snapshot["last"] as? Timestamp ?? Timestamp()
 					self.deck?.cards[cardIndex].next = snapshot["next"] as? Timestamp ?? Timestamp()
 				}
-				return Card(id: card.documentID, front: card["front"] as? String ?? "Error", back: card["back"] as? String ?? "Error", count: card["count"] as? Int ?? 0, correct: 0, streak: 0, last: Timestamp(), next: Timestamp(), history: [], deck: self.deck!.id)
+				return Card(id: card.documentID, front: card["front"] as? String ?? "Error", back: card["back"] as? String ?? "Error", count: card["count"] as? Int ?? 0, correct: 0, streak: 0, last: Timestamp(), next: Timestamp(), history: [], deck: deckId)
 			}
 			self.cardsTableView.reloadData()
 		}
@@ -122,7 +122,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let element = deck?.cards[indexPath.row]
 		cell.textLabel?.text = element?.front
-		cell.detailTextLabel?.text = element?.next.description
+		cell.detailTextLabel?.text = element?.next.format()
 		return cell
 	}
 	

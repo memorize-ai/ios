@@ -163,15 +163,24 @@ extension UIView {
 	}
 }
 
+extension Date {
+	func format(_ format: String) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = format
+		return dateFormatter.string(from: self)
+	}
+	
+	func format() -> String {
+		return format("MMM d, yyyy @ h:mm a")
+	}
+}
+
 extension Timestamp {
-	func beautify() -> String {
-		let date = dateValue()
-		let totalSeconds = Int(date.timeIntervalSinceNow)
-		let hours = Int(totalSeconds / 3600)
-		let minutes = totalSeconds - hours * 3600
-		let seconds = totalSeconds - hours * 3600 - minutes * 60
-		if hours < 2 {
-			return hours < 1
-		}
+	func format(_ format: String) -> String {
+		return dateValue().format(format)
+	}
+	
+	func format() -> String {
+		return dateValue().format()
 	}
 }

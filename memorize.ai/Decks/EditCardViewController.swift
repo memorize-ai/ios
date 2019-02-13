@@ -134,7 +134,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let element = history[indexPath.row]
-		cell.textLabel?.text = element.date.description
+		cell.textLabel?.text = element.date.format()
 		cell.detailTextLabel?.text = element.correct ? "Correct" : "Wrong"
 		return cell
 	}
