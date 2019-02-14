@@ -16,7 +16,7 @@
 		4D052ACC2204259C0093B64E /* memorize_aiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052ACB2204259C0093B64E /* memorize_aiTests.swift */; };
 		4D052AD72204259C0093B64E /* memorize_aiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052AD62204259C0093B64E /* memorize_aiUITests.swift */; };
 		4D052AE5220427260093B64E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D052AE4220427260093B64E /* GoogleService-Info.plist */; };
-		4D3607842211426E00492ACD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3607832211426E00492ACD /* SettingsViewController.swift */; };
+		4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3607832211426E00492ACD /* EditProfileViewController.swift */; };
 		4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */; };
 		4D64390622056528006F4F2D /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */; };
 		4D64390722056528006F4F2D /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */; };
@@ -85,7 +85,7 @@
 		4D052AD62204259C0093B64E /* memorize_aiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memorize_aiUITests.swift; sourceTree = "<group>"; };
 		4D052AD82204259C0093B64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D052AE4220427260093B64E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4D3607832211426E00492ACD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4D3607832211426E00492ACD /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				4D64391422057886006F4F2D /* Global.swift */,
 				4D052AB72204259B0093B64E /* Main.storyboard */,
 				4D052AB52204259B0093B64E /* UserViewController.swift */,
-				4D3607832211426E00492ACD /* SettingsViewController.swift */,
+				4D3607832211426E00492ACD /* EditProfileViewController.swift */,
 				4D64391622057D3A006F4F2D /* Authentication */,
 				4DF9724622076C8200FF8BED /* Decks */,
 				4D8A344F22090E8A0021474A /* Review */,
@@ -562,7 +562,7 @@
 				4D052ABC2204259B0093B64E /* memorize_ai.xcdatamodeld in Sources */,
 				4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */,
 				4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */,
-				4D3607842211426E00492ACD /* SettingsViewController.swift in Sources */,
+				4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */,
 				4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
 				4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */,

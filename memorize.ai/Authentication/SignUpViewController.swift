@@ -90,7 +90,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		dismissKeyboard()
 		Auth.auth().createUser(withEmail: emailText, password: passwordText) { authResult, error in
 			if error == nil {
-				self.findLink(nameText.trimAll(), ext: nil, id: authResult!.user.uid, name: nameText, email: emailText, password: passwordText)
+				guard let data = #imageLiteral(resourceName: "Person").pngData() else { return }
+				let metadata = StorageMetadata()
+				metadata.contentType = "image/png"
+				storage.child("users/\(authResult!.user.uid)").putData(data, metadata: metadata) { metadata, error in
+					self.findLink(nameText.lowercased().trimAll(), ext: nil, id: authResult!.user.uid, name: nameText, email: emailText, password: passwordText)
+				}
 			} else if let error = error {
 				self.hideActivityIndicator()
 				switch error.localizedDescription {

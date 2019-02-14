@@ -1,8 +1,9 @@
 import UIKit
 import Firebase
 
-class SettingsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
-	@IBOutlet weak var pictureImageView: UIImageView!
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+	@IBOutlet weak var pictureView: UIView!
+	@IBOutlet weak var pictureButton: UIButton!
 	@IBOutlet weak var pictureActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var emailLabel: UILabel!
@@ -18,6 +19,21 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 		nameLabel.text = name
 		emailLabel.text = email
 		linkTextField.text = link
+		storage.child("users/\(id!)").getData(maxSize: 50000000) { data, error in
+			if let data = data, error == nil {
+				self.pictureActivityIndicator.stopAnimating()
+				self.pictureButton.imageView?.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Person")
+			} else {
+				self.pictureActivityIndicator.stopAnimating()
+				self.pictureButton.imageView?.image = #imageLiteral(resourceName: "Person")
+				self.showAlert("Unable to load profile picture")
+			}
+		}
+		let cornerRadius = pictureView.bounds.width / 2
+		pictureView.layer.cornerRadius = cornerRadius
+		pictureButton.layer.cornerRadius = cornerRadius
+		pictureButton.layer.borderWidth = 0.5
+		pictureButton.layer.borderColor = UIColor.lightGray.cgColor
     }
 	
 	@objc func signOut() {
@@ -41,6 +57,19 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { action in
+			self.pictureButton.imageView?.image = nil
+			self.pictureActivityIndicator.startAnimating()
+			self.uploadImage(#imageLiteral(resourceName: "Person")) { metadata, error in
+				if error == nil {
+					self.pictureActivityIndicator.stopAnimating()
+					self.pictureButton.imageView?.image = #imageLiteral(resourceName: "Person")
+				} else if let error = error {
+					self.pictureActivityIndicator.stopAnimating()
+					self.showAlert(error.localizedDescription)
+				}
+			}
+		})
 		alert.addAction(UIAlertAction(title: "Camera", style: .default) { action in
 			picker.sourceType = .camera
 			self.present(picker, animated: true, completion: nil)
@@ -55,12 +84,12 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			pictureImageView.image = nil
+			pictureButton.imageView?.image = nil
 			pictureActivityIndicator.startAnimating()
 			uploadImage(image) { metadata, error in
 				if error == nil {
 					self.pictureActivityIndicator.stopAnimating()
-					self.pictureImageView.image = image
+					self.pictureButton.imageView?.image = image
 				} else if let error = error {
 					self.pictureActivityIndicator.stopAnimating()
 					self.showAlert(error.localizedDescription)
@@ -72,20 +101,6 @@ class SettingsViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
-	}
-	
-	@IBAction func resetImage() {
-		pictureImageView.image = nil
-		pictureActivityIndicator.startAnimating()
-		uploadImage(#imageLiteral(resourceName: "Person")) { metadata, error in
-			if error == nil {
-				self.pictureActivityIndicator.stopAnimating()
-				self.pictureImageView.image = #imageLiteral(resourceName: "Person")
-			} else if let error = error {
-				self.pictureActivityIndicator.stopAnimating()
-				self.showAlert(error.localizedDescription)
-			}
-		}
 	}
 	
 	@IBAction func linkChanged() {

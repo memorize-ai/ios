@@ -43,7 +43,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									link = snapshot["link"] as? String ?? ""
 									self.activityIndicator.stopAnimating()
 									self.loadingView.isHidden = true
-									self.createSettingsBarButtonItem()
+									self.createProfileBarButtonItem()
 									startup = false
 								}
 							} else if let error = error {
@@ -64,7 +64,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				} catch {}
 			}
 		} else {
-			createSettingsBarButtonItem()
+			createProfileBarButtonItem()
 		}
 		navigationController?.navigationBar.tintColor = .white
 		navigationItem.title = name
@@ -86,12 +86,16 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		performSegue(withIdentifier: "signIn", sender: self)
 	}
 	
-	func createSettingsBarButtonItem() {
-		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(settings)), animated: false)
+	func createProfileBarButtonItem() {
+		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(editProfile)), animated: false)
+		storage.getData(maxSize: 50000000) { data, error in
+			guard let data = data, error == nil else { return }
+			self.navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(data: data) ?? #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(self.editProfile)), animated: true)
+		}
 	}
 	
-	@objc func settings() {
-		performSegue(withIdentifier: "settings", sender: self)
+	@objc func editProfile() {
+		performSegue(withIdentifier: "editProfile", sender: self)
 	}
 	
 	@objc func showDecks() {
