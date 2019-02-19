@@ -1,5 +1,5 @@
 import UIKit
-import Firebase
+import FirebaseFirestore
 
 class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var decksCollectionView: UICollectionView!

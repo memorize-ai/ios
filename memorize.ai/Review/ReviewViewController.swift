@@ -1,5 +1,5 @@
 import UIKit
-import Firebase
+import FirebaseFirestore
 
 class ReviewViewController: UIViewController {
 	@IBOutlet weak var cardView: UIView!

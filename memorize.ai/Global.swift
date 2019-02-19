@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
-import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 import InstantSearchClient
 import AudioToolbox
 

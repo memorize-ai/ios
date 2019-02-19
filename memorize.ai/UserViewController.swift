@@ -1,6 +1,6 @@
 import UIKit
 import CoreData
-import Firebase
+import FirebaseAuth
 
 class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!

@@ -1,5 +1,5 @@
 import UIKit
-import Firebase
+import FirebaseFirestore
 
 class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!

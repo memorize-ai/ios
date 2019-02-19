@@ -1,5 +1,6 @@
 import UIKit
-import Firebase
+import FirebaseAuth
+import FirebaseStorage
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 	@IBOutlet weak var pictureView: UIView!
