@@ -111,6 +111,7 @@
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		4DAEEC7B220A074400A207FD /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
+		4DC857DD221B824400FD2100 /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
 		4DF9724722076CDD00FF8BED /* ChooseDeckTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDeckTypeViewController.swift; sourceTree = "<group>"; };
 		4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +210,7 @@
 				4D052ABF2204259C0093B64E /* LaunchScreen.storyboard */,
 				4D052AC22204259C0093B64E /* Info.plist */,
 				4D052AE4220427260093B64E /* GoogleService-Info.plist */,
+				4DC857DD221B824400FD2100 /* memorize.ai.entitlements */,
 				4D052ABA2204259B0093B64E /* memorize_ai.xcdatamodeld */,
 				4D6438F722056528006F4F2D /* Nunito */,
 			);
@@ -359,6 +361,11 @@
 				TargetAttributes = {
 					4D052AAF2204259B0093B64E = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					4D052AC62204259C0093B64E = {
 						CreatedOnToolsVersion = 10.1;
@@ -742,6 +749,7 @@
 			baseConfigurationReference = 06AAEFB76E9502EA6E136E64 /* Pods-memorize.ai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = memorize.ai/memorize.ai.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JUP7FZ7QC3;
 				INFOPLIST_FILE = memorize.ai/Info.plist;
@@ -761,6 +769,7 @@
 			baseConfigurationReference = 82D92F6E9DCF441FEE3F5D79 /* Pods-memorize.ai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = memorize.ai/memorize.ai.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JUP7FZ7QC3;
 				INFOPLIST_FILE = memorize.ai/Info.plist;
