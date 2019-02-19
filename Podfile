@@ -4,6 +4,7 @@ target 'memorize.ai' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
+	pod 'Firebase/Messaging'
 	pod 'InstantSearchClient', '~> 6.0'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
