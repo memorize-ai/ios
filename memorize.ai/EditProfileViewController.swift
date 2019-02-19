@@ -58,6 +58,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+		alert.addAction(UIAlertAction(title: "Take Photo", style: .default) { action in
+			picker.sourceType = .camera
+			self.present(picker, animated: true, completion: nil)
+		})
+		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { action in
+			picker.sourceType = .photoLibrary
+			self.present(picker, animated: true, completion: nil)
+		})
 		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { action in
 			self.pictureButton.imageView?.image = nil
 			self.pictureActivityIndicator.startAnimating()
@@ -70,14 +78,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 					self.showAlert(error.localizedDescription)
 				}
 			}
-		})
-		alert.addAction(UIAlertAction(title: "Camera", style: .default) { action in
-			picker.sourceType = .camera
-			self.present(picker, animated: true, completion: nil)
-		})
-		alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { action in
-			picker.sourceType = .photoLibrary
-			self.present(picker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		present(alert, animated: true, completion: nil)
