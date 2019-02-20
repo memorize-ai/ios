@@ -8,7 +8,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	struct SearchResult {
 		let id: String
 		let name: String
-		let creator: String
+		var owner: String?
 	}
 	
 	var result = [SearchResult]()
@@ -44,7 +44,19 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 		} else {
 			decksIndex.search(Query(query: searchText)) { content, error in
 				if let hits = content?["hits"] as? [[String: Any]], error == nil {
-					self.result = hits.map { SearchResult(id: $0["objectID"] as? String ?? "", name: $0["name"] as? String ?? "", creator: ($0["creator"] as? [String: Any])?["name"] as? String ?? "") }
+					self.result = hits.map {
+						let resultId = $0["objectID"] as? String ?? ""
+						firestore.collection("users").document($0["owner"] as? String ?? "").getDocument { snapshot, error in
+							guard let snapshot = snapshot?.data(), error == nil else { return }
+							for i in 0..<self.result.count {
+								if self.result[i].id == resultId {
+									self.result[i].owner = snapshot["name"] as? String
+									self.decksTableView.reloadData()
+								}
+							}
+						}
+						return SearchResult(id: resultId, name: $0["name"] as? String ?? "", owner: nil)
+					}
 				} else if let error = error {
 					self.showAlert(error.localizedDescription)
 				}
@@ -69,7 +81,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			tableView.reloadData()
 		}
 		cell.textLabel?.text = element.name
-		cell.detailTextLabel?.text = element.creator
+		cell.detailTextLabel?.text = element.owner
 		return cell
 	}
 	

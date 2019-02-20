@@ -98,8 +98,8 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		dismissKeyboard()
 		let metadata = StorageMetadata()
 		metadata.contentType = "image/png"
-		let deckId = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "owner": id!, "creator": ["id": id!, "name": name!]]).documentID
-		firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["name": nameText, "count": 0, "mastered": 0])
+		let deckId = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id!, "owner": id!]).documentID
+		firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["mastered": 0])
 		storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
 			if error == nil {
 				self.hideActivityIndicator()
