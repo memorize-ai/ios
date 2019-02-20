@@ -15,30 +15,22 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		layout.minimumLineSpacing = 8
 		layout.minimumInteritemSpacing = 8
 		decksCollectionView.collectionViewLayout = layout
-		firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
-			if let snapshot = snapshot?.documents, error == nil {
-				decks = snapshot.map { deck in
-					let deckId = deck.documentID
-					storage.child("decks/\(deckId)").getData(maxSize: 50000000) { data, error in
-						if let data = data, error == nil {
-							decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-							self.decksCollectionView.reloadData()
-						}
-					}
-					let creator = deck["creator"] as? [String: Any]
-					return Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deck["name"] as? String ?? "Error", description: deck["description"] as? String ?? "Error", isPublic: deck["public"] as? Bool ?? true, count: deck["count"] as? Int ?? 0, creator: Creator(id: creator?["id"] as? String ?? "Error", name: creator?["name"] as? String ?? "Error"), owner: deck["owner"] as? String ?? "Error", permissions: [], cards: [])
-				}
+		for deck in decks {
+			let deckId = deck.id
+			storage.child("decks/\(deckId)").getData(maxSize: 50000000) { data, error in
+				guard let data = data, error == nil else { return }
+				decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+				self.decksCollectionView.reloadData()
 			}
 		}
     }
 	
 	@objc @IBAction func newDeck() {
-		if let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController {
-			addChild(chooseDeckTypeVC)
-			chooseDeckTypeVC.view.frame = view.frame
-			view.addSubview(chooseDeckTypeVC.view)
-			chooseDeckTypeVC.didMove(toParent: self)
-		}
+		guard let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController else { return }
+		addChild(chooseDeckTypeVC)
+		chooseDeckTypeVC.view.frame = view.frame
+		view.addSubview(chooseDeckTypeVC.view)
+		chooseDeckTypeVC.didMove(toParent: self)
 	}
 	
 	@IBAction func edit() {
@@ -127,14 +119,13 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController {
-			editCardVC.deck = deck
-			editCardVC.card = deck?.cards[indexPath.row]
-			addChild(editCardVC)
-			editCardVC.view.frame = view.frame
-			view.addSubview(editCardVC.view)
-			editCardVC.didMove(toParent: self)
-		}
+		guard let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
+		editCardVC.deck = deck
+		editCardVC.card = deck?.cards[indexPath.row]
+		addChild(editCardVC)
+		editCardVC.view.frame = view.frame
+		view.addSubview(editCardVC.view)
+		editCardVC.didMove(toParent: self)
 	}
 }
 

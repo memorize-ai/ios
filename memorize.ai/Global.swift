@@ -23,7 +23,7 @@ struct Deck {
 	var description: String
 	var isPublic: Bool
 	var count: Int
-	var creator: Creator
+	var creator: String
 	var owner: String
 	var permissions: [Permission]
 	var cards: [Card]
@@ -60,15 +60,8 @@ struct Card {
 	let deck: String
 }
 
-struct Creator {
-	let id: String
-	let name: String
-}
-
 struct Permission {
 	let id: String
-	let name: String
-	let email: String
 	var role: Role
 }
 

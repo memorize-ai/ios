@@ -46,6 +46,16 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.createProfileBarButtonItem()
 									startup = false
 								}
+								firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
+									guard let snapshot = snapshot?.documents, error == nil else { return }
+									for deck in snapshot {
+										let deckId = deck.documentID
+										firestore.collection("decks").document(deckId).addSnapshotListener { documentSnapshot, error in
+											guard let documentData = documentSnapshot?.data(), error == nil else { return }
+											decks.append(Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: documentData["name"] as? String ?? "", description: documentData["description"] as? String ?? "", isPublic: documentData["public"] as? Bool ?? true, count: documentData["count"] as? Int ?? 0, creator: documentData["creator"] as? String ?? "", owner: documentData["owner"] as? String ?? "", permissions: [], cards: []))
+										}
+									}
+								}
 							} else if let error = error {
 								switch error.localizedDescription {
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
