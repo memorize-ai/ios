@@ -40,7 +40,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.navigationController?.setNavigationBarHidden(false, animated: true)
 									self.navigationItem.title = name
 									email = localEmail
-									link = snapshot["link"] as? String ?? ""
+									slug = snapshot["slug"] as? String ?? ""
 									self.activityIndicator.stopAnimating()
 									self.loadingView.isHidden = true
 									self.createProfileBarButtonItem()
