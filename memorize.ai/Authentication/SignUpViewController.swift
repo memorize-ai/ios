@@ -94,8 +94,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 				guard let data = #imageLiteral(resourceName: "Person").pngData() else { return }
 				let metadata = StorageMetadata()
 				metadata.contentType = "image/png"
-				storage.child("users/\(authResult!.user.uid)").putData(data, metadata: metadata) { metadata, error in
-					self.findLink(nameText.lowercased().trimAll(), ext: nil, id: authResult!.user.uid, name: nameText, email: emailText, password: passwordText)
+				id = authResult?.user.uid
+				storage.child("users/\(id!)").putData(data, metadata: metadata) { metadata, error in
+					storage.child("users/\(id!)").downloadURL { url, error in
+						guard let changeRequest = authResult?.user.createProfileChangeRequest(), let photoURL = url, error == nil else { return }
+						changeRequest.displayName = nameText
+						changeRequest.photoURL = photoURL
+					}
+					firestore.collection("users").document(id!).setData(["name": nameText, "email": emailText])
+					name = nameText
+					saveLogin(email: emailText, password: passwordText)
+					self.hideActivityIndicator()
+					self.performSegue(withIdentifier: "signUp", sender: self)
 				}
 			} else if let error = error {
 				self.hideActivityIndicator()
@@ -105,23 +115,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 				default:
 					self.showAlert("There was a problem creating a new account")
 				}
-			}
-		}
-	}
-	
-	func findLink(_ l: String, ext: Int?, id i: String, name n: String, email e: String, password p: String) {
-		let newLink = l + (ext == nil ? "" : String(ext!))
-		firestore.collection("links").document(newLink).addSnapshotListener { snapshot, error in
-			if snapshot?.exists ?? false {
-				self.findLink(l, ext: (ext ?? -1) + 1, id: i, name: n, email: e, password: p)
-			} else {
-				id = i
-				firestore.collection("users").document(id!).setData(["name": n, "email": e, "link": newLink])
-				name = n
-				saveLogin(email: e, password: p)
-				link = newLink
-				self.hideActivityIndicator()
-				self.performSegue(withIdentifier: "signUp", sender: self)
 			}
 		}
 	}
