@@ -200,8 +200,7 @@
 			children = (
 				4D64391422057886006F4F2D /* Global.swift */,
 				4D052AB72204259B0093B64E /* Main.storyboard */,
-				4D052AB52204259B0093B64E /* UserViewController.swift */,
-				4D3607832211426E00492ACD /* EditProfileViewController.swift */,
+				4D44043D224D7D8400AEABD2 /* Home */,
 				4D64391622057D3A006F4F2D /* Authentication */,
 				4DF9724622076C8200FF8BED /* Decks */,
 				4D8A344F22090E8A0021474A /* Review */,
@@ -233,6 +232,15 @@
 				4D052AD82204259C0093B64E /* Info.plist */,
 			);
 			path = memorize.aiUITests;
+			sourceTree = "<group>";
+		};
+		4D44043D224D7D8400AEABD2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4D052AB52204259B0093B64E /* UserViewController.swift */,
+				4D3607832211426E00492ACD /* EditProfileViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		4D6438F722056528006F4F2D /* Nunito */ = {
