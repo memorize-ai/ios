@@ -46,7 +46,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.createProfileBarButtonItem()
 									startup = false
 								}
-								loadDecks()
+								self.loadDecks()
 							} else if let error = error {
 								switch error.localizedDescription {
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
@@ -131,11 +131,14 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					firestore.collection("decks").document(deckId).addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
 						decks.append(Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
+						self.actionsTableView.reloadData()
 					}
 				case .modified:
 					decks[Deck.id(deckId)!].mastered = deck.get("mastered") as? Int ?? decks[Deck.id(deckId)!].mastered
+					self.actionsTableView.reloadData()
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
+					self.actionsTableView.reloadData()
 				}
 			}
 		}
