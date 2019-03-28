@@ -2,8 +2,9 @@ import UIKit
 import FirebaseStorage
 
 class CreateDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
+	@IBOutlet weak var outerImageView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var resetImageButton: UIButton!
+	@IBOutlet weak var changeButton: UIButton!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
 	@IBOutlet weak var descriptionTextView: UITextView!
@@ -17,8 +18,12 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	override func viewDidLoad() {
         super.viewDidLoad()
 		disable()
-		imageView.layer.borderWidth = 1
+		let cornerRadius = outerImageView.bounds.width / 2
+		outerImageView.layer.cornerRadius = cornerRadius
+		imageView.layer.cornerRadius = cornerRadius
+		imageView.layer.borderWidth = 0.5
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
+		changeButton.roundCorners([.bottomLeft, .bottomRight], radius: cornerRadius)
 		textViewDidEndEditing(descriptionTextView)
     }
 	
@@ -26,13 +31,16 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-		alert.addAction(UIAlertAction(title: "Camera", style: .default) { action in
+		alert.addAction(UIAlertAction(title: "Take Photo", style: .default) { _ in
 			picker.sourceType = .camera
 			self.present(picker, animated: true, completion: nil)
 		})
-		alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { action in
+		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { _ in
 			picker.sourceType = .photoLibrary
 			self.present(picker, animated: true, completion: nil)
+		})
+		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
+			self.imageView.image = #imageLiteral(resourceName: "Gray Deck")
 		})
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		present(alert, animated: true, completion: nil)
@@ -47,10 +55,6 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
-	}
-	
-	@IBAction func resetImage() {
-		imageView.image = #imageLiteral(resourceName: "Gray Deck")
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
