@@ -9,6 +9,7 @@ let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 let decksIndex = client.index(withName: "decks")
+let fileLimit: Int64 = 50000000
 var startup = true
 var id: String?
 var name: String?

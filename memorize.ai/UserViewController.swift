@@ -34,13 +34,13 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "") { user, error in
 							if error == nil {
 								id = user?.user.uid
-								firestore.collection("users").document(id!).getDocument { snapshot, error in
-									guard let snapshot = snapshot?.data() else { return }
-									name = snapshot["name"] as? String ?? ""
+								firestore.collection("users").document(id!).addSnapshotListener { snapshot, error in
+									guard error == nil, let snapshot = snapshot else { return }
+									name = snapshot.get("name") as? String ?? "Error"
 									self.navigationController?.setNavigationBarHidden(false, animated: true)
 									self.navigationItem.title = name
 									email = localEmail
-									slug = snapshot["slug"] as? String ?? ""
+									slug = snapshot.get("slug") as? String ?? "Error"
 									self.activityIndicator.stopAnimating()
 									self.loadingView.isHidden = true
 									self.createProfileBarButtonItem()
@@ -66,9 +66,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			}
 		} else {
 			createProfileBarButtonItem()
+			navigationItem.title = name
 		}
-		navigationController?.navigationBar.tintColor = .white
-		navigationItem.title = name
 		navigationItem.setHidesBackButton(true, animated: true)
 	}
 	
@@ -89,8 +88,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func createProfileBarButtonItem() {
 		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(editProfile)), animated: false)
-		storage.getData(maxSize: 50000000) { data, error in
-			guard let data = data, error == nil else { return }
+		storage.getData(maxSize: fileLimit) { data, error in
+			guard error == nil, let data = data else { return }
 			self.navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(data: data) ?? #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(self.editProfile)), animated: true)
 		}
 	}

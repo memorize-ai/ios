@@ -17,7 +17,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		decksCollectionView.collectionViewLayout = layout
 		for deck in decks {
 			let deckId = deck.id
-			storage.child("decks/\(deckId)").getData(maxSize: 50000000) { data, error in
+			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
 				guard let data = data, error == nil else { return }
 				decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 				self.decksCollectionView.reloadData()

@@ -44,7 +44,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				self.showAlert(error.localizedDescription)
 			}
 		}
-		storage.child("decks/\(self.deckId!)").getData(maxSize: 50000000) { data, error in
+		storage.child("decks/\(self.deckId!)").getData(maxSize: fileLimit) { data, error in
 			if let data = data, error == nil {
 				self.imageActivityIndicator.stopAnimating()
 				self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
