@@ -24,6 +24,7 @@ struct Deck {
 	var description: String
 	var isPublic: Bool
 	var count: Int
+	var mastered: Int
 	var creator: String
 	var owner: String
 	var permissions: [Permission]
@@ -55,8 +56,7 @@ struct Card {
 	var count: Int
 	var correct: Int
 	var streak: Int
-	var last: Timestamp
-	var next: Timestamp
+	var last: String
 	var history: [History]
 	let deck: String
 }
@@ -70,15 +70,15 @@ enum Role: String {
 	case editor = "editor"
 	case viewer = "viewer"
 	
-	init?(_ string: String) {
+	init(_ string: String) {
 		self = string == "editor" ? .editor : .viewer
 	}
 }
 
 struct History {
 	let id: String
-	let date: Timestamp
-	let next: Timestamp
+	let date: Date
+	let next: Date
 	let correct: Bool
 	let elapsed: Int
 }
@@ -167,15 +167,5 @@ extension Date {
 	
 	func format() -> String {
 		return format("MMM d, yyyy @ h:mm a")
-	}
-}
-
-extension Timestamp {
-	func format(_ format: String) -> String {
-		return dateValue().format(format)
-	}
-	
-	func format() -> String {
-		return dateValue().format()
 	}
 }

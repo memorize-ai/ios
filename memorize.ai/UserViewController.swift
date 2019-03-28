@@ -46,16 +46,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.createProfileBarButtonItem()
 									startup = false
 								}
-								firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
-									guard let snapshot = snapshot?.documents, error == nil else { return }
-									for deck in snapshot {
-										let deckId = deck.documentID
-										firestore.collection("decks").document(deckId).addSnapshotListener { documentSnapshot, error in
-											guard let documentData = documentSnapshot?.data(), error == nil else { return }
-											decks.append(Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: documentData["name"] as? String ?? "", description: documentData["description"] as? String ?? "", isPublic: documentData["public"] as? Bool ?? true, count: documentData["count"] as? Int ?? 0, creator: documentData["creator"] as? String ?? "", owner: documentData["owner"] as? String ?? "", permissions: [], cards: []))
-										}
-									}
-								}
+								loadDecks()
 							} else if let error = error {
 								switch error.localizedDescription {
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
@@ -126,6 +117,28 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@IBAction func review() {
 		performSegue(withIdentifier: "review", sender: self)
+	}
+	
+	func loadDecks() {
+		firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let deck = $0.document
+				let deckId = deck.documentID
+				let changeType = $0.type
+				switch changeType {
+				case .added:
+					firestore.collection("decks").document(deckId).addSnapshotListener { deckSnapshot, deckError in
+						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
+						decks.append(Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
+					}
+				case .modified:
+					decks[Deck.id(deckId)!].mastered = deck.get("mastered") as? Int ?? decks[Deck.id(deckId)!].mastered
+				case .removed:
+					decks = decks.filter { return $0.id != deckId }
+				}
+			}
+		}
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
