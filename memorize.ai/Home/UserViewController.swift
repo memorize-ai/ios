@@ -45,6 +45,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.loadingView.isHidden = true
 									self.createProfileBarButtonItem()
 									startup = false
+									callChangeHandler(.profileChanged)
 								}
 								self.loadDecks()
 							} else if let error = error {

@@ -43,7 +43,6 @@
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
 		4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAEEC7B220A074400A207FD /* EditCardViewController.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
-		4DF9724822076CDD00FF8BED /* ChooseDeckTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF9724722076CDD00FF8BED /* ChooseDeckTypeViewController.swift */; };
 		4DF9724A220779AE00FF8BED /* CreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */; };
 		8CA1776EAA9CB8113779FB44 /* Pods_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */; };
 		9DDEA990CEBD550307F274C5 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1427E8A3FFD8404A861DF9A1 /* Pods_memorize_ai.framework */; };
@@ -112,7 +111,6 @@
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		4DAEEC7B220A074400A207FD /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		4DC857DD221B824400FD2100 /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
-		4DF9724722076CDD00FF8BED /* ChooseDeckTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDeckTypeViewController.swift; sourceTree = "<group>"; };
 		4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */,
-				4DF9724722076CDD00FF8BED /* ChooseDeckTypeViewController.swift */,
 				4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */,
 				4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */,
 				4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */,
@@ -565,7 +562,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DF9724822076CDD00FF8BED /* ChooseDeckTypeViewController.swift in Sources */,
 				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,

@@ -15,8 +15,8 @@ var id: String?
 var name: String?
 var email: String?
 var slug: String?
-var profilePicture: UIImage?
 var decks = [Deck]()
+var changeHandler: ((Change) -> Void)?
 
 struct Deck {
 	let id: String
@@ -82,6 +82,26 @@ struct History {
 	let next: Date
 	let correct: Bool
 	let elapsed: Int
+}
+
+enum Change {
+	case profileChanged
+	case newDeck
+	case deckChanged
+	case deckDeleted
+}
+
+func callChangeHandler(_ change: Change) {
+	changeHandler?(change)
+}
+
+func updateChangeHandler(_ newChangeHandler: ((Change) -> Void)?) {
+	changeHandler = newChangeHandler
+}
+
+func updateAndCallChangeHandler(_ change: Change, _ newChangeHandler: ((Change) -> Void)?) {
+	updateChangeHandler(newChangeHandler)
+	callChangeHandler(change)
 }
 
 func saveLogin(email e: String, password p: String) {
@@ -151,7 +171,7 @@ extension String {
 }
 
 extension UIView {
-	func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+	func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
 		let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
 		let mask = CAShapeLayer()
 		mask.path = path.cgPath
