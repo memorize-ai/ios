@@ -25,6 +25,7 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 		let element = cards[indexPath.row]
 		cell.imageView?.image = decks[Deck.id(element.deck) ?? 0].image
 		cell.textLabel?.text = element.front
+		firestore.collection("users").document(
 		cell.detailTextLabel?.text = element.next.format()
 		return cell
 	}

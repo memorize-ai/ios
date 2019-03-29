@@ -29,16 +29,19 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 				case .added:
 					self.card!.history.append(newHistory)
 					self.historyTableView.reloadData()
+					callChangeHandler(.historyModified)
 				case .modified:
 					for i in 0..<currentHistory.count {
 						if currentHistory[i].id == historyId {
 							self.card!.history[i] = newHistory
 							self.historyTableView.reloadData()
+							callChangeHandler(.historyModified)
 						}
 					}
 				case .removed:
 					self.card!.history = currentHistory.filter { return $0.id != historyId }
 					self.historyTableView.reloadData()
+					callChangeHandler(.historyRemoved)
 				}
 			}
 		}
@@ -55,6 +58,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 			if change == .cardModified {
 				self.frontTextView.text = self.card!.front
 				self.backTextView.text = self.card!.back
+			} else if change == .historyModified || change == .historyRemoved {
+				self.historyTableView.reloadData()
 			}
 		}
 	}

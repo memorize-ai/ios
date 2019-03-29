@@ -20,6 +20,14 @@ class CardViewController: UIViewController {
 		}, completion: nil)
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateChangeHandler { change in
+			self.frontLabel.text = self.card?.front
+			self.backLabel.text = self.card?.back
+		}
+	}
+	
 	@IBAction func hide() {
 		UIView.animate(withDuration: 0.2, animations: {
 			self.cardView.transform = CGAffineTransform(scaleX: 0, y: 0)

@@ -131,6 +131,8 @@ enum Change {
 	case deckRemoved
 	case cardModified
 	case cardRemoved
+	case historyModified
+	case historyRemoved
 }
 
 func callChangeHandler(_ change: Change) {

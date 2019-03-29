@@ -44,6 +44,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				case .added:
 					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: "", history: [], deck: self.deckId!))
 					self.cardsTableView.reloadData()
+					callChangeHandler(.cardModified)
 				case .modified:
 					for i in 0..<self.cards.count {
 						let oldCard = self.cards[i]
@@ -51,11 +52,13 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 							self.cards[i].front = card.get("front") as? String ?? oldCard.front
 							self.cards[i].back = card.get("back") as? String ?? oldCard.back
 							self.cardsTableView.reloadData()
+							callChangeHandler(.cardModified)
 						}
 					}
 				case .removed:
 					self.cards = self.cards.filter { return $0.id != cardId }
 					self.cardsTableView.reloadData()
+					callChangeHandler(.cardRemoved)
 				}
 			}
 		}

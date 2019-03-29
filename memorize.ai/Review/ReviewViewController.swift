@@ -17,12 +17,23 @@ class ReviewViewController: UIViewController {
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
-		frontLabel.text = deck?.cards[card].front ?? decks[0].cards[card].front
+		frontLabel.text = deck?.cards[card].front ?? "Error"
 		cardView.layer.borderWidth = 1
 		cardView.layer.borderColor = UIColor.lightGray.cgColor
 		dontKnowButton.layer.borderWidth = 1
 		dontKnowButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateChangeHandler { change in
+			if change == .cardModified {
+				let card = self.deck?.cards[self.card]
+				self.frontLabel.text = card?.front ?? "Error"
+				self.backLabel.text = card?.back ?? "Error"
+			}
+		}
+	}
 	
 	@IBAction func dontKnow() {
 		createHistory(false)
