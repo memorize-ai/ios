@@ -124,6 +124,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 					self.deck!.cards = self.deck!.cards.filter { return $0.id != cardId }
 					self.cardsTableView.reloadData()
 					callChangeHandler(.cardRemoved)
+				@unknown default:
+					return
 				}
 			}
 		}

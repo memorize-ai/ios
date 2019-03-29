@@ -42,6 +42,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 					self.card!.history = currentHistory.filter { return $0.id != historyId }
 					self.historyTableView.reloadData()
 					callChangeHandler(.historyRemoved)
+				@unknown default:
+					return
 				}
 			}
 		}

@@ -153,6 +153,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					decks = decks.filter { return $0.id != deckId }
 					self.actionsTableView.reloadData()
 					callChangeHandler(.deckRemoved)
+				@unknown default:
+					return
 				}
 			}
 		}

@@ -59,6 +59,8 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					self.cards = self.cards.filter { return $0.id != cardId }
 					self.cardsTableView.reloadData()
 					callChangeHandler(.cardRemoved)
+				@unknown default:
+					return
 				}
 			}
 		}
