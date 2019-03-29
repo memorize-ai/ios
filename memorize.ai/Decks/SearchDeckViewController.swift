@@ -46,11 +46,11 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 				if let hits = content?["hits"] as? [[String: Any]], error == nil {
 					self.result = hits.map {
 						let resultId = $0["objectID"] as? String ?? ""
-						firestore.collection("users").document($0["owner"] as? String ?? "").getDocument { snapshot, error in
-							guard let snapshot = snapshot?.data(), error == nil else { return }
+						firestore.collection("users").document($0["owner"] as? String ?? "").addSnapshotListener { snapshot, error in
+							guard error == nil, let snapshot = snapshot else { return }
 							for i in 0..<self.result.count {
 								if self.result[i].id == resultId {
-									self.result[i].owner = snapshot["name"] as? String
+									self.result[i].owner = snapshot.get("owner") as? String
 									self.decksTableView.reloadData()
 								}
 							}
