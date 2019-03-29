@@ -10,7 +10,7 @@ class CardViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		titleBar.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+		titleBar.roundCorners([.topLeft, .topRight], radius: 10)
 		frontLabel.text = card?.front
 		backLabel.text = card?.back
 		cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
