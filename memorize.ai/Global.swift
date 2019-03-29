@@ -15,6 +15,7 @@ var id: String?
 var name: String?
 var email: String?
 var slug: String?
+var profilePicture: UIImage?
 var decks = [Deck]()
 var changeHandler: ((Change) -> Void)?
 
@@ -127,6 +128,7 @@ class History {
 
 enum Change {
 	case profileModified
+	case profilePicture
 	case deckModified
 	case deckRemoved
 	case cardModified

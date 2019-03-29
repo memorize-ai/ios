@@ -91,8 +91,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(editProfile)), animated: false)
 		storage.getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data else { return }
+			profilePicture = UIImage(data: data) ?? #imageLiteral(resourceName: "Person")
 			let editProfileButton = UIButton(type: .custom)
-			editProfileButton.setImage(UIImage(data: data) ?? #imageLiteral(resourceName: "Person"), for: .normal)
+			editProfileButton.setImage(profilePicture, for: .normal)
 			editProfileButton.addTarget(self, action: #selector(self.editProfile), for: .touchUpInside)
 			editProfileButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
 			editProfileButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
