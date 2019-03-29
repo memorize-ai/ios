@@ -20,32 +20,47 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
 		imageView.layer.borderWidth = 1
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
-		firestore.collection("decks").document(deckId!).getDocument { snapshot, error in
-			if let snapshot = snapshot?.data(), error == nil {
-				self.nameLabel.text = snapshot["name"] as? String ?? "Error"
-				self.descriptionLabel.text = snapshot["description"] as? String ?? "Error"
+		firestore.collection("decks").document(deckId!).addSnapshotListener { snapshot, error in
+			if error == nil, let snapshot = snapshot {
+				self.nameLabel.text = snapshot.get("name") as? String ?? "Error"
+				self.descriptionLabel.text = snapshot.get("description") as? String ?? "Error"
 				self.activityIndicator.stopAnimating()
 				self.loadingView.isHidden = true
 			} else {
 				self.activityIndicator.stopAnimating()
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck", preferredStyle: .alert)
-				let action = UIAlertAction(title: "OK", style: .default) { action in
+				alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 					self.navigationController?.popViewController(animated: true)
-				}
-				alertController.addAction(action)
+				})
 				self.present(alertController, animated: true, completion: nil)
 			}
 		}
 		firestore.collection("decks").document(deckId!).collection("cards").addSnapshotListener { snapshot, error in
-			if let snapshot = snapshot?.documents, error == nil {
-				self.cards = snapshot.map { Card(id: $0.documentID, front: $0["front"] as? String ?? "Error", back: $0["back"] as? String ?? "Error", count: $0["count"] as? Int ?? 0, correct: 0, streak: 0, last: Timestamp(), next: Timestamp(), history: [], deck: self.deckId!) }
-				self.cardsTableView.reloadData()
-			} else if let error = error {
-				self.showAlert(error.localizedDescription)
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let card = $0.document
+				let cardId = card.documentID
+				switch $0.type {
+				case .added:
+					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: "", history: [], deck: self.deckId!))
+					self.cardsTableView.reloadData()
+				case .modified:
+					for i in 0..<self.cards.count {
+						let oldCard = self.cards[i]
+						if oldCard.id == cardId {
+							self.cards[i].front = card.get("front") as? String ?? oldCard.front
+							self.cards[i].back = card.get("back") as? String ?? oldCard.back
+							self.cardsTableView.reloadData()
+						}
+					}
+				case .removed:
+					self.cards = self.cards.filter { return $0.id != cardId }
+					self.cardsTableView.reloadData()
+				}
 			}
 		}
 		storage.child("decks/\(self.deckId!)").getData(maxSize: fileLimit) { data, error in
-			if let data = data, error == nil {
+			if error == nil, let data = data {
 				self.imageActivityIndicator.stopAnimating()
 				self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 			} else {
@@ -70,11 +85,10 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	@IBAction func get() {
-		let getDeck = getButton.currentTitle == "GET"
 		getButton.setTitle(nil, for: .normal)
 		getActivityIndicator.startAnimating()
-		if getDeck {
-			firestore.collection("users").document(id!).collection("decks").document(deckId!).setData(["name": nameLabel.text!, "count": cards.count, "mastered": 0]) { error in
+		if getButton.currentTitle == "GET" {
+			firestore.collection("users").document(id!).collection("decks").document(deckId!).setData(["mastered": 0]) { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 90
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
