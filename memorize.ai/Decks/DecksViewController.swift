@@ -15,15 +15,19 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		layout.minimumLineSpacing = 8
 		layout.minimumInteritemSpacing = 8
 		decksCollectionView.collectionViewLayout = layout
-		for deck in decks {
-			let deckId = deck.id
+		loadDeckImages()
+    }
+	
+	func loadDeckImages() {
+		decks.forEach {
+			let deckId = $0.id
 			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
 				guard error == nil, let data = data else { return }
 				decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 				self.decksCollectionView.reloadData()
 			}
 		}
-    }
+	}
 	
 	@objc func newDeck() {
 		guard let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController else { return }
@@ -34,7 +38,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	@IBAction func edit() {
-		// edit
+		// TODO - edit
 	}
 	
 	@IBAction func review() {
@@ -83,20 +87,33 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newDeck)), animated: true)
 		}
 		deck = decks[indexPath.item]
-		firestore.collection("decks").document(deck!.id).collection("cards").addSnapshotListener { snapshot, error in
-			guard let snapshot = snapshot?.documents, let deckId = self.deck?.id, error == nil else { return }
-			self.deck?.cards = snapshot.map { card in
+		let deckId = deck!.id
+		firestore.collection("decks").document(deckId).collection("cards").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let card = $0.document
 				let cardId = card.documentID
-				firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).getDocument { snapshot, error in
-					guard let snapshot = snapshot?.data(), let cardIndex = self.deck?.card(id: cardId) else { return }
-					self.deck?.cards[cardIndex].correct = snapshot["correct"] as? Int ?? 0
-					self.deck?.cards[cardIndex].streak = snapshot["streak"] as? Int ?? 0
-					self.deck?.cards[cardIndex].last = snapshot["last"] as? Timestamp ?? Timestamp()
-					self.deck?.cards[cardIndex].next = snapshot["next"] as? Timestamp ?? Timestamp()
+				switch $0.type {
+				case .added:
+					firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
+						guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
+						decks[Deck.id(deckId)!].cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, last: cardSnapshot.get("last") as? String ?? "", history: [], deck: deckId))
+						self.cardsTableView.reloadData()
+						callChangeHandler(.cardAdded)
+					}
+				case .modified:
+					let cardIndex = decks[Deck.id(deckId)!].card(id: cardId)!
+					let oldCard = decks[Deck.id(deckId)!].cards[cardIndex]
+					decks[Deck.id(deckId)!].cards[cardIndex].front = card.get("front") as? String ?? oldCard.front
+					decks[Deck.id(deckId)!].cards[cardIndex].back = card.get("back") as? String ?? oldCard.back
+					self.cardsTableView.reloadData()
+					callChangeHandler(.cardModified)
+				case .removed:
+					decks[Deck.id(deckId)!].cards = decks[Deck.id(deckId)!].cards.filter { return $0.id != cardId }
+					self.cardsTableView.reloadData()
+					callChangeHandler(.cardRemoved)
 				}
-				return Card(id: card.documentID, front: card["front"] as? String ?? "Error", back: card["back"] as? String ?? "Error", count: card["count"] as? Int ?? 0, correct: 0, streak: 0, last: Timestamp(), next: Timestamp(), history: [], deck: deckId)
 			}
-			self.cardsTableView.reloadData()
 		}
 	}
 	
@@ -112,9 +129,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = deck?.cards[indexPath.row]
-		cell.textLabel?.text = element?.front
-		cell.detailTextLabel?.text = element?.next.format()
+		guard let element = deck?.cards[indexPath.row] else { return cell }
+		cell.textLabel?.text = element.front
+		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(element.id).collection("history").document(element.last).addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot else { return }
+			cell.detailTextLabel?.text = "NEXT: \((snapshot.get("next") as? Date ?? Date()).format())"
+		}
 		return cell
 	}
 	

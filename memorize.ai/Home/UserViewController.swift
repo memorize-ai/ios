@@ -45,7 +45,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.loadingView.isHidden = true
 									self.createProfileBarButtonItem()
 									startup = false
-									callChangeHandler(.profileChanged)
+									callChangeHandler(.profileModified)
 								}
 								self.loadDecks()
 							} else if let error = error {
@@ -133,20 +133,22 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			snapshot.forEach {
 				let deck = $0.document
 				let deckId = deck.documentID
-				let changeType = $0.type
-				switch changeType {
+				switch $0.type {
 				case .added:
 					firestore.collection("decks").document(deckId).addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
 						decks.append(Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
 						self.actionsTableView.reloadData()
+						callChangeHandler(.deckAdded)
 					}
 				case .modified:
 					decks[Deck.id(deckId)!].mastered = deck.get("mastered") as? Int ?? decks[Deck.id(deckId)!].mastered
 					self.actionsTableView.reloadData()
+					callChangeHandler(.deckModified)
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
 					self.actionsTableView.reloadData()
+					callChangeHandler(.deckRemoved)
 				}
 			}
 		}

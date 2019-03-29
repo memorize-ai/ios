@@ -85,10 +85,13 @@ struct History {
 }
 
 enum Change {
-	case profileChanged
-	case newDeck
-	case deckChanged
-	case deckDeleted
+	case profileModified
+	case deckAdded
+	case deckModified
+	case deckRemoved
+	case cardAdded
+	case cardModified
+	case cardRemoved
 }
 
 func callChangeHandler(_ change: Change) {

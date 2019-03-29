@@ -15,8 +15,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 		navigationItem.setRightBarButton(UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut)), animated: true)
-		updateAndCallChangeHandler(.profileChanged) { change in
-			if change == .profileChanged {
+		updateAndCallChangeHandler(.profileModified) { change in
+			if change == .profileModified {
 				self.nameLabel.text = name
 				self.emailLabel.text = email
 				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
