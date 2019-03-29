@@ -12,21 +12,34 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	
 	var deck: Deck?
 	var card: Card?
-	var history = [History]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		titleBar.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+		titleBar.roundCorners([.topLeft, .topRight], radius: 10)
 		resetBorder(textView: frontTextView)
 		resetBorder(textView: backTextView)
-		frontTextView.text = card?.front
-		backTextView.text = card?.back
 		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(card!.id).collection("history").addSnapshotListener { snapshot, error in
-			if let snapshot = snapshot?.documents, error == nil {
-				self.history = snapshot.map { History(id: $0.documentID, date: $0["date"] as? Timestamp ?? Timestamp(), next: $0["next"] as? Timestamp ?? Timestamp(), correct: $0["correct"] as? Bool ?? false, elapsed: $0["elapsed"] as? Int ?? 0) }
-				self.historyTableView.reloadData()
-			} else if let error = error {
-				self.showAlert(error.localizedDescription)
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let historyElement = $0.document
+				let historyId = historyElement.documentID
+				let newHistory = History(id: historyId, date: historyElement.get("date") as? Date ?? Date(), next: historyElement.get("next") as? Date ?? Date(), correct: historyElement.get("correct") as? Bool ?? false, elapsed: historyElement.get("elapsed") as? Int ?? 0)
+				let currentHistory = self.card!.history
+				switch $0.type {
+				case .added:
+					self.card!.history.append(newHistory)
+					self.historyTableView.reloadData()
+				case .modified:
+					for i in 0..<currentHistory.count {
+						if currentHistory[i].id == historyId {
+							self.card!.history[i] = newHistory
+							self.historyTableView.reloadData()
+						}
+					}
+				case .removed:
+					self.card!.history = currentHistory.filter { return $0.id != historyId }
+					self.historyTableView.reloadData()
+				}
 			}
 		}
 		editCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -34,6 +47,16 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
 			self.editCardView.transform = .identity
 		}, completion: nil)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateChangeHandler { change in
+			if change == .cardModified {
+				self.frontTextView.text = self.card!.front
+				self.backTextView.text = self.card!.back
+			}
+		}
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -128,12 +151,12 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return history.count
+		return card!.history.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = history[indexPath.row]
+		let element = card!.history[indexPath.row]
 		cell.textLabel?.text = element.date.format()
 		cell.detailTextLabel?.text = element.correct ? "Correct" : "Wrong"
 		return cell

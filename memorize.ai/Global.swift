@@ -18,7 +18,7 @@ var slug: String?
 var decks = [Deck]()
 var changeHandler: ((Change) -> Void)?
 
-struct Deck {
+class Deck {
 	let id: String
 	var image: UIImage
 	var name: String
@@ -30,6 +30,20 @@ struct Deck {
 	var owner: String
 	var permissions: [Permission]
 	var cards: [Card]
+	
+	init(id: String, image: UIImage, name: String, description: String, isPublic: Bool, count: Int, mastered: Int, creator: String, owner: String, permissions: [Permission], cards: [Card]) {
+		self.id = id
+		self.image = image
+		self.name = name
+		self.description = description
+		self.isPublic = isPublic
+		self.count = count
+		self.mastered = mastered
+		self.creator = creator
+		self.owner = owner
+		self.permissions = permissions
+		self.cards = cards
+	}
 	
 	static func id(_ t: String) -> Int? {
 		for i in 0..<decks.count {
@@ -50,7 +64,7 @@ struct Deck {
 	}
 }
 
-struct Card {
+class Card {
 	let id: String
 	var front: String
 	var back: String
@@ -61,11 +75,29 @@ struct Card {
 	var last: String
 	var history: [History]
 	let deck: String
+	
+	init(id: String, front: String, back: String, count: Int, correct: Int, streak: Int, mastered: Bool, last: String, history: [History], deck: String) {
+		self.id = id
+		self.front = front
+		self.back = back
+		self.count = count
+		self.correct = correct
+		self.streak = streak
+		self.mastered = mastered
+		self.last = last
+		self.history = history
+		self.deck = deck
+	}
 }
 
-struct Permission {
+class Permission {
 	let id: String
 	var role: Role
+	
+	init(id: String, role: Role) {
+		self.id = id
+		self.role = role
+	}
 }
 
 enum Role: String {
@@ -77,20 +109,26 @@ enum Role: String {
 	}
 }
 
-struct History {
+class History {
 	let id: String
 	let date: Date
 	let next: Date
 	let correct: Bool
 	let elapsed: Int
+	
+	init(id: String, date: Date, next: Date, correct: Bool, elapsed: Int) {
+		self.id = id
+		self.date = date
+		self.next = next
+		self.correct = correct
+		self.elapsed = elapsed
+	}
 }
 
 enum Change {
 	case profileModified
-	case deckAdded
 	case deckModified
 	case deckRemoved
-	case cardAdded
 	case cardModified
 	case cardRemoved
 }

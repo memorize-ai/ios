@@ -18,12 +18,23 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		loadDeckImages()
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateChangeHandler { change in
+			if change == .deckModified {
+				self.decksCollectionView.reloadData()
+			} else if change == .deckRemoved {
+				self.navigationController?.popViewController(animated: true)
+			}
+		}
+	}
+	
 	func loadDeckImages() {
-		decks.forEach {
-			let deckId = $0.id
+		decks.forEach { deck in
+			let deckId = deck.id
 			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
 				guard error == nil, let data = data else { return }
-				decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+				deck.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 				self.decksCollectionView.reloadData()
 			}
 		}
@@ -97,19 +108,20 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				case .added:
 					firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
 						guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-						decks[Deck.id(deckId)!].cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", history: [], deck: deckId))
+						self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", history: [], deck: deckId))
 						self.cardsTableView.reloadData()
-						callChangeHandler(.cardAdded)
+						callChangeHandler(.cardModified)
 					}
 				case .modified:
-					let cardIndex = decks[Deck.id(deckId)!].card(id: cardId)!
-					let oldCard = decks[Deck.id(deckId)!].cards[cardIndex]
-					decks[Deck.id(deckId)!].cards[cardIndex].front = card.get("front") as? String ?? oldCard.front
-					decks[Deck.id(deckId)!].cards[cardIndex].back = card.get("back") as? String ?? oldCard.back
+					let modifiedCard = self.deck!.cards[self.deck!.card(id: cardId)!]
+					if let front = card.get("front") as? String, let back = card.get("back") as? String {
+						modifiedCard.front = front
+						modifiedCard.back = back
+					}
 					self.cardsTableView.reloadData()
 					callChangeHandler(.cardModified)
 				case .removed:
-					decks[Deck.id(deckId)!].cards = decks[Deck.id(deckId)!].cards.filter { return $0.id != cardId }
+					self.deck!.cards = self.deck!.cards.filter { return $0.id != cardId }
 					self.cardsTableView.reloadData()
 					callChangeHandler(.cardRemoved)
 				}
