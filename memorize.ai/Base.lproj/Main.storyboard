@@ -2426,6 +2426,112 @@
             </objects>
             <point key="canvasLocation" x="817" y="805"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="QKA-UI-Xh8">
+            <objects>
+                <viewController storyboardIdentifier="editCard" id="WYS-Mb-rsl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F3y-wF-ZUv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-OD-qWT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITd-EU-xPE">
+                                <rect key="frame" x="40" y="201" width="334" height="334"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44C-Fs-v4M">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Card" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVa-G7-4De">
+                                                <rect key="frame" x="128.66666666666666" y="0.0" width="77" height="40"/>
+                                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="FVa-G7-4De" firstAttribute="centerX" secondItem="44C-Fs-v4M" secondAttribute="centerX" id="7sS-xD-eUK"/>
+                                            <constraint firstItem="FVa-G7-4De" firstAttribute="top" secondItem="44C-Fs-v4M" secondAttribute="top" id="HFb-ej-b4g"/>
+                                            <constraint firstAttribute="bottom" secondItem="FVa-G7-4De" secondAttribute="bottom" id="Pjk-95-9rj"/>
+                                            <constraint firstAttribute="height" constant="40" id="g3Z-eW-aSP"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWw-Gi-euY">
+                                        <rect key="frame" x="20" y="60" width="44" height="18"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nf2-pj-tGZ">
+                                        <rect key="frame" x="30" y="171" width="36" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dY-Hf-Xos">
+                                        <rect key="frame" x="30" y="92" width="294" height="39.333333333333343"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kg4-GX-ds9">
+                                        <rect key="frame" x="30" y="193" width="294" height="39.333333333333343"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ITd-EU-xPE" secondAttribute="height" multiplier="1:1" id="EBB-Yh-Gmj"/>
+                                    <constraint firstAttribute="trailing" secondItem="44C-Fs-v4M" secondAttribute="trailing" id="GIa-rN-wbz"/>
+                                    <constraint firstItem="44C-Fs-v4M" firstAttribute="leading" secondItem="ITd-EU-xPE" secondAttribute="leading" id="Ih3-bB-dSh"/>
+                                    <constraint firstItem="44C-Fs-v4M" firstAttribute="top" secondItem="ITd-EU-xPE" secondAttribute="top" id="QNI-Xv-d6j"/>
+                                    <constraint firstItem="UWw-Gi-euY" firstAttribute="leading" secondItem="ITd-EU-xPE" secondAttribute="leading" constant="20" id="ZcA-sc-4AL"/>
+                                    <constraint firstItem="UWw-Gi-euY" firstAttribute="top" secondItem="44C-Fs-v4M" secondAttribute="bottom" constant="20" id="jTs-Dy-y3b"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ITd-EU-xPE" firstAttribute="centerY" secondItem="F3y-wF-ZUv" secondAttribute="centerY" id="9Ie-J3-E1c"/>
+                            <constraint firstItem="JQV-Zr-lEe" firstAttribute="trailing" secondItem="ITd-EU-xPE" secondAttribute="trailing" constant="40" id="E32-0K-Asn"/>
+                            <constraint firstItem="ITd-EU-xPE" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" constant="40" id="F0s-2A-S0K"/>
+                            <constraint firstItem="ITd-EU-xPE" firstAttribute="centerX" secondItem="F3y-wF-ZUv" secondAttribute="centerX" id="ItS-7Z-3w5"/>
+                            <constraint firstItem="dOy-OD-qWT" firstAttribute="bottom" secondItem="F3y-wF-ZUv" secondAttribute="bottom" id="j9O-gI-6ys"/>
+                            <constraint firstItem="dOy-OD-qWT" firstAttribute="trailing" secondItem="F3y-wF-ZUv" secondAttribute="trailing" id="mqR-Cy-WU2"/>
+                            <constraint firstItem="dOy-OD-qWT" firstAttribute="leading" secondItem="F3y-wF-ZUv" secondAttribute="leading" id="ubJ-T2-O6k"/>
+                            <constraint firstItem="dOy-OD-qWT" firstAttribute="top" secondItem="F3y-wF-ZUv" secondAttribute="top" id="x0O-0Z-o4C"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JQV-Zr-lEe"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nLy-go-JQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="1485"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Gray Deck" width="200" height="200"/>
