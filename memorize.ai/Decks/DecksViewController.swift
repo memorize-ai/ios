@@ -18,14 +18,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		for deck in decks {
 			let deckId = deck.id
 			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
-				guard let data = data, error == nil else { return }
+				guard error == nil, let data = data else { return }
 				decks[Deck.id(deckId)!].image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 				self.decksCollectionView.reloadData()
 			}
 		}
     }
 	
-	@objc @IBAction func newDeck() {
+	@objc func newDeck() {
 		guard let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController else { return }
 		addChild(chooseDeckTypeVC)
 		chooseDeckTypeVC.view.frame = view.frame
@@ -41,11 +41,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		performSegue(withIdentifier: "review", sender: self)
 	}
 	
-	func createDeck() {
+	@IBAction func createDeck() {
 		performSegue(withIdentifier: "createDeck", sender: self)
 	}
 	
-	func searchDeck() {
+	@IBAction func searchDeck() {
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
