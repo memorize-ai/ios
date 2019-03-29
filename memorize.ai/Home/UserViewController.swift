@@ -68,6 +68,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		} else {
 			createProfileBarButtonItem()
 			navigationItem.title = name
+			if shouldLoadDecks {
+				loadDecks()
+				shouldLoadDecks = false
+			}
 		}
 		navigationItem.setHidesBackButton(true, animated: true)
 	}

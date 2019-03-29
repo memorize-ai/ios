@@ -10,13 +10,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		FirebaseApp.configure()
-		if #available(iOS 10.0, *) {
-			UNUserNotificationCenter.current().delegate = self
-			UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {_, _ in }
-		} else {
-			application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
-		}
-		application.registerForRemoteNotifications()
 		Messaging.messaging().delegate = self
 		return true
 	}

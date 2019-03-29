@@ -11,6 +11,7 @@ let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f
 let decksIndex = client.index(withName: "decks")
 let fileLimit: Int64 = 50000000
 var startup = true
+var shouldLoadDecks = false
 var id: String?
 var name: String?
 var email: String?
