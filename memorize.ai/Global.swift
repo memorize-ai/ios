@@ -57,6 +57,7 @@ struct Card {
 	var count: Int
 	var correct: Int
 	var streak: Int
+	var mastered: Bool
 	var last: String
 	var history: [History]
 	let deck: String
