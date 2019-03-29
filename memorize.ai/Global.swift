@@ -21,7 +21,7 @@ var changeHandler: ((Change) -> Void)?
 
 class Deck {
 	let id: String
-	var image: UIImage
+	var image: UIImage?
 	var name: String
 	var description: String
 	var isPublic: Bool
@@ -32,7 +32,7 @@ class Deck {
 	var permissions: [Permission]
 	var cards: [Card]
 	
-	init(id: String, image: UIImage, name: String, description: String, isPublic: Bool, count: Int, mastered: Int, creator: String, owner: String, permissions: [Permission], cards: [Card]) {
+	init(id: String, image: UIImage?, name: String, description: String, isPublic: Bool, count: Int, mastered: Int, creator: String, owner: String, permissions: [Permission], cards: [Card]) {
 		self.id = id
 		self.image = image
 		self.name = name
@@ -74,10 +74,11 @@ class Card {
 	var streak: Int
 	var mastered: Bool
 	var last: String
+	var next: Date
 	var history: [History]
 	let deck: String
 	
-	init(id: String, front: String, back: String, count: Int, correct: Int, streak: Int, mastered: Bool, last: String, history: [History], deck: String) {
+	init(id: String, front: String, back: String, count: Int, correct: Int, streak: Int, mastered: Bool, last: String, next: Date, history: [History], deck: String) {
 		self.id = id
 		self.front = front
 		self.back = back
@@ -86,6 +87,7 @@ class Card {
 		self.streak = streak
 		self.mastered = mastered
 		self.last = last
+		self.next = next
 		self.history = history
 		self.deck = deck
 	}

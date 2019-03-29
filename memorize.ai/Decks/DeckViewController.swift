@@ -42,7 +42,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				let cardId = card.documentID
 				switch $0.type {
 				case .added:
-					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: "", history: [], deck: self.deckId!))
+					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: "", next: Date(), history: [], deck: self.deckId!))
 					self.cardsTableView.reloadData()
 					callChangeHandler(.cardModified)
 				case .modified:

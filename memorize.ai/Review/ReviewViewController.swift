@@ -10,7 +10,8 @@ class ReviewViewController: UIViewController {
 	
 	var deck: Deck?
 	var card = 0
-	var reviewedCards = [Card]()
+	var correct = false
+	var reviewedCards = [(id: String, correct: Bool)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,8 @@ class ReviewViewController: UIViewController {
 	}
 	
 	@IBAction func dontKnow() {
-		createHistory(false)
+		correct = false
+		createHistory()
 		flipAnimation()
 	}
 	
@@ -44,12 +46,13 @@ class ReviewViewController: UIViewController {
 		if dontKnowButton.isHidden {
 			slideAnimation()
 		} else {
-			createHistory(true)
+			correct = true
+			createHistory()
 			flipAnimation()
 		}
 	}
 	
-	func createHistory(_ correct: Bool) {
+	func createHistory() {
 		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(deck!.cards[card].id).collection("history").addDocument(data: ["date": Timestamp(), "correct": correct])
 	}
 	
@@ -59,7 +62,7 @@ class ReviewViewController: UIViewController {
 		}) { finished in
 			if finished {
 				let card = self.deck!.cards[self.card]
-				self.reviewedCards.append(card)
+				self.reviewedCards.append((id: card.id, correct: self.correct))
 				self.cardBarView.isHidden = false
 				self.backLabel.isHidden = false
 				self.backLabel.text = card.back
@@ -91,6 +94,7 @@ class ReviewViewController: UIViewController {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let recapVC = segue.destination as? RecapViewController else { return }
+		recapVC.deck = deck
 		recapVC.cards = reviewedCards
 	}
 	

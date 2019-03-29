@@ -89,9 +89,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func createProfileBarButtonItem() {
 		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(editProfile)), animated: false)
-		storage.getData(maxSize: fileLimit) { data, error in
+		storage.child("users/\(id!)").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data else { return }
 			profilePicture = UIImage(data: data) ?? #imageLiteral(resourceName: "Person")
+			callChangeHandler(.profilePicture)
 			let editProfileButton = UIButton(type: .custom)
 			editProfileButton.setImage(profilePicture, for: .normal)
 			editProfileButton.addTarget(self, action: #selector(self.editProfile), for: .touchUpInside)
@@ -138,7 +139,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				case .added:
 					firestore.collection("decks").document(deckId).addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
-						decks.append(Deck(id: deckId, image: #imageLiteral(resourceName: "Gray Deck"), name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
+						decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
 						self.actionsTableView.reloadData()
 						callChangeHandler(.deckModified)
 					}

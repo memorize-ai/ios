@@ -108,7 +108,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				case .added:
 					firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
 						guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-						self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", history: [], deck: deckId))
+						self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
 						self.cardsTableView.reloadData()
 						callChangeHandler(.cardModified)
 					}
