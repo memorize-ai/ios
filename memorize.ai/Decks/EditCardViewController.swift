@@ -3,6 +3,7 @@ import FirebaseFirestore
 
 class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var editCardView: UIView!
+	@IBOutlet weak var editCardViewVerticalConstraint: NSLayoutConstraint!
 	@IBOutlet weak var titleBar: UIView!
 	@IBOutlet weak var frontLabel: UILabel!
 	@IBOutlet weak var frontTextView: UITextView!
@@ -64,6 +65,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 				self.historyTableView.reloadData()
 			}
 		}
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -81,6 +84,22 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 				self.view.removeFromSuperview()
 			}
 		}
+	}
+	
+	@objc func keyboardWillShow(notification: NSNotification) {
+		if let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+			editCardViewVerticalConstraint.constant = editCardView.frame.height / 2 - height
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+				self.view.layoutIfNeeded()
+			}, completion: nil)
+		}
+	}
+	
+	@objc func keyboardWillHide(notification: NSNotification) {
+		editCardViewVerticalConstraint.constant = 0
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
+			self.view.layoutIfNeeded()
+		}, completion: nil)
 	}
 	
 	@IBAction func delete() {
