@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseFirestore
 
-class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	@IBOutlet weak var cardsTableView: UITableView!
 	@IBOutlet weak var startView: UIView!
@@ -21,14 +21,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		let decksLayout = UICollectionViewFlowLayout()
-		decksLayout.itemSize = CGSize(width: 84, height: 102)
-		decksLayout.minimumLineSpacing = 8
-		decksLayout.minimumInteritemSpacing = 8
-		decksCollectionView.collectionViewLayout = decksLayout
-		let actionsLayout = UICollectionViewFlowLayout()
-		decksLayout.minimumInteritemSpacing = 8
-		actionsCollectionView.collectionViewLayout = actionsLayout
 		loadDeckImages()
     }
 	
@@ -92,12 +84,24 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		reviewVC.deck = deck
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == decksCollectionView {
-			return decks.count
+			return CGSize(width: 84, height: 102)
 		} else {
-			return actions.count
+			return CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito", size: 17)!]).width + 4, height: 36)
 		}
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return collectionView == decksCollectionView ? 8 : 4
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 8
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return collectionView == decksCollectionView ? decks.count : actions.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,7 +117,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
 			let element = actions[indexPath.item]
 			cell.button.setTitle(element.name, for: .normal)
-			cell.widthAnchor.constraint(equalToConstant: cell.button.bounds.width).isActive = true
 			cell.action = {
 				self.performSelector(onMainThread: element.action, with: nil, waitUntilDone: false)
 			}
@@ -217,5 +220,14 @@ class ActionCollectionViewCell: UICollectionViewCell {
 	
 	@IBAction func click() {
 		action?()
+	}
+	
+	override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+		setNeedsLayout()
+		layoutIfNeeded()
+		let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+		var frame = layoutAttributes.frame
+		frame.size.width = size.width
+		return layoutAttributes
 	}
 }
