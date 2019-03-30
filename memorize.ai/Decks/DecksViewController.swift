@@ -5,16 +5,30 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	@IBOutlet weak var cardsTableView: UITableView!
 	@IBOutlet weak var startView: UIView!
+	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	
+	struct Action {
+		let name: String
+		let action: Selector
+	}
+	
+	let actions = [
+		Action(name: "EDIT", action: #selector(editDeck)),
+		Action(name: "NEW CARD", action: #selector(newCard)),
+		Action(name: "REVIEW", action: #selector(review))
+	]
 	var deck: Deck?
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width: 84, height: 102)
-		layout.minimumLineSpacing = 8
-		layout.minimumInteritemSpacing = 8
-		decksCollectionView.collectionViewLayout = layout
+		let decksLayout = UICollectionViewFlowLayout()
+		decksLayout.itemSize = CGSize(width: 84, height: 102)
+		decksLayout.minimumLineSpacing = 8
+		decksLayout.minimumInteritemSpacing = 8
+		decksCollectionView.collectionViewLayout = decksLayout
+		let actionsLayout = UICollectionViewFlowLayout()
+		decksLayout.minimumInteritemSpacing = 8
+		actionsCollectionView.collectionViewLayout = actionsLayout
 		loadDeckImages()
     }
 	
@@ -48,11 +62,20 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		chooseDeckTypeVC.didMove(toParent: self)
 	}
 	
-	@IBAction func edit() {
+	@objc func editDeck() {
 		// TODO - edit
 	}
 	
-	@IBAction func review() {
+	@objc func newCard() {
+		guard let newCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newCard") as? NewCardViewController else { return }
+		newCardVC.deck = deck
+		addChild(newCardVC)
+		newCardVC.view.frame = view.frame
+		view.addSubview(newCardVC.view)
+		newCardVC.didMove(toParent: self)
+	}
+	
+	@objc func review() {
 		performSegue(withIdentifier: "review", sender: self)
 	}
 	
@@ -64,77 +87,95 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return decks.count
-	}
-	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let reviewVC = segue.destination as? ReviewViewController else { return }
 		reviewVC.deck = deck
 	}
 	
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		if collectionView == decksCollectionView {
+			return decks.count
+		} else {
+			return actions.count
+		}
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
-		let element = decks[indexPath.item]
-		cell.layer.borderWidth = 1
-		cell.layer.borderColor = #colorLiteral(red: 0.198331058, green: 0.198331058, blue: 0.198331058, alpha: 1)
-		cell.imageView.image = element.image
-		cell.nameLabel.text = element.name
-		return cell
+		if collectionView == decksCollectionView {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
+			let element = decks[indexPath.item]
+			cell.layer.borderWidth = 1
+			cell.layer.borderColor = #colorLiteral(red: 0.198331058, green: 0.198331058, blue: 0.198331058, alpha: 1)
+			cell.imageView.image = element.image
+			cell.nameLabel.text = element.name
+			return cell
+		} else {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
+			let element = actions[indexPath.item]
+			cell.button.setTitle(element.name, for: .normal)
+			cell.action = {
+				self.performSelector(onMainThread: element.action, with: nil, waitUntilDone: false)
+			}
+			return cell
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
-		cell?.layer.borderWidth = 2
-		cell?.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.537254902, blue: 0.8549019608, alpha: 1)
-		if !startView.isHidden {
-			UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-				self.startView.alpha = 0
-			}) { finished in
-				if finished {
-					self.startView.isHidden = true
+		if collectionView == decksCollectionView {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
+			cell?.layer.borderWidth = 2
+			cell?.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.537254902, blue: 0.8549019608, alpha: 1)
+			if !startView.isHidden {
+				UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+					self.startView.alpha = 0
+				}) { finished in
+					if finished {
+						self.startView.isHidden = true
+					}
 				}
+				navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newDeck)), animated: true)
 			}
-			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newDeck)), animated: true)
-		}
-		deck = decks[indexPath.item]
-		let deckId = deck!.id
-		firestore.collection("decks").document(deckId).collection("cards").addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
-			snapshot.forEach {
-				let card = $0.document
-				let cardId = card.documentID
-				switch $0.type {
-				case .added:
-					firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
-						guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-						self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+			deck = decks[indexPath.item]
+			let deckId = deck!.id
+			firestore.collection("decks").document(deckId).collection("cards").addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+				snapshot.forEach {
+					let card = $0.document
+					let cardId = card.documentID
+					switch $0.type {
+					case .added:
+						firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
+							guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
+							self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+							self.cardsTableView.reloadData()
+							callChangeHandler(.cardModified)
+						}
+					case .modified:
+						let modifiedCard = self.deck!.cards[self.deck!.card(id: cardId)!]
+						if let front = card.get("front") as? String, let back = card.get("back") as? String {
+							modifiedCard.front = front
+							modifiedCard.back = back
+						}
 						self.cardsTableView.reloadData()
 						callChangeHandler(.cardModified)
+					case .removed:
+						self.deck!.cards = self.deck!.cards.filter { return $0.id != cardId }
+						self.cardsTableView.reloadData()
+						callChangeHandler(.cardRemoved)
+					@unknown default:
+						return
 					}
-				case .modified:
-					let modifiedCard = self.deck!.cards[self.deck!.card(id: cardId)!]
-					if let front = card.get("front") as? String, let back = card.get("back") as? String {
-						modifiedCard.front = front
-						modifiedCard.back = back
-					}
-					self.cardsTableView.reloadData()
-					callChangeHandler(.cardModified)
-				case .removed:
-					self.deck!.cards = self.deck!.cards.filter { return $0.id != cardId }
-					self.cardsTableView.reloadData()
-					callChangeHandler(.cardRemoved)
-				@unknown default:
-					return
 				}
 			}
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
-		cell?.layer.borderWidth = 1
-		cell?.layer.borderColor = #colorLiteral(red: 0.1977208257, green: 0.2122347951, blue: 0.2293028235, alpha: 1)
+		if collectionView == decksCollectionView {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
+			cell?.layer.borderWidth = 1
+			cell?.layer.borderColor = #colorLiteral(red: 0.1977208257, green: 0.2122347951, blue: 0.2293028235, alpha: 1)
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -166,4 +207,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 class DeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
+}
+
+class ActionCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var button: UIButton!
+	
+	var action: (() -> Void)?
+	
+	@IBAction func click() {
+		action?()
+	}
 }
