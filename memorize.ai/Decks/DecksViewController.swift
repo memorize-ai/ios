@@ -97,7 +97,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return 8
+		return collectionView == decksCollectionView ? 8 : 20
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
