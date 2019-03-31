@@ -5,10 +5,18 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var decksTableView: UITableView!
 	
-	struct SearchResult {
+	class SearchResult {
 		let id: String
+		var image: UIImage?
 		let name: String
-		var owner: String?
+		let owner: String
+		
+		init(id: String, image: UIImage?, name: String, owner: String) {
+			self.id = id
+			self.image = image
+			self.name = name
+			self.owner = owner
+		}
 	}
 	
 	var result = [SearchResult]()
@@ -33,8 +41,9 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let deckVC = segue.destination as? DeckViewController, let deckId = selectedResult?.id else { return }
-		deckVC.deckId = deckId
+		guard let deckVC = segue.destination as? DeckViewController, let selectedResult = selectedResult else { return }
+		deckVC.deckId = selectedResult.id
+		deckVC.image = selectedResult.image
 	}
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -43,24 +52,21 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			decksTableView.reloadData()
 		} else {
 			decksIndex.search(Query(query: searchText)) { content, error in
-				if let hits = content?["hits"] as? [[String: Any]], error == nil {
-					self.result = hits.map {
-						let resultId = $0["objectID"] as? String ?? ""
-						firestore.collection("users").document($0["owner"] as? String ?? "").addSnapshotListener { snapshot, error in
-							guard error == nil, let snapshot = snapshot else { return }
-							for i in 0..<self.result.count {
-								if self.result[i].id == resultId {
-									self.result[i].owner = snapshot.get("owner") as? String
-									self.decksTableView.reloadData()
-								}
+				if error == nil, let hits = content?["hits"] as? [[String : Any]] {
+					hits.forEach { hit in
+						let deckId = hit["objectID"] as? String ?? ""
+						firestore.collection("decks").document(deckId).addSnapshotListener { _, error in
+							guard error == nil, let owner = hit["owner"] as? String else { return }
+							firestore.collection("users").document(owner).addSnapshotListener { snapshot, userError in
+								guard userError == nil, let snapshot = snapshot else { return }
+								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("owner") as? String ?? "Error"))
+								self.decksTableView.reloadData()
 							}
 						}
-						return SearchResult(id: resultId, name: $0["name"] as? String ?? "", owner: nil)
 					}
 				} else if let error = error {
 					self.showAlert(error.localizedDescription)
 				}
-				self.decksTableView.reloadData()
 			}
 		}
 	}
@@ -72,13 +78,12 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let element = result[indexPath.row]
-		storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
-			if let data = data, error == nil {
-				cell.imageView?.image = UIImage(data: data)
-			} else {
-				cell.imageView?.image = #imageLiteral(resourceName: "Gray Deck")
+		if element.image == nil {
+			storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
+				guard error == nil, let data = data else { return }
+				element.image = UIImage(data: data)
+				tableView.reloadData()
 			}
-			tableView.reloadData()
 		}
 		cell.textLabel?.text = element.name
 		cell.detailTextLabel?.text = element.owner

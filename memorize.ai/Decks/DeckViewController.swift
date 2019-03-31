@@ -14,6 +14,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var cardsTableView: UITableView!
 	
 	var deckId: String?
+	var image: UIImage?
 	var cards = [Card]()
 	
     override func viewDidLoad() {
@@ -64,12 +65,17 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}
 			}
 		}
-		storage.child("decks/\(self.deckId!)").getData(maxSize: fileLimit) { data, error in
-			if error == nil, let data = data {
-				self.imageActivityIndicator.stopAnimating()
-				self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-			} else {
-				self.showAlert("Unable to load image")
+		if let image = image {
+			imageActivityIndicator.stopAnimating()
+			imageView.image = image
+		} else {
+			storage.child("decks/\(self.deckId!)").getData(maxSize: fileLimit) { data, error in
+				if error == nil, let data = data {
+					self.imageActivityIndicator.stopAnimating()
+					self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+				} else {
+					self.showAlert("Unable to load image")
+				}
 			}
 		}
     }
