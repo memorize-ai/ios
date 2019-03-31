@@ -90,9 +90,10 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	@IBAction func get() {
+		let isGet = getButton.currentTitle == "GET"
 		getButton.setTitle(nil, for: .normal)
 		getActivityIndicator.startAnimating()
-		if getButton.currentTitle == "GET" {
+		if isGet {
 			firestore.collection("users").document(id!).collection("decks").document(deckId!).setData(["mastered": 0]) { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 90
