@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseFirestore
 import FirebaseStorage
 
 class CreateDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
@@ -102,19 +103,22 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		dismissKeyboard()
 		let metadata = StorageMetadata()
 		metadata.contentType = "image/png"
-		let deckId = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id!, "owner": id!]).documentID
-		firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["mastered": 0])
-		storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
-			if error == nil {
-				self.hideActivityIndicator()
-				self.navigationController?.popViewController(animated: true)
-			} else if let error = error {
-				self.hideActivityIndicator()
-				switch error.localizedDescription {
-				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-					self.showAlert("No internet")
-				default:
-					self.showAlert("There was a problem creating a new deck")
+		var deckRef: DocumentReference?
+		deckRef = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id!, "owner": id!]) { error in
+			guard error == nil, let deckId = deckRef?.documentID else { return }
+			firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["mastered": 0])
+			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
+				if error == nil {
+					self.hideActivityIndicator()
+					self.navigationController?.popViewController(animated: true)
+				} else if let error = error {
+					self.hideActivityIndicator()
+					switch error.localizedDescription {
+					case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
+						self.showAlert("No internet")
+					default:
+						self.showAlert("There was a problem creating a new deck")
+					}
 				}
 			}
 		}
