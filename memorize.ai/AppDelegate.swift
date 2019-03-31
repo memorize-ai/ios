@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 		FirebaseApp.configure()
 		if #available(iOS 10.0, *) {
 			UNUserNotificationCenter.current().delegate = self
-			UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {_, _ in }
+			UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
 		} else {
 			application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
 		}
