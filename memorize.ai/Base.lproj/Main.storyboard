@@ -646,7 +646,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZR9-EC-PhX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="53" height="36"/>
+                                                    <rect key="frame" x="0.66666666666666785" y="0.0" width="53" height="36"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
@@ -2107,7 +2107,7 @@
                                         <rect key="frame" x="0.0" y="40" width="334" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyb-jX-XY8">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="340.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="320.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zl-IX-G0b">
                                                         <rect key="frame" x="20" y="20" width="44" height="18"/>
@@ -2165,10 +2165,10 @@
                                                         </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0qR-8k-uus">
-                                                        <rect key="frame" x="0.0" y="300.66666666666663" width="334" height="20"/>
+                                                        <rect key="frame" x="0.0" y="300.66666666666663" width="334" height="0.0"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" placeholder="YES" id="Pia-LQ-uXL"/>
+                                                            <constraint firstAttribute="height" placeholder="YES" id="Pia-LQ-uXL"/>
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="COI-Sk-ssd" detailTextLabel="nx4-xS-cW1" style="IBUITableViewCellStyleSubtitle" id="oMa-Nh-i6Q">
@@ -2293,7 +2293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kC-da-PkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="1485"/>
+            <point key="canvasLocation" x="815.94202898550736" y="1484.5108695652175"/>
         </scene>
         <!--Choose Deck Type View Controller-->
         <scene sceneID="aRZ-MI-yDd">
