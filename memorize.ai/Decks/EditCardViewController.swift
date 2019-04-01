@@ -9,6 +9,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	@IBOutlet weak var frontTextView: UITextView!
 	@IBOutlet weak var backLabel: UILabel!
 	@IBOutlet weak var backTextView: UITextView!
+	@IBOutlet weak var historyLabel: UILabel!
 	@IBOutlet weak var historyTableView: UITableView!
 	
 	var deck: Deck?
@@ -29,6 +30,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 				switch $0.type {
 				case .added:
 					self.card!.history.append(newHistory)
+					self.historyLabel.isHidden = false
 					self.historyTableView.reloadData()
 					callChangeHandler(.historyModified)
 				case .modified:
@@ -41,6 +43,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 					}
 				case .removed:
 					self.card!.history = currentHistory.filter { return $0.id != historyId }
+					self.historyLabel.isHidden = self.card!.history.isEmpty
 					self.historyTableView.reloadData()
 					callChangeHandler(.historyRemoved)
 				@unknown default:

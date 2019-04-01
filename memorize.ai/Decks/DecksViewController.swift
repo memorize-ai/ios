@@ -88,7 +88,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if collectionView == decksCollectionView {
 			return CGSize(width: 84, height: 102)
 		} else {
-			return CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito", size: 17)!]).width + 4, height: 36)
+			return CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-SemiBold", size: 17)!]).width + 4, height: 36)
 		}
 	}
 	

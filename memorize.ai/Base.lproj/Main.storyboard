@@ -13,9 +13,6 @@
         <array key="Nunito-Bold.ttf">
             <string>Nunito-Bold</string>
         </array>
-        <array key="Nunito-Regular.ttf">
-            <string>Nunito-Regular</string>
-        </array>
         <array key="Nunito-SemiBold.ttf">
             <string>Nunito-SemiBold</string>
         </array>
@@ -642,15 +639,15 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="rVj-nZ-GXv" customClass="ActionCollectionViewCell" customModule="memorize_ai" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="4" width="52" height="36"/>
+                                        <rect key="frame" x="8" y="4" width="54" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="52" height="36"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="54" height="36"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZR9-EC-PhX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="36"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="53" height="36"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="click" destination="rVj-nZ-GXv" eventType="touchUpInside" id="Kbu-cV-hbW"/>
@@ -665,7 +662,7 @@
                                             <constraint firstItem="ZR9-EC-PhX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rVj-nZ-GXv" secondAttribute="leading" id="hrf-26-Wue"/>
                                             <constraint firstItem="ZR9-EC-PhX" firstAttribute="top" secondItem="rVj-nZ-GXv" secondAttribute="top" id="mSe-Yq-BQd"/>
                                         </constraints>
-                                        <size key="customSize" width="52" height="36"/>
+                                        <size key="customSize" width="54" height="36"/>
                                         <connections>
                                             <outlet property="button" destination="ZR9-EC-PhX" id="fza-4v-3qv"/>
                                         </connections>
@@ -676,8 +673,8 @@
                                     <outlet property="delegate" destination="wRy-Ck-hDU" id="kAH-MQ-hSI"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-mE-jVH">
-                                <rect key="frame" x="100" y="255" width="314" height="481"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-mE-jVH">
+                                <rect key="frame" x="100" y="64" width="314" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KO2-hq-CpR">
                                         <rect key="frame" x="90.666666666666657" y="275" width="133" height="122"/>
@@ -2204,7 +2201,7 @@
                                                             <outlet property="delegate" destination="ngo-Wp-CMQ" id="L5e-BH-1dj"/>
                                                         </connections>
                                                     </tableView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HISTORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEn-Mg-89R">
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HISTORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEn-Mg-89R">
                                                         <rect key="frame" x="20" y="278.66666666666663" width="56" height="18"/>
                                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="13"/>
                                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2289,6 +2286,7 @@
                         <outlet property="editCardViewVerticalConstraint" destination="Rj0-oL-4hm" id="L8h-KP-gEs"/>
                         <outlet property="frontLabel" destination="2zl-IX-G0b" id="mdJ-tG-faC"/>
                         <outlet property="frontTextView" destination="twy-MA-Qyy" id="7x6-1v-OfP"/>
+                        <outlet property="historyLabel" destination="zEn-Mg-89R" id="ugc-tA-ehs"/>
                         <outlet property="historyTableView" destination="0qR-8k-uus" id="wJV-fA-Ojg"/>
                         <outlet property="titleBar" destination="9g5-r5-Oav" id="sHQ-Mk-qGJ"/>
                     </connections>
