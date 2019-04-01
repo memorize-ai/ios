@@ -91,21 +91,25 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		performSegue(withIdentifier: "signIn", sender: self)
 	}
 	
+	func leftBarButtonItem(image: UIImage) {
+		let editProfileButton = UIButton(type: .custom)
+		editProfileButton.setImage(image, for: .normal)
+		editProfileButton.addTarget(self, action: #selector(self.editProfile), for: .touchUpInside)
+		editProfileButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+		editProfileButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+		editProfileButton.layer.cornerRadius = 16
+		let editProfileBarButtonItem = UIBarButtonItem()
+		editProfileBarButtonItem.customView = editProfileButton
+		self.navigationItem.setLeftBarButton(editProfileBarButtonItem, animated: true)
+	}
+	
 	func createProfileBarButtonItem() {
-		navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "Person"), style: .plain, target: self, action: #selector(editProfile)), animated: false)
+		leftBarButtonItem(image: #imageLiteral(resourceName: "Person"))
 		storage.child("users/\(id!)").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data else { return }
 			profilePicture = UIImage(data: data) ?? #imageLiteral(resourceName: "Person")
 			callChangeHandler(.profilePicture)
-			let editProfileButton = UIButton(type: .custom)
-			editProfileButton.setImage(profilePicture, for: .normal)
-			editProfileButton.addTarget(self, action: #selector(self.editProfile), for: .touchUpInside)
-			editProfileButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
-			editProfileButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
-			editProfileButton.layer.cornerRadius = 16
-			let editProfileBarButtonItem = UIBarButtonItem()
-			editProfileBarButtonItem.customView = editProfileButton
-			self.navigationItem.setLeftBarButton(editProfileBarButtonItem, animated: true)
+			self.leftBarButtonItem(image: profilePicture!)
 		}
 	}
 	

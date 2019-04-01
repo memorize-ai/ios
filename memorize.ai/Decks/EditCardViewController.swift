@@ -20,6 +20,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 		titleBar.roundCorners([.topLeft, .topRight], radius: 10)
 		resetBorder(textView: frontTextView)
 		resetBorder(textView: backTextView)
+		frontTextView.text = card!.front
+		backTextView.text = card!.back
 		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(card!.id).collection("history").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
@@ -186,8 +188,9 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let element = card!.history[indexPath.row]
-		cell.textLabel?.text = element.date.format()
-		cell.detailTextLabel?.text = element.correct ? "Correct" : "Wrong"
+		cell.textLabel?.text = element.date.elapsed()
+		cell.textLabel?.textColor = element.correct ? #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1) : #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+		cell.detailTextLabel?.text = element.date.format()
 		return cell
 	}
 }
