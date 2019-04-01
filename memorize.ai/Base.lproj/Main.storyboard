@@ -2243,6 +2243,11 @@
                                             <constraint firstAttribute="bottom" secondItem="oyb-jX-XY8" secondAttribute="bottom" id="rkN-wB-TQ5"/>
                                             <constraint firstItem="oyb-jX-XY8" firstAttribute="top" secondItem="ukF-9n-NeZ" secondAttribute="top" id="xCx-Dd-34i"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2570,6 +2575,11 @@
                                             <constraint firstItem="qZT-DL-NKd" firstAttribute="top" secondItem="IrH-2p-AO5" secondAttribute="top" id="W7b-XD-tdJ"/>
                                             <constraint firstItem="qZT-DL-NKd" firstAttribute="leading" secondItem="IrH-2p-AO5" secondAttribute="leading" id="bRA-ec-bEr"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

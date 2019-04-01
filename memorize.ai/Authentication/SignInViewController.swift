@@ -76,9 +76,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 				id = user?.user.uid
 				firestore.collection("users").document(id!).getDocument { snapshot, error in
 					guard let snapshot = snapshot else { return }
-					name = snapshot.get("name") as? String ?? ""
+					name = snapshot.get("name") as? String ?? "Error"
 					saveLogin(email: emailText, password: passwordText)
-					slug = snapshot.get("slug") as? String ?? ""
+					slug = snapshot.get("slug") as? String ?? "error"
 					self.hideActivityIndicator()
 					self.performSegue(withIdentifier: "signIn", sender: self)
 				}

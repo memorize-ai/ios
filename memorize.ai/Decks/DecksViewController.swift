@@ -150,7 +150,16 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 					case .added:
 						firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
 							guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-							self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+							if let cardIndex = self.deck?.card(id: cardId), let localCard = self.deck?.cards[cardIndex] {
+								localCard.count = cardSnapshot.get("count") as? Int ?? 0
+								localCard.correct = cardSnapshot.get("correct") as? Int ?? 0
+								localCard.streak = cardSnapshot.get("streak") as? Int ?? 0
+								localCard.mastered = cardSnapshot.get("mastered") as? Bool ?? false
+								localCard.last = cardSnapshot.get("last") as? String ?? "Error"
+								localCard.next = cardSnapshot.get("next") as? Date ?? Date()
+							} else {
+								self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "Error", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+							}
 							self.cardsTableView.reloadData()
 							callChangeHandler(.cardModified)
 						}
@@ -220,14 +229,5 @@ class ActionCollectionViewCell: UICollectionViewCell {
 	
 	@IBAction func click() {
 		action?()
-	}
-	
-	override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-		setNeedsLayout()
-		layoutIfNeeded()
-		let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-		var frame = layoutAttributes.frame
-		frame.size.width = size.width
-		return layoutAttributes
 	}
 }

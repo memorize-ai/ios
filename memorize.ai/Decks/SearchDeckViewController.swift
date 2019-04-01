@@ -54,7 +54,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			decksIndex.search(Query(query: searchText)) { content, error in
 				if error == nil, let hits = content?["hits"] as? [[String : Any]] {
 					hits.forEach { hit in
-						let deckId = hit["objectID"] as? String ?? ""
+						let deckId = hit["objectID"] as? String ?? "Error"
 						firestore.collection("decks").document(deckId).addSnapshotListener { _, error in
 							guard error == nil, let owner = hit["owner"] as? String else { return }
 							firestore.collection("users").document(owner).addSnapshotListener { snapshot, userError in

@@ -31,7 +31,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					let login = try managedContext.fetch(fetchRequest)
 					if login.count == 1 {
 						let localEmail = login[0].value(forKey: "email") as? String
-						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "") { user, error in
+						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "Error") { user, error in
 							if error == nil {
 								id = user?.user.uid
 								firestore.collection("users").document(id!).addSnapshotListener { snapshot, error in
