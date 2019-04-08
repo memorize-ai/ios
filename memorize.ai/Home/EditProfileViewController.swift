@@ -96,11 +96,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		if let data = image.pngData() {
 			let metadata = StorageMetadata()
 			metadata.contentType = "image/png"
-			storage.child("users/\(id!)").putData(data, metadata: metadata) { metadata, error in
+			storage.child("users/\(id!)").putData(data, metadata: metadata) { _, error in
 				guard error == nil else { return }
 				storage.child("users/\(id!)").downloadURL { url, error in
-					guard let url = url, let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest(), error == nil else { return }
-					changeRequest.photoURL = url
+					guard error == nil, let url = url else { return }
+					Auth.auth().currentUser?.createProfileChangeRequest().photoURL = url
 					completion()
 				}
 			}
