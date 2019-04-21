@@ -39,6 +39,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 					for i in 0..<currentHistory.count {
 						if currentHistory[i].id == historyId {
 							self.card!.history[i] = newHistory
+							self.historyLabel.isHidden = false
 							self.historyTableView.reloadData()
 							callChangeHandler(.historyModified)
 						}
@@ -70,6 +71,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 				self.historyTableView.reloadData()
 			}
 		}
+		historyTableView.reloadData()
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
