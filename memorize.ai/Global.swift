@@ -94,7 +94,7 @@ class Card {
 	}
 	
 	func isDue() -> Bool {
-		return next.timeIntervalSinceNow >= 0
+		return next.timeIntervalSinceNow <= 0
 	}
 }
 

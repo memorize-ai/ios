@@ -75,11 +75,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let reviewVC = segue.destination as? ReviewViewController else { return }
-		reviewVC.deck = deck
-	}
-	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return collectionView == decksCollectionView ? CGSize(width: 84, height: 102) : CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36)
 	}
@@ -132,46 +127,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newDeck)), animated: true)
 			}
 			deck = decks[indexPath.item]
-			let deckId = deck!.id
-			firestore.collection("decks").document(deckId).collection("cards").addSnapshotListener { snapshot, error in
-				guard error == nil, let snapshot = snapshot?.documentChanges else { return }
-				snapshot.forEach {
-					let card = $0.document
-					let cardId = card.documentID
-					switch $0.type {
-					case .added:
-						firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
-							guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-							if let cardIndex = self.deck?.card(id: cardId), let localCard = self.deck?.cards[cardIndex] {
-								localCard.count = cardSnapshot.get("count") as? Int ?? 0
-								localCard.correct = cardSnapshot.get("correct") as? Int ?? 0
-								localCard.streak = cardSnapshot.get("streak") as? Int ?? 0
-								localCard.mastered = cardSnapshot.get("mastered") as? Bool ?? false
-								localCard.last = cardSnapshot.get("last") as? String ?? "Error"
-								localCard.next = cardSnapshot.get("next") as? Date ?? Date()
-							} else {
-								self.deck!.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "Error", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
-							}
-							self.cardsTableView.reloadData()
-							callChangeHandler(.cardModified)
-						}
-					case .modified:
-						let modifiedCard = self.deck!.cards[self.deck!.card(id: cardId)!]
-						if let front = card.get("front") as? String, let back = card.get("back") as? String {
-							modifiedCard.front = front
-							modifiedCard.back = back
-						}
-						self.cardsTableView.reloadData()
-						callChangeHandler(.cardModified)
-					case .removed:
-						self.deck!.cards = self.deck!.cards.filter { return $0.id != cardId }
-						self.cardsTableView.reloadData()
-						callChangeHandler(.cardRemoved)
-					@unknown default:
-						return
-					}
-				}
-			}
+			cardsTableView.reloadData()
 		}
 	}
 	

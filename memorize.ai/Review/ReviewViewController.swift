@@ -8,17 +8,15 @@ class ReviewViewController: UIViewController {
 	@IBOutlet weak var backLabel: UILabel!
 	@IBOutlet weak var dontKnowButton: UIButton!
 	
-	var deck: Deck?
-	var card = 0
+	var dueCards = [(deck: Deck, card: Card)]()
 	var correct = false
-	var reviewedCards = [(id: String, correct: Bool)]()
+	var reviewedCards = [(deck: Deck, card: Card, correct: Bool)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
-		frontLabel.text = deck?.cards[card].front ?? "Error"
 		cardView.layer.borderWidth = 1
 		cardView.layer.borderColor = UIColor.lightGray.cgColor
 		dontKnowButton.layer.borderWidth = 1
@@ -27,13 +25,12 @@ class ReviewViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		updateChangeHandler { change in
-			if change == .cardModified {
-				let card = self.deck?.cards[self.card]
-				self.frontLabel.text = card?.front ?? "Error"
-				self.backLabel.text = card?.back ?? "Error"
-			}
-		}
+		dueCards = decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
+		frontLabel.text = current().card.front
+	}
+	
+	func current() -> (deck: Deck, card: Card) {
+		return dueCards.first!
 	}
 	
 	@IBAction func dontKnow() {
@@ -53,19 +50,18 @@ class ReviewViewController: UIViewController {
 	}
 	
 	func createHistory() {
-		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(deck!.cards[card].id).collection("history").addDocument(data: ["correct": correct])
+		firestore.collection("users").document(id!).collection("decks").document(current().deck.id).collection("cards").document(current().card.id).collection("history").addDocument(data: ["correct": correct])
 	}
 	
 	func flipAnimation() {
 		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
-			self.cardView.transform = CGAffineTransform(scaleX: 0.01, y: 1)
+			self.cardView.transform = CGAffineTransform(scaleX: CGFloat.ulpOfOne, y: 1)
 		}) { finished in
 			if finished {
-				let card = self.deck!.cards[self.card]
-				self.reviewedCards.append((id: card.id, correct: self.correct))
+				self.reviewedCards.append((deck: self.current().deck, card: self.current().card, correct: self.correct))
 				self.cardBarView.isHidden = false
 				self.backLabel.isHidden = false
-				self.backLabel.text = card.back
+				self.backLabel.text = self.current().card.back
 				self.dontKnowButton.isHidden = true
 				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
 					self.cardView.transform = .identity
@@ -80,7 +76,7 @@ class ReviewViewController: UIViewController {
 		}) { finished in
 			if finished {
 				self.newCard()
-				self.frontLabel.text = self.deck?.cards[self.card].front
+				self.frontLabel.text = self.current().card.front
 				self.cardBarView.isHidden = true
 				self.backLabel.isHidden = true
 				self.dontKnowButton.isHidden = false
@@ -94,15 +90,14 @@ class ReviewViewController: UIViewController {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard let recapVC = segue.destination as? RecapViewController else { return }
-		recapVC.deck = deck
 		recapVC.cards = reviewedCards
 	}
 	
 	func newCard() {
-		if card == deck!.cards.count - 1 {
+		if dueCards.count == 1 {
 			performSegue(withIdentifier: "recap", sender: self)
 		} else {
-			card += 1
+			dueCards = Array(dueCards.dropFirst())
 		}
 	}
 }
