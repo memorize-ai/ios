@@ -104,6 +104,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
 			let element = actions[indexPath.item]
 			cell.button.setTitle(element.name, for: .normal)
+			cell.button.isEnabled = !(element.name == "review all" && Deck.allDue().isEmpty)
 			cell.action = {
 				self.performSelector(onMainThread: element.action, with: nil, waitUntilDone: false)
 			}

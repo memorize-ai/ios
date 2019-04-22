@@ -56,6 +56,10 @@ class Deck {
 		return nil
 	}
 	
+	static func allDue() -> [Card] {
+		return decks.flatMap { return $0.cards.filter { return $0.isDue() } }
+	}
+	
 	func card(id t: String) -> Int? {
 		for i in 0..<cards.count {
 			if cards[i].id == t {

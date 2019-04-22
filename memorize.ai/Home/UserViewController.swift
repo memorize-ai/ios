@@ -114,7 +114,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	func reloadReview() {
-		let dueCards = decks.flatMap { return $0.cards.filter { return $0.isDue() } }
+		let dueCards = Deck.allDue()
 		if reviewButton.isHidden {
 			cardsLabel.text = "1 card due"
 			reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
