@@ -94,13 +94,13 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	func leftBarButtonItem(image: UIImage) {
 		let editProfileButton = UIButton(type: .custom)
 		editProfileButton.setImage(image, for: .normal)
-		editProfileButton.addTarget(self, action: #selector(self.editProfile), for: .touchUpInside)
+		editProfileButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
 		editProfileButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
 		editProfileButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
 		editProfileButton.layer.cornerRadius = 16
 		let editProfileBarButtonItem = UIBarButtonItem()
 		editProfileBarButtonItem.customView = editProfileButton
-		self.navigationItem.setLeftBarButton(editProfileBarButtonItem, animated: true)
+		navigationItem.setLeftBarButton(editProfileBarButtonItem, animated: false)
 	}
 	
 	func createProfileBarButtonItem() {
@@ -110,6 +110,34 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			profilePicture = UIImage(data: data) ?? #imageLiteral(resourceName: "Person")
 			callChangeHandler(.profilePicture)
 			self.leftBarButtonItem(image: profilePicture!)
+		}
+	}
+	
+	func reloadReview() {
+		let dueCards = decks.flatMap { return $0.cards.filter { return $0.isDue() } }
+		if reviewButton.isHidden {
+			cardsLabel.text = "1 card due"
+			reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
+			cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
+			reviewButton.isHidden = false
+			cardsLabel.isHidden = false
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+				self.reviewButton.transform = .identity
+				self.cardsLabel.transform = .identity
+			}, completion: nil)
+		} else if dueCards.isEmpty {
+			cardsLabel.text = "0 cards due"
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
+				self.cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
+			}) { finished in
+				if finished {
+					self.reviewButton.isHidden = true
+					self.cardsLabel.isHidden = true
+				}
+			}
+		} else {
+			cardsLabel.text = "\(dueCards.count) card\(dueCards.count == 1 ? "" : "s") due"
 		}
 	}
 	
@@ -150,6 +178,48 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 						decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
 						self.actionsTableView.reloadData()
 						callChangeHandler(.deckModified)
+						firestore.collection("decks").document(deckId).collection("cards").addSnapshotListener { snapshot, error in
+							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+							snapshot.forEach {
+								let card = $0.document
+								let cardId = card.documentID
+								guard let localDeckIndex = Deck.id(deckId) else { return }
+								let localDeck = decks[localDeckIndex]
+								switch $0.type {
+								case .added:
+									firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
+										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
+										if let cardIndex = localDeck.card(id: cardId) {
+											let localCard = localDeck.cards[cardIndex]
+											localCard.count = cardSnapshot.get("count") as? Int ?? 0
+											localCard.correct = cardSnapshot.get("correct") as? Int ?? 0
+											localCard.streak = cardSnapshot.get("streak") as? Int ?? 0
+											localCard.mastered = cardSnapshot.get("mastered") as? Bool ?? false
+											localCard.last = cardSnapshot.get("last") as? String ?? "Error"
+											localCard.next = cardSnapshot.get("next") as? Date ?? Date()
+										} else {
+											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "Error", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+										}
+										self.reloadReview()
+										callChangeHandler(.cardModified)
+									}
+								case .modified:
+									let modifiedCard = localDeck.cards[localDeck.card(id: cardId)!]
+									if let front = card.get("front") as? String, let back = card.get("back") as? String {
+										modifiedCard.front = front
+										modifiedCard.back = back
+									}
+									self.reloadReview()
+									callChangeHandler(.cardModified)
+								case .removed:
+									localDeck.cards = localDeck.cards.filter { return $0.id != cardId }
+									self.reloadReview()
+									callChangeHandler(.cardRemoved)
+								@unknown default:
+									return
+								}
+							}
+						}
 					}
 				case .modified:
 					if let mastered = deck.get("mastered") as? Int {

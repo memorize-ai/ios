@@ -12,11 +12,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let action: Selector
 	}
 	
-	let actions = [
-		Action(name: "EDIT", action: #selector(editDeck)),
-		Action(name: "NEW CARD", action: #selector(newCard)),
-		Action(name: "REVIEW", action: #selector(review))
-	]
+	let actions = [Action(name: "new card", action: #selector(newCard)), Action(name: "review all", action: #selector(review))]
 	var deck: Deck?
 	
 	override func viewDidLoad() {
@@ -85,7 +81,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return collectionView == decksCollectionView ? CGSize(width: 84, height: 102) : CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-SemiBold", size: 17)!]).width + 4, height: 36)
+		return collectionView == decksCollectionView ? CGSize(width: 84, height: 102) : CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

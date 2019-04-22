@@ -92,6 +92,10 @@ class Card {
 		self.history = history
 		self.deck = deck
 	}
+	
+	func isDue() -> Bool {
+		return next.timeIntervalSinceNow >= 0
+	}
 }
 
 class Permission {

@@ -13,6 +13,9 @@
         <array key="Nunito-Bold.ttf">
             <string>Nunito-Bold</string>
         </array>
+        <array key="Nunito-ExtraBold.ttf">
+            <string>Nunito-ExtraBold</string>
+        </array>
         <array key="Nunito-SemiBold.ttf">
             <string>Nunito-SemiBold</string>
         </array>
@@ -83,7 +86,10 @@
                                 </connections>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cards" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="gI7-VO-pbC">
-                                <rect key="frame" x="40" y="700" width="334" height="20.666666666666629"/>
+                                <rect key="frame" x="40" y="700" width="334" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="D5k-aI-iqP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -107,8 +113,8 @@
                                     <action selector="review" destination="XhB-Ss-34n" eventType="touchUpInside" id="YqZ-Ox-lxm"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="64" width="414" height="366"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zjI-yq-TL3">
                                         <rect key="frame" x="188.66666666666666" y="317.66666666666669" width="37" height="37"/>
@@ -646,8 +652,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZR9-EC-PhX">
-                                                    <rect key="frame" x="0.66666666666666785" y="0.0" width="53" height="36"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="54" height="36"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="17"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="click" destination="rVj-nZ-GXv" eventType="touchUpInside" id="Kbu-cV-hbW"/>
@@ -673,8 +679,8 @@
                                     <outlet property="delegate" destination="wRy-Ck-hDU" id="kAH-MQ-hSI"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-mE-jVH">
-                                <rect key="frame" x="100" y="64" width="314" height="672"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-mE-jVH">
+                                <rect key="frame" x="100" y="164" width="314" height="572"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KO2-hq-CpR">
                                         <rect key="frame" x="90.666666666666657" y="275" width="133" height="122"/>
