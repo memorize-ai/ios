@@ -679,8 +679,8 @@
                                     <outlet property="delegate" destination="wRy-Ck-hDU" id="kAH-MQ-hSI"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-mE-jVH">
-                                <rect key="frame" x="100" y="164" width="314" height="572"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-mE-jVH">
+                                <rect key="frame" x="100" y="64" width="314" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KO2-hq-CpR">
                                         <rect key="frame" x="90.666666666666657" y="275" width="133" height="122"/>
@@ -2535,6 +2535,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="WYS-Mb-rsl" id="ShR-Zf-Miu"/>
+                                                        </connections>
                                                     </textView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nf2-pj-tGZ">
                                                         <rect key="frame" x="20.000000000000004" y="121.66666666666669" width="35.333333333333343" height="18"/>
@@ -2553,6 +2556,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="WYS-Mb-rsl" id="iGb-Oe-Tvp"/>
+                                                        </connections>
                                                     </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
