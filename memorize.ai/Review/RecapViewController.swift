@@ -3,7 +3,7 @@ import UIKit
 class RecapViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var cardsTableView: UITableView!
 	
-	var cards = [(deck: Deck, card: Card, correct: Bool)]()
+	var cards = [(deck: Deck, card: Card, correct: Bool, next: Date)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 			}
 		}
 		cell.textLabel?.text = element.card.front
-		cell.detailTextLabel?.text = element.card.next.format()
+		cell.detailTextLabel?.text = element.next.format()
 		return cell
 	}
 }

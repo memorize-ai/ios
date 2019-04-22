@@ -10,10 +10,10 @@ class ReviewViewController: UIViewController {
 	
 	var dueCards = [(deck: Deck, card: Card)]()
 	var correct = false
-	var reviewedCards = [(deck: Deck, card: Card, correct: Bool)]()
+	var reviewedCards = [(deck: Deck, card: Card, correct: Bool, next: Date)]()
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
@@ -21,7 +21,7 @@ class ReviewViewController: UIViewController {
 		cardView.layer.borderColor = UIColor.lightGray.cgColor
 		dontKnowButton.layer.borderWidth = 1
 		dontKnowButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
-    }
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -34,8 +34,7 @@ class ReviewViewController: UIViewController {
 	}
 	
 	@IBAction func dontKnow() {
-		correct = false
-		createHistory()
+		createHistory(false)
 		flipAnimation()
 	}
 	
@@ -43,14 +42,22 @@ class ReviewViewController: UIViewController {
 		if dontKnowButton.isHidden {
 			slideAnimation()
 		} else {
-			correct = true
-			createHistory()
+			createHistory(true)
 			flipAnimation()
 		}
 	}
 	
-	func createHistory() {
-		firestore.collection("users").document(id!).collection("decks").document(current().deck.id).collection("cards").document(current().card.id).collection("history").addDocument(data: ["correct": correct])
+	func createHistory(_ correct: Bool) {
+		let deckId = current().deck.id
+		let cardId = current().card.id
+		var documentReference: DocumentReference?
+		documentReference = firestore.collection("users/\(id!)/decks/\(deckId)/cards/\(cardId)/history").addDocument(data: ["correct": correct]) { error in
+			guard error == nil, let documentReference = documentReference else { return }
+			firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)/history/\(documentReference.documentID)").addSnapshotListener { snapshot, historyError in
+				guard historyError == nil, let next = snapshot?.get("next") as? Date else { return }
+				self.reviewedCards.append((deck: self.current().deck, card: self.current().card, correct: self.correct, next: next))
+			}
+		}
 	}
 	
 	func flipAnimation() {
@@ -58,7 +65,6 @@ class ReviewViewController: UIViewController {
 			self.cardView.transform = CGAffineTransform(scaleX: CGFloat.ulpOfOne, y: 1)
 		}) { finished in
 			if finished {
-				self.reviewedCards.append((deck: self.current().deck, card: self.current().card, correct: self.correct))
 				self.cardBarView.isHidden = false
 				self.backLabel.isHidden = false
 				self.backLabel.text = self.current().card.back
