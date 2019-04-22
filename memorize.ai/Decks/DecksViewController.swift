@@ -12,7 +12,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let action: Selector
 	}
 	
-	let actions = [Action(name: "new card", action: #selector(newCard)), Action(name: "review all", action: #selector(review))]
+	let actions = [Action(name: "new card", action: #selector(newCard)), Action(name: "review all", action: #selector(review)), Action(name: "visit page", action: #selector(visitPage))]
 	var deck: Deck?
 	
 	override func viewDidLoad() {
@@ -27,6 +27,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				self.decksCollectionView.reloadData()
 			} else if change == .deckRemoved {
 				self.navigationController?.popViewController(animated: true)
+			} else if change == .cardModified || change == .cardRemoved {
+				self.cardsTableView.reloadData()
 			}
 		}
 	}
@@ -42,16 +44,18 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard let deckVC = segue.destination as? DeckViewController, let deck = deck else { return }
+		deckVC.deckId = deck.id
+		deckVC.image = deck.image
+	}
+	
 	@objc func newDeck() {
 		guard let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController else { return }
 		addChild(chooseDeckTypeVC)
 		chooseDeckTypeVC.view.frame = view.frame
 		view.addSubview(chooseDeckTypeVC.view)
 		chooseDeckTypeVC.didMove(toParent: self)
-	}
-	
-	@objc func editDeck() {
-		// TODO - edit
 	}
 	
 	@objc func newCard() {
@@ -65,6 +69,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	@objc func review() {
 		performSegue(withIdentifier: "review", sender: self)
+	}
+	
+	@objc func visitPage() {
+		performSegue(withIdentifier: "visit", sender: self)
 	}
 	
 	@IBAction func createDeck() {
