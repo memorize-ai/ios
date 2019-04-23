@@ -120,7 +120,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func reloadReview() {
 		let dueCards = Deck.allDue()
-		if reviewButton.isHidden {
+		if reviewButton.isHidden && !dueCards.isEmpty {
 			cardsLabel.text = "1 card due"
 			reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
 			cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
@@ -130,7 +130,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				self.reviewButton.transform = .identity
 				self.cardsLabel.transform = .identity
 			}, completion: nil)
-		} else if dueCards.isEmpty {
+		} else if !reviewButton.isHidden && dueCards.isEmpty {
 			cardsLabel.text = "0 cards due"
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
