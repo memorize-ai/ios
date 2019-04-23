@@ -164,10 +164,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		guard let element = deck?.cards[indexPath.row] else { return cell }
 		cell.textLabel?.text = element.front
-		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(element.id).collection("history").document(element.last).addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot else { return }
-			cell.detailTextLabel?.text = "NEXT: \((snapshot.get("next") as? Date ?? Date()).format())"
-		}
+		cell.detailTextLabel?.text = element.next.format()
 		return cell
 	}
 	

@@ -46,6 +46,7 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 		if let next = element.next {
 			cell.detailTextLabel?.text = next.format()
 		} else {
+			cell.detailTextLabel?.text = "loading..."
 			firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let next = snapshot?.get("next") as? Date else { return }
 				self.cards[indexPath.row] = (id: element.id, deck: element.deck, card: element.card, correct: element.correct, next: next)
