@@ -9,6 +9,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
 		super.viewDidLoad()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateChangeHandler { change in
+			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved {
+				self.loadCards()
+			}
+		}
+		loadCards()
+	}
+	
 	func loadCards() {
 		cards = decks.flatMap { return $0.cards }.sorted { return $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
 		cardsTableView.reloadData()
