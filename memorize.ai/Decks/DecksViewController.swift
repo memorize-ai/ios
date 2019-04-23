@@ -35,11 +35,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func loadDeckImages() {
 		decks.forEach { deck in
-			let deckId = deck.id
-			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
-				guard error == nil, let data = data else { return }
-				deck.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-				self.decksCollectionView.reloadData()
+			if deck.image == nil {
+				storage.child("decks/\(deck.id)").getData(maxSize: fileLimit) { data, error in
+					guard error == nil, let data = data else { return }
+					deck.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+					self.decksCollectionView.reloadData()
+				}
+			} else {
+				decksCollectionView.reloadData()
 			}
 		}
 	}
