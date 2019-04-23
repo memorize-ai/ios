@@ -65,11 +65,13 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					}
 				} catch {}
 			}
+			Card.poll()
 		} else {
 			createProfileBarButtonItem()
 			navigationItem.title = name
 			if shouldLoadDecks {
 				loadDecks()
+				Card.poll()
 				shouldLoadDecks = false
 			}
 		}
@@ -81,6 +83,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		updateChangeHandler { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved {
 				self.actionsTableView.reloadData()
+			} else if change == .cardDue {
+				self.reloadReview()
 			}
 		}
 		actionsTableView.reloadData()

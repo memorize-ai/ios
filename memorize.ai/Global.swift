@@ -97,6 +97,14 @@ class Card {
 		self.deck = deck
 	}
 	
+	static func poll() {
+		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+			if !Deck.allDue().isEmpty {
+				callChangeHandler(.cardDue)
+			}
+		}
+	}
+	
 	func isDue() -> Bool {
 		return next.timeIntervalSinceNow <= 0
 	}
@@ -146,6 +154,7 @@ enum Change {
 	case cardRemoved
 	case historyModified
 	case historyRemoved
+	case cardDue
 }
 
 func callChangeHandler(_ change: Change) {

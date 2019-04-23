@@ -48,16 +48,7 @@ class ReviewViewController: UIViewController {
 	}
 	
 	func createHistory(_ correct: Bool) {
-		let deckId = current().deck.id
-		let cardId = current().card.id
-		var documentReference: DocumentReference?
-		documentReference = firestore.collection("users/\(id!)/decks/\(deckId)/cards/\(cardId)/history").addDocument(data: ["correct": correct]) { error in
-			guard error == nil, let documentReference = documentReference else { return }
-			firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)/history/\(documentReference.documentID)").addSnapshotListener { snapshot, historyError in
-				guard historyError == nil, let next = snapshot?.get("next") as? Date else { return }
-				self.reviewedCards.append((deck: self.current().deck, card: self.current().card, correct: self.correct, next: next))
-			}
-		}
+		firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["correct": correct])
 	}
 	
 	func flipAnimation() {
@@ -88,7 +79,7 @@ class ReviewViewController: UIViewController {
 				self.dontKnowButton.isHidden = false
 				self.cardView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
 				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-					self.cardBarView.transform = .identity
+					self.cardView.transform = .identity
 				}, completion: nil)
 			}
 		}
@@ -103,7 +94,7 @@ class ReviewViewController: UIViewController {
 		if dueCards.count == 1 {
 			performSegue(withIdentifier: "recap", sender: self)
 		} else {
-			dueCards = Array(dueCards.dropFirst())
+			dueCards.removeFirst()
 		}
 	}
 }

@@ -29,8 +29,13 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				self.navigationController?.popViewController(animated: true)
 			} else if change == .cardModified || change == .cardRemoved {
 				self.cardsTableView.reloadData()
+			} else if change == .cardDue {
+				self.actionsCollectionView.reloadData()
 			}
 		}
+		decksCollectionView.reloadData()
+		cardsTableView.reloadData()
+		actionsCollectionView.reloadData()
 	}
 	
 	func loadDeckImages() {
