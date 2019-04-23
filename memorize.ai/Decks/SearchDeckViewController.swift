@@ -78,7 +78,9 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let element = result[indexPath.row]
-		if element.image == nil {
+		if let image = element.image {
+			cell.imageView?.image = image
+		} else {
 			storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
 				guard error == nil, let data = data else { return }
 				element.image = UIImage(data: data)
