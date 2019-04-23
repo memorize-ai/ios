@@ -3,7 +3,7 @@ import UIKit
 class RecapViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var cardsTableView: UITableView!
 	
-	var cards = [(deck: Deck, card: Card, correct: Bool, next: Date)]()
+	var cards = [(id: String, deck: Deck, card: Card, correct: Bool, next: Date?)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,16 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 			}
 		}
 		cell.textLabel?.text = element.card.front
-		cell.detailTextLabel?.text = element.next.format()
+		if let next = element.next {
+			cell.detailTextLabel?.text = next.format()
+		} else {
+			firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
+				guard error == nil, let next = snapshot?.get("next") as? Date else { return }
+				self.cards[indexPath.row] = (id: element.id, deck: element.deck, card: element.card, correct: element.correct, next: next)
+				cell.detailTextLabel?.text = next.format()
+				tableView.reloadData()
+			}
+		}
 		return cell
 	}
 }

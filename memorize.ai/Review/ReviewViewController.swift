@@ -10,7 +10,7 @@ class ReviewViewController: UIViewController {
 	
 	var dueCards = [(deck: Deck, card: Card)]()
 	var correct = false
-	var reviewedCards = [(deck: Deck, card: Card, correct: Bool, next: Date)]()
+	var reviewedCards = [(id: String, deck: Deck, card: Card, correct: Bool, next: Date?)]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -48,7 +48,11 @@ class ReviewViewController: UIViewController {
 	}
 	
 	func createHistory(_ correct: Bool) {
-		firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["correct": correct])
+		var documentReference: DocumentReference?
+		documentReference = firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["correct": correct]) { error in
+			guard error == nil, let documentReference = documentReference else { return }
+			self.reviewedCards.append((id: documentReference.documentID, deck: self.current().deck, card: self.current().card, correct: correct, next: nil))
+		}
 	}
 	
 	func flipAnimation() {
