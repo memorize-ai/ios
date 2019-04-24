@@ -65,6 +65,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}
 			}
 		}
+		imageView.layer.masksToBounds = true
 		if let image = image {
 			imageActivityIndicator.stopAnimating()
 			imageView.image = image

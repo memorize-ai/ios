@@ -24,6 +24,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		imageView.layer.cornerRadius = cornerRadius
 		imageView.layer.borderWidth = 0.5
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
+		imageView.layer.masksToBounds = true
 		changeButton.roundCorners([.bottomLeft, .bottomRight], radius: cornerRadius)
 		textViewDidEndEditing(descriptionTextView)
     }

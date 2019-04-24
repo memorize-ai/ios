@@ -107,6 +107,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		editProfileButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
 		editProfileButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
 		editProfileButton.layer.cornerRadius = 16
+		editProfileButton.layer.masksToBounds = true
 		let editProfileBarButtonItem = UIBarButtonItem()
 		editProfileBarButtonItem.customView = editProfileButton
 		navigationItem.setLeftBarButton(editProfileBarButtonItem, animated: false)
@@ -115,10 +116,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	func createProfileBarButtonItem() {
 		leftBarButtonItem(image: #imageLiteral(resourceName: "Person"))
 		storage.child("users/\(id!)").getData(maxSize: fileLimit) { data, error in
-			guard error == nil, let data = data else { return }
-			profilePicture = UIImage(data: data) ?? #imageLiteral(resourceName: "Person")
+			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+			profilePicture = image
+			self.leftBarButtonItem(image: image)
 			callChangeHandler(.profilePicture)
-			self.leftBarButtonItem(image: profilePicture!)
 		}
 	}
 	

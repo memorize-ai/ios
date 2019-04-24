@@ -28,6 +28,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		pictureImageView.layer.cornerRadius = cornerRadius
 		pictureImageView.layer.borderWidth = 0.5
 		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
+		pictureView.layer.masksToBounds = true
 		changeButton.roundCorners([.bottomLeft, .bottomRight], radius: cornerRadius)
     }
 	

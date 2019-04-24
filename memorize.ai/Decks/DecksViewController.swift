@@ -114,6 +114,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			cell.layer.borderWidth = 1
 			cell.layer.borderColor = #colorLiteral(red: 0.198331058, green: 0.198331058, blue: 0.198331058, alpha: 1)
 			cell.imageView.image = element.image
+			cell.imageView.layer.masksToBounds = true
 			cell.nameLabel.text = element.name
 			return cell
 		} else {
