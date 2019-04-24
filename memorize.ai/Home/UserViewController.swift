@@ -32,9 +32,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					if login.count == 1 {
 						let localEmail = login[0].value(forKey: "email") as? String
 						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "Error") { user, error in
-							if error == nil {
-								id = user?.user.uid
-								firestore.collection("users").document(id!).addSnapshotListener { snapshot, error in
+							if error == nil, let uid = user?.user.uid {
+								id = uid
+								firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
 									guard error == nil, let snapshot = snapshot else { return }
 									name = snapshot.get("name") as? String ?? "Error"
 									self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -175,18 +175,18 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	func loadDecks() {
-		firestore.collection("users").document(id!).collection("decks").addSnapshotListener { snapshot, error in
+		firestore.collection("users/\(id!)/decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let deck = $0.document
 				let deckId = deck.documentID
 				switch $0.type {
 				case .added:
-					firestore.collection("decks").document(deckId).addSnapshotListener { deckSnapshot, deckError in
+					firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
 						decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
 						callChangeHandler(.deckModified)
-						firestore.collection("decks").document(deckId).collection("cards").addSnapshotListener { snapshot, error in
+						firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 							snapshot.forEach {
 								let card = $0.document
@@ -195,7 +195,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 								let localDeck = decks[localDeckIndex]
 								switch $0.type {
 								case .added:
-									firestore.collection("users").document(id!).collection("decks").document(deckId).collection("cards").document(cardId).addSnapshotListener { cardSnapshot, cardError in
+									firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
 										if let cardIndex = localDeck.card(id: cardId) {
 											let localCard = localDeck.cards[cardIndex]

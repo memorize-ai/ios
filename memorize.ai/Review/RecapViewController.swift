@@ -1,7 +1,7 @@
 import UIKit
 
-class RecapViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-	@IBOutlet weak var cardsTableView: UITableView!
+class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	@IBOutlet weak var recapCollectionView: UICollectionView!
 	
 	var cards = [(id: String, deck: Deck, card: Card, correct: Bool, next: Date?)]()
 	
@@ -16,7 +16,7 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 		super.viewWillAppear(animated)
 		updateChangeHandler { change in
 			if change == .cardModified {
-				self.cardsTableView.reloadData()
+				self.recapCollectionView.reloadData()
 			}
 		}
 	}
@@ -25,35 +25,44 @@ class RecapViewController: UIViewController, UITableViewDataSource, UITableViewD
 		performSegue(withIdentifier: "done", sender: self)
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return cards.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = cards[indexPath.row]
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RecapCollectionViewCell
+		let element = cards[indexPath.item]
 		if let image = element.deck.image {
-			cell.imageView?.image = image
+			cell.imageView.image = image
 		} else {
+			cell.imageActivityIndicator.startAnimating()
 			storage.child("decks/\(element.deck.id)").getData(maxSize: fileLimit) { data, error in
-				guard error == nil, let data = data else { return }
-				element.deck.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-				cell.imageView?.image = element.deck.image
-				tableView.reloadData()
+				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+				element.deck.image = image
+				cell.imageActivityIndicator.stopAnimating()
+				cell.imageView.image = image
 			}
 		}
-		cell.textLabel?.text = element.card.front
+		cell.deckLabel.text = element.deck.name
+		cell.cardLabel.text = element.card.front
 		if let next = element.next {
-			cell.detailTextLabel?.text = next.format()
+			cell.nextLabel.text = next.format()
 		} else {
-			cell.detailTextLabel?.text = "loading..."
+			cell.nextLabel.text = "Loading..."
 			firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let next = snapshot?.get("next") as? Date else { return }
-				self.cards[indexPath.row] = (id: element.id, deck: element.deck, card: element.card, correct: element.correct, next: next)
-				cell.detailTextLabel?.text = next.format()
-				tableView.reloadData()
+				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, correct: element.correct, next: next)
+				cell.nextLabel.text = next.format()
 			}
 		}
 		return cell
 	}
+}
+
+class RecapCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var deckLabel: UILabel!
+	@IBOutlet weak var cardLabel: UILabel!
+	@IBOutlet weak var nextLabel: UILabel!
 }

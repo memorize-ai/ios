@@ -101,7 +101,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 						changeRequest.displayName = nameText
 						changeRequest.photoURL = photoURL
 					}
-					firestore.collection("users").document(id!).setData(["name": nameText, "email": emailText])
+					firestore.document("users/\(id!)").setData(["name": nameText, "email": emailText])
 					name = nameText
 					saveLogin(email: emailText, password: passwordText)
 					self.hideActivityIndicator()

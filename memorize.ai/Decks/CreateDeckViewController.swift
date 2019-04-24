@@ -106,7 +106,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		var deckRef: DocumentReference?
 		deckRef = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id!, "owner": id!]) { error in
 			guard error == nil, let deckId = deckRef?.documentID else { return }
-			firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["mastered": 0])
+			firestore.document("users/\(id!)/decks/\(deckId)").setData(["mastered": 0])
 			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
 				if error == nil {
 					self.hideActivityIndicator()

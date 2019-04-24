@@ -55,9 +55,9 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 				if error == nil, let hits = content?["hits"] as? [[String : Any]] {
 					hits.forEach { hit in
 						let deckId = hit["objectID"] as? String ?? "Error"
-						firestore.collection("decks").document(deckId).addSnapshotListener { _, error in
+						firestore.document("decks/\(deckId)").addSnapshotListener { _, error in
 							guard error == nil, let owner = hit["owner"] as? String else { return }
-							firestore.collection("users").document(owner).addSnapshotListener { snapshot, userError in
+							firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
 								guard userError == nil, let snapshot = snapshot else { return }
 								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
 								self.decksTableView.reloadData()

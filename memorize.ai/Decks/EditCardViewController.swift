@@ -22,7 +22,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 		resetBorder(textView: backTextView)
 		frontTextView.text = card!.front
 		backTextView.text = card!.back
-		firestore.collection("users").document(id!).collection("decks").document(deck!.id).collection("cards").document(card!.id).collection("history").addSnapshotListener { snapshot, error in
+		firestore.collection("users/\(id!)/decks/\(deck!.id)/cards/\(card!.id)/history").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let historyElement = $0.document
@@ -111,7 +111,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	
 	@IBAction func delete() {
 		if deck?.owner == id {
-			firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id).delete { error in
+			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").delete { error in
 				if error == nil {
 					self.hide()
 				} else if let error = error {
@@ -177,7 +177,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	
 	func textViewDidChange(_ textView: UITextView) {
 		if deck?.owner == id {
-			firestore.collection("decks").document(deck!.id).collection("cards").document(card!.id).updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()])
+			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()])
 		} else {
 			makeCopy()
 		}

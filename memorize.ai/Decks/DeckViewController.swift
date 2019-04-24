@@ -21,7 +21,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
 		imageView.layer.borderWidth = 1
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
-		firestore.collection("decks").document(deckId!).addSnapshotListener { snapshot, error in
+		firestore.document("decks/\(deckId!)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
 				self.nameLabel.text = snapshot.get("name") as? String ?? "Error"
 				self.descriptionLabel.text = snapshot.get("description") as? String ?? "Error"
@@ -36,7 +36,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				self.present(alertController, animated: true, completion: nil)
 			}
 		}
-		firestore.collection("decks").document(deckId!).collection("cards").addSnapshotListener { snapshot, error in
+		firestore.collection("decks/\(deckId!)/cards").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let card = $0.document
@@ -100,7 +100,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		getButton.setTitle(nil, for: .normal)
 		getActivityIndicator.startAnimating()
 		if isGet {
-			firestore.collection("users").document(id!).collection("decks").document(deckId!).setData(["mastered": 0]) { error in
+			firestore.document("users/\(id!)/decks/\(deckId!)").setData(["mastered": 0]) { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 90
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
@@ -116,7 +116,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}
 			}
 		} else {
-			firestore.collection("users").document(id!).collection("decks").document(deckId!).delete { error in
+			firestore.document("users/\(id!)/decks/\(deckId!)").delete { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 70
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
