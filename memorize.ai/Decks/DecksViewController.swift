@@ -30,12 +30,16 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			} else if change == .cardModified || change == .cardRemoved {
 				self.cardsTableView.reloadData()
 			} else if change == .cardDue {
-				self.actionsCollectionView.reloadData()
+				UIView.performWithoutAnimation {
+					self.actionsCollectionView.reloadData()
+				}
 			}
 		}
 		decksCollectionView.reloadData()
 		cardsTableView.reloadData()
-		actionsCollectionView.reloadData()
+		UIView.performWithoutAnimation {
+			self.actionsCollectionView.reloadData()
+		}
 	}
 	
 	func loadDeckImages() {

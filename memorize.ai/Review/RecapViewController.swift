@@ -3,7 +3,7 @@ import UIKit
 class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var recapCollectionView: UICollectionView!
 	
-	var cards = [(id: String, deck: Deck, card: Card, correct: Bool, next: Date?)]()
+	var cards = [(id: String, deck: Deck, card: Card, quality: Int, next: Date?)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,22 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.imageView.image = image
 			}
 		}
+		switch element.quality {
+		case 0:
+			cell.layer.borderColor = #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+		case 1:
+			cell.layer.borderColor = #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+		case 2:
+			cell.layer.borderColor = #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+		case 3:
+			cell.layer.borderColor = #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
+		case 4:
+			cell.layer.borderColor = #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
+		case 5:
+			cell.layer.borderColor = #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
+		default:
+			cell.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+		}
 		cell.deckLabel.text = element.deck.name
 		cell.cardLabel.text = element.card.front
 		if let next = element.next {
@@ -51,7 +67,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 			cell.nextLabel.text = "Loading..."
 			firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let next = snapshot?.get("next") as? Date else { return }
-				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, correct: element.correct, next: next)
+				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, quality: element.quality, next: next)
 				cell.nextLabel.text = next.format()
 			}
 		}

@@ -6,11 +6,18 @@ class ReviewViewController: UIViewController {
 	@IBOutlet weak var frontLabel: UILabel!
 	@IBOutlet weak var cardBarView: UIView!
 	@IBOutlet weak var backLabel: UILabel!
-	@IBOutlet weak var dontKnowButton: UIButton!
+	@IBOutlet weak var hardestLabel: UILabel!
+	@IBOutlet weak var qualityImageView: UIImageView!
+	@IBOutlet weak var quality0Button: UIButton!
+	@IBOutlet weak var quality1Button: UIButton!
+	@IBOutlet weak var quality2Button: UIButton!
+	@IBOutlet weak var quality3Button: UIButton!
+	@IBOutlet weak var quality4Button: UIButton!
+	@IBOutlet weak var quality5Button: UIButton!
+	@IBOutlet weak var easiestLabel: UILabel!
 	
 	var dueCards = [(deck: Deck, card: Card)]()
-	var correct = false
-	var reviewedCards = [(id: String, deck: Deck, card: Card, correct: Bool, next: Date?)]()
+	var reviewedCards = [(id: String, deck: Deck, card: Card, quality: Int, next: Date?)]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -19,8 +26,7 @@ class ReviewViewController: UIViewController {
 		view.addGestureRecognizer(tap)
 		cardView.layer.borderWidth = 1
 		cardView.layer.borderColor = UIColor.lightGray.cgColor
-		dontKnowButton.layer.borderWidth = 1
-		dontKnowButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
+		deselectQualityButtons()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -33,25 +39,35 @@ class ReviewViewController: UIViewController {
 		return dueCards.first!
 	}
 	
-	@IBAction func dontKnow() {
-		createHistory(false)
+	func qualityButtons() -> [UIButton] {
+		return [quality0Button, quality1Button, quality2Button, quality3Button, quality4Button, quality5Button]
+	}
+	
+	func qualityButton(_ index: Int) -> UIButton {
+		return qualityButtons()[index]
+	}
+	
+	func deselectQualityButtons() {
+		qualityButtons().forEach { $0.layer.borderColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1) }
+	}
+	
+	@IBAction func next(_ sender: UIButton) {
+		guard let index = qualityButtons().firstIndex(of: sender) else { return }
+		createHistory(index)
 		flipAnimation()
 	}
 	
 	@objc func tappedScreen() {
-		if dontKnowButton.isHidden {
+		if qualityImageView.isHidden {
 			slideAnimation()
-		} else {
-			createHistory(true)
-			flipAnimation()
 		}
 	}
 	
-	func createHistory(_ correct: Bool) {
+	func createHistory(_ quality: Int) {
 		var documentReference: DocumentReference?
-		documentReference = firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["correct": correct]) { error in
+		documentReference = firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["quality": quality]) { error in
 			guard error == nil, let documentReference = documentReference else { return }
-			self.reviewedCards.append((id: documentReference.documentID, deck: self.current().deck, card: self.current().card, correct: correct, next: nil))
+			self.reviewedCards.append((id: documentReference.documentID, deck: self.current().deck, card: self.current().card, quality: quality, next: nil))
 		}
 	}
 	
@@ -63,7 +79,6 @@ class ReviewViewController: UIViewController {
 				self.cardBarView.isHidden = false
 				self.backLabel.isHidden = false
 				self.backLabel.text = self.current().card.back
-				self.dontKnowButton.isHidden = true
 				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
 					self.cardView.transform = .identity
 				}, completion: nil)
@@ -80,7 +95,6 @@ class ReviewViewController: UIViewController {
 				self.frontLabel.text = self.current().card.front
 				self.cardBarView.isHidden = true
 				self.backLabel.isHidden = true
-				self.dontKnowButton.isHidden = false
 				self.cardView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
 				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
 					self.cardView.transform = .identity
