@@ -14,6 +14,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	let actions = [Action(name: "new card", action: #selector(newCard)), Action(name: "review all", action: #selector(review)), Action(name: "visit page", action: #selector(visitPage))]
 	var deck: Deck?
+	var cardsDue = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			} else if change == .cardModified || change == .cardRemoved {
 				self.cardsTableView.reloadData()
 			} else if change == .cardDue {
-				self.actionsCollectionView.reloadData()
+				let noneDue = Deck.allDue().isEmpty
+				if self.cardsDue && noneDue {
+					self.actionsCollectionView.reloadData()
+					self.cardsDue = false
+				} else if !(self.cardsDue || noneDue) {
+					self.actionsCollectionView.reloadData()
+					self.cardsDue = true
+				}
 			}
 		}
 		decksCollectionView.reloadData()
