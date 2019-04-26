@@ -73,7 +73,7 @@ class ReviewViewController: UIViewController {
 	
 	func hideQualityView(_ hidden: Bool) {
 		([hardestLabel, qualityImageView, easiestLabel] + qualityButtons()).forEach { $0?.isHidden = hidden }
-	} 
+	}
 	
 	func flipAnimation() {
 		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
