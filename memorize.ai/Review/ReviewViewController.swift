@@ -65,7 +65,7 @@ class ReviewViewController: UIViewController {
 	
 	func createHistory(_ quality: Int) {
 		var documentReference: DocumentReference?
-		documentReference = firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["quality": quality]) { error in
+		documentReference = firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["rating": quality]) { error in
 			guard error == nil, let documentReference = documentReference else { return }
 			self.reviewedCards.append((id: documentReference.documentID, deck: self.current().deck, card: self.current().card, quality: quality, next: nil))
 		}
