@@ -68,6 +68,10 @@ class Deck {
 		}
 		return nil
 	}
+	
+	func allDue() -> [Card] {
+		return cards.filter { return $0.isDue() }
+	}
 }
 
 class Card {

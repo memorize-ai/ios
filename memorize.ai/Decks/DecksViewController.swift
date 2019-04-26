@@ -18,7 +18,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		loadDeckImages()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -44,20 +43,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		decksCollectionView.reloadData()
 		cardsTableView.reloadData()
 		actionsCollectionView.reloadData()
-	}
-	
-	func loadDeckImages() {
-		decks.forEach { deck in
-			if deck.image == nil {
-				storage.child("decks/\(deck.id)").getData(maxSize: fileLimit) { data, error in
-					guard error == nil, let data = data else { return }
-					deck.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-					self.decksCollectionView.reloadData()
-				}
-			} else {
-				decksCollectionView.reloadData()
-			}
-		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,11 +104,18 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if collectionView == decksCollectionView {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
 			let element = decks[indexPath.item]
-			cell.layer.borderWidth = 1
-			cell.layer.borderColor = #colorLiteral(red: 0.198331058, green: 0.198331058, blue: 0.198331058, alpha: 1)
-			cell.imageView.image = element.image
-			cell.imageView.layer.masksToBounds = true
+			if let image = element.image {
+				cell.imageView.image = image
+			} else {
+				cell.imageActivityIndicator.startAnimating()
+				storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
+					guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+					cell.imageActivityIndicator.stopAnimating()
+					cell.imageView.image = image
+				}
+			}
 			cell.nameLabel.text = element.name
+			cell.due(!element.allDue().isEmpty)
 			return cell
 		} else {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
@@ -139,9 +131,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == decksCollectionView {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
-			cell?.layer.borderWidth = 2
-			cell?.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.537254902, blue: 0.8549019608, alpha: 1)
+			(collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell)?.layer.borderWidth = 2
 			if !startView.isHidden {
 				UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
 					self.startView.alpha = 0
@@ -190,7 +180,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 class DeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
+	
+	func due(_ isDue: Bool) {
+		layer.borderColor = isDue ? #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+	}
 }
 
 class ActionCollectionViewCell: UICollectionViewCell {
