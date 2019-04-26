@@ -72,16 +72,8 @@ class ReviewViewController: UIViewController {
 	}
 	
 	func hideQualityView(_ hidden: Bool) {
-		hardestLabel.isHidden = hidden
-		qualityImageView.isHidden = hidden
-		quality0Button.isHidden = hidden
-		quality1Button.isHidden = hidden
-		quality2Button.isHidden = hidden
-		quality3Button.isHidden = hidden
-		quality4Button.isHidden = hidden
-		quality5Button.isHidden = hidden
-		easiestLabel.isHidden = hidden
-	}
+		([hardestLabel, qualityImageView, easiestLabel] + qualityButtons()).forEach { $0?.isHidden = hidden }
+	} 
 	
 	func flipAnimation() {
 		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
@@ -109,7 +101,6 @@ class ReviewViewController: UIViewController {
 				self.frontLabel.text = self.current().card.front
 				self.cardBarView.isHidden = true
 				self.backLabel.isHidden = true
-				self.qualityImageView.isHidden = true
 				self.cardView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
 				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
 					self.cardView.transform = .identity
