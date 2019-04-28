@@ -81,9 +81,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		updateChangeHandler { change in
-			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved {
+			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
 				self.actionsTableView.reloadData()
-			} else if change == .cardDue {
 				self.reloadReview()
 			}
 		}
