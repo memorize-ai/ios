@@ -102,7 +102,7 @@ class Card {
 	}
 	
 	static func poll() {
-		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+		Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
 			if !Deck.allDue().isEmpty {
 				callChangeHandler(.cardDue)
 			}
