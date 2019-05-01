@@ -373,26 +373,26 @@
                                 <rect key="frame" x="30" y="50" width="354" height="656"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Front" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKe-31-YQG">
-                                        <rect key="frame" x="20" y="100" width="314" height="29.333333333333343"/>
+                                        <rect key="frame" x="20" y="100" width="314" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3N-kg-Isu">
-                                        <rect key="frame" x="40" y="149.33333333333334" width="274" height="1"/>
+                                        <rect key="frame" x="40" y="154.33333333333334" width="274" height="1"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.66666666669999997" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="tOW-lB-C1T"/>
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Back" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92G-Xj-Q62">
-                                        <rect key="frame" x="20" y="170.33333333333334" width="314" height="29.333333333333343"/>
+                                        <rect key="frame" x="20" y="175.33333333333334" width="314" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Quality" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-eK-U3f">
-                                        <rect key="frame" x="20" y="396" width="314" height="216"/>
+                                        <rect key="frame" x="20" y="392.66666666666669" width="314.00000000000364" height="216.00000000000006"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="216" id="TeM-Cu-LbY"/>
                                         </constraints>
@@ -403,24 +403,24 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hardest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqT-LX-Ar3">
-                                        <rect key="frame" x="20" y="616" width="314" height="20"/>
+                                        <rect key="frame" x="20" y="612.66666666666663" width="314" height="23.333333333333371"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="easiest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmz-mI-InM">
-                                        <rect key="frame" x="20" y="372" width="314" height="20"/>
+                                        <rect key="frame" x="20" y="365.33333333333331" width="314" height="23.333333333333314"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDX-Ip-yuB">
-                                        <rect key="frame" x="20" y="432" width="314" height="36"/>
+                                        <rect key="frame" x="20" y="428.66666666666669" width="314" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="lw8-td-gBY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="Slight hesitation">
+                                        <state key="normal" title="Hesitated">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -433,12 +433,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWw-Ga-kuZ">
-                                        <rect key="frame" x="20" y="576" width="314" height="36"/>
+                                        <rect key="frame" x="20" y="572.66666666666663" width="314" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="ptH-b4-SUB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="Complete blackout">
+                                        <state key="normal" title="Forgot">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -451,12 +451,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-rF-TH5">
-                                        <rect key="frame" x="20" y="540" width="314" height="36"/>
+                                        <rect key="frame" x="20" y="536.66666666666663" width="314" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="37I-tq-B6W"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="Incorrect; correct remembered">
+                                        <state key="normal" title="Kind of forgot">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -469,12 +469,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9c-0A-ZF7">
-                                        <rect key="frame" x="20" y="504" width="314" height="36"/>
+                                        <rect key="frame" x="20" y="500.66666666666663" width="314" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="gLn-eI-vk7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="Incorrect; easy to recall">
+                                        <state key="normal" title="Almost remembered">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -487,12 +487,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ya-pV-HAB">
-                                        <rect key="frame" x="20" y="468" width="314" height="36"/>
+                                        <rect key="frame" x="20" y="464.66666666666663" width="314" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="STu-19-hsj"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="Serious difficulty">
+                                        <state key="normal" title="Struggled and got it">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -505,12 +505,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNd-5H-i5r">
-                                        <rect key="frame" x="20" y="396" width="314" height="36"/>
+                                        <rect key="frame" x="20" y="392.66666666666669" width="314" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="fb5-uW-one"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                        <state key="normal" title="Perfect">
+                                        <state key="normal" title="Easy">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -2926,6 +2926,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fjp-pM-RhT"/>
         <segue reference="1zn-0n-nWw"/>
         <segue reference="Reh-O7-sEd"/>
         <segue reference="O84-5M-BZf"/>
