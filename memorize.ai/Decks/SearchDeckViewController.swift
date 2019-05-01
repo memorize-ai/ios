@@ -82,8 +82,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 			cell.imageView?.image = image
 		} else {
 			storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
-				guard error == nil, let data = data else { return }
-				element.image = UIImage(data: data)
+				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+				element.image = image
 				tableView.reloadData()
 			}
 		}
