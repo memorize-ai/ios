@@ -184,7 +184,18 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				case .added:
 					firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
-						decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
+						if let deckIndex = Deck.id(deckSnapshot.documentID) {
+							let localDeck = decks[deckIndex]
+							localDeck.name = deckSnapshot.get("name") as? String ?? "Error"
+							localDeck.description = deckSnapshot.get("description") as? String ?? "Error"
+							localDeck.isPublic = deckSnapshot.get("public") as? Bool ?? true
+							localDeck.count = deckSnapshot.get("count") as? Int ?? 0
+							localDeck.mastered = deck.get("mastered") as? Int ?? 0
+							localDeck.creator = deckSnapshot.get("creator") as? String ?? "Error"
+							localDeck.owner = deckSnapshot.get("owner") as? String ?? "Error"
+						} else {
+							decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
+						}
 						callChangeHandler(.deckModified)
 						firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
