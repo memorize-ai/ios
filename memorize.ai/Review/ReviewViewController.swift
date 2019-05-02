@@ -6,7 +6,6 @@ class ReviewViewController: UIViewController {
 	@IBOutlet weak var frontLabel: UILabel!
 	@IBOutlet weak var cardBarView: UIView!
 	@IBOutlet weak var backLabel: UILabel!
-	@IBOutlet weak var hardestLabel: UILabel!
 	@IBOutlet weak var qualityImageView: UIImageView!
 	@IBOutlet weak var quality0Button: UIButton!
 	@IBOutlet weak var quality1Button: UIButton!
@@ -14,7 +13,6 @@ class ReviewViewController: UIViewController {
 	@IBOutlet weak var quality3Button: UIButton!
 	@IBOutlet weak var quality4Button: UIButton!
 	@IBOutlet weak var quality5Button: UIButton!
-	@IBOutlet weak var easiestLabel: UILabel!
 	
 	var dueCards = [(deck: Deck, card: Card)]()
 	var reviewedCards = [(id: String, deck: Deck, card: Card, quality: Int, next: Date?)]()
@@ -72,7 +70,7 @@ class ReviewViewController: UIViewController {
 	}
 	
 	func hideQualityView(_ hidden: Bool) {
-		([hardestLabel, qualityImageView, easiestLabel] + qualityButtons()).forEach { $0?.isHidden = hidden }
+		([qualityImageView] + qualityButtons()).forEach { $0?.isHidden = hidden }
 	}
 	
 	func flipAnimation() {
