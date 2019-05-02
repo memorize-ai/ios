@@ -113,8 +113,8 @@
                                     <action selector="review" destination="XhB-Ss-34n" eventType="touchUpInside" id="YqZ-Ox-lxm"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="64" width="414" height="366"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zjI-yq-TL3">
                                         <rect key="frame" x="188.66666666666666" y="339.66666666666669" width="37" height="37"/>
@@ -373,26 +373,26 @@
                                 <rect key="frame" x="30" y="50" width="354" height="656"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Front" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKe-31-YQG">
-                                        <rect key="frame" x="20" y="100" width="314" height="29.333333333333343"/>
+                                        <rect key="frame" x="20" y="100" width="314" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3N-kg-Isu">
-                                        <rect key="frame" x="40" y="149.33333333333334" width="274" height="1"/>
+                                        <rect key="frame" x="40" y="154.33333333333334" width="274" height="1"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.66666666669999997" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="tOW-lB-C1T"/>
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Back" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="92G-Xj-Q62">
-                                        <rect key="frame" x="20" y="170.33333333333334" width="314" height="29.333333333333343"/>
+                                        <rect key="frame" x="20" y="175.33333333333334" width="314" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Quality" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-eK-U3f">
-                                        <rect key="frame" x="20" y="400" width="314" height="216"/>
+                                        <rect key="frame" x="20" y="400" width="314.00000000000364" height="216"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="216" id="TeM-Cu-LbY"/>
                                         </constraints>
@@ -1510,6 +1510,7 @@
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="bottom" constant="20" id="acr-zv-0hi"/>
                                             <constraint firstItem="M4j-N2-Iwa" firstAttribute="top" secondItem="NLa-Es-asw" secondAttribute="bottom" constant="20" id="cbB-Qu-sza"/>
                                             <constraint firstAttribute="bottom" secondItem="aTc-Yy-Mx4" secondAttribute="bottom" constant="20" id="dEt-rO-gQY"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OVc-Ua-8bB" secondAttribute="trailing" constant="20" id="fhC-Gd-PLM"/>
                                             <constraint firstAttribute="trailing" secondItem="aTc-Yy-Mx4" secondAttribute="trailing" id="fuO-Cp-FlA"/>
                                             <constraint firstAttribute="trailing" secondItem="Bpb-hs-f6E" secondAttribute="trailing" constant="20" id="jQ7-x8-TIn"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" constant="20" id="qrV-fu-9eI"/>
@@ -1524,8 +1525,8 @@
                                     <constraint firstAttribute="trailing" secondItem="ScY-Tx-UZe" secondAttribute="trailing" id="NkT-vx-ZKn"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
-                                <rect key="frame" x="0.0" y="379" width="414" height="357"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-Gn-wa9">
                                         <rect key="frame" x="188.66666666666666" y="339.66666666666669" width="37" height="37"/>
@@ -2863,12 +2864,11 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fjp-pM-RhT"/>
         <segue reference="1zn-0n-nWw"/>
         <segue reference="Reh-O7-sEd"/>
-        <segue reference="O84-5M-BZf"/>
-        <segue reference="NDx-ee-NxK"/>
-        <segue reference="wcZ-AT-Xhd"/>
+        <segue reference="xrl-eN-ji3"/>
+        <segue reference="zq2-cu-WBD"/>
+        <segue reference="p0r-eq-3dv"/>
         <segue reference="bVP-fd-FWX"/>
     </inferredMetricsTieBreakers>
 </document>
