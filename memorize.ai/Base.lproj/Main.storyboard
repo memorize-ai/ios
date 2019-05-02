@@ -1370,7 +1370,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScY-Tx-UZe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="229"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="260.33333333333331"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmA-Sj-bhc">
                                                 <rect key="frame" x="20" y="20" width="374" height="100"/>
@@ -1468,25 +1468,25 @@
                                                 </connections>
                                             </segmentedControl>
                                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aTc-Yy-Mx4">
-                                                <rect key="frame" x="0.0" y="209" width="414" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="209" width="414" height="31.333333333333343"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="bDf-cj-xvE" detailTextLabel="Oet-7t-Pnn" style="IBUITableViewCellStyleSubtitle" id="dLn-Jo-QtA">
                                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dLn-Jo-QtA" id="mQH-KR-Zfx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="388" height="43.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="376" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bDf-cj-xvE">
-                                                                    <rect key="frame" x="15" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                                                    <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oet-7t-Pnn">
-                                                                    <rect key="frame" x="14.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                                                    <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <nil key="textColor"/>
@@ -1507,16 +1507,25 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVc-Ua-8bB">
+                                                <rect key="frame" x="20.000000000000004" y="217" width="42.333333333333343" height="23.333333333333343"/>
+                                                <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="0Ki-Hn-7iY"/>
+                                            <constraint firstItem="OVc-Ua-8bB" firstAttribute="top" secondItem="Bpb-hs-f6E" secondAttribute="bottom" constant="8" id="5Ad-ul-98f"/>
                                             <constraint firstAttribute="trailing" secondItem="XmA-Sj-bhc" secondAttribute="trailing" constant="20" id="5iB-lJ-c8w"/>
+                                            <constraint firstItem="OVc-Ua-8bB" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="CtA-w1-da5"/>
                                             <constraint firstItem="aTc-Yy-Mx4" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="F1B-Pi-I8o"/>
                                             <constraint firstItem="M4j-N2-Iwa" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="MIs-Gq-ccm"/>
                                             <constraint firstAttribute="trailing" secondItem="M4j-N2-Iwa" secondAttribute="trailing" constant="20" id="QbG-uo-pui"/>
                                             <constraint firstAttribute="trailing" secondItem="NLa-Es-asw" secondAttribute="trailing" constant="20" id="RKs-cJ-JTZ"/>
                                             <constraint firstItem="Bpb-hs-f6E" firstAttribute="top" secondItem="M4j-N2-Iwa" secondAttribute="bottom" constant="20" id="Sll-5y-3lr"/>
+                                            <constraint firstAttribute="bottom" secondItem="OVc-Ua-8bB" secondAttribute="bottom" constant="20" id="VFv-Dx-qCJ"/>
                                             <constraint firstItem="aTc-Yy-Mx4" firstAttribute="top" secondItem="M4j-N2-Iwa" secondAttribute="bottom" constant="20" id="XZU-g4-gr3"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="YCb-uy-3Lw"/>
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="bottom" constant="20" id="acr-zv-0hi"/>
@@ -1525,7 +1534,6 @@
                                             <constraint firstAttribute="trailing" secondItem="aTc-Yy-Mx4" secondAttribute="trailing" id="fuO-Cp-FlA"/>
                                             <constraint firstAttribute="trailing" secondItem="Bpb-hs-f6E" secondAttribute="trailing" constant="20" id="jQ7-x8-TIn"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" constant="20" id="qrV-fu-9eI"/>
-                                            <constraint firstAttribute="bottom" secondItem="Bpb-hs-f6E" secondAttribute="bottom" constant="20" id="spi-uM-zX1"/>
                                             <constraint firstItem="Bpb-hs-f6E" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="tfU-9s-gUa"/>
                                         </constraints>
                                     </view>
@@ -1537,8 +1545,8 @@
                                     <constraint firstAttribute="trailing" secondItem="ScY-Tx-UZe" secondAttribute="trailing" id="NkT-vx-ZKn"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
+                                <rect key="frame" x="0.0" y="379" width="414" height="357"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-Gn-wa9">
                                         <rect key="frame" x="188.66666666666666" y="339.66666666666669" width="37" height="37"/>
@@ -1569,6 +1577,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="9nY-Gn-wa9" id="Cg0-Zq-0e1"/>
                         <outlet property="cardsTableView" destination="aTc-Yy-Mx4" id="a3k-DC-g4Y"/>
+                        <outlet property="creatorLabel" destination="OVc-Ua-8bB" id="3aN-Jg-8mY"/>
                         <outlet property="descriptionLabel" destination="Bpb-hs-f6E" id="Xqp-56-Cdd"/>
                         <outlet property="getActivityIndicator" destination="kCP-a8-2u0" id="Kn7-Fq-QWk"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="dTb-cB-Zcc"/>
@@ -1581,7 +1590,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2878" y="805"/>
+            <point key="canvasLocation" x="2876.811594202899" y="804.61956521739137"/>
         </scene>
         <!--Card View Controller-->
         <scene sceneID="Wn5-ZD-dMC">

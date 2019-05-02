@@ -12,6 +12,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var getActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var descriptionLabel: UILabel!
 	@IBOutlet weak var cardsTableView: UITableView!
+	@IBOutlet weak var creatorLabel: UILabel!
 	
 	var deckId: String?
 	var image: UIImage?
@@ -27,6 +28,10 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				self.descriptionLabel.text = snapshot.get("description") as? String ?? "Error"
 				self.activityIndicator.stopAnimating()
 				self.loadingView.isHidden = true
+				firestore.document("users/\(snapshot.get("creator") as! String)").getDocument { creatorSnapshot, creatorError in
+					guard creatorError == nil, let creatorSnapshot = creatorSnapshot else { return }
+					self.creatorLabel.text = "Created by \(creatorSnapshot.get("name") as! String)"
+				}
 			} else {
 				self.activityIndicator.stopAnimating()
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck", preferredStyle: .alert)
@@ -140,8 +145,10 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		case 0:
 			cardsTableView.isHidden = true
 			descriptionLabel.isHidden = false
+			creatorLabel.isHidden = false
 		case 1:
 			descriptionLabel.isHidden = true
+			creatorLabel.isHidden = true
 			cardsTableView.isHidden = false
 		default:
 			return
