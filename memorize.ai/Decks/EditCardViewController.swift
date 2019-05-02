@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseFirestore
 
-class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class EditCardViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var editCardView: UIView!
 	@IBOutlet weak var editCardViewVerticalConstraint: NSLayoutConstraint!
 	@IBOutlet weak var titleBar: UIView!
@@ -9,8 +9,6 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 	@IBOutlet weak var frontTextView: UITextView!
 	@IBOutlet weak var backLabel: UILabel!
 	@IBOutlet weak var backTextView: UITextView!
-	@IBOutlet weak var historyLabel: UILabel!
-	@IBOutlet weak var historyTableView: UITableView!
 	
 	var deck: Deck?
 	var card: Card?
@@ -22,38 +20,6 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 		resetBorder(textView: backTextView)
 		frontTextView.text = card!.front
 		backTextView.text = card!.back
-		firestore.collection("users/\(id!)/decks/\(deck!.id)/cards/\(card!.id)/history").addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
-			snapshot.forEach {
-				let historyElement = $0.document
-				let historyId = historyElement.documentID
-				let newHistory = History(id: historyId, date: historyElement.get("date") as? Date ?? Date(), next: historyElement.get("next") as? Date ?? Date(), correct: historyElement.get("correct") as? Bool ?? false, elapsed: historyElement.get("elapsed") as? Int ?? 0)
-				let currentHistory = self.card!.history
-				switch $0.type {
-				case .added:
-					self.card!.history.append(newHistory)
-					self.historyLabel.isHidden = false
-					self.historyTableView.reloadData()
-					callChangeHandler(.historyModified)
-				case .modified:
-					for i in 0..<currentHistory.count {
-						if currentHistory[i].id == historyId {
-							self.card!.history[i] = newHistory
-							self.historyLabel.isHidden = false
-							self.historyTableView.reloadData()
-							callChangeHandler(.historyModified)
-						}
-					}
-				case .removed:
-					self.card!.history = currentHistory.filter { return $0.id != historyId }
-					self.historyLabel.isHidden = self.card!.history.isEmpty
-					self.historyTableView.reloadData()
-					callChangeHandler(.historyRemoved)
-				@unknown default:
-					return
-				}
-			}
-		}
 		editCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -67,19 +33,10 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 			if change == .cardModified {
 				self.frontTextView.text = self.card!.front
 				self.backTextView.text = self.card!.back
-			} else if change == .historyModified || change == .historyRemoved {
-				self.historyTableView.reloadData()
 			}
 		}
-		historyTableView.reloadData()
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-	}
-	
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		historyTableView.isScrollEnabled = false
-		historyTableView.frame.size = historyTableView.contentSize
 	}
 	
 	@IBAction func hide() {
@@ -119,35 +76,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 				}
 			}
 		} else {
-			makeCopy()
+			showAlert("You are not the owner of this deck")
 		}
-	}
-	
-	func makeCopy() {
-//		let alertController = UIAlertController(title: "Make a copy", message: "You are not the owner of this deck", preferredStyle: .alert)
-//		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//		let create = UIAlertAction(title: "Create", style: .default) { action in
-//			let metadata = StorageMetadata()
-//			metadata.contentType = "image/png"
-//			let deckId = firestore.collection("decks").addDocument(data: ["name": self.deck!.name, "description": self.deck!.description, "public": self.deck!.isPublic, "count": self.deck!.cards.count, "owner": id!, "creator": ["id": id!, "name": name!]]).documentID
-//			firestore.collection("users").document(id!).collection("decks").document(deckId).setData(["name": self.deck!.name, "count": self.deck!.cards.count, "mastered": 0])
-//			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
-//				if error == nil {
-//					hide()
-//				} else if let error = error {
-//					self.hideActivityIndicator()
-//					switch error.localizedDescription {
-//					case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-//						self.showAlert("No internet")
-//					default:
-//						self.showAlert("There was a problem copying the deck")
-//					}
-//				}
-//			}
-//		}
-//		alertController.addAction(cancel)
-//		alertController.addAction(create)
-//		present(alertController, animated: true, completion: nil)
 	}
 	
 	func resetBorder(textView: UITextView) {
@@ -179,20 +109,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate, UITableViewD
 		if deck?.owner == id {
 			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()])
 		} else {
-			makeCopy()
+			showAlert("You are not the owner of this deck")
 		}
-	}
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return card!.history.count
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = card!.history[indexPath.row]
-		cell.textLabel?.text = element.date.elapsed()
-		cell.textLabel?.textColor = element.correct ? #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1) : #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
-		cell.detailTextLabel?.text = element.date.format()
-		return cell
 	}
 }

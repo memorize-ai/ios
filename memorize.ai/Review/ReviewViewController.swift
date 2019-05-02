@@ -54,12 +54,12 @@ class ReviewViewController: UIViewController {
 	@IBAction func next(_ sender: UIButton) {
 		guard let index = qualityButtons().firstIndex(of: sender) else { return }
 		createHistory(index)
-		flipAnimation()
+		slideAnimation()
 	}
 	
 	@objc func tappedScreen() {
 		if qualityImageView.isHidden {
-			slideAnimation()
+			flipAnimation()
 		}
 	}
 	
@@ -80,7 +80,7 @@ class ReviewViewController: UIViewController {
 			self.cardView.transform = CGAffineTransform(scaleX: CGFloat.ulpOfOne, y: 1)
 		}) { finished in
 			if finished {
-				self.hideQualityView(true)
+				self.hideQualityView(false)
 				self.cardBarView.isHidden = false
 				self.backLabel.isHidden = false
 				self.backLabel.text = self.current().card.back
@@ -97,7 +97,7 @@ class ReviewViewController: UIViewController {
 		}) { finished in
 			if finished {
 				self.newCard()
-				self.hideQualityView(false)
+				self.hideQualityView(true)
 				self.frontLabel.text = self.current().card.front
 				self.cardBarView.isHidden = true
 				self.backLabel.isHidden = true
