@@ -95,6 +95,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 				let metadata = StorageMetadata()
 				metadata.contentType = "image/png"
 				id = authResult?.user.uid
+				pushToken()
 				storage.child("users/\(id!)").putData(data, metadata: metadata) { metadata, error in
 					storage.child("users/\(id!)").downloadURL { url, error in
 						guard let changeRequest = authResult?.user.createProfileChangeRequest(), let photoURL = url, error == nil else { return }

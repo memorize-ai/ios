@@ -34,6 +34,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "Error") { user, error in
 							if error == nil, let uid = user?.user.uid {
 								id = uid
+								pushToken()
 								firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
 									guard error == nil, let snapshot = snapshot else { return }
 									name = snapshot.get("name") as? String ?? "Error"

@@ -74,6 +74,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		Auth.auth().signIn(withEmail: emailText, password: passwordText) { user, error in
 			if error == nil {
 				id = user?.user.uid
+				pushToken()
 				firestore.document("users/\(id!)").getDocument { snapshot, error in
 					guard let snapshot = snapshot else { return }
 					name = snapshot.get("name") as? String ?? "Error"

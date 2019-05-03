@@ -19,6 +19,7 @@ var slug: String?
 var profilePicture: UIImage?
 var decks = [Deck]()
 var changeHandler: ((Change) -> Void)?
+var token: String?
 
 class Deck {
 	let id: String
@@ -172,6 +173,11 @@ func updateChangeHandler(_ newChangeHandler: ((Change) -> Void)?) {
 func updateAndCallChangeHandler(_ change: Change, _ newChangeHandler: ((Change) -> Void)?) {
 	updateChangeHandler(newChangeHandler)
 	callChangeHandler(change)
+}
+
+func pushToken() {
+	guard let id = id, let token = token else { return }
+	firestore.document("users/\(id)/tokens/\(token)").setData(["enabled": true])
 }
 
 func saveLogin(email e: String, password p: String) {
