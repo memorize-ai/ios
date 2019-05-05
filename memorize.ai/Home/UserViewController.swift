@@ -22,6 +22,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if startup {
+			navigationController?.setNavigationBarHidden(true, animated: false)
 			loadingView.isHidden = false
 			loadingImage.isHidden = false
 			if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -44,6 +45,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									slug = snapshot.get("slug") as? String ?? "error"
 									self.loadingImage.isHidden = true
 									self.loadingView.isHidden = true
+									self.navigationController?.setNavigationBarHidden(false, animated: true)
 									self.createProfileBarButtonItem()
 									startup = false
 									callChangeHandler(.profileModified)
@@ -55,7 +57,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.loadingView.isHidden = true
 									self.offlineView.isHidden = false
 									self.retryButton.isHidden = false
-									self.navigationController?.setNavigationBarHidden(true, animated: true)
 								default:
 									self.signIn()
 								}
