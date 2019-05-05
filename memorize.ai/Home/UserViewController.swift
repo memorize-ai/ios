@@ -4,7 +4,7 @@ import FirebaseAuth
 
 class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
 	@IBOutlet weak var retryButton: UIButton!
 	@IBOutlet weak var actionsTableView: UITableView!
@@ -23,7 +23,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidLoad()
 		if startup {
 			loadingView.isHidden = false
-			activityIndicator.startAnimating()
+			loadingImage.isHidden = false
 			if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 				let managedContext = appDelegate.persistentContainer.viewContext
 				let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Login")
@@ -42,7 +42,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.navigationItem.title = name
 									email = localEmail
 									slug = snapshot.get("slug") as? String ?? "error"
-									self.activityIndicator.stopAnimating()
+									self.loadingImage.isHidden = true
 									self.loadingView.isHidden = true
 									self.createProfileBarButtonItem()
 									startup = false
@@ -52,7 +52,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 							} else if let error = error {
 								switch error.localizedDescription {
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-									self.activityIndicator.stopAnimating()
+									self.loadingView.isHidden = true
 									self.offlineView.isHidden = false
 									self.retryButton.isHidden = false
 									self.navigationController?.setNavigationBarHidden(true, animated: true)
