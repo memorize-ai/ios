@@ -20,7 +20,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
 	}
 	
 	func loadCards() {
-		cards = decks.flatMap { return $0.cards }.sorted { return $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
+		cards = Card.all().sorted { return $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
 		cardsTableView.reloadData()
 	}
 	

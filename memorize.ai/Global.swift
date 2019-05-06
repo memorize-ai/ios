@@ -102,6 +102,10 @@ class Card {
 		self.deck = deck
 	}
 	
+	static func all() -> [Card] {
+		return decks.flatMap { return $0.cards }
+	}
+	
 	static func poll() {
 		Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
 			if !Deck.allDue().isEmpty {

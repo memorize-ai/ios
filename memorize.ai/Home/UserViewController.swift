@@ -2,22 +2,30 @@ import UIKit
 import CoreData
 import FirebaseAuth
 
-class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
 	@IBOutlet weak var retryButton: UIButton!
-	@IBOutlet weak var actionsTableView: UITableView!
+	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	@IBOutlet weak var reviewButton: UIButton!
 	@IBOutlet weak var cardsLabel: UILabel!
 	
-	struct Action {
+	class Action {
 		let image: UIImage?
 		let name: String
 		let action: Selector?
+		var enabled: Bool
+		
+		init(image: UIImage?, name: String, action: Selector?) {
+			self.image = image
+			self.name = name
+			self.action = action
+			self.enabled = false
+		}
 	}
 	
-	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "Decks", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "Cards", action: #selector(showCards)), Action(image: #imageLiteral(resourceName: "Create"), name: "Create a deck", action: #selector(createDeck)), Action(image: #imageLiteral(resourceName: "Search"), name: "Search for a deck", action: #selector(searchDeck))]
+	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "DECKS", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "CARDS", action: #selector(showCards)), Action(image: #imageLiteral(resourceName: "Create"), name: "CREATE DECK", action: #selector(createDeck)), Action(image: #imageLiteral(resourceName: "Search"), name: "SEARCH DECKS", action: #selector(searchDeck))]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -77,13 +85,16 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 45, height: view.bounds.width / 4 - 25)
+		actionsCollectionView.collectionViewLayout = flowLayout
 		updateChangeHandler { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
-				self.actionsTableView.reloadData()
+				self.actionsCollectionView.reloadData()
 				self.reloadReview()
 			}
 		}
-		actionsTableView.reloadData()
+		actionsCollectionView.reloadData()
 	}
 	
 	@IBAction func retry() {
@@ -264,35 +275,33 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 	}
 	
-	func numberOfSections(in tableView: UITableView) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return actions.count
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = actions[indexPath.section]
-		cell.imageView?.image = element.image
-		cell.textLabel?.text = element.name
-		switch element.name {
-		case "Decks":
-			let decksCount = decks.count
-			cell.detailTextLabel?.text = "\(decksCount) deck\(decksCount == 1 ? "" : "s")"
-		case "Cards":
-			let cardsCount = decks.reduce(0) { result, deck in result + deck.cards.count }
-			cell.detailTextLabel?.text = "\(cardsCount) card\(cardsCount == 1 ? "" : "s")"
-		default:
-			cell.detailTextLabel?.text = nil
-		}
-		cell.accessoryView?.isHidden = element.action == nil
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserActionCollectionViewCell
+		let element = actions[indexPath.item]
+		cell.imageView.image = element.image
+		cell.label.text = element.name
+		element.enabled = !(element.name == "DECKS" && decks.isEmpty) || !(element.name == "CARDS" && Card.all().isEmpty)
+		cell.enable(element.enabled)
 		return cell
 	}
 	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let action = actions[indexPath.section].action else { return }
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let element = actions[indexPath.item]
+		guard element.enabled, let action = element.action else { return }
 		performSelector(onMainThread: action, with: nil, waitUntilDone: false)
+	}
+}
+
+class UserActionCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var label: UILabel!
+	@IBOutlet weak var barView: UIView!
+	
+	func enable(_ enabled: Bool) {
+		barView.backgroundColor = enabled ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 	}
 }
