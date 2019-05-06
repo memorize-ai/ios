@@ -32,6 +32,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					let login = try managedContext.fetch(fetchRequest)
 					if login.count == 1 {
 						let localEmail = login[0].value(forKey: "email") as? String
+						loadProfileBarButtonItem(login[0].value(forKey: "image") as? Data)
 						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "Error") { user, error in
 							if error == nil, let uid = user?.user.uid {
 								id = uid
@@ -44,7 +45,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 									self.loadingImage.isHidden = true
 									self.loadingView.isHidden = true
 									self.navigationController?.setNavigationBarHidden(false, animated: false)
-									self.createProfileBarButtonItem()
+									self.reloadProfileBarButtonItem()
 									startup = false
 									callChangeHandler(.profileModified)
 								}
@@ -66,13 +67,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				} catch {}
 			}
 			Card.poll()
-		} else {
-			createProfileBarButtonItem()
-			if shouldLoadDecks {
-				loadDecks()
-				Card.poll()
-				shouldLoadDecks = false
-			}
+		} else if shouldLoadDecks {
+			loadDecks()
+			Card.poll()
+			shouldLoadDecks = false
 		}
 		navigationItem.setHidesBackButton(true, animated: true)
 	}
@@ -117,12 +115,18 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		navigationItem.setLeftBarButtonItems([editProfileBarButtonItem, titleBarButtonItem], animated: false)
 	}
 	
-	func createProfileBarButtonItem() {
-		leftBarButtonItem(image: #imageLiteral(resourceName: "Person"))
+	func loadProfileBarButtonItem(_ data: Data?) {
+		let image = UIImage(data: data ?? #imageLiteral(resourceName: "Person").pngData()!) ?? #imageLiteral(resourceName: "Person")
+		leftBarButtonItem(image: image)
+		profilePicture = image
+	}
+	
+	func reloadProfileBarButtonItem() {
 		storage.child("users/\(id!)").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-			profilePicture = image
 			self.leftBarButtonItem(image: image)
+			profilePicture = image
+			saveImage(image)
 			callChangeHandler(.profilePicture)
 		}
 	}

@@ -208,6 +208,18 @@ func deleteLogin() {
 	} catch {}
 }
 
+func saveImage(_ image: UIImage) {
+	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+	let managedContext = appDelegate.persistentContainer.viewContext
+	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Login")
+	do {
+		let logins = try managedContext.fetch(fetchRequest)
+		guard let firstLogin = logins.first, let data = image.pngData() else { return }
+		firstLogin.setValue(data, forKey: "image")
+		try managedContext.save()
+	} catch {}
+}
+
 extension UIViewController {
 	func hideKeyboard() {
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
