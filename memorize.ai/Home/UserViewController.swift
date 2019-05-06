@@ -39,13 +39,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 								firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
 									guard error == nil, let snapshot = snapshot else { return }
 									name = snapshot.get("name") as? String ?? "Error"
-									self.navigationController?.setNavigationBarHidden(false, animated: true)
-									self.navigationItem.title = name
 									email = localEmail
 									slug = snapshot.get("slug") as? String ?? "error"
 									self.loadingImage.isHidden = true
 									self.loadingView.isHidden = true
-									self.navigationController?.setNavigationBarHidden(false, animated: true)
+									self.navigationController?.setNavigationBarHidden(false, animated: false)
 									self.createProfileBarButtonItem()
 									startup = false
 									callChangeHandler(.profileModified)
@@ -54,7 +52,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 							} else if let error = error {
 								switch error.localizedDescription {
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-									self.loadingView.isHidden = true
+									self.loadingImage.isHidden = true
 									self.offlineView.isHidden = false
 									self.retryButton.isHidden = false
 								default:
@@ -70,7 +68,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			Card.poll()
 		} else {
 			createProfileBarButtonItem()
-			navigationItem.title = name
 			if shouldLoadDecks {
 				loadDecks()
 				Card.poll()
@@ -111,7 +108,13 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		editProfileButton.layer.masksToBounds = true
 		let editProfileBarButtonItem = UIBarButtonItem()
 		editProfileBarButtonItem.customView = editProfileButton
-		navigationItem.setLeftBarButton(editProfileBarButtonItem, animated: false)
+		let titleLabel = UILabel()
+		titleLabel.text = "  memorize.ai"
+		titleLabel.font = UIFont(name: "Nunito-ExtraBold", size: 20)
+		titleLabel.textColor = .white
+		titleLabel.sizeToFit()
+		let titleBarButtonItem = UIBarButtonItem(customView: titleLabel)
+		navigationItem.setLeftBarButtonItems([editProfileBarButtonItem, titleBarButtonItem], animated: false)
 	}
 	
 	func createProfileBarButtonItem() {
