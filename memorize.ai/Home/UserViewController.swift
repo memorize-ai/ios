@@ -237,10 +237,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 											localCard.correct = cardSnapshot.get("correct") as? Int ?? 0
 											localCard.streak = cardSnapshot.get("streak") as? Int ?? 0
 											localCard.mastered = cardSnapshot.get("mastered") as? Bool ?? false
-											localCard.last = cardSnapshot.get("last") as? String ?? "Error"
+											localCard.last = cardSnapshot.get("last") as? Date ?? Date()
 											localCard.next = cardSnapshot.get("next") as? Date ?? Date()
+											localCard.lastHistory = cardSnapshot.get("lastHistory") as? String ?? "Error"
 										} else {
-											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? String ?? "Error", next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? Date ?? Date(), next: cardSnapshot.get("next") as? Date ?? Date(), lastHistory: cardSnapshot.get("lastHistory") as? String ?? "Error", history: [], deck: deckId))
 										}
 										self.reloadReview()
 										callChangeHandler(.cardModified)
