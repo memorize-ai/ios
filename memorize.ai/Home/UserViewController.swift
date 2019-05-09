@@ -2,12 +2,13 @@ import UIKit
 import CoreData
 import FirebaseAuth
 
-class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
 	@IBOutlet weak var retryButton: UIButton!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
+	@IBOutlet weak var cardsTableView: UITableView!
 	@IBOutlet weak var reviewButton: UIButton!
 	@IBOutlet weak var cardsLabel: UILabel!
 	
@@ -26,6 +27,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "DECKS", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "CARDS", action: #selector(showCards)), Action(image: #imageLiteral(resourceName: "Create"), name: "CREATE DECK", action: #selector(createDeck)), Action(image: #imageLiteral(resourceName: "Search"), name: "SEARCH DECKS", action: #selector(searchDeck))]
+	var cards = [(image: UIImage, card: Card)]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -104,6 +106,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		offlineView.isHidden = true
 		retryButton.isHidden = true
 		viewDidLoad()
+	}
+	
+	func loadCards() {
+		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Gray Circle"), card: $0) }
+		cards.append(contentsOf: Card.all().sorted { return $0.last.date.timeIntervalSinceNow < $1.last.date.timeIntervalSinceNow }.map { return (image: UIImage(named: "Quality \($0.last.rating)")!, card: $0) })
 	}
 	
 	func signIn() {
@@ -231,17 +238,18 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								case .added:
 									firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
+										let last = cardSnapshot.get("last") as? [String : Any]
+										let cardLast = Card.Last(id: last?["id"] as? String ?? "Error", date: last?["date"] as? Date ?? Date(), rating: last?["rating"] as? Int ?? 0, elapsed: last?["elapsed"] as? Int ?? 0)
 										if let cardIndex = localDeck.card(id: cardId) {
 											let localCard = localDeck.cards[cardIndex]
 											localCard.count = cardSnapshot.get("count") as? Int ?? 0
 											localCard.correct = cardSnapshot.get("correct") as? Int ?? 0
 											localCard.streak = cardSnapshot.get("streak") as? Int ?? 0
 											localCard.mastered = cardSnapshot.get("mastered") as? Bool ?? false
-											localCard.last = cardSnapshot.get("last") as? Date ?? Date()
+											localCard.last = cardLast
 											localCard.next = cardSnapshot.get("next") as? Date ?? Date()
-											localCard.lastHistory = cardSnapshot.get("lastHistory") as? String ?? "Error"
 										} else {
-											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardSnapshot.get("last") as? Date ?? Date(), next: cardSnapshot.get("next") as? Date ?? Date(), lastHistory: cardSnapshot.get("lastHistory") as? String ?? "Error", history: [], deck: deckId))
+											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardLast, next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
 										}
 										self.reloadReview()
 										callChangeHandler(.cardModified)
@@ -297,6 +305,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let element = actions[indexPath.item]
 		guard element.enabled, let action = element.action else { return }
 		performSelector(onMainThread: action, with: nil, waitUntilDone: false)
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		<#code#>
 	}
 }
 
