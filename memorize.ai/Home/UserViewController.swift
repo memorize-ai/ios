@@ -316,10 +316,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UserCardsTableViewCell
 		let element = cards[indexPath.row]
-		cell.imageView?.image = element.image
-		cell.textLabel?.text = element.card.front
+		cell.ratingImageView.image = element.image
+		cell.frontLabel.text = element.card.front
 		return cell
 	}
 }
@@ -335,4 +335,9 @@ class UserActionCollectionViewCell: UICollectionViewCell {
 		label.textColor = color
 		barView.backgroundColor = color
 	}
+}
+
+class UserCardsTableViewCell: UITableViewCell {
+	@IBOutlet weak var ratingImageView: UIImageView!
+	@IBOutlet weak var frontLabel: UILabel!
 }
