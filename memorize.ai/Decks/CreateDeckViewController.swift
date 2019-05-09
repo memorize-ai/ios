@@ -19,13 +19,9 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	override func viewDidLoad() {
         super.viewDidLoad()
 		disable()
-		let cornerRadius = outerImageView.bounds.width / 2
-		outerImageView.layer.cornerRadius = cornerRadius
-		imageView.layer.cornerRadius = cornerRadius
-		imageView.layer.borderWidth = 0.5
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
+		createButton.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
-		changeButton.roundCorners([.bottomLeft, .bottomRight], radius: cornerRadius)
 		textViewDidEndEditing(descriptionTextView)
     }
 	
@@ -139,14 +135,14 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	
 	func enable() {
 		createButton.isEnabled = true
-		createButton.setTitleColor(.white, for: .normal)
+		createButton.setTitleColor(#colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1), for: .normal)
 		createButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
 	}
 	
 	func disable() {
 		createButton.isEnabled = false
-		createButton.setTitleColor(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), for: .normal)
-		createButton.backgroundColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)
+		createButton.setTitleColor(#colorLiteral(red: 0.8264711499, green: 0.8266105652, blue: 0.8264527917, alpha: 1), for: .normal)
+		createButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
