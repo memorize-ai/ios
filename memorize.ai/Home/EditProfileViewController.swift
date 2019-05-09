@@ -14,7 +14,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		navigationItem.setRightBarButton(UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut)), animated: true)
 		updateAndCallChangeHandler(.profileModified) { change in
 			if change == .profileModified || change == .profilePicture {
 				self.nameLabel.text = name
@@ -23,16 +22,12 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
 			}
 		}
-		let cornerRadius = pictureView.bounds.width / 2
-		pictureView.layer.cornerRadius = cornerRadius
-		pictureImageView.layer.cornerRadius = cornerRadius
 		pictureImageView.layer.borderWidth = 0.5
 		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
-		pictureView.layer.masksToBounds = true
-		changeButton.roundCorners([.bottomLeft, .bottomRight], radius: cornerRadius)
+		pictureImageView.layer.masksToBounds = true
     }
 	
-	@objc func signOut() {
+	@IBAction func signOut() {
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		let signOut = UIAlertAction(title: "Sign Out", style: .default) { _ in
