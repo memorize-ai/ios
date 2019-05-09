@@ -85,9 +85,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		navigationController?.setNavigationBarHidden(false, animated: true)
 		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 45, height: view.bounds.width / 4 - 25)
+		let width = view.bounds.width / 2 - 45
+		flowLayout.itemSize = CGSize(width: width, height: width / 1.75)
 		actionsCollectionView.collectionViewLayout = flowLayout
+		reviewButton.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		updateChangeHandler { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
 				self.actionsCollectionView.reloadData()
@@ -302,6 +305,9 @@ class UserActionCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
 	
 	func enable(_ enabled: Bool) {
-		barView.backgroundColor = enabled ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		let color = enabled ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		label.textColor = color
+		barView.backgroundColor = color
 	}
 }

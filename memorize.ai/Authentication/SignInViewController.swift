@@ -21,11 +21,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		navigationController?.setNavigationBarHidden(false, animated: true)
-	}
-	
 	@IBAction func back() {
 		navigationController?.popViewController(animated: true)
 	}
