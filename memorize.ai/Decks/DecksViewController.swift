@@ -21,6 +21,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
         super.viewDidLoad()
 		expand(false)
 		view.layoutIfNeeded()
+		deck = decks[0]
+		decksCollectionView.reloadData()
+		cardsTableView.reloadData()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -138,6 +141,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 					}
 				}
 				cell.nameLabel.text = element.name
+				cell.layer.borderWidth = element.id == deck?.id ? 2 : 0
+				cell.layer.borderColor = element.id == deck?.id ? #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1) : nil
 				return cell
 			} else {
 				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
@@ -153,6 +158,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 						cell.imageView.image = image
 						element.image = image
 					}
+				}
+				if element.id == deck?.id {
+					cell.layer.borderWidth = 3
 				}
 				return cell
 			}
@@ -171,6 +179,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == decksCollectionView {
 			deck = decks[indexPath.item]
+			decksCollectionView.reloadData()
 			cardsTableView.reloadData()
 		}
 	}
@@ -216,6 +225,8 @@ class ExpandedDeckCollectionViewCell: UICollectionViewCell {
 	
 	func due(_ isDue: Bool) {
 		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		imageView.layer.borderWidth = 2
+		imageView.layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 	}
 }
 
