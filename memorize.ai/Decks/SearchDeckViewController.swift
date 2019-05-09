@@ -1,9 +1,9 @@
 import UIKit
 import InstantSearchClient
 
-class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var searchBar: UISearchBar!
-	@IBOutlet weak var decksTableView: UITableView!
+	@IBOutlet weak var decksCollectionView: UICollectionView!
 	
 	class SearchResult {
 		let id: String
@@ -24,6 +24,10 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.minimumLineSpacing = 8
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 50)
+		decksCollectionView.collectionViewLayout = flowLayout
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +53,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		result.removeAll()
 		if searchText.trim().isEmpty {
-			decksTableView.reloadData()
+			decksCollectionView.reloadData()
 		} else {
 			decksIndex.search(Query(query: searchText)) { content, error in
 				if error == nil, let hits = content?["hits"] as? [[String : Any]] {
@@ -60,7 +64,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 							firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
 								guard userError == nil, let snapshot = snapshot else { return }
 								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
-								self.decksTableView.reloadData()
+								self.decksCollectionView.reloadData()
 							}
 						}
 					}
@@ -71,29 +75,41 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UITableVi
 		}
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return result.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = result[indexPath.row]
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SearchResultCollectionViewCell
+		let element = result[indexPath.item]
 		if let image = element.image {
-			cell.imageView?.image = image
+			cell.imageView.image = image
 		} else {
 			storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
-				guard error == nil, let data = data else { return }
-				element.image = UIImage(data: data)
-				tableView.reloadData()
+				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+				cell.imageView.image = image
+				element.image = image
 			}
 		}
-		cell.textLabel?.text = element.name
-		cell.detailTextLabel?.text = element.owner
+		cell.nameLabel.text = element.name
+		cell.ownerLabel.text = element.owner
+		cell.owned(Deck.id(element.id) != nil)
 		return cell
 	}
 	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		selectedResult = result[indexPath.row]
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		selectedResult = result[indexPath.item]
 		performSegue(withIdentifier: "deck", sender: self)
+	}
+}
+
+class SearchResultCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var ownerLabel: UILabel!
+	@IBOutlet weak var checkImageView: UIImageView!
+	
+	func owned(_ isOwned: Bool) {
+		checkImageView.isHidden = !isOwned
 	}
 }
