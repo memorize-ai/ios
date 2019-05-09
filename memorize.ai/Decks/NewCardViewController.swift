@@ -55,17 +55,13 @@ class NewCardViewController: UIViewController, UITextViewDelegate {
 	@objc func keyboardWillShow(notification: NSNotification) {
 		if let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
 			newCardViewVerticalConstraint.constant = newCardView.frame.height / 2 - height
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-				self.view.layoutIfNeeded()
-			}, completion: nil)
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 		}
 	}
 	
 	@objc func keyboardWillHide(notification: NSNotification) {
 		newCardViewVerticalConstraint.constant = 0
-		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
-			self.view.layoutIfNeeded()
-		}, completion: nil)
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
 	func resetBorder(textView: UITextView) {
