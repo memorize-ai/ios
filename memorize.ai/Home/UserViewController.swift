@@ -80,6 +80,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else if shouldLoadDecks {
 			loadDecks()
 			Card.poll()
+			navigationController?.setNavigationBarHidden(false, animated: true)
 			shouldLoadDecks = false
 		}
 		navigationItem.setHidesBackButton(true, animated: true)
@@ -87,7 +88,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		navigationController?.setNavigationBarHidden(false, animated: true)
 		let flowLayout = UICollectionViewFlowLayout()
 		let width = view.bounds.width / 2 - 45
 		flowLayout.itemSize = CGSize(width: width, height: width / 1.75)
@@ -95,11 +95,15 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		reviewButton.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		updateChangeHandler { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
+				self.loadCards()
 				self.actionsCollectionView.reloadData()
+				self.cardsTableView.reloadData()
 				self.reloadReview()
 			}
 		}
+		loadCards()
 		actionsCollectionView.reloadData()
+		cardsTableView.reloadData()
 	}
 	
 	@IBAction func retry() {
@@ -110,7 +114,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadCards() {
 		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Gray Circle"), card: $0) }
-		cards.append(contentsOf: Card.all().sorted { return $0.last.date.timeIntervalSinceNow < $1.last.date.timeIntervalSinceNow }.map { return (image: UIImage(named: "Quality \($0.last.rating)")!, card: $0) })
+		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: UIImage(named: "Quality \($0.last!.rating)")!, card: $0) })
 	}
 	
 	func signIn() {
@@ -239,7 +243,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
 										let last = cardSnapshot.get("last") as? [String : Any]
-										let cardLast = Card.Last(id: last?["id"] as? String ?? "Error", date: last?["date"] as? Date ?? Date(), rating: last?["rating"] as? Int ?? 0, elapsed: last?["elapsed"] as? Int ?? 0)
+										let cardLast = last == nil ? nil : Card.Last(id: last?["id"] as? String ?? "Error", date: last?["date"] as? Date ?? Date(), rating: last?["rating"] as? Int ?? 0, elapsed: last?["elapsed"] as? Int ?? 0)
 										if let cardIndex = localDeck.card(id: cardId) {
 											let localCard = localDeck.cards[cardIndex]
 											localCard.count = cardSnapshot.get("count") as? Int ?? 0
@@ -296,7 +300,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let element = actions[indexPath.item]
 		cell.imageView.image = element.image
 		cell.label.text = element.name
-		element.enabled = !(element.name == "DECKS" && decks.isEmpty) || !(element.name == "CARDS" && Card.all().isEmpty)
+		element.enabled = !((element.name == "DECKS" && decks.isEmpty) || (element.name == "CARDS" && Card.all().isEmpty))
 		cell.enable(element.enabled)
 		return cell
 	}
@@ -308,11 +312,15 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return
+		return cards.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		<#code#>
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		let element = cards[indexPath.row]
+		cell.imageView?.image = element.image
+		cell.textLabel?.text = element.card.front
+		return cell
 	}
 }
 

@@ -83,12 +83,12 @@ class Card {
 	var correct: Int
 	var streak: Int
 	var mastered: Bool
-	var last: Last
+	var last: Last?
 	var next: Date
 	var history: [History]
 	let deck: String
 	
-	init(id: String, front: String, back: String, count: Int, correct: Int, streak: Int, mastered: Bool, last: Last, next: Date, history: [History], deck: String) {
+	init(id: String, front: String, back: String, count: Int, correct: Int, streak: Int, mastered: Bool, last: Last?, next: Date, history: [History], deck: String) {
 		self.id = id
 		self.front = front
 		self.back = back
