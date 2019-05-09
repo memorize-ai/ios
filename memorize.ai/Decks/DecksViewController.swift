@@ -3,8 +3,8 @@ import FirebaseFirestore
 
 class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
+	@IBOutlet weak var decksCollectionViewWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var cardsTableView: UITableView!
-	@IBOutlet weak var startView: UIView!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	
 	struct Action {
@@ -15,9 +15,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	let actions = [Action(name: "new card", action: #selector(newCard)), Action(name: "review all", action: #selector(review)), Action(name: "visit page", action: #selector(visitPage))]
 	var deck: Deck?
 	var cardsDue = false
+	var expanded = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		expand(false)
+		view.layoutIfNeeded()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -76,16 +79,33 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		performSegue(withIdentifier: "visit", sender: self)
 	}
 	
-	@IBAction func createDeck() {
+	func createDeck() {
 		performSegue(withIdentifier: "createDeck", sender: self)
 	}
 	
-	@IBAction func searchDeck() {
+	func searchDeck() {
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
+	func expand(_ expanded: Bool) {
+		self.expanded = expanded
+		let toggleButton = UIButton(type: .custom)
+		toggleButton.setImage(expanded ? #imageLiteral(resourceName: "White Right Arrow") : #imageLiteral(resourceName: "White Left Arrow"), for: .normal)
+		toggleButton.addTarget(self, action: #selector(toggleExpand), for: .touchUpInside)
+		toggleButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+		toggleButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+		navigationItem.setRightBarButton(UIBarButtonItem(customView: toggleButton), animated: true)
+	}
+	
+	@objc func toggleExpand() {
+		expand(!expanded)
+		decksCollectionViewWidthConstraint.constant = expanded ? 2 * view.bounds.width / 3 : 100
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: view.layoutIfNeeded, completion: nil)
+		decksCollectionView.reloadData()
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return collectionView == decksCollectionView ? CGSize(width: 84, height: 102) : CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36)
+		return collectionView == decksCollectionView ? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84) : CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -102,21 +122,40 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if collectionView == decksCollectionView {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
-			let element = decks[indexPath.item]
-			if let image = element.image {
-				cell.imageView.image = image
-			} else {
-				cell.imageActivityIndicator.startAnimating()
-				storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
-					guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-					cell.imageActivityIndicator.stopAnimating()
+			if expanded {
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "expanded", for: indexPath) as! ExpandedDeckCollectionViewCell
+				let element = decks[indexPath.item]
+				cell.due(!element.allDue().isEmpty)
+				if let image = element.image {
 					cell.imageView.image = image
+				} else {
+					cell.imageActivityIndicator.startAnimating()
+					storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
+						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+						cell.imageActivityIndicator.stopAnimating()
+						cell.imageView.image = image
+						element.image = image
+					}
 				}
+				cell.nameLabel.text = element.name
+				return cell
+			} else {
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
+				let element = decks[indexPath.item]
+				cell.due(!element.allDue().isEmpty)
+				if let image = element.image {
+					cell.imageView.image = image
+				} else {
+					cell.imageActivityIndicator.startAnimating()
+					storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
+						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+						cell.imageActivityIndicator.stopAnimating()
+						cell.imageView.image = image
+						element.image = image
+					}
+				}
+				return cell
 			}
-			cell.nameLabel.text = element.name
-			cell.due(!element.allDue().isEmpty)
-			return cell
 		} else {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
 			let element = actions[indexPath.item]
@@ -131,27 +170,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if collectionView == decksCollectionView {
-			(collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell)?.layer.borderWidth = 2
-			if !startView.isHidden {
-				UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-					self.startView.alpha = 0
-				}) { finished in
-					if finished {
-						self.startView.isHidden = true
-					}
-				}
-				navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newDeck)), animated: true)
-			}
 			deck = decks[indexPath.item]
 			cardsTableView.reloadData()
-		}
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-		if collectionView == decksCollectionView {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DeckCollectionViewCell
-			cell?.layer.borderWidth = 1
-			cell?.layer.borderColor = #colorLiteral(red: 0.1977208257, green: 0.2122347951, blue: 0.2293028235, alpha: 1)
 		}
 	}
 	
@@ -181,10 +201,21 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 class DeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
+	
+	func due(_ isDue: Bool) {
+		layer.borderWidth = isDue ? 2 : 0
+		layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : nil
+	}
+}
+
+class ExpandedDeckCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var barView: UIView!
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	
 	func due(_ isDue: Bool) {
-		layer.borderColor = isDue ? #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 	}
 }
 
