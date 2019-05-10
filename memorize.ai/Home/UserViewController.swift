@@ -7,6 +7,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
 	@IBOutlet weak var retryButton: UIButton!
+	@IBOutlet weak var helloLabel: UILabel!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	@IBOutlet weak var cardsTableView: UITableView!
 	@IBOutlet weak var reviewButton: UIButton!
@@ -50,6 +51,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
 									guard error == nil, let snapshot = snapshot else { return }
 									name = snapshot.get("name") as? String ?? "Error"
+									self.createHelloLabel()
 									email = localEmail
 									slug = snapshot.get("slug") as? String ?? "error"
 									self.loadingImage.isHidden = true
@@ -80,6 +82,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else if shouldLoadDecks {
 			loadDecks()
 			Card.poll()
+			createHelloLabel()
 			navigationController?.setNavigationBarHidden(false, animated: true)
 			shouldLoadDecks = false
 		}
@@ -110,6 +113,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		offlineView.isHidden = true
 		retryButton.isHidden = true
 		viewDidLoad()
+	}
+	
+	func createHelloLabel() {
+		guard let name = name else { return }
+		helloLabel.text = "Hello, \(name)"
 	}
 	
 	func loadCards() {

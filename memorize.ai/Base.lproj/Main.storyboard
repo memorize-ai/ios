@@ -134,7 +134,7 @@
                                     <outlet property="delegate" destination="XhB-Ss-34n" id="3U9-dS-eH0"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, Ken Mueller" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNl-ur-4dR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNl-ur-4dR">
                                 <rect key="frame" x="40" y="114" width="334" height="24"/>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <color key="textColor" red="0.24315250570398905" green="0.24315250570398905" blue="0.24315250570398905" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -315,6 +315,7 @@
                         <outlet property="actionsCollectionView" destination="nae-r5-nuc" id="0aM-gu-Oht"/>
                         <outlet property="cardsLabel" destination="gI7-VO-pbC" id="rSa-xG-re2"/>
                         <outlet property="cardsTableView" destination="xDP-1z-qWL" id="vFX-rv-I2E"/>
+                        <outlet property="helloLabel" destination="dNl-ur-4dR" id="jhi-Gr-amQ"/>
                         <outlet property="loadingImage" destination="0n6-QN-His" id="4VC-DY-tdV"/>
                         <outlet property="loadingView" destination="5fG-Ab-81s" id="vWu-xD-kFM"/>
                         <outlet property="offlineView" destination="waV-L4-S5d" id="E0x-lh-zvY"/>
@@ -3063,11 +3064,11 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h5F-6A-J1r"/>
+        <segue reference="1zn-0n-nWw"/>
         <segue reference="NJF-dv-A8u"/>
-        <segue reference="O84-5M-BZf"/>
-        <segue reference="NDx-ee-NxK"/>
-        <segue reference="wcZ-AT-Xhd"/>
+        <segue reference="xrl-eN-ji3"/>
+        <segue reference="zq2-cu-WBD"/>
+        <segue reference="p0r-eq-3dv"/>
         <segue reference="xao-oA-rKh"/>
     </inferredMetricsTieBreakers>
 </document>
