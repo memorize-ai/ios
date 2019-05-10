@@ -103,7 +103,10 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	
 	func textViewDidChange(_ textView: UITextView) {
 		if deck?.owner == id {
-			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()])
+			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()]) { error in
+				guard error == nil else { return }
+				(self.parent as? DecksViewController)?.cardsCollectionView.reloadData()
+			}
 		} else {
 			showAlert("You are not the owner of this deck")
 		}
