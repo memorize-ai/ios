@@ -1,10 +1,10 @@
 import UIKit
 import FirebaseFirestore
 
-class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
+class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	@IBOutlet weak var decksCollectionViewWidthConstraint: NSLayoutConstraint!
-	@IBOutlet weak var cardsTableView: UITableView!
+	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	
 	struct Action {
@@ -21,9 +21,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
         super.viewDidLoad()
 		expand(false)
 		view.layoutIfNeeded()
-		deck = decks[0]
+		deck = decks.first
 		decksCollectionView.reloadData()
-		cardsTableView.reloadData()
+		cardsCollectionView.reloadData()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +34,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			} else if change == .deckRemoved {
 				self.navigationController?.popViewController(animated: true)
 			} else if change == .cardModified || change == .cardRemoved {
-				self.cardsTableView.reloadData()
+				self.cardsCollectionView.reloadData()
 			} else if change == .cardDue {
 				let noneDue = Deck.allDue().isEmpty
 				if self.cardsDue && noneDue {
@@ -47,7 +47,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			}
 		}
 		decksCollectionView.reloadData()
-		cardsTableView.reloadData()
+		cardsCollectionView.reloadData()
 		actionsCollectionView.reloadData()
 	}
 	
@@ -108,19 +108,19 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return collectionView == decksCollectionView ? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84) : CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36)
+		return collectionView == decksCollectionView ? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84) : collectionView == actionsCollectionView ? CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36) : CGSize(width: cardsCollectionView.bounds.width - 20, height: 50)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return collectionView == decksCollectionView ? 8 : 4
+		return collectionView == decksCollectionView ? 8 : collectionView == actionsCollectionView ? 4 : 10
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return collectionView == decksCollectionView ? 8 : 20
+		return collectionView == decksCollectionView ? 8 : collectionView == actionsCollectionView ? 20 : 10
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return collectionView == decksCollectionView ? decks.count : actions.count
+		return collectionView == decksCollectionView ? decks.count : collectionView == actionsCollectionView ? actions.count : deck?.cards.count ?? 0
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -164,7 +164,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				}
 				return cell
 			}
-		} else {
+		} else if collectionView == actionsCollectionView {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
 			let element = actions[indexPath.item]
 			cell.button.setTitle(element.name, for: .normal)
@@ -173,6 +173,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				self.performSelector(onMainThread: element.action, with: nil, waitUntilDone: false)
 			}
 			return cell
+		} else {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ThinCardCollectionViewCell
+			guard let element = deck?.cards[indexPath.item] else { return cell }
+			cell.due(element.isDue())
+			cell.frontLabel.text = element.front
+			return cell
 		}
 	}
 	
@@ -180,30 +186,25 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if collectionView == decksCollectionView {
 			deck = decks[indexPath.item]
 			decksCollectionView.reloadData()
-			cardsTableView.reloadData()
+			cardsCollectionView.reloadData()
+		} else if collectionView == cardsCollectionView {
+			guard let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
+			editCardVC.deck = deck
+			editCardVC.card = deck?.cards[indexPath.item]
+			addChild(editCardVC)
+			editCardVC.view.frame = view.frame
+			view.addSubview(editCardVC.view)
+			editCardVC.didMove(toParent: self)
 		}
 	}
+}
+
+class ThinCardCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var barView: UIView!
+	@IBOutlet weak var frontLabel: UILabel!
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return deck?.cards.count ?? 0
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		guard let element = deck?.cards[indexPath.row] else { return cell }
-		cell.textLabel?.text = element.front
-		cell.detailTextLabel?.text = element.next.format()
-		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
-		editCardVC.deck = deck
-		editCardVC.card = deck?.cards[indexPath.row]
-		addChild(editCardVC)
-		editCardVC.view.frame = view.frame
-		view.addSubview(editCardVC.view)
-		editCardVC.didMove(toParent: self)
+	func due(_ isDue: Bool) {
+		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 	}
 }
 
