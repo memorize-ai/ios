@@ -1,7 +1,7 @@
 import UIKit
 
-class CardsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-	@IBOutlet weak var cardsTableView: UITableView!
+class CardsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	
 	var cards = [Card]()
 	
@@ -21,30 +21,46 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
 	
 	func loadCards() {
 		cards = Card.sortDue(Card.all())
-		cardsTableView.reloadData()
+		cardsCollectionView.reloadData()
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return cards.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = cards[indexPath.row]
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CardCollectionViewCell
+		let element = cards[indexPath.item]
 		guard let deckIndex = Deck.id(element.deck) else { return cell }
 		let deck = decks[deckIndex]
-		if let image = decks[deckIndex].image {
-			cell.imageView?.image = image
+		cell.due(element.isDue())
+		if let image = deck.image {
+			cell.imageView.image = image
 		} else {
-			storage.child("decks/\(element.deck)").getData(maxSize: fileLimit) { data, error in
-				guard error == nil, let data = data else { return }
-				deck.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
-				cell.imageView?.image = deck.image
-				tableView.reloadData()
+			cell.imageActivityIndicator.startAnimating()
+			storage.child("decks/\(deck.id)").getData(maxSize: fileLimit) { data, error in
+				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+				cell.imageActivityIndicator.stopAnimating()
+				cell.imageView.image = image
+				deck.image = image
 			}
 		}
-		cell.textLabel?.text = element.front
-		cell.detailTextLabel?.text = element.next.format()
+		cell.nameLabel.text = element.front
+		cell.nextLabel.text = element.next.format()
 		return cell
+	}
+}
+
+class CardCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var barView: UIView!
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var nextLabel: UILabel!
+	
+	func due(_ isDue: Bool) {
+		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		imageView.layer.borderWidth = 2
+		imageView.layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 	}
 }
