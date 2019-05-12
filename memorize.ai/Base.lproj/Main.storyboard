@@ -165,8 +165,8 @@
                                     <action selector="review" destination="XhB-Ss-34n" eventType="touchUpInside" id="YqZ-Ox-lxm"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="413" width="414" height="323"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waV-L4-S5d">
                                         <rect key="frame" x="40" y="279.66666666666669" width="334" height="177"/>
@@ -1064,6 +1064,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="248.99999999999997" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VA4-IN-aOD">
+                                                    <rect key="frame" x="20" y="0.0" width="229" height="50"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0TG-Oh-ztN">
                                                     <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1075,22 +1083,16 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="vaK-p7-5gj">
-                                                    <rect key="frame" x="30" y="10" width="209" height="30"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.90396433639999996" green="0.90396433639999996" blue="0.90396433639999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="0TG-Oh-ztN" firstAttribute="leading" secondItem="C70-tC-aWu" secondAttribute="leading" id="5z1-3R-dMJ"/>
-                                            <constraint firstItem="vaK-p7-5gj" firstAttribute="leading" secondItem="0TG-Oh-ztN" secondAttribute="trailing" constant="10" id="6FA-w8-bJL"/>
-                                            <constraint firstItem="vaK-p7-5gj" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" constant="10" id="SzX-nK-6a6"/>
-                                            <constraint firstAttribute="bottom" secondItem="vaK-p7-5gj" secondAttribute="bottom" constant="10" id="dnR-eg-SPl"/>
+                                            <constraint firstAttribute="bottom" secondItem="VA4-IN-aOD" secondAttribute="bottom" id="7FE-1l-dG5"/>
+                                            <constraint firstItem="VA4-IN-aOD" firstAttribute="leading" secondItem="0TG-Oh-ztN" secondAttribute="trailing" id="VIr-Zh-oNp"/>
+                                            <constraint firstItem="VA4-IN-aOD" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="dSK-Wi-ttF"/>
+                                            <constraint firstAttribute="trailing" secondItem="VA4-IN-aOD" secondAttribute="trailing" id="uDD-Qj-3p6"/>
                                             <constraint firstItem="0TG-Oh-ztN" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="umB-uC-ymx"/>
-                                            <constraint firstAttribute="trailing" secondItem="vaK-p7-5gj" secondAttribute="trailing" constant="10" id="v8y-RF-tti"/>
                                             <constraint firstAttribute="bottom" secondItem="0TG-Oh-ztN" secondAttribute="bottom" id="yaU-Mw-tSn"/>
                                         </constraints>
                                         <size key="customSize" width="248.99999999999997" height="50"/>
@@ -1101,7 +1103,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="barView" destination="0TG-Oh-ztN" id="vnW-Uf-lEA"/>
-                                            <outlet property="frontLabel" destination="vaK-p7-5gj" id="20t-Xa-AVx"/>
+                                            <outlet property="webView" destination="VA4-IN-aOD" id="QMI-02-Goa"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

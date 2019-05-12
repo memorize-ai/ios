@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseFirestore
+import WebKit
 
 class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
@@ -201,10 +202,31 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 class ThinCardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
-	@IBOutlet weak var frontLabel: UILabel!
+	@IBOutlet weak var webView: WKWebView!
 	
 	func due(_ isDue: Bool) {
 		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+	}
+	
+	func load(_ text: String) {
+		webView.loadHTMLString("""
+			<!DOCTYPE html>
+			<html>
+				<head>
+					<script src="MathJax-2.7.5/MathJax.js?config=TeX-AMS_CHTML"></script>
+					<title>MathJax</title>
+					<style>
+						div.main.latex {
+							font-size: 30pt;
+							color: #eee;
+						}
+					</style>
+				</head>
+				<body>
+					<div class="main latex">\(text)</div>
+				</body>
+			</html>
+		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
 	}
 }
 
