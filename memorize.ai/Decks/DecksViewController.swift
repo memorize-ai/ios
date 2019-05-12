@@ -180,6 +180,15 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			guard let element = deck?.cards[indexPath.item] else { return cell }
 			cell.due(element.isDue())
 			cell.load(element.front)
+			cell.action = {
+				guard let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
+				editCardVC.deck = self.deck
+				editCardVC.card = self.deck?.cards[indexPath.item]
+				self.addChild(editCardVC)
+				editCardVC.view.frame = self.view.frame
+				self.view.addSubview(editCardVC.view)
+				editCardVC.didMove(toParent: self)
+			}
 			return cell
 		}
 	}
@@ -189,14 +198,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			deck = decks[indexPath.item]
 			decksCollectionView.reloadData()
 			cardsCollectionView.reloadData()
-		} else if collectionView == cardsCollectionView {
-			guard let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
-			editCardVC.deck = deck
-			editCardVC.card = deck?.cards[indexPath.item]
-			addChild(editCardVC)
-			editCardVC.view.frame = view.frame
-			view.addSubview(editCardVC.view)
-			editCardVC.didMove(toParent: self)
 		}
 	}
 }
@@ -204,6 +205,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 class ThinCardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var webView: WKWebView!
+	
+	var action: (() -> Void)?
+	
+	@IBAction func click() {
+		action?()
+	}
 	
 	func due(_ isDue: Bool) {
 		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)

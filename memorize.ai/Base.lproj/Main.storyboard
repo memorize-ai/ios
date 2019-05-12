@@ -1083,14 +1083,24 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21N-Px-wOK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="249" height="50"/>
+                                                    <connections>
+                                                        <action selector="click" destination="C70-tC-aWu" eventType="touchUpInside" id="hqe-sQ-DQU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.90396433639999996" green="0.90396433639999996" blue="0.90396433639999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="0TG-Oh-ztN" firstAttribute="leading" secondItem="C70-tC-aWu" secondAttribute="leading" id="5z1-3R-dMJ"/>
                                             <constraint firstAttribute="bottom" secondItem="VA4-IN-aOD" secondAttribute="bottom" id="7FE-1l-dG5"/>
+                                            <constraint firstItem="21N-Px-wOK" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="9RO-Ss-EmJ"/>
+                                            <constraint firstItem="21N-Px-wOK" firstAttribute="leading" secondItem="C70-tC-aWu" secondAttribute="leading" id="II5-Qb-AIY"/>
+                                            <constraint firstAttribute="trailing" secondItem="21N-Px-wOK" secondAttribute="trailing" id="N8t-pu-5ku"/>
                                             <constraint firstItem="VA4-IN-aOD" firstAttribute="leading" secondItem="0TG-Oh-ztN" secondAttribute="trailing" id="VIr-Zh-oNp"/>
                                             <constraint firstItem="VA4-IN-aOD" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="dSK-Wi-ttF"/>
+                                            <constraint firstAttribute="bottom" secondItem="21N-Px-wOK" secondAttribute="bottom" id="qaE-Ca-G50"/>
                                             <constraint firstAttribute="trailing" secondItem="VA4-IN-aOD" secondAttribute="trailing" id="uDD-Qj-3p6"/>
                                             <constraint firstItem="0TG-Oh-ztN" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="umB-uC-ymx"/>
                                             <constraint firstAttribute="bottom" secondItem="0TG-Oh-ztN" secondAttribute="bottom" id="yaU-Mw-tSn"/>
