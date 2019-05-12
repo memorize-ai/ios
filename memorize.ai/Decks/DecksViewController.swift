@@ -152,6 +152,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				if let image = element.image {
 					cell.imageView.image = image
 				} else {
+					cell.imageView.image = nil
 					cell.imageActivityIndicator.startAnimating()
 					storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
@@ -209,20 +210,7 @@ class ThinCardCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func load(_ text: String) {
-		webView.loadHTMLString("""
-			<!DOCTYPE html>
-			<html>
-				<head>
-					<link rel="stylesheet" href="katex.min.css">
-					<script src="katex.min.js"></script>
-					<script src="auto-render.min.js"></script>
-				</head>
-				<body>
-					\(text)
-					<script>renderMathInElement(document.body)</script>
-				</body>
-			</html>
-		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true))
+		webView.render(text, markdown: false)
 	}
 }
 

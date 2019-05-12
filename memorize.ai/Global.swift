@@ -4,6 +4,8 @@ import FirebaseFirestore
 import FirebaseStorage
 import InstantSearchClient
 import AudioToolbox
+import WebKit
+import Down
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
@@ -240,6 +242,25 @@ func saveImage(_ image: UIImage) {
 		firstLogin.setValue(data, forKey: "image")
 		try managedContext.save()
 	} catch {}
+}
+
+extension WKWebView {
+	func render(_ text: String, markdown: Bool) {
+		loadHTMLString("""
+			<!DOCTYPE html>
+			<html>
+				<head>
+					<link rel="stylesheet" href="katex.min.css">
+					<script src="katex.min.js"></script>
+					<script src="auto-render.min.js"></script>
+				</head>
+				<body>
+					\(markdown ? (try? Down(markdownString: text).toHTML()) ?? text : text)
+					<script>renderMathInElement(document.body)</script>
+				</body>
+			</html>
+		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true))
+	}
 }
 
 extension UIViewController {
