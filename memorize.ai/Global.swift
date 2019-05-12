@@ -253,9 +253,19 @@ extension WKWebView {
 					<link rel="stylesheet" href="katex.min.css">
 					<script src="katex.min.js"></script>
 					<script src="auto-render.min.js"></script>
+					<style>
+						html, body {
+							font-size: 90px;
+						}
+						div {
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+					</style>
 				</head>
 				<body>
-					\(markdown ? (try? Down(markdownString: text).toHTML()) ?? text : text)
+					<div>\(markdown ? (try? Down(markdownString: text).toHTML()) ?? text : text)</div>
 					<script>renderMathInElement(document.body)</script>
 				</body>
 			</html>
