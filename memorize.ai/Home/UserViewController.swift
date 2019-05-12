@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import FirebaseAuth
+import WebKit
 
 class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
@@ -327,7 +328,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UserCardsTableViewCell
 		let element = cards[indexPath.row]
 		cell.ratingImageView.image = element.image
-		cell.frontLabel.text = element.card.front
+		cell.load(element.card.front)
 		return cell
 	}
 }
@@ -347,5 +348,9 @@ class UserActionCollectionViewCell: UICollectionViewCell {
 
 class UserCardsTableViewCell: UITableViewCell {
 	@IBOutlet weak var ratingImageView: UIImageView!
-	@IBOutlet weak var frontLabel: UILabel!
+	@IBOutlet weak var webView: WKWebView!
+	
+	func load(_ text: String) {
+		webView.render(text, textColor: "333333", backgroundColor: "F3F3F3", markdown: false)
+	}
 }

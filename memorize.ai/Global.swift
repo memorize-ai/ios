@@ -245,7 +245,7 @@ func saveImage(_ image: UIImage) {
 }
 
 extension WKWebView {
-	func render(_ text: String, markdown: Bool) {
+	func render(_ text: String, textColor: String, backgroundColor: String, markdown: Bool) {
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -256,6 +256,8 @@ extension WKWebView {
 					<style>
 						html, body {
 							font-size: 90px;
+							color: #\(textColor);
+							background-color: #\(backgroundColor);
 						}
 						div {
 							white-space: nowrap;

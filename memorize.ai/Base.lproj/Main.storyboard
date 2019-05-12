@@ -165,8 +165,8 @@
                                     <action selector="review" destination="XhB-Ss-34n" eventType="touchUpInside" id="YqZ-Ox-lxm"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waV-L4-S5d">
                                         <rect key="frame" x="40" y="279.66666666666669" width="334" height="177"/>
@@ -245,27 +245,29 @@
                                                         <constraint firstAttribute="height" constant="28" id="tFS-FH-qIG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ik-jK-WSC">
-                                                    <rect key="frame" x="52" y="8" width="41.666666666666657" height="28"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4T-aQ-zo0">
+                                                    <rect key="frame" x="44" y="0.0" width="290" height="44"/>
+                                                    <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="1Ik-jK-WSC" firstAttribute="leading" secondItem="ejf-AJ-dUj" secondAttribute="trailing" constant="16" id="0tv-qc-m5F"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Ik-jK-WSC" secondAttribute="trailing" constant="8" id="316-xx-lIb"/>
+                                                <constraint firstAttribute="trailing" secondItem="g4T-aQ-zo0" secondAttribute="trailing" id="0sm-Fy-Nsc"/>
                                                 <constraint firstAttribute="bottom" secondItem="ejf-AJ-dUj" secondAttribute="bottom" constant="8" id="4oX-G6-EFK"/>
-                                                <constraint firstAttribute="bottom" secondItem="1Ik-jK-WSC" secondAttribute="bottom" constant="8" id="GeW-eY-bU3"/>
+                                                <constraint firstAttribute="bottom" secondItem="g4T-aQ-zo0" secondAttribute="bottom" id="LVU-9M-wuv"/>
+                                                <constraint firstItem="g4T-aQ-zo0" firstAttribute="leading" secondItem="ejf-AJ-dUj" secondAttribute="trailing" constant="8" id="TwZ-78-Cbz"/>
                                                 <constraint firstItem="ejf-AJ-dUj" firstAttribute="leading" secondItem="wFC-qK-0PS" secondAttribute="leading" constant="8" id="amn-9P-Hzt"/>
                                                 <constraint firstItem="ejf-AJ-dUj" firstAttribute="top" secondItem="wFC-qK-0PS" secondAttribute="top" constant="8" id="bQz-kA-3vX"/>
-                                                <constraint firstItem="1Ik-jK-WSC" firstAttribute="top" secondItem="wFC-qK-0PS" secondAttribute="top" constant="8" id="cUb-yX-x7w"/>
+                                                <constraint firstItem="g4T-aQ-zo0" firstAttribute="top" secondItem="wFC-qK-0PS" secondAttribute="top" id="vpj-eF-vz0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="frontLabel" destination="1Ik-jK-WSC" id="YYe-4w-bs6"/>
                                             <outlet property="ratingImageView" destination="ejf-AJ-dUj" id="qgL-WM-9sU"/>
+                                            <outlet property="webView" destination="g4T-aQ-zo0" id="igm-xe-1HD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1065,8 +1067,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VA4-IN-aOD">
-                                                    <rect key="frame" x="20" y="0.0" width="229" height="50"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="28" y="0.0" width="221" height="50"/>
+                                                    <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <wkWebViewConfiguration key="configuration">
                                                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                         <wkPreferences key="preferences"/>
@@ -1091,14 +1093,14 @@
                                                 </button>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.90396433639999996" green="0.90396433639999996" blue="0.90396433639999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="0TG-Oh-ztN" firstAttribute="leading" secondItem="C70-tC-aWu" secondAttribute="leading" id="5z1-3R-dMJ"/>
                                             <constraint firstAttribute="bottom" secondItem="VA4-IN-aOD" secondAttribute="bottom" id="7FE-1l-dG5"/>
                                             <constraint firstItem="21N-Px-wOK" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="9RO-Ss-EmJ"/>
                                             <constraint firstItem="21N-Px-wOK" firstAttribute="leading" secondItem="C70-tC-aWu" secondAttribute="leading" id="II5-Qb-AIY"/>
                                             <constraint firstAttribute="trailing" secondItem="21N-Px-wOK" secondAttribute="trailing" id="N8t-pu-5ku"/>
-                                            <constraint firstItem="VA4-IN-aOD" firstAttribute="leading" secondItem="0TG-Oh-ztN" secondAttribute="trailing" id="VIr-Zh-oNp"/>
+                                            <constraint firstItem="VA4-IN-aOD" firstAttribute="leading" secondItem="0TG-Oh-ztN" secondAttribute="trailing" constant="8" id="VIr-Zh-oNp"/>
                                             <constraint firstItem="VA4-IN-aOD" firstAttribute="top" secondItem="C70-tC-aWu" secondAttribute="top" id="dSK-Wi-ttF"/>
                                             <constraint firstAttribute="bottom" secondItem="21N-Px-wOK" secondAttribute="bottom" id="qaE-Ca-G50"/>
                                             <constraint firstAttribute="trailing" secondItem="VA4-IN-aOD" secondAttribute="trailing" id="uDD-Qj-3p6"/>
@@ -1891,7 +1893,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmS-JX-Rgi">
                                                         <rect key="frame" x="20" y="42" width="294" height="23.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Aa-FL-LoP">
