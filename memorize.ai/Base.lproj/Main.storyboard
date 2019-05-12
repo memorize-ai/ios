@@ -1882,7 +1882,7 @@
                                         <rect key="frame" x="0.0" y="40" width="334" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGT-dD-gtx">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="170.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="174"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bm4-JX-ZIR">
                                                         <rect key="frame" x="20" y="20" width="44" height="18"/>
@@ -1890,40 +1890,50 @@
                                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmS-JX-Rgi">
-                                                        <rect key="frame" x="20" y="42" width="294" height="23.333333333333329"/>
-                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Aa-FL-LoP">
-                                                        <rect key="frame" x="19.999999999999996" y="105.33333333333331" width="35.666666666666657" height="18"/>
+                                                        <rect key="frame" x="19.999999999999996" y="102" width="35.666666666666657" height="18"/>
                                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="13"/>
                                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2L-il-liN">
-                                                        <rect key="frame" x="20" y="127.3333333333333" width="294" height="23.333333333333329"/>
-                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbm-O8-VZE">
+                                                        <rect key="frame" x="20" y="42" width="294" height="30"/>
+                                                        <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="sfg-ta-40F"/>
+                                                        </constraints>
+                                                        <wkWebViewConfiguration key="configuration">
+                                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                            <wkPreferences key="preferences"/>
+                                                        </wkWebViewConfiguration>
+                                                    </wkWebView>
+                                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSv-yr-N5d">
+                                                        <rect key="frame" x="20" y="124" width="294" height="30"/>
+                                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="AIp-s9-fA1"/>
+                                                        </constraints>
+                                                        <wkWebViewConfiguration key="configuration">
+                                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                            <wkPreferences key="preferences"/>
+                                                        </wkWebViewConfiguration>
+                                                    </wkWebView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="GmS-JX-Rgi" firstAttribute="top" secondItem="bm4-JX-ZIR" secondAttribute="bottom" constant="4" id="5hr-QI-7o1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="MSv-yr-N5d" secondAttribute="bottom" constant="20" id="4im-fD-NvD"/>
                                                     <constraint firstItem="bm4-JX-ZIR" firstAttribute="top" secondItem="YGT-dD-gtx" secondAttribute="top" constant="20" id="6fp-sN-rw3"/>
                                                     <constraint firstItem="7Aa-FL-LoP" firstAttribute="leading" secondItem="YGT-dD-gtx" secondAttribute="leading" constant="20" id="79E-wa-u9E"/>
                                                     <constraint firstItem="bm4-JX-ZIR" firstAttribute="leading" secondItem="YGT-dD-gtx" secondAttribute="leading" constant="20" id="85x-MZ-0G3"/>
-                                                    <constraint firstItem="H2L-il-liN" firstAttribute="top" secondItem="7Aa-FL-LoP" secondAttribute="bottom" constant="4" id="RAq-QJ-5Fj"/>
-                                                    <constraint firstAttribute="trailing" secondItem="GmS-JX-Rgi" secondAttribute="trailing" constant="20" id="RPl-RB-pfQ"/>
-                                                    <constraint firstItem="GmS-JX-Rgi" firstAttribute="leading" secondItem="YGT-dD-gtx" secondAttribute="leading" constant="20" id="U3x-MC-K4I"/>
-                                                    <constraint firstAttribute="bottom" secondItem="H2L-il-liN" secondAttribute="bottom" constant="20" id="V3u-Fe-3uM"/>
-                                                    <constraint firstAttribute="trailing" secondItem="H2L-il-liN" secondAttribute="trailing" constant="20" id="XdB-SJ-3Qz"/>
+                                                    <constraint firstItem="MSv-yr-N5d" firstAttribute="top" secondItem="7Aa-FL-LoP" secondAttribute="bottom" constant="4" id="Qf5-Tu-mKH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MSv-yr-N5d" secondAttribute="trailing" constant="20" id="VaT-3O-U61"/>
+                                                    <constraint firstItem="wbm-O8-VZE" firstAttribute="leading" secondItem="YGT-dD-gtx" secondAttribute="leading" constant="20" id="eWN-ux-ani"/>
+                                                    <constraint firstAttribute="trailing" secondItem="wbm-O8-VZE" secondAttribute="trailing" constant="20" id="gfh-r3-oIT"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Aa-FL-LoP" secondAttribute="trailing" constant="20" id="hCP-a3-qhj"/>
-                                                    <constraint firstItem="H2L-il-liN" firstAttribute="leading" secondItem="YGT-dD-gtx" secondAttribute="leading" constant="20" id="kNx-3Y-Tw3"/>
-                                                    <constraint firstItem="7Aa-FL-LoP" firstAttribute="top" secondItem="GmS-JX-Rgi" secondAttribute="bottom" constant="40" id="p1e-j4-mAs"/>
+                                                    <constraint firstItem="7Aa-FL-LoP" firstAttribute="top" secondItem="wbm-O8-VZE" secondAttribute="bottom" constant="30" id="kat-Ii-Tzt"/>
+                                                    <constraint firstItem="wbm-O8-VZE" firstAttribute="top" secondItem="bm4-JX-ZIR" secondAttribute="bottom" constant="4" id="l4W-HC-HE7"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bm4-JX-ZIR" secondAttribute="trailing" constant="20" id="uxS-sh-Fdw"/>
+                                                    <constraint firstItem="MSv-yr-N5d" firstAttribute="leading" secondItem="YGT-dD-gtx" secondAttribute="leading" constant="20" id="vrs-PU-xcu"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -1968,15 +1978,15 @@
                         <viewLayoutGuide key="safeArea" id="Znh-DC-uzD"/>
                     </view>
                     <connections>
-                        <outlet property="backLabel" destination="H2L-il-liN" id="LY6-zx-qi5"/>
+                        <outlet property="backWebView" destination="MSv-yr-N5d" id="UIg-CZ-Kmz"/>
                         <outlet property="cardView" destination="eJH-fo-5rB" id="1sq-nW-VvC"/>
-                        <outlet property="frontLabel" destination="GmS-JX-Rgi" id="8uA-yx-HTH"/>
+                        <outlet property="frontWebView" destination="wbm-O8-VZE" id="SF9-hh-Zgq"/>
                         <outlet property="titleBar" destination="DnN-cM-PR6" id="RI8-Ix-68v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXM-K7-LRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3568" y="805"/>
+            <point key="canvasLocation" x="3566.666666666667" y="804.61956521739137"/>
         </scene>
         <!--Start Up View Controller-->
         <scene sceneID="MgL-tP-JM1">

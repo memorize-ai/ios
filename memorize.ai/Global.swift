@@ -245,7 +245,7 @@ func saveImage(_ image: UIImage) {
 }
 
 extension WKWebView {
-	func render(_ text: String, textColor: String, backgroundColor: String, markdown: Bool) {
+	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String, markdown: Bool) {
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -255,7 +255,7 @@ extension WKWebView {
 					<script src="auto-render.min.js"></script>
 					<style>
 						html, body {
-							font-size: 90px;
+							font-size: \(fontSize)px;
 							color: #\(textColor);
 							background-color: #\(backgroundColor);
 						}
