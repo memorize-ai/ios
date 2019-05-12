@@ -44,8 +44,6 @@
 		4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */; };
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
 		4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAEEC7B220A074400A207FD /* EditCardViewController.swift */; };
-		4DB8AE122287CE1800A08AFA /* katex.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC02287CE1800A08AFA /* katex.css */; };
-		4DB8AE132287CE1800A08AFA /* katex.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC12287CE1800A08AFA /* katex.js */; };
 		4DB8AE142287CE1800A08AFA /* mhchem.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC32287CE1800A08AFA /* mhchem.mjs */; };
 		4DB8AE152287CE1800A08AFA /* mathtex-script-type.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC42287CE1800A08AFA /* mathtex-script-type.mjs */; };
 		4DB8AE162287CE1800A08AFA /* auto-render.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC52287CE1800A08AFA /* auto-render.mjs */; };
@@ -60,7 +58,6 @@
 		4DB8AE1F2287CE1800A08AFA /* mhchem.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADCE2287CE1800A08AFA /* mhchem.min.js */; };
 		4DB8AE202287CE1800A08AFA /* mhchem.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADCF2287CE1800A08AFA /* mhchem.js */; };
 		4DB8AE212287CE1800A08AFA /* copy-tex.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADD02287CE1800A08AFA /* copy-tex.min.css */; };
-		4DB8AE222287CE1800A08AFA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADD12287CE1800A08AFA /* README.md */; };
 		4DB8AE232287CE1800A08AFA /* katex.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADD22287CE1800A08AFA /* katex.min.css */; };
 		4DB8AE242287CE1800A08AFA /* katex.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADD32287CE1800A08AFA /* katex.min.js */; };
 		4DB8AE252287CE1800A08AFA /* KaTeX_Typewriter-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADD52287CE1800A08AFA /* KaTeX_Typewriter-Regular.woff2 */; };
@@ -195,8 +192,6 @@
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		4DAEEC7B220A074400A207FD /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
-		4DB8ADC02287CE1800A08AFA /* katex.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.css; sourceTree = "<group>"; };
-		4DB8ADC12287CE1800A08AFA /* katex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.js; sourceTree = "<group>"; };
 		4DB8ADC32287CE1800A08AFA /* mhchem.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhchem.mjs; sourceTree = "<group>"; };
 		4DB8ADC42287CE1800A08AFA /* mathtex-script-type.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mathtex-script-type.mjs"; sourceTree = "<group>"; };
 		4DB8ADC52287CE1800A08AFA /* auto-render.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "auto-render.mjs"; sourceTree = "<group>"; };
@@ -211,7 +206,6 @@
 		4DB8ADCE2287CE1800A08AFA /* mhchem.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mhchem.min.js; sourceTree = "<group>"; };
 		4DB8ADCF2287CE1800A08AFA /* mhchem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mhchem.js; sourceTree = "<group>"; };
 		4DB8ADD02287CE1800A08AFA /* copy-tex.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "copy-tex.min.css"; sourceTree = "<group>"; };
-		4DB8ADD12287CE1800A08AFA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4DB8ADD22287CE1800A08AFA /* katex.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.min.css; sourceTree = "<group>"; };
 		4DB8ADD32287CE1800A08AFA /* katex.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.min.js; sourceTree = "<group>"; };
 		4DB8ADD52287CE1800A08AFA /* KaTeX_Typewriter-Regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KaTeX_Typewriter-Regular.woff2"; sourceTree = "<group>"; };
@@ -460,21 +454,6 @@
 		4DB8ADBF2287CE1800A08AFA /* katex */ = {
 			isa = PBXGroup;
 			children = (
-				4DB8ADC02287CE1800A08AFA /* katex.css */,
-				4DB8ADC12287CE1800A08AFA /* katex.js */,
-				4DB8ADC22287CE1800A08AFA /* contrib */,
-				4DB8ADD12287CE1800A08AFA /* README.md */,
-				4DB8ADD22287CE1800A08AFA /* katex.min.css */,
-				4DB8ADD32287CE1800A08AFA /* katex.min.js */,
-				4DB8ADD42287CE1800A08AFA /* fonts */,
-				4DB8AE112287CE1800A08AFA /* katex.mjs */,
-			);
-			path = katex;
-			sourceTree = "<group>";
-		};
-		4DB8ADC22287CE1800A08AFA /* contrib */ = {
-			isa = PBXGroup;
-			children = (
 				4DB8ADC32287CE1800A08AFA /* mhchem.mjs */,
 				4DB8ADC42287CE1800A08AFA /* mathtex-script-type.mjs */,
 				4DB8ADC52287CE1800A08AFA /* auto-render.mjs */,
@@ -489,8 +468,12 @@
 				4DB8ADCE2287CE1800A08AFA /* mhchem.min.js */,
 				4DB8ADCF2287CE1800A08AFA /* mhchem.js */,
 				4DB8ADD02287CE1800A08AFA /* copy-tex.min.css */,
+				4DB8ADD22287CE1800A08AFA /* katex.min.css */,
+				4DB8ADD32287CE1800A08AFA /* katex.min.js */,
+				4DB8ADD42287CE1800A08AFA /* fonts */,
+				4DB8AE112287CE1800A08AFA /* katex.mjs */,
 			);
-			path = contrib;
+			path = katex;
 			sourceTree = "<group>";
 		};
 		4DB8ADD42287CE1800A08AFA /* fonts */ = {
@@ -692,7 +675,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DB8AE1B2287CE1800A08AFA /* copy-tex.css in Resources */,
-				4DB8AE132287CE1800A08AFA /* katex.js in Resources */,
 				4D64390822056528006F4F2D /* Nunito-ExtraLightItalic.ttf in Resources */,
 				4D64390F22056528006F4F2D /* Nunito-ExtraLight.ttf in Resources */,
 				4DB8AE1E2287CE1800A08AFA /* mathtex-script-type.js in Resources */,
@@ -728,10 +710,8 @@
 				4DB8AE302287CE1800A08AFA /* KaTeX_Caligraphic-Regular.woff in Resources */,
 				4DB8AE2D2287CE1800A08AFA /* KaTeX_Caligraphic-Bold.woff2 in Resources */,
 				4D052AE5220427260093B64E /* GoogleService-Info.plist in Resources */,
-				4DB8AE222287CE1800A08AFA /* README.md in Resources */,
 				4DB8AE562287CE1800A08AFA /* KaTeX_Script-Regular.woff in Resources */,
 				4DB8AE162287CE1800A08AFA /* auto-render.mjs in Resources */,
-				4DB8AE122287CE1800A08AFA /* katex.css in Resources */,
 				4D64390B22056528006F4F2D /* Nunito-SemiBold.ttf in Resources */,
 				4DB8AE4E2287CE1800A08AFA /* KaTeX_Math-Italic.woff in Resources */,
 				4DB8AE412287CE1800A08AFA /* KaTeX_Size2-Regular.woff in Resources */,

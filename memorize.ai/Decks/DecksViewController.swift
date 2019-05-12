@@ -178,7 +178,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ThinCardCollectionViewCell
 			guard let element = deck?.cards[indexPath.item] else { return cell }
 			cell.due(element.isDue())
-			cell.frontLabel.text = element.front
+			cell.load(element.front)
 			return cell
 		}
 	}
@@ -213,20 +213,16 @@ class ThinCardCollectionViewCell: UICollectionViewCell {
 			<!DOCTYPE html>
 			<html>
 				<head>
-					<script src="MathJax-2.7.5/MathJax.js?config=TeX-AMS_CHTML"></script>
-					<title>MathJax</title>
-					<style>
-						div.main.latex {
-							font-size: 30pt;
-							color: #eee;
-						}
-					</style>
+					<link rel="stylesheet" href="katex.min.css">
+					<script src="katex.min.js"></script>
+					<script src="auto-render.min.js"></script>
 				</head>
 				<body>
-					<div class="main latex">\(text)</div>
+					\(text)
+					<script>renderMathInElement(document.body)</script>
 				</body>
 			</html>
-		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true))
 	}
 }
 
