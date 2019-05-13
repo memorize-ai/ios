@@ -123,7 +123,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadCards() {
 		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Gray Circle"), card: $0) }
-		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: UIImage(named: "Quality \($0.last!.rating)")!, card: $0) })
+		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: Rating.image($0.last!.rating), card: $0) })
 	}
 	
 	func signIn() {

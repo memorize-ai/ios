@@ -174,6 +174,31 @@ class History {
 	}
 }
 
+class Rating {
+	static func color(_ rating: Int) -> UIColor {
+		switch rating {
+		case 0:
+			return #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+		case 1:
+			return #colorLiteral(red: 0.7862434983, green: 0.4098072052, blue: 0.2144107223, alpha: 1)
+		case 2:
+			return #colorLiteral(red: 0.7540822029, green: 0.6499487758, blue: 0, alpha: 1)
+		case 3:
+			return #colorLiteral(red: 0.6504547, green: 0.7935678959, blue: 0, alpha: 1)
+		case 4:
+			return #colorLiteral(red: 0.3838550448, green: 0.7988399267, blue: 0, alpha: 1)
+		case 5:
+			return #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
+		default:
+			return #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+		}
+	}
+	
+	static func image(_ rating: Int) -> UIImage {
+		return rating < 0 || rating > 5 ? #imageLiteral(resourceName: "Gray Circle") : UIImage(named: "Quality \(rating)") ?? #imageLiteral(resourceName: "Gray Circle")
+	}
+}
+
 enum Change {
 	case profileModified
 	case profilePicture
