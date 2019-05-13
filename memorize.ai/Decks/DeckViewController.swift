@@ -24,8 +24,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 35)
 		cardsCollectionView.collectionViewLayout = flowLayout
-		imageView.layer.borderWidth = 1
+		imageView.layer.borderWidth = 0.5
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
+		imageView.layer.masksToBounds = true
 		firestore.document("decks/\(deckId!)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
 				self.nameLabel.text = snapshot.get("name") as? String ?? "Error"
@@ -74,7 +75,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				}
 			}
 		}
-		imageView.layer.masksToBounds = true
 		if let image = image {
 			imageActivityIndicator.stopAnimating()
 			imageView.image = image
