@@ -39,28 +39,10 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 			storage.child("decks/\(element.deck.id)").getData(maxSize: fileLimit) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				element.deck.image = image
-				cell.imageActivityIndicator.stopAnimating()
 				cell.imageView.image = image
 			}
 		}
-		switch element.quality {
-		case 0:
-			cell.layer.borderColor = #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
-		case 1:
-			cell.layer.borderColor = #colorLiteral(red: 0.7862434983, green: 0.4098072052, blue: 0.2144107223, alpha: 1)
-		case 2:
-			cell.layer.borderColor = #colorLiteral(red: 0.7540822029, green: 0.6499487758, blue: 0, alpha: 1)
-		case 3:
-			cell.layer.borderColor = #colorLiteral(red: 0.6504547, green: 0.7935678959, blue: 0, alpha: 1)
-		case 4:
-			cell.layer.borderColor = #colorLiteral(red: 0.3838550448, green: 0.7988399267, blue: 0, alpha: 1)
-		case 5:
-			cell.layer.borderColor = #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
-		default:
-			cell.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-		}
-		cell.deckLabel.text = element.deck.name
-		cell.cardLabel.text = element.card.front
+		cell.load(element.card.front)
 		if let next = element.next {
 			cell.nextLabel.text = next.format()
 		} else {
@@ -71,6 +53,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.nextLabel.text = next.format()
 			}
 		}
+		cell.ratingImageView.image = Rating.image(element.quality)
 		return cell
 	}
 }
