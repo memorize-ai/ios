@@ -1,7 +1,8 @@
 import UIKit
 import FirebaseFirestore
+import WebKit
 
-class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var imageView: UIImageView!
@@ -11,7 +12,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var getButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var getActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var descriptionLabel: UILabel!
-	@IBOutlet weak var cardsTableView: UITableView!
+	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	@IBOutlet weak var creatorLabel: UILabel!
 	
 	var deckId: String?
@@ -20,6 +21,9 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 35)
+		cardsCollectionView.collectionViewLayout = flowLayout
 		imageView.layer.borderWidth = 1
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		firestore.document("decks/\(deckId!)").addSnapshotListener { snapshot, error in
@@ -49,7 +53,7 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				switch $0.type {
 				case .added:
 					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: Card.Last(id: "nil", date: Date(), rating: 0, elapsed: 0), next: Date(), history: [], deck: self.deckId!))
-					self.cardsTableView.reloadData()
+					self.reloadCards()
 					callChangeHandler(.cardModified)
 				case .modified:
 					for i in 0..<self.cards.count {
@@ -57,13 +61,13 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 						if oldCard.id == cardId {
 							self.cards[i].front = card.get("front") as? String ?? oldCard.front
 							self.cards[i].back = card.get("back") as? String ?? oldCard.back
-							self.cardsTableView.reloadData()
+							self.reloadCards()
 							callChangeHandler(.cardModified)
 						}
 					}
 				case .removed:
 					self.cards = self.cards.filter { return $0.id != cardId }
-					self.cardsTableView.reloadData()
+					self.reloadCards()
 					callChangeHandler(.cardRemoved)
 				@unknown default:
 					return
@@ -97,8 +101,16 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		cardsTableView.isScrollEnabled = false
-		cardsTableView.frame.size = cardsTableView.contentSize
+		resizeCardsCollectionView()
+	}
+	
+	func reloadCards() {
+		cardsCollectionView.reloadData()
+		resizeCardsCollectionView()
+	}
+	
+	func resizeCardsCollectionView() {
+		cardsCollectionView.frame.size = CGSize(width: view.bounds.width - 40, height: CGFloat(cards.count * 45))
 	}
 	
 	@IBAction func get() {
@@ -141,38 +153,51 @@ class DeckViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+		resizeCardsCollectionView()
 		switch sender.selectedSegmentIndex {
 		case 0:
-			cardsTableView.isHidden = true
+			cardsCollectionView.isHidden = true
 			descriptionLabel.isHidden = false
 			creatorLabel.isHidden = false
 		case 1:
 			descriptionLabel.isHidden = true
 			creatorLabel.isHidden = true
-			cardsTableView.isHidden = false
+			cardsCollectionView.isHidden = false
 		default:
 			return
 		}
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return cards.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = cards[indexPath.row]
-		cell.textLabel?.text = element.front
-		cell.detailTextLabel?.text = element.back
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BasicCardCollectionViewCell
+		let element = cards[indexPath.item]
+		cell.load(element.front)
+		cell.action = {
+			guard let cardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
+			cardVC.card = element
+			self.addChild(cardVC)
+			cardVC.view.frame = self.view.frame
+			self.view.addSubview(cardVC.view)
+			cardVC.didMove(toParent: self)
+		}
 		return cell
 	}
+}
+
+class BasicCardCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var webView: WKWebView!
 	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let cardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
-		cardVC.card = cards[indexPath.row]
-		addChild(cardVC)
-		cardVC.view.frame = view.frame
-		view.addSubview(cardVC.view)
-		cardVC.didMove(toParent: self)
+	var action: (() -> Void)?
+	
+	@IBAction func click() {
+		action?()
+	}
+	
+	func load(_ text: String) {
+		webView.render(text, fontSize: 60, textColor: "333333", backgroundColor: "f8f8f8", markdown: false)
 	}
 }
