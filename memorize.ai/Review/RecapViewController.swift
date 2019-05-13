@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 
 class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var recapCollectionView: UICollectionView!
@@ -35,7 +36,6 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if let image = element.deck.image {
 			cell.imageView.image = image
 		} else {
-			cell.imageActivityIndicator.startAnimating()
 			storage.child("decks/\(element.deck.id)").getData(maxSize: fileLimit) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				element.deck.image = image
@@ -77,8 +77,11 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 class RecapCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var deckLabel: UILabel!
-	@IBOutlet weak var cardLabel: UILabel!
+	@IBOutlet weak var webView: WKWebView!
 	@IBOutlet weak var nextLabel: UILabel!
+	@IBOutlet weak var ratingImageView: UIImageView!
+	
+	func load(_ text: String) {
+		webView.render(text, fontSize: 60, textColor: "333333", backgroundColor: "e7e7e7", markdown: false)
+	}
 }
