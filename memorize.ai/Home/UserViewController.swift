@@ -106,6 +106,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		}
 		loadCards()
+		createHelloLabel()
+		loadProfileBarButtonItem(nil)
 		actionsCollectionView.reloadData()
 		cardsTableView.reloadData()
 	}
@@ -150,7 +152,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadProfileBarButtonItem(_ data: Data?) {
-		let image = UIImage(data: data ?? #imageLiteral(resourceName: "Person").pngData()!) ?? #imageLiteral(resourceName: "Person")
+		let image = UIImage(data: data ?? #imageLiteral(resourceName: "Person").pngData()!) ?? profilePicture ?? #imageLiteral(resourceName: "Person")
 		leftBarButtonItem(image: image)
 		profilePicture = image
 	}

@@ -8,6 +8,10 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 68)
+		flowLayout.sectionInset.top = 8
+		recapCollectionView.collectionViewLayout = flowLayout
 		navigationItem.setHidesBackButton(true, animated: true)
 		let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(back))
 		navigationItem.setRightBarButton(done, animated: true)
@@ -65,6 +69,6 @@ class RecapCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var ratingImageView: UIImageView!
 	
 	func load(_ text: String) {
-		webView.render(text, fontSize: 60, textColor: "333333", backgroundColor: "e7e7e7", markdown: false)
+		webView.render(text, fontSize: 85, textColor: "000000", backgroundColor: "f2f2f2", markdown: false)
 	}
 }

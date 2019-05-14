@@ -109,7 +109,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return collectionView == decksCollectionView ? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84) : collectionView == actionsCollectionView ? CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36) : CGSize(width: cardsCollectionView.bounds.width - 20, height: 50)
+		return collectionView == decksCollectionView ? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84) : collectionView == actionsCollectionView ? CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36) : CGSize(width: cardsCollectionView.bounds.width - 20, height: 37)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
