@@ -152,7 +152,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadProfileBarButtonItem(_ data: Data?) {
-		let image = UIImage(data: data ?? #imageLiteral(resourceName: "Person").pngData()!) ?? profilePicture ?? #imageLiteral(resourceName: "Person")
+		let image = (data == nil ? profilePicture : UIImage(data: data!)) ?? #imageLiteral(resourceName: "Person")
 		leftBarButtonItem(image: image)
 		profilePicture = image
 	}

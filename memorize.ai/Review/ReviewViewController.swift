@@ -3,15 +3,18 @@ import FirebaseFirestore
 import WebKit
 
 class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	@IBOutlet weak var progressView: UIProgressView!
 	@IBOutlet weak var frontWebView: WKWebView!
 	@IBOutlet weak var frontWebViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var backWebView: WKWebView!
 	@IBOutlet weak var backWebViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var ratingCollectionView: UICollectionView!
+	@IBOutlet weak var ratingCollectionViewHeightConstraint: NSLayoutConstraint!
 	
+	var current = 0
 	var dueCards = [(deck: Deck, card: Card)]()
-	var reviewedCards = [(id: String, deck: Deck, card: Card, quality: Int, next: Date?)]()
+	var reviewedCards = [(id: String, deck: Deck, card: Card, rating: Rating, next: Date?)]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,100 +25,24 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.updateAndCall(.cardDue) { change in
-			if change == .cardModified || change == .cardRemoved {
-				let _dueCards = self.loadDueCards()
-				if self.dueCards.count != _dueCards.count {
-					self.dueCards = _dueCards
-				}
-				let currentCard = self.current().card
+		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont(name: "Nunito-SemiBold", size: 20)!]
+		navigationController?.navigationBar.barTintColor = .white
+		navigationController?.navigationBar.tintColor = .darkGray
+		dueCards = decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
+		ChangeHandler.updateAndCall(.cardModified) { change in
+			if change == .cardModified {
+				let currentCard = self.dueCards[self.current].card
 				self.load(currentCard.front, webView: self.frontWebView)
 				self.load(currentCard.back, webView: self.backWebView)
 			}
 		}
 	}
 	
-	func loadDueCards() -> [(deck: Deck, card: Card)] {
-		return decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
-	}
-	
-	func current() -> (deck: Deck, card: Card) {
-		return dueCards.first!
-	}
-	
-	func qualityButtons() -> [UIButton] {
-		return [quality0Button, quality1Button, quality2Button, quality3Button, quality4Button, quality5Button]
-	}
-	
-	func qualityButton(_ index: Int) -> UIButton {
-		return qualityButtons()[index]
-	}
-	
-	func deselectQualityButtons() {
-		qualityButtons().forEach { $0.layer.borderColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1) }
-		load
-	}
-	
-	func load(_ text: String, webView: WKWebView) {
-		webView.render(text, fontSize: 90, textColor: "333333", backgroundColor: "e7e7e7", markdown: false/*true*/)
-	}
-	
-	@IBAction func next(_ sender: UIButton) {
-		guard let index = qualityButtons().firstIndex(of: sender) else { return }
-		createHistory(index)
-		slideAnimation()
-	}
-	
-	@objc func tappedScreen() {
-		if qualityImageView.isHidden {
-			flipAnimation()
-		}
-	}
-	
-	func createHistory(_ quality: Int) {
-		var documentReference: DocumentReference?
-		documentReference = firestore.collection("users/\(id!)/decks/\(current().deck.id)/cards/\(current().card.id)/history").addDocument(data: ["rating": quality]) { error in
-			guard error == nil, let documentReference = documentReference else { return }
-			self.reviewedCards.append((id: documentReference.documentID, deck: self.current().deck, card: self.current().card, quality: quality, next: nil))
-		}
-	}
-	
-	func hideQualityView(_ hidden: Bool) {
-		([qualityImageView] + qualityButtons()).forEach { $0?.isHidden = hidden }
-	}
-	
-	func flipAnimation() {
-		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
-			self.cardView.transform = CGAffineTransform(scaleX: CGFloat.ulpOfOne, y: 1)
-		}) { finished in
-			if finished {
-				self.hideQualityView(false)
-				self.cardBarView.isHidden = false
-				self.backLabel.isHidden = false
-				self.backLabel.text = self.current().card.back
-				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: {
-					self.cardView.transform = .identity
-				}, completion: nil)
-			}
-		}
-	}
-	
-	func slideAnimation() {
-		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-			self.cardView.transform = CGAffineTransform(translationX: -self.view.bounds.width, y: 0)
-		}) { finished in
-			if finished {
-				self.newCard()
-				self.hideQualityView(true)
-				self.frontLabel.text = self.current().card.front
-				self.cardBarView.isHidden = true
-				self.backLabel.isHidden = true
-				self.cardView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
-				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-					self.cardView.transform = .identity
-				}, completion: nil)
-			}
-		}
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "Nunito-SemiBold", size: 20)!]
+		navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+		navigationController?.navigationBar.tintColor = .white
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,11 +50,35 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		recapVC.cards = reviewedCards
 	}
 	
-	func newCard() {
-		if dueCards.count == 1 {
-			performSegue(withIdentifier: "recap", sender: self)
-		} else {
-			dueCards.removeFirst()
+	@objc func tappedScreen() {
+		if backWebView.isHidden {
+			barView.alpha = 0
+			backWebView.alpha = 0
+			barView.isHidden = false
+			backWebView.isHidden = false
+			UIView.animate(withDuration: 0.5) {
+				self.barView.alpha = 1
+				self.backWebView.alpha = 1
+			}
+			ratingCollectionViewHeightConstraint.constant = ratingCollectionView.contentSize.height
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
+		}
+	}
+	
+	func normalize(rating: Int) -> Int {
+		return Rating.ratings.count - rating - 1
+	}
+	
+	func load(_ text: String, webView: WKWebView) {
+		webView.render(text, fontSize: 90, textColor: "000000", backgroundColor: "ffffff", markdown: false) // markdown: true
+	}
+	
+	func push(rating: Int) {
+		let element = dueCards[current]
+		var documentReference: DocumentReference?
+		documentReference = firestore.collection("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
+			guard error == nil, let documentReference = documentReference else { return }
+			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: Rating.get(rating), next: nil))
 		}
 	}
 	
@@ -137,10 +88,46 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RatingCollectionViewCell
-		let element = Rating.get(indexPath.item)
+		let element = Rating.get(normalize(rating: indexPath.item))
 		cell.imageView.image = element.image
 		cell.label.text = element.description
 		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		push(rating: normalize(rating: indexPath.item))
+		current += 1
+		progressView.setProgress(Float(current) / Float(dueCards.count), animated: true)
+		let shouldContinue = current < dueCards.count
+		if shouldContinue {
+			UIView.animate(withDuration: 0.25, animations: {
+				self.frontWebView.alpha = 0
+			}) { finished in
+				if finished {
+					self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
+					UIView.animate(withDuration: 0.25) {
+						self.frontWebView.alpha = 1
+					}
+				}
+			}
+		}
+		UIView.animate(withDuration: 0.5, animations: {
+			self.barView.alpha = 0
+			self.backWebView.alpha = 0
+		}) { finished in
+			if finished {
+				self.barView.isHidden = true
+				self.backWebView.isHidden = true
+				if shouldContinue {
+					let element = self.dueCards[self.current].card
+					self.load(element.back, webView: self.backWebView)
+				} else {
+					self.performSegue(withIdentifier: "recap", sender: self)
+				}
+			}
+		}
+		ratingCollectionViewHeightConstraint.constant = 0
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: view.layoutIfNeeded, completion: nil)
 	}
 }
 

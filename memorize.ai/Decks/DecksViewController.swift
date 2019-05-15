@@ -226,8 +226,8 @@ class DeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	
 	func due(_ isDue: Bool) {
-		layer.borderWidth = isDue ? 2 : 0
-		layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : nil
+		layer.borderWidth = isDue ? 2 : 1
+		layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 	}
 }
 

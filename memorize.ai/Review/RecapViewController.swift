@@ -4,7 +4,7 @@ import WebKit
 class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var recapCollectionView: UICollectionView!
 	
-	var cards = [(id: String, deck: Deck, card: Card, quality: Int, next: Date?)]()
+	var cards = [(id: String, deck: Deck, card: Card, rating: Rating, next: Date?)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +53,11 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 			cell.nextLabel.text = "Loading..."
 			firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let next = snapshot?.get("next") as? Date else { return }
-				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, quality: element.quality, next: next)
-				cell.nextLabel.text = next.format()
+				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, rating: element.rating, next: next)
+				cell.nextLabel.text = "Next: \(next.format())"
 			}
 		}
-		cell.ratingImageView.image = Rating.image(element.quality)
+		cell.ratingImageView.image = element.rating.image
 		return cell
 	}
 }
