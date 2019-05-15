@@ -99,8 +99,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		let toggleButton = UIButton(type: .custom)
 		toggleButton.setImage(expanded ? #imageLiteral(resourceName: "White Left Arrow") : #imageLiteral(resourceName: "White Right Arrow"), for: .normal)
 		toggleButton.addTarget(self, action: #selector(toggleExpand), for: .touchUpInside)
-		toggleButton.widthAnchor.constraint(equalToConstant: 42).isActive = true
-		toggleButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+		toggleButton.widthAnchor.constraint(equalToConstant: 31.5).isActive = true
+		toggleButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
 		navigationItem.setRightBarButton(UIBarButtonItem(customView: toggleButton), animated: true)
 	}
 	
