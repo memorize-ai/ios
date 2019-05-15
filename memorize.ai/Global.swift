@@ -198,7 +198,7 @@ class Rating {
 	}
 	
 	static func image(_ rating: Int) -> UIImage {
-		return rating < 0 || rating > 5 ? #imageLiteral(resourceName: "Gray Circle") : UIImage(named: "Quality \(rating)") ?? #imageLiteral(resourceName: "Gray Circle")
+		return rating < 0 || rating > 5 ? #imageLiteral(resourceName: "Gray Circle") : UIImage(named: "Rating \(rating)") ?? #imageLiteral(resourceName: "Gray Circle")
 	}
 	
 	static func color(_ rating: Int) -> UIColor {

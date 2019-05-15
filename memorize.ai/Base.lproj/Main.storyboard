@@ -1462,7 +1462,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Quality 5" translatesAutoresizingMaskIntoConstraints="NO" id="8yT-87-ama">
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rating 5" translatesAutoresizingMaskIntoConstraints="NO" id="8yT-87-ama">
                                                     <rect key="frame" x="353" y="6" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="v67-YB-1rK"/>
@@ -3166,7 +3166,7 @@
         <image name="Left Arrow" width="626" height="626"/>
         <image name="Logo" width="783" height="484"/>
         <image name="Offline" width="288" height="288"/>
-        <image name="Quality 5" width="825" height="825"/>
+        <image name="Rating 5" width="825" height="825"/>
         <image name="Transparent Logo" width="1191" height="732"/>
         <image name="X" width="512" height="512"/>
     </resources>
