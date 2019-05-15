@@ -105,6 +105,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.reloadReview()
 			}
 		}
+		reloadReview()
 		loadCards()
 		createHelloLabel()
 		loadProfileBarButtonItem(nil)

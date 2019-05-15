@@ -50,6 +50,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		decksCollectionView.reloadData()
 		cardsCollectionView.reloadData()
 		actionsCollectionView.reloadData()
+		if decks.isEmpty {
+			navigationController?.popViewController(animated: true)
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
