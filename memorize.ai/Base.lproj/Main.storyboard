@@ -246,7 +246,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4T-aQ-zo0">
-                                                    <rect key="frame" x="44" y="0.0" width="290" height="44"/>
+                                                    <rect key="frame" x="44" y="4" width="290" height="40"/>
                                                     <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <wkWebViewConfiguration key="configuration">
                                                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -261,7 +261,7 @@
                                                 <constraint firstItem="g4T-aQ-zo0" firstAttribute="leading" secondItem="ejf-AJ-dUj" secondAttribute="trailing" constant="8" id="TwZ-78-Cbz"/>
                                                 <constraint firstItem="ejf-AJ-dUj" firstAttribute="leading" secondItem="wFC-qK-0PS" secondAttribute="leading" constant="8" id="amn-9P-Hzt"/>
                                                 <constraint firstItem="ejf-AJ-dUj" firstAttribute="top" secondItem="wFC-qK-0PS" secondAttribute="top" constant="8" id="bQz-kA-3vX"/>
-                                                <constraint firstItem="g4T-aQ-zo0" firstAttribute="top" secondItem="wFC-qK-0PS" secondAttribute="top" id="vpj-eF-vz0"/>
+                                                <constraint firstItem="g4T-aQ-zo0" firstAttribute="top" secondItem="wFC-qK-0PS" secondAttribute="top" constant="4" id="vpj-eF-vz0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3171,7 +3171,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h5F-6A-J1r"/>
+        <segue reference="1zn-0n-nWw"/>
         <segue reference="NJF-dv-A8u"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
