@@ -1,18 +1,14 @@
 import UIKit
 import FirebaseFirestore
+import WebKit
 
-class ReviewViewController: UIViewController {
-	@IBOutlet weak var cardView: UIView!
-	@IBOutlet weak var frontLabel: UILabel!
-	@IBOutlet weak var cardBarView: UIView!
-	@IBOutlet weak var backLabel: UILabel!
-	@IBOutlet weak var qualityImageView: UIImageView!
-	@IBOutlet weak var quality0Button: UIButton!
-	@IBOutlet weak var quality1Button: UIButton!
-	@IBOutlet weak var quality2Button: UIButton!
-	@IBOutlet weak var quality3Button: UIButton!
-	@IBOutlet weak var quality4Button: UIButton!
-	@IBOutlet weak var quality5Button: UIButton!
+class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	@IBOutlet weak var frontWebView: WKWebView!
+	@IBOutlet weak var frontWebViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var barView: UIView!
+	@IBOutlet weak var backWebView: WKWebView!
+	@IBOutlet weak var backWebViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var ratingCollectionView: UICollectionView!
 	
 	var dueCards = [(deck: Deck, card: Card)]()
 	var reviewedCards = [(id: String, deck: Deck, card: Card, quality: Int, next: Date?)]()
@@ -22,15 +18,25 @@ class ReviewViewController: UIViewController {
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
 		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
-		cardView.layer.borderWidth = 1
-		cardView.layer.borderColor = UIColor.lightGray.cgColor
-		deselectQualityButtons()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		dueCards = decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
-		frontLabel.text = current().card.front
+		ChangeHandler.updateAndCall(.cardDue) { change in
+			if change == .cardModified || change == .cardRemoved {
+				let _dueCards = self.loadDueCards()
+				if self.dueCards.count != _dueCards.count {
+					self.dueCards = _dueCards
+				}
+				let currentCard = self.current().card
+				self.load(currentCard.front, webView: self.frontWebView)
+				self.load(currentCard.back, webView: self.backWebView)
+			}
+		}
+	}
+	
+	func loadDueCards() -> [(deck: Deck, card: Card)] {
+		return decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
 	}
 	
 	func current() -> (deck: Deck, card: Card) {
@@ -47,6 +53,11 @@ class ReviewViewController: UIViewController {
 	
 	func deselectQualityButtons() {
 		qualityButtons().forEach { $0.layer.borderColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1) }
+		load
+	}
+	
+	func load(_ text: String, webView: WKWebView) {
+		webView.render(text, fontSize: 90, textColor: "333333", backgroundColor: "e7e7e7", markdown: false/*true*/)
 	}
 	
 	@IBAction func next(_ sender: UIButton) {
@@ -119,4 +130,21 @@ class ReviewViewController: UIViewController {
 			dueCards.removeFirst()
 		}
 	}
+	
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return Rating.ratings.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RatingCollectionViewCell
+		let element = Rating.get(indexPath.item)
+		cell.imageView.image = element.image
+		cell.label.text = element.description
+		return cell
+	}
+}
+
+class RatingCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var label: UILabel!
 }

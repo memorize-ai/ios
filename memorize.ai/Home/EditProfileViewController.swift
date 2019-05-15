@@ -14,7 +14,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		updateAndCallChangeHandler(.profileModified) { change in
+		ChangeHandler.updateAndCall(.profileModified) { change in
 			if change == .profileModified || change == .profilePicture {
 				self.nameLabel.text = name
 				self.emailLabel.text = email

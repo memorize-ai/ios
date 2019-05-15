@@ -11,7 +11,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		updateChangeHandler { change in
+		ChangeHandler.update { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved {
 				self.loadCards()
 			}

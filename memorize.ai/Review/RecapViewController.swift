@@ -19,7 +19,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		updateChangeHandler { change in
+		ChangeHandler.update { change in
 			if change == .cardModified {
 				self.recapCollectionView.reloadData()
 			}

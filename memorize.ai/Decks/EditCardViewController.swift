@@ -29,7 +29,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		updateChangeHandler { change in
+		ChangeHandler.update { change in
 			if change == .cardModified {
 				self.frontTextView.text = self.card!.front
 				self.backTextView.text = self.card!.back

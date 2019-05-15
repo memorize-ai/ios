@@ -20,7 +20,6 @@ var email: String?
 var slug: String?
 var profilePicture: UIImage?
 var decks = [Deck]()
-var changeHandler: ((Change) -> Void)?
 var token: String?
 
 class Deck {
@@ -125,7 +124,7 @@ class Card {
 	static func poll() {
 		Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
 			if !Deck.allDue().isEmpty {
-				callChangeHandler(.cardDue)
+				ChangeHandler.call(.cardDue)
 			}
 		}
 	}
@@ -175,6 +174,33 @@ class History {
 }
 
 class Rating {
+	static let ratings = [
+		Rating(image: image(0), color: color(0), description: description(0)),
+		Rating(image: image(1), color: color(1), description: description(1)),
+		Rating(image: image(2), color: color(2), description: description(2)),
+		Rating(image: image(3), color: color(3), description: description(3)),
+		Rating(image: image(4), color: color(4), description: description(4)),
+		Rating(image: image(5), color: color(5), description: description(5))
+	]
+	
+	let image: UIImage
+	let color: UIColor
+	let description: String
+	
+	init(image: UIImage, color: UIColor, description: String) {
+		self.image = image
+		self.color = color
+		self.description = description
+	}
+	
+	static func get(_ rating: Int) -> Rating {
+		return ratings[rating]
+	}
+	
+	static func image(_ rating: Int) -> UIImage {
+		return rating < 0 || rating > 5 ? #imageLiteral(resourceName: "Gray Circle") : UIImage(named: "Quality \(rating)") ?? #imageLiteral(resourceName: "Gray Circle")
+	}
+	
 	static func color(_ rating: Int) -> UIColor {
 		switch rating {
 		case 0:
@@ -194,34 +220,24 @@ class Rating {
 		}
 	}
 	
-	static func image(_ rating: Int) -> UIImage {
-		return rating < 0 || rating > 5 ? #imageLiteral(resourceName: "Gray Circle") : UIImage(named: "Quality \(rating)") ?? #imageLiteral(resourceName: "Gray Circle")
+	static func description(_ rating: Int) -> String {
+		switch rating {
+		case 0:
+			return "Forgot"
+		case 1:
+			return "Kind of forgot"
+		case 2:
+			return "Almost remembered"
+		case 3:
+			return "Struggled and got it"
+		case 4:
+			return "Hesitated"
+		case 5:
+			return "Easy"
+		default:
+			return ""
+		}
 	}
-}
-
-enum Change {
-	case profileModified
-	case profilePicture
-	case deckModified
-	case deckRemoved
-	case cardModified
-	case cardRemoved
-	case historyModified
-	case historyRemoved
-	case cardDue
-}
-
-func callChangeHandler(_ change: Change) {
-	changeHandler?(change)
-}
-
-func updateChangeHandler(_ newChangeHandler: ((Change) -> Void)?) {
-	changeHandler = newChangeHandler
-}
-
-func updateAndCallChangeHandler(_ change: Change, _ newChangeHandler: ((Change) -> Void)?) {
-	updateChangeHandler(newChangeHandler)
-	callChangeHandler(change)
 }
 
 func pushToken() {

@@ -60,7 +60,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									self.navigationController?.setNavigationBarHidden(false, animated: false)
 									self.reloadProfileBarButtonItem()
 									startup = false
-									callChangeHandler(.profileModified)
+									ChangeHandler.call(.profileModified)
 								}
 								self.loadDecks()
 							} else if let error = error {
@@ -97,7 +97,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		flowLayout.itemSize = CGSize(width: width, height: width / 1.75)
 		actionsCollectionView.collectionViewLayout = flowLayout
 		reviewButton.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-		updateChangeHandler { change in
+		ChangeHandler.update { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
 				self.loadCards()
 				self.actionsCollectionView.reloadData()
@@ -163,7 +163,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			self.leftBarButtonItem(image: image)
 			profilePicture = image
 			saveImage(image)
-			callChangeHandler(.profilePicture)
+			ChangeHandler.call(.profilePicture)
 		}
 	}
 	
@@ -241,7 +241,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						} else {
 							decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
 						}
-						callChangeHandler(.deckModified)
+						ChangeHandler.call(.deckModified)
 						firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 							snapshot.forEach {
@@ -267,7 +267,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardLast, next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
 										}
 										self.reloadReview()
-										callChangeHandler(.cardModified)
+										ChangeHandler.call(.cardModified)
 									}
 								case .modified:
 									let modifiedCard = localDeck.cards[localDeck.card(id: cardId)!]
@@ -276,11 +276,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 										modifiedCard.back = back
 									}
 									self.reloadReview()
-									callChangeHandler(.cardModified)
+									ChangeHandler.call(.cardModified)
 								case .removed:
 									localDeck.cards = localDeck.cards.filter { return $0.id != cardId }
 									self.reloadReview()
-									callChangeHandler(.cardRemoved)
+									ChangeHandler.call(.cardRemoved)
 								@unknown default:
 									return
 								}
@@ -291,10 +291,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					if let mastered = deck.get("mastered") as? Int {
 						decks[Deck.id(deckId)!].mastered = mastered
 					}
-					callChangeHandler(.deckModified)
+					ChangeHandler.call(.deckModified)
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
-					callChangeHandler(.deckRemoved)
+					ChangeHandler.call(.deckRemoved)
 				@unknown default:
 					return
 				}

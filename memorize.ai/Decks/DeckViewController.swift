@@ -55,7 +55,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				case .added:
 					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: Card.Last(id: "nil", date: Date(), rating: 0, elapsed: 0), next: Date(), history: [], deck: self.deckId!))
 					self.reloadCards()
-					callChangeHandler(.cardModified)
+					ChangeHandler.call(.cardModified)
 				case .modified:
 					for i in 0..<self.cards.count {
 						let oldCard = self.cards[i]
@@ -63,13 +63,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 							self.cards[i].front = card.get("front") as? String ?? oldCard.front
 							self.cards[i].back = card.get("back") as? String ?? oldCard.back
 							self.reloadCards()
-							callChangeHandler(.cardModified)
+							ChangeHandler.call(.cardModified)
 						}
 					}
 				case .removed:
 					self.cards = self.cards.filter { return $0.id != cardId }
 					self.reloadCards()
-					callChangeHandler(.cardRemoved)
+					ChangeHandler.call(.cardRemoved)
 				@unknown default:
 					return
 				}

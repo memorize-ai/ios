@@ -29,7 +29,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		updateChangeHandler { change in
+		ChangeHandler.update { change in
 			if change == .deckModified {
 				self.decksCollectionView.reloadData()
 			} else if change == .deckRemoved {
