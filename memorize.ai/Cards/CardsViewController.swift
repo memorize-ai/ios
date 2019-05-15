@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 
 class CardsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var cardsCollectionView: UICollectionView!
@@ -45,7 +46,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 				deck.image = image
 			}
 		}
-		cell.nameLabel.text = element.front
+		cell.load(element.front)
 		cell.nextLabel.text = element.next.format()
 		return cell
 	}
@@ -55,12 +56,16 @@ class CardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var webView: WKWebView!
 	@IBOutlet weak var nextLabel: UILabel!
 	
 	func due(_ isDue: Bool) {
 		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		imageView.layer.borderWidth = 2
 		imageView.layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+	}
+	
+	func load(_ text: String) {
+		webView.render(text, fontSize: 90, textColor: "000000", backgroundColor: "e7e7e7", markdown: false)
 	}
 }

@@ -3087,12 +3087,6 @@
                                                         <constraint firstItem="zgr-ZT-03n" firstAttribute="centerX" secondItem="DUP-0k-ibX" secondAttribute="centerX" id="zVY-gv-euZ"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="m75-lo-ubz">
-                                                    <rect key="frame" x="104" y="9.9999999999999982" width="280" height="23.333333333333329"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="usi-EV-4Zr">
                                                     <rect key="frame" x="104" y="53" width="280" height="21"/>
                                                     <constraints>
@@ -3102,23 +3096,31 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3D-yw-AAW">
+                                                    <rect key="frame" x="104" y="10" width="280" height="33"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.90396433639999996" green="0.90396433639999996" blue="0.90396433639999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="usi-EV-4Zr" secondAttribute="bottom" constant="10" id="4np-Jg-2ZI"/>
+                                            <constraint firstItem="a3D-yw-AAW" firstAttribute="leading" secondItem="DUP-0k-ibX" secondAttribute="trailing" constant="10" id="7W5-RI-wYg"/>
                                             <constraint firstAttribute="bottom" secondItem="DUP-0k-ibX" secondAttribute="bottom" constant="10" id="DGU-dU-I0k"/>
-                                            <constraint firstItem="m75-lo-ubz" firstAttribute="leading" secondItem="DUP-0k-ibX" secondAttribute="trailing" constant="10" id="JGl-DH-Zhe"/>
                                             <constraint firstItem="DUP-0k-ibX" firstAttribute="leading" secondItem="ZQp-u2-ed2" secondAttribute="trailing" constant="10" id="M7v-pZ-uYa"/>
                                             <constraint firstItem="DUP-0k-ibX" firstAttribute="top" secondItem="3nk-sD-BI2" secondAttribute="top" constant="10" id="T2I-5H-Jyh"/>
                                             <constraint firstItem="ZQp-u2-ed2" firstAttribute="leading" secondItem="3nk-sD-BI2" secondAttribute="leading" id="Vr9-oC-Dm1"/>
                                             <constraint firstItem="ZQp-u2-ed2" firstAttribute="top" secondItem="3nk-sD-BI2" secondAttribute="top" id="emB-lC-fMF"/>
-                                            <constraint firstAttribute="trailing" secondItem="m75-lo-ubz" secondAttribute="trailing" constant="10" id="i7g-D7-AJn"/>
                                             <constraint firstItem="usi-EV-4Zr" firstAttribute="leading" secondItem="DUP-0k-ibX" secondAttribute="trailing" constant="10" id="jQN-lF-cOC"/>
+                                            <constraint firstAttribute="trailing" secondItem="a3D-yw-AAW" secondAttribute="trailing" constant="10" id="m3w-aw-gnf"/>
+                                            <constraint firstItem="a3D-yw-AAW" firstAttribute="top" secondItem="3nk-sD-BI2" secondAttribute="top" constant="10" id="rdt-Dh-ucT"/>
                                             <constraint firstAttribute="bottom" secondItem="ZQp-u2-ed2" secondAttribute="bottom" id="uJH-gv-Tuf"/>
-                                            <constraint firstItem="usi-EV-4Zr" firstAttribute="top" relation="greaterThanOrEqual" secondItem="m75-lo-ubz" secondAttribute="bottom" constant="10" id="wWX-OZ-WBD"/>
+                                            <constraint firstItem="usi-EV-4Zr" firstAttribute="top" secondItem="a3D-yw-AAW" secondAttribute="bottom" constant="10" id="vbb-qk-DGI"/>
                                             <constraint firstAttribute="trailing" secondItem="usi-EV-4Zr" secondAttribute="trailing" constant="10" id="yBH-b9-l8h"/>
-                                            <constraint firstItem="m75-lo-ubz" firstAttribute="top" secondItem="3nk-sD-BI2" secondAttribute="top" constant="10" id="yL3-Cv-NOy"/>
                                         </constraints>
                                         <size key="customSize" width="394" height="84"/>
                                         <userDefinedRuntimeAttributes>
@@ -3130,8 +3132,8 @@
                                             <outlet property="barView" destination="ZQp-u2-ed2" id="ofs-tC-ixo"/>
                                             <outlet property="imageActivityIndicator" destination="zgr-ZT-03n" id="r0K-Wd-Btw"/>
                                             <outlet property="imageView" destination="fU3-UC-48B" id="Iyk-x6-auM"/>
-                                            <outlet property="nameLabel" destination="m75-lo-ubz" id="LdR-Bc-4oA"/>
                                             <outlet property="nextLabel" destination="usi-EV-4Zr" id="k5V-HD-vcG"/>
+                                            <outlet property="webView" destination="a3D-yw-AAW" id="ET3-87-0jU"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
