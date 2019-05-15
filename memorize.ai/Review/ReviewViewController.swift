@@ -30,10 +30,11 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		navigationController?.navigationBar.tintColor = .darkGray
 		dueCards = decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
-			if change == .cardModified {
-				let currentCard = self.dueCards[self.current].card
-				self.load(currentCard.front, webView: self.frontWebView)
-				self.load(currentCard.back, webView: self.backWebView)
+			if change == .cardModified || change == .deckModified {
+				let element = self.dueCards[self.current]
+				self.load(element.card.front, webView: self.frontWebView)
+				self.load(element.card.back, webView: self.backWebView)
+				self.navigationItem.title = element.deck.name
 			}
 		}
 	}
@@ -70,7 +71,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func load(_ text: String, webView: WKWebView) {
-		webView.render(text, fontSize: 90, textColor: "000000", backgroundColor: "ffffff", markdown: false) // markdown: true
+		webView.render(text, fontSize: 90, textColor: "000000", backgroundColor: "ffffff", markdown: false)
 	}
 	
 	func push(rating: Int) {
@@ -102,6 +103,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		if shouldContinue {
 			UIView.animate(withDuration: 0.25, animations: {
 				self.frontWebView.alpha = 0
+				self.navigationItem.title = self.dueCards[self.current].deck.name
 			}) { finished in
 				if finished {
 					self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)

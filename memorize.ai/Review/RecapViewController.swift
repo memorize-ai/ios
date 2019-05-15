@@ -48,7 +48,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 		cell.load(element.card.front)
 		if let next = element.next {
-			cell.nextLabel.text = next.format()
+			cell.nextLabel.text = "Next: \(next.format())"
 		} else {
 			cell.nextLabel.text = "Loading..."
 			firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
