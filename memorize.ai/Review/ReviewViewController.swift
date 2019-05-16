@@ -56,6 +56,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			backButton.isEnabled = false
 			leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 			rightButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+			leftButton.alpha = 0
+			rightButton.alpha = 0
+			leftButton.isHidden = false
+			rightButton.isHidden = false
 			disable(leftButton)
 			disable(rightButton)
 			UIView.animate(withDuration: 0.25, animations: {

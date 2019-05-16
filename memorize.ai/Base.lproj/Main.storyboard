@@ -801,7 +801,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0oV-0w-Hbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2186.9565217391305" y="133.69565217391306"/>
+            <point key="canvasLocation" x="2187" y="134"/>
         </scene>
         <!--Decks-->
         <scene sceneID="SAJ-zz-F5f">
@@ -3197,7 +3197,6 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fjp-pM-RhT"/>
         <segue reference="1zn-0n-nWw"/>
         <segue reference="NJF-dv-A8u"/>
         <segue reference="xrl-eN-ji3"/>
