@@ -5,10 +5,10 @@ import WebKit
 class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var progressView: UIProgressView!
 	@IBOutlet weak var frontWebView: WKWebView!
-	@IBOutlet weak var frontWebViewHeightConstraint: NSLayoutConstraint!
-	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var backWebView: WKWebView!
-	@IBOutlet weak var backWebViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var backButton: UIButton!
+	@IBOutlet weak var leftButton: UIButton!
+	@IBOutlet weak var rightButton: UIButton!
 	@IBOutlet weak var ratingCollectionView: UICollectionView!
 	@IBOutlet weak var ratingCollectionViewHeightConstraint: NSLayoutConstraint!
 	
@@ -18,9 +18,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let tap = UITapGestureRecognizer(target: self, action: #selector(tappedScreen))
-		tap.cancelsTouchesInView = false
-		view.addGestureRecognizer(tap)
+		backButton.layer.borderColor = UIColor.darkGray.cgColor
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -51,19 +49,80 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		recapVC.cards = reviewedCards
 	}
 	
-	@objc func tappedScreen() {
-		if backWebView.isHidden {
-			barView.alpha = 0
-			backWebView.alpha = 0
-			barView.isHidden = false
-			backWebView.isHidden = false
-			UIView.animate(withDuration: 0.5) {
-				self.barView.alpha = 1
-				self.backWebView.alpha = 1
+	@IBAction func back() {
+		if backButton.isHidden {
+			disable(rightButton)
+		} else {
+			backButton.isEnabled = false
+			leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+			rightButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+			disable(leftButton)
+			disable(rightButton)
+			UIView.animate(withDuration: 0.25, animations: {
+				self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+				self.backButton.alpha = 0
+				self.leftButton.transform = .identity
+				self.leftButton.alpha = 1
+				self.rightButton.transform = .identity
+				self.rightButton.alpha = 1
+			}) {
+				guard $0 else { return }
+				self.backButton.isHidden = true
+				self.backButton.isEnabled = true
 			}
-			ratingCollectionViewHeightConstraint.constant = ratingCollectionView.contentSize.height
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 		}
+		UIView.animate(withDuration: 0.25, animations: {
+			self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
+			self.frontWebView.alpha = 0
+		}) {
+			guard $0 else { return }
+			self.frontWebView.isHidden = true
+			self.backWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
+			self.backWebView.alpha = 0
+			self.backWebView.isHidden = false
+			UIView.animate(withDuration: 0.25, animations: {
+				self.backWebView.transform = .identity
+				self.backWebView.alpha = 1
+			}) {
+				guard $0 else { return }
+				self.enable(self.leftButton)
+				if self.backButton.isHidden {
+					self.ratingCollectionViewHeightConstraint.constant = self.ratingCollectionView.contentSize.height
+					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: self.view.layoutIfNeeded, completion: nil)
+				}
+			}
+		}
+	}
+	
+	@IBAction func front() {
+		disable(leftButton)
+		UIView.animate(withDuration: 0.25, animations: {
+			self.backWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
+			self.backWebView.alpha = 0
+		}) {
+			guard $0 else { return }
+			self.backWebView.isHidden = true
+			self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
+			self.frontWebView.alpha = 0
+			self.frontWebView.isHidden = false
+			UIView.animate(withDuration: 0.25, animations: {
+				self.frontWebView.transform = .identity
+				self.frontWebView.alpha = 1
+			}) {
+				guard $0 else { return }
+				self.enable(self.rightButton)
+			}
+		}
+	}
+	
+	func enable(_ button: UIButton) {
+		button.isEnabled = true
+		button.tintColor = .darkGray
+	}
+	
+	func disable(_ button: UIButton) {
+		button.isEnabled = false
+		button.tintColor = .lightGray
 	}
 	
 	func normalize(rating: Int) -> Int {
@@ -100,32 +159,66 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		current += 1
 		progressView.setProgress(Float(current) / Float(dueCards.count), animated: true)
 		let shouldContinue = current < dueCards.count
-		if shouldContinue {
-			UIView.animate(withDuration: 0.25, animations: {
-				self.frontWebView.alpha = 0
-				self.navigationItem.title = self.dueCards[self.current].deck.name
-			}) { finished in
-				if finished {
+		UIView.animate(withDuration: 0.25, animations: {
+			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+			self.leftButton.alpha = 0
+			self.rightButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+			self.rightButton.alpha = 0
+		}) {
+			guard $0 else { return }
+			if shouldContinue {
+				if self.frontWebView.isHidden {
 					self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
-					UIView.animate(withDuration: 0.25) {
-						self.frontWebView.alpha = 1
+					UIView.animate(withDuration: 0.25, animations: {
+						self.backWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
+						self.backWebView.alpha = 0
+					}) {
+						guard $0 else { return }
+						self.backWebView.isHidden = true
+						self.load(self.dueCards[self.current].card.back, webView: self.backWebView)
+						self.frontWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
+						self.frontWebView.alpha = 0
+						self.frontWebView.isHidden = false
+						UIView.animate(withDuration: 0.25, animations: {
+							self.frontWebView.transform = .identity
+							self.frontWebView.alpha = 1
+						}) {
+							guard $0 else { return }
+							self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+							self.backButton.alpha = 0
+							self.backButton.isHidden = false
+							UIView.animate(withDuration: 0.25) {
+								self.backButton.transform = .identity
+								self.backButton.alpha = 1
+							}
+						}
+					}
+				} else {
+					self.load(self.dueCards[self.current].card.back, webView: self.backWebView)
+					UIView.animate(withDuration: 0.25, animations: {
+						self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
+						self.frontWebView.alpha = 0
+					}) {
+						guard $0 else { return }
+						self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
+						self.frontWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
+						UIView.animate(withDuration: 0.25, animations: {
+							self.frontWebView.transform = .identity
+							self.frontWebView.alpha = 1
+						}) {
+							guard $0 else { return }
+							self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+							self.backButton.alpha = 0
+							self.backButton.isHidden = false
+							UIView.animate(withDuration: 0.25) {
+								self.backButton.transform = .identity
+								self.backButton.alpha = 1
+							}
+						}
 					}
 				}
-			}
-		}
-		UIView.animate(withDuration: 0.5, animations: {
-			self.barView.alpha = 0
-			self.backWebView.alpha = 0
-		}) { finished in
-			if finished {
-				self.barView.isHidden = true
-				self.backWebView.isHidden = true
-				if shouldContinue {
-					let element = self.dueCards[self.current].card
-					self.load(element.back, webView: self.backWebView)
-				} else {
-					self.performSegue(withIdentifier: "recap", sender: self)
-				}
+			} else {
+				self.performSegue(withIdentifier: "recap", sender: self)
 			}
 		}
 		ratingCollectionViewHeightConstraint.constant = 0
