@@ -52,6 +52,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		result.removeAll()
+		decksCollectionView.reloadData()
 		if searchText.trim().isEmpty {
 			decksCollectionView.reloadData()
 		} else {
