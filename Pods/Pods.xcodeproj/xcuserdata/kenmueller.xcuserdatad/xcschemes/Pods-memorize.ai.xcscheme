@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A67C08475D726C0AC5F71640A30FC885"
+               BlueprintIdentifier = "F4D4D83453D74B506D9C75FA98DEE696"
                BuildableName = "Pods_memorize_ai.framework"
                BlueprintName = "Pods-memorize.ai"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A67C08475D726C0AC5F71640A30FC885"
+            BlueprintIdentifier = "F4D4D83453D74B506D9C75FA98DEE696"
             BuildableName = "Pods_memorize_ai.framework"
             BlueprintName = "Pods-memorize.ai"
             ReferencedContainer = "container:Pods.xcodeproj">

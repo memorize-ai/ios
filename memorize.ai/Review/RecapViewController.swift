@@ -69,6 +69,6 @@ class RecapCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var ratingImageView: UIImageView!
 	
 	func load(_ text: String) {
-		webView.render(text, fontSize: 85, textColor: "000000", backgroundColor: "f2f2f2", markdown: false)
+		webView.render(text, fontSize: 85, textColor: "000000", backgroundColor: "f2f2f2")
 	}
 }

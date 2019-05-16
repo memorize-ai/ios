@@ -5,7 +5,6 @@ import FirebaseStorage
 import InstantSearchClient
 import AudioToolbox
 import WebKit
-import Down
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
@@ -286,7 +285,7 @@ func saveImage(_ image: UIImage) {
 }
 
 extension WKWebView {
-	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String, markdown: Bool) {
+	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -308,7 +307,7 @@ extension WKWebView {
 					</style>
 				</head>
 				<body>
-					<div>\(markdown ? (try? Down(markdownString: text).toHTML()) ?? text : text)</div>
+					<div>\(text)</div>
 					<script>renderMathInElement(document.body)</script>
 				</body>
 			</html>

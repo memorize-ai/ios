@@ -17,10 +17,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	class Action {
 		let image: UIImage?
 		let name: String
-		let action: Selector?
+		let action: (UserViewController) -> () -> Void
 		var enabled: Bool
 		
-		init(image: UIImage?, name: String, action: Selector?) {
+		init(image: UIImage?, name: String, action: @escaping (UserViewController) -> () -> Void) {
 			self.image = image
 			self.name = name
 			self.action = action
@@ -28,7 +28,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "DECKS", action: #selector(showDecks)), Action(image: #imageLiteral(resourceName: "Cards"), name: "CARDS", action: #selector(showCards)), Action(image: #imageLiteral(resourceName: "Create"), name: "CREATE DECK", action: #selector(createDeck)), Action(image: #imageLiteral(resourceName: "Search"), name: "SEARCH DECKS", action: #selector(searchDeck))]
+	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "DECKS", action: showDecks), Action(image: #imageLiteral(resourceName: "Cards"), name: "CARDS", action: showCards), Action(image: #imageLiteral(resourceName: "Create"), name: "CREATE DECK", action: createDeck), Action(image: #imageLiteral(resourceName: "Search"), name: "SEARCH DECKS", action: searchDeck)]
 	var cards = [(image: UIImage, card: Card)]()
 	
 	override func viewDidLoad() {
@@ -200,19 +200,19 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		performSegue(withIdentifier: "editProfile", sender: self)
 	}
 	
-	@objc func showDecks() {
+	func showDecks() {
 		performSegue(withIdentifier: "decks", sender: self)
 	}
 	
-	@objc func showCards() {
+	func showCards() {
 		performSegue(withIdentifier: "cards", sender: self)
 	}
 	
-	@objc func createDeck() {
+	func createDeck() {
 		performSegue(withIdentifier: "createDeck", sender: self)
 	}
 	
-	@objc func searchDeck() {
+	func searchDeck() {
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
@@ -319,8 +319,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let element = actions[indexPath.item]
-		guard element.enabled, let action = element.action else { return }
-		performSelector(onMainThread: action, with: nil, waitUntilDone: false)
+		guard element.enabled else { return }
+		element.action(self)()
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -354,6 +354,6 @@ class UserCardsTableViewCell: UITableViewCell {
 	@IBOutlet weak var webView: WKWebView!
 	
 	func load(_ text: String) {
-		webView.render(text, fontSize: 90, textColor: "333333", backgroundColor: "f3f3f3", markdown: false)
+		webView.render(text, fontSize: 90, textColor: "333333", backgroundColor: "f3f3f3")
 	}
 }

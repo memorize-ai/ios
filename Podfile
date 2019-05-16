@@ -6,7 +6,6 @@ target 'memorize.ai' do
 	pod 'Firebase/Storage'
 	pod 'Firebase/Messaging'
 	pod 'InstantSearchClient', '~> 6.0'
-	pod 'Down', '0.5.2'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
   	end

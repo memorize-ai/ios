@@ -71,7 +71,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func load(_ text: String, webView: WKWebView) {
-		webView.render(text, fontSize: 90, textColor: "000000", backgroundColor: "ffffff", markdown: false)
+		webView.render(text, fontSize: 90, textColor: "000000", backgroundColor: "ffffff")
 	}
 	
 	func push(rating: Int) {
