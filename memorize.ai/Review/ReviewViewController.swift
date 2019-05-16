@@ -62,7 +62,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			rightButton.isHidden = false
 			disable(leftButton)
 			disable(rightButton)
-			UIView.animate(withDuration: 0.25, animations: {
+			UIView.animate(withDuration: 0.125, animations: {
 				self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 				self.backButton.alpha = 0
 				self.leftButton.transform = .identity
@@ -75,7 +75,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				self.backButton.isEnabled = true
 			}
 		}
-		UIView.animate(withDuration: 0.25, animations: {
+		UIView.animate(withDuration: 0.125, animations: {
 			self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
 			self.frontWebView.alpha = 0
 		}) {
@@ -84,7 +84,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			self.backWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
 			self.backWebView.alpha = 0
 			self.backWebView.isHidden = false
-			UIView.animate(withDuration: 0.25, animations: {
+			UIView.animate(withDuration: 0.125, animations: {
 				self.backWebView.transform = .identity
 				self.backWebView.alpha = 1
 			}) {
@@ -100,7 +100,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	@IBAction func front() {
 		disable(leftButton)
-		UIView.animate(withDuration: 0.25, animations: {
+		UIView.animate(withDuration: 0.125, animations: {
 			self.backWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
 			self.backWebView.alpha = 0
 		}) {
@@ -109,7 +109,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
 			self.frontWebView.alpha = 0
 			self.frontWebView.isHidden = false
-			UIView.animate(withDuration: 0.25, animations: {
+			UIView.animate(withDuration: 0.125, animations: {
 				self.frontWebView.transform = .identity
 				self.frontWebView.alpha = 1
 			}) {
@@ -163,7 +163,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		current += 1
 		progressView.setProgress(Float(current) / Float(dueCards.count), animated: true)
 		let shouldContinue = current < dueCards.count
-		UIView.animate(withDuration: 0.25, animations: {
+		UIView.animate(withDuration: 0.125, animations: {
 			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 			self.leftButton.alpha = 0
 			self.rightButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -173,7 +173,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			if shouldContinue {
 				if self.frontWebView.isHidden {
 					self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
-					UIView.animate(withDuration: 0.25, animations: {
+					UIView.animate(withDuration: 0.125, animations: {
 						self.backWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
 						self.backWebView.alpha = 0
 					}) {
@@ -183,7 +183,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 						self.frontWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
 						self.frontWebView.alpha = 0
 						self.frontWebView.isHidden = false
-						UIView.animate(withDuration: 0.25, animations: {
+						UIView.animate(withDuration: 0.125, animations: {
 							self.frontWebView.transform = .identity
 							self.frontWebView.alpha = 1
 						}) {
@@ -191,7 +191,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 							self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 							self.backButton.alpha = 0
 							self.backButton.isHidden = false
-							UIView.animate(withDuration: 0.25) {
+							UIView.animate(withDuration: 0.125) {
 								self.backButton.transform = .identity
 								self.backButton.alpha = 1
 							}
@@ -199,14 +199,14 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 					}
 				} else {
 					self.load(self.dueCards[self.current].card.back, webView: self.backWebView)
-					UIView.animate(withDuration: 0.25, animations: {
+					UIView.animate(withDuration: 0.125, animations: {
 						self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
 						self.frontWebView.alpha = 0
 					}) {
 						guard $0 else { return }
 						self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
 						self.frontWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
-						UIView.animate(withDuration: 0.25, animations: {
+						UIView.animate(withDuration: 0.125, animations: {
 							self.frontWebView.transform = .identity
 							self.frontWebView.alpha = 1
 						}) {
@@ -214,7 +214,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 							self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 							self.backButton.alpha = 0
 							self.backButton.isHidden = false
-							UIView.animate(withDuration: 0.25) {
+							UIView.animate(withDuration: 0.125) {
 								self.backButton.transform = .identity
 								self.backButton.alpha = 1
 							}
