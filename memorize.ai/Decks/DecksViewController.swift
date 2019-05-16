@@ -8,12 +8,17 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	
-	struct Action {
+	class Action {
 		let name: String
-		let action: Selector
+		let action: (DecksViewController) -> () -> Void
+		
+		init(name: String, action: @escaping (DecksViewController) -> () -> Void) {
+			self.name = name
+			self.action = action
+		}
 	}
 	
-	let actions = [Action(name: "new card", action: #selector(newCard)), Action(name: "review all", action: #selector(review)), Action(name: "visit page", action: #selector(visitPage))]
+	let actions = [Action(name: "new card", action: newCard), Action(name: "review all", action: review), Action(name: "visit page", action: visitPage)]
 	var deck: Deck?
 	var cardsDue = false
 	var expanded = false
@@ -174,9 +179,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			let element = actions[indexPath.item]
 			cell.button.setTitle(element.name, for: .normal)
 			cell.button.isEnabled = !(element.name == "review all" && Deck.allDue().isEmpty)
-			cell.action = {
-				self.performSelector(onMainThread: element.action, with: nil, waitUntilDone: false)
-			}
+			cell.action = element.action(self)
 			return cell
 		} else {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ThinCardCollectionViewCell

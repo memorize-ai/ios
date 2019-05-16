@@ -66,12 +66,18 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
 								self.decksCollectionView.reloadData()
 							}
+							self.decksCollectionView.reloadData()
 						}
+						self.decksCollectionView.reloadData()
 					}
+					self.decksCollectionView.reloadData()
 				} else if let error = error {
 					self.showAlert(error.localizedDescription)
+					self.decksCollectionView.reloadData()
 				}
+				self.decksCollectionView.reloadData()
 			}
+			self.decksCollectionView.reloadData()
 		}
 	}
 	
