@@ -294,6 +294,7 @@ extension WKWebView {
 					<link rel="stylesheet" href="katex.min.css">
 					<script src="katex.min.js"></script>
 					<script src="auto-render.min.js"></script>
+					\(preview ? "" : "<link rel=\"stylesheet\" href=\"prism.css\">")
 					<style>
 						html, body {
 							font-family: Helvetica;
@@ -316,6 +317,7 @@ extension WKWebView {
 				<body>
 					<div>\(preview ? text : (try? Down(markdownString: text).toHTML()) ?? text)</div>
 					<script>renderMathInElement(document.body)</script>
+					\(preview ? "" : "<script src=\"prism.js\"></script>")
 				</body>
 			</html>
 		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true))

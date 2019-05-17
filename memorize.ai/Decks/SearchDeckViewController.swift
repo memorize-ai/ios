@@ -53,9 +53,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		result.removeAll()
 		decksCollectionView.reloadData()
-		if searchText.trim().isEmpty {
-			decksCollectionView.reloadData()
-		} else {
+		if !searchText.trim().isEmpty {
 			decksIndex.search(Query(query: searchText)) { content, error in
 				if error == nil, let hits = content?["hits"] as? [[String : Any]] {
 					hits.forEach { hit in
@@ -67,18 +65,12 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
 								self.decksCollectionView.reloadData()
 							}
-							self.decksCollectionView.reloadData()
 						}
-						self.decksCollectionView.reloadData()
 					}
-					self.decksCollectionView.reloadData()
 				} else if let error = error {
 					self.showAlert(error.localizedDescription)
-					self.decksCollectionView.reloadData()
 				}
-				self.decksCollectionView.reloadData()
 			}
-			self.decksCollectionView.reloadData()
 		}
 	}
 	
