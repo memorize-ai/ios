@@ -585,7 +585,7 @@
                                             <constraint firstAttribute="height" constant="50" id="v4g-K2-JbN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
-                                        <state key="normal" title="VIEW BACK">
+                                        <state key="normal" title="CONTINUE">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -1130,11 +1130,11 @@
             <objects>
                 <viewController title="Create a deck" id="fwd-VK-lMc" customClass="CreateDeckViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ghe-gP-9Y9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="972"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oO-qd-AyE">
-                                <rect key="frame" x="0.0" y="20" width="414" height="952"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="740"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kR-cI-HsC">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="747.33333333333337"/>
@@ -1389,7 +1389,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xck-vS-WiA"/>
                     </view>
-                    <size key="freeformSize" width="414" height="972"/>
+                    <size key="freeformSize" width="414" height="760"/>
                     <connections>
                         <outlet property="changeButton" destination="gAX-O3-Job" id="boH-Ye-50f"/>
                         <outlet property="createActivityIndicator" destination="Yhj-CF-Pdo" id="AQ6-WQ-Uol"/>
@@ -1405,7 +1405,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xe7-WL-yX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1500.0000000000002" y="900.81521739130437"/>
+            <point key="canvasLocation" x="1500" y="814"/>
         </scene>
         <!--Search-->
         <scene sceneID="Eck-gd-bdm">

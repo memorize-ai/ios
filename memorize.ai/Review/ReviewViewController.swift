@@ -15,6 +15,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	var current = 0
 	var dueCards = [(deck: Deck, card: Card)]()
 	var reviewedCards = [(id: String, deck: Deck, card: Card, rating: Rating, next: Date?)]()
+	var shouldSegue = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -143,6 +144,9 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		documentReference = firestore.collection("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
 			guard error == nil, let documentReference = documentReference else { return }
 			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: Rating.get(rating), next: nil))
+			if self.shouldSegue {
+				self.performSegue(withIdentifier: "recap", sender: self)
+			}
 		}
 	}
 	
@@ -222,7 +226,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 					}
 				}
 			} else {
-				self.performSegue(withIdentifier: "recap", sender: self)
+				self.shouldSegue = true
 			}
 		}
 		ratingCollectionViewHeightConstraint.constant = 0
