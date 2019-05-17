@@ -29,12 +29,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.update { change in
-			if change == .cardModified {
-				self.frontTextView.text = self.card!.front
-				self.backTextView.text = self.card!.back
-			}
-		}
+		ChangeHandler.update(nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
@@ -66,6 +61,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 		if deck?.owner == id {
 			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").delete { error in
 				if error == nil {
+					(self.parent as? DecksViewController)?.cardsCollectionView.reloadData()
 					self.hide()
 				} else if let error = error {
 					self.showAlert(error.localizedDescription)
