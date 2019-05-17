@@ -39,6 +39,8 @@
 		4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D85C60C220638A2005B08DD /* SignInViewController.swift */; };
 		4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A345022090E9E0021474A /* ReviewViewController.swift */; };
 		4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D9392220A5C720049482C /* RecapViewController.swift */; };
+		4D9E7700228E53B9007EC018 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FE228E53B9007EC018 /* prism.js */; };
+		4D9E7701228E53B9007EC018 /* prism.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FF228E53B9007EC018 /* prism.css */; };
 		4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */; };
 		4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */; };
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
@@ -187,6 +189,8 @@
 		4D85C60C220638A2005B08DD /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4D8A345022090E9E0021474A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		4D8D9392220A5C720049482C /* RecapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapViewController.swift; sourceTree = "<group>"; };
+		4D9E76FE228E53B9007EC018 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
+		4D9E76FF228E53B9007EC018 /* prism.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = prism.css; sourceTree = "<group>"; };
 		4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				4D052AD52204259C0093B64E /* memorize.aiUITests */,
 				4D052AB12204259B0093B64E /* Products */,
 				4DB8ADBF2287CE1800A08AFA /* katex */,
+				4D9E76FD228E53B9007EC018 /* prism */,
 				4C58CF4B79F548F66481BA77 /* Pods */,
 				0E5B4BF503131F394CED0803 /* Frameworks */,
 			);
@@ -450,6 +455,15 @@
 				4D8D9392220A5C720049482C /* RecapViewController.swift */,
 			);
 			path = Review;
+			sourceTree = "<group>";
+		};
+		4D9E76FD228E53B9007EC018 /* prism */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E76FE228E53B9007EC018 /* prism.js */,
+				4D9E76FF228E53B9007EC018 /* prism.css */,
+			);
+			path = prism;
 			sourceTree = "<group>";
 		};
 		4DB8ADBF2287CE1800A08AFA /* katex */ = {
@@ -731,6 +745,7 @@
 				4DB8AE482287CE1800A08AFA /* KaTeX_Main-Bold.woff in Resources */,
 				4DB8AE312287CE1800A08AFA /* KaTeX_Typewriter-Regular.ttf in Resources */,
 				4DB8AE592287CE1800A08AFA /* KaTeX_Size1-Regular.ttf in Resources */,
+				4D9E7701228E53B9007EC018 /* prism.css in Resources */,
 				4DB8AE272287CE1800A08AFA /* KaTeX_AMS-Regular.ttf in Resources */,
 				4DB8AE512287CE1800A08AFA /* KaTeX_Size2-Regular.ttf in Resources */,
 				4DB8AE432287CE1800A08AFA /* KaTeX_Fraktur-Regular.woff2 in Resources */,
@@ -768,6 +783,7 @@
 				4DB8AE542287CE1800A08AFA /* KaTeX_Size1-Regular.woff2 in Resources */,
 				4DB8AE532287CE1800A08AFA /* KaTeX_Main-Italic.woff2 in Resources */,
 				4DB8AE392287CE1800A08AFA /* KaTeX_SansSerif-Bold.ttf in Resources */,
+				4D9E7700228E53B9007EC018 /* prism.js in Resources */,
 				4DB8AE262287CE1800A08AFA /* KaTeX_Main-Regular.woff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
