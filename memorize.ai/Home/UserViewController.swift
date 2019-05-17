@@ -80,12 +80,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				} catch {}
 			}
 			Card.poll()
-		} else if shouldLoadDecks {
-			loadDecks()
-			Card.poll()
-			createHelloLabel()
-			navigationController?.setNavigationBarHidden(false, animated: true)
-			shouldLoadDecks = false
 		}
 		navigationItem.setHidesBackButton(true, animated: true)
 	}
@@ -110,6 +104,15 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		loadProfileBarButtonItem(nil)
 		actionsCollectionView.reloadData()
 		cardsTableView.reloadData()
+		if shouldLoadDecks {
+			reloadProfileBarButtonItem()
+			loadDecks()
+			Card.poll()
+			createHelloLabel()
+			navigationController?.setNavigationBarHidden(false, animated: true)
+			navigationItem.setHidesBackButton(true, animated: true)
+			shouldLoadDecks = false
+		}
 	}
 	
 	@IBAction func retry() {
