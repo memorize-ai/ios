@@ -306,6 +306,9 @@ extension WKWebView {
 								overflow: hidden;
 								text-overflow: ellipsis;
 							}
+							.katex-display {
+								margin: 0;
+							}
 						""" : "")
 					</style>
 				</head>
