@@ -64,6 +64,9 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 								guard userError == nil, let snapshot = snapshot else { return }
 								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
 								self.decksCollectionView.reloadData()
+								Timer.scheduledTimer(withTimeInterval: 0.02, repeats: false) { _ in
+									self.decksCollectionView.reloadData()
+								}
 							}
 						}
 					}
