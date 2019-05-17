@@ -191,11 +191,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
 				self.cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
-			}) { finished in
-				if finished {
-					self.reviewButton.isHidden = true
-					self.cardsLabel.isHidden = true
-				}
+			}) {
+				guard $0 else { return }
+				self.reviewButton.isHidden = true
+				self.cardsLabel.isHidden = true
 			}
 		} else {
 			cardsLabel.text = "\(dueCards.count) card\(dueCards.count == 1 ? "" : "s") due"

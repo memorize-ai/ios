@@ -38,10 +38,9 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 		UIView.animate(withDuration: 0.2, animations: {
 			self.editCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 			self.view.backgroundColor = .clear
-		}) { finished in
-			if finished {
-				self.view.removeFromSuperview()
-			}
+		}) {
+			guard $0 else { return }
+			self.view.removeFromSuperview()
 		}
 	}
 	

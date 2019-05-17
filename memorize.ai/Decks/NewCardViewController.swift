@@ -45,10 +45,9 @@ class NewCardViewController: UIViewController, UITextViewDelegate {
 		UIView.animate(withDuration: 0.2, animations: {
 			self.newCardView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
 			self.view.backgroundColor = .clear
-		}) { finished in
-			if finished {
-				self.view.removeFromSuperview()
-			}
+		}) {
+			guard $0 else { return }
+			self.view.removeFromSuperview()
 		}
 	}
 	
