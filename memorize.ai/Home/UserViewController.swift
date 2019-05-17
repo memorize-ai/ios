@@ -11,6 +11,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var helloLabel: UILabel!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	@IBOutlet weak var cardsTableView: UITableView!
+	@IBOutlet weak var cardsTableViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var reviewButton: UIButton!
 	@IBOutlet weak var cardsLabel: UILabel!
 	
@@ -182,13 +183,17 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
 			reviewButton.isHidden = false
 			cardsLabel.isHidden = false
+			cardsTableViewBottomConstraint.constant = 20
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+				self.view.layoutIfNeeded()
 				self.reviewButton.transform = .identity
 				self.cardsLabel.transform = .identity
 			}, completion: nil)
 		} else if !reviewButton.isHidden && dueCards.isEmpty {
 			cardsLabel.text = "0 cards due"
+			cardsTableViewBottomConstraint.constant = -60
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+				self.view.layoutIfNeeded()
 				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
 				self.cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
 			}) {
