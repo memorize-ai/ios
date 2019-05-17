@@ -66,14 +66,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		deckVC.image = deck.image
 	}
 	
-	@objc func newDeck() {
-		guard let chooseDeckTypeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDeckType") as? ChooseDeckTypeViewController else { return }
-		addChild(chooseDeckTypeVC)
-		chooseDeckTypeVC.view.frame = view.frame
-		view.addSubview(chooseDeckTypeVC.view)
-		chooseDeckTypeVC.didMove(toParent: self)
-	}
-	
 	@objc func newCard() {
 		guard let newCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newCard") as? NewCardViewController else { return }
 		newCardVC.deck = deck
