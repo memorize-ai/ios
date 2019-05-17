@@ -5,6 +5,7 @@ import FirebaseStorage
 import InstantSearchClient
 import AudioToolbox
 import WebKit
+import Down
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
@@ -313,7 +314,7 @@ extension WKWebView {
 					</style>
 				</head>
 				<body>
-					<div>\(text)</div>
+					<div>\(preview ? text : (try? Down(markdownString: text).toHTML()) ?? text)</div>
 					<script>renderMathInElement(document.body)</script>
 				</body>
 			</html>
