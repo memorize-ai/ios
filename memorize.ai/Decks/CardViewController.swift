@@ -23,10 +23,7 @@ class CardViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.update { change in
-			self.frontWebView.render(self.card!.front, preview: false, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
-			self.backWebView.render(self.card!.back, preview: false, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
-		}
+		ChangeHandler.update(nil)
 	}
 	
 	@IBAction func hide() {
