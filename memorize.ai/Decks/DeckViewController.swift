@@ -5,13 +5,15 @@ import WebKit
 class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var mainView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var getButton: UIButton!
 	@IBOutlet weak var getButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var getActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var descriptionLabel: UILabel!
+	@IBOutlet weak var descriptionWebView: WKWebView!
+	@IBOutlet weak var descriptionWebViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	@IBOutlet weak var creatorLabel: UILabel!
 	
@@ -30,12 +32,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		firestore.document("decks/\(deckId!)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
 				self.nameLabel.text = snapshot.get("name") as? String ?? "Error"
-				self.descriptionLabel.text = snapshot.get("description") as? String ?? "Error"
+				self.load(snapshot.get("description") as? String ?? "An error has occurred")
 				self.activityIndicator.stopAnimating()
 				self.loadingView.isHidden = true
 				firestore.document("users/\(snapshot.get("creator") as! String)").getDocument { creatorSnapshot, creatorError in
 					guard creatorError == nil, let creatorSnapshot = creatorSnapshot else { return }
 					self.creatorLabel.text = "Created by \(creatorSnapshot.get("name") as! String)"
+					self.resizeDescriptionWebView()
 				}
 			} else {
 				self.activityIndicator.stopAnimating()
@@ -104,6 +107,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		resizeCardsCollectionView()
 	}
 	
+	func load(_ text: String) {
+		descriptionWebView.render(text, preview: false, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
+	}
+	
+	func resizeDescriptionWebView() {
+		descriptionWebViewHeightConstraint.constant = view.bounds.height - mainView.bounds.height - creatorLabel.bounds.height - 260/*116.5*/
+		view.layoutIfNeeded()
+	}
+	
 	func reloadCards() {
 		cardsCollectionView.reloadData()
 		resizeCardsCollectionView()
@@ -157,10 +169,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		switch sender.selectedSegmentIndex {
 		case 0:
 			cardsCollectionView.isHidden = true
-			descriptionLabel.isHidden = false
+			descriptionWebView.isHidden = false
 			creatorLabel.isHidden = false
 		case 1:
-			descriptionLabel.isHidden = true
+			descriptionWebView.isHidden = true
 			creatorLabel.isHidden = true
 			cardsCollectionView.isHidden = false
 		default:

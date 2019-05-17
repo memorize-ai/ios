@@ -1667,18 +1667,6 @@
                                                     <action selector="segmentedControlChanged:" destination="9XY-L1-f93" eventType="valueChanged" id="Kx7-3b-xqx"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpb-hs-f6E">
-                                                <rect key="frame" x="20" y="208.66666666666666" width="374" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVc-Ua-8bB">
-                                                <rect key="frame" x="20.000000000000004" y="216.66666666666666" width="42.333333333333343" height="23.333333333333343"/>
-                                                <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ERf-oH-Bgx">
                                                 <rect key="frame" x="20" y="208.66666666666666" width="374" height="31.333333333333343"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1743,29 +1731,46 @@
                                                     <outlet property="delegate" destination="9XY-L1-f93" id="afw-Vh-VQk"/>
                                                 </connections>
                                             </collectionView>
+                                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7al-02-6bQ">
+                                                <rect key="frame" x="20" y="208.66666666666666" width="374" height="0.0"/>
+                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="Gpn-hb-Psp"/>
+                                                </constraints>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                            </wkWebView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVc-Ua-8bB">
+                                                <rect key="frame" x="20" y="216.66666666666666" width="374" height="23.333333333333343"/>
+                                                <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="0Ki-Hn-7iY"/>
                                             <constraint firstItem="ERf-oH-Bgx" firstAttribute="top" secondItem="M4j-N2-Iwa" secondAttribute="bottom" constant="20" id="4m6-K5-kr8"/>
-                                            <constraint firstItem="OVc-Ua-8bB" firstAttribute="top" secondItem="Bpb-hs-f6E" secondAttribute="bottom" constant="8" id="5Ad-ul-98f"/>
                                             <constraint firstAttribute="trailing" secondItem="XmA-Sj-bhc" secondAttribute="trailing" constant="20" id="5iB-lJ-c8w"/>
-                                            <constraint firstItem="OVc-Ua-8bB" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="CtA-w1-da5"/>
+                                            <constraint firstItem="OVc-Ua-8bB" firstAttribute="top" secondItem="7al-02-6bQ" secondAttribute="bottom" constant="8" id="Fas-Ct-qWA"/>
+                                            <constraint firstItem="7al-02-6bQ" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="Hy1-A9-XHO"/>
                                             <constraint firstItem="M4j-N2-Iwa" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="MIs-Gq-ccm"/>
                                             <constraint firstAttribute="trailing" secondItem="M4j-N2-Iwa" secondAttribute="trailing" constant="20" id="QbG-uo-pui"/>
                                             <constraint firstAttribute="trailing" secondItem="NLa-Es-asw" secondAttribute="trailing" constant="20" id="RKs-cJ-JTZ"/>
-                                            <constraint firstItem="Bpb-hs-f6E" firstAttribute="top" secondItem="M4j-N2-Iwa" secondAttribute="bottom" constant="20" id="Sll-5y-3lr"/>
-                                            <constraint firstAttribute="bottom" secondItem="OVc-Ua-8bB" secondAttribute="bottom" constant="20" id="VFv-Dx-qCJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="OVc-Ua-8bB" secondAttribute="bottom" constant="20" id="SiF-Dy-o1O"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="YCb-uy-3Lw"/>
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="bottom" constant="20" id="acr-zv-0hi"/>
                                             <constraint firstAttribute="bottom" secondItem="ERf-oH-Bgx" secondAttribute="bottom" constant="20" id="bcu-Zg-Xv0"/>
                                             <constraint firstItem="M4j-N2-Iwa" firstAttribute="top" secondItem="NLa-Es-asw" secondAttribute="bottom" constant="20" id="cbB-Qu-sza"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OVc-Ua-8bB" secondAttribute="trailing" constant="20" id="fhC-Gd-PLM"/>
-                                            <constraint firstAttribute="trailing" secondItem="Bpb-hs-f6E" secondAttribute="trailing" constant="20" id="jQ7-x8-TIn"/>
+                                            <constraint firstItem="7al-02-6bQ" firstAttribute="top" secondItem="M4j-N2-Iwa" secondAttribute="bottom" constant="20" id="dSY-mW-e7A"/>
+                                            <constraint firstAttribute="trailing" secondItem="OVc-Ua-8bB" secondAttribute="trailing" constant="20" id="hME-fb-7qg"/>
                                             <constraint firstAttribute="trailing" secondItem="ERf-oH-Bgx" secondAttribute="trailing" constant="20" id="oUe-vb-iDh"/>
+                                            <constraint firstAttribute="trailing" secondItem="7al-02-6bQ" secondAttribute="trailing" constant="20" id="orq-Z5-ZHY"/>
                                             <constraint firstItem="ERf-oH-Bgx" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="pFt-Zh-lpF"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" constant="20" id="qrV-fu-9eI"/>
-                                            <constraint firstItem="Bpb-hs-f6E" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="tfU-9s-gUa"/>
+                                            <constraint firstItem="OVc-Ua-8bB" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="rpX-iB-t7t"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1793,7 +1798,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Msd-U6-Cw5" firstAttribute="bottom" secondItem="QYV-Js-Ngp" secondAttribute="bottom" id="J9F-Sl-zB3"/>
+                            <constraint firstItem="Msd-U6-Cw5" firstAttribute="bottom" secondItem="5x1-yW-fPN" secondAttribute="bottom" id="J9F-Sl-zB3"/>
                             <constraint firstItem="ScY-Tx-UZe" firstAttribute="width" secondItem="5x1-yW-fPN" secondAttribute="width" id="TPb-eL-iiN"/>
                             <constraint firstItem="0P8-bg-Clx" firstAttribute="leading" secondItem="QYV-Js-Ngp" secondAttribute="leading" id="Ucb-yf-jMm"/>
                             <constraint firstItem="0P8-bg-Clx" firstAttribute="bottom" secondItem="QYV-Js-Ngp" secondAttribute="bottom" id="pGg-HW-2VZ"/>
@@ -1809,19 +1814,21 @@
                         <outlet property="activityIndicator" destination="9nY-Gn-wa9" id="Cg0-Zq-0e1"/>
                         <outlet property="cardsCollectionView" destination="ERf-oH-Bgx" id="mzB-id-DOZ"/>
                         <outlet property="creatorLabel" destination="OVc-Ua-8bB" id="3aN-Jg-8mY"/>
-                        <outlet property="descriptionLabel" destination="Bpb-hs-f6E" id="Xqp-56-Cdd"/>
+                        <outlet property="descriptionWebView" destination="7al-02-6bQ" id="hSV-iZ-z7r"/>
+                        <outlet property="descriptionWebViewHeightConstraint" destination="Gpn-hb-Psp" id="bPp-qn-VTB"/>
                         <outlet property="getActivityIndicator" destination="kCP-a8-2u0" id="Kn7-Fq-QWk"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="dTb-cB-Zcc"/>
                         <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="6pp-yV-xKt"/>
                         <outlet property="imageActivityIndicator" destination="Rm9-WX-cH2" id="fzx-bQ-Mcp"/>
                         <outlet property="imageView" destination="hbD-lL-WAl" id="5NQ-Wk-N46"/>
                         <outlet property="loadingView" destination="0P8-bg-Clx" id="ejY-Zn-d8q"/>
+                        <outlet property="mainView" destination="XmA-Sj-bhc" id="zkO-C3-UQJ"/>
                         <outlet property="nameLabel" destination="h8e-mj-PpG" id="o6n-ev-U9S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2187" y="804"/>
+            <point key="canvasLocation" x="2186.9565217391305" y="803.804347826087"/>
         </scene>
         <!--Card View Controller-->
         <scene sceneID="Wn5-ZD-dMC">
