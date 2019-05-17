@@ -101,7 +101,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
 				self.loadCards()
 				self.actionsCollectionView.reloadData()
-				self.cardsTableView.reloadData()
 				self.reloadReview()
 			}
 		}
@@ -125,8 +124,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadCards() {
+		let count = cards.count
 		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Gray Circle"), card: $0) }
 		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: Rating.image($0.last!.rating), card: $0) })
+		if count != cards.count {
+			cardsTableView.reloadData()
+		}
 	}
 	
 	func signIn() {

@@ -295,6 +295,7 @@ extension WKWebView {
 					<script src="auto-render.min.js"></script>
 					<style>
 						html, body {
+							font-family: Helvetica;
 							font-size: \(fontSize)px;
 							color: #\(textColor);
 							background-color: #\(backgroundColor);
