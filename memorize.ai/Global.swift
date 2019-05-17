@@ -285,7 +285,7 @@ func saveImage(_ image: UIImage) {
 }
 
 extension WKWebView {
-	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
+	func render(_ text: String, preview: Bool, fontSize: Int, textColor: String, backgroundColor: String) {
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -300,11 +300,13 @@ extension WKWebView {
 							color: #\(textColor);
 							background-color: #\(backgroundColor);
 						}
-						div {
-							white-space: nowrap;
-							overflow: hidden;
-							text-overflow: ellipsis;
-						}
+						\(preview ? """
+							div {
+								white-space: nowrap;
+								overflow: hidden;
+								text-overflow: ellipsis;
+							}
+						""" : "")
 					</style>
 				</head>
 				<body>

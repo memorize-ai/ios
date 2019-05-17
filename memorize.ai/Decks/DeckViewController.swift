@@ -198,6 +198,6 @@ class BasicCardCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func load(_ text: String) {
-		webView.render(text, fontSize: 60, textColor: "333333", backgroundColor: "f8f8f8")
+		webView.render(text, preview: true, fontSize: 60, textColor: "333333", backgroundColor: "f8f8f8")
 	}
 }

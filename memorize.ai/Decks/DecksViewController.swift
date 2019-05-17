@@ -223,7 +223,7 @@ class ThinCardCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func load(_ text: String) {
-		webView.render(text, fontSize: 90, textColor: "333333", backgroundColor: "e7e7e7")
+		webView.render(text, preview: true, fontSize: 90, textColor: "333333", backgroundColor: "e7e7e7")
 	}
 }
 

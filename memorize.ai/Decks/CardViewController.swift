@@ -12,8 +12,8 @@ class CardViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		titleBar.roundCorners([.topLeft, .topRight], radius: 10)
-		frontWebView.render(card!.front, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
-		backWebView.render(card!.back, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
+		frontWebView.render(card!.front, preview: false, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
+		backWebView.render(card!.back, preview: false, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
 		cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -24,8 +24,8 @@ class CardViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.update { change in
-			self.frontWebView.render(self.card!.front, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
-			self.backWebView.render(self.card!.back, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
+			self.frontWebView.render(self.card!.front, preview: false, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
+			self.backWebView.render(self.card!.back, preview: false, fontSize: 60, textColor: "333333", backgroundColor: "ffffff")
 		}
 	}
 	

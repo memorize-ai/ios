@@ -357,6 +357,6 @@ class UserCardsTableViewCell: UITableViewCell {
 	@IBOutlet weak var webView: WKWebView!
 	
 	func load(_ text: String) {
-		webView.render(text, fontSize: 90, textColor: "333333", backgroundColor: "f3f3f3")
+		webView.render(text, preview: true, fontSize: 90, textColor: "333333", backgroundColor: "f3f3f3")
 	}
 }
