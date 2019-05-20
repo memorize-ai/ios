@@ -20,6 +20,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		backButton.layer.borderColor = UIColor.darkGray.cgColor
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 40)
+		flowLayout.minimumLineSpacing = 8
+		ratingCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
