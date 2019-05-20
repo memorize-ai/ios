@@ -170,7 +170,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 			self.leftBarButtonItem(image: image)
 			profilePicture = image
-			saveImage(image)
+			saveImage(data)
 			ChangeHandler.call(.profilePicture)
 		}
 	}

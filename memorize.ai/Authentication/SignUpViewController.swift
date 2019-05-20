@@ -82,9 +82,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		dismissKeyboard()
 		Auth.auth().createUser(withEmail: emailText, password: passwordText) { authResult, error in
 			if error == nil {
-				guard let data = #imageLiteral(resourceName: "Person").pngData() else { return }
+				guard let data = #imageLiteral(resourceName: "Person").compressedData() else { return }
 				let metadata = StorageMetadata()
-				metadata.contentType = "image/png"
+				metadata.contentType = "image/jpeg"
 				id = authResult?.user.uid
 				pushToken()
 				storage.child("users/\(id!)").putData(data, metadata: metadata) { metadata, error in

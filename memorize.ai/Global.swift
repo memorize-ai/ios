@@ -11,7 +11,6 @@ let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 let decksIndex = client.index(withName: "decks")
-let fileLimit: Int64 = 50000000
 var startup = true
 var shouldLoadDecks = false
 var id: String?
@@ -272,14 +271,14 @@ func deleteUser() {
 	} catch {}
 }
 
-func saveImage(_ image: UIImage) {
+func saveImage(_ data: Data) {
 	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
 	let managedContext = appDelegate.persistentContainer.viewContext
 	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
 	do {
-		let logins = try managedContext.fetch(fetchRequest)
-		guard let firstLogin = logins.first, let data = image.pngData() else { return }
-		firstLogin.setValue(data, forKey: "image")
+		let users = try managedContext.fetch(fetchRequest)
+		guard let user = users.first else { return }
+		user.setValue(data, forKey: "image")
 		try managedContext.save()
 	} catch {}
 }
@@ -390,5 +389,16 @@ extension Date {
 		formatter.maximumUnitCount = 1
 		formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
 		return "\(formatter.string(from: self, to: Date())!) ago"
+	}
+}
+
+extension UIImage {
+	func compressedData() -> Data? {
+		return jpegData(compressionQuality: compressionQuality)
+	}
+	
+	func compressed() -> UIImage? {
+		guard let data = compressedData() else { return nil }
+		return UIImage(data: data)
 	}
 }

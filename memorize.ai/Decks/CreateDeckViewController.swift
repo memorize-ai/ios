@@ -95,11 +95,11 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	@IBAction func create() {
-		guard let image = imageView.image?.pngData(), let nameText = nameTextField.text?.trim() else { return }
+		guard let image = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim() else { return }
 		showActivityIndicator()
 		dismissKeyboard()
 		let metadata = StorageMetadata()
-		metadata.contentType = "image/png"
+		metadata.contentType = "image/jpeg"
 		var deckRef: DocumentReference?
 		deckRef = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id!, "owner": id!]) { error in
 			guard error == nil, let deckId = deckRef?.documentID else { return }

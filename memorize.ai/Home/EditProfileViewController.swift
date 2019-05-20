@@ -89,13 +89,13 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func uploadImage(_ image: UIImage, completion: @escaping () -> Void) {
-		profilePicture = image
-		if let data = image.pngData() {
+		profilePicture = image.compressed()
+		if let data = image.compressedData() {
 			let metadata = StorageMetadata()
-			metadata.contentType = "image/png"
+			metadata.contentType = "image/jpeg"
 			storage.child("users/\(id!)").putData(data, metadata: metadata) { _, error in
 				guard error == nil else { return }
-				saveImage(image)
+				saveImage(data)
 				storage.child("users/\(id!)").downloadURL { url, error in
 					guard error == nil, let url = url else { return }
 					Auth.auth().currentUser?.createProfileChangeRequest().photoURL = url

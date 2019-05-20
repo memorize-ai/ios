@@ -123,6 +123,7 @@
 		4DB8AE602287CE1800A08AFA /* KaTeX_Math-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8AE102287CE1800A08AFA /* KaTeX_Math-BoldItalic.ttf */; };
 		4DB8AE612287CE1800A08AFA /* katex.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8AE112287CE1800A08AFA /* katex.mjs */; };
 		4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8AE65228C920800A08AFA /* ChangeHandler.swift */; };
+		4DCB002522936CD30072FED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB002422936CD30072FED4 /* Constants.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		4DF2A8D8224F0E0200BA5F8B /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */; };
 		4DF9724A220779AE00FF8BED /* CreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */; };
@@ -274,6 +275,7 @@
 		4DB8AE112287CE1800A08AFA /* katex.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = katex.mjs; sourceTree = "<group>"; };
 		4DB8AE65228C920800A08AFA /* ChangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHandler.swift; sourceTree = "<group>"; };
 		4DC857DD221B824400FD2100 /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
+		4DCB002422936CD30072FED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,6 +364,7 @@
 		4D052AB22204259B0093B64E /* memorize.ai */ = {
 			isa = PBXGroup;
 			children = (
+				4DCB002422936CD30072FED4 /* Constants.swift */,
 				4DB8AE65228C920800A08AFA /* ChangeHandler.swift */,
 				4D64391422057886006F4F2D /* Global.swift */,
 				4D052AB72204259B0093B64E /* Main.storyboard */,
@@ -939,6 +942,7 @@
 				4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */,
 				4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */,
 				4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */,
+				4DCB002522936CD30072FED4 /* Constants.swift in Sources */,
 				4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
 				4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */,
