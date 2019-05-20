@@ -95,7 +95,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 					}
 					firestore.document("users/\(id!)").setData(["name": nameText, "email": emailText])
 					name = nameText
-					saveLogin(email: emailText, password: passwordText)
+					saveUser(email: emailText, password: passwordText)
 					self.hideActivityIndicator()
 					self.performSegue(withIdentifier: "signUp", sender: self)
 				}

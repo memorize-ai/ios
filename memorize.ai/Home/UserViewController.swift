@@ -40,7 +40,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			loadingImage.isHidden = false
 			if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 				let managedContext = appDelegate.persistentContainer.viewContext
-				let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Login")
+				let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
 				do {
 					let login = try managedContext.fetch(fetchRequest)
 					if login.count == 1 {

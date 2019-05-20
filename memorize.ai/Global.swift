@@ -245,38 +245,37 @@ func pushToken() {
 	firestore.document("users/\(id)/tokens/\(token)").setData(["enabled": true])
 }
 
-func saveLogin(email e: String, password p: String) {
+func saveUser(email e: String, password p: String) {
 	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
 	let managedContext = appDelegate.persistentContainer.viewContext
-	guard let entity = NSEntityDescription.entity(forEntityName: "Login", in: managedContext) else { return }
-	let login = NSManagedObject(entity: entity, insertInto: managedContext)
-	login.setValue(e, forKeyPath: "email")
-	login.setValue(p, forKeyPath: "password")
+	guard let entity = NSEntityDescription.entity(forEntityName: "User", in: managedContext) else { return }
+	let user = NSManagedObject(entity: entity, insertInto: managedContext)
+	user.setValue(e, forKey: "email")
+	user.setValue(p, forKey: "password")
 	do {
 		try managedContext.save()
 		email = e
 	} catch {}
 }
 
-func deleteLogin() {
+func deleteUser() {
 	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
 	let managedContext = appDelegate.persistentContainer.viewContext
-	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Login")
+	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
 	do {
-		let login = try managedContext.fetch(fetchRequest)
-		if login.count == 1 {
-			managedContext.delete(login[0])
-			id = nil
-			name = nil
-			email = nil
-		}
+		let users = try managedContext.fetch(fetchRequest)
+		guard let user = users.first else { return }
+		managedContext.delete(user)
+		id = nil
+		name = nil
+		email = nil
 	} catch {}
 }
 
 func saveImage(_ image: UIImage) {
 	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
 	let managedContext = appDelegate.persistentContainer.viewContext
-	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Login")
+	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
 	do {
 		let logins = try managedContext.fetch(fetchRequest)
 		guard let firstLogin = logins.first, let data = image.pngData() else { return }

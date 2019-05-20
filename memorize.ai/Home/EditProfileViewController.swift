@@ -33,7 +33,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let signOut = UIAlertAction(title: "Sign Out", style: .default) { _ in
 			do {
 				try Auth.auth().signOut()
-				deleteLogin()
+				deleteUser()
 				self.performSegue(withIdentifier: "signOut", sender: self)
 			} catch let error {
 				self.showAlert(error.localizedDescription)
