@@ -3,7 +3,7 @@ import FirebaseAuth
 import FirebaseStorage
 import SafariServices
 
-class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var pictureView: UIView!
 	@IBOutlet weak var pictureImageView: UIImageView!
 	@IBOutlet weak var changeButton: UIButton!
@@ -11,6 +11,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var emailLabel: UILabel!
 	@IBOutlet weak var linkButton: UIButton!
+	@IBOutlet weak var settingsCollectionView: UICollectionView!
+	@IBOutlet weak var settingsCollectionViewHeightConstraint: NSLayoutConstraint!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		pictureImageView.layer.borderWidth = 0.5
 		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
 		pictureImageView.layer.masksToBounds = true
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 43)
+		flowLayout.minimumLineSpacing = 8
+		settingsCollectionView.collectionViewLayout = flowLayout
     }
 	
 	@IBAction func signOut() {
@@ -70,7 +76,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		present(alert, animated: true, completion: nil)
 	}
 	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 			pictureImageView.image = nil
 			changeButton.isHidden = true
@@ -110,5 +116,47 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBAction func linkClicked() {
 		guard let currentTitle = linkButton.currentTitle, let url = URL(string: currentTitle) else { return }
 		present(SFSafariViewController(url: url), animated: true, completion: nil)
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return settings.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SettingCollectionViewCell
+		cell.load(settings[indexPath.item])
+		return cell
+	}
+}
+
+class SettingCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var descriptionLabel: UILabel!
+	@IBOutlet weak var descriptionLabelHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var descriptionLabelBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var valueSwitch: UISwitch!
+	
+	var setting: Setting?
+	
+	func load(_ setting: Setting) {
+		self.setting = setting
+		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		titleLabel.text = setting.title
+		descriptionLabel.text = setting.description
+		let noDescription = setting.description.isEmpty
+		descriptionLabelHeightConstraint.constant = noDescription ? 0 : 12
+		descriptionLabelBottomConstraint.constant = noDescription ? 0 : 6
+		valueSwitch.setOn(setting.value as? Bool ?? false, animated: false)
+	}
+	
+	@IBAction func valueSwitchChanged() {
+		guard let id = id, let setting = setting else { return }
+		firestore.document("users/\(id)/settings/\(setting.id)").setData(["value": valueSwitch.isOn]) { error in
+			if error == nil {
+				Setting.handle(setting)
+			} else {
+				self.valueSwitch.setOn(!self.valueSwitch.isOn, animated: true)
+			}
+		}
 	}
 }

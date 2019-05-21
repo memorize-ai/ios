@@ -60,6 +60,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									startup = false
 									ChangeHandler.call(.profileModified)
 								}
+								self.loadSettings()
 								self.loadDecks()
 							} else if let error = error {
 								switch error.localizedDescription {
@@ -122,6 +123,43 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func createHelloLabel() {
 		guard let name = name else { return }
 		helloLabel.text = "Hello, \(name)"
+	}
+	
+	func loadSettings() {
+		guard let id = id else { return }
+		firestore.collection("settings").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let setting = $0.document
+				let settingId = setting.documentID
+				switch $0.type {
+				case .added:
+					firestore.document("users/\(id)/settings/\(settingId)").addSnapshotListener { settingSnapshot, settingError in
+						guard settingError == nil, let settingSnapshot = settingSnapshot, let value = settingSnapshot.exists ? settingSnapshot.get("value") : setting.get("default") else { return }
+						let newSetting = Setting(id: settingId, slug: setting.get("slug") as? String ?? "error", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value)
+						if let localSettingIndex = Setting.id(settingId) {
+							settings[localSettingIndex] = newSetting
+						} else {
+							settings.append(newSetting)
+						}
+						Setting.handle(newSetting)
+						ChangeHandler.call(.settingModified)
+					}
+				case .modified:
+					guard let localSettingIndex = Setting.id(settingId) else { return }
+					let localSetting = settings[localSettingIndex]
+					localSetting.title = setting.get("title") as? String ?? "Error"
+					localSetting.description = setting.get("description") as? String ?? ""
+					Setting.handle(localSetting)
+					ChangeHandler.call(.settingModified)
+				case .removed:
+					settings = settings.filter { $0.id != settingId }
+					ChangeHandler.call(.settingRemoved)
+				@unknown default:
+					break
+				}
+			}
+		}
 	}
 	
 	func loadCards() {
