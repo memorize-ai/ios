@@ -3,33 +3,30 @@ import CoreData
 import FirebaseAuth
 import WebKit
 
-class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class UserViewController: UIViewController, /*UICollectionViewDataSource, UICollectionViewDelegate,*/ UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
 	@IBOutlet weak var retryButton: UIButton!
 	@IBOutlet weak var helloLabel: UILabel!
-	@IBOutlet weak var actionsCollectionView: UICollectionView!
+	@IBOutlet weak var decksView: UIView!
+	@IBOutlet weak var decksLabel: UILabel!
+	@IBOutlet weak var decksBarView: UIView!
+	@IBOutlet weak var cardsView: UIView!
+	@IBOutlet weak var cardsLabel: UILabel!
+	@IBOutlet weak var cardsBarView: UIView!
+	@IBOutlet weak var createView: UIView!
+	@IBOutlet weak var createLabel: UILabel!
+	@IBOutlet weak var createBarView: UIView!
+	@IBOutlet weak var marketplaceView: UIView!
+	@IBOutlet weak var marketplaceLabel: UILabel!
+	@IBOutlet weak var marketplaceBarView: UIView!
 	@IBOutlet weak var cardsTableView: UITableView!
 	@IBOutlet weak var cardsTableViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var reviewButton: UIButton!
-	@IBOutlet weak var cardsLabel: UILabel!
+	@IBOutlet weak var dueCardsLabel: UILabel!
 	
-	class Action {
-		let image: UIImage?
-		let name: String
-		let action: (UserViewController) -> () -> Void
-		var enabled: Bool
-		
-		init(image: UIImage?, name: String, action: @escaping (UserViewController) -> () -> Void) {
-			self.image = image
-			self.name = name
-			self.action = action
-			self.enabled = false
-		}
-	}
-	
-	let actions = [Action(image: #imageLiteral(resourceName: "Decks"), name: "DECKS", action: showDecks), Action(image: #imageLiteral(resourceName: "Cards"), name: "CARDS", action: showCards), Action(image: #imageLiteral(resourceName: "Create"), name: "CREATE DECK", action: createDeck), Action(image: #imageLiteral(resourceName: "Search"), name: "SEARCH DECKS", action: searchDeck)]
+	var enabled = [false, false, true, true]
 	var cards = [(image: UIImage, card: Card)]()
 	
 	override func viewDidLoad() {
@@ -87,23 +84,19 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		let flowLayout = UICollectionViewFlowLayout()
-		let width = view.bounds.width / 2 - 45
-		flowLayout.itemSize = CGSize(width: width, height: width / 1.75)
-		actionsCollectionView.collectionViewLayout = flowLayout
 		reviewButton.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		ChangeHandler.update { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved || change == .cardDue {
 				self.loadCards()
-				self.actionsCollectionView.reloadData()
+				self.reloadActions()
 				self.reloadReview()
 			}
 		}
 		reloadReview()
 		loadCards()
 		createHelloLabel()
+		reloadActions()
 		loadProfileBarButtonItem(nil)
-		actionsCollectionView.reloadData()
 		cardsTableView.reloadData()
 		if shouldLoadDecks {
 			reloadProfileBarButtonItem()
@@ -178,52 +171,36 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func reloadReview() {
 		let dueCards = Deck.allDue()
 		if reviewButton.isHidden && !dueCards.isEmpty {
-			cardsLabel.text = "1 card due"
+			dueCardsLabel.text = "1 card due"
 			reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
-			cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
+			dueCardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
 			reviewButton.isHidden = false
-			cardsLabel.isHidden = false
+			dueCardsLabel.isHidden = false
 			cardsTableViewBottomConstraint.constant = 20
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
 				self.view.layoutIfNeeded()
 				self.reviewButton.transform = .identity
-				self.cardsLabel.transform = .identity
+				self.dueCardsLabel.transform = .identity
 			}, completion: nil)
 		} else if !reviewButton.isHidden && dueCards.isEmpty {
-			cardsLabel.text = "0 cards due"
+			dueCardsLabel.text = "0 cards due"
 			cardsTableViewBottomConstraint.constant = -60
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 				self.view.layoutIfNeeded()
 				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
-				self.cardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
+				self.dueCardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
 			}) {
 				guard $0 else { return }
 				self.reviewButton.isHidden = true
-				self.cardsLabel.isHidden = true
+				self.dueCardsLabel.isHidden = true
 			}
 		} else {
-			cardsLabel.text = "\(dueCards.count) card\(dueCards.count == 1 ? "" : "s") due"
+			dueCardsLabel.text = "\(dueCards.count) card\(dueCards.count == 1 ? "" : "s") due"
 		}
 	}
 	
 	@objc func editProfile() {
 		performSegue(withIdentifier: "editProfile", sender: self)
-	}
-	
-	func showDecks() {
-		performSegue(withIdentifier: "decks", sender: self)
-	}
-	
-	func showCards() {
-		performSegue(withIdentifier: "cards", sender: self)
-	}
-	
-	func createDeck() {
-		performSegue(withIdentifier: "createDeck", sender: self)
-	}
-	
-	func searchDeck() {
-		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
 	@IBAction func review() {
@@ -313,24 +290,45 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return actions.count
+	func toggle(_ label: UILabel, _ barView: UIView, enabled: Bool) {
+		let color = enabled ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		label.textColor = color
+		barView.backgroundColor = color
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserActionCollectionViewCell
-		let element = actions[indexPath.item]
-		cell.imageView.image = element.image
-		cell.label.text = element.name
-		element.enabled = !((element.name == "DECKS" && decks.isEmpty) || (element.name == "CARDS" && Card.all().isEmpty))
-		cell.enable(element.enabled)
-		return cell
+	func reloadActions() {
+		let actions = [
+			(view: decksView, label: decksLabel, barView: decksBarView),
+			(view: cardsView, label: cardsLabel, barView: cardsBarView),
+			(view: createView, label: createLabel, barView: createBarView),
+			(view: marketplaceView, label: marketplaceLabel, barView: marketplaceBarView)
+		]
+		for i in 0...3 {
+			let action = actions[i]
+			action.view!.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+			enabled[i] = !((i == 0 && decks.isEmpty) || (i == 1 && Card.all().isEmpty))
+			toggle(action.label!, action.barView!, enabled: enabled[i])
+		}
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let element = actions[indexPath.item]
-		guard element.enabled else { return }
-		element.action(self)()
+	@IBAction func showDecks() {
+		guard enabled[0] else { return }
+		performSegue(withIdentifier: "decks", sender: self)
+	}
+	
+	@IBAction func showCards() {
+		guard enabled[1] else { return }
+		performSegue(withIdentifier: "cards", sender: self)
+	}
+	
+	@IBAction func showCreate() {
+		guard enabled[2] else { return }
+		performSegue(withIdentifier: "createDeck", sender: self)
+	}
+	
+	@IBAction func showMarketplace() {
+		guard enabled[3] else { return }
+		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -343,19 +341,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		cell.ratingImageView.image = element.image
 		cell.load(element.card.front)
 		return cell
-	}
-}
-
-class UserActionCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var label: UILabel!
-	@IBOutlet weak var barView: UIView!
-	
-	func enable(_ enabled: Bool) {
-		let color = enabled ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-		label.textColor = color
-		barView.backgroundColor = color
 	}
 }
 
