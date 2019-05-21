@@ -363,32 +363,23 @@
                                                         <constraint firstAttribute="width" constant="28" id="rSs-ck-tIl"/>
                                                     </constraints>
                                                 </imageView>
-                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o32-w6-Ybv">
-                                                    <rect key="frame" x="46" y="3" width="282" height="33"/>
-                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <wkWebViewConfiguration key="configuration">
-                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                        <wkPreferences key="preferences"/>
-                                                    </wkWebViewConfiguration>
-                                                </wkWebView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uka-GL-Ocp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="42"/>
-                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QY-le-a3C">
+                                                    <rect key="frame" x="40" y="6" width="288" height="30"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="uka-GL-Ocp" secondAttribute="bottom" id="42k-Z6-xTJ"/>
                                             <constraint firstItem="osA-Sk-QDF" firstAttribute="leading" secondItem="C40-fw-VwH" secondAttribute="leading" constant="6" id="4MF-Pa-Xdp"/>
-                                            <constraint firstItem="uka-GL-Ocp" firstAttribute="leading" secondItem="C40-fw-VwH" secondAttribute="leading" id="CgA-nA-P7C"/>
-                                            <constraint firstItem="uka-GL-Ocp" firstAttribute="top" secondItem="C40-fw-VwH" secondAttribute="top" id="HJ3-GL-QEW"/>
-                                            <constraint firstAttribute="bottom" secondItem="o32-w6-Ybv" secondAttribute="bottom" constant="6" id="Hoh-Ya-DLN"/>
-                                            <constraint firstAttribute="trailing" secondItem="o32-w6-Ybv" secondAttribute="trailing" constant="6" id="Obq-uy-Kmj"/>
-                                            <constraint firstItem="o32-w6-Ybv" firstAttribute="top" secondItem="C40-fw-VwH" secondAttribute="top" constant="3" id="OsO-bf-umE"/>
+                                            <constraint firstItem="2QY-le-a3C" firstAttribute="leading" secondItem="osA-Sk-QDF" secondAttribute="trailing" constant="6" id="9BA-W2-SO8"/>
+                                            <constraint firstAttribute="bottom" secondItem="2QY-le-a3C" secondAttribute="bottom" constant="6" id="Aa2-tQ-3Gq"/>
+                                            <constraint firstItem="2QY-le-a3C" firstAttribute="top" secondItem="C40-fw-VwH" secondAttribute="top" constant="6" id="JCk-UO-KJm"/>
                                             <constraint firstItem="osA-Sk-QDF" firstAttribute="top" secondItem="C40-fw-VwH" secondAttribute="top" constant="6" id="Sxu-zd-3aP"/>
                                             <constraint firstAttribute="bottom" secondItem="osA-Sk-QDF" secondAttribute="bottom" constant="6" id="WL8-W5-MKh"/>
-                                            <constraint firstItem="o32-w6-Ybv" firstAttribute="leading" secondItem="osA-Sk-QDF" secondAttribute="trailing" constant="12" id="hiP-PD-qWQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="uka-GL-Ocp" secondAttribute="trailing" id="j7p-kn-Xsu"/>
+                                            <constraint firstAttribute="trailing" secondItem="2QY-le-a3C" secondAttribute="trailing" constant="6" id="guL-jK-v6n"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -400,7 +391,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="imageView" destination="osA-Sk-QDF" id="o3a-i5-JIj"/>
-                                            <outlet property="webView" destination="o32-w6-Ybv" id="fIw-ST-INk"/>
+                                            <outlet property="label" destination="2QY-le-a3C" id="OyF-Xh-4H4"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -350,10 +350,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 class UserCardsCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var label: UILabel!
 	
 	func load(_ text: String) {
 		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-		webView.render(text, preview: true, fontSize: 90, textColor: "333333", backgroundColor: "ffffff")
+		label.text = text.clean()
 	}
 }

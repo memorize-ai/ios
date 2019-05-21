@@ -313,7 +313,7 @@ extension WKWebView {
 					</style>
 				</head>
 				<body>
-					<div>\(preview ? text : (try? Down(markdownString: text).toHTML()) ?? text)</div>
+					<div>\(preview ? text.clean() : (try? Down(markdownString: text).toHTML()) ?? text)</div>
 					<script>renderMathInElement(document.body)</script>
 					\(preview ? "" : "<script src=\"prism.js\"></script>")
 				</body>
@@ -357,6 +357,10 @@ extension String {
 	
 	func checkEmail() -> Bool {
 		return NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").evaluate(with: self)
+	}
+	
+	func clean() -> String {
+		return replacingOccurrences(of: #"#|\\[\(\)\[\]]|\\|\*\*|_|\n*```\w*\n*"#, with: "", options: .regularExpression)
 	}
 }
 
