@@ -56,7 +56,7 @@ class CardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var label: UILabel!
 	@IBOutlet weak var nextLabel: UILabel!
 	
 	func due(_ isDue: Bool) {
@@ -66,6 +66,6 @@ class CardCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func load(_ text: String) {
-		webView.render(text, preview: true, fontSize: 90, textColor: "000000", backgroundColor: "e7e7e7")
+		label.text = text.clean()
 	}
 }

@@ -201,7 +201,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 }
 
 class BasicCardCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var label: UILabel!
 	
 	var action: (() -> Void)?
 	
@@ -210,6 +210,6 @@ class BasicCardCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func load(_ text: String) {
-		webView.render(text, preview: true, fontSize: 60, textColor: "333333", backgroundColor: "f8f8f8")
+		label.text = text.clean()
 	}
 }

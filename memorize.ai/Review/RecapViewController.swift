@@ -64,11 +64,11 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 class RecapCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var label: UILabel!
 	@IBOutlet weak var nextLabel: UILabel!
 	@IBOutlet weak var ratingImageView: UIImageView!
 	
 	func load(_ text: String) {
-		webView.render(text, preview: true, fontSize: 85, textColor: "000000", backgroundColor: "f2f2f2")
+		label.text = text.clean()
 	}
 }

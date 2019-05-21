@@ -202,7 +202,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 
 class ThinCardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
-	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var label: UILabel!
 	
 	var action: (() -> Void)?
 	
@@ -215,7 +215,7 @@ class ThinCardCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func load(_ text: String) {
-		webView.render(text, preview: true, fontSize: 90, textColor: "333333", backgroundColor: "e7e7e7")
+		label.text = text.clean()
 	}
 }
 
