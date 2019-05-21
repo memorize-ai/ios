@@ -3,7 +3,7 @@ import CoreData
 import FirebaseAuth
 import WebKit
 
-class UserViewController: UIViewController, /*UICollectionViewDataSource, UICollectionViewDelegate,*/ UITableViewDataSource, UITableViewDelegate {
+class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
@@ -21,8 +21,8 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 	@IBOutlet weak var marketplaceView: UIView!
 	@IBOutlet weak var marketplaceLabel: UILabel!
 	@IBOutlet weak var marketplaceBarView: UIView!
-	@IBOutlet weak var cardsTableView: UITableView!
-	@IBOutlet weak var cardsTableViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var cardsCollectionView: UICollectionView!
+	@IBOutlet weak var cardsCollectionViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var reviewButton: UIButton!
 	@IBOutlet weak var dueCardsLabel: UILabel!
 	
@@ -80,6 +80,10 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 			Card.poll()
 		}
 		navigationItem.setHidesBackButton(true, animated: true)
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 80, height: 40)
+		flowLayout.minimumLineSpacing = 8
+		cardsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +101,7 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 		createHelloLabel()
 		reloadActions()
 		loadProfileBarButtonItem(nil)
-		cardsTableView.reloadData()
+		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
 			reloadProfileBarButtonItem()
 			loadDecks()
@@ -125,7 +129,7 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Gray Circle"), card: $0) }
 		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: Rating.image($0.last!.rating), card: $0) })
 		if count != cards.count {
-			cardsTableView.reloadData()
+			cardsCollectionView.reloadData()
 		}
 	}
 	
@@ -176,7 +180,7 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 			dueCardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
 			reviewButton.isHidden = false
 			dueCardsLabel.isHidden = false
-			cardsTableViewBottomConstraint.constant = 20
+			cardsCollectionViewBottomConstraint.constant = 20
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
 				self.view.layoutIfNeeded()
 				self.reviewButton.transform = .identity
@@ -184,7 +188,7 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 			}, completion: nil)
 		} else if !reviewButton.isHidden && dueCards.isEmpty {
 			dueCardsLabel.text = "0 cards due"
-			cardsTableViewBottomConstraint.constant = -60
+			cardsCollectionViewBottomConstraint.constant = -60
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 				self.view.layoutIfNeeded()
 				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
@@ -331,24 +335,25 @@ class UserViewController: UIViewController, /*UICollectionViewDataSource, UIColl
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return cards.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UserCardsTableViewCell
-		let element = cards[indexPath.row]
-		cell.ratingImageView.image = element.image
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserCardsCollectionViewCell
+		let element = cards[indexPath.item]
+		cell.imageView.image = element.image
 		cell.load(element.card.front)
 		return cell
 	}
 }
 
-class UserCardsTableViewCell: UITableViewCell {
-	@IBOutlet weak var ratingImageView: UIImageView!
+class UserCardsCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var webView: WKWebView!
 	
 	func load(_ text: String) {
-		webView.render(text, preview: true, fontSize: 90, textColor: "333333", backgroundColor: "f3f3f3")
+		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+		webView.render(text, preview: true, fontSize: 90, textColor: "333333", backgroundColor: "ffffff")
 	}
 }
