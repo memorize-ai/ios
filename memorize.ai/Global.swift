@@ -11,7 +11,6 @@ let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 let decksIndex = client.index(withName: "decks")
-var currentViewController: UIViewController?
 var startup = true
 var shouldLoadDecks = false
 var id: String?
@@ -242,6 +241,8 @@ class Rating {
 }
 
 class Setting {
+	private static var handler: ((Setting) -> Void)?
+	
 	let id: String
 	let slug: String
 	let type: SettingType
@@ -287,8 +288,15 @@ class Setting {
 		return nil
 	}
 	
-	static func handle(_ setting: Setting) {
-		currentViewController?.handle(setting)
+	static func updateHandler(_ newHandler: ((Setting) -> Void)?) {
+		handler = newHandler
+		settings.forEach {
+			handler?($0)
+		}
+	}
+	
+	static func callHandler(_ setting: Setting) {
+		handler?(setting)
 	}
 }
 
@@ -402,10 +410,6 @@ extension UIViewController {
 	func showAlert(_ message: String) {
 		AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 		showAlert("Error", message)
-	}
-	
-	func handle(_ setting: Setting) {
-		currentViewController = self
 	}
 }
 

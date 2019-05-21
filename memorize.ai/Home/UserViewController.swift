@@ -97,6 +97,15 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.reloadReview()
 			}
 		}
+		Setting.updateHandler { setting in
+			let enabled = setting.value as? Bool ?? false
+			switch setting.type {
+			case .darkMode:
+				self.view.backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+			case .unknown, .algorithm:
+				break
+			}
+		}
 		reloadReview()
 		loadCards()
 		createHelloLabel()
@@ -142,7 +151,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						} else {
 							settings.append(newSetting)
 						}
-						Setting.handle(newSetting)
+						Setting.callHandler(newSetting)
 						ChangeHandler.call(.settingModified)
 					}
 				case .modified:
@@ -150,7 +159,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					let localSetting = settings[localSettingIndex]
 					localSetting.title = setting.get("title") as? String ?? "Error"
 					localSetting.description = setting.get("description") as? String ?? ""
-					Setting.handle(localSetting)
+					Setting.callHandler(localSetting)
 					ChangeHandler.call(.settingModified)
 				case .removed:
 					settings = settings.filter { $0.id != settingId }

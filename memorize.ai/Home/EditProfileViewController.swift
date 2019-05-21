@@ -153,7 +153,7 @@ class SettingCollectionViewCell: UICollectionViewCell {
 		guard let id = id, let setting = setting else { return }
 		firestore.document("users/\(id)/settings/\(setting.id)").setData(["value": valueSwitch.isOn]) { error in
 			if error == nil {
-				Setting.handle(setting)
+				Setting.callHandler(setting)
 			} else {
 				self.valueSwitch.setOn(!self.valueSwitch.isOn, animated: true)
 			}

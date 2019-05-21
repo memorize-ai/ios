@@ -1,6 +1,6 @@
-var changeHandler: ((Change) -> Void)?
-
 class ChangeHandler {
+	private static var changeHandler: ((Change) -> Void)?
+	
 	static func call(_ change: Change) {
 		changeHandler?(change)
 	}
