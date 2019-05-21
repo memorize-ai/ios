@@ -22,6 +22,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				self.emailLabel.text = email
 				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
 				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
+				self.settingsCollectionView.reloadData()
+				self.resizeSettingsCollectionView()
 			}
 		}
 		pictureImageView.layer.borderWidth = 0.5
@@ -32,6 +34,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		flowLayout.minimumLineSpacing = 8
 		settingsCollectionView.collectionViewLayout = flowLayout
     }
+	
+	func resizeSettingsCollectionView() {
+		settingsCollectionViewHeightConstraint.constant = settingsCollectionView.contentSize.height
+		view.layoutIfNeeded()
+	}
 	
 	@IBAction func signOut() {
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)

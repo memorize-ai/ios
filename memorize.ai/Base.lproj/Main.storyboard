@@ -543,7 +543,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsg-M5-zL2">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="626"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q21-sq-ltA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="359"/>
@@ -632,7 +632,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9r-gE-JoW">
-                                                                    <rect key="frame" x="16" y="6" width="290" height="33"/>
+                                                                    <rect key="frame" x="16" y="6" width="280" height="33"/>
                                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -661,7 +661,7 @@
                                                         <constraints>
                                                             <constraint firstItem="J9r-gE-JoW" firstAttribute="top" secondItem="iX5-De-iAA" secondAttribute="top" constant="6" id="4Pa-6S-aVD"/>
                                                             <constraint firstAttribute="trailing" secondItem="f2T-ql-4Kp" secondAttribute="trailing" constant="9" id="4t3-Qy-eWB"/>
-                                                            <constraint firstItem="f2T-ql-4Kp" firstAttribute="leading" secondItem="J9r-gE-JoW" secondAttribute="trailing" constant="6" id="ESU-zX-Nyo"/>
+                                                            <constraint firstItem="f2T-ql-4Kp" firstAttribute="leading" secondItem="J9r-gE-JoW" secondAttribute="trailing" constant="16" id="ESU-zX-Nyo"/>
                                                             <constraint firstAttribute="bottom" secondItem="L3v-2h-dY5" secondAttribute="bottom" id="ILn-rE-27X"/>
                                                             <constraint firstItem="L3v-2h-dY5" firstAttribute="leading" secondItem="iX5-De-iAA" secondAttribute="leading" constant="6" id="JKh-1F-50j"/>
                                                             <constraint firstAttribute="bottom" secondItem="f2T-ql-4Kp" secondAttribute="bottom" constant="6" id="Kb9-1p-XAq"/>
@@ -756,9 +756,9 @@
                         <constraints>
                             <constraint firstItem="q21-sq-ltA" firstAttribute="width" secondItem="wPp-Ww-XZU" secondAttribute="width" id="2Z2-lU-mQ5"/>
                             <constraint firstItem="lZh-JO-Vn9" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" constant="40" id="AJk-79-zfd"/>
-                            <constraint firstItem="ciK-f6-6s4" firstAttribute="bottom" secondItem="xsg-M5-zL2" secondAttribute="bottom" id="Iv9-vb-MR8"/>
                             <constraint firstItem="xsg-M5-zL2" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" id="Nfy-7a-igP"/>
                             <constraint firstItem="ciK-f6-6s4" firstAttribute="trailing" secondItem="xsg-M5-zL2" secondAttribute="trailing" id="WPA-Ze-6R4"/>
+                            <constraint firstItem="lZh-JO-Vn9" firstAttribute="top" secondItem="xsg-M5-zL2" secondAttribute="bottom" constant="20" id="XvW-C9-AfW"/>
                             <constraint firstItem="xsg-M5-zL2" firstAttribute="top" secondItem="ciK-f6-6s4" secondAttribute="top" id="ie9-0y-31t"/>
                             <constraint firstItem="ciK-f6-6s4" firstAttribute="bottom" secondItem="lZh-JO-Vn9" secondAttribute="bottom" constant="30" id="qE3-2x-XrE"/>
                             <constraint firstItem="ciK-f6-6s4" firstAttribute="trailing" secondItem="lZh-JO-Vn9" secondAttribute="trailing" constant="40" id="tSv-26-5tr"/>
@@ -3339,7 +3339,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1zn-0n-nWw"/>
+        <segue reference="h5F-6A-J1r"/>
         <segue reference="Reh-O7-sEd"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>

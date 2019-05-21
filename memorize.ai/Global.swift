@@ -249,14 +249,16 @@ class Setting {
 	var title: String
 	var description: String
 	var value: Any
+	var order: Int
 	
-	init(id: String, slug: String, title: String, description: String, value: Any) {
+	init(id: String, slug: String, title: String, description: String, value: Any, order: Int) {
 		self.id = id
 		self.slug = slug
 		self.type = Setting.getType(slug)
 		self.title = title
 		self.description = description
 		self.value = value
+		self.order = order
 	}
 	
 	private static func getType(_ slug: String) -> SettingType {

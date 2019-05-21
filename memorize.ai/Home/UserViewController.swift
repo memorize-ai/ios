@@ -101,7 +101,9 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			let enabled = setting.value as? Bool ?? false
 			switch setting.type {
 			case .darkMode:
-				self.view.backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+				let backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+				self.view.backgroundColor = backgroundColor
+				self.cardsCollectionView.backgroundColor = backgroundColor
 			case .unknown, .algorithm:
 				break
 			}
@@ -145,11 +147,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				case .added:
 					firestore.document("users/\(id)/settings/\(settingId)").addSnapshotListener { settingSnapshot, settingError in
 						guard settingError == nil, let settingSnapshot = settingSnapshot, let value = settingSnapshot.exists ? settingSnapshot.get("value") : setting.get("default") else { return }
-						let newSetting = Setting(id: settingId, slug: setting.get("slug") as? String ?? "error", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value)
+						let newSetting = Setting(id: settingId, slug: setting.get("slug") as? String ?? "error", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value, order: setting.get("order") as? Int ?? 0)
 						if let localSettingIndex = Setting.id(settingId) {
 							settings[localSettingIndex] = newSetting
 						} else {
 							settings.append(newSetting)
+							settings.sort { $0.order < $1.order }
 						}
 						Setting.callHandler(newSetting)
 						ChangeHandler.call(.settingModified)
