@@ -84,8 +84,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gli-gS-nj1">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="37"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gli-gS-nj1">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="106.33333333333333"/>
                                                 <connections>
                                                     <action selector="showDecks" destination="XhB-Ss-34n" eventType="touchUpInside" id="3tG-Zp-3bB"/>
                                                 </connections>
@@ -141,8 +141,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2E-m8-3WY">
-                                                <rect key="frame" x="0.0" y="0.0" width="137" height="70"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2E-m8-3WY">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="106.33333333333333"/>
                                                 <connections>
                                                     <action selector="showCards" destination="XhB-Ss-34n" eventType="touchUpInside" id="Jbu-EI-nPj"/>
                                                 </connections>
@@ -364,7 +364,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QY-le-a3C">
-                                                    <rect key="frame" x="40" y="6" width="288" height="30"/>
+                                                    <rect key="frame" x="40" y="6" width="288" height="28"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -400,8 +400,8 @@
                                     <outlet property="delegate" destination="XhB-Ss-34n" id="MCf-wV-w1R"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="729" width="414" height="7"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waV-L4-S5d">
                                         <rect key="frame" x="40" y="279.66666666666669" width="334" height="177"/>
@@ -1766,8 +1766,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msd-U6-Cw5">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScY-Tx-UZe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScY-Tx-UZe">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmA-Sj-bhc">
                                                 <rect key="frame" x="20" y="20" width="374" height="100"/>
@@ -1971,8 +1971,8 @@
                                     <constraint firstAttribute="trailing" secondItem="ScY-Tx-UZe" secondAttribute="trailing" id="NkT-vx-ZKn"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
-                                <rect key="frame" x="0.0" y="537" width="414" height="199"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-Gn-wa9">
                                         <rect key="frame" x="188.66666666666666" y="339.66666666666669" width="37" height="37"/>
@@ -3247,9 +3247,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="1zn-0n-nWw"/>
         <segue reference="Reh-O7-sEd"/>
-        <segue reference="O84-5M-BZf"/>
-        <segue reference="NDx-ee-NxK"/>
-        <segue reference="wcZ-AT-Xhd"/>
+        <segue reference="xrl-eN-ji3"/>
+        <segue reference="zq2-cu-WBD"/>
+        <segue reference="p0r-eq-3dv"/>
         <segue reference="bVP-fd-FWX"/>
     </inferredMetricsTieBreakers>
 </document>
