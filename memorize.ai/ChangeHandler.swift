@@ -28,6 +28,7 @@ enum Change {
 	case historyRemoved
 	case cardDue
 	case settingAdded
+	case settingValueModified
 	case settingModified
 	case settingRemoved
 }

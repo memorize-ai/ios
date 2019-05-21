@@ -33,7 +33,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				self.emailLabel.text = email
 				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
 				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
-			} else if change == .settingAdded {
+			} else if change == .settingAdded || change == .settingModified || change == .settingRemoved {
 				self.settingsCollectionView.reloadData()
 				self.resizeSettingsCollectionView()
 			}
