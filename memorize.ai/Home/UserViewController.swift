@@ -153,7 +153,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							ChangeHandler.call(.settingValueModified)
 						} else {
 							settings.append(newSetting)
-							settings.sort { $0.order < $1.order }
+							settings.sort { return $0.order < $1.order }
 							ChangeHandler.call(.settingAdded)
 						}
 						Setting.callHandler(newSetting)
@@ -164,10 +164,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					localSetting.title = setting.get("title") as? String ?? "Error"
 					localSetting.description = setting.get("description") as? String ?? ""
 					localSetting.order = setting.get("order") as? Int ?? 0
+					settings.sort { return $0.order < $1.order }
 					Setting.callHandler(localSetting)
 					ChangeHandler.call(.settingModified)
 				case .removed:
-					settings = settings.filter { $0.id != settingId }
+					settings = settings.filter { return $0.id != settingId }
+					settings.sort { return $0.order < $1.order }
 					ChangeHandler.call(.settingRemoved)
 				@unknown default:
 					break

@@ -31,7 +31,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont(name: "Nunito-SemiBold", size: 20)!]
 		navigationController?.navigationBar.barTintColor = .white
 		navigationController?.navigationBar.tintColor = .darkGray
-		dueCards = decks.flatMap { deck in return deck.cards.filter { return $0.isDue() }.map { return (deck: deck, card: $0) } }
+		dueCards = decks.flatMap { deck in return Card.sortDue(deck.cards.filter { return $0.isDue() }).map { return (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
 				let element = self.dueCards[self.current]
