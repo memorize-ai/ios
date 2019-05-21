@@ -150,12 +150,13 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						let newSetting = Setting(id: settingId, slug: setting.get("slug") as? String ?? "error", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value, order: setting.get("order") as? Int ?? 0)
 						if let localSettingIndex = Setting.id(settingId) {
 							settings[localSettingIndex] = newSetting
+							ChangeHandler.call(.settingModified)
 						} else {
 							settings.append(newSetting)
 							settings.sort { $0.order < $1.order }
+							ChangeHandler.call(.settingAdded)
 						}
 						Setting.callHandler(newSetting)
-						ChangeHandler.call(.settingAdded)
 					}
 				case .modified:
 					guard let localSettingIndex = Setting.id(settingId) else { return }

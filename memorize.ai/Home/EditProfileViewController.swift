@@ -157,7 +157,7 @@ class SettingCollectionViewCell: UICollectionViewCell {
 		descriptionLabel.text = setting.description
 		let noDescription = setting.description.isEmpty
 		descriptionLabelHeightConstraint.constant = noDescription ? 0 : 12
-		descriptionLabelBottomConstraint.constant = noDescription ? 0 : 6
+		descriptionLabelBottomConstraint.constant = noDescription ? 2 : 6
 		valueSwitch.setOn(setting.value as? Bool ?? false, animated: false)
 	}
 	

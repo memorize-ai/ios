@@ -632,13 +632,13 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9r-gE-JoW">
-                                                                    <rect key="frame" x="16" y="6" width="280" height="33"/>
+                                                                    <rect key="frame" x="16" y="6" width="280" height="31"/>
                                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L3v-2h-dY5">
-                                                                    <rect key="frame" x="6.0000000000000018" y="43" width="24.666666666666671" height="0.0"/>
+                                                                    <rect key="frame" x="6" y="41" width="290" height="0.0"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" id="omB-kl-XDt"/>
                                                                     </constraints>
@@ -659,10 +659,11 @@
                                                         </view>
                                                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="f2T-ql-4Kp" firstAttribute="leading" secondItem="L3v-2h-dY5" secondAttribute="trailing" constant="16" id="0PG-oA-Rvu"/>
                                                             <constraint firstItem="J9r-gE-JoW" firstAttribute="top" secondItem="iX5-De-iAA" secondAttribute="top" constant="6" id="4Pa-6S-aVD"/>
                                                             <constraint firstAttribute="trailing" secondItem="f2T-ql-4Kp" secondAttribute="trailing" constant="9" id="4t3-Qy-eWB"/>
                                                             <constraint firstItem="f2T-ql-4Kp" firstAttribute="leading" secondItem="J9r-gE-JoW" secondAttribute="trailing" constant="16" id="ESU-zX-Nyo"/>
-                                                            <constraint firstAttribute="bottom" secondItem="L3v-2h-dY5" secondAttribute="bottom" id="ILn-rE-27X"/>
+                                                            <constraint firstAttribute="bottom" secondItem="L3v-2h-dY5" secondAttribute="bottom" constant="2" id="ILn-rE-27X"/>
                                                             <constraint firstItem="L3v-2h-dY5" firstAttribute="leading" secondItem="iX5-De-iAA" secondAttribute="leading" constant="6" id="JKh-1F-50j"/>
                                                             <constraint firstAttribute="bottom" secondItem="f2T-ql-4Kp" secondAttribute="bottom" constant="6" id="Kb9-1p-XAq"/>
                                                             <constraint firstItem="L3v-2h-dY5" firstAttribute="top" secondItem="J9r-gE-JoW" secondAttribute="bottom" constant="4" id="XdZ-6z-Rh7"/>
