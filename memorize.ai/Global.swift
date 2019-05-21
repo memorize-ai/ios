@@ -252,13 +252,13 @@ class Setting {
 	init(id: String, slug: String, title: String, description: String, value: Any) {
 		self.id = id
 		self.slug = slug
-		self.type = getType(slug)
+		self.type = Setting.getType(slug)
 		self.title = title
 		self.description = description
 		self.value = value
 	}
 	
-	private func getType(_ slug: String) -> SettingType {
+	private static func getType(_ slug: String) -> SettingType {
 		switch slug {
 		case "dark-mode":
 			return .darkMode
