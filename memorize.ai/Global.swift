@@ -244,6 +244,7 @@ class Rating {
 class Setting {
 	let id: String
 	let slug: String
+	let type: SettingType
 	var title: String
 	var description: String
 	var value: Any
@@ -251,9 +252,21 @@ class Setting {
 	init(id: String, slug: String, title: String, description: String, value: Any) {
 		self.id = id
 		self.slug = slug
+		self.type = getType(slug)
 		self.title = title
 		self.description = description
 		self.value = value
+	}
+	
+	private func getType(_ slug: String) -> SettingType {
+		switch slug {
+		case "dark-mode":
+			return .darkMode
+		case "algorithm":
+			return .algorithm
+		default:
+			return .unknown
+		}
 	}
 	
 	static func id(_ t: String) -> Int? {
@@ -277,6 +290,12 @@ class Setting {
 	static func handle(_ setting: Setting) {
 		currentViewController?.handle(setting)
 	}
+}
+switch settings[0].
+enum SettingType {
+	case darkMode
+	case algorithm
+	case unknown
 }
 
 func pushToken() {
