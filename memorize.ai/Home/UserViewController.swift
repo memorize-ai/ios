@@ -155,7 +155,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							settings.sort { $0.order < $1.order }
 						}
 						Setting.callHandler(newSetting)
-						ChangeHandler.call(.settingModified)
+						ChangeHandler.call(.settingAdded)
 					}
 				case .modified:
 					guard let localSettingIndex = Setting.id(settingId) else { return }

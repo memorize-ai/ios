@@ -14,18 +14,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var settingsCollectionView: UICollectionView!
 	@IBOutlet weak var settingsCollectionViewHeightConstraint: NSLayoutConstraint!
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		ChangeHandler.updateAndCall(.profileModified) { change in
-			if change == .profileModified || change == .profilePicture {
-				self.nameLabel.text = name
-				self.emailLabel.text = email
-				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
-				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
-				self.settingsCollectionView.reloadData()
-				self.resizeSettingsCollectionView()
-			}
-		}
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		pictureImageView.layer.borderWidth = 0.5
 		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
 		pictureImageView.layer.masksToBounds = true
@@ -33,10 +23,25 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 43)
 		flowLayout.minimumLineSpacing = 8
 		settingsCollectionView.collectionViewLayout = flowLayout
-    }
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		ChangeHandler.updateAndCall(.profileModified, .settingAdded) { change in
+			if change == .profileModified || change == .profilePicture {
+				self.nameLabel.text = name
+				self.emailLabel.text = email
+				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
+				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
+			} else if change == .settingAdded {
+				self.settingsCollectionView.reloadData()
+				self.resizeSettingsCollectionView()
+			}
+		}
+	}
 	
 	func resizeSettingsCollectionView() {
-		settingsCollectionViewHeightConstraint.constant = settingsCollectionView.contentSize.height
+		settingsCollectionViewHeightConstraint.constant = CGFloat(51 * settings.count - 8)
 		view.layoutIfNeeded()
 	}
 	

@@ -9,9 +9,11 @@ class ChangeHandler {
 		changeHandler = handler
 	}
 	
-	static func updateAndCall(_ change: Change, _ handler: ((Change) -> Void)?) {
+	static func updateAndCall(_ changes: Change..., handler: ((Change) -> Void)?) {
 		update(handler)
-		call(change)
+		changes.forEach {
+			call($0)
+		}
 	}
 }
 
@@ -25,6 +27,7 @@ enum Change {
 	case historyModified
 	case historyRemoved
 	case cardDue
+	case settingAdded
 	case settingModified
 	case settingRemoved
 }
