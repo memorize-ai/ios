@@ -291,7 +291,7 @@ class Setting {
 		currentViewController?.handle(setting)
 	}
 }
-switch settings[0].
+
 enum SettingType {
 	case darkMode
 	case algorithm
