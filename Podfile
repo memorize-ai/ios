@@ -7,6 +7,7 @@ target 'memorize.ai' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	pod 'Firebase/Messaging'
+	pod 'Firebase/Functions'
 	pod 'InstantSearchClient'
 	pod 'Down', :git => 'https://github.com/iwasrobbed/Down.git'
 	target 'memorize.aiTests' do
