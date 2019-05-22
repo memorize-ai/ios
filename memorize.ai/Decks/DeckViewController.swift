@@ -100,6 +100,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		Deck.view(deckId!)
 		previewButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 		if Deck.id(deckId!) != nil {
 			getButtonWidthConstraint.constant = 90

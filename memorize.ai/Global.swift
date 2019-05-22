@@ -8,6 +8,7 @@ import Down
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
+let functions = Functions.functions()
 let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 let decksIndex = client.index(withName: "decks")
 var startup = true
@@ -46,6 +47,10 @@ class Deck {
 		self.owner = owner
 		self.permissions = permissions
 		self.cards = cards
+	}
+	
+	static func view(_ deckId: String) {
+		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { _, _ in }
 	}
 	
 	static func id(_ t: String) -> Int? {
