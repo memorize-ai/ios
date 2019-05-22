@@ -25,6 +25,8 @@
 #include <utility>
 #include <vector>
 
+#include "Firestore/core/src/firebase/firestore/util/warnings.h"
+
 #include "Firestore/core/src/firebase/firestore/remote/grpc_call.h"
 #include "Firestore/core/src/firebase/firestore/remote/grpc_completion.h"
 #include "Firestore/core/src/firebase/firestore/remote/grpc_stream_observer.h"
@@ -32,7 +34,9 @@
 #include "Firestore/core/src/firebase/firestore/util/status.h"
 #include "absl/types/optional.h"
 #include "grpcpp/client_context.h"
+SUPPRESS_DOCUMENTATION_WARNINGS_BEGIN()
 #include "grpcpp/generic/generic_stub.h"
+SUPPRESS_END()
 #include "grpcpp/support/byte_buffer.h"
 
 namespace firebase {
@@ -180,6 +184,7 @@ class GrpcStream : public GrpcCall {
  private:
   void Read();
   void MaybeWrite(absl::optional<internal::BufferedWrite> maybe_write);
+  bool TryLastWrite(grpc::ByteBuffer&& message);
 
   void Shutdown();
   void UnsetObserver() {
@@ -191,12 +196,16 @@ class GrpcStream : public GrpcCall {
   void OnRead(const grpc::ByteBuffer& message);
   void OnWrite();
   void OnOperationFailed();
-  void OnFinishedByServer(const grpc::Status& status);
   void RemoveCompletion(const GrpcCompletion* to_remove);
 
   using OnSuccess = std::function<void(const GrpcCompletion*)>;
   GrpcCompletion* NewCompletion(GrpcCompletion::Type type,
                                 const OnSuccess& callback);
+  // Finishes the underlying gRPC call. Must always be invoked on any call that
+  // was started. Presumes that any pending completions will quickly come off
+  // the queue and will block until they do, so this must only be invoked when
+  // the current call either failed (`OnOperationFailed`) or canceled.
+  void FinishGrpcCall(const OnSuccess& callback);
 
   // Blocks until all the completions issued by this stream come out from the
   // gRPC completion queue. Once they do, it is safe to delete this `GrpcStream`
@@ -228,7 +237,8 @@ class GrpcStream : public GrpcCall {
 
   std::vector<GrpcCompletion*> completions_;
 
-  bool is_finishing_ = false;
+  // gRPC asserts that a call is finished exactly once.
+  bool is_grpc_call_finished_ = false;
 };
 
 }  // namespace remote

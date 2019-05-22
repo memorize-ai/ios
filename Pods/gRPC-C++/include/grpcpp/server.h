@@ -26,8 +26,10 @@
 #include <vector>
 
 #include <grpc/compression.h>
+#include <grpc/support/atm.h>
 #include <grpcpp/completion_queue.h>
 #include <grpcpp/impl/call.h>
+#include <grpcpp/impl/codegen/client_interceptor.h>
 #include <grpcpp/impl/codegen/grpc_library.h>
 #include <grpcpp/impl/codegen/server_interface.h>
 #include <grpcpp/impl/rpc_service_method.h>
@@ -99,6 +101,30 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
   /// Establish a channel for in-process communication
   std::shared_ptr<Channel> InProcessChannel(const ChannelArguments& args);
 
+  /// NOTE: class experimental_type is not part of the public API of this class.
+  /// TODO(yashykt): Integrate into public API when this is no longer
+  /// experimental.
+  class experimental_type {
+   public:
+    explicit experimental_type(Server* server) : server_(server) {}
+
+    /// Establish a channel for in-process communication with client
+    /// interceptors
+    std::shared_ptr<Channel> InProcessChannelWithInterceptors(
+        const ChannelArguments& args,
+        std::vector<
+            std::unique_ptr<experimental::ClientInterceptorFactoryInterface>>
+            interceptor_creators);
+
+   private:
+    Server* server_;
+  };
+
+  /// NOTE: The function experimental() is not stable public API. It is a view
+  /// to the experimental components of this class. It may be changed or removed
+  /// at any time.
+  experimental_type experimental() { return experimental_type(this); }
+
  protected:
   /// Register a service. This call does not take ownership of the service.
   /// The service must exist for the lifetime of the Server instance.
@@ -120,6 +146,10 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
   int AddListeningPort(const grpc::string& addr,
                        ServerCredentials* creds) override;
 
+  /// NOTE: This is *NOT* a public API. The server constructors are supposed to
+  /// be used by \a ServerBuilder class only. The constructor will be made
+  /// 'private' very soon.
+  ///
   /// Server constructors. To be used by \a ServerBuilder only.
   ///
   /// \param max_message_size Maximum message length that the channel can
@@ -144,7 +174,12 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
   Server(int max_message_size, ChannelArguments* args,
          std::shared_ptr<std::vector<std::unique_ptr<ServerCompletionQueue>>>
              sync_server_cqs,
-         int min_pollers, int max_pollers, int sync_cq_timeout_msec);
+         int min_pollers, int max_pollers, int sync_cq_timeout_msec,
+         grpc_resource_quota* server_rq = nullptr,
+         std::vector<
+             std::unique_ptr<experimental::ServerInterceptorFactoryInterface>>
+             interceptor_creators = std::vector<std::unique_ptr<
+                 experimental::ServerInterceptorFactoryInterface>>());
 
   /// Start the server.
   ///
@@ -157,11 +192,17 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
   grpc_server* server() override { return server_; };
 
  private:
+  std::vector<std::unique_ptr<experimental::ServerInterceptorFactoryInterface>>*
+  interceptor_creators() override {
+    return &interceptor_creators_;
+  }
+
   friend class AsyncGenericService;
   friend class ServerBuilder;
   friend class ServerInitializer;
 
   class SyncRequest;
+  class CallbackRequest;
   class UnimplementedAsyncRequest;
   class UnimplementedAsyncResponse;
 
@@ -184,7 +225,17 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
     return max_receive_message_size_;
   };
 
+  CompletionQueue* CallbackCQ() override;
+
   ServerInitializer* initializer();
+
+  // A vector of interceptor factory objects.
+  // This should be destroyed after health_check_service_ and this requirement
+  // is satisfied by declaring interceptor_creators_ before
+  // health_check_service_. (C++ mandates that member objects be destroyed in
+  // the reverse order of initialization.)
+  std::vector<std::unique_ptr<experimental::ServerInterceptorFactoryInterface>>
+      interceptor_creators_;
 
   const int max_receive_message_size_;
 
@@ -198,6 +249,16 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
   /// the \a sync_server_cqs)
   std::vector<std::unique_ptr<SyncRequestThreadManager>> sync_req_mgrs_;
 
+  // Outstanding unmatched callback requests, indexed by method.
+  // NOTE: Using a gpr_atm rather than atomic_int because atomic_int isn't
+  //       copyable or movable and thus will cause compilation errors. We
+  //       actually only want to extend the vector before the threaded use
+  //       starts, but this is still a limitation.
+  std::vector<gpr_atm> callback_unmatched_reqs_count_;
+
+  // List of callback requests to start when server actually starts.
+  std::list<CallbackRequest*> callback_reqs_to_start_;
+
   // Server status
   std::mutex mu_;
   bool started_;
@@ -205,6 +266,17 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
   bool shutdown_notified_;  // Was notify called on the shutdown_cv_
 
   std::condition_variable shutdown_cv_;
+
+  // It is ok (but not required) to nest callback_reqs_mu_ under mu_ .
+  // Incrementing callback_reqs_outstanding_ is ok without a lock but it must be
+  // decremented under the lock in case it is the last request and enables the
+  // server shutdown. The increment is performance-critical since it happens
+  // during periods of increasing load; the decrement happens only when memory
+  // is maxed out, during server shutdown, or (possibly in a future version)
+  // during decreasing load, so it is less performance-critical.
+  std::mutex callback_reqs_mu_;
+  std::condition_variable callback_reqs_done_cv_;
+  std::atomic_int callback_reqs_outstanding_{0};
 
   std::shared_ptr<GlobalCallbacks> global_callbacks_;
 
@@ -218,6 +290,16 @@ class Server : public ServerInterface, private GrpcLibraryCodegen {
 
   std::unique_ptr<HealthCheckServiceInterface> health_check_service_;
   bool health_check_service_disabled_;
+
+  // A special handler for resource exhausted in sync case
+  std::unique_ptr<internal::MethodHandler> resource_exhausted_handler_;
+
+  // callback_cq_ references the callbackable completion queue associated
+  // with this server (if any). It is set on the first call to CallbackCQ().
+  // It is _not owned_ by the server; ownership belongs with its internal
+  // shutdown callback tag (invoked when the CQ is fully shutdown).
+  // It is protected by mu_
+  CompletionQueue* callback_cq_ = nullptr;
 };
 
 }  // namespace grpc

@@ -1,3 +1,5 @@
+platform :ios, '12.1'
+
 target 'memorize.ai' do
 	use_frameworks!
 	pod 'Firebase/Core'
@@ -5,7 +7,7 @@ target 'memorize.ai' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	pod 'Firebase/Messaging'
-	pod 'InstantSearchClient', '~> 6.0'
+	pod 'InstantSearchClient'
 	pod 'Down', :git => 'https://github.com/iwasrobbed/Down.git'
 	target 'memorize.aiTests' do
 		inherit! :search_paths

@@ -17,6 +17,7 @@
 #import "Firestore/Source/API/FSTUserDataConverter.h"
 
 #include <memory>
+#include <set>
 #include <string>
 #include <utility>
 #include <vector>
@@ -30,8 +31,8 @@
 #import "Firestore/Source/API/FIRFirestore+Internal.h"
 #import "Firestore/Source/Model/FSTFieldValue.h"
 #import "Firestore/Source/Model/FSTMutation.h"
-#import "Firestore/Source/Util/FSTUsageValidation.h"
 
+#include "Firestore/core/src/firebase/firestore/api/input_validation.h"
 #include "Firestore/core/src/firebase/firestore/core/user_data.h"
 #include "Firestore/core/src/firebase/firestore/model/database_id.h"
 #include "Firestore/core/src/firebase/firestore/model/document_key.h"
@@ -46,6 +47,7 @@
 #include "absl/strings/match.h"
 
 namespace util = firebase::firestore::util;
+using firebase::firestore::api::ThrowInvalidArgument;
 using firebase::firestore::core::ParsedSetData;
 using firebase::firestore::core::ParsedUpdateData;
 using firebase::firestore::core::ParseAccumulator;
@@ -57,6 +59,8 @@ using firebase::firestore::model::DocumentKey;
 using firebase::firestore::model::FieldMask;
 using firebase::firestore::model::FieldPath;
 using firebase::firestore::model::FieldTransform;
+using firebase::firestore::model::FieldValue;
+using firebase::firestore::model::NumericIncrementTransform;
 using firebase::firestore::model::Precondition;
 using firebase::firestore::model::ServerTimestampTransform;
 using firebase::firestore::model::TransformOperation;
@@ -108,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
   // NOTE: The public API is typed as NSDictionary but we type 'input' as 'id' since we can't trust
   // Obj-C to verify the type for us.
   if (![input isKindOfClass:[NSDictionary class]]) {
-    FSTThrowInvalidArgument(@"Data to be written must be an NSDictionary.");
+    ThrowInvalidArgument("Data to be written must be an NSDictionary.");
   }
 
   ParseAccumulator accumulator{UserDataSource::Set};
@@ -121,16 +125,16 @@ NS_ASSUME_NONNULL_BEGIN
   // NOTE: The public API is typed as NSDictionary but we type 'input' as 'id' since we can't trust
   // Obj-C to verify the type for us.
   if (![input isKindOfClass:[NSDictionary class]]) {
-    FSTThrowInvalidArgument(@"Data to be written must be an NSDictionary.");
+    ThrowInvalidArgument("Data to be written must be an NSDictionary.");
   }
 
   ParseAccumulator accumulator{UserDataSource::MergeSet};
 
-  FSTObjectValue *updateData =
-      (FSTObjectValue *)[self parseData:input context:accumulator.RootContext()];
+  FSTObjectValue *updateData = (FSTObjectValue *)[self parseData:input
+                                                         context:accumulator.RootContext()];
 
   if (fieldMask) {
-    std::vector<FieldPath> validatedFieldPaths;
+    std::set<FieldPath> validatedFieldPaths;
     for (id fieldPath in fieldMask) {
       FieldPath path;
 
@@ -139,18 +143,17 @@ NS_ASSUME_NONNULL_BEGIN
       } else if ([fieldPath isKindOfClass:[FIRFieldPath class]]) {
         path = ((FIRFieldPath *)fieldPath).internalValue;
       } else {
-        FSTThrowInvalidArgument(
-            @"All elements in mergeFields: must be NSStrings or FIRFieldPaths.");
+        ThrowInvalidArgument("All elements in mergeFields: must be NSStrings or FIRFieldPaths.");
       }
 
       // Verify that all elements specified in the field mask are part of the parsed context.
       if (!accumulator.Contains(path)) {
-        FSTThrowInvalidArgument(
-            @"Field '%s' is specified in your field mask but missing from your input data.",
-            path.CanonicalString().c_str());
+        ThrowInvalidArgument(
+            "Field '%s' is specified in your field mask but missing from your input data.",
+            path.CanonicalString());
       }
 
-      validatedFieldPaths.push_back(path);
+      validatedFieldPaths.insert(path);
     }
 
     return std::move(accumulator).MergeData(updateData, FieldMask{std::move(validatedFieldPaths)});
@@ -164,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
   // NOTE: The public API is typed as NSDictionary but we type 'input' as 'id' since we can't trust
   // Obj-C to verify the type for us.
   if (![input isKindOfClass:[NSDictionary class]]) {
-    FSTThrowInvalidArgument(@"Data to be written must be an NSDictionary.");
+    ThrowInvalidArgument("Data to be written must be an NSDictionary.");
   }
 
   NSDictionary *dict = input;
@@ -181,8 +184,7 @@ NS_ASSUME_NONNULL_BEGIN
     } else if ([key isKindOfClass:[FIRFieldPath class]]) {
       path = ((FIRFieldPath *)key).internalValue;
     } else {
-      FSTThrowInvalidArgument(
-          @"Dictionary keys in updateData: must be NSStrings or FIRFieldPaths.");
+      ThrowInvalidArgument("Dictionary keys in updateData: must be NSStrings or FIRFieldPaths.");
     }
 
     value = self.preConverter(value);
@@ -190,8 +192,8 @@ NS_ASSUME_NONNULL_BEGIN
       // Add it to the field mask, but don't add anything to updateData.
       context.AddToFieldMask(std::move(path));
     } else {
-      FSTFieldValue *_Nullable parsedValue =
-          [self parseData:value context:context.ChildContext(path)];
+      FSTFieldValue *_Nullable parsedValue = [self parseData:value
+                                                     context:context.ChildContext(path)];
       if (parsedValue) {
         context.AddToFieldMask(path);
         updateData = [updateData objectBySettingValue:parsedValue forPath:path];
@@ -245,7 +247,7 @@ NS_ASSUME_NONNULL_BEGIN
     if ([input isKindOfClass:[NSArray class]]) {
       // TODO(b/34871131): Include the path containing the array in the error message.
       if (context.array_element()) {
-        FSTThrowInvalidArgument(@"Nested arrays are not supported");
+        ThrowInvalidArgument("Nested arrays are not supported");
       }
       return [self parseArray:(NSArray *)input context:std::move(context)];
     } else {
@@ -296,11 +298,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)parseSentinelFieldValue:(FIRFieldValue *)fieldValue context:(ParseContext &&)context {
   // Sentinels are only supported with writes, and not within arrays.
   if (!context.write()) {
-    FSTThrowInvalidArgument(@"%@ can only be used with updateData() and setData()%s",
-                            fieldValue.methodName, context.FieldDescription().c_str());
+    ThrowInvalidArgument("%s can only be used with updateData() and setData()%s",
+                         fieldValue.methodName, context.FieldDescription());
   }
   if (!context.path()) {
-    FSTThrowInvalidArgument(@"%@ is not currently supported inside arrays", fieldValue.methodName);
+    ThrowInvalidArgument("%s is not currently supported inside arrays", fieldValue.methodName);
   }
 
   if ([fieldValue isKindOfClass:[FSTDeleteFieldValue class]]) {
@@ -312,16 +314,14 @@ NS_ASSUME_NONNULL_BEGIN
     } else if (context.data_source() == UserDataSource::Update) {
       HARD_ASSERT(context.path()->size() > 0,
                   "FieldValue.delete() at the top level should have already been handled.");
-      FSTThrowInvalidArgument(
-          @"FieldValue.delete() can only appear at the top level of your "
-           "update data%s",
-          context.FieldDescription().c_str());
+      ThrowInvalidArgument("FieldValue.delete() can only appear at the top level of your "
+                           "update data%s",
+                           context.FieldDescription());
     } else {
       // We shouldn't encounter delete sentinels for queries or non-merge setData calls.
-      FSTThrowInvalidArgument(
-          @"FieldValue.delete() can only be used with updateData() and setData() with "
-          @"merge:true%s",
-          context.FieldDescription().c_str());
+      ThrowInvalidArgument(
+          "FieldValue.delete() can only be used with updateData() and setData() with merge:true%s",
+          context.FieldDescription());
     }
 
   } else if ([fieldValue isKindOfClass:[FSTServerTimestampFieldValue class]]) {
@@ -341,6 +341,15 @@ NS_ASSUME_NONNULL_BEGIN
     auto array_remove = absl::make_unique<ArrayTransform>(TransformOperation::Type::ArrayRemove,
                                                           std::move(parsedElements));
     context.AddToFieldTransforms(*context.path(), std::move(array_remove));
+
+  } else if ([fieldValue isKindOfClass:[FSTNumericIncrementFieldValue class]]) {
+    FSTNumericIncrementFieldValue *numericIncrementFieldValue =
+        (FSTNumericIncrementFieldValue *)fieldValue;
+    FSTNumberValue *operand =
+        (FSTNumberValue *)[self parsedQueryValue:numericIncrementFieldValue.operand];
+    auto numeric_increment = absl::make_unique<NumericIncrementTransform>(operand);
+
+    context.AddToFieldTransforms(*context.path(), std::move(numeric_increment));
 
   } else {
     HARD_FAIL("Unknown FIRFieldValue type: %s", NSStringFromClass([fieldValue class]));
@@ -390,9 +399,8 @@ NS_ASSUME_NONNULL_BEGIN
           unsigned long long extended = [input unsignedLongLongValue];
 
           if (extended > LLONG_MAX) {
-            FSTThrowInvalidArgument(@"NSNumber (%llu) is too large%s",
-                                    [input unsignedLongLongValue],
-                                    context.FieldDescription().c_str());
+            ThrowInvalidArgument("NSNumber (%s) is too large%s", [input unsignedLongLongValue],
+                                 context.FieldDescription());
 
           } else {
             return [FSTIntegerValue integerValue:(int64_t)extended];
@@ -419,7 +427,7 @@ NS_ASSUME_NONNULL_BEGIN
         // legitimate usage of signed chars is impossible, but this should be rare.
         //
         // Additionally, for consistency, map unsigned chars to bools in the same way.
-        return [FSTBooleanValue booleanValue:[input boolValue]];
+        return FieldValue::FromBoolean([input boolValue]).Wrap();
 
       default:
         // All documented codes should be handled above, so this shouldn't happen.
@@ -427,7 +435,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
   } else if ([input isKindOfClass:[NSString class]]) {
-    return [FSTStringValue stringValue:input];
+    return FieldValue::FromString(util::MakeString(input)).Wrap();
 
   } else if ([input isKindOfClass:[NSDate class]]) {
     return [FSTTimestampValue timestampValue:[FIRTimestamp timestampWithDate:input]];
@@ -449,17 +457,17 @@ NS_ASSUME_NONNULL_BEGIN
     FSTDocumentKeyReference *reference = input;
     if (*reference.databaseID != *self.databaseID) {
       const DatabaseId *other = reference.databaseID;
-      FSTThrowInvalidArgument(
-          @"Document Reference is for database %s/%s but should be for database %s/%s%s",
-          other->project_id().c_str(), other->database_id().c_str(),
-          self.databaseID->project_id().c_str(), self.databaseID->database_id().c_str(),
-          context.FieldDescription().c_str());
+      ThrowInvalidArgument(
+          "Document Reference is for database %s/%s but should be for database %s/%s%s",
+          other->project_id(), other->database_id(), self.databaseID->project_id(),
+          self.databaseID->database_id(), context.FieldDescription());
     }
-    return [FSTReferenceValue referenceValue:reference.key databaseID:self.databaseID];
+    return [FSTReferenceValue referenceValue:[FSTDocumentKey keyWithDocumentKey:reference.key]
+                                  databaseID:self.databaseID];
 
   } else {
-    FSTThrowInvalidArgument(@"Unsupported type: %@%s", NSStringFromClass([input class]),
-                            context.FieldDescription().c_str());
+    ThrowInvalidArgument("Unsupported type: %s%s", NSStringFromClass([input class]),
+                         context.FieldDescription());
   }
 }
 
