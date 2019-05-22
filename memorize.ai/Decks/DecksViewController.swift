@@ -61,6 +61,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: sender)
 		guard let deckVC = segue.destination as? DeckViewController, let deck = deck else { return }
 		deckVC.deckId = deck.id
 		deckVC.image = deck.image

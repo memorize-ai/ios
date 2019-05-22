@@ -45,6 +45,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: sender)
 		guard let deckVC = segue.destination as? DeckViewController, let selectedResult = selectedResult else { return }
 		deckVC.deckId = selectedResult.id
 		deckVC.image = selectedResult.image

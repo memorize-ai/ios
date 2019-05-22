@@ -12,12 +12,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var getButton: UIButton!
 	@IBOutlet weak var getButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var getActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var previewButton: UIButton!
 	@IBOutlet weak var descriptionWebView: WKWebView!
 	@IBOutlet weak var descriptionWebViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	@IBOutlet weak var creatorLabel: UILabel!
 	
 	var deckId: String?
+	var deckName: String?
+	var count: Int?
 	var image: UIImage?
 	var cards = [Card]()
 	
@@ -31,7 +34,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		imageView.layer.masksToBounds = true
 		firestore.document("decks/\(deckId!)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
-				self.nameLabel.text = snapshot.get("name") as? String ?? "Error"
+				self.deckName = snapshot.get("name") as? String ?? "Error"
+				self.nameLabel.text = self.deckName
+				self.count = snapshot.get("count") as? Int
 				self.load(snapshot.get("description") as? String ?? "An error has occurred")
 				self.activityIndicator.stopAnimating()
 				self.loadingView.isHidden = true
@@ -95,8 +100,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		previewButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 		if Deck.id(deckId!) != nil {
 			getButtonWidthConstraint.constant = 90
+			view.layoutIfNeeded()
 			getButton.setTitle("DELETE", for: .normal)
 			getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 		}
@@ -107,12 +114,30 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		resizeCardsCollectionView()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: sender)
+		guard let reviewVC = segue.destination as? ReviewViewController else { return }
+		reviewVC.previewCards = cards
+		reviewVC.previewDeck = deckName
+	}
+	
+	@IBAction func preview() {
+		switch count {
+		case 0:
+			showAlert("There are no cards in this deck to preview")
+		case cards.count:
+			performSegue(withIdentifier: "preview", sender: self)
+		default:
+			showAlert("Loading cards...")
+		}
+	}
+	
 	func load(_ text: String) {
 		descriptionWebView.render(text, preview: false, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
 	}
 	
 	func resizeDescriptionWebView() {
-		descriptionWebViewHeightConstraint.constant = view.bounds.height - mainView.bounds.height - creatorLabel.bounds.height - 260/*116.5*/
+		descriptionWebViewHeightConstraint.constant = view.bounds.height - mainView.bounds.height - creatorLabel.bounds.height - 190
 		view.layoutIfNeeded()
 	}
 	

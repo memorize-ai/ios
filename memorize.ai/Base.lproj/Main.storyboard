@@ -1862,7 +1862,7 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScY-Tx-UZe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmA-Sj-bhc">
                                                 <rect key="frame" x="20" y="20" width="374" height="100"/>
@@ -1950,7 +1950,7 @@
                                                 </constraints>
                                             </view>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="M4j-N2-Iwa">
-                                                <rect key="frame" x="20" y="160.66666666666666" width="374" height="29"/>
+                                                <rect key="frame" x="20" y="230.66666666666666" width="374" height="28.999999999999972"/>
                                                 <segments>
                                                     <segment title="DESCRIPTION"/>
                                                     <segment title="CARDS"/>
@@ -1960,7 +1960,7 @@
                                                 </connections>
                                             </segmentedControl>
                                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ERf-oH-Bgx">
-                                                <rect key="frame" x="20" y="208.66666666666666" width="374" height="31.333333333333343"/>
+                                                <rect key="frame" x="20" y="278.66666666666669" width="374" height="31.333333333333314"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MlR-ee-q1t">
                                                     <size key="itemSize" width="364" height="142"/>
@@ -2017,7 +2017,7 @@
                                                 </connections>
                                             </collectionView>
                                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7al-02-6bQ">
-                                                <rect key="frame" x="20" y="208.66666666666666" width="374" height="0.0"/>
+                                                <rect key="frame" x="20" y="278.66666666666669" width="374" height="0.0"/>
                                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="Gpn-hb-Psp"/>
@@ -2028,11 +2028,31 @@
                                                 </wkWebViewConfiguration>
                                             </wkWebView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVc-Ua-8bB">
-                                                <rect key="frame" x="20" y="216.66666666666666" width="374" height="23.333333333333343"/>
+                                                <rect key="frame" x="20" y="286.66666666666669" width="374" height="23.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0D-oZ-PUb">
+                                                <rect key="frame" x="20" y="160.66666666666666" width="374" height="50"/>
+                                                <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="sPj-q7-KGk"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
+                                                <state key="normal" title="PREVIEW"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="preview" destination="9XY-L1-f93" eventType="touchUpInside" id="K5V-Cq-jDr"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -2046,11 +2066,14 @@
                                             <constraint firstAttribute="trailing" secondItem="NLa-Es-asw" secondAttribute="trailing" constant="20" id="RKs-cJ-JTZ"/>
                                             <constraint firstAttribute="bottom" secondItem="OVc-Ua-8bB" secondAttribute="bottom" constant="20" id="SiF-Dy-o1O"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="YCb-uy-3Lw"/>
+                                            <constraint firstItem="M4j-N2-Iwa" firstAttribute="top" secondItem="r0D-oZ-PUb" secondAttribute="bottom" constant="20" id="ZAL-sl-7op"/>
                                             <constraint firstItem="NLa-Es-asw" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="bottom" constant="20" id="acr-zv-0hi"/>
                                             <constraint firstAttribute="bottom" secondItem="ERf-oH-Bgx" secondAttribute="bottom" constant="20" id="bcu-Zg-Xv0"/>
-                                            <constraint firstItem="M4j-N2-Iwa" firstAttribute="top" secondItem="NLa-Es-asw" secondAttribute="bottom" constant="20" id="cbB-Qu-sza"/>
                                             <constraint firstItem="7al-02-6bQ" firstAttribute="top" secondItem="M4j-N2-Iwa" secondAttribute="bottom" constant="20" id="dSY-mW-e7A"/>
+                                            <constraint firstItem="r0D-oZ-PUb" firstAttribute="top" secondItem="NLa-Es-asw" secondAttribute="bottom" constant="20" id="g6W-OG-pPb"/>
                                             <constraint firstAttribute="trailing" secondItem="OVc-Ua-8bB" secondAttribute="trailing" constant="20" id="hME-fb-7qg"/>
+                                            <constraint firstItem="r0D-oZ-PUb" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="kQd-Rg-MjX"/>
+                                            <constraint firstAttribute="trailing" secondItem="r0D-oZ-PUb" secondAttribute="trailing" constant="20" id="lg2-qp-exi"/>
                                             <constraint firstAttribute="trailing" secondItem="ERf-oH-Bgx" secondAttribute="trailing" constant="20" id="oUe-vb-iDh"/>
                                             <constraint firstAttribute="trailing" secondItem="7al-02-6bQ" secondAttribute="trailing" constant="20" id="orq-Z5-ZHY"/>
                                             <constraint firstItem="ERf-oH-Bgx" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="pFt-Zh-lpF"/>
@@ -2066,8 +2089,8 @@
                                     <constraint firstAttribute="trailing" secondItem="ScY-Tx-UZe" secondAttribute="trailing" id="NkT-vx-ZKn"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P8-bg-Clx">
+                                <rect key="frame" x="0.0" y="700" width="414" height="36"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-Gn-wa9">
                                         <rect key="frame" x="188.66666666666666" y="339.66666666666669" width="37" height="37"/>
@@ -2109,11 +2132,13 @@
                         <outlet property="loadingView" destination="0P8-bg-Clx" id="ejY-Zn-d8q"/>
                         <outlet property="mainView" destination="XmA-Sj-bhc" id="zkO-C3-UQJ"/>
                         <outlet property="nameLabel" destination="h8e-mj-PpG" id="o6n-ev-U9S"/>
+                        <outlet property="previewButton" destination="r0D-oZ-PUb" id="hMW-nd-ywR"/>
+                        <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="xln-P0-Fwc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2186.9565217391305" y="803.804347826087"/>
+            <point key="canvasLocation" x="2187" y="805"/>
         </scene>
         <!--Card View Controller-->
         <scene sceneID="Wn5-ZD-dMC">
@@ -3344,7 +3369,7 @@
         <segue reference="Reh-O7-sEd"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
-        <segue reference="p0r-eq-3dv"/>
+        <segue reference="xln-P0-Fwc"/>
         <segue reference="bVP-fd-FWX"/>
     </inferredMetricsTieBreakers>
 </document>

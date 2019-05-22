@@ -16,6 +16,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	var dueCards = [(deck: Deck, card: Card)]()
 	var reviewedCards = [(id: String, deck: Deck, card: Card, rating: Rating, next: Date?)]()
 	var shouldSegue = false
+	var previewDeck: String?
+	var previewCards: [Card]?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,10 +36,17 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		dueCards = decks.flatMap { deck in return Card.sortDue(deck.cards.filter { return $0.isDue() }).map { return (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
-				let element = self.dueCards[self.current]
-				self.load(element.card.front, webView: self.frontWebView)
-				self.load(element.card.back, webView: self.backWebView)
-				self.navigationItem.title = element.deck.name
+				if self.isReview() {
+					let element = self.dueCards[self.current]
+					self.load(element.card.front, webView: self.frontWebView)
+					self.load(element.card.back, webView: self.backWebView)
+					self.navigationItem.title = element.deck.name
+				} else {
+					let element = self.previewCards![self.current]
+					self.load(element.front, webView: self.frontWebView)
+					self.load(element.back, webView: self.backWebView)
+					self.navigationItem.title = self.previewDeck
+				}
 			}
 		}
 	}
@@ -50,6 +59,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: sender)
 		guard let recapVC = segue.destination as? RecapViewController else { return }
 		recapVC.cards = reviewedCards
 	}
@@ -124,6 +134,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 	}
 	
+	func isReview() -> Bool {
+		return previewDeck == nil
+	}
+	
 	func enable(_ button: UIButton) {
 		button.isEnabled = true
 		button.tintColor = .darkGray
@@ -167,10 +181,12 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		push(rating: normalize(rating: indexPath.item))
+		if isReview() {
+			push(rating: normalize(rating: indexPath.item))
+		}
 		current += 1
-		progressView.setProgress(Float(current) / Float(dueCards.count), animated: true)
-		let shouldContinue = current < dueCards.count
+		let count = isReview() ? dueCards.count : previewCards!.count
+		progressView.setProgress(Float(current) / Float(count), animated: true)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 			self.leftButton.alpha = 0
@@ -178,16 +194,18 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			self.rightButton.alpha = 0
 		}) {
 			guard $0 else { return }
-			if shouldContinue {
+			if self.current < count {
+				self.navigationItem.title = self.isReview() ? self.dueCards[self.current].deck.name : self.previewDeck
+				let card = self.isReview() ? self.dueCards[self.current].card : self.previewCards![self.current]
 				if self.frontWebView.isHidden {
-					self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
+					self.load(card.front, webView: self.frontWebView)
 					UIView.animate(withDuration: 0.125, animations: {
 						self.backWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
 						self.backWebView.alpha = 0
 					}) {
 						guard $0 else { return }
 						self.backWebView.isHidden = true
-						self.load(self.dueCards[self.current].card.back, webView: self.backWebView)
+						self.load(card.back, webView: self.backWebView)
 						self.frontWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
 						self.frontWebView.alpha = 0
 						self.frontWebView.isHidden = false
@@ -206,13 +224,13 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 						}
 					}
 				} else {
-					self.load(self.dueCards[self.current].card.back, webView: self.backWebView)
+					self.load(card.back, webView: self.backWebView)
 					UIView.animate(withDuration: 0.125, animations: {
 						self.frontWebView.transform = CGAffineTransform(translationX: -self.view.bounds.width / 2, y: 0)
 						self.frontWebView.alpha = 0
 					}) {
 						guard $0 else { return }
-						self.load(self.dueCards[self.current].card.front, webView: self.frontWebView)
+						self.load(card.front, webView: self.frontWebView)
 						self.frontWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)
 						UIView.animate(withDuration: 0.125, animations: {
 							self.frontWebView.transform = .identity
@@ -229,8 +247,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 						}
 					}
 				}
-			} else {
+			} else if self.isReview() {
 				self.shouldSegue = true
+			} else {
+				self.navigationController?.popViewController(animated: true)
 			}
 		}
 		ratingCollectionViewHeightConstraint.constant = 0
