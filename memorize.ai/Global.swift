@@ -265,6 +265,8 @@ class Setting {
 		switch slug {
 		case "dark-mode":
 			return .darkMode
+		case "notifications":
+			return .notifications
 		case "algorithm":
 			return .algorithm
 		default:
@@ -304,6 +306,7 @@ class Setting {
 
 enum SettingType {
 	case darkMode
+	case notifications
 	case algorithm
 	case unknown
 }
