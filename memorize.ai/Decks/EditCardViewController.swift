@@ -1,5 +1,5 @@
 import UIKit
-import FirebaseFirestore
+import Firebase
 
 class EditCardViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var editCardView: UIView!

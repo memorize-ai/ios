@@ -1,6 +1,5 @@
 import UIKit
-import FirebaseAuth
-import FirebaseStorage
+import Firebase
 import SafariServices
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate {

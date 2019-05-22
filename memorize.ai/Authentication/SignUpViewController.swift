@@ -1,6 +1,5 @@
 import UIKit
-import FirebaseAuth
-import FirebaseStorage
+import Firebase
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var nameTextField: UITextField!

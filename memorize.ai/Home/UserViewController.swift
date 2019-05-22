@@ -1,6 +1,6 @@
 import UIKit
 import CoreData
-import FirebaseAuth
+import Firebase
 import WebKit
 
 class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -104,7 +104,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
 				self.view.backgroundColor = backgroundColor
 				self.cardsCollectionView.backgroundColor = backgroundColor
-			case .unknown, .algorithm:
+			default:
 				break
 			}
 		}

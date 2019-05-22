@@ -1,7 +1,6 @@
 import UIKit
 import CoreData
-import FirebaseCore
-import FirebaseMessaging
+import Firebase
 import UserNotifications
 
 @UIApplicationMain

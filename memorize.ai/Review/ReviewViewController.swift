@@ -1,5 +1,5 @@
 import UIKit
-import FirebaseFirestore
+import Firebase
 import WebKit
 
 class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {

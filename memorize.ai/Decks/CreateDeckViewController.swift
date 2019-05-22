@@ -1,6 +1,5 @@
 import UIKit
-import FirebaseFirestore
-import FirebaseStorage
+import Firebase
 
 class CreateDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 	@IBOutlet weak var outerImageView: UIView!

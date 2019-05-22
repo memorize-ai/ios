@@ -1,5 +1,5 @@
 import UIKit
-import FirebaseFirestore
+import Firebase
 import WebKit
 
 class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
