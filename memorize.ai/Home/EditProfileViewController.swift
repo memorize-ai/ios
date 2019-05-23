@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import SafariServices
 
-class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var pictureView: UIView!
 	@IBOutlet weak var pictureImageView: UIImageView!
 	@IBOutlet weak var changeButton: UIButton!
@@ -10,18 +10,28 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var emailLabel: UILabel!
 	@IBOutlet weak var linkButton: UIButton!
-	@IBOutlet weak var settingsCollectionView: UICollectionView!
-	@IBOutlet weak var settingsCollectionViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var optionsTableView: UITableView!
+	@IBOutlet weak var optionsTableViewHeightConstraint: NSLayoutConstraint!
+	
+	class Option {
+		let image: UIImage
+		let name: String
+		let action: (EditProfileViewController) -> () -> Void
+		
+		init(image: UIImage, name: String, action: @escaping (EditProfileViewController) -> () -> Void) {
+			self.image = image
+			self.name = name
+			self.action = action
+		}
+	}
+	
+	let options = [Option(image: #imageLiteral(resourceName: "Settings"), name: "Settings", action: showSettings)]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		pictureImageView.layer.borderWidth = 0.5
 		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
 		pictureImageView.layer.masksToBounds = true
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 43)
-		flowLayout.minimumLineSpacing = 8
-		settingsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -32,16 +42,18 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				self.emailLabel.text = email
 				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
 				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
-			} else if change == .settingAdded || change == .settingModified || change == .settingRemoved {
-				self.settingsCollectionView.reloadData()
-				self.resizeSettingsCollectionView()
 			}
 		}
+		resizeOptionsTableView()
 	}
 	
-	func resizeSettingsCollectionView() {
-		settingsCollectionViewHeightConstraint.constant = CGFloat(51 * settings.count - 8)
+	func resizeOptionsTableView() {
+		optionsTableViewHeightConstraint.constant = CGFloat(56 * options.count)
 		view.layoutIfNeeded()
+	}
+	
+	func showSettings() {
+		performSegue(withIdentifier: "settings", sender: self)
 	}
 	
 	@IBAction func signOut() {
@@ -125,49 +137,28 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	@IBAction func linkClicked() {
-		guard let currentTitle = linkButton.currentTitle, let url = URL(string: currentTitle) else { return }
+		guard let currentTitle = linkButton.currentTitle, let url = URL(string: "https://\(currentTitle)") else { return }
 		present(SFSafariViewController(url: url), animated: true, completion: nil)
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return settings.count
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return options.count
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SettingCollectionViewCell
-		cell.load(settings[indexPath.item])
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OptionTableViewCell
+		let element = options[indexPath.row]
+		cell.optionImageView.image = element.image
+		cell.nameLabel.text = element.name
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		options[indexPath.row].action(self)()
 	}
 }
 
-class SettingCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var descriptionLabel: UILabel!
-	@IBOutlet weak var descriptionLabelHeightConstraint: NSLayoutConstraint!
-	@IBOutlet weak var descriptionLabelBottomConstraint: NSLayoutConstraint!
-	@IBOutlet weak var valueSwitch: UISwitch!
-	
-	var setting: Setting?
-	
-	func load(_ setting: Setting) {
-		self.setting = setting
-		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-		titleLabel.text = setting.title
-		descriptionLabel.text = setting.description
-		let noDescription = setting.description.isEmpty
-		descriptionLabelHeightConstraint.constant = noDescription ? 0 : 12
-		descriptionLabelBottomConstraint.constant = noDescription ? 2 : 6
-		valueSwitch.setOn(setting.value as? Bool ?? false, animated: false)
-	}
-	
-	@IBAction func valueSwitchChanged() {
-		guard let id = id, let setting = setting else { return }
-		firestore.document("users/\(id)/settings/\(setting.id)").setData(["value": valueSwitch.isOn]) { error in
-			if error == nil {
-				Setting.callHandler(setting)
-			} else {
-				self.valueSwitch.setOn(!self.valueSwitch.isOn, animated: true)
-			}
-		}
-	}
+class OptionTableViewCell: UITableViewCell {
+	@IBOutlet weak var optionImageView: UIImageView!
+	@IBOutlet weak var nameLabel: UILabel!
 }

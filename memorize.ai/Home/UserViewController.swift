@@ -147,15 +147,15 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				case .added:
 					firestore.document("users/\(id)/settings/\(settingId)").addSnapshotListener { settingSnapshot, settingError in
 						guard settingError == nil, let settingSnapshot = settingSnapshot, let value = settingSnapshot.exists ? settingSnapshot.get("value") : setting.get("default") else { return }
-						let newSetting = Setting(id: settingId, slug: setting.get("slug") as? String ?? "error", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value, order: setting.get("order") as? Int ?? 0)
+						let newSetting = Setting(id: settingId, section: setting.get("section") as? String ?? "", slug: setting.get("slug") as? String ?? "", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value, order: setting.get("order") as? Int ?? 0)
 						if let localSettingIndex = Setting.id(settingId) {
 							settings[localSettingIndex] = newSetting
 							ChangeHandler.call(.settingValueModified)
 						} else {
 							settings.append(newSetting)
-							settings.sort { return $0.order < $1.order }
 							ChangeHandler.call(.settingAdded)
 						}
+						Setting.loadSectionedSettings()
 						Setting.callHandler(newSetting)
 					}
 				case .modified:
@@ -164,12 +164,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					localSetting.title = setting.get("title") as? String ?? "Error"
 					localSetting.description = setting.get("description") as? String ?? ""
 					localSetting.order = setting.get("order") as? Int ?? 0
-					settings.sort { return $0.order < $1.order }
+					Setting.loadSectionedSettings()
 					Setting.callHandler(localSetting)
 					ChangeHandler.call(.settingModified)
 				case .removed:
 					settings = settings.filter { return $0.id != settingId }
-					settings.sort { return $0.order < $1.order }
+					Setting.loadSectionedSettings()
 					ChangeHandler.call(.settingRemoved)
 				@unknown default:
 					break
