@@ -54,6 +54,12 @@ class Deck {
 		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { _, _ in }
 	}
 	
+	static func rate(_ deckId: String, rating: DeckRating, completion: @escaping (Error?) -> Void) {
+		functions.httpsCallable("rateDeck").call(["deckId": deckId]) { _, error in
+			completion(error)
+		}
+	}
+	
 	static func id(_ t: String) -> Int? {
 		for i in 0..<decks.count {
 			if decks[i].id == t {
@@ -79,6 +85,16 @@ class Deck {
 	func allDue() -> [Card] {
 		return cards.filter { return $0.isDue() }
 	}
+	
+	func rate(_ rating: DeckRating, completion: @escaping (Error?) -> Void) {
+		Deck.rate(id, rating: rating, completion: completion)
+	}
+}
+
+enum DeckRating {
+	case like
+	case none
+	case dislike
 }
 
 class Card {

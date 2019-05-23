@@ -543,7 +543,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsg-M5-zL2">
-                                <rect key="frame" x="0.0" y="64" width="414" height="602"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="582"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q21-sq-ltA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="351"/>
@@ -710,7 +710,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lZh-JO-Vn9" firstAttribute="top" secondItem="xsg-M5-zL2" secondAttribute="bottom" id="19N-iM-waw"/>
+                            <constraint firstItem="lZh-JO-Vn9" firstAttribute="top" secondItem="xsg-M5-zL2" secondAttribute="bottom" constant="20" id="19N-iM-waw"/>
                             <constraint firstItem="q21-sq-ltA" firstAttribute="width" secondItem="wPp-Ww-XZU" secondAttribute="width" id="3hT-gU-1fI"/>
                             <constraint firstItem="xsg-M5-zL2" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" id="4gP-ZL-Vhk"/>
                             <constraint firstItem="lZh-JO-Vn9" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" constant="40" id="AJk-79-zfd"/>
