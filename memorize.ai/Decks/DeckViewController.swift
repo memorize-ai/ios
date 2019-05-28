@@ -86,13 +86,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if let image = image {
 			imageActivityIndicator.stopAnimating()
 			imageView.image = image
+			imageView.layer.borderWidth = 0
 		} else {
 			storage.child("decks/\(self.deckId!)").getData(maxSize: fileLimit) { data, error in
+				self.imageActivityIndicator.stopAnimating()
+				self.imageView.layer.borderWidth = 0
 				if error == nil, let data = data {
-					self.imageActivityIndicator.stopAnimating()
 					self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
 				} else {
-					self.showAlert("Unable to load image")
+					self.imageView.image = #imageLiteral(resourceName: "Gray Deck")
 				}
 			}
 		}
