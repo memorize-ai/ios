@@ -60,6 +60,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									startup = false
 									ChangeHandler.call(.profileModified)
 								}
+								self.updateLastOnline()
 								self.loadSettings()
 								self.loadDecks()
 							} else if let error = error {
@@ -115,6 +116,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		loadProfileBarButtonItem(nil)
 		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
+			updateLastOnline()
 			reloadProfileBarButtonItem()
 			loadDecks()
 			Card.poll()
@@ -134,6 +136,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func createHelloLabel() {
 		guard let name = name else { return }
 		helloLabel.text = "Hello, \(name)"
+	}
+	
+	func updateLastOnline() {
+		guard Auth.auth().currentUser != nil else { return }
+		functions.httpsCallable("updateLastOnline").call(nil) { _, _ in }
 	}
 	
 	func loadSettings() {
@@ -180,7 +187,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadCards() {
 		let count = cards.count
-		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Gray Circle"), card: $0) }
+		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Due"), card: $0) }
 		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: Rating.image($0.last!.rating), card: $0) })
 		if count != cards.count {
 			cardsCollectionView.reloadData()
