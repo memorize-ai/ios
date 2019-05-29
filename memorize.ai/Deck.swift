@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 var decks = [Deck]()
 
@@ -14,9 +15,9 @@ class Deck {
 	var downloads: DeckDownloads
 	var ratings: DeckRatings
 	var users: [DeckUser]
-	var creator: String
+	let creator: String
 	var owner: String
-	var created: Date
+	let created: Date
 	var updated: Date
 	var permissions: [Permission]
 	var cards: [Card]
@@ -82,6 +83,23 @@ class Deck {
 	func rate(_ rating: Int, completion: @escaping (Error?) -> Void) {
 		Deck.rate(id, rating: rating, completion: completion)
 	}
+	
+	func update(_ snapshot: DocumentSnapshot) {
+		name = snapshot.get("name") as? String ?? name
+		subtitle = snapshot.get("subtitle") as? String ?? subtitle
+		description = snapshot.get("description") as? String ?? description
+		isPublic = snapshot.get("public") as? Bool ?? isPublic
+		count = snapshot.get("count") as? Int ?? count
+		views = DeckViews(snapshot)
+		downloads = DeckDownloads(snapshot)
+		ratings = DeckRatings(snapshot)
+		owner = snapshot.get("owner") as? String ?? owner
+		updated = snapshot.get("updated") as? Date ?? updated
+	}
+	
+	func updateMastered(_ snapshot: DocumentSnapshot) {
+		mastered = snapshot.get("mastered") as? Int ?? mastered
+	}
 }
 
 class DeckViews {
@@ -92,6 +110,12 @@ class DeckViews {
 		self.total = total
 		self.unique = unique
 	}
+	
+	init(_ snapshot: DocumentSnapshot) {
+		let views = snapshot.get("views") as? [String : Any]
+		total = views?["total"] as? Int ?? 0
+		unique = views?["unique"] as? Int ?? 0
+	}
 }
 
 class DeckDownloads {
@@ -101,6 +125,12 @@ class DeckDownloads {
 	init(total: Int, current: Int) {
 		self.total = total
 		self.current = current
+	}
+	
+	init(_ snapshot: DocumentSnapshot) {
+		let downloads = snapshot.get("downloads") as? [String : Any]
+		total = downloads?["total"] as? Int ?? 0
+		current = downloads?["current"] as? Int ?? 0
 	}
 }
 
@@ -119,6 +149,16 @@ class DeckRatings {
 		self.all3 = all3
 		self.all4 = all4
 		self.all5 = all5
+	}
+	
+	init(_ snapshot: DocumentSnapshot) {
+		let ratings = snapshot.get("ratings") as? [String : Any]
+		average = ratings?["average"] as? Double ?? 0
+		all1 = ratings?["1"] as? Int ?? 0
+		all2 = ratings?["2"] as? Int ?? 0
+		all3 = ratings?["3"] as? Int ?? 0
+		all4 = ratings?["4"] as? Int ?? 0
+		all5 = ratings?["5"] as? Int ?? 0
 	}
 }
 
@@ -139,5 +179,15 @@ class DeckUser {
 		self.review = review
 		self.date = date
 		self.cards = cards
+	}
+	
+	init(_ snapshot: DocumentSnapshot) {
+		id = snapshot.documentID
+		past = snapshot.get("past") as? Bool ?? false
+		current = snapshot.get("current") as? Bool ?? false
+		rating = snapshot.get("rating") as? Int
+		review = snapshot.get("review") as? String
+		date = snapshot.get("date") as? Date
+		cards = []
 	}
 }

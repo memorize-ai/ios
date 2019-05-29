@@ -282,17 +282,29 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				case .added:
 					firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
-						if let deckIndex = Deck.id(deckSnapshot.documentID) {
-							let localDeck = decks[deckIndex]
-							localDeck.name = deckSnapshot.get("name") as? String ?? "Error"
-							localDeck.description = deckSnapshot.get("description") as? String ?? "Error"
-							localDeck.isPublic = deckSnapshot.get("public") as? Bool ?? true
-							localDeck.count = deckSnapshot.get("count") as? Int ?? 0
-							localDeck.mastered = deck.get("mastered") as? Int ?? 0
-							localDeck.creator = deckSnapshot.get("creator") as? String ?? "Error"
-							localDeck.owner = deckSnapshot.get("owner") as? String ?? "Error"
+						if let deckIndex = Deck.id(deckId) {
+							decks[deckIndex].update(deckSnapshot)
 						} else {
-							decks.append(Deck(id: deckId, image: nil, name: deckSnapshot.get("name") as? String ?? "Error", description: deckSnapshot.get("description") as? String ?? "Error", isPublic: deckSnapshot.get("public") as? Bool ?? true, count: deckSnapshot.get("count") as? Int ?? 0, mastered: deck.get("mastered") as? Int ?? 0, creator: deckSnapshot.get("creator") as? String ?? "Error", owner: deckSnapshot.get("owner") as? String ?? "Error", permissions: [], cards: []))
+							decks.append(Deck(
+								id: deckId,
+								image: nil,
+								name: deckSnapshot.get("name") as? String ?? "Error",
+								subtitle: deckSnapshot.get("subtitle") as? String ?? "Error",
+								description: deckSnapshot.get("description") as? String ?? "Error",
+								isPublic: deckSnapshot.get("public") as? Bool ?? true,
+								count: deckSnapshot.get("count") as? Int ?? 0,
+								views: DeckViews(deckSnapshot),
+								downloads: DeckDownloads(deckSnapshot),
+								ratings: DeckRatings(deckSnapshot),
+								users: [],
+								creator: deckSnapshot.get("creator") as? String ?? "Error",
+								owner: deckSnapshot.get("owner") as? String ?? "Error",
+								created: deckSnapshot.get("created") as? Date ?? Date(),
+								updated: deckSnapshot.get("updated") as? Date ?? Date(),
+								permissions: [],
+								cards: [],
+								mastered: deck.get("mastered") as? Int ?? 0
+							))
 						}
 						ChangeHandler.call(.deckModified)
 						firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
@@ -341,9 +353,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						}
 					}
 				case .modified:
-					if let mastered = deck.get("mastered") as? Int {
-						decks[Deck.id(deckId)!].mastered = mastered
-					}
+					decks[Deck.id(deckId)!].updateMastered(deck)
 					ChangeHandler.call(.deckModified)
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
