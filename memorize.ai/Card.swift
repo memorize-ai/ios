@@ -62,8 +62,31 @@ class Card {
 	}
 }
 
-enum CardRating {
-	case none
-	case dislike
-	case like
+class CardRating {
+	let id: String
+	var rating: CardRatingType
+	var date: Date
+	
+	init(id: String, rating: CardRatingType, date: Date) {
+		self.id = id
+		self.rating = rating
+		self.date = date
+	}
+}
+
+enum CardRatingType: Int {
+	case dislike = -1
+	case none = 0
+	case like = 1
+	
+	init(_ number: Int) {
+		switch number {
+		case -1:
+			self = .dislike
+		case 1:
+			self = .like
+		default:
+			self = .none
+		}
+	}
 }
