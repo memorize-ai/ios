@@ -20,6 +20,13 @@
 		4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A7246229611D6004FA89E /* SettingsViewController.swift */; };
 		4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3607832211426E00492ACD /* EditProfileViewController.swift */; };
 		4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */; };
+		4D5F1F12229E19EF00AC7732 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F11229E19EF00AC7732 /* Deck.swift */; };
+		4D5F1F14229E1A3400AC7732 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F13229E1A3400AC7732 /* Card.swift */; };
+		4D5F1F16229E1A6B00AC7732 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F15229E1A6B00AC7732 /* Setting.swift */; };
+		4D5F1F18229E1AC400AC7732 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F17229E1AC400AC7732 /* Permission.swift */; };
+		4D5F1F1A229E1AD200AC7732 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F19229E1AD200AC7732 /* History.swift */; };
+		4D5F1F1C229E1AEE00AC7732 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1B229E1AEE00AC7732 /* Rating.swift */; };
+		4D5F1F1E229E1B0C00AC7732 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1D229E1B0C00AC7732 /* User.swift */; };
 		4D64390622056528006F4F2D /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */; };
 		4D64390722056528006F4F2D /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */; };
 		4D64390822056528006F4F2D /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438FA22056528006F4F2D /* Nunito-ExtraLightItalic.ttf */; };
@@ -172,6 +179,13 @@
 		4D1A7246229611D6004FA89E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4D3607832211426E00492ACD /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
+		4D5F1F11229E19EF00AC7732 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		4D5F1F13229E1A3400AC7732 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		4D5F1F15229E1A6B00AC7732 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		4D5F1F17229E1AC400AC7732 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		4D5F1F19229E1AD200AC7732 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		4D5F1F1B229E1AEE00AC7732 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		4D5F1F1D229E1B0C00AC7732 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
 		4D6438FA22056528006F4F2D /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -369,6 +383,13 @@
 				4DCB002422936CD30072FED4 /* Constants.swift */,
 				4DB8AE65228C920800A08AFA /* ChangeHandler.swift */,
 				4D64391422057886006F4F2D /* Global.swift */,
+				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
+				4D5F1F1B229E1AEE00AC7732 /* Rating.swift */,
+				4D5F1F19229E1AD200AC7732 /* History.swift */,
+				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
+				4D5F1F15229E1A6B00AC7732 /* Setting.swift */,
+				4D5F1F13229E1A3400AC7732 /* Card.swift */,
+				4D5F1F11229E19EF00AC7732 /* Deck.swift */,
 				4D052AB72204259B0093B64E /* Main.storyboard */,
 				4D44043D224D7D8400AEABD2 /* Home */,
 				4D64391622057D3A006F4F2D /* Authentication */,
@@ -928,22 +949,29 @@
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */,
 				4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */,
+				4D5F1F18229E1AC400AC7732 /* Permission.swift in Sources */,
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
 				4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */,
 				4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */,
 				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
 				4DF2A8D8224F0E0200BA5F8B /* NewCardViewController.swift in Sources */,
+				4D5F1F1A229E1AD200AC7732 /* History.swift in Sources */,
 				4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */,
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
 				4DF9724A220779AE00FF8BED /* CreateDeckViewController.swift in Sources */,
 				4D052ABC2204259B0093B64E /* memorize_ai.xcdatamodeld in Sources */,
 				4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */,
+				4D5F1F16229E1A6B00AC7732 /* Setting.swift in Sources */,
 				4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */,
 				4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */,
 				4DCB002522936CD30072FED4 /* Constants.swift in Sources */,
+				4D5F1F1E229E1B0C00AC7732 /* User.swift in Sources */,
 				4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */,
+				4D5F1F14229E1A3400AC7732 /* Card.swift in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
 				4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */,
+				4D5F1F1C229E1AEE00AC7732 /* Rating.swift in Sources */,
+				4D5F1F12229E19EF00AC7732 /* Deck.swift in Sources */,
 				4D052AB42204259B0093B64E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -136,7 +136,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func load(_ text: String) {
-		descriptionWebView.render(text, preview: false, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
+		descriptionWebView.render(text, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
 	}
 	
 	func resizeDescriptionWebView() {
