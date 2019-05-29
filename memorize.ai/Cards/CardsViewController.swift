@@ -32,8 +32,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CardCollectionViewCell
 		let element = cards[indexPath.item]
-		guard let deckIndex = Deck.id(element.deck) else { return cell }
-		let deck = decks[deckIndex]
+		guard let deck = Deck.get(element.deck) else { return cell }
 		cell.due(element.isDue())
 		if let image = deck.image {
 			cell.imageView.image = image

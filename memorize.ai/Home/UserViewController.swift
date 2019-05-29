@@ -153,26 +153,30 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				switch $0.type {
 				case .added:
 					firestore.document("users/\(id)/settings/\(settingId)").addSnapshotListener { settingSnapshot, settingError in
-						guard settingError == nil, let settingSnapshot = settingSnapshot, let value = settingSnapshot.exists ? settingSnapshot.get("value") : setting.get("default") else { return }
-						let newSetting = Setting(id: settingId, section: setting.get("section") as? String ?? "", slug: setting.get("slug") as? String ?? "", title: setting.get("title") as? String ?? "Error", description: setting.get("description") as? String ?? "", value: value, order: setting.get("order") as? Int ?? 0)
-						if let localSettingIndex = Setting.id(settingId) {
-							settings[localSettingIndex] = newSetting
+						guard settingError == nil, let settingSnapshot = settingSnapshot else { return }
+						if let localSetting = Setting.get(settingId) {
+							localSetting.update(settingSnapshot, type: .user)
 							ChangeHandler.call(.settingValueModified)
 						} else {
-							settings.append(newSetting)
+							settings.append(Setting(
+								id: settingId,
+								section: setting.get("section") as? String ?? "",
+								slug: setting.get("slug") as? String ?? "",
+								title: setting.get("title") as? String ?? "Error",
+								description: setting.get("description") as? String ?? "",
+								value: settingSnapshot.get("value"),
+								default: setting.get("default") ?? true,
+								order: setting.get("order") as? Int ?? 0
+							))
 							ChangeHandler.call(.settingAdded)
 						}
 						Setting.loadSectionedSettings()
-						Setting.callHandler(newSetting)
+						Setting.callHandler(settingId)
 					}
 				case .modified:
-					guard let localSettingIndex = Setting.id(settingId) else { return }
-					let localSetting = settings[localSettingIndex]
-					localSetting.title = setting.get("title") as? String ?? "Error"
-					localSetting.description = setting.get("description") as? String ?? ""
-					localSetting.order = setting.get("order") as? Int ?? 0
+					Setting.get(settingId)?.update(setting, type: .setting)
 					Setting.loadSectionedSettings()
-					Setting.callHandler(localSetting)
+					Setting.callHandler(settingId)
 					ChangeHandler.call(.settingModified)
 				case .removed:
 					settings = settings.filter { return $0.id != settingId }
@@ -282,8 +286,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				case .added:
 					firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
-						if let deckIndex = Deck.id(deckId) {
-							decks[deckIndex].update(deckSnapshot)
+						if let localDeck = Deck.get(deckId) {
+							localDeck.update(deckSnapshot, type: .deck)
 						} else {
 							decks.append(Deck(
 								id: deckId,
@@ -312,34 +316,38 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							snapshot.forEach {
 								let card = $0.document
 								let cardId = card.documentID
-								guard let localDeckIndex = Deck.id(deckId) else { return }
-								let localDeck = decks[localDeckIndex]
+								guard let localDeck = Deck.get(deckId) else { return }
 								switch $0.type {
 								case .added:
 									firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-										let last = cardSnapshot.get("last") as? [String : Any]
-										let cardLast = last == nil ? nil : Card.Last(id: last?["id"] as? String ?? "Error", date: last?["date"] as? Date ?? Date(), rating: last?["rating"] as? Int ?? 0, elapsed: last?["elapsed"] as? Int ?? 0)
-										if let cardIndex = localDeck.card(id: cardId) {
-											let localCard = localDeck.cards[cardIndex]
-											localCard.count = cardSnapshot.get("count") as? Int ?? 0
-											localCard.correct = cardSnapshot.get("correct") as? Int ?? 0
-											localCard.streak = cardSnapshot.get("streak") as? Int ?? 0
-											localCard.mastered = cardSnapshot.get("mastered") as? Bool ?? false
-											localCard.last = cardLast
-											localCard.next = cardSnapshot.get("next") as? Date ?? Date()
+										if let localCard = Card.get(cardId, deckId: deckId) {
+											localCard.update(cardSnapshot, type: .user)
 										} else {
-											localDeck.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: cardSnapshot.get("count") as? Int ?? 0, correct: cardSnapshot.get("correct") as? Int ?? 0, streak: cardSnapshot.get("streak") as? Int ?? 0, mastered: cardSnapshot.get("mastered") as? Bool ?? false, last: cardLast, next: cardSnapshot.get("next") as? Date ?? Date(), history: [], deck: deckId))
+											localDeck.cards.append(Card(
+												id: cardId,
+												front: card.get("front") as? String ?? "Error",
+												back: card.get("back") as? String ?? "Error",
+												created: card.get("created") as? Date ?? Date(),
+												updated: card.get("updated") as? Date ?? Date(),
+												likes: card.get("likes") as? Int ?? 0,
+												dislikes: card.get("dislikes") as? Int ?? 0,
+												count: cardSnapshot.get("count") as? Int ?? 0,
+												correct: cardSnapshot.get("correct") as? Int ?? 0,
+												e: cardSnapshot.get("e") as? Double ?? 0,
+												streak: cardSnapshot.get("streak") as? Int ?? 0,
+												mastered: cardSnapshot.get("mastered") as? Bool ?? false,
+												last: CardLast(cardSnapshot),
+												next: cardSnapshot.get("next") as? Date ?? Date(),
+												history: [],
+												deck: deckId
+											))
 										}
 										self.reloadReview()
 										ChangeHandler.call(.cardModified)
 									}
 								case .modified:
-									let modifiedCard = localDeck.cards[localDeck.card(id: cardId)!]
-									if let front = card.get("front") as? String, let back = card.get("back") as? String {
-										modifiedCard.front = front
-										modifiedCard.back = back
-									}
+									Card.get(cardId, deckId: deckId)?.update(card, type: .card)
 									self.reloadReview()
 									ChangeHandler.call(.cardModified)
 								case .removed:
@@ -353,7 +361,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						}
 					}
 				case .modified:
-					decks[Deck.id(deckId)!].updateMastered(deck)
+					Deck.get(deckId)?.update(deck, type: .user)
 					ChangeHandler.call(.deckModified)
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
@@ -378,11 +386,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			(view: createView, label: createLabel, barView: createBarView),
 			(view: marketplaceView, label: marketplaceLabel, barView: marketplaceBarView)
 		]
-		for i in 0...3 {
-			let action = actions[i]
+		(0...3).forEach {
+			let action = actions[$0]
 			action.view!.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-			enabled[i] = !((i == 0 && decks.isEmpty) || (i == 1 && Card.all().isEmpty))
-			toggle(action.label!, action.barView!, enabled: enabled[i])
+			enabled[$0] = !(($0 == 0 && decks.isEmpty) || ($0 == 1 && Card.all().isEmpty))
+			toggle(action.label!, action.barView!, enabled: enabled[$0])
 		}
 	}
 	

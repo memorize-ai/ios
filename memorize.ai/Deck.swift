@@ -54,26 +54,12 @@ class Deck {
 		}
 	}
 	
-	static func id(_ t: String) -> Int? {
-		for i in 0..<decks.count {
-			if decks[i].id == t {
-				return i
-			}
-		}
-		return nil
+	static func get(_ id: String) -> Deck? {
+		return decks.first { return $0.id == id }
 	}
 	
 	static func allDue() -> [Card] {
 		return decks.flatMap { return $0.cards.filter { return $0.isDue() } }
-	}
-	
-	func card(id t: String) -> Int? {
-		for i in 0..<cards.count {
-			if cards[i].id == t {
-				return i
-			}
-		}
-		return nil
 	}
 	
 	func allDue() -> [Card] {
@@ -84,21 +70,22 @@ class Deck {
 		Deck.rate(id, rating: rating, completion: completion)
 	}
 	
-	func update(_ snapshot: DocumentSnapshot) {
-		name = snapshot.get("name") as? String ?? name
-		subtitle = snapshot.get("subtitle") as? String ?? subtitle
-		description = snapshot.get("description") as? String ?? description
-		isPublic = snapshot.get("public") as? Bool ?? isPublic
-		count = snapshot.get("count") as? Int ?? count
-		views = DeckViews(snapshot)
-		downloads = DeckDownloads(snapshot)
-		ratings = DeckRatings(snapshot)
-		owner = snapshot.get("owner") as? String ?? owner
-		updated = snapshot.get("updated") as? Date ?? updated
-	}
-	
-	func updateMastered(_ snapshot: DocumentSnapshot) {
-		mastered = snapshot.get("mastered") as? Int ?? mastered
+	func update(_ snapshot: DocumentSnapshot, type: DeckUpdateType) {
+		switch type {
+		case .deck:
+			name = snapshot.get("name") as? String ?? name
+			subtitle = snapshot.get("subtitle") as? String ?? subtitle
+			description = snapshot.get("description") as? String ?? description
+			isPublic = snapshot.get("public") as? Bool ?? isPublic
+			count = snapshot.get("count") as? Int ?? count
+			views = DeckViews(snapshot)
+			downloads = DeckDownloads(snapshot)
+			ratings = DeckRatings(snapshot)
+			owner = snapshot.get("owner") as? String ?? owner
+			updated = snapshot.get("updated") as? Date ?? updated
+		case .user:
+			mastered = snapshot.get("mastered") as? Int ?? mastered
+		}
 	}
 }
 
@@ -190,4 +177,9 @@ class DeckUser {
 		date = snapshot.get("date") as? Date
 		cards = []
 	}
+}
+
+enum DeckUpdateType {
+	case deck
+	case user
 }

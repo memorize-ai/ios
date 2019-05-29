@@ -1,3 +1,5 @@
+import Firebase
+
 var settings = [Setting]()
 var sectionedSettings = [SectionedSettings]()
 
@@ -5,16 +7,17 @@ class Setting {
 	private static var handler: ((Setting) -> Void)?
 	
 	let id: String
-	var sectionSlug: String
+	private var sectionSlug: String
 	var section: SettingSection
-	let slug: String
-	let type: SettingType
+	private var slug: String
+	var type: SettingType
 	var title: String
 	var description: String
-	var value: Any
+	var value: Any?
+	var `default`: Any
 	var order: Int
 	
-	init(id: String, section: String, slug: String, title: String, description: String, value: Any, order: Int) {
+	init(id: String, section: String, slug: String, title: String, description: String, value: Any?, default: Any, order: Int) {
 		self.id = id
 		sectionSlug = section
 		self.section = Setting.getSection(section)
@@ -23,7 +26,12 @@ class Setting {
 		self.title = title
 		self.description = description
 		self.value = value
+		self.default = `default`
 		self.order = order
+	}
+	
+	var isDefault: Bool {
+		return value == nil
 	}
 	
 	private static func getSection(_ slug: String) -> SettingSection {
@@ -63,21 +71,12 @@ class Setting {
 		sectionedSettings.sort { $0.section.rawValue < $1.section.rawValue }
 	}
 	
-	static func id(_ t: String) -> Int? {
-		for i in 0..<settings.count {
-			if settings[i].id == t {
-				return i
-			}
-		}
-		return nil
+	static func get(_ id: String) -> Setting? {
+		return settings.first { return $0.id == id }
 	}
 	
 	static func get(_ type: SettingType) -> Setting? {
-		return settings.first { $0.type == type }
-	}
-	
-	static func get(_ slug: String) -> Setting? {
-		return settings.first { $0.slug == slug }
+		return settings.first { return $0.type == type }
 	}
 	
 	static func updateHandler(_ newHandler: ((Setting) -> Void)?) {
@@ -89,6 +88,29 @@ class Setting {
 	
 	static func callHandler(_ setting: Setting) {
 		handler?(setting)
+	}
+	
+	static func callHandler(_ id: String) {
+		guard let setting = get(id) else { return }
+		callHandler(setting)
+	}
+	
+	func getValue() -> Any {
+		return value ?? `default`
+	}
+	
+	func update(_ snapshot: DocumentSnapshot, type: SettingUpdateType) {
+		switch type {
+		case .setting:
+			section = Setting.getSection(snapshot.get("section") as? String ?? sectionSlug)
+			self.type = Setting.getType(snapshot.get("slug") as? String ?? slug)
+			title = snapshot.get("title") as? String ?? title
+			description = snapshot.get("description") as? String ?? description
+			`default` = snapshot.get("default") ?? `default`
+			order = snapshot.get("order") as? Int ?? order
+		case .user:
+			value = snapshot.get("value")
+		}
 	}
 }
 
@@ -124,4 +146,9 @@ enum SettingType {
 	case notifications
 	case algorithm
 	case unknown
+}
+
+enum SettingUpdateType {
+	case setting
+	case user
 }

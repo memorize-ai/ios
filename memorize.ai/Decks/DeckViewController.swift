@@ -32,7 +32,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		imageView.layer.borderWidth = 0.5
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
-		firestore.document("decks/\(deckId!)").addSnapshotListener { snapshot, error in
+		guard let deckId = deckId else { return }
+		firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
 				self.deckName = snapshot.get("name") as? String ?? "Error"
 				self.nameLabel.text = self.deckName
@@ -54,26 +55,29 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.present(alertController, animated: true, completion: nil)
 			}
 		}
-		firestore.collection("decks/\(deckId!)/cards").addSnapshotListener { snapshot, error in
+		firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let card = $0.document
 				let cardId = card.documentID
 				switch $0.type {
 				case .added:
-					self.cards.append(Card(id: cardId, front: card.get("front") as? String ?? "Error", back: card.get("back") as? String ?? "Error", count: 0, correct: 0, streak: 0, mastered: false, last: Card.Last(id: "nil", date: Date(), rating: 0, elapsed: 0), next: Date(), history: [], deck: self.deckId!))
+					self.cards.append(Card(
+						id: cardId,
+						front: card.get("front") as? String ?? "Error",
+						back: card.get("back") as? String ?? "Error",
+						created: card.get("created") as? Date ?? Date(),
+						updated: card.get("updated") as? Date ?? Date(),
+						likes: card.get("likes") as? Int ?? 0,
+						dislikes: card.get("dislikes") as? Int ?? 0,
+						deck: deckId
+					))
 					self.reloadCards()
 					ChangeHandler.call(.cardModified)
 				case .modified:
-					for i in 0..<self.cards.count {
-						let oldCard = self.cards[i]
-						if oldCard.id == cardId {
-							self.cards[i].front = card.get("front") as? String ?? oldCard.front
-							self.cards[i].back = card.get("back") as? String ?? oldCard.back
-							self.reloadCards()
-							ChangeHandler.call(.cardModified)
-						}
-					}
+					self.cards.first { return $0.id == cardId }?.update(card, type: .card)
+					self.reloadCards()
+					ChangeHandler.call(.cardModified)
 				case .removed:
 					self.cards = self.cards.filter { return $0.id != cardId }
 					self.reloadCards()
@@ -104,7 +108,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		super.viewWillAppear(animated)
 		Deck.view(deckId!)
 		previewButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-		if Deck.id(deckId!) != nil {
+		if Deck.get(deckId!) != nil {
 			getButtonWidthConstraint.constant = 90
 			view.layoutIfNeeded()
 			getButton.setTitle("DELETE", for: .normal)

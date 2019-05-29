@@ -96,7 +96,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		}
 		cell.nameLabel.text = element.name
 		cell.ownerLabel.text = element.owner
-		cell.owned(Deck.id(element.id) != nil)
+		cell.owned(Deck.get(element.id) != nil)
 		return cell
 	}
 	
