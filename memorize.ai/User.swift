@@ -6,7 +6,6 @@ var name: String?
 var email: String?
 var slug: String?
 var profilePicture: UIImage?
-var invites = [Invite]()
 var token: String?
 
 func pushToken() {
