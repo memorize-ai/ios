@@ -39,11 +39,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let managedContext = appDelegate.persistentContainer.viewContext
 				let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
 				do {
-					let login = try managedContext.fetch(fetchRequest)
-					if login.count == 1 {
-						let localEmail = login[0].value(forKey: "email") as? String
-						loadProfileBarButtonItem(login[0].value(forKey: "image") as? Data)
-						Auth.auth().signIn(withEmail: localEmail!, password: login[0].value(forKey: "password") as? String ?? "Error") { user, error in
+					let users = try managedContext.fetch(fetchRequest)
+					if let user = users.first {
+						let localEmail = user.value(forKey: "email") as? String
+						loadProfileBarButtonItem(user.value(forKey: "image") as? Data)
+						Auth.auth().signIn(withEmail: localEmail!, password: user.value(forKey: "password") as? String ?? "Error") { user, error in
 							if error == nil, let uid = user?.user.uid {
 								id = uid
 								pushToken()
@@ -395,7 +395,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	@IBAction func showDecks() {
-		guard enabled[0] else { return }
+		guard enabled.first ?? false else { return }
 		performSegue(withIdentifier: "decks", sender: self)
 	}
 	

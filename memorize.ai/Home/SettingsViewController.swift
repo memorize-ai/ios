@@ -47,7 +47,7 @@ class SettingTableViewCell: UITableViewCell {
 		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		titleLabel.text = setting.title
 		descriptionLabel.text = setting.description
-		valueSwitch.setOn(setting.value as? Bool ?? false, animated: false)
+		valueSwitch.setOn(setting.getValue() as? Bool ?? false, animated: false)
 	}
 	
 	@IBAction func valueSwitchChanged() {
