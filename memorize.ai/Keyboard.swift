@@ -19,10 +19,8 @@ extension UITextView {
 	}
 	
 	func shift(_ times: Int = 1) {
-		(1...times).forEach { _ in
-			guard let selectedRange = selectedTextRange, let newPosition = position(from: selectedRange.start, offset: -1) else { return }
-			selectedTextRange = textRange(from: newPosition, to: newPosition)
-		}
+		guard let selectedRange = selectedTextRange, let newPosition = position(from: selectedRange.start, offset: -times) else { return }
+		selectedTextRange = textRange(from: newPosition, to: newPosition)
 	}
 	
 	private func items(_ type: KeyboardType) -> [UIBarButtonItem] {
