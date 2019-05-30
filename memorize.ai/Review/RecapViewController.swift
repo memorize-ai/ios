@@ -24,6 +24,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 				self.recapCollectionView.reloadData()
 			}
 		}
+		updateCurrentViewController()
 	}
 	
 	@objc func back() {

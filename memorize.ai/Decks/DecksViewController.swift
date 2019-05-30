@@ -58,6 +58,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if decks.isEmpty {
 			navigationController?.popViewController(animated: true)
 		}
+		updateCurrentViewController()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -13,6 +13,7 @@ let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f
 let decksIndex = client.index(withName: "decks")
 var startup = true
 var shouldLoadDecks = false
+var currentViewController: UIViewController?
 
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
@@ -44,13 +45,7 @@ extension WKWebView {
 }
 
 extension UIViewController {
-	func hideKeyboard() {
-		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-		tap.cancelsTouchesInView = false
-		view.addGestureRecognizer(tap)
-	}
-	
-	@objc func dismissKeyboard() {
+	func dismissKeyboard() {
 		view.endEditing(true)
 	}
 	
@@ -64,6 +59,10 @@ extension UIViewController {
 	func showAlert(_ message: String) {
 		AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 		showAlert("Error", message)
+	}
+	
+	func updateCurrentViewController() {
+		currentViewController = self
 	}
 }
 

@@ -20,6 +20,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 		resetBorder(textView: backTextView)
 		frontTextView.text = card!.front
 		backTextView.text = card!.back
+		frontTextView.setKeyboard(.advanced)
+		backTextView.setKeyboard(.advanced)
 		editCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -32,6 +34,7 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 		ChangeHandler.update(nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		updateCurrentViewController()
 	}
 	
 	@IBAction func hide() {

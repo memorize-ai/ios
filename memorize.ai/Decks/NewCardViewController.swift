@@ -18,6 +18,8 @@ class NewCardViewController: UIViewController, UITextViewDelegate {
 		disable()
 		resetBorder(textView: frontTextView)
 		resetBorder(textView: backTextView)
+		frontTextView.setKeyboard(.advanced)
+		backTextView.setKeyboard(.advanced)
 		newCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -29,6 +31,7 @@ class NewCardViewController: UIViewController, UITextViewDelegate {
 		super.viewWillAppear(animated)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		updateCurrentViewController()
 	}
 	
 	@IBAction func create() {

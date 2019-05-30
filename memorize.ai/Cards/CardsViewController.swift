@@ -18,6 +18,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 			}
 		}
 		loadCards()
+		updateCurrentViewController()
 	}
 	
 	func loadCards() {

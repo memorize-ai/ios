@@ -49,6 +49,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				}
 			}
 		}
+		updateCurrentViewController()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {

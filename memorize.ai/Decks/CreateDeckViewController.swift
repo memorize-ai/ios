@@ -21,8 +21,15 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		createButton.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
+		nameTextField.
 		textViewDidEndEditing(descriptionTextView)
+		descriptionTextView.setKeyboard(.advanced)
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateCurrentViewController()
+	}
 	
 	@IBAction func chooseImage() {
 		let picker = UIImagePickerController()

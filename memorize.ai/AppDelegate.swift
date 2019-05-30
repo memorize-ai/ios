@@ -7,7 +7,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 	var window: UIWindow?
 	
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
 		FirebaseApp.configure()
 		if #available(iOS 10.0, *) {
 			UNUserNotificationCenter.current().delegate = self
@@ -21,23 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	}
 	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-		token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-	}
-	
-	func applicationWillResignActive(_ application: UIApplication) {
-		
-	}
-	
-	func applicationDidEnterBackground(_ application: UIApplication) {
-		
-	}
-
-	func applicationWillEnterForeground(_ application: UIApplication) {
-		
-	}
-
-	func applicationDidBecomeActive(_ application: UIApplication) {
-		
+		token = deviceToken.map { return String(format: "%02.2hhx", $0) }.joined()
 	}
 
 	func applicationWillTerminate(_ application: UIApplication) {

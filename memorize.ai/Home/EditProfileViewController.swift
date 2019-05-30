@@ -45,6 +45,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			}
 		}
 		resizeOptionsTableView()
+		updateCurrentViewController()
 	}
 	
 	func resizeOptionsTableView() {

@@ -27,6 +27,7 @@ class CardViewController: UIViewController {
 		super.viewWillAppear(animated)
 		ChangeHandler.update(nil)
 		disable(leftButton)
+		updateCurrentViewController()
 	}
 	
 	@IBAction func hide() {

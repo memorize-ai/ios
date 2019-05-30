@@ -34,6 +34,10 @@ class Setting {
 		return value == nil
 	}
 	
+	var data: Any {
+		return value ?? `default`
+	}
+	
 	private static func getSection(_ slug: String) -> SettingSection {
 		switch slug {
 		case "general":
@@ -93,10 +97,6 @@ class Setting {
 	static func callHandler(_ id: String) {
 		guard let setting = get(id) else { return }
 		callHandler(setting)
-	}
-	
-	func getValue() -> Any {
-		return value ?? `default`
 	}
 	
 	func update(_ snapshot: DocumentSnapshot, type: SettingUpdateType) {

@@ -125,6 +125,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			navigationItem.setHidesBackButton(true, animated: true)
 			shouldLoadDecks = false
 		}
+		updateCurrentViewController()
 	}
 	
 	@IBAction func retry() {

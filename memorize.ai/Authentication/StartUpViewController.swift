@@ -14,5 +14,6 @@ class StartUpViewController: UIViewController {
 		navigationController?.setNavigationBarHidden(true, animated: true)
 		startup = false
 		shouldLoadDecks = true
+		updateCurrentViewController()
 	}
 }
