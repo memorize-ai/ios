@@ -32,10 +32,15 @@ extension UITextView {
 		case .advanced:
 			items = [
 				UIBarButtonItem(title: "Code", style: .plain, target: self, action: #selector(code)),
+				flex,
 				UIBarButtonItem(title: "Math", style: .plain, target: self, action: #selector(math)),
+				flex,
 				UIBarButtonItem(title: "#", style: .plain, target: self, action: #selector(markdownHeader)),
+				flex,
 				UIBarButtonItem(title: "**", style: .plain, target: self, action: #selector(markdownBold)),
+				flex,
 				UIBarButtonItem(title: "\\", style: .plain, target: self, action: #selector(backSlash)),
+				flex,
 				UIBarButtonItem(title: "{ }", style: .plain, target: self, action: #selector(curlyBraces))
 			]
 		}
