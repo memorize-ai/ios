@@ -1,11 +1,27 @@
 import UIKit
 
+extension UITextField {
+	func setKeyboard(_ type: UIKeyboardAppearance) {
+		keyboardAppearance = type
+	}
+	
+	func setKeyboard() {
+		setKeyboard(getKeyboardAppearance())
+	}
+}
+
 extension UITextView {
 	func setKeyboard(_ type: KeyboardType) {
+		keyboardAppearance = getKeyboardAppearance()
 		let toolbar = UIToolbar()
 		toolbar.sizeToFit()
-		toolbar.barStyle = Setting.get(.darkMode)?.data as? Bool ?? false ? .blackTranslucent : .default
-		toolbar.setItems(items(type), animated: false)
+		toolbar.barStyle = isDarkMode() ? .blackTranslucent : .default
+		toolbar.setItems(items(type).map {
+			if isDarkMode() {
+				$0.tintColor = .white
+			}
+			return $0
+		}, animated: false)
 		inputAccessoryView = toolbar
 	}
 	
@@ -79,4 +95,12 @@ extension UITextView {
 enum KeyboardType {
 	case plain
 	case advanced
+}
+
+fileprivate func isDarkMode() -> Bool {
+	return Setting.get(.darkMode)?.data as? Bool ?? false
+}
+
+fileprivate func getKeyboardAppearance() -> UIKeyboardAppearance {
+	return isDarkMode() ? .dark : .default
 }

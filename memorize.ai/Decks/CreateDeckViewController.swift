@@ -21,6 +21,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		createButton.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
+		nameTextField.setKeyboard()
 		textViewDidEndEditing(descriptionTextView)
 		descriptionTextView.setKeyboard(.advanced)
     }
