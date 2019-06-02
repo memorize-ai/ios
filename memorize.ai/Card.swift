@@ -48,11 +48,11 @@ class Card {
 	}
 	
 	static func poll() {
-//		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-//			if !Deck.allDue().isEmpty {
-//				ChangeHandler.call(.cardDue)
-//			}
-//		}
+		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+			if !Deck.allDue().isEmpty {
+				ChangeHandler.call(.cardDue)
+			}
+		}
 	}
 	
 	static func sortDue(_ cards: [Card]) -> [Card] {
@@ -64,7 +64,12 @@ class Card {
 	}
 	
 	func isDue() -> Bool {
-		return next.timeIntervalSinceNow <= 0
+		if id == "jPldz4E6t655oFHW9BNg" {
+			print("$$next", next.timeIntervalSince1970)
+			print("$$next_date", next)
+			print("$$now", Date().timeIntervalSince1970)
+		}
+		return next.timeIntervalSince1970 < Date().timeIntervalSince1970
 	}
 	
 	func update(_ snapshot: DocumentSnapshot, type: CardUpdateType) {
@@ -72,7 +77,7 @@ class Card {
 		case .card:
 			front = snapshot.get("front") as? String ?? front
 			back = snapshot.get("back") as? String ?? back
-			updated = snapshot.get("updated") as? Date ?? updated
+			updated = snapshot.getDate("updated") ?? updated
 			likes = snapshot.get("likes") as? Int ?? likes
 			dislikes = snapshot.get("dislikes") as? Int ?? dislikes
 		case .user:
@@ -82,7 +87,7 @@ class Card {
 			streak = snapshot.get("streak") as? Int ?? streak
 			mastered = snapshot.get("mastered") as? Bool ?? mastered
 			last = CardLast(snapshot) ?? last
-			next = snapshot.get("next") as? Date ?? next
+			next = snapshot.getDate("next") ?? next
 		}
 	}
 }
@@ -115,7 +120,7 @@ class CardLast {
 	init?(_ snapshot: DocumentSnapshot) {
 		guard let last = snapshot.get("last") as? [String : Any] else { return nil }
 		id = last["id"] as? String ?? "Error"
-		date = last["date"] as? Date ?? Date()
+		date = (last["date"] as? Timestamp)?.dateValue() ?? Date()
 		rating = last["rating"] as? Int ?? 0
 		elapsed = last["elapsed"] as? Int ?? 0
 	}

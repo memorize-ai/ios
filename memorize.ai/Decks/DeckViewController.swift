@@ -66,8 +66,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						id: cardId,
 						front: card.get("front") as? String ?? "Error",
 						back: card.get("back") as? String ?? "Error",
-						created: card.get("created") as? Date ?? Date(),
-						updated: card.get("updated") as? Date ?? Date(),
+						created: card.getDate("created") ?? Date(),
+						updated: card.getDate("updated") ?? Date(),
 						likes: card.get("likes") as? Int ?? 0,
 						dislikes: card.get("dislikes") as? Int ?? 0,
 						deck: deckId

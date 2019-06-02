@@ -305,8 +305,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								users: [],
 								creator: deckSnapshot.get("creator") as? String ?? "Error",
 								owner: deckSnapshot.get("owner") as? String ?? "Error",
-								created: deckSnapshot.get("created") as? Date ?? Date(),
-								updated: deckSnapshot.get("updated") as? Date ?? Date(),
+								created: deckSnapshot.getDate("created") ?? Date(),
+								updated: deckSnapshot.getDate("updated") ?? Date(),
 								permissions: [],
 								cards: [],
 								mastered: deck.get("mastered") as? Int ?? 0
@@ -330,8 +330,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 												id: cardId,
 												front: card.get("front") as? String ?? "Error",
 												back: card.get("back") as? String ?? "Error",
-												created: card.get("created") as? Date ?? Date(),
-												updated: card.get("updated") as? Date ?? Date(),
+												created: card.getDate("created") ?? Date(),
+												updated: card.getDate("updated") ?? Date(),
 												likes: card.get("likes") as? Int ?? 0,
 												dislikes: card.get("dislikes") as? Int ?? 0,
 												count: cardSnapshot.get("count") as? Int ?? 0,
@@ -340,7 +340,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 												streak: cardSnapshot.get("streak") as? Int ?? 0,
 												mastered: cardSnapshot.get("mastered") as? Bool ?? false,
 												last: CardLast(cardSnapshot),
-												next: cardSnapshot.get("next") as? Date ?? Date(),
+												next: cardSnapshot.getDate("next") ?? Date(),
 												history: [],
 												deck: deckId
 											))

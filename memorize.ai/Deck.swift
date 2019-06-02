@@ -82,7 +82,7 @@ class Deck {
 			downloads = DeckDownloads(snapshot)
 			ratings = DeckRatings(snapshot)
 			owner = snapshot.get("owner") as? String ?? owner
-			updated = snapshot.get("updated") as? Date ?? updated
+			updated = snapshot.getDate("updated") ?? updated
 		case .user:
 			mastered = snapshot.get("mastered") as? Int ?? mastered
 		}
@@ -174,7 +174,7 @@ class DeckUser {
 		current = snapshot.get("current") as? Bool ?? false
 		rating = snapshot.get("rating") as? Int
 		review = snapshot.get("review") as? String
-		date = snapshot.get("date") as? Date
+		date = snapshot.getDate("date")
 		cards = []
 	}
 }

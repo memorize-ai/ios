@@ -15,6 +15,12 @@ var startup = true
 var shouldLoadDecks = false
 var currentViewController: UIViewController?
 
+extension DocumentSnapshot {
+	func getDate(_ field: String) -> Date? {
+		return (get(field) as? Timestamp)?.dateValue()
+	}
+}
+
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
 		loadHTMLString("""

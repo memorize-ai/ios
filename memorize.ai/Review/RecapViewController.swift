@@ -53,7 +53,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else {
 			cell.nextLabel.text = "Loading..."
 			listeners["users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)"] = firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
-				guard error == nil, let next = snapshot?.get("next") as? Date else { return }
+				guard error == nil, let next = snapshot?.getDate("next") else { return }
 				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, rating: element.rating, next: next)
 				cell.nextLabel.text = next.format()
 			}
