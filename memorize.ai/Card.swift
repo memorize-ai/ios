@@ -64,12 +64,7 @@ class Card {
 	}
 	
 	func isDue() -> Bool {
-		if id == "jPldz4E6t655oFHW9BNg" {
-			print("$$next", next.timeIntervalSince1970)
-			print("$$next_date", next)
-			print("$$now", Date().timeIntervalSince1970)
-		}
-		return next.timeIntervalSince1970 < Date().timeIntervalSince1970
+		return next.timeIntervalSinceNow <= 0
 	}
 	
 	func update(_ snapshot: DocumentSnapshot, type: CardUpdateType) {
