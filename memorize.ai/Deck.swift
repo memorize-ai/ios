@@ -59,7 +59,6 @@ class Deck {
 	}
 	
 	static func allDue() -> [Card] {
-		decks.map { print("deck \($0.id) \($0.name)") }
 		return decks.flatMap { return $0.cards.filter { return $0.isDue() } }
 	}
 	
