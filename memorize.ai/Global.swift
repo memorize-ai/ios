@@ -11,9 +11,14 @@ let storage = Storage.storage().reference()
 let functions = Functions.functions()
 let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 let decksIndex = client.index(withName: "decks")
+var listeners = [String : ListenerRegistration]()
 var startup = true
 var shouldLoadDecks = false
 var currentViewController: UIViewController?
+
+func removeListener(_ key: String) {
+	listeners[key]?.remove()
+}
 
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {

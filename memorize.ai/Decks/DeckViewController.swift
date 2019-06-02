@@ -33,7 +33,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
 		guard let deckId = deckId else { return }
-		firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
+		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
 				self.deckName = snapshot.get("name") as? String ?? "Error"
 				self.nameLabel.text = self.deckName
@@ -55,7 +55,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.present(alertController, animated: true, completion: nil)
 			}
 		}
-		firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
+		listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let card = $0.document

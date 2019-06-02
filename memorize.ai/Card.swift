@@ -48,11 +48,11 @@ class Card {
 	}
 	
 	static func poll() {
-		Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
-			if !Deck.allDue().isEmpty {
-				ChangeHandler.call(.cardDue)
-			}
-		}
+//		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+//			if !Deck.allDue().isEmpty {
+//				ChangeHandler.call(.cardDue)
+//			}
+//		}
 	}
 	
 	static func sortDue(_ cards: [Card]) -> [Card] {

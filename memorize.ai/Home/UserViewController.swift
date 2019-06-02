@@ -47,7 +47,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							if error == nil, let uid = user?.user.uid {
 								id = uid
 								pushToken()
-								firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
+								listeners["users/\(uid)"] = firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
 									guard error == nil, let snapshot = snapshot else { return }
 									name = snapshot.get("name") as? String ?? "Error"
 									self.createHelloLabel()
@@ -146,14 +146,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadSettings() {
 		guard let id = id else { return }
-		firestore.collection("settings").addSnapshotListener { snapshot, error in
+		listeners["settings"] = firestore.collection("settings").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let setting = $0.document
 				let settingId = setting.documentID
 				switch $0.type {
 				case .added:
-					firestore.document("users/\(id)/settings/\(settingId)").addSnapshotListener { settingSnapshot, settingError in
+					listeners["users/\(id)/settings/\(settingId)"] = firestore.document("users/\(id)/settings/\(settingId)").addSnapshotListener { settingSnapshot, settingError in
 						guard settingError == nil, let settingSnapshot = settingSnapshot else { return }
 						if let localSetting = Setting.get(settingId) {
 							localSetting.update(settingSnapshot, type: .user)
@@ -278,14 +278,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadDecks() {
-		firestore.collection("users/\(id!)/decks").addSnapshotListener { snapshot, error in
+		listeners["users/\(id!)/decks"] = firestore.collection("users/\(id!)/decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let deck = $0.document
 				let deckId = deck.documentID
 				switch $0.type {
 				case .added:
-					firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
+					listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
 						if let localDeck = Deck.get(deckId) {
 							localDeck.update(deckSnapshot, type: .deck)
@@ -312,7 +312,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							))
 						}
 						ChangeHandler.call(.deckModified)
-						firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
+						listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 							snapshot.forEach {
 								let card = $0.document
@@ -320,7 +320,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								guard let localDeck = Deck.get(deckId) else { return }
 								switch $0.type {
 								case .added:
-									firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
+									listeners["users/\(id!)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
 										if let localCard = Card.get(cardId, deckId: deckId) {
 											localCard.update(cardSnapshot, type: .user)
@@ -366,6 +366,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					ChangeHandler.call(.deckModified)
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
+					removeListener("decks/\(deckId)")
 					ChangeHandler.call(.deckRemoved)
 				@unknown default:
 					return
