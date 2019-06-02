@@ -25,7 +25,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
-	let options = [Option(image: #imageLiteral(resourceName: "Settings"), name: "Settings", action: showSettings)]
+	let options = [
+		Option(image: #imageLiteral(resourceName: "Settings"), name: "Settings", action: showSettings),
+		Option(image: #imageLiteral(resourceName: "Cloud"), name: "Uploads", action: showUploads),
+//		Option(image: #imageLiteral(resourceName: <#T##String#>), name: "Ratings", action: showRatings)
+	]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -55,6 +59,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func showSettings() {
 		performSegue(withIdentifier: "settings", sender: self)
+	}
+	
+	func showUploads() {
+		performSegue(withIdentifier: "uploads", sender: self)
 	}
 	
 	@IBAction func signOut() {

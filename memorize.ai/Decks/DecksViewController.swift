@@ -18,7 +18,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 	
-	let actions = [Action(name: "new card", action: newCard), Action(name: "review all", action: review), Action(name: "visit page", action: visitPage)]
+	let actions = [
+		Action(name: "new card", action: newCard),
+		Action(name: "review all", action: review),
+		Action(name: "visit page", action: visitPage)
+	]
 	var deck: Deck?
 	var cardsDue = false
 	var expanded = false
