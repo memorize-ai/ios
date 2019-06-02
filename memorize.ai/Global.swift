@@ -20,6 +20,7 @@ extension DocumentSnapshot {
 
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
+		let unescapedText = text.replacingOccurrences(of: "\\", with: "\\\\")
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -38,7 +39,7 @@ extension WKWebView {
 					</style>
 				</head>
 				<body>
-					<div>\((try? Down(markdownString: text).toHTML()) ?? text)</div>
+					<div>\((try? Down(markdownString: unescapedText).toHTML()) ?? unescapedText)</div>
 					<script>renderMathInElement(document.body)</script>
 					<script src="prism.js"></script>
 				</body>
