@@ -181,6 +181,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					ChangeHandler.call(.settingModified)
 				case .removed:
 					settings = settings.filter { return $0.id != settingId }
+					Listener.remove("users/\(id)/settings/\(settingId)")
 					Setting.loadSectionedSettings()
 					ChangeHandler.call(.settingRemoved)
 				@unknown default:
@@ -353,6 +354,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									ChangeHandler.call(.cardModified)
 								case .removed:
 									localDeck.cards = localDeck.cards.filter { return $0.id != cardId }
+									Listener.remove("users/\(id!)/decks/\(deckId)/cards/\(cardId)")
 									self.reloadReview()
 									ChangeHandler.call(.cardRemoved)
 								@unknown default:
@@ -366,7 +368,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					ChangeHandler.call(.deckModified)
 				case .removed:
 					decks = decks.filter { return $0.id != deckId }
-					removeListener("decks/\(deckId)")
+					Listener.remove("decks/\(deckId)")
 					ChangeHandler.call(.deckRemoved)
 				@unknown default:
 					return

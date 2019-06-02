@@ -134,6 +134,7 @@
 		4DB8AE612287CE1800A08AFA /* katex.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8AE112287CE1800A08AFA /* katex.mjs */; };
 		4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8AE65228C920800A08AFA /* ChangeHandler.swift */; };
 		4DCB002522936CD30072FED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB002422936CD30072FED4 /* Constants.swift */; };
+		4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF83DD22A378F3006B73A4 /* Listener.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		4DF2A8D8224F0E0200BA5F8B /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */; };
 		4DF9724A220779AE00FF8BED /* CreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */; };
@@ -296,6 +297,7 @@
 		4DB8AE65228C920800A08AFA /* ChangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHandler.swift; sourceTree = "<group>"; };
 		4DC857DD221B824400FD2100 /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
 		4DCB002422936CD30072FED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4DCF83DD22A378F3006B73A4 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,6 +391,7 @@
 				4D64391422057886006F4F2D /* Global.swift */,
 				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
 				4D5F1F1F229E1C4D00AC7732 /* Invite.swift */,
+				4DCF83DD22A378F3006B73A4 /* Listener.swift */,
 				4D5F1F1B229E1AEE00AC7732 /* Rating.swift */,
 				4D5F1F19229E1AD200AC7732 /* History.swift */,
 				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
@@ -954,6 +957,7 @@
 				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */,
+				4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */,
 				4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */,
 				4D5F1F18229E1AC400AC7732 /* Permission.swift in Sources */,
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
