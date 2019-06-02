@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 import Firebase
-import InstantSearchClient
 import AudioToolbox
 import WebKit
 import Down
@@ -9,8 +8,6 @@ import Down
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 let functions = Functions.functions()
-let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
-let decksIndex = client.index(withName: "decks")
 var startup = true
 var shouldLoadDecks = false
 var currentViewController: UIViewController?

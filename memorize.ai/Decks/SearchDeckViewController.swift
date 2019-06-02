@@ -56,15 +56,15 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		result.removeAll()
 		decksCollectionView.reloadData()
 		if !searchText.trim().isEmpty {
-			decksIndex.search(Query(query: searchText)) { content, error in
-				if error == nil, let hits = content?["hits"] as? [[String : Any]] {
-					hits.forEach { hit in
-						let deckId = hit["objectID"] as? String ?? "Error"
+			Algolia.search(.decks, for: searchText) { results, error in
+				if error == nil {
+					results.forEach { result in
+						let deckId = result["objectID"] as? String ?? "Error"
 						listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { _, error in
-							guard error == nil, let owner = hit["owner"] as? String else { return }
+							guard error == nil, let owner = result["owner"] as? String else { return }
 							listeners["users/\(owner)"] = firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
 								guard userError == nil, let snapshot = snapshot else { return }
-								self.result.append(SearchResult(id: deckId, image: nil, name: hit["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
+								self.result.append(SearchResult(id: deckId, image: nil, name: result["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
 								self.decksCollectionView.reloadData()
 								Timer.scheduledTimer(withTimeInterval: 0.02, repeats: false) { _ in
 									self.decksCollectionView.reloadData()
