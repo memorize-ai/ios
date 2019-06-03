@@ -975,11 +975,27 @@
                         <outlet property="filterSegmentedControl" destination="OPf-tc-e8c" id="0zz-X2-4BR"/>
                         <outlet property="searchBar" destination="tcF-Fb-gdq" id="YUV-BR-lPY"/>
                         <outlet property="uploadsCollectionView" destination="UfS-do-7lD" id="ckH-Vo-N24"/>
+                        <segue destination="kdw-V6-Hub" kind="show" identifier="upload" id="0Yj-jn-rSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dae-B8-abQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2192.753623188406" y="133.69565217391306"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dxc-sK-ZBc">
+            <objects>
+                <viewController id="kdw-V6-Hub" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cse-27-Bl0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="SYM-Qc-9Sh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R0Q-Fj-is4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2893" y="134"/>
         </scene>
         <!--Review-->
         <scene sceneID="MWw-Cd-YnB">
