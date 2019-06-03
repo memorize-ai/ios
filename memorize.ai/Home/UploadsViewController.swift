@@ -42,6 +42,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		default:
 			return
 		}
+		loadFilteredUploads()
 		uploadsCollectionView.reloadData()
 	}
 	
