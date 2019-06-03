@@ -151,6 +151,20 @@
 			<key>orderHint</key>
 			<integer>25</integer>
 		</dict>
+		<key>SwiftyMimeTypes-SwiftyMimeTypes.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
+		<key>SwiftyMimeTypes.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>26</integer>
+		</dict>
 		<key>gRPC-C++-gRPCCertificates.xcscheme</key>
 		<dict>
 			<key>isShown</key>

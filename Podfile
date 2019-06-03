@@ -10,10 +10,11 @@ target 'memorize.ai' do
 	pod 'Firebase/Functions'
 	pod 'InstantSearchClient'
 	pod 'Down', :git => 'https://github.com/iwasrobbed/Down.git'
+	pod 'SwiftyMimeTypes'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
-  	end
-  	target 'memorize.aiUITests' do
+	end
+	target 'memorize.aiUITests' do
 		inherit! :search_paths
-  	end
+	end
 end

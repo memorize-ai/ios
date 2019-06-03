@@ -50,7 +50,7 @@ class Upload {
 	}
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
-		Upload.storage.child("\(memorize_ai.id!)/\(id).png").getData(maxSize: fileLimit) { data, error in
+		Upload.storage.child("\(memorize_ai.id!)/\(id).\()").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
 			completion(data, nil)
@@ -67,6 +67,6 @@ class Upload {
 
 enum UploadType: String {
 	case image = "image"
-	case video = "video"
+	case gif = "gif"
 	case audio = "audio"
 }

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2DDB29AD879F4990654E0F5B21CDE3D9"
+               BlueprintIdentifier = "5F8CAE91BB23E0AE914386C701F48E51"
                BuildableName = "InstantSearchClient.framework"
                BlueprintName = "InstantSearchClient"
                ReferencedContainer = "container:Pods.xcodeproj">

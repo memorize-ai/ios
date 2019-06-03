@@ -1,0 +1,6 @@
+framework module SwiftyMimeTypes {
+  umbrella header "SwiftyMimeTypes-umbrella.h"
+
+  export *
+  module * { export * }
+}
