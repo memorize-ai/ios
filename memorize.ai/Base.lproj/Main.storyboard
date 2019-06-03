@@ -549,7 +549,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="351"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ex-Xq-gD5">
-                                                <rect key="frame" x="130" y="83.333333333333343" width="42" height="23.333333333333329"/>
+                                                <rect key="frame" x="130" y="83.333333333333343" width="264" height="23.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -590,7 +590,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="rIZ-2b-g0C">
-                                                <rect key="frame" x="130" y="40" width="45.666666666666657" height="23.333333333333329"/>
+                                                <rect key="frame" x="130" y="40" width="264" height="23.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -667,13 +667,17 @@
                                             <constraint firstItem="oyG-re-dKr" firstAttribute="top" secondItem="rIZ-2b-g0C" secondAttribute="top" id="C1q-61-E96"/>
                                             <constraint firstItem="rIZ-2b-g0C" firstAttribute="leading" secondItem="oyG-re-dKr" secondAttribute="trailing" constant="10" id="DqD-c8-9PH"/>
                                             <constraint firstItem="kBk-A6-MRH" firstAttribute="top" secondItem="oyG-re-dKr" secondAttribute="bottom" constant="40" id="FZ1-gE-J9L"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kBk-A6-MRH" secondAttribute="trailing" constant="20" id="Hgc-t4-bk3"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wmq-LT-5lE" secondAttribute="trailing" constant="20" id="Khc-2l-Dtd"/>
                                             <constraint firstItem="wmq-LT-5lE" firstAttribute="top" secondItem="kBk-A6-MRH" secondAttribute="bottom" id="MSu-Di-Y0s"/>
                                             <constraint firstAttribute="bottom" secondItem="PEy-EW-krH" secondAttribute="bottom" constant="20" id="PjS-JP-m3T"/>
                                             <constraint firstAttribute="trailing" secondItem="PEy-EW-krH" secondAttribute="trailing" id="SCe-lI-BnQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="8Ex-Xq-gD5" secondAttribute="trailing" constant="20" id="VoY-be-h6V"/>
                                             <constraint firstItem="oyG-re-dKr" firstAttribute="top" secondItem="q21-sq-ltA" secondAttribute="top" constant="40" id="X4N-ue-rUc"/>
                                             <constraint firstItem="oyG-re-dKr" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="aNm-0U-3hD"/>
                                             <constraint firstItem="kBk-A6-MRH" firstAttribute="leading" secondItem="wmq-LT-5lE" secondAttribute="leading" id="aQF-cB-BUn"/>
                                             <constraint firstItem="8Ex-Xq-gD5" firstAttribute="leading" secondItem="oyG-re-dKr" secondAttribute="trailing" constant="10" id="bvH-11-78K"/>
+                                            <constraint firstAttribute="trailing" secondItem="rIZ-2b-g0C" secondAttribute="trailing" constant="20" id="ctp-Xt-I8a"/>
                                             <constraint firstItem="oyG-re-dKr" firstAttribute="leading" secondItem="kBk-A6-MRH" secondAttribute="leading" id="dfe-Ny-AgO"/>
                                             <constraint firstItem="PEy-EW-krH" firstAttribute="top" secondItem="wmq-LT-5lE" secondAttribute="bottom" constant="24" id="mV2-CY-MTF"/>
                                             <constraint firstItem="PEy-EW-krH" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" id="nzw-VR-N94"/>
@@ -761,7 +765,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qR-AR-3eC">
-                                                    <rect key="frame" x="30" y="15" width="277" height="31"/>
+                                                    <rect key="frame" x="30" y="15" width="54" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="fcC-zA-huC"/>
                                                     </constraints>
@@ -776,7 +780,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TeA-tf-z9S">
-                                                    <rect key="frame" x="30" y="53.999999999999993" width="277" height="30.666666666666664"/>
+                                                    <rect key="frame" x="30.000000000000004" y="53.999999999999993" width="36.333333333333343" height="30.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="nG4-de-7Db"/>
                                                     </constraints>
@@ -787,11 +791,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8qR-AR-3eC" firstAttribute="top" secondItem="1L7-g5-WjR" secondAttribute="top" constant="15" id="026-iR-jBJ"/>
-                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" secondItem="TeA-tf-z9S" secondAttribute="trailing" constant="30" id="Eg3-Bv-ouU"/>
+                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TeA-tf-z9S" secondAttribute="trailing" constant="30" id="Eg3-Bv-ouU"/>
                                                 <constraint firstItem="TeA-tf-z9S" firstAttribute="top" secondItem="8qR-AR-3eC" secondAttribute="bottom" constant="8" id="PMt-lD-cM2"/>
                                                 <constraint firstItem="TeA-tf-z9S" firstAttribute="leading" secondItem="1L7-g5-WjR" secondAttribute="leading" constant="30" id="btv-H4-V2z"/>
                                                 <constraint firstAttribute="trailing" secondItem="Cpm-eC-I4P" secondAttribute="trailing" constant="28" id="hEZ-8C-nEA"/>
-                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" secondItem="8qR-AR-3eC" secondAttribute="trailing" constant="30" id="jJl-rz-w1j"/>
+                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8qR-AR-3eC" secondAttribute="trailing" constant="30" id="jJl-rz-w1j"/>
                                                 <constraint firstItem="8qR-AR-3eC" firstAttribute="leading" secondItem="1L7-g5-WjR" secondAttribute="leading" constant="30" id="sDu-TY-yQB"/>
                                                 <constraint firstItem="Cpm-eC-I4P" firstAttribute="centerY" secondItem="1L7-g5-WjR" secondAttribute="centerY" id="wR6-kf-XMJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="TeA-tf-z9S" secondAttribute="bottom" constant="15" id="ykZ-FG-XkY"/>
