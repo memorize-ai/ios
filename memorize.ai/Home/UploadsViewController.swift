@@ -52,6 +52,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				guard let uploadId = $0["objectID"] as? String, let upload = Upload.get(uploadId) else { return nil }
 				return upload.data == nil ? nil : upload
 			}, for: self.filter)
+			self.uploadsCollectionView.reloadData()
 		}
 	}
 	
