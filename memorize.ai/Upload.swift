@@ -23,28 +23,33 @@ class Upload {
 		self.type = type
 	}
 	
+	static func loaded(_ filter: (Upload) -> Bool) -> [Upload] {
+		return uploads.filter { return $0.data != nil && filter($0) }
+	}
+	
 	static func loaded() -> [Upload] {
-		return uploads.filter { return $0.data != nil }
+		return loaded { _ in return true }
 	}
 	
-	static func load(_ count: Int) {
-		uploads.filter { return $0.data == nil }.prefix(count).forEach { $0.load() }
+	static func getNext(_ count: Int) -> [Upload] {
+		return Array(uploads.filter { return $0.data == nil }.prefix(count))
 	}
 	
-	static func reloadAll() {
-		uploads.filter { return $0.shouldReload }.forEach {
-			storage.child
-		}
-	}
+//	static func reloadAll() {
+//		uploads.filter { return $0.shouldReload }.forEach {
+//			storage.child
+//		}
+//	}
 	
 	static func get(_ id: String) -> Upload? {
 		return uploads.first { return $0.id == id }
 	}
 	
-	func load(completion: ) {
+	func load(completion: @escaping (Data?, Error?) -> Void) {
 		Upload.storage.child("\(memorize_ai.id!)/\(id)").getData(maxSize: fileLimit) { data, error in
-			guard error == nil, let data = data else { return }
+			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
+			completion(data, nil)
 		}
 	}
 	

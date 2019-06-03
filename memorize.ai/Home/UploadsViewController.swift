@@ -4,15 +4,82 @@ class UploadsViewController: UIViewController, UICollectionViewDataSource, UICol
 	@IBOutlet weak var filterSegmentedControl: UISegmentedControl!
 	@IBOutlet weak var uploadsCollectionView: UICollectionView!
 	
+	var filter: UploadType?
+	var filteredUploads = [Upload]()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		filterSegmentedControl.setTitleTextAttributes([
+			.font: UIFont(name: "Nunito-SemiBold", size: 18)!,
+			.foregroundColor: UIColor.lightGray
+		], for: .normal)
+		filterSegmentedControl.setTitleTextAttributes([
+			.font : UIFont(name: "Nunito-SemiBold", size: 18)!,
+			.foregroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+		], for: .selected)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		ChangeHandler.updateAndCall(.uploadAdded) { change in
+			if change == .uploadAdded || change == .uploadModified || change == .uploadRemoved || change == .uploadLoaded {
+				self.loadFilteredUploads()
+			}
+		}
+	}
+	
+	@IBAction func filterSegmentedControlChanged() {
+		switch filterSegmentedControl.selectedSegmentIndex {
+		case 0:
+			filter = nil
+		case 1:
+			filter = .image
+		case 2:
+			filter = .video
+		case 3:
+			filter = .audio
+		default:
+			return
+		}
+		uploadsCollectionView.reloadData()
+	}
+	
+	func loadFilteredUploads() {
+		filteredUploads = Upload.loaded { return filter == nil ? true : $0.type == filter }
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return Upload.loaded().count
+		return filteredUploads.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		<#code#>
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UploadCollectionViewCell
+		let element = filteredUploads[indexPath.item]
+		if let data = element.data {
+			cell.imageView.image = UIImage(data: data) // check if type is image
+		} else {
+			cell.imageView.image = nil
+			cell.activityIndicator.startAnimating()
+			element.load { data, error in
+				cell.activityIndicator.stopAnimating()
+				if error == nil, let data = data {
+					cell.imageView.image = UIImage(data: data)
+				} else {
+					self.showAlert("There was a problem loading \(element.name)")
+				}
+			}
+		}
+		cell.nameLabel.text = element.name
+		return cell
 	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		// Show info modal so the user can edit or delete the file
+	}
+}
+
+class UploadCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var nameLabel: UILabel!
 }
