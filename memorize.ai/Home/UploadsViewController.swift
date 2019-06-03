@@ -58,7 +58,15 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	func loadFilteredUploads() {
 		guard let searchText = searchBar.text else { return }
 		if searchText.trim().isEmpty {
-			filteredUploads = Upload.filter(Upload.loaded(), for: filter)
+			let loaded = Upload.loaded()
+			filteredUploads = Upload.filter(loaded, for: filter)
+			if !uploads.isEmpty && loaded.isEmpty {
+				uploads.first?.load { _, error in
+					guard error == nil else { return }
+					self.loadFilteredUploads()
+					self.uploadsCollectionView.reloadData()
+				}
+			}
 		} else {
 			searchBar(searchBar, textDidChange: searchText)
 		}

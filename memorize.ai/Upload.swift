@@ -4,7 +4,7 @@ import Firebase
 var uploads = [Upload]()
 
 class Upload {
-	static let storage = Storage.storage(url: "uploads.memorize.ai").reference()
+	static let storage = Storage.storage(url: "gs://uploads.memorize.ai").reference()
 	
 	let id: String
 	var name: String
@@ -50,7 +50,7 @@ class Upload {
 	}
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
-		Upload.storage.child("\(memorize_ai.id!)/\(id)").getData(maxSize: fileLimit) { data, error in
+		Upload.storage.child("\(memorize_ai.id!)/\(id).png").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
 			completion(data, nil)

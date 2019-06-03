@@ -63,6 +63,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								self.updateLastOnline()
 								self.loadSettings()
 								self.loadDecks()
+								self.loadUploads()
 							} else if let error = error {
 								switch error.localizedDescription {
 								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
@@ -119,6 +120,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			updateLastOnline()
 			reloadProfileBarButtonItem()
 			loadDecks()
+			loadUploads()
 			Card.poll()
 			createHelloLabel()
 			navigationController?.setNavigationBarHidden(false, animated: true)
