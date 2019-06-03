@@ -378,7 +378,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadUploads() {
-		firestore.collection("users/\(id!)/uploads").addSnapshotListener { snapshot, error in
+		listeners["users/\(id!)/uploads"] = firestore.collection("users/\(id!)/uploads").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let upload = $0.document
