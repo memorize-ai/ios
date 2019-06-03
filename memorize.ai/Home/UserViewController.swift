@@ -377,6 +377,36 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
+	func loadUploads() {
+		firestore.collection("users/\(id!)/uploads").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let upload = $0.document
+				let uploadId = upload.documentID
+				switch $0.type {
+				case .added:
+					uploads.append(Upload(
+						id: uploadId,
+						name: upload.get("name") as? String ?? "Error",
+						created: upload.getDate("created") ?? Date(),
+						updated: upload.getDate("updated") ?? Date(),
+						data: nil,
+						type: UploadType(rawValue: upload.get("type") as? String ?? "") ?? .image
+					))
+					ChangeHandler.call(.uploadAdded)
+				case .modified:
+					Upload.get(uploadId)?.update(upload)
+					ChangeHandler.call(.uploadModified)
+				case .removed:
+					uploads = uploads.filter { return $0.id != uploadId }
+					ChangeHandler.call(.uploadRemoved)
+				@unknown default:
+					return
+				}
+			}
+		}
+	}
+	
 	func toggle(_ label: UILabel, _ barView: UIView, enabled: Bool) {
 		let color = enabled ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		label.textColor = color

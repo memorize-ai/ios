@@ -31,4 +31,8 @@ enum Change {
 	case settingValueModified
 	case settingModified
 	case settingRemoved
+	case uploadAdded
+	case uploadModified
+	case uploadRemoved
+	case uploadLoaded
 }
