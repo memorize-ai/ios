@@ -840,7 +840,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UfS-do-7lD">
-                                <rect key="frame" x="0.0" y="156" width="414" height="580"/>
+                                <rect key="frame" x="0.0" y="156" width="414" height="490"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="zts-5D-LGn">
                                     <size key="itemSize" width="135" height="132"/>
@@ -933,17 +933,39 @@
                                     <action selector="filterSegmentedControlChanged" destination="PDB-ip-5Km" eventType="valueChanged" id="piO-rg-4HL"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhU-YU-PAu">
+                                <rect key="frame" x="40" y="666" width="334" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="XYE-De-tdG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
+                                <state key="normal" title="UPLOAD">
+                                    <color key="titleColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="upload" destination="PDB-ip-5Km" eventType="touchUpInside" id="Q9e-ba-bx2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tcF-Fb-gdq" firstAttribute="top" secondItem="vqa-3a-Msc" secondAttribute="top" id="4A0-bp-7Tm"/>
+                            <constraint firstItem="mhU-YU-PAu" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" constant="40" id="7a9-ng-hj8"/>
                             <constraint firstItem="OPf-tc-e8c" firstAttribute="top" secondItem="tcF-Fb-gdq" secondAttribute="bottom" constant="-4" id="ADA-Yx-qj4"/>
+                            <constraint firstItem="vqa-3a-Msc" firstAttribute="trailing" secondItem="mhU-YU-PAu" secondAttribute="trailing" constant="40" id="AFH-uj-YqU"/>
                             <constraint firstItem="UfS-do-7lD" firstAttribute="top" secondItem="OPf-tc-e8c" secondAttribute="bottom" id="GF7-Fp-sAC"/>
                             <constraint firstItem="vqa-3a-Msc" firstAttribute="trailing" secondItem="UfS-do-7lD" secondAttribute="trailing" id="Py5-Av-SZv"/>
                             <constraint firstItem="tcF-Fb-gdq" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="SAT-cq-Ee3"/>
-                            <constraint firstItem="vqa-3a-Msc" firstAttribute="bottom" secondItem="UfS-do-7lD" secondAttribute="bottom" id="SwP-AD-yfb"/>
+                            <constraint firstItem="vqa-3a-Msc" firstAttribute="bottom" secondItem="mhU-YU-PAu" secondAttribute="bottom" constant="20" id="XJu-ps-Pwy"/>
                             <constraint firstItem="OPf-tc-e8c" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="age-FL-FDT"/>
                             <constraint firstItem="tcF-Fb-gdq" firstAttribute="trailing" secondItem="vqa-3a-Msc" secondAttribute="trailing" id="eN6-bb-dJt"/>
+                            <constraint firstItem="mhU-YU-PAu" firstAttribute="top" secondItem="UfS-do-7lD" secondAttribute="bottom" constant="20" id="snd-Cd-ob3"/>
                             <constraint firstItem="UfS-do-7lD" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="yHr-jS-EKe"/>
                             <constraint firstItem="OPf-tc-e8c" firstAttribute="trailing" secondItem="vqa-3a-Msc" secondAttribute="trailing" id="z9L-Pd-Wwc"/>
                         </constraints>

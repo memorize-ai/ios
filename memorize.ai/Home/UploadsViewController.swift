@@ -51,6 +51,10 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		uploadsCollectionView.reloadData()
 	}
 	
+	@IBAction func upload() {
+		performSegue(withIdentifier: "upload", sender: self)
+	}
+	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		Algolia.search(.uploads, for: searchText) { results, error in
 			guard error == nil else { return }
