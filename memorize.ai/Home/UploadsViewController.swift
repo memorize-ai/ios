@@ -36,7 +36,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		case 1:
 			filter = .image
 		case 2:
-			filter = .video
+			filter = .gif
 		case 3:
 			filter = .audio
 		default:

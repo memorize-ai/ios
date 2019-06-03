@@ -393,7 +393,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						created: upload.getDate("created") ?? Date(),
 						updated: upload.getDate("updated") ?? Date(),
 						data: nil,
-						type: UploadType(rawValue: upload.get("type") as? String ?? "") ?? .image
+						type: UploadType(rawValue: upload.get("type") as? String ?? "") ?? .image,
+						mime: upload.get("mime") as? String ?? "image/png"
 					))
 					ChangeHandler.call(.uploadAdded)
 				case .modified:

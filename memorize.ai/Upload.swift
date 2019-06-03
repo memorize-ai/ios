@@ -1,5 +1,6 @@
 import Foundation
 import Firebase
+import SwiftyMimeTypes
 
 var uploads = [Upload]()
 
@@ -12,15 +13,22 @@ class Upload {
 	var updated: Date
 	var data: Data?
 	var type: UploadType
+	var mime: String
 	var shouldReload = false
 	
-	init(id: String, name: String, created: Date, updated: Date, data: Data?, type: UploadType) {
+	init(id: String, name: String, created: Date, updated: Date, data: Data?, type: UploadType, mime: String) {
 		self.id = id
 		self.name = name
 		self.created = created
 		self.updated = updated
 		self.data = data
 		self.type = type
+		self.mime = mime
+	}
+	
+	var filename: String? {
+		guard let ext = MimeTypes.filenameExtension(forType: mime) else { return nil }
+		return "\(id).\(ext)"
 	}
 	
 	static func loaded(_ filter: (Upload) -> Bool) -> [Upload] {
@@ -50,7 +58,8 @@ class Upload {
 	}
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
-		Upload.storage.child("\(memorize_ai.id!)/\(id).\()").getData(maxSize: fileLimit) { data, error in
+		guard let filename = filename else { return }
+		Upload.storage.child("\(memorize_ai.id!)/\(filename)").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
 			completion(data, nil)
@@ -61,6 +70,7 @@ class Upload {
 		name = snapshot.get("name") as? String ?? name
 		updated = snapshot.getDate("updated") ?? updated
 		type = UploadType(rawValue: snapshot.get("type") as? String ?? type.rawValue) ?? type
+		mime = snapshot.get("mime") as? String ?? mime
 		shouldReload = true
 	}
 }
