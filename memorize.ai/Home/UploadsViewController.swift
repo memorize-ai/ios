@@ -101,6 +101,13 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 			}
 		}
 		cell.nameLabel.text = element.name
+		if indexPath.item == filteredUploads.count - 1 {
+			let next = Upload.filter(Upload.getNext(5), for: filter)
+			if !next.isEmpty {
+				filteredUploads.append(contentsOf: next)
+				uploadsCollectionView.reloadData()
+			}
+		}
 		return cell
 	}
 	
