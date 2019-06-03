@@ -18,6 +18,10 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 			.font: UIFont(name: "Nunito-SemiBold", size: 18)!,
 			.foregroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 		], for: .selected)
+		let flowLayout = UICollectionViewFlowLayout()
+		let size = view.bounds.width / 2 - 16
+		flowLayout.itemSize = CGSize(width: size, height: size)
+		uploadsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
