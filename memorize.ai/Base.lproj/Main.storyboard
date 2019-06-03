@@ -836,17 +836,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UfS-do-7lD">
-                                <rect key="frame" x="0.0" y="104" width="414" height="632"/>
+                                <rect key="frame" x="0.0" y="156" width="414" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="zts-5D-LGn">
                                     <size key="itemSize" width="135" height="132"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                                    <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="8"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="a6P-Fv-LvR" customClass="UploadCollectionViewCell" customModule="memorize_ai" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="135" height="132"/>
+                                        <rect key="frame" x="8" y="0.0" width="135" height="132"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="135" height="132"/>
@@ -902,11 +902,18 @@
                                     <outlet property="delegate" destination="PDB-ip-5Km" id="eEv-br-dyg"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Your uploads" translatesAutoresizingMaskIntoConstraints="NO" id="tcF-Fb-gdq">
+                                <rect key="frame" x="0.0" y="64" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PDB-ip-5Km" id="Em2-rX-VmC"/>
+                                </connections>
+                            </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OPf-tc-e8c">
-                                <rect key="frame" x="0.0" y="64" width="414" height="41"/>
+                                <rect key="frame" x="0.0" y="116" width="414" height="41"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="z45-fE-fyg"/>
+                                    <constraint firstAttribute="height" constant="40" id="gMc-bs-47x"/>
                                 </constraints>
                                 <segments>
                                     <segment title="All"/>
@@ -922,18 +929,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OPf-tc-e8c" firstAttribute="top" secondItem="vqa-3a-Msc" secondAttribute="top" id="1zS-O1-fuG"/>
+                            <constraint firstItem="tcF-Fb-gdq" firstAttribute="top" secondItem="vqa-3a-Msc" secondAttribute="top" id="4A0-bp-7Tm"/>
+                            <constraint firstItem="OPf-tc-e8c" firstAttribute="top" secondItem="tcF-Fb-gdq" secondAttribute="bottom" constant="-4" id="ADA-Yx-qj4"/>
+                            <constraint firstItem="UfS-do-7lD" firstAttribute="top" secondItem="OPf-tc-e8c" secondAttribute="bottom" id="GF7-Fp-sAC"/>
                             <constraint firstItem="vqa-3a-Msc" firstAttribute="trailing" secondItem="UfS-do-7lD" secondAttribute="trailing" id="Py5-Av-SZv"/>
+                            <constraint firstItem="tcF-Fb-gdq" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="SAT-cq-Ee3"/>
                             <constraint firstItem="vqa-3a-Msc" firstAttribute="bottom" secondItem="UfS-do-7lD" secondAttribute="bottom" id="SwP-AD-yfb"/>
-                            <constraint firstItem="UfS-do-7lD" firstAttribute="top" secondItem="OPf-tc-e8c" secondAttribute="bottom" id="bak-zy-Pux"/>
-                            <constraint firstItem="OPf-tc-e8c" firstAttribute="trailing" secondItem="vqa-3a-Msc" secondAttribute="trailing" id="e7M-lJ-MHh"/>
-                            <constraint firstItem="OPf-tc-e8c" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="nqk-ot-12l"/>
+                            <constraint firstItem="OPf-tc-e8c" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="age-FL-FDT"/>
+                            <constraint firstItem="tcF-Fb-gdq" firstAttribute="trailing" secondItem="vqa-3a-Msc" secondAttribute="trailing" id="eN6-bb-dJt"/>
                             <constraint firstItem="UfS-do-7lD" firstAttribute="leading" secondItem="vqa-3a-Msc" secondAttribute="leading" id="yHr-jS-EKe"/>
+                            <constraint firstItem="OPf-tc-e8c" firstAttribute="trailing" secondItem="vqa-3a-Msc" secondAttribute="trailing" id="z9L-Pd-Wwc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vqa-3a-Msc"/>
                     </view>
                     <connections>
                         <outlet property="filterSegmentedControl" destination="OPf-tc-e8c" id="0zz-X2-4BR"/>
+                        <outlet property="searchBar" destination="tcF-Fb-gdq" id="YUV-BR-lPY"/>
                         <outlet property="uploadsCollectionView" destination="UfS-do-7lD" id="ckH-Vo-N24"/>
                     </connections>
                 </viewController>

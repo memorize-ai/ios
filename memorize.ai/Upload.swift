@@ -31,6 +31,10 @@ class Upload {
 		return loaded { _ in return true }
 	}
 	
+	static func filter(_ array: [Upload], for type: UploadType?) -> [Upload] {
+		return array.filter { return type == nil ? true : $0.type == type }
+	}
+	
 	static func getNext(_ count: Int) -> [Upload] {
 		return Array(uploads.filter { return $0.data == nil }.prefix(count))
 	}

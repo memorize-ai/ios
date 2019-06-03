@@ -1,7 +1,8 @@
 import UIKit
 
-class UploadsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class UploadsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var filterSegmentedControl: UISegmentedControl!
+	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var uploadsCollectionView: UICollectionView!
 	
 	var filter: UploadType?
@@ -14,7 +15,7 @@ class UploadsViewController: UIViewController, UICollectionViewDataSource, UICol
 			.foregroundColor: UIColor.lightGray
 		], for: .normal)
 		filterSegmentedControl.setTitleTextAttributes([
-			.font : UIFont(name: "Nunito-SemiBold", size: 18)!,
+			.font: UIFont(name: "Nunito-SemiBold", size: 18)!,
 			.foregroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 		], for: .selected)
 	}
@@ -44,8 +45,23 @@ class UploadsViewController: UIViewController, UICollectionViewDataSource, UICol
 		uploadsCollectionView.reloadData()
 	}
 	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		Algolia.search(.uploads, for: searchText) { results, error in
+			guard error == nil else { return }
+			self.filteredUploads = Upload.filter(results.compactMap {
+				guard let uploadId = $0["objectID"] as? String, let upload = Upload.get(uploadId) else { return nil }
+				return upload.data == nil ? nil : upload
+			}, for: self.filter)
+		}
+	}
+	
 	func loadFilteredUploads() {
-		filteredUploads = Upload.loaded { return filter == nil ? true : $0.type == filter }
+		guard let searchText = searchBar.text else { return }
+		if searchText.trim().isEmpty {
+			filteredUploads = Upload.filter(Upload.loaded(), for: filter)
+		} else {
+			searchBar(searchBar, textDidChange: searchText)
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
