@@ -25,6 +25,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		ChangeHandler.updateAndCall(.uploadAdded) { change in
 			if change == .uploadAdded || change == .uploadModified || change == .uploadRemoved || change == .uploadLoaded {
 				self.loadFilteredUploads()
+				self.uploadsCollectionView.reloadData()
 			}
 		}
 	}
