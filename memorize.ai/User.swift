@@ -1,5 +1,4 @@
 import UIKit
-import CoreData
 
 var id: String?
 var name: String?
@@ -13,41 +12,34 @@ func pushToken() {
 	firestore.document("users/\(id)/tokens/\(token)").setData(["enabled": true])
 }
 
-func saveUser(email e: String, password p: String) {
-	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-	let managedContext = appDelegate.persistentContainer.viewContext
-	guard let entity = NSEntityDescription.entity(forEntityName: "User", in: managedContext) else { return }
-	let user = NSManagedObject(entity: entity, insertInto: managedContext)
-	user.setValue(e, forKey: "email")
-	user.setValue(p, forKey: "password")
-	do {
-		try managedContext.save()
-		email = e
-	} catch {}
+func saveUser(email _email: String, password _password: String) {
+	defaults.set(_email, forKey: "email")
+	defaults.set(_password, forKey: "password")
+	email = _email
 }
 
 func deleteUser() {
-	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-	let managedContext = appDelegate.persistentContainer.viewContext
-	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
-	do {
-		let users = try managedContext.fetch(fetchRequest)
-		guard let user = users.first else { return }
-		managedContext.delete(user)
-		id = nil
-		name = nil
-		email = nil
-	} catch {}
+	defaults.set(nil, forKey: "email")
+	defaults.set(nil, forKey: "password")
+	defaults.set(nil, forKey: "image")
+	id = nil
+	name = nil
+	email = nil
+	slug = nil
+	profilePicture = nil
+	token = nil
 }
 
 func saveImage(_ data: Data) {
-	guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-	let managedContext = appDelegate.persistentContainer.viewContext
-	let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
-	do {
-		let users = try managedContext.fetch(fetchRequest)
-		guard let user = users.first else { return }
-		user.setValue(data, forKey: "image")
-		try managedContext.save()
-	} catch {}
+	defaults.set(data, forKey: "image")
+}
+
+func getUser() -> (email: String, password: String, image: UIImage?)? {
+	guard let email = defaults.string(forKey: "email"), let password = defaults.string(forKey: "password"), let image = getImage() else { return nil }
+	return (email, password, image)
+}
+
+func getImage() -> UIImage? {
+	guard let data = defaults.data(forKey: "image") else { return nil }
+	return UIImage(data: data)
 }

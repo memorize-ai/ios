@@ -8,6 +8,7 @@ import Down
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 let functions = Functions.functions()
+let defaults = UserDefaults.standard
 var startup = true
 var shouldLoadDecks = false
 var currentViewController: UIViewController?

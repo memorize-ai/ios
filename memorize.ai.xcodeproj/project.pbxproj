@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -139,6 +139,7 @@
 		4DCB002522936CD30072FED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB002422936CD30072FED4 /* Constants.swift */; };
 		4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF83DD22A378F3006B73A4 /* Listener.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
+		4DEA540722A5CF6400C5CCEF /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */; };
 		4DF2A8D8224F0E0200BA5F8B /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */; };
 		4DF9724A220779AE00FF8BED /* CreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */; };
 		8CA1776EAA9CB8113779FB44 /* Pods_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */; };
@@ -304,6 +305,7 @@
 		4DC857DD221B824400FD2100 /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
 		4DCB002422936CD30072FED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DCF83DD22A378F3006B73A4 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
+		4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -458,6 +460,7 @@
 				4D3607832211426E00492ACD /* EditProfileViewController.swift */,
 				4D1A7246229611D6004FA89E /* SettingsViewController.swift */,
 				4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */,
+				4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
+				4DEA540722A5CF6400C5CCEF /* UploadViewController.swift in Sources */,
 				4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */,
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */,

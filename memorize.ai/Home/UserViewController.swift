@@ -1,5 +1,4 @@
 import UIKit
-import CoreData
 import Firebase
 import WebKit
 
@@ -35,50 +34,42 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			navigationController?.setNavigationBarHidden(true, animated: false)
 			loadingView.isHidden = false
 			loadingImage.isHidden = false
-			if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-				let managedContext = appDelegate.persistentContainer.viewContext
-				let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
-				do {
-					let users = try managedContext.fetch(fetchRequest)
-					if let user = users.first {
-						let localEmail = user.value(forKey: "email") as? String
-						loadProfileBarButtonItem(user.value(forKey: "image") as? Data)
-						Auth.auth().signIn(withEmail: localEmail!, password: user.value(forKey: "password") as? String ?? "Error") { user, error in
-							if error == nil, let uid = user?.user.uid {
-								id = uid
-								pushToken()
-								listeners["users/\(uid)"] = firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
-									guard error == nil, let snapshot = snapshot else { return }
-									name = snapshot.get("name") as? String ?? "Error"
-									self.createHelloLabel()
-									email = localEmail
-									slug = snapshot.get("slug") as? String ?? "error"
-									self.loadingImage.isHidden = true
-									self.loadingView.isHidden = true
-									self.navigationController?.setNavigationBarHidden(false, animated: false)
-									self.reloadProfileBarButtonItem()
-									startup = false
-									ChangeHandler.call(.profileModified)
-								}
-								self.updateLastOnline()
-								self.loadSettings()
-								self.loadDecks()
-								self.loadUploads()
-							} else if let error = error {
-								switch error.localizedDescription {
-								case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-									self.loadingImage.isHidden = true
-									self.offlineView.isHidden = false
-									self.retryButton.isHidden = false
-								default:
-									self.signIn()
-								}
-							}
+			if let _user = getUser() {
+				loadProfileBarButtonItem(_user.image)
+				Auth.auth().signIn(withEmail: _user.email, password: _user.password) { user, error in
+					if error == nil, let uid = user?.user.uid {
+						id = uid
+						pushToken()
+						listeners["users/\(uid)"] = firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
+							guard error == nil, let snapshot = snapshot else { return }
+							name = snapshot.get("name") as? String ?? "Error"
+							self.createHelloLabel()
+							email = _user.email
+							slug = snapshot.get("slug") as? String ?? "error"
+							self.loadingImage.isHidden = true
+							self.loadingView.isHidden = true
+							self.navigationController?.setNavigationBarHidden(false, animated: false)
+							self.reloadProfileBarButtonItem()
+							startup = false
+							ChangeHandler.call(.profileModified)
 						}
-					} else {
-						signIn()
+						self.updateLastOnline()
+						self.loadSettings()
+						self.loadDecks()
+						self.loadUploads()
+					} else if let error = error {
+						switch error.localizedDescription {
+						case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
+							self.loadingImage.isHidden = true
+							self.offlineView.isHidden = false
+							self.retryButton.isHidden = false
+						default:
+							self.signIn()
+						}
 					}
-				} catch {}
+				}
+			} else {
+				signIn()
 			}
 			Card.poll()
 		}
@@ -225,8 +216,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		navigationItem.setLeftBarButtonItems([editProfileBarButtonItem, titleBarButtonItem], animated: false)
 	}
 	
-	func loadProfileBarButtonItem(_ data: Data?) {
-		let image = (data == nil ? profilePicture : UIImage(data: data!)) ?? #imageLiteral(resourceName: "Person")
+	func loadProfileBarButtonItem(_ image: UIImage?) {
+		guard let image = image ?? profilePicture else { return }
 		leftBarButtonItem(image: image)
 		profilePicture = image
 	}
