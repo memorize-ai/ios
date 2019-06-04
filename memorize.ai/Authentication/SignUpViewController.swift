@@ -86,7 +86,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 				let metadata = StorageMetadata()
 				metadata.contentType = "image/jpeg"
 				id = authResult?.user.uid
-				pushToken()
+				User.pushToken()
 				storage.child("users/\(id!)").putData(data, metadata: metadata) { metadata, error in
 					storage.child("users/\(id!)").downloadURL { url, error in
 						guard let changeRequest = authResult?.user.createProfileChangeRequest(), let photoURL = url, error == nil else { return }
@@ -95,7 +95,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 					}
 					firestore.document("users/\(id!)").setData(["name": nameText, "email": emailText])
 					name = nameText
-					saveUser(email: emailText, password: passwordText)
+					User.save(email: emailText, password: passwordText)
 					self.hideActivityIndicator()
 					self.performSegue(withIdentifier: "signUp", sender: self)
 				}

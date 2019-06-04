@@ -34,12 +34,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			navigationController?.setNavigationBarHidden(true, animated: false)
 			loadingView.isHidden = false
 			loadingImage.isHidden = false
-			if let _user = getUser() {
+			if let _user = User.get() {
 				loadProfileBarButtonItem(_user.image)
 				Auth.auth().signIn(withEmail: _user.email, password: _user.password) { user, error in
 					if error == nil, let uid = user?.user.uid {
 						id = uid
-						pushToken()
+						User.pushToken()
 						listeners["users/\(uid)"] = firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot else { return }
 							name = snapshot.get("name") as? String ?? "Error"
@@ -227,7 +227,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 			self.leftBarButtonItem(image: image)
 			profilePicture = image
-			saveImage(data)
+			User.save(image: data)
 			ChangeHandler.call(.profilePicture)
 		}
 	}

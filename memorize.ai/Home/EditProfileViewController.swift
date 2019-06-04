@@ -72,7 +72,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			do {
 				try Auth.auth().signOut()
 				Listener.removeAll()
-				deleteUser()
+				User.delete()
 				self.performSegue(withIdentifier: "signOut", sender: self)
 			} catch let error {
 				self.showAlert(error.localizedDescription)
@@ -134,7 +134,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			metadata.contentType = "image/jpeg"
 			storage.child("users/\(id!)").putData(data, metadata: metadata) { _, error in
 				guard error == nil else { return }
-				saveImage(data)
+				User.save(image: data)
 				storage.child("users/\(id!)").downloadURL { url, error in
 					guard error == nil, let url = url else { return }
 					Auth.auth().currentUser?.createProfileChangeRequest().photoURL = url

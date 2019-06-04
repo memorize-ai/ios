@@ -65,7 +65,7 @@ class Setting {
 	static func loadSectionedSettings() {
 		sectionedSettings.removeAll()
 		for setting in settings {
-			if let section = (sectionedSettings.filter { $0.section == setting.section }).first {
+			if let section = (sectionedSettings.first { $0.section == setting.section }) {
 				section.settings.append(setting)
 				section.settings.sort { $0.order < $1.order }
 			} else {
@@ -82,6 +82,8 @@ class Setting {
 	static func get(_ type: SettingType) -> Setting? {
 		return settings.first { return $0.type == type }
 	}
+	
+//	static func ge
 	
 	static func updateHandler(_ newHandler: ((Setting) -> Void)?) {
 		handler = newHandler

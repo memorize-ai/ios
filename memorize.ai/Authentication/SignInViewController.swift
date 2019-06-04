@@ -66,11 +66,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		Auth.auth().signIn(withEmail: emailText, password: passwordText) { user, error in
 			if error == nil {
 				id = user?.user.uid
-				pushToken()
+				User.pushToken()
 				firestore.document("users/\(id!)").getDocument { snapshot, error in
 					guard let snapshot = snapshot else { return }
 					name = snapshot.get("name") as? String ?? "Error"
-					saveUser(email: emailText, password: passwordText)
+					User.save(email: emailText, password: passwordText)
 					slug = snapshot.get("slug") as? String ?? "error"
 					self.hideActivityIndicator()
 					self.performSegue(withIdentifier: "signIn", sender: self)
