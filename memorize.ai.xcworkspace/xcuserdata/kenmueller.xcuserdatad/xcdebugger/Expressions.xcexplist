@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "UserViewController.viewDidLoad():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_user.darkMode">
+            </PersistentString>
+            <PersistentString
+               value = "Setting.get(.darkMode)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Upload.load(completion:):Upload.swift">
          <PersistentStrings>
             <PersistentString

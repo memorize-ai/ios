@@ -10,6 +10,7 @@ class Listener {
 	static func removeAll() {
 		listeners.forEach {
 			$0.value.remove()
+			listeners.removeValue(forKey: $0.key)
 		}
 	}
 }

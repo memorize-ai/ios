@@ -13,9 +13,9 @@ class User {
 		firestore.document("users/\(id)/tokens/\(token)").setData(["enabled": true])
 	}
 	
-	static func save(email _email: String, password _password: String) {
+	static func save(email _email: String, password: String) {
 		defaults.set(_email, forKey: "email")
-		defaults.set(_password, forKey: "password")
+		defaults.set(password, forKey: "password")
 		email = _email
 	}
 	
@@ -23,10 +23,15 @@ class User {
 		defaults.set(image, forKey: "image")
 	}
 	
+	static func save(darkMode: Bool) {
+		defaults.set(darkMode, forKey: "darkMode")
+	}
+	
 	static func delete() {
-		defaults.set(nil, forKey: "email")
-		defaults.set(nil, forKey: "password")
-		defaults.set(nil, forKey: "image")
+		defaults.removeObject(forKey: "email")
+		defaults.removeObject(forKey: "password")
+		defaults.removeObject(forKey: "image")
+		defaults.removeObject(forKey: "darkMode")
 		id = nil
 		name = nil
 		email = nil
@@ -35,9 +40,9 @@ class User {
 		token = nil
 	}
 	
-	static func get() -> (email: String, password: String, image: UIImage?)? {
+	static func get() -> (email: String, password: String, image: UIImage?, darkMode: Bool)? {
 		guard let email = defaults.string(forKey: "email"), let password = defaults.string(forKey: "password"), let image = getImage() else { return nil }
-		return (email, password, image)
+		return (email, password, image, darkMode: defaults.bool(forKey: "darkMode"))
 	}
 	
 	static func getImage() -> UIImage? {

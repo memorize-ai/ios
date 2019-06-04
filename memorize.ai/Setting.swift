@@ -50,16 +50,7 @@ class Setting {
 	}
 	
 	private static func getType(_ slug: String) -> SettingType {
-		switch slug {
-		case "dark-mode":
-			return .darkMode
-		case "notifications":
-			return .notifications
-		case "algorithm":
-			return .algorithm
-		default:
-			return .unknown
-		}
+		return SettingType(rawValue: slug) ?? .unknown
 	}
 	
 	static func loadSectionedSettings() {
@@ -83,7 +74,14 @@ class Setting {
 		return settings.first { return $0.type == type }
 	}
 	
-//	static func ge
+	private static func updateDarkMode(_ setting: Setting) {
+		guard setting.type == .darkMode else { return }
+		if setting.value == nil {
+			defaults.removeObject(forKey: "darkMode")
+		} else if let bool = setting.value as? Bool {
+			defaults.set(bool, forKey: "darkMode")
+		}
+	}
 	
 	static func updateHandler(_ newHandler: ((Setting) -> Void)?) {
 		handler = newHandler
@@ -93,6 +91,7 @@ class Setting {
 	}
 	
 	static func callHandler(_ setting: Setting) {
+		updateDarkMode(setting)
 		handler?(setting)
 	}
 	
@@ -143,10 +142,11 @@ enum SettingSection: Int {
 	}
 }
 
-enum SettingType {
-	case darkMode
-	case notifications
-	case algorithm
+enum SettingType: String {
+	case darkMode = "dark-mode"
+	case notifications = "notifications"
+	case emailNotifications = "email-notifications"
+	case algorithm = "algorithm"
 	case unknown
 }
 
