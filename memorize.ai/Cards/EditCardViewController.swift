@@ -16,6 +16,7 @@ class EditCardViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		disable(leftArrow)
 		reloadRightBarButtonItem()
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
 		self.cardEditor = addViewController(cardEditor) as? CardEditorViewController
@@ -41,7 +42,6 @@ class EditCardViewController: UIViewController {
 	}
 	
 	func reloadRightBarButtonItem() {
-		guard let cardEditor = cardEditor else { return }
 		func setRightBarButton(_ title: String, action: Selector) {
 			navigationItem.setRightBarButton(UIBarButtonItem(title: title, style: .done, target: self, action: action), animated: false)
 		}
@@ -50,15 +50,18 @@ class EditCardViewController: UIViewController {
 		} else {
 			setRightBarButton("Save", action: #selector(save))
 		}
-		navigationItem.rightBarButtonItem?.isEnabled = cardEditor.hasText
+		if cardEditor?.hasText ?? false {
+			enableRightBarButtonItem()
+		} else {
+			 disableRightBarButtonItem()
+		}
 	}
 	
 	@objc func save() {
 		guard let deck = deck, let card = card, let text = cardEditor?.trimmedText else { return }
-		navigationItem.rightBarButtonItem?.isEnabled = false
+		disableRightBarButtonItem()
 		firestore.document("decks/\(deck.id)/cards/\(card.id)").updateData(["front": text.front, "back": text.back]) { error in
 			guard error == nil else { return }
-			self.navigationItem.rightBarButtonItem?.isEnabled = true
 			buzz()
 			self.reloadRightBarButtonItem()
 		}
@@ -67,10 +70,9 @@ class EditCardViewController: UIViewController {
 	@objc func create() {
 		guard let deck = deck, let text = cardEditor?.trimmedText else { return }
 		let date = Date()
-		navigationItem.rightBarButtonItem?.isEnabled = false
+		disableRightBarButtonItem()
 		firestore.collection("decks/\(deck.id)/cards").addDocument(data: ["front": text.front, "back": text.back, "created": date, "updated": date, "likes": 0, "dislikes": 0]) { error in
 			guard error == nil else { return }
-			self.navigationItem.rightBarButtonItem?.isEnabled = true
 			buzz()
 			self.reloadRightBarButtonItem()
 		}
@@ -87,31 +89,69 @@ class EditCardViewController: UIViewController {
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
+	func enableRightBarButtonItem() {
+		guard let button = navigationItem.rightBarButtonItem else { return }
+		button.isEnabled = true
+		button.tintColor = .white
+	}
+	
+	func disableRightBarButtonItem() {
+		guard let button = navigationItem.rightBarButtonItem else { return }
+		button.isEnabled = false
+		button.tintColor = .lightGray
+	}
+	
+	func enable(_ button: UIButton) {
+		button.isEnabled = true
+		button.tintColor = .darkGray
+	}
+	
+	func disable(_ button: UIButton) {
+		button.isEnabled = false
+		button.tintColor = .lightGray
+	}
+	
 	@IBAction func left() {
+		disable(leftArrow)
+		sideLabel.text = "~~~"
 		switch currentSide {
 		case .front:
 			return
 		case .back:
 			switch currentView {
 			case .editor:
-				cardEditor?.swap(completion: nil)
+				cardEditor?.swap { side in
+					self.sideLabel.text = side.uppercased
+					self.enable(self.rightArrow)
+				}
 				cardPreview?.load(.front)
 			case .preview:
-				cardPreview?.swap(completion: nil)
+				cardPreview?.swap { side in
+					self.sideLabel.text = side.uppercased
+					self.enable(self.rightArrow)
+				}
 				cardEditor?.load(.front)
 			}
 		}
 	}
 	
 	@IBAction func right() {
+		disable(rightArrow)
+		sideLabel.text = "~~~"
 		switch currentSide {
 		case .front:
 			switch currentView {
 			case .editor:
-				cardEditor?.swap(completion: nil)
+				cardEditor?.swap { side in
+					self.sideLabel.text = side.uppercased
+					self.enable(self.leftArrow)
+				}
 				cardPreview?.load(.back)
 			case .preview:
-				cardPreview?.swap(completion: nil)
+				cardPreview?.swap { side in
+					self.sideLabel.text = side.uppercased
+					self.enable(self.leftArrow)
+				}
 				cardEditor?.load(.back)
 			}
 		case .back:

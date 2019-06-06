@@ -143,7 +143,11 @@ enum CardUpdateType {
 	case user
 }
 
-enum CardSide {
-	case front
-	case back
+enum CardSide: String {
+	case front = "front"
+	case back = "back"
+	
+	var uppercased: String {
+		return rawValue.uppercased()
+	}
 }

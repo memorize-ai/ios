@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scrollView.subviews.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserViewController.viewDidLoad():UserViewController.swift">
          <PersistentStrings>
             <PersistentString

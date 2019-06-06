@@ -1737,7 +1737,7 @@
                         <segue destination="YCz-Zd-eG2" kind="show" identifier="searchDeck" id="O84-5M-BZf"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="wcZ-AT-Xhd"/>
                         <segue destination="9XY-L1-f93" kind="show" identifier="visit" id="Reh-O7-sEd"/>
-                        <segue destination="WYS-Mb-rsl" kind="show" identifier="newCard" id="dEU-yB-E5T"/>
+                        <segue destination="WYS-Mb-rsl" kind="show" identifier="editCard" id="dEU-yB-E5T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCa-uP-y9W" userLabel="First Responder" sceneMemberID="firstResponder"/>

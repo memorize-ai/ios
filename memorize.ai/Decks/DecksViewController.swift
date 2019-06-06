@@ -66,19 +66,19 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		super.prepare(for: segue, sender: sender)
-		guard let deckVC = segue.destination as? DeckViewController, let deck = deck else { return }
-		deckVC.deckId = deck.id
-		deckVC.image = deck.image
+		super.prepare(for: segue, sender: self)
+		guard let deck = deck else { return }
+		if let deckVC = segue.destination as? DeckViewController {
+			deckVC.deckId = deck.id
+			deckVC.image = deck.image
+		} else if let editCardVC = segue.destination as? EditCardViewController {
+			editCardVC.deck = deck
+			editCardVC.card = sender as? Card
+		}
 	}
 	
 	@objc func newCard() {
-		guard let newCardVC = storyboard?.instantiateViewController(withIdentifier: "newCard") as? NewCardViewController else { return }
-		newCardVC.deck = deck
-		addChild(newCardVC)
-		newCardVC.view.frame = view.frame
-		view.addSubview(newCardVC.view)
-		newCardVC.didMove(toParent: self)
+		performSegue(withIdentifier: "editCard", sender: nil)
 	}
 	
 	@objc func review() {
@@ -194,13 +194,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			cell.due(element.isDue())
 			cell.load(element.front)
 			cell.action = {
-				guard let editCardVC = self.storyboard?.instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
-				editCardVC.deck = self.deck
-				editCardVC.card = self.deck?.cards[indexPath.item]
-				self.addChild(editCardVC)
-				editCardVC.view.frame = self.view.frame
-				self.view.addSubview(editCardVC.view)
-				editCardVC.didMove(toParent: self)
+				self.performSegue(withIdentifier: "editCard", sender: self.deck?.cards[indexPath.item])
 			}
 			return cell
 		}
