@@ -3127,7 +3127,7 @@
         <!--Card Editor View Controller-->
         <scene sceneID="Yta-Yp-xoO">
             <objects>
-                <viewController id="AWX-EI-uBs" customClass="CardEditorViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cardEditor" id="AWX-EI-uBs" customClass="CardEditorViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JfV-dc-wec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3176,7 +3176,7 @@
         <!--Card Preview View Controller-->
         <scene sceneID="t2l-7r-MMn">
             <objects>
-                <viewController id="tMR-TA-bCV" customClass="CardPreviewViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cardPreview" id="tMR-TA-bCV" customClass="CardPreviewViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5x8-Eq-tyj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
