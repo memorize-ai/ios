@@ -35,16 +35,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			loadingView.isHidden = false
 			loadingImage.isHidden = false
 			if let _user = User.get() {
-				Setting.callHandler(Setting.get(.darkMode) ?? Setting(
-					id: "0",
-					section: "General",
-					slug: SettingType.darkMode.rawValue,
-					title: "Dark mode",
-					description: "",
-					value: _user.darkMode,
-					default: false,
-					order: 0
-				))
+				darkMode(_user.darkMode)
 				loadProfileBarButtonItem(_user.image)
 				Auth.auth().signIn(withEmail: _user.email, password: _user.password) { user, error in
 					if error == nil, let uid = user?.user.uid {
@@ -103,11 +94,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		Setting.updateHandler { setting in
 			switch setting.type {
 			case .darkMode:
-				let enabled = setting.data as? Bool ?? false
-				self.loadingView.backgroundColor = enabled ? .darkGray : .white
-				let backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
-				self.view.backgroundColor = backgroundColor
-				self.cardsCollectionView.backgroundColor = backgroundColor
+				self.darkMode(setting.data as? Bool ?? false)
 			default:
 				return
 			}
@@ -130,6 +117,13 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			shouldLoadDecks = false
 		}
 		updateCurrentViewController()
+	}
+	
+	func darkMode(_ enabled: Bool) {
+		self.loadingView.backgroundColor = enabled ? .darkGray : .white
+		let backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+		self.view.backgroundColor = backgroundColor
+		self.cardsCollectionView.backgroundColor = backgroundColor
 	}
 	
 	@IBAction func retry() {
