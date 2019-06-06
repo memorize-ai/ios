@@ -30,9 +30,11 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: UIFont(name: "Nunito-SemiBold", size: 20)!]
-		navigationController?.navigationBar.barTintColor = .white
-		navigationController?.navigationBar.tintColor = .darkGray
+		if let navigationController = navigationController, let semiBold = UIFont(name: "Nunito-SemiBold", size: 20) {
+			navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: semiBold]
+			navigationController.navigationBar.barTintColor = .white
+			navigationController.navigationBar.tintColor = .darkGray
+		}
 		dueCards = decks.flatMap { deck in return Card.sortDue(deck.cards.filter { return $0.isDue() }).map { return (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
@@ -41,8 +43,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 					self.load(element.card.front, webView: self.frontWebView)
 					self.load(element.card.back, webView: self.backWebView)
 					self.navigationItem.title = element.deck.name
-				} else {
-					let element = self.previewCards![self.current]
+				} else if let previewCards = self.previewCards {
+					let element = previewCards[self.current]
 					self.load(element.front, webView: self.frontWebView)
 					self.load(element.back, webView: self.backWebView)
 					self.navigationItem.title = self.previewDeck
@@ -54,9 +56,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "Nunito-SemiBold", size: 20)!]
-		navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-		navigationController?.navigationBar.tintColor = .white
+		guard let navigationController = navigationController, let semiBold = UIFont(name: "Nunito-SemiBold", size: 20) else { return }
+		navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: semiBold]
+		navigationController.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+		navigationController.navigationBar.tintColor = .white
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -158,9 +161,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func push(rating: Int) {
+		guard let id = id else { return }
 		let element = dueCards[current]
 		var documentReference: DocumentReference?
-		documentReference = firestore.collection("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
+		documentReference = firestore.collection("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
 			guard error == nil, let documentReference = documentReference else { return }
 			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: Rating.get(rating), next: nil))
 			if self.shouldSegue {
@@ -174,7 +178,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RatingCollectionViewCell
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? RatingCollectionViewCell else { return _cell }
 		let element = Rating.get(normalize(rating: indexPath.item))
 		cell.imageView.image = element.image
 		cell.label.text = element.description
@@ -186,7 +191,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			push(rating: normalize(rating: indexPath.item))
 		}
 		current += 1
-		let count = isReview() ? dueCards.count : previewCards!.count
+		let count = isReview() ? dueCards.count : previewCards?.count ?? 0
 		progressView.setProgress(Float(current) / Float(count), animated: true)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -197,7 +202,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			guard $0 else { return }
 			if self.current < count {
 				self.navigationItem.title = self.isReview() ? self.dueCards[self.current].deck.name : self.previewDeck
-				let card = self.isReview() ? self.dueCards[self.current].card : self.previewCards![self.current]
+				let _card = self.isReview() ? self.dueCards[self.current].card : self.previewCards?[self.current]
+				guard let card = _card else { return }
 				if self.frontWebView.isHidden {
 					self.load(card.front, webView: self.frontWebView)
 					UIView.animate(withDuration: 0.125, animations: {

@@ -84,7 +84,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SearchResultCollectionViewCell
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? SearchResultCollectionViewCell else { return _cell }
 		let element = result[indexPath.item]
 		if let image = element.image {
 			cell.imageView.image = image

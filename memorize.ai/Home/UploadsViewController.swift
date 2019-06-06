@@ -5,19 +5,22 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var uploadsCollectionView: UICollectionView!
 	
+	var action: (() -> Void)?
 	var filter: UploadType?
 	var filteredUploads = [Upload]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		filterSegmentedControl.setTitleTextAttributes([
-			.font: UIFont(name: "Nunito-SemiBold", size: 18)!,
-			.foregroundColor: UIColor.lightGray
-		], for: .normal)
-		filterSegmentedControl.setTitleTextAttributes([
-			.font: UIFont(name: "Nunito-SemiBold", size: 18)!,
-			.foregroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-		], for: .selected)
+		if let semiBold = UIFont(name: "Nunito-SemiBold", size: 18) {
+			filterSegmentedControl.setTitleTextAttributes([
+				.font: semiBold,
+				.foregroundColor: UIColor.lightGray
+			], for: .normal)
+			filterSegmentedControl.setTitleTextAttributes([
+				.font: semiBold,
+				.foregroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+			], for: .selected)
+		}
 		let flowLayout = UICollectionViewFlowLayout()
 		let size = view.bounds.width / 2 - 16
 		flowLayout.itemSize = CGSize(width: size, height: size)
@@ -88,7 +91,8 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UploadCollectionViewCell
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? UploadCollectionViewCell else { return _cell }
 		let element = filteredUploads[indexPath.item]
 		if let data = element.data {
 			switch element.type {
@@ -121,7 +125,11 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		// Show info modal so the user can edit or delete the file
+		if let action = action {
+			action()
+		} else {
+			
+		}
 	}
 }
 

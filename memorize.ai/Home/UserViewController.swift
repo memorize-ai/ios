@@ -192,7 +192,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func loadCards() {
 		let count = cards.count
 		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Due"), card: $0) }
-		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last!.date.timeIntervalSinceNow < $1.last!.date.timeIntervalSinceNow }.map { return (image: Rating.image($0.last!.rating), card: $0) })
+		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last?.date.timeIntervalSinceNow ?? 0 < $1.last?.date.timeIntervalSinceNow ?? 0 }.map { return (image: Rating.image($0.last?.rating ?? 0), card: $0) })
 		if count != cards.count {
 			cardsCollectionView.reloadData()
 		}
@@ -228,7 +228,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func reloadProfileBarButtonItem() {
-		storage.child("users/\(id!)").getData(maxSize: fileLimit) { data, error in
+		guard let id = id else { return }
+		storage.child("users/\(id)").getData(maxSize: fileLimit) { data, error in
 			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 			self.leftBarButtonItem(image: image)
 			profilePicture = image
@@ -277,7 +278,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadDecks() {
-		listeners["users/\(id!)/decks"] = firestore.collection("users/\(id!)/decks").addSnapshotListener { snapshot, error in
+		guard let id = id else { return }
+		listeners["users/\(id)/decks"] = firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let deck = $0.document
@@ -319,7 +321,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								guard let localDeck = Deck.get(deckId) else { return }
 								switch $0.type {
 								case .added:
-									listeners["users/\(id!)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id!)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
+									listeners["users/\(id)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
 										if let localCard = Card.get(cardId, deckId: deckId) {
 											localCard.update(cardSnapshot, type: .user)
@@ -352,7 +354,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									ChangeHandler.call(.cardModified)
 								case .removed:
 									localDeck.cards = localDeck.cards.filter { return $0.id != cardId }
-									Listener.remove("users/\(id!)/decks/\(deckId)/cards/\(cardId)")
+									Listener.remove("users/\(id)/decks/\(deckId)/cards/\(cardId)")
 									self.reloadReview()
 									ChangeHandler.call(.cardRemoved)
 								@unknown default:
@@ -376,7 +378,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadUploads() {
-		listeners["users/\(id!)/uploads"] = firestore.collection("users/\(id!)/uploads").addSnapshotListener { snapshot, error in
+		guard let id = id else { return }
+		listeners["users/\(id)/uploads"] = firestore.collection("users/\(id)/uploads").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let upload = $0.document
@@ -421,9 +424,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		]
 		(0...3).forEach {
 			let action = actions[$0]
-			action.view!.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+			guard let view = action.view, let label = action.label, let barView = action.barView else { return }
+			view.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 			enabled[$0] = !(($0 == 0 && decks.isEmpty) || ($0 == 1 && Card.all().isEmpty))
-			toggle(action.label!, action.barView!, enabled: enabled[$0])
+			toggle(label, barView, enabled: enabled[$0])
 		}
 	}
 	
@@ -452,7 +456,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserCardsCollectionViewCell
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? UserCardsCollectionViewCell else { return _cell }
 		let element = cards[indexPath.item]
 		cell.imageView.image = element.image
 		cell.load(element.card.front)

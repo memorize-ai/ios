@@ -35,7 +35,8 @@ class NewCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	@IBAction func create() {
-		firestore.collection("decks/\(deck!.id)/cards").addDocument(data: ["front": frontTextView.text.trim(), "back": backTextView.text.trim()]) { error in
+		guard let deck = deck else { return }
+		firestore.collection("decks/\(deck.id)/cards").addDocument(data: ["front": frontTextView.text.trim(), "back": backTextView.text.trim()]) { error in
 			if error == nil {
 				self.hide()
 			} else {

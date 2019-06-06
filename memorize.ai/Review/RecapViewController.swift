@@ -36,7 +36,8 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RecapCollectionViewCell
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? RecapCollectionViewCell else { return _cell }
 		let element = cards[indexPath.item]
 		if let image = element.deck.image {
 			cell.imageView.image = image
@@ -50,9 +51,9 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		cell.load(element.card.front)
 		if let next = element.next {
 			cell.nextLabel.text = next.format()
-		} else {
+		} else if let id = id {
 			cell.nextLabel.text = "Loading..."
-			listeners["users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)"] = firestore.document("users/\(id!)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
+			listeners["users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)"] = firestore.document("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history/\(element.id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let next = snapshot?.getDate("next") else { return }
 				self.cards[indexPath.item] = (id: element.id, deck: element.deck, card: element.card, rating: element.rating, next: next)
 				cell.nextLabel.text = next.format()

@@ -101,15 +101,15 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	@IBAction func create() {
-		guard let image = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim() else { return }
+		guard let id = id, let image = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim() else { return }
 		showActivityIndicator()
 		dismissKeyboard()
 		let metadata = StorageMetadata()
 		metadata.contentType = "image/jpeg"
 		var deckRef: DocumentReference?
-		deckRef = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id!, "owner": id!]) { error in
+		deckRef = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id, "owner": id]) { error in
 			guard error == nil, let deckId = deckRef?.documentID else { return }
-			firestore.document("users/\(id!)/decks/\(deckId)").setData(["mastered": 0])
+			firestore.document("users/\(id)/decks/\(deckId)").setData(["mastered": 0])
 			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
 				if error == nil {
 					self.hideActivityIndicator()

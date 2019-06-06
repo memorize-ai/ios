@@ -82,18 +82,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		dismissKeyboard()
 		Auth.auth().createUser(withEmail: emailText, password: passwordText) { authResult, error in
 			if error == nil {
-				guard let data = #imageLiteral(resourceName: "Person").compressedData() else { return }
+				id = authResult?.user.uid
+				guard let id = id, let data = #imageLiteral(resourceName: "Person").compressedData() else { return }
 				let metadata = StorageMetadata()
 				metadata.contentType = "image/jpeg"
-				id = authResult?.user.uid
 				User.pushToken()
-				storage.child("users/\(id!)").putData(data, metadata: metadata) { metadata, error in
-					storage.child("users/\(id!)").downloadURL { url, error in
+				storage.child("users/\(id)").putData(data, metadata: metadata) { metadata, error in
+					storage.child("users/\(id)").downloadURL { url, error in
 						guard let changeRequest = authResult?.user.createProfileChangeRequest(), let photoURL = url, error == nil else { return }
 						changeRequest.displayName = nameText
 						changeRequest.photoURL = photoURL
 					}
-					firestore.document("users/\(id!)").setData(["name": nameText, "email": emailText])
+					firestore.document("users/\(id)").setData(["name": nameText, "email": emailText])
 					name = nameText
 					User.save(email: emailText, password: passwordText)
 					self.hideActivityIndicator()

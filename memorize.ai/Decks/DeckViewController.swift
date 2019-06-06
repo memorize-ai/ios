@@ -41,9 +41,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.load(snapshot.get("description") as? String ?? "An error has occurred")
 				self.activityIndicator.stopAnimating()
 				self.loadingView.isHidden = true
-				firestore.document("users/\(snapshot.get("creator") as! String)").getDocument { creatorSnapshot, creatorError in
-					guard creatorError == nil, let creatorSnapshot = creatorSnapshot else { return }
-					self.creatorLabel.text = "Created by \(creatorSnapshot.get("name") as! String)"
+				guard let creator = snapshot.get("creator") as? String else { return }
+				firestore.document("users/\(creator)").getDocument { creatorSnapshot, creatorError in
+					guard creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String else { return }
+					self.creatorLabel.text = "Created by \(creatorName)"
 					self.resizeDescriptionWebView()
 				}
 			} else {
@@ -91,8 +92,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			imageActivityIndicator.stopAnimating()
 			imageView.image = image
 			imageView.layer.borderWidth = 0
-		} else {
-			storage.child("decks/\(self.deckId!)").getData(maxSize: fileLimit) { data, error in
+		} else if let deckId = self.deckId {
+			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
 				self.imageActivityIndicator.stopAnimating()
 				self.imageView.layer.borderWidth = 0
 				if error == nil, let data = data {
@@ -106,9 +107,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		Deck.view(deckId!)
+		guard let deckId = deckId else { return }
+		Deck.view(deckId)
 		previewButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-		if Deck.get(deckId!) != nil {
+		if Deck.get(deckId) != nil {
 			getButtonWidthConstraint.constant = 90
 			view.layoutIfNeeded()
 			getButton.setTitle("DELETE", for: .normal)
@@ -159,11 +161,12 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	@IBAction func get() {
+		guard let id = id, let deckId = deckId else { return }
 		let isGet = getButton.currentTitle == "GET"
 		getButton.setTitle(nil, for: .normal)
 		getActivityIndicator.startAnimating()
 		if isGet {
-			firestore.document("users/\(id!)/decks/\(deckId!)").setData(["mastered": 0]) { error in
+			firestore.document("users/\(id)/decks/\(deckId)").setData(["mastered": 0]) { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 90
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
@@ -179,7 +182,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				}
 			}
 		} else {
-			firestore.document("users/\(id!)/decks/\(deckId!)").delete { error in
+			firestore.document("users/\(id)/decks/\(deckId)").delete { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 70
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
@@ -218,7 +221,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BasicCardCollectionViewCell
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? BasicCardCollectionViewCell else { return _cell }
 		let element = cards[indexPath.item]
 		cell.load(element.front)
 		cell.action = {

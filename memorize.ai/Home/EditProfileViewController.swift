@@ -42,9 +42,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.profileModified, .settingAdded) { change in
 			if change == .profileModified || change == .profilePicture {
+				guard let slug = slug else { return }
 				self.nameLabel.text = name
 				self.emailLabel.text = email
-				self.linkButton.setTitle("memorize.ai/\(slug!)", for: .normal)
+				self.linkButton.setTitle("memorize.ai/\(slug)", for: .normal)
 				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
 			}
 		}
@@ -128,14 +129,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func uploadImage(_ image: UIImage, completion: @escaping () -> Void) {
-		profilePicture = image.compressed()
-		if let data = image.compressedData() {
+		if let id = id, let data = image.compressedData() {
+			profilePicture = image.compressed()
 			let metadata = StorageMetadata()
 			metadata.contentType = "image/jpeg"
-			storage.child("users/\(id!)").putData(data, metadata: metadata) { _, error in
+			storage.child("users/\(id)").putData(data, metadata: metadata) { _, error in
 				guard error == nil else { return }
 				User.save(image: data)
-				storage.child("users/\(id!)").downloadURL { url, error in
+				storage.child("users/\(id)").downloadURL { url, error in
 					guard error == nil, let url = url else { return }
 					Auth.auth().currentUser?.createProfileChangeRequest().photoURL = url
 					completion()
@@ -156,7 +157,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OptionTableViewCell
+		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? OptionTableViewCell else { return _cell }
 		let element = options[indexPath.row]
 		cell.optionImageView.image = element.image
 		cell.nameLabel.text = element.name

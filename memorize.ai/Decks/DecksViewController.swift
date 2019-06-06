@@ -115,7 +115,13 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return collectionView == decksCollectionView ? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84) : collectionView == actionsCollectionView ? CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: UIFont(name: "Nunito-ExtraBold", size: 17)!]).width + 4, height: 36) : CGSize(width: cardsCollectionView.bounds.width - 20, height: 37)
+		if collectionView == actionsCollectionView, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) {
+			return CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: extraBold]).width + 4, height: 36)
+		} else {
+			return collectionView == decksCollectionView
+				? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84)
+				: CGSize(width: cardsCollectionView.bounds.width - 20, height: 37)
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -133,7 +139,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if collectionView == decksCollectionView {
 			if expanded {
-				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "expanded", for: indexPath) as! ExpandedDeckCollectionViewCell
+				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "expanded", for: indexPath)
+				guard let cell = _cell as? ExpandedDeckCollectionViewCell else { return _cell }
 				let element = decks[indexPath.item]
 				cell.due(!element.allDue().isEmpty)
 				if let image = element.image {
@@ -152,7 +159,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.layer.borderColor = element.id == deck?.id ? #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1) : nil
 				return cell
 			} else {
-				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCollectionViewCell
+				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+				guard let cell = _cell as? DeckCollectionViewCell else { return _cell }
 				let element = decks[indexPath.item]
 				cell.due(!element.allDue().isEmpty)
 				if let image = element.image {
@@ -173,15 +181,16 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				return cell
 			}
 		} else if collectionView == actionsCollectionView {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ActionCollectionViewCell
+			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
 			let element = actions[indexPath.item]
 			cell.button.setTitle(element.name, for: .normal)
 			cell.button.isEnabled = !(element.name == "review all" && Deck.allDue().isEmpty)
 			cell.action = element.action(self)
 			return cell
 		} else {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ThinCardCollectionViewCell
-			guard let element = deck?.cards[indexPath.item] else { return cell }
+			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+			guard let cell = _cell as? ThinCardCollectionViewCell, let element = deck?.cards[indexPath.item] else { return _cell }
 			cell.due(element.isDue())
 			cell.load(element.front)
 			cell.action = {

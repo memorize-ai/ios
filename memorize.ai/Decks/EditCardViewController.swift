@@ -15,11 +15,12 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		guard let card = card else { return }
 		titleBar.roundCorners([.topLeft, .topRight], radius: 10)
 		resetBorder(textView: frontTextView)
 		resetBorder(textView: backTextView)
-		frontTextView.text = card!.front
-		backTextView.text = card!.back
+		frontTextView.text = card.front
+		backTextView.text = card.back
 		frontTextView.setKeyboard(.advanced)
 		backTextView.setKeyboard(.advanced)
 		editCardView.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -60,8 +61,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	@IBAction func delete() {
-		if deck?.owner == id {
-			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").delete { error in
+		if let deck = deck, deck.owner == id, let card = card {
+			firestore.document("decks/\(deck.id)/cards/\(card.id)").delete { error in
 				if error == nil {
 					(self.parent as? DecksViewController)?.cardsCollectionView.reloadData()
 					self.hide()
@@ -100,8 +101,8 @@ class EditCardViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
-		if deck?.owner == id {
-			firestore.document("decks/\(deck!.id)/cards/\(card!.id)").updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()]) { error in
+		if let deck = deck, deck.owner == id, let card = card {
+			firestore.document("decks/\(deck.id)/cards/\(card.id)").updateData(textView == frontTextView ? ["front": frontTextView.text.trim()] : ["back": backTextView.text.trim()]) { error in
 				guard error == nil else { return }
 				(self.parent as? DecksViewController)?.cardsCollectionView.reloadData()
 			}

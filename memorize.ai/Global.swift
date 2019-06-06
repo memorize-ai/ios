@@ -117,7 +117,7 @@ extension Date {
 		formatter.zeroFormattingBehavior = .dropAll
 		formatter.maximumUnitCount = 1
 		formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
-		return "\(formatter.string(from: self, to: Date())!) ago"
+		return "\(formatter.string(from: self, to: Date()) ?? "") ago"
 	}
 }
 

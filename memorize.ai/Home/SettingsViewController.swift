@@ -30,7 +30,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingTableViewCell
+		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? SettingTableViewCell else { return _cell }
 		cell.load(sectionedSettings[indexPath.section].settings[indexPath.row])
 		return cell
 	}
