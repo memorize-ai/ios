@@ -73,7 +73,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	@objc func newCard() {
-		guard let newCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "newCard") as? NewCardViewController else { return }
+		guard let newCardVC = storyboard?.instantiateViewController(withIdentifier: "newCard") as? NewCardViewController else { return }
 		newCardVC.deck = deck
 		addChild(newCardVC)
 		newCardVC.view.frame = view.frame
@@ -194,7 +194,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			cell.due(element.isDue())
 			cell.load(element.front)
 			cell.action = {
-				guard let editCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
+				guard let editCardVC = self.storyboard?.instantiateViewController(withIdentifier: "editCard") as? EditCardViewController else { return }
 				editCardVC.deck = self.deck
 				editCardVC.card = self.deck?.cards[indexPath.item]
 				self.addChild(editCardVC)

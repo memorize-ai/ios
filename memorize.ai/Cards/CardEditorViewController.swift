@@ -4,7 +4,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var frontTextView: UITextView!
 	@IBOutlet weak var backTextView: UITextView!
 	
-	var listener: ((CardSide) -> Void)?
+	private var listener: ((CardSide) -> Void)?
 	
 	func update(_ side: CardSide, text: String) {
 		switch side {

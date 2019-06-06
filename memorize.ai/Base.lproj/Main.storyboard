@@ -3079,6 +3079,9 @@
                                             <constraint firstAttribute="height" constant="30" id="T8T-mh-7OF"/>
                                         </constraints>
                                         <state key="normal" image="Gray Left Arrow"/>
+                                        <connections>
+                                            <action selector="left" destination="WYS-Mb-rsl" eventType="touchUpInside" id="Twn-Qt-Jrb"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SaD-z4-IW9">
                                         <rect key="frame" x="344" y="10" width="40" height="30"/>
@@ -3087,6 +3090,9 @@
                                             <constraint firstAttribute="width" constant="40" id="MaH-ef-Fjj"/>
                                         </constraints>
                                         <state key="normal" image="Gray Right Arrow"/>
+                                        <connections>
+                                            <action selector="right" destination="WYS-Mb-rsl" eventType="touchUpInside" id="C9x-YH-iJa"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMr-WM-tvn">
                                         <rect key="frame" x="173.33333333333334" y="11.333333333333369" width="67.333333333333343" height="27.333333333333329"/>
@@ -3119,6 +3125,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JQV-Zr-lEe"/>
                     </view>
+                    <connections>
+                        <outlet property="leftArrow" destination="O7h-Jj-1Zu" id="uqV-MM-Cwg"/>
+                        <outlet property="rightArrow" destination="SaD-z4-IW9" id="HTN-rg-e9c"/>
+                        <outlet property="sideLabel" destination="BMr-WM-tvn" id="ajB-Uw-a7o"/>
+                        <outlet property="swapViewBottomConstraint" destination="AgO-ez-fBz" id="B8F-LK-cmR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLy-go-JQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

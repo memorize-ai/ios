@@ -226,7 +226,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let element = cards[indexPath.item]
 		cell.load(element.front)
 		cell.action = {
-			guard let cardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
+			guard let cardVC = self.storyboard?.instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
 			cardVC.card = element
 			self.addChild(cardVC)
 			cardVC.view.frame = self.view.frame
