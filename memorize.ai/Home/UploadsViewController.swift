@@ -91,7 +91,12 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UploadCollectionViewCell
 		let element = filteredUploads[indexPath.item]
 		if let data = element.data {
-			cell.imageView.image = UIImage(data: data) // check if type is image
+			switch element.type {
+			case .image, .gif:
+				cell.imageView.image = UIImage(data: data)
+			case .audio:
+				cell.imageView.image = #imageLiteral(resourceName: "Sound")
+			}
 		} else {
 			cell.imageView.image = nil
 			cell.activityIndicator.startAnimating()
