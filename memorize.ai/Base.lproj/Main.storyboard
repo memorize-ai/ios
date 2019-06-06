@@ -3180,13 +3180,45 @@
                     <view key="view" contentMode="scaleToFill" id="5x8-Eq-tyj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgb-ot-W2X">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gk-3l-SaD">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sTK-6Z-bMM" firstAttribute="trailing" secondItem="Mgb-ot-W2X" secondAttribute="trailing" id="3j0-Xy-9Jn"/>
+                            <constraint firstAttribute="bottom" secondItem="7Gk-3l-SaD" secondAttribute="bottom" id="4le-EU-aRS"/>
+                            <constraint firstItem="sTK-6Z-bMM" firstAttribute="bottom" secondItem="Mgb-ot-W2X" secondAttribute="bottom" id="87X-tT-akN"/>
+                            <constraint firstItem="7Gk-3l-SaD" firstAttribute="top" secondItem="sTK-6Z-bMM" secondAttribute="top" id="AnB-6F-ffL"/>
+                            <constraint firstItem="7Gk-3l-SaD" firstAttribute="leading" secondItem="sTK-6Z-bMM" secondAttribute="leading" id="Fgg-nd-2kY"/>
+                            <constraint firstAttribute="trailing" secondItem="7Gk-3l-SaD" secondAttribute="trailing" id="d5K-qc-eJn"/>
+                            <constraint firstItem="Mgb-ot-W2X" firstAttribute="top" secondItem="sTK-6Z-bMM" secondAttribute="top" id="m5i-RM-Qoa"/>
+                            <constraint firstItem="Mgb-ot-W2X" firstAttribute="leading" secondItem="sTK-6Z-bMM" secondAttribute="leading" id="skJ-ye-anF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sTK-6Z-bMM"/>
                     </view>
+                    <connections>
+                        <outlet property="backWebView" destination="7Gk-3l-SaD" id="d4s-oT-fR6"/>
+                        <outlet property="frontWebView" destination="Mgb-ot-W2X" id="jOR-9H-G1x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06X-H4-wfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="1480"/>
+            <point key="canvasLocation" x="2192.753623188406" y="1479.6195652173915"/>
         </scene>
         <!--Cards-->
         <scene sceneID="ges-AY-7uU">

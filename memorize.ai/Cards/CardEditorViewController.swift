@@ -6,8 +6,13 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	
 	var listener: ((CardSide) -> Void)?
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	func update(_ side: CardSide, text: String) {
+		switch side {
+		case .front:
+			frontTextView.text = text
+		case .back:
+			backTextView.text = text
+		}
 	}
 	
 	func listen(handler: @escaping (CardSide) -> Void) {
@@ -36,7 +41,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		}
 	}
 	
-	func swap(completion: @escaping () -> Void) {
+	func swap(completion: @escaping (CardSide) -> Void) {
 		let halfWidth = view.bounds.width / 2
 		if frontTextView.isHidden {
 			UIView.animate(withDuration: 0.25, animations: {
@@ -55,7 +60,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 					self.frontTextView.alpha = 1
 				}) {
 					guard $0 else { return }
-					completion()
+					completion(.front)
 				}
 			}
 		} else {
@@ -75,7 +80,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 					self.backTextView.alpha = 1
 				}) {
 					guard $0 else { return }
-					completion()
+					completion(.back)
 				}
 			}
 		}
