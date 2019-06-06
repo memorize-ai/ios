@@ -29,7 +29,7 @@ class CardPreviewViewController: UIViewController {
 		}
 	}
 	
-	func swap(completion: @escaping (CardSide) -> Void) {
+	func swap(completion: ((CardSide) -> Void)?) {
 		let halfWidth = view.bounds.width / 2
 		if frontWebView.isHidden {
 			UIView.animate(withDuration: 0.25, animations: {
@@ -48,7 +48,7 @@ class CardPreviewViewController: UIViewController {
 					self.frontWebView.alpha = 1
 				}) {
 					guard $0 else { return }
-					completion(.front)
+					completion?(.front)
 				}
 			}
 		} else {
@@ -68,7 +68,7 @@ class CardPreviewViewController: UIViewController {
 					self.backWebView.alpha = 1
 				}) {
 					guard $0 else { return }
-					completion(.back)
+					completion?(.back)
 				}
 			}
 		}

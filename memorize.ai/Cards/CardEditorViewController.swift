@@ -4,7 +4,19 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var frontTextView: UITextView!
 	@IBOutlet weak var backTextView: UITextView!
 	
-	private var listener: ((CardSide) -> Void)?
+	private var listener: ((CardSide, String) -> Void)?
+
+	var text: (front: String, back: String) {
+		return (frontTextView.text, backTextView.text)
+	}
+	
+	var trimmedText: (front: String, back: String) {
+		return (frontTextView.text.trim(), backTextView.text.trim())
+	}
+	
+	var hasText: Bool {
+		return !(trimmedText.front.isEmpty || trimmedText.back.isEmpty)
+	}
 	
 	func update(_ side: CardSide, text: String) {
 		switch side {
@@ -15,16 +27,16 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		}
 	}
 	
-	func listen(handler: @escaping (CardSide) -> Void) {
+	func listen(handler: @escaping (CardSide, String) -> Void) {
 		listener = handler
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
 		switch textView {
 		case frontTextView:
-			listener?(.front)
+			listener?(.front, textView.text)
 		case backTextView:
-			listener?(.back)
+			listener?(.back, textView.text)
 		default:
 			return
 		}
@@ -41,7 +53,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		}
 	}
 	
-	func swap(completion: @escaping (CardSide) -> Void) {
+	func swap(completion: ((CardSide) -> Void)?) {
 		let halfWidth = view.bounds.width / 2
 		if frontTextView.isHidden {
 			UIView.animate(withDuration: 0.25, animations: {
@@ -60,7 +72,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 					self.frontTextView.alpha = 1
 				}) {
 					guard $0 else { return }
-					completion(.front)
+					completion?(.front)
 				}
 			}
 		} else {
@@ -80,7 +92,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 					self.backTextView.alpha = 1
 				}) {
 					guard $0 else { return }
-					completion(.back)
+					completion?(.back)
 				}
 			}
 		}

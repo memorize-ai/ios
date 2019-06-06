@@ -49,6 +49,10 @@ extension WKWebView {
 	}
 }
 
+func buzz() {
+	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+}
+
 extension UIViewController {
 	func dismissKeyboard() {
 		view.endEditing(true)
@@ -62,7 +66,7 @@ extension UIViewController {
 	}
 	
 	func showAlert(_ message: String) {
-		AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+		buzz()
 		showAlert("Error", message)
 	}
 	
