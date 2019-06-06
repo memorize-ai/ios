@@ -142,3 +142,8 @@ enum CardUpdateType {
 	case card
 	case user
 }
+
+enum CardSide {
+	case front
+	case back
+}

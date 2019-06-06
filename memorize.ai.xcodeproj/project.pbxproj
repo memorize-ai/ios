@@ -16,6 +16,8 @@
 		4D052ACC2204259C0093B64E /* memorize_aiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052ACB2204259C0093B64E /* memorize_aiTests.swift */; };
 		4D052AD72204259C0093B64E /* memorize_aiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052AD62204259C0093B64E /* memorize_aiUITests.swift */; };
 		4D052AE5220427260093B64E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D052AE4220427260093B64E /* GoogleService-Info.plist */; };
+		4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */; };
+		4D12041A22A8E7EE00DAC7D9 /* CardPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */; };
 		4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1882C0226E696000F29F99 /* CardsViewController.swift */; };
 		4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A7246229611D6004FA89E /* SettingsViewController.swift */; };
 		4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3607832211426E00492ACD /* EditProfileViewController.swift */; };
@@ -57,7 +59,6 @@
 		4DA2C2E122A48E5400669570 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2E022A48E5400669570 /* Upload.swift */; };
 		4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */; };
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
-		4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAEEC7B220A074400A207FD /* EditCardViewController.swift */; };
 		4DB8AE142287CE1800A08AFA /* mhchem.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC32287CE1800A08AFA /* mhchem.mjs */; };
 		4DB8AE152287CE1800A08AFA /* mathtex-script-type.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC42287CE1800A08AFA /* mathtex-script-type.mjs */; };
 		4DB8AE162287CE1800A08AFA /* auto-render.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC52287CE1800A08AFA /* auto-render.mjs */; };
@@ -140,7 +141,7 @@
 		4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF83DD22A378F3006B73A4 /* Listener.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		4DEA540722A5CF6400C5CCEF /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */; };
-		4DF2A8D8224F0E0200BA5F8B /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */; };
+		4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */; };
 		4DF9724A220779AE00FF8BED /* CreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */; };
 		8CA1776EAA9CB8113779FB44 /* Pods_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */; };
 		9DDEA990CEBD550307F274C5 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1427E8A3FFD8404A861DF9A1 /* Pods_memorize_ai.framework */; };
@@ -182,6 +183,8 @@
 		4D052AD62204259C0093B64E /* memorize_aiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memorize_aiUITests.swift; sourceTree = "<group>"; };
 		4D052AD82204259C0093B64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D052AE4220427260093B64E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditorViewController.swift; sourceTree = "<group>"; };
+		4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewViewController.swift; sourceTree = "<group>"; };
 		4D1882C0226E696000F29F99 /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		4D1A7246229611D6004FA89E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4D3607832211426E00492ACD /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -223,7 +226,6 @@
 		4DA2C2E022A48E5400669570 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
-		4DAEEC7B220A074400A207FD /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		4DB8ADC32287CE1800A08AFA /* mhchem.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhchem.mjs; sourceTree = "<group>"; };
 		4DB8ADC42287CE1800A08AFA /* mathtex-script-type.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mathtex-script-type.mjs"; sourceTree = "<group>"; };
 		4DB8ADC52287CE1800A08AFA /* auto-render.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "auto-render.mjs"; sourceTree = "<group>"; };
@@ -306,7 +308,7 @@
 		4DCB002422936CD30072FED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DCF83DD22A378F3006B73A4 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
-		4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
+		4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewController.swift; sourceTree = "<group>"; };
 		66ACBB0E4B9A6E7621F19DD9 /* Pods_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -449,6 +451,9 @@
 			isa = PBXGroup;
 			children = (
 				4D1882C0226E696000F29F99 /* CardsViewController.swift */,
+				4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */,
+				4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */,
+				4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -610,12 +615,10 @@
 			isa = PBXGroup;
 			children = (
 				4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */,
-				4DF2A8D7224F0E0200BA5F8B /* NewCardViewController.swift */,
 				4DF97249220779AE00FF8BED /* CreateDeckViewController.swift */,
 				4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */,
 				4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */,
 				4DAA38FD2208D4F500EB443E /* CardViewController.swift */,
-				4DAEEC7B220A074400A207FD /* EditCardViewController.swift */,
 			);
 			path = Decks;
 			sourceTree = "<group>";
@@ -952,12 +955,14 @@
 				4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */,
 				4DA2C2DF22A48AA400669570 /* UploadsViewController.swift in Sources */,
 				4D5F1F18229E1AC400AC7732 /* Permission.swift in Sources */,
+				4D12041A22A8E7EE00DAC7D9 /* CardPreviewViewController.swift in Sources */,
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
 				4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */,
 				4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */,
 				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
 				4DA2C2E122A48E5400669570 /* Upload.swift in Sources */,
-				4DF2A8D8224F0E0200BA5F8B /* NewCardViewController.swift in Sources */,
+				4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */,
+				4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */,
 				4D5F1F1A229E1AD200AC7732 /* History.swift in Sources */,
 				4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */,
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
@@ -971,7 +976,6 @@
 				4DCB002522936CD30072FED4 /* Constants.swift in Sources */,
 				4D5F1F1E229E1B0C00AC7732 /* User.swift in Sources */,
 				4D5F1F22229F217200AC7732 /* Keyboard.swift in Sources */,
-				4DAEEC7C220A074400A207FD /* EditCardViewController.swift in Sources */,
 				4D5F1F14229E1A3400AC7732 /* Card.swift in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
 				4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */,
