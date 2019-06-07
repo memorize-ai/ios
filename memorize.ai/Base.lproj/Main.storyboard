@@ -780,7 +780,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TeA-tf-z9S">
-                                                    <rect key="frame" x="30" y="53.999999999999993" width="37" height="30.666666666666664"/>
+                                                    <rect key="frame" x="30.000000000000004" y="53.999999999999993" width="36.333333333333343" height="30.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="nG4-de-7Db"/>
                                                     </constraints>
@@ -2556,7 +2556,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="477"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-kx-muO">
-                                        <rect key="frame" x="-184.66666666666663" y="163.66666666666666" width="783.33333333333337" height="149.99999999999997"/>
+                                        <rect key="frame" x="-184.66666666666666" y="163.66666666666666" width="783.33333333333337" height="149.99999999999997"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="rbc-KL-gP7">
                                                 <rect key="frame" x="0.0" y="0.0" width="783.33333333333337" height="150"/>
@@ -3095,7 +3095,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMr-WM-tvn">
-                                        <rect key="frame" x="174" y="13.333333333333369" width="66.333333333333314" height="23.333333333333329"/>
+                                        <rect key="frame" x="173.33333333333334" y="11.333333333333369" width="67.333333333333343" height="27.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
