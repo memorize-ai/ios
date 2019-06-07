@@ -2269,33 +2269,24 @@
                                                     <constraint firstItem="h8e-mj-PpG" firstAttribute="leading" secondItem="hbD-lL-WAl" secondAttribute="trailing" constant="20" id="y8U-9C-rFL"/>
                                                 </constraints>
                                             </view>
-                                            <wkWebView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7al-02-6bQ">
-                                                <rect key="frame" x="20" y="278.66666666666669" width="374" height="0.0"/>
-                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" id="Gpn-hb-Psp"/>
-                                                </constraints>
-                                                <wkWebViewConfiguration key="configuration">
-                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                    <wkPreferences key="preferences"/>
-                                                </wkWebViewConfiguration>
-                                            </wkWebView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mfX-pg-YXV">
-                                                <rect key="frame" x="49" y="350" width="240" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mfX-pg-YXV">
+                                                <rect key="frame" x="0.0" y="160.00000000000003" width="414" height="289.66666666666674"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RFv-Ww-Evc">
-                                                    <size key="itemSize" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="mfX-pg-YXV" secondAttribute="height" multiplier="1:0.7" id="PKo-P1-Qd6"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RFv-Ww-Evc">
+                                                    <size key="itemSize" width="175" height="284"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gSB-84-IDR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="gSB-84-IDR">
+                                                        <rect key="frame" x="20" y="3" width="175" height="284"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="175" height="284"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </view>
                                                     </collectionViewCell>
@@ -2305,9 +2296,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="XmA-Sj-bhc" secondAttribute="trailing" constant="20" id="5iB-lJ-c8w"/>
-                                            <constraint firstItem="7al-02-6bQ" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="Hy1-A9-XHO"/>
+                                            <constraint firstItem="mfX-pg-YXV" firstAttribute="top" secondItem="XmA-Sj-bhc" secondAttribute="bottom" constant="40" id="7f8-1X-rtT"/>
+                                            <constraint firstItem="mfX-pg-YXV" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="U4y-Ns-nr5"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="YCb-uy-3Lw"/>
-                                            <constraint firstAttribute="trailing" secondItem="7al-02-6bQ" secondAttribute="trailing" constant="20" id="orq-Z5-ZHY"/>
+                                            <constraint firstAttribute="trailing" secondItem="mfX-pg-YXV" secondAttribute="trailing" id="a88-d2-Nru"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" constant="20" id="qrV-fu-9eI"/>
                                         </constraints>
                                     </view>
@@ -2350,8 +2342,6 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="9nY-Gn-wa9" id="Cg0-Zq-0e1"/>
-                        <outlet property="descriptionWebView" destination="7al-02-6bQ" id="hSV-iZ-z7r"/>
-                        <outlet property="descriptionWebViewHeightConstraint" destination="Gpn-hb-Psp" id="bPp-qn-VTB"/>
                         <outlet property="getActivityIndicator" destination="kCP-a8-2u0" id="Kn7-Fq-QWk"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="dTb-cB-Zcc"/>
                         <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="6pp-yV-xKt"/>
@@ -2365,7 +2355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="819" y="2151"/>
+            <point key="canvasLocation" x="818.84057971014499" y="2149.7282608695655"/>
         </scene>
         <!--Card View Controller-->
         <scene sceneID="Wn5-ZD-dMC">
@@ -3145,6 +3135,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6R-Gn-CGi">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="AWX-EI-uBs" id="BRN-DD-zjn"/>
+                                </connections>
+                            </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgX-4C-VBv">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3152,15 +3151,6 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="AWX-EI-uBs" id="HzO-r8-Uvg"/>
-                                </connections>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6R-Gn-CGi">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="AWX-EI-uBs" id="BRN-DD-zjn"/>
                                 </connections>
                             </textView>
                         </subviews>
@@ -3194,7 +3184,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgb-ot-W2X">
+                            <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gk-3l-SaD">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -3202,7 +3192,7 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gk-3l-SaD">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgb-ot-W2X">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">

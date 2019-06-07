@@ -56,7 +56,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	func swap(completion: ((CardSide) -> Void)?) {
 		let halfWidth = view.bounds.width / 2
 		if frontTextView.isHidden {
-			UIView.animate(withDuration: 0.25, animations: {
+			UIView.animate(withDuration: 0.125, animations: {
 				self.backTextView.transform = CGAffineTransform(translationX: halfWidth, y: 0)
 				self.backTextView.alpha = 0
 			}) {
@@ -67,7 +67,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				self.frontTextView.transform = CGAffineTransform(translationX: -halfWidth, y: 0)
 				self.frontTextView.alpha = 0
 				self.frontTextView.isHidden = false
-				UIView.animate(withDuration: 0.25, animations: {
+				UIView.animate(withDuration: 0.125, animations: {
 					self.frontTextView.transform = .identity
 					self.frontTextView.alpha = 1
 				}) {
@@ -76,7 +76,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				}
 			}
 		} else {
-			UIView.animate(withDuration: 0.25, animations: {
+			UIView.animate(withDuration: 0.125, animations: {
 				self.frontTextView.transform = CGAffineTransform(translationX: -halfWidth, y: 0)
 				self.frontTextView.alpha = 0
 			}) {
@@ -87,7 +87,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				self.backTextView.transform = CGAffineTransform(translationX: halfWidth, y: 0)
 				self.backTextView.alpha = 0
 				self.backTextView.isHidden = false
-				UIView.animate(withDuration: 0.25, animations: {
+				UIView.animate(withDuration: 0.125, animations: {
 					self.backTextView.transform = .identity
 					self.backTextView.alpha = 1
 				}) {

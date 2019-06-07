@@ -40,10 +40,10 @@ class EditCardViewController: UIViewController {
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
 		self.cardPreview = addViewController(cardPreview) as? CardPreviewViewController
 		self.cardEditor = addViewController(cardEditor) as? CardEditorViewController
-//		cardEditor.listen { side, text in
-//			cardPreview.update(side, text: text)
-//			self.reloadRightBarButtonItem()
-//		}
+		cardEditor.listen { side, text in
+			cardPreview.update(side, text: text)
+			self.reloadRightBarButtonItem()
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -140,13 +140,13 @@ class EditCardViewController: UIViewController {
 			switch currentView {
 			case .editor:
 				cardEditor?.swap { side in
-					self.sideLabel.text = side.uppercased
+					self.updateSide(side)
 					self.enable(self.rightArrow)
 				}
 				cardPreview?.load(.front)
 			case .preview:
 				cardPreview?.swap { side in
-					self.sideLabel.text = side.uppercased
+					self.updateSide(side)
 					self.enable(self.rightArrow)
 				}
 				cardEditor?.load(.front)
@@ -162,13 +162,13 @@ class EditCardViewController: UIViewController {
 			switch currentView {
 			case .editor:
 				cardEditor?.swap { side in
-					self.sideLabel.text = side.uppercased
+					self.updateSide(side)
 					self.enable(self.leftArrow)
 				}
 				cardPreview?.load(.back)
 			case .preview:
 				cardPreview?.swap { side in
-					self.sideLabel.text = side.uppercased
+					self.updateSide(side)
 					self.enable(self.leftArrow)
 				}
 				cardEditor?.load(.back)
@@ -176,6 +176,11 @@ class EditCardViewController: UIViewController {
 		case .back:
 			return
 		}
+	}
+	
+	func updateSide(_ side: CardSide) {
+		sideLabel.text = side.uppercased
+		currentSide = side
 	}
 }
 
