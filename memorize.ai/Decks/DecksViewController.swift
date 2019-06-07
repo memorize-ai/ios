@@ -54,6 +54,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 					self.actionsCollectionView.reloadData()
 					self.cardsDue = true
 				}
+			} else if change == .cardDraftAdded || change == .cardDraftModified {
+				self.cardsCollectionView.reloadData()
 			}
 		}
 		decksCollectionView.reloadData()
@@ -193,6 +195,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			guard let cell = _cell as? ThinCardCollectionViewCell, let element = deck?.cards[indexPath.item] else { return _cell }
 			cell.due(element.isDue())
 			cell.load(element.front)
+			cell.setDraft(element.hasDraft)
 			cell.action = {
 				self.performSegue(withIdentifier: "editCard", sender: self.deck?.cards[indexPath.item])
 			}
@@ -212,6 +215,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 class ThinCardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var label: UILabel!
+	@IBOutlet weak var draftImageView: UIImageView!
+	@IBOutlet weak var draftImageViewWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var draftImageViewTrailingConstraint: NSLayoutConstraint!
 	
 	var action: (() -> Void)?
 	
@@ -225,6 +231,11 @@ class ThinCardCollectionViewCell: UICollectionViewCell {
 	
 	func load(_ text: String) {
 		label.text = text.clean()
+	}
+	
+	func setDraft(_ hasDraft: Bool) {
+		draftImageViewWidthConstraint.constant = hasDraft ? 25 : 0
+		draftImageViewTrailingConstraint.constant = hasDraft ? 6 : 0
 	}
 }
 

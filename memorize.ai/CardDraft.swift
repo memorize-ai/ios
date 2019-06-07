@@ -1,3 +1,5 @@
+import Firebase
+
 var cardDrafts = [CardDraft]()
 
 class CardDraft {
@@ -36,6 +38,11 @@ class CardDraft {
 	
 	static func get(cardId: String) -> CardDraft? {
 		return cardDrafts.first { $0.cardId == cardId }
+	}
+	
+	func update(_ snapshot: DocumentSnapshot) {
+		front = snapshot.get("front") as? String ?? front
+		back = snapshot.get("back") as? String ?? back
 	}
 }
 

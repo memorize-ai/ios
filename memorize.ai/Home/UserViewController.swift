@@ -58,6 +58,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						self.loadSettings()
 						self.loadDecks()
 						self.loadUploads()
+						self.loadCardDrafts()
 					} else if let error = error {
 						switch error.localizedDescription {
 						case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
@@ -110,6 +111,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			reloadProfileBarButtonItem()
 			loadDecks()
 			loadUploads()
+			loadCardDrafts()
 			Card.poll()
 			createHelloLabel()
 			navigationController?.setNavigationBarHidden(false, animated: true)
@@ -195,6 +197,37 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		cards.append(contentsOf: Card.all().filter { $0.last != nil }.sorted { $0.last?.date.timeIntervalSinceNow ?? 0 < $1.last?.date.timeIntervalSinceNow ?? 0 }.map { (image: Rating.image($0.last?.rating ?? 0), card: $0) })
 		if count != cards.count {
 			cardsCollectionView.reloadData()
+		}
+	}
+	
+	func loadCardDrafts() {
+		guard let id = id else { return }
+		firestore.collection("users/\(id)/cardDrafts").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let draft = $0.document
+				let draftId = draft.documentID
+				switch $0.type {
+				case .added:
+					guard let deckId = draft.get("deck") as? String, let front = draft.get("front") as? String, let back = draft.get("back") as? String else { return }
+					cardDrafts.append(CardDraft(
+						id: draftId,
+						deckId: deckId,
+						cardId: draft.get("card") as? String,
+						front: front,
+						back: back
+					))
+					ChangeHandler.call(.cardDraftAdded)
+				case .modified:
+					CardDraft.get(draftId)?.update(draft)
+					ChangeHandler.call(.cardDraftModified)
+				case .removed:
+					cardDrafts = cardDrafts.filter { $0.id == draftId }
+					ChangeHandler.call(.cardDraftRemoved)
+				@unknown default:
+					break
+				}
+			}
 		}
 	}
 	

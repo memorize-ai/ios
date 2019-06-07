@@ -35,4 +35,7 @@ enum Change {
 	case uploadModified
 	case uploadRemoved
 	case uploadLoaded
+	case cardDraftAdded
+	case cardDraftModified
+	case cardDraftRemoved
 }
