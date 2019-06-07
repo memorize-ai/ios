@@ -76,7 +76,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.reloadCards()
 					ChangeHandler.call(.cardModified)
 				case .modified:
-					self.cards.first { return $0.id == cardId }?.update(card, type: .card)
+					self.cards.first { $0.id == cardId }?.update(card, type: .card)
 					self.reloadCards()
 					ChangeHandler.call(.cardModified)
 				case .removed:

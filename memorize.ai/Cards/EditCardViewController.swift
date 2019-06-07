@@ -16,6 +16,24 @@ class EditCardViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		// =========
+		let numberOfPages :Int = 5
+		let padding : CGFloat = 15
+		let viewWidth = scrollView.frame.size.width - 2 * padding
+		let viewHeight = scrollView.frame.size.height - 2 * padding
+		
+		var x : CGFloat = 0
+		
+		for i in 0...numberOfPages{
+			let view: UIView = UIView(frame: CGRect(x: x + padding, y: padding, width: viewWidth, height: viewHeight))
+			view.backgroundColor = UIColor.blue
+			scrollView.addSubview(view)
+			
+			x = view.frame.origin.x + viewWidth + padding
+		}
+		
+		scrollView.contentSize = CGSize(width:x+padding, height:scrollView.frame.size.height)
+		// =========
 		disable(leftArrow)
 		reloadRightBarButtonItem()
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
@@ -36,8 +54,8 @@ class EditCardViewController: UIViewController {
 	
 	func addViewController(_ viewController: UIViewController) -> UIViewController {
 		scrollView.addSubview(viewController.view)
-		addChild(viewController)
-		viewController.didMove(toParent: self)
+//		addChild(viewController)
+//		viewController.didMove(toParent: self)
 		return viewController
 	}
 	

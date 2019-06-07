@@ -67,11 +67,11 @@ class Setting {
 	}
 	
 	static func get(_ id: String) -> Setting? {
-		return settings.first { return $0.id == id }
+		return settings.first { $0.id == id }
 	}
 	
 	static func get(_ type: SettingType) -> Setting? {
-		return settings.first { return $0.type == type }
+		return settings.first { $0.type == type }
 	}
 	
 	private static func updateDarkMode(_ setting: Setting) {

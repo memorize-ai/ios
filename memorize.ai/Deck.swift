@@ -56,17 +56,17 @@ class Deck {
 	}
 	
 	static func get(_ id: String) -> Deck? {
-		return decks.first { return $0.id == id }
+		return decks.first { $0.id == id }
 	}
 	
 	static func allDue() -> [Card] {
-		return decks.flatMap { return $0.cards.filter { return $0.isDue() } }
+		return decks.flatMap { $0.cards.filter { $0.isDue() } }
 	}
 	
 	static func loadFromCoreData() {
 		guard let managedDecks = try? (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext.fetch(NSFetchRequest<NSManagedObject>(entityName: "ManagedDeck")) else { return }
 		for managedDeck in managedDecks {
-			guard let id = managedDeck.value(forKey: "id") as? String, let name = managedDeck.value(forKey: "name") as? String, let subtitle = managedDeck.value(forKey: "subtitle") as? String, let description = managedDeck.value(forKey: "desc") as? String, let isPublic = managedDeck.value(forKey: "public") as? Bool, let count = managedDeck.value(forKey: "count") as? Int32, let creator = managedDeck.value(forKey: "creator") as? String, let owner = managedDeck.value(forKey: "owner") as? String, let mastered = managedDeck.value(forKey: "mastered") as? Int32 else { continue }
+			guard let id = managedDeck.value(forKey: "id") as? String, let name = managedDeck.value(forKey: "name") as? String, let subtitle = managedDeck.value(forKey: "subtitle") as? String, let description = managedDeck.value(forKey: "desc") as? String, let isPublic = managedDeck.value(forKey: "isPublic") as? Bool, let count = managedDeck.value(forKey: "count") as? Int32, let creator = managedDeck.value(forKey: "creator") as? String, let owner = managedDeck.value(forKey: "owner") as? String, let mastered = managedDeck.value(forKey: "mastered") as? Int32 else { continue }
 			var image: UIImage?
 			if let data = managedDeck.value(forKey: "image") as? Data {
 				image = UIImage(data: data)
@@ -99,7 +99,7 @@ class Deck {
 	}
 	
 	func allDue() -> [Card] {
-		return cards.filter { return $0.isDue() }
+		return cards.filter { $0.isDue() }
 	}
 	
 	func rate(_ rating: Int, completion: @escaping (Error?) -> Void) {

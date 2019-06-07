@@ -32,7 +32,7 @@ class Upload {
 	}
 	
 	static func loaded(_ filter: (Upload) -> Bool) -> [Upload] {
-		return uploads.filter { return $0.data != nil && filter($0) }
+		return uploads.filter { $0.data != nil && filter($0) }
 	}
 	
 	static func loaded() -> [Upload] {
@@ -40,21 +40,21 @@ class Upload {
 	}
 	
 	static func filter(_ array: [Upload], for type: UploadType?) -> [Upload] {
-		return array.filter { return type == nil ? true : $0.type == type }
+		return array.filter { type == nil ? true : $0.type == type }
 	}
 	
 	static func getNext(_ count: Int) -> [Upload] {
-		return Array(uploads.filter { return $0.data == nil }.prefix(count))
+		return Array(uploads.filter { $0.data == nil }.prefix(count))
 	}
 	
 //	static func reloadAll() {
-//		uploads.filter { return $0.shouldReload }.forEach {
+//		uploads.filter { $0.shouldReload }.forEach {
 //			storage.child
 //		}
 //	}
 	
 	static func get(_ id: String) -> Upload? {
-		return uploads.first { return $0.id == id }
+		return uploads.first { $0.id == id }
 	}
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {

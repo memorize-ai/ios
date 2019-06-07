@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	}
 	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-		token = deviceToken.map { return String(format: "%02.2hhx", $0) }.joined()
+		token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
 	}
 
 	func applicationWillTerminate(_ application: UIApplication) {

@@ -44,7 +44,7 @@ class Card {
 	}
 	
 	static func all() -> [Card] {
-		return decks.flatMap { return $0.cards }
+		return decks.flatMap { $0.cards }
 	}
 	
 	static func poll() {
@@ -56,11 +56,11 @@ class Card {
 	}
 	
 	static func sortDue(_ cards: [Card]) -> [Card] {
-		return cards.sorted { return $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
+		return cards.sorted { $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
 	}
 	
 	static func get(_ id: String, deckId: String) -> Card? {
-		return Deck.get(deckId)?.cards.first { return $0.id == id }
+		return Deck.get(deckId)?.cards.first { $0.id == id }
 	}
 	
 	func isDue() -> Bool {

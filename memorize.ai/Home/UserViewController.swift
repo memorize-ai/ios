@@ -178,7 +178,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					Setting.callHandler(settingId)
 					ChangeHandler.call(.settingModified)
 				case .removed:
-					settings = settings.filter { return $0.id != settingId }
+					settings = settings.filter { $0.id != settingId }
 					Listener.remove("users/\(id)/settings/\(settingId)")
 					Setting.loadSectionedSettings()
 					ChangeHandler.call(.settingRemoved)
@@ -191,8 +191,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadCards() {
 		let count = cards.count
-		cards = Card.sortDue(Deck.allDue()).map { return (image: #imageLiteral(resourceName: "Due"), card: $0) }
-		cards.append(contentsOf: Card.all().filter { return $0.last != nil }.sorted { return $0.last?.date.timeIntervalSinceNow ?? 0 < $1.last?.date.timeIntervalSinceNow ?? 0 }.map { return (image: Rating.image($0.last?.rating ?? 0), card: $0) })
+		cards = Card.sortDue(Deck.allDue()).map { (image: #imageLiteral(resourceName: "Due"), card: $0) }
+		cards.append(contentsOf: Card.all().filter { $0.last != nil }.sorted { $0.last?.date.timeIntervalSinceNow ?? 0 < $1.last?.date.timeIntervalSinceNow ?? 0 }.map { (image: Rating.image($0.last?.rating ?? 0), card: $0) })
 		if count != cards.count {
 			cardsCollectionView.reloadData()
 		}
@@ -353,7 +353,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									self.reloadReview()
 									ChangeHandler.call(.cardModified)
 								case .removed:
-									localDeck.cards = localDeck.cards.filter { return $0.id != cardId }
+									localDeck.cards = localDeck.cards.filter { $0.id != cardId }
 									Listener.remove("users/\(id)/decks/\(deckId)/cards/\(cardId)")
 									self.reloadReview()
 									ChangeHandler.call(.cardRemoved)
@@ -367,7 +367,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					Deck.get(deckId)?.update(deck, type: .user)
 					ChangeHandler.call(.deckModified)
 				case .removed:
-					decks = decks.filter { return $0.id != deckId }
+					decks = decks.filter { $0.id != deckId }
 					Listener.remove("decks/\(deckId)")
 					ChangeHandler.call(.deckRemoved)
 				@unknown default:
@@ -400,7 +400,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					Upload.get(uploadId)?.update(upload)
 					ChangeHandler.call(.uploadModified)
 				case .removed:
-					uploads = uploads.filter { return $0.id != uploadId }
+					uploads = uploads.filter { $0.id != uploadId }
 					ChangeHandler.call(.uploadRemoved)
 				@unknown default:
 					return
