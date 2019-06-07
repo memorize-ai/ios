@@ -45,6 +45,10 @@ class Deck {
 		self.mastered = mastered
 	}
 	
+	var cardDraft: CardDraft? {
+		return cardDrafts.first { $0.deckId == id && $0.type == .new }
+	}
+	
 	static func view(_ deckId: String) {
 		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { _, _ in }
 	}

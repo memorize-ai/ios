@@ -39,6 +39,14 @@ class Card {
 		self.deck = deck
 	}
 	
+	var draft: CardDraft? {
+		return CardDraft.get(cardId: id)
+	}
+	
+	var hasDraft: Bool {
+		return draft != nil
+	}
+	
 	convenience init(id: String, front: String, back: String, created: Date, updated: Date, likes: Int, dislikes: Int, deck: String) {
 		self.init(id: id, front: front, back: back, created: created, updated: updated, likes: likes, dislikes: dislikes, count: 0, correct: 0, e: 0, streak: 0, mastered: false, last: nil, next: Date(), history: [], deck: deck)
 	}
