@@ -1,5 +1,6 @@
 import UIKit
 import Firebase
+import CoreData
 
 var decks = [Deck]()
 
@@ -60,6 +61,41 @@ class Deck {
 	
 	static func allDue() -> [Card] {
 		return decks.flatMap { return $0.cards.filter { return $0.isDue() } }
+	}
+	
+	static func loadFromCoreData() {
+		guard let managedDecks = try? (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext.fetch(NSFetchRequest<NSManagedObject>(entityName: "ManagedDeck")) else { return }
+		for managedDeck in managedDecks {
+			guard let id = managedDeck.value(forKey: "id") as? String, let name = managedDeck.value(forKey: "name") as? String, let subtitle = managedDeck.value(forKey: "subtitle") as? String, let description = managedDeck.value(forKey: "desc") as? String, let isPublic = managedDeck.value(forKey: "public") as? Bool, let count = managedDeck.value(forKey: "count") as? Int32, let creator = managedDeck.value(forKey: "creator") as? String, let owner = managedDeck.value(forKey: "owner") as? String, let mastered = managedDeck.value(forKey: "mastered") as? Int32 else { continue }
+			var image: UIImage?
+			if let data = managedDeck.value(forKey: "image") as? Data {
+				image = UIImage(data: data)
+			}
+			if let image = image, let deck = get(id) {
+				deck.image = image
+			} else {
+				decks.append(Deck(
+					id: id,
+					image: image,
+					name: name,
+					subtitle: subtitle,
+					description: description,
+					isPublic: isPublic,
+					count: Int(count),
+					views: DeckViews(total: 0, unique: 0),
+					downloads: DeckDownloads(total: 0, current: 0),
+					ratings: DeckRatings(average: 0, all1: 0, all2: 0, all3: 0, all4: 0, all5: 0),
+					users: [],
+					creator: creator,
+					owner: owner,
+					created: Date(),
+					updated: Date(),
+					permissions: [],
+					cards: [],
+					mastered: Int(mastered)
+				))
+			}
+		}
 	}
 	
 	func allDue() -> [Card] {
