@@ -3068,9 +3068,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9X-Lx-kRn">
-                                <rect key="frame" x="0.0" y="64" width="414" height="622"/>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bwv-Dq-yLD">
                                 <rect key="frame" x="0.0" y="686" width="414" height="50"/>
                                 <subviews>
@@ -3114,23 +3111,47 @@
                                     <constraint firstAttribute="trailing" secondItem="SaD-z4-IW9" secondAttribute="trailing" constant="30" id="fdZ-Hw-eLt"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Xx-ZM-xEq">
+                                <rect key="frame" x="0.0" y="64" width="414" height="622"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XaN-NZ-cZv">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="u7u-nF-KHE">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="WYS-Mb-rsl" id="fAz-i6-xbZ"/>
+                                    <outlet property="delegate" destination="WYS-Mb-rsl" id="vAx-u4-9Ub"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JQV-Zr-lEe" firstAttribute="trailing" secondItem="h9X-Lx-kRn" secondAttribute="trailing" id="3YU-Ld-fo4"/>
                             <constraint firstItem="JQV-Zr-lEe" firstAttribute="bottom" secondItem="Bwv-Dq-yLD" secondAttribute="bottom" id="AgO-ez-fBz"/>
-                            <constraint firstItem="Bwv-Dq-yLD" firstAttribute="top" secondItem="h9X-Lx-kRn" secondAttribute="bottom" id="IqS-Ag-B6r"/>
-                            <constraint firstItem="h9X-Lx-kRn" firstAttribute="top" secondItem="JQV-Zr-lEe" secondAttribute="top" id="JZx-Hy-2Tv"/>
-                            <constraint firstItem="h9X-Lx-kRn" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="LsF-bd-uKt"/>
+                            <constraint firstItem="JQV-Zr-lEe" firstAttribute="trailing" secondItem="9Xx-ZM-xEq" secondAttribute="trailing" id="Bxv-iE-Woq"/>
                             <constraint firstItem="JQV-Zr-lEe" firstAttribute="trailing" secondItem="Bwv-Dq-yLD" secondAttribute="trailing" id="NDS-IP-Llk"/>
+                            <constraint firstItem="9Xx-ZM-xEq" firstAttribute="top" secondItem="JQV-Zr-lEe" secondAttribute="top" id="X6X-Hz-jeE"/>
                             <constraint firstItem="Bwv-Dq-yLD" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="md3-jj-nmu"/>
+                            <constraint firstItem="9Xx-ZM-xEq" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="wlk-YK-5zj"/>
+                            <constraint firstItem="Bwv-Dq-yLD" firstAttribute="top" secondItem="9Xx-ZM-xEq" secondAttribute="bottom" id="yTb-HJ-ERT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JQV-Zr-lEe"/>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="9Xx-ZM-xEq" id="UVK-76-Hku"/>
                         <outlet property="leftArrow" destination="O7h-Jj-1Zu" id="uqV-MM-Cwg"/>
                         <outlet property="rightArrow" destination="SaD-z4-IW9" id="HTN-rg-e9c"/>
-                        <outlet property="scrollView" destination="h9X-Lx-kRn" id="nbd-a7-GYM"/>
                         <outlet property="sideLabel" destination="BMr-WM-tvn" id="ajB-Uw-a7o"/>
                         <outlet property="swapViewBottomConstraint" destination="AgO-ez-fBz" id="B8F-LK-cmR"/>
                     </connections>

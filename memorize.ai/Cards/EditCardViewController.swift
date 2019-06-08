@@ -1,7 +1,7 @@
 import UIKit
 
-class EditCardViewController: UIViewController {
-	@IBOutlet weak var scrollView: UIScrollView!
+class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var leftArrow: UIButton!
 	@IBOutlet weak var rightArrow: UIButton!
 	@IBOutlet weak var sideLabel: UILabel!
@@ -14,14 +14,19 @@ class EditCardViewController: UIViewController {
 	var currentView = EditCardView.editor
 	var currentSide = CardSide.front
 	var lastPublishedText: (front: String, back: String)?
+	var views = [UIView]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+		collectionView.collectionViewLayout = flowLayout
 		navigationItem.title = card == nil ? "New Card" : "Edit Card"
 		disable(leftArrow)
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
-		self.cardPreview = addViewController(cardPreview) as? CardPreviewViewController
-		self.cardEditor = addViewController(cardEditor) as? CardEditorViewController
+		self.cardEditor = cardEditor
+		self.cardPreview = cardPreview
+		views = [cardEditor.view, cardPreview.view]
 		loadText()
 		reloadRightBarButtonItem()
 		guard let id = id, let deck = deck else { return }
@@ -53,23 +58,20 @@ class EditCardViewController: UIViewController {
 		updateCurrentViewController()
 	}
 	
-	func addViewController(_ viewController: UIViewController) -> UIViewController {
-		scrollView.addSubview(viewController.view)
-		addChild(viewController)
-		viewController.didMove(toParent: self)
-		return viewController
-	}
-	
 	func loadText() {
-		guard let deck = deck, let cardEditor = cardEditor else { return }
+		guard let deck = deck, let cardEditor = cardEditor, let cardPreview = cardPreview else { return }
 		if let card = card {
 			lastPublishedText = card.text
 			let draft = CardDraft.get(cardId: card.id)
 			cardEditor.update(.front, text: draft?.front ?? card.front)
+			cardPreview.update(.front, text: draft?.front ?? card.front)
 			cardEditor.update(.back, text: draft?.back ?? card.back)
+			cardPreview.update(.back, text: draft?.back ?? card.back)
 		} else if let draft = CardDraft.get(deckId: deck.id) {
 			cardEditor.update(.front, text: draft.front)
+			cardPreview.update(.front, text: draft.front)
 			cardEditor.update(.back, text: draft.back)
+			cardPreview.update(.back, text: draft.back)
 		}
 	}
 	
@@ -202,6 +204,16 @@ class EditCardViewController: UIViewController {
 	func updateSide(_ side: CardSide) {
 		sideLabel.text = side.uppercased
 		currentSide = side
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return views.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		cell.addSubview(views[indexPath.item])
+		return cell
 	}
 }
 
