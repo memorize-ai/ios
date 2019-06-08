@@ -33,7 +33,7 @@ class CardDraft {
 	}
 	
 	static func get(deckId: String) -> CardDraft? {
-		return cardDrafts.first { $0.deckId == deckId }
+		return cardDrafts.first { $0.type == .new && $0.deckId == deckId }
 	}
 	
 	static func get(cardId: String) -> CardDraft? {

@@ -46,7 +46,7 @@ class Deck {
 	}
 	
 	var cardDraft: CardDraft? {
-		return cardDrafts.first { $0.deckId == id && $0.type == .new }
+		return CardDraft.get(deckId: id)
 	}
 	
 	static func view(_ deckId: String) {

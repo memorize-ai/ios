@@ -40,6 +40,7 @@ class EditCardViewController: UIViewController {
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
 		self.cardPreview = addViewController(cardPreview) as? CardPreviewViewController
 		self.cardEditor = addViewController(cardEditor) as? CardEditorViewController
+		loadText()
 		cardEditor.listen { side, text in
 			cardPreview.update(side, text: text)
 			self.reloadRightBarButtonItem()
@@ -58,6 +59,18 @@ class EditCardViewController: UIViewController {
 		addChild(viewController)
 		viewController.didMove(toParent: self)
 		return viewController
+	}
+	
+	func loadText() {
+		guard let deck = deck, let cardEditor = cardEditor else { return }
+		if let card = card {
+			let draft = CardDraft.get(cardId: card.id)
+			cardEditor.update(.front, text: draft?.front ?? card.front)
+			cardEditor.update(.back, text: draft?.back ?? card.back)
+		} else if let draft = CardDraft.get(deckId: deck.id) {
+			cardEditor.update(.front, text: draft.front)
+			cardEditor.update(.back, text: draft.back)
+		}
 	}
 	
 	func reloadRightBarButtonItem() {
