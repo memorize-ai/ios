@@ -71,7 +71,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		let signOut = UIAlertAction(title: "Sign Out", style: .default) { _ in
 			do {
-				try Auth.auth().signOut()
+				try auth.signOut()
 				Listener.removeAll()
 				User.delete()
 				self.performSegue(withIdentifier: "signOut", sender: self)
@@ -138,7 +138,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				User.save(image: data)
 				storage.child("users/\(id)").downloadURL { url, error in
 					guard error == nil, let url = url else { return }
-					Auth.auth().currentUser?.createProfileChangeRequest().photoURL = url
+					auth.currentUser?.createProfileChangeRequest().photoURL = url
 					completion()
 				}
 			}

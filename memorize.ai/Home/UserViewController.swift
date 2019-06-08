@@ -34,32 +34,25 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			navigationController?.setNavigationBarHidden(true, animated: false)
 			loadingView.isHidden = false
 			loadingImage.isHidden = false
-			if let _user = User.get() {
-				darkMode(_user.darkMode)
-				loadProfileBarButtonItem(_user.image)
-				Auth.auth().signIn(withEmail: _user.email, password: _user.password) { user, error in
-					if error == nil, let uid = user?.user.uid {
-						id = uid
-						User.pushToken()
-						listeners["users/\(uid)"] = firestore.document("users/\(uid)").addSnapshotListener { snapshot, error in
-							guard error == nil, let snapshot = snapshot else { return }
-							name = snapshot.get("name") as? String ?? "Error"
-							self.createHelloLabel()
-							email = _user.email
-							slug = snapshot.get("slug") as? String ?? "error"
-							self.loadingImage.isHidden = true
-							self.loadingView.isHidden = true
-							self.navigationController?.setNavigationBarHidden(false, animated: false)
-							self.reloadProfileBarButtonItem()
-							startup = false
-							ChangeHandler.call(.profileModified)
-						}
-						self.updateLastOnline()
-						self.loadSettings()
-						self.loadDecks()
-						self.loadUploads()
-						self.loadCardDrafts()
-					} else if let error = error {
+			if auth.currentUser == nil {
+				signIn()
+			} else if let user = User.get() {
+				darkMode(user.darkMode)
+				loadProfileBarButtonItem(user.image)
+				id = user.id
+				name = user.name
+				email = user.email
+				profilePicture = user.image
+				User.pushToken()
+				loadingImage.isHidden = true
+				loadingView.isHidden = true
+				navigationController?.setNavigationBarHidden(false, animated: false)
+				reloadProfileBarButtonItem()
+				startup = false
+				ChangeHandler.call(.profileModified)
+				guard let id = id else { return }
+				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
+					if let error = error {
 						switch error.localizedDescription {
 						case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
 							self.loadingImage.isHidden = true
@@ -68,8 +61,20 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						default:
 							self.signIn()
 						}
+					} else if let snapshot = snapshot {
+						name = snapshot.get("name") as? String ?? name
+						self.createHelloLabel()
+						email = snapshot.get("email") as? String ?? email
+						slug = snapshot.get("slug") as? String ?? slug
+						User.save()
+						ChangeHandler.call(.profileModified)
 					}
 				}
+				updateLastOnline()
+				loadSettings()
+				loadDecks()
+				loadUploads()
+				loadCardDrafts()
 			} else {
 				signIn()
 			}
@@ -140,7 +145,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func updateLastOnline() {
-		guard Auth.auth().currentUser != nil else { return }
+		guard auth.currentUser != nil else { return }
 		functions.httpsCallable("updateLastOnline").call(nil) { _, _ in }
 	}
 	

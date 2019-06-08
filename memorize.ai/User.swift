@@ -13,10 +13,17 @@ class User {
 		firestore.document("users/\(id)/tokens/\(token)").setData(["enabled": true])
 	}
 	
-	static func save(email _email: String, password: String) {
-		defaults.set(_email, forKey: "email")
-		defaults.set(password, forKey: "password")
-		email = _email
+	static func save() {
+		guard let id = id, let name = name, let email = email else { return }
+		defaults.set(id, forKey: "id")
+		defaults.set(name, forKey: "name")
+		defaults.set(email, forKey: "email")
+		if let slug = slug {
+			defaults.set(slug, forKey: "slug")
+		}
+		if let data = profilePicture?.jpegData(compressionQuality: compressionQuality) {
+			defaults.set(data, forKey: "image")
+		}
 	}
 	
 	static func save(image: Data) {
@@ -28,8 +35,10 @@ class User {
 	}
 	
 	static func delete() {
+		defaults.removeObject(forKey: "id")
+		defaults.removeObject(forKey: "name")
 		defaults.removeObject(forKey: "email")
-		defaults.removeObject(forKey: "password")
+		defaults.removeObject(forKey: "slug")
 		defaults.removeObject(forKey: "image")
 		defaults.removeObject(forKey: "darkMode")
 		id = nil
@@ -40,9 +49,9 @@ class User {
 		token = nil
 	}
 	
-	static func get() -> (email: String, password: String, image: UIImage?, darkMode: Bool)? {
-		guard let email = defaults.string(forKey: "email"), let password = defaults.string(forKey: "password"), let image = getImage() else { return nil }
-		return (email, password, image, darkMode: defaults.bool(forKey: "darkMode"))
+	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool)? {
+		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email"), let image = getImage() else { return nil }
+		return (id, name, email, defaults.string(forKey: "slug"), image, defaults.bool(forKey: "darkMode"))
 	}
 	
 	static func getImage() -> UIImage? {

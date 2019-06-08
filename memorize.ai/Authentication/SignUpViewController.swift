@@ -80,7 +80,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		guard let nameText = nameTextField.text?.trim(), let emailText = emailTextField.text?.trim(), let passwordText = passwordTextField.text?.trim() else { return }
 		showActivityIndicator()
 		dismissKeyboard()
-		Auth.auth().createUser(withEmail: emailText, password: passwordText) { authResult, error in
+		auth.createUser(withEmail: emailText, password: passwordText) { authResult, error in
 			if error == nil {
 				id = authResult?.user.uid
 				guard let id = id, let data = #imageLiteral(resourceName: "Person").compressedData() else { return }
@@ -95,7 +95,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 					}
 					firestore.document("users/\(id)").setData(["name": nameText, "email": emailText])
 					name = nameText
-					User.save(email: emailText, password: passwordText)
+					email = emailText
+					User.save()
 					self.hideActivityIndicator()
 					self.performSegue(withIdentifier: "signUp", sender: self)
 				}
