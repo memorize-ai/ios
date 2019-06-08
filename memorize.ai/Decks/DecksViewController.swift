@@ -54,7 +54,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 					self.actionsCollectionView.reloadData()
 					self.cardsDue = true
 				}
-			} else if change == .cardDraftAdded || change == .cardDraftModified {
+			} else if change == .cardDraftAdded || change == .cardDraftModified || change == .cardDraftRemoved {
 				self.cardsCollectionView.reloadData()
 			}
 		}

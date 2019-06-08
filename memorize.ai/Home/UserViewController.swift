@@ -227,7 +227,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					CardDraft.get(draftId)?.update(draft)
 					ChangeHandler.call(.cardDraftModified)
 				case .removed:
-					cardDrafts = cardDrafts.filter { $0.id == draftId }
+					cardDrafts = cardDrafts.filter { $0.id != draftId }
 					ChangeHandler.call(.cardDraftRemoved)
 				@unknown default:
 					break

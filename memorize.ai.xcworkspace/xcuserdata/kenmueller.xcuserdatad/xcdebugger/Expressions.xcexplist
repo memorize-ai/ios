@@ -3,10 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
+         contextName = "UserViewController.loadCards():UserViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "scrollView.subviews.count">
+               value = "cards.count">
+            </PersistentString>
+            <PersistentString
+               value = "Deck.allDue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data">
+            </PersistentString>
+            <PersistentString
+               value = "self.data">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,28 +36,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Upload.load(completion:):Upload.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "id">
-            </PersistentString>
-            <PersistentString
-               value = "memorize_ai.id!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserViewController.loadCards():UserViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cards.count">
-            </PersistentString>
-            <PersistentString
-               value = "Deck.allDue()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "UserViewController.reloadReview():UserViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -52,13 +44,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
+         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "data">
+               value = "scrollView.subviews.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in EditCardViewController.viewDidLoad():EditCardViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "draft.id">
             </PersistentString>
             <PersistentString
-               value = "self.data">
+               value = "cardDrafts.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Upload.load(completion:):Upload.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "id">
+            </PersistentString>
+            <PersistentString
+               value = "memorize_ai.id!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
