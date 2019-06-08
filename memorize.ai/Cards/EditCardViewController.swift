@@ -13,6 +13,7 @@ class EditCardViewController: UIViewController {
 	var card: Card?
 	var currentView = EditCardView.editor
 	var currentSide = CardSide.front
+	var lastPublishedText = (front: "", back: "")
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,7 +42,23 @@ class EditCardViewController: UIViewController {
 		self.cardPreview = addViewController(cardPreview) as? CardPreviewViewController
 		self.cardEditor = addViewController(cardEditor) as? CardEditorViewController
 		loadText()
+		guard let id = id, let deck = deck else { return }
 		cardEditor.listen { side, text in
+			if let card = self.card {
+				if let draft = CardDraft.get(cardId: card.id) {
+					firestore.document("users/\(id)/cardDrafts/\(draft.id)").updateData([side.rawValue: text])
+				} else {
+					let text = cardEditor.text
+					firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "card": card.id, "front": text.front, "back": text.back])
+				}
+			} else {
+				if let draft = CardDraft.get(deckId: deck.id) {
+					firestore.document("users/\(id)/cardDrafts/\(draft.id)").updateData([side.rawValue: text])
+				} else {
+					let text = cardEditor.text
+					firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "front": text.front, "back": text.back])
+				}
+			}
 			cardPreview.update(side, text: text)
 			self.reloadRightBarButtonItem()
 		}
@@ -74,14 +91,7 @@ class EditCardViewController: UIViewController {
 	}
 	
 	func reloadRightBarButtonItem() {
-		func setRightBarButton(_ title: String, action: Selector) {
-			navigationItem.setRightBarButton(UIBarButtonItem(title: title, style: .done, target: self, action: action), animated: false)
-		}
-		if card == nil {
-			setRightBarButton("Create", action: #selector(create))
-		} else {
-			setRightBarButton("Save", action: #selector(save))
-		}
+		navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(create) : #selector(save)), animated: false)
 		if cardEditor?.hasText ?? false {
 			enableRightBarButtonItem()
 		} else {
