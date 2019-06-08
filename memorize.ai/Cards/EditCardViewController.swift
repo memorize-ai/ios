@@ -13,35 +13,17 @@ class EditCardViewController: UIViewController {
 	var card: Card?
 	var currentView = EditCardView.editor
 	var currentSide = CardSide.front
-	var lastPublishedText = (front: "", back: "")
+	var lastPublishedText: (front: String, back: String)?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		scrollView.backgroundColor = .orange
-//		// =========
-//		let numberOfPages :Int = 5
-//		let padding : CGFloat = 15
-//		let viewWidth = scrollView.frame.size.width - 2 * padding
-//		let viewHeight = scrollView.frame.size.height - 2 * padding
-//
-//		var x : CGFloat = 0
-//
-//		for i in 0...numberOfPages{
-//			let view: UIView = UIView(frame: CGRect(x: x + padding, y: padding, width: viewWidth, height: viewHeight))
-//			view.backgroundColor = UIColor.blue
-//			scrollView .addSubview(view)
-//
-//			x = view.frame.origin.x + viewWidth + padding
-//		}
-//
-//		scrollView.contentSize = CGSize(width:x+padding, height:scrollView.frame.size.height)
-//		// =========
+		navigationItem.title = card == nil ? "New Card" : "Edit Card"
 		disable(leftArrow)
-		reloadRightBarButtonItem()
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
 		self.cardPreview = addViewController(cardPreview) as? CardPreviewViewController
 		self.cardEditor = addViewController(cardEditor) as? CardEditorViewController
 		loadText()
+		reloadRightBarButtonItem()
 		guard let id = id, let deck = deck else { return }
 		cardEditor.listen { side, text in
 			if let card = self.card {
@@ -81,6 +63,7 @@ class EditCardViewController: UIViewController {
 	func loadText() {
 		guard let deck = deck, let cardEditor = cardEditor else { return }
 		if let card = card {
+			lastPublishedText = card.text
 			let draft = CardDraft.get(cardId: card.id)
 			cardEditor.update(.front, text: draft?.front ?? card.front)
 			cardEditor.update(.back, text: draft?.back ?? card.back)
@@ -91,32 +74,47 @@ class EditCardViewController: UIViewController {
 	}
 	
 	func reloadRightBarButtonItem() {
-		navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(create) : #selector(save)), animated: false)
-		if cardEditor?.hasText ?? false {
-			enableRightBarButtonItem()
-		} else {
+		navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(publishNew) : #selector(publishEdit)), animated: false)
+		guard let cardEditor = cardEditor, cardEditor.hasText else { return disableRightBarButtonItem() }
+		guard let lastPublishedText = lastPublishedText else { return enableRightBarButtonItem() }
+		if cardEditor.trimmedText == lastPublishedText {
 			disableRightBarButtonItem()
+		} else {
+			enableRightBarButtonItem()
 		}
 	}
 	
-	@objc func save() {
-		guard let deck = deck, let card = card, let text = cardEditor?.trimmedText else { return }
-		disableRightBarButtonItem()
-		firestore.document("decks/\(deck.id)/cards/\(card.id)").updateData(["front": text.front, "back": text.back]) { error in
-			guard error == nil else { return }
-			buzz()
-			self.reloadRightBarButtonItem()
-		}
-	}
-	
-	@objc func create() {
+	@objc func publishNew() {
 		guard let deck = deck, let text = cardEditor?.trimmedText else { return }
 		let date = Date()
 		disableRightBarButtonItem()
 		firestore.collection("decks/\(deck.id)/cards").addDocument(data: ["front": text.front, "back": text.back, "created": date, "updated": date, "likes": 0, "dislikes": 0]) { error in
-			guard error == nil else { return }
-			buzz()
-			self.reloadRightBarButtonItem()
+			if error == nil, let id = id {
+				if let draft = CardDraft.get(deckId: deck.id) {
+					firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete()
+				}
+				self.navigationController?.popViewController(animated: true)
+			} else {
+				self.showAlert("There was an error publishing the card. Please try again.")
+				self.enableRightBarButtonItem()
+			}
+		}
+	}
+	
+	@objc func publishEdit() {
+		guard let deck = deck, let card = card, let text = cardEditor?.trimmedText else { return }
+		disableRightBarButtonItem()
+		firestore.document("decks/\(deck.id)/cards/\(card.id)").updateData(["front": text.front, "back": text.back]) { error in
+			if error == nil, let id = id {
+				if let draft = CardDraft.get(cardId: card.id) {
+					firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete()
+				}
+				self.lastPublishedText = text
+				buzz()
+			} else {
+				self.showAlert("There was an error publishing the card. Please try again.")
+				self.enableRightBarButtonItem()
+			}
 		}
 	}
 	

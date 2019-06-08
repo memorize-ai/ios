@@ -39,6 +39,10 @@ class Card {
 		self.deck = deck
 	}
 	
+	var text: (front: String, back: String) {
+		return (front, back)
+	}
+	
 	var draft: CardDraft? {
 		return CardDraft.get(cardId: id)
 	}

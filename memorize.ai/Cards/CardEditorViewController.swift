@@ -5,6 +5,12 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var backTextView: UITextView!
 	
 	private var listener: ((CardSide, String) -> Void)?
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		frontTextView.setKeyboard(.advanced)
+		backTextView.setKeyboard(.advanced)
+	}
 
 	var text: (front: String, back: String) {
 		return (frontTextView.text, backTextView.text)
