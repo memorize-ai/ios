@@ -20,6 +20,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		super.viewDidLoad()
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+		flowLayout.scrollDirection = .horizontal
 		collectionView.collectionViewLayout = flowLayout
 		navigationItem.title = card == nil ? "New Card" : "Edit Card"
 		disable(leftArrow)
