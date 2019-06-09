@@ -264,6 +264,7 @@ class ExpandedDeckCollectionViewCell: UICollectionViewCell {
 
 class ActionCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var button: UIButton!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	var action: (() -> Void)?
 	

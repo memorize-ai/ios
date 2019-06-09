@@ -146,7 +146,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func updateLastOnline() {
 		guard auth.currentUser != nil else { return }
-		functions.httpsCallable("updateLastOnline").call(nil) { _, _ in }
+		functions.httpsCallable("updateLastOnline").call { _, _ in }
 	}
 	
 	func loadSettings() {

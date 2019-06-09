@@ -110,6 +110,13 @@ class Deck {
 		Deck.rate(id, rating: rating, completion: completion)
 	}
 	
+	func canEdit(completion: @escaping (Bool, Error?) -> Void) {
+		functions.httpsCallable("canEditDeck").call(["deckId": id]) { result, error in
+			guard error == nil, let result = result?.data as? Bool else { return completion(false, error) }
+			completion(result, nil)
+		}
+	}
+	
 	func update(_ snapshot: DocumentSnapshot, type: DeckUpdateType) {
 		switch type {
 		case .deck:
