@@ -7,6 +7,10 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	@IBOutlet weak var changeButton: UIButton!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
+	@IBOutlet weak var subtitleCharactersRemainingLabel: UILabel!
+	@IBOutlet weak var subtitleTextView: UITextView!
+	@IBOutlet weak var tagsRemainingLabel: UILabel!
+	@IBOutlet weak var tagsTextView: UITextView!
 	@IBOutlet weak var descriptionTextView: UITextView!
 	@IBOutlet weak var publicSwitch: UISwitch!
 	@IBOutlet weak var privateSwitch: UISwitch!
