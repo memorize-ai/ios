@@ -18,7 +18,11 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	@IBOutlet weak var createButton: UIButton!
 	@IBOutlet weak var createActivityIndicator: UIActivityIndicatorView!
 	
+	let SUBTITLE_LENGTH = 60
+	let TAGS_COUNT = 20
 	var hasTagsPlaceholder = true
+	var lastTags = ""
+	var lastSubtitle = ""
 	var isPublic = true
 	
 	override func viewDidLoad() {
@@ -90,6 +94,17 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		nameText.isEmpty ? disable() : enable()
 	}
 	
+	@IBAction func subtitleChanged() {
+		guard let subtitleText = subtitleTextField.text else { return }
+		let difference = SUBTITLE_LENGTH - subtitleText.trim().count
+		if difference < 0 {
+			subtitleTextField.text = lastSubtitle
+		} else {
+			lastSubtitle = subtitleText
+			subtitleCharactersRemainingLabel.text = "(\(difference))"
+		}
+	}
+	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.layer.borderWidth = 2
 		textView.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
@@ -110,6 +125,22 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 			tagsTextView.textColor = .lightGray
 			tagsTextView.font = UIFont(name: "Nunito-Regular", size: 17)
 		}
+	}
+	
+	func textViewDidChange(_ textView: UITextView) {
+		if textView == tagsTextView {
+			let difference = TAGS_COUNT - getTags().count
+			if difference < 0 {
+				tagsTextView.text = lastTags
+			} else {
+				lastTags = tagsTextView.text
+				tagsRemainingLabel.text = "(\(difference))"
+			}
+		}
+	}
+	
+	func getTags() -> [String] {
+		return tagsTextView.text.split(separator: ",").map { String($0).trim() }.filter { !$0.isEmpty }
 	}
 	
 	@IBAction func publicSwitchChanged() {

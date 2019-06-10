@@ -2020,6 +2020,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 <connections>
                                                     <action selector="nameChanged" destination="fwd-VK-lMc" eventType="editingChanged" id="YiY-pD-2hp"/>
+                                                    <action selector="subtitleChanged" destination="fwd-VK-lMc" eventType="editingChanged" id="FPw-6D-SC2"/>
                                                     <outlet property="delegate" destination="fwd-VK-lMc" id="doh-Hc-Y7J"/>
                                                 </connections>
                                             </textField>
