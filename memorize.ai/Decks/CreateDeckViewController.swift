@@ -8,7 +8,8 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
 	@IBOutlet weak var subtitleCharactersRemainingLabel: UILabel!
-	@IBOutlet weak var subtitleTextView: UITextView!
+	@IBOutlet weak var subtitleTextField: UITextField!
+	@IBOutlet weak var subtitleBarView: UIView!
 	@IBOutlet weak var tagsRemainingLabel: UILabel!
 	@IBOutlet weak var tagsTextView: UITextView!
 	@IBOutlet weak var descriptionTextView: UITextView!
@@ -17,6 +18,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	@IBOutlet weak var createButton: UIButton!
 	@IBOutlet weak var createActivityIndicator: UIActivityIndicatorView!
 	
+	var hasTagsPlaceholder = true
 	var isPublic = true
 	
 	override func viewDidLoad() {
@@ -26,7 +28,9 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		createButton.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
 		nameTextField.setKeyboard()
+		textViewDidEndEditing(tagsTextView)
 		textViewDidEndEditing(descriptionTextView)
+		tagsTextView.setKeyboard(.plain)
 		descriptionTextView.setKeyboard(.advanced)
     }
 	
@@ -66,16 +70,18 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
+		let barView = textField == nameTextField ? nameBarView : subtitleBarView
 		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-			self.nameBarView.transform = CGAffineTransform(scaleX: 1.01, y: 2)
-			self.nameBarView.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+			barView?.transform = CGAffineTransform(scaleX: 1.01, y: 2)
+			barView?.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
 		}, completion: nil)
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
+		let barView = textField == nameTextField ? nameBarView : subtitleBarView
 		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-			self.nameBarView.transform = .identity
-			self.nameBarView.backgroundColor = .lightGray
+			barView?.transform = .identity
+			barView?.backgroundColor = .lightGray
 		}, completion: nil)
 	}
 	
@@ -87,11 +93,23 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.layer.borderWidth = 2
 		textView.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		if textView == tagsTextView && hasTagsPlaceholder {
+			hasTagsPlaceholder = false
+			tagsTextView.text = ""
+			tagsTextView.textColor = .darkGray
+			tagsTextView.font = UIFont(name: "Nunito-SemiBold", size: 17)
+		}
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
-		descriptionTextView.layer.borderWidth = 1
-		descriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
+		textView.layer.borderWidth = 1
+		textView.layer.borderColor = UIColor.lightGray.cgColor
+		if textView == tagsTextView && tagsTextView.text.isEmpty {
+			hasTagsPlaceholder = true
+			tagsTextView.text = "Separate with commas"
+			tagsTextView.textColor = .lightGray
+			tagsTextView.font = UIFont(name: "Nunito-Regular", size: 17)
+		}
 	}
 	
 	@IBAction func publicSwitchChanged() {

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "UserViewController.reloadReview():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Deck.allDue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserViewController.loadCards():UserViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,17 +18,6 @@
             </PersistentString>
             <PersistentString
                value = "Deck.allDue()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "data">
-            </PersistentString>
-            <PersistentString
-               value = "self.data">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,10 +33,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserViewController.reloadReview():UserViewController.swift">
+         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Deck.allDue()">
+               value = "data">
+            </PersistentString>
+            <PersistentString
+               value = "self.data">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -70,6 +70,14 @@
             </PersistentString>
             <PersistentString
                value = "memorize_ai.id!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CreateDeckViewController.textViewDidBeginEditing(_:):CreateDeckViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tagsTextView.textColor!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
