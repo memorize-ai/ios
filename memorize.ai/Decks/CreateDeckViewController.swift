@@ -23,7 +23,6 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	var hasTagsPlaceholder = true
 	var lastTags = ""
 	var lastSubtitle = ""
-	var isPublic = true
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,17 +139,15 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func getTags() -> [String] {
-		return tagsTextView.text.split(separator: ",").map { String($0).trim() }.filter { !$0.isEmpty }
+		return hasTagsPlaceholder ? [] : tagsTextView.text.split(separator: ",").map { String($0).trim() }.filter { !$0.isEmpty }
 	}
 	
 	@IBAction func publicSwitchChanged() {
 		privateSwitch.setOn(!privateSwitch.isOn, animated: true)
-		isPublic = !isPublic
 	}
 	
 	@IBAction func privateSwitchChanged() {
 		publicSwitch.setOn(!publicSwitch.isOn, animated: true)
-		isPublic = !isPublic
 	}
 	
 	@IBAction func create() {
@@ -166,7 +163,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 			"subtitle": subtitleText,
 			"description": descriptionTextView.text.trim(),
 			"tags": getTags(),
-			"public": isPublic,
+			"public": publicSwitch.isOn,
 			"count": 0,
 			"views": ["total": 0, "unique": 0],
 			"downloads": ["total": 0, "current": 0],
