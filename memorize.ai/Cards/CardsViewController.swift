@@ -40,7 +40,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 			cell.imageView.image = image
 		} else {
 			cell.imageActivityIndicator.startAnimating()
-			storage.child("decks/\(deck.id)").getData(maxSize: fileLimit) { data, error in
+			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				cell.imageActivityIndicator.stopAnimating()
 				cell.imageView.image = image

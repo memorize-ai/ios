@@ -1,4 +1,4 @@
 import UIKit
 
-let fileLimit: Int64 = 50000000
-let compressionQuality: CGFloat = 0.5
+let MAX_FILE_SIZE: Int64 = 50000000
+let COMPRESSION_QUALITY: CGFloat = 0.5

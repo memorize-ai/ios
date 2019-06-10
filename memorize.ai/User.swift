@@ -21,7 +21,7 @@ class User {
 		if let slug = slug {
 			defaults.set(slug, forKey: "slug")
 		}
-		if let data = profilePicture?.jpegData(compressionQuality: compressionQuality) {
+		if let data = profilePicture?.jpegData(compressionQuality: 1) {
 			defaults.set(data, forKey: "image")
 		}
 	}

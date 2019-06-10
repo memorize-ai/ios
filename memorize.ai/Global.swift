@@ -128,7 +128,7 @@ extension Date {
 
 extension UIImage {
 	func compressedData() -> Data? {
-		return jpegData(compressionQuality: compressionQuality)
+		return jpegData(compressionQuality: COMPRESSION_QUALITY)
 	}
 	
 	func compressed() -> UIImage? {

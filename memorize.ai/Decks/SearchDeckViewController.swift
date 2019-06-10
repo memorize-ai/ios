@@ -90,7 +90,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		if let image = element.image {
 			cell.imageView.image = image
 		} else {
-			storage.child("decks/\(element.id)").getData(maxSize: fileLimit) { data, error in
+			storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				cell.imageView.image = image
 				element.image = image

@@ -93,7 +93,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			imageView.image = image
 			imageView.layer.borderWidth = 0
 		} else if let deckId = self.deckId {
-			storage.child("decks/\(deckId)").getData(maxSize: fileLimit) { data, error in
+			storage.child("decks/\(deckId)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				self.imageActivityIndicator.stopAnimating()
 				self.imageView.layer.borderWidth = 0
 				if error == nil, let data = data {

@@ -59,7 +59,7 @@ class Upload {
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
 		guard let userId = memorize_ai.id, let filename = filename else { return }
-		Upload.storage.child("\(userId)/\(filename)").getData(maxSize: fileLimit) { data, error in
+		Upload.storage.child("\(userId)/\(filename)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
 			completion(data, nil)

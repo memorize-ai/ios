@@ -42,7 +42,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if let image = element.deck.image {
 			cell.imageView.image = image
 		} else {
-			storage.child("decks/\(element.deck.id)").getData(maxSize: fileLimit) { data, error in
+			storage.child("decks/\(element.deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				element.deck.image = image
 				cell.imageView.image = image
