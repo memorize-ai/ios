@@ -170,7 +170,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 			"count": 0,
 			"views": ["total": 0, "unique": 0],
 			"downloads": ["total": 0, "current": 0],
-			"ratings": ["average": 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0],
+			"ratings": ["average": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0],
 			"creator": id,
 			"owner": id,
 			"created": date,
