@@ -9,7 +9,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	
 	class Action {
-		let name: String
+		var name: String
 		let action: (DecksViewController) -> () -> Void
 		
 		init(name: String, action: @escaping (DecksViewController) -> () -> Void) {
@@ -48,19 +48,20 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			} else if change == .cardDue {
 				let noneDue = Deck.allDue().isEmpty
 				if self.cardsDue && noneDue {
-					self.actionsCollectionView.reloadData()
+					self.reloadActions()
 					self.cardsDue = false
 				} else if !(self.cardsDue || noneDue) {
-					self.actionsCollectionView.reloadData()
+					self.reloadActions()
 					self.cardsDue = true
 				}
 			} else if change == .cardDraftAdded || change == .cardDraftModified || change == .cardDraftRemoved {
+				self.reloadActions()
 				self.cardsCollectionView.reloadData()
 			}
 		}
 		decksCollectionView.reloadData()
 		cardsCollectionView.reloadData()
-		actionsCollectionView.reloadData()
+		reloadActions()
 		if decks.isEmpty {
 			navigationController?.popViewController(animated: true)
 		}
@@ -77,6 +78,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			editCardVC.deck = deck
 			editCardVC.card = sender as? Card
 		}
+	}
+	
+	var itemOffset: Int {
+		return deck?.canEdit == nil ? 0 : deck?.canEdit ?? false ? 0 : 1
 	}
 	
 	@objc func newCard() {
@@ -116,6 +121,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		decksCollectionView.reloadData()
 	}
 	
+	func reloadActions() {
+		actions.first?.name = "new card\(deck?.hasCardDraft ?? false ? "*" : "")"
+		actionsCollectionView.reloadData()
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == actionsCollectionView, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) {
 			return CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: extraBold]).width + 4, height: 36)
@@ -135,7 +145,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return collectionView == decksCollectionView ? decks.count : collectionView == actionsCollectionView ? actions.count : deck?.cards.count ?? 0
+		return collectionView == decksCollectionView
+			? decks.count
+			: collectionView == actionsCollectionView
+				? actions.count - itemOffset
+				: deck?.cards.count ?? 0
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -185,8 +199,26 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else if collectionView == actionsCollectionView {
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
-			let element = actions[indexPath.item]
-			cell.button.setTitle(element.name, for: .normal)
+			let element = actions[indexPath.item + itemOffset]
+			if element.name == "new card" {
+				if deck?.canEdit == nil {
+					cell.activityIndicator.startAnimating()
+					deck?.canEdit { canEdit, error in
+						guard error == nil else { return }
+						self.deck?.canEdit = canEdit
+						if canEdit {
+							cell.activityIndicator.stopAnimating()
+							cell.button.setTitle(element.name, for: .normal)
+						} else {
+							self.reloadActions()
+						}
+					}
+				} else {
+					cell.button.setTitle(element.name, for: .normal)
+				}
+			} else {
+				cell.button.setTitle(element.name, for: .normal)
+			}
 			cell.button.isEnabled = !(element.name == "review all" && Deck.allDue().isEmpty)
 			cell.action = element.action(self)
 			return cell
@@ -207,6 +239,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if collectionView == decksCollectionView {
 			deck = decks[indexPath.item]
 			decksCollectionView.reloadData()
+			reloadActions()
 			cardsCollectionView.reloadData()
 		}
 	}

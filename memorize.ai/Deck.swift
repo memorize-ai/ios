@@ -45,8 +45,14 @@ class Deck {
 		self.mastered = mastered
 	}
 	
+	var canEdit: Bool?
+	
 	var cardDraft: CardDraft? {
 		return CardDraft.get(deckId: id)
+	}
+	
+	var hasCardDraft: Bool {
+		return cardDraft != nil
 	}
 	
 	static func view(_ deckId: String) {
