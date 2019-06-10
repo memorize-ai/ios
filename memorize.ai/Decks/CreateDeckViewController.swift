@@ -178,7 +178,7 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 		]) { error in
 			guard error == nil, let deckId = deckRef?.documentID else { return }
 			firestore.document("users/\(id)/decks/\(deckId)").setData(["mastered": 0])
-			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
+			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { _, error in
 				if error == nil {
 					self.hideActivityIndicator()
 					self.navigationController?.popViewController(animated: true)
