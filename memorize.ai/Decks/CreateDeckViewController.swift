@@ -154,13 +154,28 @@ class CreateDeckViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	@IBAction func create() {
-		guard let id = id, let image = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim() else { return }
+		guard let id = id, let image = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
+		let date = Date()
 		showActivityIndicator()
 		dismissKeyboard()
 		let metadata = StorageMetadata()
 		metadata.contentType = "image/jpeg"
 		var deckRef: DocumentReference?
-		deckRef = firestore.collection("decks").addDocument(data: ["name": nameText, "description": descriptionTextView.text.trim(), "public": isPublic, "count": 0, "creator": id, "owner": id]) { error in
+		deckRef = firestore.collection("decks").addDocument(data: [
+			"name": nameText,
+			"subtitle": subtitleText,
+			"description": descriptionTextView.text.trim(),
+			"tags": getTags(),
+			"public": isPublic,
+			"count": 0,
+			"views": ["total": 0, "unique": 0],
+			"downloads": ["total": 0, "current": 0],
+			"ratings": ["average": 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0],
+			"creator": id,
+			"owner": id,
+			"created": date,
+			"updated": date
+		]) { error in
 			guard error == nil, let deckId = deckRef?.documentID else { return }
 			firestore.document("users/\(id)/decks/\(deckId)").setData(["mastered": 0])
 			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { metadata, error in
