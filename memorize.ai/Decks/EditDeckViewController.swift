@@ -32,6 +32,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationItem.title = "\(deck == nil ? "New" : "Edit") Deck"
+		submitButton.setTitle(deck == nil ? "CREATE" : "PUBLISH", for: .normal)
 		loadText()
 		loadBlocks()
 		disable()
