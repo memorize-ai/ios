@@ -48,6 +48,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 			}
 		}
 		cell.load(element.front)
+		cell.draft(element.hasDraft)
 		cell.nextLabel.text = element.next.format()
 		return cell
 	}
@@ -58,6 +59,8 @@ class CardCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var label: UILabel!
+	@IBOutlet weak var draftViewWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var draftViewTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var nextLabel: UILabel!
 	
 	func due(_ isDue: Bool) {
@@ -68,5 +71,10 @@ class CardCollectionViewCell: UICollectionViewCell {
 	
 	func load(_ text: String) {
 		label.text = text.clean()
+	}
+	
+	func draft(_ hasDraft: Bool) {
+		draftViewWidthConstraint.constant = hasDraft ? 25 : 0
+		draftViewTrailingConstraint.constant = hasDraft ? 10 : 0
 	}
 }
