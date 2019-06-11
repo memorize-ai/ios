@@ -84,10 +84,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 			if error == nil {
 				id = authResult?.user.uid
 				guard let id = id, let data = #imageLiteral(resourceName: "Person").compressedData() else { return }
-				let metadata = StorageMetadata()
-				metadata.contentType = "image/jpeg"
 				User.pushToken()
-				storage.child("users/\(id)").putData(data, metadata: metadata) { metadata, error in
+				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { metadata, error in
 					storage.child("users/\(id)").downloadURL { url, error in
 						guard let changeRequest = authResult?.user.createProfileChangeRequest(), let photoURL = url, error == nil else { return }
 						changeRequest.displayName = nameText

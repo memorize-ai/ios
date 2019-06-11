@@ -335,6 +335,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								name: deckSnapshot.get("name") as? String ?? "Error",
 								subtitle: deckSnapshot.get("subtitle") as? String ?? "Error",
 								description: deckSnapshot.get("description") as? String ?? "Error",
+								tags: deckSnapshot.get("tags") as? [String] ?? [],
 								isPublic: deckSnapshot.get("public") as? Bool ?? true,
 								count: deckSnapshot.get("count") as? Int ?? 0,
 								views: DeckViews(deckSnapshot),
@@ -347,9 +348,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								updated: deckSnapshot.getDate("updated") ?? Date(),
 								permissions: [],
 								cards: [],
-								mastered: deck.get("mastered") as? Int ?? 0
+								mastered: deck.get("mastered") as? Int ?? 0,
+								role: Role(deck.get("role") as? String),
+								hidden: deck.get("hidden") as? Bool ?? false
 							))
 						}
+						Deck.filterAll()
 						ChangeHandler.call(.deckModified)
 						listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
@@ -403,6 +407,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					}
 				case .modified:
 					Deck.get(deckId)?.update(deck, type: .user)
+					Deck.filterAll()
 					ChangeHandler.call(.deckModified)
 				case .removed:
 					decks = decks.filter { $0.id != deckId }

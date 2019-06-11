@@ -2,12 +2,15 @@ import UIKit
 import Firebase
 
 class EditDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
+	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var outerImageView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var changeButton: UIButton!
+	@IBOutlet weak var nameBlockView: UIView!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
 	@IBOutlet weak var subtitleCharactersRemainingLabel: UILabel!
+	@IBOutlet weak var subtitleBlockView: UIView!
 	@IBOutlet weak var subtitleTextField: UITextField!
 	@IBOutlet weak var subtitleBarView: UIView!
 	@IBOutlet weak var tagsRemainingLabel: UILabel!
@@ -16,19 +19,23 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	@IBOutlet weak var publicSwitch: UISwitch!
 	@IBOutlet weak var privateSwitch: UISwitch!
 	@IBOutlet weak var submitButton: UIButton!
-	@IBOutlet weak var createActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var submitActivityIndicator: UIActivityIndicatorView!
 	
 	let SUBTITLE_LENGTH = 60
 	let TAGS_COUNT = 20
+	
+	var deck: Deck?
 	var hasTagsPlaceholder = true
 	var lastTags = ""
 	var lastSubtitle = ""
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		navigationItem.title = "\(deck == nil ? "New" : "Edit") Deck"
+		loadBlocks()
 		disable()
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
-		createButton.layer.borderColor = UIColor.lightGray.cgColor
+		submitButton.layer.borderColor = UIColor.lightGray.cgColor
 		imageView.layer.masksToBounds = true
 		nameTextField.setKeyboard()
 		textViewDidEndEditing(tagsTextView)
@@ -39,7 +46,24 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		ChangeHandler.update { change in
+			if change == .deckModified {
+				self.loadBlocks()
+			}
+		}
 		updateCurrentViewController()
+	}
+	
+	func loadBlocks() {
+		guard let role = deck?.role else { return }
+		switch role {
+		case .owner, .admin:
+			nameBlockView.isHidden = true
+			subtitleBarView.isHidden = true
+		default:
+			nameBlockView.isHidden = false
+			subtitleBlockView.isHidden = false
+		}
 	}
 	
 	@IBAction func chooseImage() {
@@ -150,70 +174,118 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		publicSwitch.setOn(!publicSwitch.isOn, animated: true)
 	}
 	
-	@IBAction func create() {
-		guard let id = id, let image = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
-		let date = Date()
+	@IBAction func submit() {
+		guard let id = id, let imageData = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
 		showActivityIndicator()
+		loadSubmitBarButtonItem(false)
 		dismissKeyboard()
-		let metadata = StorageMetadata()
-		metadata.contentType = "image/jpeg"
-		var deckRef: DocumentReference?
-		deckRef = firestore.collection("decks").addDocument(data: [
-			"name": nameText,
-			"subtitle": subtitleText,
-			"description": descriptionTextView.text.trim(),
-			"tags": getTags(),
-			"public": publicSwitch.isOn,
-			"count": 0,
-			"views": ["total": 0, "unique": 0],
-			"downloads": ["total": 0, "current": 0],
-			"ratings": ["average": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0],
-			"creator": id,
-			"owner": id,
-			"created": date,
-			"updated": date
-		]) { error in
-			guard error == nil, let deckId = deckRef?.documentID else { return }
-			firestore.document("users/\(id)/decks/\(deckId)").setData(["mastered": 0])
-			storage.child("decks/\(deckId)").putData(image, metadata: metadata) { _, error in
+		if let deck = deck {
+			firestore.document("decks/\(deck.id)").updateData([
+				"name": nameText,
+				"subtitle": subtitleText,
+				"description": descriptionTextView.text.trim(),
+				"tags": getTags(),
+				"public": publicSwitch.isOn,
+			]) { error in
 				if error == nil {
-					self.hideActivityIndicator()
-					self.navigationController?.popViewController(animated: true)
-				} else if let error = error {
-					self.hideActivityIndicator()
-					switch error.localizedDescription {
-					case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-						self.showAlert("No internet")
-					default:
-						self.showAlert("There was a problem creating a new deck")
+					self.setImage(deck.id, data: imageData) {
+						buzz()
+						self.hideActivityIndicator()
 					}
+				} else {
+					self.showAlert("Unable to publish changes. Please try again")
+				}
+			}
+		} else {
+			let date = Date()
+			var deckRef: DocumentReference?
+			deckRef = firestore.collection("decks").addDocument(data: [
+				"name": nameText,
+				"subtitle": subtitleText,
+				"description": descriptionTextView.text.trim(),
+				"tags": getTags(),
+				"public": publicSwitch.isOn,
+				"count": 0,
+				"views": ["total": 0, "unique": 0],
+				"downloads": ["total": 0, "current": 0],
+				"ratings": ["average": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0],
+				"creator": id,
+				"owner": id,
+				"created": date,
+				"updated": date
+			]) { error in
+				if error == nil, let deckId = deckRef?.documentID {
+					Deck.new(deckId) { error in
+						if error == nil {
+							self.setImage(deckId, data: imageData) {
+								self.navigationController?.popViewController(animated: true)
+							}
+						} else {
+							self.showAlert("Unable to add the deck to your library. You can manually get the deck from the Marketplace")
+							self.navigationController?.popViewController(animated: true)
+						}
+					}
+				} else {
+					self.hideActivityIndicator()
+					self.enable()
 				}
 			}
 		}
 	}
 	
+	func setImage(_ deckId: String, data: Data, completion: @escaping () -> Void) {
+		storage.child("decks/\(deckId)").putData(data, metadata: JPEG_METADATA) { _, error in
+			if let error = error {
+				self.hideActivityIndicator()
+				switch error.localizedDescription {
+				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
+					self.showAlert("No internet")
+				default:
+					self.showAlert("There was a problem creating a new deck")
+				}
+			} else {
+				self.hideActivityIndicator()
+				completion()
+			}
+		}
+	}
+	
+	@objc func submitFromBarButton() {
+		scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height), animated: true)
+		submit()
+	}
+	
+	func loadSubmitBarButtonItem(_ enabled: Bool) {
+		navigationItem.setRightBarButton(UIBarButtonItem(title: deck == nil ? "Create" : "Publish", style: .done, target: self, action: #selector(submitFromBarButton)), animated: false)
+		guard let rightBarButton = navigationItem.rightBarButtonItem else { return }
+		rightBarButton.isEnabled = enabled
+		rightBarButton.tintColor = enabled ? .white : #colorLiteral(red: 0.9841352105, green: 0.9841352105, blue: 0.9841352105, alpha: 1)
+	}
+	
 	func showActivityIndicator() {
-		createButton.isEnabled = false
-		createButton.setTitle(nil, for: .normal)
-		createActivityIndicator.startAnimating()
+		submitButton.isEnabled = false
+		submitButton.setTitle(nil, for: .normal)
+		submitActivityIndicator.startAnimating()
 	}
 	
 	func hideActivityIndicator() {
-		createButton.isEnabled = true
-		createButton.setTitle("CREATE", for: .normal)
-		createActivityIndicator.stopAnimating()
+		submitButton.isEnabled = true
+		submitButton.setTitle("PUBLISH", for: .normal)
+		submitActivityIndicator.stopAnimating()
 	}
 	
 	func enable() {
-		createButton.isEnabled = true
-		createButton.setTitleColor(#colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1), for: .normal)
-		createButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		submitButton.isEnabled = true
+		submitButton.setTitleColor(#colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1), for: .normal)
+		submitButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		loadSubmitBarButtonItem(true)
 	}
 	
 	func disable() {
-		createButton.isEnabled = false
-		createButton.setTitleColor(#colorLiteral(red: 0.8264711499, green: 0.8266105652, blue: 0.8264527917, alpha: 1), for: .normal)
-		createButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
+		submitButton.isEnabled = false
+		submitButton.setTitleColor(#colorLiteral(red: 0.8264711499, green: 0.8266105652, blue: 0.8264527917, alpha: 1), for: .normal)
+		submitButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
+		loadSubmitBarButtonItem(false)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {

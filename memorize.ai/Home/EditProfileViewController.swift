@@ -131,9 +131,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	func uploadImage(_ image: UIImage, completion: @escaping () -> Void) {
 		if let id = id, let data = image.compressedData() {
 			profilePicture = image.compressed()
-			let metadata = StorageMetadata()
-			metadata.contentType = "image/jpeg"
-			storage.child("users/\(id)").putData(data, metadata: metadata) { _, error in
+			storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
 				guard error == nil else { return }
 				User.save(image: data)
 				storage.child("users/\(id)").downloadURL { url, error in

@@ -10,6 +10,7 @@ class Deck {
 	var name: String
 	var subtitle: String
 	var description: String
+	var tags: [String]
 	var isPublic: Bool
 	var count: Int
 	var views: DeckViews
@@ -23,13 +24,16 @@ class Deck {
 	var permissions: [Permission]
 	var cards: [Card]
 	var mastered: Int
+	var role: Role
+	var hidden: Bool
 	
-	init(id: String, image: UIImage?, name: String, subtitle: String, description: String, isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, users: [DeckUser], creator: String, owner: String, created: Date, updated: Date, permissions: [Permission], cards: [Card], mastered: Int) {
+	init(id: String, image: UIImage?, name: String, subtitle: String, description: String, tags: [String], isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, users: [DeckUser], creator: String, owner: String, created: Date, updated: Date, permissions: [Permission], cards: [Card], mastered: Int, role: Role, hidden: Bool) {
 		self.id = id
 		self.image = image
 		self.name = name
 		self.subtitle = subtitle
 		self.description = description
+		self.tags = tags
 		self.isPublic = isPublic
 		self.count = count
 		self.views = views
@@ -43,9 +47,9 @@ class Deck {
 		self.permissions = permissions
 		self.cards = cards
 		self.mastered = mastered
+		self.role = role
+		self.hidden = hidden
 	}
-	
-	var canEdit: Bool?
 	
 	var cardDraft: CardDraft? {
 		return CardDraft.get(deckId: id)
@@ -55,14 +59,20 @@ class Deck {
 		return cardDraft != nil
 	}
 	
+	static func filterAll() {
+		decks = decks.filter { !$0.hidden }
+	}
+	
+	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
+		functions.httpsCallable("addDeck").call(["deckId": deckId]) { completion($1) }
+	}
+	
 	static func view(_ deckId: String) {
 		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { _, _ in }
 	}
 	
 	static func rate(_ deckId: String, rating: Int, completion: @escaping (Error?) -> Void) {
-		functions.httpsCallable("rateDeck").call(["deckId": deckId]) { _, error in
-			completion(error)
-		}
+		functions.httpsCallable("rateDeck").call(["deckId": deckId]) { completion($1) }
 	}
 	
 	static func get(_ id: String) -> Deck? {
@@ -73,41 +83,6 @@ class Deck {
 		return decks.flatMap { $0.cards.filter { $0.isDue() } }
 	}
 	
-	static func loadFromCoreData() {
-		guard let managedDecks = try? (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext.fetch(NSFetchRequest<NSManagedObject>(entityName: "ManagedDeck")) else { return }
-		for managedDeck in managedDecks {
-			guard let id = managedDeck.value(forKey: "id") as? String, let name = managedDeck.value(forKey: "name") as? String, let subtitle = managedDeck.value(forKey: "subtitle") as? String, let description = managedDeck.value(forKey: "desc") as? String, let isPublic = managedDeck.value(forKey: "isPublic") as? Bool, let count = managedDeck.value(forKey: "count") as? Int32, let creator = managedDeck.value(forKey: "creator") as? String, let owner = managedDeck.value(forKey: "owner") as? String, let mastered = managedDeck.value(forKey: "mastered") as? Int32 else { continue }
-			var image: UIImage?
-			if let data = managedDeck.value(forKey: "image") as? Data {
-				image = UIImage(data: data)
-			}
-			if let image = image, let deck = get(id) {
-				deck.image = image
-			} else {
-				decks.append(Deck(
-					id: id,
-					image: image,
-					name: name,
-					subtitle: subtitle,
-					description: description,
-					isPublic: isPublic,
-					count: Int(count),
-					views: DeckViews(total: 0, unique: 0),
-					downloads: DeckDownloads(total: 0, current: 0),
-					ratings: DeckRatings(average: 0, all1: 0, all2: 0, all3: 0, all4: 0, all5: 0),
-					users: [],
-					creator: creator,
-					owner: owner,
-					created: Date(),
-					updated: Date(),
-					permissions: [],
-					cards: [],
-					mastered: Int(mastered)
-				))
-			}
-		}
-	}
-	
 	func allDue() -> [Card] {
 		return cards.filter { $0.isDue() }
 	}
@@ -116,19 +91,13 @@ class Deck {
 		Deck.rate(id, rating: rating, completion: completion)
 	}
 	
-	func canEdit(completion: @escaping (Bool, Error?) -> Void) {
-		functions.httpsCallable("canEditDeck").call(["deckId": id]) { result, error in
-			guard error == nil, let result = result?.data as? Bool else { return completion(false, error) }
-			completion(result, nil)
-		}
-	}
-	
 	func update(_ snapshot: DocumentSnapshot, type: DeckUpdateType) {
 		switch type {
 		case .deck:
 			name = snapshot.get("name") as? String ?? name
 			subtitle = snapshot.get("subtitle") as? String ?? subtitle
 			description = snapshot.get("description") as? String ?? description
+			tags = snapshot.get("tags") as? [String] ?? tags
 			isPublic = snapshot.get("public") as? Bool ?? isPublic
 			count = snapshot.get("count") as? Int ?? count
 			views = DeckViews(snapshot)
@@ -138,6 +107,8 @@ class Deck {
 			updated = snapshot.getDate("updated") ?? updated
 		case .user:
 			mastered = snapshot.get("mastered") as? Int ?? mastered
+			role = Role(snapshot.get("role") as? String)
+			hidden = snapshot.get("hidden") as? Bool ?? hidden
 		}
 	}
 }

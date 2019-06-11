@@ -23,18 +23,10 @@ enum Role: String {
 	case viewer = "viewer"
 	case editor = "editor"
 	case admin = "admin"
+	case owner = "owner"
 	
-	init(_ string: String) {
-		switch string {
-		case "viewer":
-			self = .viewer
-		case "editor":
-			self = .editor
-		case "admin":
-			self = .admin
-		default:
-			self = .none
-		}
+	init(_ string: String?) {
+		self = Role(rawValue: string ?? "none") ?? .none
 	}
 }
 
@@ -42,15 +34,4 @@ enum PermissionStatus: Int {
 	case declined = -1
 	case pending = 0
 	case accepted = 1
-	
-	init(_ number: Int) {
-		switch number {
-		case -1:
-			self = .declined
-		case 1:
-			self = .accepted
-		default:
-			self = .pending
-		}
-	}
 }

@@ -20,7 +20,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	let actions = [
 		Action(name: "new card", action: newCard),
-		Action(name: "review all", action: review),
+		Action(name: "edit", action: editDeck),
 		Action(name: "visit page", action: visitPage)
 	]
 	var deck: Deck?
@@ -81,27 +81,24 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	var itemOffset: Int {
-		return deck?.canEdit == nil ? 0 : deck?.canEdit ?? false ? 0 : 1
+		guard let role = deck?.role else { return 0 }
+		return role == .editor || role == .admin || role == .owner ? 1 : 0
 	}
 	
 	@objc func newCard() {
-		performSegue(withIdentifier: "editCard", sender: nil)
+		performSegue(withIdentifier: "editCard", sender: self)
 	}
 	
-	@objc func review() {
-		performSegue(withIdentifier: "review", sender: self)
+	@objc func editDeck() {
+		performSegue(withIdentifier: "editDeck", sender: self)
+	}
+	
+	@objc func permissions() {
+		performSegue(withIdentifier: "permissions", sender: self)
 	}
 	
 	@objc func visitPage() {
 		performSegue(withIdentifier: "visit", sender: self)
-	}
-	
-	func createDeck() {
-		performSegue(withIdentifier: "createDeck", sender: self)
-	}
-	
-	func searchDeck() {
-		performSegue(withIdentifier: "searchDeck", sender: self)
 	}
 	
 	func expand(_ expanded: Bool) {
