@@ -35,7 +35,18 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	func clearAllData() {
-		
+		let alertController = UIAlertController(title: "Are you sure?", message: "All progress for this deck will be deleted. This cannot be undone", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Clear", style: .default) { _ in
+			self.deck?.clearAllData { error in
+				if error == nil {
+					
+				} else {
+					self.showAlert("An unknown error occurred. Please try again")
+				}
+			}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	func removeDeck() {

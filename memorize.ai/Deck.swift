@@ -75,6 +75,10 @@ class Deck {
 		functions.httpsCallable("rateDeck").call(["deckId": deckId]) { completion($1) }
 	}
 	
+	static func clearAllData(_ deckId: String, completion: @escaping (Error?) -> Void) {
+		functions.httpsCallable("clearDeckData").call(["deckId": deckId]) { completion($1) }
+	}
+	
 	static func get(_ id: String) -> Deck? {
 		return decks.first { $0.id == id }
 	}
@@ -89,6 +93,10 @@ class Deck {
 	
 	func rate(_ rating: Int, completion: @escaping (Error?) -> Void) {
 		Deck.rate(id, rating: rating, completion: completion)
+	}
+	
+	func clearAllData(completion: @escaping (Error?) -> Void) {
+		Deck.clearAllData(id, completion: completion)
 	}
 	
 	func update(_ snapshot: DocumentSnapshot, type: DeckUpdateType) {
