@@ -32,6 +32,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationItem.title = "\(deck == nil ? "New" : "Edit") Deck"
+		loadText()
 		loadBlocks()
 		disable()
 		imageView.layer.borderColor = UIColor.lightGray.cgColor
@@ -52,6 +53,16 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	func loadText() {
+		guard let deck = deck else { return }
+		nameTextField.text = deck.name
+		subtitleTextField.text = deck.subtitle
+		tagsTextView.text = deck.tags.joined(separator: ", ")
+		descriptionTextView.text = deck.description
+		publicSwitch.setOn(deck.isPublic, animated: false)
+		privateSwitch.setOn(!deck.isPublic, animated: false)
 	}
 	
 	func loadBlocks() {
