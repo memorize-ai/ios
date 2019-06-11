@@ -113,8 +113,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	}
 	
 	@IBAction func nameChanged() {
-		guard let nameText = nameTextField.text?.trim() else { return }
-		nameText.isEmpty ? disable() : enable()
+		reloadSubmit()
 	}
 	
 	@IBAction func subtitleChanged() {
@@ -126,6 +125,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			lastSubtitle = subtitleText
 			subtitleCharactersRemainingLabel.text = "(\(difference))"
 		}
+		reloadSubmit()
 	}
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
@@ -160,6 +160,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 				tagsRemainingLabel.text = "(\(difference))"
 			}
 		}
+		reloadSubmit()
 	}
 	
 	func getTags() -> [String] {
@@ -168,10 +169,12 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	@IBAction func publicSwitchChanged() {
 		privateSwitch.setOn(!privateSwitch.isOn, animated: true)
+		reloadSubmit()
 	}
 	
 	@IBAction func privateSwitchChanged() {
 		publicSwitch.setOn(!publicSwitch.isOn, animated: true)
+		reloadSubmit()
 	}
 	
 	@IBAction func submit() {
@@ -255,6 +258,17 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		submit()
 	}
 	
+	func reloadSubmit() {
+		guard let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
+		if nameText.isEmpty {
+			disable()
+		} else if let deck = deck, deck.name == nameText && deck.subtitle == subtitleText && deck.tags == getTags() && deck.description == descriptionTextView.text && deck.isPublic == publicSwitch.isOn {
+				disable()
+		} else {
+			enable()
+		}
+	}
+	
 	func loadSubmitBarButtonItem(_ enabled: Bool) {
 		navigationItem.setRightBarButton(UIBarButtonItem(title: deck == nil ? "Create" : "Publish", style: .done, target: self, action: #selector(submitFromBarButton)), animated: false)
 		guard let rightBarButton = navigationItem.rightBarButtonItem else { return }
@@ -270,7 +284,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func hideActivityIndicator() {
 		submitButton.isEnabled = true
-		submitButton.setTitle("PUBLISH", for: .normal)
+		submitButton.setTitle(deck == nil ? "CREATE" : "PUBLISH", for: .normal)
 		submitActivityIndicator.stopAnimating()
 	}
 	

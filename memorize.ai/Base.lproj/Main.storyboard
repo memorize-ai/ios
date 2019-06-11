@@ -1606,23 +1606,16 @@
                                                         <action selector="click" destination="rVj-nZ-GXv" eventType="touchUpInside" id="Kbu-cV-hbW"/>
                                                     </connections>
                                                 </button>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="tiJ-Fq-abv">
-                                                    <rect key="frame" x="17" y="8" width="20" height="20"/>
-                                                    <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="ZR9-EC-PhX" secondAttribute="bottom" id="FgT-EQ-39K"/>
-                                            <constraint firstItem="tiJ-Fq-abv" firstAttribute="centerY" secondItem="rVj-nZ-GXv" secondAttribute="centerY" id="UIC-iW-fzH"/>
                                             <constraint firstAttribute="trailing" secondItem="ZR9-EC-PhX" secondAttribute="trailing" id="jwc-7V-VKq"/>
                                             <constraint firstItem="ZR9-EC-PhX" firstAttribute="leading" secondItem="rVj-nZ-GXv" secondAttribute="leading" id="jz5-TS-Q02"/>
-                                            <constraint firstItem="tiJ-Fq-abv" firstAttribute="centerX" secondItem="rVj-nZ-GXv" secondAttribute="centerX" id="kGy-ze-JiL"/>
                                             <constraint firstItem="ZR9-EC-PhX" firstAttribute="top" secondItem="rVj-nZ-GXv" secondAttribute="top" id="mSe-Yq-BQd"/>
                                         </constraints>
                                         <size key="customSize" width="54" height="36"/>
                                         <connections>
-                                            <outlet property="activityIndicator" destination="tiJ-Fq-abv" id="x3A-dg-1go"/>
                                             <outlet property="button" destination="ZR9-EC-PhX" id="fza-4v-3qv"/>
                                         </connections>
                                     </collectionViewCell>
@@ -3210,7 +3203,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMr-WM-tvn">
-                                        <rect key="frame" x="173.33333333333334" y="11.333333333333369" width="67.333333333333343" height="27.333333333333329"/>
+                                        <rect key="frame" x="174" y="13.333333333333369" width="66.333333333333314" height="23.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3550,7 +3543,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TPR-zk-sPC"/>
+        <segue reference="dEU-yB-E5T"/>
         <segue reference="h5F-6A-J1r"/>
         <segue reference="Reh-O7-sEd"/>
         <segue reference="O84-5M-BZf"/>

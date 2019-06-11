@@ -25,16 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	}
 
 	func applicationWillTerminate(_ application: UIApplication) {
-		self.saveContext()
+		saveContext()
 	}
 
 	lazy var persistentContainer: NSPersistentContainer = {
 	    let container = NSPersistentContainer(name: "memorize_ai")
-	    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-	        if let error = error as NSError? {
-	            fatalError("Unresolved error \(error), \(error.userInfo)")
-	        }
-	    })
+	    container.loadPersistentStores { storeDescription, error in
+			guard let error = error as NSError? else { return }
+			fatalError("Unresolved error \(error), \(error.userInfo)")
+	    }
 	    return container
 	}()
 
@@ -44,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	        do {
 	            try context.save()
 	        } catch {
-	            let nserror = error as NSError
-	            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+	            let error = error as NSError
+	            fatalError("Unresolved error \(error), \(error.userInfo)")
 	        }
 	    }
 	}

@@ -52,6 +52,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.imageActivityIndicator.stopAnimating()
 				cell.imageView.image = image
 				deck.image = image
+				self.cardsCollectionView.reloadData()
 			}
 		}
 		cell.load(element.front)

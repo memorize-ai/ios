@@ -165,6 +165,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 						cell.imageActivityIndicator.stopAnimating()
 						cell.imageView.image = image
 						element.image = image
+						self.decksCollectionView.reloadData()
 					}
 				}
 				cell.nameLabel.text = element.name
@@ -186,6 +187,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 						cell.imageActivityIndicator.stopAnimating()
 						cell.imageView.image = image
 						element.image = image
+						self.decksCollectionView.reloadData()
 					}
 				}
 				if element.id == deck?.id {
@@ -197,26 +199,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
 			let element = actions[indexPath.item + itemOffset]
-			if element.name == "new card" {
-				if deck?.canEdit == nil {
-					cell.activityIndicator.startAnimating()
-					deck?.canEdit { canEdit, error in
-						guard error == nil else { return }
-						self.deck?.canEdit = canEdit
-						if canEdit {
-							cell.activityIndicator.stopAnimating()
-							cell.button.setTitle(element.name, for: .normal)
-						} else {
-							self.reloadActions()
-						}
-					}
-				} else {
-					cell.button.setTitle(element.name, for: .normal)
-				}
-			} else {
-				cell.button.setTitle(element.name, for: .normal)
-			}
-			cell.button.isEnabled = !(element.name == "review all" && Deck.allDue().isEmpty)
+			cell.button.setTitle(element.name, for: .normal)
 			cell.action = element.action(self)
 			return cell
 		} else {
@@ -294,7 +277,6 @@ class ExpandedDeckCollectionViewCell: UICollectionViewCell {
 
 class ActionCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var button: UIButton!
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	var action: (() -> Void)?
 	
