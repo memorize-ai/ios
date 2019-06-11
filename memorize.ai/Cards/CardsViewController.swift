@@ -21,6 +21,13 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		updateCurrentViewController()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		guard let editCardVC = segue.destination as? EditCardViewController, let card = sender as? Card else { return }
+		editCardVC.deck = card.getDeck
+		editCardVC.card = card
+	}
+	
 	func loadCards() {
 		cards = Card.sortDue(Card.all())
 		cardsCollectionView.reloadData()
@@ -51,6 +58,10 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		cell.draft(element.hasDraft)
 		cell.nextLabel.text = element.next.format()
 		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		performSegue(withIdentifier: "editCard", sender: cards[indexPath.item])
 	}
 }
 

@@ -39,6 +39,10 @@ class Card {
 		self.deck = deck
 	}
 	
+	var getDeck: Deck? {
+		return Deck.get(deck)
+	}
+	
 	var text: (front: String, back: String) {
 		return (front, back)
 	}
