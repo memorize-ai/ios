@@ -17,7 +17,9 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	@IBOutlet weak var tagsTextView: UITextView!
 	@IBOutlet weak var descriptionTextView: UITextView!
 	@IBOutlet weak var publicSwitch: UISwitch!
+	@IBOutlet weak var publicBlockView: UIView!
 	@IBOutlet weak var privateSwitch: UISwitch!
+	@IBOutlet weak var privateBlockView: UIView!
 	@IBOutlet weak var submitButton: UIButton!
 	@IBOutlet weak var submitActivityIndicator: UIActivityIndicatorView!
 	
@@ -71,6 +73,8 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		descriptionTextView.text = deck.description
 		publicSwitch.setOn(deck.isPublic, animated: false)
 		privateSwitch.setOn(!deck.isPublic, animated: false)
+		subtitleChanged()
+		textViewDidChange(tagsTextView)
 	}
 	
 	func loadBlocks() {
@@ -78,10 +82,14 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		switch role {
 		case .owner, .admin:
 			nameBlockView.isHidden = true
-			subtitleBarView.isHidden = true
+			subtitleBlockView.isHidden = true
+			publicBlockView.isHidden = true
+			privateBlockView.isHidden = true
 		default:
 			nameBlockView.isHidden = false
 			subtitleBlockView.isHidden = false
+			publicBlockView.isHidden = false
+			privateBlockView.isHidden = false
 		}
 	}
 	

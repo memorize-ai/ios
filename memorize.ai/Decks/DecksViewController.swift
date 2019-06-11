@@ -84,7 +84,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	var itemOffset: Int {
 		guard let role = deck?.role else { return 0 }
-		return role == .editor || role == .admin || role == .owner ? 1 : 0
+		return role == .editor || role == .admin || role == .owner ? 0 : 1
 	}
 	
 	@objc func newCard() {
@@ -127,7 +127,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == actionsCollectionView, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) {
-			return CGSize(width: (actions[indexPath.row].name as NSString).size(withAttributes: [.font: extraBold]).width + 4, height: 36)
+			return CGSize(width: (actions[indexPath.item + itemOffset].name as NSString).size(withAttributes: [.font: extraBold]).width + 4, height: 36)
 		} else {
 			return collectionView == decksCollectionView
 				? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84)
