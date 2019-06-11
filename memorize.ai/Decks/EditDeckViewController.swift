@@ -58,9 +58,16 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func loadText() {
 		guard let deck = deck else { return }
+		imageView.image = deck.image
 		nameTextField.text = deck.name
 		subtitleTextField.text = deck.subtitle
-		tagsTextView.text = deck.tags.joined(separator: ", ")
+		let tags = deck.tags.joined(separator: ", ")
+		tagsTextView.text = tags
+		hasTagsPlaceholder = tags.isEmpty
+		if !hasTagsPlaceholder {
+			tagsTextView.textColor = .darkGray
+			tagsTextView.font = UIFont(name: "Nunito-SemiBold", size: 17)
+		}
 		descriptionTextView.text = deck.description
 		publicSwitch.setOn(deck.isPublic, animated: false)
 		privateSwitch.setOn(!deck.isPublic, animated: false)

@@ -3,19 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "UserViewController.reloadReview():UserViewController.swift">
+         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Deck.allDue()">
+               value = "itemOffset">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserViewController.loadCards():UserViewController.swift">
+         contextName = "UserViewController.reloadReview():UserViewController.swift">
          <PersistentStrings>
-            <PersistentString
-               value = "cards.count">
-            </PersistentString>
             <PersistentString
                value = "Deck.allDue()">
             </PersistentString>
@@ -33,6 +30,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserViewController.loadCards():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cards.count">
+            </PersistentString>
+            <PersistentString
+               value = "Deck.allDue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in Upload.load(completion:):Upload.swift">
          <PersistentStrings>
             <PersistentString
@@ -40,14 +48,6 @@
             </PersistentString>
             <PersistentString
                value = "self.data">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "scrollView.subviews.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,10 +63,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
+         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "itemOffset">
+               value = "scrollView.subviews.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in UserViewController.loadDecks():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "deck.get(&quot;mastered&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "deck.get(&quot;role&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

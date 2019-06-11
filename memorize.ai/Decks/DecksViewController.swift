@@ -77,6 +77,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else if let editCardVC = segue.destination as? EditCardViewController {
 			editCardVC.deck = deck
 			editCardVC.card = sender as? Card
+		} else if let editDeckVC = segue.destination as? EditDeckViewController {
+			editDeckVC.deck = deck
 		}
 	}
 	

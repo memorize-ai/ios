@@ -1744,7 +1744,7 @@
                         <outlet property="cardsCollectionView" destination="bjO-8b-QSd" id="5Hz-cb-JtZ"/>
                         <outlet property="decksCollectionView" destination="A1T-Z1-Wbg" id="I2Y-PR-ajs"/>
                         <outlet property="decksCollectionViewWidthConstraint" destination="szd-qj-UKV" id="FHN-yb-J2k"/>
-                        <segue destination="fwd-VK-lMc" kind="show" identifier="createDeck" id="NDx-ee-NxK"/>
+                        <segue destination="fwd-VK-lMc" kind="show" identifier="editDeck" id="NDx-ee-NxK"/>
                         <segue destination="YCz-Zd-eG2" kind="show" identifier="searchDeck" id="O84-5M-BZf"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="wcZ-AT-Xhd"/>
                         <segue destination="9XY-L1-f93" kind="show" identifier="visit" id="Reh-O7-sEd"/>
@@ -3543,12 +3543,12 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dEU-yB-E5T"/>
+        <segue reference="TPR-zk-sPC"/>
         <segue reference="h5F-6A-J1r"/>
         <segue reference="Reh-O7-sEd"/>
         <segue reference="O84-5M-BZf"/>
         <segue reference="NDx-ee-NxK"/>
-        <segue reference="wcZ-AT-Xhd"/>
+        <segue reference="p0r-eq-3dv"/>
         <segue reference="xao-oA-rKh"/>
     </inferredMetricsTieBreakers>
 </document>
