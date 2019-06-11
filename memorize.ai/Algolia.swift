@@ -10,8 +10,7 @@ class Algolia {
 	
 	static func search(_ index: AlgoliaIndex, for query: String, completion: @escaping ([[String : Any]], Error?) -> Void) {
 		indices[index]?.search(Query(query: query)) { content, error in
-			guard error == nil, let hits = content?["hits"] as? [[String : Any]] else { return completion([], error) }
-			completion(hits, nil)
+			completion(content?["hits"] as? [[String : Any]] ?? [], error)
 		}
 	}
 }
