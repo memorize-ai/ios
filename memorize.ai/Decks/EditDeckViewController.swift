@@ -79,13 +79,9 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func loadBlocks() {
 		guard let role = deck?.role else { return }
-		switch role {
-		case .owner, .admin:
-			nameBlockView.isHidden = true
-			subtitleBlockView.isHidden = true
-			publicBlockView.isHidden = true
-			privateBlockView.isHidden = true
-		default:
+		if role == .editor {
+			changeButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
+			changeButton.isEnabled = false
 			nameBlockView.isHidden = false
 			subtitleBlockView.isHidden = false
 			publicBlockView.isHidden = false
@@ -107,14 +103,16 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		})
 		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
 			self.imageView.image = #imageLiteral(resourceName: "Gray Deck")
+			self.reloadSubmit()
 		})
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		present(alert, animated: true, completion: nil)
 	}
 	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 			imageView.image = image
+			reloadSubmit()
 		}
 		dismiss(animated: true, completion: nil)
 	}
@@ -221,6 +219,8 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 					self.setImage(deck.id, data: imageData) {
 						buzz()
 						self.hideActivityIndicator()
+						self.disable()
+						deck.image = self.imageView.image
 					}
 				} else {
 					self.showAlert("Unable to publish changes. Please try again")
@@ -289,7 +289,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		guard let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
 		if nameText.isEmpty {
 			disable()
-		} else if let deck = deck, deck.name == nameText && deck.subtitle == subtitleText && deck.tags == getTags() && deck.description == descriptionTextView.text && deck.isPublic == publicSwitch.isOn {
+		} else if let deck = deck, deck.image == imageView.image && deck.name == nameText && deck.subtitle == subtitleText && deck.tags == getTags() && deck.description == descriptionTextView.text && deck.isPublic == publicSwitch.isOn {
 				disable()
 		} else {
 			enable()

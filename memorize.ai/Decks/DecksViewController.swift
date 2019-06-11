@@ -9,11 +9,17 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	
 	class Action {
-		var name: String
+		var name: String?
+		var image: UIImage?
 		let action: (DecksViewController) -> () -> Void
 		
 		init(name: String, action: @escaping (DecksViewController) -> () -> Void) {
 			self.name = name
+			self.action = action
+		}
+		
+		init(image: UIImage, action: @escaping (DecksViewController) -> () -> Void) {
+			self.image = image
 			self.action = action
 		}
 	}
@@ -21,6 +27,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	let actions = [
 		Action(name: "new card", action: newCard),
 		Action(name: "edit", action: editDeck),
+		Action(name: "permissions", action: showPermissions),
+		Action(image: #imageLiteral(resourceName: "Ellipsis"), action: showAdvancedSettings),
 		Action(name: "visit page", action: visitPage)
 	]
 	var deck: Deck?
@@ -82,24 +90,34 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 	
-	var itemOffset: Int {
-		guard let role = deck?.role else { return 0 }
-		return role == .editor || role == .admin || role == .owner ? 0 : 1
+	var filteredActions: [Action] {
+		switch deck?.role {
+		case .some(.editor):
+			return [actions[0], actions[1], actions[3], actions[4]]
+		case .some(.admin), .some(.owner):
+			return actions
+		default:
+			return [actions[3], actions[4]]
+		}
 	}
 	
-	@objc func newCard() {
+	func newCard() {
 		performSegue(withIdentifier: "editCard", sender: self)
 	}
 	
-	@objc func editDeck() {
+	func editDeck() {
 		performSegue(withIdentifier: "editDeck", sender: self)
 	}
 	
-	@objc func permissions() {
+	func showPermissions() {
 		performSegue(withIdentifier: "permissions", sender: self)
 	}
 	
-	@objc func visitPage() {
+	func showAdvancedSettings() {
+		performSegue(withIdentifier: "settings", sender: self)
+	}
+	
+	func visitPage() {
 		performSegue(withIdentifier: "visit", sender: self)
 	}
 	
@@ -127,7 +145,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if collectionView == actionsCollectionView, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) {
-			return CGSize(width: (actions[indexPath.item + itemOffset].name as NSString).size(withAttributes: [.font: extraBold]).width + 4, height: 36)
+			guard let name = filteredActions[indexPath.item].name as NSString? else { return CGSize(width: 36, height: 36) }
+			return CGSize(width: name.size(withAttributes: [.font: extraBold]).width + 4, height: 36)
 		} else {
 			return collectionView == decksCollectionView
 				? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84)
@@ -147,7 +166,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		return collectionView == decksCollectionView
 			? decks.count
 			: collectionView == actionsCollectionView
-				? actions.count - itemOffset
+				? filteredActions.count
 				: deck?.cards.count ?? 0
 	}
 	
@@ -200,9 +219,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else if collectionView == actionsCollectionView {
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
-			let element = actions[indexPath.item + itemOffset]
-			cell.button.setTitle(element.name, for: .normal)
-			cell.action = element.action(self)
+			cell.load(self, action: filteredActions[indexPath.item])
 			return cell
 		} else {
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
@@ -284,5 +301,11 @@ class ActionCollectionViewCell: UICollectionViewCell {
 	
 	@IBAction func click() {
 		action?()
+	}
+	
+	func load(_ viewController: DecksViewController, action: DecksViewController.Action) {
+		button.setTitle(action.name, for: .normal)
+		button.setImage(action.image, for: .normal)
+		self.action = action.action(viewController)
 	}
 }

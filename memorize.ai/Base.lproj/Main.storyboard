@@ -1931,12 +1931,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XxX-ZX-ez4">
                                                 <rect key="frame" x="147" y="40" width="120" height="120"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAX-O3-Job">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
-                                                        <connections>
-                                                            <action selector="chooseImage" destination="fwd-VK-lMc" eventType="touchUpInside" id="Z3d-H1-lOU"/>
-                                                        </connections>
-                                                    </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gray Deck" translatesAutoresizingMaskIntoConstraints="NO" id="V7W-Ph-pcT">
                                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                         <userDefinedRuntimeAttributes>
@@ -1948,6 +1942,12 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAX-O3-Job">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                        <connections>
+                                                            <action selector="chooseImage" destination="fwd-VK-lMc" eventType="touchUpInside" id="Z3d-H1-lOU"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
