@@ -1,33 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F203" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ManagedCard" representedClassName="ManagedCard" syncable="YES" codeGenerationType="class">
-        <attribute name="back" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="deck" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="front" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="last" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="next" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-    </entity>
-    <entity name="ManagedDeck" representedClassName="ManagedDeck" syncable="YES" codeGenerationType="class">
-        <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="creator" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="isPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="mastered" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="owner" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="ManagedSavedCard" representedClassName="ManagedSavedCard" syncable="YES" codeGenerationType="class">
-        <attribute name="back" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="front" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <elements>
-        <element name="ManagedDeck" positionX="-63" positionY="-18" width="128" height="195"/>
-        <element name="ManagedCard" positionX="-63" positionY="0" width="128" height="135"/>
-        <element name="ManagedSavedCard" positionX="-54" positionY="18" width="128" height="90"/>
-    </elements>
+    <elements/>
 </model>

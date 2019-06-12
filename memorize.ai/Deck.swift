@@ -1,6 +1,5 @@
 import UIKit
 import Firebase
-import CoreData
 
 var allDecks = [Deck]()
 var decks: [Deck] {

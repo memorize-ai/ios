@@ -1,5 +1,4 @@
 import Foundation
-import CoreData
 import Firebase
 import AudioToolbox
 import WebKit
