@@ -1388,7 +1388,7 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="28"/>
+                                                <integer key="value" value="34"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -1410,7 +1410,7 @@
                             <constraint firstItem="y8b-zK-QqR" firstAttribute="leading" secondItem="Glg-yc-ZA8" secondAttribute="leading" id="5gO-5n-Bz7"/>
                             <constraint firstItem="y8b-zK-QqR" firstAttribute="top" secondItem="Glg-yc-ZA8" secondAttribute="top" id="6ga-fe-Bea"/>
                             <constraint firstItem="y8b-zK-QqR" firstAttribute="trailing" secondItem="Glg-yc-ZA8" secondAttribute="trailing" id="BAf-5q-tDX"/>
-                            <constraint firstItem="Glg-yc-ZA8" firstAttribute="bottom" secondItem="y8b-zK-QqR" secondAttribute="bottom" id="ayM-4R-uA0"/>
+                            <constraint firstItem="y8b-zK-QqR" firstAttribute="bottom" secondItem="bp3-Gl-O37" secondAttribute="bottom" id="ayM-4R-uA0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Glg-yc-ZA8"/>
                     </view>

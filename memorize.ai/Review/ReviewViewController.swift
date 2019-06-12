@@ -18,6 +18,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	var shouldSegue = false
 	var previewDeck: String?
 	var previewCards: [Card]?
+	var isPushing = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -38,7 +39,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		dueCards = decks.flatMap { deck in return Card.sortDue(deck.cards.filter { $0.isDue() }).map { (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
-				if self.isReview() {
+				guard self.current < self.dueCards.count else { return }
+				if self.isReview {
 					let element = self.dueCards[self.current]
 					self.load(element.card.front, webView: self.frontWebView)
 					self.load(element.card.back, webView: self.backWebView)
@@ -138,7 +140,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 	}
 	
-	func isReview() -> Bool {
+	var isReview: Bool {
 		return previewDeck == nil
 	}
 	
@@ -160,16 +162,22 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		webView.render(text, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
 	}
 	
+	func goToRecap() {
+		performSegue(withIdentifier: "recap", sender: self)
+	}
+	
 	func push(rating: Int) {
-		guard let id = id else { return }
+		isPushing = true
+		guard let id = id else { return isPushing = false }
 		let element = dueCards[current]
 		var documentReference: DocumentReference?
 		documentReference = firestore.collection("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
-			guard error == nil, let documentReference = documentReference else { return }
+			guard error == nil, let documentReference = documentReference else { return self.isPushing = false }
 			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: Rating.get(rating), next: nil))
 			if self.shouldSegue {
-				self.performSegue(withIdentifier: "recap", sender: self)
+				self.goToRecap()
 			}
+			self.isPushing = false
 		}
 	}
 	
@@ -187,11 +195,11 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if isReview() {
+		if isReview {
 			push(rating: normalize(rating: indexPath.item))
 		}
 		current += 1
-		let count = isReview() ? dueCards.count : previewCards?.count ?? 0
+		let count = isReview ? dueCards.count : previewCards?.count ?? 0
 		progressView.setProgress(Float(current) / Float(count), animated: true)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -201,9 +209,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}) {
 			guard $0 else { return }
 			if self.current < count {
-				self.navigationItem.title = self.isReview() ? self.dueCards[self.current].deck.name : self.previewDeck
-				let _card = self.isReview() ? self.dueCards[self.current].card : self.previewCards?[self.current]
-				guard let card = _card else { return }
+				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
+				guard let card = self.isReview ? self.dueCards[self.current].card : self.previewCards?[self.current] else { return }
 				if self.frontWebView.isHidden {
 					self.load(card.front, webView: self.frontWebView)
 					UIView.animate(withDuration: 0.125, animations: {
@@ -254,8 +261,12 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 						}
 					}
 				}
-			} else if self.isReview() {
-				self.shouldSegue = true
+			} else if self.isReview {
+				if self.isPushing {
+					self.shouldSegue = true
+				} else {
+					self.goToRecap()
+				}
 			} else {
 				self.navigationController?.popViewController(animated: true)
 			}

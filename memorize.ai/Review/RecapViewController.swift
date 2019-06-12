@@ -46,6 +46,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				element.deck.image = image
 				cell.imageView.image = image
+				self.recapCollectionView.reloadData()
 			}
 		}
 		cell.load(element.card.front)
