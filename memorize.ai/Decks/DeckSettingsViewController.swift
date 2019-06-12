@@ -127,12 +127,12 @@ class DeckSettingTableViewCell: UITableViewCell {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	func startLoading() {
-		editingAccessoryType = .none
+//		editingAccessoryView?.isHidden = true
 		activityIndicator.startAnimating()
 	}
 	
 	func stopLoading() {
 		activityIndicator.stopAnimating()
-		editingAccessoryType = .disclosureIndicator
+//		editingAccessoryView?.isHidden = false
 	}
 }
