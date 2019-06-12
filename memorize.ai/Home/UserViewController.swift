@@ -326,10 +326,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				case .added:
 					listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { deckSnapshot, deckError in
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
-						if let localDeck = Deck.get(deckId) {
+						if let localDeck = Deck.getFromAll(deckId) {
 							localDeck.update(deckSnapshot, type: .deck)
 						} else {
-							decks.append(Deck(
+							allDecks.append(Deck(
 								id: deckId,
 								image: nil,
 								name: deckSnapshot.get("name") as? String ?? "Error",
@@ -353,14 +353,13 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								hidden: deck.get("hidden") as? Bool ?? false
 							))
 						}
-						Deck.filterAll()
 						ChangeHandler.call(.deckModified)
 						listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
 							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 							snapshot.forEach {
 								let card = $0.document
 								let cardId = card.documentID
-								guard let localDeck = Deck.get(deckId) else { return }
+								guard let localDeck = Deck.getFromAll(deckId) else { return }
 								switch $0.type {
 								case .added:
 									listeners["users/\(id)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
@@ -406,11 +405,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						}
 					}
 				case .modified:
-					Deck.get(deckId)?.update(deck, type: .user)
-					Deck.filterAll()
+					Deck.getFromAll(deckId)?.update(deck, type: .user)
 					ChangeHandler.call(.deckModified)
 				case .removed:
-					decks = decks.filter { $0.id != deckId }
+					allDecks = allDecks.filter { $0.id != deckId }
 					Listener.remove("decks/\(deckId)")
 					ChangeHandler.call(.deckRemoved)
 				@unknown default:

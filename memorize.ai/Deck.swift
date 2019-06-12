@@ -2,7 +2,10 @@ import UIKit
 import Firebase
 import CoreData
 
-var decks = [Deck]()
+var allDecks = [Deck]()
+var decks: [Deck] {
+	return allDecks.filter { !$0.hidden }
+}
 
 class Deck {
 	let id: String
@@ -59,10 +62,6 @@ class Deck {
 		return cardDraft != nil
 	}
 	
-	static func filterAll() {
-		decks = decks.filter { !$0.hidden }
-	}
-	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
 		functions.httpsCallable("addDeck").call(["deckId": deckId]) { completion($1) }
 	}
@@ -77,6 +76,10 @@ class Deck {
 	
 	static func clearAllData(_ deckId: String, completion: @escaping (Error?) -> Void) {
 		functions.httpsCallable("clearDeckData").call(["deckId": deckId]) { completion($1) }
+	}
+	
+	static func getFromAll(_ id: String) -> Deck? {
+		return allDecks.first { $0.id == id }
 	}
 	
 	static func get(_ id: String) -> Deck? {
