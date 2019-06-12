@@ -365,7 +365,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 									listeners["users/\(id)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
 										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
 										if let localCard = Card.get(cardId, deckId: deckId) {
-											localCard.update(cardSnapshot, type: .user)
+											if cardSnapshot.exists {
+												localCard.update(cardSnapshot, type: .user)
+											} else {
+												localCard.reset()
+											}
 										} else {
 											localDeck.cards.append(Card(
 												id: cardId,

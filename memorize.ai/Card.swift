@@ -101,6 +101,16 @@ class Card {
 			next = snapshot.getDate("next") ?? next
 		}
 	}
+	
+	func reset() {
+		count = 0
+		correct = 0
+		e = 2.5
+		streak = 0
+		mastered = false
+		last = nil
+		next = Date()
+	}
 }
 
 class CardRating {
