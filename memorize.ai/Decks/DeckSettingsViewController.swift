@@ -1,7 +1,6 @@
 import UIKit
 
 class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-	
 	class DeckSetting {
 		let name: String
 		let color: UIColor
@@ -44,13 +43,13 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 		guard let deck = deck else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "All progress for this deck will be deleted. This cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-		alertController.addAction(UIAlertAction(title: "Clear", style: .default) { _ in
+		alertController.addAction(UIAlertAction(title: "Clear", style: .destructive) { _ in
+			cell.startLoading()
 			deck.clearAllData { error in
+				cell.stopLoading()
 				if error == nil {
-					cell.activityIndicator.stopAnimating()
 					buzz()
 				} else {
-					cell.activityIndicator.stopAnimating()
 					self.showAlert("An unknown error occurred. Please try again")
 				}
 			}
@@ -59,14 +58,14 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	func removeDeck(_ cell: DeckSettingTableViewCell) {
-		guard let deck = deck else { return }
-		firestore.document("decks/\(deck.id)").updateData(["hidden": true]) { error in
+		guard let id = id, let deck = deck else { return }
+		cell.startLoading()
+		firestore.document("users/\(id)/decks/\(deck.id)").updateData(["hidden": true]) { error in
+			cell.stopLoading()
 			if error == nil {
-				cell.activityIndicator.stopAnimating()
 				buzz()
 				self.navigationController?.popViewController(animated: true)
 			} else {
-				cell.activityIndicator.stopAnimating()
 				self.showAlert("An unknown error occurred. Please try again")
 			}
 		}
@@ -74,6 +73,26 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	
 	func deleteDeck(_ cell: DeckSettingTableViewCell) {
 		guard let deck = deck else { return }
+		let alertController = UIAlertController(title: "Are you sure?", message: "This deck will be permanently deleted from the marketplace. Anyone using it will be unable to use it anymore. This action cannot be undone", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+			let alertController = UIAlertController(title: "Are you really sure?", message: "This action cannot be undone", preferredStyle: .alert)
+			alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+			alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+				cell.startLoading()
+				firestore.document("decks/\(deck.id)").delete { error in
+					cell.stopLoading()
+					if error == nil {
+						buzz()
+						self.navigationController?.popViewController(animated: true)
+					} else {
+						self.showAlert("An unknown error occurred. Please try again")
+					}
+				}
+			})
+			self.present(alertController, animated: true, completion: nil)
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,4 +117,14 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 class DeckSettingTableViewCell: UITableViewCell {
 	@IBOutlet weak var label: UILabel!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	
+	func startLoading() {
+		editingAccessoryType = .none
+		activityIndicator.startAnimating()
+	}
+	
+	func stopLoading() {
+		activityIndicator.stopAnimating()
+		editingAccessoryType = .disclosureIndicator
+	}
 }
