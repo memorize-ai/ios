@@ -20,9 +20,13 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	let deckSettings = [
-		DeckSetting(name: "Clear all data", color: nil, action: clearAllData),
-		DeckSetting(name: "Remove deck", color: nil, action: removeDeck),
-		DeckSetting(name: "Permanently delete deck", color: .red, action: deleteDeck)
+		[
+			DeckSetting(name: "Clear all data", color: nil, action: clearAllData),
+			DeckSetting(name: "Remove deck", color: nil, action: removeDeck),
+		],
+		[
+			DeckSetting(name: "Permanently delete deck", color: .red, action: deleteDeck)
+		]
 	]
 	var deck: Deck?
 	
@@ -30,12 +34,12 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 		super.viewDidLoad()
 	}
 	
-	var filteredDeckSettings: [DeckSetting] {
+	var filteredDeckSettings: [[DeckSetting]] {
 		switch deck?.role {
 		case .some(.owner):
 			return deckSettings
 		default:
-			return [deckSettings[0], deckSettings[1]]
+			return [deckSettings[0]]
 		}
 	}
 	
@@ -95,14 +99,18 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 		present(alertController, animated: true, completion: nil)
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return filteredDeckSettings.count
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return filteredDeckSettings[section].count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		guard let cell = _cell as? DeckSettingTableViewCell else { return _cell }
-		let element = filteredDeckSettings[indexPath.row]
+		let element = filteredDeckSettings[indexPath.section][indexPath.row]
 		cell.label.text = element.name
 		cell.label.textColor = element.color
 		element.cell = cell
@@ -110,7 +118,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		filteredDeckSettings[indexPath.row].callAction(self)
+		filteredDeckSettings[indexPath.section][indexPath.row].callAction(self)
 	}
 }
 
