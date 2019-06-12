@@ -25,7 +25,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			DeckSetting(name: "Remove deck", color: nil, action: removeDeck)
 		],
 		[
-			DeckSetting(name: "Permanently delete deck", color: .red, action: deleteDeck)
+			DeckSetting(name: "Permanently delete deck", color: #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1), action: deleteDeck)
 		]
 	]
 	var deck: Deck?
