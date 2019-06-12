@@ -21,6 +21,17 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	
 	let deckSettings = [
 		[
+			DeckSetting(name: "Rate deck", color: nil, action: rateDeck),
+			DeckSetting(name: "Force review", color: nil, action: forceReview)
+		],
+		[
+			DeckSetting(name: "User permissions", color: nil, action: viewPermissions)
+		],
+		[
+			DeckSetting(name: "Analytics", color: #colorLiteral(red: 0.2539775372, green: 0.7368414402, blue: 0.4615401626, alpha: 1), action: viewAnalytics),
+			DeckSetting(name: "Visit page", color: nil, action: visitPage)
+		],
+		[
 			DeckSetting(name: "Clear all data", color: nil, action: clearAllData),
 			DeckSetting(name: "Remove deck", color: nil, action: removeDeck)
 		],
@@ -30,8 +41,20 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	]
 	var deck: Deck?
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		guard let deck = deck else { return }
+		if let reviewVC = segue.destination as? ReviewViewController {
+			reviewVC.previewDeck = deck.name
+			reviewVC.previewCards = deck.cards
+		} else if let deckPermissionsVC = segue.destination as? DeckPermissionsViewController {
+			deckPermissionsVC.deck = deck
+		} else if let deckAnalyticsVC = segue.destination as? DeckAnalyticsViewController {
+			deckAnalyticsVC.deck = deck
+		} else if let deckVC = segue.destination as? DeckViewController {
+			deckVC.deckId = deck.id
+			deckVC.image = deck.image
+		}
 	}
 	
 	var filteredDeckSettings: [[DeckSetting]] {
@@ -39,8 +62,28 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 		case .some(.owner):
 			return deckSettings
 		default:
-			return [deckSettings[0]]
+			return [deckSettings[0], deckSettings[1], deckSettings[2]]
 		}
+	}
+	
+	func rateDeck(_ cell: DeckSettingTableViewCell) {
+		// Rate deck with RateDeckViewController modal
+	}
+	
+	func forceReview(_ cell: DeckSettingTableViewCell) {
+		performSegue(withIdentifier: "review", sender: self)
+	}
+	
+	func viewPermissions(_ cell: DeckSettingTableViewCell) {
+		performSegue(withIdentifier: "permissions", sender: self)
+	}
+	
+	func viewAnalytics(_ cell: DeckSettingTableViewCell) {
+		performSegue(withIdentifier: "analytics", sender: self)
+	}
+	
+	func visitPage(_ cell: DeckSettingTableViewCell) {
+		performSegue(withIdentifier: "visit", sender: self)
 	}
 	
 	func clearAllData(_ cell: DeckSettingTableViewCell) {

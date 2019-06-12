@@ -27,7 +27,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	let actions = [
 		Action(name: "new card", action: newCard),
 		Action(name: "edit", action: editDeck),
-		Action(name: "permissions", action: showPermissions),
 		Action(image: #imageLiteral(resourceName: "Ellipsis"), action: showAdvancedSettings),
 		Action(name: "visit page", action: visitPage)
 	]
@@ -94,12 +93,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	var filteredActions: [Action] {
 		switch deck?.role {
-		case .some(.editor):
-			return [actions[0], actions[1], actions[3], actions[4]]
-		case .some(.admin), .some(.owner):
-			return actions
+		case .some(.editor), .some(.admin), .some(.owner):
+			return [actions[0], actions[1], actions[2]]
 		default:
-			return [actions[3], actions[4]]
+			return [actions[2], actions[3]]
 		}
 	}
 	
@@ -109,10 +106,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func editDeck() {
 		performSegue(withIdentifier: "editDeck", sender: self)
-	}
-	
-	func showPermissions() {
-		performSegue(withIdentifier: "permissions", sender: self)
 	}
 	
 	func showAdvancedSettings() {
