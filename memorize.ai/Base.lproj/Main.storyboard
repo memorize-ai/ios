@@ -2183,7 +2183,7 @@
         <!--Settings-->
         <scene sceneID="HKD-NF-Fji">
             <objects>
-                <viewController title="Settings" id="K2E-PB-uo5" sceneMemberID="viewController">
+                <viewController title="Settings" id="K2E-PB-uo5" customClass="DeckSettingsViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qaf-WN-HdA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
