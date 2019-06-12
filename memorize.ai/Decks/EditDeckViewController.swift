@@ -3,6 +3,7 @@ import Firebase
 
 class EditDeckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var outerImageView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var changeButton: UIButton!
@@ -55,7 +56,21 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 				self.loadBlocks()
 			}
 		}
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 		updateCurrentViewController()
+	}
+	
+	@objc func keyboardWillShow(notification: NSNotification) {
+		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
+		scrollViewBottomConstraint.constant = height - 30
+		scrollView.layoutIfNeeded()
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
+	}
+	
+	@objc func keyboardWillHide(notification: NSNotification) {
+		scrollViewBottomConstraint.constant = 0
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
 	func loadText() {
@@ -213,7 +228,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 				"subtitle": subtitleText,
 				"description": descriptionTextView.text.trim(),
 				"tags": getTags(),
-				"public": publicSwitch.isOn,
+				"public": publicSwitch.isOn
 			]) { error in
 				if error == nil {
 					self.setImage(deck.id, data: imageData) {
