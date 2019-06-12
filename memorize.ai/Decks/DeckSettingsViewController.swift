@@ -22,7 +22,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	let deckSettings = [
 		[
 			DeckSetting(name: "Clear all data", color: nil, action: clearAllData),
-			DeckSetting(name: "Remove deck", color: nil, action: removeDeck),
+			DeckSetting(name: "Remove deck", color: nil, action: removeDeck)
 		],
 		[
 			DeckSetting(name: "Permanently delete deck", color: .red, action: deleteDeck)
