@@ -76,7 +76,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	func deleteDeck(_ cell: DeckSettingTableViewCell) {
-		guard let deck = deck else { return }
+		guard let id = id, let deck = deck else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "This deck will be permanently deleted from the marketplace. Anyone using it will be unable to use it anymore. This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
@@ -87,8 +87,14 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 				firestore.document("decks/\(deck.id)").delete { error in
 					cell.stopLoading()
 					if error == nil {
-						buzz()
-						self.navigationController?.popViewController(animated: true)
+						firestore.document("users/\(id)/decks/\(deck.id)").delete { error in
+							if error == nil {
+								buzz()
+								self.navigationController?.popViewController(animated: true)
+							} else {
+								self.showAlert("An unknown error occurred. Please try again")
+							}
+						}
 					} else {
 						self.showAlert("An unknown error occurred. Please try again")
 					}
