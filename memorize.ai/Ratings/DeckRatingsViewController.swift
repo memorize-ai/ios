@@ -37,7 +37,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 			cell.detailLabel.text = "\(rating.review == nil ? "" : "has review • ")unpublished"
 		} else {
 			cell.ratingLabel.text = "~"
-			cell.ratingLabel.font = UIFont(name: "Nunito-SemiBold", size: 20)
+			cell.ratingLabel.font = UIFont(name: "Nunito-Bold", size: 40)
 			cell.detailLabel.text = "unrated"
 		}
 		return cell
