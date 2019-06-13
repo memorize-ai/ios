@@ -104,7 +104,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	func reloadStars(_ index: Int = 0) {
 		(1...stars.count).forEach {
-			stars[$0].setImage($0 > index ? #imageLiteral(resourceName: "Unselected Star") : #imageLiteral(resourceName: "Selected Star"), for: .normal)
+			stars[$0 - 1].setImage($0 > index ? #imageLiteral(resourceName: "Unselected Star") : #imageLiteral(resourceName: "Selected Star"), for: .normal)
 		}
 	}
 	
