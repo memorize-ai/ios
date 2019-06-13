@@ -113,18 +113,6 @@ class Card {
 	}
 }
 
-class CardRating {
-	let id: String
-	var rating: CardRatingType
-	var date: Date
-	
-	init(id: String, rating: CardRatingType, date: Date) {
-		self.id = id
-		self.rating = rating
-		self.date = date
-	}
-}
-
 class CardLast {
 	let id: String
 	let date: Date
@@ -144,23 +132,6 @@ class CardLast {
 		date = (last["date"] as? Timestamp)?.dateValue() ?? Date()
 		rating = last["rating"] as? Int ?? 0
 		elapsed = last["elapsed"] as? Int ?? 0
-	}
-}
-
-enum CardRatingType: Int {
-	case dislike = -1
-	case none = 0
-	case like = 1
-	
-	init(_ number: Int) {
-		switch number {
-		case -1:
-			self = .dislike
-		case 1:
-			self = .like
-		default:
-			self = .none
-		}
 	}
 }
 

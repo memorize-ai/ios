@@ -38,4 +38,7 @@ enum Change {
 	case cardDraftAdded
 	case cardDraftModified
 	case cardDraftRemoved
+	case deckRatingAdded
+	case deckRatingModified
+	case deckRatingRemoved
 }
