@@ -3,18 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "itemOffset">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "UserViewController.reloadReview():UserViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "Deck.allDue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemOffset">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -41,13 +41,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
+         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "data">
-            </PersistentString>
-            <PersistentString
-               value = "self.data">
+               value = "scrollView.subviews.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,10 +60,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
+         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
          <PersistentStrings>
             <PersistentString
-               value = "scrollView.subviews.count">
+               value = "data">
+            </PersistentString>
+            <PersistentString
+               value = "self.data">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -80,6 +80,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	@IBAction func titleChanged() {
 		updateDraft(selectedRating)
+		reloadRightBarButton()
 	}
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
@@ -94,6 +95,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	func textViewDidChange(_ textView: UITextView) {
 		updateDraft(selectedRating)
+		reloadRightBarButton()
 	}
 	
 	@IBAction func starSelected(_ sender: UIButton) {
@@ -127,12 +129,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	func reloadRightBarButton() {
 		navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: #selector(publish)), animated: false)
-		if let rating = deck?.rating {
-			if let draft = deck?.ratingDraft {
-				setRightBarButton(!(rating.rating == draft.rating && rating.title == draft.title && rating.review == draft.review))
-			} else {
-				setRightBarButton(false)
-			}
+		if let deck = deck, let rating = deck.rating, deck.hasRatingDraft {
+			setRightBarButton(!(rating.rating == selectedRating && rating.title == titleTextField.text?.trim() && rating.review == reviewTextView.text.trim()))
 		} else {
 			setRightBarButton(selectedRating != nil)
 		}
