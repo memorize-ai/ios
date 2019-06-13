@@ -78,6 +78,10 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		}, completion: nil)
 	}
 	
+	@IBAction func titleChanged() {
+		updateDraft(selectedRating)
+	}
+	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.layer.borderWidth = 2
 		textView.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
@@ -86,6 +90,10 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	func textViewDidEndEditing(_ textView: UITextView) {
 		textView.layer.borderWidth = 1
 		textView.layer.borderColor = UIColor.lightGray.cgColor
+	}
+	
+	func textViewDidChange(_ textView: UITextView) {
+		updateDraft(selectedRating)
 	}
 	
 	@IBAction func starSelected(_ sender: UIButton) {

@@ -3752,6 +3752,7 @@
                                                 <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 <connections>
+                                                    <action selector="titleChanged" destination="3Bm-Xc-u3A" eventType="editingChanged" id="1pj-MA-hCM"/>
                                                     <outlet property="delegate" destination="3Bm-Xc-u3A" id="cFg-Cz-9QD"/>
                                                 </connections>
                                             </textField>
