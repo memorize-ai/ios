@@ -22,6 +22,10 @@ class CardRating {
 	var card: Card? {
 		return Card.get(id, deckId: deckId)
 	}
+	
+	static func get(_ id: String) -> CardRating? {
+		return cardRatings.first { $0.id == id }
+	}
 }
 
 enum CardRatingType: Int {
