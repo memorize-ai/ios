@@ -302,7 +302,31 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadRatingDrafts() {
-		
+		guard let id = id else { return }
+		listeners["users/\(id)/ratingDrafts"] = firestore.collection("users/\(id)/ratingDrafts").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let draft = $0.document
+				let deckId = draft.documentID
+				switch $0.type {
+				case .added:
+					ratingDrafts.append(RatingDraft(
+						id: deckId,
+						rating: draft.get("rating") as? Int,
+						review: draft.get("review") as? String
+					))
+					ChangeHandler.call(.ratingDraftAdded)
+				case .modified:
+					RatingDraft.get(deckId)?.update(draft)
+					ChangeHandler.call(.ratingDraftModified)
+				case .removed:
+					ratingDrafts = ratingDrafts.filter { $0.id != deckId }
+					ChangeHandler.call(.ratingDraftRemoved)
+				@unknown default:
+					break
+				}
+			}
+		}
 	}
 	
 	func signIn() {
