@@ -7,8 +7,8 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
-		if let rateDeckVC = segue.destination as? RateDeckViewController, let rating = sender as? DeckRating {
-			rateDeckVC.rating = rating
+		if let rateDeckVC = segue.destination as? RateDeckViewController, let deck = sender as? Deck {
+			rateDeckVC.deck = deck
 		}
 	}
 	
@@ -54,7 +54,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: "editRating", sender: deckRatings[indexPath.row])
+		performSegue(withIdentifier: "editRating", sender: decks[indexPath.row])
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
