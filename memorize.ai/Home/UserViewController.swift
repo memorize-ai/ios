@@ -199,7 +199,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func loadCards() {
 		let count = cards.count
 		cards = Card.sortDue(Deck.allDue()).map { (image: #imageLiteral(resourceName: "Due"), card: $0) }
-		cards.append(contentsOf: Card.all().filter { $0.last != nil }.sorted { $0.last?.date.timeIntervalSinceNow ?? 0 < $1.last?.date.timeIntervalSinceNow ?? 0 }.map { (image: Rating.image($0.last?.rating ?? 0), card: $0) })
+		cards.append(contentsOf: Card.all().filter { $0.last != nil }.sorted { $0.last?.date.timeIntervalSinceNow ?? 0 < $1.last?.date.timeIntervalSinceNow ?? 0 }.map { (image: PerformanceRating.image($0.last?.rating ?? 0), card: $0) })
 		if count != cards.count {
 			cardsCollectionView.reloadData()
 		}

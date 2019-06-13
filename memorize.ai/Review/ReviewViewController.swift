@@ -14,7 +14,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	var current = 0
 	var dueCards = [(deck: Deck, card: Card)]()
-	var reviewedCards = [(id: String, deck: Deck, card: Card, rating: Rating, next: Date?)]()
+	var reviewedCards = [(id: String, deck: Deck, card: Card, rating: PerformanceRating, next: Date?)]()
 	var shouldSegue = false
 	var previewDeck: String?
 	var previewCards: [Card]?
@@ -155,7 +155,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func normalize(rating: Int) -> Int {
-		return Rating.ratings.count - rating - 1
+		return PerformanceRating.ratings.count - rating - 1
 	}
 	
 	func load(_ text: String, webView: WKWebView) {
@@ -173,7 +173,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		var documentReference: DocumentReference?
 		documentReference = firestore.collection("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
 			guard error == nil, let documentReference = documentReference else { return self.isPushing = false }
-			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: Rating.get(rating), next: nil))
+			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: PerformanceRating.get(rating), next: nil))
 			if self.shouldSegue {
 				self.goToRecap()
 			}
@@ -182,13 +182,13 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return Rating.ratings.count
+		return PerformanceRating.ratings.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 		guard let cell = _cell as? RatingCollectionViewCell else { return _cell }
-		let element = Rating.get(normalize(rating: indexPath.item))
+		let element = PerformanceRating.get(normalize(rating: indexPath.item))
 		cell.imageView.image = element.image
 		cell.label.text = element.description
 		return cell

@@ -4,7 +4,7 @@ import WebKit
 class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var recapCollectionView: UICollectionView!
 	
-	var cards = [(id: String, deck: Deck, card: Card, rating: Rating, next: Date?)]()
+	var cards = [(id: String, deck: Deck, card: Card, rating: PerformanceRating, next: Date?)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()

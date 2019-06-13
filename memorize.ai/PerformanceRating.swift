@@ -1,13 +1,13 @@
 import UIKit
 
-class Rating {
+class PerformanceRating {
 	static let ratings = [
-		Rating(image: image(0), color: color(0), description: description(0)),
-		Rating(image: image(1), color: color(1), description: description(1)),
-		Rating(image: image(2), color: color(2), description: description(2)),
-		Rating(image: image(3), color: color(3), description: description(3)),
-		Rating(image: image(4), color: color(4), description: description(4)),
-		Rating(image: image(5), color: color(5), description: description(5))
+		PerformanceRating(image: image(0), color: color(0), description: description(0)),
+		PerformanceRating(image: image(1), color: color(1), description: description(1)),
+		PerformanceRating(image: image(2), color: color(2), description: description(2)),
+		PerformanceRating(image: image(3), color: color(3), description: description(3)),
+		PerformanceRating(image: image(4), color: color(4), description: description(4)),
+		PerformanceRating(image: image(5), color: color(5), description: description(5))
 	]
 	
 	let image: UIImage
@@ -20,7 +20,7 @@ class Rating {
 		self.description = description
 	}
 	
-	static func get(_ rating: Int) -> Rating {
+	static func get(_ rating: Int) -> PerformanceRating {
 		return ratings[rating]
 	}
 	

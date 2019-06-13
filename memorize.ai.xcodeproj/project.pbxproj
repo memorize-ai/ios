@@ -28,7 +28,7 @@
 		4D5F1F16229E1A6B00AC7732 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F15229E1A6B00AC7732 /* Setting.swift */; };
 		4D5F1F18229E1AC400AC7732 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F17229E1AC400AC7732 /* Permission.swift */; };
 		4D5F1F1A229E1AD200AC7732 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F19229E1AD200AC7732 /* History.swift */; };
-		4D5F1F1C229E1AEE00AC7732 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1B229E1AEE00AC7732 /* Rating.swift */; };
+		4D5F1F1C229E1AEE00AC7732 /* PerformanceRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */; };
 		4D5F1F1E229E1B0C00AC7732 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1D229E1B0C00AC7732 /* User.swift */; };
 		4D5F1F20229E1C4D00AC7732 /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1F229E1C4D00AC7732 /* Invite.swift */; };
 		4D5F1F22229F217200AC7732 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F21229F217200AC7732 /* Keyboard.swift */; };
@@ -143,6 +143,7 @@
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		4DE7FD3C22B1B8CA00B82F38 /* DeckPermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7FD3B22B1B8CA00B82F38 /* DeckPermissionsViewController.swift */; };
 		4DE7FD3E22B1B97300B82F38 /* DeckAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7FD3D22B1B97300B82F38 /* DeckAnalyticsViewController.swift */; };
+		4DE7FD4022B1D72700B82F38 /* RatingDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7FD3F22B1D72700B82F38 /* RatingDraft.swift */; };
 		4DE8322722B03E6000DDD1F9 /* DeckSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8322622B03E6000DDD1F9 /* DeckSettingsViewController.swift */; };
 		4DEA540722A5CF6400C5CCEF /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */; };
 		4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */; };
@@ -199,7 +200,7 @@
 		4D5F1F15229E1A6B00AC7732 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		4D5F1F17229E1AC400AC7732 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		4D5F1F19229E1AD200AC7732 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
-		4D5F1F1B229E1AEE00AC7732 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceRating.swift; sourceTree = "<group>"; };
 		4D5F1F1D229E1B0C00AC7732 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D5F1F1F229E1C4D00AC7732 /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		4D5F1F21229F217200AC7732 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 		4DCF83DD22A378F3006B73A4 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		4DE7FD3B22B1B8CA00B82F38 /* DeckPermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckPermissionsViewController.swift; sourceTree = "<group>"; };
 		4DE7FD3D22B1B97300B82F38 /* DeckAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckAnalyticsViewController.swift; sourceTree = "<group>"; };
+		4DE7FD3F22B1D72700B82F38 /* RatingDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDraft.swift; sourceTree = "<group>"; };
 		4DE8322622B03E6000DDD1F9 /* DeckSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckSettingsViewController.swift; sourceTree = "<group>"; };
 		4DEA540622A5CF6400C5CCEF /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
@@ -412,12 +414,13 @@
 				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
 				4D5F1F1F229E1C4D00AC7732 /* Invite.swift */,
 				4DCF83DD22A378F3006B73A4 /* Listener.swift */,
-				4D5F1F1B229E1AEE00AC7732 /* Rating.swift */,
+				4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */,
 				4D5F1F19229E1AD200AC7732 /* History.swift */,
 				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
 				4D5F1F21229F217200AC7732 /* Keyboard.swift */,
 				4D5F1F15229E1A6B00AC7732 /* Setting.swift */,
 				4D2CB86922AA0A7900092FD4 /* CardDraft.swift */,
+				4DE7FD3F22B1D72700B82F38 /* RatingDraft.swift */,
 				4D5F1F13229E1A3400AC7732 /* Card.swift */,
 				4D5F1F11229E19EF00AC7732 /* Deck.swift */,
 				4D052AB72204259B0093B64E /* Main.storyboard */,
@@ -978,6 +981,7 @@
 				4DA2C2E122A48E5400669570 /* Upload.swift in Sources */,
 				4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */,
 				4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */,
+				4DE7FD4022B1D72700B82F38 /* RatingDraft.swift in Sources */,
 				4D5F1F1A229E1AD200AC7732 /* History.swift in Sources */,
 				4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */,
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
@@ -995,7 +999,7 @@
 				4D5F1F14229E1A3400AC7732 /* Card.swift in Sources */,
 				4D052AB62204259B0093B64E /* UserViewController.swift in Sources */,
 				4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */,
-				4D5F1F1C229E1AEE00AC7732 /* Rating.swift in Sources */,
+				4D5F1F1C229E1AEE00AC7732 /* PerformanceRating.swift in Sources */,
 				4D5F1F12229E19EF00AC7732 /* Deck.swift in Sources */,
 				4D052AB42204259B0093B64E /* AppDelegate.swift in Sources */,
 			);
