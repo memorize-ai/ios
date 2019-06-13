@@ -22,7 +22,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
 		flowLayout.scrollDirection = .horizontal
 		collectionView.collectionViewLayout = flowLayout
-		navigationItem.title = card == nil ? "New Card" : "Edit Card"
+		navigationItem.title = "\(card == nil ? "New" : "Edit") Card"
 		disable(leftArrow)
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
 		self.cardEditor = cardEditor
