@@ -20,25 +20,40 @@ class ChangeHandler {
 enum Change {
 	case profileModified
 	case profilePicture
+	
 	case deckModified
 	case deckRemoved
+	
 	case cardModified
 	case cardRemoved
+	case cardDue
+	
 	case historyModified
 	case historyRemoved
-	case cardDue
+	
 	case settingAdded
 	case settingValueModified
 	case settingModified
 	case settingRemoved
+	
 	case uploadAdded
 	case uploadModified
 	case uploadRemoved
 	case uploadLoaded
+	
 	case cardDraftAdded
 	case cardDraftModified
 	case cardDraftRemoved
+	
 	case deckRatingAdded
 	case deckRatingModified
 	case deckRatingRemoved
+	
+	case cardRatingAdded
+	case cardRatingModified
+	case cardRatingRemoved
+	
+	case ratingDraftAdded
+	case ratingDraftModified
+	case ratingDraftRemoved
 }
