@@ -3626,21 +3626,114 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgE-x5-TID">
-                                <rect key="frame" x="188" y="163" width="42" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgE-x5-TID">
+                                <rect key="frame" x="40" y="104" width="24" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="e61-vk-bxU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1b3-Si-84T">
+                                <rect key="frame" x="40" y="332.33333333333331" width="414" height="71.333333333333314"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEw-WP-AUF">
+                                        <rect key="frame" x="0.0" y="0.0" width="74.666666666666671" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="wEw-WP-AUF" secondAttribute="height" multiplier="20:19" id="Osg-rm-ahd"/>
+                                        </constraints>
+                                        <state key="normal" image="Unselected Star"/>
+                                        <connections>
+                                            <action selector="starDeselected" destination="3Bm-Xc-u3A" eventType="touchDragOutside" id="OAR-ts-bJt"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDragInside" id="C1Z-D5-zKS"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDown" id="MmZ-bG-WIs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2m-PO-8u3">
+                                        <rect key="frame" x="84.666666666666671" y="0.0" width="75.000000000000014" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="O2m-PO-8u3" secondAttribute="height" multiplier="20:19" id="nvL-0N-k9t"/>
+                                        </constraints>
+                                        <state key="normal" image="Unselected Star"/>
+                                        <connections>
+                                            <action selector="starDeselected" destination="3Bm-Xc-u3A" eventType="touchDragOutside" id="wpv-UC-aNR"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDown" id="bef-gK-flk"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDragInside" id="mTV-zc-Lrm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EV7-gQ-fV6">
+                                        <rect key="frame" x="169.66666666666666" y="0.0" width="74.666666666666657" height="50"/>
+                                        <state key="normal" image="Unselected Star"/>
+                                        <connections>
+                                            <action selector="starDeselected" destination="3Bm-Xc-u3A" eventType="touchDragOutside" id="VYK-r3-VSo"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDown" id="Vdu-NZ-AHR"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDragInside" id="ku3-El-6uS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iP-vA-cKe">
+                                        <rect key="frame" x="254.33333333333331" y="0.0" width="75" height="71.333333333333329"/>
+                                        <state key="normal" image="Unselected Star"/>
+                                        <connections>
+                                            <action selector="starDeselected" destination="3Bm-Xc-u3A" eventType="touchDragOutside" id="bQj-Nl-e2X"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDragInside" id="Kax-4x-rrP"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDown" id="yMV-k8-aa8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="who-Zu-vFU">
+                                        <rect key="frame" x="339.33333333333331" y="0.0" width="74.666666666666686" height="71.333333333333329"/>
+                                        <state key="normal" image="Unselected Star"/>
+                                        <connections>
+                                            <action selector="starDeselected" destination="3Bm-Xc-u3A" eventType="touchDragOutside" id="buQ-lb-Lqv"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDragInside" id="lPk-aY-ezi"/>
+                                            <action selector="starSelected:" destination="3Bm-Xc-u3A" eventType="touchDown" id="vcw-g6-CDc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="wEw-WP-AUF" firstAttribute="leading" secondItem="1b3-Si-84T" secondAttribute="leading" id="1bu-DX-Nl6"/>
+                                    <constraint firstItem="9iP-vA-cKe" firstAttribute="top" secondItem="1b3-Si-84T" secondAttribute="top" id="4gy-qx-dLM"/>
+                                    <constraint firstItem="wEw-WP-AUF" firstAttribute="height" secondItem="O2m-PO-8u3" secondAttribute="height" id="JRl-Ig-wU8"/>
+                                    <constraint firstItem="who-Zu-vFU" firstAttribute="width" secondItem="who-Zu-vFU" secondAttribute="height" multiplier="20:19" id="NmD-zX-fxN"/>
+                                    <constraint firstItem="EV7-gQ-fV6" firstAttribute="width" secondItem="EV7-gQ-fV6" secondAttribute="height" multiplier="20:19" id="ONY-8Z-T90"/>
+                                    <constraint firstItem="who-Zu-vFU" firstAttribute="top" secondItem="1b3-Si-84T" secondAttribute="top" id="Ofd-c7-SDP"/>
+                                    <constraint firstAttribute="trailing" secondItem="who-Zu-vFU" secondAttribute="trailing" id="bQf-iF-zvo"/>
+                                    <constraint firstItem="O2m-PO-8u3" firstAttribute="height" secondItem="EV7-gQ-fV6" secondAttribute="height" id="clr-z7-3Da"/>
+                                    <constraint firstItem="who-Zu-vFU" firstAttribute="leading" secondItem="9iP-vA-cKe" secondAttribute="trailing" constant="10" id="eHP-uk-HHU"/>
+                                    <constraint firstItem="9iP-vA-cKe" firstAttribute="leading" secondItem="EV7-gQ-fV6" secondAttribute="trailing" constant="10" id="eWT-VR-hx3"/>
+                                    <constraint firstItem="EV7-gQ-fV6" firstAttribute="leading" secondItem="O2m-PO-8u3" secondAttribute="trailing" constant="10" id="g8D-ap-KR3"/>
+                                    <constraint firstAttribute="bottom" secondItem="9iP-vA-cKe" secondAttribute="bottom" id="i9O-Wg-CYR"/>
+                                    <constraint firstItem="EV7-gQ-fV6" firstAttribute="height" secondItem="9iP-vA-cKe" secondAttribute="height" id="oIN-Tg-5zt"/>
+                                    <constraint firstItem="9iP-vA-cKe" firstAttribute="height" secondItem="who-Zu-vFU" secondAttribute="height" id="sgn-UU-hl6"/>
+                                    <constraint firstItem="O2m-PO-8u3" firstAttribute="leading" secondItem="wEw-WP-AUF" secondAttribute="trailing" constant="10" id="uNS-pG-2DF"/>
+                                    <constraint firstItem="9iP-vA-cKe" firstAttribute="width" secondItem="9iP-vA-cKe" secondAttribute="height" multiplier="20:19" id="uSR-Tx-x5h"/>
+                                    <constraint firstAttribute="bottom" secondItem="who-Zu-vFU" secondAttribute="bottom" id="znj-T3-QuE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1b3-Si-84T" firstAttribute="leading" secondItem="F3A-bt-AR6" secondAttribute="leading" constant="40" id="7Il-DT-pCh"/>
+                            <constraint firstItem="1b3-Si-84T" firstAttribute="trailing" secondItem="F3A-bt-AR6" secondAttribute="trailing" constant="40" id="IgW-so-N5F"/>
+                            <constraint firstItem="1b3-Si-84T" firstAttribute="centerY" secondItem="pw8-TR-zAv" secondAttribute="centerY" id="K1B-Q9-94i"/>
+                            <constraint firstItem="NgE-x5-TID" firstAttribute="leading" secondItem="F3A-bt-AR6" secondAttribute="leading" constant="40" id="Peh-Ul-iWI"/>
+                            <constraint firstItem="1b3-Si-84T" firstAttribute="centerX" secondItem="pw8-TR-zAv" secondAttribute="centerX" id="lWf-xI-xab"/>
+                            <constraint firstItem="NgE-x5-TID" firstAttribute="top" secondItem="F3A-bt-AR6" secondAttribute="top" constant="40" id="mKU-pz-UdP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="F3A-bt-AR6"/>
                     </view>
+                    <connections>
+                        <outlet property="star1Button" destination="wEw-WP-AUF" id="hCU-Pk-ttv"/>
+                        <outlet property="star2Button" destination="O2m-PO-8u3" id="EBw-0N-hyf"/>
+                        <outlet property="star3Button" destination="EV7-gQ-fV6" id="04N-lB-my7"/>
+                        <outlet property="star4Button" destination="9iP-vA-cKe" id="juU-D6-nzD"/>
+                        <outlet property="star5Button" destination="who-Zu-vFU" id="JAn-RA-eaK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SqA-Pi-LUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="809"/>
+            <point key="canvasLocation" x="2192.753623188406" y="808.69565217391312"/>
         </scene>
         <!--Ratings-->
         <scene sceneID="u9c-v3-k3t">
@@ -3878,6 +3971,7 @@
         <image name="Rating 5" width="825" height="825"/>
         <image name="Search" width="1177" height="1176"/>
         <image name="Transparent Logo" width="1191" height="732"/>
+        <image name="Unselected Star" width="376" height="359"/>
         <image name="Upload" width="434" height="512"/>
         <image name="X" width="512" height="512"/>
     </resources>
