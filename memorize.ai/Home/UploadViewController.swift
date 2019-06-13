@@ -14,6 +14,11 @@ class UploadViewController: UIViewController {
 		super.viewDidLoad()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateCurrentViewController()
+	}
+	
 	@IBAction func chooseFile() {
 		
 	}

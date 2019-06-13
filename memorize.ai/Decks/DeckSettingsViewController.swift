@@ -41,6 +41,11 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	]
 	var deck: Deck?
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		updateCurrentViewController()
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
 		guard let deck = deck else { return }

@@ -35,6 +35,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				self.uploadsCollectionView.reloadData()
 			}
 		}
+		updateCurrentViewController()
 	}
 	
 	@IBAction func filterSegmentedControlChanged() {
