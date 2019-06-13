@@ -39,13 +39,11 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 					let text = cardEditor.text
 					firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "card": card.id, "front": text.front, "back": text.back])
 				}
+			} else if let draft = CardDraft.get(deckId: deck.id) {
+				firestore.document("users/\(id)/cardDrafts/\(draft.id)").updateData([side.rawValue: text])
 			} else {
-				if let draft = CardDraft.get(deckId: deck.id) {
-					firestore.document("users/\(id)/cardDrafts/\(draft.id)").updateData([side.rawValue: text])
-				} else {
-					let text = cardEditor.text
-					firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "front": text.front, "back": text.back])
-				}
+				let text = cardEditor.text
+				firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "front": text.front, "back": text.back])
 			}
 			cardPreview.update(side, text: text)
 			self.reloadRightBarButtonItem()
