@@ -2243,6 +2243,7 @@
                     <connections>
                         <segue destination="305-bK-oSv" kind="show" identifier="permissions" id="yA8-c2-qUK"/>
                         <segue destination="hkx-K9-vG5" kind="show" identifier="analytics" id="HDI-H5-eeV"/>
+                        <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="FG1-aM-YqR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-Pa-nLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3764,7 +3765,7 @@
         <segue reference="Reh-O7-sEd"/>
         <segue reference="O84-5M-BZf"/>
         <segue reference="NDx-ee-NxK"/>
-        <segue reference="wcZ-AT-Xhd"/>
+        <segue reference="FG1-aM-YqR"/>
         <segue reference="xao-oA-rKh"/>
     </inferredMetricsTieBreakers>
 </document>
