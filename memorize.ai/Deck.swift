@@ -61,6 +61,22 @@ class Deck {
 		return cardDraft != nil
 	}
 	
+	var rating: DeckRating? {
+		return DeckRating.get(id)
+	}
+	
+	var hasRating: Bool {
+		return rating != nil
+	}
+	
+	var ratingDraft: RatingDraft? {
+		return RatingDraft.get(id)
+	}
+	
+	var hasRatingDraft: Bool {
+		return ratingDraft != nil
+	}
+	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
 		functions.httpsCallable("addDeck").call(["deckId": deckId]) { completion($1) }
 	}

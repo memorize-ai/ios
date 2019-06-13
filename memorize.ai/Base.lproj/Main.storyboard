@@ -3549,29 +3549,49 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="nPE-Sl-WAC" detailTextLabel="gzx-qx-qwG" style="IBUITableViewCellStyleValue1" id="l2R-bz-UTa">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="63" id="l2R-bz-UTa" customClass="DeckRatingPreviewTableViewCell" customModule="memorize_ai" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l2R-bz-UTa" id="yIw-WV-6kH">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="62.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nPE-Sl-WAC">
-                                                    <rect key="frame" x="19.999999999999996" y="11.999999999999998" width="33.666666666666664" height="23.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KXV-q5-mBZ">
+                                                    <rect key="frame" x="20" y="19.333333333333332" width="42" height="23.999999999999996"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gzx-qx-qwG">
-                                                    <rect key="frame" x="322" y="8.9999999999999982" width="54" height="27.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaJ-Kx-Gae">
+                                                    <rect key="frame" x="326.33333333333331" y="17.666666666666671" width="49.666666666666686" height="27.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkU-1E-5fO">
+                                                    <rect key="frame" x="20" y="45.333333333333336" width="33" height="15.333333333333336"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="13"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KXV-q5-mBZ" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="2z5-OT-uCf"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SkU-1E-5fO" secondAttribute="trailing" id="Ak2-6o-Ksp"/>
+                                                <constraint firstAttribute="bottom" secondItem="SkU-1E-5fO" secondAttribute="bottom" constant="2" id="BHk-th-KyX"/>
+                                                <constraint firstItem="SkU-1E-5fO" firstAttribute="top" secondItem="KXV-q5-mBZ" secondAttribute="bottom" constant="2" id="S09-BS-P6K"/>
+                                                <constraint firstItem="SkU-1E-5fO" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="hs8-3a-Bdy"/>
+                                                <constraint firstAttribute="trailing" secondItem="AaJ-Kx-Gae" secondAttribute="trailing" id="jUI-Mu-dGI"/>
+                                                <constraint firstItem="KXV-q5-mBZ" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="pLh-NI-bmk"/>
+                                                <constraint firstItem="AaJ-Kx-Gae" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KXV-q5-mBZ" secondAttribute="trailing" constant="20" id="uXU-Td-DzN"/>
+                                                <constraint firstItem="AaJ-Kx-Gae" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="wTj-Qx-Tck"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deckNameLabel" destination="KXV-q5-mBZ" id="Vq7-vB-7Y9"/>
+                                            <outlet property="detailLabel" destination="SkU-1E-5fO" id="TgV-m6-F6h"/>
+                                            <outlet property="ratingLabel" destination="AaJ-Kx-Gae" id="1yv-bx-4iz"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -3596,7 +3616,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmc-qb-X6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1503" y="809"/>
+            <point key="canvasLocation" x="1502.8985507246377" y="808.69565217391312"/>
         </scene>
         <!--Edit Rating-->
         <scene sceneID="mqb-mz-DAK">

@@ -21,18 +21,34 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return deckRatings.count
+		return decks.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let element = deckRatings[indexPath.row]
-		cell.textLabel?.text = element.deck?.name
-		cell.detailTextLabel?.text = String(element.rating)
+		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? DeckRatingPreviewTableViewCell else { return _cell }
+		let deck = decks[indexPath.row]
+		cell.deckNameLabel.text = deck.name
+		if let rating = deck.rating {
+			cell.ratingLabel.text = String(rating.rating)
+			cell.detailLabel.text = "\(rating.date.format())\(rating.review.isEmpty ? "" : " • has review")\(deck.hasRatingDraft ? " • has draft" : "")"
+		} else if let rating = deck.ratingDraft {
+			cell.ratingLabel.text = rating.rating == nil ? "-" : String(rating.rating ?? 0)
+			cell.detailLabel.text = "\(rating.review == nil ? "" : "has review • ")unpublished"
+		} else {
+			cell.ratingLabel.text = "~"
+			cell.detailLabel.text = "unrated"
+		}
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "editRating", sender: deckRatings[indexPath.row])
 	}
+}
+
+class DeckRatingPreviewTableViewCell: UITableViewCell {
+	@IBOutlet weak var deckNameLabel: UILabel!
+	@IBOutlet weak var ratingLabel: UILabel!
+	@IBOutlet weak var detailLabel: UILabel!
 }
