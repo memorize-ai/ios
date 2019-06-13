@@ -33,10 +33,11 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 			cell.ratingLabel.text = String(rating.rating)
 			cell.detailLabel.text = "\(rating.date.format())\(rating.review.isEmpty ? "" : " • has review")\(deck.hasRatingDraft ? " • has draft" : "")"
 		} else if let rating = deck.ratingDraft {
-			cell.ratingLabel.text = rating.rating == nil ? "-" : String(rating.rating ?? 0)
+			cell.ratingLabel.text = rating.rating == nil ? "~" : String(rating.rating ?? 0)
 			cell.detailLabel.text = "\(rating.review == nil ? "" : "has review • ")unpublished"
 		} else {
 			cell.ratingLabel.text = "~"
+			cell.ratingLabel.font = UIFont(name: "Nunito-SemiBold", size: 20)
 			cell.detailLabel.text = "unrated"
 		}
 		return cell
