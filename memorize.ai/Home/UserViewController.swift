@@ -289,9 +289,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					))
 					ChangeHandler.call(.cardRatingAdded)
 				case .modified:
-					
+					CardRating.get(cardId)?.update(rating)
+					ChangeHandler.call(.cardRatingModified)
 				case .removed:
-					
+					cardRatings = cardRatings.filter { $0.id != cardId }
+					ChangeHandler.call(.cardRatingRemoved)
 				@unknown default:
 					break
 				}

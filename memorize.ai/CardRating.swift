@@ -1,4 +1,5 @@
 import Foundation
+import Firebase
 
 var cardRatings = [CardRating]()
 
@@ -25,6 +26,11 @@ class CardRating {
 	
 	static func get(_ id: String) -> CardRating? {
 		return cardRatings.first { $0.id == id }
+	}
+	
+	func update(_ snapshot: DocumentSnapshot) {
+		rating = CardRatingType(snapshot.get("rating") as? Int ?? rating.rawValue)
+		date = snapshot.getDate("date") ?? date
 	}
 }
 
