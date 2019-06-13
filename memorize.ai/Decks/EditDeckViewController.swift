@@ -64,7 +64,6 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	@objc func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
 		scrollViewBottomConstraint.constant = height - 30
-		scrollView.layoutIfNeeded()
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
