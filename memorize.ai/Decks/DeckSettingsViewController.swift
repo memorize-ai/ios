@@ -49,7 +49,9 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
 		guard let deck = deck else { return }
-		if let reviewVC = segue.destination as? ReviewViewController {
+		if let rateDeckVC = segue.destination as? RateDeckViewController {
+			rateDeckVC.deck = deck
+		} else if let reviewVC = segue.destination as? ReviewViewController {
 			reviewVC.previewDeck = deck.name
 			reviewVC.previewCards = deck.cards
 		} else if let deckPermissionsVC = segue.destination as? DeckPermissionsViewController {
@@ -72,7 +74,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	func rateDeck(_ cell: DeckSettingTableViewCell) {
-		// Rate deck with RateDeckViewController modal
+		performSegue(withIdentifier: "rate", sender: self)
 	}
 	
 	func forceReview(_ cell: DeckSettingTableViewCell) {
