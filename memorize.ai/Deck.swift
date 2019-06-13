@@ -86,7 +86,11 @@ class Deck {
 	}
 	
 	static func rate(_ deckId: String, rating: Int, completion: @escaping (Error?) -> Void) {
-		functions.httpsCallable("rateDeck").call(["deckId": deckId]) { completion($1) }
+		functions.httpsCallable("rateDeck").call(["deckId": deckId, "rating": rating]) { completion($1) }
+	}
+	
+	static func unrate(_ deckId: String, completion: @escaping (Error?) -> Void) {
+		rate(deckId, rating: 0, completion: completion)
 	}
 	
 	static func clearAllData(_ deckId: String, completion: @escaping (Error?) -> Void) {
@@ -111,6 +115,10 @@ class Deck {
 	
 	func rate(_ rating: Int, completion: @escaping (Error?) -> Void) {
 		Deck.rate(id, rating: rating, completion: completion)
+	}
+	
+	func unrate(completion: @escaping (Error?) -> Void) {
+		Deck.unrate(id, completion: completion)
 	}
 	
 	func clearAllData(completion: @escaping (Error?) -> Void) {
