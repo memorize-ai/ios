@@ -5,11 +5,13 @@ var ratingDrafts = [RatingDraft]()
 class RatingDraft {
 	let id: String
 	var rating: Int?
+	var title: String?
 	var review: String?
 	
-	init(id: String, rating: Int?, review: String?) {
+	init(id: String, rating: Int?, title: String?, review: String?) {
 		self.id = id
 		self.rating = rating
+		self.title = title
 		self.review = review
 	}
 	
@@ -23,6 +25,7 @@ class RatingDraft {
 	
 	func update(_ snapshot: DocumentSnapshot) {
 		rating = snapshot.get("rating") as? Int
+		title = snapshot.get("title") as? String
 		review = snapshot.get("review") as? String
 	}
 }

@@ -6,9 +6,10 @@ class RateDeckViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var star3Button: UIButton!
 	@IBOutlet weak var star4Button: UIButton!
 	@IBOutlet weak var star5Button: UIButton!
+	@IBOutlet weak var titleTextField: UITextField!
 	@IBOutlet weak var reviewTextView: UITextView!
 	
-	var rating: DeckRating?
+	var deck: Deck?
 	var selectedRating: Int?
 	
 	override func viewDidLoad() {
@@ -29,11 +30,11 @@ class RateDeckViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func load() {
-		guard let rating = rating else { return }
-		if let draft = rating.draft {
+		guard let deck = deck else { return }
+		if let draft = deck.ratingDraft {
 			reloadStars((draft.rating ?? 1) - 1)
 			reviewTextView.text = draft.review
-		} else {
+		} else if let rating = deck.rating {
 			reloadStars(rating.rating - 1)
 			reviewTextView.text = rating.review
 		}
@@ -42,10 +43,12 @@ class RateDeckViewController: UIViewController, UITextViewDelegate {
 	@IBAction func starSelected(_ sender: UIButton) {
 		guard let index = stars.firstIndex(of: sender) else { return }
 		reloadStars(index)
+		updateDraft(rating: index + 1)
 	}
 	
 	@IBAction func starDeselected() {
 		reloadStars()
+		updateDraft(rating: nil)
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
@@ -56,6 +59,15 @@ class RateDeckViewController: UIViewController, UITextViewDelegate {
 		(0..<stars.count).forEach {
 			stars[$0].setImage($0 > index ? #imageLiteral(resourceName: "Unselected Star") : #imageLiteral(resourceName: "Selected Star"), for: .normal)
 		}
+	}
+	
+	func updateDraft(rating newRating: Int?) {
+		guard let id = id, let deck = deck else { return }
+		firestore.document("users/\(id)/ratingDrafts/\(deck.id)").setData([
+			"rating": newRating ?? 0,
+			"title": titleTextField.text ?? "",
+			"review": reviewTextView.text ?? ""
+		])
 	}
 	
 	func reloadRightBarButton() {

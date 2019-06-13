@@ -85,12 +85,12 @@ class Deck {
 		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { _, _ in }
 	}
 	
-	static func rate(_ deckId: String, rating: Int, completion: @escaping (Error?) -> Void) {
-		functions.httpsCallable("rateDeck").call(["deckId": deckId, "rating": rating]) { completion($1) }
+	static func rate(_ deckId: String, rating: Int, title: String?, review: String?, completion: @escaping (Error?) -> Void) {
+		functions.httpsCallable("rateDeck").call(["deckId": deckId, "rating": rating, "title": title ?? "", "review": review ?? ""]) { completion($1) }
 	}
 	
 	static func unrate(_ deckId: String, completion: @escaping (Error?) -> Void) {
-		rate(deckId, rating: 0, completion: completion)
+		rate(deckId, rating: 0, title: nil, review: nil, completion: completion)
 	}
 	
 	static func clearAllData(_ deckId: String, completion: @escaping (Error?) -> Void) {
@@ -113,8 +113,8 @@ class Deck {
 		return cards.filter { $0.isDue() }
 	}
 	
-	func rate(_ rating: Int, completion: @escaping (Error?) -> Void) {
-		Deck.rate(id, rating: rating, completion: completion)
+	func rate(_ rating: Int, title: String?, review: String?, completion: @escaping (Error?) -> Void) {
+		Deck.rate(id, rating: rating, title: title, review: review, completion: completion)
 	}
 	
 	func unrate(completion: @escaping (Error?) -> Void) {

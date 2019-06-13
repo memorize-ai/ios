@@ -252,6 +252,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					deckRatings.append(DeckRating(
 						id: deckId,
 						rating: rating.get("rating") as? Int ?? 0,
+						title: rating.get("title") as? String ?? "",
 						review: rating.get("review") as? String ?? "",
 						date: rating.getDate("date") ?? Date()
 					))
@@ -311,6 +312,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					ratingDrafts.append(RatingDraft(
 						id: deckId,
 						rating: draft.get("rating") as? Int,
+						title: draft.get("title") as? String,
 						review: draft.get("review") as? String
 					))
 					ChangeHandler.call(.ratingDraftAdded)
