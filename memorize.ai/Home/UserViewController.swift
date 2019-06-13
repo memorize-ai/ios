@@ -75,6 +75,9 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				loadDecks()
 				loadUploads()
 				loadCardDrafts()
+				loadDeckRatings()
+				loadCardRatings()
+				loadRatingDrafts()
 			} else {
 				signIn()
 			}
@@ -117,6 +120,9 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			loadDecks()
 			loadUploads()
 			loadCardDrafts()
+			loadDeckRatings()
+			loadCardRatings()
+			loadRatingDrafts()
 			Card.poll()
 			createHelloLabel()
 			navigationController?.setNavigationBarHidden(false, animated: true)
@@ -207,7 +213,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadCardDrafts() {
 		guard let id = id else { return }
-		firestore.collection("users/\(id)/cardDrafts").addSnapshotListener { snapshot, error in
+		listeners["users/\(id)/cardDrafts"] = firestore.collection("users/\(id)/cardDrafts").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
 			snapshot.forEach {
 				let draft = $0.document
@@ -234,6 +240,67 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				}
 			}
 		}
+	}
+	
+	func loadRatings() {
+		guard let id = id else { return }
+		listeners["users/\(id)/ratings"] = firestore.collection("users/\(id)/ratings").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let rating = $0.document
+				let deckId = rating.documentID
+				switch $0.type {
+				case .added:
+					deckRatings.append(DeckRating(
+						id: deckId,
+						rating: rating.get("rating") as? Int ?? 0,
+						review: rating.get("review") as? String ?? "",
+						date: rating.getDate("date") ?? Date()
+					))
+					self.loadCardRatings(deckId)
+					ChangeHandler.call(.deckRatingAdded)
+				case .modified:
+					DeckRating.get(deckId)?.update(rating)
+					ChangeHandler.call(.deckRatingModified)
+				case .removed:
+					deckRatings = deckRatings.filter { $0.id != deckId }
+					ChangeHandler.call(.deckRatingRemoved)
+				@unknown default:
+					break
+				}
+			}
+		}
+	}
+	
+	func loadCardRatings(_ deckId: String) {
+		guard let id = id else { return }
+		listeners["users/\(id)/ratings/\(deckId)/cards"] = firestore.collection("users/\(id)/ratings/\(deckId)/cards").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let rating = $0.document
+				let cardId = rating.documentID
+				switch $0.type {
+				case .added:
+					cardRatings.append(CardRating(
+						deckId: deckId,
+						id: cardId,
+						rating: CardRatingType(rating.get("rating") as? Int ?? 0),
+						date: rating.getDate("date") ?? Date()
+					))
+					ChangeHandler.call(.cardRatingAdded)
+				case .modified:
+					
+				case .removed:
+					
+				@unknown default:
+					break
+				}
+			}
+		}
+	}
+	
+	func loadRatingDrafts() {
+		
 	}
 	
 	func signIn() {

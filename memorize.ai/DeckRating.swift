@@ -1,4 +1,5 @@
 import Foundation
+import Firebase
 
 var deckRatings = [DeckRating]()
 
@@ -29,5 +30,11 @@ class DeckRating {
 	
 	static func get(_ id: String) -> DeckRating? {
 		return deckRatings.first { $0.id == id }
+	}
+	
+	func update(_ snapshot: DocumentSnapshot) {
+		rating = snapshot.get("rating") as? Int ?? rating
+		review = snapshot.get("review") as? String ?? review
+		date = snapshot.getDate("date") ?? date
 	}
 }

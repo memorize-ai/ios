@@ -34,13 +34,6 @@ enum CardRatingType: Int {
 	case like = 1
 	
 	init(_ number: Int) {
-		switch number {
-		case -1:
-			self = .dislike
-		case 1:
-			self = .like
-		default:
-			self = .none
-		}
+		self = CardRatingType(rawValue: number) ?? .none
 	}
 }
