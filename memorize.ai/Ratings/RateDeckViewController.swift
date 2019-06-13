@@ -9,6 +9,7 @@ class RateDeckViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var reviewTextView: UITextView!
 	
 	var rating: DeckRating?
+	var selectedRating: Int?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

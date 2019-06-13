@@ -3562,32 +3562,51 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaJ-Kx-Gae">
-                                                    <rect key="frame" x="275" y="4" width="101" height="54.666666666666664"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="40"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkU-1E-5fO">
                                                     <rect key="frame" x="20" y="50.666666666666664" width="40" height="10"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-6U-jbX">
+                                                    <rect key="frame" x="275" y="4" width="101" height="54.666666666666664"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaJ-Kx-Gae">
+                                                            <rect key="frame" x="0.0" y="0.0" width="101" height="54.666666666666664"/>
+                                                            <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="40"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="NVT-NB-z9G">
+                                                            <rect key="frame" x="32" y="9" width="37" height="37"/>
+                                                            <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="AaJ-Kx-Gae" firstAttribute="top" secondItem="TTs-6U-jbX" secondAttribute="top" id="4hH-Qh-TYB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="AaJ-Kx-Gae" secondAttribute="trailing" id="DuU-6n-jvq"/>
+                                                        <constraint firstAttribute="bottom" secondItem="AaJ-Kx-Gae" secondAttribute="bottom" id="Lg1-6K-NCx"/>
+                                                        <constraint firstItem="NVT-NB-z9G" firstAttribute="centerY" secondItem="TTs-6U-jbX" secondAttribute="centerY" id="QKK-fo-9cT"/>
+                                                        <constraint firstItem="NVT-NB-z9G" firstAttribute="centerX" secondItem="TTs-6U-jbX" secondAttribute="centerX" id="x79-Uy-viE"/>
+                                                        <constraint firstItem="AaJ-Kx-Gae" firstAttribute="leading" secondItem="TTs-6U-jbX" secondAttribute="leading" id="ylr-AV-mrA"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="KXV-q5-mBZ" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="2z5-OT-uCf"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SkU-1E-5fO" secondAttribute="trailing" id="Ak2-6o-Ksp"/>
                                                 <constraint firstAttribute="bottom" secondItem="SkU-1E-5fO" secondAttribute="bottom" constant="2" id="BHk-th-KyX"/>
+                                                <constraint firstItem="TTs-6U-jbX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KXV-q5-mBZ" secondAttribute="trailing" constant="20" id="LEY-Px-pF9"/>
                                                 <constraint firstItem="SkU-1E-5fO" firstAttribute="top" secondItem="KXV-q5-mBZ" secondAttribute="bottom" constant="2" id="S09-BS-P6K"/>
+                                                <constraint firstAttribute="trailing" secondItem="TTs-6U-jbX" secondAttribute="trailing" id="VJZ-5e-ihz"/>
                                                 <constraint firstItem="SkU-1E-5fO" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="hs8-3a-Bdy"/>
-                                                <constraint firstAttribute="trailing" secondItem="AaJ-Kx-Gae" secondAttribute="trailing" id="jUI-Mu-dGI"/>
+                                                <constraint firstItem="TTs-6U-jbX" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="jxI-Pv-RRs"/>
                                                 <constraint firstItem="KXV-q5-mBZ" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="pLh-NI-bmk"/>
-                                                <constraint firstItem="AaJ-Kx-Gae" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KXV-q5-mBZ" secondAttribute="trailing" constant="20" id="uXU-Td-DzN"/>
-                                                <constraint firstItem="AaJ-Kx-Gae" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="wTj-Qx-Tck"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="NVT-NB-z9G" id="SE9-kW-LSM"/>
                                             <outlet property="deckNameLabel" destination="KXV-q5-mBZ" id="Vq7-vB-7Y9"/>
                                             <outlet property="detailLabel" destination="SkU-1E-5fO" id="TgV-m6-F6h"/>
                                             <outlet property="ratingLabel" destination="AaJ-Kx-Gae" id="1yv-bx-4iz"/>
