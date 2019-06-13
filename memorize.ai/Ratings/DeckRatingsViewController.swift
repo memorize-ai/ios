@@ -3,8 +3,11 @@ import UIKit
 class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var ratingsTableView: UITableView!
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		if let rateDeckVC = segue.destination as? RateDeckViewController, let rating = sender as? DeckRating {
+			rateDeckVC.rating = rating
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -18,10 +21,18 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		<#code#>
+		return deckRatings.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		<#code#>
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		let element = deckRatings[indexPath.row]
+		cell.textLabel?.text = element.deck?.name
+		cell.detailTextLabel?.text = String(element.rating)
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		performSegue(withIdentifier: "editRating", sender: deckRatings[indexPath.row])
 	}
 }

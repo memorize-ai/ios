@@ -11,6 +11,10 @@ class DeckRating {
 		self.review = review
 	}
 	
+	var deck: Deck? {
+		return Deck.get(id)
+	}
+	
 	var hasReview: Bool {
 		return !review.isEmpty
 	}
