@@ -36,10 +36,10 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.update { change in
-			if change == .deckRemoved && !(decks.contains { $0.id == self.deck?.id }) {
-				self.navigationController?.popViewController(animated: true)
-			} else if change == .deckRatingRemoved || change == .ratingDraftRemoved {
+			if change == .deckRatingAdded || change == .deckRatingRemoved || change == .ratingDraftAdded || change == .ratingDraftRemoved {
 				self.reloadDestructiveButtons()
+			} else if change == .deckRemoved && !(decks.contains { $0.id == self.deck?.id }) {
+				self.navigationController?.popViewController(animated: true)
 			}
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -193,9 +193,10 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 				if error == nil {
 					buzz()
 					if let rating = deck.rating {
-						self.reloadStars(rating.rating)
+						self.reloadStars(self.updateSelectedRating(rating.rating))
 						self.titleTextField.text = rating.title
 						self.reviewTextView.text = rating.review
+						self.reloadRightBarButton()
 						self.reloadDestructiveButtons()
 					} else {
 						self.navigationController?.popViewController(animated: true)
@@ -219,6 +220,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 				if error == nil {
 					buzz()
 					if deck.hasRatingDraft {
+						self.reloadRightBarButton()
 						self.reloadDestructiveButtons()
 					} else {
 						self.navigationController?.popViewController(animated: true)
