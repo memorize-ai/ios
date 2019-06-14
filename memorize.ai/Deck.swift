@@ -105,6 +105,10 @@ class Deck {
 		return decks.first { $0.id == id }
 	}
 	
+	static func has(_ id: String) -> Bool {
+		return get(id) != nil
+	}
+	
 	static func allDue() -> [Card] {
 		return decks.flatMap { $0.cards.filter { $0.isDue() } }
 	}
