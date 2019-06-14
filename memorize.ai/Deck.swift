@@ -105,7 +105,8 @@ class Deck {
 		return decks.first { $0.id == id }
 	}
 	
-	static func has(_ id: String) -> Bool {
+	static func has(_ id: String?) -> Bool {
+		guard let id = id else { return false }
 		return get(id) != nil
 	}
 	
