@@ -2739,15 +2739,16 @@
                                             <constraint firstAttribute="bottom" secondItem="Fly-83-Xin" secondAttribute="bottom" id="p2V-qH-pXA"/>
                                             <constraint firstAttribute="bottom" secondItem="pWU-VG-cfG" secondAttribute="bottom" id="wfi-dx-4qa"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="imageView" destination="SR9-F9-wvW" id="bs8-G6-w9k"/>
-                                            <outlet property="nameLabel" destination="fAb-hl-C0c" id="Hv4-a9-ZaS"/>
-                                            <outlet property="ownerLabel" destination="hlN-PW-dSB" id="5Sx-jK-Vdb"/>
+                                            <outlet property="card1WebView" destination="Fly-83-Xin" id="eNH-9Z-UKe"/>
+                                            <outlet property="card2WebView" destination="4AA-nh-PsU" id="g4m-Ao-Ao5"/>
+                                            <outlet property="card3WebView" destination="pWU-VG-cfG" id="2RJ-he-aVJ"/>
+                                            <outlet property="imageView" destination="SR9-F9-wvW" id="dwc-Rq-5cF"/>
+                                            <outlet property="nameLabel" destination="fAb-hl-C0c" id="MCQ-Ux-Vos"/>
+                                            <outlet property="ratingsCountLabel" destination="NL5-h9-JiS" id="pws-2L-Lpa"/>
+                                            <outlet property="starsSliderView" destination="8n6-jY-xIO" id="D1p-Gq-XQp"/>
+                                            <outlet property="starsSliderViewTrailingConstraint" destination="R8L-vQ-S0n" id="rrv-0V-ACw"/>
+                                            <outlet property="subtitleLabel" destination="hlN-PW-dSB" id="caL-oQ-zMM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

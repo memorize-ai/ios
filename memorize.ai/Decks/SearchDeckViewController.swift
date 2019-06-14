@@ -1,5 +1,6 @@
 import UIKit
 import InstantSearchClient
+import WebKit
 
 class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var searchBar: UISearchBar!
@@ -9,18 +10,19 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		let id: String
 		var image: UIImage?
 		let name: String
-		let owner: String
+		let subtitle: String
+		let averageRating: Double
 		
-		init(id: String, image: UIImage?, name: String, owner: String) {
+		init(id: String, image: UIImage?, name: String, subtitle: String, averageRating: Double) {
 			self.id = id
 			self.image = image
 			self.name = name
-			self.owner = owner
+			self.subtitle = subtitle
+			self.averageRating = averageRating
 		}
 	}
 	
-	var result = [SearchResult]()
-	var selectedResult: SearchResult?
+	var searchResults = [SearchResult]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,19 +43,19 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
-	@IBAction func back() {
-		navigationController?.popViewController(animated: true)
-	}
-	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: sender)
-		guard let deckVC = segue.destination as? DeckViewController, let selectedResult = selectedResult else { return }
+		guard let deckVC = segue.destination as? DeckViewController, let selectedResult = sender as? SearchResult else { return }
 		deckVC.deckId = selectedResult.id
 		deckVC.image = selectedResult.image
 	}
 	
+	@IBAction func back() {
+		navigationController?.popViewController(animated: true)
+	}
+	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		result.removeAll()
+		searchResults.removeAll()
 		decksCollectionView.reloadData()
 		if !searchText.trim().isEmpty {
 			Algolia.search(.decks, for: searchText) { results, error in
@@ -64,57 +66,59 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 							guard error == nil, let owner = result["owner"] as? String else { return }
 							listeners["users/\(owner)"] = firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
 								guard userError == nil, let snapshot = snapshot else { return }
-								self.result.append(SearchResult(id: deckId, image: nil, name: result["name"] as? String ?? "Error", owner: snapshot.get("name") as? String ?? "Error"))
+								self.searchResults.append(SearchResult(id: deckId, image: nil, name: result["name"] as? String ?? "Error", subtitle: snapshot.get("subtitle") as? String ?? "Error"))
 								self.decksCollectionView.reloadData()
-								Timer.scheduledTimer(withTimeInterval: 0.02, repeats: false) { _ in
-									self.decksCollectionView.reloadData()
-								}
 							}
 						}
 					}
 				} else {
-					self.showNotification("Unable to search decks. Please try again", type: .error)
+					self.showNotification("Unable to load search results. Please try again", type: .error)
 				}
 			}
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return result.count
+		return searchResults.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 		guard let cell = _cell as? SearchResultCollectionViewCell else { return _cell }
-		let element = result[indexPath.item]
-		if let image = element.image {
+		let searchResult = searchResults[indexPath.item]
+		if let image = searchResult.image {
 			cell.imageView.image = image
 		} else {
-			storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+			storage.child("decks/\(searchResult.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				cell.imageView.image = image
-				element.image = image
+				searchResult.image = image
 			}
 		}
-		cell.nameLabel.text = element.name
-		cell.ownerLabel.text = element.owner
-		cell.owned(Deck.get(element.id) != nil)
+		cell.nameLabel.text = searchResult.name
+		cell.subtitleLabel.text = searchResult.subtitle
+		cell.setAverageRating(searchResult.averageRating)
 		return cell
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		selectedResult = result[indexPath.item]
-		performSegue(withIdentifier: "deck", sender: self)
+		performSegue(withIdentifier: "deck", sender: searchResults[indexPath.item])
 	}
 }
 
 class SearchResultCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet weak var ownerLabel: UILabel!
-	@IBOutlet weak var checkImageView: UIImageView!
+	@IBOutlet weak var subtitleLabel: UILabel!
+	@IBOutlet weak var starsSliderView: UIView!
+	@IBOutlet weak var starsSliderViewTrailingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var ratingsCountLabel: UILabel!
+	@IBOutlet weak var card1WebView: WKWebView!
+	@IBOutlet weak var card2WebView: WKWebView!
+	@IBOutlet weak var card3WebView: WKWebView!
 	
-	func owned(_ isOwned: Bool) {
-		checkImageView.isHidden = !isOwned
+	func setAverageRating(_ rating: Double) {
+		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (rating == 0 ? 1 : CGFloat(5 - rating) / 5)
+		layoutIfNeeded()
 	}
 }
