@@ -128,9 +128,9 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		reloadRightBarButton()
 	}
 	
-	func reloadStars(_ index: Int = 0) {
+	func reloadStars(_ rating: Int = 0) {
 		(1...stars.count).forEach {
-			stars[$0 - 1].setImage($0 > index ? #imageLiteral(resourceName: "Unselected Star") : #imageLiteral(resourceName: "Selected Star"), for: .normal)
+			stars[$0 - 1].setImage($0 > rating ? #imageLiteral(resourceName: "Unselected Star") : #imageLiteral(resourceName: "Selected Star"), for: .normal)
 		}
 	}
 	
@@ -192,7 +192,10 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 				self.setRemoveDraftLoading(false)
 				if error == nil {
 					buzz()
-					if deck.hasRating {
+					if let rating = deck.rating {
+						self.reloadStars(rating.rating)
+						self.titleTextField.text = rating.title
+						self.reviewTextView.text = rating.review
 						self.reloadDestructiveButtons()
 					} else {
 						self.navigationController?.popViewController(animated: true)
@@ -207,7 +210,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	@IBAction func deleteRating() {
 		guard let deck = deck else { return }
-		let alertController = UIAlertController(title: "Are you sure?", message: "Your draft will be kept, but the published rating will be deleted. This action cannot be undone", preferredStyle: .alert)
+		let alertController = UIAlertController(title: "Are you sure?", message: "Your\(deck.hasRatingDraft ? " draft will be kept, but the" : "") published rating will be deleted. This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
 			self.setDeleteRatingLoading(true)
@@ -268,7 +271,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 			removeDraftViewWidthConstraint.constant = 0
 			deleteRatingViewWidthConstraint.constant = 0
 		}
-		UIView.animate(withDuration: animated ? 0.25 : 0, animations: view.layoutIfNeeded)
+		UIView.animate(withDuration: animated ? 0.15 : 0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
