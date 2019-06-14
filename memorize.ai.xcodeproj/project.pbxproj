@@ -145,6 +145,8 @@
 		4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */; };
 		4DDD3F2D22B1FD7700BA2C98 /* CardRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2C22B1FD7700BA2C98 /* CardRatingsViewController.swift */; };
 		4DDD3F2F22B1FF2400BA2C98 /* CardRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2E22B1FF2400BA2C98 /* CardRating.swift */; };
+		4DDD3F3222B34B5900BA2C98 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F3122B34B5900BA2C98 /* NotificationViewController.swift */; };
+		4DDD3F3422B3502E00BA2C98 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F3322B3502E00BA2C98 /* Notification.swift */; };
 		4DDDDD7F22B1D902004704F0 /* DeckRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDDD7E22B1D902004704F0 /* DeckRating.swift */; };
 		4DE7FD3C22B1B8CA00B82F38 /* DeckPermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7FD3B22B1B8CA00B82F38 /* DeckPermissionsViewController.swift */; };
 		4DE7FD3E22B1B97300B82F38 /* DeckAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE7FD3D22B1B97300B82F38 /* DeckAnalyticsViewController.swift */; };
@@ -322,6 +324,8 @@
 		4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDeckViewController.swift; sourceTree = "<group>"; };
 		4DDD3F2C22B1FD7700BA2C98 /* CardRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRatingsViewController.swift; sourceTree = "<group>"; };
 		4DDD3F2E22B1FF2400BA2C98 /* CardRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRating.swift; sourceTree = "<group>"; };
+		4DDD3F3122B34B5900BA2C98 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		4DDD3F3322B3502E00BA2C98 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		4DDDDD7E22B1D902004704F0 /* DeckRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckRating.swift; sourceTree = "<group>"; };
 		4DE7FD3B22B1B8CA00B82F38 /* DeckPermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckPermissionsViewController.swift; sourceTree = "<group>"; };
 		4DE7FD3D22B1B97300B82F38 /* DeckAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckAnalyticsViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +447,7 @@
 				4DF9724622076C8200FF8BED /* Decks */,
 				4D1882BF226E694E00F29F99 /* Cards */,
 				4D8A344F22090E8A0021474A /* Review */,
+				4DDD3F3022B34B0900BA2C98 /* Modals */,
 				4D052ABD2204259C0093B64E /* Assets.xcassets */,
 				4D052AB32204259B0093B64E /* AppDelegate.swift */,
 				4D052ABF2204259C0093B64E /* LaunchScreen.storyboard */,
@@ -653,6 +658,15 @@
 				4DDD3F2C22B1FD7700BA2C98 /* CardRatingsViewController.swift */,
 			);
 			path = Ratings;
+			sourceTree = "<group>";
+		};
+		4DDD3F3022B34B0900BA2C98 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				4DDD3F3122B34B5900BA2C98 /* NotificationViewController.swift */,
+				4DDD3F3322B3502E00BA2C98 /* Notification.swift */,
+			);
+			path = Modals;
 			sourceTree = "<group>";
 		};
 		4DF9724622076C8200FF8BED /* Decks */ = {
@@ -992,6 +1006,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DDD3F3222B34B5900BA2C98 /* NotificationViewController.swift in Sources */,
 				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
 				4DEA540722A5CF6400C5CCEF /* UploadViewController.swift in Sources */,
 				4DE8322722B03E6000DDD1F9 /* DeckSettingsViewController.swift in Sources */,
@@ -1011,6 +1026,7 @@
 				4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */,
 				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
 				4DDD3F2D22B1FD7700BA2C98 /* CardRatingsViewController.swift in Sources */,
+				4DDD3F3422B3502E00BA2C98 /* Notification.swift in Sources */,
 				4DA2C2E122A48E5400669570 /* Upload.swift in Sources */,
 				4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */,
 				4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */,

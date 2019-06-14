@@ -4172,6 +4172,54 @@
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="3699.4565217391305"/>
         </scene>
+        <!--Notification View Controller-->
+        <scene sceneID="WjW-Su-vug">
+            <objects>
+                <viewController storyboardIdentifier="notification" id="Kag-aF-fab" customClass="NotificationViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VoD-76-ItC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-FY-2I7">
+                                <rect key="frame" x="0.0" y="682.66666666666663" width="414" height="53.333333333333371"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KUX-u2-pkh">
+                                        <rect key="frame" x="29.999999999999996" y="14.999999999999998" width="41.666666666666657" height="23.333333333333329"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="CVl-r6-63j"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.36078431372549019" green="0.36078431372549019" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="KUX-u2-pkh" secondAttribute="bottom" constant="15" id="54f-IX-e11"/>
+                                    <constraint firstItem="KUX-u2-pkh" firstAttribute="top" secondItem="SaR-FY-2I7" secondAttribute="top" constant="15" id="IRj-Dt-wNH"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KUX-u2-pkh" secondAttribute="trailing" constant="20" symbolic="YES" id="MH9-9f-Vae"/>
+                                    <constraint firstItem="KUX-u2-pkh" firstAttribute="leading" secondItem="SaR-FY-2I7" secondAttribute="leading" constant="30" id="NIE-MX-CeB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SaR-FY-2I7" firstAttribute="leading" secondItem="VoD-76-ItC" secondAttribute="leading" id="0Dc-7g-5Q7"/>
+                            <constraint firstAttribute="bottom" secondItem="SaR-FY-2I7" secondAttribute="bottom" id="MIQ-te-t9m"/>
+                            <constraint firstAttribute="trailing" secondItem="SaR-FY-2I7" secondAttribute="trailing" id="kfm-yP-fhM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aj1-q1-vW0"/>
+                    </view>
+                    <connections>
+                        <outlet property="notificationLabel" destination="KUX-u2-pkh" id="gS8-Az-agc"/>
+                        <outlet property="notificationLabelBottomConstraint" destination="54f-IX-e11" id="fRy-ZH-OGG"/>
+                        <outlet property="notificationView" destination="SaR-FY-2I7" id="lhc-sf-t8s"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5U-kj-TsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="4372.826086956522"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Asterisk" width="1128" height="1216"/>
