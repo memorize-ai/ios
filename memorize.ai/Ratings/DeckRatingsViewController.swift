@@ -14,7 +14,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.update { change in
+		ChangeHandler.updateAndCall(.deckModified) { change in
 			if change == .deckModified || change == .deckRemoved || change == .deckRatingAdded || change == .deckRatingModified || change == .deckRatingRemoved || change == .ratingDraftAdded || change == .ratingDraftModified || change == .ratingDraftRemoved {
 				self.ratingsTableView.reloadData()
 			}
