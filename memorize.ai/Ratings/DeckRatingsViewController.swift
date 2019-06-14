@@ -40,7 +40,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		cell.deckNameLabel.text = deck.name
 		if let rating = deck.rating {
 			cell.ratingLabel.text = String(rating.rating)
-			cell.detailLabel.text = "\(rating.date.format())\(rating.review.isEmpty ? "" : " • has review")\(deck.hasRatingDraft ? " • has draft" : "")"
+			cell.detailLabel.text = "\(rating.date.formatCompact())\(rating.review.isEmpty ? "" : " • has review")\(deck.hasRatingDraft ? " • has draft" : "")"
 		} else if let rating = deck.ratingDraft {
 			cell.ratingLabel.text = rating.rating == nil ? "~" : String(rating.rating ?? 0)
 			cell.detailLabel.text = "\(rating.review == nil ? "" : "has review • ")unpublished"

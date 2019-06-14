@@ -108,6 +108,10 @@ extension Date {
 		return format("MMM d, yyyy @ h:mm a")
 	}
 	
+	func formatCompact() -> String {
+		return format("MMM d, yyyy")
+	}
+	
 	func elapsed() -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
