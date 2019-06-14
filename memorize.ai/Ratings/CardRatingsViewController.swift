@@ -35,7 +35,8 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		cell.likeButton.setImage(ratingType == .like ? #imageLiteral(resourceName: "Selected Like") : #imageLiteral(resourceName: "Unselected Like"), for: .normal)
 		cell.dislikeButton.setImage(ratingType == .dislike ? #imageLiteral(resourceName: "Selected Dislike") : #imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
 		cell.handler = { rating in
-			let shouldUnrate = rating == ratingType
+			let oldRating = card.ratingType
+			let shouldUnrate = rating == oldRating
 			if shouldUnrate {
 				cell.likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
 				cell.dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
@@ -45,7 +46,7 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 			}
 			card.rate(shouldUnrate ? .none : rating) { error in
 				if error == nil {
-					self.showNotification("\(shouldUnrate ? "Removed from" : "Added to") \(shouldUnrate ? ratingType == .like ? "" : "dis" : rating == .like ? "" : "dis")liked cards", type: .success)
+					self.showNotification("\(shouldUnrate ? "Removed from" : "Added to") \(shouldUnrate ? oldRating == .like ? "" : "dis" : rating == .like ? "" : "dis")liked cards", type: .success)
 				} else {
 					self.ratingsTableView.reloadData()
 					self.showNotification("Unable to rate card. Please try again", type: .error)
