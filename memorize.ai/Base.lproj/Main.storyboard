@@ -3992,7 +3992,7 @@
                                                         <action selector="like" destination="9Ns-oI-C1l" eventType="touchUpInside" id="mQd-XC-qoH"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T38-G4-g2E">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T38-G4-g2E">
                                                     <rect key="frame" x="78" y="28.333333333333336" width="41.666666666666657" height="23.333333333333336"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -4044,12 +4044,12 @@
                                                 <constraint firstAttribute="bottom" secondItem="QeP-Mo-D3U" secondAttribute="bottom" constant="15" id="O2e-wC-zVp"/>
                                                 <constraint firstItem="2mi-6C-Bfd" firstAttribute="leading" secondItem="jUR-DD-wvw" secondAttribute="trailing" constant="20" id="Pxo-z8-cBz"/>
                                                 <constraint firstItem="LsR-vJ-g0H" firstAttribute="leading" secondItem="QeP-Mo-D3U" secondAttribute="trailing" constant="8" id="XST-Xt-6SU"/>
+                                                <constraint firstItem="LsR-vJ-g0H" firstAttribute="top" secondItem="Nkw-fz-Zht" secondAttribute="top" constant="7.6699999999999999" id="cVb-qU-nvZ"/>
                                                 <constraint firstItem="2mi-6C-Bfd" firstAttribute="top" secondItem="Nkw-fz-Zht" secondAttribute="top" constant="15" id="fma-fA-G8w"/>
                                                 <constraint firstItem="jUR-DD-wvw" firstAttribute="top" secondItem="Nkw-fz-Zht" secondAttribute="top" constant="15" id="kOv-CH-PVN"/>
                                                 <constraint firstItem="T38-G4-g2E" firstAttribute="top" secondItem="LsR-vJ-g0H" secondAttribute="bottom" constant="4" id="nDm-df-hFM"/>
                                                 <constraint firstAttribute="bottom" secondItem="2mi-6C-Bfd" secondAttribute="bottom" constant="15" id="r6U-ZT-FSg"/>
                                                 <constraint firstItem="jUR-DD-wvw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LsR-vJ-g0H" secondAttribute="trailing" constant="8" id="wgE-ew-ep5"/>
-                                                <constraint firstItem="T38-G4-g2E" firstAttribute="centerY" secondItem="Nkw-fz-Zht" secondAttribute="centerY" id="zjI-Uq-wAY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
