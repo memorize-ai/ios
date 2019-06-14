@@ -3932,11 +3932,9 @@
                     <connections>
                         <outlet property="deleteRatingActivityIndicator" destination="8Km-XX-RRT" id="lYj-Tl-05U"/>
                         <outlet property="deleteRatingButton" destination="mhD-3q-6kE" id="uWU-PY-D8s"/>
-                        <outlet property="deleteRatingViewTrailingConstraint" destination="sGg-9e-UdR" id="asH-UC-tS8"/>
                         <outlet property="deleteRatingViewWidthConstraint" destination="6mM-Tf-VMF" id="Pab-GO-OAh"/>
                         <outlet property="removeDraftActivityIndicator" destination="q3p-y5-YVE" id="Rah-Ky-LNe"/>
                         <outlet property="removeDraftButton" destination="vcG-fW-e4I" id="luQ-qM-Qq4"/>
-                        <outlet property="removeDraftViewLeadingConstraint" destination="sRd-c3-fIi" id="0uk-1r-Sfs"/>
                         <outlet property="removeDraftViewWidthConstraint" destination="7tN-Qk-qGh" id="6yJ-XN-V31"/>
                         <outlet property="reviewTextView" destination="6Q4-Xo-vDg" id="9Uu-LW-Ix3"/>
                         <outlet property="scrollViewBottomConstraint" destination="vu8-QL-y9n" id="o4J-bJ-q9W"/>

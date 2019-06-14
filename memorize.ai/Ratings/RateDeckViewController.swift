@@ -12,11 +12,9 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	@IBOutlet weak var reviewTextView: UITextView!
 	@IBOutlet weak var removeDraftButton: UIButton!
 	@IBOutlet weak var removeDraftActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var removeDraftViewLeadingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var removeDraftViewWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteRatingButton: UIButton!
 	@IBOutlet weak var deleteRatingActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var deleteRatingViewTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteRatingViewWidthConstraint: NSLayoutConstraint!
 	
 	var deck: Deck?
@@ -32,6 +30,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		reviewTextView.setKeyboard(.plain)
 		textViewDidEndEditing(reviewTextView)
 		removeDraftButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
+		deleteRatingButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
