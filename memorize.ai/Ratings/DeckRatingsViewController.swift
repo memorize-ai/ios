@@ -5,13 +5,6 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	var cells = [Int : DeckRatingPreviewTableViewCell]()
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		super.prepare(for: segue, sender: self)
-		if let rateDeckVC = segue.destination as? RateDeckViewController, let deck = sender as? Deck {
-			rateDeckVC.deck = deck
-		}
-	}
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.deckModified) { change in
@@ -20,6 +13,13 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		if let rateDeckVC = segue.destination as? RateDeckViewController, let deck = sender as? Deck {
+			rateDeckVC.deck = deck
+		}
 	}
 	
 	func showConfirmAlert(_ message: String, completion: @escaping (Bool) -> Void) {
