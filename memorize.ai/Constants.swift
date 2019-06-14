@@ -8,3 +8,4 @@ let JPEG_METADATA: StorageMetadata = {
 	metadata.contentType = "image/jpeg"
 	return metadata
 }()
+let DEFAULT_E = 2.5

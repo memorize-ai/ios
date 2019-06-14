@@ -474,7 +474,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 												dislikes: card.get("dislikes") as? Int ?? 0,
 												count: cardSnapshot.get("count") as? Int ?? 0,
 												correct: cardSnapshot.get("correct") as? Int ?? 0,
-												e: cardSnapshot.get("e") as? Double ?? 0,
+												e: cardSnapshot.get("e") as? Double ?? DEFAULT_E,
 												streak: cardSnapshot.get("streak") as? Int ?? 0,
 												mastered: cardSnapshot.get("mastered") as? Bool ?? false,
 												last: CardLast(cardSnapshot),

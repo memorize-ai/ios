@@ -37,6 +37,7 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		cell.handler = { rating in
 			
 		}
+		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

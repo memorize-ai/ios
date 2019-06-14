@@ -39,6 +39,10 @@ class Card {
 		self.deck = deck
 	}
 	
+	convenience init(id: String, front: String, back: String, created: Date, updated: Date, likes: Int, dislikes: Int, deck: String) {
+		self.init(id: id, front: front, back: back, created: created, updated: updated, likes: likes, dislikes: dislikes, count: 0, correct: 0, e: DEFAULT_E, streak: 0, mastered: false, last: nil, next: Date(), history: [], deck: deck)
+	}
+	
 	var getDeck: Deck? {
 		return Deck.get(deck)
 	}
@@ -66,10 +70,6 @@ class Card {
 	var ratingType: CardRatingType {
 		guard let rating = rating else { return .none }
 		return rating.rating
-	}
-	
-	convenience init(id: String, front: String, back: String, created: Date, updated: Date, likes: Int, dislikes: Int, deck: String) {
-		self.init(id: id, front: front, back: back, created: created, updated: updated, likes: likes, dislikes: dislikes, count: 0, correct: 0, e: 0, streak: 0, mastered: false, last: nil, next: Date(), history: [], deck: deck)
 	}
 	
 	static func all() -> [Card] {
@@ -118,7 +118,7 @@ class Card {
 	func reset() {
 		count = 0
 		correct = 0
-		e = 2.5
+		e = DEFAULT_E
 		streak = 0
 		mastered = false
 		last = nil
