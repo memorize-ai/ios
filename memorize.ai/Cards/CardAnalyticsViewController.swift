@@ -7,7 +7,7 @@ class CardAnalyticsViewController: UIViewController, UITableViewDataSource, UITa
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.update { change in
+		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .cardRemoved {
 				self.analyticsTableView.reloadData()
 			} else if change == .deckRemoved && !Deck.has(self.deck?.id) {
