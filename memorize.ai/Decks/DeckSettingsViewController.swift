@@ -29,6 +29,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 		],
 		[
 			DeckSetting(name: "Analytics", color: #colorLiteral(red: 0.2539775372, green: 0.7368414402, blue: 0.4615401626, alpha: 1), action: viewAnalytics),
+			DeckSetting(name: "Card ratings", color: nil, action: viewCardRatings),
 			DeckSetting(name: "Visit page", color: nil, action: visitPage)
 		],
 		[
@@ -58,6 +59,8 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			deckPermissionsVC.deck = deck
 		} else if let deckAnalyticsVC = segue.destination as? DeckAnalyticsViewController {
 			deckAnalyticsVC.deck = deck
+		} else if let cardAnalyticsVC = segue.destination as? CardAnalyticsViewController {
+			cardAnalyticsVC.deck = deck
 		} else if let deckVC = segue.destination as? DeckViewController {
 			deckVC.deckId = deck.id
 			deckVC.image = deck.image
@@ -87,6 +90,10 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	
 	func viewAnalytics(_ cell: DeckSettingTableViewCell) {
 		performSegue(withIdentifier: "analytics", sender: self)
+	}
+	
+	func viewCardRatings(_ cell: DeckSettingTableViewCell) {
+		performSegue(withIdentifier: "cardRatings", sender: self)
 	}
 	
 	func visitPage(_ cell: DeckSettingTableViewCell) {
