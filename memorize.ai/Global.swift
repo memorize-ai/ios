@@ -12,6 +12,7 @@ let defaults = UserDefaults.standard
 var startup = true
 var shouldLoadDecks = false
 var currentViewController: UIViewController?
+var keyboardOffset: CGFloat = 0
 
 extension DocumentSnapshot {
 	func getDate(_ field: String) -> Date? {
@@ -72,6 +73,17 @@ extension UIViewController {
 	
 	func updateCurrentViewController() {
 		currentViewController = self
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	@objc private func keyboardWillShow(notification: NSNotification) {
+		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
+		keyboardOffset = height
+	}
+	
+	@objc private func keyboardWillHide(notification: NSNotification) {
+		keyboardOffset = 0
 	}
 }
 
