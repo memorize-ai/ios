@@ -11,11 +11,13 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	@IBOutlet weak var titleBarView: UIView!
 	@IBOutlet weak var reviewTextView: UITextView!
 	@IBOutlet weak var removeDraftButton: UIButton!
-	@IBOutlet weak var removeDraftButtonLeadingConstraint: NSLayoutConstraint!
-	@IBOutlet weak var removeDraftButtonWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var removeDraftActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var removeDraftViewLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var removeDraftViewWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteRatingButton: UIButton!
-	@IBOutlet weak var deleteRatingButtonTrailingConstraint: NSLayoutConstraint!
-	@IBOutlet weak var deleteRatingButtonWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var deleteRatingActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var deleteRatingViewTrailingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var deleteRatingViewWidthConstraint: NSLayoutConstraint!
 	
 	var deck: Deck?
 	var selectedRating: Int?
@@ -174,12 +176,24 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	}
 	
 	@IBAction func removeDraft() {
+		guard let id = id, let deck = deck else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		alertController.addAction(UIAlertAction(title: "Remove", style: .destructive) { _ in
-			<#code#>
+			firestore.document("users/\(id)/ratingDrafts/\(deck.id)").delete { error in
+				if error == nil {
+					self.setRightBarButton(false)
+					buzz()
+				} else {
+					self.setRightBarButton(true)
+				}
+			}
 		})
 		present(alertController, animated: true, completion: nil)
+	}
+	
+	@IBAction func deleteRating() {
+		
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
