@@ -3650,7 +3650,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON5-9l-sPI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="366"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="412"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1b3-Si-84T">
                                                 <rect key="frame" x="82.333333333333329" y="30" width="249.33333333333337" height="40"/>
@@ -3793,20 +3793,76 @@
                                                     <outlet property="delegate" destination="3Bm-Xc-u3A" id="en0-EF-q0z"/>
                                                 </connections>
                                             </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtO-Eb-Gzf">
+                                                <rect key="frame" x="20" y="346" width="374" height="36"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcG-fW-e4I">
+                                                        <rect key="frame" x="0.0" y="0.0" width="103" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="103" id="1hM-ko-LhZ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
+                                                        <state key="normal" title="Remove draft">
+                                                            <color key="titleColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                <real key="value" value="0.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="removeDraft" destination="3Bm-Xc-u3A" eventType="touchUpInside" id="hIe-Gg-dqe"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhD-3q-6kE">
+                                                        <rect key="frame" x="276" y="0.0" width="98" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="98" id="kKh-Cs-klh"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
+                                                        <state key="normal" title="Delete rating">
+                                                            <color key="titleColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                <real key="value" value="0.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="mhD-3q-6kE" secondAttribute="bottom" id="Wfv-og-Cvi"/>
+                                                    <constraint firstAttribute="bottom" secondItem="vcG-fW-e4I" secondAttribute="bottom" id="ZvZ-lU-Ug9"/>
+                                                    <constraint firstItem="vcG-fW-e4I" firstAttribute="top" secondItem="TtO-Eb-Gzf" secondAttribute="top" id="eZE-Tx-eAi"/>
+                                                    <constraint firstItem="mhD-3q-6kE" firstAttribute="top" secondItem="TtO-Eb-Gzf" secondAttribute="top" id="gez-wy-zoL"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mhD-3q-6kE" secondAttribute="trailing" id="jbv-UK-Dve"/>
+                                                    <constraint firstItem="vcG-fW-e4I" firstAttribute="leading" secondItem="TtO-Eb-Gzf" secondAttribute="leading" id="rZY-Kd-kGV"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="r4o-2n-lNg" firstAttribute="top" secondItem="XaD-bx-MXd" secondAttribute="bottom" id="01M-j6-43t"/>
-                                            <constraint firstAttribute="bottom" secondItem="6Q4-Xo-vDg" secondAttribute="bottom" constant="40" id="3qE-ic-elD"/>
                                             <constraint firstItem="kgs-4q-V3q" firstAttribute="leading" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="20" id="46E-J9-xK7"/>
                                             <constraint firstAttribute="trailing" secondItem="6Q4-Xo-vDg" secondAttribute="trailing" constant="20" id="9ds-Ou-q2i"/>
                                             <constraint firstAttribute="trailing" secondItem="r4o-2n-lNg" secondAttribute="trailing" constant="20" id="ANh-UK-SpD"/>
+                                            <constraint firstItem="TtO-Eb-Gzf" firstAttribute="top" secondItem="6Q4-Xo-vDg" secondAttribute="bottom" constant="20" id="F9g-UR-rXf"/>
+                                            <constraint firstAttribute="bottom" secondItem="TtO-Eb-Gzf" secondAttribute="bottom" constant="30" id="FTB-lH-ppu"/>
                                             <constraint firstItem="6Q4-Xo-vDg" firstAttribute="leading" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="20" id="HSW-cm-POm"/>
                                             <constraint firstItem="XaD-bx-MXd" firstAttribute="leading" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="20" id="P27-EW-f0G"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kgs-4q-V3q" secondAttribute="trailing" constant="20" id="U8W-3w-D51"/>
+                                            <constraint firstItem="TtO-Eb-Gzf" firstAttribute="leading" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="20" id="Vjg-a0-iPu"/>
                                             <constraint firstItem="1b3-Si-84T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="15" id="Vl0-f6-lpr"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XnE-l6-UL1" secondAttribute="trailing" constant="20" id="YBz-8n-XCN"/>
                                             <constraint firstItem="1b3-Si-84T" firstAttribute="centerX" secondItem="ON5-9l-sPI" secondAttribute="centerX" id="ZsR-uZ-G91"/>
+                                            <constraint firstItem="TtO-Eb-Gzf" firstAttribute="centerX" secondItem="ON5-9l-sPI" secondAttribute="centerX" id="bap-dx-Sva"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1b3-Si-84T" secondAttribute="trailing" constant="15" id="c6I-sh-sX5"/>
                                             <constraint firstItem="XaD-bx-MXd" firstAttribute="top" secondItem="kgs-4q-V3q" secondAttribute="bottom" constant="4" id="eHR-4A-Nta"/>
                                             <constraint firstItem="6Q4-Xo-vDg" firstAttribute="top" secondItem="XnE-l6-UL1" secondAttribute="bottom" constant="4" id="eVt-90-PCG"/>
@@ -3815,6 +3871,7 @@
                                             <constraint firstItem="XnE-l6-UL1" firstAttribute="leading" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="20" id="i90-et-vPC"/>
                                             <constraint firstAttribute="trailing" secondItem="XaD-bx-MXd" secondAttribute="trailing" constant="20" id="mR9-QU-gbt"/>
                                             <constraint firstItem="1b3-Si-84T" firstAttribute="top" secondItem="ON5-9l-sPI" secondAttribute="top" constant="30" id="mZS-sG-ItF"/>
+                                            <constraint firstAttribute="trailing" secondItem="TtO-Eb-Gzf" secondAttribute="trailing" constant="20" id="q3Z-sZ-Kpp"/>
                                             <constraint firstItem="r4o-2n-lNg" firstAttribute="leading" secondItem="ON5-9l-sPI" secondAttribute="leading" constant="20" id="ut0-qn-QP5"/>
                                         </constraints>
                                     </view>
@@ -3838,6 +3895,12 @@
                         <viewLayoutGuide key="safeArea" id="F3A-bt-AR6"/>
                     </view>
                     <connections>
+                        <outlet property="deleteRatingButton" destination="mhD-3q-6kE" id="uWU-PY-D8s"/>
+                        <outlet property="deleteRatingButtonTrailingConstraint" destination="jbv-UK-Dve" id="vRq-oq-l4m"/>
+                        <outlet property="deleteRatingButtonWidthConstraint" destination="kKh-Cs-klh" id="43j-C5-Vyo"/>
+                        <outlet property="removeDraftButton" destination="vcG-fW-e4I" id="luQ-qM-Qq4"/>
+                        <outlet property="removeDraftButtonLeadingConstraint" destination="rZY-Kd-kGV" id="Q6X-mv-KSB"/>
+                        <outlet property="removeDraftButtonWidthConstraint" destination="1hM-ko-LhZ" id="eQw-ek-GuD"/>
                         <outlet property="reviewTextView" destination="6Q4-Xo-vDg" id="9Uu-LW-Ix3"/>
                         <outlet property="scrollViewBottomConstraint" destination="vu8-QL-y9n" id="o4J-bJ-q9W"/>
                         <outlet property="star1Button" destination="wEw-WP-AUF" id="hCU-Pk-ttv"/>

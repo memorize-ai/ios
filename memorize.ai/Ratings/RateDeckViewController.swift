@@ -10,6 +10,12 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	@IBOutlet weak var titleTextField: UITextField!
 	@IBOutlet weak var titleBarView: UIView!
 	@IBOutlet weak var reviewTextView: UITextView!
+	@IBOutlet weak var removeDraftButton: UIButton!
+	@IBOutlet weak var removeDraftButtonLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var removeDraftButtonWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var deleteRatingButton: UIButton!
+	@IBOutlet weak var deleteRatingButtonTrailingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var deleteRatingButtonWidthConstraint: NSLayoutConstraint!
 	
 	var deck: Deck?
 	var selectedRating: Int?
@@ -22,6 +28,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		titleTextField.setKeyboard()
 		reviewTextView.setKeyboard(.plain)
 		textViewDidEndEditing(reviewTextView)
+		removeDraftButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -164,6 +171,15 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 				self.showAlert("Unable to publish rating. Please try again")
 			}
 		}
+	}
+	
+	@IBAction func removeDraft() {
+		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Remove", style: .destructive) { _ in
+			<#code#>
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
