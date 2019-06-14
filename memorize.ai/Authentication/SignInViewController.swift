@@ -81,9 +81,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 				self.hideActivityIndicator()
 				switch error.localizedDescription {
 				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-					self.showAlert("No internet")
+					self.showNotification("No internet", type: .error)
 				default:
-					self.showAlert("Invalid email/password")
+					self.showNotification("Invalid email/password", type: .error)
 				}
 			}
 		}

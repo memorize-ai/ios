@@ -72,8 +72,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 							}
 						}
 					}
-				} else if let error = error {
-					self.showAlert(error.localizedDescription)
+				} else {
+					self.showNotification("Unable to search decks. Please try again", type: .error)
 				}
 			}
 		}

@@ -84,8 +84,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				Listener.removeAll()
 				User.delete()
 				self.performSegue(withIdentifier: "signOut", sender: self)
-			} catch let error {
-				self.showAlert(error.localizedDescription)
+			} catch {
+				self.showNotification("Unable to sign out. Please try again", type: .error)
 			}
 		}
 		alertController.addAction(cancel)
@@ -150,7 +150,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				}
 			}
 		} else {
-			showAlert("Unable to set profile picture")
+			showNotification("Unable to set profile picture. Please try again", type: .error)
 		}
 	}
 	

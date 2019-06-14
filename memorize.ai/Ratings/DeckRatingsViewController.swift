@@ -70,7 +70,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 						if error == nil {
 							self.ratingsTableView.reloadData()
 						} else {
-							self.showAlert("Unable to delete rating\(draftMessage). Please try again")
+							self.showNotification("Unable to delete rating\(draftMessage). Please try again", type: .error)
 						}
 					}
 				}
@@ -84,7 +84,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 						if error == nil {
 							self.ratingsTableView.reloadData()
 						} else {
-							self.showAlert("Unable to delete draft. Please try again")
+							self.showNotification("Unable to delete draft. Please try again", type: .error)
 						}
 					}
 				}

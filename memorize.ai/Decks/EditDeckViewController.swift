@@ -237,7 +237,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 						deck.image = self.imageView.image
 					}
 				} else {
-					self.showAlert("Unable to publish changes. Please try again")
+					self.showNotification("Unable to publish changes. Please try again", type: .error)
 				}
 			}
 		} else {
@@ -265,7 +265,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 								self.navigationController?.popViewController(animated: true)
 							}
 						} else {
-							self.showAlert("Unable to add the deck to your library. You can manually get the deck from the Marketplace")
+							self.showNotification("Unable to add the deck to your library. You can manually get the deck from the Marketplace", type: .error)
 							self.navigationController?.popViewController(animated: true)
 						}
 					}
@@ -283,9 +283,9 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 				self.hideActivityIndicator()
 				switch error.localizedDescription {
 				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-					self.showAlert("No internet")
+					self.showNotification("No internet", type: .error)
 				default:
-					self.showAlert("There was a problem creating a new deck")
+					self.showNotification("There was a problem creating a new deck", type: .error)
 				}
 			} else {
 				self.hideActivityIndicator()

@@ -110,7 +110,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				if error == nil, let data = data {
 					cell.imageView.image = UIImage(data: data)
 				} else {
-					self.showAlert("There was a problem loading \(element.name)")
+					self.showNotification("Unable to load \(element.name)", type: .error)
 				}
 			}
 		}

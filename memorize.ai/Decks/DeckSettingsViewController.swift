@@ -104,7 +104,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 				if error == nil {
 					buzz()
 				} else {
-					self.showAlert("An unknown error occurred. Please try again")
+					self.showNotification("An unknown error occurred. Please try again", type: .error)
 				}
 			}
 		})
@@ -120,7 +120,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 				buzz()
 				self.navigationController?.popViewController(animated: true)
 			} else {
-				self.showAlert("An unknown error occurred. Please try again")
+				self.showNotification("An unknown error occurred. Please try again", type: .error)
 			}
 		}
 	}
@@ -142,11 +142,11 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 								buzz()
 								self.navigationController?.popViewController(animated: true)
 							} else {
-								self.showAlert("An unknown error occurred. Please try again")
+								self.showNotification("An unknown error occurred. Please try again", type: .error)
 							}
 						}
 					} else {
-						self.showAlert("An unknown error occurred. Please try again")
+						self.showNotification("An unknown error occurred. Please try again", type: .error)
 					}
 				}
 			})

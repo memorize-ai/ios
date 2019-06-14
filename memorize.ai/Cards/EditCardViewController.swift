@@ -96,7 +96,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 				}
 				self.navigationController?.popViewController(animated: true)
 			} else {
-				self.showAlert("There was an error publishing the card. Please try again.")
+				self.showNotification("There was an error publishing the card. Please try again", type: .error)
 				self.enableRightBarButtonItem()
 			}
 		}
@@ -113,7 +113,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 				self.lastPublishedText = text
 				buzz()
 			} else {
-				self.showAlert("There was an error publishing the card. Please try again.")
+				self.showNotification("There was an error publishing the card. Please try again", type: .error)
 				self.enableRightBarButtonItem()
 			}
 		}

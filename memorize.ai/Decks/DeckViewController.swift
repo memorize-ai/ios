@@ -134,11 +134,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBAction func preview() {
 		switch count {
 		case 0:
-			showAlert("There are no cards in this deck to preview")
+			showNotification("There are no cards in this deck to preview", type: .normal)
 		case cards.count:
 			performSegue(withIdentifier: "preview", sender: self)
 		default:
-			showAlert("Loading cards...")
+			showNotification("Loading cards...", type: .normal)
 		}
 	}
 	
@@ -175,10 +175,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						self.getButton.setTitle("DELETE", for: .normal)
 						self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 					}, completion: nil)
-				} else if let error = error {
+				} else {
 					self.getActivityIndicator.stopAnimating()
 					self.getButton.setTitle("GET", for: .normal)
-					self.showAlert(error.localizedDescription)
+					self.showNotification("Unable to get deck. Please try again", type: .error)
 				}
 			}
 		} else {
@@ -191,10 +191,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						self.getButton.setTitle("GET", for: .normal)
 						self.getButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
 					}, completion: nil)
-				} else if let error = error {
+				} else {
 					self.getActivityIndicator.stopAnimating()
 					self.getButton.setTitle("DELETE", for: .normal)
-					self.showAlert(error.localizedDescription)
+					self.showNotification("Unable to remove deck from library. Please try again", type: .error)
 				}
 			}
 		}
