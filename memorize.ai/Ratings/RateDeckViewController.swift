@@ -27,6 +27,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		navigationItem.title = "\(deck?.hasRating ?? false ? "Edit" : "New") Rating"
 		load()
 		reloadRightBarButton()
+		reloadDestructiveButtons(animated: false)
 		titleTextField.setKeyboard()
 		reviewTextView.setKeyboard(.plain)
 		textViewDidEndEditing(reviewTextView)
@@ -35,6 +36,13 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		ChangeHandler.update { change in
+			if change == .deckRemoved && !(decks.contains { $0.id == self.deck?.id }) {
+				self.navigationController?.popViewController(animated: true)
+			} else if change == .deckRatingRemoved || change == .ratingDraftRemoved {
+				self.reloadDestructiveButtons()
+			}
+		}
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 		updateCurrentViewController()
@@ -180,12 +188,18 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		alertController.addAction(UIAlertAction(title: "Remove", style: .destructive) { _ in
+			self.setRemoveDraftLoading(true)
 			firestore.document("users/\(id)/ratingDrafts/\(deck.id)").delete { error in
+				self.setRemoveDraftLoading(false)
 				if error == nil {
-					self.setRightBarButton(false)
 					buzz()
+					if deck.hasRating {
+						self.reloadDestructiveButtons()
+					} else {
+						self.navigationController?.popViewController(animated: true)
+					}
 				} else {
-					self.setRightBarButton(true)
+					self.showAlert("Unable to remove draft. Please try again")
 				}
 			}
 		})
@@ -193,7 +207,69 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	}
 	
 	@IBAction func deleteRating() {
-		
+		guard let deck = deck else { return }
+		let alertController = UIAlertController(title: "Are you sure?", message: "Your draft will be kept, but the published rating will be deleted. This action cannot be undone", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+			self.setDeleteRatingLoading(true)
+			deck.unrate { error in
+				self.setDeleteRatingLoading(false)
+				if error == nil {
+					buzz()
+					if deck.hasRatingDraft {
+						self.reloadDestructiveButtons()
+					} else {
+						self.navigationController?.popViewController(animated: true)
+					}
+				} else {
+					self.showAlert("Unable to delete rating. Please try again")
+				}
+			}
+		})
+		present(alertController, animated: true, completion: nil)
+	}
+	
+	func setRemoveDraftLoading(_ isLoading: Bool) {
+		removeDraftButton.isEnabled = !isLoading
+		removeDraftButton.setTitle(isLoading ? nil : "Remove draft", for: .normal)
+		if isLoading {
+			removeDraftActivityIndicator.startAnimating()
+		} else {
+			removeDraftActivityIndicator.stopAnimating()
+		}
+	}
+	
+	func setDeleteRatingLoading(_ isLoading: Bool) {
+		deleteRatingButton.isEnabled = !isLoading
+		deleteRatingButton.setTitle(isLoading ? nil : "Delete rating", for: .normal)
+		if isLoading {
+			deleteRatingActivityIndicator.startAnimating()
+		} else {
+			deleteRatingActivityIndicator.stopAnimating()
+		}
+	}
+	
+	func reloadDestructiveButtons(animated: Bool = true) {
+		guard let deck = deck else { return }
+		let hasDraft = deck.hasRatingDraft
+		let hasRating = deck.hasRating
+		let fullWidth = view.bounds.width - 40
+		let halfWidth = view.bounds.width / 2 - 30
+		switch true {
+		case hasDraft && hasRating:
+			removeDraftViewWidthConstraint.constant = halfWidth
+			deleteRatingViewWidthConstraint.constant = halfWidth
+		case hasDraft:
+			removeDraftViewWidthConstraint.constant = fullWidth
+			deleteRatingViewWidthConstraint.constant = 0
+		case hasRating:
+			removeDraftViewWidthConstraint.constant = 0
+			deleteRatingViewWidthConstraint.constant = fullWidth
+		default:
+			removeDraftViewWidthConstraint.constant = 0
+			deleteRatingViewWidthConstraint.constant = 0
+		}
+		UIView.animate(withDuration: animated ? 0.25 : 0, animations: view.layoutIfNeeded)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
