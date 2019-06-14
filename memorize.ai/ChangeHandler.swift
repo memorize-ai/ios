@@ -18,6 +18,8 @@ class ChangeHandler {
 }
 
 enum Change {
+	case keyboardMoved
+	
 	case profileModified
 	case profilePicture
 	

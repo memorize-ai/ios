@@ -80,10 +80,12 @@ extension UIViewController {
 	@objc private func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
 		keyboardOffset = height
+		ChangeHandler.call(.keyboardMoved)
 	}
 	
 	@objc private func keyboardWillHide(notification: NSNotification) {
 		keyboardOffset = 0
+		ChangeHandler.call(.keyboardMoved)
 	}
 }
 
