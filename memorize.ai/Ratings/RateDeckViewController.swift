@@ -160,6 +160,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	@objc func publish() {
 		guard let id = id, let deck = deck else { return }
+		showNotification("Publishing...", type: .normal)
 		setRightBarButton(false)
 		let isNew = !deck.hasRating
 		deck.rate(selectedRating ?? 0, title: titleTextField.text?.trim() ?? "", review: reviewTextView.text.trim()) { error in
@@ -170,6 +171,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 						buzz()
 						if isNew {
 							self.navigationController?.popViewController(animated: true)
+						} else {
+							self.showNotification("Published", type: .success)
 						}
 					} else {
 						self.setRightBarButton(true)
@@ -177,7 +180,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 				}
 			} else {
 				self.setRightBarButton(true)
-				self.showAlert("Unable to publish rating. Please try again")
+				self.showNotification("Unable to publish rating. Please try again", type: .error)
 			}
 		}
 	}
@@ -198,11 +201,12 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 						self.reviewTextView.text = rating.review
 						self.reloadRightBarButton()
 						self.reloadDestructiveButtons()
+						self.showNotification("Removed draft", type: .success)
 					} else {
 						self.navigationController?.popViewController(animated: true)
 					}
 				} else {
-					self.showAlert("Unable to remove draft. Please try again")
+					self.showNotification("Unable to remove draft. Please try again", type: .error)
 				}
 			}
 		})
@@ -222,11 +226,12 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 					if deck.hasRatingDraft {
 						self.reloadRightBarButton()
 						self.reloadDestructiveButtons()
+						self.showNotification("Deleted rating", type: .success)
 					} else {
 						self.navigationController?.popViewController(animated: true)
 					}
 				} else {
-					self.showAlert("Unable to delete rating. Please try again")
+					self.showNotification("Unable to delete rating. Please try again", type: .error)
 				}
 			}
 		})
