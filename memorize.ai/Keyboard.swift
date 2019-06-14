@@ -1,5 +1,41 @@
 import UIKit
 
+var currentViewController: UIViewController?
+var keyboardOffset: CGFloat = 0
+
+class KeyboardHandler {
+	private static var handler: ((KeyboardDirection) -> Void)?
+	
+	static func update(_ handler: ((KeyboardDirection) -> Void)?) {
+		self.handler = handler
+	}
+	
+	static func call(_ direction: KeyboardDirection) {
+		handler?(direction)
+	}
+}
+
+extension UIViewController {
+	func updateCurrentViewController() {
+		currentViewController = self
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	@objc private func keyboardWillShow(notification: NSNotification) {
+		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
+		keyboardOffset = height
+		ChangeHandler.call(.keyboardMoved)
+		KeyboardHandler.call(.up)
+	}
+	
+	@objc private func keyboardWillHide(notification: NSNotification) {
+		keyboardOffset = 0
+		ChangeHandler.call(.keyboardMoved)
+		KeyboardHandler.call(.down)
+	}
+}
+
 extension UITextField {
 	func setKeyboard(_ type: UIKeyboardAppearance) {
 		keyboardAppearance = type
@@ -95,6 +131,11 @@ extension UITextView {
 enum KeyboardType {
 	case plain
 	case advanced
+}
+
+enum KeyboardDirection {
+	case up
+	case down
 }
 
 fileprivate func isDarkMode() -> Bool {

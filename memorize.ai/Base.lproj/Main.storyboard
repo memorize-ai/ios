@@ -4181,7 +4181,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-FY-2I7">
-                                <rect key="frame" x="0.0" y="682.66666666666663" width="414" height="53.333333333333371"/>
+                                <rect key="frame" x="0.0" y="683" width="414" height="53"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KUX-u2-pkh">
                                         <rect key="frame" x="29.999999999999996" y="14.999999999999998" width="41.666666666666657" height="23.333333333333329"/>
@@ -4214,6 +4214,7 @@
                         <outlet property="notificationLabel" destination="KUX-u2-pkh" id="gS8-Az-agc"/>
                         <outlet property="notificationLabelBottomConstraint" destination="54f-IX-e11" id="fRy-ZH-OGG"/>
                         <outlet property="notificationView" destination="SaR-FY-2I7" id="lhc-sf-t8s"/>
+                        <outlet property="notificationViewBottomConstraint" destination="MIQ-te-t9m" id="npb-Jq-Kc1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d5U-kj-TsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
