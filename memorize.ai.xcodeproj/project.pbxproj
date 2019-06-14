@@ -31,6 +31,7 @@
 		4D5F1F1E229E1B0C00AC7732 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1D229E1B0C00AC7732 /* User.swift */; };
 		4D5F1F20229E1C4D00AC7732 /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1F229E1C4D00AC7732 /* Invite.swift */; };
 		4D5F1F22229F217200AC7732 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F21229F217200AC7732 /* Keyboard.swift */; };
+		4D62955122B3A508009560F9 /* CardAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62955022B3A508009560F9 /* CardAnalyticsViewController.swift */; };
 		4D64390622056528006F4F2D /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */; };
 		4D64390722056528006F4F2D /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */; };
 		4D64390822056528006F4F2D /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438FA22056528006F4F2D /* Nunito-ExtraLightItalic.ttf */; };
@@ -210,6 +211,7 @@
 		4D5F1F1D229E1B0C00AC7732 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D5F1F1F229E1C4D00AC7732 /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		4D5F1F21229F217200AC7732 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		4D62955022B3A508009560F9 /* CardAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnalyticsViewController.swift; sourceTree = "<group>"; };
 		4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
 		4D6438FA22056528006F4F2D /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				4D1882C0226E696000F29F99 /* CardsViewController.swift */,
+				4D62955022B3A508009560F9 /* CardAnalyticsViewController.swift */,
 				4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */,
 				4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */,
 				4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */,
@@ -1014,6 +1017,7 @@
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */,
 				4DDDDD7F22B1D902004704F0 /* DeckRating.swift in Sources */,
+				4D62955122B3A508009560F9 /* CardAnalyticsViewController.swift in Sources */,
 				4DE7FD3E22B1B97300B82F38 /* DeckAnalyticsViewController.swift in Sources */,
 				4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */,
 				4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */,

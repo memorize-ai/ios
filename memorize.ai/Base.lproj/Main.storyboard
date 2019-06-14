@@ -2247,6 +2247,7 @@
                         <segue destination="hkx-K9-vG5" kind="show" identifier="analytics" id="HDI-H5-eeV"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="FG1-aM-YqR"/>
                         <segue destination="3Bm-Xc-u3A" kind="show" identifier="rate" id="nwZ-Xi-26f"/>
+                        <segue destination="6YS-R4-WZM" kind="show" identifier="cardRatings" id="td1-Eo-4jz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-Pa-nLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2366,6 +2367,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jof-m5-csY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1500.0000000000002" y="3493.2065217391305"/>
+        </scene>
+        <!--Card Ratings-->
+        <scene sceneID="uP8-jJ-SUD">
+            <objects>
+                <viewController title="Card Ratings" id="6YS-R4-WZM" customClass="CardAnalyticsViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lIJ-il-3W1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6P4-CT-sgb">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="85" id="fzl-OC-ONh">
+                                        <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fzl-OC-ONh" id="Mxh-ov-Od5">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="84.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6YS-R4-WZM" id="ObV-ua-VFA"/>
+                                    <outlet property="delegate" destination="6YS-R4-WZM" id="QSe-nB-3NF"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="6P4-CT-sgb" secondAttribute="bottom" id="2W6-Mf-rxm"/>
+                            <constraint firstItem="6P4-CT-sgb" firstAttribute="leading" secondItem="qlQ-Ua-7dh" secondAttribute="leading" id="IM4-RZ-y2e"/>
+                            <constraint firstItem="qlQ-Ua-7dh" firstAttribute="trailing" secondItem="6P4-CT-sgb" secondAttribute="trailing" id="Y50-Hb-Sbf"/>
+                            <constraint firstItem="6P4-CT-sgb" firstAttribute="top" secondItem="qlQ-Ua-7dh" secondAttribute="top" id="pj1-EM-kov"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qlQ-Ua-7dh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gHP-q1-GsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2192.753623188406" y="3492.3913043478265"/>
         </scene>
         <!--Search-->
         <scene sceneID="Eck-gd-bdm">
@@ -4362,7 +4404,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="324-2A-P4S"/>
+        <segue reference="nwZ-Xi-26f"/>
         <segue reference="TPR-zk-sPC"/>
         <segue reference="h5F-6A-J1r"/>
         <segue reference="Reh-O7-sEd"/>
