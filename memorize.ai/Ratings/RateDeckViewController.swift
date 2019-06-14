@@ -145,7 +145,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	func reloadRightBarButton() {
 		navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: #selector(publish)), animated: false)
-		if let deck = deck, let rating = deck.rating, deck.hasRatingDraft {
+		if let rating = deck?.rating {
 			setRightBarButton(!(rating.rating == selectedRating && rating.title == titleTextField.text?.trim() && rating.review == reviewTextView.text.trim()))
 		} else {
 			setRightBarButton(selectedRating != nil)
