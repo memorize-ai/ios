@@ -58,24 +58,34 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		guard editingStyle == .delete, let cell = cells[indexPath.row] else { return }
+		guard editingStyle == .delete, let cell = cells[indexPath.row], let id = id else { return }
 		let deck = decks[indexPath.row]
 		if deck.hasRating {
-			let draftMessage = deck.hasRatingDraft ? " and draft" : ""
+			let draft = deck.ratingDraft
+			let draftMessage = draft == nil ? "" : " and draft"
 			showConfirmAlert("Your published rating\(draftMessage) will be deleted. This action cannot be undone") { accepted in
 				if accepted {
 					cell.startLoading()
 					deck.unrate { error in
-						cell.stopLoading()
 						if error == nil {
-							self.ratingsTableView.reloadData()
+							if let draft = draft {
+								firestore.document("users/\(id)/ratingDrafts/\(draft.id)").delete { error in
+									cell.stopLoading()
+									self.ratingsTableView.reloadData()
+									self.showNotification(error == nil ? "Deleted rating\(draftMessage)" : "Unable to delete draft. Please try again", type: error == nil ? .success : .error)
+								}
+							} else {
+								cell.stopLoading()
+								self.ratingsTableView.reloadData()
+							}
 						} else {
+							cell.stopLoading()
 							self.showNotification("Unable to delete rating\(draftMessage). Please try again", type: .error)
 						}
 					}
 				}
 			}
-		} else if let draft = deck.ratingDraft, let id = id {
+		} else if let draft = deck.ratingDraft {
 			showConfirmAlert("Your draft will be deleted. This action cannot be undone") { accepted in
 				if accepted {
 					cell.startLoading()
