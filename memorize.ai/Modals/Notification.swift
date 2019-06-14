@@ -3,12 +3,12 @@ import UIKit
 extension UIViewController {
 	func showNotification(_ text: String, type: NotificationType, delay: Double = 2, completion: (() -> Void)? = nil) {
 		guard let notificationVC = storyboard?.instantiateViewController(withIdentifier: "notification") as? NotificationViewController else { return }
-		notificationVC.notificationView.backgroundColor = type.color
-		notificationVC.notificationLabel.text = text
 		addChild(notificationVC)
 		notificationVC.view.frame = view.frame
 		view.addSubview(notificationVC.view)
 		notificationVC.didMove(toParent: self)
+		notificationVC.notificationView.backgroundColor = type.color
+		notificationVC.notificationLabel.text = text
 		notificationVC.show(delay, completion: completion)
 	}
 }
