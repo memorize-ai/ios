@@ -12,13 +12,15 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		let name: String
 		let subtitle: String
 		let averageRating: Double
+		let ratingsCount: Int
 		
-		init(id: String, image: UIImage?, name: String, subtitle: String, averageRating: Double) {
+		init(id: String, image: UIImage?, name: String, subtitle: String, averageRating: Double, ratingsCount: Int) {
 			self.id = id
 			self.image = image
 			self.name = name
 			self.subtitle = subtitle
 			self.averageRating = averageRating
+			self.ratingsCount = ratingsCount
 		}
 	}
 	
@@ -27,8 +29,9 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	override func viewDidLoad() {
         super.viewDidLoad()
 		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.minimumLineSpacing = 8
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 50)
+		flowLayout.minimumLineSpacing = 20
+		let size = view.bounds.width - 40
+		flowLayout.itemSize = CGSize(width: size, height: size)
 		decksCollectionView.collectionViewLayout = flowLayout
     }
 	
@@ -65,8 +68,15 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 						listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { _, error in
 							guard error == nil, let owner = result["owner"] as? String else { return }
 							listeners["users/\(owner)"] = firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
-								guard userError == nil, let snapshot = snapshot else { return }
-								self.searchResults.append(SearchResult(id: deckId, image: nil, name: result["name"] as? String ?? "Error", subtitle: snapshot.get("subtitle") as? String ?? "Error"))
+								guard userError == nil, let snapshot = snapshot, let ratings = snapshot.get("ratings") as? [String : Any] else { return }
+								self.searchResults.append(SearchResult(
+									id: deckId,
+									image: Deck.get(deckId)?.image,
+									name: result["name"] as? String ?? "Error",
+									subtitle: snapshot.get("subtitle") as? String ?? "Error",
+									averageRating: ratings["average"] as? Double ?? 0,
+									ratingsCount: (ratings["1"] as? Int ?? 0) + (ratings["2"] as? Int ?? 0) + (ratings["3"] as? Int ?? 0) + (ratings["4"] as? Int ?? 0) + (ratings["5"] as? Int ?? 0)
+								))
 								self.decksCollectionView.reloadData()
 							}
 						}
@@ -93,11 +103,14 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				cell.imageView.image = image
 				searchResult.image = image
+				Deck.get(searchResult.id)?.image = image
 			}
 		}
 		cell.nameLabel.text = searchResult.name
 		cell.subtitleLabel.text = searchResult.subtitle
 		cell.setAverageRating(searchResult.averageRating)
+		cell.ratingsCountLabel.text = String(searchResult.ratingsCount)
+		// Load webview as well
 		return cell
 	}
 	
