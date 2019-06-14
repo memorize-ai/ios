@@ -35,14 +35,24 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		cell.likeButton.setImage(ratingType == .like ? #imageLiteral(resourceName: "Selected Like") : #imageLiteral(resourceName: "Unselected Like"), for: .normal)
 		cell.dislikeButton.setImage(ratingType == .dislike ? #imageLiteral(resourceName: "Selected Dislike") : #imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
 		cell.handler = { rating in
-			
+			let shouldUnrate = rating == ratingType
+			if shouldUnrate {
+				cell.likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
+				cell.dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+			} else {
+				cell.likeButton.setImage(rating == .like ? #imageLiteral(resourceName: "Selected Like") : #imageLiteral(resourceName: "Unselected Like"), for: .normal)
+				cell.dislikeButton.setImage(rating == .dislike ? #imageLiteral(resourceName: "Selected Dislike") : #imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+			}
+			card.rate(shouldUnrate ? .none : rating) { error in
+				if error == nil {
+					self.showNotification("\(shouldUnrate ? "Removed from" : "Added to") \(shouldUnrate ? ratingType == .like ? "" : "dis" : rating == .like ? "" : "dis")liked cards", type: .success)
+				} else {
+					self.ratingsTableView.reloadData()
+					self.showNotification("Unable to rate card. Please try again", type: .error)
+				}
+			}
 		}
 		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		guard editingStyle == .delete else { return }
-		
 	}
 }
 
