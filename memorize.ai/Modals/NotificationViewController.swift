@@ -8,10 +8,17 @@ class NotificationViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		view.isUserInteractionEnabled = false
 		notificationViewBottomConstraint.constant = keyboardOffset
 		view.layoutIfNeeded()
 		KeyboardHandler.update { direction in
 			self.notificationViewBottomConstraint.constant = keyboardOffset
+			switch direction {
+			case .up:
+				self.notificationLabelBottomConstraint.constant = 15
+			case .down:
+				self.notificationLabelBottomConstraint.constant = self.view.safeAreaInsets.bottom + 15
+			}
 			UIView.animate(
 				withDuration: 0.5,
 				delay: 0,
