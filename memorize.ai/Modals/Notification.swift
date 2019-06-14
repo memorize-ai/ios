@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIViewController {
-	func showNotification(_ text: String, type: NotificationType, delay: Double = 2, completion: (() -> Void)? = nil) {
+	func showNotification(_ text: String, type: NotificationType, delay: TimeInterval = 2, completion: (() -> Void)? = nil) {
 		guard let notificationVC = storyboard?.instantiateViewController(withIdentifier: "notification") as? NotificationViewController else { return }
 		addChild(notificationVC)
 		notificationVC.view.frame = view.frame
