@@ -210,6 +210,10 @@ class DeckRatings {
 		all4 = ratings?["4"] as? Int ?? 0
 		all5 = ratings?["5"] as? Int ?? 0
 	}
+	
+	var count: Int {
+		return all1 + all2 + all3 + all4 + all5
+	}
 }
 
 class DeckUser {
