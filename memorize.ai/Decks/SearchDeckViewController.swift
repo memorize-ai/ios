@@ -24,7 +24,9 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		}
 	}
 	
+	var searchOperation: Operation?
 	var searchResults = [SearchResult]()
+	var cache = [String : SearchResult]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,27 +64,36 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		if searchText.trim().isEmpty {
 			decksCollectionView.reloadData()
 		} else {
-			Algolia.search(.decks, for: searchText) { results, error in
+			searchOperation?.cancel()
+			searchOperation = Algolia.search(.decks, for: searchText) { results, error in
 				if error == nil {
 					for result in results {
-						guard let deckId = result["objectID"] as? String, !(self.searchResults.contains { $0.id == deckId }) else { continue }
-						listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { _, error in
-							guard error == nil, let owner = result["owner"] as? String else { return }
-							listeners["users/\(owner)"] = firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
-								guard userError == nil, let snapshot = snapshot else { return }
-								let deck = Deck.get(deckId)
-								self.searchResults.append(SearchResult(
-									id: deckId,
-									image: deck?.image,
-									name: result["name"] as? String ?? "Error",
-									subtitle: snapshot.get("subtitle") as? String ?? "Error",
-									ratings: DeckRatings(snapshot),
-									deck: deck
-								))
-								self.decksCollectionView.reloadData()
+						guard let deckId = result["objectID"] as? String else { continue }
+						if let cachedResult = self.cache[deckId] {
+							self.searchResults.append(cachedResult)
+							self.decksCollectionView.reloadData()
+						} else {
+							listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { _, error in
+								guard error == nil, let owner = result["owner"] as? String else { return }
+								listeners["users/\(owner)"] = firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
+									guard userError == nil, let snapshot = snapshot else { return }
+									let deck = Deck.get(deckId)
+									let searchResult = SearchResult(
+										id: deckId,
+										image: deck?.image,
+										name: result["name"] as? String ?? "Error",
+										subtitle: snapshot.get("subtitle") as? String ?? "Error",
+										ratings: DeckRatings(snapshot),
+										deck: deck
+									)
+									self.searchResults.append(searchResult)
+									self.decksCollectionView.reloadData()
+									self.cache[deckId] = searchResult
+								}
 							}
 						}
 					}
+					self.decksCollectionView.reloadData()
 				} else {
 					self.showNotification("Unable to load search results. Please try again", type: .error)
 				}
