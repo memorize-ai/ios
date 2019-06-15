@@ -228,47 +228,57 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@IBAction func removeDraft() {
 		guard let id = id else { return }
-		setRemoveDraftLoading(true)
-		showNotification("Removing draft...", type: .normal)
-		if let draft = card?.draft {
-			firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
-				self.setRemoveDraftLoading(false)
-				self.showNotification(error == nil ? "Removed draft" : "Unable to remove draft. Please try again", type: error == nil ? .success : .error)
+		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Remove", style: .destructive) { _ in
+			self.setRemoveDraftLoading(true)
+			self.showNotification("Removing draft...", type: .normal)
+			if let draft = self.card?.draft {
+				firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
+					self.setRemoveDraftLoading(false)
+					self.showNotification(error == nil ? "Removed draft" : "Unable to remove draft. Please try again", type: error == nil ? .success : .error)
+				}
+			} else if let draft = self.deck?.cardDraft {
+				firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
+					self.setRemoveDraftLoading(false)
+					self.showNotification(error == nil ? "Removed draft" : "Unable to remove draft. Please try again", type: error == nil ? .success : .error)
+				}
 			}
-		} else if let draft = deck?.cardDraft {
-			firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
-				self.setRemoveDraftLoading(false)
-				self.showNotification(error == nil ? "Removed draft" : "Unable to remove draft. Please try again", type: error == nil ? .success : .error)
-			}
-		}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction func deleteCard() {
 		guard let deck = deck, let card = card else { return }
-		setDeleteCardLoading(true)
 		let draft = card.draft
-		let draftMessage = draft == nil ? "" : " and draft"
-		showNotification("Deleting card\(draftMessage)...", type: .normal)
-		firestore.document("decks/\(deck.id)/cards/\(card.id)").delete { error in
-			if error == nil {
-				if let draft = draft, let id = id {
-					firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
-						self.setDeleteCardLoading(false)
-						if error == nil {
-							self.navigationController?.popViewController(animated: true)
-						} else {
-							self.showNotification("Unable to delete draft. Please try again", type: .error)
+		let alertController = UIAlertController(title: "Are you sure?", message: "The card\(draft == nil ? " and your draft" : "") will be deleted. This action cannot be undone", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+			self.setDeleteCardLoading(true)
+			let draftMessage = draft == nil ? "" : " and draft"
+			self.showNotification("Deleting card\(draftMessage)...", type: .normal)
+			firestore.document("decks/\(deck.id)/cards/\(card.id)").delete { error in
+				if error == nil {
+					if let draft = draft, let id = id {
+						firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
+							self.setDeleteCardLoading(false)
+							if error == nil {
+								self.navigationController?.popViewController(animated: true)
+							} else {
+								self.showNotification("Unable to delete draft. Please try again", type: .error)
+							}
 						}
+					} else {
+						self.setDeleteCardLoading(false)
+						self.navigationController?.popViewController(animated: true)
 					}
 				} else {
 					self.setDeleteCardLoading(false)
-					self.navigationController?.popViewController(animated: true)
+					self.showNotification("Unable to delete card\(draftMessage). Please try again", type: .error)
 				}
-			} else {
-				self.setDeleteCardLoading(false)
-				self.showNotification("Unable to delete card\(draftMessage). Please try again", type: .error)
 			}
-		}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	func setRemoveDraftLoading(_ isLoading: Bool) {
