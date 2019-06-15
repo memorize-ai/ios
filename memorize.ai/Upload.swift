@@ -26,9 +26,18 @@ class Upload {
 		self.mime = mime
 	}
 	
+	private var storageReference: StorageReference? {
+		guard let uid = memorize_ai.id, let filename = filename else { return nil }
+		return Upload.storage.child("\(uid)/\(filename)")
+	}
+	
 	var filename: String? {
 		guard let ext = MimeTypes.filenameExtension(forType: mime) else { return nil }
 		return "\(id).\(ext)"
+	}
+	
+	func url(completion: @escaping (URL?, Error?) -> Void) {
+		storageReference?.downloadURL(completion: completion)
 	}
 	
 	static func loaded(_ filter: (Upload) -> Bool) -> [Upload] {
@@ -58,8 +67,7 @@ class Upload {
 	}
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
-		guard let userId = memorize_ai.id, let filename = filename else { return }
-		Upload.storage.child("\(userId)/\(filename)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+		storageReference?.getData(maxSize: MAX_FILE_SIZE) { data, error in
 			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
 			completion(data, nil)
