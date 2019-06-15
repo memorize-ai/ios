@@ -2328,14 +2328,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mEP-C1-dhR">
-                                                    <rect key="frame" x="19.999999999999996" y="10.999999999999998" width="37.666666666666664" height="23.333333333333332"/>
+                                                    <rect key="frame" x="19.999999999999996" y="8.9999999999999982" width="39.666666666666664" height="27.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ovG-hL-mle">
-                                                    <rect key="frame" x="343" y="10.999999999999998" width="51" height="23.333333333333332"/>
+                                                    <rect key="frame" x="340" y="8.9999999999999982" width="54" height="27.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -2797,7 +2797,7 @@
                         <constraints>
                             <constraint firstItem="VPq-ri-ELQ" firstAttribute="leading" secondItem="6OF-UA-HfB" secondAttribute="leading" id="3OQ-Bh-zW8"/>
                             <constraint firstItem="ajf-mh-WyF" firstAttribute="top" secondItem="6OF-UA-HfB" secondAttribute="top" id="LDv-Wl-2Ch"/>
-                            <constraint firstItem="6OF-UA-HfB" firstAttribute="bottom" secondItem="VPq-ri-ELQ" secondAttribute="bottom" id="MZ9-8T-J2d"/>
+                            <constraint firstItem="VPq-ri-ELQ" firstAttribute="bottom" secondItem="7wN-Lt-6Ft" secondAttribute="bottom" id="MZ9-8T-J2d"/>
                             <constraint firstItem="6OF-UA-HfB" firstAttribute="trailing" secondItem="VPq-ri-ELQ" secondAttribute="trailing" id="NZz-9v-0XC"/>
                             <constraint firstItem="ajf-mh-WyF" firstAttribute="leading" secondItem="6OF-UA-HfB" secondAttribute="leading" id="PO5-Ct-21P"/>
                             <constraint firstItem="VPq-ri-ELQ" firstAttribute="top" secondItem="ajf-mh-WyF" secondAttribute="bottom" id="Pxc-m6-6VN"/>
