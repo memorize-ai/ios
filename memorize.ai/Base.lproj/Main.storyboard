@@ -2676,7 +2676,10 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NL5-h9-JiS">
-                                                            <rect key="frame" x="244.00000000000003" y="51.666666666666664" width="42.333333333333343" height="23.333333333333336"/>
+                                                            <rect key="frame" x="244.00000000000003" y="55" width="42.333333333333343" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="Ycv-7t-g5J"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
