@@ -20,7 +20,7 @@ extension DocumentSnapshot {
 
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
-		let escapedText = text.replacingOccurrences(of: "\\", with: "\\\\")
+		let escapedText = text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -30,7 +30,8 @@ extension WKWebView {
 					<script src="auto-render.min.js"></script>
 					<link rel="stylesheet" href="prism.css">
 					<style>
-						html, body {
+						html,
+						body {
 							font-family: Helvetica;
 							font-size: \(fontSize)px;
 							color: #\(textColor);

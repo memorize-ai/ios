@@ -81,7 +81,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 				upload.url { url, error in
 					self.stopLoading()
 					if error == nil, let url = url {
-						self.cardEditor?.current.add(url.absoluteString)
+						self.cardEditor?.current.add(upload.toMarkdown(url.absoluteString))
 						self.showNotification("Added \(upload.type == .audio ? "audio file" : upload.type.rawValue)", type: .success)
 					} else {
 						self.showNotification("Unable to add \(upload.type.rawValue). Please try again", type: .error)
