@@ -20,7 +20,7 @@ extension DocumentSnapshot {
 
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
-		let escapedText = text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
+		let escapedText = Card.escape(text)
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>

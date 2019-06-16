@@ -72,6 +72,43 @@ class Card {
 		return rating.rating
 	}
 	
+	static func escape(_ text: String) -> String {
+		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
+	}
+	
+	func audio() {
+		let urlstring = "http://radio.spainmedia.es/wp-content/uploads/2015/12/tailtoddle_lo4.mp3"
+		let url = NSURL(string: urlstring)
+		print("the url = \(url!)")
+		downloadFileFromURL(url!)
+		func downloadFileFromURL(url:NSURL){
+			
+			var downloadTask:NSURLSessionDownloadTask
+			downloadTask = NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { [weak self](URL, response, error) -> Void in
+				self?.play(URL)
+			})
+			
+			downloadTask.resume()
+			
+		}
+		func play(url:NSURL) {
+			print("playing \(url)")
+			
+			do {
+				self.player = try AVAudioPlayer(contentsOfURL: url)
+				player.prepareToPlay()
+				player.volume = 1.0
+				player.play()
+			} catch let error as NSError {
+				//self.player = nil
+				print(error.localizedDescription)
+			} catch {
+				print("AVAudioPlayer init failed")
+			}
+			
+		}
+	}
+	
 	static func all() -> [Card] {
 		return decks.flatMap { $0.cards }
 	}
