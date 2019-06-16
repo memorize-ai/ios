@@ -56,12 +56,6 @@ class Upload {
 		return Array(uploads.filter { $0.data == nil }.prefix(count))
 	}
 	
-//	static func reloadAll() {
-//		uploads.filter { $0.shouldReload }.forEach {
-//			storage.child
-//		}
-//	}
-	
 	static func get(_ id: String) -> Upload? {
 		return uploads.first { $0.id == id }
 	}
@@ -71,6 +65,15 @@ class Upload {
 			guard error == nil, let data = data else { return completion(nil, error) }
 			self.data = data
 			completion(data, nil)
+		}
+	}
+	
+	func toMarkdown(_ url: String) -> String {
+		switch type {
+		case .image, .gif:
+			return "![\(name)](\(url))"
+		case .audio:
+			return "<audio>\(url)</audio>"
 		}
 	}
 	

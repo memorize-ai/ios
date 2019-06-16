@@ -20,7 +20,7 @@ extension DocumentSnapshot {
 
 extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
-		let unescapedText = text.replacingOccurrences(of: "\\", with: "\\\\")
+		let escapedText = text.replacingOccurrences(of: "\\", with: "\\\\")
 		loadHTMLString("""
 			<!DOCTYPE html>
 			<html>
@@ -39,7 +39,7 @@ extension WKWebView {
 					</style>
 				</head>
 				<body>
-					<div>\((try? Down(markdownString: unescapedText).toHTML()) ?? unescapedText)</div>
+					<div>\((try? Down(markdownString: escapedText).toHTML()) ?? escapedText)</div>
 					<script>renderMathInElement(document.body)</script>
 					<script src="prism.js"></script>
 				</body>
@@ -85,6 +85,13 @@ extension String {
 	
 	func clean() -> String {
 		return replacingOccurrences(of: #"#|\\[\(\)\[\]]|\\|\*\*|_|\n*```\w*\n*"#, with: "", options: .regularExpression).trim()
+	}
+	
+	func match(_ regex: String) -> [[String]] {
+		let nsString = self as NSString
+		return (try? NSRegularExpression(pattern: regex, options: []))?.matches(in: self, options: [], range: NSMakeRange(0, count)).map { match in
+			(0..<match.numberOfRanges).map { match.range(at: $0).location == NSNotFound ? "" : nsString.substring(with: match.range(at: $0)) }
+		} ?? []
 	}
 }
 
