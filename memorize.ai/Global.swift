@@ -12,6 +12,16 @@ let defaults = UserDefaults.standard
 var startup = true
 var shouldLoadDecks = false
 
+func buzz() {
+	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+}
+
+extension Collection {
+	subscript(safe index: Index) -> Element? {
+		return indices.contains(index) ? self[index] : nil
+	}
+}
+
 extension DocumentSnapshot {
 	func getDate(_ field: String) -> Date? {
 		return (get(field) as? Timestamp)?.dateValue()
@@ -47,10 +57,6 @@ extension WKWebView {
 			</html>
 		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true))
 	}
-}
-
-func buzz() {
-	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 }
 
 extension UIViewController {

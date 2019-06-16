@@ -76,11 +76,11 @@ class Card {
 		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 	}
 	
-	func audio() {
-		let urlstring = "http://radio.spainmedia.es/wp-content/uploads/2015/12/tailtoddle_lo4.mp3"
-		let url = NSURL(string: urlstring)
-		print("the url = \(url!)")
-		downloadFileFromURL(url!)
+	func audio(_ side: CardSide) {
+		side.text(for: self).match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap { $0.count > 1 ? $0[1] : nil }.forEach {
+			
+		}
+		downloadFileFromURL(URL(string: urlstring)!)
 		func downloadFileFromURL(url:NSURL){
 			
 			var downloadTask:NSURLSessionDownloadTask
@@ -204,5 +204,9 @@ enum CardSide: String {
 	
 	var uppercased: String {
 		return rawValue.uppercased()
+	}
+	
+	func text(for card: Card) -> String {
+		return self == .front ? card.front : card.back
 	}
 }
