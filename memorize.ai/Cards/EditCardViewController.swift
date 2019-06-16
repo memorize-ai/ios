@@ -2,6 +2,8 @@ import UIKit
 
 class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var loadingView: UIView!
+	@IBOutlet weak var loadingActivityIndicatory: UIActivityIndicatorView!
 	@IBOutlet weak var leftArrow: UIButton!
 	@IBOutlet weak var rightArrow: UIButton!
 	@IBOutlet weak var sideLabel: UILabel!
@@ -74,10 +76,29 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
 		if let uploadsVC = segue.destination as? UploadsViewController {
-			uploadsVC.action = {
-				// add url to text field
+			uploadsVC.completion = { upload in
+				self.startLoading()
+				upload.url { url, error in
+					self.stopLoading()
+					if error == nil, let url = url {
+						self.cardEditor?.current.add(url.absoluteString)
+						self.showNotification("Added \(upload.type == .audio ? "audio file" : upload.type.rawValue)", type: .success)
+					} else {
+						self.showNotification("Unable to add \(upload.type.rawValue). Please try again", type: .error)
+					}
+				}
 			}
 		}
+	}
+	
+	func startLoading() {
+		loadingView.isHidden = false
+		loadingActivityIndicatory.startAnimating()
+	}
+	
+	func stopLoading() {
+		loadingActivityIndicatory.stopAnimating()
+		loadingView.isHidden = true
 	}
 	
 	func loadText() {

@@ -24,6 +24,10 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		return !(trimmedText.front.isEmpty || trimmedText.back.isEmpty)
 	}
 	
+	var current: UITextView {
+		return frontTextView.isHidden ? backTextView : frontTextView
+	}
+	
 	func update(_ side: CardSide, text: String) {
 		switch side {
 		case .front:

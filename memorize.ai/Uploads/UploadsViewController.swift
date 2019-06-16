@@ -5,7 +5,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var uploadsCollectionView: UICollectionView!
 	
-	var action: (() -> Void)?
+	var completion: ((Upload) -> Void)?
 	var filter: UploadType?
 	var filteredUploads = [Upload]()
 	
@@ -126,8 +126,9 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if let action = action {
-			action()
+		if let completion = completion {
+			navigationController?.popViewController(animated: true)
+			completion(filteredUploads[indexPath.item])
 		} else {
 			
 		}
