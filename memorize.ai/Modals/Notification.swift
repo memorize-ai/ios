@@ -1,15 +1,25 @@
 import UIKit
 
+fileprivate var oldNotification: NotificationViewController?
+
 extension UIViewController {
 	func showNotification(_ text: String, type: NotificationType, delay: TimeInterval = 2, completion: (() -> Void)? = nil) {
-		guard let notificationVC = storyboard?.instantiateViewController(withIdentifier: "notification") as? NotificationViewController else { return }
-		addChild(notificationVC)
-		notificationVC.view.frame = view.frame
-		view.addSubview(notificationVC.view)
-		notificationVC.didMove(toParent: self)
-		notificationVC.notificationView.backgroundColor = type.color
-		notificationVC.notificationLabel.text = text
-		notificationVC.show(delay, completion: completion)
+		func showNew() {
+			guard let notificationVC = storyboard?.instantiateViewController(withIdentifier: "notification") as? NotificationViewController else { return }
+			addChild(notificationVC)
+			notificationVC.view.frame = view.frame
+			view.addSubview(notificationVC.view)
+			notificationVC.didMove(toParent: self)
+			oldNotification = notificationVC
+			notificationVC.notificationView.backgroundColor = type.color
+			notificationVC.notificationLabel.text = text
+			notificationVC.show(delay, completion: completion)
+		}
+		if let oldNotification = oldNotification {
+			oldNotification.hide(completion: showNew)
+		} else {
+			showNew()
+		}
 	}
 }
 

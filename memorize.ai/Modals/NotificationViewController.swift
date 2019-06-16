@@ -40,14 +40,18 @@ class NotificationViewController: UIViewController {
 		}) {
 			guard $0 else { return }
 			Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
-				UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-					self.notificationView.transform = CGAffineTransform(translationX: 0, y: self.notificationView.bounds.height)
-				}) {
-					guard $0 else { return }
-					self.view.removeFromSuperview()
-					completion?()
-				}
+				self.hide(completion: completion)
 			}
+		}
+	}
+	
+	func hide(completion: (() -> Void)?) {
+		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+			self.notificationView.transform = CGAffineTransform(translationX: 0, y: self.notificationView.bounds.height)
+		}) {
+			guard $0 else { return }
+			self.view.removeFromSuperview()
+			completion?()
 		}
 	}
 }
