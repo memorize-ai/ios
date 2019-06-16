@@ -234,15 +234,21 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		alertController.addAction(UIAlertAction(title: "Remove", style: .destructive) { _ in
 			self.setRemoveDraftLoading(true)
 			self.showNotification("Removing draft...", type: .normal)
-			if let draft = self.card?.draft {
+			if let card = self.card, let draft = card.draft {
 				firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
 					self.setRemoveDraftLoading(false)
 					self.showNotification(error == nil ? "Removed draft" : "Unable to remove draft. Please try again", type: error == nil ? .success : .error)
+					self.cardEditor?.update(.front, text: card.front)
+					self.cardEditor?.update(.back, text: card.back)
 				}
 			} else if let draft = self.deck?.cardDraft {
 				firestore.document("users/\(id)/cardDrafts/\(draft.id)").delete { error in
 					self.setRemoveDraftLoading(false)
-					self.showNotification(error == nil ? "Removed draft" : "Unable to remove draft. Please try again", type: error == nil ? .success : .error)
+					if error == nil {
+						self.navigationController?.popViewController(animated: true)
+					} else {
+						self.showNotification("Unable to remove draft. Please try again", type: .error)
+					}
 				}
 			}
 		})
