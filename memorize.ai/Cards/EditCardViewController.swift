@@ -38,6 +38,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		views = [cardEditor.view, cardPreview.view]
 		loadText()
 		reloadRightBarButtonItem()
+		reloadToolbar(animated: false)
 		guard let id = id, let deck = deck else { return }
 		cardEditor.listen { side, text in
 			if let card = self.card {
@@ -143,7 +144,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@objc func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
-		toolbarBottomConstraint.constant = height - 20
+		toolbarBottomConstraint.constant = height - 30
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
@@ -301,7 +302,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	func reloadToolbar() {
+	func reloadToolbar(animated: Bool = true) {
 		guard let deck = deck else { return }
 		let oneThirdWidth = (view.bounds.width - 40) / 3
 		let halfWidth = view.bounds.width / 2 - 15
@@ -325,6 +326,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			removeDraftButtonWidthConstraint.constant = 0
 			deleteCardButtonWidthConstraint.constant = 0
 		}
+		UIView.animate(withDuration: animated ? 0.15 : 0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
 	func updateSide(_ side: CardSide) {
