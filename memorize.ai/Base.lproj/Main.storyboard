@@ -339,7 +339,7 @@
                                     <action selector="review" destination="XhB-Ss-34n" eventType="touchUpInside" id="YqZ-Ox-lxm"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kOp-YG-uZ1">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kOp-YG-uZ1">
                                 <rect key="frame" x="40" y="400" width="334" height="296"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9SN-2J-pR5">
@@ -3932,12 +3932,16 @@
                     </view>
                     <connections>
                         <outlet property="backTextView" destination="u6R-Gn-CGi" id="z0E-Z8-GCQ"/>
+                        <outlet property="backTextViewBottomConstraint" destination="C5H-Le-62Y" id="GfB-36-mO8"/>
+                        <outlet property="backTextViewTopConstraint" destination="PpM-CX-mlV" id="siA-V5-8GA"/>
                         <outlet property="frontTextView" destination="QgX-4C-VBv" id="C1c-NE-c8s"/>
+                        <outlet property="frontTextViewBottomConstraint" destination="C5H-Le-62Y" id="WUt-CF-qR0"/>
+                        <outlet property="frontTextViewTopConstraint" destination="FIm-zc-Dws" id="eEc-w2-Cwy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mWG-vX-3GX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1503" y="1480"/>
+            <point key="canvasLocation" x="1502.8985507246377" y="1479.6195652173915"/>
         </scene>
         <!--Ratings-->
         <scene sceneID="if9-hW-NRh">
@@ -4765,10 +4769,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="nwZ-Xi-26f"/>
         <segue reference="TPR-zk-sPC"/>
-        <segue reference="h5F-6A-J1r"/>
+        <segue reference="1zn-0n-nWw"/>
         <segue reference="NJF-dv-A8u"/>
-        <segue reference="O84-5M-BZf"/>
-        <segue reference="NDx-ee-NxK"/>
+        <segue reference="xrl-eN-ji3"/>
+        <segue reference="zq2-cu-WBD"/>
         <segue reference="xln-P0-Fwc"/>
         <segue reference="y6W-0c-pPw"/>
         <segue reference="xao-oA-rKh"/>

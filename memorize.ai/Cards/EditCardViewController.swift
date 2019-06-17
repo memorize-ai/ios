@@ -167,11 +167,23 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@objc func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
-		toolbarBottomConstraint.constant = height - 30
+		let offset = height - 30
+		let halfOffset = offset / 2
+		cardEditor?.frontTextViewTopConstraint.constant = halfOffset
+		cardEditor?.backTextViewTopConstraint.constant = halfOffset
+		cardEditor?.frontTextViewBottomConstraint.constant = halfOffset
+		cardEditor?.backTextViewBottomConstraint.constant = halfOffset
+		cardEditor?.view.layoutIfNeeded()
+		toolbarBottomConstraint.constant = offset
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
 	@objc func keyboardWillHide(notification: NSNotification) {
+		cardEditor?.frontTextViewTopConstraint.constant = 0
+		cardEditor?.backTextViewTopConstraint.constant = 0
+		cardEditor?.frontTextViewBottomConstraint.constant = 0
+		cardEditor?.backTextViewBottomConstraint.constant = 0
+		cardEditor?.view.layoutIfNeeded()
 		toolbarBottomConstraint.constant = 0
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}
@@ -404,7 +416,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		if Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) == 0 {
 			reloadRightBarButtonItem()
 		} else {
-			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(playAudio)), animated: true)
+			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(playAudio)), animated: false)
 		}
 	}
 }

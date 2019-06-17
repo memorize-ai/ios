@@ -2,7 +2,11 @@ import UIKit
 
 class CardEditorViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var frontTextView: UITextView!
+	@IBOutlet weak var frontTextViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var frontTextViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var backTextView: UITextView!
+	@IBOutlet weak var backTextViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var backTextViewBottomConstraint: NSLayoutConstraint!
 	
 	private var listener: ((CardSide, String) -> Void)?
 	
