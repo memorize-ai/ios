@@ -173,7 +173,12 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		cardEditor?.backTextViewTopConstraint.constant = halfOffset
 		cardEditor?.frontTextViewBottomConstraint.constant = halfOffset
 		cardEditor?.backTextViewBottomConstraint.constant = halfOffset
+		cardPreview?.frontWebViewTopConstraint.constant = halfOffset
+		cardPreview?.backWebViewTopConstraint.constant = halfOffset
+		cardPreview?.frontWebViewBottomConstraint.constant = halfOffset
+		cardPreview?.backWebViewBottomConstraint.constant = halfOffset
 		cardEditor?.view.layoutIfNeeded()
+		cardPreview?.view.layoutIfNeeded()
 		toolbarBottomConstraint.constant = offset
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
@@ -183,7 +188,12 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		cardEditor?.backTextViewTopConstraint.constant = 0
 		cardEditor?.frontTextViewBottomConstraint.constant = 0
 		cardEditor?.backTextViewBottomConstraint.constant = 0
+		cardPreview?.frontWebViewTopConstraint.constant = 0
+		cardPreview?.backWebViewTopConstraint.constant = 0
+		cardPreview?.frontWebViewBottomConstraint.constant = 0
+		cardPreview?.backWebViewBottomConstraint.constant = 0
 		cardEditor?.view.layoutIfNeeded()
+		cardPreview?.view.layoutIfNeeded()
 		toolbarBottomConstraint.constant = 0
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}

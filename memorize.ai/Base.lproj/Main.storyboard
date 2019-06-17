@@ -4530,7 +4530,11 @@
                     </view>
                     <connections>
                         <outlet property="backWebView" destination="7Gk-3l-SaD" id="d4s-oT-fR6"/>
+                        <outlet property="backWebViewBottomConstraint" destination="4le-EU-aRS" id="xSW-qY-d1t"/>
+                        <outlet property="backWebViewTopConstraint" destination="AnB-6F-ffL" id="7XV-RR-3dk"/>
                         <outlet property="frontWebView" destination="Mgb-ot-W2X" id="jOR-9H-G1x"/>
+                        <outlet property="frontWebViewBottomConstraint" destination="87X-tT-akN" id="vjI-bg-4uP"/>
+                        <outlet property="frontWebViewTopConstraint" destination="m5i-RM-Qoa" id="R7G-hj-mXL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06X-H4-wfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
