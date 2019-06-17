@@ -5,7 +5,7 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.update { change in
+		ChangeHandler.updateAndCall(.deckModified) { change in
 			if change == .deckModified || change == .deckRemoved || change == .cardRemoved || change == .cardRatingAdded || change == .cardRatingModified || change == .cardRatingRemoved {
 				self.ratingsTableView.reloadData()
 			}

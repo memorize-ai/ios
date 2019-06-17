@@ -11,10 +11,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
+         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
          <PersistentStrings>
             <PersistentString
-               value = "itemOffset">
+               value = "data">
+            </PersistentString>
+            <PersistentString
+               value = "self.data">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -30,6 +33,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemOffset">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserViewController.loadCards():UserViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -37,14 +48,6 @@
             </PersistentString>
             <PersistentString
                value = "Deck.allDue()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "scrollView.subviews.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -60,13 +63,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
+         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "data">
-            </PersistentString>
-            <PersistentString
-               value = "self.data">
+               value = "scrollView.subviews.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -78,6 +78,14 @@
             </PersistentString>
             <PersistentString
                value = "deck.get(&quot;role&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in CardRatingsViewController.tableView(_:cellForRowAt:):CardRatingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cardRatings.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
