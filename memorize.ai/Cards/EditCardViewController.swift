@@ -393,7 +393,9 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-		cell.addSubview(views[indexPath.item])
+		let element = views[indexPath.item]
+		element.frame.size.height = cell.frame.height
+		cell.addSubview(element)
 		return cell
 	}
 	
