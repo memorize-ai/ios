@@ -1,5 +1,6 @@
 import Foundation
 import Firebase
+import AVFoundation
 
 class Card {
 	let id: String
@@ -68,45 +69,35 @@ class Card {
 	}
 	
 	var ratingType: CardRatingType {
-		guard let rating = rating else { return .none }
-		return rating.rating
+		return rating?.rating ?? .none
 	}
 	
 	static func escape(_ text: String) -> String {
 		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 	}
 	
-	func audio(_ side: CardSide) {
-		side.text(for: self).match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap { $0.count > 1 ? $0[1] : nil }.forEach {
-			
-		}
-		downloadFileFromURL(URL(string: urlstring)!)
-		func downloadFileFromURL(url:NSURL){
-			
-			var downloadTask:NSURLSessionDownloadTask
-			downloadTask = NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { [weak self](URL, response, error) -> Void in
-				self?.play(URL)
-			})
-			
-			downloadTask.resume()
-			
-		}
-		func play(url:NSURL) {
-			print("playing \(url)")
-			
-			do {
-				self.player = try AVAudioPlayer(contentsOfURL: url)
-				player.prepareToPlay()
-				player.volume = 1.0
-				player.play()
-			} catch let error as NSError {
-				//self.player = nil
-				print(error.localizedDescription)
-			} catch {
-				print("AVAudioPlayer init failed")
+	func audio(_ side: CardSide, completion: @escaping ([URL]) -> Void) {
+		getLocalAudioUrls(side.text(for: self).match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
+			guard let string = $0[safe: 1] else { return nil }
+			return URL(string: string)
+		}, completion: completion)
+	}
+	
+	private func getLocalAudioUrls(_ remote: [URL], local: [URL] = [], completion: @escaping ([URL]) -> Void) {
+		guard let first = remote.first else { return completion(local) }
+		getLocalAudioUrl(first) { url, error in
+			var remote = remote
+			remote.removeFirst()
+			if error == nil, let url = url {
+				self.getLocalAudioUrls(remote, local: local + [url], completion: completion)
+			} else {
+				self.getLocalAudioUrls(remote, local: local, completion: completion)
 			}
-			
 		}
+	}
+	
+	private func getLocalAudioUrl(_ url: URL, completion: @escaping (URL?, Error?) -> Void) {
+		URLSession.shared.downloadTask(with: url) { completion($0, $2) }.resume()
 	}
 	
 	static func all() -> [Card] {

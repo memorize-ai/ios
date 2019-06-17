@@ -60,7 +60,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	}
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-		_ = Algolia.search(.uploads, for: searchText) { results, error in
+		Algolia.search(.uploads, for: searchText) { results, error in
 			guard error == nil else { return }
 			self.filteredUploads = Upload.filter(results.compactMap {
 				guard let uploadId = $0["objectID"] as? String, let upload = Upload.get(uploadId) else { return nil }
