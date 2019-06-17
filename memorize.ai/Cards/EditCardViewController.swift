@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 
 class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -17,6 +18,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
+	var queuePlayer: AVQueuePlayer?
 	var cardEditor: CardEditorViewController?
 	var cardPreview: CardPreviewViewController?
 	var deck: Deck?
@@ -361,6 +363,30 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		currentSide = side
 	}
 	
+	func getText() -> String {
+		let isFront = currentSide == .front
+		if let card = card {
+			if let draft = card.draft {
+				return isFront ? draft.front : draft.back
+			} else {
+				return isFront ? card.front : card.back
+			}
+		} else if let draft = deck?.cardDraft {
+			return isFront ? draft.front : draft.back
+		} else {
+			return ""
+		}
+	}
+	
+	@objc func playAudio() {
+		queuePlayer?.pause()
+		Card.downloadAudio(getText()) {
+			self.showAlert($0.first?.absoluteString ?? "") // temp line
+			self.queuePlayer = Card.queuePlayer($0)
+			self.queuePlayer?.play()
+		}
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return views.count
 	}
@@ -369,6 +395,15 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 		cell.addSubview(views[indexPath.item])
 		return cell
+	}
+	
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		let pageWidth = scrollView.frame.size.width
+		if Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) == 0 {
+			reloadRightBarButtonItem()
+		} else {
+			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(playAudio)), animated: true)
+		}
 	}
 }
 

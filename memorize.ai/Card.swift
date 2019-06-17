@@ -76,14 +76,18 @@ class Card {
 		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 	}
 	
-	func audio(_ side: CardSide, completion: @escaping ([URL]) -> Void) {
-		getLocalAudioUrls(side.text(for: self).match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
+	static func queuePlayer(_ urls: [URL]) -> AVQueuePlayer {
+		return AVQueuePlayer(items: urls.map { AVPlayerItem(url: $0) })
+	}
+	
+	static func downloadAudio(_ text: String, completion: @escaping ([URL]) -> Void) {
+		getLocalAudioUrls(text.match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
 			guard let string = $0[safe: 1] else { return nil }
 			return URL(string: string)
 		}, completion: completion)
 	}
 	
-	private func getLocalAudioUrls(_ remote: [URL], local: [URL] = [], completion: @escaping ([URL]) -> Void) {
+	private static func getLocalAudioUrls(_ remote: [URL], local: [URL] = [], completion: @escaping ([URL]) -> Void) {
 		guard let first = remote.first else { return completion(local) }
 		getLocalAudioUrl(first) { url, error in
 			var remote = remote
@@ -96,8 +100,12 @@ class Card {
 		}
 	}
 	
-	private func getLocalAudioUrl(_ url: URL, completion: @escaping (URL?, Error?) -> Void) {
+	private static func getLocalAudioUrl(_ url: URL, completion: @escaping (URL?, Error?) -> Void) {
 		URLSession.shared.downloadTask(with: url) { completion($0, $2) }.resume()
+	}
+	
+	func downloadAudio(_ side: CardSide, completion: @escaping ([URL]) -> Void) {
+		Card.downloadAudio(side.text(for: self), completion: completion)
 	}
 	
 	static func all() -> [Card] {
