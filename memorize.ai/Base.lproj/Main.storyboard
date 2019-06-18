@@ -1017,7 +1017,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="upload" destination="kdw-V6-Hub" eventType="touchUpInside" id="mMc-KQ-oXi"/>
+                                    <action selector="submitUpload" destination="kdw-V6-Hub" eventType="touchUpInside" id="w1H-mU-OXu"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6uK-bA-X9r">
