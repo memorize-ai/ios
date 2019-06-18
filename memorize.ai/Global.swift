@@ -148,3 +148,12 @@ extension UIImage {
 		return UIImage(data: data)
 	}
 }
+
+extension Data {
+	var size: String {
+		let formatter = ByteCountFormatter()
+		formatter.allowedUnits = [.useMB, .useGB]
+		formatter.countStyle = .file
+		return formatter.string(fromByteCount: Int64(count))
+	}
+}

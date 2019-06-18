@@ -21,11 +21,8 @@ class UploadViewController: UIViewController, UITableViewDataSource, UITableView
 	
 	var metadata: [(key: String, value: String)] {
 		guard let file = file else { return [] }
-		let formatter = ByteCountFormatter()
-		formatter.allowedUnits = [.useMB, .useGB]
-		formatter.countStyle = .file
 		return [
-			("Size", formatter.string(fromByteCount: Int64(file.data.count))),
+			("Size", file.size),
 			("Type", file.type.formatted),
 			("Ext", file.extension)
 		]
