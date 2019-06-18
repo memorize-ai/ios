@@ -106,6 +106,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
 					Upload.storage.child("\(id)/\(uploadId)").putData(file.data, metadata: metadata) { _, error in
 						if error == nil {
 							self.navigationController?.popViewController(animated: true)
+							self.navigationController?.topViewController?.showNotification("Uploaded file", type: .success) // will this work?
 						} else {
 							self.showNotification("Unable to upload file. Please try again", type: .error)
 						}
