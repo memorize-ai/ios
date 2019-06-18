@@ -11,20 +11,25 @@ class Upload {
 	var name: String
 	let created: Date
 	var updated: Date
-	var data: Data?
 	var type: UploadType
 	var mime: String
-	var shouldReload = false
+	var `extension`: String
+	var size: String
+	var data: Data?
 	
-	init(id: String, name: String, created: Date, updated: Date, data: Data?, type: UploadType, mime: String) {
+	init(id: String, name: String, created: Date, updated: Date, type: UploadType, mime: String, extension: String, size: String, data: Data?) {
 		self.id = id
 		self.name = name
 		self.created = created
 		self.updated = updated
-		self.data = data
 		self.type = type
 		self.mime = mime
+		self.extension = `extension`
+		self.size = size
+		self.data = data
 	}
+	
+	var shouldReload = false
 	
 	private var storageReference: StorageReference? {
 		guard let uid = memorize_ai.id, let filename = filename else { return nil }
@@ -90,4 +95,15 @@ enum UploadType: String {
 	case image = "image"
 	case gif = "gif"
 	case audio = "audio"
+	
+	var formatted: String {
+		switch self {
+		case .image:
+			return "Image"
+		case .gif:
+			return "Gif"
+		case .audio:
+			return "Audio"
+		}
+	}
 }
