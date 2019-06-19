@@ -8,8 +8,8 @@ class UploadActionsViewController: UIViewController {
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var typeLabel: UILabel!
 	@IBOutlet weak var sizeLabel: UILabel!
-	
 	@IBOutlet weak var extensionLabel: UILabel!
+	
 	var upload: Upload?
 	
 	override func viewDidLoad() {
@@ -24,7 +24,7 @@ class UploadActionsViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		ChangeHandler.update { change in
+		ChangeHandler.updateAndCall(.uploadModified) { change in
 			if change == .uploadModified {
 				self.reloadLabels()
 			} else if change == .uploadRemoved && !(uploads.contains { $0.id == self.upload?.id }) {
@@ -41,7 +41,11 @@ class UploadActionsViewController: UIViewController {
 	}
 	
 	func reloadLabels() {
-		
+		guard let upload = upload else { return }
+		nameLabel.text = upload.name
+		typeLabel.text = upload.type.formatted
+		sizeLabel.text = upload.size
+		extensionLabel.text = upload.extension
 	}
 	
 	@IBAction func delete() {
