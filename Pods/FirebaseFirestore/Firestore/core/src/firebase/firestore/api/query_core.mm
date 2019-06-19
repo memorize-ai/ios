@@ -52,6 +52,10 @@ namespace firebase {
 namespace firestore {
 namespace api {
 
+Query::Query(FSTQuery* query, std::shared_ptr<Firestore> firestore)
+    : firestore_{std::move(firestore)}, query_{query} {
+}
+
 bool operator==(const Query& lhs, const Query& rhs) {
   return lhs.firestore() == rhs.firestore() &&
          objc::Equals(lhs.query(), rhs.query());
@@ -253,7 +257,7 @@ Query Query::OrderBy(FieldPath fieldPath, Direction direction) const {
   return Wrap([query() queryByAddingSortOrder:sortOrder]);
 }
 
-Query Query::Limit(int64_t limit) const {
+Query Query::Limit(int32_t limit) const {
   if (limit <= 0) {
     ThrowInvalidArgument(
         "Invalid Query. Query limit (%s) is invalid. Limit must be positive.",

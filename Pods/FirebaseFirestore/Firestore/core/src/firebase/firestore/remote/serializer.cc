@@ -35,6 +35,7 @@
 #include "Firestore/core/src/firebase/firestore/model/field_value.h"
 #include "Firestore/core/src/firebase/firestore/model/no_document.h"
 #include "Firestore/core/src/firebase/firestore/model/resource_path.h"
+#include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/nanopb_util.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/reader.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/writer.h"
@@ -68,6 +69,7 @@ using firebase::firestore::model::Precondition;
 using firebase::firestore::model::ResourcePath;
 using firebase::firestore::model::SetMutation;
 using firebase::firestore::model::SnapshotVersion;
+using firebase::firestore::nanopb::ByteString;
 using firebase::firestore::nanopb::CheckedSize;
 using firebase::firestore::nanopb::Reader;
 using firebase::firestore::nanopb::Writer;
@@ -75,32 +77,11 @@ using firebase::firestore::util::Status;
 using firebase::firestore::util::StringFormat;
 
 pb_bytes_array_t* Serializer::EncodeString(const std::string& str) {
-  pb_size_t size = CheckedSize(str.size());
-  auto result =
-      static_cast<pb_bytes_array_t*>(malloc(PB_BYTES_ARRAY_T_ALLOCSIZE(size)));
-  result->size = size;
-  memcpy(result->bytes, str.c_str(), size);
-  return result;
+  return nanopb::MakeBytesArray(str);
 }
 
 std::string Serializer::DecodeString(const pb_bytes_array_t* str) {
-  if (str == nullptr) return "";
-  size_t size = static_cast<size_t>(str->size);
-  return std::string{reinterpret_cast<const char*>(str->bytes), size};
-}
-
-pb_bytes_array_t* Serializer::EncodeBytes(const std::vector<uint8_t>& bytes) {
-  pb_size_t size = CheckedSize(bytes.size());
-  auto result =
-      static_cast<pb_bytes_array_t*>(malloc(PB_BYTES_ARRAY_T_ALLOCSIZE(size)));
-  result->size = size;
-  memcpy(result->bytes, bytes.data(), size);
-  return result;
-}
-
-std::vector<uint8_t> Serializer::DecodeBytes(const pb_bytes_array_t* bytes) {
-  if (bytes == nullptr) return {};
-  return std::vector<uint8_t>(bytes->bytes, bytes->bytes + bytes->size);
+  return nanopb::MakeString(str);
 }
 
 namespace {
@@ -321,7 +302,9 @@ google_firestore_v1_Value Serializer::EncodeFieldValue(
 
     case FieldValue::Type::Blob:
       result.which_value_type = google_firestore_v1_Value_bytes_value_tag;
-      result.bytes_value = EncodeBytes(field_value.blob_value());
+      // Copy the blob so that pb_release can do the right thing.
+      result.bytes_value =
+          nanopb::CopyBytesArray(field_value.blob_value().get());
       return result;
 
     case FieldValue::Type::Reference:
@@ -379,10 +362,8 @@ FieldValue Serializer::DecodeFieldValue(Reader* reader,
     case google_firestore_v1_Value_string_value_tag:
       return FieldValue::FromString(DecodeString(msg.string_value));
 
-    case google_firestore_v1_Value_bytes_value_tag: {
-      std::vector<uint8_t> bytes = DecodeBytes(msg.bytes_value);
-      return FieldValue::FromBlob(bytes.data(), bytes.size());
-    }
+    case google_firestore_v1_Value_bytes_value_tag:
+      return FieldValue::FromBlob(ByteString(msg.bytes_value));
 
     case google_firestore_v1_Value_reference_value_tag:
       // TODO(b/74243929): Implement remaining types.

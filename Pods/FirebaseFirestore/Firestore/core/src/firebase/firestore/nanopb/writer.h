@@ -24,6 +24,8 @@
 #include <string>
 #include <vector>
 
+#include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
+
 namespace firebase {
 namespace firestore {
 namespace nanopb {
@@ -35,28 +37,6 @@ namespace nanopb {
 class Writer {
  public:
   /**
-   * Creates an output stream that writes to the specified vector. Note that
-   * this vector pointer must remain valid for the lifetime of this Writer.
-   *
-   * (This is roughly equivalent to the nanopb function
-   * pb_ostream_from_buffer())
-   *
-   * @param out_bytes where the output should be serialized to.
-   */
-  static Writer Wrap(std::vector<std::uint8_t>* out_bytes);
-
-  /**
-   * Creates an output stream that writes to the specified string. Note that
-   * this string pointer must remain valid for the lifetime of this Writer.
-   *
-   * (This is roughly equivalent to the nanopb function
-   * pb_ostream_from_buffer())
-   *
-   * @param out_string where the output should be serialized to.
-   */
-  static Writer Wrap(std::string* out_string);
-
-  /**
    * Writes a nanopb message to the output stream.
    *
    * This essentially wraps calls to nanopb's `pb_encode()` method. If we didn't
@@ -65,16 +45,103 @@ class Writer {
    */
   void WriteNanopbMessage(const pb_field_t fields[], const void* src_struct);
 
- private:
+ protected:
   /**
-   * Creates a new Writer, based on the given nanopb pb_ostream_t. Note that
-   * a shallow copy will be taken. (Non-null pointers within this struct must
-   * remain valid for the lifetime of this Writer.)
+   * Creates a new Writer, with a default-initialized pb_ostream_t.
    */
-  explicit Writer(const pb_ostream_t& stream) : stream_(stream) {
+  Writer() = default;
+
+  pb_ostream_t stream_{};
+};
+
+/**
+ * Creates a Writer that writes into a vector of bytes.
+ *
+ * This is roughly equivalent to the nanopb function pb_ostream_from_buffer(),
+ * except that ByteStringWriter manages the buffer.
+ */
+class ByteStringWriter : public Writer {
+ public:
+  ByteStringWriter();
+  ~ByteStringWriter();
+
+  ByteStringWriter(const ByteStringWriter&) = delete;
+  ByteStringWriter(ByteStringWriter&&) = delete;
+
+  ByteStringWriter& operator=(const ByteStringWriter&) = delete;
+  ByteStringWriter& operator=(ByteStringWriter&&) = delete;
+
+  /**
+   * Appends the given data to the internal buffer, growing the capacity of the
+   * buffer to fit.
+   */
+  void Append(const void* data, size_t size);
+
+  /**
+   * Reserves the given number of bytes of total capacity. To reserve `n` more
+   * bytes in a writer `w`, call `w.Reserve(w.size() + n)`.
+   */
+  void Reserve(size_t capacity);
+
+  /**
+   * Sets the size of the buffer to some value less than the current capacity,
+   * presumably after writing into the buffer with `pos()`.
+   */
+  void SetSize(size_t size);
+
+  /**
+   * Returns a ByteString that takes ownership of the bytes backing this
+   * writer.
+   */
+  ByteString Release();
+
+  size_t size() const {
+    return buffer_ ? buffer_->size : 0;
   }
 
-  pb_ostream_t stream_;
+  size_t capacity() const {
+    return capacity_;
+  }
+
+  /**
+   * Returns the number of remaining bytes: the difference between capacity and
+   * size.
+   */
+  size_t remaining() const {
+    return capacity_ - size();
+  }
+
+  /**
+   * Returns the current writing position within this writer's internal buffer.
+   * This can only be used after calling `Reserve()`.
+   */
+  uint8_t* pos() {
+    return buffer_->bytes + buffer_->size;
+  }
+
+ private:
+  pb_bytes_array_t* buffer_ = nullptr;
+  size_t capacity_ = 0;
+};
+
+/**
+ * Creates an Writer that writes into a std::string.
+ *
+ * This is roughly equivalent to the nanopb function pb_ostream_from_buffer(),
+ * except that StringWriter manages the string.
+ */
+class StringWriter : public Writer {
+ public:
+  StringWriter();
+
+  /**
+   * Returns the string backing this StringWriter, taking ownership of its
+   * contents.
+   */
+  std::string Release();
+
+ private:
+  std::string buffer_;
 };
 
 }  // namespace nanopb
