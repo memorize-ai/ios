@@ -33,7 +33,7 @@ class Upload {
 	
 	private var storageReference: StorageReference? {
 		guard let uid = memorize_ai.id else { return nil }
-		return Upload.storage.child("\(uid)/\(filename)")
+		return Upload.storage.child("\(uid)/\(id)")
 	}
 	
 	var filename: String {
@@ -50,10 +50,6 @@ class Upload {
 	
 	static func loaded(_ filter: ((Upload) -> Bool)? = nil) -> [Upload] {
 		return uploads.filter { $0.data != nil && (filter?($0) ?? true) }
-	}
-	
-	static func loaded() -> [Upload] {
-		return loaded { _ in return true }
 	}
 	
 	static func filter(_ array: [Upload], for type: UploadType?) -> [Upload] {
