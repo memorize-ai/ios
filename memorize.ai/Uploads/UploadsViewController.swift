@@ -128,5 +128,6 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 class UploadCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
 }
