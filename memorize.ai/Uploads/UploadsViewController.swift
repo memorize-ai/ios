@@ -1,4 +1,5 @@
 import UIKit
+//import SwiftySound
 
 class UploadsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var filterSegmentedControl: UISegmentedControl!
@@ -31,11 +32,15 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.uploadAdded) { change in
 			if change == .uploadAdded || change == .uploadModified || change == .uploadRemoved || change == .uploadLoaded {
-				self.loadFilteredUploads()
-				self.uploadsCollectionView.reloadData()
+				self.reloadUploads()
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	func reloadUploads() {
+		loadFilteredUploads()
+		uploadsCollectionView.reloadData()
 	}
 	
 	@IBAction func filterSegmentedControlChanged() {
@@ -96,7 +101,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				cell.imageView.image = #imageLiteral(resourceName: "Sound")
 				cell.playButton.isHidden = false
 				cell.playAction = {
-					// Play sound
+//					Sound.play(url: URL(string: "https://www2.cs.uic.edu/~i101/SoundFiles/preamble.wav")!)
 				}
 			}
 		} else {

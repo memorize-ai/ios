@@ -27,6 +27,9 @@ class UploadActionsViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.uploadModified) { change in
+			if change == .uploadAdded || change == .uploadModified || change == .uploadRemoved {
+				(self.parent as? UploadsViewController)?.reloadUploads()
+			}
 			if change == .uploadModified {
 				self.reloadLabels()
 			} else if change == .uploadRemoved && !(uploads.contains { $0.id == self.upload?.id }) {
