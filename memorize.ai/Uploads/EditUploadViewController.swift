@@ -56,9 +56,18 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			self.present(imagePicker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { _ in
-			imagePicker.sourceType = .photoLibrary
-			self.imagePickerSourceType = .photoLibrary
-			self.present(imagePicker, animated: true, completion: nil)
+			if PHPhotoLibrary.authorizationStatus() == .authorized {
+				imagePicker.sourceType = .photoLibrary
+				self.imagePickerSourceType = .photoLibrary
+				self.present(imagePicker, animated: true, completion: nil)
+			} else {
+				PHPhotoLibrary.requestAuthorization {
+					guard $0 == .authorized else { return }
+					imagePicker.sourceType = .photoLibrary
+					self.imagePickerSourceType = .photoLibrary
+					self.present(imagePicker, animated: true, completion: nil)
+				}
+			}
 		})
 		alert.addAction(UIAlertAction(title: "iCloud", style: .default) { _ in
 			let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypeImage), String(kUTTypeMP3)], in: .import)
