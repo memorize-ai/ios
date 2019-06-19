@@ -14,6 +14,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	var upload: Upload?
 	var file: (name: String?, type: UploadType?, mime: String?, extension: String?, size: String?, data: Data?) = (nil, nil, nil, nil, nil, nil)
+	var didChangeData = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -68,6 +69,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 				file.extension = ext
 				file.data = data
 				file.size = data.size
+				didChangeData = true
 				reloadUpload()
 			} else {
 				showNotification("Unable to select image. Please choose another image", type: .error)
@@ -84,6 +86,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
 		showAlert(urls[0].absoluteString) // test line
+		didChangeData = true
 	}
 	
 	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -125,14 +128,19 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 				"size": size
 			]) { error in
 				if error == nil {
-					Upload.storage.child("\(id)/\(upload.id)").putData(data, metadata: metadata) { _, error in
-						self.setLoading(false)
-						if error == nil {
-							upload.data = data
-							self.showNotification("Uploaded file", type: .success)
-						} else {
-							self.showNotification("Unable to upload file. Please try again", type: .error)
+					if self.didChangeData {
+						Upload.storage.child("\(id)/\(upload.id)").putData(data, metadata: metadata) { _, error in
+							self.setLoading(false)
+							if error == nil {
+								upload.data = data
+								self.showNotification("Uploaded file", type: .success)
+							} else {
+								self.showNotification("Unable to upload file. Please try again", type: .error)
+							}
 						}
+					} else {
+						self.setLoading(false)
+						self.showNotification("Edited upload", type: .success)
 					}
 				} else {
 					self.setLoading(false)
