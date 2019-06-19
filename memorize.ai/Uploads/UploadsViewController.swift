@@ -126,11 +126,16 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let upload = filteredUploads[indexPath.item]
 		if let completion = completion {
 			navigationController?.popViewController(animated: true)
-			completion(filteredUploads[indexPath.item])
-		} else {
-			
+			completion(upload)
+		} else if let uploadActionsVC = storyboard?.instantiateViewController(withIdentifier: "uploadActions") as? UploadActionsViewController  {
+			uploadActionsVC.upload = upload
+			addChild(uploadActionsVC)
+			uploadActionsVC.view.frame = view.frame
+			view.addSubview(uploadActionsVC.view)
+			uploadActionsVC.didMove(toParent: self)
 		}
 	}
 }
