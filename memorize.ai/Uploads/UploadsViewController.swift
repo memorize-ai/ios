@@ -73,15 +73,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	func loadFilteredUploads() {
 		guard let searchText = searchBar.text else { return }
 		if searchText.trim().isEmpty {
-			let loaded = Upload.loaded()
-			filteredUploads = Upload.filter(loaded, for: filter)
-			if !uploads.isEmpty && loaded.isEmpty {
-				uploads.first?.load { _, error in
-					guard error == nil else { return }
-					self.loadFilteredUploads()
-					self.uploadsCollectionView.reloadData()
-				}
-			}
+			filteredUploads = Upload.filter(uploads, for: filter)
 		} else {
 			searchBar(searchBar, textDidChange: searchText)
 		}
@@ -115,13 +107,6 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 			}
 		}
 		cell.nameLabel.text = element.name
-		if indexPath.item == filteredUploads.count - 1 {
-			let next = Upload.filter(Upload.getNext(5), for: filter)
-			if !next.isEmpty {
-				filteredUploads.append(contentsOf: next)
-				uploadsCollectionView.reloadData()
-			}
-		}
 		return cell
 	}
 	
