@@ -304,7 +304,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		if nameText.isEmpty {
 			disable()
 		} else if let deck = deck, deck.image == imageView.image && deck.name == nameText && deck.subtitle == subtitleText && deck.tags == getTags() && deck.description == descriptionTextView.text && deck.isPublic == publicSwitch.isOn {
-				disable()
+			disable()
 		} else {
 			enable()
 		}

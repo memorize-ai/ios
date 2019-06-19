@@ -18,6 +18,9 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		fileImageView.layer.borderColor = UIColor.lightGray.cgColor
+		uploadButton.layer.borderColor = UIColor.lightGray.cgColor
+		nameTextField.setKeyboard()
 		if let upload = upload, let data = upload.data {
 			file = (name: upload.name, type: upload.type, mime: upload.mime, extension: upload.extension, size: upload.size, data: data)
 		}
@@ -65,7 +68,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 				file.extension = ext
 				file.data = data
 				file.size = data.size
-				didChangeData = true
+				didPickFile()
 				reloadUpload()
 			} else {
 				showNotification("Unable to select image. Please choose another image", type: .error)
@@ -82,11 +85,16 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
 		showAlert(urls[0].absoluteString) // test line
-		didChangeData = true
+		didPickFile()
 	}
 	
 	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
 		dismiss(animated: true, completion: nil)
+	}
+	
+	func didPickFile() {
+		didChangeData = true
+		chooseFileLabel.isHidden = true
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -186,6 +194,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		uploadButton.isEnabled = isEnabled
 		uploadButton.setTitleColor(isEnabled ? #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1) : #colorLiteral(red: 0.8264711499, green: 0.8266105652, blue: 0.8264527917, alpha: 1), for: .normal)
 		uploadButton.backgroundColor = isEnabled ? #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1) : #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
+		uploadButton.layer.borderWidth = isEnabled ? 0 : 1
 	}
 	
 	func setLoading(_ isLoading: Bool) {
@@ -208,5 +217,10 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		cell.textLabel?.text = element.key
 		cell.detailTextLabel?.text = element.value
 		return cell
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		dismissKeyboard()
+		return false
 	}
 }
