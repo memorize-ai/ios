@@ -4,7 +4,7 @@ import MobileCoreServices
 import Photos
 
 class EditUploadViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
-	@IBOutlet weak var chooseFileLabel: UILabel!
+	@IBOutlet weak var chooseFileView: UIView!
 	@IBOutlet weak var fileImageView: UIImageView!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
@@ -31,7 +31,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 				fileImageView.image = #imageLiteral(resourceName: "Sound")
 			}
 			nameTextField.text = upload.name
-			chooseFileLabel.isHidden = true
+			chooseFileView.isHidden = true
 		}
 		reloadUpload()
 	}
@@ -155,7 +155,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	func didPickFile() {
 		didChangeData = true
-		chooseFileLabel.isHidden = true
+		chooseFileView.isHidden = true
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
