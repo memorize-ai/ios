@@ -96,6 +96,18 @@ enum UploadType: String {
 	case gif = "gif"
 	case audio = "audio"
 	
+	init?(mime: String) {
+		if mime == "image/gif" {
+			self = .gif
+		} else if mime.starts(with: "image/") {
+			self = .image
+		} else if mime.starts(with: "audio/") {
+			self = .audio
+		} else {
+			return nil
+		}
+	}
+	
 	var formatted: String {
 		switch self {
 		case .image:
