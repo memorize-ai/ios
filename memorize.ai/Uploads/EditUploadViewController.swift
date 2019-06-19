@@ -15,6 +15,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	var upload: Upload?
 	var file: (name: String?, type: UploadType?, mime: String?, extension: String?, size: String?, data: Data?)
 	var didChangeData = false
+	var imagePickerSourceType: UIImagePickerController.SourceType?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -43,10 +44,12 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 		alert.addAction(UIAlertAction(title: "Take Photo", style: .default) { _ in
 			imagePicker.sourceType = .camera
+			self.imagePickerSourceType = .camera
 			self.present(imagePicker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { _ in
 			imagePicker.sourceType = .photoLibrary
+			self.imagePickerSourceType = .photoLibrary
 			self.present(imagePicker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "iCloud", style: .default) { _ in
@@ -59,19 +62,18 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset, let _ext = PHAssetResource.assetResources(for: asset).first?.originalFilename.split(separator: ".").last, let data = image.compressedData() {
-			let ext = String(_ext)
-			if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
-				fileImageView.image = image
-				file.type = type
-				file.mime = mime
-				file.extension = ext
-				file.data = data
-				file.size = data.size
-				didPickFile()
-				reloadUpload()
-			} else {
-				showNotification("Unable to select image. Please choose another image", type: .error)
+		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let data = image.compressedData() {
+			switch imagePickerSourceType {
+			case .some(.camera):
+				saveImage(image, data: data, extension: "heic")
+			case .some(.photoLibrary):
+				if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset, let ext = PHAssetResource.assetResources(for: asset).first?.originalFilename.split(separator: ".").last {
+					saveImage(image, data: data, extension: String(ext))
+				} else {
+					showNotification("Unable to select image. Please choose another image", type: .error)
+				}
+			default:
+				showNotification("Error when selecting image. Please try again", type: .error)
 			}
 		} else {
 			showNotification("Unable to select image. Please choose another image", type: .error)
@@ -81,6 +83,21 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
+	}
+	
+	func saveImage(_ image: UIImage, data: Data, extension ext: String) {
+		if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
+			fileImageView.image = image
+			file.type = type
+			file.mime = mime
+			file.extension = ext
+			file.data = data
+			file.size = data.size
+			didPickFile()
+			reloadUpload()
+		} else {
+			showNotification("Unable to select image. Please choose another image", type: .error)
+		}
 	}
 	
 	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
