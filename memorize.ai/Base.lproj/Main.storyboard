@@ -1241,6 +1241,9 @@
                                     <outlet property="delegate" destination="kdw-V6-Hub" id="rt1-tM-XIG"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BAZ-X8-uur">
+                                <rect key="frame" x="40" y="666" width="334" height="50"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1252,10 +1255,14 @@
                             <constraint firstItem="SYM-Qc-9Sh" firstAttribute="trailing" secondItem="s5k-dB-H60" secondAttribute="trailing" constant="40" id="Fw4-T9-D23"/>
                             <constraint firstItem="BJZ-cg-g16" firstAttribute="top" secondItem="TA4-FT-i2J" secondAttribute="bottom" constant="10" id="GfG-Gv-fGR"/>
                             <constraint firstItem="sFK-4W-fkD" firstAttribute="leading" secondItem="SYM-Qc-9Sh" secondAttribute="leading" constant="40" id="Os1-qn-jd1"/>
+                            <constraint firstItem="BAZ-X8-uur" firstAttribute="top" secondItem="s5k-dB-H60" secondAttribute="bottom" constant="10" id="UrA-5P-C4u"/>
                             <constraint firstItem="TA4-FT-i2J" firstAttribute="top" secondItem="SYM-Qc-9Sh" secondAttribute="top" constant="30" id="XcD-Ql-sOp"/>
                             <constraint firstItem="SYM-Qc-9Sh" firstAttribute="trailing" secondItem="BJZ-cg-g16" secondAttribute="trailing" constant="40" id="Yq6-JH-wkb"/>
+                            <constraint firstItem="SYM-Qc-9Sh" firstAttribute="trailing" secondItem="BAZ-X8-uur" secondAttribute="trailing" constant="40" id="Z59-aA-oZx"/>
                             <constraint firstItem="sFK-4W-fkD" firstAttribute="top" secondItem="s5k-dB-H60" secondAttribute="bottom" constant="10" id="bAX-5o-mSm"/>
                             <constraint firstItem="BJZ-cg-g16" firstAttribute="leading" secondItem="SYM-Qc-9Sh" secondAttribute="leading" constant="40" id="egE-Hl-Y32"/>
+                            <constraint firstItem="SYM-Qc-9Sh" firstAttribute="bottom" secondItem="BAZ-X8-uur" secondAttribute="bottom" constant="20" id="haT-fh-1CM"/>
+                            <constraint firstItem="BAZ-X8-uur" firstAttribute="leading" secondItem="SYM-Qc-9Sh" secondAttribute="leading" constant="40" id="jEu-nZ-Uph"/>
                             <constraint firstItem="SYM-Qc-9Sh" firstAttribute="trailing" secondItem="TA4-FT-i2J" secondAttribute="trailing" constant="40" id="mLG-6C-Lv0"/>
                             <constraint firstItem="TA4-FT-i2J" firstAttribute="leading" secondItem="SYM-Qc-9Sh" secondAttribute="leading" constant="40" id="nZ3-rh-hhF"/>
                             <constraint firstItem="s5k-dB-H60" firstAttribute="top" secondItem="6uK-bA-X9r" secondAttribute="bottom" id="ocQ-Wd-vbw"/>
@@ -1269,6 +1276,7 @@
                         <outlet property="metadataTableView" destination="s5k-dB-H60" id="mHX-wq-jZQ"/>
                         <outlet property="nameBarView" destination="6uK-bA-X9r" id="9Vr-wV-I4E"/>
                         <outlet property="nameTextField" destination="BJZ-cg-g16" id="8nc-Kx-Gfa"/>
+                        <outlet property="uploadActivityIndicator" destination="BAZ-X8-uur" id="Ilu-mL-DAi"/>
                         <outlet property="uploadButton" destination="sFK-4W-fkD" id="c6A-bD-F91"/>
                     </connections>
                 </viewController>

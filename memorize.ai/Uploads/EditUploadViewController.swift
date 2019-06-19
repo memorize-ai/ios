@@ -9,6 +9,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	@IBOutlet weak var nameBarView: UIView!
 	@IBOutlet weak var metadataTableView: UITableView!
 	@IBOutlet weak var uploadButton: UIButton!
+	@IBOutlet weak var uploadActivityIndicator: UIActivityIndicatorView!
 	
 	var upload: Upload?
 	var file: (name: String?, type: UploadType?, mime: String?, extension: String?, size: String?, data: Data?) = (nil, nil, nil, nil, nil, nil)
@@ -18,6 +19,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		if let upload = upload, let data = upload.data {
 			file = (name: upload.name, type: upload.type, mime: upload.mime, extension: upload.extension, size: upload.size, data: data)
 		}
+		reloadUpload()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		guard let id = id, let name = file.name, let type = file.type?.rawValue, let mime = file.mime, let ext = file.extension, let size = file.size, let data = file.data else { return }
 		let now = Date()
 		let metadata = StorageMetadata.from(mime: mime)
+		setLoading(true)
 		showNotification("Uploading...", type: .normal)
 		if let upload = upload {
 			firestore.document("users/\(id)/uploads/\(upload.id)").updateData([
@@ -82,6 +85,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			]) { error in
 				if error == nil {
 					Upload.storage.child("\(id)/\(upload.id)").putData(data, metadata: metadata) { _, error in
+						self.setLoading(false)
 						if error == nil {
 							self.showNotification("Uploaded file", type: .success)
 						} else {
@@ -89,6 +93,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 						}
 					}
 				} else {
+					self.setLoading(false)
 					self.showNotification("Unable to upload file. Please try again", type: .error)
 				}
 			}
@@ -105,6 +110,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			]) { error in
 				if error == nil, let uploadId = documentReference?.documentID {
 					Upload.storage.child("\(id)/\(uploadId)").putData(data, metadata: metadata) { _, error in
+						self.setLoading(false)
 						if error == nil {
 							self.navigationController?.popViewController(animated: true)
 							self.navigationController?.topViewController?.showNotification("Uploaded file", type: .success) // will this work?
@@ -113,6 +119,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 						}
 					}
 				} else {
+					self.setLoading(false)
 					self.showNotification("Unable to upload file. Please try again", type: .error)
 				}
 			}
@@ -120,7 +127,29 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func reloadUpload() {
-		
+		if file.name == nil || file.type == nil || file.mime == nil || file.extension == nil || file.size == nil || file.data == nil {
+			setEnabled(true)
+		} else if let upload = upload, upload.name == file.name && upload.type == file.type && upload.mime == file.mime && upload.extension == file.extension && upload.size == file.size {
+			setEnabled(false)
+		} else {
+			setEnabled(true)
+		}
+	}
+	
+	func setEnabled(_ isEnabled: Bool) {
+		uploadButton.isEnabled = isEnabled
+		uploadButton.setTitleColor(isEnabled ? #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1) : #colorLiteral(red: 0.8264711499, green: 0.8266105652, blue: 0.8264527917, alpha: 1), for: .normal)
+		uploadButton.backgroundColor = isEnabled ? #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1) : #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
+	}
+	
+	func setLoading(_ isLoading: Bool) {
+		uploadButton.isEnabled = !isLoading
+		uploadButton.setTitle(isLoading ? nil : "UPLOAD", for: .normal)
+		if isLoading {
+			uploadActivityIndicator.startAnimating()
+		} else {
+			uploadActivityIndicator.stopAnimating()
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
