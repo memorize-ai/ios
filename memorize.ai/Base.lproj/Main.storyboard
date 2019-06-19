@@ -984,10 +984,10 @@
             </objects>
             <point key="canvasLocation" x="2192.753623188406" y="133.69565217391306"/>
         </scene>
-        <!--View Controller-->
+        <!--Upload Actions View Controller-->
         <scene sceneID="JBo-PP-QW5">
             <objects>
-                <viewController id="Vsh-9u-LmE" sceneMemberID="viewController">
+                <viewController id="Vsh-9u-LmE" customClass="UploadActionsViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iz7-mE-vaV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
