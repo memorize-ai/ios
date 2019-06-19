@@ -1014,6 +1014,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="hide" destination="mnq-ju-4zN" eventType="touchUpInside" id="Nag-f2-41O"/>
+                                                    <action selector="hide" destination="Vsh-9u-LmE" eventType="touchUpInside" id="iMZ-nO-lxI"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-LF-tOc">
@@ -1022,10 +1023,21 @@
                                                     <constraint firstAttribute="width" secondItem="GEj-LF-tOc" secondAttribute="height" multiplier="1:1" id="5Jb-U7-zb8"/>
                                                 </constraints>
                                                 <state key="normal" image="Trash Can"/>
+                                                <connections>
+                                                    <action selector="delete" destination="Vsh-9u-LmE" eventType="touchUpInside" id="oqH-pn-qUI"/>
+                                                </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kzM-tS-312">
+                                                <rect key="frame" x="12" y="6" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="kzM-tS-312" secondAttribute="height" id="ixg-Ux-TdG"/>
+                                                </constraints>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="kzM-tS-312" firstAttribute="top" secondItem="0Cj-EI-R7q" secondAttribute="top" constant="6" id="1Rh-El-byA"/>
+                                            <constraint firstItem="kzM-tS-312" firstAttribute="leading" secondItem="0Cj-EI-R7q" secondAttribute="leading" constant="12" id="32G-De-VLQ"/>
                                             <constraint firstItem="ZCe-Xp-vCt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wd3-ks-1a8" secondAttribute="trailing" constant="20" id="440-iu-5ov"/>
                                             <constraint firstAttribute="bottom" secondItem="Wd3-ks-1a8" secondAttribute="bottom" id="6Ml-uw-KpJ"/>
                                             <constraint firstAttribute="bottom" secondItem="ZCe-Xp-vCt" secondAttribute="bottom" constant="6" id="IdC-0f-2e4"/>
@@ -1034,11 +1046,15 @@
                                             <constraint firstItem="Wd3-ks-1a8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GEj-LF-tOc" secondAttribute="trailing" constant="8" id="VfP-ii-t4P"/>
                                             <constraint firstItem="GEj-LF-tOc" firstAttribute="top" secondItem="0Cj-EI-R7q" secondAttribute="top" constant="6" id="Xo9-ss-ZOw"/>
                                             <constraint firstAttribute="bottom" secondItem="GEj-LF-tOc" secondAttribute="bottom" constant="6" id="aDq-sm-d7a"/>
+                                            <constraint firstAttribute="bottom" secondItem="kzM-tS-312" secondAttribute="bottom" constant="6" id="aJU-qk-vb6"/>
                                             <constraint firstAttribute="trailing" secondItem="ZCe-Xp-vCt" secondAttribute="trailing" constant="6" id="atb-tr-1FK"/>
                                             <constraint firstItem="Wd3-ks-1a8" firstAttribute="centerX" secondItem="0Cj-EI-R7q" secondAttribute="centerX" id="iF9-Yy-vOW"/>
                                             <constraint firstAttribute="height" constant="40" id="qKm-aX-xN9"/>
                                             <constraint firstItem="Wd3-ks-1a8" firstAttribute="top" secondItem="0Cj-EI-R7q" secondAttribute="top" id="sy0-tk-FBz"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmB-h6-u0A">
                                         <rect key="frame" x="20" y="48" width="254" height="25"/>
@@ -1112,6 +1128,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Y1A-I0-FhG"/>
                     </view>
+                    <connections>
+                        <outlet property="deleteActivityIndicator" destination="kzM-tS-312" id="XGB-lA-PMy"/>
+                        <outlet property="deleteButton" destination="GEj-LF-tOc" id="kws-iF-Gqn"/>
+                        <outlet property="titleBar" destination="0Cj-EI-R7q" id="qfm-aC-fg4"/>
+                        <outlet property="uploadView" destination="RX8-v1-aTQ" id="17w-Xo-sdT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UO1-rH-yqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
