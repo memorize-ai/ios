@@ -149,7 +149,7 @@ extension Date {
 		return format("MMM d, yyyy")
 	}
 	
-	func elapsed() -> String {
+	func elapsed(to date: Date = Date()) -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		let formatter = DateComponentsFormatter()
@@ -157,7 +157,7 @@ extension Date {
 		formatter.zeroFormattingBehavior = .dropAll
 		formatter.maximumUnitCount = 1
 		formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
-		return "\(formatter.string(from: self, to: Date()) ?? "") ago"
+		return "\(formatter.string(from: self, to: date) ?? "") ago"
 	}
 }
 
