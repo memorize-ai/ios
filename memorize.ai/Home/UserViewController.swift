@@ -250,17 +250,25 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let deckId = rating.documentID
 				switch $0.type {
 				case .added:
-					deckRatings.append(DeckRating(
-						id: deckId,
-						rating: rating.get("rating") as? Int ?? 0,
-						title: rating.get("title") as? String ?? "",
-						review: rating.get("review") as? String ?? "",
-						date: rating.getDate("date") ?? Date()
-					))
+					if let ratingValue = rating.get("rating") as? Int, let title = rating.get("title") as? String, let review = rating.get("review") as? String, let date = rating.getDate("date") {
+						deckRatings.append(DeckRating(
+							id: deckId,
+							rating: ratingValue,
+							title: title,
+							review: review,
+							date: date
+						))
+					}
 					self.loadCardRatings(deckId)
 					ChangeHandler.call(.deckRatingAdded)
 				case .modified:
-					DeckRating.get(deckId)?.update(rating)
+					if let deckRating = DeckRating.get(deckId) {
+						deckRating.update(rating)
+					} else {
+						let deckRating = DeckRating(id: deckId, rating: 0, title: "", review: "", date: Date())
+						deckRating.update(rating)
+						deckRatings.append(deckRating)
+					}
 					ChangeHandler.call(.deckRatingModified)
 				case .removed:
 					deckRatings = deckRatings.filter { $0.id != deckId }
@@ -531,7 +539,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						mime: upload.get("mime") as? String ?? "image/png",
 						extension: upload.get("extension") as? String ?? "png",
 						size: upload.get("size") as? String ?? "0 MB",
-						data: nil
+						data: Upload.dataFromCache(uploadId)
 					))
 					ChangeHandler.call(.uploadAdded)
 				case .modified:

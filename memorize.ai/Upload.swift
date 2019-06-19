@@ -2,6 +2,7 @@ import Foundation
 import Firebase
 
 var uploads = [Upload]()
+var uploadCache = [String : Data]()
 
 class Upload {
 	static let storage = Storage.storage(url: "gs://uploads.memorize.ai").reference()
@@ -43,8 +44,12 @@ class Upload {
 		storageReference?.downloadURL(completion: completion)
 	}
 	
-	static func loaded(_ filter: (Upload) -> Bool) -> [Upload] {
-		return uploads.filter { $0.data != nil && filter($0) }
+	static func dataFromCache(_ id: String) -> Data? {
+		return uploadCache.removeValue(forKey: id)
+	}
+	
+	static func loaded(_ filter: ((Upload) -> Bool)? = nil) -> [Upload] {
+		return uploads.filter { $0.data != nil && (filter?($0) ?? true) }
 	}
 	
 	static func loaded() -> [Upload] {
