@@ -9,6 +9,8 @@ class UploadActionsViewController: UIViewController {
 	@IBOutlet weak var typeLabel: UILabel!
 	@IBOutlet weak var sizeLabel: UILabel!
 	@IBOutlet weak var extensionLabel: UILabel!
+	@IBOutlet weak var lastUpdatedLabel: UILabel!
+	@IBOutlet weak var createdLabel: UILabel!
 	
 	var upload: Upload?
 	
@@ -46,6 +48,8 @@ class UploadActionsViewController: UIViewController {
 		typeLabel.text = upload.type.rawValue
 		sizeLabel.text = upload.size
 		extensionLabel.text = upload.extension
+		lastUpdatedLabel.text = upload.updated.format()
+		createdLabel.text = upload.created.format()
 	}
 	
 	@IBAction func delete() {

@@ -1068,7 +1068,7 @@
                                         <rect key="frame" x="0.0" y="40" width="334" height="254"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBs-ut-8m6">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="292"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="428.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw8-ia-Fpd">
                                                         <rect key="frame" x="20" y="20" width="43" height="20.666666666666671"/>
@@ -1118,6 +1118,30 @@
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAST UPDATED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e56-dO-GBC">
+                                                        <rect key="frame" x="20" y="292" width="112" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGK-sq-Hne">
+                                                        <rect key="frame" x="20" y="317" width="294" height="23.333333333333314"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-hP-sQi">
+                                                        <rect key="frame" x="20" y="360.33333333333337" width="68" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-nw-MVz">
+                                                        <rect key="frame" x="20" y="385.33333333333337" width="294" height="23.333333333333314"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -1126,20 +1150,32 @@
                                                     <constraint firstItem="fBK-b3-SEX" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="4Q1-Fq-zh1"/>
                                                     <constraint firstItem="kiO-L7-aYF" firstAttribute="top" secondItem="ZNT-rZ-Epe" secondAttribute="bottom" constant="20" id="5g1-PI-Khk"/>
                                                     <constraint firstItem="1MW-Sc-qb4" firstAttribute="top" secondItem="kiO-L7-aYF" secondAttribute="bottom" constant="4" id="ABa-eX-jNf"/>
+                                                    <constraint firstItem="RA2-nw-MVz" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="Cg9-Ws-qCz"/>
+                                                    <constraint firstItem="RA2-nw-MVz" firstAttribute="top" secondItem="CjQ-hP-sQi" secondAttribute="bottom" constant="4" id="DJB-72-CyD"/>
                                                     <constraint firstItem="s9R-Hd-Cf4" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="FHo-1H-y0C"/>
                                                     <constraint firstItem="mw8-ia-Fpd" firstAttribute="top" secondItem="xBs-ut-8m6" secondAttribute="top" constant="20" id="FQZ-JU-C1J"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fBK-b3-SEX" secondAttribute="trailing" constant="20" id="FrM-uO-kR7"/>
+                                                    <constraint firstItem="e56-dO-GBC" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="K10-bf-9JY"/>
                                                     <constraint firstAttribute="trailing" secondItem="s9R-Hd-Cf4" secondAttribute="trailing" constant="20" id="KD3-Eu-ICc"/>
+                                                    <constraint firstItem="CjQ-hP-sQi" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="KKB-io-iqW"/>
                                                     <constraint firstAttribute="trailing" secondItem="ZNT-rZ-Epe" secondAttribute="trailing" constant="20" id="LMi-kH-cuj"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e56-dO-GBC" secondAttribute="trailing" constant="20" id="MLp-LA-Meu"/>
                                                     <constraint firstAttribute="trailing" secondItem="1MW-Sc-qb4" secondAttribute="trailing" constant="20" id="OQi-sP-EaN"/>
                                                     <constraint firstItem="fBK-b3-SEX" firstAttribute="top" secondItem="s9R-Hd-Cf4" secondAttribute="bottom" constant="20" id="POU-g9-bTe"/>
                                                     <constraint firstItem="ZNT-rZ-Epe" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="RUg-yc-x1H"/>
+                                                    <constraint firstItem="CjQ-hP-sQi" firstAttribute="top" secondItem="fGK-sq-Hne" secondAttribute="bottom" constant="20" id="SP9-8y-Asc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RA2-nw-MVz" secondAttribute="bottom" constant="20" id="UXC-3U-LF7"/>
                                                     <constraint firstItem="KlR-C1-KIQ" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="UZs-lt-EG2"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CjQ-hP-sQi" secondAttribute="trailing" constant="20" id="WWu-tg-nz7"/>
                                                     <constraint firstAttribute="trailing" secondItem="KlR-C1-KIQ" secondAttribute="trailing" constant="20" id="WZ8-XX-XSy"/>
+                                                    <constraint firstItem="fGK-sq-Hne" firstAttribute="top" secondItem="e56-dO-GBC" secondAttribute="bottom" constant="4" id="aqD-hc-30n"/>
+                                                    <constraint firstItem="fGK-sq-Hne" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="bjd-7p-pd1"/>
                                                     <constraint firstItem="KlR-C1-KIQ" firstAttribute="top" secondItem="dKs-0l-OVT" secondAttribute="bottom" constant="4" id="c71-vn-8Jd"/>
+                                                    <constraint firstItem="e56-dO-GBC" firstAttribute="top" secondItem="KlR-C1-KIQ" secondAttribute="bottom" constant="20" id="c8D-oJ-sVM"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fGK-sq-Hne" secondAttribute="trailing" constant="20" id="iDS-ja-Cb7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RA2-nw-MVz" secondAttribute="trailing" constant="20" id="ihj-Ma-KCT"/>
                                                     <constraint firstItem="dKs-0l-OVT" firstAttribute="top" secondItem="1MW-Sc-qb4" secondAttribute="bottom" constant="20" id="jWz-so-b5d"/>
                                                     <constraint firstItem="ZNT-rZ-Epe" firstAttribute="top" secondItem="fBK-b3-SEX" secondAttribute="bottom" constant="4" id="jiZ-Ao-Uzs"/>
-                                                    <constraint firstAttribute="bottom" secondItem="KlR-C1-KIQ" secondAttribute="bottom" constant="20" id="ltZ-Pe-ohq"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mw8-ia-Fpd" secondAttribute="trailing" constant="20" id="p8g-hG-FNS"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kiO-L7-aYF" secondAttribute="trailing" constant="20" id="rhz-mE-P0B"/>
                                                     <constraint firstItem="kiO-L7-aYF" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="vJP-hO-N68"/>
@@ -1195,9 +1231,11 @@
                         <viewLayoutGuide key="safeArea" id="Y1A-I0-FhG"/>
                     </view>
                     <connections>
+                        <outlet property="createdLabel" destination="RA2-nw-MVz" id="LWb-DZ-hWP"/>
                         <outlet property="deleteActivityIndicator" destination="kzM-tS-312" id="XGB-lA-PMy"/>
                         <outlet property="deleteButton" destination="GEj-LF-tOc" id="kws-iF-Gqn"/>
                         <outlet property="extensionLabel" destination="KlR-C1-KIQ" id="ngv-Ua-ETh"/>
+                        <outlet property="lastUpdatedLabel" destination="fGK-sq-Hne" id="df2-g8-Cgf"/>
                         <outlet property="nameLabel" destination="s9R-Hd-Cf4" id="rvV-NR-gDa"/>
                         <outlet property="sizeLabel" destination="1MW-Sc-qb4" id="4KJ-1O-EBQ"/>
                         <outlet property="titleBar" destination="0Cj-EI-R7q" id="qfm-aC-fg4"/>
