@@ -11,7 +11,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
 	@IBOutlet weak var uploadButton: UIButton!
 	
 	var upload: Upload?
-	var file: (name: String, type: UploadType, mime: String, extension: String, size: String, data: Data)?
+	var file: (name: String?, type: UploadType?, mime: String?, extension: String?, size: String?, data: Data?) = (nil, nil, nil, nil, nil, nil)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -26,11 +26,11 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
 	}
 	
 	var metadata: [(key: String, value: String)] {
-		guard let file = file else { return [] }
+		guard let size = file.size, let type = file.type?.rawValue, let ext = file.extension else { return [] }
 		return [
-			("Size", file.size),
-			("Type", file.type.formatted),
-			("Ext", file.extension)
+			("Size", size),
+			("Type", type),
+			("Ext", ext)
 		]
 	}
 	
@@ -59,6 +59,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
 		dismiss(animated: true, completion: nil)
 		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
 		fileImageView.image = image
+		file.data = image.compressedData()
 		reloadUpload()
 	}
 	
@@ -67,20 +68,20 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
 	}
 	
 	@IBAction func submitUpload() {
-		guard let id = id, let file = file else { return }
+		guard let id = id, let name = file.name, let type = file.type?.rawValue, let mime = file.mime, let ext = file.extension, let size = file.size, let data = file.data else { return }
 		let now = Date()
-		let metadata = StorageMetadata.from(mime: file.mime)
+		let metadata = StorageMetadata.from(mime: mime)
 		showNotification("Uploading...", type: .normal)
 		if let upload = upload {
 			firestore.document("users/\(id)/uploads/\(upload.id)").updateData([
-				"name": file.name,
-				"type": file.type.rawValue,
-				"mime": file.mime,
-				"extension": file.extension,
-				"size": file.size
+				"name": name,
+				"type": type,
+				"mime": mime,
+				"extension": ext,
+				"size": size
 			]) { error in
 				if error == nil {
-					Upload.storage.child("\(id)/\(upload.id)").putData(file.data, metadata: metadata) { _, error in
+					Upload.storage.child("\(id)/\(upload.id)").putData(data, metadata: metadata) { _, error in
 						if error == nil {
 							self.showNotification("Uploaded file", type: .success)
 						} else {
@@ -94,16 +95,16 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate, UI
 		} else {
 			var documentReference: DocumentReference?
 			documentReference = firestore.collection("users/\(id)/uploads").addDocument(data: [
-				"name": file.name,
+				"name": name,
 				"created": now,
 				"updated": now,
-				"type": file.type.rawValue,
-				"mime": file.mime,
-				"extension": file.extension,
-				"size": file.size
+				"type": type,
+				"mime": mime,
+				"extension": ext,
+				"size": size
 			]) { error in
 				if error == nil, let uploadId = documentReference?.documentID {
-					Upload.storage.child("\(id)/\(uploadId)").putData(file.data, metadata: metadata) { _, error in
+					Upload.storage.child("\(id)/\(uploadId)").putData(data, metadata: metadata) { _, error in
 						if error == nil {
 							self.navigationController?.popViewController(animated: true)
 							self.navigationController?.topViewController?.showNotification("Uploaded file", type: .success) // will this work?
