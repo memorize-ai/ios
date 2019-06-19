@@ -115,6 +115,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
 			updateLastOnline()
+			loadBarButtonItems(image: #imageLiteral(resourceName: "Person"))
 			reloadProfileBarButtonItem()
 			loadDecks()
 			loadUploads()
@@ -333,7 +334,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		performSegue(withIdentifier: "signIn", sender: self)
 	}
 	
-	func leftBarButtonItem(image: UIImage) {
+	func loadBarButtonItems(image: UIImage) {
 		let editProfileButton = UIButton(type: .custom)
 		editProfileButton.setImage(image, for: .normal)
 		editProfileButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
@@ -341,20 +342,17 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		editProfileButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
 		editProfileButton.layer.cornerRadius = 16
 		editProfileButton.layer.masksToBounds = true
-		let editProfileBarButtonItem = UIBarButtonItem()
-		editProfileBarButtonItem.customView = editProfileButton
 		let titleLabel = UILabel()
 		titleLabel.text = "  memorize.ai"
 		titleLabel.font = UIFont(name: "Nunito-ExtraBold", size: 20)
 		titleLabel.textColor = .white
 		titleLabel.sizeToFit()
-		let titleBarButtonItem = UIBarButtonItem(customView: titleLabel)
-		navigationItem.setLeftBarButtonItems([editProfileBarButtonItem, titleBarButtonItem], animated: false)
+		navigationItem.setLeftBarButtonItems([UIBarButtonItem(customView: editProfileButton), UIBarButtonItem(customView: titleLabel)], animated: false)
 	}
 	
 	func loadProfileBarButtonItem(_ image: UIImage?) {
 		guard let image = image ?? profilePicture else { return }
-		leftBarButtonItem(image: image)
+		loadBarButtonItems(image: image)
 		profilePicture = image
 	}
 	
@@ -362,7 +360,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		guard let id = id else { return }
 		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-			self.leftBarButtonItem(image: image)
+			self.loadBarButtonItems(image: image)
 			profilePicture = image
 			User.save(image: data)
 			ChangeHandler.call(.profilePicture)
