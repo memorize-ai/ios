@@ -18,7 +18,12 @@ func buzz() {
 }
 
 func mimeTypeForExtension(_ ext: String) -> String? {
-	return MimeTypes.mimeType(forExtension: ext)
+	switch ext {
+	case "heic":
+		return "image/heic"
+	default:
+		return MimeTypes.mimeType(forExtension: ext)
+	}
 }
 
 func metadataForExtension(_ ext: String) -> StorageMetadata? {
