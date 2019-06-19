@@ -13,7 +13,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	@IBOutlet weak var uploadActivityIndicator: UIActivityIndicatorView!
 	
 	var upload: Upload?
-	var file: (name: String?, type: UploadType?, mime: String?, extension: String?, size: String?, data: Data?) = (nil, nil, nil, nil, nil, nil)
+	var file: (name: String?, type: UploadType?, mime: String?, extension: String?, size: String?, data: Data?)
 	var didChangeData = false
 	
 	override func viewDidLoad() {
