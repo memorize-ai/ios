@@ -262,14 +262,19 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.loadCardRatings(deckId)
 					ChangeHandler.call(.deckRatingAdded)
 				case .modified:
-					if let deckRating = DeckRating.get(deckId) {
-						deckRating.update(rating)
+					if rating.get("x") == nil {
+						if let deckRating = DeckRating.get(deckId) {
+							deckRating.update(rating)
+						} else {
+							let deckRating = DeckRating(id: deckId, rating: 0, title: "", review: "", date: Date())
+							deckRating.update(rating)
+							deckRatings.append(deckRating)
+						}
+						ChangeHandler.call(.deckRatingModified)
 					} else {
-						let deckRating = DeckRating(id: deckId, rating: 0, title: "", review: "", date: Date())
-						deckRating.update(rating)
-						deckRatings.append(deckRating)
+						deckRatings = deckRatings.filter { $0.id != deckId }
+						ChangeHandler.call(.deckRatingRemoved)
 					}
-					ChangeHandler.call(.deckRatingModified)
 				case .removed:
 					deckRatings = deckRatings.filter { $0.id != deckId }
 					ChangeHandler.call(.deckRatingRemoved)
