@@ -205,6 +205,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		} else {
 			setEnabled(true)
 		}
+		metadataTableView.reloadData()
 	}
 	
 	func setEnabled(_ isEnabled: Bool) {
