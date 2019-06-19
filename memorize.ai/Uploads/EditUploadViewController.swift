@@ -35,7 +35,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	var metadata: [(key: String, value: String)] {
 		guard let size = file.size, let type = file.type?.rawValue, let ext = file.extension else { return [] }
-		return [("Size", size), ("Type", type), ("Ext", ext)]
+		return [("Size", size), ("Type", type), ("Extension", ext)]
 	}
 	
 	@IBAction func chooseFile() {
@@ -139,7 +139,6 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		let now = Date()
 		let metadata = StorageMetadata.from(mime: mime)
 		setLoading(true)
-		showNotification("Uploading...", type: .normal)
 		if let upload = upload {
 			firestore.document("users/\(id)/uploads/\(upload.id)").updateData([
 				"name": name,
