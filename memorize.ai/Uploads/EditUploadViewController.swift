@@ -128,6 +128,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 					Upload.storage.child("\(id)/\(upload.id)").putData(data, metadata: metadata) { _, error in
 						self.setLoading(false)
 						if error == nil {
+							upload.data = data
 							self.showNotification("Uploaded file", type: .success)
 						} else {
 							self.showNotification("Unable to upload file. Please try again", type: .error)
