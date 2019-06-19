@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import MobileCoreServices
 
-class UploadViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+class EditUploadViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var chooseFileLabel: UILabel!
 	@IBOutlet weak var fileImageView: UIImageView!
 	@IBOutlet weak var nameTextField: UITextField!

@@ -992,8 +992,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RX8-v1-aTQ">
-                                <rect key="frame" x="60" y="221" width="294" height="482"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RX8-v1-aTQ">
+                                <rect key="frame" x="60" y="221" width="294" height="294"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Cj-EI-R7q">
                                         <rect key="frame" x="0.0" y="0.0" width="294" height="40"/>
@@ -1016,12 +1016,12 @@
                                                     <action selector="hide" destination="mnq-ju-4zN" eventType="touchUpInside" id="Nag-f2-41O"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-LF-tOc">
-                                                <rect key="frame" x="12" y="6" width="52" height="28"/>
-                                                <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="17"/>
-                                                <state key="normal" title="Delete">
-                                                    <color key="titleColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-LF-tOc">
+                                                <rect key="frame" x="12" y="6" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="GEj-LF-tOc" secondAttribute="height" multiplier="1:1" id="5Jb-U7-zb8"/>
+                                                </constraints>
+                                                <state key="normal" image="Trash Can"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1040,11 +1040,65 @@
                                             <constraint firstItem="Wd3-ks-1a8" firstAttribute="top" secondItem="0Cj-EI-R7q" secondAttribute="top" id="sy0-tk-FBz"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmB-h6-u0A">
+                                        <rect key="frame" x="20" y="48" width="254" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="NVm-rs-ZZI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
+                                        <state key="normal" title="Edit"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gMf-d8-5VK">
+                                        <rect key="frame" x="10" y="73" width="274" height="213"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="fdR-ZE-idQ" detailTextLabel="nX5-hK-ZGf" style="IBUITableViewCellStyleValue1" id="sZ8-Ap-6Jv">
+                                                <rect key="frame" x="0.0" y="55.333333333333343" width="274" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sZ8-Ap-6Jv" id="riY-0H-LbD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="274" height="43.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdR-ZE-idQ">
+                                                            <rect key="frame" x="16.000000000000004" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nX5-hK-ZGf">
+                                                            <rect key="frame" x="214" y="11.999999999999998" width="44" height="20.333333333333332"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="RX8-v1-aTQ" secondAttribute="height" id="0rB-8k-imu"/>
+                                    <constraint firstItem="qmB-h6-u0A" firstAttribute="top" secondItem="0Cj-EI-R7q" secondAttribute="bottom" constant="8" id="1Ms-op-KU3"/>
+                                    <constraint firstItem="qmB-h6-u0A" firstAttribute="leading" secondItem="RX8-v1-aTQ" secondAttribute="leading" constant="20" id="C77-eg-CRi"/>
+                                    <constraint firstItem="gMf-d8-5VK" firstAttribute="top" secondItem="qmB-h6-u0A" secondAttribute="bottom" id="DBP-jJ-i7a"/>
                                     <constraint firstItem="0Cj-EI-R7q" firstAttribute="top" secondItem="RX8-v1-aTQ" secondAttribute="top" id="Egp-LE-RU1"/>
+                                    <constraint firstItem="gMf-d8-5VK" firstAttribute="leading" secondItem="RX8-v1-aTQ" secondAttribute="leading" constant="10" id="bTf-vT-rkH"/>
+                                    <constraint firstAttribute="trailing" secondItem="gMf-d8-5VK" secondAttribute="trailing" constant="10" id="hkd-4q-D9a"/>
+                                    <constraint firstAttribute="bottom" secondItem="gMf-d8-5VK" secondAttribute="bottom" constant="8" id="n66-Dk-QdX"/>
                                     <constraint firstAttribute="trailing" secondItem="0Cj-EI-R7q" secondAttribute="trailing" id="oEs-6t-1iD"/>
+                                    <constraint firstAttribute="trailing" secondItem="qmB-h6-u0A" secondAttribute="trailing" constant="20" id="q6H-pw-wxU"/>
                                     <constraint firstItem="0Cj-EI-R7q" firstAttribute="leading" secondItem="RX8-v1-aTQ" secondAttribute="leading" id="x9r-od-TBO"/>
                                 </constraints>
                             </view>
@@ -1066,7 +1120,7 @@
         <!--Upload file-->
         <scene sceneID="dxc-sK-ZBc">
             <objects>
-                <viewController title="Upload file" id="kdw-V6-Hub" customClass="UploadViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Upload file" id="kdw-V6-Hub" customClass="EditUploadViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cse-27-Bl0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1115,7 +1169,7 @@
                                 <rect key="frame" x="40" y="94" width="334" height="167"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose file" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-9y-tJ8">
-                                        <rect key="frame" x="124.33333333333334" y="73.666666666666657" width="85.333333333333343" height="20"/>
+                                        <rect key="frame" x="123.66666666666666" y="72" width="86.666666666666657" height="23.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -4875,6 +4929,7 @@
         <image name="Opaque Background Star" width="376" height="359"/>
         <image name="Search" width="1177" height="1176"/>
         <image name="Transparent Logo" width="1191" height="732"/>
+        <image name="Trash Can" width="512" height="512"/>
         <image name="Unselected Dislike" width="500" height="512"/>
         <image name="Unselected Like" width="500" height="512"/>
         <image name="Unselected Star" width="376" height="359"/>
