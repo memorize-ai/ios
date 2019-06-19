@@ -31,11 +31,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	var metadata: [(key: String, value: String)] {
 		guard let size = file.size, let type = file.type?.rawValue, let ext = file.extension else { return [] }
-		return [
-			("Size", size),
-			("Type", type),
-			("Ext", ext)
-		]
+		return [("Size", size), ("Type", type), ("Ext", ext)]
 	}
 	
 	@IBAction func chooseFile() {
@@ -178,7 +174,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	
 	func reloadUpload() {
 		if file.name == nil || file.type == nil || file.mime == nil || file.extension == nil || file.size == nil || file.data == nil {
-			setEnabled(true)
+			setEnabled(false)
 		} else if let upload = upload, upload.name == file.name && upload.type == file.type && upload.mime == file.mime && upload.extension == file.extension && upload.size == file.size {
 			setEnabled(false)
 		} else {
