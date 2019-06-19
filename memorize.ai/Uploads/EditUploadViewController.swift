@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import MobileCoreServices
+import Photos
 
 class EditUploadViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var chooseFileLabel: UILabel!
@@ -58,15 +59,31 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset, let _ext = PHAssetResource.assetResources(for: asset).first?.originalFilename.split(separator: ".").last, let data = image.compressedData() {
+			let ext = String(_ext)
+			if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
+				fileImageView.image = image
+				file.type = type
+				file.mime = mime
+				file.extension = ext
+				file.data = data
+				file.size = data.size
+				reloadUpload()
+			} else {
+				showNotification("Unable to select image. Please choose another image", type: .error)
+			}
+		} else {
+			showNotification("Unable to select image. Please choose another image", type: .error)
+		}
 		dismiss(animated: true, completion: nil)
-		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-		fileImageView.image = image
-		file.data = image.compressedData()
-		reloadUpload()
 	}
 	
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
+	}
+	
+	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+		<#code#>
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
