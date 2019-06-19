@@ -101,8 +101,35 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-		showAlert(urls[0].absoluteString) // test line
-		didPickFile()
+		if let url = urls.first, let data = try? Data(contentsOf: url), let _ext = url.absoluteString.split(separator: ".").last {
+			let ext = String(_ext)
+			if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
+				switch type {
+				case .image, .gif:
+					if let image = UIImage(data: data) {
+						fileImageView.image = image
+					} else {
+						showNotification("Error when displaying image. Please try again", type: .error)
+						dismiss(animated: true, completion: nil)
+						return
+					}
+				case .audio:
+					fileImageView.image = #imageLiteral(resourceName: "Sound")
+				}
+				file.type = type
+				file.mime = mime
+				file.extension = ext
+				file.data = data
+				file.size = data.size
+				didPickFile()
+				reloadUpload()
+			} else {
+				showNotification("Unable to select file. Please try again", type: .error)
+			}
+		} else {
+			showNotification("Unable to select file. Please try again", type: .error)
+		}
+		dismiss(animated: true, completion: nil)
 	}
 	
 	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -183,7 +210,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 						self.setLoading(false)
 						if error == nil {
 							self.navigationController?.popViewController(animated: true)
-							self.navigationController?.topViewController?.showNotification("Uploaded file", type: .success) // will this work?
+							self.navigationController?.topViewController?.showNotification("Uploaded file", type: .success)
 						} else {
 							self.showNotification("Unable to upload file. Please try again", type: .error)
 						}
