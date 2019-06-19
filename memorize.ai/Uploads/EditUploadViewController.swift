@@ -24,6 +24,13 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		nameTextField.setKeyboard()
 		if let upload = upload, let data = upload.data {
 			file = (name: upload.name, type: upload.type, mime: upload.mime, extension: upload.extension, size: upload.size, data: data)
+			switch upload.type {
+			case .image, .gif:
+				fileImageView.image = UIImage(data: data)
+			case .audio:
+				fileImageView.image = #imageLiteral(resourceName: "Sound")
+			}
+			chooseFileLabel.isHidden = true
 		}
 		reloadUpload()
 	}
