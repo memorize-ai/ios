@@ -18,6 +18,13 @@ class UploadActionsViewController: UIViewController {
 		}, completion: nil)
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		if let editUploadVC = segue.destination as? EditUploadViewController {
+			editUploadVC.upload = upload
+		}
+	}
+	
 	@IBAction func delete() {
 		guard let id = id, let upload = upload else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "Every card using this upload will be unable to use it anymore. This action cannot be undone", preferredStyle: .alert)
