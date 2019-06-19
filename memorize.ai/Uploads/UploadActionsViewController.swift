@@ -43,7 +43,7 @@ class UploadActionsViewController: UIViewController {
 	func reloadLabels() {
 		guard let upload = upload else { return }
 		nameLabel.text = upload.name
-		typeLabel.text = upload.type.formatted
+		typeLabel.text = upload.type.rawValue
 		sizeLabel.text = upload.size
 		extensionLabel.text = upload.extension
 	}
