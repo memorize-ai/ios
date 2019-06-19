@@ -1133,6 +1133,10 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="nameChanged" destination="kdw-V6-Hub" eventType="editingChanged" id="DYW-lx-9Jo"/>
+                                    <outlet property="delegate" destination="kdw-V6-Hub" id="69m-OP-Yxo"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFK-4W-fkD">
                                 <rect key="frame" x="40" y="666" width="334" height="50"/>

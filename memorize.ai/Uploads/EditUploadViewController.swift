@@ -69,6 +69,26 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		dismiss(animated: true, completion: nil)
 	}
 	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+			self.nameBarView.transform = CGAffineTransform(scaleX: 1.01, y: 2)
+			self.nameBarView.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		}, completion: nil)
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+			self.nameBarView.transform = .identity
+			self.nameBarView.backgroundColor = .lightGray
+		}, completion: nil)
+	}
+	
+	@IBAction func nameChanged() {
+		guard let name = nameTextField.text?.trim() else { return }
+		file.name = name.isEmpty ? nil : name
+		reloadUpload()
+	}
+	
 	@IBAction func submitUpload() {
 		guard let id = id, let name = file.name, let type = file.type?.rawValue, let mime = file.mime, let ext = file.extension, let size = file.size, let data = file.data else { return }
 		let now = Date()
