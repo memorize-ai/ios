@@ -30,6 +30,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			case .audio:
 				fileImageView.image = #imageLiteral(resourceName: "Sound")
 			}
+			nameTextField.text = upload.name
 			chooseFileLabel.isHidden = true
 		}
 		reloadUpload()
