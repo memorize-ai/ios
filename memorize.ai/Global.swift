@@ -175,7 +175,7 @@ extension UIImage {
 extension Data {
 	var size: String {
 		let formatter = ByteCountFormatter()
-		formatter.allowedUnits = [.useMB, .useGB]
+		formatter.allowedUnits = [.useKB, .useMB, .useGB]
 		formatter.countStyle = .file
 		return formatter.string(fromByteCount: Int64(count))
 	}
