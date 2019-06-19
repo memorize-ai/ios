@@ -83,7 +83,11 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-		<#code#>
+		showAlert(urls[0].absoluteString) // test line
+	}
+	
+	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+		dismiss(animated: true, completion: nil)
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
