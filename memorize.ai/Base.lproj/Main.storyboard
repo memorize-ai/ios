@@ -1058,44 +1058,107 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gMf-d8-5VK">
-                                        <rect key="frame" x="10" y="73" width="274" height="213"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="fdR-ZE-idQ" detailTextLabel="nX5-hK-ZGf" style="IBUITableViewCellStyleValue1" id="sZ8-Ap-6Jv">
-                                                <rect key="frame" x="0.0" y="55.333333333333343" width="274" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sZ8-Ap-6Jv" id="riY-0H-LbD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="274" height="43.666666666666664"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdR-ZE-idQ">
-                                                            <rect key="frame" x="16.000000000000004" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nX5-hK-ZGf">
-                                                            <rect key="frame" x="214" y="11.999999999999998" width="44" height="20.333333333333332"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ntS-8h-dF7">
+                                        <rect key="frame" x="0.0" y="40" width="294" height="254"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBs-ut-8m6">
+                                                <rect key="frame" x="0.0" y="0.0" width="294" height="293.33333333333331"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw8-ia-Fpd">
+                                                        <rect key="frame" x="20" y="20" width="44" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9R-Hd-Cf4">
+                                                        <rect key="frame" x="20" y="45" width="254" height="23.333333333333329"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBK-b3-SEX">
+                                                        <rect key="frame" x="20" y="88.333333333333314" width="37" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNT-rZ-Epe">
+                                                        <rect key="frame" x="20" y="113.33333333333331" width="254" height="23.333333333333343"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiO-L7-aYF">
+                                                        <rect key="frame" x="20" y="156.66666666666669" width="32" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MW-Sc-qb4">
+                                                        <rect key="frame" x="20" y="181.66666666666669" width="254" height="23.333333333333343"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXTENSION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKs-0l-OVT">
+                                                        <rect key="frame" x="20" y="225" width="84" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlR-C1-KIQ">
+                                                        <rect key="frame" x="20" y="250.00000000000003" width="254" height="23.333333333333343"/>
+                                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="mw8-ia-Fpd" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="2BN-M5-B79"/>
+                                                    <constraint firstItem="1MW-Sc-qb4" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="3jR-PY-cjC"/>
+                                                    <constraint firstItem="fBK-b3-SEX" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="4Q1-Fq-zh1"/>
+                                                    <constraint firstItem="kiO-L7-aYF" firstAttribute="top" secondItem="ZNT-rZ-Epe" secondAttribute="bottom" constant="20" id="5g1-PI-Khk"/>
+                                                    <constraint firstItem="1MW-Sc-qb4" firstAttribute="top" secondItem="kiO-L7-aYF" secondAttribute="bottom" constant="4" id="ABa-eX-jNf"/>
+                                                    <constraint firstItem="s9R-Hd-Cf4" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="FHo-1H-y0C"/>
+                                                    <constraint firstItem="mw8-ia-Fpd" firstAttribute="top" secondItem="xBs-ut-8m6" secondAttribute="top" constant="20" id="FQZ-JU-C1J"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fBK-b3-SEX" secondAttribute="trailing" constant="20" id="FrM-uO-kR7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="s9R-Hd-Cf4" secondAttribute="trailing" constant="20" id="KD3-Eu-ICc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ZNT-rZ-Epe" secondAttribute="trailing" constant="20" id="LMi-kH-cuj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1MW-Sc-qb4" secondAttribute="trailing" constant="20" id="OQi-sP-EaN"/>
+                                                    <constraint firstItem="fBK-b3-SEX" firstAttribute="top" secondItem="s9R-Hd-Cf4" secondAttribute="bottom" constant="20" id="POU-g9-bTe"/>
+                                                    <constraint firstItem="ZNT-rZ-Epe" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="RUg-yc-x1H"/>
+                                                    <constraint firstItem="KlR-C1-KIQ" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="UZs-lt-EG2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="KlR-C1-KIQ" secondAttribute="trailing" constant="20" id="WZ8-XX-XSy"/>
+                                                    <constraint firstItem="KlR-C1-KIQ" firstAttribute="top" secondItem="dKs-0l-OVT" secondAttribute="bottom" constant="4" id="c71-vn-8Jd"/>
+                                                    <constraint firstItem="dKs-0l-OVT" firstAttribute="top" secondItem="1MW-Sc-qb4" secondAttribute="bottom" constant="20" id="jWz-so-b5d"/>
+                                                    <constraint firstItem="ZNT-rZ-Epe" firstAttribute="top" secondItem="fBK-b3-SEX" secondAttribute="bottom" constant="4" id="jiZ-Ao-Uzs"/>
+                                                    <constraint firstAttribute="bottom" secondItem="KlR-C1-KIQ" secondAttribute="bottom" constant="20" id="ltZ-Pe-ohq"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mw8-ia-Fpd" secondAttribute="trailing" constant="20" id="p8g-hG-FNS"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kiO-L7-aYF" secondAttribute="trailing" constant="20" id="rhz-mE-P0B"/>
+                                                    <constraint firstItem="kiO-L7-aYF" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="vJP-hO-N68"/>
+                                                    <constraint firstItem="s9R-Hd-Cf4" firstAttribute="top" secondItem="mw8-ia-Fpd" secondAttribute="bottom" constant="4" id="yTb-cJ-DF6"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dKs-0l-OVT" secondAttribute="trailing" constant="20" id="zDw-Z1-jd2"/>
+                                                    <constraint firstItem="dKs-0l-OVT" firstAttribute="leading" secondItem="xBs-ut-8m6" secondAttribute="leading" constant="20" id="zSe-Vb-vpC"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="xBs-ut-8m6" secondAttribute="bottom" id="B9V-8A-7aq"/>
+                                            <constraint firstAttribute="trailing" secondItem="xBs-ut-8m6" secondAttribute="trailing" id="PIY-ls-XkP"/>
+                                            <constraint firstItem="xBs-ut-8m6" firstAttribute="top" secondItem="ntS-8h-dF7" secondAttribute="top" id="WAH-af-xux"/>
+                                            <constraint firstItem="xBs-ut-8m6" firstAttribute="leading" secondItem="ntS-8h-dF7" secondAttribute="leading" id="c6S-G9-Lmr"/>
+                                        </constraints>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="RX8-v1-aTQ" secondAttribute="height" id="0rB-8k-imu"/>
+                                    <constraint firstAttribute="trailing" secondItem="ntS-8h-dF7" secondAttribute="trailing" id="56L-Gh-ys7"/>
+                                    <constraint firstAttribute="bottom" secondItem="ntS-8h-dF7" secondAttribute="bottom" id="8xy-1N-hxC"/>
                                     <constraint firstItem="0Cj-EI-R7q" firstAttribute="top" secondItem="RX8-v1-aTQ" secondAttribute="top" id="Egp-LE-RU1"/>
-                                    <constraint firstItem="gMf-d8-5VK" firstAttribute="leading" secondItem="RX8-v1-aTQ" secondAttribute="leading" constant="10" id="bTf-vT-rkH"/>
-                                    <constraint firstAttribute="trailing" secondItem="gMf-d8-5VK" secondAttribute="trailing" constant="10" id="hkd-4q-D9a"/>
-                                    <constraint firstAttribute="bottom" secondItem="gMf-d8-5VK" secondAttribute="bottom" constant="8" id="n66-Dk-QdX"/>
+                                    <constraint firstItem="ntS-8h-dF7" firstAttribute="top" secondItem="0Cj-EI-R7q" secondAttribute="bottom" id="Ges-wR-pYx"/>
+                                    <constraint firstItem="xBs-ut-8m6" firstAttribute="width" secondItem="RX8-v1-aTQ" secondAttribute="width" id="e1j-qd-ktf"/>
+                                    <constraint firstItem="ntS-8h-dF7" firstAttribute="leading" secondItem="RX8-v1-aTQ" secondAttribute="leading" id="nL5-23-uXx"/>
                                     <constraint firstAttribute="trailing" secondItem="0Cj-EI-R7q" secondAttribute="trailing" id="oEs-6t-1iD"/>
                                     <constraint firstItem="0Cj-EI-R7q" firstAttribute="leading" secondItem="RX8-v1-aTQ" secondAttribute="leading" id="x9r-od-TBO"/>
                                 </constraints>
@@ -1105,6 +1168,7 @@
                         <constraints>
                             <constraint firstItem="RX8-v1-aTQ" firstAttribute="centerX" secondItem="iz7-mE-vaV" secondAttribute="centerX" id="2Lr-cp-UHe"/>
                             <constraint firstItem="RX8-v1-aTQ" firstAttribute="centerY" secondItem="iz7-mE-vaV" secondAttribute="centerY" id="4NQ-6x-2zF"/>
+                            <constraint firstItem="RX8-v1-aTQ" firstAttribute="top" secondItem="Y1A-I0-FhG" secondAttribute="top" constant="201" id="BRp-jB-XsF"/>
                             <constraint firstItem="RX8-v1-aTQ" firstAttribute="leading" secondItem="Y1A-I0-FhG" secondAttribute="leading" constant="60" id="hes-Kp-wuu"/>
                             <constraint firstItem="Y1A-I0-FhG" firstAttribute="trailing" secondItem="RX8-v1-aTQ" secondAttribute="trailing" constant="60" id="tbD-pV-apN"/>
                         </constraints>
@@ -1113,7 +1177,11 @@
                     <connections>
                         <outlet property="deleteActivityIndicator" destination="kzM-tS-312" id="XGB-lA-PMy"/>
                         <outlet property="deleteButton" destination="GEj-LF-tOc" id="kws-iF-Gqn"/>
+                        <outlet property="extensionLabel" destination="KlR-C1-KIQ" id="ngv-Ua-ETh"/>
+                        <outlet property="nameLabel" destination="s9R-Hd-Cf4" id="rvV-NR-gDa"/>
+                        <outlet property="sizeLabel" destination="1MW-Sc-qb4" id="4KJ-1O-EBQ"/>
                         <outlet property="titleBar" destination="0Cj-EI-R7q" id="qfm-aC-fg4"/>
+                        <outlet property="typeLabel" destination="ZNT-rZ-Epe" id="ESv-ry-2tg"/>
                         <outlet property="uploadView" destination="RX8-v1-aTQ" id="17w-Xo-sdT"/>
                     </connections>
                 </viewController>
@@ -3345,10 +3413,10 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="477"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-kx-muO">
-                                        <rect key="frame" x="198.99999999999997" y="163.66666666666666" width="16" height="149.99999999999997"/>
+                                        <rect key="frame" x="-184.66666666666666" y="163.66666666666666" width="783.33333333333337" height="149.99999999999997"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="rbc-KL-gP7">
-                                                <rect key="frame" x="0.0" y="0.0" width="16" height="150"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="783.33333333333337" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="gHr-WB-yjH"/>
                                                 </constraints>
@@ -4955,13 +5023,13 @@
     <inferredMetricsTieBreakers>
         <segue reference="nwZ-Xi-26f"/>
         <segue reference="TPR-zk-sPC"/>
-        <segue reference="1zn-0n-nWw"/>
+        <segue reference="h5F-6A-J1r"/>
         <segue reference="NJF-dv-A8u"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
         <segue reference="xln-P0-Fwc"/>
         <segue reference="O56-gj-Ou4"/>
-        <segue reference="y6W-0c-pPw"/>
+        <segue reference="MJl-Ks-n56"/>
         <segue reference="xao-oA-rKh"/>
     </inferredMetricsTieBreakers>
 </document>

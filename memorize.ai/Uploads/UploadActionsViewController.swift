@@ -5,7 +5,11 @@ class UploadActionsViewController: UIViewController {
 	@IBOutlet weak var titleBar: UIView!
 	@IBOutlet weak var deleteButton: UIButton!
 	@IBOutlet weak var deleteActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var typeLabel: UILabel!
+	@IBOutlet weak var sizeLabel: UILabel!
 	
+	@IBOutlet weak var extensionLabel: UILabel!
 	var upload: Upload?
 	
 	override func viewDidLoad() {
@@ -18,11 +22,26 @@ class UploadActionsViewController: UIViewController {
 		}, completion: nil)
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		ChangeHandler.update { change in
+			if change == .uploadModified {
+				self.reloadLabels()
+			} else if change == .uploadRemoved && !(uploads.contains { $0.id == self.upload?.id }) {
+				self.hide()
+			}
+		}
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
 		if let editUploadVC = segue.destination as? EditUploadViewController {
 			editUploadVC.upload = upload
 		}
+	}
+	
+	func reloadLabels() {
+		
 	}
 	
 	@IBAction func delete() {
