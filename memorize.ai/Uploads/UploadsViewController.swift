@@ -91,8 +91,13 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 			switch element.type {
 			case .image, .gif:
 				cell.imageView.image = UIImage(data: data)
+				cell.playButton.isHidden = true
 			case .audio:
 				cell.imageView.image = #imageLiteral(resourceName: "Sound")
+				cell.playButton.isHidden = false
+				cell.playAction = {
+					// Play sound
+				}
 			}
 		} else {
 			cell.imageView.image = nil
@@ -130,4 +135,10 @@ class UploadCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
+	
+	var playAction: (() -> Void)?
+	
+	@IBAction func play() {
+		playAction?()
+	}
 }
