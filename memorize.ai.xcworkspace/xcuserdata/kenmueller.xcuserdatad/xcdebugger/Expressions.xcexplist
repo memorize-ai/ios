@@ -3,74 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "UserViewController.reloadReview():UserViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Deck.allDue()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "data">
-            </PersistentString>
-            <PersistentString
-               value = "self.data">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserViewController.viewDidLoad():UserViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "_user.darkMode">
-            </PersistentString>
-            <PersistentString
-               value = "Setting.get(.darkMode)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "itemOffset">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserViewController.loadCards():UserViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cards.count">
-            </PersistentString>
-            <PersistentString
-               value = "Deck.allDue()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in EditCardViewController.viewDidLoad():EditCardViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "draft.id">
-            </PersistentString>
-            <PersistentString
-               value = "cardDrafts.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "scrollView.subviews.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in UserViewController.loadDecks():UserViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -90,6 +22,74 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in UploadsViewController.collectionView(_:cellForItemAt:):UploadsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "AVPlayer(url: URL(string: &quot;https://www2.cs.uic.edu/~i101/SoundFiles/preamble.wav&quot;)!)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in EditCardViewController.viewDidLoad():EditCardViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "draft.id">
+            </PersistentString>
+            <PersistentString
+               value = "cardDrafts.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserViewController.reloadReview():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Deck.allDue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserViewController.loadCards():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cards.count">
+            </PersistentString>
+            <PersistentString
+               value = "Deck.allDue()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserViewController.viewDidLoad():UserViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_user.darkMode">
+            </PersistentString>
+            <PersistentString
+               value = "Setting.get(.darkMode)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EditCardViewController.viewDidLoad():EditCardViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scrollView.subviews.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Upload.load(completion:):Upload.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data">
+            </PersistentString>
+            <PersistentString
+               value = "self.data">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Upload.load(completion:):Upload.swift">
          <PersistentStrings>
             <PersistentString
@@ -97,6 +97,14 @@
             </PersistentString>
             <PersistentString
                value = "memorize_ai.id!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DecksViewController.collectionView(_:numberOfItemsInSection:):DecksViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemOffset">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

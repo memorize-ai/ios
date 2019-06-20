@@ -51,6 +51,7 @@
 		4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391722057D88006F4F2D /* StartUpViewController.swift */; };
 		4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64391922057DBD006F4F2D /* SignUpViewController.swift */; };
 		4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D85C60C220638A2005B08DD /* SignInViewController.swift */; };
+		4D89420122BB182A00C24FC6 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89420022BB182A00C24FC6 /* Audio.swift */; };
 		4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A345022090E9E0021474A /* ReviewViewController.swift */; };
 		4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D9392220A5C720049482C /* RecapViewController.swift */; };
 		4D9E7700228E53B9007EC018 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FE228E53B9007EC018 /* prism.js */; };
@@ -232,6 +233,7 @@
 		4D64391722057D88006F4F2D /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
 		4D64391922057DBD006F4F2D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4D85C60C220638A2005B08DD /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		4D89420022BB182A00C24FC6 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		4D8A345022090E9E0021474A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		4D8D9392220A5C720049482C /* RecapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapViewController.swift; sourceTree = "<group>"; };
 		4D9E76FE228E53B9007EC018 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				4DCF83DD22A378F3006B73A4 /* Listener.swift */,
 				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
 				4DA2C2E022A48E5400669570 /* Upload.swift */,
+				4D89420022BB182A00C24FC6 /* Audio.swift */,
 				4DA2C2DC22A4604400669570 /* Algolia.swift */,
 				4DDD3F2622B1F9FB00BA2C98 /* History.swift */,
 				4D5F1F1F229E1C4D00AC7732 /* Invite.swift */,
@@ -1021,6 +1024,7 @@
 				4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */,
 				4DDDDD7F22B1D902004704F0 /* DeckRating.swift in Sources */,
 				4D62955122B3A508009560F9 /* CardAnalyticsViewController.swift in Sources */,
+				4D89420122BB182A00C24FC6 /* Audio.swift in Sources */,
 				4DE7FD3E22B1B97300B82F38 /* DeckAnalyticsViewController.swift in Sources */,
 				4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */,
 				4DB8AE66228C920800A08AFA /* ChangeHandler.swift in Sources */,
