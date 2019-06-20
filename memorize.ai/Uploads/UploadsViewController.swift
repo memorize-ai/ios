@@ -1,5 +1,4 @@
 import UIKit
-//import SwiftySound
 
 class UploadsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var filterSegmentedControl: UISegmentedControl!
@@ -101,7 +100,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				cell.imageView.image = #imageLiteral(resourceName: "Sound")
 				cell.playButton.isHidden = false
 				cell.playAction = {
-//					Sound.play(url: URL(string: "https://www2.cs.uic.edu/~i101/SoundFiles/preamble.wav")!)
+					// Do this
 				}
 			}
 		} else {

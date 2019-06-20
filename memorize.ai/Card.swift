@@ -1,6 +1,5 @@
 import Foundation
 import Firebase
-import AVFoundation
 
 class Card {
 	let id: String
@@ -74,38 +73,6 @@ class Card {
 	
 	static func escape(_ text: String) -> String {
 		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
-	}
-	
-	static func queuePlayer(_ urls: [URL]) -> AVQueuePlayer {
-		return AVQueuePlayer(items: urls.map { AVPlayerItem(url: $0) })
-	}
-	
-	static func downloadAudio(_ text: String, completion: @escaping ([URL]) -> Void) {
-		getLocalAudioUrls(text.match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
-			guard let string = $0[safe: 1] else { return nil }
-			return URL(string: string)
-		}, completion: completion)
-	}
-	
-	private static func getLocalAudioUrls(_ remote: [URL], local: [URL] = [], completion: @escaping ([URL]) -> Void) {
-		guard let first = remote.first else { return completion(local) }
-		getLocalAudioUrl(first) { url, error in
-			var remote = remote
-			remote.removeFirst()
-			if error == nil, let url = url {
-				self.getLocalAudioUrls(remote, local: local + [url], completion: completion)
-			} else {
-				self.getLocalAudioUrls(remote, local: local, completion: completion)
-			}
-		}
-	}
-	
-	private static func getLocalAudioUrl(_ url: URL, completion: @escaping (URL?, Error?) -> Void) {
-		URLSession.shared.downloadTask(with: url) { completion($0, $2) }.resume()
-	}
-	
-	func downloadAudio(_ side: CardSide, completion: @escaping ([URL]) -> Void) {
-		Card.downloadAudio(side.text(for: self), completion: completion)
 	}
 	
 	static func all() -> [Card] {

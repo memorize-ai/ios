@@ -3,7 +3,6 @@ import Firebase
 import AudioToolbox
 import WebKit
 import Down
-import SwiftyMimeTypes
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
@@ -15,20 +14,6 @@ var shouldLoadDecks = false
 
 func buzz() {
 	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-}
-
-func mimeTypeForExtension(_ ext: String) -> String? {
-	switch ext {
-	case "heic":
-		return "image/heic"
-	default:
-		return MimeTypes.mimeType(forExtension: ext)
-	}
-}
-
-func metadataForExtension(_ ext: String) -> StorageMetadata? {
-	guard let mime = mimeTypeForExtension(ext) else { return nil }
-	return StorageMetadata.from(mime: mime)
 }
 
 extension StorageMetadata {

@@ -1,5 +1,4 @@
 import UIKit
-import AVFoundation
 
 class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -18,7 +17,6 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
-	var queuePlayer: AVQueuePlayer?
 	var cardEditor: CardEditorViewController?
 	var cardPreview: CardPreviewViewController?
 	var deck: Deck?
@@ -401,12 +399,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	@objc func playAudio() {
-		queuePlayer?.pause()
-		Card.downloadAudio(getText()) {
-			self.showAlert($0.first?.absoluteString ?? "") // temp line
-			self.queuePlayer = Card.queuePlayer($0)
-			self.queuePlayer?.play()
-		}
+		
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

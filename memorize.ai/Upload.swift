@@ -1,5 +1,6 @@
 import Foundation
 import Firebase
+import SwiftyMimeTypes
 
 var uploads = [Upload]()
 var uploadCache = [String : Data]()
@@ -119,4 +120,18 @@ enum UploadType: String {
 			return "Audio"
 		}
 	}
+}
+
+func mimeTypeForExtension(_ ext: String) -> String? {
+	switch ext {
+	case "heic":
+		return "image/heic"
+	default:
+		return MimeTypes.mimeType(forExtension: ext)
+	}
+}
+
+func metadataForExtension(_ ext: String) -> StorageMetadata? {
+	guard let mime = mimeTypeForExtension(ext) else { return nil }
+	return StorageMetadata.from(mime: mime)
 }
