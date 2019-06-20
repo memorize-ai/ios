@@ -98,6 +98,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				cell.playButton.isHidden = true
 			case .audio:
 				cell.imageView.image = #imageLiteral(resourceName: "Sound")
+				cell.setPlayState(.ready)
 				cell.playButton.isHidden = false
 				cell.playAction = {
 					if Audio.isPlaying {
