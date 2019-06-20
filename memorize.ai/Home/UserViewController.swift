@@ -544,7 +544,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						mime: upload.get("mime") as? String ?? "image/png",
 						extension: upload.get("extension") as? String ?? "png",
 						size: upload.get("size") as? String ?? "0 MB",
-						data: Upload.dataFromCache(uploadId)
+						data: nil
 					))
 					ChangeHandler.call(.uploadAdded)
 				case .modified:
