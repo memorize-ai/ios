@@ -83,6 +83,30 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		}
 	}
 	
+	func loadCell(_ cell: UploadCollectionViewCell, upload: Upload, data: Data) {
+		switch upload.type {
+		case .image, .gif:
+			cell.imageView.image = UIImage(data: data)
+			cell.playButton.isHidden = true
+		case .audio:
+			cell.imageView.image = #imageLiteral(resourceName: "Sound")
+			cell.setPlayState(.ready)
+			cell.playButton.isHidden = false
+			cell.playAction = {
+				if Audio.isPlaying {
+					Audio.stop()
+					cell.setPlayState(.ready)
+				} else {
+					cell.setPlayState(.stop)
+					Audio.play(data: data) {
+						guard !$0 else { return }
+						self.showNotification("Unable to play sound. Please try again", type: .error)
+					}
+				}
+			}
+		}
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return filteredUploads.count
 	}
@@ -90,42 +114,22 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 		guard let cell = _cell as? UploadCollectionViewCell else { return _cell }
-		let element = filteredUploads[indexPath.item]
-		if let data = element.data {
-			switch element.type {
-			case .image, .gif:
-				cell.imageView.image = UIImage(data: data)
-				cell.playButton.isHidden = true
-			case .audio:
-				cell.imageView.image = #imageLiteral(resourceName: "Sound")
-				cell.setPlayState(.ready)
-				cell.playButton.isHidden = false
-				cell.playAction = {
-					if Audio.isPlaying {
-						Audio.stop()
-						cell.setPlayState(.ready)
-					} else {
-						cell.setPlayState(.stop)
-						Audio.play(data: data) {
-							guard !$0 else { return }
-							self.showNotification("Unable to play sound. Please try again", type: .error)
-						}
-					}
-				}
-			}
+		let upload = filteredUploads[indexPath.item]
+		if let data = upload.data {
+			loadCell(cell, upload: upload, data: data)
 		} else {
 			cell.imageView.image = nil
 			cell.activityIndicator.startAnimating()
-			element.load { data, error in
+			upload.load { data, error in
 				cell.activityIndicator.stopAnimating()
 				if error == nil, let data = data {
-					cell.imageView.image = UIImage(data: data)
+					self.loadCell(cell, upload: upload, data: data)
 				} else {
-					self.showNotification("Unable to load \(element.name)", type: .error)
+					self.showNotification("Unable to load \(upload.name)", type: .error)
 				}
 			}
 		}
-		cell.nameLabel.text = element.name
+		cell.nameLabel.text = upload.name
 		return cell
 	}
 	
