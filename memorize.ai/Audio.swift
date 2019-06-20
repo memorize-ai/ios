@@ -33,7 +33,7 @@ class Audio {
 		guard let player = try? AVAudioPlayer(data: data) else { return completion(false) }
 		self.player?.stop()
 		self.player = player
-		let success = self.player?.play(numberOfLoops: 1) {
+		let success = self.player?.play(numberOfLoops: 0) {
 			guard $0 else { return }
 			completion(true)
 		}
