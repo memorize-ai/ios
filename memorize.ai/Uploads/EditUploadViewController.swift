@@ -99,6 +99,8 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 								self.file.extension = ext
 								self.file.size = data.size
 								self.file.data = data
+								self.didPickFile()
+								self.reloadUpload()
 							}
 						} else {
 							self.showNotification("Invalid file type", type: .error)
