@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB6EBFE308C954656307ACB74D9B5EE8"
-               BuildableName = "Pods-memorize.ai.framework"
-               BlueprintName = "Pods-memorize.ai"
+               BlueprintIdentifier = "4CDD1C6C8885D07092D8EA708AAC0E53"
+               BuildableName = "DeviceKit.framework"
+               BlueprintName = "DeviceKit"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

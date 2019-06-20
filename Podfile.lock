@@ -5,6 +5,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - DeviceKit (2.0.0)
   - Down (0.8.5)
   - Firebase/Auth (6.3.0):
     - Firebase/CoreOnly
@@ -135,6 +136,7 @@ PODS:
   - SwiftySound (1.1.0)
 
 DEPENDENCIES:
+  - DeviceKit (~> 2.0)
   - Down (from `https://github.com/iwasrobbed/Down.git`)
   - Firebase/Auth
   - Firebase/Core
@@ -149,6 +151,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL-GRPC
+    - DeviceKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -183,6 +186,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  DeviceKit: 72d36709552d4b3582abd76a53949148acad9811
   Down: d2554b5006cf45bdb2bc6f19d91ca4fec6a45b31
   Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
   FirebaseAnalytics: 470ddab7253b21ad5a40bebd4a9903d7ae19386a
@@ -207,6 +211,6 @@ SPEC CHECKSUMS:
   SwiftyMimeTypes: df2392d0f7b7c06bb3a65909e0d1efc09f5b6b6b
   SwiftySound: eb46cc2399cf7d94f58c372f38216e15e0a6de3e
 
-PODFILE CHECKSUM: 84010622b3b0010f7d70a01d176441bf7de0dd93
+PODFILE CHECKSUM: d5b292dff389ec9ce31bb5d770fc19c1ae4b74bd
 
 COCOAPODS: 1.7.2
