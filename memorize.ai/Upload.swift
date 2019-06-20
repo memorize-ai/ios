@@ -65,6 +65,14 @@ class Upload {
 		return uploads.first { $0.id == id }
 	}
 	
+	func url(completion: @escaping (URL?) -> Void) {
+		guard let storageReference = storageReference else { return completion(nil) }
+		storageReference.downloadURL { url, error in
+			guard error == nil, let url = url else { return completion(nil) }
+			completion(url)
+		}
+	}
+	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
 		storageReference?.getData(maxSize: MAX_FILE_SIZE) { data, error in
 			guard error == nil, let data = data else { return completion(nil, error) }
