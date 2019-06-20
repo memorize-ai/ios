@@ -32,7 +32,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	
 	@objc func keyboardWillShow(notification: NSNotification) {
 		if let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-			signUpButtonBottomConstraint.constant = height
+			signUpButtonBottomConstraint.constant = height - view.safeAreaInsets.bottom
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 		}
 	}
