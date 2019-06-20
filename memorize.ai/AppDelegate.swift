@@ -23,11 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 		token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
 	}
-
+	
 	func applicationWillTerminate(_ application: UIApplication) {
 		saveContext()
 	}
-
+	
 	lazy var persistentContainer: NSPersistentContainer = {
 	    let container = NSPersistentContainer(name: "memorize_ai")
 	    container.loadPersistentStores { storeDescription, error in
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	    }
 	    return container
 	}()
-
+	
 	func saveContext() {
 	    let context = persistentContainer.viewContext
 	    if context.hasChanges {
