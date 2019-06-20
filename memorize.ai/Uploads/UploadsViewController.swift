@@ -161,6 +161,6 @@ class UploadCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func setPlayState(_ playState: Audio.PlayState) {
-		playButton.setImage(playState == .ready ? #imageLiteral(resourceName: "Play") : #imageLiteral(resourceName: "Stop"), for: .normal)
+		playButton.setImage(Audio.image(for: playState), for: .normal)
 	}
 }
