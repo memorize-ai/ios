@@ -3,7 +3,7 @@ import SwiftySound
 
 class Audio {
 	private static var cache = [URL : URL]()
-	private static var last: Sound?
+	private static var player: AVAudioPlayer?
 	
 	static func download(url: URL, completion: @escaping (URL?) -> Void = { _ in }) {
 		if let cachedUrl = cache[url] {
@@ -24,14 +24,20 @@ class Audio {
 	
 	static func play(url: URL, completion: @escaping (Bool) -> Void = { _ in }) {
 		download(url: url) { url in
-			guard let url = url, let sound = Sound(url: url) else { return completion(false) }
-			last?.stop()
-			last = sound
-			sound.play {
-				guard $0 else { return }
-				completion(true)
-			}
+			guard let url = url, let data = try? Data(contentsOf: url) else { return completion(false) }
+			play(data: data, completion: completion)
 		}
+	}
+	
+	static func play(data: Data, completion: @escaping (Bool) -> Void = { _ in }) {
+		guard let player = try? AVAudioPlayer(data: data) else { return completion(false) }
+		self.player?.stop()
+		self.player = player
+		let success = self.player?.play(numberOfLoops: 1) {
+			guard $0 else { return }
+			completion(true)
+		}
+		guard success ?? false else { return completion(false) }
 	}
 	
 	static func play(urls: [URL], completion: @escaping (Bool) -> Void = { _ in }) {
