@@ -22,10 +22,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in UploadsViewController.collectionView(_:cellForItemAt:):UploadsViewController.swift">
+         contextName = "EditCardViewController.addUpload():EditCardViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "AVPlayer(url: URL(string: &quot;https://www2.cs.uic.edu/~i101/SoundFiles/preamble.wav&quot;)!)">
+               value = "view.safeAreaInsets.top">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -76,6 +76,20 @@
             <PersistentString
                value = "scrollView.subviews.count">
             </PersistentString>
+            <PersistentString
+               value = "view.safeAreaInsets.bottom">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EditCardViewController.left():EditCardViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "collectionViewTopConstraint.constant">
+            </PersistentString>
+            <PersistentString
+               value = "view.safeAreaInsets.bottom">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -113,6 +127,14 @@
          <PersistentStrings>
             <PersistentString
                value = "tagsTextView.textColor!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EditCardViewController.viewWillAppear(_:):EditCardViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.safeAreaInsets.top">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -2687,14 +2687,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mEP-C1-dhR">
-                                                    <rect key="frame" x="19.999999999999996" y="10.999999999999998" width="37.666666666666664" height="23.333333333333332"/>
+                                                    <rect key="frame" x="19.999999999999996" y="8.9999999999999982" width="39.666666666666664" height="27.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ovG-hL-mle">
-                                                    <rect key="frame" x="343" y="10.999999999999998" width="51" height="23.333333333333332"/>
+                                                    <rect key="frame" x="340" y="8.9999999999999982" width="54" height="27.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -4107,8 +4107,8 @@
                                     <constraint firstAttribute="height" constant="1" id="i3A-IK-fw8"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-tx-Ukv">
-                                <rect key="frame" x="0.0" y="64" width="414" height="586"/>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-tx-Ukv">
+                                <rect key="frame" x="0.0" y="236" width="414" height="414"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-q6-C6x">
                                         <rect key="frame" x="189" y="275.66666666666669" width="37" height="37"/>
@@ -4230,6 +4230,7 @@
                         <outlet property="addUploadButton" destination="dM2-sp-gux" id="1eO-w7-ofi"/>
                         <outlet property="addUploadButtonWidthConstraint" destination="k08-Vu-tlS" id="61m-Pv-Ysk"/>
                         <outlet property="collectionView" destination="9Xx-ZM-xEq" id="UVK-76-Hku"/>
+                        <outlet property="collectionViewTopConstraint" destination="x9M-59-0p5" id="bjg-kV-HIW"/>
                         <outlet property="deleteCardActivityIndicator" destination="PUh-Bx-nyd" id="auC-ZD-iIJ"/>
                         <outlet property="deleteCardButton" destination="ZM1-Cn-k0P" id="5fS-Yq-1q3"/>
                         <outlet property="deleteCardButtonWidthConstraint" destination="UdO-Gh-oi2" id="vWA-c0-UzJ"/>

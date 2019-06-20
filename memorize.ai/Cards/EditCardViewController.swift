@@ -2,6 +2,7 @@ import UIKit
 
 class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingActivityIndicatory: UIActivityIndicatorView!
 	@IBOutlet weak var leftArrow: UIButton!
@@ -71,6 +72,12 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 		updateCurrentViewController()
+	}
+	
+	override func viewSafeAreaInsetsDidChange() {
+		super.viewSafeAreaInsetsDidChange()
+//		collectionViewTopConstraint.constant = -view.safeAreaInsets.bottom// * 17 / 16//9 / 8
+//		view.layoutIfNeeded()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
