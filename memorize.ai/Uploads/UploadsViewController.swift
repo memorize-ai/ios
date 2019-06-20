@@ -98,9 +98,12 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 					cell.setPlayState(.ready)
 				} else {
 					cell.setPlayState(.stop)
-					Audio.play(data: data) {
-						guard !$0 else { return }
-						self.showNotification("Unable to play sound. Please try again", type: .error)
+					Audio.play(data: data) { success in
+						if success {
+							cell.setPlayState(.ready)
+						} else {
+							self.showNotification("Unable to play audio. Please try again", type: .error)
+						}
 					}
 				}
 			}

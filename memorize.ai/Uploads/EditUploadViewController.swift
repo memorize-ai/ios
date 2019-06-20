@@ -6,6 +6,7 @@ import Photos
 class EditUploadViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var chooseFileView: UIView!
 	@IBOutlet weak var fileImageView: UIImageView!
+	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
 	@IBOutlet weak var metadataTableView: UITableView!
@@ -32,6 +33,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			}
 			nameTextField.text = upload.name
 			chooseFileView.isHidden = true
+			reloadPlayButton()
 		}
 		reloadUpload()
 	}
@@ -196,6 +198,36 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	func didPickFile() {
 		didChangeData = true
 		chooseFileView.isHidden = true
+		reloadPlayButton()
+	}
+	
+	func reloadPlayButton() {
+		switch file.type {
+		case .some(.audio):
+			playButton.isHidden = false
+		default:
+			playButton.isHidden = true
+		}
+	}
+	
+	@IBAction func playAudio() {
+		if let data = file.data {
+			if Audio.isPlaying {
+				Audio.stop()
+				playButton.setImage(Audio.image(for: .ready), for: .normal)
+			} else {
+				playButton.setImage(Audio.image(for: .stop), for: .normal)
+				Audio.play(data: data) { success in
+					if success {
+						self.playButton.setImage(Audio.image(for: .ready), for: .normal)
+					} else {
+						self.showNotification("Unable to play audio. Please try again", type: .error)
+					}
+				}
+			}
+		} else {
+			showNotification("Unable to get audio data. Please try again", type: .error)
+		}
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
