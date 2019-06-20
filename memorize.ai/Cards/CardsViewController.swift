@@ -29,7 +29,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func loadCards() {
-		cards = Card.sortDue(Card.all())
+		cards = Card.sort(Card.all, by: .due)
 		cardsCollectionView.reloadData()
 	}
 	

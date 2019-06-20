@@ -36,7 +36,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			navigationController.navigationBar.barTintColor = .white
 			navigationController.navigationBar.tintColor = .darkGray
 		}
-		dueCards = decks.flatMap { deck in return Card.sortDue(deck.cards.filter { $0.isDue() }).map { (deck: deck, card: $0) } }
+		dueCards = decks.flatMap { deck in return Card.sort(deck.cards.filter { $0.isDue() }, by: .due).map { (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
 				guard self.current < self.dueCards.count else { return }

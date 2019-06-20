@@ -399,6 +399,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	@objc func playAudio() {
+		Audio.stop()
 		Card.playAudio(getText())
 	}
 	

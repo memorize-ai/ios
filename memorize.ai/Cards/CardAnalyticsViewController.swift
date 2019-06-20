@@ -18,7 +18,7 @@ class CardAnalyticsViewController: UIViewController, UITableViewDataSource, UITa
 	}
 	
 	var cards: [Card] {
-		return deck?.cards ?? []
+		return Card.sort(deck?.cards ?? [], by: .front)
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

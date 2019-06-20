@@ -43,6 +43,10 @@ class Card {
 		self.init(id: id, front: front, back: back, created: created, updated: updated, likes: likes, dislikes: dislikes, count: 0, correct: 0, e: DEFAULT_E, streak: 0, mastered: false, last: nil, next: Date(), history: [], deck: deck)
 	}
 	
+	static var all: [Card] {
+		return decks.flatMap { $0.cards }
+	}
+	
 	var getDeck: Deck? {
 		return Deck.get(deck)
 	}
@@ -86,10 +90,6 @@ class Card {
 		}
 	}
 	
-	static func all() -> [Card] {
-		return decks.flatMap { $0.cards }
-	}
-	
 	static func poll() {
 		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
 			if !Deck.allDue().isEmpty {
@@ -98,8 +98,13 @@ class Card {
 		}
 	}
 	
-	static func sortDue(_ cards: [Card]) -> [Card] {
-		return cards.sorted { $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
+	static func sort(_ cards: [Card], by type: CardSortType) -> [Card] {
+		switch type {
+		case .due:
+			return cards.sorted { $0.front < $1.front }
+		case .front:
+			return cards.sorted { $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
+		}
 	}
 	
 	static func get(_ id: String, deckId: String) -> Card? {
@@ -194,4 +199,9 @@ enum CardSide: String {
 	func text(for card: Card) -> String {
 		return self == .front ? card.front : card.back
 	}
+}
+
+enum CardSortType {
+	case due
+	case front
 }

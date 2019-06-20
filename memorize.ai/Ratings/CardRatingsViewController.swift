@@ -14,13 +14,13 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return Card.all().count
+		return Card.all.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		guard let cell = _cell as? CardRatingTableViewCell else { return _cell }
-		let card = Card.all()[indexPath.row]
+		let card = Card.sort(Card.all, by: .front)[indexPath.row]
 		guard let deck = card.getDeck else { return cell }
 		if let image = deck.image {
 			cell.deckImageView.image = image
