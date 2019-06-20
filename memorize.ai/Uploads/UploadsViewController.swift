@@ -154,18 +154,13 @@ class UploadCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
 	
-	enum PlayState {
-		case ready
-		case stop
-	}
-	
 	var playAction: (() -> Void)?
 	
 	@IBAction func play() {
 		playAction?()
 	}
 	
-	func setPlayState(_ playState: PlayState) {
+	func setPlayState(_ playState: Audio.PlayState) {
 		playButton.setImage(playState == .ready ? #imageLiteral(resourceName: "Play") : #imageLiteral(resourceName: "Stop"), for: .normal)
 	}
 }

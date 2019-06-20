@@ -5,12 +5,26 @@ class Audio {
 	private static var cache = [URL : URL]()
 	private static var player: AVAudioPlayer?
 	
+	enum PlayState {
+		case ready
+		case stop
+	}
+	
 	static var isPlaying: Bool {
 		return player?.isPlaying ?? false
 	}
 	
 	static func stop() {
 		player?.stop()
+	}
+	
+	static func image(for playState: PlayState) -> UIImage {
+		switch playState {
+		case .ready:
+			return #imageLiteral(resourceName: "Play")
+		case .stop:
+			return #imageLiteral(resourceName: "Stop")
+		}
 	}
 	
 	static func download(url: URL, completion: @escaping (URL?) -> Void = { _ in }) {
