@@ -100,7 +100,17 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				cell.imageView.image = #imageLiteral(resourceName: "Sound")
 				cell.playButton.isHidden = false
 				cell.playAction = {
-					// Do this
+					element.url { url in
+						if let url = url {
+							Audio.play(url: url) { success in
+								if !success {
+									self.showNotification("Unable to play sound. Please try again", type: .error)
+								}
+							}
+						} else {
+							self.showNotification("Unable to play sound. Please try again", type: .error)
+						}
+					}
 				}
 			}
 		} else {
