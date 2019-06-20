@@ -2,15 +2,16 @@ import AVFoundation
 import SwiftySound
 
 class Audio {
-	private static var audioCache = [URL : URL]()
+	private static var cache = [URL : URL]()
+	private static var last: Sound?
 	
 	static func download(url: URL, completion: @escaping (URL?) -> Void = { _ in }) {
-		if let cachedUrl = audioCache[url] {
+		if let cachedUrl = cache[url] {
 			completion(cachedUrl)
 		} else {
 			URLSession.shared.downloadTask(with: url) {
 				guard $2 == nil, let localUrl = $0 else { return completion(nil) }
-				audioCache[url] = localUrl
+				cache[url] = localUrl
 				completion(localUrl)
 			}.resume()
 		}
@@ -24,6 +25,8 @@ class Audio {
 	static func play(url: URL, completion: @escaping (Bool) -> Void = { _ in }) {
 		download(url: url) { url in
 			guard let url = url, let sound = Sound(url: url) else { return completion(false) }
+			last?.stop()
+			last = sound
 			sound.play {
 				guard $0 else { return }
 				completion(true)
