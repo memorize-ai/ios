@@ -2,7 +2,6 @@ import AVFoundation
 import SwiftySound
 
 class Audio {
-	private static var cache = [URL : URL]()
 	private static var player: AVAudioPlayer?
 	
 	enum PlayState {
@@ -28,15 +27,10 @@ class Audio {
 	}
 	
 	static func download(url: URL, completion: @escaping (URL?) -> Void = { _ in }) {
-		if let cachedUrl = cache[url] {
-			completion(cachedUrl)
-		} else {
-			URLSession.shared.downloadTask(with: url) {
-				guard $2 == nil, let localUrl = $0 else { return completion(nil) }
-				cache[url] = localUrl
-				completion(localUrl)
-			}.resume()
-		}
+		URLSession.shared.downloadTask(with: url) {
+			guard $2 == nil else { return completion(nil) }
+			completion($0)
+		}.resume()
 	}
 	
 	static func download(url: String, completion: @escaping (URL?) -> Void = { _ in }) {
