@@ -22,7 +22,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 			], for: .selected)
 		}
 		let flowLayout = UICollectionViewFlowLayout()
-		let size = view.bounds.width / 2 - 16
+		let size = view.bounds.width / 2 - 40
 		flowLayout.itemSize = CGSize(width: size, height: size)
 		uploadsCollectionView.collectionViewLayout = flowLayout
 	}
