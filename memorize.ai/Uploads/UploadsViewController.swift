@@ -100,14 +100,15 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 				cell.imageView.image = #imageLiteral(resourceName: "Sound")
 				cell.playButton.isHidden = false
 				cell.playAction = {
-					if let data = element.data {
-						Audio.play(data: data) { success in
-							if !success {
-								self.showNotification("Unable to play sound. Please try again", type: .error)
-							}
-						}
+					if Audio.isPlaying {
+						Audio.stop()
+						cell.setPlayState(.ready)
 					} else {
-						self.showNotification("Loading audio...", type: .normal)
+						cell.setPlayState(.stop)
+						Audio.play(data: data) {
+							guard !$0 else { return }
+							self.showNotification("Unable to play sound. Please try again", type: .error)
+						}
 					}
 				}
 			}
@@ -148,9 +149,18 @@ class UploadCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
 	
+	enum PlayState {
+		case ready
+		case stop
+	}
+	
 	var playAction: (() -> Void)?
 	
 	@IBAction func play() {
 		playAction?()
+	}
+	
+	func setPlayState(_ playState: PlayState) {
+		playButton.setImage(playState == .ready ? #imageLiteral(resourceName: "Play") : #imageLiteral(resourceName: "Stop"), for: .normal)
 	}
 }

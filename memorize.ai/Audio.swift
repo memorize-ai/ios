@@ -5,6 +5,14 @@ class Audio {
 	private static var cache = [URL : URL]()
 	private static var player: AVAudioPlayer?
 	
+	static var isPlaying: Bool {
+		return player?.isPlaying ?? false
+	}
+	
+	static func stop() {
+		player?.stop()
+	}
+	
 	static func download(url: URL, completion: @escaping (URL?) -> Void = { _ in }) {
 		if let cachedUrl = cache[url] {
 			completion(cachedUrl)
@@ -31,7 +39,7 @@ class Audio {
 	
 	static func play(data: Data, completion: @escaping (Bool) -> Void = { _ in }) {
 		guard let player = try? AVAudioPlayer(data: data) else { return completion(false) }
-		self.player?.stop()
+		stop()
 		self.player = player
 		let success = self.player?.play(numberOfLoops: 0) {
 			guard $0 else { return }
