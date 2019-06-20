@@ -3298,6 +3298,11 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="175" height="284"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </view>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
