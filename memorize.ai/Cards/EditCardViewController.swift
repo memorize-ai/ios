@@ -163,18 +163,23 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
+	func setConstraints(_ constant: CGFloat) {
+		[
+			cardEditor?.frontTextViewTopConstraint,
+			cardEditor?.backTextViewTopConstraint,
+			cardEditor?.frontTextViewBottomConstraint,
+			cardEditor?.backTextViewBottomConstraint,
+			cardPreview?.frontWebViewTopConstraint,
+			cardPreview?.backWebViewTopConstraint,
+			cardPreview?.frontWebViewBottomConstraint,
+			cardPreview?.backWebViewBottomConstraint
+		].forEach { $0?.constant = constant }
+	}
+	
 	@objc func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
-		let offset = height - 30
-		let halfOffset = offset / 2
-		cardEditor?.frontTextViewTopConstraint.constant = halfOffset
-		cardEditor?.backTextViewTopConstraint.constant = halfOffset
-		cardEditor?.frontTextViewBottomConstraint.constant = halfOffset
-		cardEditor?.backTextViewBottomConstraint.constant = halfOffset
-		cardPreview?.frontWebViewTopConstraint.constant = halfOffset
-		cardPreview?.backWebViewTopConstraint.constant = halfOffset
-		cardPreview?.frontWebViewBottomConstraint.constant = halfOffset
-		cardPreview?.backWebViewBottomConstraint.constant = halfOffset
+		let offset = height - view.safeAreaInsets.bottom
+		setConstraints(offset / 2)
 		cardEditor?.view.layoutIfNeeded()
 		cardPreview?.view.layoutIfNeeded()
 		toolbarBottomConstraint.constant = offset
@@ -182,14 +187,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	@objc func keyboardWillHide(notification: NSNotification) {
-		cardEditor?.frontTextViewTopConstraint.constant = 0
-		cardEditor?.backTextViewTopConstraint.constant = 0
-		cardEditor?.frontTextViewBottomConstraint.constant = 0
-		cardEditor?.backTextViewBottomConstraint.constant = 0
-		cardPreview?.frontWebViewTopConstraint.constant = 0
-		cardPreview?.backWebViewTopConstraint.constant = 0
-		cardPreview?.frontWebViewBottomConstraint.constant = 0
-		cardPreview?.backWebViewBottomConstraint.constant = 0
+		setConstraints(0)
 		cardEditor?.view.layoutIfNeeded()
 		cardPreview?.view.layoutIfNeeded()
 		toolbarBottomConstraint.constant = 0
