@@ -20,6 +20,10 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	var deck: Deck?
 	var selectedRating: Int?
 	
+	deinit {
+		KeyboardHandler.removeListener(self)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.title = "\(deck?.hasRating ?? false ? "Edit" : "New") Rating"
@@ -42,8 +46,14 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 				self.navigationController?.popViewController(animated: true)
 			}
 		}
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		KeyboardHandler.addListener(self) { direction in
+			switch direction {
+			case .up:
+				self.keyboardWillShow()
+			case .down:
+				self.keyboardWillHide()
+			}
+		}
 		updateCurrentViewController()
 	}
 	
@@ -51,13 +61,12 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		return [star1Button, star2Button, star3Button, star4Button, star5Button]
 	}
 	
-	@objc func keyboardWillShow(notification: NSNotification) {
-		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
-		scrollViewBottomConstraint.constant = height - view.safeAreaInsets.bottom
+	func keyboardWillShow() {
+		scrollViewBottomConstraint.constant = keyboardOffset - view.safeAreaInsets.bottom
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
-	@objc func keyboardWillHide(notification: NSNotification) {
+	func keyboardWillHide() {
 		scrollViewBottomConstraint.constant = 0
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}

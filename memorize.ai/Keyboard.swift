@@ -4,14 +4,20 @@ var currentViewController: UIViewController?
 var keyboardOffset: CGFloat = 0
 
 class KeyboardHandler {
-	private static var handler: ((KeyboardDirection) -> Void)?
+	private static var listeners = [UIViewController : (KeyboardDirection) -> Void]()
 	
-	static func update(_ handler: ((KeyboardDirection) -> Void)?) {
-		self.handler = handler
+	static func addListener(_ viewController: UIViewController, listener: @escaping (KeyboardDirection) -> Void) {
+		listeners[viewController] = listener
+	}
+	
+	static func removeListener(_ viewController: UIViewController) {
+		NotificationCenter.default.removeObserver(viewController, name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.removeObserver(viewController, name: UIResponder.keyboardWillHideNotification, object: nil)
+		listeners.removeValue(forKey: viewController)
 	}
 	
 	static func call(_ direction: KeyboardDirection) {
-		handler?(direction)
+		listeners.forEach { $1(direction) }
 	}
 }
 

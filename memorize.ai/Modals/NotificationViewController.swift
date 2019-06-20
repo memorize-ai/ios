@@ -6,12 +6,16 @@ class NotificationViewController: UIViewController {
 	@IBOutlet weak var notificationLabel: UILabel!
 	@IBOutlet weak var notificationLabelBottomConstraint: NSLayoutConstraint!
 	
+	deinit {
+		KeyboardHandler.removeListener(self)
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		view.isUserInteractionEnabled = false
 		notificationViewBottomConstraint.constant = keyboardOffset
 		view.layoutIfNeeded()
-		KeyboardHandler.update { direction in
+		KeyboardHandler.addListener(self) { direction in
 			self.notificationViewBottomConstraint.constant = keyboardOffset
 			switch direction {
 			case .up:

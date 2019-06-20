@@ -14,6 +14,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var signUpActivityIndicator: UIActivityIndicatorView!
 	
+	deinit {
+		KeyboardHandler.removeListener(self)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		disable()
@@ -21,8 +25,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		KeyboardHandler.addListener(self) { direction in
+			switch direction {
+			case .up:
+				self.keyboardWillShow()
+			case .down:
+				self.keyboardWillHide()
+			}
+		}
 		updateCurrentViewController()
 	}
 	
@@ -30,14 +40,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		navigationController?.popViewController(animated: true)
 	}
 	
-	@objc func keyboardWillShow(notification: NSNotification) {
-		if let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-			signUpButtonBottomConstraint.constant = height - view.safeAreaInsets.bottom
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
-		}
+	func keyboardWillShow() {
+		signUpButtonBottomConstraint.constant = keyboardOffset - view.safeAreaInsets.bottom
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
-	@objc func keyboardWillHide(notification: NSNotification) {
+	func keyboardWillHide() {
 		signUpButtonBottomConstraint.constant = 145
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
 	}
