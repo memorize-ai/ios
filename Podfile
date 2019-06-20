@@ -12,6 +12,7 @@ target 'memorize.ai' do
 	pod 'Down', :git => 'https://github.com/iwasrobbed/Down.git'
 	pod 'SwiftyMimeTypes'
 	pod 'SwiftySound'
+	pod 'DeviceKit', '~> 2.0'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
 	end
