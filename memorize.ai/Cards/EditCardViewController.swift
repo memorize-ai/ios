@@ -416,11 +416,18 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 		let pageWidth = scrollView.frame.size.width
-		if Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) == 0 {
+		let newCurrentView: EditCardView = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) == 0 ? .editor : .preview
+		switch newCurrentView {
+		case currentView:
+			return
+		case .editor:
+			Audio.stop()
 			reloadRightBarButtonItem()
-		} else {
+		case .preview:
+			playAudio()
 			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(playAudio)), animated: false)
 		}
+		currentView = newCurrentView
 	}
 }
 
