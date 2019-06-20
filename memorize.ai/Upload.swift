@@ -31,6 +31,7 @@ class Upload {
 	}
 	
 	var shouldReload = false
+	private var cachedUrl: URL?
 	
 	private var storageReference: StorageReference? {
 		guard let uid = memorize_ai.id else { return nil }
@@ -66,10 +67,15 @@ class Upload {
 	}
 	
 	func url(completion: @escaping (URL?) -> Void) {
-		guard let storageReference = storageReference else { return completion(nil) }
-		storageReference.downloadURL { url, error in
-			guard error == nil, let url = url else { return completion(nil) }
-			completion(url)
+		if let cachedUrl = cachedUrl {
+			completion(cachedUrl)
+		} else {
+			guard let storageReference = storageReference else { return completion(nil) }
+			storageReference.downloadURL { url, error in
+				guard error == nil, let url = url else { return completion(nil) }
+				self.cachedUrl = url
+				completion(url)
+			}
 		}
 	}
 	
