@@ -28,8 +28,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	let options = [
 		Option(image: #imageLiteral(resourceName: "Settings"), name: "Settings", action: showSettings),
 		Option(image: #imageLiteral(resourceName: "Cloud"), name: "Uploads", action: showUploads),
-		Option(image: #imageLiteral(resourceName: "Decks"), name: "Deck Ratings", action: showDeckRatings), // Get a better image
-		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings) // Get a better image
+		Option(image: #imageLiteral(resourceName: "Decks"), name: "Deck Ratings", action: showDeckRatings),
+		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings)
 	]
 	
 	override func viewDidLoad() {
