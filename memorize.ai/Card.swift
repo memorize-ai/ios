@@ -75,6 +75,17 @@ class Card {
 		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 	}
 	
+	static func playAudio(_ text: String, completion: @escaping (Bool) -> Void = { _ in }) {
+		Audio.play(urls: getAudioUrls(text), completion: completion)
+	}
+	
+	static func getAudioUrls(_ text: String) -> [URL] {
+		return text.match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
+			guard let string = $0[safe: 1] else { return nil }
+			return URL(string: string)
+		}
+	}
+	
 	static func all() -> [Card] {
 		return decks.flatMap { $0.cards }
 	}
@@ -97,6 +108,14 @@ class Card {
 	
 	static func rate(_ id: String, deckId: String, type: CardRatingType, completion: @escaping (Error?) -> Void) {
 		functions.httpsCallable("rateCard").call(["deckId": deckId, "cardId": id, "rating": type.rawValue]) { completion($1) }
+	}
+	
+	func playAudio(_ side: CardSide, completion: @escaping (Bool) -> Void = { _ in }) {
+		Card.playAudio(side.text(for: self), completion: completion)
+	}
+	
+	func getAudioUrls(_ side: CardSide) -> [URL] {
+		return Card.getAudioUrls(side.text(for: self))
 	}
 	
 	func rate(_ type: CardRatingType, completion: @escaping (Error?) -> Void) {
