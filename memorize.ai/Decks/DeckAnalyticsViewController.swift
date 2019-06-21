@@ -48,20 +48,20 @@ class DeckAnalyticsViewController: UIViewController, UITableViewDataSource, UITa
 		let ratingsColor: UIColor = deck.ratings.average == 0 ? .lightGray : .black
 		return [
 			AnalyticSection(name: "ratings", analytics: [
-				Analytic(key: "Average", value: String(deck.ratings.average.oneDecimalPlace), color: ratingsColor),
-				Analytic(key: "1 Star", value: deck.ratings.all1, color: ratingsColor),
-				Analytic(key: "2 Star", value: deck.ratings.all2, color: ratingsColor),
-				Analytic(key: "3 Star", value: deck.ratings.all3, color: ratingsColor),
-				Analytic(key: "4 Star", value: deck.ratings.all4, color: ratingsColor),
-				Analytic(key: "5 Star", value: deck.ratings.all5, color: ratingsColor)
+				Analytic(key: "Average", value: String(deck.ratings.average.oneDecimalPlace.formatted), color: ratingsColor),
+				Analytic(key: "1 Star", value: deck.ratings.all1.formatted, color: ratingsColor),
+				Analytic(key: "2 Star", value: deck.ratings.all2.formatted, color: ratingsColor),
+				Analytic(key: "3 Star", value: deck.ratings.all3.formatted, color: ratingsColor),
+				Analytic(key: "4 Star", value: deck.ratings.all4.formatted, color: ratingsColor),
+				Analytic(key: "5 Star", value: deck.ratings.all5.formatted, color: ratingsColor)
 			]),
 			AnalyticSection(name: "views", analytics: [
-				Analytic(key: "Total", value: deck.views.total),
-				Analytic(key: "Unique", value: deck.views.unique)
+				Analytic(key: "Total", value: deck.views.total.formatted),
+				Analytic(key: "Unique", value: deck.views.unique.formatted)
 			]),
 			AnalyticSection(name: "downloads", analytics: [
-				Analytic(key: "Total", value: deck.downloads.total),
-				Analytic(key: "Current", value: deck.downloads.current)
+				Analytic(key: "Total", value: deck.downloads.total.formatted),
+				Analytic(key: "Current", value: deck.downloads.current.formatted)
 			])
 		]
 	}
