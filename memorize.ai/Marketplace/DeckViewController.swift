@@ -32,6 +32,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
 	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
 	
+	let CARD_PREVIEW_COUNT = 10
+	let RATINGS_COUNT = 10
+	
 	var deck: (
 		id: String?,
 		image: UIImage?,
@@ -53,9 +56,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		updated: Date?
 	)
 	var cards = [Card]()
-	var ratings = [DeckRating]()
+	var ratings = [(rating: DeckRating, user: (id: String, image: UIImage?, name: String?, url: URL?))]()
 	var isDescriptionExpanded = false
 	var info = [[(String, String?)]]()
+	var creatorDecks = [Deck]()
+	var similarDecks = [Deck]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +84,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.updated = updated
 				self.setLabels(name: deckName, subtitle: subtitle, description: description, ratings: deckRatings)
 				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings, created: created, updated: updated)
-				firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
+				listeners["users/\(creatorId)"] = firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
 					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = URL(string: "https://memorize.ai/users/\(creatorSlug)") {
 						self.deck.creator.name = creatorName
 						self.deck.creator.url = creatorUrl
@@ -96,6 +101,50 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					}
 					self.loadCreator()
 				}
+				listeners["decks"] = firestore.collection("decks").whereField("creator", isEqualTo: creatorId).addSnapshotListener { decksSnapshot, decksError in
+					if decksError == nil, let decksSnapshot = decksSnapshot?.documentChanges {
+						for deckSnapshot in decksSnapshot {
+							let creatorDeck = deckSnapshot.document
+							let creatorDeckId = creatorDeck.documentID
+							if creatorDeckId == deckId { continue }
+							switch deckSnapshot.type {
+							case .added:
+								self.creatorDecks.append(Deck(
+									id: creatorDeckId,
+									image: Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
+									name: creatorDeck.get("name") as? String ?? "Error",
+									subtitle: creatorDeck.get("subtitle") as? String ?? "",
+									description: creatorDeck.get("description") as? String ?? "",
+									tags: creatorDeck.get("tags") as? [String] ?? [],
+									isPublic: creatorDeck.get("public") as? Bool ?? true,
+									count: creatorDeck.get("count") as? Int ?? 0,
+									views: DeckViews(creatorDeck),
+									downloads: DeckDownloads(creatorDeck),
+									ratings: DeckRatings(creatorDeck),
+									users: [],
+									creator: creatorId,
+									owner: creatorDeck.get("owner") as? String ?? "",
+									created: Date(),
+									updated: Date(),
+									permissions: [],
+									cards: [],
+									mastered: 0,
+									role: .none,
+									hidden: false
+								))
+							case .modified:
+								self.creatorDecks.first { $0.id == creatorDeckId }?.update(creatorDeck, type: .deck)
+							case .removed:
+								self.creatorDecks = self.creatorDecks.filter { $0.id != creatorDeckId }
+							@unknown default:
+								return
+							}
+							self.loadCreatorDecks()
+						}
+					} else {
+						self.showNotification("Unable to load creator's other decks", type: .error)
+					}
+				}
 			} else {
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
 				alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -105,33 +154,56 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		}
 		listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
-			snapshot.forEach {
-				let card = $0.document
-				let cardId = card.documentID
-				switch $0.type {
-				case .added:
-					self.cards.append(Card(
-						id: cardId,
-						front: card.get("front") as? String ?? "Error",
-						back: card.get("back") as? String ?? "Error",
-						created: card.getDate("created") ?? Date(),
-						updated: card.getDate("updated") ?? Date(),
-						likes: card.get("likes") as? Int ?? 0,
-						dislikes: card.get("dislikes") as? Int ?? 0,
-						deck: deckId
-					))
-				case .modified:
-					self.cards.first { $0.id == cardId }?.update(card, type: .card)
-				case .removed:
-					self.cards = self.cards.filter { $0.id != cardId }
-				@unknown default:
-					return
+			if error == nil, let snapshot = snapshot?.documentChanges {
+				snapshot.forEach {
+					let card = $0.document
+					let cardId = card.documentID
+					switch $0.type {
+					case .added:
+						self.cards.append(Card(
+							id: cardId,
+							front: card.get("front") as? String ?? "Error",
+							back: card.get("back") as? String ?? "Error",
+							created: card.getDate("created") ?? Date(),
+							updated: card.getDate("updated") ?? Date(),
+							likes: card.get("likes") as? Int ?? 0,
+							dislikes: card.get("dislikes") as? Int ?? 0,
+							deck: deckId
+						))
+					case .modified:
+						self.cards.first { $0.id == cardId }?.update(card, type: .card)
+					case .removed:
+						self.cards = self.cards.filter { $0.id != cardId }
+					@unknown default:
+						return
+					}
+					guard let isPublic = self.deck.isPublic, let count = self.deck.count, let views = self.deck.views, let downloads = self.deck.downloads, let ratings = self.deck.ratings, let created = self.deck.created, let updated = self.deck.updated else { return }
+					self.setCardLabels()
+					self.loadCardPreview()
+					self.loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings, created: created, updated: updated)
 				}
-				guard let isPublic = self.deck.isPublic, let count = self.deck.count, let views = self.deck.views, let downloads = self.deck.downloads, let ratings = self.deck.ratings, let created = self.deck.created, let updated = self.deck.updated else { return }
-				self.setCardLabels()
-				self.loadCardPreview()
-				self.loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings, created: created, updated: updated)
+			} else {
+				self.showNotification("Unable to load cards", type: .error)
+			}
+		}
+		listeners["decks/\(deckId)/users"] = firestore.collection("decks/\(deckId)/users").addSnapshotListener { snapshot, error in
+			if error == nil, let snapshot = snapshot?.documentChanges {
+				snapshot.forEach {
+					let user = $0.document
+					let userId = user.documentID
+					switch $0.type {
+					case .added:
+						
+					case .modified:
+						
+					case .removed:
+						
+					@unknown default:
+						return
+					}
+				}
+			} else {
+				self.showNotification("Unable to load ratings", type: .error)
 			}
 		}
 		if let image = deck.image {
@@ -313,31 +385,16 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		switch collectionView {
-		case cardPreviewCollectionView:
-			
-		case ratingsCollectionView:
-			
-		case infoCollectionView:
-			
-		case moreByCreatorCollectionView:
-			
-		case similarDecksCollectionView:
-			
-		}
-	}
-	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		switch collectionView {
 		case cardPreviewCollectionView:
-			
+			return cards.prefix(CARD_PREVIEW_COUNT).count
 		case ratingsCollectionView:
-			
+			return ratings.count
 		case infoCollectionView:
-			
+			return info.flatMap { $0 }.count
 		case moreByCreatorCollectionView:
-			
+			return moreByCreatorLabel
 		case similarDecksCollectionView:
 			
 		}
