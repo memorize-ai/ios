@@ -166,14 +166,14 @@ extension Data {
 	}
 }
 
-extension Int {
+extension Double {
 	var formatted: String {
 		let absolute = abs(self)
-		func greaterThan(_ number: Int) -> Bool {
+		func greaterThan(_ number: Double) -> Bool {
 			return absolute >= number
 		}
-		func format(_ number: Int, ext: Character) -> String {
-			return "\(round(Double(self) / Double(number)))\(ext)"
+		func format(_ number: Double, ext: Character) -> String {
+			return "\((self / number).rounded())\(ext)"
 		}
 		switch true {
 		case greaterThan(1000):
@@ -187,5 +187,11 @@ extension Int {
 		default:
 			return "overflow"
 		}
+	}
+}
+
+extension Int {
+	var formatted: String {
+		return Double(self).formatted
 	}
 }
