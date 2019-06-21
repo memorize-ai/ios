@@ -3228,6 +3228,9 @@
                                                                         <real key="value" value="16.5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="get" destination="9XY-L1-f93" eventType="touchUpInside" id="Jx3-wG-HVm"/>
+                                                                </connections>
                                                             </button>
                                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kCP-a8-2u0">
                                                                 <rect key="frame" x="25" y="6.6666666666666572" width="20" height="20"/>
@@ -3273,6 +3276,9 @@
                                                                         <real key="value" value="16.5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="previewDeck" destination="9XY-L1-f93" eventType="touchUpInside" id="uVP-Av-bfA"/>
+                                                                </connections>
                                                             </button>
                                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kzT-wJ-6SC">
                                                                 <rect key="frame" x="40" y="6.6666666666666572" width="20" height="20"/>
@@ -4025,8 +4031,8 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87p-cl-OMK">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1716.6666666666667"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87p-cl-OMK">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="12"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -4120,8 +4126,8 @@
                         <outlet property="loadingView" destination="87p-cl-OMK" id="fwD-E4-XBU"/>
                         <outlet property="moreByCreatorCollectionView" destination="6Og-O9-apJ" id="fIy-pa-X8H"/>
                         <outlet property="moreByCreatorLabel" destination="3wa-GQ-gdV" id="RUi-PL-jmh"/>
-                        <outlet property="previewButton" destination="aoR-uh-Vz9" id="c1b-jz-JMb"/>
                         <outlet property="previewButtonActivityIndicator" destination="kzT-wJ-6SC" id="mPz-zA-HTN"/>
+                        <outlet property="previewView" destination="Grd-r2-eeM" id="Fm4-yH-p4U"/>
                         <outlet property="rateDeckButton" destination="r5J-jQ-nmh" id="JfP-1F-qNH"/>
                         <outlet property="ratingCountLabel" destination="lfJ-4O-OUb" id="K8H-zk-Mgn"/>
                         <outlet property="ratingsCollectionView" destination="xgf-Q6-gxj" id="q1I-JP-HCV"/>
