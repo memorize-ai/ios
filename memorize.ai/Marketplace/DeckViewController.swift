@@ -155,7 +155,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 							@unknown default:
 								return
 							}
-							self.loadCreatorDecks()
+							self.moreByCreatorCollectionView.reloadData()
 						}
 					} else {
 						self.showNotification("Unable to load creator's other decks", type: .error)
@@ -432,17 +432,19 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		switch collectionView {
-		case cardPreviewCollectionView:
+		switch collectionView.tag {
+		case cardPreviewCollectionView.tag:
 			return cards.prefix(CARD_PREVIEW_COUNT).count
-		case ratingsCollectionView:
+		case ratingsCollectionView.tag:
 			return ratings.count
-		case infoCollectionView:
+		case infoCollectionView.tag:
 			return info.flatMap { $0 }.count
-		case moreByCreatorCollectionView:
-			return moreByCreatorLabel
-		case similarDecksCollectionView:
-			
+		case moreByCreatorCollectionView.tag:
+			return creatorDecks.count
+		case similarDecksCollectionView.tag:
+			return similarDecks.count
+		default:
+			return 0
 		}
 	}
 	
