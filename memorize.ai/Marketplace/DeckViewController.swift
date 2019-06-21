@@ -363,3 +363,13 @@ class CardPreviewCollectionViewCell: UICollectionViewCell {
 
 class DeckRatingCollectionViewCell: UICollectionViewCell {
 }
+
+class DeckInfoCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var largeTextLabel: UILabel!
+	@IBOutlet weak var smallTextLabel: UILabel!
+	
+	func load(_ tuple: (String, String?)) {
+		largeTextLabel.text = tuple.0
+		smallTextLabel.text = tuple.1
+	}
+}
