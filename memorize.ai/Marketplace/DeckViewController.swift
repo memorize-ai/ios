@@ -493,6 +493,23 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			return _cell
 		}
 	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		switch collectionView.tag {
+		case cardPreviewCollectionView.tag:
+			return
+		case ratingsCollectionView.tag:
+			// Show full rating in a modal
+		case infoCollectionView.tag:
+			return
+		case moreByCreatorCollectionView.tag:
+			// Show deck
+		case similarDecksCollectionView.tag:
+			// Show deck
+		default:
+			return
+		}
+	}
 }
 
 class CardPreviewCollectionViewCell: UICollectionViewCell {
