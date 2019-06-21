@@ -1,5 +1,6 @@
 import UIKit
 import SafariServices
+import WebKit
 
 class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
@@ -345,4 +346,20 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		<#code#>
 	}
+}
+
+class CardPreviewCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var webView: WKWebView!
+	@IBOutlet weak var playButton: UIButton!
+	@IBOutlet weak var likeCountLabel: UILabel!
+	@IBOutlet weak var dislikeCountLabel: UILabel!
+	
+	func load(_ text: String, likes: Int, dislikes: Int) {
+		webView.render(text, fontSize: 40, textColor: "000000", backgroundColor: "ffffff")
+		likeCountLabel.text = likes.formatted
+		dislikeCountLabel.text = dislikes.formatted
+	}
+}
+
+class DeckRatingCollectionViewCell: UICollectionViewCell {
 }
