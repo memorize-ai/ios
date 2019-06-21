@@ -1,6 +1,5 @@
 import UIKit
-import Firebase
-import WebKit
+import SafariServices
 
 class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var loadingView: UIView!
@@ -18,6 +17,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var cardCountLabel: UILabel!
 	@IBOutlet weak var cardPreviewCollectionView: UICollectionView!
 	@IBOutlet weak var descriptionTextView: UILabel!
+	@IBOutlet weak var descriptionTextViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var descriptionMoreLabel: UILabel!
 	@IBOutlet weak var showFullDescriptionButton: UIButton!
 	@IBOutlet weak var creatorImageView: UIImageView!
@@ -40,10 +40,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		count: Int?,
 		views: DeckViews?,
 		downloads: DeckDownloads?,
-		ratingInfo: DeckRatings?,
-		ratings: [DeckRating]?,
-		creatorId: String?,
+		ratings: DeckRatings?,
 		creator: (
+			id: String?,
 			image: UIImage?,
 			name: String?,
 			url: URL?
@@ -52,25 +51,31 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		updated: Date?
 	)
 	var cards = [Card]()
+	var ratings = [DeckRating]()
 	var hasDeck = false
+	var isDescriptionExpanded = false
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		guard let deckId = deck.id else { return }
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
-			if error == nil, let snapshot = snapshot {
-				self.deckName = snapshot.get("name") as? String ?? "Error"
-				self.nameLabel.text = self.deckName
-				self.count = snapshot.get("count") as? Int
-				self.load(snapshot.get("description") as? String ?? "An error has occurred")
-				self.activityIndicator.stopAnimating()
-				self.loadingView.isHidden = true
-				guard let creator = snapshot.get("creator") as? String else { return }
-				firestore.document("users/\(creator)").getDocument { creatorSnapshot, creatorError in
-					guard creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String else { return }
-					self.creatorLabel.text = "Created by \(creatorName)"
-					self.resizeDescriptionWebView()
-				}
+			if error == nil, let snapshot = snapshot, let deckName = snapshot.get("name") as? String, let subtitle = snapshot.get("subtitle") as? String, let description = snapshot.get("description") as? String, let isPublic = snapshot.get("public") as? Bool, let count = snapshot.get("count") as? Int, let creatorId = snapshot.get("creator") as? String, let created = snapshot.getDate("created"), let updated = snapshot.getDate("updated") {
+				let deckViews = DeckViews(snapshot)
+				let deckDownloads = DeckDownloads(snapshot)
+				let deckRatings = DeckRatings(snapshot)
+				self.deck.name = deckName
+				self.deck.subtitle = subtitle
+				self.deck.description = description
+				self.deck.isPublic = isPublic
+				self.deck.count = count
+				self.deck.views = deckViews
+				self.deck.downloads = deckDownloads
+				self.deck.ratings = deckRatings
+				self.deck.creator.id = creatorId
+				self.deck.created = created
+				self.deck.updated = updated
+				self.setLabels(name: deckName, subtitle: subtitle, description: description, isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
+				self.loadInfo(count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
 			} else {
 				self.activityIndicator.stopAnimating()
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
@@ -144,22 +149,63 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
-		guard let reviewVC = segue.destination as? ReviewViewController else { return }
-		reviewVC.previewCards = cards
-		reviewVC.previewDeck = deck.name
+		if let reviewVC = segue.destination as? ReviewViewController {
+			if let deckName = deck.name {
+				reviewVC.previewCards = cards
+				reviewVC.previewDeck = deckName
+			} else {
+				showNotification("Unable to load deck. Please try again", type: .error)
+			}
+		} else if let rateDeckVC = segue.destination as? RateDeckViewController {
+			if let deckId = deck.id, let deck = Deck.get(deckId) {
+				rateDeckVC.deck = deck
+			} else {
+				showNotification("Unable to load deck. Please try again", type: .error)
+			}
+		}
+	}
+	
+	func setLabels(name: String, subtitle: String, description: String, isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
+		deckNameLabel.text = name
+		deckSubtitleLabel.text = subtitle
+		setDescription(description)
+		loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings)
+		setRatingLabels(ratings)
+	}
+	
+	func setDescription(_ description: String) {
+		descriptionTextView.text = description
+		if isDescriptionExpanded {
+			descriptionMoreLabel.isHidden = true
+			descriptionTextViewHeightConstraint.isActive = false
+			UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
+		}
+	}
+	
+	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
+		
 	}
 	
 	@IBAction func showFullDescription() {
-		showFullDescriptionButton.isEnabled = false
-		// Show full description
+		if let description = deck.description {
+			showFullDescriptionButton.isEnabled = false
+			isDescriptionExpanded = true
+			setDescription(description)
+		} else {
+			showNotification("There was an error expanding the description. Please try again", type: .error)
+		}
 	}
 	
 	@IBAction func showCreatorProfile() {
-		// Visit the creator profile on the website
+		if let url = deck.creator.url {
+			present(SFSafariViewController(url: url), animated: true, completion: nil)
+		} else {
+			showNotification("Loading creator...", type: .normal)
+		}
 	}
 	
 	@IBAction func rateDeck() {
-		// Rate deck
+		performSegue(withIdentifier: "rate", sender: self)
 	}
 	
 	@IBAction func previewDeck() {

@@ -4119,6 +4119,7 @@
                         <outlet property="deckSubtitleLabel" destination="zdD-wf-kDt" id="De0-Wr-xTE"/>
                         <outlet property="descriptionMoreLabel" destination="enf-zV-Idq" id="4Qa-1p-Yff"/>
                         <outlet property="descriptionTextView" destination="L1O-v6-wkr" id="AIL-Hk-OfA"/>
+                        <outlet property="descriptionTextViewHeightConstraint" destination="rDW-ug-rxL" id="XaJ-4o-fvd"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="Gpf-1T-mze"/>
                         <outlet property="getButtonActivityIndicator" destination="kCP-a8-2u0" id="dUP-g7-dPn"/>
                         <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="WB7-Zd-fL7"/>
