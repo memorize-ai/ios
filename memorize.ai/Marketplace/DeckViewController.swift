@@ -224,8 +224,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 								url: nil
 							)
 						))
+						// Load user that made the rating
 					case .modified:
-						let localRating -
+						self.ratings.first { $0.user.id == userId }?.rating.update(user)
 					case .removed:
 						self.ratings = self.ratings.filter { $0.user.id != userId }
 					@unknown default:
