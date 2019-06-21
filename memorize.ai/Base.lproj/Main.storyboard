@@ -3263,7 +3263,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
                                                                 <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="100" id="VZ2-Qt-LRH"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="VZ2-Qt-LRH"/>
                                                                     <constraint firstAttribute="height" constant="33" id="aFL-5X-94d"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="15"/>
@@ -3550,6 +3550,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                                         <state key="normal" title="Rate Deck"/>
+                                                        <connections>
+                                                            <action selector="rateDeck" destination="9XY-L1-f93" eventType="touchUpInside" id="cT9-mw-9Lo"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4022,6 +4025,10 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87p-cl-OMK">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1716.6666666666667"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -4048,13 +4055,16 @@
                                             <constraint firstItem="Zet-jN-iHX" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="Rwu-wb-APo"/>
                                             <constraint firstAttribute="trailing" secondItem="ubC-Bf-DfE" secondAttribute="trailing" constant="20" id="Ryn-59-u5K"/>
                                             <constraint firstItem="mfX-pg-YXV" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="U4y-Ns-nr5"/>
+                                            <constraint firstItem="87p-cl-OMK" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="Ugu-hT-X33"/>
                                             <constraint firstItem="Zet-jN-iHX" firstAttribute="top" secondItem="QOO-W2-Lim" secondAttribute="bottom" constant="20" id="Wek-VV-4cz"/>
                                             <constraint firstAttribute="trailing" secondItem="D8E-qP-TdG" secondAttribute="trailing" constant="20" id="Wew-Re-syl"/>
                                             <constraint firstItem="D8E-qP-TdG" firstAttribute="top" secondItem="8aD-iY-ynz" secondAttribute="bottom" constant="20" id="Wyt-KO-iGr"/>
+                                            <constraint firstAttribute="trailing" secondItem="87p-cl-OMK" secondAttribute="trailing" id="XTx-nu-U2H"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="YCb-uy-3Lw"/>
                                             <constraint firstItem="9jR-Xo-Kgi" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="ZqF-3q-AcI"/>
                                             <constraint firstAttribute="trailing" secondItem="mfX-pg-YXV" secondAttribute="trailing" id="a88-d2-Nru"/>
                                             <constraint firstAttribute="trailing" secondItem="9jR-Xo-Kgi" secondAttribute="trailing" constant="20" id="b4C-Fs-g5q"/>
+                                            <constraint firstAttribute="bottom" secondItem="87p-cl-OMK" secondAttribute="bottom" id="bQB-BC-qBN"/>
                                             <constraint firstItem="xgf-Q6-gxj" firstAttribute="top" secondItem="vPO-7R-uG8" secondAttribute="bottom" constant="20" id="eES-Iq-H9n"/>
                                             <constraint firstItem="QOO-W2-Lim" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="eLx-w4-mPr"/>
                                             <constraint firstItem="y5f-gw-vQe" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="ed4-7Q-Nwx"/>
@@ -4065,6 +4075,7 @@
                                             <constraint firstItem="Zal-Ih-1CU" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" constant="20" id="pB0-pC-6Cy"/>
                                             <constraint firstItem="9jR-Xo-Kgi" firstAttribute="top" secondItem="xgf-Q6-gxj" secondAttribute="bottom" constant="20" id="qJI-8e-PuF"/>
                                             <constraint firstItem="XmA-Sj-bhc" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" constant="20" id="qrV-fu-9eI"/>
+                                            <constraint firstItem="87p-cl-OMK" firstAttribute="top" secondItem="ScY-Tx-UZe" secondAttribute="top" id="uDk-7P-Rmw"/>
                                             <constraint firstAttribute="trailing" secondItem="QOO-W2-Lim" secondAttribute="trailing" constant="20" id="uHb-Da-CtY"/>
                                             <constraint firstItem="8aD-iY-ynz" firstAttribute="top" secondItem="y5f-gw-vQe" secondAttribute="bottom" constant="20" id="ufX-Mi-jQ7"/>
                                             <constraint firstItem="xgf-Q6-gxj" firstAttribute="leading" secondItem="ScY-Tx-UZe" secondAttribute="leading" id="yZf-GV-r6R"/>
@@ -4106,6 +4117,7 @@
                         <outlet property="getButtonActivityIndicator" destination="kCP-a8-2u0" id="dUP-g7-dPn"/>
                         <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="WB7-Zd-fL7"/>
                         <outlet property="infoCollectionView" destination="QOO-W2-Lim" id="Xzy-9u-eTm"/>
+                        <outlet property="loadingView" destination="87p-cl-OMK" id="fwD-E4-XBU"/>
                         <outlet property="moreByCreatorCollectionView" destination="6Og-O9-apJ" id="fIy-pa-X8H"/>
                         <outlet property="moreByCreatorLabel" destination="3wa-GQ-gdV" id="RUi-PL-jmh"/>
                         <outlet property="previewButton" destination="aoR-uh-Vz9" id="c1b-jz-JMb"/>
@@ -4121,7 +4133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="2579"/>
+            <point key="canvasLocation" x="815.94202898550736" y="2578.5326086956525"/>
         </scene>
         <!--Card View Controller-->
         <scene sceneID="Wn5-ZD-dMC">

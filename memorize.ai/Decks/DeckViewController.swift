@@ -3,6 +3,7 @@ import Firebase
 import WebKit
 
 class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var deckImageView: UIImageView!
 	@IBOutlet weak var deckImageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var deckNameLabel: UILabel!
@@ -29,21 +30,33 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
 	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
 	
-	var deckId: String?
-	var deckName: String?
-	var count: Int?
-	var image: UIImage?
+	var deck: (
+		id: String?,
+		image: UIImage?,
+		name: String?,
+		subtitle: String?,
+		description: String?,
+		isPublic: Bool?,
+		count: Int?,
+		views: DeckViews?,
+		downloads: DeckDownloads?,
+		ratingInfo: DeckRatings?,
+		ratings: [DeckRating]?,
+		creatorId: String?,
+		creator: (
+			image: UIImage?,
+			name: String?,
+			url: URL?
+		),
+		created: Date?,
+		updated: Date?
+	)
 	var cards = [Card]()
+	var hasDeck = false
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 35)
-		cardsCollectionView.collectionViewLayout = flowLayout
-		imageView.layer.borderWidth = 0.5
-		imageView.layer.borderColor = UIColor.lightGray.cgColor
-		imageView.layer.masksToBounds = true
-		guard let deckId = deckId else { return }
+		guard let deckId = deck.id else { return }
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot {
 				self.deckName = snapshot.get("name") as? String ?? "Error"
@@ -149,6 +162,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	@IBAction func showCreatorProfile() {
 		// Visit the creator profile on the website
+	}
+	
+	@IBAction func rateDeck() {
+		// Rate deck
 	}
 	
 	@IBAction func preview() {
