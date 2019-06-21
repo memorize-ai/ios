@@ -59,6 +59,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 		guard let deckId = deck.id else { return }
+		loadCreator()
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot, let deckName = snapshot.get("name") as? String, let subtitle = snapshot.get("subtitle") as? String, let description = snapshot.get("description") as? String, let isPublic = snapshot.get("public") as? Bool, let count = snapshot.get("count") as? Int, let creatorId = snapshot.get("creator") as? String, let created = snapshot.getDate("created"), let updated = snapshot.getDate("updated") {
 				let deckViews = DeckViews(snapshot)
@@ -76,7 +77,24 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.created = created
 				self.deck.updated = updated
 				self.setLabels(name: deckName, subtitle: subtitle, description: description, ratings: deckRatings)
-				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
+				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings, created: created, updated: updated)
+				firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
+					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = URL(string: "https://memorize.ai/users/\(creatorSlug)") {
+						self.deck.creator.name = creatorName
+						self.deck.creator.url = creatorUrl
+					} else {
+						self.showNotification("Unable to load deck creator", type: .error)
+					}
+					self.loadCreator()
+				}
+				storage.child("users/\(creatorId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
+					if creatorError == nil, let creatorData = creatorData, let creatorImage = UIImage(data: creatorData) {
+						self.deck.creator.image = creatorImage
+					} else {
+						self.deck.creator.image = #imageLiteral(resourceName: "Person")
+					}
+					self.loadCreator()
+				}
 			} else {
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
 				alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -109,10 +127,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				@unknown default:
 					return
 				}
-				guard let isPublic = self.deck.isPublic, let count = self.deck.count, let views = self.deck.views, let downloads = self.deck.downloads, let ratings = self.deck.ratings else { return }
+				guard let isPublic = self.deck.isPublic, let count = self.deck.count, let views = self.deck.views, let downloads = self.deck.downloads, let ratings = self.deck.ratings, let created = self.deck.created, let updated = self.deck.updated else { return }
 				self.setCardLabels()
 				self.loadCardPreview()
-				self.loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings)
+				self.loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings, created: created, updated: updated)
 			}
 		}
 		if let image = deck.image {
@@ -191,12 +209,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
+	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, created: Date, updated: Date) {
 		info = [
 			[(isPublic ? "public" : "private", nil), (count.formatted, "cards")],
 			[(ratings.count.formatted, "ratings"), (ratings.average.oneDecimalPlace, "average")],
 			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
-			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")]
+			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")],
+			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
 		] as? [[(String, String?)]] ?? []
 		infoCollectionView.reloadData()
 	}
@@ -210,6 +229,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		averageRatingLabel.text = String(ratings.average.oneDecimalPlace)
 		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
 		view.layoutIfNeeded()
+	}
+	
+	func loadCreator() {
+		creatorImageView.image = deck.image ?? #imageLiteral(resourceName: "Person")
+		creatorNameLabel.text = deck.creator.name
 	}
 	
 	@IBAction func showFullDescription() {
