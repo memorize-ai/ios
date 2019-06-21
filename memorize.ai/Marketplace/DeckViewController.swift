@@ -29,6 +29,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var ratingsCollectionView: UICollectionView!
 	@IBOutlet weak var noRatingsLabel: UILabel!
 	@IBOutlet weak var infoCollectionView: UICollectionView!
+	@IBOutlet weak var infoCollectionViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var moreByCreatorLabel: UILabel!
 	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
 	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
@@ -50,6 +51,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	let CARD_PREVIEW_COUNT = 10
 	let RATINGS_COUNT = 10
+	let CARD_PREVIEW_CELL_SPACING: CGFloat = 15
+	let RATING_CELL_SPACING: CGFloat = 15
+	let INFO_CELL_HEIGHT: CGFloat = 40
+	let INFO_CELL_SPACING: CGFloat = 10
+	let DECK_PREVIEW_CELL_SPACING: CGFloat = 15
 	
 	var deck: (
 		id: String?,
@@ -81,6 +87,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 		guard let deckId = deck.id else { return }
+		loadFlowLayouts()
 		loadCreator()
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot, let deckName = snapshot.get("name") as? String, let subtitle = snapshot.get("subtitle") as? String, let description = snapshot.get("description") as? String, let isPublic = snapshot.get("public") as? Bool, let count = snapshot.get("count") as? Int, let creatorId = snapshot.get("creator") as? String, let created = snapshot.getDate("created"), let updated = snapshot.getDate("updated") {
@@ -308,6 +315,29 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		return Deck.has(deck.id)
 	}
 	
+	func loadFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		let cardPreviewCollectionViewHeight = cardPreviewCollectionView.bounds.height
+		flowLayout.itemSize = CGSize(width: cardPreviewCollectionViewHeight * 0.7, height: cardPreviewCollectionViewHeight)
+		flowLayout.minimumInteritemSpacing = CARD_PREVIEW_CELL_SPACING
+		flowLayout.minimumLineSpacing = 0
+		cardPreviewCollectionView.collectionViewLayout = flowLayout
+		let ratingsCollectionViewHeight = ratingsCollectionView.bounds.height
+		flowLayout.itemSize = CGSize(width: ratingsCollectionViewHeight * 1.5, height: ratingsCollectionViewHeight)
+		flowLayout.minimumInteritemSpacing = RATING_CELL_SPACING
+		flowLayout.minimumLineSpacing = 0
+		ratingsCollectionView.collectionViewLayout = flowLayout
+		flowLayout.itemSize = CGSize(width: (infoCollectionView.bounds.width - INFO_CELL_SPACING) / 2, height: INFO_CELL_HEIGHT)
+		flowLayout.minimumInteritemSpacing = INFO_CELL_SPACING
+		flowLayout.minimumLineSpacing = INFO_CELL_SPACING
+		infoCollectionView.collectionViewLayout = flowLayout
+		flowLayout.itemSize = CGSize(width: moreByCreatorCollectionView.bounds.width * 2 / 3, height: moreByCreatorCollectionView.bounds.height)
+		flowLayout.minimumInteritemSpacing = DECK_PREVIEW_CELL_SPACING
+		flowLayout.minimumLineSpacing = 0
+		moreByCreatorCollectionView.collectionViewLayout = flowLayout
+		similarDecksCollectionView.collectionViewLayout = flowLayout
+	}
+	
 	func setLabels(name: String, subtitle: String, description: String, ratings: DeckRatings) {
 		deckNameLabel.text = name
 		deckSubtitleLabel.text = subtitle
@@ -340,6 +370,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")],
 			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
 		] as? [[(String, String?)]] ?? []
+		infoCollectionViewHeightConstraint.constant = CGFloat(info.count) * (INFO_CELL_HEIGHT + INFO_CELL_SPACING) - INFO_CELL_SPACING
+		view.layoutIfNeeded()
 		infoCollectionView.reloadData()
 	}
 	

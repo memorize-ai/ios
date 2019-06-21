@@ -4289,6 +4289,7 @@
                         <outlet property="getButtonActivityIndicator" destination="kCP-a8-2u0" id="dUP-g7-dPn"/>
                         <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="WB7-Zd-fL7"/>
                         <outlet property="infoCollectionView" destination="QOO-W2-Lim" id="Xzy-9u-eTm"/>
+                        <outlet property="infoCollectionViewHeightConstraint" destination="zcD-PS-9An" id="vwS-vE-rMR"/>
                         <outlet property="loadingView" destination="87p-cl-OMK" id="fwD-E4-XBU"/>
                         <outlet property="moreByCreatorCollectionView" destination="6Og-O9-apJ" id="fIy-pa-X8H"/>
                         <outlet property="moreByCreatorLabel" destination="3wa-GQ-gdV" id="RUi-PL-jmh"/>
