@@ -3437,6 +3437,9 @@
                                                                                     <integer key="value" value="15"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
+                                                                            <connections>
+                                                                                <action selector="play" destination="gSB-84-IDR" eventType="touchUpInside" id="YiA-rO-BvG"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <constraints>

@@ -344,7 +344,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setCardLabels() {
-		cardCountLabel.text = (deck.count ?? 0).formatted
+		cardCountLabel.text = "\((deck.count ?? 0).formatted) cards"
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
@@ -471,7 +471,22 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
 			guard let cell = _cell as? CardPreviewCollectionViewCell else { return _cell }
-			// Code
+			let card = cards.prefix(CARD_PREVIEW_COUNT)[indexPath.item]
+			cell.load(card, side: .front)
+			cell.playAction = {
+				if Audio.isPlaying {
+					Audio.stop()
+					cell.setPlayState(.ready)
+				} else {
+					cell.setPlayState(.stop)
+					card.playAudio(.front) { success in
+						cell.setPlayState(.ready)
+						if !success {
+							self.showNotification("Unable to play audio. Please try again", type: .error)
+						}
+					}
+				}
+			}
 			return cell
 		case ratingsCollectionView.tag:
 			guard let cell = _cell as? DeckRatingCollectionViewCell else { return _cell }
@@ -518,10 +533,21 @@ class CardPreviewCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var likeCountLabel: UILabel!
 	@IBOutlet weak var dislikeCountLabel: UILabel!
 	
-	func load(_ text: String, likes: Int, dislikes: Int) {
-		webView.render(text, fontSize: 40, textColor: "000000", backgroundColor: "ffffff")
-		likeCountLabel.text = likes.formatted
-		dislikeCountLabel.text = dislikes.formatted
+	var playAction: (() -> Void)?
+	
+	@IBAction func play() {
+		playAction?()
+	}
+	
+	func load(_ card: Card, side: CardSide) {
+		playButton.isHidden = card.getAudioUrls(side).isEmpty
+		webView.render(side.text(for: card), fontSize: 40, textColor: "000000", backgroundColor: "ffffff")
+		likeCountLabel.text = card.likes.formatted
+		dislikeCountLabel.text = card.dislikes.formatted
+	}
+	
+	func setPlayState(_ playState: Audio.PlayState) {
+		playButton.setImage(Audio.image(for: playState), for: .normal)
 	}
 }
 
