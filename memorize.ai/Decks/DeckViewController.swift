@@ -3,20 +3,31 @@ import Firebase
 import WebKit
 
 class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-	@IBOutlet weak var loadingView: UIView!
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var mainView: UIView!
-	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var deckImageView: UIImageView!
+	@IBOutlet weak var deckImageActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var deckNameLabel: UILabel!
+	@IBOutlet weak var deckSubtitleLabel: UILabel!
 	@IBOutlet weak var getButton: UIButton!
 	@IBOutlet weak var getButtonWidthConstraint: NSLayoutConstraint!
-	@IBOutlet weak var getActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var getButtonActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var previewButton: UIButton!
-	@IBOutlet weak var descriptionWebView: WKWebView!
-	@IBOutlet weak var descriptionWebViewHeightConstraint: NSLayoutConstraint!
-	@IBOutlet weak var cardsCollectionView: UICollectionView!
-	@IBOutlet weak var creatorLabel: UILabel!
+	@IBOutlet weak var previewButtonActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var starsSliderView: UIView!
+	@IBOutlet weak var ratingCountLabel: UILabel!
+	@IBOutlet weak var cardCountLabel: UILabel!
+	@IBOutlet weak var cardPreviewCollectionView: UICollectionView!
+	@IBOutlet weak var descriptionTextView: UILabel!
+	@IBOutlet weak var descriptionMoreLabel: UILabel!
+	@IBOutlet weak var showFullDescriptionButton: UIButton!
+	@IBOutlet weak var creatorImageView: UIImageView!
+	@IBOutlet weak var creatorNameLabel: UILabel!
+	@IBOutlet weak var rateDeckButton: UIButton!
+	@IBOutlet weak var averageRatingLabel: UILabel!
+	@IBOutlet weak var ratingsCollectionView: UICollectionView!
+	@IBOutlet weak var infoCollectionView: UICollectionView!
+	@IBOutlet weak var moreByCreatorLabel: UILabel!
+	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
+	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
 	
 	var deckId: String?
 	var deckName: String?
@@ -129,6 +140,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		guard let reviewVC = segue.destination as? ReviewViewController else { return }
 		reviewVC.previewCards = cards
 		reviewVC.previewDeck = deckName
+	}
+	
+	@IBAction func showFullDescription() {
+		showFullDescriptionButton.isEnabled = false
+		// Show full description
+	}
+	
+	@IBAction func showCreatorProfile() {
+		// Visit the creator profile on the website
 	}
 	
 	@IBAction func preview() {

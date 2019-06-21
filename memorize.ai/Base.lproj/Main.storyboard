@@ -3276,6 +3276,7 @@
                                                             </button>
                                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kzT-wJ-6SC">
                                                                 <rect key="frame" x="40" y="6.6666666666666572" width="20" height="20"/>
+                                                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </activityIndicatorView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3495,6 +3496,9 @@
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="poE-sG-ehr">
                                                         <rect key="frame" x="0.0" y="0.0" width="130.33333333333334" height="30"/>
+                                                        <connections>
+                                                            <action selector="showCreatorProfile" destination="9XY-L1-f93" eventType="touchUpInside" id="nqE-NK-DPE"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j33-7O-TKM">
                                                         <rect key="frame" x="38" y="0.0" width="42.333333333333343" height="30"/>
@@ -3718,6 +3722,9 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKT-6D-nri">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="140"/>
+                                                        <connections>
+                                                            <action selector="showFullDescription" destination="9XY-L1-f93" eventType="touchUpInside" id="iRD-SF-9Zs"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4084,6 +4091,31 @@
                     </view>
                     <size key="freeformSize" width="414" height="1780"/>
                     <connections>
+                        <outlet property="averageRatingLabel" destination="e90-3H-4Mg" id="fRu-a2-LPr"/>
+                        <outlet property="cardCountLabel" destination="Wij-ZY-MCX" id="8YB-Ay-1un"/>
+                        <outlet property="cardPreviewCollectionView" destination="mfX-pg-YXV" id="bFu-UI-cuj"/>
+                        <outlet property="creatorImageView" destination="IfW-fa-XBB" id="Wdh-LO-VvE"/>
+                        <outlet property="creatorNameLabel" destination="j33-7O-TKM" id="A7v-03-BAY"/>
+                        <outlet property="deckImageActivityIndicator" destination="Rm9-WX-cH2" id="Iar-9P-axR"/>
+                        <outlet property="deckImageView" destination="hbD-lL-WAl" id="BtK-Cf-FlW"/>
+                        <outlet property="deckNameLabel" destination="h8e-mj-PpG" id="bfY-JL-zUP"/>
+                        <outlet property="deckSubtitleLabel" destination="zdD-wf-kDt" id="De0-Wr-xTE"/>
+                        <outlet property="descriptionMoreLabel" destination="enf-zV-Idq" id="4Qa-1p-Yff"/>
+                        <outlet property="descriptionTextView" destination="L1O-v6-wkr" id="AIL-Hk-OfA"/>
+                        <outlet property="getButton" destination="FYY-KY-7rt" id="Gpf-1T-mze"/>
+                        <outlet property="getButtonActivityIndicator" destination="kCP-a8-2u0" id="dUP-g7-dPn"/>
+                        <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="WB7-Zd-fL7"/>
+                        <outlet property="infoCollectionView" destination="QOO-W2-Lim" id="Xzy-9u-eTm"/>
+                        <outlet property="moreByCreatorCollectionView" destination="6Og-O9-apJ" id="fIy-pa-X8H"/>
+                        <outlet property="moreByCreatorLabel" destination="3wa-GQ-gdV" id="RUi-PL-jmh"/>
+                        <outlet property="previewButton" destination="aoR-uh-Vz9" id="c1b-jz-JMb"/>
+                        <outlet property="previewButtonActivityIndicator" destination="kzT-wJ-6SC" id="mPz-zA-HTN"/>
+                        <outlet property="rateDeckButton" destination="r5J-jQ-nmh" id="JfP-1F-qNH"/>
+                        <outlet property="ratingCountLabel" destination="lfJ-4O-OUb" id="K8H-zk-Mgn"/>
+                        <outlet property="ratingsCollectionView" destination="xgf-Q6-gxj" id="q1I-JP-HCV"/>
+                        <outlet property="showFullDescriptionButton" destination="vKT-6D-nri" id="PkM-TB-1qF"/>
+                        <outlet property="similarDecksCollectionView" destination="In7-z9-CUc" id="MlT-a2-Sg4"/>
+                        <outlet property="starsSliderView" destination="i1z-Ki-97N" id="06C-2y-6Hq"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="xln-P0-Fwc"/>
                     </connections>
                 </viewController>
