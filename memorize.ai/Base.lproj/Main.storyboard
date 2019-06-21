@@ -2611,22 +2611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-Pa-nLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="3852"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="h0A-Wf-Kjr">
-            <objects>
-                <viewController id="pNP-gE-MPf" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="w40-H1-8em">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="qxn-L2-ayT"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vh6-eZ-Zxr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1503" y="2821"/>
+            <point key="canvasLocation" x="816" y="3681"/>
         </scene>
         <!--Permissions-->
         <scene sceneID="Uao-A6-Efy">
@@ -2663,7 +2648,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIB-w4-nfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2183" y="2821"/>
+            <point key="canvasLocation" x="1503" y="2821"/>
         </scene>
         <!--Analytics-->
         <scene sceneID="FEZ-c3-Krd">
@@ -2702,14 +2687,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mEP-C1-dhR">
-                                                    <rect key="frame" x="19.999999999999996" y="10.999999999999998" width="37.666666666666664" height="23.333333333333332"/>
+                                                    <rect key="frame" x="19.999999999999996" y="8.9999999999999982" width="39.666666666666664" height="27.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ovG-hL-mle">
-                                                    <rect key="frame" x="343" y="10.999999999999998" width="51" height="23.333333333333332"/>
+                                                    <rect key="frame" x="340" y="8.9999999999999982" width="54" height="27.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -3194,11 +3179,11 @@
             <objects>
                 <viewController id="9XY-L1-f93" customClass="DeckViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5x1-yW-fPN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1780"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msd-U6-Cw5">
-                                <rect key="frame" x="0.0" y="64" width="414" height="1936"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="1716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScY-Tx-UZe">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1716.6666666666667"/>
@@ -4065,7 +4050,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QYV-Js-Ngp"/>
                     </view>
-                    <size key="freeformSize" width="414" height="2000"/>
+                    <size key="freeformSize" width="414" height="1780"/>
                     <connections>
                         <outlet property="getActivityIndicator" destination="kCP-a8-2u0" id="Kn7-Fq-QWk"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="dTb-cB-Zcc"/>
@@ -4079,7 +4064,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="815.94202898550736" y="2667.3913043478265"/>
+            <point key="canvasLocation" x="816" y="2579"/>
         </scene>
         <!--Card View Controller-->
         <scene sceneID="Wn5-ZD-dMC">
@@ -5887,7 +5872,7 @@
         <segue reference="NJF-dv-A8u"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
-        <segue reference="xln-P0-Fwc"/>
+        <segue reference="FG1-aM-YqR"/>
         <segue reference="0Yj-jn-rSr"/>
         <segue reference="y6W-0c-pPw"/>
         <segue reference="xao-oA-rKh"/>
