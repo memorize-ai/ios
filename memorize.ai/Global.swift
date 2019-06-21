@@ -188,6 +188,10 @@ extension Double {
 			return "overflow"
 		}
 	}
+	
+	var oneDecimalPlace: Double {
+		return (self * 10).rounded() / 10
+	}
 }
 
 extension Int {

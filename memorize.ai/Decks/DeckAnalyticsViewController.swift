@@ -48,7 +48,7 @@ class DeckAnalyticsViewController: UIViewController, UITableViewDataSource, UITa
 		let ratingsColor: UIColor = deck.ratings.average == 0 ? .lightGray : .black
 		return [
 			AnalyticSection(name: "ratings", analytics: [
-				Analytic(key: "Average", value: String((deck.ratings.average * 10).rounded() / 10), color: ratingsColor),
+				Analytic(key: "Average", value: String((deck.ratings.average.oneDecimalPlace), color: ratingsColor),
 				Analytic(key: "1 Star", value: deck.ratings.all1, color: ratingsColor),
 				Analytic(key: "2 Star", value: deck.ratings.all2, color: ratingsColor),
 				Analytic(key: "3 Star", value: deck.ratings.all3, color: ratingsColor),
