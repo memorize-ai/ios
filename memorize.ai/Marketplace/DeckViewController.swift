@@ -75,7 +75,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.creator.id = creatorId
 				self.deck.created = created
 				self.deck.updated = updated
-				self.setLabels(name: deckName, subtitle: subtitle, description: description)
+				self.setLabels(name: deckName, subtitle: subtitle, description: description, ratings: deckRatings)
 				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
 			} else {
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
@@ -115,18 +115,18 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings)
 			}
 		}
-		if let image = image {
-			imageActivityIndicator.stopAnimating()
-			imageView.image = image
-			imageView.layer.borderWidth = 0
-		} else if let deckId = self.deckId {
+		if let image = deck.image {
+			deckImageActivityIndicator.stopAnimating()
+			deckImageView.image = image
+			deckImageView.layer.borderWidth = 0
+		} else if let deckId = deck.id {
 			storage.child("decks/\(deckId)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-				self.imageActivityIndicator.stopAnimating()
-				self.imageView.layer.borderWidth = 0
-				if error == nil, let data = data {
-					self.imageView.image = UIImage(data: data) ?? #imageLiteral(resourceName: "Gray Deck")
+				self.deckImageActivityIndicator.stopAnimating()
+				self.deckImageView.layer.borderWidth = 0
+				if error == nil, let data = data, let image = UIImage(data: data) {
+					self.deckImageView.image = image
 				} else {
-					self.imageView.image = #imageLiteral(resourceName: "Gray Deck")
+					self.deckImageView.image = #imageLiteral(resourceName: "Gray Deck")
 				}
 			}
 		}
