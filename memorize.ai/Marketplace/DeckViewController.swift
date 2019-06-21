@@ -102,19 +102,17 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						dislikes: card.get("dislikes") as? Int ?? 0,
 						deck: deckId
 					))
-					self.setlabe
-					ChangeHandler.call(.cardModified)
 				case .modified:
 					self.cards.first { $0.id == cardId }?.update(card, type: .card)
-					self.reloadCards()
-					ChangeHandler.call(.cardModified)
 				case .removed:
 					self.cards = self.cards.filter { $0.id != cardId }
-					self.reloadCards()
-					ChangeHandler.call(.cardRemoved)
 				@unknown default:
 					return
 				}
+				guard let isPublic = self.deck.isPublic, let count = self.deck.count, let views = self.deck.views, let downloads = self.deck.downloads, let ratings = self.deck.ratings else { return }
+				self.setCardLabels()
+				self.loadCardPreview()
+				self.loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings)
 			}
 		}
 		if let image = image {
