@@ -451,6 +451,7 @@
 				4D44043D224D7D8400AEABD2 /* Home */,
 				4DBFE50422B1F89400EDF0C7 /* Uploads */,
 				4DBFE50522B1F8A300EDF0C7 /* Ratings */,
+				4D49928C22BC8C2B006D53C5 /* Marketplace */,
 				4DF9724622076C8200FF8BED /* Decks */,
 				4D1882BF226E694E00F29F99 /* Cards */,
 				4D8A344F22090E8A0021474A /* Review */,
@@ -493,7 +494,6 @@
 				4DF2A8D7224F0E0200BA5F8B /* EditCardViewController.swift */,
 				4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */,
 				4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */,
-				4DAA38FD2208D4F500EB443E /* CardViewController.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -506,6 +506,16 @@
 				4D1A7246229611D6004FA89E /* SettingsViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		4D49928C22BC8C2B006D53C5 /* Marketplace */ = {
+			isa = PBXGroup;
+			children = (
+				4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */,
+				4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */,
+				4DAA38FD2208D4F500EB443E /* CardViewController.swift */,
+			);
+			path = Marketplace;
 			sourceTree = "<group>";
 		};
 		4D6438F722056528006F4F2D /* Nunito */ = {
@@ -686,8 +696,6 @@
 				4DE8322622B03E6000DDD1F9 /* DeckSettingsViewController.swift */,
 				4DE7FD3B22B1B8CA00B82F38 /* DeckPermissionsViewController.swift */,
 				4DE7FD3D22B1B97300B82F38 /* DeckAnalyticsViewController.swift */,
-				4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */,
-				4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */,
 			);
 			path = Decks;
 			sourceTree = "<group>";
