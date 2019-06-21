@@ -450,6 +450,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
+	func showOtherDeck(_ deck: Deck) {
+		guard let deckVC = storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return }
+		deckVC.deck.id = deck.id
+		deckVC.deck.image = deck.image
+		navigationController?.pushViewController(deckVC, animated: true)
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
@@ -524,9 +531,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		case infoCollectionView.tag:
 			return
 		case moreByCreatorCollectionView.tag:
-			// Show deck
+			showOtherDeck(creatorDecks[indexPath.item])
 		case similarDecksCollectionView.tag:
-			// Show deck
+			showOtherDeck(similarDecks[indexPath.item])
 		default:
 			return
 		}

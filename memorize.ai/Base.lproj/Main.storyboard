@@ -3178,7 +3178,7 @@
         <scene sceneID="JvY-0j-dJk">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="9XY-L1-f93" customClass="DeckViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="deck" id="9XY-L1-f93" customClass="DeckViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5x1-yW-fPN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1780"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
