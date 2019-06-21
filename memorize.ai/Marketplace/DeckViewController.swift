@@ -513,7 +513,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
-			guard let cardVC = self.storyboard?.instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
+			guard let cardVC = storyboard?.instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
 			cardVC.card = cards.prefix(CARD_PREVIEW_COUNT)[indexPath.item]
 			addChild(cardVC)
 			cardVC.view.frame = view.frame
