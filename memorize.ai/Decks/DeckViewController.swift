@@ -189,6 +189,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")]
 		] as? [[(String, String?)]] ?? []
+		infoCollectionView.reloadData()
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
