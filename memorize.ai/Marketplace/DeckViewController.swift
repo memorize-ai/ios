@@ -497,7 +497,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
-			return
+			// Show card modal
 		case ratingsCollectionView.tag:
 			// Show full rating in a modal
 		case infoCollectionView.tag:
