@@ -165,3 +165,27 @@ extension Data {
 		return formatter.string(fromByteCount: Int64(count))
 	}
 }
+
+extension Int {
+	var formatted: String {
+		let absolute = abs(self)
+		func greaterThan(_ number: Int) -> Bool {
+			return absolute >= number
+		}
+		func format(_ number: Int, ext: Character) -> String {
+			return "\(round(Double(self) / Double(number)))\(ext)"
+		}
+		switch true {
+		case greaterThan(1000):
+			return format(1000, ext: "K")
+		case greaterThan(1000000):
+			return format(1000000, ext: "M")
+		case greaterThan(1000000000):
+			return format(1000000000, ext: "B")
+		case greaterThan(1000000000000):
+			return format(1000000000000, ext: "T")
+		default:
+			return "overflow"
+		}
+	}
+}
