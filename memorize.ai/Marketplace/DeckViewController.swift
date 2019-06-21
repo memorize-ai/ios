@@ -175,6 +175,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		previewView.isHidden = hasDeck
 		loadCardPreview()
 		setDescription(description)
+		setCardLabels()
 		setRatingLabels(ratings)
 	}
 	
@@ -200,6 +201,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")]
 		] as? [[(String, String?)]] ?? []
 		infoCollectionView.reloadData()
+	}
+	
+	func setCardLabels() {
+		cardCountLabel.text = (deck.count ?? 0).formatted
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
