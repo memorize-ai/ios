@@ -132,7 +132,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 							if creatorDeckId == deckId { continue }
 							switch deckSnapshot.type {
 							case .added:
-								self.creatorDecks.append(Deck(
+								let newDeck = Deck(
 									id: creatorDeckId,
 									image: Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
 									name: creatorDeck.get("name") as? String ?? "Error",
@@ -154,7 +154,14 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 									mastered: 0,
 									role: .none,
 									hidden: false
-								))
+								)
+								self.creatorDecks.append(newDeck)
+								storage.child("decks/\(creatorDeckId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
+									if creatorError == nil, let creatorData = creatorData {
+										newDeck.image = UIImage(data: creatorData)
+									}
+									self.moreByCreatorCollectionView.reloadData()
+								}
 							case .modified:
 								self.creatorDecks.first { $0.id == creatorDeckId }?.update(creatorDeck, type: .deck)
 							case .removed:
@@ -489,6 +496,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		navigationController?.pushViewController(deckVC, animated: true)
 	}
 	
+	func deckPreviewCell(_ deck: Deck, cell: DeckPreviewCollectionViewCell) -> DeckPreviewCollectionViewCell {
+		cell.imageView.image = deck.image ??
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
@@ -538,12 +549,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			return cell
 		case moreByCreatorCollectionView.tag:
 			guard let cell = _cell as? DeckPreviewCollectionViewCell else { return _cell }
-			// Code
-			return cell
+			return deckPreviewCell(creatorDecks[indexPath.item], cell: cell)
 		case similarDecksCollectionView.tag:
 			guard let cell = _cell as? DeckPreviewCollectionViewCell else { return _cell }
-			// Code
-			return cell
+			return deckPreviewCell(similarDecks[indexPath.item], cell: cell)
 		default:
 			return _cell
 		}
