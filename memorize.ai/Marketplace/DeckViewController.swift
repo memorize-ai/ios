@@ -371,10 +371,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			rateDeckButton.setTitle("Edit Draft", for: .normal)
 		} else if DeckRating.get(deckId) != nil {
 			rateDeckButton.setTitle("Edit Rating", for: .normal)
-		} else if hasDeck {
-			rateDeckButton.setTitle("New Rating", for: .normal)
 		} else {
-			rateDeckButton.isEnabled = false
+			rateDeckButton.setTitle("New Rating", for: .normal)
+			if !hasDeck {
+				rateDeckButton.isEnabled = false
+			}
 		}
 	}
 	
