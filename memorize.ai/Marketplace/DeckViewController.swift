@@ -53,7 +53,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	)
 	var cards = [Card]()
 	var ratings = [DeckRating]()
-	var hasDeck = false
 	var isDescriptionExpanded = false
 	var info = [[(String, String?)]]()
 	
@@ -76,7 +75,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.creator.id = creatorId
 				self.deck.created = created
 				self.deck.updated = updated
-				self.setLabels(name: deckName, subtitle: subtitle, description: description, isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
+				self.setLabels(name: deckName, subtitle: subtitle, description: description)
+				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
 			} else {
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
 				alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -102,7 +102,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						dislikes: card.get("dislikes") as? Int ?? 0,
 						deck: deckId
 					))
-					self.reloadCards()
+					self.setlabe
 					ChangeHandler.call(.cardModified)
 				case .modified:
 					self.cards.first { $0.id == cardId }?.update(card, type: .card)
@@ -138,7 +138,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		super.viewWillAppear(animated)
 		guard let deckId = deck.id else { return }
 		Deck.view(deckId)
-		if Deck.has(deckId) {
+		if hasDeck {
 			getButtonWidthConstraint.constant = 90
 			view.layoutIfNeeded()
 			getButton.setTitle("DELETE", for: .normal)
@@ -165,12 +165,16 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	func setLabels(name: String, subtitle: String, description: String, isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
+	var hasDeck: Bool {
+		return Deck.has(deck.id)
+	}
+	
+	func setLabels(name: String, subtitle: String, description: String, ratings: DeckRatings) {
 		deckNameLabel.text = name
 		deckSubtitleLabel.text = subtitle
+		previewView.isHidden = hasDeck
 		loadCardPreview()
 		setDescription(description)
-		loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings)
 		setRatingLabels(ratings)
 	}
 	
@@ -191,7 +195,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
 		info = [
 			[(isPublic ? "public" : "private", nil), (count.formatted, "cards")],
-			[(ratings.count.formatted, "ratings"), (ratings.average, "average")],
+			[(ratings.count.formatted, "ratings"), (ratings.average.oneDecimalPlace, "average")],
 			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")]
 		] as? [[(String, String?)]] ?? []
@@ -199,6 +203,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
+		ratingCountLabel.text = ratings.count.formatted
+		averageRatingLabel.text = String(ratings.average.oneDecimalPlace)
 		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
 		view.layoutIfNeeded()
 	}
