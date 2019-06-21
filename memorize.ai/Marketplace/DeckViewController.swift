@@ -78,7 +78,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.updated = updated
 				self.setLabels(name: deckName, subtitle: subtitle, description: description, isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
 			} else {
-				self.activityIndicator.stopAnimating()
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
 				alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
 					self.navigationController?.popViewController(animated: true)
@@ -110,7 +109,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.reloadCards()
 					ChangeHandler.call(.cardModified)
 				case .removed:
-					self.cards = self.cards.filter { return $0.id != cardId }
+					self.cards = self.cards.filter { $0.id != cardId }
 					self.reloadCards()
 					ChangeHandler.call(.cardRemoved)
 				@unknown default:
@@ -169,9 +168,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setLabels(name: String, subtitle: String, description: String, isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
 		deckNameLabel.text = name
 		deckSubtitleLabel.text = subtitle
+		loadCardPreview()
 		setDescription(description)
 		loadInfo(isPublic: isPublic, count: count, views: views, downloads: downloads, ratings: ratings)
 		setRatingLabels(ratings)
+	}
+	
+	func loadCardPreview() {
+		cards = cards.sorted { $0.dislikes < $1.dislikes }.sorted { $0.likes > $1.likes }
+		cardPreviewCollectionView.reloadData()
 	}
 	
 	func setDescription(_ description: String) {
@@ -285,7 +290,18 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		<#code#>
+		switch collectionView {
+		case cardPreviewCollectionView:
+			
+		case ratingsCollectionView:
+			
+		case infoCollectionView:
+			
+		case moreByCreatorCollectionView:
+			
+		case similarDecksCollectionView:
+			
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
