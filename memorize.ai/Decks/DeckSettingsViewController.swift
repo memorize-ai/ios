@@ -62,8 +62,8 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 		} else if let cardAnalyticsVC = segue.destination as? CardAnalyticsViewController {
 			cardAnalyticsVC.deck = deck
 		} else if let deckVC = segue.destination as? DeckViewController {
-			deckVC.deckId = deck.id
-			deckVC.image = deck.image
+			deckVC.deck.id = deck.id
+			deckVC.deck.image = deck.image
 		}
 	}
 	

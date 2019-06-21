@@ -79,8 +79,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		super.prepare(for: segue, sender: self)
 		guard let deck = deck else { return }
 		if let deckVC = segue.destination as? DeckViewController {
-			deckVC.deckId = deck.id
-			deckVC.image = deck.image
+			deckVC.deck.id = deck.id
+			deckVC.deck.image = deck.image
 		} else if let editCardVC = segue.destination as? EditCardViewController {
 			editCardVC.deck = deck
 			editCardVC.card = sender as? Card
