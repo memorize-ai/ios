@@ -234,6 +234,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func loadCreator() {
 		creatorImageView.image = deck.image ?? #imageLiteral(resourceName: "Person")
 		creatorNameLabel.text = deck.creator.name
+		if let creatorName = deck.creator.name {
+			moreByCreatorLabel.text = "More by \(creatorName)"
+		} else {
+			moreByCreatorLabel.text = nil
+		}
 	}
 	
 	@IBAction func showFullDescription() {
