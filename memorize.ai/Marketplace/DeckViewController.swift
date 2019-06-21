@@ -209,7 +209,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					let userId = user.documentID
 					switch $0.type {
 					case .added:
-						self.ratings.append(Rating(
+						let newRating = Rating(
 							rating: DeckRating(
 								id: deckId,
 								rating: user.get("rating") as? Int ?? 1,
@@ -223,8 +223,19 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 								name: nil,
 								url: nil
 							)
-						))
-						// Load user that made the rating
+						)
+						self.ratings.append(newRating)
+						firestore.document("users/\(userId)").addSnapshotListener { userSnapshot, userError in
+							guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String, let userSlug = userSnapshot.get("slug") as? String, let url = URL(string: "https://memorize.ai/users/\(userSlug)") else { return }
+							newRating.user.name = userName
+							newRating.user.url = url
+							self.ratingsCollectionView.reloadData()
+						}
+						storage.child("users/\(userId)").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
+							guard userError == nil, let userData = userData, let userImage = UIImage(data: userData) else { return }
+							newRating.user.image = userImage
+							self.ratingsCollectionView.reloadData()
+						}
 					case .modified:
 						self.ratings.first { $0.user.id == userId }?.rating.update(user)
 					case .removed:
