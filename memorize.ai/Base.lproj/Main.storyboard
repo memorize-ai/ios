@@ -4151,7 +4151,7 @@
                                                 </cells>
                                             </collectionView>
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87p-cl-OMK">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="12"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8X-9o-2oD">

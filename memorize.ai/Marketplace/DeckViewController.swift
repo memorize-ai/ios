@@ -278,6 +278,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			getButton.setTitle("DELETE", for: .normal)
 			getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 		}
+		ChangeHandler.updateAndCall(.deckRatingAdded) { change in
+			if change == .deckRatingAdded || change == .deckRatingRemoved || change == .ratingDraftAdded || change == .ratingDraftRemoved {
+				self.loadRateDeckButton()
+			}
+		}
 		updateCurrentViewController()
 	}
 	
@@ -357,6 +362,19 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			moreByCreatorLabel.text = "More by \(creatorName)"
 		} else {
 			moreByCreatorLabel.text = nil
+		}
+	}
+	
+	func loadRateDeckButton() {
+		guard let deckId = deck.id else { return }
+		if RatingDraft.get(deckId) != nil {
+			rateDeckButton.setTitle("Edit Draft", for: .normal)
+		} else if DeckRating.get(deckId) != nil {
+			rateDeckButton.setTitle("Edit Rating", for: .normal)
+		} else if hasDeck {
+			rateDeckButton.setTitle("New Rating", for: .normal)
+		} else {
+			rateDeckButton.isEnabled = false
 		}
 	}
 	
