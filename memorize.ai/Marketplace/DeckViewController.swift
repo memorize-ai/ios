@@ -27,10 +27,26 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var rateDeckButton: UIButton!
 	@IBOutlet weak var averageRatingLabel: UILabel!
 	@IBOutlet weak var ratingsCollectionView: UICollectionView!
+	@IBOutlet weak var noRatingsLabel: UILabel!
 	@IBOutlet weak var infoCollectionView: UICollectionView!
 	@IBOutlet weak var moreByCreatorLabel: UILabel!
 	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
 	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
+	
+	class Rating {
+		let rating: DeckRating
+		var user: (
+			id: String,
+			image: UIImage?,
+			name: String?,
+			url: URL?
+		)
+		
+		init(rating: DeckRating, user: (id: String, image: UIImage?, name: String?, url: URL?)) {
+			self.rating = rating
+			self.user = user
+		}
+	}
 	
 	let CARD_PREVIEW_COUNT = 10
 	let RATINGS_COUNT = 10
@@ -56,7 +72,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		updated: Date?
 	)
 	var cards = [Card]()
-	var ratings = [(rating: DeckRating, user: (id: String, image: UIImage?, name: String?, url: URL?))]()
+	var ratings = [Rating]()
 	var isDescriptionExpanded = false
 	var info = [[(String, String?)]]()
 	var creatorDecks = [Deck]()
@@ -193,14 +209,31 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					let userId = user.documentID
 					switch $0.type {
 					case .added:
-						
+						self.ratings.append(Rating(
+							rating: DeckRating(
+								id: deckId,
+								rating: user.get("rating") as? Int ?? 1,
+								title: user.get("title") as? String ?? "",
+								review: user.get("review") as? String ?? "",
+								date: user.getDate("date") ?? Date()
+							),
+							user: (
+								id: userId,
+								image: nil,
+								name: nil,
+								url: nil
+							)
+						))
 					case .modified:
-						
+						let localRating -
 					case .removed:
-						
+						self.ratings = self.ratings.filter { $0.user.id != userId }
 					@unknown default:
 						return
 					}
+					guard let ratings = self.deck.ratings else { return }
+					self.setRatingLabels(ratings)
+					self.ratingsCollectionView.reloadData()
 				}
 			} else {
 				self.showNotification("Unable to load ratings", type: .error)
@@ -300,6 +333,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setRatingLabels(_ ratings: DeckRatings) {
 		ratingCountLabel.text = ratings.count.formatted
 		averageRatingLabel.text = String(ratings.average.oneDecimalPlace)
+		noRatingsLabel.isHidden = !self.ratings.isEmpty
 		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
 		view.layoutIfNeeded()
 	}
