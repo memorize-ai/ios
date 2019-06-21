@@ -467,7 +467,31 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		<#code#>
+		let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		switch collectionView.tag {
+		case cardPreviewCollectionView.tag:
+			guard let cell = _cell as? CardPreviewCollectionViewCell else { return _cell }
+			// Code
+			return cell
+		case ratingsCollectionView.tag:
+			guard let cell = _cell as? DeckRatingCollectionViewCell else { return _cell }
+			// Code
+			return cell
+		case infoCollectionView.tag:
+			guard let cell = _cell as? DeckInfoCollectionViewCell else { return _cell }
+			// Code
+			return cell
+		case moreByCreatorCollectionView.tag:
+			guard let cell = _cell as? DeckPreviewCollectionViewCell else { return _cell }
+			// Code
+			return cell
+		case similarDecksCollectionView.tag:
+			guard let cell = _cell as? DeckPreviewCollectionViewCell else { return _cell }
+			// Code
+			return cell
+		default:
+			return _cell
+		}
 	}
 }
 
