@@ -54,6 +54,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var ratings = [DeckRating]()
 	var hasDeck = false
 	var isDescriptionExpanded = false
+	var info = [[(String, String?)]]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +76,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.created = created
 				self.deck.updated = updated
 				self.setLabels(name: deckName, subtitle: subtitle, description: description, isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
-				self.loadInfo(count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings)
 			} else {
 				self.activityIndicator.stopAnimating()
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
@@ -183,6 +183,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings) {
+		info = [
+			[(isPublic ? "public" : "private", nil), (count.formatted, "cards")],
+			[(ratings.count.formatted, "ratings"), (ratings.average, "average")],
+			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
+			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")]
+		] as? [[(String, String?)]] ?? []
+	}
+	
+	func setRatingLabels(_ ratings: DeckRatings) {
 		
 	}
 	
