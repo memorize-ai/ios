@@ -373,3 +373,9 @@ class DeckInfoCollectionViewCell: UICollectionViewCell {
 		smallTextLabel.text = tuple.1
 	}
 }
+
+class DeckPreviewCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var subtitleLabel: UILabel!
+}

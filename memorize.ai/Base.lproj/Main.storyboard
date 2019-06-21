@@ -3917,7 +3917,7 @@
                                                             <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="GWx-Q2-AHW">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="GWx-Q2-AHW" customClass="DeckPreviewCollectionViewCell" customModule="memorize_ai" customModuleProvider="target">
                                                                 <rect key="frame" x="48" y="0.0" width="318" height="58"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -3938,16 +3938,16 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdO-Xc-PCb">
-                                                                            <rect key="frame" x="68" y="6.6666666666666679" width="44.666666666666657" height="45"/>
+                                                                            <rect key="frame" x="68" y="3" width="44.666666666666657" height="52"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDn-bD-sbB">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="24.666666666666668"/>
                                                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="18"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IR-dx-UzP">
-                                                                                    <rect key="frame" x="0.0" y="25" width="44.666666666666664" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="28.666666666666671" width="44.666666666666664" height="23.333333333333329"/>
                                                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
@@ -3974,6 +3974,11 @@
                                                                     <constraint firstItem="LuH-9u-Uxh" firstAttribute="top" secondItem="GWx-Q2-AHW" secondAttribute="top" id="Mnm-2Q-t2L"/>
                                                                     <constraint firstItem="qdO-Xc-PCb" firstAttribute="centerY" secondItem="GWx-Q2-AHW" secondAttribute="centerY" id="iVx-Xb-14p"/>
                                                                 </constraints>
+                                                                <connections>
+                                                                    <outlet property="imageView" destination="LuH-9u-Uxh" id="BM9-d5-vVB"/>
+                                                                    <outlet property="nameLabel" destination="BDn-bD-sbB" id="Rma-xh-sBB"/>
+                                                                    <outlet property="subtitleLabel" destination="0IR-dx-UzP" id="g8j-ru-IAj"/>
+                                                                </connections>
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>
@@ -4008,7 +4013,7 @@
                                                             <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="OdG-Ov-WPe">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="OdG-Ov-WPe" customClass="DeckPreviewCollectionViewCell" customModule="memorize_ai" customModuleProvider="target">
                                                                 <rect key="frame" x="48" y="0.0" width="318" height="58"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -4029,16 +4034,16 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pz0-Kn-AmR">
-                                                                            <rect key="frame" x="68" y="6.6666666666666679" width="44.666666666666657" height="45"/>
+                                                                            <rect key="frame" x="68" y="3" width="44.666666666666657" height="52"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gP-cq-8aW">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="24.666666666666668"/>
                                                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="18"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mh-XV-l5I">
-                                                                                    <rect key="frame" x="0.0" y="25" width="44.666666666666664" height="20"/>
+                                                                                    <rect key="frame" x="0.0" y="28.666666666666671" width="44.666666666666664" height="23.333333333333329"/>
                                                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
@@ -4065,6 +4070,11 @@
                                                                     <constraint firstItem="pa1-Gz-wn0" firstAttribute="top" secondItem="OdG-Ov-WPe" secondAttribute="top" id="dWg-E7-epI"/>
                                                                     <constraint firstItem="pz0-Kn-AmR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OdG-Ov-WPe" secondAttribute="top" id="sMS-ht-reD"/>
                                                                 </constraints>
+                                                                <connections>
+                                                                    <outlet property="imageView" destination="pa1-Gz-wn0" id="Na9-aM-nxM"/>
+                                                                    <outlet property="nameLabel" destination="1gP-cq-8aW" id="fxD-UE-xa5"/>
+                                                                    <outlet property="subtitleLabel" destination="7mh-XV-l5I" id="fUg-bK-xh0"/>
+                                                                </connections>
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>
