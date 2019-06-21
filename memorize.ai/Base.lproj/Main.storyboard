@@ -3228,9 +3228,6 @@
                                                                         <real key="value" value="16.5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="get" destination="9XY-L1-f93" eventType="touchUpInside" id="vVH-rL-hcN"/>
-                                                                </connections>
                                                             </button>
                                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kCP-a8-2u0">
                                                                 <rect key="frame" x="25" y="6.6666666666666572" width="20" height="20"/>
@@ -3276,9 +3273,6 @@
                                                                         <real key="value" value="16.5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="get" destination="9XY-L1-f93" eventType="touchUpInside" id="JnM-0U-UJ9"/>
-                                                                </connections>
                                                             </button>
                                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kzT-wJ-6SC">
                                                                 <rect key="frame" x="40" y="6.6666666666666572" width="20" height="20"/>
@@ -4090,13 +4084,6 @@
                     </view>
                     <size key="freeformSize" width="414" height="1780"/>
                     <connections>
-                        <outlet property="getActivityIndicator" destination="kCP-a8-2u0" id="Kn7-Fq-QWk"/>
-                        <outlet property="getButton" destination="FYY-KY-7rt" id="dTb-cB-Zcc"/>
-                        <outlet property="getButtonWidthConstraint" destination="fwo-rI-aKc" id="6pp-yV-xKt"/>
-                        <outlet property="imageActivityIndicator" destination="Rm9-WX-cH2" id="fzx-bQ-Mcp"/>
-                        <outlet property="imageView" destination="hbD-lL-WAl" id="5NQ-Wk-N46"/>
-                        <outlet property="mainView" destination="XmA-Sj-bhc" id="zkO-C3-UQJ"/>
-                        <outlet property="nameLabel" destination="h8e-mj-PpG" id="o6n-ev-U9S"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="xln-P0-Fwc"/>
                     </connections>
                 </viewController>
