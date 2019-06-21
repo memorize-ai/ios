@@ -513,7 +513,12 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
-			// Show card modal
+			guard let cardVC = self.storyboard?.instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
+			cardVC.card = cards.prefix(CARD_PREVIEW_COUNT)[indexPath.item]
+			addChild(cardVC)
+			cardVC.view.frame = view.frame
+			view.addSubview(cardVC.view)
+			cardVC.didMove(toParent: self)
 		case ratingsCollectionView.tag:
 			// Show full rating in a modal
 		case infoCollectionView.tag:
