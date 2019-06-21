@@ -4134,7 +4134,8 @@
                         <outlet property="ratingsCollectionView" destination="xgf-Q6-gxj" id="q1I-JP-HCV"/>
                         <outlet property="showFullDescriptionButton" destination="vKT-6D-nri" id="PkM-TB-1qF"/>
                         <outlet property="similarDecksCollectionView" destination="In7-z9-CUc" id="MlT-a2-Sg4"/>
-                        <outlet property="starsSliderView" destination="i1z-Ki-97N" id="06C-2y-6Hq"/>
+                        <outlet property="starsSliderView" destination="7g3-JE-UGE" id="GN4-no-NOc"/>
+                        <outlet property="starsSliderViewTrailingConstraint" destination="Ncl-CE-Ijf" id="j2i-vG-GvR"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="xln-P0-Fwc"/>
                     </connections>
                 </viewController>

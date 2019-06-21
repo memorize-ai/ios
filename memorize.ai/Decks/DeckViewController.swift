@@ -13,6 +13,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var previewView: UIView!
 	@IBOutlet weak var previewButtonActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var starsSliderView: UIView!
+	@IBOutlet weak var starsSliderViewTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var ratingCountLabel: UILabel!
 	@IBOutlet weak var cardCountLabel: UILabel!
 	@IBOutlet weak var cardPreviewCollectionView: UICollectionView!
@@ -193,7 +194,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
-		
+		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
+		view.layoutIfNeeded()
 	}
 	
 	@IBAction func showFullDescription() {
