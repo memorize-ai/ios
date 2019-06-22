@@ -177,16 +177,16 @@ extension Double {
 			return "\(str.suffix(2) == ".0" ? String(str.prefix(str.count - 2)) : str)\(ext)"
 		}
 		switch true {
-		case absolute < 1000:
-			return format(1, ext: "")
-		case greaterThan(1000):
-			return format(1000, ext: "K")
-		case greaterThan(1000000):
-			return format(1000000, ext: "M")
-		case greaterThan(1000000000):
-			return format(1000000000, ext: "B")
 		case greaterThan(1000000000000):
 			return format(1000000000000, ext: "T")
+		case greaterThan(1000000000):
+			return format(1000000000, ext: "B")
+		case greaterThan(1000000):
+			return format(1000000, ext: "M")
+		case greaterThan(1000):
+			return format(1000, ext: "K")
+		case absolute < 1000:
+			return format(1, ext: "")
 		default:
 			return "overflow"
 		}
