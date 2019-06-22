@@ -173,7 +173,7 @@ extension Double {
 			return absolute >= number
 		}
 		func format(_ number: Double, ext: String) -> String {
-			let str = String((self / number).rounded())
+			let str = String((self / number).oneDecimalPlace)
 			return "\(str.suffix(2) == ".0" ? String(str.prefix(str.count - 2)) : str)\(ext)"
 		}
 		switch true {
