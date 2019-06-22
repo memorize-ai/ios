@@ -430,6 +430,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			Audio.stop()
 			reloadRightBarButtonItem()
 		case .preview:
+			if Card.getAudioUrls(getText()).isEmpty { break }
 			playAudio()
 			navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(playAudio)), animated: false)
 		}
