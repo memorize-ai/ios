@@ -34,16 +34,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
 	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
 	
+	typealias DeckUser = (id: String, image: UIImage?, name: String?, url: URL?)
+	
 	class Rating {
 		let rating: DeckRating
-		var user: (
-			id: String,
-			image: UIImage?,
-			name: String?,
-			url: URL?
-		)
+		var user: DeckUser
 		
-		init(rating: DeckRating, user: (id: String, image: UIImage?, name: String?, url: URL?)) {
+		init(rating: DeckRating, user: DeckUser) {
 			self.rating = rating
 			self.user = user
 		}
