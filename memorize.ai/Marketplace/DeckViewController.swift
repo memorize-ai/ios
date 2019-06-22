@@ -497,7 +497,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func deckPreviewCell(_ deck: Deck, cell: DeckPreviewCollectionViewCell) -> DeckPreviewCollectionViewCell {
-		cell.imageView.image = deck.image ??
+		cell.imageView.image = deck.image ?? #imageLiteral(resourceName: "Gray Deck")
+		cell.nameLabel.text = deck.name
+		cell.subtitleLabel.text = deck.subtitle
+		return cell
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
