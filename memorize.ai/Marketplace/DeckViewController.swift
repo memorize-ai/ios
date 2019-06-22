@@ -548,7 +548,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			return cell
 		case infoCollectionView.tag:
 			guard let cell = _cell as? DeckInfoCollectionViewCell else { return _cell }
-			// Code
+			cell.load(info.flatMap { $0 }[indexPath.item])
 			return cell
 		case moreByCreatorCollectionView.tag:
 			guard let cell = _cell as? DeckPreviewCollectionViewCell else { return _cell }
@@ -571,7 +571,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			view.addSubview(cardVC.view)
 			cardVC.didMove(toParent: self)
 		case ratingsCollectionView.tag:
-			// Show full rating in a modal
+			print("hi") // Show full rating in a modal
 		case infoCollectionView.tag:
 			return
 		case moreByCreatorCollectionView.tag:
