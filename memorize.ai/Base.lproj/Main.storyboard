@@ -2607,6 +2607,7 @@
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="FG1-aM-YqR"/>
                         <segue destination="3Bm-Xc-u3A" kind="show" identifier="rate" id="nwZ-Xi-26f"/>
                         <segue destination="6YS-R4-WZM" kind="show" identifier="cardRatings" id="td1-Eo-4jz"/>
+                        <segue destination="9XY-L1-f93" kind="show" identifier="visit" id="MiA-Dd-bWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-Pa-nLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6132,10 +6133,10 @@
         <segue reference="nwZ-Xi-26f"/>
         <segue reference="TPR-zk-sPC"/>
         <segue reference="h5F-6A-J1r"/>
-        <segue reference="NJF-dv-A8u"/>
+        <segue reference="MiA-Dd-bWk"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
-        <segue reference="xln-P0-Fwc"/>
+        <segue reference="FG1-aM-YqR"/>
         <segue reference="0Yj-jn-rSr"/>
         <segue reference="y6W-0c-pPw"/>
         <segue reference="xao-oA-rKh"/>
