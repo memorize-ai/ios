@@ -172,10 +172,13 @@ extension Double {
 		func greaterThan(_ number: Double) -> Bool {
 			return absolute >= number
 		}
-		func format(_ number: Double, ext: Character) -> String {
-			return "\((self / number).rounded())\(ext)"
+		func format(_ number: Double, ext: String) -> String {
+			let str = String((self / number).rounded())
+			return "\(str.suffix(2) == ".0" ? String(str.prefix(str.count - 2)) : str)\(ext)"
 		}
 		switch true {
+		case absolute < 1000:
+			return format(1, ext: "")
 		case greaterThan(1000):
 			return format(1000, ext: "K")
 		case greaterThan(1000000):
