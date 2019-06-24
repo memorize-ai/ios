@@ -14,7 +14,7 @@ class CardViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		guard let card = card else { return }
-		titleBar.roundCorners([.topLeft, .topRight], radius: 10)
+		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
 		frontWebView.render(card.front, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
 		backWebView.render(card.back, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
 		cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
