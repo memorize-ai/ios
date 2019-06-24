@@ -4136,28 +4136,31 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="178" height="68"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aks-Lm-Jmm">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="74.666666666666671" height="68"/>
-                                                                    <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="30"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="2zJ-QF-Msq">
+                                                                    <rect key="frame" x="0.0" y="42" width="178" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="7sN-TG-gJd"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="21"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="2zJ-QF-Msq">
-                                                                    <rect key="frame" x="83" y="40" width="95" height="27"/>
-                                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="Aks-Lm-Jmm">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="36"/>
+                                                                    <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="25"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </view>
                                                         <constraints>
-                                                            <constraint firstItem="Aks-Lm-Jmm" firstAttribute="leading" secondItem="qOj-B9-nhw" secondAttribute="leading" id="1cZ-cp-Iqa"/>
-                                                            <constraint firstAttribute="trailing" secondItem="2zJ-QF-Msq" secondAttribute="trailing" id="ABZ-tJ-ipJ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="2zJ-QF-Msq" secondAttribute="bottom" id="OL8-ll-sDc"/>
-                                                            <constraint firstItem="2zJ-QF-Msq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qOj-B9-nhw" secondAttribute="top" id="gHH-8g-oM6"/>
-                                                            <constraint firstItem="2zJ-QF-Msq" firstAttribute="leading" secondItem="Aks-Lm-Jmm" secondAttribute="trailing" constant="8" id="t1m-75-uCn"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Aks-Lm-Jmm" secondAttribute="bottom" id="yFK-0g-wY1"/>
-                                                            <constraint firstItem="Aks-Lm-Jmm" firstAttribute="top" secondItem="qOj-B9-nhw" secondAttribute="top" id="yTi-cT-F5O"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Aks-Lm-Jmm" secondAttribute="trailing" id="KY4-OU-PvX"/>
+                                                            <constraint firstItem="Aks-Lm-Jmm" firstAttribute="top" secondItem="qOj-B9-nhw" secondAttribute="top" id="VgF-7p-iEK"/>
+                                                            <constraint firstAttribute="bottom" secondItem="2zJ-QF-Msq" secondAttribute="bottom" constant="6" id="dLR-xG-a5O"/>
+                                                            <constraint firstItem="Aks-Lm-Jmm" firstAttribute="leading" secondItem="qOj-B9-nhw" secondAttribute="leading" id="e5U-N4-BGm"/>
+                                                            <constraint firstAttribute="trailing" secondItem="2zJ-QF-Msq" secondAttribute="trailing" id="eJB-HY-jAs"/>
+                                                            <constraint firstItem="2zJ-QF-Msq" firstAttribute="top" secondItem="Aks-Lm-Jmm" secondAttribute="bottom" constant="6" id="gHO-BN-9Lg"/>
+                                                            <constraint firstItem="2zJ-QF-Msq" firstAttribute="leading" secondItem="qOj-B9-nhw" secondAttribute="leading" id="xP0-h3-WeY"/>
                                                         </constraints>
                                                         <connections>
                                                             <outlet property="largeTextLabel" destination="Aks-Lm-Jmm" id="bfT-4V-I02"/>

@@ -50,8 +50,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	let RATINGS_COUNT = 10
 	let CARD_PREVIEW_CELL_SPACING: CGFloat = 15
 	let RATING_CELL_SPACING: CGFloat = 15
-	let INFO_CELL_HEIGHT: CGFloat = 40
-	let INFO_CELL_SPACING: CGFloat = 10
+	let INFO_CELL_HEIGHT: CGFloat = 60
+	let INFO_CELL_LINE_SPACING: CGFloat = 15
+	let INFO_CELL_ITEM_SPACING: CGFloat = 10
 	let DECK_PREVIEW_CELL_SPACING: CGFloat = 15
 	
 	var deck: (
@@ -338,10 +339,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			scrollDirection: .horizontal
 		)
 		infoCollectionView.collectionViewLayout = flowLayout(
-			width: (infoCollectionView.bounds.width - INFO_CELL_SPACING) / 2,
+			width: (infoCollectionView.bounds.width - INFO_CELL_ITEM_SPACING) / 2,
 			height: INFO_CELL_HEIGHT,
-			itemSpacing: INFO_CELL_SPACING,
-			lineSpacing: INFO_CELL_SPACING,
+			itemSpacing: INFO_CELL_ITEM_SPACING,
+			lineSpacing: INFO_CELL_LINE_SPACING,
 			scrollDirection: .vertical
 		)
 		let deckPreviewFlowLayout = flowLayout(
@@ -390,13 +391,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, created: Date, updated: Date) {
 		info = [
-			[(isPublic ? "public" : "private", nil), (count.formatted, "cards")],
+			[(isPublic ? "public" : "private", "access"), (count.formatted, "cards")],
 			[(ratings.count.formatted, "ratings"), (String(ratings.average.oneDecimalPlace), "average")],
 			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")],
 			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
 		]
-		infoCollectionViewHeightConstraint.constant = CGFloat(info.count) * (INFO_CELL_HEIGHT + INFO_CELL_SPACING) - INFO_CELL_SPACING
+		infoCollectionViewHeightConstraint.constant = CGFloat(info.count) * (INFO_CELL_HEIGHT + INFO_CELL_LINE_SPACING) - INFO_CELL_LINE_SPACING
 		view.layoutIfNeeded()
 		infoCollectionView.reloadData()
 	}
