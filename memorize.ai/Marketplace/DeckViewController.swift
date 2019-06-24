@@ -321,26 +321,47 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadFlowLayouts() {
-		let flowLayout = UICollectionViewFlowLayout()
 		let cardPreviewCollectionViewHeight = cardPreviewCollectionView.bounds.height
-		flowLayout.itemSize = CGSize(width: cardPreviewCollectionViewHeight * 0.7, height: cardPreviewCollectionViewHeight)
-		flowLayout.minimumInteritemSpacing = CARD_PREVIEW_CELL_SPACING
-		flowLayout.minimumLineSpacing = 0
-		cardPreviewCollectionView.collectionViewLayout = flowLayout
+		cardPreviewCollectionView.collectionViewLayout = flowLayout(
+			width: cardPreviewCollectionViewHeight * 0.7,
+			height: cardPreviewCollectionViewHeight,
+			itemSpacing: CARD_PREVIEW_CELL_SPACING,
+			lineSpacing: 0,
+			scrollDirection: .horizontal
+		)
 		let ratingsCollectionViewHeight = ratingsCollectionView.bounds.height
-		flowLayout.itemSize = CGSize(width: ratingsCollectionViewHeight * 1.5, height: ratingsCollectionViewHeight)
-		flowLayout.minimumInteritemSpacing = RATING_CELL_SPACING
-		flowLayout.minimumLineSpacing = 0
-		ratingsCollectionView.collectionViewLayout = flowLayout
-		flowLayout.itemSize = CGSize(width: (infoCollectionView.bounds.width - INFO_CELL_SPACING) / 2, height: INFO_CELL_HEIGHT)
-		flowLayout.minimumInteritemSpacing = INFO_CELL_SPACING
-		flowLayout.minimumLineSpacing = INFO_CELL_SPACING
-		infoCollectionView.collectionViewLayout = flowLayout
-		flowLayout.itemSize = CGSize(width: moreByCreatorCollectionView.bounds.width * 2 / 3, height: moreByCreatorCollectionView.bounds.height)
-		flowLayout.minimumInteritemSpacing = DECK_PREVIEW_CELL_SPACING
-		flowLayout.minimumLineSpacing = 0
-		moreByCreatorCollectionView.collectionViewLayout = flowLayout
-		similarDecksCollectionView.collectionViewLayout = flowLayout
+		ratingsCollectionView.collectionViewLayout = flowLayout(
+			width: ratingsCollectionViewHeight * 1.5,
+			height: ratingsCollectionViewHeight,
+			itemSpacing: RATING_CELL_SPACING,
+			lineSpacing: 0,
+			scrollDirection: .horizontal
+		)
+		infoCollectionView.collectionViewLayout = flowLayout(
+			width: (infoCollectionView.bounds.width - INFO_CELL_SPACING) / 2,
+			height: INFO_CELL_HEIGHT,
+			itemSpacing: INFO_CELL_SPACING,
+			lineSpacing: INFO_CELL_SPACING,
+			scrollDirection: .vertical
+		)
+		let deckPreviewFlowLayout = flowLayout(
+			width: moreByCreatorCollectionView.bounds.width * 2 / 3,
+			height: moreByCreatorCollectionView.bounds.height,
+			itemSpacing: DECK_PREVIEW_CELL_SPACING,
+			lineSpacing: 0,
+			scrollDirection: .horizontal
+		)
+		moreByCreatorCollectionView.collectionViewLayout = deckPreviewFlowLayout
+		similarDecksCollectionView.collectionViewLayout = deckPreviewFlowLayout
+	}
+	
+	func flowLayout(width: CGFloat, height: CGFloat, itemSpacing: CGFloat, lineSpacing: CGFloat, scrollDirection: UICollectionView.ScrollDirection) -> UICollectionViewFlowLayout {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: width, height: height)
+		flowLayout.minimumInteritemSpacing = itemSpacing
+		flowLayout.minimumLineSpacing = lineSpacing
+		flowLayout.scrollDirection = scrollDirection
+		return flowLayout
 	}
 	
 	func setLabels(name: String, subtitle: String, description: String, ratings: DeckRatings) {
@@ -362,7 +383,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		descriptionTextView.text = description
 		if isDescriptionExpanded {
 			descriptionMoreLabel.isHidden = true
-			descriptionTextViewHeightConstraint.isActive = false
+			descriptionTextViewHeightConstraint?.isActive = false
 			UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 		}
 	}
