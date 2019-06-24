@@ -4318,7 +4318,7 @@
                         <outlet property="previewButtonActivityIndicator" destination="kzT-wJ-6SC" id="mPz-zA-HTN"/>
                         <outlet property="previewView" destination="Grd-r2-eeM" id="Fm4-yH-p4U"/>
                         <outlet property="rateDeckButton" destination="r5J-jQ-nmh" id="JfP-1F-qNH"/>
-                        <outlet property="ratingCountLabel" destination="lfJ-4O-OUb" id="K8H-zk-Mgn"/>
+                        <outlet property="ratingCountLabel" destination="D3N-VP-HXY" id="quY-Hq-0Yj"/>
                         <outlet property="ratingsCollectionView" destination="xgf-Q6-gxj" id="q1I-JP-HCV"/>
                         <outlet property="showFullDescriptionButton" destination="vKT-6D-nri" id="PkM-TB-1qF"/>
                         <outlet property="similarDecksCollectionView" destination="In7-z9-CUc" id="MlT-a2-Sg4"/>
