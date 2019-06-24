@@ -139,34 +139,60 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		if collectionView == actionsCollectionView, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) {
-			guard let name = filteredActions[indexPath.item].name as NSString? else { return CGSize(width: 36, height: 36) }
+		switch collectionView.tag {
+		case decksCollectionView.tag:
+			return CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84)
+		case actionsCollectionView.tag:
+			guard let name = filteredActions[indexPath.item].name as NSString?, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) else { return CGSize(width: 36, height: 36) }
 			return CGSize(width: name.size(withAttributes: [.font: extraBold]).width + 4, height: 36)
-		} else {
-			return collectionView == decksCollectionView
-				? CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84)
-				: CGSize(width: cardsCollectionView.bounds.width - 20, height: 37)
+		case cardsCollectionView.tag:
+			return CGSize(width: cardsCollectionView.bounds.width - 20, height: 37)
+		default:
+			return CGSize(width: 0, height: 0)
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return collectionView == decksCollectionView ? 8 : collectionView == actionsCollectionView ? 4 : 10
+		switch collectionView.tag {
+		case decksCollectionView.tag:
+			return 8
+		case actionsCollectionView.tag:
+			return 4
+		case cardsCollectionView.tag:
+			return 10
+		default:
+			return 0
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return collectionView == decksCollectionView ? 8 : collectionView == actionsCollectionView ? 20 : 10
+		switch collectionView.tag {
+		case decksCollectionView.tag:
+			return 8
+		case actionsCollectionView.tag:
+			return 20
+		case cardsCollectionView.tag:
+			return 10
+		default:
+			return 0
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return collectionView == decksCollectionView
-			? decks.count
-			: collectionView == actionsCollectionView
-				? filteredActions.count
-				: deck?.cards.count ?? 0
+		switch collectionView.tag {
+		case decksCollectionView.tag:
+			return decks.count
+		case actionsCollectionView.tag:
+			return filteredActions.count
+		case cardsCollectionView.tag:
+			return deck?.cards.count ?? 0
+		default:
+			return 0
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if collectionView == decksCollectionView {
+		if collectionView.tag == decksCollectionView.tag {
 			if expanded {
 				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "expanded", for: indexPath)
 				guard let cell = _cell as? ExpandedDeckCollectionViewCell else { return _cell }
@@ -211,7 +237,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				}
 				return cell
 			}
-		} else if collectionView == actionsCollectionView {
+		} else if collectionView.tag == actionsCollectionView.tag {
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
 			cell.load(self, action: filteredActions[indexPath.item])
@@ -230,12 +256,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		if collectionView == decksCollectionView {
-			deck = decks[indexPath.item]
-			decksCollectionView.reloadData()
-			reloadActions()
-			cardsCollectionView.reloadData()
-		}
+		guard collectionView.tag == decksCollectionView.tag else { return }
+		deck = decks[indexPath.item]
+		decksCollectionView.reloadData()
+		reloadActions()
+		cardsCollectionView.reloadData()
 	}
 }
 
