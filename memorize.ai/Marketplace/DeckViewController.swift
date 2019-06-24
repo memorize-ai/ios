@@ -391,11 +391,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, created: Date, updated: Date) {
 		info = [
 			[(isPublic ? "public" : "private", nil), (count.formatted, "cards")],
-			[(ratings.count.formatted, "ratings"), (ratings.average.oneDecimalPlace, "average")],
+			[(ratings.count.formatted, "ratings"), (String(ratings.average.oneDecimalPlace), "average")],
 			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")],
 			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
-		] as? [[(String, String?)]] ?? []
+		]
 		infoCollectionViewHeightConstraint.constant = CGFloat(info.count) * (INFO_CELL_HEIGHT + INFO_CELL_SPACING) - INFO_CELL_SPACING
 		view.layoutIfNeeded()
 		infoCollectionView.reloadData()
