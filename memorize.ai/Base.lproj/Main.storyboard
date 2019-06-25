@@ -4447,18 +4447,21 @@
                         <outlet property="infoCollectionView" destination="QOO-W2-Lim" id="Xzy-9u-eTm"/>
                         <outlet property="infoCollectionViewHeightConstraint" destination="zcD-PS-9An" id="vwS-vE-rMR"/>
                         <outlet property="loadingView" destination="87p-cl-OMK" id="fwD-E4-XBU"/>
+                        <outlet property="mainRatingCountLabel" destination="D3N-VP-HXY" id="e2X-1A-XmV"/>
+                        <outlet property="mainStarsSliderView" destination="7g3-JE-UGE" id="dDT-Ai-zMZ"/>
+                        <outlet property="mainStarsSliderViewTrailingConstraint" destination="Ncl-CE-Ijf" id="YDw-md-Qg5"/>
                         <outlet property="moreByCreatorCollectionView" destination="6Og-O9-apJ" id="fIy-pa-X8H"/>
                         <outlet property="moreByCreatorLabel" destination="3wa-GQ-gdV" id="RUi-PL-jmh"/>
                         <outlet property="noRatingsLabel" destination="sbf-MO-3jl" id="siS-kx-7oU"/>
                         <outlet property="previewButtonActivityIndicator" destination="kzT-wJ-6SC" id="mPz-zA-HTN"/>
                         <outlet property="previewView" destination="Grd-r2-eeM" id="Fm4-yH-p4U"/>
                         <outlet property="rateDeckButton" destination="r5J-jQ-nmh" id="JfP-1F-qNH"/>
-                        <outlet property="ratingCountLabel" destination="D3N-VP-HXY" id="quY-Hq-0Yj"/>
                         <outlet property="ratingsCollectionView" destination="xgf-Q6-gxj" id="q1I-JP-HCV"/>
+                        <outlet property="ratingsRatingCountLabel" destination="lfJ-4O-OUb" id="KFA-om-IoO"/>
+                        <outlet property="ratingsStarsSliderView" destination="i1z-Ki-97N" id="UZc-LQ-ycb"/>
+                        <outlet property="ratingsStarsSliderViewTrailingConstraint" destination="f5c-eX-YUg" id="U78-Ky-40D"/>
                         <outlet property="showFullDescriptionButton" destination="vKT-6D-nri" id="PkM-TB-1qF"/>
                         <outlet property="similarDecksCollectionView" destination="In7-z9-CUc" id="MlT-a2-Sg4"/>
-                        <outlet property="starsSliderView" destination="7g3-JE-UGE" id="GN4-no-NOc"/>
-                        <outlet property="starsSliderViewTrailingConstraint" destination="Ncl-CE-Ijf" id="j2i-vG-GvR"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="xln-P0-Fwc"/>
                         <segue destination="3Bm-Xc-u3A" kind="show" identifier="rate" id="PcJ-Cf-5WB"/>
                     </connections>

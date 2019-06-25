@@ -13,9 +13,12 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var getButtonActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var previewView: UIView!
 	@IBOutlet weak var previewButtonActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var starsSliderView: UIView!
-	@IBOutlet weak var starsSliderViewTrailingConstraint: NSLayoutConstraint!
-	@IBOutlet weak var ratingCountLabel: UILabel!
+	@IBOutlet weak var mainStarsSliderView: UIView!
+	@IBOutlet weak var mainStarsSliderViewTrailingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var ratingsStarsSliderView: UIView!
+	@IBOutlet weak var ratingsStarsSliderViewTrailingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var mainRatingCountLabel: UILabel!
+	@IBOutlet weak var ratingsRatingCountLabel: UILabel!
 	@IBOutlet weak var cardCountLabel: UILabel!
 	@IBOutlet weak var cardPreviewCollectionView: UICollectionView!
 	@IBOutlet weak var descriptionLabel: UILabel!
@@ -124,54 +127,53 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.loadCreator()
 				}
 				listeners["decks"] = firestore.collection("decks").whereField("creator", isEqualTo: creatorId).addSnapshotListener { decksSnapshot, decksError in
-					if decksError == nil, let decksSnapshot = decksSnapshot?.documentChanges {
-						for deckSnapshot in decksSnapshot {
-							let creatorDeck = deckSnapshot.document
-							let creatorDeckId = creatorDeck.documentID
-							if creatorDeckId == deckId { continue }
-							switch deckSnapshot.type {
-							case .added:
-								let newDeck = Deck(
-									id: creatorDeckId,
-									image: Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
-									name: creatorDeck.get("name") as? String ?? "Error",
-									subtitle: creatorDeck.get("subtitle") as? String ?? "",
-									description: creatorDeck.get("description") as? String ?? "",
-									tags: creatorDeck.get("tags") as? [String] ?? [],
-									isPublic: creatorDeck.get("public") as? Bool ?? true,
-									count: creatorDeck.get("count") as? Int ?? 0,
-									views: DeckViews(creatorDeck),
-									downloads: DeckDownloads(creatorDeck),
-									ratings: DeckRatings(creatorDeck),
-									users: [],
-									creator: creatorId,
-									owner: creatorDeck.get("owner") as? String ?? "",
-									created: Date(),
-									updated: Date(),
-									permissions: [],
-									cards: [],
-									mastered: 0,
-									role: .none,
-									hidden: false
-								)
-								self.creatorDecks.append(newDeck)
-								storage.child("decks/\(creatorDeckId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
-									if creatorError == nil, let creatorData = creatorData {
-										newDeck.image = UIImage(data: creatorData)
-									}
-									self.moreByCreatorCollectionView.reloadData()
+					guard decksError == nil, let decksSnapshot = decksSnapshot?.documentChanges else { return }
+					for deckSnapshot in decksSnapshot {
+						let creatorDeck = deckSnapshot.document
+						let creatorDeckId = creatorDeck.documentID
+						if creatorDeckId == deckId { continue }
+						print(creatorDeck.data())
+						switch deckSnapshot.type {
+						case .added:
+							let newDeck = Deck(
+								id: creatorDeckId,
+								image: Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
+								name: creatorDeck.get("name") as? String ?? "Error",
+								subtitle: creatorDeck.get("subtitle") as? String ?? "",
+								description: creatorDeck.get("description") as? String ?? "",
+								tags: creatorDeck.get("tags") as? [String] ?? [],
+								isPublic: creatorDeck.get("public") as? Bool ?? true,
+								count: creatorDeck.get("count") as? Int ?? 0,
+								views: DeckViews(creatorDeck),
+								downloads: DeckDownloads(creatorDeck),
+								ratings: DeckRatings(creatorDeck),
+								users: [],
+								creator: creatorId,
+								owner: creatorDeck.get("owner") as? String ?? "",
+								created: Date(),
+								updated: Date(),
+								permissions: [],
+								cards: [],
+								mastered: 0,
+								role: .none,
+								hidden: false
+							)
+							self.creatorDecks.append(newDeck)
+							storage.child("decks/\(creatorDeckId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
+								if creatorError == nil, let creatorData = creatorData {
+									newDeck.image = UIImage(data: creatorData)
 								}
-							case .modified:
-								self.creatorDecks.first { $0.id == creatorDeckId }?.update(creatorDeck, type: .deck)
-							case .removed:
-								self.creatorDecks = self.creatorDecks.filter { $0.id != creatorDeckId }
-							@unknown default:
-								return
+								self.moreByCreatorCollectionView.reloadData()
 							}
-							self.moreByCreatorCollectionView.reloadData()
+						case .modified:
+							self.creatorDecks.first { $0.id == creatorDeckId }?.update(creatorDeck, type: .deck)
+						case .removed:
+							self.creatorDecks = self.creatorDecks.filter { $0.id != creatorDeckId }
+						@unknown default:
+							return
 						}
-					} else {
-						self.showNotification("Unable to load creator's other decks", type: .error)
+						print(self.creatorDecks)
+						self.moreByCreatorCollectionView.reloadData()
 					}
 				}
 			} else {
@@ -294,6 +296,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		ChangeHandler.updateAndCall(.deckRatingAdded) { change in
 			if change == .deckRatingAdded || change == .deckRatingRemoved || change == .ratingDraftAdded || change == .ratingDraftRemoved {
 				self.loadRateDeckButton()
+				guard let ratings = self.deck.ratings else { return }
+				self.setRatingLabels(ratings)
 			}
 		}
 		updateCurrentViewController()
@@ -389,10 +393,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setDescription(_ description: String) {
-		descriptionTextView.text = description
+		descriptionLabel.text = description
 		if isDescriptionExpanded {
 			descriptionMoreLabel.isHidden = true
-			descriptionTextViewHeightConstraint?.isActive = false
+			descriptionLabelHeightConstraint.isActive = false
 			UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 		}
 	}
@@ -415,10 +419,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
-		ratingCountLabel.text = ratings.count.formatted
+		let formattedRatings = ratings.count.formatted
+		mainRatingCountLabel.text = formattedRatings
+		ratingsRatingCountLabel.text = formattedRatings
 		averageRatingLabel.text = String(ratings.average.oneDecimalPlace)
 		noRatingsLabel.isHidden = !self.ratings.isEmpty
-		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
+		mainStarsSliderViewTrailingConstraint.constant = getStarsTrailingConstraint(width: mainStarsSliderView.bounds.width, ratings: ratings)
+		ratingsStarsSliderViewTrailingConstraint.constant = getStarsTrailingConstraint(width: ratingsStarsSliderView.bounds.width, ratings: ratings)
 		view.layoutIfNeeded()
 	}
 	

@@ -16,6 +16,10 @@ func buzz() {
 	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 }
 
+func getStarsTrailingConstraint(width: CGFloat, ratings: DeckRatings) -> CGFloat {
+	return width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
+}
+
 extension StorageMetadata {
 	static func from(mime: String) -> StorageMetadata {
 		let metadata = StorageMetadata()
