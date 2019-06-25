@@ -328,7 +328,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			height: cardPreviewCollectionViewHeight,
 			itemSpacing: CARD_PREVIEW_CELL_SPACING,
 			lineSpacing: 0,
-			scrollDirection: .horizontal
+			scrollDirection: .horizontal,
+			leftInset: 20,
+			rightInset: 20
 		)
 		let ratingsCollectionViewHeight = ratingsCollectionView.bounds.height
 		ratingsCollectionView.collectionViewLayout = flowLayout(
@@ -336,7 +338,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			height: ratingsCollectionViewHeight,
 			itemSpacing: RATING_CELL_SPACING,
 			lineSpacing: 0,
-			scrollDirection: .horizontal
+			scrollDirection: .horizontal,
+			leftInset: 20,
+			rightInset: 20
 		)
 		infoCollectionView.collectionViewLayout = flowLayout(
 			width: (infoCollectionView.bounds.width - INFO_CELL_ITEM_SPACING) / 2,
@@ -350,18 +354,22 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			height: moreByCreatorCollectionView.bounds.height,
 			itemSpacing: DECK_PREVIEW_CELL_SPACING,
 			lineSpacing: 0,
-			scrollDirection: .horizontal
+			scrollDirection: .horizontal,
+			leftInset: 20,
+			rightInset: 20
 		)
 		moreByCreatorCollectionView.collectionViewLayout = deckPreviewFlowLayout
 		similarDecksCollectionView.collectionViewLayout = deckPreviewFlowLayout
 	}
 	
-	func flowLayout(width: CGFloat, height: CGFloat, itemSpacing: CGFloat, lineSpacing: CGFloat, scrollDirection: UICollectionView.ScrollDirection) -> UICollectionViewFlowLayout {
+	func flowLayout(width: CGFloat, height: CGFloat, itemSpacing: CGFloat, lineSpacing: CGFloat, scrollDirection: UICollectionView.ScrollDirection, leftInset: CGFloat = 0, rightInset: CGFloat = 0) -> UICollectionViewFlowLayout {
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: width, height: height)
 		flowLayout.minimumInteritemSpacing = itemSpacing
 		flowLayout.minimumLineSpacing = lineSpacing
 		flowLayout.scrollDirection = scrollDirection
+		flowLayout.sectionInset.left = leftInset
+		flowLayout.sectionInset.right = rightInset
 		return flowLayout
 	}
 	
