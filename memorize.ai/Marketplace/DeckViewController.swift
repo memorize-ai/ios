@@ -396,7 +396,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		descriptionLabel.text = description
 		if isDescriptionExpanded {
 			descriptionMoreLabel.isHidden = true
-			descriptionLabelHeightConstraint.isActive = false
+			descriptionLabelHeightConstraint?.isActive = false
 			view.layoutIfNeeded()
 		} else {
 			descriptionMoreLabel.isHidden = !descriptionLabel.isTruncated
