@@ -369,8 +369,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func flowLayout(width: CGFloat, height: CGFloat, itemSpacing: CGFloat, lineSpacing: CGFloat, scrollDirection: UICollectionView.ScrollDirection, leftInset: CGFloat = 0, rightInset: CGFloat = 0) -> UICollectionViewFlowLayout {
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: width, height: height)
-		flowLayout.minimumInteritemSpacing = itemSpacing
-		flowLayout.minimumLineSpacing = lineSpacing
+		flowLayout.minimumInteritemSpacing = scrollDirection == .vertical ? itemSpacing : lineSpacing
+		flowLayout.minimumLineSpacing = scrollDirection == .vertical ? lineSpacing : itemSpacing
 		flowLayout.scrollDirection = scrollDirection
 		flowLayout.sectionInset.left = leftInset
 		flowLayout.sectionInset.right = rightInset
