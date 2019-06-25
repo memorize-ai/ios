@@ -4438,6 +4438,8 @@
                         <outlet property="deckImageView" destination="hbD-lL-WAl" id="BtK-Cf-FlW"/>
                         <outlet property="deckNameLabel" destination="h8e-mj-PpG" id="bfY-JL-zUP"/>
                         <outlet property="deckSubtitleLabel" destination="zdD-wf-kDt" id="De0-Wr-xTE"/>
+                        <outlet property="descriptionLabel" destination="WqE-hM-cpV" id="20b-pS-3u1"/>
+                        <outlet property="descriptionLabelHeightConstraint" destination="wPp-ey-Xq0" id="eLp-LZ-8t2"/>
                         <outlet property="descriptionMoreLabel" destination="enf-zV-Idq" id="4Qa-1p-Yff"/>
                         <outlet property="getButton" destination="FYY-KY-7rt" id="Gpf-1T-mze"/>
                         <outlet property="getButtonActivityIndicator" destination="kCP-a8-2u0" id="dUP-g7-dPn"/>

@@ -18,8 +18,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var ratingCountLabel: UILabel!
 	@IBOutlet weak var cardCountLabel: UILabel!
 	@IBOutlet weak var cardPreviewCollectionView: UICollectionView!
-	@IBOutlet weak var descriptionTextView: UILabel!
-	@IBOutlet weak var descriptionTextViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var descriptionLabel: UILabel!
+	@IBOutlet weak var descriptionLabelHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var descriptionMoreLabel: UILabel!
 	@IBOutlet weak var showFullDescriptionButton: UIButton!
 	@IBOutlet weak var creatorImageView: UIImageView!
