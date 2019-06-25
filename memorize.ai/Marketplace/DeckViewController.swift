@@ -78,7 +78,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var cards = [Card]()
 	var ratings = [Rating]()
 	var isDescriptionExpanded = false
-	var info = [[(String, String?)]]()
+	var info = [[(String, String)]]()
 	var creatorDecks = [Deck]()
 	var similarDecks = [Deck]()
 	
@@ -392,7 +392,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, created: Date, updated: Date) {
 		info = [
 			[(isPublic ? "public" : "private", "access"), (count.formatted, "cards")],
-			[(ratings.count.formatted, "ratings"), (String(ratings.average.oneDecimalPlace), "average")],
+			[(ratings.count.formatted, "rating\(ratings.count == 1 ? "" : "s")"), (String(ratings.average.oneDecimalPlace), "average")],
 			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
 			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")],
 			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
@@ -635,7 +635,7 @@ class DeckInfoCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var largeTextLabel: UILabel!
 	@IBOutlet weak var smallTextLabel: UILabel!
 	
-	func load(_ tuple: (String, String?)) {
+	func load(_ tuple: (String, String)) {
 		largeTextLabel.text = tuple.0
 		smallTextLabel.text = tuple.1
 	}

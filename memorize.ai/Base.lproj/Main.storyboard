@@ -4329,6 +4329,7 @@
                         <outlet property="starsSliderView" destination="7g3-JE-UGE" id="GN4-no-NOc"/>
                         <outlet property="starsSliderViewTrailingConstraint" destination="Ncl-CE-Ijf" id="j2i-vG-GvR"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="xln-P0-Fwc"/>
+                        <segue destination="3Bm-Xc-u3A" kind="show" identifier="rate" id="PcJ-Cf-5WB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v58-xc-Da4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6135,7 +6136,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nwZ-Xi-26f"/>
+        <segue reference="PcJ-Cf-5WB"/>
         <segue reference="dEU-yB-E5T"/>
         <segue reference="h5F-6A-J1r"/>
         <segue reference="Reh-O7-sEd"/>
