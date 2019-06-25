@@ -217,7 +217,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.showNotification("Unable to load cards", type: .error)
 			}
 		}
-		listeners["decks/\(deckId)/users"] = firestore.collection("decks/\(deckId)/users").addSnapshotListener { snapshot, error in
+		listeners["decks/\(deckId)/users"] = firestore.collection("decks/\(deckId)/users").whereField("hasTitle", isEqualTo: true).limit(to: RATINGS_COUNT).addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot?.documentChanges {
 				snapshot.forEach {
 					let user = $0.document
