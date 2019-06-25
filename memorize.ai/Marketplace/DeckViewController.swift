@@ -51,8 +51,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	let CARD_PREVIEW_COUNT = 10
 	let RATINGS_COUNT = 10
-	let CARD_PREVIEW_CELL_SPACING: CGFloat = 15
-	let RATING_CELL_SPACING: CGFloat = 15
+	let CARD_PREVIEW_CELL_SPACING: CGFloat = 20
+	let RATING_CELL_SPACING: CGFloat = 20
 	let INFO_CELL_HEIGHT: CGFloat = 60
 	let INFO_CELL_LINE_SPACING: CGFloat = 15
 	let INFO_CELL_ITEM_SPACING: CGFloat = 10
@@ -646,6 +646,13 @@ class CardPreviewCollectionViewCell: UICollectionViewCell {
 }
 
 class DeckRatingCollectionViewCell: UICollectionViewCell {
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var starsSliderView: UIView!
+	@IBOutlet weak var starsSliderViewTrailingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var dateLabel: UILabel!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var reviewLabel: UILabel!
+	@IBOutlet weak var moreLabel: UILabel!
 }
 
 class DeckInfoCollectionViewCell: UICollectionViewCell {
