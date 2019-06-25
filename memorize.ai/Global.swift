@@ -119,6 +119,18 @@ extension UIView {
 	}
 }
 
+extension UILabel {
+	var isTruncated: Bool {
+		guard let text = text, let font = font else { return false }
+		return (text as NSString).boundingRect(
+			with: CGSize(width: frame.size.width, height: .greatestFiniteMagnitude),
+			options: .usesLineFragmentOrigin,
+			attributes: [.font: font],
+			context: nil
+		).size.height > bounds.size.height
+	}
+}
+
 extension Date {
 	func format(_ format: String) -> String {
 		let dateFormatter = DateFormatter()
