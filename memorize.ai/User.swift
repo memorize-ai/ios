@@ -8,6 +8,14 @@ var profilePicture: UIImage?
 var token: String?
 
 class User {
+	static func getImageFromStorage(completion: @escaping (UIImage?) -> Void) {
+		guard let id = id else { return completion(nil) }
+		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+			guard error == nil, let data = data, let image = UIImage(data: data) else { return completion(nil) }
+			completion(image)
+		}
+	}
+	
 	static func pushToken() {
 		guard let id = id, let token = token else { return }
 		firestore.document("users/\(id)/tokens/\(token)").setData(["enabled": true])
