@@ -140,11 +140,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 					}
 					self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 				}
-				storage.child("users/\(id)").delete { error in
-					self.pictureActivityIndicator.stopAnimating()
-					self.pictureImageView.image = #imageLiteral(resourceName: "Person")
-					self.changeButton.isHidden = false
-				}
 			})
 		}
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
