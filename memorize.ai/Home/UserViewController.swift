@@ -115,7 +115,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
 			updateLastOnline()
-			loadBarButtonItems(image: #imageLiteral(resourceName: "Person"))
+			loadBarButtonItems(image: DEFAULT_PROFILE_PICTURE)
 			reloadProfileBarButtonItem()
 			loadDecks()
 			loadUploads()

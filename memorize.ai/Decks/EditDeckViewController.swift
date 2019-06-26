@@ -125,7 +125,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			self.present(picker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
-			self.imageView.image = #imageLiteral(resourceName: "Gray Deck")
+			self.imageView.image = DEFAULT_DECK_IMAGE
 			self.reloadSubmit()
 		})
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

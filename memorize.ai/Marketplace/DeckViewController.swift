@@ -122,7 +122,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					if creatorError == nil, let creatorData = creatorData, let creatorImage = UIImage(data: creatorData) {
 						self.deck.creator.image = creatorImage
 					} else {
-						self.deck.creator.image = #imageLiteral(resourceName: "Person")
+						self.deck.creator.image = DEFAULT_PROFILE_PICTURE
 					}
 					self.loadCreator()
 				}
@@ -277,7 +277,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				if error == nil, let data = data, let image = UIImage(data: data) {
 					self.deckImageView.image = image
 				} else {
-					self.deckImageView.image = #imageLiteral(resourceName: "Gray Deck")
+					self.deckImageView.image = DEFAULT_DECK_IMAGE
 				}
 			}
 		}
@@ -432,7 +432,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadCreator() {
-		creatorImageView.image = deck.creator.image ?? #imageLiteral(resourceName: "Person")
+		creatorImageView.image = deck.creator.image ?? DEFAULT_PROFILE_PICTURE
 		creatorNameLabel.text = deck.creator.name
 		if let creatorName = deck.creator.name {
 			moreByCreatorLabel.text = "More by \(creatorName)"
@@ -534,7 +534,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func deckPreviewCell(_ deck: Deck, cell: DeckPreviewCollectionViewCell) -> DeckPreviewCollectionViewCell {
-		cell.imageView.image = deck.image ?? #imageLiteral(resourceName: "Gray Deck")
+		cell.imageView.image = deck.image ?? DEFAULT_DECK_IMAGE
 		cell.nameLabel.text = deck.name
 		cell.subtitleLabel.text = deck.subtitle
 		return cell

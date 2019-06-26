@@ -6,3 +6,4 @@ let COMPRESSION_QUALITY: CGFloat = 0.5
 let JPEG_METADATA = StorageMetadata.from(mime: "image/jpeg")
 let DEFAULT_E = 2.5
 let DEFAULT_PROFILE_PICTURE = #imageLiteral(resourceName: "Person")
+let DEFAULT_DECK_IMAGE = #imageLiteral(resourceName: "Gray Deck")
