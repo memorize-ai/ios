@@ -126,16 +126,18 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			picker.sourceType = .photoLibrary
 			self.present(picker, animated: true, completion: nil)
 		})
-		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
-			self.pictureImageView.image = nil
-			self.changeButton.isHidden = true
-			self.pictureActivityIndicator.startAnimating()
-			self.uploadImage(#imageLiteral(resourceName: "Person")) {
-				self.pictureActivityIndicator.stopAnimating()
-				self.pictureImageView.image = #imageLiteral(resourceName: "Person")
-				self.changeButton.isHidden = false
-			}
-		})
+		if profilePicture != nil, let id = id {
+			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
+				self.pictureImageView.image = nil
+				self.changeButton.isHidden = true
+				self.pictureActivityIndicator.startAnimating()
+				storage.child("users/\(id)").delete { error in
+					self.pictureActivityIndicator.stopAnimating()
+					self.pictureImageView.image = #imageLiteral(resourceName: "Person")
+					self.changeButton.isHidden = false
+				}
+			})
+		}
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		present(alert, animated: true, completion: nil)
 	}
@@ -145,7 +147,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			pictureImageView.image = nil
 			changeButton.isHidden = true
 			pictureActivityIndicator.startAnimating()
-			uploadImage(image) {
+			uploadImage(image) { // showNotification("Unable to set profile picture. Please try again", type: .error)
 				self.pictureActivityIndicator.stopAnimating()
 				self.pictureImageView.image = image
 				self.changeButton.isHidden = false
@@ -158,20 +160,38 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		dismiss(animated: true, completion: nil)
 	}
 	
-	func uploadImage(_ image: UIImage, completion: @escaping () -> Void) {
-		if let id = id, let data = image.compressedData() {
-			profilePicture = image.compressed()
-			storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
-				guard error == nil else { return }
-				User.save(image: data)
-				storage.child("users/\(id)").downloadURL { url, error in
-					guard error == nil, let url = url else { return }
-					auth.currentUser?.createProfileChangeRequest().photoURL = url
-					completion()
+	func uploadImage(_ image: UIImage?, completion: @escaping (Bool) -> Void) {
+		guard let id = id else { return completion(false) }
+		if let image = image {
+			if let data = image.compressedData {
+				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
+					if error == nil {
+						storage.child("users/\(id)").downloadURL { url, error in
+							if error == nil, let url = url, let currentUser = auth.currentUser {
+								User.save(image: data)
+								currentUser.createProfileChangeRequest().photoURL = url
+								completion(true)
+							} else {
+								completion(false)
+							}
+						}
+					} else {
+						completion(false)
+					}
 				}
+			} else {
+				completion(false)
 			}
 		} else {
-			showNotification("Unable to set profile picture. Please try again", type: .error)
+			storage.child("users/\(id)").delete { error in
+				if error == nil {
+					profilePicture = nil
+					User.save(image: nil)
+					completion(true)
+				} else {
+					completion(false)
+				}
+			}
 		}
 	}
 	
