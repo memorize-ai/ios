@@ -8,6 +8,14 @@ var profilePicture: UIImage?
 var token: String?
 
 class User {
+	static func urlString(slug: String) -> String {
+		return "memorize.ai/u/\(slug)"
+	}
+	
+	static func url(slug: String) -> URL? {
+		return URL(string: "https://\(urlString(slug: slug))")
+	}
+	
 	static func getImageFromStorage(completion: @escaping (UIImage?) -> Void) {
 		guard let id = id else { return completion(nil) }
 		func callCompletion(_ image: UIImage?, data: Data?) {
