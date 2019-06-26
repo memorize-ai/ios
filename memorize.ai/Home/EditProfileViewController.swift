@@ -78,7 +78,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBAction func signOut() {
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		let signOut = UIAlertAction(title: "Sign Out", style: .default) { _ in
+		let signOut = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
 			do {
 				try auth.signOut()
 				Listener.removeAll()
