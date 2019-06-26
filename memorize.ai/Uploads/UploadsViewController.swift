@@ -1,26 +1,20 @@
 import UIKit
 
 class UploadsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
-	@IBOutlet weak var filterSegmentedControl: UISegmentedControl!
+	@IBOutlet weak var allFilterButton: UIButton!
+	@IBOutlet weak var imagesFilterButton: UIButton!
+	@IBOutlet weak var gifsFilterButton: UIButton!
+	@IBOutlet weak var audioFilterButton: UIButton!
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var uploadsCollectionView: UICollectionView!
 	
+	var audioAllowed = true
 	var completion: ((Upload) -> Void)?
 	var filter: UploadType?
 	var filteredUploads = [Upload]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		if let semiBold = UIFont(name: "Nunito-SemiBold", size: 18) {
-			filterSegmentedControl.setTitleTextAttributes([
-				.font: semiBold,
-				.foregroundColor: UIColor.lightGray
-			], for: .normal)
-			filterSegmentedControl.setTitleTextAttributes([
-				.font: semiBold,
-				.foregroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-			], for: .selected)
-		}
 		let flowLayout = UICollectionViewFlowLayout()
 		let size = view.bounds.width / 2 - 40
 		flowLayout.itemSize = CGSize(width: size, height: size)
@@ -42,21 +36,32 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		uploadsCollectionView.reloadData()
 	}
 	
-	@IBAction func filterSegmentedControlChanged() {
-		switch filterSegmentedControl.selectedSegmentIndex {
-		case 0:
-			filter = nil
-		case 1:
-			filter = .image
-		case 2:
-			filter = .gif
-		case 3:
-			filter = .audio
-		default:
-			return
+	@IBAction func filterAll() {
+		selectFilter(nil)
+	}
+	
+	@IBAction func filterImages() {
+		selectFilter(.image)
+	}
+	
+	@IBAction func filterGifs() {
+		selectFilter(.gif)
+	}
+	
+	@IBAction func filterAudio() {
+		selectFilter(.audio)
+	}
+	
+	func deselectAllFilters() {
+		([allFilterButton, imagesFilterButton, gifsFilterButton] + (audioAllowed ? [audioFilterButton] : [])).forEach {
+			$0?.setTitleColor(.lightGray, for: .normal)
 		}
-		loadFilteredUploads()
-		uploadsCollectionView.reloadData()
+	}
+	
+	func selectFilter(_ filter: UploadType?) {
+		deselectAllFilters()
+		self.filter = filter
+		reloadUploads()
 	}
 	
 	@IBAction func upload() {
@@ -66,30 +71,33 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		Algolia.search(.uploads, for: searchText) { results, error in
 			guard error == nil else { return }
-			self.filteredUploads = Upload.filter(results.compactMap {
-				guard let uploadId = $0["objectID"] as? String, let upload = Upload.get(uploadId) else { return nil }
-				return upload.data == nil ? nil : upload
-			}, for: self.filter)
+			self.filteredUploads = self.filterForAudio(Upload.filter(results.compactMap {
+				guard let uploadId = $0["objectID"] as? String else { return nil }
+				return Upload.get(uploadId)
+			}, for: self.filter))
 			self.uploadsCollectionView.reloadData()
 		}
+	}
+	
+	func filterForAudio(_ uploads: [Upload]) -> [Upload] {
+		return audioAllowed ? uploads : uploads.filter { $0.type != .audio }
 	}
 	
 	func loadFilteredUploads() {
 		guard let searchText = searchBar.text else { return }
 		if searchText.trim().isEmpty {
-			filteredUploads = Upload.filter(uploads, for: filter)
+			filteredUploads = filterForAudio(Upload.filter(uploads, for: filter))
 		} else {
 			searchBar(searchBar, textDidChange: searchText)
 		}
 	}
 	
 	func loadCell(_ cell: UploadCollectionViewCell, upload: Upload, data: Data) {
+		cell.imageView.image = upload.image
 		switch upload.type {
 		case .image, .gif:
-			cell.imageView.image = UIImage(data: data)
 			cell.playButton.isHidden = true
 		case .audio:
-			cell.imageView.image = #imageLiteral(resourceName: "Sound")
 			cell.setPlayState(.ready)
 			cell.playButton.isHidden = false
 			cell.playAction = {
