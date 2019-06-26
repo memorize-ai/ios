@@ -10,13 +10,16 @@ var token: String?
 class User {
 	static func getImageFromStorage(completion: @escaping (UIImage?) -> Void) {
 		guard let id = id else { return completion(nil) }
-		func callCompletion(_ image: UIImage?) {
+		func callCompletion(_ image: UIImage?, data: Data?) {
 			profilePicture = image
+			if let data = data {
+				save(image: data)
+			}
 			completion(image)
 		}
 		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-			guard error == nil, let data = data, let image = UIImage(data: data) else { return callCompletion(nil) }
-			callCompletion(image)
+			guard error == nil, let unwrappedData = data, let image = UIImage(data: unwrappedData) else { return callCompletion(nil, data: data) }
+			callCompletion(image, data: unwrappedData)
 		}
 	}
 	
