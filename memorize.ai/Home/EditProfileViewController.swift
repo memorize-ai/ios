@@ -129,8 +129,18 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		if profilePicture != nil, let id = id {
 			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
 				self.pictureImageView.image = nil
-				self.changeButton.isHidden = true
+				self.changeButton.isEnabled = false
 				self.pictureActivityIndicator.startAnimating()
+				self.uploadImage(nil) { success in
+					self.pictureActivityIndicator.stopAnimating()
+					self.changeButton.isEnabled = true
+					if success {
+						profilePicture = nil
+					} else {
+						self.showNotification("Unable to set profile picture. Please try again", type: .error)
+					}
+					self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+				}
 				storage.child("users/\(id)").delete { error in
 					self.pictureActivityIndicator.stopAnimating()
 					self.pictureImageView.image = #imageLiteral(resourceName: "Person")
@@ -145,12 +155,17 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 			pictureImageView.image = nil
-			changeButton.isHidden = true
+			changeButton.isEnabled = false
 			pictureActivityIndicator.startAnimating()
-			uploadImage(image) { // showNotification("Unable to set profile picture. Please try again", type: .error)
+			uploadImage(image) { success in
 				self.pictureActivityIndicator.stopAnimating()
-				self.pictureImageView.image = image
-				self.changeButton.isHidden = false
+				self.changeButton.isEnabled = true
+				if success {
+					profilePicture = image
+				} else {
+					self.showNotification("Unable to set profile picture. Please try again", type: .error)
+				}
+				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 			}
 		}
 		dismiss(animated: true, completion: nil)
