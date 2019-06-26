@@ -54,6 +54,32 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		updateCurrentViewController()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		if let uploadsVC = segue.destination as? UploadsViewController, sender as? Bool ?? false {
+			uploadsVC.completion = { upload in
+				if let data = upload.data {
+					if let image = UIImage(data: data) {
+						
+					} else {
+						self.showNotification("Upload must be an image", type: .error)
+					}
+				} else {
+					self.startLoading()
+					upload.url { url, error in
+						self.stopLoading()
+						if error == nil, let url = url {
+							self.cardEditor?.current.add(upload.toMarkdown(url.absoluteString))
+							self.showNotification("Added \(upload.type == .audio ? "audio file" : upload.type.rawValue)", type: .success)
+						} else {
+							self.showNotification("Unable to add \(upload.type.rawValue). Please try again", type: .error)
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	@objc
 	func share() {
 		if let slug = slug, let url = User.url(slug: slug) {
@@ -75,7 +101,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func showUploads() {
-		performSegue(withIdentifier: "uploads", sender: self)
+		performSegue(withIdentifier: "uploads", sender: false)
 	}
 	
 	func showDeckRatings() {
@@ -124,6 +150,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { _ in
 			picker.sourceType = .photoLibrary
 			self.present(picker, animated: true, completion: nil)
+		})
+		alert.addAction(UIAlertAction(title: "Choose Upload", style: .default) { _ in
+			self.performSegue(withIdentifier: "uploads", sender: true)
 		})
 		if profilePicture != nil {
 			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
