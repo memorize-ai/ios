@@ -44,10 +44,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.profileModified, .settingAdded) { change in
 			if change == .profileModified || change == .profilePicture {
-				guard let slug = slug else { return }
 				self.nameLabel.text = name
 				self.emailLabel.text = email
-				self.linkButton.setTitle("memorize.ai/\(slug)", for: .normal)
+				self.linkButton.setTitle(User.urlString(slug: slug ?? ""), for: .normal)
 				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 			}
 		}
@@ -211,8 +210,15 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	@IBAction func linkClicked() {
-		guard let currentTitle = linkButton.currentTitle, let url = URL(string: "https://\(currentTitle)") else { return }
-		present(SFSafariViewController(url: url), animated: true, completion: nil)
+		if let slug = slug {
+			if let url = User.url(slug: slug) {
+				present(SFSafariViewController(url: url), animated: true, completion: nil)
+			} else {
+				showNotification("Unable to load profile url. Please try again", type: .error)
+			}
+		} else {
+			showNotification("Loading profile url...", type: .normal)
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
