@@ -82,6 +82,15 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			do {
 				try auth.signOut()
 				Listener.removeAll()
+				uploads.removeAll()
+				invites.removeAll()
+				settings.removeAll()
+				sectionedSettings.removeAll()
+				cardDrafts.removeAll()
+				ratingDrafts.removeAll()
+				deckRatings.removeAll()
+				cardRatings.removeAll()
+				allDecks.removeAll()
 				User.delete()
 				self.performSegue(withIdentifier: "signOut", sender: self)
 			} catch {
