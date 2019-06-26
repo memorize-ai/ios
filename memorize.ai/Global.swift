@@ -17,7 +17,11 @@ func buzz() {
 }
 
 func getStarsTrailingConstraint(width: CGFloat, ratings: DeckRatings) -> CGFloat {
-	return width * (ratings.average == 0 ? 1 : CGFloat(5 - ratings.average) / 5)
+	return getStarsTrailingConstraint(width: width, rating: ratings.average)
+}
+
+func getStarsTrailingConstraint(width: CGFloat, rating: Double) -> CGFloat {
+	return width * (rating == 0 ? 1 : CGFloat(5 - rating) / 5)
 }
 
 extension StorageMetadata {
