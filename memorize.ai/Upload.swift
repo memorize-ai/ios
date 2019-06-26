@@ -1,6 +1,7 @@
 import Foundation
 import Firebase
 import SwiftyMimeTypes
+import SwiftGifOrigin
 
 var uploads = [Upload]()
 
@@ -29,8 +30,8 @@ class Upload {
 		self.data = data
 	}
 	
-	var shouldReload = false
 	private var cachedUrl: URL?
+	var shouldReload = false
 	
 	private var storageReference: StorageReference? {
 		guard let uid = memorize_ai.id else { return nil }
@@ -39,6 +40,18 @@ class Upload {
 	
 	var filename: String {
 		return "\(id).\(`extension`)"
+	}
+	
+	var image: UIImage? {
+		guard let data = data else { return nil }
+		switch type {
+		case .image:
+			return UIImage(data: data)
+		case .gif:
+			return UIImage.gif(data: data)
+		case .audio:
+			return UPLOAD_SOUND_ICON
+		}
 	}
 	
 	func url(completion: @escaping (URL?, Error?) -> Void) {
