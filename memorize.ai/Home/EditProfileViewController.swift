@@ -1,6 +1,6 @@
 import UIKit
-import Firebase
 import SafariServices
+//import SwiftGifOrigin
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var pictureView: UIView!
@@ -57,23 +57,32 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
 		if let uploadsVC = segue.destination as? UploadsViewController, sender as? Bool ?? false {
+			uploadsVC.audioAllowed = false
 			uploadsVC.completion = { upload in
-				if let data = upload.data {
-					if let image = UIImage(data: data) {
-						
-					} else {
-						self.showNotification("Upload must be an image", type: .error)
+				if upload.type == .audio {
+					self.showNotification("Upload must be an image or gif", type: .error)
+					return
+				}
+				self.setLoading(true)
+				if let image = upload.image {
+					self.uploadImage(image) { success in
+						self.setLoading(false)
+						if success {
+							profilePicture = image
+						} else {
+							self.showNotification("Unable to set profile picture. Please try again", type: .error)
+						}
+						self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 					}
 				} else {
-					self.startLoading()
-					upload.url { url, error in
-						self.stopLoading()
-						if error == nil, let url = url {
-							self.cardEditor?.current.add(upload.toMarkdown(url.absoluteString))
-							self.showNotification("Added \(upload.type == .audio ? "audio file" : upload.type.rawValue)", type: .success)
+					upload.load { _, error in
+						self.setLoading(false)
+						if error == nil, let image = upload.image {
+							profilePicture = image
 						} else {
-							self.showNotification("Unable to add \(upload.type.rawValue). Please try again", type: .error)
+							self.showNotification("Unable to set profile picture. Please try again", type: .error)
 						}
+						self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 					}
 				}
 			}
@@ -156,12 +165,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		})
 		if profilePicture != nil {
 			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
-				self.pictureImageView.image = nil
-				self.changeButton.isEnabled = false
-				self.pictureActivityIndicator.startAnimating()
+				self.setLoading(true)
 				self.uploadImage(nil) { success in
-					self.pictureActivityIndicator.stopAnimating()
-					self.changeButton.isEnabled = true
+					self.setLoading(false)
 					if success {
 						profilePicture = nil
 					} else {
@@ -177,12 +183,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			pictureImageView.image = nil
-			changeButton.isEnabled = false
-			pictureActivityIndicator.startAnimating()
+			setLoading(true)
 			uploadImage(image) { success in
-				self.pictureActivityIndicator.stopAnimating()
-				self.changeButton.isEnabled = true
+				self.setLoading(false)
 				if success {
 					profilePicture = image
 				} else {
@@ -196,6 +199,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
+	}
+	
+	func setLoading(_ isLoading: Bool) {
+		changeButton.isEnabled = !isLoading
+		if isLoading {
+			pictureImageView.image = nil
+			pictureActivityIndicator.startAnimating()
+		} else {
+			pictureActivityIndicator.stopAnimating()
+		}
 	}
 	
 	func uploadImage(_ image: UIImage?, completion: @escaping (Bool) -> Void) {
