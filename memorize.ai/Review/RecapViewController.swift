@@ -27,7 +27,8 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		updateCurrentViewController()
 	}
 	
-	@objc func back() {
+	@objc
+	func back() {
 		performSegue(withIdentifier: "done", sender: self)
 	}
 	

@@ -37,6 +37,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		pictureImageView.layer.borderWidth = 0.5
 		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
 		pictureImageView.layer.masksToBounds = true
+		navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share)), animated: false)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -47,11 +48,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				self.nameLabel.text = name
 				self.emailLabel.text = email
 				self.linkButton.setTitle("memorize.ai/\(slug)", for: .normal)
-				self.pictureImageView.image = profilePicture ?? #imageLiteral(resourceName: "Person")
+				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 			}
 		}
 		resizeOptionsTableView()
 		updateCurrentViewController()
+	}
+	
+	@objc
+	func share() {
+		// share
 	}
 	
 	func resizeOptionsTableView() {

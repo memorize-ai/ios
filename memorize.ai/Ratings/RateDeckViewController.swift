@@ -167,7 +167,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		button.tintColor = enabled ? .white : #colorLiteral(red: 0.9841352105, green: 0.9841352105, blue: 0.9841352105, alpha: 1)
 	}
 	
-	@objc func publish() {
+	@objc
+	func publish() {
 		guard let id = id, let deck = deck else { return }
 		showNotification("Publishing...", type: .normal)
 		setRightBarButton(false)

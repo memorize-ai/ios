@@ -303,7 +303,8 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		}
 	}
 	
-	@objc func submitFromBarButton() {
+	@objc
+	func submitFromBarButton() {
 		scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height), animated: true)
 		submit()
 	}

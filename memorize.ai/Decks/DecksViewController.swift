@@ -126,7 +126,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		navigationItem.setRightBarButton(UIBarButtonItem(customView: toggleButton), animated: true)
 	}
 	
-	@objc func toggleExpand() {
+	@objc
+	func toggleExpand() {
 		expand(!expanded)
 		decksCollectionViewWidthConstraint.constant = expanded ? 2 * view.bounds.width / 3 : 100
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: view.layoutIfNeeded, completion: nil)

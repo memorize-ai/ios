@@ -136,7 +136,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	@objc func publishNew() {
+	@objc
+	func publishNew() {
 		guard let deck = deck, let text = cardEditor?.trimmedText else { return }
 		let date = Date()
 		disableRightBarButtonItem()
@@ -153,7 +154,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	@objc func publishEdit() {
+	@objc
+	func publishEdit() {
 		guard let deck = deck, let card = card, let text = cardEditor?.trimmedText else { return }
 		disableRightBarButtonItem()
 		firestore.document("decks/\(deck.id)/cards/\(card.id)").updateData(["front": text.front, "back": text.back]) { error in
@@ -183,7 +185,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		].forEach { $0?.constant = constant }
 	}
 	
-	@objc func keyboardWillShow(notification: NSNotification) {
+	@objc
+	func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
 		let offset = height - view.safeAreaInsets.bottom
 		setConstraints(offset / 2)
@@ -193,7 +196,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
-	@objc func keyboardWillHide(notification: NSNotification) {
+	@objc
+	func keyboardWillHide(notification: NSNotification) {
 		setConstraints(0)
 		cardEditor?.view.layoutIfNeeded()
 		cardPreview?.view.layoutIfNeeded()
@@ -403,7 +407,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	@objc func playAudio() {
+	@objc
+	func playAudio() {
 		Audio.stop()
 		Card.playAudio(getText())
 	}

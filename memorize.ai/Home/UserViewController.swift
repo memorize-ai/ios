@@ -407,7 +407,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	@objc func editProfile() {
+	@objc
+	func editProfile() {
 		performSegue(withIdentifier: "editProfile", sender: self)
 	}
 	

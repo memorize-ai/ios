@@ -29,14 +29,16 @@ extension UIViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 	
-	@objc private func keyboardWillShow(notification: NSNotification) {
+	@objc
+	private func keyboardWillShow(notification: NSNotification) {
 		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
 		keyboardOffset = height
 		ChangeHandler.call(.keyboardMoved)
 		KeyboardHandler.call(.up)
 	}
 	
-	@objc private func keyboardWillHide(notification: NSNotification) {
+	@objc
+	private func keyboardWillHide(notification: NSNotification) {
 		keyboardOffset = 0
 		ChangeHandler.call(.keyboardMoved)
 		KeyboardHandler.call(.down)
@@ -106,31 +108,38 @@ extension UITextView {
 		return items + [flex, UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
 	}
 	
-	@objc private func done() {
+	@objc
+	private func done() {
 		currentViewController?.view.endEditing(false)
 	}
 	
-	@objc private func code() {
+	@objc
+	private func code() {
 		add("```\n\n```", shift: 5)
 	}
 	
-	@objc private func math() {
+	@objc
+	private func math() {
 		add("\\(\\)", shift: 2)
 	}
 	
-	@objc private func markdownHeader() {
+	@objc
+	private func markdownHeader() {
 		add("#")
 	}
 	
-	@objc private func markdownBold() {
+	@objc
+	private func markdownBold() {
 		add("****", shift: 2)
 	}
 	
-	@objc private func backSlash() {
+	@objc
+	private func backSlash() {
 		add("\\")
 	}
 	
-	@objc private func curlyBraces() {
+	@objc
+	private func curlyBraces() {
 		add("{}", shift: 1)
 	}
 }
