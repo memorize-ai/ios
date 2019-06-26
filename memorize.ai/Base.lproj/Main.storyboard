@@ -3340,7 +3340,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Orb-jf-eUN">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="284"/>
+                                                                    <rect key="frame" x="4" y="0.0" width="167" height="284"/>
                                                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <wkWebViewConfiguration key="configuration">
                                                                         <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
@@ -3352,7 +3352,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="175" height="284"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eT8-5X-GfM">
-                                                                            <rect key="frame" x="0.0" y="242" width="175" height="42"/>
+                                                                            <rect key="frame" x="0.0" y="236" width="175" height="48"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Su-HN-Py8">
                                                                                     <rect key="frame" x="90" y="6" width="69" height="30"/>
@@ -3414,12 +3414,12 @@
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstItem="70l-dy-36v" firstAttribute="top" secondItem="eT8-5X-GfM" secondAttribute="top" constant="6" id="3jN-bq-A0n"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="4Su-HN-Py8" secondAttribute="bottom" constant="6" id="PgJ-fu-Vwy"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="4Su-HN-Py8" secondAttribute="bottom" constant="12" id="PgJ-fu-Vwy"/>
                                                                                 <constraint firstItem="4Su-HN-Py8" firstAttribute="top" secondItem="eT8-5X-GfM" secondAttribute="top" constant="6" id="bIw-vj-Pc1"/>
                                                                                 <constraint firstItem="4Su-HN-Py8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="70l-dy-36v" secondAttribute="trailing" id="d7V-Xs-L7p"/>
                                                                                 <constraint firstItem="70l-dy-36v" firstAttribute="leading" secondItem="eT8-5X-GfM" secondAttribute="leading" constant="16" id="i1i-Yj-NRy"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="4Su-HN-Py8" secondAttribute="trailing" constant="16" id="lam-6e-vgF"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="70l-dy-36v" secondAttribute="bottom" constant="6" id="nDh-y5-l8e"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="70l-dy-36v" secondAttribute="bottom" constant="12" id="nDh-y5-l8e"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -3457,15 +3457,18 @@
                                                             <constraint firstItem="b2D-vV-R6m" firstAttribute="leading" secondItem="gSB-84-IDR" secondAttribute="leading" id="5AQ-uO-sFB"/>
                                                             <constraint firstItem="Orb-jf-eUN" firstAttribute="top" secondItem="gSB-84-IDR" secondAttribute="top" id="9GE-Bh-mOQ"/>
                                                             <constraint firstAttribute="bottom" secondItem="b2D-vV-R6m" secondAttribute="bottom" id="COr-h7-VnX"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Orb-jf-eUN" secondAttribute="trailing" id="ENf-hL-ywC"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Orb-jf-eUN" secondAttribute="trailing" constant="4" id="ENf-hL-ywC"/>
                                                             <constraint firstAttribute="bottom" secondItem="Orb-jf-eUN" secondAttribute="bottom" id="c1B-rS-98l"/>
                                                             <constraint firstItem="b2D-vV-R6m" firstAttribute="top" secondItem="gSB-84-IDR" secondAttribute="top" id="sfh-Ab-J47"/>
                                                             <constraint firstAttribute="trailing" secondItem="b2D-vV-R6m" secondAttribute="trailing" id="tZe-BY-KB2"/>
-                                                            <constraint firstItem="Orb-jf-eUN" firstAttribute="leading" secondItem="gSB-84-IDR" secondAttribute="leading" id="w8d-gc-qu0"/>
+                                                            <constraint firstItem="Orb-jf-eUN" firstAttribute="leading" secondItem="gSB-84-IDR" secondAttribute="leading" constant="4" id="w8d-gc-qu0"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                <integer key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
