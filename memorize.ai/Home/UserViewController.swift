@@ -370,12 +370,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func reloadProfileBarButtonItem() {
-		guard let id = id else { return }
-		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-			guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-			self.loadBarButtonItems(image: image)
-			profilePicture = image
-			User.save(image: data)
+		User.getImageFromStorage { image in
+			self.loadBarButtonItems(image: image ?? DEFAULT_PROFILE_PICTURE)
 			ChangeHandler.call(.profilePicture)
 		}
 	}
