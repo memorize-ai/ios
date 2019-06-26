@@ -57,7 +57,13 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@objc
 	func share() {
-		// share
+		if let slug = slug, let url = User.url(slug: slug) {
+			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+			activityVC.popoverPresentationController?.sourceView = view
+			present(activityVC, animated: true, completion: nil)
+		} else {
+			showNotification("Loading profile url...", type: .normal)
+		}
 	}
 	
 	func resizeOptionsTableView() {
