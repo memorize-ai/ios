@@ -161,7 +161,7 @@ extension Date {
 		formatter.unitsStyle = .full
 		formatter.zeroFormattingBehavior = .dropAll
 		formatter.maximumUnitCount = 1
-		formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
+		formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute, .second]
 		return "\(formatter.string(from: self, to: date) ?? "") ago"
 	}
 }
