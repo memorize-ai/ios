@@ -43,11 +43,12 @@ class Upload {
 	}
 	
 	var image: UIImage? {
-		guard let data = data else { return nil }
 		switch type {
 		case .image:
+			guard let data = data else { return nil }
 			return UIImage(data: data)
 		case .gif:
+			guard let data = data else { return nil }
 			return UIImage.gif(data: data)
 		case .audio:
 			return UPLOAD_SOUND_ICON
