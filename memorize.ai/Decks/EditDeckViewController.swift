@@ -226,7 +226,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	}
 	
 	@IBAction func submit() {
-		guard let id = id, let imageData = imageView.image?.compressedData(), let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
+		guard let id = id, let imageData = imageView.image?.compressedData, let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
 		showActivityIndicator()
 		loadSubmitBarButtonItem(false)
 		dismissKeyboard()

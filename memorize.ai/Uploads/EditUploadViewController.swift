@@ -121,7 +121,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let data = image.compressedData() {
+		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let data = image.compressedData {
 			switch imagePickerSourceType {
 			case .some(.camera):
 				saveImage(image, data: data, extension: "heic")
