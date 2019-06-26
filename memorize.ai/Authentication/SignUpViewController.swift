@@ -89,32 +89,44 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		showActivityIndicator()
 		dismissKeyboard()
 		auth.createUser(withEmail: emailText, password: passwordText) { authResult, error in
-			if error == nil {
-				id = authResult?.user.uid
-				guard let id = id, let data = #imageLiteral(resourceName: "Person").compressedData() else { return }
+			if error == nil, let user = authResult?.user {
+				id = user.uid
+				guard let id = id else { return }
 				User.pushToken()
-				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { metadata, error in
-					storage.child("users/\(id)").downloadURL { url, error in
-						guard let changeRequest = authResult?.user.createProfileChangeRequest(), let photoURL = url, error == nil else { return }
-						changeRequest.displayName = nameText
-						changeRequest.photoURL = photoURL
-					}
-					firestore.document("users/\(id)").setData(["name": nameText, "email": emailText])
-					name = nameText
-					email = emailText
-					User.save()
+				user.createProfileChangeRequest().displayName = nameText
+				firestore.document("users/\(id)").setData(["name": nameText, "email": emailText]) { error in
 					self.hideActivityIndicator()
-					self.performSegue(withIdentifier: "signUp", sender: self)
+					if let error = error {
+						self.showError(error)
+					} else {
+						listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
+							if error == nil, let snapshot = snapshot {
+								name = snapshot.get("name") as? String ?? "Error"
+								email = snapshot.get("email") as? String ?? "Error"
+								slug = snapshot.get("slug") as? String
+								ChangeHandler.call(.profileModified)
+								User.save()
+								self.hideActivityIndicator()
+								self.performSegue(withIdentifier: "signUp", sender: self)
+							} else if let error = error {
+								self.showError(error)
+							}
+						}
+					}
 				}
 			} else if let error = error {
-				self.hideActivityIndicator()
-				switch error.localizedDescription {
-				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-					self.showNotification("No internet", type: .error)
-				default:
-					self.showNotification("There was a problem creating a new account", type: .error)
-				}
+				self.showError(error)
 			}
+		}
+	}
+	
+	func showError(_ error: Error) {
+		hideActivityIndicator()
+		switch error.localizedDescription {
+		case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
+			showNotification("No internet", type: .error)
+		default:
+			showNotification("There was a problem creating a new account", type: .error)
 		}
 	}
 	

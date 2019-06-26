@@ -76,24 +76,32 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 				id = user?.user.uid
 				guard let id = id else { return }
 				User.pushToken()
-				firestore.document("users/\(id)").getDocument { snapshot, error in
-					guard let snapshot = snapshot else { return }
-					name = snapshot.get("name") as? String ?? "Error"
-					email = snapshot.get("email") as? String ?? "Error"
-					User.save()
-					slug = snapshot.get("slug") as? String ?? "error"
-					self.hideActivityIndicator()
-					self.performSegue(withIdentifier: "signIn", sender: self)
+				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
+					if error == nil, let snapshot = snapshot {
+						name = snapshot.get("name") as? String ?? "Error"
+						email = snapshot.get("email") as? String ?? "Error"
+						slug = snapshot.get("slug") as? String
+						ChangeHandler.call(.profileModified)
+						User.save()
+						self.hideActivityIndicator()
+						self.performSegue(withIdentifier: "signIn", sender: self)
+					} else if let error = error {
+						self.showError(error)
+					}
 				}
 			} else if let error = error {
-				self.hideActivityIndicator()
-				switch error.localizedDescription {
-				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-					self.showNotification("No internet", type: .error)
-				default:
-					self.showNotification("Invalid email/password", type: .error)
-				}
+				self.showError(error)
 			}
+		}
+	}
+	
+	func showError(_ error: Error) {
+		hideActivityIndicator()
+		switch error.localizedDescription {
+		case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
+			showNotification("No internet", type: .error)
+		default:
+			showNotification("Invalid email/password", type: .error)
 		}
 	}
 	
