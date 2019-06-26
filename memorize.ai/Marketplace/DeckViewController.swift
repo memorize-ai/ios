@@ -581,7 +581,19 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			return cell
 		case ratingsCollectionView.tag:
 			guard let cell = _cell as? DeckRatingCollectionViewCell else { return _cell }
-			// Code
+			let rating = ratings[indexPath.item]
+			cell.titleLabel.text = rating.rating.title
+			cell.starsSliderViewTrailingConstraint.constant = getStarsTrailingConstraint(width: cell.starsSliderView.bounds.width, rating: Double(rating.rating.rating))
+			cell.dateLabel.text = rating.rating.date.formatCompact()
+			cell.nameLabel.text = rating.user.name
+			let hasReview = rating.rating.hasReview
+			cell.reviewLabel.text = hasReview ? rating.rating.review : "(no review)"
+			cell.reviewLabel.textColor = hasReview ? .black : .darkGray
+			cell.moreLabel.isHidden = !(hasReview && cell.reviewLabel.isTruncated)
+			cell.action = {
+				if cell.moreLabel.isHidden { return }
+				// When clicked, show modal
+			}
 			return cell
 		case infoCollectionView.tag:
 			guard let cell = _cell as? DeckInfoCollectionViewCell else { return _cell }
@@ -608,7 +620,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			view.addSubview(cardVC.view)
 			cardVC.didMove(toParent: self)
 		case ratingsCollectionView.tag:
-			print("hi") // Show full rating in a modal
+			return
 		case infoCollectionView.tag:
 			return
 		case moreByCreatorCollectionView.tag:
@@ -653,6 +665,12 @@ class DeckRatingCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var reviewLabel: UILabel!
 	@IBOutlet weak var moreLabel: UILabel!
+	
+	var action: (() -> Void)?
+	
+	@IBAction func click() {
+		action?()
+	}
 }
 
 class DeckInfoCollectionViewCell: UICollectionViewCell {
