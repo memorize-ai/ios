@@ -20,9 +20,7 @@ class User {
 		guard let id = id else { return completion(nil) }
 		func callCompletion(_ image: UIImage?, data: Data?) {
 			profilePicture = image
-			if let data = data {
-				save(image: data)
-			}
+			save(image: data)
 			completion(image)
 		}
 		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
@@ -49,8 +47,12 @@ class User {
 		}
 	}
 	
-	static func save(image: Data) {
-		defaults.set(image, forKey: "image")
+	static func save(image: Data?) {
+		if let image = image {
+			defaults.set(image, forKey: "image")
+		} else {
+			defaults.removeObject(forKey: "image")
+		}
 	}
 	
 	static func save(darkMode: Bool) {
