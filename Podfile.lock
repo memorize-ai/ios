@@ -132,6 +132,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.8.0)
+  - SwiftGifOrigin (1.7.0)
   - SwiftyMimeTypes (2.1.0)
   - SwiftySound (1.1.0)
 
@@ -145,6 +146,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - InstantSearchClient
+  - SwiftGifOrigin (~> 1.7.0)
   - SwiftyMimeTypes
   - SwiftySound
 
@@ -172,6 +174,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - SwiftGifOrigin
     - SwiftyMimeTypes
     - SwiftySound
 
@@ -181,7 +184,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Down:
-    :commit: 805e537949f21a64c46227ca9aa881f16ba93048
+    :commit: dcf86dcce5f6d03d62e405074b3d9cb384244afc
     :git: https://github.com/iwasrobbed/Down.git
 
 SPEC CHECKSUMS:
@@ -208,9 +211,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
   SwiftyMimeTypes: df2392d0f7b7c06bb3a65909e0d1efc09f5b6b6b
   SwiftySound: eb46cc2399cf7d94f58c372f38216e15e0a6de3e
 
-PODFILE CHECKSUM: d5b292dff389ec9ce31bb5d770fc19c1ae4b74bd
+PODFILE CHECKSUM: d6070a5dfc7951cbe49b6bfa83496f29b3fee37f
 
 COCOAPODS: 1.7.2

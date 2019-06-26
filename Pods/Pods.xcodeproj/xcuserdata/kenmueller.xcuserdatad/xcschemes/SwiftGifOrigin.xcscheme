@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB6EBFE308C954656307ACB74D9B5EE8"
-               BuildableName = "Pods-memorize.ai.framework"
-               BlueprintName = "Pods-memorize.ai"
+               BlueprintIdentifier = "A7F9119A842E66F127E010A97169E4F4"
+               BuildableName = "SwiftGifOrigin.framework"
+               BlueprintName = "SwiftGifOrigin"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
