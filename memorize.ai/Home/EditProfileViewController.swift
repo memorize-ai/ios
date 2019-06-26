@@ -125,7 +125,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			picker.sourceType = .photoLibrary
 			self.present(picker, animated: true, completion: nil)
 		})
-		if profilePicture != nil, let id = id {
+		if profilePicture != nil {
 			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
 				self.pictureImageView.image = nil
 				self.changeButton.isEnabled = false
