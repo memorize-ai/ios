@@ -112,7 +112,8 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		}
 	}
 	
-	@IBAction func chooseImage() {
+	@IBAction
+	func chooseImage() {
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -160,11 +161,13 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		}, completion: nil)
 	}
 	
-	@IBAction func nameChanged() {
+	@IBAction
+	func nameChanged() {
 		reloadSubmit()
 	}
 	
-	@IBAction func subtitleChanged() {
+	@IBAction
+	func subtitleChanged() {
 		guard let subtitleText = subtitleTextField.text else { return }
 		let difference = SUBTITLE_LENGTH - subtitleText.trim().count
 		if difference < 0 {
@@ -215,17 +218,20 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		return hasTagsPlaceholder ? [] : tagsTextView.text.split(separator: ",").map { String($0).trim() }.filter { !$0.isEmpty }
 	}
 	
-	@IBAction func publicSwitchChanged() {
+	@IBAction
+	func publicSwitchChanged() {
 		privateSwitch.setOn(!privateSwitch.isOn, animated: true)
 		reloadSubmit()
 	}
 	
-	@IBAction func privateSwitchChanged() {
+	@IBAction
+	func privateSwitchChanged() {
 		publicSwitch.setOn(!publicSwitch.isOn, animated: true)
 		reloadSubmit()
 	}
 	
-	@IBAction func submit() {
+	@IBAction
+	func submit() {
 		guard let id = id, let imageData = imageView.image?.compressedData, let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
 		showActivityIndicator()
 		loadSubmitBarButtonItem(false)

@@ -227,7 +227,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		button.tintColor = .lightGray
 	}
 	
-	@IBAction func left() {
+	@IBAction
+	func left() {
 		disable(leftArrow)
 		sideLabel.text = "~~~"
 		switch currentSide {
@@ -251,7 +252,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	@IBAction func right() {
+	@IBAction
+	func right() {
 		disable(rightArrow)
 		sideLabel.text = "~~~"
 		switch currentSide {
@@ -275,11 +277,13 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	@IBAction func addUpload() {
+	@IBAction 
+	func addUpload() {
 		performSegue(withIdentifier: "addUpload", sender: self)
 	}
 	
-	@IBAction func removeDraft() {
+	@IBAction
+	func removeDraft() {
 		guard let id = id else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -307,7 +311,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		present(alertController, animated: true, completion: nil)
 	}
 	
-	@IBAction func deleteCard() {
+	@IBAction
+	func deleteCard() {
 		guard let deck = deck, let card = card else { return }
 		let draft = card.draft
 		let alertController = UIAlertController(title: "Are you sure?", message: "The card\(draft == nil ? " and your draft" : "") will be deleted. This action cannot be undone", preferredStyle: .alert)

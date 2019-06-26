@@ -40,19 +40,23 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		uploadsCollectionView.reloadData()
 	}
 	
-	@IBAction func filterAll() {
+	@IBAction
+	func filterAll() {
 		selectFilter(nil)
 	}
 	
-	@IBAction func filterImages() {
+	@IBAction
+	func filterImages() {
 		selectFilter(.image)
 	}
 	
-	@IBAction func filterGifs() {
+	@IBAction
+	func filterGifs() {
 		selectFilter(.gif)
 	}
 	
-	@IBAction func filterAudio() {
+	@IBAction
+	func filterAudio() {
 		selectFilter(.audio)
 	}
 	
@@ -68,7 +72,8 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		reloadUploads()
 	}
 	
-	@IBAction func upload() {
+	@IBAction
+	func upload() {
 		performSegue(withIdentifier: "upload", sender: self)
 	}
 	
@@ -170,7 +175,8 @@ class UploadCollectionViewCell: UICollectionViewCell {
 	
 	var playAction: (() -> Void)?
 	
-	@IBAction func play() {
+	@IBAction
+	func play() {
 		playAction?()
 	}
 	

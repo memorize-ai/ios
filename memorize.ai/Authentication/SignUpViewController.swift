@@ -36,7 +36,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		updateCurrentViewController()
 	}
 	
-	@IBAction func back() {
+	@IBAction
+	func back() {
 		navigationController?.popViewController(animated: true)
 	}
 	
@@ -68,23 +69,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-	@IBAction func nameTextFieldChanged() {
+	@IBAction
+	func nameTextFieldChanged() {
 		updateSignUpButton()
 	}
 	
-	@IBAction func emailTextFieldChanged() {
+	@IBAction
+	func emailTextFieldChanged() {
 		guard let emailText = emailTextField.text?.trim() else { return }
 		invalidEmailLabel.isHidden = emailText.checkEmail() || emailText.isEmpty
 		updateSignUpButton()
 	}
 	
-	@IBAction func passwordTextFieldChanged() {
+	@IBAction
+	func passwordTextFieldChanged() {
 		guard let passwordText = passwordTextField.text?.trim() else { return }
 		passwordTooShortLabel.isHidden = passwordText.count >= 6 || passwordText.isEmpty
 		updateSignUpButton()
 	}
 	
-	@IBAction func signUp() {
+	@IBAction
+	func signUp() {
 		guard let nameText = nameTextField.text?.trim(), let emailText = emailTextField.text?.trim(), let passwordText = passwordTextField.text?.trim() else { return }
 		showActivityIndicator()
 		dismissKeyboard()

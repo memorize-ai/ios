@@ -73,11 +73,13 @@ class CardRatingTableViewCell: UITableViewCell {
 	
 	var handler: ((CardRatingType) -> Void)?
 	
-	@IBAction func like() {
+	@IBAction
+	func like() {
 		handler?(.like)
 	}
 	
-	@IBAction func dislike() {
+	@IBAction
+	func dislike() {
 		handler?(.dislike)
 	}
 }

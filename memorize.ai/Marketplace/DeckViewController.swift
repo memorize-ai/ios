@@ -455,7 +455,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	@IBAction func showFullDescription() {
+	@IBAction
+	func showFullDescription() {
 		if let description = deck.description {
 			showFullDescriptionButton.isEnabled = false
 			isDescriptionExpanded = true
@@ -465,7 +466,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	@IBAction func showCreatorProfile() {
+	@IBAction
+	func showCreatorProfile() {
 		if let url = deck.creator.url {
 			present(SFSafariViewController(url: url), animated: true, completion: nil)
 		} else {
@@ -473,11 +475,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	@IBAction func rateDeck() {
+	@IBAction
+	func rateDeck() {
 		performSegue(withIdentifier: "rate", sender: self)
 	}
 	
-	@IBAction func previewDeck() {
+	@IBAction
+	func previewDeck() {
 		switch deck.count {
 		case .some(cards.count):
 			performSegue(withIdentifier: "preview", sender: self)
@@ -486,7 +490,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	@IBAction func get() {
+	@IBAction
+	func get() {
 		guard let id = id, let deckId = deck.id else { return }
 		let isGet = getButton.currentTitle == "GET"
 		getButton.setTitle(nil, for: .normal)
@@ -641,7 +646,8 @@ class CardPreviewCollectionViewCell: UICollectionViewCell {
 	
 	var playAction: (() -> Void)?
 	
-	@IBAction func play() {
+	@IBAction
+	func play() {
 		playAction?()
 	}
 	
@@ -669,7 +675,8 @@ class DeckRatingCollectionViewCell: UICollectionViewCell {
 	
 	var action: (() -> Void)?
 	
-	@IBAction func click() {
+	@IBAction
+	func click() {
 		action?()
 	}
 }

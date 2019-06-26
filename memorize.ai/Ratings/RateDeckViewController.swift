@@ -103,7 +103,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		}, completion: nil)
 	}
 	
-	@IBAction func titleChanged() {
+	@IBAction
+	func titleChanged() {
 		updateDraft(selectedRating)
 		reloadRightBarButton()
 	}
@@ -123,7 +124,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		reloadRightBarButton()
 	}
 	
-	@IBAction func starSelected(_ sender: UIButton) {
+	@IBAction
+	func starSelected(_ sender: UIButton) {
 		guard let index = stars.firstIndex(of: sender) else { return }
 		let rating = updateSelectedRating(index + 1)
 		reloadStars(rating)
@@ -131,7 +133,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		reloadRightBarButton()
 	}
 	
-	@IBAction func starDeselected() {
+	@IBAction
+	func starDeselected() {
 		reloadStars()
 		updateDraft(updateSelectedRating(nil))
 		reloadRightBarButton()
@@ -195,7 +198,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		}
 	}
 	
-	@IBAction func removeDraft() {
+	@IBAction
+	func removeDraft() {
 		guard let id = id, let deck = deck else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -223,7 +227,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		present(alertController, animated: true, completion: nil)
 	}
 	
-	@IBAction func deleteRating() {
+	@IBAction
+	func deleteRating() {
 		guard let deck = deck else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "Your\(deck.hasRatingDraft ? " draft will be kept, but the" : "") published rating will be deleted. This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

@@ -274,7 +274,8 @@ class ThinCardCollectionViewCell: UICollectionViewCell {
 	
 	var action: (() -> Void)?
 	
-	@IBAction func click() {
+	@IBAction
+	func click() {
 		action?()
 	}
 	
@@ -320,7 +321,8 @@ class ActionCollectionViewCell: UICollectionViewCell {
 	
 	var action: (() -> Void)?
 	
-	@IBAction func click() {
+	@IBAction
+	func click() {
 		action?()
 	}
 	

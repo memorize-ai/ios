@@ -55,7 +55,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		deckVC.deck.image = selectedResult.image
 	}
 	
-	@IBAction func back() {
+	@IBAction
+	func back() {
 		navigationController?.popViewController(animated: true)
 	}
 	

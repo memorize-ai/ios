@@ -138,7 +138,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		self.cardsCollectionView.backgroundColor = backgroundColor
 	}
 	
-	@IBAction func retry() {
+	@IBAction
+	func retry() {
 		offlineView.isHidden = true
 		retryButton.isHidden = true
 		viewDidLoad()
@@ -412,7 +413,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		performSegue(withIdentifier: "editProfile", sender: self)
 	}
 	
-	@IBAction func review() {
+	@IBAction
+	func review() {
 		performSegue(withIdentifier: "review", sender: self)
 	}
 	
@@ -579,22 +581,26 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	@IBAction func showDecks() {
+	@IBAction
+	func showDecks() {
 		guard enabled.first ?? false else { return }
 		performSegue(withIdentifier: "decks", sender: self)
 	}
 	
-	@IBAction func showCards() {
+	@IBAction
+	func showCards() {
 		guard enabled[1] else { return }
 		performSegue(withIdentifier: "cards", sender: self)
 	}
 	
-	@IBAction func showCreate() {
+	@IBAction
+	func showCreate() {
 		guard enabled[2] else { return }
 		performSegue(withIdentifier: "createDeck", sender: self)
 	}
 	
-	@IBAction func showMarketplace() {
+	@IBAction
+	func showMarketplace() {
 		guard enabled[3] else { return }
 		performSegue(withIdentifier: "searchDeck", sender: self)
 	}

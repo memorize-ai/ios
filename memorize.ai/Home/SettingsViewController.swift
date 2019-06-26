@@ -52,7 +52,8 @@ class SettingTableViewCell: UITableViewCell {
 		valueSwitch.setOn(setting.data as? Bool ?? false, animated: false)
 	}
 	
-	@IBAction func valueSwitchChanged() {
+	@IBAction
+	func valueSwitchChanged() {
 		guard let id = id, let setting = setting else { return }
 		firestore.document("users/\(id)/settings/\(setting.id)").setData(["value": valueSwitch.isOn]) { error in
 			if error == nil {

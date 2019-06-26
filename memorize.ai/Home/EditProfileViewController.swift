@@ -121,7 +121,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		performSegue(withIdentifier: "cardRatings", sender: self)
 	}
 	
-	@IBAction func signOut() {
+	@IBAction
+	func signOut() {
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		let signOut = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
@@ -148,7 +149,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		present(alertController, animated: true, completion: nil)
 	}
 	
-	@IBAction func chooseImage() {
+	@IBAction
+	func chooseImage() {
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -246,7 +248,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
-	@IBAction func linkClicked() {
+	@IBAction
+	func linkClicked() {
 		if let slug = slug {
 			if let url = User.url(slug: slug) {
 				present(SFSafariViewController(url: url), animated: true, completion: nil)

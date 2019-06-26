@@ -48,7 +48,8 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		return [("Size", size), ("Type", type), ("Extension", ext)]
 	}
 	
-	@IBAction func chooseFile() {
+	@IBAction
+	func chooseFile() {
 		let imagePicker = UIImagePickerController()
 		imagePicker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -210,7 +211,8 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		}
 	}
 	
-	@IBAction func playAudio() {
+	@IBAction
+	func playAudio() {
 		if let data = file.data {
 			if Audio.isPlaying {
 				Audio.stop()
@@ -244,13 +246,15 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		}, completion: nil)
 	}
 	
-	@IBAction func nameChanged() {
+	@IBAction
+	func nameChanged() {
 		guard let name = nameTextField.text?.trim() else { return }
 		file.name = name.isEmpty ? nil : name
 		reloadUpload()
 	}
 	
-	@IBAction func submitUpload() {
+	@IBAction
+	func submitUpload() {
 		guard let id = id, let name = file.name, let type = file.type?.rawValue, let mime = file.mime, let ext = file.extension, let size = file.size, let data = file.data else { return }
 		let now = Date()
 		let metadata = StorageMetadata.from(mime: mime)

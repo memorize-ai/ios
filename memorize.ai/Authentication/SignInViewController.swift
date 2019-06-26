@@ -32,7 +32,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		updateCurrentViewController()
 	}
 	
-	@IBAction func back() {
+	@IBAction
+	func back() {
 		navigationController?.popViewController(animated: true)
 	}
 	
@@ -62,12 +63,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-	@IBAction func textFieldChanged() {
+	@IBAction
+	func textFieldChanged() {
 		guard let emailText = emailTextField.text?.trim(), let passwordText = passwordTextField.text?.trim() else { return }
 		!(emailText.isEmpty || passwordText.isEmpty) ? enable() : disable()
 	}
 	
-	@IBAction func signIn() {
+	@IBAction
+	func signIn() {
 		guard let emailText = emailTextField.text?.trim(), let passwordText = passwordTextField.text?.trim() else { return }
 		showActivityIndicator()
 		dismissKeyboard()

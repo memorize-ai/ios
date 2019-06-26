@@ -31,7 +31,8 @@ class CardViewController: UIViewController {
 		updateCurrentViewController()
 	}
 	
-	@IBAction func hide() {
+	@IBAction
+	func hide() {
 		UIView.animate(withDuration: 0.2, animations: {
 			self.cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 			self.view.backgroundColor = .clear
@@ -41,7 +42,8 @@ class CardViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func back() {
+	@IBAction
+	func back() {
 		disable(rightButton)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.frontWebView.transform = CGAffineTransform(translationX: -20, y: 0)
@@ -62,7 +64,8 @@ class CardViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func front() {
+	@IBAction
+	func front() {
 		disable(leftButton)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.backWebView.transform = CGAffineTransform(translationX: 20, y: 0)

@@ -70,7 +70,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		recapVC.cards = reviewedCards
 	}
 	
-	@IBAction func back() {
+	@IBAction
+	func back() {
 		if backButton.isHidden {
 			disable(rightButton)
 		} else {
@@ -119,7 +120,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 	}
 	
-	@IBAction func front() {
+	@IBAction
+	func front() {
 		disable(leftButton)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.backWebView.transform = CGAffineTransform(translationX: self.view.bounds.width / 2, y: 0)

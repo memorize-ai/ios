@@ -55,7 +55,8 @@ class UploadActionsViewController: UIViewController {
 		createdLabel.text = upload.created.format()
 	}
 	
-	@IBAction func delete() {
+	@IBAction
+	func delete() {
 		guard let id = id, let upload = upload else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "Every card using this upload will be unable to use it anymore. This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -82,7 +83,8 @@ class UploadActionsViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func hide() {
+	@IBAction
+	func hide() {
 		UIView.animate(withDuration: 0.2, animations: {
 			self.uploadView.transform = CGAffineTransform(scaleX: 0, y: 0)
 			self.view.backgroundColor = .clear
