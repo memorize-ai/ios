@@ -4266,7 +4266,7 @@
                                                                                     <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 </view>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15" id="1m9-Bd-nzg"/>
                                                                                 <constraint firstItem="ASf-GI-U0e" firstAttribute="leading" secondItem="BCa-AH-qb3" secondAttribute="trailing" id="62x-zz-xm7"/>
