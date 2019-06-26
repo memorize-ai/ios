@@ -19,6 +19,10 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		let size = view.bounds.width / 2 - 40
 		flowLayout.itemSize = CGSize(width: size, height: size)
 		uploadsCollectionView.collectionViewLayout = flowLayout
+		if !audioAllowed {
+			audioFilterButton.setTitleColor(#colorLiteral(red: 0.9601849914, green: 0.9601849914, blue: 0.9601849914, alpha: 1), for: .normal)
+			audioFilterButton.isEnabled = false
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
