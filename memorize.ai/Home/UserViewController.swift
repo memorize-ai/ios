@@ -63,9 +63,9 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						}
 					} else if let snapshot = snapshot {
 						name = snapshot.get("name") as? String ?? name
-						self.createHelloLabel()
 						email = snapshot.get("email") as? String ?? email
-						slug = snapshot.get("slug") as? String ?? slug
+						slug = snapshot.get("slug") as? String
+						self.createHelloLabel()
 						User.save()
 						ChangeHandler.call(.profileModified)
 					}
