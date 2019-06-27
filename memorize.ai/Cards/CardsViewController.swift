@@ -45,7 +45,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		cell.due(element.isDue())
 		if let image = deck.image {
 			cell.imageView.image = image
-		} else {
+		} else if deck.hasImage {
 			cell.imageActivityIndicator.startAnimating()
 			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
@@ -54,6 +54,10 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 				deck.image = image
 				self.cardsCollectionView.reloadData()
 			}
+		} else {
+			cell.imageView.image = DEFAULT_DECK_IMAGE
+			deck.image = nil
+			cardsCollectionView.reloadData()
 		}
 		cell.load(element.front)
 		cell.draft(element.hasDraft)
