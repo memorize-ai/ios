@@ -77,7 +77,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	@IBAction
 	func emailTextFieldChanged() {
 		guard let emailText = emailTextField.text?.trim() else { return }
-		invalidEmailLabel.isHidden = emailText.checkEmail() || emailText.isEmpty
+		invalidEmailLabel.isHidden = emailText.isValidEmail() || emailText.isEmpty
 		updateSignUpButton()
 	}
 	
@@ -174,7 +174,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	
 	func updateSignUpButton() {
 		guard let nameText = nameTextField.text?.trim(), let emailText = emailTextField.text?.trim(), let passwordText = passwordTextField.text?.trim() else { return }
-		!nameText.isEmpty && emailText.checkEmail() && passwordText.count >= 6 ? enable() : disable()
+		!nameText.isEmpty && emailText.isValidEmail() && passwordText.count >= 6 ? enable() : disable()
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
