@@ -53,19 +53,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		switch textField {
-		case nameTextField: enable(barView: nameBarView)
-		case emailTextField: enable(barView: emailBarView)
-		case passwordTextField: enable(barView: passwordBarView)
-		default: return
+		case nameTextField:
+			enable(barView: nameBarView)
+		case emailTextField:
+			enable(barView: emailBarView)
+		case passwordTextField:
+			enable(barView: passwordBarView)
+		default:
+			return
 		}
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		switch textField {
-		case nameTextField: disable(barView: nameBarView)
-		case emailTextField: disable(barView: emailBarView)
-		case passwordTextField: disable(barView: passwordBarView)
-		default: return
+		case nameTextField:
+			disable(barView: nameBarView)
+		case emailTextField:
+			disable(barView: emailBarView)
+		case passwordTextField:
+			disable(barView: passwordBarView)
+		default:
+			return
 		}
 	}
 	

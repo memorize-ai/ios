@@ -49,17 +49,23 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		switch textField {
-		case emailTextField: enable(barView: emailBarView)
-		case passwordTextField: enable(barView: passwordBarView)
-		default: return
+		case emailTextField:
+			enable(barView: emailBarView)
+		case passwordTextField:
+			enable(barView: passwordBarView)
+		default:
+			return
 		}
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		switch textField {
-		case emailTextField: disable(barView: emailBarView)
-		case passwordTextField: disable(barView: passwordBarView)
-		default: return
+		case emailTextField:
+			disable(barView: emailBarView)
+		case passwordTextField:
+			disable(barView: passwordBarView)
+		default:
+			return
 		}
 	}
 	
