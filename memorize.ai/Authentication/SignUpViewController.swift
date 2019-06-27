@@ -98,7 +98,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 				id = user.uid
 				guard let id = id else { return }
 				User.pushToken()
-				user.createProfileChangeRequest().displayName = nameText
 				firestore.document("users/\(id)").setData(["name": nameText, "email": emailText]) { error in
 					self.hideActivityIndicator()
 					if let error = error {
