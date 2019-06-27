@@ -7,6 +7,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	@IBOutlet weak var outerImageView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var changeButton: UIButton!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameBlockView: UIView!
 	@IBOutlet weak var nameTextField: UITextField!
 	@IBOutlet weak var nameBarView: UIView!
@@ -71,6 +72,39 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		super.prepare(for: segue, sender: self)
+		if let uploadsVC = segue.destination as? UploadsViewController, sender as? Bool ?? false {
+			uploadsVC.audioAllowed = false
+			uploadsVC.completion = { upload in
+				if upload.type == .audio {
+					self.showNotification("Upload must be an image or gif", type: .error)
+					return
+				}
+				if let image = upload.image {
+					self.didChangeImage = true
+					self.image = image
+					self.imageView.image = image
+					self.reloadSubmit()
+				} else {
+					self.imageView.image = nil
+					self.changeButton.isEnabled = false
+					self.imageActivityIndicator.startAnimating()
+					upload.load { _, error in
+						self.changeButton.isEnabled = true
+						self.imageActivityIndicator.stopAnimating()
+						if error == nil, let image = upload.image {
+							self.image = image
+						} else {
+							self.showNotification("Unable to load image. Please try again", type: .error)
+						}
+						self.imageView.image = self.image ?? DEFAULT_DECK_IMAGE
+					}
+				}
+			}
+		}
 	}
 	
 	func keyboardWillShow() {
