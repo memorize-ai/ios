@@ -54,6 +54,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		super.prepare(for: segue, sender: sender)
 		guard let deckVC = segue.destination as? DeckViewController, let selectedResult = sender as? SearchResult else { return }
 		deckVC.deck.id = selectedResult.id
+		deckVC.deck.hasImage = selectedResult.hasImage
 		deckVC.deck.image = selectedResult.image
 	}
 	

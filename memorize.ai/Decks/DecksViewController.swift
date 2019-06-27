@@ -89,6 +89,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		guard let deck = deck else { return }
 		if let deckVC = segue.destination as? DeckViewController {
 			deckVC.deck.id = deck.id
+			deckVC.deck.hasImage = deck.hasImage
 			deckVC.deck.image = deck.image
 		} else if let editCardVC = segue.destination as? EditCardViewController {
 			editCardVC.deck = deck

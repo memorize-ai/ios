@@ -544,6 +544,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func showOtherDeck(_ deck: Deck) {
 		guard let deckVC = storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return }
 		deckVC.deck.id = deck.id
+		deckVC.deck.hasImage = deck.hasImage
 		deckVC.deck.image = deck.image
 		navigationController?.pushViewController(deckVC, animated: true)
 	}
