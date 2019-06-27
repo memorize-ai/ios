@@ -27,7 +27,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	let options = [
 		Option(image: #imageLiteral(resourceName: "Settings"), name: "Settings", action: showSettings),
 		Option(image: #imageLiteral(resourceName: "Cloud"), name: "Uploads", action: showUploads),
-		Option(image: DEFAULT_DECK_IMAGE, name: "Deck Ratings", action: showDeckRatings),
+		Option(image: #imageLiteral(resourceName: "Decks"), name: "Deck Ratings", action: showDeckRatings),
 		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings),
 		Option(image: #imageLiteral(resourceName: "Book"), name: "Tutorial", action: showTutorial)
 	]
