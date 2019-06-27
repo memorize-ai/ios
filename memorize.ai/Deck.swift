@@ -8,6 +8,7 @@ var decks: [Deck] {
 
 class Deck {
 	let id: String
+	var hasImage: Bool
 	var image: UIImage?
 	var name: String
 	var subtitle: String
@@ -29,8 +30,9 @@ class Deck {
 	var role: Role
 	var hidden: Bool
 	
-	init(id: String, image: UIImage?, name: String, subtitle: String, description: String, tags: [String], isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, users: [DeckUser], creator: String, owner: String, created: Date, updated: Date, permissions: [Permission], cards: [Card], mastered: Int, role: Role, hidden: Bool) {
+	init(id: String, hasImage: Bool, image: UIImage?, name: String, subtitle: String, description: String, tags: [String], isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, users: [DeckUser], creator: String, owner: String, created: Date, updated: Date, permissions: [Permission], cards: [Card], mastered: Int, role: Role, hidden: Bool) {
 		self.id = id
+		self.hasImage = hasImage
 		self.image = image
 		self.name = name
 		self.subtitle = subtitle
@@ -133,6 +135,7 @@ class Deck {
 	func update(_ snapshot: DocumentSnapshot, type: DeckUpdateType) {
 		switch type {
 		case .deck:
+			hasImage = snapshot.get("hasImage") as? Bool ?? false
 			name = snapshot.get("name") as? String ?? name
 			subtitle = snapshot.get("subtitle") as? String ?? subtitle
 			description = snapshot.get("description") as? String ?? description
