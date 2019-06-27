@@ -807,6 +807,7 @@
                         <segue destination="PDB-ip-5Km" kind="show" identifier="uploads" id="MJl-Ks-n56"/>
                         <segue destination="Hfv-uJ-UyC" kind="show" identifier="deckRatings" id="m79-ie-SpS"/>
                         <segue destination="Jjp-he-rgi" kind="show" identifier="cardRatings" id="Z5E-Pv-nLz"/>
+                        <segue destination="Ono-gw-nzX" kind="show" identifier="tutorial" id="boo-9C-hs4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHv-jT-Qi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5331,6 +5332,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxq-4P-o63" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1500" y="-537"/>
+        </scene>
+        <!--Tutorial-->
+        <scene sceneID="pOe-XX-dHP">
+            <objects>
+                <viewController title="Tutorial" id="Ono-gw-nzX" customClass="TutorialViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3HW-gu-2bi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScM-dH-LeR">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ScM-dH-LeR" firstAttribute="leading" secondItem="RMp-KE-cOY" secondAttribute="leading" id="90u-xy-0U9"/>
+                            <constraint firstItem="ScM-dH-LeR" firstAttribute="top" secondItem="RMp-KE-cOY" secondAttribute="top" id="Q86-kG-Ynu"/>
+                            <constraint firstItem="RMp-KE-cOY" firstAttribute="trailing" secondItem="ScM-dH-LeR" secondAttribute="trailing" id="WCO-kR-SiH"/>
+                            <constraint firstAttribute="bottom" secondItem="ScM-dH-LeR" secondAttribute="bottom" id="zhs-6K-OEL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RMp-KE-cOY"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="ScM-dH-LeR" id="90t-mF-mKf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Bi-9i-TsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2193" y="-537"/>
         </scene>
         <!--Edit Card-->
         <scene sceneID="QKA-UI-Xh8">
