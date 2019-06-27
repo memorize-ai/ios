@@ -8,14 +8,16 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	
 	class SearchResult {
 		let id: String
+		let hasImage: Bool
 		var image: UIImage?
 		let name: String
 		let subtitle: String
 		let ratings: DeckRatings
 		let deck: Deck?
 		
-		init(id: String, image: UIImage?, name: String, subtitle: String, ratings: DeckRatings, deck: Deck?) {
+		init(id: String, hasImage: Bool, image: UIImage?, name: String, subtitle: String, ratings: DeckRatings, deck: Deck?) {
 			self.id = id
+			self.hasImage = hasImage
 			self.image = image
 			self.name = name
 			self.subtitle = subtitle
@@ -81,6 +83,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 									let deck = Deck.get(deckId)
 									let searchResult = SearchResult(
 										id: deckId,
+										hasImage: result["hasImage"] as? Bool ?? false,
 										image: deck?.image,
 										name: result["name"] as? String ?? "Error",
 										subtitle: snapshot.get("subtitle") as? String ?? "Error",
@@ -112,7 +115,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		let searchResult = searchResults[indexPath.item]
 		if let image = searchResult.image {
 			cell.imageView.image = image
-		} else {
+		} else if searchResult.hasImage {
 			storage.child("decks/\(searchResult.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				cell.imageView.image = image
@@ -120,6 +123,11 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 				searchResult.deck?.image = image
 				self.decksCollectionView.reloadData()
 			}
+		} else {
+			cell.imageView.image = DEFAULT_DECK_IMAGE
+			searchResult.image = DEFAULT_DECK_IMAGE
+			searchResult.deck?.image = nil
+			self.decksCollectionView.reloadData()
 		}
 		cell.nameLabel.text = searchResult.name
 		cell.subtitleLabel.text = searchResult.subtitle

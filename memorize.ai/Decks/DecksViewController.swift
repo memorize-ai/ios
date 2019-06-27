@@ -193,7 +193,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if collectionView.tag == decksCollectionView.tag {
+		switch collectionView.tag {
+		case decksCollectionView.tag:
 			if expanded {
 				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "expanded", for: indexPath)
 				guard let cell = _cell as? ExpandedDeckCollectionViewCell else { return _cell }
@@ -201,7 +202,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.due(!element.allDue().isEmpty)
 				if let image = element.image {
 					cell.imageView.image = image
-				} else {
+				} else if element.hasImage {
 					cell.imageActivityIndicator.startAnimating()
 					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
@@ -210,6 +211,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 						element.image = image
 						self.decksCollectionView.reloadData()
 					}
+				} else {
+					cell.imageView.image = DEFAULT_DECK_IMAGE
+					element.image = nil
+					self.decksCollectionView.reloadData()
 				}
 				cell.nameLabel.text = element.name
 				cell.layer.borderWidth = element.id == deck?.id ? 2 : 0
@@ -238,12 +243,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				}
 				return cell
 			}
-		} else if collectionView.tag == actionsCollectionView.tag {
+		case actionsCollectionView.tag:
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
 			cell.load(self, action: filteredActions[indexPath.item])
 			return cell
-		} else {
+		default:
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ThinCardCollectionViewCell, let element = deck?.cards[indexPath.item] else { return _cell }
 			cell.due(element.isDue())

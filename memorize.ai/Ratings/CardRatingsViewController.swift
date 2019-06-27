@@ -25,14 +25,18 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		if let image = deck.image {
 			cell.deckImageView.image = image
 		} else {
-			cell.deckImageView.image = nil
-			cell.deckActivityIndicator.startAnimating()
-			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-				cell.deckActivityIndicator.stopAnimating()
-				cell.deckImageView.image = image
-				deck.image = image
-				self.ratingsTableView.reloadData()
+			if deck.hasImage {
+				cell.deckImageView.image = nil
+				cell.deckActivityIndicator.startAnimating()
+				storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+					guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+					cell.deckActivityIndicator.stopAnimating()
+					cell.deckImageView.image = image
+					deck.image = image
+					self.ratingsTableView.reloadData()
+				}
+			} else {
+				cell.deckImageView.image = DEFAULT_DECK_IMAGE
 			}
 		}
 		cell.deckNameLabel.text = deck.name

@@ -60,6 +60,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	var deck: (
 		id: String?,
+		hasImage: Bool?,
 		image: UIImage?,
 		name: String?,
 		subtitle: String?,
@@ -87,7 +88,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		guard let deckId = deck.id else { return }
+		guard let deckId = deck.id, let hasImage = deck.hasImage else { return }
 		loadFlowLayouts()
 		loadCreator()
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
@@ -95,6 +96,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let deckViews = DeckViews(snapshot)
 				let deckDownloads = DeckDownloads(snapshot)
 				let deckRatings = DeckRatings(snapshot)
+				self.deck.hasImage = snapshot.get("hasImage") as? Bool ?? false
 				self.deck.name = deckName
 				self.deck.subtitle = subtitle
 				self.deck.description = description
@@ -160,10 +162,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 								hidden: false
 							)
 							self.creatorDecks.append(newDeck)
-							storage.child("decks/\(creatorDeckId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
-								if creatorError == nil, let creatorData = creatorData {
-									newDeck.image = UIImage(data: creatorData)
+							if newDeck.hasImage {
+								storage.child("decks/\(creatorDeckId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
+									if creatorError == nil, let creatorData = creatorData {
+										newDeck.image = UIImage(data: creatorData)
+									}
+									self.moreByCreatorCollectionView.reloadData()
 								}
+							} else {
+								newDeck.image = nil
 								self.moreByCreatorCollectionView.reloadData()
 							}
 						case .modified:
@@ -242,7 +249,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						)
 						self.ratings.append(newRating)
 						firestore.document("users/\(userId)").addSnapshotListener { userSnapshot, userError in
-							guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String, let userSlug = userSnapshot.get("slug") as? String, let url = URL(string: "https://memorize.ai/users/\(userSlug)") else { return }
+							guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String, let userSlug = userSnapshot.get("slug") as? String, let url = User.url(slug: userSlug) else { return }
 							newRating.user.name = userName
 							newRating.user.url = url
 							self.ratingsCollectionView.reloadData()
@@ -271,7 +278,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			deckImageActivityIndicator.stopAnimating()
 			deckImageView.image = image
 			deckImageView.layer.borderWidth = 0
-		} else if let deckId = deck.id {
+		} else if hasImage {
 			storage.child("decks/\(deckId)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				self.deckImageActivityIndicator.stopAnimating()
 				self.deckImageView.layer.borderWidth = 0
@@ -281,6 +288,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.deckImageView.image = DEFAULT_DECK_IMAGE
 				}
 			}
+		} else {
+			deckImageView.image = DEFAULT_DECK_IMAGE
 		}
     }
 	

@@ -27,6 +27,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	let SUBTITLE_LENGTH = 60
 	let TAGS_COUNT = 20
 	
+	var image: UIImage?
 	var deck: Deck?
 	var hasTagsPlaceholder = true
 	var lastTags = ""
