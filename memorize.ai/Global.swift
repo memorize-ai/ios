@@ -11,6 +11,8 @@ let auth = Auth.auth()
 let defaults = UserDefaults.standard
 var startup = true
 var shouldLoadDecks = false
+var shouldShowEditProfileTip = false
+var shouldShowTutorial = false
 
 func buzz() {
 	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
