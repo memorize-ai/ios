@@ -75,8 +75,8 @@ class User {
 	}
 	
 	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool)? {
-		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email"), let image = getImage() else { return nil }
-		return (id, name, email, defaults.string(forKey: "slug"), image, defaults.bool(forKey: "darkMode"))
+		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email") else { return nil }
+		return (id, name, email, defaults.string(forKey: "slug"), getImage(), defaults.bool(forKey: "darkMode"))
 	}
 	
 	static func getImage() -> UIImage? {
