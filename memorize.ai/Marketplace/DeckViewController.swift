@@ -291,7 +291,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			getButtonWidthConstraint.constant = 90
 			view.layoutIfNeeded()
 			getButton.setTitle("DELETE", for: .normal)
-			getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
+			getButton.backgroundColor = DEFAULT_RED_COLOR
 		}
 		ChangeHandler.updateAndCall(.deckRatingAdded) { change in
 			if change == .deckRatingAdded || change == .deckRatingRemoved || change == .ratingDraftAdded || change == .ratingDraftRemoved {
@@ -504,7 +504,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						self.view.layoutIfNeeded()
 						self.getButtonActivityIndicator.stopAnimating()
 						self.getButton.setTitle("DELETE", for: .normal)
-						self.getButton.backgroundColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
+						self.getButton.backgroundColor = DEFAULT_RED_COLOR
 					}, completion: nil)
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
@@ -520,7 +520,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						self.view.layoutIfNeeded()
 						self.getButtonActivityIndicator.stopAnimating()
 						self.getButton.setTitle("GET", for: .normal)
-						self.getButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+						self.getButton.backgroundColor = DEFAULT_BLUE_COLOR
 					}, completion: nil)
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()

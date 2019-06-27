@@ -33,8 +33,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		titleTextField.setKeyboard()
 		reviewTextView.setKeyboard(.plain)
 		textViewDidEndEditing(reviewTextView)
-		removeDraftButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
-		deleteRatingButton.layer.borderColor = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
+		removeDraftButton.layer.borderColor = DEFAULT_RED_COLOR.cgColor
+		deleteRatingButton.layer.borderColor = DEFAULT_RED_COLOR.cgColor
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +92,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 			self.titleBarView.transform = CGAffineTransform(scaleX: 1.01, y: 2)
-			self.titleBarView.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+			self.titleBarView.backgroundColor = DEFAULT_BLUE_COLOR
 		}, completion: nil)
 	}
 	
@@ -111,7 +111,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.layer.borderWidth = 2
-		textView.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		textView.layer.borderColor = DEFAULT_BLUE_COLOR.cgColor
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {

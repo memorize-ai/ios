@@ -235,7 +235,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 			self.nameBarView.transform = CGAffineTransform(scaleX: 1.01, y: 2)
-			self.nameBarView.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+			self.nameBarView.backgroundColor = DEFAULT_BLUE_COLOR
 		}, completion: nil)
 	}
 	
@@ -330,7 +330,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	func setEnabled(_ isEnabled: Bool) {
 		uploadButton.isEnabled = isEnabled
 		uploadButton.setTitleColor(isEnabled ? #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1) : #colorLiteral(red: 0.8264711499, green: 0.8266105652, blue: 0.8264527917, alpha: 1), for: .normal)
-		uploadButton.backgroundColor = isEnabled ? #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1) : #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
+		uploadButton.backgroundColor = isEnabled ? DEFAULT_BLUE_COLOR : #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1)
 		uploadButton.layer.borderWidth = isEnabled ? 0 : 1
 	}
 	

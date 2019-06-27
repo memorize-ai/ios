@@ -213,7 +213,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				}
 				cell.nameLabel.text = element.name
 				cell.layer.borderWidth = element.id == deck?.id ? 2 : 0
-				cell.layer.borderColor = element.id == deck?.id ? #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1) : nil
+				cell.layer.borderColor = element.id == deck?.id ? DEFAULT_BLUE_COLOR.cgColor : nil
 				return cell
 			} else {
 				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)

@@ -149,7 +149,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		let barView = textField == nameTextField ? nameBarView : subtitleBarView
 		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 			barView?.transform = CGAffineTransform(scaleX: 1.01, y: 2)
-			barView?.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+			barView?.backgroundColor = DEFAULT_BLUE_COLOR
 		}, completion: nil)
 	}
 	
@@ -181,7 +181,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		textView.layer.borderWidth = 2
-		textView.layer.borderColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		textView.layer.borderColor = DEFAULT_BLUE_COLOR.cgColor
 		if textView == tagsTextView && hasTagsPlaceholder {
 			hasTagsPlaceholder = false
 			tagsTextView.text = ""
@@ -348,7 +348,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	func enable() {
 		submitButton.isEnabled = true
 		submitButton.setTitleColor(#colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1), for: .normal)
-		submitButton.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+		submitButton.backgroundColor = DEFAULT_BLUE_COLOR
 		loadSubmitBarButtonItem(true)
 	}
 	

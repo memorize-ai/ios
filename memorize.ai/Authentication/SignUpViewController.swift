@@ -148,7 +148,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	
 	func enable() {
 		signUpButton.isEnabled = true
-		signUpButton.setTitleColor(#colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1), for: .normal)
+		signUpButton.setTitleColor(DEFAULT_BLUE_COLOR, for: .normal)
 		signUpButton.backgroundColor = .white
 	}
 	
@@ -161,7 +161,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	func enable(barView: UIView) {
 		UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 			barView.transform = CGAffineTransform(scaleX: 1.01, y: 2)
-			barView.backgroundColor = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
+			barView.backgroundColor = DEFAULT_BLUE_COLOR
 		}, completion: nil)
 	}
 	
