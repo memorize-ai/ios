@@ -434,6 +434,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						} else {
 							allDecks.append(Deck(
 								id: deckId,
+								hasImage: deckSnapshot.get("hasImage") as? Bool ?? false,
 								image: nil,
 								name: deckSnapshot.get("name") as? String ?? "Error",
 								subtitle: deckSnapshot.get("subtitle") as? String ?? "Error",

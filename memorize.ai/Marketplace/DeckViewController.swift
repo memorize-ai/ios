@@ -137,6 +137,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						case .added:
 							let newDeck = Deck(
 								id: creatorDeckId,
+								hasImage: creatorDeck.get("hasImage") as? Bool ?? false,
 								image: Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
 								name: creatorDeck.get("name") as? String ?? "Error",
 								subtitle: creatorDeck.get("subtitle") as? String ?? "",
