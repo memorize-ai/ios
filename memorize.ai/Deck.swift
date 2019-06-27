@@ -111,7 +111,7 @@ class Deck {
 	}
 	
 	static func allDue() -> [Card] {
-		return decks.flatMap { $0.cards.filter { $0.isDue() } }
+		return decks.flatMap { $0.allDue() }
 	}
 	
 	func allDue() -> [Card] {
