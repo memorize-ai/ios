@@ -4787,10 +4787,10 @@
             </objects>
             <point key="canvasLocation" x="1500" y="2153"/>
         </scene>
-        <!--View Controller-->
+        <!--Rating View Controller-->
         <scene sceneID="PJT-Wf-Aou">
             <objects>
-                <viewController id="0m3-gg-cP5" sceneMemberID="viewController">
+                <viewController id="0m3-gg-cP5" customClass="RatingViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0KL-e1-pql">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

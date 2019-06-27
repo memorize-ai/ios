@@ -55,6 +55,7 @@
 		4D89420122BB182A00C24FC6 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89420022BB182A00C24FC6 /* Audio.swift */; };
 		4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A345022090E9E0021474A /* ReviewViewController.swift */; };
 		4D8D9393220A5C720049482C /* RecapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D9392220A5C720049482C /* RecapViewController.swift */; };
+		4D99409D22C55B6900C7F43A /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D99409C22C55B6900C7F43A /* RatingViewController.swift */; };
 		4D9E7700228E53B9007EC018 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FE228E53B9007EC018 /* prism.js */; };
 		4D9E7701228E53B9007EC018 /* prism.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FF228E53B9007EC018 /* prism.css */; };
 		4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */; };
@@ -238,6 +239,7 @@
 		4D89420022BB182A00C24FC6 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		4D8A345022090E9E0021474A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		4D8D9392220A5C720049482C /* RecapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapViewController.swift; sourceTree = "<group>"; };
+		4D99409C22C55B6900C7F43A /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		4D9E76FE228E53B9007EC018 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
 		4D9E76FF228E53B9007EC018 /* prism.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = prism.css; sourceTree = "<group>"; };
 		4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDeckViewController.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */,
 				4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */,
 				4DAA38FD2208D4F500EB443E /* CardViewController.swift */,
+				4D99409C22C55B6900C7F43A /* RatingViewController.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -1052,6 +1055,7 @@
 				4DDD3F3422B3502E00BA2C98 /* Notification.swift in Sources */,
 				4DA2C2E122A48E5400669570 /* Upload.swift in Sources */,
 				4D34DB6722B9D3B600D5C9C9 /* UploadActionsViewController.swift in Sources */,
+				4D99409D22C55B6900C7F43A /* RatingViewController.swift in Sources */,
 				4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */,
 				4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */,
 				4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */,
