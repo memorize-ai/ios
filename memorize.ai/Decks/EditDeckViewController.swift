@@ -84,6 +84,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func loadText() {
 		guard let deck = deck else { return }
+		image = deck.image
 		imageView.image = deck.image
 		nameTextField.text = deck.name
 		subtitleTextField.text = deck.subtitle
