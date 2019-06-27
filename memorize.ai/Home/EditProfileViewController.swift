@@ -249,6 +249,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	@IBAction
+	func nameClicked() {
+		
+	}
+	
+	@IBAction
+	func emailClicked() {
+		
+	}
+	
+	@IBAction
 	func linkClicked() {
 		if let slug = slug {
 			if let url = User.url(slug: slug) {
