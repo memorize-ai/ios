@@ -1,6 +1,5 @@
 import UIKit
 import SafariServices
-//import SwiftGifOrigin
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var pictureView: UIView!
