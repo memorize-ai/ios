@@ -3753,18 +3753,18 @@
                                                             <constraint firstAttribute="height" constant="17" id="iVB-Ya-DmO"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="poE-sG-ehr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="114.33333333333333" height="30"/>
-                                                        <connections>
-                                                            <action selector="showCreatorProfile" destination="9XY-L1-f93" eventType="touchUpInside" id="nqE-NK-DPE"/>
-                                                        </connections>
-                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j33-7O-TKM">
                                                         <rect key="frame" x="38" y="0.0" width="42.333333333333343" height="30"/>
                                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="poE-sG-ehr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="114.33333333333333" height="30"/>
+                                                        <connections>
+                                                            <action selector="showCreatorProfile" destination="9XY-L1-f93" eventType="touchUpInside" id="nqE-NK-DPE"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -3973,7 +3973,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="more" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enf-zV-Idq">
-                                                        <rect key="frame" x="329" y="120" width="45" height="20"/>
+                                                        <rect key="frame" x="329" y="116.66666666666673" width="45" height="23.333333333333329"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="m5U-bD-lXh"/>
@@ -4497,7 +4497,7 @@
                                                         </connections>
                                                     </collectionView>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No reviews" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbf-MO-3jl">
-                                                        <rect key="frame" x="165" y="80" width="84.333333333333314" height="20"/>
+                                                        <rect key="frame" x="164" y="78.333333333333371" width="86" height="23.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -4963,15 +4963,18 @@
                                                             <constraint firstAttribute="height" constant="17" id="vNN-0S-b64"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3u-Yp-k2g">
-                                                        <rect key="frame" x="0.0" y="0.0" width="114.33333333333333" height="30"/>
-                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xbt-nf-tJW">
                                                         <rect key="frame" x="38" y="0.0" width="42.333333333333343" height="30"/>
                                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3u-Yp-k2g">
+                                                        <rect key="frame" x="0.0" y="0.0" width="114" height="30"/>
+                                                        <connections>
+                                                            <action selector="userClicked" destination="0m3-gg-cP5" eventType="touchUpInside" id="ueq-po-uUE"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -5021,6 +5024,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="41r-r1-bUQ"/>
                     </view>
+                    <connections>
+                        <outlet property="userImageView" destination="69C-wC-Ml7" id="5BG-a8-pRQ"/>
+                        <outlet property="userNameLabel" destination="Xbt-nf-tJW" id="9qn-Hw-MAr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dnd-v0-x0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -5651,7 +5658,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRONT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMr-WM-tvn">
-                                        <rect key="frame" x="174" y="8.3333333333333695" width="66.333333333333314" height="23.333333333333329"/>
+                                        <rect key="frame" x="173.33333333333334" y="6.3333333333333695" width="67.333333333333343" height="27.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
