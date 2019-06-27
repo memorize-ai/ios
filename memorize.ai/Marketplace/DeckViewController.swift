@@ -328,6 +328,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			} else {
 				showNotification("Unable to load deck. Please try again", type: .error)
 			}
+		} else if let ratingVC = segue.destination as? RatingViewController, let rating = sender as? Rating {
+			ratingVC.rating = rating
 		}
 	}
 	
@@ -608,7 +610,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cell.moreLabel.isHidden = !(hasReview && cell.reviewLabel.isTruncated)
 			cell.action = {
 				if cell.moreLabel.isHidden { return }
-				// When clicked, show modal
+				self.performSegue(withIdentifier: "rating", sender: rating)
 			}
 			return cell
 		case infoCollectionView.tag:
