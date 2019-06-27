@@ -49,7 +49,19 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			if change == .deckModified {
 				self.decksCollectionView.reloadData()
 			} else if change == .deckRemoved {
-				self.navigationController?.popViewController(animated: true)
+				if Deck.has(self.deck?.id) {
+					self.decksCollectionView.reloadData()
+				} else if let deck = decks.first {
+					self.deck = deck
+					self.decksCollectionView.reloadData()
+					self.cardsCollectionView.reloadData()
+					self.reloadActions()
+				} else {
+					self.deck = nil
+					self.decksCollectionView.reloadData()
+					self.cardsCollectionView.reloadData()
+					self.navigationController?.popViewController(animated: true)
+				}
 			} else if change == .cardModified || change == .cardRemoved {
 				self.cardsCollectionView.reloadData()
 			} else if change == .cardDue {
@@ -69,9 +81,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		decksCollectionView.reloadData()
 		cardsCollectionView.reloadData()
 		reloadActions()
-		if decks.isEmpty {
-			navigationController?.popViewController(animated: true)
-		}
 		updateCurrentViewController()
 	}
 	
