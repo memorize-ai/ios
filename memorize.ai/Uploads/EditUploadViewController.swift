@@ -79,40 +79,40 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		})
 		alert.addAction(UIAlertAction(title: "Paste URL", style: .default) { _ in
 			let urlAlert = UIAlertController(title: "Paste URL", message: nil, preferredStyle: .alert)
-			urlAlert.addTextField { $0.placeholder = "File URL" }
+			urlAlert.addTextField {
+				$0.placeholder = "File URL"
+				$0.clearButtonMode = .whileEditing
+			}
 			urlAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 			urlAlert.addAction(UIAlertAction(title: "Submit", style: .default) { _ in
-				if let urlString = urlAlert.textFields?.first?.text?.trim() {
-					if urlString.isEmpty {
-						self.showNotification("Please enter a valid URL", type: .error)
-					} else if let url = URL(string: urlString), let data = try? Data(contentsOf: url), let _ext = urlString.split(separator: ".").last {
-						let ext = String(_ext)
-						if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
-							switch type {
-							case .image, .gif:
-								if let image = UIImage(data: data) {
-									self.saveImage(image, data: data, extension: ext)
-								} else {
-									self.showNotification("Unable to load image from URL. Please try again", type: .error)
-								}
-							case .audio:
-								self.fileImageView.image = #imageLiteral(resourceName: "Sound")
-								self.file.type = type
-								self.file.mime = mime
-								self.file.extension = ext
-								self.file.size = data.size
-								self.file.data = data
-								self.didPickFile()
-								self.reloadUpload()
+				let urlString = urlAlert.textFields?.first?.text?.trim() ?? ""
+				if urlString.isEmpty {
+					self.showNotification("Please enter a valid URL", type: .error)
+				} else if let url = URL(string: urlString), let data = try? Data(contentsOf: url), let _ext = urlString.split(separator: ".").last {
+					let ext = String(_ext)
+					if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
+						switch type {
+						case .image, .gif:
+							if let image = UIImage(data: data) {
+								self.saveImage(image, data: data, extension: ext)
+							} else {
+								self.showNotification("Unable to load image from URL. Please try again", type: .error)
 							}
-						} else {
-							self.showNotification("Invalid file type", type: .error)
+						case .audio:
+							self.fileImageView.image = #imageLiteral(resourceName: "Sound")
+							self.file.type = type
+							self.file.mime = mime
+							self.file.extension = ext
+							self.file.size = data.size
+							self.file.data = data
+							self.didPickFile()
+							self.reloadUpload()
 						}
 					} else {
-						self.showNotification("Unable to get file contents from URL. Please try again", type: .error)
+						self.showNotification("Invalid file type", type: .error)
 					}
 				} else {
-					self.showNotification("Unable to process URL. Please try again", type: .error)
+					self.showNotification("Unable to get file contents from URL. Please try again", type: .error)
 				}
 			})
 			self.present(urlAlert, animated: true, completion: nil)
