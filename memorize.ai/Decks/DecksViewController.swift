@@ -203,6 +203,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				if let image = element.image {
 					cell.imageView.image = image
 				} else if element.hasImage {
+					cell.imageView.image = nil
 					cell.imageActivityIndicator.startAnimating()
 					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
@@ -214,7 +215,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else {
 					cell.imageView.image = DEFAULT_DECK_IMAGE
 					element.image = nil
-					self.decksCollectionView.reloadData()
+					decksCollectionView.reloadData()
 				}
 				cell.nameLabel.text = element.name
 				cell.layer.borderWidth = element.id == deck?.id ? 2 : 0
@@ -227,7 +228,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.due(!element.allDue().isEmpty)
 				if let image = element.image {
 					cell.imageView.image = image
-				} else {
+				} else if element.hasImage {
 					cell.imageView.image = nil
 					cell.imageActivityIndicator.startAnimating()
 					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
@@ -237,6 +238,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 						element.image = image
 						self.decksCollectionView.reloadData()
 					}
+				} else {
+					cell.imageView.image = DEFAULT_DECK_IMAGE
+					element.image = nil
+					decksCollectionView.reloadData()
 				}
 				if element.id == deck?.id {
 					cell.layer.borderWidth = 3
