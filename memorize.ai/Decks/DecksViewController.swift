@@ -224,7 +224,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else {
 					cell.imageView.image = DEFAULT_DECK_IMAGE
 					element.image = nil
-					decksCollectionView.reloadData()
 				}
 				cell.nameLabel.text = element.name
 				cell.layer.borderWidth = element.id == deck?.id ? 2 : 0
@@ -250,7 +249,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else {
 					cell.imageView.image = DEFAULT_DECK_IMAGE
 					element.image = nil
-					decksCollectionView.reloadData()
 				}
 				if element.id == deck?.id {
 					cell.layer.borderWidth = 3
