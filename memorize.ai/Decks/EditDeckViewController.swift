@@ -97,6 +97,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 						self.imageActivityIndicator.stopAnimating()
 						if error == nil, let image = upload.image {
 							self.image = image
+							self.reloadSubmit()
 						} else {
 							self.showNotification("Unable to load image. Please try again", type: .error)
 						}
