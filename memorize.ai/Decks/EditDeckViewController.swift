@@ -281,7 +281,18 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 							self.showNotification("Unable to change image. Please try again", type: .error)
 						}
 					} else {
-						// Delete image
+						storage.child("decks/\(deck.id)").delete { error in
+							if error == nil {
+								deck.image = nil
+								buzz()
+								self.hideActivityIndicator()
+								self.disable()
+							} else {
+								self.hideActivityIndicator()
+								self.enable()
+								self.showNotification("Unable to reset image. Please try again", type: .error)
+							}
+						}
 					}
 				} else {
 					self.hideActivityIndicator()
