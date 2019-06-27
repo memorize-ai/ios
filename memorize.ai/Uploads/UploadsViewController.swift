@@ -20,7 +20,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		flowLayout.itemSize = CGSize(width: size, height: size)
 		uploadsCollectionView.collectionViewLayout = flowLayout
 		if !audioAllowed {
-			audioFilterButton.setTitleColor(#colorLiteral(red: 0.9601849914, green: 0.9601849914, blue: 0.9601849914, alpha: 1), for: .normal)
+			audioFilterButton.setTitleColor(#colorLiteral(red: 0.9198423028, green: 0.9198423028, blue: 0.9198423028, alpha: 1), for: .normal)
 			audioFilterButton.isEnabled = false
 		}
 	}
@@ -42,22 +42,22 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	
 	@IBAction
 	func filterAll() {
-		selectFilter(nil)
+		selectFilter(nil, button: allFilterButton)
 	}
 	
 	@IBAction
 	func filterImages() {
-		selectFilter(.image)
+		selectFilter(.image, button: imagesFilterButton)
 	}
 	
 	@IBAction
 	func filterGifs() {
-		selectFilter(.gif)
+		selectFilter(.gif, button: gifsFilterButton)
 	}
 	
 	@IBAction
 	func filterAudio() {
-		selectFilter(.audio)
+		selectFilter(.audio, button: audioFilterButton)
 	}
 	
 	func deselectAllFilters() {
@@ -66,8 +66,9 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		}
 	}
 	
-	func selectFilter(_ filter: UploadType?) {
+	func selectFilter(_ filter: UploadType?, button: UIButton) {
 		deselectAllFilters()
+		button.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
 		self.filter = filter
 		reloadUploads()
 	}
