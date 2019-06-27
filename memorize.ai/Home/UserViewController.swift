@@ -365,7 +365,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadProfileBarButtonItem(_ image: UIImage?) {
-		guard let image = image ?? profilePicture else { return }
+		let image = image ?? profilePicture ?? DEFAULT_PROFILE_PICTURE
 		loadBarButtonItems(image: image)
 		profilePicture = image
 	}
