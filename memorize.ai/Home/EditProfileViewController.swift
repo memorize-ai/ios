@@ -278,33 +278,53 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			$0.keyboardType = .emailAddress
 			$0.clearButtonMode = .whileEditing
 		}
+		alertController.addTextField {
+			$0.placeholder = "Confirm password"
+			$0.isSecureTextEntry = true
+			$0.clearButtonMode = .whileEditing
+		}
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
+			guard let email = email, let id = id else { return }
 			let newEmail = alertController.textFields?.first?.text?.trim() ?? ""
 			if newEmail.isEmpty {
 				self.showNotification("Email cannot be blank", type: .error)
-			} else if newEmail.isValidEmail(), let id = id {
-				firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
-					if error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser {
-						if snapshot.isEmpty {
-							currentUser.updateEmail(to: newEmail) { error in
-								if error == nil {
-									firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
-										self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
+				return
+			}
+			let password = alertController.textFields?.last?.text?.trim() ?? ""
+			if password.isEmpty {
+				self.showNotification("Password cannot be blank", type: .error)
+				return
+			}
+			self.showNotification("Changing email...", type: .normal)
+			auth.signIn(withEmail: email, password: password) { _, error in
+				if error == nil {
+					if newEmail.isValidEmail() {
+						firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
+							if error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser {
+								if snapshot.isEmpty {
+									currentUser.updateEmail(to: newEmail) { error in
+										if error == nil {
+											firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
+												self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
+											}
+										} else {
+											self.showNotification("Unable to change email. Please try again", type: .error)
+										}
 									}
 								} else {
-									self.showNotification("Unable to change email. Please try again", type: .error)
+									self.showNotification("Email is already in use", type: .error)
 								}
+							} else {
+								self.showNotification("Unable to validate email. Please try again", type: .error)
 							}
-						} else {
-							self.showNotification("Email is already in use", type: .error)
 						}
 					} else {
-						self.showNotification("Unable to validate email. Please try again", type: .error)
+						self.showNotification("Invalid email", type: .error)
 					}
+				} else {
+					self.showNotification("Invalid password", type: .error)
 				}
-			} else {
-				self.showNotification("Invalid email", type: .error)
 			}
 		})
 		present(alertController, animated: true, completion: nil)
