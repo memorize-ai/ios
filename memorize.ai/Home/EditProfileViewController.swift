@@ -270,7 +270,23 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func emailClicked() {
-		
+		let alertController = UIAlertController(title: "Change email", message: nil, preferredStyle: .alert)
+		alertController.addTextField {
+			$0.placeholder = "Email"
+			$0.keyboardType = .emailAddress
+		}
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
+			let newEmail = alertController.textFields?.first?.text?.trim() ?? ""
+			if newEmail.isEmpty {
+				self.showNotification("Email cannot be blank", type: .error)
+			} else if newEmail.isValidEmail(), let id = id {
+				
+			} else {
+				self.showNotification("Invalid email", type: .error)
+			}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction
