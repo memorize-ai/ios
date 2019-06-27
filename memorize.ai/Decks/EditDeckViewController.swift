@@ -120,7 +120,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	func loadText() {
 		guard let deck = deck else { return }
 		image = deck.image
-		imageView.image = deck.image
+		imageView.image = image ?? DEFAULT_DECK_IMAGE
 		nameTextField.text = deck.name
 		subtitleTextField.text = deck.subtitle
 		let tags = deck.tags.joined(separator: ", ")
