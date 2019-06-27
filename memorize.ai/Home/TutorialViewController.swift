@@ -13,9 +13,9 @@ class TutorialViewController: UIViewController {
 			showTutorial(tutorial)
 		} else {
 			firestore.document("markdown/ios-tutorial").addSnapshotListener { snapshot, error in
-				if error == nil, let snapshot = snapshot, let text = snapshot.get("text") as? String, let html = try? Down(markdownString: text).toHTML() {
-					tutorial = html
-					self.showTutorial(html)
+				if error == nil, let text = snapshot?.get("text") as? String {
+					tutorial = text
+					self.showTutorial(text)
 				} else {
 					self.navigationController?.popViewController(animated: true)
 				}
@@ -24,6 +24,6 @@ class TutorialViewController: UIViewController {
 	}
 	
 	func showTutorial(_ text: String) {
-		webView.loadHTMLString(text, baseURL: nil)
+		webView.render(text, fontSize: 35, textColor: "000000", backgroundColor: "ffffff")
 	}
 }
