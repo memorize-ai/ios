@@ -543,7 +543,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsg-M5-zL2">
-                                <rect key="frame" x="0.0" y="64" width="414" height="582"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="549"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q21-sq-ltA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="350.66666666666669"/>
@@ -704,26 +704,6 @@
                                                     <constraint firstItem="wmO-SN-1yv" firstAttribute="leading" secondItem="BEA-Y6-oX2" secondAttribute="leading" id="qOg-7l-CAq"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqu-Oc-1nd">
-                                                <rect key="frame" x="258" y="6" width="150" height="25"/>
-                                                <color key="backgroundColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="0IN-yy-rdi"/>
-                                                    <constraint firstAttribute="width" constant="150" id="QJb-Zl-HlO"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="13"/>
-                                                <state key="normal" title="RESET PASSWORD">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <real key="value" value="12.5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="resetPassword" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="e4N-vR-5bc"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -743,10 +723,8 @@
                                             <constraint firstAttribute="trailing" secondItem="BEA-Y6-oX2" secondAttribute="trailing" constant="20" id="bJG-fW-bFK"/>
                                             <constraint firstAttribute="trailing" secondItem="kc1-nJ-brZ" secondAttribute="trailing" constant="20" id="cdN-Di-nTv"/>
                                             <constraint firstItem="oyG-re-dKr" firstAttribute="leading" secondItem="kBk-A6-MRH" secondAttribute="leading" id="dfe-Ny-AgO"/>
-                                            <constraint firstItem="Aqu-Oc-1nd" firstAttribute="top" secondItem="q21-sq-ltA" secondAttribute="top" constant="6" id="ehr-CK-3su"/>
                                             <constraint firstItem="PEy-EW-krH" firstAttribute="top" secondItem="wmq-LT-5lE" secondAttribute="bottom" constant="24" id="mV2-CY-MTF"/>
                                             <constraint firstItem="PEy-EW-krH" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" id="nzw-VR-N94"/>
-                                            <constraint firstAttribute="trailing" secondItem="Aqu-Oc-1nd" secondAttribute="trailing" constant="6" id="qjg-Q2-bCE"/>
                                             <constraint firstItem="kc1-nJ-brZ" firstAttribute="leading" secondItem="oyG-re-dKr" secondAttribute="trailing" constant="10" id="vE1-qQ-4xX"/>
                                         </constraints>
                                     </view>
@@ -777,14 +755,37 @@
                                     <action selector="signOut" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="FCO-5G-MeD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqu-Oc-1nd">
+                                <rect key="frame" x="40" y="633" width="150" height="25"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="I93-b7-RXX"/>
+                                    <constraint firstAttribute="height" constant="25" id="LBo-iP-7TM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="13"/>
+                                <state key="normal" title="RESET PASSWORD">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="12.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="resetPassword" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="e4N-vR-5bc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lZh-JO-Vn9" firstAttribute="top" secondItem="xsg-M5-zL2" secondAttribute="bottom" constant="20" id="19N-iM-waw"/>
                             <constraint firstItem="q21-sq-ltA" firstAttribute="width" secondItem="wPp-Ww-XZU" secondAttribute="width" id="3hT-gU-1fI"/>
                             <constraint firstItem="xsg-M5-zL2" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" id="4gP-ZL-Vhk"/>
+                            <constraint firstItem="lZh-JO-Vn9" firstAttribute="top" secondItem="Aqu-Oc-1nd" secondAttribute="bottom" constant="8" id="6LQ-KJ-308"/>
                             <constraint firstItem="lZh-JO-Vn9" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" constant="40" id="AJk-79-zfd"/>
+                            <constraint firstItem="Aqu-Oc-1nd" firstAttribute="leading" secondItem="ciK-f6-6s4" secondAttribute="leading" constant="40" id="DFT-mM-uHa"/>
+                            <constraint firstItem="Aqu-Oc-1nd" firstAttribute="top" secondItem="xsg-M5-zL2" secondAttribute="bottom" constant="20" id="JcM-QM-BCw"/>
                             <constraint firstItem="xsg-M5-zL2" firstAttribute="top" secondItem="ciK-f6-6s4" secondAttribute="top" id="OlW-MW-KQg"/>
+                            <constraint firstItem="ciK-f6-6s4" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aqu-Oc-1nd" secondAttribute="trailing" constant="40" id="dH5-AH-3K1"/>
                             <constraint firstItem="xsg-M5-zL2" firstAttribute="trailing" secondItem="ciK-f6-6s4" secondAttribute="trailing" id="lTL-Fq-Jdo"/>
                             <constraint firstItem="ciK-f6-6s4" firstAttribute="bottom" secondItem="lZh-JO-Vn9" secondAttribute="bottom" constant="30" id="qE3-2x-XrE"/>
                             <constraint firstItem="ciK-f6-6s4" firstAttribute="trailing" secondItem="lZh-JO-Vn9" secondAttribute="trailing" constant="40" id="tSv-26-5tr"/>
