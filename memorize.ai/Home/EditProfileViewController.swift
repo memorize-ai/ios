@@ -252,6 +252,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let alertController = UIAlertController(title: "Change name", message: nil, preferredStyle: .alert)
 		alertController.addTextField {
 			$0.placeholder = "Name"
+			$0.text = name
 			$0.clearButtonMode = .whileEditing
 		}
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -273,6 +274,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let alertController = UIAlertController(title: "Change email", message: nil, preferredStyle: .alert)
 		alertController.addTextField {
 			$0.placeholder = "Email"
+			$0.text = email
 			$0.keyboardType = .emailAddress
 			$0.clearButtonMode = .whileEditing
 		}
