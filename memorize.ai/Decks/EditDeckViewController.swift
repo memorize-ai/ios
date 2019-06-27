@@ -27,6 +27,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	let SUBTITLE_LENGTH = 60
 	let TAGS_COUNT = 20
 	
+	var didChangeImage = false
 	var image: UIImage?
 	var deck: Deck?
 	var hasTagsPlaceholder = true
@@ -127,16 +128,25 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			picker.sourceType = .photoLibrary
 			self.present(picker, animated: true, completion: nil)
 		})
-		alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
-			self.imageView.image = DEFAULT_DECK_IMAGE
-			self.reloadSubmit()
+		alert.addAction(UIAlertAction(title: "Your Uploads", style: .default) { _ in
+			self.performSegue(withIdentifier: "uploads", sender: true)
 		})
+		if image != nil {
+			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
+				self.didChangeImage = true
+				self.image = nil
+				self.imageView.image = DEFAULT_DECK_IMAGE
+				self.reloadSubmit()
+			})
+		}
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		present(alert, animated: true, completion: nil)
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+			didChangeImage = true
+			self.image = image
 			imageView.image = image
 			reloadSubmit()
 		}
@@ -234,33 +244,54 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	@IBAction
 	func submit() {
-		guard let id = id, let imageData = imageView.image?.compressedData, let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
+		guard let id = id, let nameText = nameTextField.text?.trim(), let subtitleText = subtitleTextField.text?.trim() else { return }
 		showActivityIndicator()
 		loadSubmitBarButtonItem(false)
 		dismissKeyboard()
 		if let deck = deck {
-			firestore.document("decks/\(deck.id)").updateData([
+			let description = descriptionTextView.text.trim()
+			let tags = getTags()
+			firestore.document("decks/\(deck.id)").updateData(deck.role == .editor ? [
+				"description": description,
+				"tags": tags,
+			] : [
+				"hasImage": image == nil ? FieldValue.delete() : true,
 				"name": nameText,
 				"subtitle": subtitleText,
-				"description": descriptionTextView.text.trim(),
-				"tags": getTags(),
+				"description": description,
+				"tags": tags,
 				"public": publicSwitch.isOn
 			]) { error in
 				if error == nil {
-					self.setImage(deck.id, data: imageData) {
+					if deck.role == .editor || !self.didChangeImage {
 						buzz()
 						self.hideActivityIndicator()
 						self.disable()
-						deck.image = self.imageView.image
+					} else if let image = self.image {
+						if let imageData = image.compressedData {
+							self.setImage(deck.id, data: imageData) {
+								deck.image = image
+								buzz()
+								self.hideActivityIndicator()
+								self.disable()
+							}
+						} else {
+							self.hideActivityIndicator()
+							self.enable()
+							self.showNotification("Unable to change image. Please try again", type: .error)
+						}
+					} else {
+						// Delete image
 					}
 				} else {
+					self.hideActivityIndicator()
+					self.enable()
 					self.showNotification("Unable to publish changes. Please try again", type: .error)
 				}
 			}
 		} else {
 			let date = Date()
-			var deckRef: DocumentReference?
-			deckRef = firestore.collection("decks").addDocument(data: [
+			var data: [String : Any] = [
 				"name": nameText,
 				"subtitle": subtitleText,
 				"description": descriptionTextView.text.trim(),
@@ -274,21 +305,26 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 				"owner": id,
 				"created": date,
 				"updated": date
-			]) { error in
+			]
+			if image != nil {
+				data["hasImage"] = true
+			}
+			var deckRef: DocumentReference?
+			deckRef = firestore.collection("decks").addDocument(data: data) { error in
 				if error == nil, let deckId = deckRef?.documentID {
 					Deck.new(deckId) { error in
-						if error == nil {
+						if error == nil, let imageData = self.image?.compressedData {
 							self.setImage(deckId, data: imageData) {
 								self.navigationController?.popViewController(animated: true)
 							}
 						} else {
-							self.showNotification("Unable to add the deck to your library. You can manually get the deck from the Marketplace", type: .error)
 							self.navigationController?.popViewController(animated: true)
 						}
 					}
 				} else {
 					self.hideActivityIndicator()
 					self.enable()
+					self.showNotification("Unable to create deck. Please try again", type: .error)
 				}
 			}
 		}
@@ -296,17 +332,14 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	
 	func setImage(_ deckId: String, data: Data, completion: @escaping () -> Void) {
 		storage.child("decks/\(deckId)").putData(data, metadata: JPEG_METADATA) { _, error in
-			if let error = error {
-				self.hideActivityIndicator()
-				switch error.localizedDescription {
-				case "Network error (such as timeout, interrupted connection or unreachable host) has occurred.":
-					self.showNotification("No internet", type: .error)
-				default:
-					self.showNotification("There was a problem creating a new deck", type: .error)
-				}
-			} else {
-				self.hideActivityIndicator()
+			self.hideActivityIndicator()
+			switch error?.localizedDescription {
+			case .none:
 				completion()
+			case .some("Network error (such as timeout, interrupted connection or unreachable host) has occurred."):
+				self.showNotification("No internet", type: .error)
+			default:
+				self.showNotification("There was a problem creating a new deck", type: .error)
 			}
 		}
 	}
