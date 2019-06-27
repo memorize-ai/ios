@@ -281,7 +281,25 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			if newEmail.isEmpty {
 				self.showNotification("Email cannot be blank", type: .error)
 			} else if newEmail.isValidEmail(), let id = id {
-				
+				firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
+					if error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser {
+						if snapshot.isEmpty {
+							currentUser.updateEmail(to: newEmail) { error in
+								if error == nil {
+									firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
+										self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
+									}
+								} else {
+									self.showNotification("Unable to change email. Please try again", type: .error)
+								}
+							}
+						} else {
+							self.showNotification("Email is already in use", type: .error)
+						}
+					} else {
+						self.showNotification("Unable to validate email. Please try again", type: .error)
+					}
+				}
 			} else {
 				self.showNotification("Invalid email", type: .error)
 			}
