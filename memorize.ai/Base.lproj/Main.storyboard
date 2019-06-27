@@ -4831,7 +4831,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="477"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-kx-muO">
-                                        <rect key="frame" x="-184.66666666666663" y="163.66666666666666" width="783.33333333333337" height="149.99999999999997"/>
+                                        <rect key="frame" x="-184.66666666666666" y="163.66666666666666" width="783.33333333333337" height="149.99999999999997"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="rbc-KL-gP7">
                                                 <rect key="frame" x="0.0" y="0.0" width="783.33333333333337" height="150"/>
@@ -6100,13 +6100,16 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T38-G4-g2E">
-                                                    <rect key="frame" x="78" y="28.333333333333336" width="41.666666666666657" height="23.333333333333336"/>
+                                                    <rect key="frame" x="78" y="24.333333333333336" width="41.666666666666657" height="23.333333333333336"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LsR-vJ-g0H">
                                                     <rect key="frame" x="78" y="7.6666666666666661" width="29.333333333333329" height="16.666666666666671"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16.670000000000002" id="nCd-VG-dzX"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -6154,7 +6157,7 @@
                                                 <constraint firstItem="LsR-vJ-g0H" firstAttribute="top" secondItem="Nkw-fz-Zht" secondAttribute="top" constant="7.6699999999999999" id="cVb-qU-nvZ"/>
                                                 <constraint firstItem="2mi-6C-Bfd" firstAttribute="top" secondItem="Nkw-fz-Zht" secondAttribute="top" constant="15" id="fma-fA-G8w"/>
                                                 <constraint firstItem="jUR-DD-wvw" firstAttribute="top" secondItem="Nkw-fz-Zht" secondAttribute="top" constant="15" id="kOv-CH-PVN"/>
-                                                <constraint firstItem="T38-G4-g2E" firstAttribute="top" secondItem="LsR-vJ-g0H" secondAttribute="bottom" constant="4" id="nDm-df-hFM"/>
+                                                <constraint firstItem="T38-G4-g2E" firstAttribute="top" secondItem="LsR-vJ-g0H" secondAttribute="bottom" id="nDm-df-hFM"/>
                                                 <constraint firstAttribute="bottom" secondItem="2mi-6C-Bfd" secondAttribute="bottom" constant="15" id="r6U-ZT-FSg"/>
                                                 <constraint firstItem="jUR-DD-wvw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LsR-vJ-g0H" secondAttribute="trailing" constant="8" id="wgE-ew-ep5"/>
                                             </constraints>
