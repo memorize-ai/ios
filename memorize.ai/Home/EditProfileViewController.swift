@@ -161,7 +161,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			picker.sourceType = .photoLibrary
 			self.present(picker, animated: true, completion: nil)
 		})
-		alert.addAction(UIAlertAction(title: "Choose Upload", style: .default) { _ in
+		alert.addAction(UIAlertAction(title: "Your Uploads", style: .default) { _ in
 			self.performSegue(withIdentifier: "uploads", sender: true)
 		})
 		if profilePicture != nil {
