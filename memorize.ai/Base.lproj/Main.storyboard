@@ -5025,6 +5025,12 @@
                         <viewLayoutGuide key="safeArea" id="41r-r1-bUQ"/>
                     </view>
                     <connections>
+                        <outlet property="ratingDateLabel" destination="xha-cs-1M7" id="QSr-lU-ttW"/>
+                        <outlet property="ratingNameLabel" destination="HF1-lQ-e5D" id="We8-w1-YrX"/>
+                        <outlet property="ratingReviewLabel" destination="xXo-lV-iR1" id="wTw-aS-ZzJ"/>
+                        <outlet property="ratingStarsSliderView" destination="FfW-wI-gQ0" id="ydQ-RR-tk3"/>
+                        <outlet property="ratingStarsSliderViewTrailingConstraint" destination="F7n-Zm-vXi" id="FQM-jt-Clg"/>
+                        <outlet property="ratingTitleLabel" destination="RxA-Jr-ZKT" id="ODM-jU-v18"/>
                         <outlet property="userImageView" destination="69C-wC-Ml7" id="5BG-a8-pRQ"/>
                         <outlet property="userNameLabel" destination="Xbt-nf-tJW" id="9qn-Hw-MAr"/>
                     </connections>
