@@ -12,10 +12,9 @@ class TutorialViewController: UIViewController {
 		if let tutorial = tutorial {
 			showTutorial(tutorial)
 		} else {
-			firestore.document("markdown/ios-tutorial").addSnapshotListener { snapshot, error in
+			listeners["markdown/ios-tutorial"] = firestore.document("markdown/ios-tutorial").addSnapshotListener { snapshot, error in
 				if error == nil, let text = snapshot?.get("text") as? String {
-					tutorial = text
-					self.showTutorial(text)
+					tutorial = self.showTutorial(text)
 				} else {
 					self.navigationController?.popViewController(animated: true)
 				}
@@ -23,7 +22,9 @@ class TutorialViewController: UIViewController {
 		}
 	}
 	
-	func showTutorial(_ text: String) {
+	@discardableResult
+	func showTutorial(_ text: String) -> String {
 		webView.render(text, fontSize: 35, textColor: "000000", backgroundColor: "ffffff")
+		return text
 	}
 }
