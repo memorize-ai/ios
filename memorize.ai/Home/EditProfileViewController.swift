@@ -27,8 +27,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	let options = [
 		Option(image: #imageLiteral(resourceName: "Settings"), name: "Settings", action: showSettings),
 		Option(image: #imageLiteral(resourceName: "Cloud"), name: "Uploads", action: showUploads),
-		Option(image: #imageLiteral(resourceName: "Decks"), name: "Deck Ratings", action: showDeckRatings),
-		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings)
+		Option(image: DEFAULT_DECK_IMAGE, name: "Deck Ratings", action: showDeckRatings),
+		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings),
+		Option(image: #imageLiteral(resourceName: "Book"), name: "Tutorial", action: showTutorial)
 	]
 	
 	override func viewDidLoad() {
@@ -103,6 +104,19 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
+	@IBAction
+	func resetPassword() {
+		guard let email = email else { return }
+		let alertController = UIAlertController(title: "Reset password", message: "Send a password reset email to \(email)", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Send", style: .default) { _ in
+			auth.sendPasswordReset(withEmail: email) { error in
+				self.showNotification(error == nil ? "Sent. Check your email to reset your password" : "Unable to send password reset email. Please try again", type: error == nil ? .success : .error)
+			}
+		})
+		present(alertController, animated: true, completion: nil)
+	}
+	
 	func resizeOptionsTableView() {
 		optionsTableViewHeightConstraint.constant = CGFloat(56 * options.count)
 		view.layoutIfNeeded()
@@ -122,6 +136,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func showCardRatings() {
 		performSegue(withIdentifier: "cardRatings", sender: self)
+	}
+	
+	func showTutorial() {
+		performSegue(withIdentifier: "tutorial", sender: self)
 	}
 	
 	@IBAction
