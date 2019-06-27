@@ -57,7 +57,6 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else {
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 			deck.image = nil
-			cardsCollectionView.reloadData()
 		}
 		cell.load(element.front)
 		cell.draft(element.hasDraft)

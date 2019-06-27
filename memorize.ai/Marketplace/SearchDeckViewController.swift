@@ -127,7 +127,6 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 			searchResult.image = DEFAULT_DECK_IMAGE
 			searchResult.deck?.image = nil
-			self.decksCollectionView.reloadData()
 		}
 		cell.nameLabel.text = searchResult.name
 		cell.subtitleLabel.text = searchResult.subtitle

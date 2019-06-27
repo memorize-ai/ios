@@ -52,7 +52,6 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else {
 			element.deck.image = nil
 			cell.imageView.image = DEFAULT_DECK_IMAGE
-			recapCollectionView.reloadData()
 		}
 		cell.load(element.card.front)
 		if let next = element.next {
