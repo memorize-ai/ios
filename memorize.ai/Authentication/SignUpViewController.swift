@@ -132,7 +132,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 								self.hideActivityIndicator()
 								shouldShowTutorial = true
 								shouldShowEditProfileTip = true
-								self.performSegue(withIdentifier: "signIn", sender: self)
+								self.performSegue(withIdentifier: "signUp", sender: self)
 							} else if let error = error {
 								self.showError(error)
 							}
