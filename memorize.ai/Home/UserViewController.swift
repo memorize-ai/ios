@@ -117,6 +117,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			updateLastOnline()
 			loadBarButtonItems(image: DEFAULT_PROFILE_PICTURE)
 			reloadProfileBarButtonItem()
+			loadSettings()
 			loadDecks()
 			loadUploads()
 			loadCardDrafts()
@@ -365,8 +366,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadProfileBarButtonItem(_ image: UIImage?) {
-		let image = image ?? profilePicture ?? DEFAULT_PROFILE_PICTURE
-		loadBarButtonItems(image: image)
+		let image = image ?? profilePicture
+		loadBarButtonItems(image: image ?? DEFAULT_PROFILE_PICTURE)
 		profilePicture = image
 	}
 	
