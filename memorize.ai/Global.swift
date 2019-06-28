@@ -27,10 +27,9 @@ func getStarsTrailingConstraint(width: CGFloat, rating: Double) -> CGFloat {
 }
 
 extension StorageMetadata {
-	static func from(mime: String) -> StorageMetadata {
-		let metadata = StorageMetadata()
-		metadata.contentType = mime
-		return metadata
+	convenience init(mime: String) {
+		self.init()
+		contentType = mime
 	}
 }
 

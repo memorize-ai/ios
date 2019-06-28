@@ -156,5 +156,5 @@ func mimeTypeForExtension(_ ext: String) -> String? {
 
 func metadataForExtension(_ ext: String) -> StorageMetadata? {
 	guard let mime = mimeTypeForExtension(ext) else { return nil }
-	return StorageMetadata.from(mime: mime)
+	return StorageMetadata(mime: mime)
 }

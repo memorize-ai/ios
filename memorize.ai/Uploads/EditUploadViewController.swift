@@ -257,7 +257,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	func submitUpload() {
 		guard let id = id, let name = file.name, let type = file.type?.rawValue, let mime = file.mime, let ext = file.extension, let size = file.size, let data = file.data else { return }
 		let now = Date()
-		let metadata = StorageMetadata.from(mime: mime)
+		let metadata = StorageMetadata(mime: mime)
 		setLoading(true)
 		if let upload = upload {
 			firestore.document("users/\(id)/uploads/\(upload.id)").updateData([
