@@ -321,7 +321,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			self.showNotification("Changing email...", type: .normal)
 			auth.signIn(withEmail: email, password: password) { _, error in
 				if error == nil {
-					if newEmail.isValidEmail() {
+					if newEmail.isValidEmail {
 						firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
 							if error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser {
 								if snapshot.isEmpty {

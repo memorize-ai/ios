@@ -95,16 +95,16 @@ extension UIViewController {
 }
 
 extension String {
+	var isValidEmail: Bool {
+		return NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").evaluate(with: self)
+	}
+	
 	func trim() -> String {
 		return trimmingCharacters(in: .whitespaces)
 	}
 	
 	func trimAll() -> String {
 		return replacingOccurrences(of: " ", with: "")
-	}
-	
-	func isValidEmail() -> Bool {
-		return NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").evaluate(with: self)
 	}
 	
 	func clean() -> String {
