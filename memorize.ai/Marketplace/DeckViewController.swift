@@ -112,7 +112,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings, created: created, updated: updated)
 				self.loadingView.isHidden = true
 				listeners["users/\(creatorId)"] = firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
-					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = URL(string: "https://memorize.ai/users/\(creatorSlug)") {
+					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = User.url(slug: creatorSlug) {
 						self.deck.creator.name = creatorName
 						self.deck.creator.url = creatorUrl
 					} else {
