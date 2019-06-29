@@ -216,10 +216,18 @@ extension Double {
 	var oneDecimalPlace: Double {
 		return (self * 10).rounded() / 10
 	}
+	
+	var plural: String {
+		return self == 1 ? "" : "s"
+	}
 }
 
 extension Int {
 	var formatted: String {
 		return Double(self).formatted
+	}
+	
+	var plural: String {
+		return Double(self).plural
 	}
 }

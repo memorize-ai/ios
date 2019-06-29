@@ -405,7 +405,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.dueCardsLabel.isHidden = true
 			}
 		} else {
-			dueCardsLabel.text = "\(dueCards.count) card\(dueCards.count == 1 ? "" : "s") due"
+			dueCardsLabel.text = "\(dueCards.count) card\(dueCards.count.plural) due"
 		}
 	}
 	

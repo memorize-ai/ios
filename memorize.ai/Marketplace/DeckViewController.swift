@@ -417,10 +417,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func loadInfo(isPublic: Bool, count: Int, views: DeckViews, downloads: DeckDownloads, ratings: DeckRatings, created: Date, updated: Date) {
 		info = [
-			[(isPublic ? "public" : "private", "access"), (count.formatted, "cards")],
-			[(ratings.count.formatted, "rating\(ratings.count == 1 ? "" : "s")"), (String(ratings.average.oneDecimalPlace), "average")],
-			[(downloads.total.formatted, "total downloads"), (downloads.current.formatted, "active users")],
-			[(views.total.formatted, "total views"), (views.unique.formatted, "unique viewers")],
+			[(isPublic ? "public" : "private", "access"), (count.formatted, "card\(count.plural)")],
+			[(ratings.count.formatted, "rating\(ratings.count.plural)"), (String(ratings.average.oneDecimalPlace), "average")],
+			[(downloads.total.formatted, "total download\(downloads.total.plural)"), (downloads.current.formatted, "active user\(downloads.current.plural)")],
+			[(views.total.formatted, "total view\(views.total.plural)"), (views.unique.formatted, "unique viewer\(views.unique.plural)")],
 			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
 		]
 		infoCollectionViewHeightConstraint.constant = CGFloat(info.count) * (INFO_CELL_HEIGHT + INFO_CELL_LINE_SPACING) - INFO_CELL_LINE_SPACING
@@ -429,7 +429,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setCardLabels() {
-		cardCountLabel.text = "\((deck.count ?? 0).formatted) cards"
+		cardCountLabel.text = "\((deck.count ?? 0).formatted) card\(deck.count?.plural ?? "s")"
 	}
 	
 	func setRatingLabels(_ ratings: DeckRatings) {
