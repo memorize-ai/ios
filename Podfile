@@ -14,6 +14,8 @@ target 'memorize.ai' do
 	pod 'SwiftySound'
 	pod 'DeviceKit'
 	pod 'SwiftGifOrigin'
+	pod 'Fabric'
+	pod 'Crashlytics'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
 	end
