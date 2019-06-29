@@ -71,6 +71,10 @@ class User {
 		}
 	}
 	
+	static func save(selectedDeck: Deck?) {
+		save(selectedDeckId: selectedDeck?.id)
+	}
+	
 	static func delete() {
 		defaults.removeObject(forKey: "id")
 		defaults.removeObject(forKey: "name")

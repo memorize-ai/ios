@@ -39,7 +39,11 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
         super.viewDidLoad()
 		expand(false)
 		view.layoutIfNeeded()
-		deck = decks.first
+		if let selectedDeckId = selectedDeckId {
+			deck = Deck.get(selectedDeckId) ?? decks.first
+		} else {
+			deck = decks.first
+		}
 		originalCardsCollectionViewWidth = cardsCollectionView.bounds.width
 		decksCollectionView.reloadData()
 		cardsCollectionView.reloadData()
@@ -278,7 +282,9 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard collectionView.tag == decksCollectionView.tag else { return }
-		deck = decks[indexPath.item]
+		let selectedDeck = decks[indexPath.item]
+		User.save(selectedDeck: selectedDeck)
+		deck = selectedDeck
 		decksCollectionView.reloadData()
 		reloadActions()
 		cardsCollectionView.reloadData()
