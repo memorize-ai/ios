@@ -6,6 +6,7 @@ var email: String?
 var slug: String?
 var profilePicture: UIImage?
 var token: String?
+var selectedDeckId: String?
 
 class User {
 	static func urlString(slug: String) -> String {
@@ -45,6 +46,9 @@ class User {
 		if let data = profilePicture?.jpegData(compressionQuality: 1) {
 			defaults.set(data, forKey: "image")
 		}
+		if let selectedDeckId = selectedDeckId {
+			defaults.set(selectedDeckId, forKey: "selectedDeck")
+		}
 	}
 	
 	static func save(image: Data?) {
@@ -59,6 +63,14 @@ class User {
 		defaults.set(darkMode, forKey: "darkMode")
 	}
 	
+	static func save(selectedDeckId deckId: String?) {
+		if let deckId = deckId {
+			defaults.set(deckId, forKey: "selectedDeck")
+		} else {
+			defaults.removeObject(forKey: "selectedDeck")
+		}
+	}
+	
 	static func delete() {
 		defaults.removeObject(forKey: "id")
 		defaults.removeObject(forKey: "name")
@@ -66,17 +78,27 @@ class User {
 		defaults.removeObject(forKey: "slug")
 		defaults.removeObject(forKey: "image")
 		defaults.removeObject(forKey: "darkMode")
+		defaults.removeObject(forKey: "selectedDeck")
 		id = nil
 		name = nil
 		email = nil
 		slug = nil
 		profilePicture = nil
 		token = nil
+		selectedDeckId = nil
 	}
 	
-	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool)? {
+	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool, selectedDeck: String?)? {
 		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email") else { return nil }
-		return (id, name, email, defaults.string(forKey: "slug"), getImage(), defaults.bool(forKey: "darkMode"))
+		return (
+			id,
+			name,
+			email,
+			defaults.string(forKey: "slug"),
+			getImage(),
+			defaults.bool(forKey: "darkMode"),
+			defaults.string(forKey: "selectedDeck")
+		)
 	}
 	
 	static func getImage() -> UIImage? {
