@@ -2,6 +2,8 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -13,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
 		application.registerForRemoteNotifications()
 		Messaging.messaging().delegate = self
+		Fabric.with([Crashlytics.self])
 		return true
 	}
 	
