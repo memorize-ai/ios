@@ -799,7 +799,7 @@
 				};
 			};
 			buildConfigurationList = 4D052AAB2204259B0093B64E /* Build configuration list for PBXProject "memorize.ai" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
