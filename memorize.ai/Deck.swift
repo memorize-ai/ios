@@ -83,8 +83,8 @@ class Deck {
 		functions.httpsCallable("addDeck").call(["deckId": deckId]) { completion($1) }
 	}
 	
-	static func view(_ deckId: String) {
-		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { _, _ in }
+	static func view(_ deckId: String, completion: @escaping (Error?) -> Void = { _ in }) {
+		functions.httpsCallable("viewDeck").call(["deckId": deckId]) { completion($1) }
 	}
 	
 	static func rate(_ deckId: String, rating: Int, title: String?, review: String?, completion: @escaping (Error?) -> Void) {

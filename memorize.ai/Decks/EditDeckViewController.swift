@@ -358,13 +358,21 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			var deckRef: DocumentReference?
 			deckRef = firestore.collection("decks").addDocument(data: data) { error in
 				if error == nil, let deckId = deckRef?.documentID {
-					Deck.new(deckId) { error in
-						if error == nil, let imageData = self.image?.compressedData {
-							self.setImage(deckId, data: imageData) {
-								self.navigationController?.popViewController(animated: true)
+					Deck.view(deckId) { error in
+						if error == nil {
+							Deck.new(deckId) { error in
+								if error == nil, let imageData = self.image?.compressedData {
+									self.setImage(deckId, data: imageData) {
+										self.navigationController?.popViewController(animated: true)
+									}
+								} else {
+									self.navigationController?.popViewController(animated: true)
+								}
 							}
 						} else {
-							self.navigationController?.popViewController(animated: true)
+							self.hideActivityIndicator()
+							self.enable()
+							self.showNotification("Unable to create deck. Please try again", type: .error)
 						}
 					}
 				} else {
