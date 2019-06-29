@@ -33,12 +33,14 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	var deck: Deck?
 	var cardsDue = false
 	var expanded = false
+	var originalCardsCollectionViewWidth: CGFloat?
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		expand(false)
 		view.layoutIfNeeded()
 		deck = decks.first
+		originalCardsCollectionViewWidth = cardsCollectionView.bounds.width
 		decksCollectionView.reloadData()
 		cardsCollectionView.reloadData()
     }
@@ -157,7 +159,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			guard let name = filteredActions[indexPath.item].name as NSString?, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) else { return CGSize(width: 36, height: 36) }
 			return CGSize(width: name.size(withAttributes: [.font: extraBold]).width + 4, height: 36)
 		case cardsCollectionView.tag:
-			return CGSize(width: cardsCollectionView.bounds.width - 20, height: 37)
+			return CGSize(width: (originalCardsCollectionViewWidth ?? 20) - 20, height: 37)
 		default:
 			return CGSize(width: 0, height: 0)
 		}
