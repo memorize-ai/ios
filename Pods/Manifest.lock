@@ -5,8 +5,11 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - Crashlytics (3.13.2):
+    - Fabric (~> 1.10.2)
   - DeviceKit (2.0.0)
   - Down (0.8.5)
+  - Fabric (1.10.2)
   - Firebase/Auth (6.3.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.1.2)
@@ -137,8 +140,10 @@ PODS:
   - SwiftySound (1.1.0)
 
 DEPENDENCIES:
-  - DeviceKit (~> 2.0)
+  - Crashlytics
+  - DeviceKit
   - Down (from `https://github.com/iwasrobbed/Down.git`)
+  - Fabric
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -146,14 +151,16 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - InstantSearchClient
-  - SwiftGifOrigin (~> 1.7.0)
+  - SwiftGifOrigin
   - SwiftyMimeTypes
   - SwiftySound
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL-GRPC
+    - Crashlytics
     - DeviceKit
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -189,8 +196,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  Crashlytics: 611738c7847f8291a1a51084e35987b86ba6b3ee
   DeviceKit: 72d36709552d4b3582abd76a53949148acad9811
   Down: d2554b5006cf45bdb2bc6f19d91ca4fec6a45b31
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
   FirebaseAnalytics: 470ddab7253b21ad5a40bebd4a9903d7ae19386a
   FirebaseAnalyticsInterop: efbe45c8385ec626e29f9525e5ebd38520dfb6c1
@@ -215,6 +224,6 @@ SPEC CHECKSUMS:
   SwiftyMimeTypes: df2392d0f7b7c06bb3a65909e0d1efc09f5b6b6b
   SwiftySound: eb46cc2399cf7d94f58c372f38216e15e0a6de3e
 
-PODFILE CHECKSUM: d6070a5dfc7951cbe49b6bfa83496f29b3fee37f
+PODFILE CHECKSUM: e2d3949044cfeee2bbf404afe18d94a257a18dd3
 
 COCOAPODS: 1.7.2
