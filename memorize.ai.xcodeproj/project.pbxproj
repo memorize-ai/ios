@@ -718,6 +718,7 @@
 				4D052AAD2204259B0093B64E /* Frameworks */,
 				4D052AAE2204259B0093B64E /* Resources */,
 				4D8C79CC0ADA763F16CE00CE /* [CP] Embed Pods Frameworks */,
+				4DF6D23922C7DA5900360C56 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -955,6 +956,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-memorize.ai/Pods-memorize.ai-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4DF6D23922C7DA5900360C56 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3a15eaa10674c0c65d6b56c02787541149a66f12 976f9f4f1f7880f9b8cf5f7631ff2360d73d1c8c1c48c4e38cd86c8e30aa6261\n";
 		};
 		4FE8E83F46398360C89728EE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
