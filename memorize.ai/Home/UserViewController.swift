@@ -43,6 +43,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				name = user.name
 				email = user.email
 				profilePicture = user.image
+				selectedDeckId = user.selectedDeckId
 				User.pushToken()
 				loadingImage.isHidden = true
 				loadingView.isHidden = true
