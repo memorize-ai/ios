@@ -1,6 +1,5 @@
 import UIKit
 import InstantSearchClient
-import WebKit
 
 class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var searchBar: UISearchBar!
@@ -26,6 +25,8 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		}
 	}
 	
+	let SEARCH_RESULT_CELL_HEIGHT: CGFloat = 75
+	
 	var searchOperation: Operation?
 	var searchResults = [SearchResult]()
 	var cache = [String : SearchResult]()
@@ -33,14 +34,14 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	override func viewDidLoad() {
         super.viewDidLoad()
 		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.minimumLineSpacing = 20
-		let size = view.bounds.width - 40
-		flowLayout.itemSize = CGSize(width: size, height: 10.5 * size / 12)
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: SEARCH_RESULT_CELL_HEIGHT)
+		flowLayout.minimumLineSpacing = 30
 		decksCollectionView.collectionViewLayout = flowLayout
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		ChangeHandler.update(nil)
 		navigationController?.setNavigationBarHidden(true, animated: true)
 		updateCurrentViewController()
 	}
@@ -133,19 +134,6 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		cell.subtitleLabel.text = searchResult.subtitle
 		cell.setAverageRating(searchResult.ratings.average)
 		cell.ratingsCountLabel.text = String(searchResult.ratings.count)
-		if let deck = searchResult.deck {
-			let cards = deck.cards.sorted { $0.likes > $1.likes }.prefix(3)
-			for i in 0..<cards.count {
-				cell.load(cell.webViews[i], text: cards[i].front)
-			}
-		} else {
-			firestore.collection("decks/\(searchResult.id)/cards").order(by: "likes").limit(to: 3).getDocuments { snapshot, error in
-				guard error == nil, let snapshot = snapshot?.documents else { return }
-				for i in 0..<snapshot.count {
-					cell.load(cell.webViews[i], text: snapshot[i].get("front") as? String ?? "")
-				}
-			}
-		}
 		return cell
 	}
 	
@@ -161,20 +149,9 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var starsSliderView: UIView!
 	@IBOutlet weak var starsSliderViewTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var ratingsCountLabel: UILabel!
-	@IBOutlet weak var card1WebView: WKWebView!
-	@IBOutlet weak var card2WebView: WKWebView!
-	@IBOutlet weak var card3WebView: WKWebView!
-	
-	var webViews: [WKWebView] {
-		return [card1WebView, card2WebView, card3WebView]
-	}
 	
 	func setAverageRating(_ rating: Double) {
 		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (rating == 0 ? 1 : CGFloat(5 - rating) / 5)
 		layoutIfNeeded()
-	}
-	
-	func load(_ webView: WKWebView, text: String) {
-		webView.render(text, fontSize: 50, textColor: "000000", backgroundColor: "ffffff")
 	}
 }
