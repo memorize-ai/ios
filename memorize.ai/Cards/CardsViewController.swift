@@ -16,6 +16,9 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 			if change == .deckModified || change == .deckRemoved || change == .cardModified || change == .cardRemoved {
 				self.loadCards()
 			}
+			if Card.all.isEmpty {
+				self.navigationController?.popViewController(animated: true)
+			}
 		}
 		loadCards()
 		updateCurrentViewController()
