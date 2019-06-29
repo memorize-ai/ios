@@ -62,6 +62,7 @@
 		4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2DC22A4604400669570 /* Algolia.swift */; };
 		4DA2C2DF22A48AA400669570 /* UploadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */; };
 		4DA2C2E122A48E5400669570 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2E022A48E5400669570 /* Upload.swift */; };
+		4DA9D0CD22C80D250057AD0D /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */; };
 		4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */; };
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
 		4DB8AE142287CE1800A08AFA /* mhchem.mjs in Resources */ = {isa = PBXBuildFile; fileRef = 4DB8ADC32287CE1800A08AFA /* mhchem.mjs */; };
@@ -246,6 +247,7 @@
 		4DA2C2DC22A4604400669570 /* Algolia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algolia.swift; sourceTree = "<group>"; };
 		4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsViewController.swift; sourceTree = "<group>"; };
 		4DA2C2E022A48E5400669570 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		4DB8ADC32287CE1800A08AFA /* mhchem.mjs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mhchem.mjs; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */,
 				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
 				4D5F1F21229F217200AC7732 /* Keyboard.swift */,
+				4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */,
 				4D5F1F15229E1A6B00AC7732 /* Setting.swift */,
 				4D2CB86922AA0A7900092FD4 /* CardDraft.swift */,
 				4DE7FD3F22B1D72700B82F38 /* RatingDraft.swift */,
@@ -1051,6 +1054,7 @@
 				4DDD3F3222B34B5900BA2C98 /* NotificationViewController.swift in Sources */,
 				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
 				4DEA540722A5CF6400C5CCEF /* EditUploadViewController.swift in Sources */,
+				4DA9D0CD22C80D250057AD0D /* KeyboardHandler.swift in Sources */,
 				4DE8322722B03E6000DDD1F9 /* DeckSettingsViewController.swift in Sources */,
 				4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */,
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
