@@ -88,7 +88,7 @@ class User {
 		selectedDeckId = nil
 	}
 	
-	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool, selectedDeck: String?)? {
+	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
 		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email") else { return nil }
 		return (
 			id,
