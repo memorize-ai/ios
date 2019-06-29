@@ -27,6 +27,10 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	var lastPublishedText: (front: String, back: String)?
 	var views = [UIView]()
 	
+	deinit {
+		KeyboardHandler.removeListener(self)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		let flowLayout = UICollectionViewFlowLayout()
@@ -69,15 +73,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 				self.reloadToolbar()
 			}
 		}
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
-	}
-	
-	override func viewSafeAreaInsetsDidChange() {
-		super.viewSafeAreaInsetsDidChange()
-//		collectionViewTopConstraint.constant = -view.safeAreaInsets.bottom// * 17 / 16//9 / 8
-//		view.layoutIfNeeded()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -185,10 +182,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		].forEach { $0?.constant = constant }
 	}
 	
-	@objc
-	func keyboardWillShow(notification: NSNotification) {
-		guard let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
-		let offset = height - view.safeAreaInsets.bottom
+	func keyboardWillShow() {
+		let offset = keyboardOffset - view.safeAreaInsets.bottom
 		setConstraints(offset / 2)
 		cardEditor?.view.layoutIfNeeded()
 		cardPreview?.view.layoutIfNeeded()
@@ -196,8 +191,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
-	@objc
-	func keyboardWillHide(notification: NSNotification) {
+	func keyboardWillHide() {
 		setConstraints(0)
 		cardEditor?.view.layoutIfNeeded()
 		cardPreview?.view.layoutIfNeeded()

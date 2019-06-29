@@ -63,14 +63,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 				self.loadBlocks()
 			}
 		}
-		KeyboardHandler.addListener(self) { direction in
-			switch direction {
-			case .up:
-				self.keyboardWillShow()
-			case .down:
-				self.keyboardWillHide()
-			}
-		}
+		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
 	}
 	

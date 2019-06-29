@@ -21,14 +21,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		KeyboardHandler.addListener(self) { direction in
-			switch direction {
-			case .up:
-				self.keyboardWillShow()
-			case .down:
-				self.keyboardWillHide()
-			}
-		}
+		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
 	}
 	
