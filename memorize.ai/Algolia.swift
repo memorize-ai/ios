@@ -1,7 +1,7 @@
 import InstantSearchClient
 
 class Algolia {
-	typealias Hit = [String : Any]
+	typealias SearchResult = [String : Any]
 	
 	static let client = Client(appID: "35UFDKN0J5", apiKey: "81d7ac9db3332e01c684c982e0bc3f02")
 	static let indices: [AlgoliaIndex : Index] = [
@@ -11,9 +11,9 @@ class Algolia {
 	]
 	
 	@discardableResult
-	static func search(_ index: AlgoliaIndex, for query: String, completion: @escaping ([Hit], Error?) -> Void) -> Operation? {
+	static func search(_ index: AlgoliaIndex, for query: String, completion: @escaping ([SearchResult], Error?) -> Void) -> Operation? {
 		return indices[index]?.search(Query(query: query)) { content, error in
-			completion(content?["hits"] as? [Hit] ?? [], error)
+			completion(content?["hits"] as? [SearchResult] ?? [], error)
 		}
 	}
 }
@@ -24,7 +24,7 @@ enum AlgoliaIndex {
 	case uploads
 }
 
-extension Algolia.Hit {
+extension Algolia.SearchResult {
 	var id: String? {
 		return self["objectID"] as? String
 	}
