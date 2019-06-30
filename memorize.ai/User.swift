@@ -10,11 +10,11 @@ var selectedDeckId: String?
 
 class User {
 	static func urlString(slug: String) -> String {
-		return "memorize.ai/u/\(slug)"
+		return "u/\(slug)"
 	}
 	
 	static func url(slug: String) -> URL? {
-		return URL(string: "https://\(urlString(slug: slug))")
+		return URL(string: "https://memorize.ai/\(urlString(slug: slug))")
 	}
 	
 	static func getImageFromStorage(completion: @escaping (UIImage?) -> Void) {

@@ -590,9 +590,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmq-LT-5lE">
-                                                <rect key="frame" x="20" y="200.66666666666669" width="112" height="36"/>
+                                                <rect key="frame" x="20" y="200.66666666666669" width="30" height="36"/>
                                                 <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                <state key="normal" title="memorize.ai/u/">
+                                                <state key="normal" title="u/...">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -796,6 +796,7 @@
                         <outlet property="changeButton" destination="Scw-zv-czR" id="AVy-xR-qoO"/>
                         <outlet property="emailLabel" destination="8Ex-Xq-gD5" id="b64-Fl-EJF"/>
                         <outlet property="linkButton" destination="wmq-LT-5lE" id="ugJ-g6-sgp"/>
+                        <outlet property="linkLabel" destination="kBk-A6-MRH" id="xfp-Zm-OzT"/>
                         <outlet property="nameLabel" destination="rIZ-2b-g0C" id="Hyb-X5-pk9"/>
                         <outlet property="optionsTableView" destination="PEy-EW-krH" id="YVI-7m-Kve"/>
                         <outlet property="optionsTableViewHeightConstraint" destination="5ji-jD-xIu" id="95P-fI-wUO"/>
@@ -6650,7 +6651,7 @@
         <segue reference="NDx-ee-NxK"/>
         <segue reference="xln-P0-Fwc"/>
         <segue reference="0Yj-jn-rSr"/>
-        <segue reference="BGs-3X-tk8"/>
+        <segue reference="MJl-Ks-n56"/>
         <segue reference="xao-oA-rKh"/>
     </inferredMetricsTieBreakers>
 </document>
