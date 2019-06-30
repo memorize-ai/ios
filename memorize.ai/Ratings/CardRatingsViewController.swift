@@ -24,20 +24,24 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		guard let deck = card.getDeck else { return cell }
 		if let image = deck.image {
 			cell.deckImageView.image = image
-		} else {
-			if deck.hasImage {
-				cell.deckImageView.image = nil
-				cell.deckActivityIndicator.startAnimating()
-				storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-					guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+		} else if deck.hasImage {
+			cell.deckImageView.image = nil
+			cell.deckActivityIndicator.startAnimating()
+			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+				if error == nil, let data = data, let image = UIImage(data: data) {
 					cell.deckActivityIndicator.stopAnimating()
 					cell.deckImageView.image = image
 					deck.image = image
+					Deck.cache(deck.id, image: image)
 					self.ratingsTableView.reloadData()
+				} else {
+					Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
 				}
-			} else {
-				cell.deckImageView.image = DEFAULT_DECK_IMAGE
 			}
+		} else {
+			cell.deckImageView.image = DEFAULT_DECK_IMAGE
+			deck.image = nil
+			Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
 		}
 		cell.deckNameLabel.text = deck.name
 		cell.cardLabel.text = card.front.clean()

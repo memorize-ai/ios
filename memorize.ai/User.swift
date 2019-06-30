@@ -9,6 +9,16 @@ var token: String?
 var selectedDeckId: String?
 
 class User {
+	static var imageCache = [String : UIImage]()
+	
+	static func cache(_ id: String, image: UIImage?) {
+		if let image = image {
+			imageCache[id] = image
+		} else {
+			imageCache.removeValue(forKey: id)
+		}
+	}
+	
 	static func urlString(slug: String) -> String {
 		return "u/\(slug)"
 	}
@@ -22,6 +32,7 @@ class User {
 		func callCompletion(_ image: UIImage?, data: Data?) {
 			profilePicture = image
 			save(image: data)
+			cache(id, image: image ?? DEFAULT_PROFILE_PICTURE)
 			completion(image)
 		}
 		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in

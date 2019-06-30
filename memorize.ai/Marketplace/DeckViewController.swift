@@ -123,8 +123,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				storage.child("users/\(creatorId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
 					if creatorError == nil, let creatorData = creatorData, let creatorImage = UIImage(data: creatorData) {
 						self.deck.creator.image = creatorImage
+						User.cache(creatorId, image: creatorImage)
 					} else {
 						self.deck.creator.image = DEFAULT_PROFILE_PICTURE
+						User.cache(creatorId, image: DEFAULT_PROFILE_PICTURE)
 					}
 					self.loadCreator()
 				}
@@ -164,8 +166,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 							self.creatorDecks.append(newDeck)
 							if newDeck.hasImage {
 								storage.child("decks/\(creatorDeckId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
-									if creatorError == nil, let creatorData = creatorData {
-										newDeck.image = UIImage(data: creatorData)
+									if creatorError == nil, let creatorData = creatorData, let creatorImage = UIImage(data: creatorData) {
+										newDeck.image = creatorImage
+										Deck.cache(creatorDeckId, image: creatorImage)
+									} else {
+										Deck.cache(creatorDeckId, image: DEFAULT_DECK_IMAGE)
 									}
 									self.moreByCreatorCollectionView.reloadData()
 								}
@@ -255,8 +260,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 							self.ratingsCollectionView.reloadData()
 						}
 						storage.child("users/\(userId)").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
-							guard userError == nil, let userData = userData, let userImage = UIImage(data: userData) else { return }
-							newRating.user.image = userImage
+							if userError == nil, let userData = userData, let userImage = UIImage(data: userData) {
+								newRating.user.image = userImage
+								User.cache(userId, image: userImage)
+							} else {
+								newRating.user.image = DEFAULT_PROFILE_PICTURE
+								User.cache(userId, image: DEFAULT_PROFILE_PICTURE)
+							}
 							self.ratingsCollectionView.reloadData()
 						}
 					case .modified:
@@ -286,8 +296,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deckImageView.layer.borderWidth = 0
 				if error == nil, let data = data, let image = UIImage(data: data) {
 					self.deckImageView.image = image
+					Deck.cache(deckId, image: image)
 				} else {
 					self.deckImageView.image = DEFAULT_DECK_IMAGE
+					Deck.cache(deckId, image: DEFAULT_DECK_IMAGE)
 				}
 			}
 		} else {

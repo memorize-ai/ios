@@ -252,6 +252,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 						storage.child("users/\(id)").downloadURL { url, error in
 							if error == nil, let url = url, let currentUser = auth.currentUser {
 								User.save(image: data)
+								User.cache(id, image: image)
 								currentUser.createProfileChangeRequest().photoURL = url
 								completion(true)
 							} else {
@@ -270,6 +271,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				if error == nil {
 					profilePicture = nil
 					User.save(image: nil)
+					User.cache(id, image: DEFAULT_PROFILE_PICTURE)
 					completion(true)
 				} else {
 					completion(false)

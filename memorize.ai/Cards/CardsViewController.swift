@@ -55,11 +55,13 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 				cell.imageActivityIndicator.stopAnimating()
 				cell.imageView.image = image
 				deck.image = image
+				Deck.cache(deck.id, image: image)
 				self.cardsCollectionView.reloadData()
 			}
 		} else {
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 			deck.image = nil
+			Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
 		}
 		cell.load(element.front)
 		cell.draft(element.hasDraft)

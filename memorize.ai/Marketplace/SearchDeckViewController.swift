@@ -131,12 +131,16 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		} else if searchResult.hasImage {
 			cell.setLoading(true)
 			storage.child("decks/\(searchResult.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-				cell.setLoading(false)
-				cell.imageView.image = image
-				searchResult.image = image
-				searchResult.deck?.image = image
-				self.decksCollectionView.reloadData()
+				if error == nil, let data = data, let image = UIImage(data: data) {
+					cell.setLoading(false)
+					cell.imageView.image = image
+					searchResult.image = image
+					searchResult.deck?.image = image
+					Deck.cache(searchResult.id, image: image)
+					self.decksCollectionView.reloadData()
+				} else {
+					Deck.cache(searchResult.id, image: DEFAULT_DECK_IMAGE)
+				}
 			}
 		} else {
 			cell.setLoading(false)

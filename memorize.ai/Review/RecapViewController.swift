@@ -46,11 +46,13 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 			storage.child("decks/\(element.deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				element.deck.image = image
+				Deck.cache(element.deck.id, image: image)
 				cell.imageView.image = image
 				self.recapCollectionView.reloadData()
 			}
 		} else {
 			element.deck.image = nil
+			Deck.cache(element.deck.id, image: DEFAULT_DECK_IMAGE)
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 		}
 		cell.load(element.card.front)

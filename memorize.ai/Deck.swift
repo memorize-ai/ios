@@ -55,6 +55,8 @@ class Deck {
 		self.hidden = hidden
 	}
 	
+	static var imageCache = [String : UIImage]()
+	
 	var cardDraft: CardDraft? {
 		return CardDraft.get(deckId: id)
 	}
@@ -77,6 +79,14 @@ class Deck {
 	
 	var hasRatingDraft: Bool {
 		return ratingDraft != nil
+	}
+	
+	static func cache(_ id: String, image: UIImage?) {
+		if let image = image {
+			imageCache[id] = image
+		} else {
+			imageCache.removeValue(forKey: id)
+		}
 	}
 	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {

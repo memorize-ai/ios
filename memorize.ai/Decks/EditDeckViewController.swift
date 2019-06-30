@@ -299,6 +299,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 						if let imageData = image.compressedData {
 							self.setImage(deck.id, data: imageData) {
 								deck.image = image
+								Deck.cache(deck.id, image: image)
 								buzz()
 								self.hideActivityIndicator()
 								self.disable()
@@ -312,6 +313,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 						storage.child("decks/\(deck.id)").delete { error in
 							if error == nil {
 								deck.image = nil
+								Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
 								buzz()
 								self.hideActivityIndicator()
 								self.disable()
@@ -356,9 +358,11 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 							Deck.new(deckId) { error in
 								if error == nil, let imageData = self.image?.compressedData {
 									self.setImage(deckId, data: imageData) {
+										Deck.cache(deckId, image: self.image)
 										self.navigationController?.popViewController(animated: true)
 									}
 								} else {
+									Deck.cache(deckId, image: DEFAULT_DECK_IMAGE)
 									self.navigationController?.popViewController(animated: true)
 								}
 							}
