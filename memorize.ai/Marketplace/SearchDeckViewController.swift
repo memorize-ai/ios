@@ -66,41 +66,37 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	}
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		searchOperation?.cancel()
 		searchResults.removeAll()
 		if searchText.trim().isEmpty {
 			decksCollectionView.reloadData()
 		} else {
-			searchOperation?.cancel()
 			searchOperation = Algolia.search(.decks, for: searchText) { results, error in
 				if error == nil {
 					for result in results {
-						guard let deckId = result["objectID"] as? String else { continue }
+						guard let deckId = Algolia.id(result: result) else { continue }
 						if let cachedResult = self.cache[deckId] {
 							self.searchResults.append(cachedResult)
 							self.decksCollectionView.reloadData()
 						} else {
-							listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { _, error in
-								guard error == nil, let owner = result["owner"] as? String else { return }
-								listeners["users/\(owner)"] = firestore.document("users/\(owner)").addSnapshotListener { snapshot, userError in
-									guard userError == nil, let snapshot = snapshot else { return }
-									let deck = Deck.get(deckId)
-									let searchResult = SearchResult(
-										id: deckId,
-										hasImage: result["hasImage"] as? Bool ?? false,
-										image: deck?.image,
-										name: result["name"] as? String ?? "Error",
-										subtitle: snapshot.get("subtitle") as? String ?? "Error",
-										ratings: DeckRatings(snapshot),
-										deck: deck
-									)
-									self.searchResults.append(searchResult)
-									self.decksCollectionView.reloadData()
-									self.cache[deckId] = searchResult
-								}
+							firestore.document("decks/\(deckId)").getDocument { snapshot, error in
+								guard error == nil, let snapshot = snapshot else { return }
+								let deck = Deck.get(deckId)
+								let searchResult = SearchResult(
+									id: deckId,
+									hasImage: snapshot.get("hasImage") as? Bool ?? false,
+									image: deck?.image,
+									name: snapshot.get("name") as? String ?? "Error",
+									subtitle: snapshot.get("subtitle") as? String ?? "Error",
+									ratings: DeckRatings(snapshot),
+									deck: deck
+								)
+								self.searchResults.append(searchResult)
+								self.cache[deckId] = searchResult
+								self.decksCollectionView.reloadData()
 							}
 						}
 					}
-					self.decksCollectionView.reloadData()
 				} else {
 					self.showNotification("Unable to load search results. Please try again", type: .error)
 				}
