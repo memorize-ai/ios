@@ -47,7 +47,7 @@ class User {
 			defaults.set(data, forKey: "image")
 		}
 		if let selectedDeckId = selectedDeckId {
-			defaults.set(selectedDeckId, forKey: "selectedDeck")
+			save(selectedDeckId: selectedDeckId)
 		}
 	}
 	
@@ -64,6 +64,7 @@ class User {
 	}
 	
 	static func save(selectedDeckId deckId: String?) {
+		selectedDeckId = deckId
 		if let deckId = deckId {
 			defaults.set(deckId, forKey: "selectedDeck")
 		} else {
@@ -82,14 +83,13 @@ class User {
 		defaults.removeObject(forKey: "slug")
 		defaults.removeObject(forKey: "image")
 		defaults.removeObject(forKey: "darkMode")
-		defaults.removeObject(forKey: "selectedDeck")
+		save(selectedDeckId: nil)
 		id = nil
 		name = nil
 		email = nil
 		slug = nil
 		profilePicture = nil
 		token = nil
-		selectedDeckId = nil
 	}
 	
 	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool, selectedDeckId: String?)? {

@@ -37,16 +37,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		expand(false)
-		view.layoutIfNeeded()
-		if let selectedDeckId = selectedDeckId {
-			deck = Deck.get(selectedDeckId) ?? decks.first
-		} else {
-			deck = decks.first
-		}
 		originalCardsCollectionViewWidth = cardsCollectionView.bounds.width
-		decksCollectionView.reloadData()
-		cardsCollectionView.reloadData()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +74,13 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				self.reloadActions()
 				self.cardsCollectionView.reloadData()
 			}
+		}
+		expand(false)
+		view.layoutIfNeeded()
+		if let selectedDeckId = selectedDeckId {
+			deck = Deck.get(selectedDeckId) ?? decks.first
+		} else {
+			deck = decks.first
 		}
 		decksCollectionView.reloadData()
 		cardsCollectionView.reloadData()
