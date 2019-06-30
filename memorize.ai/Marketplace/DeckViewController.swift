@@ -55,7 +55,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	let INFO_CELL_HEIGHT: CGFloat = 60
 	let INFO_CELL_LINE_SPACING: CGFloat = 15
 	let INFO_CELL_ITEM_SPACING: CGFloat = 10
-	let DECK_PREVIEW_CELL_SPACING: CGFloat = 15
+	let DECK_PREVIEW_CELL_ITEM_SPACING: CGFloat = 15
+	let DECK_PREVIEW_CELL_LINE_SPACING: CGFloat = 6
 	
 	var deck: (
 		id: String?,
@@ -368,18 +369,18 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		)
 		moreByCreatorCollectionView.collectionViewLayout = flowLayout(
 			width: moreByCreatorCollectionView.bounds.width * 2 / 3,
-			height: moreByCreatorCollectionView.bounds.height,
-			itemSpacing: DECK_PREVIEW_CELL_SPACING,
-			lineSpacing: 0,
+			height: (moreByCreatorCollectionView.bounds.height - DECK_PREVIEW_CELL_LINE_SPACING) / 2,
+			itemSpacing: DECK_PREVIEW_CELL_ITEM_SPACING,
+			lineSpacing: DECK_PREVIEW_CELL_LINE_SPACING,
 			scrollDirection: .horizontal,
 			leftInset: 20,
 			rightInset: 20
 		)
 		similarDecksCollectionView.collectionViewLayout = flowLayout(
 			width: similarDecksCollectionView.bounds.width * 2 / 3,
-			height: similarDecksCollectionView.bounds.height,
-			itemSpacing: DECK_PREVIEW_CELL_SPACING,
-			lineSpacing: 0,
+			height: (similarDecksCollectionView.bounds.height - DECK_PREVIEW_CELL_LINE_SPACING) / 2,
+			itemSpacing: DECK_PREVIEW_CELL_ITEM_SPACING,
+			lineSpacing: DECK_PREVIEW_CELL_LINE_SPACING,
 			scrollDirection: .horizontal,
 			leftInset: 20,
 			rightInset: 20
