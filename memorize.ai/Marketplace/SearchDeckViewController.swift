@@ -42,6 +42,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.update(nil)
+		decksCollectionView.reloadData()
 		navigationController?.setNavigationBarHidden(true, animated: true)
 		updateCurrentViewController()
 	}
