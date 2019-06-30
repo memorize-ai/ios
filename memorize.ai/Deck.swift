@@ -99,6 +99,10 @@ class Deck {
 		functions.httpsCallable("clearDeckData").call(["deckId": deckId]) { completion($1) }
 	}
 	
+	static func delete(_ deckId: String, completion: @escaping (Error?) -> Void) {
+		functions.httpsCallable("deleteDeck").call(["deckId": deckId]) { completion($1) }
+	}
+	
 	static func getFromAll(_ id: String) -> Deck? {
 		return allDecks.first { $0.id == id }
 	}
