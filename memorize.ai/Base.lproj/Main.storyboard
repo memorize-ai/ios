@@ -4418,7 +4418,7 @@
                                                                     <outlet property="moreLabel" destination="Tve-AY-2G9" id="W2S-kV-Abb"/>
                                                                     <outlet property="nameLabel" destination="KD7-RT-aVv" id="lg5-Hz-14k"/>
                                                                     <outlet property="reviewLabel" destination="x9R-C8-wKd" id="oH8-9J-dcQ"/>
-                                                                    <outlet property="starsSliderView" destination="eEu-ZP-PMG" id="kjM-hH-ZUM"/>
+                                                                    <outlet property="starsSliderView" destination="u79-HX-DPU" id="XOW-Ir-MfD"/>
                                                                     <outlet property="starsSliderViewTrailingConstraint" destination="Ted-bU-uhW" id="MIl-OI-wgX"/>
                                                                     <outlet property="titleLabel" destination="VTu-Yk-qoz" id="0gM-0g-8xJ"/>
                                                                 </connections>
@@ -4539,7 +4539,7 @@
                         <outlet property="infoCollectionViewHeightConstraint" destination="zcD-PS-9An" id="vwS-vE-rMR"/>
                         <outlet property="loadingView" destination="87p-cl-OMK" id="fwD-E4-XBU"/>
                         <outlet property="mainRatingCountLabel" destination="D3N-VP-HXY" id="e2X-1A-XmV"/>
-                        <outlet property="mainStarsSliderView" destination="7g3-JE-UGE" id="dDT-Ai-zMZ"/>
+                        <outlet property="mainStarsSliderView" destination="NAB-Yc-8c7" id="6QC-az-Zi8"/>
                         <outlet property="mainStarsSliderViewTrailingConstraint" destination="Ncl-CE-Ijf" id="YDw-md-Qg5"/>
                         <outlet property="moreByCreatorCollectionView" destination="6Og-O9-apJ" id="fIy-pa-X8H"/>
                         <outlet property="moreByCreatorLabel" destination="3wa-GQ-gdV" id="RUi-PL-jmh"/>
@@ -4549,7 +4549,7 @@
                         <outlet property="rateDeckButton" destination="r5J-jQ-nmh" id="JfP-1F-qNH"/>
                         <outlet property="ratingsCollectionView" destination="xgf-Q6-gxj" id="q1I-JP-HCV"/>
                         <outlet property="ratingsRatingCountLabel" destination="lfJ-4O-OUb" id="KFA-om-IoO"/>
-                        <outlet property="ratingsStarsSliderView" destination="i1z-Ki-97N" id="UZc-LQ-ycb"/>
+                        <outlet property="ratingsStarsSliderView" destination="4ZM-hP-2ZY" id="L2E-9G-EPF"/>
                         <outlet property="ratingsStarsSliderViewTrailingConstraint" destination="f5c-eX-YUg" id="U78-Ky-40D"/>
                         <outlet property="showFullDescriptionButton" destination="vKT-6D-nri" id="PkM-TB-1qF"/>
                         <outlet property="similarDecksCollectionView" destination="In7-z9-CUc" id="MlT-a2-Sg4"/>
@@ -4961,7 +4961,7 @@
                         <outlet property="ratingDateLabel" destination="xha-cs-1M7" id="QSr-lU-ttW"/>
                         <outlet property="ratingNameLabel" destination="HF1-lQ-e5D" id="We8-w1-YrX"/>
                         <outlet property="ratingReviewLabel" destination="xXo-lV-iR1" id="wTw-aS-ZzJ"/>
-                        <outlet property="ratingStarsSliderView" destination="FfW-wI-gQ0" id="ydQ-RR-tk3"/>
+                        <outlet property="ratingStarsSliderView" destination="kQr-9n-hUn" id="xNN-aZ-57d"/>
                         <outlet property="ratingStarsSliderViewTrailingConstraint" destination="F7n-Zm-vXi" id="FQM-jt-Clg"/>
                         <outlet property="ratingTitleLabel" destination="RxA-Jr-ZKT" id="ODM-jU-v18"/>
                         <outlet property="userImageView" destination="69C-wC-Ml7" id="5BG-a8-pRQ"/>
