@@ -8,6 +8,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var pictureActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var emailLabel: UILabel!
+	@IBOutlet weak var linkLabel: UILabel!
 	@IBOutlet weak var linkButton: UIButton!
 	@IBOutlet weak var optionsTableView: UITableView!
 	@IBOutlet weak var optionsTableViewHeightConstraint: NSLayoutConstraint!
@@ -50,7 +51,15 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			if change == .profileModified || change == .profilePicture {
 				self.nameLabel.text = name
 				self.emailLabel.text = email
-				self.linkButton.setTitle(User.urlString(slug: slug ?? ""), for: .normal)
+				if let slug = slug {
+					self.linkLabel.text = "PROFILE LINK"
+					self.linkButton.setTitle(User.urlString(slug: slug), for: .normal)
+					self.linkButton.isEnabled = true
+				} else {
+					self.linkLabel.text = "PROFILE LINK (LOADING)"
+					self.linkButton.setTitle(User.urlString(slug: "..."), for: .normal)
+					self.linkButton.isEnabled = false
+				}
 				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 			}
 		}
@@ -309,43 +318,22 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
 			guard let email = email, let id = id else { return }
 			let newEmail = alertController.textFields?.first?.text?.trim() ?? ""
-			if newEmail.isEmpty {
-				self.showNotification("Email cannot be blank", type: .error)
-				return
-			}
+			if newEmail.isEmpty { return self.showNotification("Email cannot be blank", type: .error) }
 			let password = alertController.textFields?.last?.text?.trim() ?? ""
-			if password.isEmpty {
-				self.showNotification("Password cannot be blank", type: .error)
-				return
-			}
+			if password.isEmpty { return self.showNotification("Password cannot be blank", type: .error) }
 			self.showNotification("Changing email...", type: .normal)
 			auth.signIn(withEmail: email, password: password) { _, error in
-				if error == nil {
-					if newEmail.isValidEmail {
-						firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
-							if error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser {
-								if snapshot.isEmpty {
-									currentUser.updateEmail(to: newEmail) { error in
-										if error == nil {
-											firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
-												self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
-											}
-										} else {
-											self.showNotification("Unable to change email. Please try again", type: .error)
-										}
-									}
-								} else {
-									self.showNotification("Email is already in use", type: .error)
-								}
-							} else {
-								self.showNotification("Unable to validate email. Please try again", type: .error)
-							}
+				guard error == nil else { return self.showNotification("Invalid password", type: .error) }
+				guard newEmail.isValidEmail else { return self.showNotification("Invalid email", type: .error) }
+				firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
+					guard error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser else { return self.showNotification("Unable to validate email. Please try again", type: .error) }
+					guard snapshot.isEmpty else { return self.showNotification("Email is already in use", type: .error) }
+					currentUser.updateEmail(to: newEmail) { error in
+						guard error == nil else { return self.showNotification("Unable to change email. Please try again", type: .error) }
+						firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
+							self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
 						}
-					} else {
-						self.showNotification("Invalid email", type: .error)
 					}
-				} else {
-					self.showNotification("Invalid password", type: .error)
 				}
 			}
 		})
