@@ -289,12 +289,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
 			let newName = alertController.textFields?.first?.text?.trim() ?? ""
-			if newName.isEmpty {
-				self.showNotification("Name cannot be blank", type: .error)
-			} else if let id = id {
-				firestore.document("users/\(id)").updateData(["name": newName]) { error in
-					self.showNotification(error == nil ? "Changed name" : "Unable to change name. Please try again", type: error == nil ? .success : .error)
-				}
+			if newName.isEmpty { return self.showNotification("Name cannot be blank", type: .error) }
+			if newName == name { return self.showNotification("Please choose a different name", type: .error) }
+			guard let id = id else { return }
+			firestore.document("users/\(id)").updateData(["name": newName]) { error in
+				self.showNotification(error == nil ? "Changed name" : "Unable to change name. Please try again", type: error == nil ? .success : .error)
 			}
 		})
 		present(alertController, animated: true, completion: nil)
