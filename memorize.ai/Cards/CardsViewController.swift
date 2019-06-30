@@ -49,7 +49,11 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		if let image = deck.image {
 			cell.imageView.image = image
 		} else if deck.hasImage {
-			cell.imageActivityIndicator.startAnimating()
+			if let cachedImage = Deck.imageFromCache(deck.id) {
+				cell.imageView.image = cachedImage
+			} else {
+				cell.imageActivityIndicator.startAnimating()
+			}
 			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 				cell.imageActivityIndicator.stopAnimating()

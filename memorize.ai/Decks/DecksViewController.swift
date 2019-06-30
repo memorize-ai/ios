@@ -217,8 +217,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				if let image = element.image {
 					cell.imageView.image = image
 				} else if element.hasImage {
-					cell.imageView.image = nil
-					cell.imageActivityIndicator.startAnimating()
+					if let cachedImage = Deck.imageFromCache(element.id) {
+						cell.imageView.image = cachedImage
+					} else {
+						cell.imageView.image = nil
+						cell.imageActivityIndicator.startAnimating()
+					}
 					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 						cell.imageActivityIndicator.stopAnimating()
@@ -244,8 +248,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				if let image = element.image {
 					cell.imageView.image = image
 				} else if element.hasImage {
-					cell.imageView.image = nil
-					cell.imageActivityIndicator.startAnimating()
+					if let cachedImage = Deck.imageFromCache(element.id) {
+						cell.imageView.image = cachedImage
+					} else {
+						cell.imageView.image = nil
+						cell.imageActivityIndicator.startAnimating()
+					}
 					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
 						cell.imageActivityIndicator.stopAnimating()

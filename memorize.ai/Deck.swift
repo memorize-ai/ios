@@ -89,6 +89,10 @@ class Deck {
 		}
 	}
 	
+	static func imageFromCache(_ id: String) -> UIImage? {
+		return imageCache[id]
+	}
+	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
 		functions.httpsCallable("addDeck").call(["deckId": deckId]) { completion($1) }
 	}

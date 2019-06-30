@@ -19,6 +19,10 @@ class User {
 		}
 	}
 	
+	static func imageFromCache(_ id: String) -> UIImage? {
+		return imageCache[id]
+	}
+	
 	static func urlString(slug: String) -> String {
 		return "u/\(slug)"
 	}

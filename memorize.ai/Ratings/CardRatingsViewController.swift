@@ -25,8 +25,12 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		if let image = deck.image {
 			cell.deckImageView.image = image
 		} else if deck.hasImage {
-			cell.deckImageView.image = nil
-			cell.deckActivityIndicator.startAnimating()
+			if let cachedImage = Deck.imageFromCache(deck.id) {
+				cell.deckImageView.image = cachedImage
+			} else {
+				cell.deckImageView.image = nil
+				cell.deckActivityIndicator.startAnimating()
+			}
 			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				if error == nil, let data = data, let image = UIImage(data: data) {
 					cell.deckActivityIndicator.stopAnimating()
