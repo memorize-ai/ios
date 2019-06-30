@@ -24,9 +24,9 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			DeckSetting(name: "Rate deck", color: nil, action: rateDeck),
 			DeckSetting(name: "Force review", color: nil, action: forceReview)
 		],
-		[
-			DeckSetting(name: "User permissions", color: nil, action: viewPermissions)
-		],
+//		[
+//			DeckSetting(name: "User permissions", color: nil, action: viewPermissions)
+//		],
 		[
 			DeckSetting(name: "Analytics", color: #colorLiteral(red: 0.2539775372, green: 0.7368414402, blue: 0.4615401626, alpha: 1), action: viewAnalytics),
 			DeckSetting(name: "Card ratings", color: nil, action: viewCardRatings),
