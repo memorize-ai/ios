@@ -82,7 +82,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		Algolia.search(.uploads, for: searchText) { results, error in
 			guard error == nil else { return }
 			self.filteredUploads = self.filterForAudio(Upload.filter(results.compactMap {
-				guard let uploadId = $0["objectID"] as? String else { return nil }
+				guard let uploadId = Algolia.id(result: $0) else { return nil }
 				return Upload.get(uploadId)
 			}, for: self.filter))
 			self.uploadsCollectionView.reloadData()
