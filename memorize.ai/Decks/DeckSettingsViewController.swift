@@ -142,7 +142,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 			alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
 				cell.startLoading()
-				firestore.document("decks/\(deck.id)").delete { error in
+				Deck.delete(deck.id) { error in
 					cell.stopLoading()
 					if error == nil {
 						firestore.document("users/\(id)/decks/\(deck.id)").delete { error in
