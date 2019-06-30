@@ -49,7 +49,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	let CARD_PREVIEW_COUNT = 10
 	let RATINGS_COUNT = 10
 	let CARD_PREVIEW_CELL_SPACING: CGFloat = 20
 	let RATING_CELL_SPACING: CGFloat = 20
@@ -279,6 +278,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			deckImageView.image = image
 			deckImageView.layer.borderWidth = 0
 		} else if hasImage {
+			deckImageView.layer.borderColor = UIColor.lightGray.cgColor
+			deckImageView.layer.borderWidth = 1
 			storage.child("decks/\(deckId)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				self.deckImageActivityIndicator.stopAnimating()
 				self.deckImageView.layer.borderWidth = 0
@@ -365,7 +366,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			lineSpacing: INFO_CELL_LINE_SPACING,
 			scrollDirection: .vertical
 		)
-		let deckPreviewFlowLayout = flowLayout(
+		moreByCreatorCollectionView.collectionViewLayout = flowLayout(
 			width: moreByCreatorCollectionView.bounds.width * 2 / 3,
 			height: moreByCreatorCollectionView.bounds.height,
 			itemSpacing: DECK_PREVIEW_CELL_SPACING,
@@ -374,8 +375,15 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			leftInset: 20,
 			rightInset: 20
 		)
-		moreByCreatorCollectionView.collectionViewLayout = deckPreviewFlowLayout
-		similarDecksCollectionView.collectionViewLayout = deckPreviewFlowLayout
+		similarDecksCollectionView.collectionViewLayout = flowLayout(
+			width: similarDecksCollectionView.bounds.width * 2 / 3,
+			height: similarDecksCollectionView.bounds.height,
+			itemSpacing: DECK_PREVIEW_CELL_SPACING,
+			lineSpacing: 0,
+			scrollDirection: .horizontal,
+			leftInset: 20,
+			rightInset: 20
+		)
 	}
 	
 	func flowLayout(width: CGFloat, height: CGFloat, itemSpacing: CGFloat, lineSpacing: CGFloat, scrollDirection: UICollectionView.ScrollDirection, leftInset: CGFloat = 0, rightInset: CGFloat = 0) -> UICollectionViewFlowLayout {
@@ -561,7 +569,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
-			return cards.prefix(CARD_PREVIEW_COUNT).count
+			return cards.count
 		case ratingsCollectionView.tag:
 			return ratings.count
 		case infoCollectionView.tag:
@@ -580,7 +588,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
 			guard let cell = _cell as? CardPreviewCollectionViewCell else { return _cell }
-			let card = cards.prefix(CARD_PREVIEW_COUNT)[indexPath.item]
+			let card = cards[indexPath.item]
 			cell.load(card, side: .front)
 			cell.playAction = {
 				if Audio.isPlaying {
@@ -632,7 +640,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
 			guard let cardVC = storyboard?.instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
-			cardVC.card = cards.prefix(CARD_PREVIEW_COUNT)[indexPath.item]
+			cardVC.card = cards[indexPath.item]
 			addChild(cardVC)
 			cardVC.view.frame = view.frame
 			view.addSubview(cardVC.view)
