@@ -16,16 +16,14 @@ class Algolia {
 			completion(content?["hits"] as? [SearchResult] ?? [], error)
 		}
 	}
+	
+	static func id(result: SearchResult) -> String? {
+		return result["objectID"] as? String
+	}
 }
 
 enum AlgoliaIndex {
 	case decks
 	case users
 	case uploads
-}
-
-extension Algolia.SearchResult {
-	var id: String? {
-		return self["objectID"] as? String
-	}
 }
