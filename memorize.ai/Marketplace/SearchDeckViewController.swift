@@ -126,16 +126,20 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		guard let cell = _cell as? SearchResultCollectionViewCell else { return _cell }
 		let searchResult = searchResults[indexPath.item]
 		if let image = searchResult.image {
+			cell.setLoading(false)
 			cell.imageView.image = image
 		} else if searchResult.hasImage {
+			cell.setLoading(true)
 			storage.child("decks/\(searchResult.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+				cell.setLoading(false)
 				cell.imageView.image = image
 				searchResult.image = image
 				searchResult.deck?.image = image
 				self.decksCollectionView.reloadData()
 			}
 		} else {
+			cell.setLoading(false)
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 			searchResult.image = DEFAULT_DECK_IMAGE
 			searchResult.deck?.image = nil
@@ -154,6 +158,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 
 class SearchResultCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var subtitleLabel: UILabel!
 	@IBOutlet weak var starsSliderView: UIView!
@@ -163,5 +168,15 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
 	func setAverageRating(_ rating: Double) {
 		starsSliderViewTrailingConstraint.constant = starsSliderView.bounds.width * (rating == 0 ? 1 : CGFloat(5 - rating) / 5)
 		layoutIfNeeded()
+	}
+	
+	func setLoading(_ isLoading: Bool) {
+		imageView.layer.borderWidth = isLoading ? 1 : 0
+		if isLoading {
+			imageView.layer.borderColor = UIColor.lightGray.cgColor
+			imageActivityIndicator.startAnimating()
+		} else {
+			imageActivityIndicator.stopAnimating()
+		}
 	}
 }
