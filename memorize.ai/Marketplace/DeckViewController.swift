@@ -275,10 +275,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		}
 		if let image = deck.image {
-			deckImageActivityIndicator.stopAnimating()
 			deckImageView.image = image
 			deckImageView.layer.borderWidth = 0
 		} else if hasImage {
+			deckImageActivityIndicator.startAnimating()
 			deckImageView.layer.borderColor = UIColor.lightGray.cgColor
 			deckImageView.layer.borderWidth = 1
 			storage.child("decks/\(deckId)").getData(maxSize: MAX_FILE_SIZE) { data, error in

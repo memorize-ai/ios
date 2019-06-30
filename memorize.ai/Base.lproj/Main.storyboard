@@ -3295,7 +3295,7 @@
                                                             <constraint firstItem="FYY-KY-7rt" firstAttribute="leading" secondItem="qQO-xD-ega" secondAttribute="leading" id="ZCu-jY-kK5"/>
                                                         </constraints>
                                                     </view>
-                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Rm9-WX-cH2">
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Rm9-WX-cH2">
                                                         <rect key="frame" x="31.666666666666664" y="31.666666666666671" width="36.999999999999993" height="37"/>
                                                         <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </activityIndicatorView>
