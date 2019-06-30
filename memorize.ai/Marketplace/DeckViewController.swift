@@ -618,7 +618,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cell.reviewLabel.textColor = hasReview ? .black : .darkGray
 			cell.moreLabel.isHidden = !(hasReview && cell.reviewLabel.isTruncated)
 			cell.action = {
-				if cell.moreLabel.isHidden { return }
 				self.performSegue(withIdentifier: "rating", sender: rating)
 			}
 			return cell
