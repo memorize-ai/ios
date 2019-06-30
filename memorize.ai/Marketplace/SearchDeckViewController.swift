@@ -79,10 +79,10 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 							self.searchResults.append(cachedResult)
 							self.decksCollectionView.reloadData()
 						} else {
-							firestore.document("decks/\(deckId)").getDocument { snapshot, error in
+							listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 								guard error == nil, let snapshot = snapshot else { return }
 								let deck = Deck.get(deckId)
-								let searchResult = SearchResult(
+								let newSearchResult = SearchResult(
 									id: deckId,
 									hasImage: snapshot.get("hasImage") as? Bool ?? false,
 									image: deck?.image,
@@ -91,8 +91,12 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 									ratings: DeckRatings(snapshot),
 									deck: deck
 								)
-								self.searchResults.append(searchResult)
-								self.cache[deckId] = searchResult
+								if let searchResultIndex = self.indexOfSearchResult(deckId) {
+									self.searchResults[searchResultIndex] = newSearchResult
+								} else {
+									self.searchResults.append(newSearchResult)
+								}
+								self.cache[deckId] = newSearchResult
 								self.decksCollectionView.reloadData()
 							}
 						}
@@ -102,6 +106,15 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 				}
 			}
 		}
+	}
+	
+	func indexOfSearchResult(_ id: String) -> Int? {
+		for i in 0..<searchResults.count {
+			if searchResults[i].id == id {
+				return i
+			}
+		}
+		return nil
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
