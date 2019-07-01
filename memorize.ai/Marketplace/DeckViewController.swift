@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 import SafariServices
 import WebKit
 
@@ -85,6 +86,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var info = [[(String, String)]]()
 	var creatorDecks = [Deck]()
 	var similarDecks = [Deck]()
+	var listeners = [String : ListenerRegistration]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +113,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.setLabels(name: deckName, subtitle: subtitle, description: description, ratings: deckRatings)
 				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings, created: created, updated: updated)
 				self.loadingView.isHidden = true
-				listeners["users/\(creatorId)"] = firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
+				self.listeners["users/\(creatorId)"] = firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
 					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = User.url(slug: creatorSlug) {
 						self.deck.creator.name = creatorName
 						self.deck.creator.url = creatorUrl
@@ -134,7 +136,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					}
 					self.loadCreator()
 				}
-				listeners["decks"] = firestore.collection("decks").whereField("creator", isEqualTo: creatorId).addSnapshotListener { decksSnapshot, decksError in
+				self.listeners["decks"] = firestore.collection("decks").whereField("creator", isEqualTo: creatorId).addSnapshotListener { decksSnapshot, decksError in
 					guard decksError == nil, let decksSnapshot = decksSnapshot?.documentChanges else { return }
 					for deckSnapshot in decksSnapshot {
 						let creatorDeck = deckSnapshot.document
@@ -340,6 +342,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		listeners.forEach { $1.remove() }
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -572,7 +579,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				}
 			}
 		} else {
-			firestore.document("users/\(id)/decks/\(deckId)").delete { error in
+			firestore.document("users/\(id)/decks/\(deckId)").updateData(["hidden": true]) { error in
 				if error == nil {
 					self.getButtonWidthConstraint.constant = 70
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
