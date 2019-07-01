@@ -237,63 +237,60 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}
 		}
 		listeners["decks/\(deckId)/users"] = firestore.collection("decks/\(deckId)/users").whereField("hasTitle", isEqualTo: true).order(by: "date").limit(to: RATINGS_COUNT).addSnapshotListener { snapshot, error in
-			if error == nil, let snapshot = snapshot?.documentChanges {
-				snapshot.forEach {
-					let user = $0.document
-					let userId = user.documentID
-					switch $0.type {
-					case .added:
-						let newRating = Rating(
-							rating: DeckRating(
-								id: deckId,
-								rating: user.get("rating") as? Int ?? 1,
-								title: user.get("title") as? String ?? "",
-								review: user.get("review") as? String ?? "",
-								date: user.getDate("date") ?? Date()
-							),
-							user: (
-								id: userId,
-								image: nil,
-								name: nil,
-								url: nil
-							)
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				let user = $0.document
+				let userId = user.documentID
+				switch $0.type {
+				case .added:
+					let newRating = Rating(
+						rating: DeckRating(
+							id: deckId,
+							rating: user.get("rating") as? Int ?? 1,
+							title: user.get("title") as? String ?? "",
+							review: user.get("review") as? String ?? "",
+							date: user.getDate("date") ?? Date()
+						),
+						user: (
+							id: userId,
+							image: nil,
+							name: nil,
+							url: nil
 						)
-						self.ratings.append(newRating)
-						firestore.document("users/\(userId)").addSnapshotListener { userSnapshot, userError in
-							guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String, let userSlug = userSnapshot.get("slug") as? String, let url = User.url(slug: userSlug) else { return }
-							newRating.user.name = userName
-							newRating.user.url = url
-							self.ratingsCollectionView.reloadData()
-						}
-						if let cachedImage = User.imageFromCache(userId) {
-							newRating.user.image = cachedImage
-							ChangeHandler.call(.ratingUserImageModified)
-							self.ratingsCollectionView.reloadData()
-						}
-						storage.child("users/\(userId)").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
-							if userError == nil, let userData = userData, let userImage = UIImage(data: userData) {
-								newRating.user.image = userImage
-								User.cache(userId, image: userImage)
-							} else {
-								newRating.user.image = DEFAULT_PROFILE_PICTURE
-								User.cache(userId, image: DEFAULT_PROFILE_PICTURE)
-							}
-							ChangeHandler.call(.ratingUserImageModified)
-							self.ratingsCollectionView.reloadData()
-						}
-					case .modified:
-						self.ratings.first { $0.user.id == userId }?.rating.update(user)
-					case .removed:
-						self.ratings = self.ratings.filter { $0.user.id != userId }
-					@unknown default:
-						return
+					)
+					self.ratings.append(newRating)
+					firestore.document("users/\(userId)").addSnapshotListener { userSnapshot, userError in
+						guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String, let userSlug = userSnapshot.get("slug") as? String, let url = User.url(slug: userSlug) else { return }
+						newRating.user.name = userName
+						newRating.user.url = url
+						self.ratingsCollectionView.reloadData()
 					}
-					guard let ratings = self.deck.ratings else { return }
-					self.setRatingLabels(ratings)
-					self.ratingsCollectionView.reloadData()
+					if let cachedImage = User.imageFromCache(userId) {
+						newRating.user.image = cachedImage
+						ChangeHandler.call(.ratingUserImageModified)
+						self.ratingsCollectionView.reloadData()
+					}
+					storage.child("users/\(userId)").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
+						if userError == nil, let userData = userData, let userImage = UIImage(data: userData) {
+							newRating.user.image = userImage
+							User.cache(userId, image: userImage)
+						} else {
+							newRating.user.image = DEFAULT_PROFILE_PICTURE
+							User.cache(userId, image: DEFAULT_PROFILE_PICTURE)
+						}
+						ChangeHandler.call(.ratingUserImageModified)
+						self.ratingsCollectionView.reloadData()
+					}
+				case .modified:
+					self.ratings.first { $0.user.id == userId }?.rating.update(user)
+				case .removed:
+					self.ratings = self.ratings.filter { $0.user.id != userId }
+				@unknown default:
+					return
 				}
-			} else {
-				self.showNotification("Unable to load ratings", type: .error)
+				guard let ratings = self.deck.ratings else { return }
+				self.setRatingLabels(ratings)
+				self.ratingsCollectionView.reloadData()
 			}
 		}
 		if let image = deck.image {
