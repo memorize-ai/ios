@@ -16,7 +16,6 @@ class RatingViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		guard let rating = rating else { return }
-		userImageView.image = rating.user.image
 		userNameLabel.text = rating.user.name
 		ratingTitleLabel.text = rating.rating.title
 		ratingStarsSliderViewTrailingConstraint.constant = getStarsTrailingConstraint(width: ratingStarsSliderView.bounds.width, rating: Double(rating.rating.rating))
@@ -25,6 +24,15 @@ class RatingViewController: UIViewController {
 		let hasReview = rating.rating.hasReview
 		ratingReviewLabel.text = hasReview ? rating.rating.review : "(no review)"
 		ratingReviewLabel.textColor = hasReview ? .black : .darkGray
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		ChangeHandler.updateAndCall(.ratingUserImageModified) { change in
+			if change == .ratingUserImageModified {
+				self.userImageView.image = self.rating?.user.image
+			}
+		}
 	}
 	
 	@IBAction

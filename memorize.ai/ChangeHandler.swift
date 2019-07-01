@@ -58,4 +58,6 @@ enum Change {
 	case ratingDraftAdded
 	case ratingDraftModified
 	case ratingDraftRemoved
+	
+	case ratingUserImageModified
 }

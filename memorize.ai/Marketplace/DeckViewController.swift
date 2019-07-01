@@ -140,13 +140,12 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						let creatorDeck = deckSnapshot.document
 						let creatorDeckId = creatorDeck.documentID
 						if creatorDeckId == deckId { continue }
-						print(creatorDeck.data())
 						switch deckSnapshot.type {
 						case .added:
 							let newDeck = Deck(
 								id: creatorDeckId,
 								hasImage: creatorDeck.get("hasImage") as? Bool ?? false,
-								image: Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
+								image: Deck.imageFromCache(creatorDeckId) ?? Deck.get(creatorDeckId)?.image ?? self.similarDecks.first { $0.id == creatorDeckId }?.image,
 								name: creatorDeck.get("name") as? String ?? "Error",
 								subtitle: creatorDeck.get("subtitle") as? String ?? "",
 								description: creatorDeck.get("description") as? String ?? "",
@@ -193,7 +192,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						@unknown default:
 							return
 						}
-						print(self.creatorDecks)
 						self.moreByCreatorCollectionView.reloadData()
 					}
 				}
@@ -269,6 +267,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						}
 						if let cachedImage = User.imageFromCache(userId) {
 							newRating.user.image = cachedImage
+							ChangeHandler.call(.ratingUserImageModified)
 							self.ratingsCollectionView.reloadData()
 						}
 						storage.child("users/\(userId)").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
@@ -279,6 +278,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 								newRating.user.image = DEFAULT_PROFILE_PICTURE
 								User.cache(userId, image: DEFAULT_PROFILE_PICTURE)
 							}
+							ChangeHandler.call(.ratingUserImageModified)
 							self.ratingsCollectionView.reloadData()
 						}
 					case .modified:
