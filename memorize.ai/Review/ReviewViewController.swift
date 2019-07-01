@@ -49,14 +49,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
 			}
 			if change == .cardModified {
-				if self.currentCard.hasAudio(self.currentSide) {
-					if !self.didPause {
-						self.playAudio()
-					}
-					self.setBarButtonItems()
-				} else {
-					self.removeBarButtonItems()
-				}
+				self.handleAudio()
 			}
 		}
 		updateCurrentViewController()
@@ -98,8 +91,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		playAudio()
 	}
 	
-	func playAudio() {
-		currentCard.playAudio(currentSide)
+	func playAudio(completion: @escaping (Bool) -> Void = { _ in }) {
+		currentCard.playAudio(currentSide, completion: completion)
 		setPlayState(.pause)
 	}
 	
@@ -122,6 +115,19 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	func setPlayState(_ playState: Audio.PlayState) {
 		self.playState = playState
 		setBarButtonItems()
+	}
+	
+	func handleAudio() {
+		if currentCard.hasAudio(currentSide) {
+			if !didPause {
+				playAudio { _ in
+					self.setPlayState(.ready)
+				}
+			}
+			setBarButtonItems()
+		} else {
+			removeBarButtonItems()
+		}
 	}
 	
 	func removeBarButtonItems(animated: Bool = true) {
@@ -171,13 +177,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				guard $0 else { return }
 				self.enable(self.leftButton)
 				self.currentSide = .back
-				if self.currentCard.hasAudio(.back) {
-					if !self.didPause {
-						self.playAudio()
-					}
-				} else {
-					self.removeBarButtonItems()
-				}
+				Audio.pause()
+				self.handleAudio()
 				if self.backButton.isHidden {
 					self.ratingCollectionViewHeightConstraint.constant = self.ratingCollectionView.contentSize.height
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: self.view.layoutIfNeeded, completion: nil)
@@ -205,13 +206,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				guard $0 else { return }
 				self.enable(self.rightButton)
 				self.currentSide = .front
-				if self.currentCard.hasAudio(.front) {
-					if !self.didPause {
-						self.playAudio()
-					}
-				} else {
-					self.removeBarButtonItems()
-				}
+				self.handleAudio()
 			}
 		}
 	}
@@ -321,13 +316,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 							}) {
 								guard $0 else { return }
 								self.currentSide = .front
-								if self.currentCard.hasAudio(.front) {
-									if !self.didPause {
-										self.playAudio()
-									}
-								} else {
-									self.removeBarButtonItems()
-								}
+								self.handleAudio()
 							}
 						}
 					}
@@ -354,13 +343,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 							}) {
 								guard $0 else { return }
 								self.currentSide = .back
-								if self.currentCard.hasAudio(.back) {
-									if !self.didPause {
-										self.playAudio()
-									}
-								} else {
-									self.removeBarButtonItems()
-								}
+								self.handleAudio()
 							}
 						}
 					}
