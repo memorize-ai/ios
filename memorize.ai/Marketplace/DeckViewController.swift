@@ -454,8 +454,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		info = [
 			[(isPublic ? "public" : "private", "access"), (count.formatted, "card\(count.plural)")],
 			[(ratings.count.formatted, "rating\(ratings.count.plural)"), (String(ratings.average.oneDecimalPlace), "average")],
-			[(downloads.total.formatted, "total download\(downloads.total.plural)"), (downloads.current.formatted, "active user\(downloads.current.plural)")],
-			[(views.total.formatted, "total view\(views.total.plural)"), (views.unique.formatted, "unique viewer\(views.unique.plural)")],
+			[(downloads.total.formatted, "download\(downloads.total.plural)"), (downloads.current.formatted, "user\(downloads.current.plural)")],
+			[(views.total.formatted, "view\(views.total.plural)"), (views.unique.formatted, "unique viewer\(views.unique.plural)")],
 			[(updated.formatCompact(), "last updated"), (created.formatCompact(), "created")]
 		]
 		infoCollectionViewHeightConstraint.constant = CGFloat(info.count) * (INFO_CELL_HEIGHT + INFO_CELL_LINE_SPACING) - INFO_CELL_LINE_SPACING
