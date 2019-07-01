@@ -167,6 +167,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 								hidden: false
 							)
 							self.creatorDecks.append(newDeck)
+							self.creatorDecks.sort { $0.ratings.compare(with: $1.ratings) }
 							if newDeck.hasImage {
 								if let cachedImage = Deck.imageFromCache(creatorDeckId) {
 									newDeck.image = cachedImage

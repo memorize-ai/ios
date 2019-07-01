@@ -235,6 +235,10 @@ class DeckRatings {
 	var count: Int {
 		return all1 + all2 + all3 + all4 + all5
 	}
+	
+	func compare(with ratings: DeckRatings) -> Bool {
+		return average == ratings.average ? count > ratings.count : average > ratings.average
+	}
 }
 
 class DeckUser {
