@@ -42,6 +42,11 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	]
 	var deck: Deck?
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share)), animated: false)
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		updateCurrentViewController()
@@ -74,6 +79,17 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			return deckSettings
 		default:
 			return [deckSettings[0], deckSettings[1], deckSettings[2]]
+		}
+	}
+	
+	@objc
+	func share() {
+		if let deckId = deck?.id, let url = Deck.url(id: deckId) {
+			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+			activityVC.popoverPresentationController?.sourceView = view
+			present(activityVC, animated: true, completion: nil)
+		} else {
+			showNotification("Unable to share deck. Please try again", type: .error)
 		}
 	}
 	
