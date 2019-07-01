@@ -319,6 +319,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
 			deckImageView.image = DEFAULT_DECK_IMAGE
 		}
+		navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share)), animated: false)
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -363,6 +364,17 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	var hasDeck: Bool {
 		return Deck.has(deck.id)
+	}
+	
+	@objc
+	func share() {
+		if let deckId = deck.id, let url = Deck.url(id: deckId) {
+			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+			activityVC.popoverPresentationController?.sourceView = view
+			present(activityVC, animated: true, completion: nil)
+		} else {
+			showNotification("Unable to share deck. Please try again", type: .error)
+		}
 	}
 	
 	func loadFlowLayouts() {
