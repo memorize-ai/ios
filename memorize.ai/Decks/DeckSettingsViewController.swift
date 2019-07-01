@@ -142,7 +142,11 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			cell.stopLoading()
 			if error == nil {
 				buzz()
-				self.navigationController?.popViewController(animated: true)
+				if decks.isEmpty {
+					self.performSegue(withIdentifier: "home", sender: self)
+				} else {
+					self.navigationController?.popViewController(animated: true)
+				}
 			} else {
 				self.showNotification("An unknown error occurred. Please try again", type: .error)
 			}
@@ -164,7 +168,11 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 						firestore.document("users/\(id)/decks/\(deck.id)").delete { error in
 							if error == nil {
 								buzz()
-								self.navigationController?.popViewController(animated: true)
+								if decks.isEmpty {
+									self.performSegue(withIdentifier: "home", sender: self)
+								} else {
+									self.navigationController?.popViewController(animated: true)
+								}
 							} else {
 								self.showNotification("An unknown error occurred. Please try again", type: .error)
 							}
