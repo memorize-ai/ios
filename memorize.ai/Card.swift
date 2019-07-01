@@ -123,6 +123,10 @@ class Card {
 		return Card.getAudioUrls(side.text(for: self))
 	}
 	
+	func hasAudio(_ side: CardSide) -> Bool {
+		return !getAudioUrls(side).isEmpty
+	}
+	
 	func rate(_ type: CardRatingType, completion: @escaping (Error?) -> Void) {
 		Card.rate(id, deckId: deck, type: type, completion: completion)
 	}

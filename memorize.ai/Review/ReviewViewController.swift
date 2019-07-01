@@ -19,6 +19,9 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	var previewDeck: String?
 	var previewCards: [Card]?
 	var isPushing = false
+	var playState = Audio.PlayState.ready
+	var currentSide = CardSide.front
+	var didPause = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -40,16 +43,19 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
 				guard self.current < self.dueCards.count else { return }
-				if self.isReview {
-					let element = self.dueCards[self.current]
-					self.load(element.card.front, webView: self.frontWebView)
-					self.load(element.card.back, webView: self.backWebView)
-					self.navigationItem.title = element.deck.name
-				} else if let previewCards = self.previewCards {
-					let element = previewCards[self.current]
-					self.load(element.front, webView: self.frontWebView)
-					self.load(element.back, webView: self.backWebView)
-					self.navigationItem.title = self.previewDeck
+				let card = self.currentCard
+				self.load(card.front, webView: self.frontWebView)
+				self.load(card.back, webView: self.backWebView)
+				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
+			}
+			if change == .cardModified {
+				if self.currentCard.hasAudio(self.currentSide) {
+					if !self.didPause {
+						self.playAudio()
+					}
+					self.setBarButtonItems()
+				} else {
+					self.removeBarButtonItems()
 				}
 			}
 		}
@@ -68,6 +74,58 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		super.prepare(for: segue, sender: sender)
 		guard let recapVC = segue.destination as? RecapViewController else { return }
 		recapVC.cards = reviewedCards
+	}
+	
+	func setBarButtonItems(animated: Bool = true) {
+		navigationItem.setRightBarButtonItems([
+			getAudioBarButtonItem(image: Audio.image(for: playState)),
+			UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadAudio))
+		], animated: animated)
+	}
+	
+	func getAudioBarButtonItem(image: UIImage) -> UIBarButtonItem {
+		let button = UIButton(type: .custom)
+		button.setImage(image, for: .normal)
+		button.addTarget(self, action: #selector(audioControlsClicked), for: .touchUpInside)
+		button.widthAnchor.constraint(equalToConstant: 32).isActive = true
+		button.heightAnchor.constraint(equalToConstant: 32).isActive = true
+		return UIBarButtonItem(customView: button)
+	}
+	
+	@objc
+	func reloadAudio() {
+		Audio.stop()
+		playAudio()
+	}
+	
+	func playAudio() {
+		currentCard.playAudio(currentSide)
+		setPlayState(.pause)
+	}
+	
+	@objc
+	func audioControlsClicked() {
+		switch playState {
+		case .ready:
+			Audio.resume()
+			setPlayState(.pause)
+			didPause = false
+		case .pause:
+			Audio.pause()
+			setPlayState(.ready)
+			didPause = true
+		default:
+			break
+		}
+	}
+	
+	func setPlayState(_ playState: Audio.PlayState) {
+		self.playState = playState
+		setBarButtonItems()
+	}
+	
+	func removeBarButtonItems(animated: Bool = true) {
+		navigationItem.setRightBarButtonItems(nil, animated: animated)
 	}
 	
 	@IBAction
@@ -112,6 +170,14 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			}) {
 				guard $0 else { return }
 				self.enable(self.leftButton)
+				self.currentSide = .back
+				if self.currentCard.hasAudio(.back) {
+					if !self.didPause {
+						self.playAudio()
+					}
+				} else {
+					self.removeBarButtonItems()
+				}
 				if self.backButton.isHidden {
 					self.ratingCollectionViewHeightConstraint.constant = self.ratingCollectionView.contentSize.height
 					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: self.view.layoutIfNeeded, completion: nil)
@@ -138,12 +204,28 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			}) {
 				guard $0 else { return }
 				self.enable(self.rightButton)
+				self.currentSide = .front
+				if self.currentCard.hasAudio(.front) {
+					if !self.didPause {
+						self.playAudio()
+					}
+				} else {
+					self.removeBarButtonItems()
+				}
 			}
 		}
 	}
 	
 	var isReview: Bool {
 		return previewDeck == nil
+	}
+	
+	var currentCard: Card {
+		if let previewCards = previewCards {
+			return previewCards[current]
+		} else {
+			return dueCards[current].card
+		}
 	}
 	
 	func enable(_ button: UIButton) {
@@ -212,7 +294,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			guard $0 else { return }
 			if self.current < count {
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
-				guard let card = self.isReview ? self.dueCards[self.current].card : self.previewCards?[self.current] else { return }
+				let card = self.currentCard
 				if self.frontWebView.isHidden {
 					self.load(card.front, webView: self.frontWebView)
 					UIView.animate(withDuration: 0.125, animations: {
@@ -233,9 +315,19 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 							self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 							self.backButton.alpha = 0
 							self.backButton.isHidden = false
-							UIView.animate(withDuration: 0.125) {
+							UIView.animate(withDuration: 0.125, animations: {
 								self.backButton.transform = .identity
 								self.backButton.alpha = 1
+							}) {
+								guard $0 else { return }
+								self.currentSide = .front
+								if self.currentCard.hasAudio(.front) {
+									if !self.didPause {
+										self.playAudio()
+									}
+								} else {
+									self.removeBarButtonItems()
+								}
 							}
 						}
 					}
@@ -256,9 +348,19 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 							self.backButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 							self.backButton.alpha = 0
 							self.backButton.isHidden = false
-							UIView.animate(withDuration: 0.125) {
+							UIView.animate(withDuration: 0.125, animations: {
 								self.backButton.transform = .identity
 								self.backButton.alpha = 1
+							}) {
+								guard $0 else { return }
+								self.currentSide = .back
+								if self.currentCard.hasAudio(.back) {
+									if !self.didPause {
+										self.playAudio()
+									}
+								} else {
+									self.removeBarButtonItems()
+								}
 							}
 						}
 					}

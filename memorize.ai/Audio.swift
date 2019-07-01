@@ -7,6 +7,7 @@ class Audio {
 	enum PlayState {
 		case ready
 		case stop
+		case pause
 	}
 	
 	static var isPlaying: Bool {
@@ -25,12 +26,14 @@ class Audio {
 		player?.stop()
 	}
 	
-	static func image(for playState: PlayState) -> UIImage {
+	static func image(for playState: PlayState, white: Bool = false) -> UIImage {
 		switch playState {
 		case .ready:
 			return #imageLiteral(resourceName: "Play")
 		case .stop:
 			return #imageLiteral(resourceName: "Stop")
+		case .pause:
+			return white ? #imageLiteral(resourceName: "Pause White") : #imageLiteral(resourceName: "Pause Black")
 		}
 	}
 	
