@@ -458,61 +458,61 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 								role: Role(deck.get("role") as? String),
 								hidden: deck.get("hidden") as? Bool ?? false
 							))
-						}
-						ChangeHandler.call(.deckModified)
-						listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
-							guard error == nil, let snapshot = snapshot?.documentChanges else { return }
-							snapshot.forEach {
-								let card = $0.document
-								let cardId = card.documentID
-								guard let localDeck = Deck.getFromAll(deckId) else { return }
-								switch $0.type {
-								case .added:
-									listeners["users/\(id)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
-										guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
-										if let localCard = Card.get(cardId, deckId: deckId) {
-											if cardSnapshot.exists {
-												localCard.update(cardSnapshot, type: .user)
+							listeners["decks/\(deckId)/cards"] = firestore.collection("decks/\(deckId)/cards").addSnapshotListener { snapshot, error in
+								guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+								snapshot.forEach {
+									let card = $0.document
+									let cardId = card.documentID
+									guard let localDeck = Deck.getFromAll(deckId) else { return }
+									switch $0.type {
+									case .added:
+										listeners["users/\(id)/decks/\(deckId)/cards/\(cardId)"] = firestore.document("users/\(id)/decks/\(deckId)/cards/\(cardId)").addSnapshotListener { cardSnapshot, cardError in
+											guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
+											if let localCard = Card.get(cardId, deckId: deckId) {
+												if cardSnapshot.exists {
+													localCard.update(cardSnapshot, type: .user)
+												} else {
+													localCard.reset()
+												}
 											} else {
-												localCard.reset()
+												localDeck.cards.append(Card(
+													id: cardId,
+													front: card.get("front") as? String ?? "Error",
+													back: card.get("back") as? String ?? "Error",
+													created: card.getDate("created") ?? Date(),
+													updated: card.getDate("updated") ?? Date(),
+													likes: card.get("likes") as? Int ?? 0,
+													dislikes: card.get("dislikes") as? Int ?? 0,
+													count: cardSnapshot.get("count") as? Int ?? 0,
+													correct: cardSnapshot.get("correct") as? Int ?? 0,
+													e: cardSnapshot.get("e") as? Double ?? DEFAULT_E,
+													streak: cardSnapshot.get("streak") as? Int ?? 0,
+													mastered: cardSnapshot.get("mastered") as? Bool ?? false,
+													last: CardLast(cardSnapshot),
+													next: cardSnapshot.getDate("next") ?? Date(),
+													history: [],
+													deck: deckId
+												))
 											}
-										} else {
-											localDeck.cards.append(Card(
-												id: cardId,
-												front: card.get("front") as? String ?? "Error",
-												back: card.get("back") as? String ?? "Error",
-												created: card.getDate("created") ?? Date(),
-												updated: card.getDate("updated") ?? Date(),
-												likes: card.get("likes") as? Int ?? 0,
-												dislikes: card.get("dislikes") as? Int ?? 0,
-												count: cardSnapshot.get("count") as? Int ?? 0,
-												correct: cardSnapshot.get("correct") as? Int ?? 0,
-												e: cardSnapshot.get("e") as? Double ?? DEFAULT_E,
-												streak: cardSnapshot.get("streak") as? Int ?? 0,
-												mastered: cardSnapshot.get("mastered") as? Bool ?? false,
-												last: CardLast(cardSnapshot),
-												next: cardSnapshot.getDate("next") ?? Date(),
-												history: [],
-												deck: deckId
-											))
+											self.reloadReview()
+											ChangeHandler.call(.cardModified)
 										}
+									case .modified:
+										Card.get(cardId, deckId: deckId)?.update(card, type: .card)
 										self.reloadReview()
 										ChangeHandler.call(.cardModified)
+									case .removed:
+										localDeck.cards = localDeck.cards.filter { $0.id != cardId }
+										Listener.remove("users/\(id)/decks/\(deckId)/cards/\(cardId)")
+										self.reloadReview()
+										ChangeHandler.call(.cardRemoved)
+									@unknown default:
+										return
 									}
-								case .modified:
-									Card.get(cardId, deckId: deckId)?.update(card, type: .card)
-									self.reloadReview()
-									ChangeHandler.call(.cardModified)
-								case .removed:
-									localDeck.cards = localDeck.cards.filter { $0.id != cardId }
-									Listener.remove("users/\(id)/decks/\(deckId)/cards/\(cardId)")
-									self.reloadReview()
-									ChangeHandler.call(.cardRemoved)
-								@unknown default:
-									return
 								}
 							}
 						}
+						ChangeHandler.call(.deckModified)
 					}
 				case .modified:
 					Deck.getFromAll(deckId)?.update(deck, type: .user)
