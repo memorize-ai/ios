@@ -93,6 +93,10 @@ class Deck {
 		return imageCache[id]
 	}
 	
+	static func url(id: String) -> URL? {
+		return URL(string: "https://memorize.ai/d/\(id)")
+	}
+	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
 		functions.httpsCallable("addDeck").call(["deckId": deckId]) { completion($1) }
 	}
