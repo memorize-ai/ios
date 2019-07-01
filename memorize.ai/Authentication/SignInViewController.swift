@@ -30,6 +30,28 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		navigationController?.popViewController(animated: true)
 	}
 	
+	@IBAction
+	func forgotPassword() {
+		let alertController = UIAlertController(title: "Forgot password", message: "Send a password reset email", preferredStyle: .alert)
+		alertController.addTextField {
+			$0.placeholder = "Email"
+			$0.text = self.emailTextField.text?.trim()
+			$0.keyboardType = .emailAddress
+			$0.clearButtonMode = .whileEditing
+		}
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Send", style: .default) { _ in
+			let email = alertController.textFields?.first?.text?.trim() ?? ""
+			if email.isEmpty { return self.showNotification("Email cannot be blank", type: .error) }
+			guard email.isValidEmail else { return self.showNotification("Invalid email", type: .error) }
+			self.showNotification("Sending...", type: .normal)
+			auth.sendPasswordReset(withEmail: email) { error in
+				self.showNotification(error == nil ? "Sent. Check your email to reset your password" : "Unable to send password reset email. Please try again", type: error == nil ? .success : .error)
+			}
+		})
+		present(alertController, animated: true, completion: nil)
+	}
+	
 	func keyboardWillShow() {
 		signInButtonBottomConstraint.constant = keyboardOffset - view.safeAreaInsets.bottom
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
