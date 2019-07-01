@@ -5445,8 +5445,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYZ-lG-JRs">
-                                        <rect key="frame" x="263" y="8" width="131" height="36"/>
-                                        <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                        <rect key="frame" x="261" y="8" width="133" height="36"/>
+                                        <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Forgot password"/>
                                         <connections>
                                             <action selector="forgotPassword" destination="rGS-Wl-YQH" eventType="touchUpInside" id="3P2-fQ-PnZ"/>
@@ -5458,8 +5458,8 @@
                                     <constraint firstItem="jYZ-lG-JRs" firstAttribute="top" secondItem="NMy-He-q3f" secondAttribute="top" constant="8" id="G4h-en-Mmv"/>
                                     <constraint firstItem="GUU-Un-hcA" firstAttribute="centerX" secondItem="NMy-He-q3f" secondAttribute="centerX" id="Qqw-3v-vUv"/>
                                     <constraint firstItem="iNb-4G-cgH" firstAttribute="leading" secondItem="NMy-He-q3f" secondAttribute="leading" constant="20" id="V1N-Gw-5T7"/>
+                                    <constraint firstItem="GUU-Un-hcA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jYZ-lG-JRs" secondAttribute="bottom" constant="20" id="VjK-d7-MJV"/>
                                     <constraint firstAttribute="trailing" secondItem="jYZ-lG-JRs" secondAttribute="trailing" constant="20" id="eeB-gW-Rjc"/>
-                                    <constraint firstItem="GUU-Un-hcA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NMy-He-q3f" secondAttribute="top" constant="20" id="mNv-Px-oXN"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GUU-Un-hcA" secondAttribute="bottom" constant="20" id="s7m-qJ-HxI"/>
                                     <constraint firstItem="GUU-Un-hcA" firstAttribute="centerY" secondItem="NMy-He-q3f" secondAttribute="centerY" id="uce-CH-Czx"/>
                                 </constraints>
