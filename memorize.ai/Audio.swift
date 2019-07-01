@@ -13,6 +13,14 @@ class Audio {
 		return player?.isPlaying ?? false
 	}
 	
+	static func resume() {
+		player?.resume()
+	}
+	
+	static func pause() {
+		player?.pause()
+	}
+	
 	static func stop() {
 		player?.stop()
 	}
