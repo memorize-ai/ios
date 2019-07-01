@@ -10,6 +10,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var signInButtonBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var signInActivityIndicator: UIActivityIndicatorView!
 	
+	var forgotPasswordTextField: UITextField?
+	var emailText: String?
+	
 	deinit {
 		KeyboardHandler.removeListener(self)
 	}
@@ -32,14 +35,19 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	
 	@IBAction
 	func forgotPassword() {
+		emailText = emailTextField.text
 		let alertController = UIAlertController(title: "Forgot password", message: "Send a password reset email", preferredStyle: .alert)
 		alertController.addTextField {
 			$0.placeholder = "Email"
 			$0.text = self.emailTextField.text?.trim()
 			$0.keyboardType = .emailAddress
 			$0.clearButtonMode = .whileEditing
+			$0.addTarget(self, action: #selector(self.forgotPasswordTextFieldChanged), for: .editingChanged)
+			self.forgotPasswordTextField = $0
 		}
-		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+			self.emailTextField.text = self.emailText ?? ""
+		})
 		alertController.addAction(UIAlertAction(title: "Send", style: .default) { _ in
 			let email = alertController.textFields?.first?.text?.trim() ?? ""
 			if email.isEmpty { return self.showNotification("Email cannot be blank", type: .error) }
@@ -50,6 +58,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 			}
 		})
 		present(alertController, animated: true, completion: nil)
+	}
+	
+	@objc
+	func forgotPasswordTextFieldChanged() {
+		emailTextField.text = forgotPasswordTextField?.text?.trim() ?? ""
+		textFieldChanged()
 	}
 	
 	func keyboardWillShow() {
