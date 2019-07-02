@@ -46,7 +46,7 @@ extension DocumentSnapshot {
 }
 
 extension WKWebView {
-	func render(_ text: String, fontSize: Int, textColor: String, backgroundColor: String) {
+	func render(_ text: String, fontSize: Int, textColor: String = "000", backgroundColor: String = "fff") {
 		let escapedText = Card.escape(text)
 		loadHTMLString("""
 			<!DOCTYPE html>

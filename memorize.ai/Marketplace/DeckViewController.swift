@@ -753,7 +753,7 @@ class CardPreviewCollectionViewCell: UICollectionViewCell {
 	func load(_ card: Card, side: CardSide) {
 		layer.borderColor = UIColor.darkGray.cgColor
 		playButton.isHidden = card.getAudioUrls(side).isEmpty
-		webView.render(side.text(for: card), fontSize: 40, textColor: "000", backgroundColor: "fff")
+		webView.render(side.text(for: card), fontSize: 40)
 		likeCountLabel.text = card.likes.formatted
 		dislikeCountLabel.text = card.dislikes.formatted
 	}

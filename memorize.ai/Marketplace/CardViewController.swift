@@ -19,8 +19,8 @@ class CardViewController: UIViewController {
 		super.viewDidLoad()
 		guard let card = card else { return }
 		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
-		frontWebView.render(card.front, fontSize: 55, textColor: "000", backgroundColor: "fff")
-		backWebView.render(card.back, fontSize: 55, textColor: "000", backgroundColor: "fff")
+		frontWebView.render(card.front, fontSize: 55)
+		backWebView.render(card.back, fontSize: 55)
 		cell?.completion = {
 			self.setPlayState(.ready)
 		}
