@@ -226,14 +226,19 @@ class DeckRatings {
 		self.all5 = all5
 	}
 	
-	init(_ snapshot: DocumentSnapshot) {
-		let ratings = snapshot.get("ratings") as? [String : Any]
-		average = ratings?["average"] as? Double ?? 0
-		all1 = ratings?["1"] as? Int ?? 0
-		all2 = ratings?["2"] as? Int ?? 0
-		all3 = ratings?["3"] as? Int ?? 0
-		all4 = ratings?["4"] as? Int ?? 0
-		all5 = ratings?["5"] as? Int ?? 0
+	convenience init(_ snapshot: DocumentSnapshot) {
+		self.init(snapshot.get("ratings") as? [String : Any] ?? [:])
+	}
+	
+	convenience init(_ dictionary: [String : Any]) {
+		self.init(
+			average: dictionary["average"] as? Double ?? 0,
+			all1: dictionary["1"] as? Int ?? 0,
+			all2: dictionary["2"] as? Int ?? 0,
+			all3: dictionary["3"] as? Int ?? 0,
+			all4: dictionary["4"] as? Int ?? 0,
+			all5: dictionary["5"] as? Int ?? 0
+		)
 	}
 	
 	var count: Int {
