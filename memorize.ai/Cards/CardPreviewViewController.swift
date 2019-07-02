@@ -19,7 +19,7 @@ class CardPreviewViewController: UIViewController {
 	}
 	
 	private func load(_ text: String, webView: WKWebView) {
-		webView.render(text, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
+		webView.render(text, fontSize: 55, textColor: "000", backgroundColor: "fff")
 	}
 	
 	func load(_ side: CardSide) {

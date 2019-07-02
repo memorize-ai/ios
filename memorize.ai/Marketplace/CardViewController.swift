@@ -16,8 +16,8 @@ class CardViewController: UIViewController {
 		super.viewDidLoad()
 		guard let card = card else { return }
 		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
-		frontWebView.render(card.front, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
-		backWebView.render(card.back, fontSize: 55, textColor: "000000", backgroundColor: "ffffff")
+		frontWebView.render(card.front, fontSize: 55, textColor: "000", backgroundColor: "fff")
+		backWebView.render(card.back, fontSize: 55, textColor: "000", backgroundColor: "fff")
 		cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -29,7 +29,7 @@ class CardViewController: UIViewController {
 		super.viewWillAppear(animated)
 		ChangeHandler.update(nil)
 		disable(leftButton)
-		updateCurrentViewController()
+		updateCurrentViewController(stopAudio: false)
 	}
 	
 	@IBAction

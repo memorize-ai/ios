@@ -24,7 +24,7 @@ class TutorialViewController: UIViewController {
 	
 	@discardableResult
 	func showTutorial(_ text: String) -> String {
-		webView.render(text, fontSize: 35, textColor: "000000", backgroundColor: "ffffff")
+		webView.render(text, fontSize: 35, textColor: "000", backgroundColor: "fff")
 		return text
 	}
 }
