@@ -88,6 +88,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var similarDecks = [Deck]()
 	var listeners = [String : ListenerRegistration]()
 	var shouldLoadDeckAttributes = true
+	var cardPreviewCells = [String : CardPreviewCollectionViewCell]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -646,7 +647,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			guard let cell = _cell as? CardPreviewCollectionViewCell else { return _cell }
 			let card = cards[indexPath.item]
 			cell.load(card, side: .front)
-			cell.playAction = {
+			cell.playAction = { completion in
 				if Audio.isPlaying {
 					Audio.stop()
 					cell.setPlayState(.ready)
@@ -654,12 +655,14 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					cell.setPlayState(.stop)
 					card.playAudio(.front) { success in
 						cell.setPlayState(.ready)
+						completion?()
 						if !success {
 							self.showNotification("Unable to play audio. Please try again", type: .error)
 						}
 					}
 				}
 			}
+			cardPreviewCells[card.id] = cell
 			return cell
 		case ratingsCollectionView.tag:
 			guard let cell = _cell as? DeckRatingCollectionViewCell else { return _cell }
@@ -695,7 +698,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		switch collectionView.tag {
 		case cardPreviewCollectionView.tag:
 			guard let cardVC = storyboard?.instantiateViewController(withIdentifier: "card") as? CardViewController else { return }
-			cardVC.card = cards[indexPath.item]
+			let card = cards[indexPath.item]
+			cardVC.card = card
+			cardVC.cell = cardPreviewCells[card.id]
 			addChild(cardVC)
 			cardVC.view.frame = view.frame
 			view.addSubview(cardVC.view)
@@ -720,11 +725,12 @@ class CardPreviewCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var likeCountLabel: UILabel!
 	@IBOutlet weak var dislikeCountLabel: UILabel!
 	
-	var playAction: (() -> Void)?
+	var playAction: (((() -> Void)?) -> Void)?
+	var completion: (() -> Void)?
 	
 	@IBAction
 	func play() {
-		playAction?()
+		playAction?(completion)
 	}
 	
 	func load(_ card: Card, side: CardSide) {

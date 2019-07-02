@@ -11,6 +11,7 @@ class CardViewController: UIViewController {
 	@IBOutlet weak var rightButton: UIButton!
 	
 	var card: Card?
+	var cell: CardPreviewCollectionViewCell?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
