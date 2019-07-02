@@ -50,7 +50,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	let RATINGS_COUNT = 10
-	let SIMILAR_DECKS_COUNT = 30
+	let SIMILAR_DECKS_COUNT = Int.max
 	let CARD_PREVIEW_CELL_SPACING: CGFloat = 20
 	let RATING_CELL_SPACING: CGFloat = 20
 	let INFO_CELL_HEIGHT: CGFloat = 60
