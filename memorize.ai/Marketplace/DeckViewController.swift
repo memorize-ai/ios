@@ -12,8 +12,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var getButton: UIButton!
 	@IBOutlet weak var getButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var getButtonActivityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var previewView: UIView!
-	@IBOutlet weak var previewButtonActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var previewButton: UIButton!
 	@IBOutlet weak var mainStarsSliderView: UIView!
 	@IBOutlet weak var mainStarsSliderViewTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var ratingsStarsSliderView: UIView!
@@ -276,11 +275,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		super.viewWillAppear(animated)
 		guard let deckId = deck.id else { return }
 		Deck.view(deckId)
-		if hasDeck {
-			getButtonWidthConstraint.constant = 90
-			view.layoutIfNeeded()
-			getButton.setTitle("DELETE", for: .normal)
-			getButton.backgroundColor = DEFAULT_RED_COLOR
+		UIView.performWithoutAnimation {
+			setGetButton(!hasDeck)
 		}
 		ChangeHandler.updateAndCall(.deckRatingAdded) { change in
 			if change == .deckRatingAdded || change == .deckRatingRemoved || change == .ratingDraftAdded || change == .ratingDraftRemoved {
@@ -463,7 +459,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setLabels(name: String, subtitle: String, description: String, ratings: DeckRatings) {
 		deckNameLabel.text = name
 		deckSubtitleLabel.text = subtitle
-		previewView.isHidden = hasDeck
 		loadCardPreview()
 		setDescription(description)
 		setCardLabels()
@@ -573,6 +568,34 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
+	func setPreviewButtonHidden(_ shouldHide: Bool) {
+		previewButton.alpha = shouldHide ? 1 : 0
+		previewButton.isHidden = !shouldHide
+		UIView.animate(withDuration: 0.5, animations: {
+			self.previewButton.alpha = shouldHide ? 0 : 1
+		}) {
+			guard $0 else { return }
+			self.previewButton.isHidden = shouldHide
+		}
+	}
+	
+	func setGetButton(_ isGet: Bool) {
+		getButtonWidthConstraint.constant = isGet ? 70 : 90
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+			self.view.layoutIfNeeded()
+			self.getButtonActivityIndicator.stopAnimating()
+			if isGet {
+				self.getButton.setTitle("GET", for: .normal)
+				self.getButton.backgroundColor = DEFAULT_BLUE_COLOR
+				self.setPreviewButtonHidden(false)
+			} else {
+				self.getButton.setTitle("DELETE", for: .normal)
+				self.getButton.backgroundColor = DEFAULT_RED_COLOR
+				self.setPreviewButtonHidden(true)
+			}
+		}, completion: nil)
+	}
+	
 	@IBAction
 	func get() {
 		guard let id = id, let deckId = deck.id else { return }
@@ -582,13 +605,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if isGet {
 			Deck.new(deckId) { error in
 				if error == nil {
-					self.getButtonWidthConstraint.constant = 90
-					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-						self.view.layoutIfNeeded()
-						self.getButtonActivityIndicator.stopAnimating()
-						self.getButton.setTitle("DELETE", for: .normal)
-						self.getButton.backgroundColor = DEFAULT_RED_COLOR
-					}, completion: nil)
+					self.setGetButton(false)
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("GET", for: .normal)
@@ -598,13 +615,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
 			firestore.document("users/\(id)/decks/\(deckId)").updateData(["hidden": true]) { error in
 				if error == nil {
-					self.getButtonWidthConstraint.constant = 70
-					UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-						self.view.layoutIfNeeded()
-						self.getButtonActivityIndicator.stopAnimating()
-						self.getButton.setTitle("GET", for: .normal)
-						self.getButton.backgroundColor = DEFAULT_BLUE_COLOR
-					}, completion: nil)
+					self.setGetButton(true)
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("DELETE", for: .normal)
