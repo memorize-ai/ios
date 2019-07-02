@@ -570,7 +570,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func setPreviewButtonHidden(_ shouldHide: Bool) {
 		previewButton.alpha = shouldHide ? 1 : 0
-		previewButton.isHidden = !shouldHide
+		previewButton.isHidden = false
 		UIView.animate(withDuration: 0.5, animations: {
 			self.previewButton.alpha = shouldHide ? 0 : 1
 		}) {
