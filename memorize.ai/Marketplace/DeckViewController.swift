@@ -652,7 +652,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func addToSimilarDecks(searchResults results: [Algolia.SearchResult], deckId: String, tags: [String]) {
 		results.filter {
 			guard let id = Algolia.id(result: $0) else { return false }
-			return id != deckId
+			return !(id == deckId || self.similarDecks.contains { $0.id == id })
 		}.sorted { DeckRatings(searchResult: $0).compare(with: DeckRatings(searchResult: $1)) }
 		.prefix(min(self.SIMILAR_DECKS_COUNT - self.similarDecks.count, tags.isEmpty ? Int.max : self.SIMILAR_DECKS_COUNT / tags.count))
 		.forEach { result in
