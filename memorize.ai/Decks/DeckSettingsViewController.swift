@@ -127,6 +127,7 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 				cell.stopLoading()
 				if error == nil {
 					buzz()
+					self.showNotification("Cleared data", type: .success)
 				} else {
 					self.showNotification("An unknown error occurred. Please try again", type: .error)
 				}
@@ -137,20 +138,25 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	
 	func removeDeck(_ cell: DeckSettingTableViewCell) {
 		guard let id = id, let deck = deck else { return }
-		cell.startLoading()
-		firestore.document("users/\(id)/decks/\(deck.id)").updateData(["hidden": true]) { error in
-			cell.stopLoading()
-			if error == nil {
-				buzz()
-				if decks.isEmpty {
-					self.performSegue(withIdentifier: "home", sender: self)
+		let alertController = UIAlertController(title: "Remove deck", message: "Your data is saved and will not be lost", preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Remove", style: .destructive) { _ in
+			cell.startLoading()
+			firestore.document("users/\(id)/decks/\(deck.id)").updateData(["hidden": true]) { error in
+				cell.stopLoading()
+				if error == nil {
+					buzz()
+					if decks.isEmpty {
+						self.performSegue(withIdentifier: "home", sender: self)
+					} else {
+						self.navigationController?.popViewController(animated: true)
+					}
 				} else {
-					self.navigationController?.popViewController(animated: true)
+					self.showNotification("An unknown error occurred. Please try again", type: .error)
 				}
-			} else {
-				self.showNotification("An unknown error occurred. Please try again", type: .error)
 			}
-		}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	func deleteDeck(_ cell: DeckSettingTableViewCell) {
@@ -206,7 +212,9 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		filteredDeckSettings[indexPath.section][indexPath.row].callAction(self)
+		let element = filteredDeckSettings[indexPath.section][indexPath.row]
+		if element.cell?.activityIndicator.isAnimating ?? true { return }
+		element.callAction(self)
 	}
 }
 
@@ -215,12 +223,10 @@ class DeckSettingTableViewCell: UITableViewCell {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	func startLoading() {
-//		editingAccessoryView?.isHidden = true
 		activityIndicator.startAnimating()
 	}
 	
 	func stopLoading() {
 		activityIndicator.stopAnimating()
-//		editingAccessoryView?.isHidden = false
 	}
 }

@@ -2678,17 +2678,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SXG-WI-NRc">
-                                                    <rect key="frame" x="379" y="12" width="20" height="20"/>
+                                                    <rect key="frame" x="356" y="12" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="5v0-eI-ArG">
-                                                    <rect key="frame" x="19.999999999999996" y="12" width="41.666666666666657" height="20"/>
+                                                    <rect key="frame" x="19.999999999999996" y="10.333333333333334" width="41.666666666666657" height="23.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="SXG-WI-NRc" secondAttribute="trailing" constant="-23" id="I4c-Nk-7Vi"/>
+                                                <constraint firstAttribute="trailing" secondItem="SXG-WI-NRc" secondAttribute="trailing" id="I4c-Nk-7Vi"/>
                                                 <constraint firstItem="SXG-WI-NRc" firstAttribute="centerY" secondItem="wkH-mb-fPt" secondAttribute="centerY" id="L0B-KA-4kc"/>
                                                 <constraint firstItem="SXG-WI-NRc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5v0-eI-ArG" secondAttribute="trailing" constant="20" id="OZv-QX-4XD"/>
                                                 <constraint firstItem="5v0-eI-ArG" firstAttribute="leading" secondItem="wkH-mb-fPt" secondAttribute="leading" constant="20" id="oOh-gx-Njc"/>
@@ -6679,13 +6679,13 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PcJ-Cf-5WB"/>
+        <segue reference="nwZ-Xi-26f"/>
         <segue reference="TPR-zk-sPC"/>
         <segue reference="h5F-6A-J1r"/>
         <segue reference="MiA-Dd-bWk"/>
         <segue reference="O84-5M-BZf"/>
         <segue reference="NDx-ee-NxK"/>
-        <segue reference="xln-P0-Fwc"/>
+        <segue reference="FG1-aM-YqR"/>
         <segue reference="0Yj-jn-rSr"/>
         <segue reference="MJl-Ks-n56"/>
         <segue reference="8JS-5f-Q5w"/>
