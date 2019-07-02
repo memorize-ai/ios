@@ -65,6 +65,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		name: String?,
 		subtitle: String?,
 		description: String?,
+		tags: [String]?,
 		isPublic: Bool?,
 		count: Int?,
 		views: DeckViews?,
@@ -95,7 +96,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		loadFlowLayouts()
 		loadCreator()
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
-			if error == nil, let snapshot = snapshot, let deckName = snapshot.get("name") as? String, let subtitle = snapshot.get("subtitle") as? String, let description = snapshot.get("description") as? String, let isPublic = snapshot.get("public") as? Bool, let count = snapshot.get("count") as? Int, let creatorId = snapshot.get("creator") as? String, let created = snapshot.getDate("created"), let updated = snapshot.getDate("updated") {
+			if error == nil, let snapshot = snapshot, let deckName = snapshot.get("name") as? String, let subtitle = snapshot.get("subtitle") as? String, let description = snapshot.get("description") as? String, let tags = snapshot.get("tags") as? [String], let isPublic = snapshot.get("public") as? Bool, let count = snapshot.get("count") as? Int, let creatorId = snapshot.get("creator") as? String, let created = snapshot.getDate("created"), let updated = snapshot.getDate("updated") {
 				let deckViews = DeckViews(snapshot)
 				let deckDownloads = DeckDownloads(snapshot)
 				let deckRatings = DeckRatings(snapshot)
@@ -103,6 +104,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.deck.name = deckName
 				self.deck.subtitle = subtitle
 				self.deck.description = description
+				self.deck.tags = tags
 				self.deck.isPublic = isPublic
 				self.deck.count = count
 				self.deck.views = deckViews
