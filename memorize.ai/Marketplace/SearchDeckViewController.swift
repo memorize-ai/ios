@@ -97,6 +97,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 									self.searchResults.append(newSearchResult)
 								}
 								self.cache[deckId] = newSearchResult
+								self.searchResults.sort { $0.ratings.compare(with: $1.ratings) }
 								self.decksCollectionView.reloadData()
 							}
 						}
