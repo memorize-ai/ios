@@ -475,7 +475,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setDescription(_ description: String) {
-		descriptionLabel.text = description
+		if description.isEmpty {
+			descriptionLabel.text = "(no description)"
+			descriptionLabel.textColor = .darkGray
+		} else {
+			descriptionLabel.text = description
+			descriptionLabel.textColor = .black
+		}
 		if isDescriptionExpanded {
 			descriptionMoreLabel.isHidden = true
 			descriptionLabelHeightConstraint?.isActive = false
