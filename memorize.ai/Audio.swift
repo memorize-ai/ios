@@ -29,9 +29,9 @@ class Audio {
 	static func image(for playState: PlayState, white: Bool = false) -> UIImage {
 		switch playState {
 		case .ready:
-			return #imageLiteral(resourceName: "Play")
+			return white ? #imageLiteral(resourceName: "Play White") : #imageLiteral(resourceName: "Play Black")
 		case .stop:
-			return #imageLiteral(resourceName: "Stop")
+			return white ? #imageLiteral(resourceName: "Stop White") : #imageLiteral(resourceName: "Stop Black")
 		case .pause:
 			return white ? #imageLiteral(resourceName: "Pause White") : #imageLiteral(resourceName: "Pause Black")
 		}
