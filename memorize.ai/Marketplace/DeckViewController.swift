@@ -635,7 +635,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				results.filter {
 					guard let id = Algolia.id(result: $0) else { return false }
 					return id != deckId
-				}.prefix(self.SIMILAR_DECKS_COUNT - self.similarDecks.count).forEach { result in
+				}.sorted { DeckRatings(searchResult: $0).compare(with: DeckRatings(searchResult: $1)) }.prefix(self.SIMILAR_DECKS_COUNT - self.similarDecks.count).forEach { result in
 					guard let deckId = Algolia.id(result: result) else { return }
 					self.similarDecks.append(Deck(
 						id: deckId,
@@ -649,7 +649,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						count: result["count"] as? Int ?? 0,
 						views: DeckViews(result["views"] as? [String : Any] ?? [:]),
 						downloads: DeckDownloads(result["downloads"] as? [String : Any] ?? [:]),
-						ratings: DeckRatings(result["ratings"] as? [String : Any] ?? [:]),
+						ratings: DeckRatings(searchResult: result),
 						users: [],
 						creator: result["creator"] as? String ?? "error",
 						owner: result["owner"] as? String ?? "error",

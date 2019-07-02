@@ -251,6 +251,10 @@ class DeckRatings {
 		)
 	}
 	
+	convenience init(searchResult: Algolia.SearchResult) {
+		self.init(searchResult["ratings"] as? [String : Any] ?? [:])
+	}
+	
 	var count: Int {
 		return all1 + all2 + all3 + all4 + all5
 	}
