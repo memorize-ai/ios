@@ -62,6 +62,7 @@
 		4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2DC22A4604400669570 /* Algolia.swift */; };
 		4DA2C2DF22A48AA400669570 /* UploadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */; };
 		4DA2C2E122A48E5400669570 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2E022A48E5400669570 /* Upload.swift */; };
+		4DA965EB22CC18C000FD7353 /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA965EA22CC18C000FD7353 /* StoreReview.swift */; };
 		4DA9D0CD22C80D250057AD0D /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */; };
 		4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */; };
 		4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA38FD2208D4F500EB443E /* CardViewController.swift */; };
@@ -247,6 +248,7 @@
 		4DA2C2DC22A4604400669570 /* Algolia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algolia.swift; sourceTree = "<group>"; };
 		4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsViewController.swift; sourceTree = "<group>"; };
 		4DA2C2E022A48E5400669570 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		4DA965EA22CC18C000FD7353 /* StoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReview.swift; sourceTree = "<group>"; };
 		4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewController.swift; sourceTree = "<group>"; };
 		4DAA38FD2208D4F500EB443E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				4DDD3F2622B1F9FB00BA2C98 /* History.swift */,
 				4D5F1F1F229E1C4D00AC7732 /* Invite.swift */,
 				4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */,
+				4DA965EA22CC18C000FD7353 /* StoreReview.swift */,
 				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
 				4D5F1F21229F217200AC7732 /* Keyboard.swift */,
 				4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */,
@@ -1080,6 +1083,7 @@
 				4D34DB6722B9D3B600D5C9C9 /* UploadActionsViewController.swift in Sources */,
 				4D99409D22C55B6900C7F43A /* RatingViewController.swift in Sources */,
 				4DF2A8D8224F0E0200BA5F8B /* EditCardViewController.swift in Sources */,
+				4DA965EB22CC18C000FD7353 /* StoreReview.swift in Sources */,
 				4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */,
 				4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */,
 				4DE7FD4022B1D72700B82F38 /* RatingDraft.swift in Sources */,
