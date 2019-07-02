@@ -350,7 +350,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		if isMovingFromParent {
-			listeners.forEach { $1.remove() }
+			removeAllListeners()
 		}
 	}
 	
@@ -376,6 +376,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	var hasDeck: Bool {
 		return Deck.has(deck.id)
+	}
+	
+	func removeAllListeners() {
+		listeners.forEach { $1.remove() }
+		listeners.removeAll()
 	}
 	
 	@objc
