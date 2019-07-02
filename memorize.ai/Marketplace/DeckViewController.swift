@@ -204,6 +204,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						self.moreByCreatorCollectionView.reloadData()
 					}
 				}
+				self.loadSimilarDecks()
 			} else {
 				let alertController = UIAlertController(title: "Error", message: "Unable to load deck. Please try again", preferredStyle: .alert)
 				alertController.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -647,7 +648,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			guard let id = Algolia.id(result: $0) else { return false }
 			return id != deckId
 		}.sorted { DeckRatings(searchResult: $0).compare(with: DeckRatings(searchResult: $1)) }
-		.prefix(min(self.SIMILAR_DECKS_COUNT - self.similarDecks.count, self.SIMILAR_DECKS_COUNT / (tags.count - 1)))
+		.prefix(min(self.SIMILAR_DECKS_COUNT - self.similarDecks.count, tags.isEmpty ? Int.max : self.SIMILAR_DECKS_COUNT / tags.count))
 		.forEach { result in
 			guard let deckId = Algolia.id(result: result) else { return }
 			self.addToSimilarDecks(searchResult: result, deckId: deckId)
