@@ -186,10 +186,15 @@ class DeckViews {
 		self.unique = unique
 	}
 	
-	init(_ snapshot: DocumentSnapshot) {
-		let views = snapshot.get("views") as? [String : Any]
-		total = views?["total"] as? Int ?? 0
-		unique = views?["unique"] as? Int ?? 0
+	convenience init(_ snapshot: DocumentSnapshot) {
+		self.init(snapshot.get("views") as? [String : Any] ?? [:])
+	}
+	
+	convenience init(_ dictionary: [String : Any]) {
+		self.init(
+			total: dictionary["total"] as? Int ?? 0,
+			unique: dictionary["unique"] as? Int ?? 0
+		)
 	}
 }
 
@@ -202,10 +207,15 @@ class DeckDownloads {
 		self.current = current
 	}
 	
-	init(_ snapshot: DocumentSnapshot) {
-		let downloads = snapshot.get("downloads") as? [String : Any]
-		total = downloads?["total"] as? Int ?? 0
-		current = downloads?["current"] as? Int ?? 0
+	convenience init(_ snapshot: DocumentSnapshot) {
+		self.init(snapshot.get("downloads") as? [String : Any] ?? [:])
+	}
+	
+	convenience init(_ dictionary: [String : Any]) {
+		self.init(
+			total: dictionary["total"] as? Int ?? 0,
+			current: dictionary["current"] as? Int ?? 0
+		)
 	}
 }
 
