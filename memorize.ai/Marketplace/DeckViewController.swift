@@ -50,6 +50,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	let RATINGS_COUNT = 10
+	let SIMILAR_DECKS_COUNT = 30
 	let CARD_PREVIEW_CELL_SPACING: CGFloat = 20
 	let RATING_CELL_SPACING: CGFloat = 20
 	let INFO_CELL_HEIGHT: CGFloat = 60
@@ -622,6 +623,44 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("DELETE", for: .normal)
 					self.showNotification("Unable to remove deck from library. Please try again", type: .error)
+				}
+			}
+		}
+	}
+	
+	func loadSimilarDecks() {
+		guard let deckId = deck.id, let tags = deck.tags else { return }
+		tags.forEach { tag in
+			Algolia.search(.decks, for: tag) { results, error in
+				results.filter {
+					guard let id = Algolia.id(result: $0) else { return false }
+					return id != deckId
+				}.prefix(self.SIMILAR_DECKS_COUNT - self.similarDecks.count).forEach { result in
+					guard let deckId = Algolia.id(result: result) else { return }
+					self.similarDecks.append(Deck(
+						id: deckId,
+						hasImage: result["hasImage"] as? Bool ?? false,
+						image: Deck.imageFromCache(deckId) ?? Deck.get(deckId)?.image ?? self.creatorDecks.first { $0.id == deckId }?.image,
+						name: result["name"] as? String ?? "Error",
+						subtitle: result["subtitle"] as? String ?? "",
+						description: result["description"] as? String ?? "",
+						tags: result["tags"] as? [String] ?? [],
+						isPublic: result["public"] as? Bool ?? true,
+						count: result["count"] as? Int ?? 0,
+						views: DeckViews(result["views"] as? [String : Any] ?? [:]),
+						downloads: DeckDownloads(result["downloads"] as? [String : Any] ?? [:]),
+						ratings: DeckRatings(result["ratings"] as? [String : Any] ?? [:]),
+						users: [],
+						creator: result["creator"] as? String ?? "error",
+						owner: result["owner"] as? String ?? "error",
+						created: Date(),
+						updated: Date(),
+						permissions: [],
+						cards: [],
+						mastered: 0,
+						role: .none,
+						hidden: false
+					))
 				}
 			}
 		}
