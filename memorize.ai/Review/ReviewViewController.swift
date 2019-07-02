@@ -42,7 +42,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		dueCards = decks.flatMap { deck in Card.sort(deck.cards.filter { $0.isDue() }, by: .due).map { (deck: deck, card: $0) } }
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
-				guard self.current < self.dueCards.count else { return }
+				guard self.current < (self.previewCards?.count ?? self.dueCards.count) else { return }
 				let card = self.currentCard
 				self.load(card.front, webView: self.frontWebView)
 				self.load(card.back, webView: self.backWebView)
