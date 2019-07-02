@@ -51,6 +51,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				reloadProfileBarButtonItem()
 				startup = false
 				ChangeHandler.call(.profileModified)
+				StoreReview.onStartup()
 				guard let id = id else { return }
 				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
 					if let error = error {
@@ -128,6 +129,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			createHelloLabel()
 			navigationController?.setNavigationBarHidden(false, animated: true)
 			navigationItem.setHidesBackButton(true, animated: true)
+			StoreReview.onStartup()
 			shouldLoadDecks = false
 		}
 		updateCurrentViewController()
