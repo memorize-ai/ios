@@ -523,7 +523,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	func loadRateDeckButton() {
+	func loadRateDeckButton(enabled: Bool? = nil) {
 		guard let deckId = deck.id else { return }
 		if RatingDraft.get(deckId) != nil {
 			rateDeckButton.setTitle("Edit Draft", for: .normal)
@@ -532,7 +532,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
 			rateDeckButton.setTitle("New Rating", for: .normal)
 		}
-		rateDeckButton.isEnabled = hasDeck
+		rateDeckButton.isEnabled = enabled ?? hasDeck
 	}
 	
 	@IBAction
@@ -608,7 +608,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			Deck.new(deckId) { error in
 				if error == nil {
 					self.setGetButton(false)
-					self.loadRateDeckButton()
+					self.loadRateDeckButton(enabled: true)
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("GET", for: .normal)
@@ -619,7 +619,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			firestore.document("users/\(id)/decks/\(deckId)").updateData(["hidden": true]) { error in
 				if error == nil {
 					self.setGetButton(true)
-					self.loadRateDeckButton()
+					self.loadRateDeckButton(enabled: false)
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("DELETE", for: .normal)
