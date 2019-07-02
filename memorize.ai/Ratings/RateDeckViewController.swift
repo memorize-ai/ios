@@ -40,6 +40,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		if let deckVC = previousViewController as? DeckViewController, let deck = deck {
 			submitAction = {
 				deckVC.listeners["decks/\(deck.id)/users"]?.remove()
+				deckVC.ratings.removeAll()
 				deckVC.loadRatings()
 			}
 		}
