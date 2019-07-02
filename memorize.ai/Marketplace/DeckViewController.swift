@@ -531,10 +531,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			rateDeckButton.setTitle("Edit Rating", for: .normal)
 		} else {
 			rateDeckButton.setTitle("New Rating", for: .normal)
-			if !hasDeck {
-				rateDeckButton.isEnabled = false
-			}
 		}
+		rateDeckButton.isEnabled = hasDeck
 	}
 	
 	@IBAction
@@ -610,6 +608,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			Deck.new(deckId) { error in
 				if error == nil {
 					self.setGetButton(false)
+					self.loadRateDeckButton()
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("GET", for: .normal)
@@ -620,6 +619,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 			firestore.document("users/\(id)/decks/\(deckId)").updateData(["hidden": true]) { error in
 				if error == nil {
 					self.setGetButton(true)
+					self.loadRateDeckButton()
 				} else {
 					self.getButtonActivityIndicator.stopAnimating()
 					self.getButton.setTitle("DELETE", for: .normal)
