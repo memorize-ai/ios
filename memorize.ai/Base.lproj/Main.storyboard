@@ -4601,7 +4601,7 @@
                                                     <action selector="hide" destination="mnq-ju-4zN" eventType="touchUpInside" id="1zc-nx-435"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afT-19-Flf">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afT-19-Flf">
                                                 <rect key="frame" x="6" y="6" width="28" height="28"/>
                                                 <state key="normal" image="Play White">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

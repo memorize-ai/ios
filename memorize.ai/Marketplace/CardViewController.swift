@@ -12,6 +12,8 @@ class CardViewController: UIViewController {
 	
 	var card: Card?
 	var cell: CardPreviewCollectionViewCell?
+	var playState = Audio.PlayState.ready
+	var currentSide = CardSide.front
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -19,6 +21,15 @@ class CardViewController: UIViewController {
 		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
 		frontWebView.render(card.front, fontSize: 55, textColor: "000", backgroundColor: "fff")
 		backWebView.render(card.back, fontSize: 55, textColor: "000", backgroundColor: "fff")
+		cell?.completion = {
+			self.setPlayState(.ready)
+		}
+		if Audio.isPlaying {
+			setPlayState(.stop)
+			playButton.isHidden = false
+		} else {
+			handleAudio()
+		}
 		cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -33,9 +44,55 @@ class CardViewController: UIViewController {
 		updateCurrentViewController(stopAudio: false)
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		cell?.completion = nil
+		cell?.setPlayState(.ready)
+		Audio.stop()
+	}
+	
 	@IBAction
 	func playButtonClicked() {
-		
+		switch playState {
+		case .ready:
+			playAudio()
+		case .stop:
+			Audio.stop()
+			setPlayState(.ready)
+		default:
+			return
+		}
+	}
+	
+	@discardableResult
+	func playAudio() -> Bool {
+		guard let card = card, card.hasAudio(currentSide) else { return false }
+		card.playAudio(currentSide) { success in
+			self.playState = .ready
+			if !success {
+				self.showNotification("Unable to play audio. Please try again", type: .error)
+			}
+		}
+		setPlayState(.stop)
+		return true
+	}
+	
+	func handleAudio() {
+		if playAudio() {
+			playButton.isHidden = false
+		} else {
+			playButton.isHidden = true
+			Audio.stop()
+		}
+	}
+	
+	func setPlayButtonImage() {
+		playButton.setImage(Audio.image(for: playState), for: .normal)
+	}
+	
+	func setPlayState(_ playState: Audio.PlayState) {
+		self.playState = playState
+		setPlayButtonImage()
 	}
 	
 	@IBAction
@@ -67,6 +124,8 @@ class CardViewController: UIViewController {
 			}) {
 				guard $0 else { return }
 				self.enable(self.leftButton)
+				self.currentSide = .back
+				self.handleAudio()
 			}
 		}
 	}
@@ -89,6 +148,8 @@ class CardViewController: UIViewController {
 			}) {
 				guard $0 else { return }
 				self.enable(self.rightButton)
+				self.currentSide = .front
+				self.handleAudio()
 			}
 		}
 	}
