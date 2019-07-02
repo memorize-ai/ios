@@ -4,6 +4,7 @@ import WebKit
 class CardViewController: UIViewController {
 	@IBOutlet weak var cardView: UIView!
 	@IBOutlet weak var titleBar: UIView!
+	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var frontWebView: WKWebView!
 	@IBOutlet weak var backWebView: WKWebView!
 	@IBOutlet weak var leftButton: UIButton!
@@ -29,6 +30,11 @@ class CardViewController: UIViewController {
 		ChangeHandler.update(nil)
 		disable(leftButton)
 		updateCurrentViewController()
+	}
+	
+	@IBAction
+	func playButtonClicked() {
+		
 	}
 	
 	@IBAction

@@ -4603,9 +4603,12 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afT-19-Flf">
                                                 <rect key="frame" x="6" y="6" width="28" height="28"/>
-                                                <state key="normal" image="Play Black">
+                                                <state key="normal" image="Play White">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="playButtonClicked" destination="mnq-ju-4zN" eventType="touchUpInside" id="Fxn-GU-UQI"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -4724,6 +4727,7 @@
                         <outlet property="cardView" destination="eJH-fo-5rB" id="1sq-nW-VvC"/>
                         <outlet property="frontWebView" destination="wbm-O8-VZE" id="s0o-jd-lTA"/>
                         <outlet property="leftButton" destination="sXR-2f-Qmo" id="g7N-V0-aXL"/>
+                        <outlet property="playButton" destination="afT-19-Flf" id="PIC-iM-KEO"/>
                         <outlet property="rightButton" destination="Zaz-X7-J4v" id="IBg-qy-fcd"/>
                         <outlet property="titleBar" destination="DnN-cM-PR6" id="RI8-Ix-68v"/>
                     </connections>
@@ -6670,6 +6674,7 @@
         <image name="Opaque Background Star" width="376" height="359"/>
         <image name="Opaque Gray Background Star" width="376" height="359"/>
         <image name="Play Black" width="512" height="512"/>
+        <image name="Play White" width="512" height="512"/>
         <image name="Search" width="1177" height="1176"/>
         <image name="Transparent Logo" width="1191" height="732"/>
         <image name="Trash Can" width="512" height="512"/>
