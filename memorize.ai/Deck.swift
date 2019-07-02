@@ -134,6 +134,12 @@ class Deck {
 		return get(id) != nil
 	}
 	
+	static func numberOfTagsInCommon(_ first: [String], _ second: [String]) -> Int {
+		return first.count > second.count
+			? first.filter { second.contains($0) }.count
+			: second.filter { first.contains($0) }.count
+	}
+	
 	static func allDue() -> [Card] {
 		return decks.flatMap { $0.allDue() }
 	}

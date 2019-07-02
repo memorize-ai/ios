@@ -470,7 +470,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadCardPreview() {
-		cards = cards.sorted { $0.dislikes < $1.dislikes }.sorted { $0.likes > $1.likes }
+		cards.sort { $0.dislikes < $1.dislikes }
+		cards.sort { $0.likes > $1.likes }
 		cardPreviewCollectionView.reloadData()
 	}
 	
@@ -709,7 +710,10 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func sortSimilarDecks() {
-		// Sort similar decks
+		similarDecks.sort { $0.ratings.compare(with: $1.ratings) }
+		if let tags = deck.tags {
+			similarDecks.sort { Deck.numberOfTagsInCommon(tags, $0.tags) > Deck.numberOfTagsInCommon(tags, $1.tags) }
+		}
 	}
 	
 	func showOtherDeck(_ deck: Deck) {
