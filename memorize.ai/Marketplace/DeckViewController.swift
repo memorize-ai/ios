@@ -629,41 +629,80 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func loadSimilarDecks() {
-		guard let deckId = deck.id, let tags = deck.tags else { return }
+		guard let deckId = deck.id, let name = deck.name, let tags = deck.tags else { return }
+		Algolia.search(.decks, for: name) { results, error in
+			guard error == nil else { return }
+			self.addToSimilarDecks(searchResults: results, deckId: deckId, tags: tags)
+		}
 		tags.forEach { tag in
 			Algolia.search(.decks, for: tag) { results, error in
-				results.filter {
-					guard let id = Algolia.id(result: $0) else { return false }
-					return id != deckId
-				}.sorted { DeckRatings(searchResult: $0).compare(with: DeckRatings(searchResult: $1)) }.prefix(self.SIMILAR_DECKS_COUNT - self.similarDecks.count).forEach { result in
-					guard let deckId = Algolia.id(result: result) else { return }
-					self.similarDecks.append(Deck(
-						id: deckId,
-						hasImage: result["hasImage"] as? Bool ?? false,
-						image: Deck.imageFromCache(deckId) ?? Deck.get(deckId)?.image ?? self.creatorDecks.first { $0.id == deckId }?.image,
-						name: result["name"] as? String ?? "Error",
-						subtitle: result["subtitle"] as? String ?? "",
-						description: result["description"] as? String ?? "",
-						tags: result["tags"] as? [String] ?? [],
-						isPublic: result["public"] as? Bool ?? true,
-						count: result["count"] as? Int ?? 0,
-						views: DeckViews(result["views"] as? [String : Any] ?? [:]),
-						downloads: DeckDownloads(result["downloads"] as? [String : Any] ?? [:]),
-						ratings: DeckRatings(searchResult: result),
-						users: [],
-						creator: result["creator"] as? String ?? "error",
-						owner: result["owner"] as? String ?? "error",
-						created: Date(),
-						updated: Date(),
-						permissions: [],
-						cards: [],
-						mastered: 0,
-						role: .none,
-						hidden: false
-					))
-				}
+				guard error == nil else { return }
+				self.addToSimilarDecks(searchResults: results, deckId: deckId, tags: tags)
 			}
 		}
+	}
+	
+	func addToSimilarDecks(searchResults results: [Algolia.SearchResult], deckId: String, tags: [String]) {
+		results.filter {
+			guard let id = Algolia.id(result: $0) else { return false }
+			return id != deckId
+		}.sorted { DeckRatings(searchResult: $0).compare(with: DeckRatings(searchResult: $1)) }
+		.prefix(min(self.SIMILAR_DECKS_COUNT - self.similarDecks.count, self.SIMILAR_DECKS_COUNT / (tags.count - 1)))
+		.forEach { result in
+			guard let deckId = Algolia.id(result: result) else { return }
+			self.addToSimilarDecks(searchResult: result, deckId: deckId)
+		}
+	}
+	
+	func addToSimilarDecks(searchResult result: Algolia.SearchResult, deckId: String) {
+		let newDeck = Deck(
+			id: deckId,
+			hasImage: result["hasImage"] as? Bool ?? false,
+			image: Deck.imageFromCache(deckId) ?? Deck.get(deckId)?.image ?? self.creatorDecks.first { $0.id == deckId }?.image,
+			name: result["name"] as? String ?? "Error",
+			subtitle: result["subtitle"] as? String ?? "",
+			description: result["description"] as? String ?? "",
+			tags: result["tags"] as? [String] ?? [],
+			isPublic: result["public"] as? Bool ?? true,
+			count: result["count"] as? Int ?? 0,
+			views: DeckViews(result["views"] as? [String : Any] ?? [:]),
+			downloads: DeckDownloads(result["downloads"] as? [String : Any] ?? [:]),
+			ratings: DeckRatings(searchResult: result),
+			users: [],
+			creator: result["creator"] as? String ?? "error",
+			owner: result["owner"] as? String ?? "error",
+			created: Date(),
+			updated: Date(),
+			permissions: [],
+			cards: [],
+			mastered: 0,
+			role: .none,
+			hidden: false
+		)
+		similarDecks.append(newDeck)
+		sortSimilarDecks()
+		if newDeck.hasImage {
+			if let cachedImage = Deck.imageFromCache(deckId) {
+				newDeck.image = cachedImage
+				similarDecksCollectionView.reloadData()
+			}
+			storage.child("decks/\(deckId)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+				if error == nil, let data = data, let image = UIImage(data: data) {
+					newDeck.image = image
+					Deck.cache(deckId, image: image)
+				} else {
+					Deck.cache(deckId, image: DEFAULT_DECK_IMAGE)
+				}
+				self.similarDecksCollectionView.reloadData()
+			}
+		} else {
+			newDeck.image = nil
+			similarDecksCollectionView.reloadData()
+		}
+	}
+	
+	func sortSimilarDecks() {
+		// Sort similar decks
 	}
 	
 	func showOtherDeck(_ deck: Deck) {
