@@ -19,6 +19,8 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	
 	var deck: Deck?
 	var selectedRating: Int?
+	var previousViewController: UIViewController?
+	var submitAction: (() -> Void)?
 	
 	deinit {
 		KeyboardHandler.removeListener(self)
@@ -35,6 +37,12 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		textViewDidEndEditing(reviewTextView)
 		removeDraftButton.layer.borderColor = DEFAULT_RED_COLOR.cgColor
 		deleteRatingButton.layer.borderColor = DEFAULT_RED_COLOR.cgColor
+		if let deckVC = previousViewController as? DeckViewController, let deck = deck {
+			submitAction = {
+				deckVC.listeners["decks/\(deck.id)/users"]?.remove()
+				deckVC.loadRatings()
+			}
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -175,6 +183,7 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 					if error == nil {
 						self.setRightBarButton(false)
 						buzz()
+						self.submitAction?()
 						if isNew {
 							self.navigationController?.popViewController(animated: true)
 						} else {

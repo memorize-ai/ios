@@ -311,6 +311,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else if let rateDeckVC = segue.destination as? RateDeckViewController {
 			if let deckId = deck.id, let deck = Deck.get(deckId) {
 				rateDeckVC.deck = deck
+				rateDeckVC.previousViewController = self
 			} else {
 				showNotification("Unable to load deck. Please try again", type: .error)
 			}
