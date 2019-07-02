@@ -87,6 +87,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var creatorDecks = [Deck]()
 	var similarDecks = [Deck]()
 	var listeners = [String : ListenerRegistration]()
+	var shouldLoadDeckAttributes = true
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +114,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.setLabels(name: deckName, subtitle: subtitle, description: description, ratings: deckRatings)
 				self.loadInfo(isPublic: isPublic, count: count, views: deckViews, downloads: deckDownloads, ratings: deckRatings, created: created, updated: updated)
 				self.loadingView.isHidden = true
+				guard self.shouldLoadDeckAttributes else { return }
+				self.shouldLoadDeckAttributes = false
 				self.listeners["users/\(creatorId)"] = firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
 					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = User.url(slug: creatorSlug) {
 						self.deck.creator.name = creatorName
@@ -346,7 +349,9 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		listeners.forEach { $1.remove() }
+		if isMovingFromParent {
+			listeners.forEach { $1.remove() }
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
