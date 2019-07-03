@@ -173,6 +173,21 @@ class Cache {
 		return true
 	}
 	
+	func getImage() -> UIImage? {
+		if let image = image {
+			return image
+		}
+		guard let data = data else { return nil }
+		switch format {
+		case .image:
+			return UIImage(data: data)
+		case .gif:
+			return UIImage.gif(data: data)
+		default:
+			return nil
+		}
+	}
+	
 	func getData() -> Data? {
 		return data ?? image?.pngData()
 	}
