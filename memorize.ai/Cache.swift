@@ -177,7 +177,10 @@ class Cache {
 		if let image = image {
 			return image
 		}
-		guard let data = data else { return nil }
+		guard let data = data else {
+			image = nil
+			return nil
+		}
 		switch format {
 		case .image:
 			image = UIImage(data: data)
@@ -185,6 +188,7 @@ class Cache {
 			image = UIImage.gif(data: data)
 		default:
 			image = nil
+			return nil
 		}
 		return image
 	}
