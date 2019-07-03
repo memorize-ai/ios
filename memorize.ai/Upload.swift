@@ -1,7 +1,6 @@
 import Foundation
 import Firebase
 import SwiftyMimeTypes
-import SwiftGifOrigin
 
 var uploads = [Upload]()
 
