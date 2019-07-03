@@ -268,7 +268,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 							self.setLoading(false)
 							if error == nil {
 								upload.data = data
-								upload.cachedImage = nil
+								Cache.remove(.upload, key: upload.id)
 								self.showNotification("Uploaded file", type: .success)
 							} else {
 								self.showNotification("Unable to upload file. Please try again", type: .error)
@@ -300,7 +300,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 						if error == nil {
 							if let localUpload = Upload.get(uploadId) {
 								localUpload.data = data
-								localUpload.cachedImage = nil
+								Cache.remove(.upload, key: uploadId)
 							}
 							self.navigationController?.popViewController(animated: true)
 							self.navigationController?.topViewController?.showNotification("Uploaded file", type: .success)
