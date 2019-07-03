@@ -10,10 +10,18 @@ let storage = Storage.storage().reference()
 let functions = Functions.functions()
 let auth = Auth.auth()
 let defaults = UserDefaults.standard
+let managedContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
 var startup = true
 var shouldLoadDecks = false
 var shouldShowEditProfileTip = false
 var registerForNotifications: (() -> Void)?
+
+@discardableResult
+func saveManagedContext() -> Bool {
+	guard let managedContext = managedContext else { return false }
+	guard managedContext.hasChanges else { return true }
+	return (try? managedContext.save()) == nil
+}
 
 func buzz() {
 	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
