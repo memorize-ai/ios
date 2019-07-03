@@ -9,18 +9,18 @@ var token: String?
 var selectedDeckId: String?
 
 class User {
-	static var imageCache = [String : UIImage]()
-	
-	static func cache(_ id: String, image: UIImage?) {
+	@discardableResult
+	static func cache(_ id: String, image: UIImage?) -> UIImage? {
 		if let image = image {
-			imageCache[id] = image
+			Cache.new(Cache(type: .user, key: id, image: image, format: .image))
 		} else {
-			imageCache.removeValue(forKey: id)
+			Cache.remove(.user, key: id)
 		}
+		return image
 	}
 	
 	static func imageFromCache(_ id: String) -> UIImage? {
-		return imageCache[id]
+		return Cache.get(.user, key: id)?.getImage()
 	}
 	
 	static func urlString(slug: String) -> String {

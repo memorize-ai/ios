@@ -79,12 +79,14 @@ class Deck {
 		return ratingDraft != nil
 	}
 	
-	static func cache(_ id: String, image: UIImage?) {
+	@discardableResult
+	static func cache(_ id: String, image: UIImage?) -> UIImage? {
 		if let image = image {
 			Cache.new(Cache(type: .deck, key: id, image: image, format: .image))
 		} else {
 			Cache.remove(.deck, key: id)
 		}
+		return image
 	}
 	
 	static func imageFromCache(_ id: String) -> UIImage? {
