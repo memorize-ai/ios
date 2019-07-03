@@ -33,6 +33,7 @@
 		4D5F1F1E229E1B0C00AC7732 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1D229E1B0C00AC7732 /* User.swift */; };
 		4D5F1F20229E1C4D00AC7732 /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F1F229E1C4D00AC7732 /* Invite.swift */; };
 		4D5F1F22229F217200AC7732 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F21229F217200AC7732 /* Keyboard.swift */; };
+		4D61E19822CCF035009590DD /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D61E19722CCF035009590DD /* Cache.swift */; };
 		4D62955122B3A508009560F9 /* CardAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62955022B3A508009560F9 /* CardAnalyticsViewController.swift */; };
 		4D64390622056528006F4F2D /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */; };
 		4D64390722056528006F4F2D /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */; };
@@ -219,6 +220,7 @@
 		4D5F1F1D229E1B0C00AC7732 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D5F1F1F229E1C4D00AC7732 /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		4D5F1F21229F217200AC7732 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		4D61E19722CCF035009590DD /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		4D62955022B3A508009560F9 /* CardAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnalyticsViewController.swift; sourceTree = "<group>"; };
 		4D6438F822056528006F4F2D /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		4D6438F922056528006F4F2D /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				4DB8AE65228C920800A08AFA /* ChangeHandler.swift */,
 				4DCF83DD22A378F3006B73A4 /* Listener.swift */,
 				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
+				4D61E19722CCF035009590DD /* Cache.swift */,
 				4DA2C2E022A48E5400669570 /* Upload.swift */,
 				4D89420022BB182A00C24FC6 /* Audio.swift */,
 				4DA2C2DC22A4604400669570 /* Algolia.swift */,
@@ -1096,6 +1099,7 @@
 				4D052ABC2204259B0093B64E /* memorize_ai.xcdatamodeld in Sources */,
 				4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */,
 				4D5F1F20229E1C4D00AC7732 /* Invite.swift in Sources */,
+				4D61E19822CCF035009590DD /* Cache.swift in Sources */,
 				4D5F1F16229E1A6B00AC7732 /* Setting.swift in Sources */,
 				4DDD3F2722B1F9FC00BA2C98 /* History.swift in Sources */,
 				4DAA38FE2208D4F500EB443E /* CardViewController.swift in Sources */,
