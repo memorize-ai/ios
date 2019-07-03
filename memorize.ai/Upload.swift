@@ -31,6 +31,7 @@ class Upload {
 	
 	private var cachedUrl: URL?
 	var cachedImage: UIImage?
+	var cachedAnimatedImage: UIImage?
 	var shouldReload = false
 	
 	private var storageReference: StorageReference? {
@@ -52,6 +53,19 @@ class Upload {
 			return cachedImage
 		case .audio:
 			return UPLOAD_SOUND_ICON
+		}
+	}
+	
+	var animatedImage: UIImage? {
+		switch type {
+		case .gif:
+			guard let data = data else { return nil }
+			if cachedAnimatedImage == nil {
+				cachedAnimatedImage = UIImage.gif(data: data)
+			}
+			return cachedAnimatedImage
+		default:
+			return image
 		}
 	}
 	
