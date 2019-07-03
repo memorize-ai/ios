@@ -113,6 +113,13 @@ class Cache {
 		managedCache.setValue(cache.properties, forKey: "properties")
 		managedCache.setValue(cache.expiration, forKey: "expiration")
 		guard saveManagedContext() else { return }
+		for i in 0..<array.count {
+			let element = array[i]
+			if element.key == cache.key && element.type == cache.type {
+				array[i] = cache
+				return
+			}
+		}
 		array.append(cache)
 	}
 	
