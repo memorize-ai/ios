@@ -7,6 +7,7 @@ class Cache {
 	static var decks = [Cache]()
 	static var uploads = [Cache]()
 	static var users = [Cache]()
+	static var didLoad = false
 	
 	let type: CacheType
 	let key: String
@@ -38,6 +39,15 @@ class Cache {
 			properties: properties,
 			expiration: expiration
 		)
+	}
+	
+	static func loadAll() {
+		didLoad = true
+		managedCaches.compactMap { Cache($0) }.forEach { cache in
+			arrayForType(cache.type) {
+				$0.append(cache)
+			}
+		}
 	}
 	
 	private static func imageForFormat(_ format: FileFormat, data: Data) -> UIImage? {
