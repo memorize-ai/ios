@@ -55,8 +55,6 @@ class Deck {
 		self.hidden = hidden
 	}
 	
-	static var imageCache = [String : UIImage]()
-	
 	var cardDraft: CardDraft? {
 		return CardDraft.get(deckId: id)
 	}
@@ -83,14 +81,14 @@ class Deck {
 	
 	static func cache(_ id: String, image: UIImage?) {
 		if let image = image {
-			imageCache[id] = image
+			Cache.new(Cache(type: .deck, key: id, image: image, format: .image))
 		} else {
-			imageCache.removeValue(forKey: id)
+			Cache.remove(.deck, key: id)
 		}
 	}
 	
 	static func imageFromCache(_ id: String) -> UIImage? {
-		return imageCache[id]
+		return Cache.get(.deck, key: id)?.getImage()
 	}
 	
 	static func url(id: String) -> URL? {
