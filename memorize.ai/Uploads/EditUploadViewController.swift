@@ -88,8 +88,8 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 					if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
 						switch type {
 						case .image, .gif:
-							if let image = UIImage(data: data) {
-								self.saveImage(image, data: data, extension: ext)
+							if let image = UIImage(data: data)?.fixedRotation {
+								self.saveImage(image, extension: ext)
 							} else {
 								self.showNotification("Unable to load image from URL. Please try again", type: .error)
 							}
@@ -117,13 +117,14 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let data = image.compressedData {
+		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+			let image = image.fixedRotation
 			switch imagePickerSourceType {
 			case .some(.camera):
-				saveImage(image, data: data, extension: "heic")
+				saveImage(image, extension: "heic")
 			case .some(.photoLibrary):
 				if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset, let ext = PHAssetResource.assetResources(for: asset).first?.originalFilename.split(separator: ".").last {
-					saveImage(image, data: data, extension: String(ext))
+					saveImage(image, extension: String(ext))
 				} else {
 					showNotification("Unable to select image. Please choose another image", type: .error)
 				}
@@ -140,8 +141,8 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 		dismiss(animated: true, completion: nil)
 	}
 	
-	func saveImage(_ image: UIImage, data: Data, extension ext: String) {
-		if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
+	func saveImage(_ image: UIImage, extension ext: String) {
+		if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime), let data = image.compressedData {
 			fileImageView.image = image
 			file.type = type
 			file.mime = mime
@@ -161,23 +162,21 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			if let mime = mimeTypeForExtension(ext), let type = UploadType(mime: mime) {
 				switch type {
 				case .image, .gif:
-					if let image = UIImage(data: data) {
-						fileImageView.image = image
+					if let image = UIImage(data: data)?.fixedRotation {
+						saveImage(image, extension: ext)
 					} else {
-						showNotification("Error when displaying image. Please try again", type: .error)
-						dismiss(animated: true, completion: nil)
-						return
+						showNotification("Unable to load image. Please try again", type: .error)
 					}
 				case .audio:
 					fileImageView.image = #imageLiteral(resourceName: "Sound")
+					file.type = type
+					file.mime = mime
+					file.extension = ext
+					file.size = data.size
+					file.data = data
+					didPickFile()
+					reloadUpload()
 				}
-				file.type = type
-				file.mime = mime
-				file.extension = ext
-				file.size = data.size
-				file.data = data
-				didPickFile()
-				reloadUpload()
 			} else {
 				showNotification("Unable to select file. Please try again", type: .error)
 			}

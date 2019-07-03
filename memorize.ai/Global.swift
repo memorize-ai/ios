@@ -185,6 +185,15 @@ extension UIImage {
 		guard let data = compressedData else { return nil }
 		return UIImage(data: data)
 	}
+	
+	var fixedRotation: UIImage {
+		if imageOrientation == .up { return self }
+		UIGraphicsBeginImageContext(size)
+		draw(in: CGRect(origin: .zero, size: size))
+		let copy = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return copy ?? self
+	}
 }
 
 extension Data {

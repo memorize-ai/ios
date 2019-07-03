@@ -295,7 +295,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 						buzz()
 						self.hideActivityIndicator()
 						self.disable()
-					} else if let image = self.image {
+					} else if let image = self.image?.fixedRotation {
 						if let imageData = image.compressedData {
 							self.setImage(deck.id, data: imageData) {
 								deck.image = image
@@ -356,9 +356,9 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 					Deck.view(deckId) { error in
 						if error == nil {
 							Deck.new(deckId) { error in
-								if error == nil, let imageData = self.image?.compressedData {
+								if error == nil, let image = self.image?.fixedRotation, let imageData = image.compressedData {
 									self.setImage(deckId, data: imageData) {
-										Deck.cache(deckId, image: self.image)
+										Deck.cache(deckId, image: image)
 										self.navigationController?.popViewController(animated: true)
 									}
 								} else {

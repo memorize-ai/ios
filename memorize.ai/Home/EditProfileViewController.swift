@@ -245,7 +245,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func uploadImage(_ image: UIImage?, completion: @escaping (Bool) -> Void) {
 		guard let id = id else { return completion(false) }
-		if let image = image {
+		if let image = image?.fixedRotation {
 			if let data = image.compressedData {
 				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
 					if error == nil {
