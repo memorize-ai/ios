@@ -82,72 +82,10 @@ class Cache {
 		users.removeAll()
 	}
 	
-	private static func dateIsExpired(_ date: Date) -> Bool {
-		return Date().timeIntervalSince(date) >= 0
-	}
-	
-	private static func imageForFormat(_ format: FileFormat, data: Data) -> UIImage? {
-		switch format {
-		case .image:
-			return UIImage(data: data)
-		case .gif:
-			return UIImage.gif(data: data)
-		case .audio, .video:
-			return nil
-		}
-	}
-	
 	static func new(_ cache: Cache) {
 		arrayForType(cache.type) {
 			save(cache, array: &$0)
 		}
-	}
-	
-	private static func save(_ cache: Cache, array: inout [Cache]) {
-		guard let managedContext = managedContext, let entity = NSEntityDescription.entity(forEntityName: "ManagedCache", in: managedContext) else { return }
-		let managedCache = NSManagedObject(entity: entity, insertInto: managedContext)
-		managedCache.setValue(cache.type.rawValue, forKey: "type")
-		managedCache.setValue(cache.key, forKey: "key")
-		managedCache.setValue(cache.getData(), forKey: "data")
-		managedCache.setValue(cache.format.rawValue, forKey: "format")
-		managedCache.setValue(cache.properties, forKey: "properties")
-		managedCache.setValue(cache.expiration, forKey: "expiration")
-		guard saveManagedContext() else { return }
-		for i in 0..<array.count {
-			let element = array[i]
-			if element.key == cache.key && element.type == cache.type {
-				array[i] = cache
-				return
-			}
-		}
-		array.append(cache)
-	}
-	
-	private static func getExpirationFromNow() -> Date {
-		return Date(timeIntervalSinceNow: EXPIRATION_OFFSET_SECONDS)
-	}
-	
-	@discardableResult
-	private static func arrayForType(_ type: CacheType, completion: ((inout [Cache]) -> Void)? = nil) -> [Cache] {
-		switch type {
-		case .deck:
-			completion?(&decks)
-			return decks
-		case .upload:
-			completion?(&uploads)
-			return uploads
-		case .user:
-			completion?(&users)
-			return users
-		}
-	}
-	
-	private static var managedCaches: [ManagedCache] {
-		return (try? managedContext?.fetch(NSFetchRequest<NSManagedObject>(entityName: "ManagedCache")).compactMap { $0 as? ManagedCache }) ?? []
-	}
-	
-	private static func getManagedCache(_ type: CacheType, key: String) -> ManagedCache? {
-		return managedCaches.first { $0.value(forKey: "type") as? String == type.rawValue && $0.value(forKey: "key") as? String == key }
 	}
 	
 	@discardableResult
@@ -199,6 +137,68 @@ class Cache {
 	
 	func hasProperty(_ property: String) -> Bool {
 		return properties.contains(property)
+	}
+	
+	private static func dateIsExpired(_ date: Date) -> Bool {
+		return Date().timeIntervalSince(date) >= 0
+	}
+	
+	private static func imageForFormat(_ format: FileFormat, data: Data) -> UIImage? {
+		switch format {
+		case .image:
+			return UIImage(data: data)
+		case .gif:
+			return UIImage.gif(data: data)
+		case .audio, .video:
+			return nil
+		}
+	}
+	
+	private static func save(_ cache: Cache, array: inout [Cache]) {
+		guard let managedContext = managedContext, let entity = NSEntityDescription.entity(forEntityName: "ManagedCache", in: managedContext) else { return }
+		let managedCache = NSManagedObject(entity: entity, insertInto: managedContext)
+		managedCache.setValue(cache.type.rawValue, forKey: "type")
+		managedCache.setValue(cache.key, forKey: "key")
+		managedCache.setValue(cache.getData(), forKey: "data")
+		managedCache.setValue(cache.format.rawValue, forKey: "format")
+		managedCache.setValue(cache.properties, forKey: "properties")
+		managedCache.setValue(cache.expiration, forKey: "expiration")
+		guard saveManagedContext() else { return }
+		for i in 0..<array.count {
+			let element = array[i]
+			if element.key == cache.key && element.type == cache.type {
+				array[i] = cache
+				return
+			}
+		}
+		array.append(cache)
+	}
+	
+	private static func getExpirationFromNow() -> Date {
+		return Date(timeIntervalSinceNow: EXPIRATION_OFFSET_SECONDS)
+	}
+	
+	@discardableResult
+	private static func arrayForType(_ type: CacheType, completion: ((inout [Cache]) -> Void)? = nil) -> [Cache] {
+		switch type {
+		case .deck:
+			completion?(&decks)
+			return decks
+		case .upload:
+			completion?(&uploads)
+			return uploads
+		case .user:
+			completion?(&users)
+			return users
+		}
+	}
+	
+	private static var managedCaches: [ManagedCache] {
+		return (try? managedContext?.fetch(NSFetchRequest<NSManagedObject>(entityName: "ManagedCache")).compactMap { $0 as? ManagedCache }) ?? []
+	}
+	
+	private static func getManagedCache(_ type: CacheType, key: String) -> ManagedCache? {
+		return managedCaches.first { $0.value(forKey: "type") as? String == type.rawValue && $0.value(forKey: "key") as? String == key }
 	}
 }
 
