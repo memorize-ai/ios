@@ -65,7 +65,7 @@ class Cache {
 				if let type = $0.value(forKey: "type") as? String, let key = $0.value(forKey: "key") as? String {
 					let type = CacheType(type)
 					arrayForType(type) {
-						$0.removeAll { $0.type == type && $0.key == key }
+						$0.removeAll { $0.key == key && $0.type == type }
 					}
 				}
 			}
@@ -150,9 +150,9 @@ class Cache {
 			saveManagedContext()
 		}
 		arrayForType(type) {
-			$0.first { $0.type == type && $0.key == key }?.expiration = expiration
+			$0.first { $0.key == key && $0.type == type }?.expiration = expiration
 		}
-		return arrayForType(type).first { $0.type == type && $0.key == key }
+		return arrayForType(type).first { $0.key == key && $0.type == type }
 	}
 	
 	@discardableResult
@@ -160,7 +160,7 @@ class Cache {
 		guard let managedContext = managedContext, let managedCache = getManagedCache(type, key: key) else { return false }
 		managedContext.delete(managedCache)
 		arrayForType(type) {
-			$0.removeAll { $0.type == type && $0.key == key }
+			$0.removeAll { $0.key == key && $0.type == type }
 		}
 		return true
 	}
