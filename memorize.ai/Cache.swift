@@ -143,6 +143,7 @@ class Cache {
 		return managedCaches.first { $0.value(forKey: "type") as? String == type.rawValue && $0.value(forKey: "key") as? String == key }
 	}
 	
+	@discardableResult
 	static func get(_ type: CacheType, key: String) -> Cache? {
 		let expiration = getExpirationFromNow()
 		if let managedCache = getManagedCache(type, key: key) {
