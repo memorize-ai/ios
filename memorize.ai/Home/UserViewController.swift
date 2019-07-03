@@ -117,6 +117,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		createHelloLabel()
 		reloadActions()
 		loadProfileBarButtonItem(nil)
+		Cache.removeAllExpired()
 		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
 			updateLastOnline()
