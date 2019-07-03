@@ -171,7 +171,7 @@ class Cache {
 	}
 	
 	func hasProperty(_ property: String) -> Bool {
-		return properties.first { $0 == property } != nil
+		return properties.contains(property)
 	}
 }
 
