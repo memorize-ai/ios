@@ -3,6 +3,7 @@ import Firebase
 import AudioToolbox
 import WebKit
 import Down
+import SwiftGifOrigin
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()

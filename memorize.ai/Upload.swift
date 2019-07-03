@@ -30,7 +30,7 @@ class Upload {
 	}
 	
 	private var cachedUrl: URL?
-	private var cachedImage: UIImage?
+	var cachedImage: UIImage?
 	var shouldReload = false
 	
 	private var storageReference: StorageReference? {
