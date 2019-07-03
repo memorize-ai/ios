@@ -63,6 +63,7 @@ class Cache {
 		managedCache.setValue(cache.type.rawValue, forKey: "type")
 		managedCache.setValue(cache.key, forKey: "key")
 		managedCache.setValue(cache.getData(), forKey: "data")
+		managedCache.setValue(cache.format.rawValue, forKey: "format")
 		managedCache.setValue(cache.properties, forKey: "properties")
 		managedCache.setValue(cache.expiration, forKey: "expiration")
 		guard saveManagedContext() else { return }
