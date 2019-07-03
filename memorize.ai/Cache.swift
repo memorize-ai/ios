@@ -62,8 +62,24 @@ class Cache {
 		managedCaches.forEach {
 			if Cache.dateIsExpired($0.value(forKey: "expiration") as? Date ?? Date(timeIntervalSince1970: 0)) {
 				managedContext.delete($0)
+				if let type = $0.value(forKey: "type") as? String, let key = $0.value(forKey: "key") as? String {
+					let type = CacheType(type)
+					arrayForType(type) {
+						$0.removeAll { $0.type == type && $0.key == key }
+					}
+				}
 			}
 		}
+	}
+	
+	static func removeAll() {
+		guard let managedContext = managedContext else { return }
+		managedCaches.forEach {
+			managedContext.delete($0)
+		}
+		decks.removeAll()
+		uploads.removeAll()
+		users.removeAll()
 	}
 	
 	private static func dateIsExpired(_ date: Date) -> Bool {
@@ -144,13 +160,7 @@ class Cache {
 		guard let managedContext = managedContext, let managedCache = getManagedCache(type, key: key) else { return false }
 		managedContext.delete(managedCache)
 		arrayForType(type) {
-			for i in 0..<$0.count {
-				let cache = $0[i]
-				if cache.type == type && cache.key == key {
-					$0.remove(at: i)
-					return
-				}
-			}
+			$0.removeAll { $0.type == type && $0.key == key }
 		}
 		return true
 	}
