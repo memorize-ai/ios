@@ -41,13 +41,33 @@ class Cache {
 		)
 	}
 	
+	var expired: Bool {
+		return Cache.dateIsExpired(expiration)
+	}
+	
 	static func loadAll() {
 		didLoad = true
+		removeAllExpired()
 		managedCaches.compactMap { Cache($0) }.forEach { cache in
-			arrayForType(cache.type) {
-				$0.append(cache)
+			if !cache.expired {
+				arrayForType(cache.type) {
+					$0.append(cache)
+				}
 			}
 		}
+	}
+	
+	static func removeAllExpired() {
+		guard let managedContext = managedContext else { return }
+		managedCaches.forEach {
+			if Cache.dateIsExpired($0.value(forKey: "expiration") as? Date ?? Date(timeIntervalSince1970: 0)) {
+				managedContext.delete($0)
+			}
+		}
+	}
+	
+	private static func dateIsExpired(_ date: Date) -> Bool {
+		return Date().timeIntervalSince(date) >= 0
 	}
 	
 	private static func imageForFormat(_ format: FileFormat, data: Data) -> UIImage? {
