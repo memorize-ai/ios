@@ -98,7 +98,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 			if error == nil, let user = authResult?.user {
 				id = user.uid
 				guard let id = id else { return }
-				User.pushToken()
 				firestore.document("users/\(id)").setData(["name": nameText, "email": emailText]) { error in
 					self.hideActivityIndicator()
 					if let error = error {
@@ -123,7 +122,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 								ChangeHandler.call(.profileModified)
 								User.save()
 								self.hideActivityIndicator()
-								shouldShowTutorial = true
 								shouldShowEditProfileTip = true
 								self.performSegue(withIdentifier: "signUp", sender: self)
 							} else if let error = error {

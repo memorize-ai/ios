@@ -113,7 +113,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 			if error == nil {
 				id = user?.user.uid
 				guard let id = id else { return }
-				User.pushToken()
 				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
 					if error == nil, let snapshot = snapshot {
 						name = snapshot.get("name") as? String ?? "Error"

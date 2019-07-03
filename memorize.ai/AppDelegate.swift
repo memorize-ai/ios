@@ -12,8 +12,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
 		FirebaseApp.configure()
 		UNUserNotificationCenter.current().delegate = self
-		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
-		application.registerForRemoteNotifications()
+		registerForNotifications = {
+			UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
+			application.registerForRemoteNotifications()
+		}
 		Messaging.messaging().delegate = self
 		Fabric.with([Crashlytics.self])
 		return true
@@ -21,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 		token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+		User.pushToken()
 	}
 	
 	func applicationWillTerminate(_ application: UIApplication) {

@@ -44,13 +44,13 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				email = user.email
 				profilePicture = user.image
 				selectedDeckId = user.selectedDeckId
-				User.pushToken()
 				loadingImage.isHidden = true
 				loadingView.isHidden = true
 				navigationController?.setNavigationBarHidden(false, animated: false)
 				reloadProfileBarButtonItem()
 				startup = false
 				ChangeHandler.call(.profileModified)
+				registerForNotifications?()
 				StoreReview.onStartup()
 				guard let id = id else { return }
 				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
@@ -129,6 +129,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			createHelloLabel()
 			navigationController?.setNavigationBarHidden(false, animated: true)
 			navigationItem.setHidesBackButton(true, animated: true)
+			registerForNotifications?()
 			StoreReview.onStartup()
 			shouldLoadDecks = false
 		}

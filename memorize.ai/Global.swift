@@ -12,7 +12,7 @@ let defaults = UserDefaults.standard
 var startup = true
 var shouldLoadDecks = false
 var shouldShowEditProfileTip = false
-var shouldShowTutorial = false
+var registerForNotifications: (() -> Void)?
 
 func buzz() {
 	AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
