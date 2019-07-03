@@ -52,6 +52,9 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				ChangeHandler.call(.profileModified)
 				registerForNotifications?()
 				StoreReview.onStartup()
+				if !Cache.didLoad {
+					Cache.loadAll()
+				}
 				guard let id = id else { return }
 				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
 					if let error = error {
@@ -131,6 +134,9 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			navigationItem.setHidesBackButton(true, animated: true)
 			registerForNotifications?()
 			StoreReview.onStartup()
+			if !Cache.didLoad {
+				Cache.loadAll()
+			}
 			shouldLoadDecks = false
 		}
 		updateCurrentViewController()
