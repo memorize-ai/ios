@@ -132,7 +132,7 @@ class Cache {
 	}
 	
 	func getData() -> Data? {
-		return data ?? image?.pngData()
+		return data ?? image?.jpegData(compressionQuality: 1)
 	}
 	
 	func hasProperty(_ property: String) -> Bool {
