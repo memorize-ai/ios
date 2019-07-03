@@ -180,12 +180,13 @@ class Cache {
 		guard let data = data else { return nil }
 		switch format {
 		case .image:
-			return UIImage(data: data)
+			image = UIImage(data: data)
 		case .gif:
-			return UIImage.gif(data: data)
+			image = UIImage.gif(data: data)
 		default:
-			return nil
+			image = nil
 		}
+		return image
 	}
 	
 	func getData() -> Data? {
