@@ -9,6 +9,9 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	@IBOutlet weak var backButton: UIButton!
 	@IBOutlet weak var leftButton: UIButton!
 	@IBOutlet weak var rightButton: UIButton!
+	@IBOutlet weak var ratingView: UIView!
+	@IBOutlet weak var likeButton: UIButton!
+	@IBOutlet weak var dislikeButton: UIButton!
 	@IBOutlet weak var ratingCollectionView: UICollectionView!
 	@IBOutlet weak var ratingCollectionViewHeightConstraint: NSLayoutConstraint!
 	
@@ -209,6 +212,16 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				self.handleAudio()
 			}
 		}
+	}
+	
+	@IBAction
+	func like() {
+		
+	}
+	
+	@IBAction
+	func dislike() {
+		
 	}
 	
 	var isReview: Bool {

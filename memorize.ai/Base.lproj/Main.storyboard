@@ -1718,6 +1718,9 @@
                                                     <constraint firstAttribute="width" secondItem="iK6-88-Mql" secondAttribute="height" multiplier="52:53" id="wb7-Uh-oVi"/>
                                                 </constraints>
                                                 <state key="normal" image="Unselected Dislike"/>
+                                                <connections>
+                                                    <action selector="dislike" destination="aBN-oB-3fZ" eventType="touchUpInside" id="Xzg-aN-4Dw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpE-l5-voK">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
@@ -1725,6 +1728,9 @@
                                                     <constraint firstAttribute="width" secondItem="YpE-l5-voK" secondAttribute="height" multiplier="52:53" id="3Eb-UY-Lzh"/>
                                                 </constraints>
                                                 <state key="normal" image="Unselected Like"/>
+                                                <connections>
+                                                    <action selector="like" destination="aBN-oB-3fZ" eventType="touchUpInside" id="hT8-3v-AZ8"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1791,11 +1797,14 @@
                     <connections>
                         <outlet property="backButton" destination="RdF-1S-4Dt" id="xpP-Rh-pce"/>
                         <outlet property="backWebView" destination="f0W-79-SjL" id="qd9-Po-Fmh"/>
+                        <outlet property="dislikeButton" destination="iK6-88-Mql" id="h4d-ZJ-5gK"/>
                         <outlet property="frontWebView" destination="SBU-RK-OhP" id="ocz-Ej-Ffm"/>
                         <outlet property="leftButton" destination="bHz-AD-w6a" id="0ti-o8-s4W"/>
+                        <outlet property="likeButton" destination="YpE-l5-voK" id="umU-Kp-hE8"/>
                         <outlet property="progressView" destination="97i-IH-IlK" id="SpS-IJ-X4I"/>
                         <outlet property="ratingCollectionView" destination="RM4-vo-id2" id="ijg-dd-0Yz"/>
                         <outlet property="ratingCollectionViewHeightConstraint" destination="YZ0-9q-yiM" id="0UH-om-NSb"/>
+                        <outlet property="ratingView" destination="lVE-VC-Hkw" id="DXz-zd-ITG"/>
                         <outlet property="rightButton" destination="C0I-kv-yO1" id="E78-Vn-QRN"/>
                         <segue destination="Zs9-Vs-52k" kind="show" identifier="recap" id="fjp-pM-RhT"/>
                     </connections>
