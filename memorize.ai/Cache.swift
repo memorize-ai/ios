@@ -50,27 +50,23 @@ class Cache {
 	
 	static func removeAllExpired() {
 		guard let managedContext = managedContext else { return }
+		let now = Date().timeIntervalSince1970
 		let fetchRequest: NSFetchRequest<ManagedCache> = ManagedCache.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "type = '\(type.rawValue)'")
-		guard let managedCache = try? managedContext?.fetch(fetchRequest).first else { return nil }
+		fetchRequest.predicate = NSPredicate(format: "expiration <= '\(now)'")
+		guard let managedCaches = try? managedContext.fetch(fetchRequest) else { return }
 		managedCaches.forEach {
-			if Cache.dateIsExpired($0.value(forKey: "expiration") as? Date ?? Date(timeIntervalSince1970: 0)) {
-				managedContext.delete($0)
-				if let type = $0.value(forKey: "type") as? String, let key = $0.value(forKey: "key") as? String {
-					let type = CacheType(type)
-					arrayForType(type) {
-						$0.removeAll { $0.key == key }
-					}
+			managedContext.delete($0)
+			if let type = $0.value(forKey: "type") as? String, let key = $0.value(forKey: "key") as? String {
+				arrayForType(CacheType(type)) {
+					$0.removeAll { $0.key == key }
 				}
 			}
 		}
 	}
 	
 	static func removeAll() {
-		guard let managedContext = managedContext else { return }
-		managedCaches.forEach {
-			managedContext.delete($0)
-		}
+		guard let managedContext = managedContext, let managedCaches = try? managedContext.fetch(ManagedCache.fetchRequest() as NSFetchRequest<ManagedCache>) else { return }
+		managedCaches.forEach(managedContext.delete)
 		decks.removeAll()
 		uploads.removeAll()
 		users.removeAll()
