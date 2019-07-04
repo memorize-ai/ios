@@ -48,6 +48,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			if change == .cardModified || change == .deckModified {
 				guard self.current < (self.previewCards?.count ?? self.dueCards.count) else { return }
 				let card = self.currentCard
+				self.currentCardRatingType = card.ratingType
 				self.load(card.front, webView: self.frontWebView)
 				self.load(card.back, webView: self.backWebView)
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
@@ -142,8 +143,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	func back() {
 		if backButton.isHidden {
 			disable(rightButton)
-			loadRating()
 		} else {
+			loadRating(shouldShow: true)
 			backButton.isEnabled = false
 			leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 			rightButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -222,11 +223,11 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		case .like:
 			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
 			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
-			currentCard.rate(.none)
+			rateCurrentCard(.none)
 		case .dislike, .none:
 			likeButton.setImage(#imageLiteral(resourceName: "Selected Like"), for: .normal)
 			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
-			currentCard.rate(.like)
+			rateCurrentCard(.like)
 		}
 	}
 	
@@ -236,15 +237,20 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		case .dislike:
 			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
 			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
-			currentCard.rate(.none)
+			rateCurrentCard(.none)
 		case .like, .none:
 			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
 			dislikeButton.setImage(#imageLiteral(resourceName: "Selected Dislike"), for: .normal)
-			currentCard.rate(.dislike)
+			rateCurrentCard(.dislike)
 		}
 	}
 	
-	func loadRating() {
+	func rateCurrentCard(_ rating: CardRatingType) {
+		currentCardRatingType = rating
+		currentCard.rate(rating)
+	}
+	
+	func loadRating(shouldShow: Bool = false) {
 		guard isReview else {
 			ratingView.isHidden = true
 			return
@@ -259,6 +265,13 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		case .none:
 			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
 			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+		}
+		if shouldShow {
+			self.ratingView.alpha = 0
+			self.ratingView.isHidden = false
+			UIView.animate(withDuration: 0.5) {
+				self.ratingView.alpha = 1
+			}
 		}
 	}
 	
@@ -337,6 +350,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			if self.current < count {
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
 				let card = self.currentCard
+				self.currentCardRatingType = card.ratingType
 				if self.frontWebView.isHidden {
 					self.load(card.front, webView: self.frontWebView)
 					UIView.animate(withDuration: 0.125, animations: {
@@ -406,7 +420,15 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			}
 		}
 		ratingCollectionViewHeightConstraint.constant = 0
-		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: view.layoutIfNeeded, completion: nil)
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+			self.view.layoutIfNeeded()
+			self.ratingView.alpha = 0
+		}) {
+			guard $0 else { return }
+			self.ratingView.isHidden = true
+			self.ratingView.alpha = 1
+			self.loadRating()
+		}
 	}
 }
 
