@@ -2,7 +2,6 @@ import UIKit
 
 class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
-	@IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingActivityIndicatory: UIActivityIndicatorView!
 	@IBOutlet weak var leftArrow: UIButton!
