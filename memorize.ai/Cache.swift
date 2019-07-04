@@ -83,7 +83,7 @@ class Cache {
 		if let cache = (arrayForType(type).first { $0.key == key }) {
 			let expiration = getExpirationFromNow()
 			if let managedCache = cache.managed {
-				managedCache.setValue(expiration, forKey: "expiration")
+				managedCache.setValue(Int32(expiration.timeIntervalSince1970), forKey: "expiration")
 				saveManagedContext()
 			}
 			cache.expiration = expiration

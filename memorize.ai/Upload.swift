@@ -91,10 +91,16 @@ class Upload {
 	}
 	
 	func load(completion: @escaping (Data?, Error?) -> Void) {
-		storageReference?.getData(maxSize: MAX_FILE_SIZE) { data, error in
-			guard error == nil, let data = data else { return completion(nil, error) }
-			self.data = data
-			completion(data, nil)
+		if let cache = Cache.get(.upload, key: id) {
+			data = cache.data
+			completion(cache.data, nil)
+		} else {
+			storageReference?.getData(maxSize: MAX_FILE_SIZE) { data, error in
+				guard error == nil, let data = data else { return completion(nil, error) }
+				Cache.new(Cache(type: .upload, key: self.id, data: data, format: self.type.fileFormat))
+				self.data = data
+				completion(data, nil)
+			}
 		}
 	}
 	
@@ -143,6 +149,17 @@ enum UploadType: String {
 			return "Gif"
 		case .audio:
 			return "Audio"
+		}
+	}
+	
+	var fileFormat: FileFormat {
+		switch self {
+		case .image:
+			return .image
+		case .gif:
+			return .image // Change to gif
+		case .audio:
+			return .audio
 		}
 	}
 }
