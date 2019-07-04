@@ -47,6 +47,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 		dueCards = decks.flatMap { deck in Card.sort(deck.cards.filter { $0.isDue() }, by: .due).map { (deck: deck, card: $0) } }
 		currentCardRatingType = currentCard.ratingType
+		handleAudio()
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
 				guard self.current < (self.previewCards?.count ?? self.dueCards.count) else { return }
@@ -54,9 +55,6 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				self.load(card.front, webView: self.frontWebView)
 				self.load(card.back, webView: self.backWebView)
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
-			}
-			if change == .cardModified {
-				self.handleAudio()
 			}
 		}
 		updateCurrentViewController()
@@ -133,6 +131,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			}
 			setBarButtonItems()
 		} else {
+			Audio.stop()
 			removeBarButtonItems()
 		}
 	}
