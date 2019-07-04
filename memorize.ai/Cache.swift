@@ -28,44 +28,38 @@ class Cache {
 	}
 	
 	convenience init?(_ managedCache: ManagedCache) {
-		guard let type = managedCache.value(forKey: "type") as? String, let key = managedCache.value(forKey: "key") as? String, let data = managedCache.value(forKey: "data") as? Data, let format = managedCache.value(forKey: "format") as? String, let properties = managedCache.value(forKey: "properties") as? [String], let expiration = managedCache.value(forKey: "expiration") as? Date else { return nil }
+		guard let type = managedCache.value(forKey: "type") as? String, let key = managedCache.value(forKey: "key") as? String, let data = managedCache.value(forKey: "data") as? Data, let format = managedCache.value(forKey: "format") as? String, let properties = managedCache.value(forKey: "properties") as? [String], let expiration = managedCache.value(forKey: "expiration") as? Int32 else { return nil }
 		let fileFormat = FileFormat(format)
 		self.init(
 			type: CacheType(type),
 			key: key,
-			image: Cache.imageForFormat(fileFormat, data: data),
+			image: nil,
 			data: data,
 			format: fileFormat,
 			properties: properties,
-			expiration: expiration
+			expiration: Date(timeIntervalSince1970: Double(expiration))
 		)
+		managed = managedCache
 	}
+	
+	private var managed: ManagedCache?
 	
 	var expired: Bool {
 		return Cache.dateIsExpired(expiration)
 	}
 	
-	static func loadAll() {
-		didLoad = true
-		removeAllExpired()
-		managedCaches.compactMap { Cache($0) }.forEach { cache in
-			if !cache.expired {
-				arrayForType(cache.type) {
-					$0.append(cache)
-				}
-			}
-		}
-	}
-	
 	static func removeAllExpired() {
 		guard let managedContext = managedContext else { return }
+		let fetchRequest: NSFetchRequest<ManagedCache> = ManagedCache.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "type = '\(type.rawValue)'")
+		guard let managedCache = try? managedContext?.fetch(fetchRequest).first else { return nil }
 		managedCaches.forEach {
 			if Cache.dateIsExpired($0.value(forKey: "expiration") as? Date ?? Date(timeIntervalSince1970: 0)) {
 				managedContext.delete($0)
 				if let type = $0.value(forKey: "type") as? String, let key = $0.value(forKey: "key") as? String {
 					let type = CacheType(type)
 					arrayForType(type) {
-						$0.removeAll { $0.key == key && $0.type == type }
+						$0.removeAll { $0.key == key }
 					}
 				}
 			}
@@ -90,15 +84,27 @@ class Cache {
 	
 	@discardableResult
 	static func get(_ type: CacheType, key: String) -> Cache? {
-		let expiration = getExpirationFromNow()
-		if let managedCache = getManagedCache(type, key: key) {
-			managedCache.setValue(expiration, forKey: "expiration")
-			saveManagedContext()
+		if let cache = (arrayForType(type).first { $0.key == key }) {
+			let expiration = getExpirationFromNow()
+			if let managedCache = cache.managed {
+				managedCache.setValue(expiration, forKey: "expiration")
+				saveManagedContext()
+			}
+			cache.expiration = expiration
+			return cache
 		}
-		arrayForType(type) {
-			$0.first { $0.key == key && $0.type == type }?.expiration = expiration
+		if let managedCache = getManagedCache(type, key: key), let cache = Cache(managedCache) {
+			switch type {
+			case .deck:
+				decks.append(cache)
+			case .upload:
+				uploads.append(cache)
+			case .user:
+				users.append(cache)
+			}
+			return cache
 		}
-		return arrayForType(type).first { $0.key == key && $0.type == type }
+		return nil
 	}
 	
 	@discardableResult
@@ -143,27 +149,17 @@ class Cache {
 		return Date().timeIntervalSince(date) >= 0
 	}
 	
-	private static func imageForFormat(_ format: FileFormat, data: Data) -> UIImage? {
-		switch format {
-		case .image:
-			return UIImage(data: data)
-		case .gif:
-			return UIImage.gif(data: data)
-		case .audio, .video:
-			return nil
-		}
-	}
-	
 	private static func save(_ cache: Cache, array: inout [Cache]) {
 		guard let managedContext = managedContext, let entity = NSEntityDescription.entity(forEntityName: "ManagedCache", in: managedContext) else { return }
-		let managedCache = NSManagedObject(entity: entity, insertInto: managedContext)
+		let managedCache = ManagedCache(entity: entity, insertInto: managedContext)
 		managedCache.setValue(cache.type.rawValue, forKey: "type")
 		managedCache.setValue(cache.key, forKey: "key")
 		managedCache.setValue(cache.getData(), forKey: "data")
 		managedCache.setValue(cache.format.rawValue, forKey: "format")
 		managedCache.setValue(cache.properties, forKey: "properties")
-		managedCache.setValue(cache.expiration, forKey: "expiration")
+		managedCache.setValue(Int32(cache.expiration.timeIntervalSince1970), forKey: "expiration")
 		guard saveManagedContext() else { return }
+		cache.managed = managedCache
 		for i in 0..<array.count {
 			let element = array[i]
 			if element.key == cache.key && element.type == cache.type {
@@ -193,12 +189,16 @@ class Cache {
 		}
 	}
 	
-	private static var managedCaches: [ManagedCache] {
-		return (try? managedContext?.fetch(NSFetchRequest<NSManagedObject>(entityName: "ManagedCache")).compactMap { $0 as? ManagedCache }) ?? []
-	}
-	
 	private static func getManagedCache(_ type: CacheType, key: String) -> ManagedCache? {
-		return managedCaches.first { $0.value(forKey: "type") as? String == type.rawValue && $0.value(forKey: "key") as? String == key }
+		let cache = arrayForType(type).first { $0.key == key }
+		if let managedCache = cache?.managed {
+			return managedCache
+		}
+		let fetchRequest: NSFetchRequest<ManagedCache> = ManagedCache.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "key = '\(key)' AND type = '\(type.rawValue)'")
+		guard let managedCache = try? managedContext?.fetch(fetchRequest).first else { return nil }
+		cache?.managed = managedCache
+		return managedCache
 	}
 }
 

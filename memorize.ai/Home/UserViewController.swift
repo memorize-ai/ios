@@ -52,9 +52,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				ChangeHandler.call(.profileModified)
 				registerForNotifications?()
 				StoreReview.onStartup()
-				if !Cache.didLoad {
-					Cache.loadAll()
-				}
+				Cache.removeAllExpired()
 				guard let id = id else { return }
 				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
 					if let error = error {
@@ -117,7 +115,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		createHelloLabel()
 		reloadActions()
 		loadProfileBarButtonItem(nil)
-		Cache.removeAllExpired()
 		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
 			updateLastOnline()
@@ -135,9 +132,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			navigationItem.setHidesBackButton(true, animated: true)
 			registerForNotifications?()
 			StoreReview.onStartup()
-			if !Cache.didLoad {
-				Cache.loadAll()
-			}
+			Cache.removeAllExpired()
 			shouldLoadDecks = false
 		}
 		updateCurrentViewController()
