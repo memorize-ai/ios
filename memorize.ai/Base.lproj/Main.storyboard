@@ -1709,7 +1709,7 @@
                                             <action selector="back" destination="aBN-oB-3fZ" eventType="touchUpInside" id="blV-0Z-HeE"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVE-VC-Hkw">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVE-VC-Hkw">
                                         <rect key="frame" x="123" y="0.0" width="128" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iK6-88-Mql">
