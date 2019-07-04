@@ -111,7 +111,7 @@ class Card {
 		return Deck.get(deckId)?.cards.first { $0.id == id }
 	}
 	
-	static func rate(_ id: String, deckId: String, type: CardRatingType, completion: @escaping (Error?) -> Void) {
+	static func rate(_ id: String, deckId: String, type: CardRatingType, completion: @escaping (Error?) -> Void = { _ in }) {
 		functions.httpsCallable("rateCard").call(["deckId": deckId, "cardId": id, "rating": type.rawValue]) { completion($1) }
 	}
 	
@@ -127,7 +127,7 @@ class Card {
 		return !getAudioUrls(side).isEmpty
 	}
 	
-	func rate(_ type: CardRatingType, completion: @escaping (Error?) -> Void) {
+	func rate(_ type: CardRatingType, completion: @escaping (Error?) -> Void = { _ in }) {
 		Card.rate(id, deckId: deck, type: type, completion: completion)
 	}
 	

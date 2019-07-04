@@ -25,6 +25,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	var playState = Audio.PlayState.ready
 	var currentSide = CardSide.front
 	var didPause = false
+	var currentCardRatingType = CardRatingType.none
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -141,6 +142,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	func back() {
 		if backButton.isHidden {
 			disable(rightButton)
+			loadRating()
 		} else {
 			backButton.isEnabled = false
 			leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -216,12 +218,48 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	@IBAction
 	func like() {
-		
+		switch currentCardRatingType {
+		case .like:
+			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+			currentCard.rate(.none)
+		case .dislike, .none:
+			likeButton.setImage(#imageLiteral(resourceName: "Selected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+			currentCard.rate(.like)
+		}
 	}
 	
 	@IBAction
 	func dislike() {
-		
+		switch currentCardRatingType {
+		case .dislike:
+			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+			currentCard.rate(.none)
+		case .like, .none:
+			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Selected Dislike"), for: .normal)
+			currentCard.rate(.dislike)
+		}
+	}
+	
+	func loadRating() {
+		guard isReview else {
+			ratingView.isHidden = true
+			return
+		}
+		switch currentCardRatingType {
+		case .like:
+			likeButton.setImage(#imageLiteral(resourceName: "Selected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+		case .dislike:
+			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Selected Dislike"), for: .normal)
+		case .none:
+			likeButton.setImage(#imageLiteral(resourceName: "Unselected Like"), for: .normal)
+			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
+		}
 	}
 	
 	var isReview: Bool {
@@ -229,11 +267,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	var currentCard: Card {
-		if let previewCards = previewCards {
-			return previewCards[current]
-		} else {
-			return dueCards[current].card
-		}
+		return previewCards?[current] ?? dueCards[current].card
 	}
 	
 	func enable(_ button: UIButton) {
