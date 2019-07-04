@@ -168,34 +168,29 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	func setConstraints(_ constant: CGFloat) {
+	func setConstraints(_ constant: CGFloat, performAnimations: Bool = false, options: UIView.AnimationOptions = .curveLinear) {
 		[
-			cardEditor?.frontTextViewTopConstraint,
-			cardEditor?.backTextViewTopConstraint,
 			cardEditor?.frontTextViewBottomConstraint,
 			cardEditor?.backTextViewBottomConstraint,
-			cardPreview?.frontWebViewTopConstraint,
-			cardPreview?.backWebViewTopConstraint,
 			cardPreview?.frontWebViewBottomConstraint,
-			cardPreview?.backWebViewBottomConstraint
+			cardPreview?.backWebViewBottomConstraint,
+			toolbarBottomConstraint
 		].forEach { $0?.constant = constant }
+		if performAnimations {
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: options, animations: {
+				self.view.layoutIfNeeded()
+				self.cardEditor?.view.layoutIfNeeded()
+				self.cardPreview?.view.layoutIfNeeded()
+			}, completion: nil)
+		}
 	}
 	
 	func keyboardWillShow() {
-		let offset = keyboardOffset - view.safeAreaInsets.bottom
-		setConstraints(offset / 2)
-		cardEditor?.view.layoutIfNeeded()
-		cardPreview?.view.layoutIfNeeded()
-		toolbarBottomConstraint.constant = offset
-		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
+		setConstraints(keyboardOffset - view.safeAreaInsets.bottom, performAnimations: true, options: .curveEaseOut)
 	}
 	
 	func keyboardWillHide() {
-		setConstraints(0)
-		cardEditor?.view.layoutIfNeeded()
-		cardPreview?.view.layoutIfNeeded()
-		toolbarBottomConstraint.constant = 0
-		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded, completion: nil)
+		setConstraints(0, performAnimations: true, options: .curveLinear)
 	}
 	
 	func enableRightBarButtonItem() {
