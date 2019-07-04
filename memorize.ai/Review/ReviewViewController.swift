@@ -46,11 +46,11 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			navigationController.navigationBar.tintColor = .darkGray
 		}
 		dueCards = decks.flatMap { deck in Card.sort(deck.cards.filter { $0.isDue() }, by: .due).map { (deck: deck, card: $0) } }
+		currentCardRatingType = currentCard.ratingType
 		ChangeHandler.updateAndCall(.cardModified) { change in
 			if change == .cardModified || change == .deckModified {
 				guard self.current < (self.previewCards?.count ?? self.dueCards.count) else { return }
 				let card = self.currentCard
-				self.currentCardRatingType = card.ratingType
 				self.load(card.front, webView: self.frontWebView)
 				self.load(card.back, webView: self.backWebView)
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
@@ -249,7 +249,11 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	func rateCurrentCard(_ rating: CardRatingType) {
 		currentCardRatingType = rating
-		currentCard.rate(rating)
+		currentCard.rate(rating) { error in
+			if error != nil {
+				self.showNotification("Unable to rate card. Please try again", type: .error)
+			}
+		}
 	}
 	
 	func loadRating(shouldShow: Bool = false) {
