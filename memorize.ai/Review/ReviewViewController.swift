@@ -34,6 +34,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 40)
 		flowLayout.minimumLineSpacing = 8
 		ratingCollectionView.collectionViewLayout = flowLayout
+		likeButton.adjustsImageWhenHighlighted = false
+		dislikeButton.adjustsImageWhenHighlighted = false
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
