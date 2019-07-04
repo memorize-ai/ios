@@ -1709,6 +1709,35 @@
                                             <action selector="back" destination="aBN-oB-3fZ" eventType="touchUpInside" id="blV-0Z-HeE"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVE-VC-Hkw">
+                                        <rect key="frame" x="123" y="0.0" width="128" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iK6-88-Mql">
+                                                <rect key="frame" x="79" y="0.0" width="49" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="iK6-88-Mql" secondAttribute="height" multiplier="52:53" id="wb7-Uh-oVi"/>
+                                                </constraints>
+                                                <state key="normal" image="Unselected Dislike"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpE-l5-voK">
+                                                <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="YpE-l5-voK" secondAttribute="height" multiplier="52:53" id="3Eb-UY-Lzh"/>
+                                                </constraints>
+                                                <state key="normal" image="Unselected Like"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="YpE-l5-voK" firstAttribute="top" secondItem="lVE-VC-Hkw" secondAttribute="top" id="1HP-S1-eY3"/>
+                                            <constraint firstAttribute="bottom" secondItem="YpE-l5-voK" secondAttribute="bottom" id="DL2-e3-Z4u"/>
+                                            <constraint firstItem="YpE-l5-voK" firstAttribute="leading" secondItem="lVE-VC-Hkw" secondAttribute="leading" id="IeX-v9-Qmg"/>
+                                            <constraint firstItem="iK6-88-Mql" firstAttribute="leading" secondItem="YpE-l5-voK" secondAttribute="trailing" priority="999" constant="30" id="TGk-QT-cc2"/>
+                                            <constraint firstItem="iK6-88-Mql" firstAttribute="top" secondItem="lVE-VC-Hkw" secondAttribute="top" id="rox-6F-EyG"/>
+                                            <constraint firstAttribute="bottom" secondItem="iK6-88-Mql" secondAttribute="bottom" id="vad-Qj-5qb"/>
+                                            <constraint firstAttribute="trailing" secondItem="iK6-88-Mql" secondAttribute="trailing" id="zCL-9x-Ahh"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1716,10 +1745,15 @@
                                     <constraint firstAttribute="trailing" secondItem="RdF-1S-4Dt" secondAttribute="trailing" id="5Ub-iq-bms"/>
                                     <constraint firstItem="RdF-1S-4Dt" firstAttribute="top" secondItem="xb8-RA-AiZ" secondAttribute="top" id="7as-XJ-dRT"/>
                                     <constraint firstAttribute="bottom" secondItem="RdF-1S-4Dt" secondAttribute="bottom" id="7qc-sk-TgA"/>
+                                    <constraint firstItem="lVE-VC-Hkw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bHz-AD-w6a" secondAttribute="trailing" constant="4" id="Hqc-fs-HJ7"/>
                                     <constraint firstItem="C0I-kv-yO1" firstAttribute="centerY" secondItem="xb8-RA-AiZ" secondAttribute="centerY" id="Lgo-7y-tS5"/>
+                                    <constraint firstItem="lVE-VC-Hkw" firstAttribute="centerX" secondItem="xb8-RA-AiZ" secondAttribute="centerX" id="QVt-Gs-qf2"/>
+                                    <constraint firstItem="lVE-VC-Hkw" firstAttribute="top" secondItem="xb8-RA-AiZ" secondAttribute="top" id="Qsi-RM-vc4"/>
                                     <constraint firstAttribute="trailing" secondItem="C0I-kv-yO1" secondAttribute="trailing" constant="15" id="TyA-rj-Ol2"/>
                                     <constraint firstItem="RdF-1S-4Dt" firstAttribute="leading" secondItem="xb8-RA-AiZ" secondAttribute="leading" id="UGx-Ta-Ti4"/>
+                                    <constraint firstAttribute="bottom" secondItem="lVE-VC-Hkw" secondAttribute="bottom" id="bsF-TX-Aiz"/>
                                     <constraint firstItem="C0I-kv-yO1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bHz-AD-w6a" secondAttribute="trailing" constant="15" id="fnL-bT-acW"/>
+                                    <constraint firstItem="C0I-kv-yO1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lVE-VC-Hkw" secondAttribute="trailing" constant="4" id="pCP-8L-cde"/>
                                     <constraint firstItem="bHz-AD-w6a" firstAttribute="centerY" secondItem="xb8-RA-AiZ" secondAttribute="centerY" id="zmu-mc-qZw"/>
                                 </constraints>
                             </view>
@@ -1768,7 +1802,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XVo-a0-67t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="809"/>
+            <point key="canvasLocation" x="137.68115942028987" y="808.69565217391312"/>
         </scene>
         <!--Recap-->
         <scene sceneID="iTR-ZL-zEZ">
