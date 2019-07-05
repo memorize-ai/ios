@@ -5858,15 +5858,15 @@
                             <constraint firstItem="u6R-Gn-CGi" firstAttribute="trailing" secondItem="yGK-y7-ovM" secondAttribute="trailing" id="WyJ-mN-4rx"/>
                             <constraint firstItem="u6R-Gn-CGi" firstAttribute="leading" secondItem="yGK-y7-ovM" secondAttribute="leading" id="f3P-uu-cwP"/>
                             <constraint firstItem="QgX-4C-VBv" firstAttribute="leading" secondItem="yGK-y7-ovM" secondAttribute="leading" id="hez-gA-zAP"/>
-                            <constraint firstItem="u6R-Gn-CGi" firstAttribute="bottom" secondItem="yGK-y7-ovM" secondAttribute="bottom" id="smB-Vf-9lj"/>
+                            <constraint firstItem="yGK-y7-ovM" firstAttribute="bottom" secondItem="u6R-Gn-CGi" secondAttribute="bottom" id="smB-Vf-9lj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yGK-y7-ovM"/>
                     </view>
                     <connections>
                         <outlet property="backTextView" destination="u6R-Gn-CGi" id="z0E-Z8-GCQ"/>
-                        <outlet property="backTextViewBottomConstraint" destination="C5H-Le-62Y" id="GfB-36-mO8"/>
+                        <outlet property="backTextViewBottomConstraint" destination="smB-Vf-9lj" id="eha-Z8-79M"/>
                         <outlet property="frontTextView" destination="QgX-4C-VBv" id="C1c-NE-c8s"/>
-                        <outlet property="frontTextViewBottomConstraint" destination="C5H-Le-62Y" id="WUt-CF-qR0"/>
+                        <outlet property="frontTextViewBottomConstraint" destination="C5H-Le-62Y" id="Gwe-xA-aqH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mWG-vX-3GX" userLabel="First Responder" sceneMemberID="firstResponder"/>
