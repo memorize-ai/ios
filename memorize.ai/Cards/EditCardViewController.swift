@@ -27,6 +27,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	var currentSide = CardSide.front
 	var playState = Audio.PlayState.ready
 	var didPause = false
+	var publicBarButtonIsShowing = true
 	var lastPublishedText: (front: String, back: String)?
 	var views = [UIView]()
 	
@@ -403,6 +404,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 				getAudioBarButtonItem(image: Audio.image(for: playState)),
 				UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadAudio))
 			], animated: animated)
+			publicBarButtonIsShowing = false
 		} else {
 			navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(publishNew) : #selector(publishEdit)), animated: animated)
 			guard let cardEditor = cardEditor, cardEditor.hasText else { return disableRightBarButtonItem() }
@@ -412,6 +414,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			} else {
 				enableRightBarButtonItem()
 			}
+			publicBarButtonIsShowing = true
 		}
 	}
 	
@@ -491,7 +494,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			return
 		case .editor:
 			Audio.stop()
-			setBarButtonItems(forAudio: false)
+			setBarButtonItems(forAudio: false, animated: !publicBarButtonIsShowing)
 		case .preview:
 			handleAudio(animated: false)
 		}
