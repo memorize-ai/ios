@@ -5605,10 +5605,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Xx-ZM-xEq">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Xx-ZM-xEq">
                                 <rect key="frame" x="0.0" y="20" width="414" height="630"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XaN-NZ-cZv">
+                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="layoutMargins" id="XaN-NZ-cZv">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -5794,7 +5795,7 @@
                             <constraint firstItem="JQV-Zr-lEe" firstAttribute="bottom" secondItem="dIQ-eh-YmW" secondAttribute="bottom" id="WS4-ob-AgS"/>
                             <constraint firstItem="dIQ-eh-YmW" firstAttribute="trailing" secondItem="JQV-Zr-lEe" secondAttribute="trailing" id="fLG-be-Skd"/>
                             <constraint firstItem="qZJ-tx-Ukv" firstAttribute="trailing" secondItem="JQV-Zr-lEe" secondAttribute="trailing" id="h0t-gc-EaM"/>
-                            <constraint firstItem="9Xx-ZM-xEq" firstAttribute="top" secondItem="JQV-Zr-lEe" secondAttribute="top" id="x9M-59-0p5"/>
+                            <constraint firstItem="9Xx-ZM-xEq" firstAttribute="top" secondItem="F3y-wF-ZUv" secondAttribute="top" constant="20" id="x9M-59-0p5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JQV-Zr-lEe"/>
                     </view>
