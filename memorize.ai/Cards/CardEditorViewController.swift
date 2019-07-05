@@ -44,10 +44,10 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
-		switch textView {
-		case frontTextView:
+		switch textView.tag {
+		case frontTextView.tag:
 			listener?(.front, textView.text)
-		case backTextView:
+		case backTextView.tag:
 			listener?(.back, textView.text)
 		default:
 			return
