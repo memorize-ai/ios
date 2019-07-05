@@ -100,7 +100,7 @@ class Card {
 	
 	static func convertUrlToFile(_ text: String) -> String {
 		guard let match = text.match(#"https://firebasestorage.googleapis.com/v0/b/uploads.memorize.ai/o/([^/\s]+)%([^/\s]+)?alt=media&token=([^/\s]+)"#).first, match.count >= 4 else { return text }
-		return "file://\(match[1])/\(match[2])/\(match[3])"
+		return "file://\(match[1])/\(match[2].dropLast())/\(match[3])"
 	}
 	
 	static func poll() {

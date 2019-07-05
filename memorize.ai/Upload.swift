@@ -105,6 +105,7 @@ class Upload {
 	}
 	
 	func toMarkdown(_ url: String) -> String {
+		let url = Card.convertUrlToFile(url)
 		switch type {
 		case .image, .gif:
 			return "![\(name)](\(url))"
