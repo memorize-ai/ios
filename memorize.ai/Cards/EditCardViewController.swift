@@ -17,6 +17,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
+	let COLLECTION_VIEW_BOTTOM_CONSTRAINT_CONSTANT: CGFloat = 86
+	
 	var cardEditor: CardEditorViewController?
 	var cardPreview: CardPreviewViewController?
 	var deck: Deck?
@@ -175,8 +177,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			cardEditor?.frontTextViewBottomConstraint,
 			cardEditor?.backTextViewBottomConstraint,
 			cardPreview?.frontWebViewBottomConstraint,
-			cardPreview?.backWebViewBottomConstraint,
-			toolbarBottomConstraint
+			cardPreview?.backWebViewBottomConstraint
 		].forEach { $0?.constant = constant }
 		if performAnimations {
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: options, animations: {
@@ -188,10 +189,13 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	func keyboardWillShow() {
-		setConstraints(keyboardOffset - view.safeAreaInsets.bottom, performAnimations: true, options: .curveEaseOut)
+		let offset = keyboardOffset - view.safeAreaInsets.bottom
+		toolbarBottomConstraint.constant = offset
+		setConstraints(offset - COLLECTION_VIEW_BOTTOM_CONSTRAINT_CONSTANT, performAnimations: true, options: .curveEaseOut)
 	}
 	
 	func keyboardWillHide() {
+		toolbarBottomConstraint.constant = 0
 		setConstraints(0, performAnimations: true, options: .curveLinear)
 	}
 	
