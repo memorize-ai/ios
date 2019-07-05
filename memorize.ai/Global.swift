@@ -73,6 +73,10 @@ extension WKWebView {
 							color: #\(textColor);
 							background-color: #\(backgroundColor);
 						}
+						img {
+							max-width: 100%;
+							height: auto;
+						}
 					</style>
 				</head>
 				<body>
