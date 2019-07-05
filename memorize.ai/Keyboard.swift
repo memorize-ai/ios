@@ -98,7 +98,7 @@ extension UITextView {
 	
 	@objc
 	private func code() {
-		add("```\n\n```", shift: 5)
+		add("```\n```", shift: 4)
 	}
 	
 	@objc
