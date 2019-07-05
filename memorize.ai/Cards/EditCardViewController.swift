@@ -17,7 +17,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
-	let COLLECTION_VIEW_BOTTOM_CONSTRAINT_CONSTANT: CGFloat = 86
+	let COLLECTION_VIEW_BOTTOM_OFFSET: CGFloat = 70
 	
 	var cardEditor: CardEditorViewController?
 	var cardPreview: CardPreviewViewController?
@@ -182,7 +182,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	func keyboardWillShow() {
 		let offset = keyboardOffset - view.safeAreaInsets.bottom
 		toolbarBottomConstraint.constant = offset
-		setConstraints(offset - COLLECTION_VIEW_BOTTOM_CONSTRAINT_CONSTANT, performAnimations: true, options: .curveEaseOut)
+		setConstraints(offset - COLLECTION_VIEW_BOTTOM_OFFSET, performAnimations: true, options: .curveEaseOut)
 	}
 	
 	func keyboardWillHide() {
@@ -456,11 +456,11 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		setBarButtonItems(forAudio: true)
 	}
 	
-	func handleAudio() {
+	func handleAudio(animated: Bool = true) {
 		let text = getText()
 		if Card.getAudioUrls(text).isEmpty {
 			Audio.stop()
-			setBarButtonItems(forAudio: false)
+			setBarButtonItems(forAudio: false, animated: animated)
 		} else {
 			if !didPause {
 				playAudio(text) { _ in
@@ -493,7 +493,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			Audio.stop()
 			setBarButtonItems(forAudio: false)
 		case .preview:
-			handleAudio()
+			handleAudio(animated: false)
 		}
 		currentView = newCurrentView
 	}
