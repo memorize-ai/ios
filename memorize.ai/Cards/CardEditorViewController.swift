@@ -44,14 +44,8 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
-//		switch textView.tag {
-//		case frontTextView.tag:
-//			// Scroll selected text to visible
-//		case backTextView.tag:
-//			// Scroll selected text to visible
-//		default:
-//			return
-//		}
+		guard let cursorPosition = textView.selectedTextRange?.start else { return }
+		textView.scrollRectToVisible(textView.caretRect(for: cursorPosition), animated: true)
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
