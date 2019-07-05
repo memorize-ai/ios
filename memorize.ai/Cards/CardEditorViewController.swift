@@ -43,6 +43,17 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		listener = handler
 	}
 	
+	func textViewDidBeginEditing(_ textView: UITextView) {
+//		switch textView.tag {
+//		case frontTextView.tag:
+//			// Scroll selected text to visible
+//		case backTextView.tag:
+//			// Scroll selected text to visible
+//		default:
+//			return
+//		}
+	}
+	
 	func textViewDidChange(_ textView: UITextView) {
 		switch textView.tag {
 		case frontTextView.tag:
