@@ -109,10 +109,12 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		if let card = card {
 			lastPublishedText = card.text
 			let draft = CardDraft.get(cardId: card.id)
-			cardEditor.update(.front, text: draft?.front ?? card.front)
-			cardPreview.update(.front, text: draft?.front ?? card.front)
-			cardEditor.update(.back, text: draft?.back ?? card.back)
-			cardPreview.update(.back, text: draft?.back ?? card.back)
+			let front = draft?.front ?? card.front
+			let back = draft?.back ?? card.back
+			cardEditor.update(.front, text: front)
+			cardPreview.update(.front, text: front)
+			cardEditor.update(.back, text: back)
+			cardPreview.update(.back, text: back)
 		} else if let draft = CardDraft.get(deckId: deck.id) {
 			cardEditor.update(.front, text: draft.front)
 			cardPreview.update(.front, text: draft.front)
