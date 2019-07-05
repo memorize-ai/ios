@@ -37,7 +37,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			if auth.currentUser == nil {
 				signIn()
 			} else if let user = User.get() {
-				darkMode(user.darkMode)
 				loadProfileBarButtonItem(user.image)
 				id = user.id
 				name = user.name
@@ -102,14 +101,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				self.reloadReview()
 			}
 		}
-		Setting.updateHandler { setting in
-			switch setting.type {
-			case .darkMode:
-				self.darkMode(setting.data as? Bool ?? false)
-			default:
-				return
-			}
-		}
 		reloadReview()
 		loadCards()
 		createHelloLabel()
@@ -136,13 +127,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			shouldLoadDecks = false
 		}
 		updateCurrentViewController()
-	}
-	
-	func darkMode(_ enabled: Bool) {
-		self.loadingView.backgroundColor = enabled ? .darkGray : .white
-		let backgroundColor = enabled ? .darkGray : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
-		self.view.backgroundColor = backgroundColor
-		self.cardsCollectionView.backgroundColor = backgroundColor
 	}
 	
 	@IBAction
