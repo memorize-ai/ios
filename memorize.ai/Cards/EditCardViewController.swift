@@ -40,6 +40,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
 		flowLayout.scrollDirection = .horizontal
+		flowLayout.minimumLineSpacing = 0
+		flowLayout.minimumInteritemSpacing = 0
 		collectionView.collectionViewLayout = flowLayout
 		navigationItem.title = "\(card == nil ? "New" : "Edit") Card"
 		disable(leftArrow)
@@ -188,7 +190,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	func keyboardWillHide() {
 		toolbarBottomConstraint.constant = 0
-		setConstraints(0, performAnimations: true, options: .curveLinear)
+		setConstraints(0 - COLLECTION_VIEW_BOTTOM_OFFSET, performAnimations: true, options: .curveLinear)
 	}
 	
 	func enableRightBarButtonItem() {
