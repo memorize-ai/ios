@@ -40,6 +40,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		updateCurrentViewController()
 		if let navigationController = navigationController, let semiBold = UIFont(name: "Nunito-SemiBold", size: 20) {
 			navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkGray, .font: semiBold]
 			navigationController.navigationBar.barTintColor = .white
@@ -57,7 +58,6 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
 			}
 		}
-		updateCurrentViewController()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {

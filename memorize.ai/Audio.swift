@@ -3,6 +3,7 @@ import SwiftySound
 
 class Audio {
 	private static var player: AVAudioPlayer?
+	private static var dataCache = [URL : Data]()
 	
 	enum PlayState {
 		case ready
@@ -44,15 +45,15 @@ class Audio {
 		}.resume()
 	}
 	
-	static func download(url: String, completion: @escaping (URL?) -> Void = { _ in }) {
-		guard let url = URL(string: url) else { return completion(nil) }
-		download(url: url, completion: completion)
-	}
-	
 	static func play(url: URL, completion: @escaping (Bool) -> Void = { _ in }) {
-		download(url: url) { url in
-			guard let url = url, let data = try? Data(contentsOf: url) else { return completion(false) }
+		if let data = dataCache[url] {
 			play(data: data, completion: completion)
+		} else {
+			download(url: url) { localUrl in
+				guard let localUrl = localUrl, let data = try? Data(contentsOf: localUrl) else { return completion(false) }
+				dataCache[url] = data
+				play(data: data, completion: completion)
+			}
 		}
 	}
 	
@@ -72,6 +73,14 @@ class Audio {
 		play(url: url) {
 			guard $0 else { return completion(false) }
 			play(urls: Array(urls.dropFirst()), completion: completion)
+		}
+	}
+	
+	static func play(data: [Data], completion: @escaping (Bool) -> Void = { _ in }) {
+		guard let dataObject = data.first else { return completion(true) }
+		play(data: dataObject) {
+			guard $0 else { return completion(false) }
+			play(data: Array(data.dropFirst()), completion: completion)
 		}
 	}
 }
