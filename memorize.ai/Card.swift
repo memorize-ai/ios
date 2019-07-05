@@ -76,7 +76,7 @@ class Card {
 	}
 	
 	static func escape(_ text: String) -> String {
-		return text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
+		return convertFileUrls(text).replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 	}
 	
 	static func playAudio(_ text: String, completion: @escaping (Bool) -> Void = { _ in }) {
@@ -84,10 +84,23 @@ class Card {
 	}
 	
 	static func getAudioUrls(_ text: String) -> [URL] {
-		return text.match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
+		return convertFileUrls(text).match(#"<\s*audio\s*>(.*)<\s*/\s*audio\s*>\n*"#).compactMap {
 			guard let string = $0[safe: 1] else { return nil }
-			return URL(string: string)
+			return URL(string: string.trim())
 		}
+	}
+	
+	static func convertFileUrls(_ text: String) -> String {
+		var text = text
+		for match in text.match(#"file://([^/\s]+)/([^/\s]+)/([^/\s]+)"#) where match.count >= 4 {
+			text = text.replacingOccurrences(of: match[0], with: "https://firebasestorage.googleapis.com/v0/b/uploads.memorize.ai/o/\(match[1])%\(match[2])?alt=media&token=\(match[3])")
+		}
+		return text
+	}
+	
+	static func convertUrlToFile(_ text: String) -> String {
+		guard let match = text.match(#"https://firebasestorage.googleapis.com/v0/b/uploads.memorize.ai/o/([^/\s]+)%([^/\s]+)?alt=media&token=([^/\s]+)"#).first, match.count >= 4 else { return text }
+		return "file://\(match[1])/\(match[2])/\(match[3])"
 	}
 	
 	static func poll() {
