@@ -42,10 +42,10 @@ class SettingTableViewCell: UITableViewCell {
 	@IBOutlet weak var descriptionLabel: UILabel!
 	@IBOutlet weak var valueSwitch: UISwitch!
 	
-	var setting: Setting?
+	var settingId: String?
 	
 	func load(_ setting: Setting) {
-		self.setting = setting
+		settingId = setting.id
 		layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
 		titleLabel.text = setting.title
 		descriptionLabel.text = setting.description
@@ -54,12 +54,13 @@ class SettingTableViewCell: UITableViewCell {
 	
 	@IBAction
 	func valueSwitchChanged() {
-		guard let id = id, let setting = setting else { return }
-		firestore.document("users/\(id)/settings/\(setting.id)").setData(["value": valueSwitch.isOn]) { error in
+		guard let id = id, let settingId = settingId else { return }
+		let isOn = valueSwitch.isOn
+		firestore.document("users/\(id)/settings/\(settingId)").setData(["value": isOn]) { error in
 			if error == nil {
-				Setting.callHandler(setting)
+				Setting.callHandler(settingId)
 			} else {
-				self.valueSwitch.setOn(!self.valueSwitch.isOn, animated: true)
+				self.valueSwitch.setOn(!isOn, animated: true)
 			}
 		}
 	}

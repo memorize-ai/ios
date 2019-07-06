@@ -837,7 +837,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qR-AR-3eC">
-                                                    <rect key="frame" x="30" y="15" width="54" height="31"/>
+                                                    <rect key="frame" x="30" y="15" width="275" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="fcC-zA-huC"/>
                                                     </constraints>
@@ -846,16 +846,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cpm-eC-I4P">
-                                                    <rect key="frame" x="337" y="34.333333333333336" width="51" height="31.000000000000007"/>
+                                                    <rect key="frame" x="335" y="34.333333333333336" width="51" height="31.000000000000007"/>
                                                     <connections>
                                                         <action selector="valueSwitchChanged" destination="TXg-Gc-Fwi" eventType="valueChanged" id="6qb-un-ZXk"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TeA-tf-z9S">
-                                                    <rect key="frame" x="30.000000000000004" y="53.999999999999993" width="36.333333333333343" height="30.666666666666664"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="nG4-de-7Db"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="30" y="53.999999999999993" width="275" height="30.666666666666664"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -863,13 +860,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8qR-AR-3eC" firstAttribute="top" secondItem="1L7-g5-WjR" secondAttribute="top" constant="15" id="026-iR-jBJ"/>
-                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TeA-tf-z9S" secondAttribute="trailing" constant="30" id="Eg3-Bv-ouU"/>
+                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" secondItem="TeA-tf-z9S" secondAttribute="trailing" constant="30" id="2JY-Nl-bC1"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cpm-eC-I4P" secondAttribute="trailing" constant="30" id="5am-8r-bpk"/>
                                                 <constraint firstItem="TeA-tf-z9S" firstAttribute="top" secondItem="8qR-AR-3eC" secondAttribute="bottom" constant="8" id="PMt-lD-cM2"/>
                                                 <constraint firstItem="TeA-tf-z9S" firstAttribute="leading" secondItem="1L7-g5-WjR" secondAttribute="leading" constant="30" id="btv-H4-V2z"/>
-                                                <constraint firstAttribute="trailing" secondItem="Cpm-eC-I4P" secondAttribute="trailing" constant="28" id="hEZ-8C-nEA"/>
-                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8qR-AR-3eC" secondAttribute="trailing" constant="30" id="jJl-rz-w1j"/>
+                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="leading" secondItem="8qR-AR-3eC" secondAttribute="trailing" constant="30" id="dzs-cW-TOp"/>
+                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="centerY" secondItem="1L7-g5-WjR" secondAttribute="centerY" id="lJH-7k-1Xe"/>
                                                 <constraint firstItem="8qR-AR-3eC" firstAttribute="leading" secondItem="1L7-g5-WjR" secondAttribute="leading" constant="30" id="sDu-TY-yQB"/>
-                                                <constraint firstItem="Cpm-eC-I4P" firstAttribute="centerY" secondItem="1L7-g5-WjR" secondAttribute="centerY" id="wR6-kf-XMJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="TeA-tf-z9S" secondAttribute="bottom" constant="15" id="ykZ-FG-XkY"/>
                                             </constraints>
                                         </tableViewCellContentView>
