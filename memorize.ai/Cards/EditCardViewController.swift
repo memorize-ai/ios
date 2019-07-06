@@ -30,6 +30,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	var publicBarButtonIsShowing = true
 	var lastPublishedText: (front: String, back: String)?
 	var views = [UIView]()
+	var hasPreviewButton = false
 	
 	deinit {
 		KeyboardHandler.removeListener(self)
@@ -98,6 +99,10 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 					}
 				}
 			}
+		} else if let reviewVC = segue.destination as? ReviewViewController, let text = cardEditor?.trimmedText {
+			let now = Date()
+			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: now, updated: now, likes: 0, dislikes: 0, deck: "~")]
+			reviewVC.previewDeck = deck?.name
 		}
 	}
 	
@@ -400,16 +405,20 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	func setBarButtonItems(forAudio: Bool, animated: Bool = true) {
+	func setBarButtonItems(forAudio: Bool, previewButton: Bool = false, animated: Bool = true) {
+		let previewButtonAddOn = previewButton ? [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(previewCard))] : []
+		hasPreviewButton = previewButton
 		navigationItem.setRightBarButtonItems(nil, animated: animated)
 		if forAudio {
 			navigationItem.setRightBarButtonItems([
 				getAudioBarButtonItem(image: Audio.image(for: playState, white: true)),
 				UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadAudio))
-			], animated: animated)
+			] + previewButtonAddOn, animated: animated)
 			publicBarButtonIsShowing = false
 		} else {
-			navigationItem.setRightBarButton(UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(publishNew) : #selector(publishEdit)), animated: animated)
+			navigationItem.setRightBarButtonItems([
+				UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(publishNew) : #selector(publishEdit))
+			] + previewButtonAddOn, animated: animated)
 			guard let cardEditor = cardEditor, cardEditor.hasText else { return disableRightBarButtonItem() }
 			guard let lastPublishedText = lastPublishedText else { return enableRightBarButtonItem() }
 			if cardEditor.trimmedText == lastPublishedText {
@@ -457,23 +466,28 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
+	@objc
+	func previewCard() {
+		performSegue(withIdentifier: "preview", sender: self)
+	}
+	
 	func setPlayState(_ playState: Audio.PlayState) {
 		self.playState = playState
-		setBarButtonItems(forAudio: true)
+		setBarButtonItems(forAudio: true, previewButton: hasPreviewButton)
 	}
 	
 	func handleAudio(animated: Bool = true) {
 		let text = getText()
 		if Card.getAudioUrls(text).isEmpty {
 			Audio.stop()
-			setBarButtonItems(forAudio: false, animated: animated)
+			setBarButtonItems(forAudio: false, previewButton: true, animated: animated)
 		} else {
 			if !didPause {
 				playAudio(text) { _ in
 					self.setPlayState(.ready)
 				}
 			}
-			setBarButtonItems(forAudio: true)
+			setBarButtonItems(forAudio: true, previewButton: true)
 		}
 	}
 	

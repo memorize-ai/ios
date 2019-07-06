@@ -5816,6 +5816,7 @@
                         <outlet property="sideLabel" destination="BMr-WM-tvn" id="ajB-Uw-a7o"/>
                         <outlet property="toolbarBottomConstraint" destination="WS4-ob-AgS" id="gKm-jl-DkI"/>
                         <segue destination="PDB-ip-5Km" kind="show" identifier="addUpload" id="y6W-0c-pPw"/>
+                        <segue destination="aBN-oB-3fZ" kind="show" identifier="preview" id="MlG-TU-DGT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLy-go-JQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6713,7 +6714,7 @@
         <segue reference="MiA-Dd-bWk"/>
         <segue reference="O84-5M-BZf"/>
         <segue reference="NDx-ee-NxK"/>
-        <segue reference="xln-P0-Fwc"/>
+        <segue reference="MlG-TU-DGT"/>
         <segue reference="0Yj-jn-rSr"/>
         <segue reference="y6W-0c-pPw"/>
         <segue reference="MYP-cc-USk"/>
