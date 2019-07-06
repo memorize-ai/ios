@@ -183,7 +183,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	func keyboardWillShow() {
-		let offset = keyboardOffset - view.safeAreaInsets.bottom
+		let offset = keyboardOffset - bottomSafeAreaInset
 		toolbarBottomConstraint.constant = offset
 		setConstraints(offset - COLLECTION_VIEW_BOTTOM_OFFSET, performAnimations: true, options: .curveEaseOut)
 	}
@@ -401,9 +401,10 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	func setBarButtonItems(forAudio: Bool, animated: Bool = true) {
+		navigationItem.setRightBarButtonItems(nil, animated: animated)
 		if forAudio {
 			navigationItem.setRightBarButtonItems([
-				getAudioBarButtonItem(image: Audio.image(for: playState)),
+				getAudioBarButtonItem(image: Audio.image(for: playState, white: true)),
 				UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadAudio))
 			], animated: animated)
 			publicBarButtonIsShowing = false
