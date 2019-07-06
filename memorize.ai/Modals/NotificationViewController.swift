@@ -36,7 +36,9 @@ class NotificationViewController: UIViewController {
 	}
 	
 	func show(_ delay: TimeInterval, completion: (() -> Void)?) {
-		notificationLabelBottomConstraint.constant = (keyboardOffset == 0 ? view.safeAreaInsets.bottom : 0) + 15
+		print(keyboardOffset)
+		print(bottomSafeAreaInset)
+		notificationLabelBottomConstraint.constant = (keyboardOffset == 0 ? bottomSafeAreaInset : 0) + 15
 		view.layoutIfNeeded()
 		notificationView.transform = CGAffineTransform(translationX: 0, y: notificationView.bounds.height)
 		UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {

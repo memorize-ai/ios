@@ -129,6 +129,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		updateCurrentViewController()
 	}
 	
+	override func viewSafeAreaInsetsDidChange() {
+		initializeBottomSafeAreaInset(view)
+	}
+	
 	@IBAction
 	func retry() {
 		offlineView.isHidden = true

@@ -15,6 +15,11 @@ var startup = true
 var shouldLoadDecks = false
 var shouldShowEditProfileTip = false
 var registerForNotifications: (() -> Void)?
+var bottomSafeAreaInset: CGFloat = 0
+
+func initializeBottomSafeAreaInset(_ view: UIView) {
+	bottomSafeAreaInset = view.safeAreaInsets.bottom
+}
 
 @discardableResult
 func saveManagedContext() -> Bool {

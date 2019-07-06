@@ -63,10 +63,18 @@ class UploadActionsViewController: UIViewController {
 		alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
 			self.setDeleteLoading(true)
 			firestore.document("users/\(id)/uploads/\(upload.id)").delete { error in
-				self.setDeleteLoading(false)
 				if error == nil {
-					self.hide()
+					Upload.storage.child("\(id)/\(upload.id)").delete { error in
+						self.setDeleteLoading(false)
+						if error == nil {
+							self.hide()
+							Cache.remove(.upload, key: upload.id)
+						} else {
+							self.showNotification("Unable to delete upload. Please try again", type: .error)
+						}
+					}
 				} else {
+					self.setDeleteLoading(false)
 					self.showNotification("Unable to delete upload. Please try again", type: .error)
 				}
 			}

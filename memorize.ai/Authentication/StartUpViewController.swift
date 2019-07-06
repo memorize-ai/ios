@@ -16,4 +16,8 @@ class StartUpViewController: UIViewController {
 		shouldLoadDecks = true
 		updateCurrentViewController()
 	}
+	
+	override func viewSafeAreaInsetsDidChange() {
+		initializeBottomSafeAreaInset(view)
+	}
 }
