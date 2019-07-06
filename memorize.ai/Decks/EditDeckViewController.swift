@@ -102,7 +102,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	}
 	
 	func keyboardWillShow() {
-		scrollViewBottomConstraint.constant = keyboardOffset - view.safeAreaInsets.bottom
+		scrollViewBottomConstraint.constant = keyboardOffset - bottomSafeAreaInset
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	

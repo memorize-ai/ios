@@ -21,7 +21,7 @@ class NotificationViewController: UIViewController {
 			case .up:
 				self.notificationLabelBottomConstraint.constant = 15
 			case .down:
-				self.notificationLabelBottomConstraint.constant = self.view.safeAreaInsets.bottom + 15
+				self.notificationLabelBottomConstraint.constant = bottomSafeAreaInset + 15
 			}
 			UIView.animate(
 				withDuration: 0.5,

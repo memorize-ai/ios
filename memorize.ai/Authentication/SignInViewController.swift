@@ -67,7 +67,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	func keyboardWillShow() {
-		signInButtonBottomConstraint.constant = keyboardOffset - view.safeAreaInsets.bottom
+		signInButtonBottomConstraint.constant = keyboardOffset - bottomSafeAreaInset
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded, completion: nil)
 	}
 	
