@@ -5603,7 +5603,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Xx-ZM-xEq">
-                                <rect key="frame" x="0.0" y="20" width="414" height="630"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="layoutMargins" id="XaN-NZ-cZv">
@@ -5779,17 +5779,17 @@
                             <constraint firstItem="qZJ-tx-Ukv" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="2o7-X4-oWW"/>
                             <constraint firstItem="9Xx-ZM-xEq" firstAttribute="trailing" secondItem="JQV-Zr-lEe" secondAttribute="trailing" id="3vJ-eG-4aF"/>
                             <constraint firstItem="qZJ-tx-Ukv" firstAttribute="top" secondItem="JQV-Zr-lEe" secondAttribute="top" id="AGo-ls-KYB"/>
-                            <constraint firstItem="qZJ-tx-Ukv" firstAttribute="bottom" secondItem="9Xx-ZM-xEq" secondAttribute="bottom" id="C3c-md-08R"/>
                             <constraint firstItem="9Xx-ZM-xEq" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="E1z-kq-HuH"/>
                             <constraint firstItem="Bwv-Dq-yLD" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="FIN-cJ-V1t"/>
                             <constraint firstItem="upD-aV-xmL" firstAttribute="top" secondItem="Bwv-Dq-yLD" secondAttribute="bottom" constant="5" id="FLR-Jt-ZDe"/>
                             <constraint firstItem="dIQ-eh-YmW" firstAttribute="top" secondItem="upD-aV-xmL" secondAttribute="bottom" id="GnT-kL-tUs"/>
-                            <constraint firstItem="JQV-Zr-lEe" firstAttribute="bottom" secondItem="9Xx-ZM-xEq" secondAttribute="bottom" constant="86" id="Gvv-XP-hA3"/>
+                            <constraint firstItem="JQV-Zr-lEe" firstAttribute="bottom" secondItem="9Xx-ZM-xEq" secondAttribute="bottom" id="Gvv-XP-hA3"/>
                             <constraint firstItem="Bwv-Dq-yLD" firstAttribute="trailing" secondItem="JQV-Zr-lEe" secondAttribute="trailing" id="J77-LV-5zR"/>
                             <constraint firstAttribute="trailing" secondItem="upD-aV-xmL" secondAttribute="trailing" id="JXP-wX-14I"/>
                             <constraint firstItem="dIQ-eh-YmW" firstAttribute="leading" secondItem="JQV-Zr-lEe" secondAttribute="leading" id="Tj8-5d-KUD"/>
                             <constraint firstItem="upD-aV-xmL" firstAttribute="leading" secondItem="F3y-wF-ZUv" secondAttribute="leading" id="UB0-pj-AOQ"/>
                             <constraint firstItem="JQV-Zr-lEe" firstAttribute="bottom" secondItem="dIQ-eh-YmW" secondAttribute="bottom" id="WS4-ob-AgS"/>
+                            <constraint firstItem="Bwv-Dq-yLD" firstAttribute="top" secondItem="qZJ-tx-Ukv" secondAttribute="bottom" id="Xrq-Ta-QDF"/>
                             <constraint firstItem="dIQ-eh-YmW" firstAttribute="trailing" secondItem="JQV-Zr-lEe" secondAttribute="trailing" id="fLG-be-Skd"/>
                             <constraint firstItem="qZJ-tx-Ukv" firstAttribute="trailing" secondItem="JQV-Zr-lEe" secondAttribute="trailing" id="h0t-gc-EaM"/>
                             <constraint firstItem="9Xx-ZM-xEq" firstAttribute="top" secondItem="F3y-wF-ZUv" secondAttribute="top" constant="20" id="x9M-59-0p5"/>

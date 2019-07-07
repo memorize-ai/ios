@@ -43,7 +43,8 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		listener = handler
 	}
 	
-	func textViewDidBeginEditing(_ textView: UITextView) {
+	func scrollToCursorPosition() {
+		let textView = current
 		guard let cursorPosition = textView.selectedTextRange?.start else { return }
 		textView.scrollRectToVisible(textView.caretRect(for: cursorPosition), animated: true)
 	}

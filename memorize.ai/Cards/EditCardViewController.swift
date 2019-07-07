@@ -17,7 +17,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
-	let COLLECTION_VIEW_BOTTOM_OFFSET: CGFloat = 70
+	let COLLECTION_VIEW_BOTTOM_OFFSET: CGFloat = 17
 	
 	var cardEditor: CardEditorViewController?
 	var cardPreview: CardPreviewViewController?
@@ -53,6 +53,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		loadText()
 		self.setBarButtonItems(forAudio: false, animated: false)
 		reloadToolbar(animated: false)
+		setConstraints(0, animated: false)
 		guard let id = id, let deck = deck else { return }
 		cardEditor.listen { side, text in
 			if let card = self.card {
@@ -101,7 +102,6 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			}
 		} else if let reviewVC = segue.destination as? ReviewViewController, let text = cardEditor?.trimmedText {
 			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: PLACEHOLDER_DATE, updated: PLACEHOLDER_DATE, likes: 0, dislikes: 0, deck: "~")]
-			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: now, updated: now, likes: 0, dislikes: 0, deck: "~")]
 			reviewVC.previewDeck = deck?.name
 		}
 	}
@@ -171,31 +171,32 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	func setConstraints(_ constant: CGFloat, performAnimations: Bool = false, options: UIView.AnimationOptions = .curveLinear) {
+	func setConstraints(_ constant: CGFloat, animated: Bool = true, options: UIView.AnimationOptions = .curveLinear, completion: (() -> Void)? = nil) {
 		[
 			cardEditor?.frontTextViewBottomConstraint,
 			cardEditor?.backTextViewBottomConstraint,
 			cardPreview?.frontWebViewBottomConstraint,
 			cardPreview?.backWebViewBottomConstraint
-		].forEach { $0?.constant = constant }
-		if performAnimations {
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: options, animations: {
-				self.view.layoutIfNeeded()
-				self.cardEditor?.view.layoutIfNeeded()
-				self.cardPreview?.view.layoutIfNeeded()
-			}, completion: nil)
+		].forEach { $0?.constant = constant + COLLECTION_VIEW_BOTTOM_OFFSET }
+		UIView.animate(withDuration: animated ? 0.5 : 0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: options, animations: {
+			self.view.layoutIfNeeded()
+			self.cardEditor?.view.layoutIfNeeded()
+			self.cardPreview?.view.layoutIfNeeded()
+		}) {
+			guard $0 else { return }
+			completion?()
 		}
 	}
 	
 	func keyboardWillShow() {
 		let offset = keyboardOffset - bottomSafeAreaInset
 		toolbarBottomConstraint.constant = offset
-		setConstraints(offset - COLLECTION_VIEW_BOTTOM_OFFSET, performAnimations: true, options: .curveEaseOut)
+		setConstraints(offset, options: .curveEaseOut, completion: cardEditor?.scrollToCursorPosition)
 	}
 	
 	func keyboardWillHide() {
 		toolbarBottomConstraint.constant = 0
-		setConstraints(0 - COLLECTION_VIEW_BOTTOM_OFFSET, performAnimations: true, options: .curveLinear)
+		setConstraints(0, options: .curveLinear)
 	}
 	
 	func enableRightBarButtonItem() {
