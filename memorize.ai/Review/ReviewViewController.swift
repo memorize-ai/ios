@@ -272,8 +272,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			dislikeButton.setImage(#imageLiteral(resourceName: "Unselected Dislike"), for: .normal)
 		}
 		if shouldShow {
-			self.ratingView.alpha = 0
-			self.ratingView.isHidden = false
+			ratingView.alpha = 0
+			ratingView.isHidden = false
 			UIView.animate(withDuration: 0.5) {
 				self.ratingView.alpha = 1
 			}
