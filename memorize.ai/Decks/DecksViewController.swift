@@ -223,6 +223,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else if element.hasImage {
 					if let cachedImage = Deck.imageFromCache(element.id) {
 						cell.imageView.image = cachedImage
+						element.image = cachedImage
 					} else {
 						cell.imageView.image = nil
 						cell.imageActivityIndicator.startAnimating()
@@ -254,6 +255,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else if element.hasImage {
 					if let cachedImage = Deck.imageFromCache(element.id) {
 						cell.imageView.image = cachedImage
+						element.image = cachedImage
 					} else {
 						cell.imageView.image = nil
 						cell.imageActivityIndicator.startAnimating()
