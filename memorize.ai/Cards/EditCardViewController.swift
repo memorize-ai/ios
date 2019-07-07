@@ -100,7 +100,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 				}
 			}
 		} else if let reviewVC = segue.destination as? ReviewViewController, let text = cardEditor?.trimmedText {
-			let now = Date()
+			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: PLACEHOLDER_DATE, updated: PLACEHOLDER_DATE, likes: 0, dislikes: 0, deck: "~")]
 			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: now, updated: now, likes: 0, dislikes: 0, deck: "~")]
 			reviewVC.previewDeck = deck?.name
 		}
