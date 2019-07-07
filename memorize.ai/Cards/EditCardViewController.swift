@@ -411,10 +411,12 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		hasPreviewButton = previewButton
 		navigationItem.setRightBarButtonItems(nil, animated: animated)
 		if forAudio {
-			navigationItem.setRightBarButtonItems([
-				getAudioBarButtonItem(image: Audio.image(for: playState, white: true)),
-				UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadAudio))
-			] + previewButtonAddOn, animated: animated)
+			DispatchQueue.main.async {
+				self.navigationItem.setRightBarButtonItems([
+					self.getAudioBarButtonItem(image: Audio.image(for: self.playState, white: true)),
+					UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.reloadAudio))
+				] + previewButtonAddOn, animated: animated)
+			}
 			publicBarButtonIsShowing = false
 		} else {
 			navigationItem.setRightBarButtonItems([
