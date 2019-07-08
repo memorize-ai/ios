@@ -411,7 +411,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
-		return Device.allDevicesWithRoundedDisplayCorners.contains(Device.realDevice(from: Device.current)) ? (0, 0) : (40, 40)
+		return Device.allDevicesWithRoundedDisplayCorners.contains(Device.realDevice(from: Device.current)) ? (0, 0) : (40, 65)
 	}
 	
 	func setBarButtonItems(forAudio: Bool, previewButton: Bool = false, animated: Bool = true) {
