@@ -32,6 +32,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	var lastPublishedText: (front: String, back: String)?
 	var views = [UIView]()
 	var hasPreviewButton = false
+	var bottomSubviewOffset: CGFloat = 0
 	
 	deinit {
 		KeyboardHandler.removeListener(self)
@@ -173,16 +174,18 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	func setConstraints(_ constant: CGFloat, animated: Bool = true, options: UIView.AnimationOptions = .curveLinear, completion: (() -> Void)? = nil) {
+		guard let cardEditor = cardEditor, let cardPreview = cardPreview else { return }
+		let constantWithOffset = constant + COLLECTION_VIEW_BOTTOM_OFFSET + bottomSubviewOffset
 		[
-			cardEditor?.frontTextViewBottomConstraint,
-			cardEditor?.backTextViewBottomConstraint,
-			cardPreview?.frontWebViewBottomConstraint,
-			cardPreview?.backWebViewBottomConstraint
-		].forEach { $0?.constant = constant + COLLECTION_VIEW_BOTTOM_OFFSET }
+			cardEditor.frontTextViewBottomConstraint,
+			cardEditor.backTextViewBottomConstraint,
+			cardPreview.frontWebViewBottomConstraint,
+			cardPreview.backWebViewBottomConstraint
+		].forEach { $0?.constant = constantWithOffset }
 		UIView.animate(withDuration: animated ? 0.5 : 0, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: options, animations: {
 			self.view.layoutIfNeeded()
-			self.cardEditor?.view.layoutIfNeeded()
-			self.cardPreview?.view.layoutIfNeeded()
+			cardEditor.view.layoutIfNeeded()
+			cardPreview.view.layoutIfNeeded()
 		}) {
 			guard $0 else { return }
 			completion?()
@@ -407,16 +410,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	func getTopConstraint() -> CGFloat {
-//		switch Device.current {
-//		case .homePod:
-//			return 0
-//		case .iPad2:
-//			return 0
-//			case .iPad2
-//		}
-		return Device.allDevicesWithRoundedDisplayCorners.contains(Device.realDevice(from: Device.current)) ? 0 : 40
-//		return 40
+	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
+		return Device.allDevicesWithRoundedDisplayCorners.contains(Device.realDevice(from: Device.current)) ? (0, 0) : (40, 40)
 	}
 	
 	func setBarButtonItems(forAudio: Bool, previewButton: Bool = false, animated: Bool = true) {
@@ -434,7 +429,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		} else {
 			navigationItem.setRightBarButtonItems([
 				UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(publishNew) : #selector(publishEdit))
-			] + previewButtonAddOn, animated: animated)
+			] + previewButtonAddOn, animated: animated)constantWithOffset
 			guard let cardEditor = cardEditor, cardEditor.hasText else { return disableRightBarButtonItem() }
 			guard let lastPublishedText = lastPublishedText else { return enableRightBarButtonItem() }
 			if cardEditor.trimmedText == lastPublishedText {
@@ -517,13 +512,20 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		element.frame.size.height = cell.frame.height
 		cell.addSubview(element)
 		if let cardEditor = cardEditor, let cardPreview = cardPreview {
-			let constant = getTopConstraint()
+			let constraints = getSubviewConstraints()
+			bottomSubviewOffset = constraints.bottom
 			[
 				cardEditor.frontTextViewTopConstraint,
 				cardEditor.backTextViewTopConstraint,
 				cardPreview.frontWebViewTopConstraint,
 				cardPreview.backWebViewTopConstraint
-			].forEach { $0.constant = constant }
+			].forEach { $0.constant = constraints.top }
+			[
+				cardEditor.frontTextViewBottomConstraint,
+				cardEditor.backTextViewBottomConstraint,
+				cardPreview.frontWebViewBottomConstraint,
+				cardPreview.backWebViewBottomConstraint
+			].forEach { $0.constant = constraints.bottom }
 		}
 		return cell
 	}
