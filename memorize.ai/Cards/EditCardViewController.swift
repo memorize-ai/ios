@@ -429,7 +429,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		} else {
 			navigationItem.setRightBarButtonItems([
 				UIBarButtonItem(title: "Publish", style: .done, target: self, action: card == nil ? #selector(publishNew) : #selector(publishEdit))
-			] + previewButtonAddOn, animated: animated)constantWithOffset
+			] + previewButtonAddOn, animated: animated)
 			guard let cardEditor = cardEditor, cardEditor.hasText else { return disableRightBarButtonItem() }
 			guard let lastPublishedText = lastPublishedText else { return enableRightBarButtonItem() }
 			if cardEditor.trimmedText == lastPublishedText {
