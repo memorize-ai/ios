@@ -156,23 +156,19 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		let signOut = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
-			do {
-				try auth.signOut()
-				Listener.removeAll()
-				uploads.removeAll()
-				invites.removeAll()
-				settings.removeAll()
-				sectionedSettings.removeAll()
-				cardDrafts.removeAll()
-				ratingDrafts.removeAll()
-				deckRatings.removeAll()
-				cardRatings.removeAll()
-				allDecks.removeAll()
-				User.delete()
-				self.performSegue(withIdentifier: "signOut", sender: self)
-			} catch {
-				self.showNotification("Unable to sign out. Please try again", type: .error)
-			}
+			guard (try? auth.signOut()) == nil else { return self.showNotification("Unable to sign out. Please try again", type: .error) }
+			Listener.removeAll()
+			uploads.removeAll()
+			invites.removeAll()
+			settings.removeAll()
+			sectionedSettings.removeAll()
+			cardDrafts.removeAll()
+			ratingDrafts.removeAll()
+			deckRatings.removeAll()
+			cardRatings.removeAll()
+			allDecks.removeAll()
+			User.delete()
+			self.performSegue(withIdentifier: "signOut", sender: self)
 		}
 		alertController.addAction(cancel)
 		alertController.addAction(signOut)
