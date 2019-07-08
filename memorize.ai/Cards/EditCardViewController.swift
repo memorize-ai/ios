@@ -1,4 +1,5 @@
 import UIKit
+import DeviceKit
 
 class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -406,6 +407,18 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
+	func getTopConstraint() -> CGFloat {
+//		switch Device.current {
+//		case .homePod:
+//			return 0
+//		case .iPad2:
+//			return 0
+//			case .iPad2
+//		}
+		return Device.allDevicesWithRoundedDisplayCorners.contains(Device.realDevice(from: Device.current)) ? 0 : 40
+//		return 40
+	}
+	
 	func setBarButtonItems(forAudio: Bool, previewButton: Bool = false, animated: Bool = true) {
 		let previewButtonAddOn = previewButton ? [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(previewCard))] : []
 		hasPreviewButton = previewButton
@@ -503,6 +516,15 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		let element = views[indexPath.item]
 		element.frame.size.height = cell.frame.height
 		cell.addSubview(element)
+		if let cardEditor = cardEditor, let cardPreview = cardPreview {
+			let constant = getTopConstraint()
+			[
+				cardEditor.frontTextViewTopConstraint,
+				cardEditor.backTextViewTopConstraint,
+				cardPreview.frontWebViewTopConstraint,
+				cardPreview.backWebViewTopConstraint
+			].forEach { $0.constant = constant }
+		}
 		return cell
 	}
 	

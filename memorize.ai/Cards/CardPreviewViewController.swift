@@ -3,8 +3,10 @@ import WebKit
 
 class CardPreviewViewController: UIViewController {
 	@IBOutlet weak var frontWebView: WKWebView!
+	@IBOutlet weak var frontWebViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var frontWebViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var backWebView: WKWebView!
+	@IBOutlet weak var backWebViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var backWebViewBottomConstraint: NSLayoutConstraint!
 	
 	func update(_ side: CardSide, text: String) {
