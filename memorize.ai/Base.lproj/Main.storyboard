@@ -287,12 +287,13 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="240" id="7as-7A-oC3"/>
                                     <constraint firstItem="UBx-vL-L2O" firstAttribute="leading" secondItem="g3Q-4n-6f8" secondAttribute="leading" id="8PS-Bt-HMQ"/>
                                     <constraint firstAttribute="trailing" secondItem="tdt-Kj-qcf" secondAttribute="trailing" id="Byy-86-h5n"/>
                                     <constraint firstItem="WgU-L1-UlA" firstAttribute="width" secondItem="UBx-vL-L2O" secondAttribute="width" id="DaR-9m-OS8"/>
                                     <constraint firstItem="O7r-AC-yGd" firstAttribute="height" secondItem="tdt-Kj-qcf" secondAttribute="height" id="Dsa-SA-YEW"/>
                                     <constraint firstItem="WgU-L1-UlA" firstAttribute="leading" secondItem="O7r-AC-yGd" secondAttribute="trailing" constant="10" id="EdS-ag-id8"/>
-                                    <constraint firstAttribute="width" secondItem="g3Q-4n-6f8" secondAttribute="height" multiplier="1.5:1" id="Qmk-Cb-O5J"/>
+                                    <constraint firstAttribute="width" secondItem="g3Q-4n-6f8" secondAttribute="height" multiplier="1.5:1" priority="999" id="Qmk-Cb-O5J"/>
                                     <constraint firstAttribute="bottom" secondItem="tdt-Kj-qcf" secondAttribute="bottom" id="RuD-eM-iID"/>
                                     <constraint firstItem="UBx-vL-L2O" firstAttribute="height" secondItem="tdt-Kj-qcf" secondAttribute="height" id="ScF-wE-hJw"/>
                                     <constraint firstItem="tdt-Kj-qcf" firstAttribute="top" secondItem="WgU-L1-UlA" secondAttribute="bottom" constant="10" id="T6G-5m-VUv"/>
@@ -400,8 +401,8 @@
                                     <outlet property="delegate" destination="XhB-Ss-34n" id="MCf-wV-w1R"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="450" width="414" height="286"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waV-L4-S5d">
                                         <rect key="frame" x="40" y="279.33333333333331" width="334" height="177.33333333333331"/>
@@ -486,6 +487,7 @@
                             <constraint firstItem="Ktw-UW-neX" firstAttribute="leading" secondItem="8uK-vv-lv9" secondAttribute="leading" constant="40" id="Sck-Ll-cFc"/>
                             <constraint firstItem="5fG-Ab-81s" firstAttribute="top" secondItem="7WA-ms-AUv" secondAttribute="top" id="TCw-nB-WkC"/>
                             <constraint firstItem="8uK-vv-lv9" firstAttribute="trailing" secondItem="kOp-YG-uZ1" secondAttribute="trailing" constant="40" id="dbJ-m3-TJb"/>
+                            <constraint firstItem="g3Q-4n-6f8" firstAttribute="centerX" secondItem="7WA-ms-AUv" secondAttribute="centerX" id="enk-Cw-Epk"/>
                             <constraint firstItem="5fG-Ab-81s" firstAttribute="leading" secondItem="7WA-ms-AUv" secondAttribute="leading" id="iJH-Ud-7bS"/>
                             <constraint firstItem="5fG-Ab-81s" firstAttribute="trailing" secondItem="7WA-ms-AUv" secondAttribute="trailing" id="l7A-gg-Dy9"/>
                             <constraint firstItem="kOp-YG-uZ1" firstAttribute="leading" secondItem="8uK-vv-lv9" secondAttribute="leading" constant="40" id="msq-OP-LFq"/>
@@ -6711,11 +6713,11 @@
     <inferredMetricsTieBreakers>
         <segue reference="PcJ-Cf-5WB"/>
         <segue reference="TPR-zk-sPC"/>
-        <segue reference="h5F-6A-J1r"/>
+        <segue reference="1zn-0n-nWw"/>
         <segue reference="MiA-Dd-bWk"/>
-        <segue reference="O84-5M-BZf"/>
-        <segue reference="NDx-ee-NxK"/>
-        <segue reference="MlG-TU-DGT"/>
+        <segue reference="xrl-eN-ji3"/>
+        <segue reference="zq2-cu-WBD"/>
+        <segue reference="p0r-eq-3dv"/>
         <segue reference="0Yj-jn-rSr"/>
         <segue reference="y6W-0c-pPw"/>
         <segue reference="MYP-cc-USk"/>
