@@ -11,9 +11,7 @@ class ChangeHandler {
 	
 	static func updateAndCall(_ changes: Change..., handler: ((Change) -> Void)?) {
 		update(handler)
-		changes.forEach {
-			call($0)
-		}
+		changes.forEach(call)
 	}
 }
 
