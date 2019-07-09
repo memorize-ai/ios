@@ -34,10 +34,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	var cardsDue = false
 	var expanded = false
 	var originalCardsCollectionViewWidth: CGFloat?
+	var startup = true
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		originalCardsCollectionViewWidth = cardsCollectionView.bounds.width
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +90,13 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		cardsCollectionView.reloadData()
 		reloadActions()
 		updateCurrentViewController()
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		guard startup else { return }
+		startup = false
+		originalCardsCollectionViewWidth = cardsCollectionView.bounds.width
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
