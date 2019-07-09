@@ -156,7 +156,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		let signOut = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
-			guard (try? auth.signOut()) == nil else { return self.showNotification("Unable to sign out. Please try again", type: .error) }
+			if (try? auth.signOut()) == nil { return self.showNotification("Unable to sign out. Please try again", type: .error) }
 			Listener.removeAll()
 			uploads.removeAll()
 			invites.removeAll()
