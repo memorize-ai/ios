@@ -36,10 +36,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	var originalCardsCollectionViewWidth: CGFloat?
 	var startup = true
 	
-	override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.update { change in

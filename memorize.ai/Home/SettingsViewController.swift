@@ -3,10 +3,6 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var settingsTableView: UITableView!
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.settingAdded) { change in
