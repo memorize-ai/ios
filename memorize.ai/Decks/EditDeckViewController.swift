@@ -53,7 +53,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		textViewDidEndEditing(tagsTextView)
 		textViewDidEndEditing(descriptionTextView)
 		tagsTextView.setKeyboard(.plain)
-		descriptionTextView.setKeyboard(.advanced)
+		descriptionTextView.setKeyboard(.plain)
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
