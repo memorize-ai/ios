@@ -8,6 +8,15 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 84)
+		flowLayout.minimumLineSpacing = 10
+		flowLayout.minimumInteritemSpacing = 10
+		flowLayout.sectionInset.top = 8
+		flowLayout.sectionInset.bottom = 8
+		flowLayout.sectionInset.left = 8
+		flowLayout.sectionInset.right = 8
+		cardsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
