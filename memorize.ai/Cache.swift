@@ -201,7 +201,7 @@ class Cache {
 	
 	private static func setManagedCache(_ managedCache: NSManagedObject, key: String, image: UIImage?, data: Data?, format: FileFormat, properties: [String], expiration: Date) {
 		managedCache.setValue(key, forKey: "key")
-		managedCache.setValue(data, forKey: "data")
+		managedCache.setValue(data ?? image?.jpegData(compressionQuality: 1), forKey: "data")
 		managedCache.setValue(format.rawValue, forKey: "format")
 		managedCache.setValue(properties, forKey: "properties")
 		managedCache.setValue(Int32(expiration.timeIntervalSince1970), forKey: "expiration")
