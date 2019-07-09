@@ -2443,7 +2443,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XxX-ZX-ez4">
                                                 <rect key="frame" x="147" y="40" width="120" height="120"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gray Deck" translatesAutoresizingMaskIntoConstraints="NO" id="V7W-Ph-pcT">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gray Deck" translatesAutoresizingMaskIntoConstraints="NO" id="V7W-Ph-pcT">
                                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -5895,19 +5895,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KXV-q5-mBZ">
-                                                    <rect key="frame" x="20.000000000000004" y="14.333333333333332" width="61.333333333333343" height="34.333333333333343"/>
+                                                    <rect key="frame" x="90" y="23.666666666666668" width="61.333333333333343" height="34.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkU-1E-5fO">
-                                                    <rect key="frame" x="20" y="50.666666666666664" width="35" height="10"/>
-                                                    <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="14"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-6U-jbX">
-                                                    <rect key="frame" x="275" y="4" width="101" height="54.666666666666664"/>
+                                                    <rect key="frame" x="275" y="13.333333333333332" width="101" height="54.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaJ-Kx-Gae">
                                                             <rect key="frame" x="0.0" y="0.0" width="101" height="54.666666666666664"/>
@@ -5930,21 +5924,44 @@
                                                         <constraint firstItem="AaJ-Kx-Gae" firstAttribute="leading" secondItem="TTs-6U-jbX" secondAttribute="leading" id="ylr-AV-mrA"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X9C-02-IlH">
+                                                    <rect key="frame" x="20" y="10.333333333333336" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="JAT-O5-BgN"/>
+                                                        <constraint firstAttribute="width" constant="50" id="W5s-Xw-8bn"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="25"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkU-1E-5fO">
+                                                    <rect key="frame" x="90" y="60.000000000000007" width="35" height="19.333333333333336"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="KXV-q5-mBZ" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="2z5-OT-uCf"/>
+                                                <constraint firstItem="X9C-02-IlH" firstAttribute="top" secondItem="yIw-WV-6kH" secondAttribute="top" constant="10" id="8ZQ-h9-gi2"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SkU-1E-5fO" secondAttribute="trailing" id="Ak2-6o-Ksp"/>
                                                 <constraint firstAttribute="bottom" secondItem="SkU-1E-5fO" secondAttribute="bottom" constant="2" id="BHk-th-KyX"/>
+                                                <constraint firstItem="SkU-1E-5fO" firstAttribute="leading" secondItem="X9C-02-IlH" secondAttribute="trailing" constant="20" id="GTi-Ll-wFt"/>
+                                                <constraint firstItem="KXV-q5-mBZ" firstAttribute="leading" secondItem="X9C-02-IlH" secondAttribute="trailing" constant="20" id="L6t-he-HGv"/>
                                                 <constraint firstItem="TTs-6U-jbX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KXV-q5-mBZ" secondAttribute="trailing" constant="20" id="LEY-Px-pF9"/>
                                                 <constraint firstItem="SkU-1E-5fO" firstAttribute="top" secondItem="KXV-q5-mBZ" secondAttribute="bottom" constant="2" id="S09-BS-P6K"/>
                                                 <constraint firstAttribute="trailing" secondItem="TTs-6U-jbX" secondAttribute="trailing" id="VJZ-5e-ihz"/>
-                                                <constraint firstItem="SkU-1E-5fO" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="hs8-3a-Bdy"/>
                                                 <constraint firstItem="TTs-6U-jbX" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="jxI-Pv-RRs"/>
+                                                <constraint firstItem="X9C-02-IlH" firstAttribute="leading" secondItem="yIw-WV-6kH" secondAttribute="leading" constant="20" id="oI7-ln-IgG"/>
                                                 <constraint firstItem="KXV-q5-mBZ" firstAttribute="centerY" secondItem="yIw-WV-6kH" secondAttribute="centerY" id="pLh-NI-bmk"/>
+                                                <constraint firstAttribute="bottom" secondItem="X9C-02-IlH" secondAttribute="bottom" constant="10" id="q96-EH-2NT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="activityIndicator" destination="NVT-NB-z9G" id="SE9-kW-LSM"/>
+                                            <outlet property="deckImageView" destination="X9C-02-IlH" id="fC5-ap-ayn"/>
                                             <outlet property="deckNameLabel" destination="KXV-q5-mBZ" id="Vq7-vB-7Y9"/>
                                             <outlet property="detailLabel" destination="SkU-1E-5fO" id="TgV-m6-F6h"/>
                                             <outlet property="ratingLabel" destination="AaJ-Kx-Gae" id="1yv-bx-4iz"/>
@@ -6711,7 +6728,7 @@
         <image name="X" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PcJ-Cf-5WB"/>
+        <segue reference="324-2A-P4S"/>
         <segue reference="TPR-zk-sPC"/>
         <segue reference="1zn-0n-nWw"/>
         <segue reference="MiA-Dd-bWk"/>
@@ -6719,7 +6736,7 @@
         <segue reference="zq2-cu-WBD"/>
         <segue reference="p0r-eq-3dv"/>
         <segue reference="0Yj-jn-rSr"/>
-        <segue reference="y6W-0c-pPw"/>
+        <segue reference="BGs-3X-tk8"/>
         <segue reference="MYP-cc-USk"/>
     </inferredMetricsTieBreakers>
 </document>

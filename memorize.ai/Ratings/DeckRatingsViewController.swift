@@ -37,6 +37,28 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		guard let cell = _cell as? DeckRatingPreviewTableViewCell else { return _cell }
 		let deck = decks[indexPath.row]
+		if let image = deck.image {
+			cell.setImage(image)
+			cell.deckImageView.image = image
+		} else if deck.hasImage {
+			if let cachedImage = Deck.imageFromCache(deck.id) {
+				cell.setImage(cachedImage)
+				deck.image = cachedImage
+			} else {
+				cell.setImage(nil)
+			}
+			storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+				guard error == nil, let data = data, let image = UIImage(data: data) else { return }
+				cell.setImage(image)
+				deck.image = image
+				Deck.cache(deck.id, image: image)
+				self.ratingsTableView.reloadData()
+			}
+		} else {
+			cell.setImage(DEFAULT_DECK_IMAGE)
+			deck.image = nil
+			Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
+		}
 		cell.deckNameLabel.text = deck.name
 		if let rating = deck.rating {
 			cell.ratingLabel.text = String(rating.rating)
@@ -104,6 +126,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 }
 
 class DeckRatingPreviewTableViewCell: UITableViewCell {
+	@IBOutlet weak var deckImageView: UIImageView!
 	@IBOutlet weak var deckNameLabel: UILabel!
 	@IBOutlet weak var ratingLabel: UILabel!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -117,5 +140,11 @@ class DeckRatingPreviewTableViewCell: UITableViewCell {
 	func stopLoading() {
 		activityIndicator.stopAnimating()
 		ratingLabel.isHidden = false
+	}
+	
+	func setImage(_ image: UIImage?) {
+		layer.borderWidth = image == nil ? 1 : 0
+		layer.borderColor = image == nil ? UIColor.lightGray.cgColor : nil
+		deckImageView.image = image
 	}
 }
