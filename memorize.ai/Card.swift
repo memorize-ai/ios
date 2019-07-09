@@ -76,7 +76,11 @@ class Card {
 	}
 	
 	static func escape(_ text: String) -> String {
-		return convertFileUrls(text).replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
+		return removeAudioUrls(text.replacingOccurrences(of: "\\", with: "\\\\"))
+	}
+	
+	static func removeAudioUrls(_ text: String) -> String {
+		return text.replacingOccurrences(of: #"<\s*audio\s*>.*<\s*/\s*audio\s*>\n*"#, with: "", options: .regularExpression)
 	}
 	
 	static func playAudio(_ text: String, completion: @escaping (Bool) -> Void = { _ in }) {
