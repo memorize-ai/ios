@@ -81,10 +81,10 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		Algolia.search(.uploads, for: searchText) { results, error in
 			guard error == nil else { return }
-			self.filteredUploads = self.filterForAudio(Upload.filter(results.compactMap {
+			self.filteredUploads = self.sortUploads(self.filterForAudio(Upload.filter(results.compactMap {
 				guard let uploadId = Algolia.id(result: $0) else { return nil }
 				return Upload.get(uploadId)
-			}, for: self.filter))
+			}, for: self.filter)))
 			self.uploadsCollectionView.reloadData()
 		}
 	}
@@ -93,10 +93,14 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 		return audioAllowed ? uploads : uploads.filter { $0.type != .audio }
 	}
 	
+	func sortUploads(_ uploads: [Upload]) -> [Upload] {
+		return uploads.sorted { $0.name < $1.name }
+	}
+	
 	func loadFilteredUploads() {
 		guard let searchText = searchBar.text else { return }
 		if searchText.trim().isEmpty {
-			filteredUploads = filterForAudio(Upload.filter(uploads, for: filter))
+			filteredUploads = sortUploads(filterForAudio(Upload.filter(uploads, for: filter)))
 		} else {
 			searchBar(searchBar, textDidChange: searchText)
 		}
