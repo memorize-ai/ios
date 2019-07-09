@@ -113,6 +113,7 @@ class EditUploadViewController: UIViewController, UINavigationControllerDelegate
 			self.present(urlAlert, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alert.popoverPresentationController?.sourceView = view
 		present(alert, animated: true, completion: nil)
 	}
 	

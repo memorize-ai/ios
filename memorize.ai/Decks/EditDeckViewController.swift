@@ -168,6 +168,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 			})
 		}
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alert.popoverPresentationController?.sourceView = view
 		present(alert, animated: true, completion: nil)
 	}
 	
