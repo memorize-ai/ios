@@ -15,7 +15,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		frontTextView.setKeyboard(.advanced)
 		backTextView.setKeyboard(.advanced)
 	}
-
+	
 	var text: (front: String, back: String) {
 		return (frontTextView.text, backTextView.text)
 	}
@@ -26,6 +26,10 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 	
 	var hasText: Bool {
 		return !(trimmedText.front.isEmpty || trimmedText.back.isEmpty)
+	}
+	
+	var hasAnyText: Bool {
+		return !(trimmedText.front.isEmpty && trimmedText.back.isEmpty)
 	}
 	
 	var current: UITextView {

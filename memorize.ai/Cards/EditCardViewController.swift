@@ -54,16 +54,19 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		setConstraints(0, animated: false)
 		guard let id = id, let deck = deck else { return }
 		cardEditor.listen { side, text in
+			let hasAnyText = cardEditor.hasAnyText
 			if let card = self.card {
 				if let draft = card.draft {
-					firestore.document("users/\(id)/cardDrafts/\(draft.id)").updateData([side.rawValue: text])
-				} else {
+					let document = firestore.document("users/\(id)/cardDrafts/\(draft.id)")
+					hasAnyText ? document.updateData([side.rawValue: text]) : document.delete()
+				} else if hasAnyText {
 					let text = cardEditor.text
 					firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "card": card.id, "front": text.front, "back": text.back])
 				}
 			} else if let draft = deck.cardDraft {
-				firestore.document("users/\(id)/cardDrafts/\(draft.id)").updateData([side.rawValue: text])
-			} else {
+				let document = firestore.document("users/\(id)/cardDrafts/\(draft.id)")
+				hasAnyText ? document.updateData([side.rawValue: text]) : document.delete()
+			} else if hasAnyText {
 				let text = cardEditor.text
 				firestore.collection("users/\(id)/cardDrafts").addDocument(data: ["deck": deck.id, "front": text.front, "back": text.back])
 			}
@@ -81,6 +84,13 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		if isMovingFromParent {
+			DecksViewController.decksDidChange = true
+		}
 	}
 	
 	override func viewDidLayoutSubviews() {
