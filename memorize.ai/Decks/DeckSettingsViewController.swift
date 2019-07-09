@@ -169,18 +169,23 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 			alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
 				cell.startLoading()
 				Deck.delete(deck.id) { error in
-					cell.stopLoading()
 					if error == nil {
-						firestore.document("users/\(id)/decks/\(deck.id)").delete { error in
-							if error == nil {
-								buzz()
-								if decks.isEmpty {
-									self.performSegue(withIdentifier: "home", sender: self)
+						Listener.remove("decks/\(deck.id)")
+						Listener.remove("decks/\(deck.id)/cards")
+						storage.child("decks/\(deck.id)").delete { error in
+							firestore.document("users/\(id)/decks/\(deck.id)").delete { error in
+								cell.stopLoading()
+								if error == nil {
+									buzz()
+									Listener.remove("users/\(id)/decks/\(deck.id)")
+									if decks.isEmpty {
+										self.performSegue(withIdentifier: "home", sender: self)
+									} else {
+										self.navigationController?.popViewController(animated: true)
+									}
 								} else {
-									self.navigationController?.popViewController(animated: true)
+									self.showNotification("An unknown error occurred. Please try again", type: .error)
 								}
-							} else {
-								self.showNotification("An unknown error occurred. Please try again", type: .error)
 							}
 						}
 					} else {
