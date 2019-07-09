@@ -1026,6 +1026,9 @@
                                 <state key="normal" title="All">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="filterAll" destination="PDB-ip-5Km" eventType="touchUpInside" id="vHm-pr-fdx"/>
                                 </connections>
@@ -1036,6 +1039,9 @@
                                 <state key="normal" title="Images">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="filterImages" destination="PDB-ip-5Km" eventType="touchUpInside" id="fcA-uK-srq"/>
                                 </connections>
@@ -1046,6 +1052,9 @@
                                 <state key="normal" title="Gifs">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="filterGifs" destination="PDB-ip-5Km" eventType="touchUpInside" id="Mlc-7h-gKe"/>
                                 </connections>
@@ -1056,6 +1065,9 @@
                                 <state key="normal" title="Audio">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="filterAudio" destination="PDB-ip-5Km" eventType="touchUpInside" id="w62-YN-uI0"/>
                                 </connections>
@@ -5700,6 +5712,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Add Upload"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addUpload" destination="WYS-Mb-rsl" eventType="touchUpInside" id="Vty-2Q-bf5"/>
                                         </connections>
@@ -5713,6 +5728,9 @@
                                                 <state key="normal" title="Remove draft">
                                                     <color key="titleColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="removeDraft" destination="WYS-Mb-rsl" eventType="touchUpInside" id="bWP-gT-nA7"/>
                                                 </connections>
@@ -5742,6 +5760,9 @@
                                                 <state key="normal" title="Delete card">
                                                     <color key="titleColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="deleteCard" destination="WYS-Mb-rsl" eventType="touchUpInside" id="8fc-xj-Wyq"/>
                                                 </connections>
@@ -6734,9 +6755,9 @@
         <segue reference="MiA-Dd-bWk"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
-        <segue reference="p0r-eq-3dv"/>
+        <segue reference="MlG-TU-DGT"/>
         <segue reference="0Yj-jn-rSr"/>
-        <segue reference="BGs-3X-tk8"/>
+        <segue reference="y6W-0c-pPw"/>
         <segue reference="MYP-cc-USk"/>
     </inferredMetricsTieBreakers>
 </document>
