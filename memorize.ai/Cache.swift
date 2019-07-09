@@ -28,13 +28,12 @@ class Cache {
 	}
 	
 	convenience init?(_ managedCache: NSManagedObject, type: CacheType) {
-		guard let key = managedCache.value(forKey: "key") as? String, let data = managedCache.value(forKey: "data") as? Data, let format = managedCache.value(forKey: "format") as? String, let properties = managedCache.value(forKey: "properties") as? [String], let expiration = managedCache.value(forKey: "expiration") as? Int32 else { return nil }
+		guard let key = managedCache.value(forKey: "key") as? String, let format = managedCache.value(forKey: "format") as? String, let properties = managedCache.value(forKey: "properties") as? [String], let expiration = managedCache.value(forKey: "expiration") as? Int32 else { return nil }
 		let fileFormat = FileFormat(format)
 		self.init(
 			type: type,
 			key: key,
-			image: nil,
-			data: data,
+			data: managedCache.value(forKey: "data") as? Data,
 			format: fileFormat,
 			properties: properties,
 			expiration: Date(timeIntervalSince1970: Double(expiration))
@@ -70,9 +69,39 @@ class Cache {
 		}
 	}
 	
-	static func new(_ cache: Cache) {
-		arrayForType(cache.type) {
-			save(cache, array: &$0)
+	static func new(type: CacheType, key: String, image: UIImage? = nil, data: Data? = nil, format: FileFormat, properties: [String] = [], expiration: Date = Cache.getExpirationFromNow()) {
+		func setManagedCache(_ managedCache: NSManagedObject) {
+			Cache.setManagedCache(managedCache, key: key, image: image, data: data, format: format, properties: properties, expiration: expiration)
+		}
+		func updateCache(_ cache: Cache) {
+			cache.update(image: image, data: data, format: format, properties: properties, expiration: expiration)
+		}
+		func newManagedCache(_ cache: Cache) {
+			guard let managedContext = managedContext, let entity = NSEntityDescription.entity(forEntityName: managedCacheName(type: type), in: managedContext) else { return }
+			let managedCache = NSManagedObject(entity: entity, insertInto: managedContext)
+			setManagedCache(managedCache)
+			saveManagedContext()
+			cache.managed = managedCache
+		}
+		arrayForType(type) {
+			if let cache = ($0.first { $0.key == key }) {
+				if let managedCache = cache.managed {
+					setManagedCache(managedCache)
+					saveManagedContext()
+				} else {
+					newManagedCache(cache)
+				}
+				updateCache(cache)
+			} else {
+				let cache = Cache(type: type, key: key, image: image, data: data, format: format, properties: properties, expiration: expiration)
+				if let managedCache = getManagedCache(type, key: key) {
+					setManagedCache(managedCache)
+					saveManagedContext()
+				} else {
+					newManagedCache(cache)
+				}
+				$0.append(cache)
+			}
 		}
 	}
 	
@@ -106,7 +135,7 @@ class Cache {
 		guard let managedContext = managedContext, let managedCache = getManagedCache(type, key: key) else { return false }
 		managedContext.delete(managedCache)
 		arrayForType(type) {
-			$0.removeAll { $0.key == key && $0.type == type }
+			$0.removeAll { $0.key == key }
 		}
 		return true
 	}
@@ -139,28 +168,16 @@ class Cache {
 		return properties.contains(property)
 	}
 	
-	private static func dateIsExpired(_ date: Date) -> Bool {
-		return Date().timeIntervalSince(date) >= 0
+	private func update(image: UIImage?, data: Data?, format: FileFormat, properties: [String], expiration: Date) {
+		self.image = image
+		self.data = data
+		self.format = format
+		self.properties = properties
+		self.expiration = expiration
 	}
 	
-	private static func save(_ cache: Cache, array: inout [Cache]) {
-		guard let managedContext = managedContext, let entity = NSEntityDescription.entity(forEntityName: managedCacheName(type: cache.type), in: managedContext) else { return }
-		let managedCache = NSManagedObject(entity: entity, insertInto: managedContext)
-		managedCache.setValue(cache.key, forKey: "key")
-		managedCache.setValue(cache.getData(), forKey: "data")
-		managedCache.setValue(cache.format.rawValue, forKey: "format")
-		managedCache.setValue(cache.properties, forKey: "properties")
-		managedCache.setValue(Int32(cache.expiration.timeIntervalSince1970), forKey: "expiration")
-		guard saveManagedContext() else { return }
-		cache.managed = managedCache
-		for i in 0..<array.count {
-			let element = array[i]
-			if element.key == cache.key && element.type == cache.type {
-				array[i] = cache
-				return
-			}
-		}
-		array.append(cache)
+	private static func dateIsExpired(_ date: Date) -> Bool {
+		return Date().timeIntervalSince(date) >= 0
 	}
 	
 	private static func getExpirationFromNow() -> Date {
@@ -180,6 +197,14 @@ class Cache {
 			completion?(&users)
 			return users
 		}
+	}
+	
+	private static func setManagedCache(_ managedCache: NSManagedObject, key: String, image: UIImage?, data: Data?, format: FileFormat, properties: [String], expiration: Date) {
+		managedCache.setValue(key, forKey: "key")
+		managedCache.setValue(data, forKey: "data")
+		managedCache.setValue(format.rawValue, forKey: "format")
+		managedCache.setValue(properties, forKey: "properties")
+		managedCache.setValue(Int32(expiration.timeIntervalSince1970), forKey: "expiration")
 	}
 	
 	private static func getManagedCache(_ type: CacheType, key: String) -> NSManagedObject? {
