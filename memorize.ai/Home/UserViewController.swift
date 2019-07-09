@@ -131,6 +131,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewSafeAreaInsetsDidChange() {
 		initializeBottomSafeAreaInset(view)
+		if didSignUp {
+			didSignUp = false
+			showNotification("Click on the user icon in the top left to view your profile", type: .normal, delay: 4)
+		}
 	}
 	
 	@IBAction

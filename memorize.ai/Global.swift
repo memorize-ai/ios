@@ -15,6 +15,7 @@ let managedContext = (UIApplication.shared.delegate as? AppDelegate)?.persistent
 var startup = true
 var shouldLoadDecks = false
 var shouldShowEditProfileTip = false
+var didSignUp = false
 var registerForNotifications: (() -> Void)?
 var bottomSafeAreaInset: CGFloat = 0
 
