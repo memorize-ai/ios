@@ -45,6 +45,10 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		listener = handler
 	}
 	
+	func scrollToTop(animated: Bool = false) {
+		[frontTextView, backTextView].forEach { $0.setContentOffset(.zero, animated: animated) }
+	}
+	
 	func scrollToCursorPosition() {
 		let textView = current
 		guard let cursorPosition = textView.selectedTextRange?.start else { return }

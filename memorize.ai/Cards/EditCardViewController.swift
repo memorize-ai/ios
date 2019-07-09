@@ -89,6 +89,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		flowLayout.minimumLineSpacing = 0
 		flowLayout.minimumInteritemSpacing = 0
 		collectionView.collectionViewLayout = flowLayout
+		cardEditor?.scrollToTop()
+		cardPreview?.scrollToTop()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

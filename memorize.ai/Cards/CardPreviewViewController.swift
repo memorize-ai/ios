@@ -33,6 +33,10 @@ class CardPreviewViewController: UIViewController {
 		}
 	}
 	
+	func scrollToTop(animated: Bool = false) {
+		[frontWebView, backWebView].forEach { $0?.scrollView.setContentOffset(.zero, animated: animated) }
+	}
+	
 	func swap(completion: ((CardSide) -> Void)?) {
 		let halfWidth = view.bounds.width / 2
 		if frontWebView.isHidden {
