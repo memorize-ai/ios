@@ -16,7 +16,6 @@ class UploadActionsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
 		uploadView.transform = CGAffineTransform(scaleX: 0, y: 0)
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -36,6 +35,11 @@ class UploadActionsViewController: UIViewController {
 				self.hide()
 			}
 		}
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

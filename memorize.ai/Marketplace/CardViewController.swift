@@ -18,7 +18,6 @@ class CardViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		guard let card = card else { return }
-		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
 		frontWebView.render(card.front, fontSize: 55)
 		backWebView.render(card.back, fontSize: 55)
 		cell?.completion = {
@@ -49,6 +48,11 @@ class CardViewController: UIViewController {
 		cell?.completion = nil
 		cell?.setPlayState(.ready)
 		Audio.stop()
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		titleBar.round(corners: [.topLeft, .topRight], radius: 10)
 	}
 	
 	@IBAction
