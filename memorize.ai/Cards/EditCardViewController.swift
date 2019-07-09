@@ -33,6 +33,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	var views = [UIView]()
 	var hasPreviewButton = false
 	var bottomSubviewOffset: CGFloat = 0
+	var startup = true
 	
 	deinit {
 		KeyboardHandler.removeListener(self)
@@ -83,14 +84,14 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+		guard startup else { return }
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
 		flowLayout.scrollDirection = .horizontal
 		flowLayout.minimumLineSpacing = 0
 		flowLayout.minimumInteritemSpacing = 0
 		collectionView.collectionViewLayout = flowLayout
-		cardEditor?.scrollToTop()
-		cardPreview?.scrollToTop()
+		scrollToTop()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,6 +113,11 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: PLACEHOLDER_DATE, updated: PLACEHOLDER_DATE, likes: 0, dislikes: 0, deck: "~")]
 			reviewVC.previewDeck = deck?.name
 		}
+	}
+	
+	func scrollToTop() {
+		cardEditor?.scrollToTop()
+		cardPreview?.scrollToTop()
 	}
 	
 	func startLoading() {
@@ -145,6 +151,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@objc
 	func publishNew() {
+		startup = false
 		guard let deck = deck, let text = cardEditor?.trimmedText else { return }
 		let date = Date()
 		disableRightBarButtonItem()
@@ -163,6 +170,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@objc
 	func publishEdit() {
+		startup = false
 		guard let deck = deck, let card = card, let text = cardEditor?.trimmedText else { return }
 		disableRightBarButtonItem()
 		firestore.document("decks/\(deck.id)/cards/\(card.id)").updateData(["front": text.front, "back": text.back]) { error in
@@ -199,12 +207,14 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	}
 	
 	func keyboardWillShow() {
+		startup = false
 		let offset = keyboardOffset - bottomSafeAreaInset
 		toolbarBottomConstraint.constant = offset
 		setConstraints(offset, options: .curveEaseOut, completion: cardEditor?.scrollToCursorPosition)
 	}
 	
 	func keyboardWillHide() {
+		startup = false
 		toolbarBottomConstraint.constant = 0
 		setConstraints(0, options: .curveLinear)
 	}
@@ -233,6 +243,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@IBAction
 	func left() {
+		startup = false
 		disable(leftArrow)
 		sideLabel.text = "~~~"
 		switch currentSide {
@@ -258,6 +269,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@IBAction
 	func right() {
+		startup = false
 		disable(rightArrow)
 		sideLabel.text = "~~~"
 		switch currentSide {
@@ -283,11 +295,13 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@IBAction 
 	func addUpload() {
+		startup = false
 		performSegue(withIdentifier: "addUpload", sender: self)
 	}
 	
 	@IBAction
 	func removeDraft() {
+		startup = false
 		guard let id = id else { return }
 		let alertController = UIAlertController(title: "Are you sure?", message: "This action cannot be undone", preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -317,6 +331,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@IBAction
 	func deleteCard() {
+		startup = false
 		guard let deck = deck, let card = card else { return }
 		let draft = card.draft
 		let alertController = UIAlertController(title: "Are you sure?", message: "The card\(draft == nil ? " and your draft" : "") will be deleted. This action cannot be undone", preferredStyle: .alert)
@@ -423,11 +438,11 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
 		switch true {
 		case Device.allDevicesWithRoundedDisplayCorners.contains(CURRENT_DEVICE):
-			return isIpad() ? (47, 65) : (0, 0)
+			return isIpad() ? (47.5, 65) : (69, 74)
 		case isIpad():
-			return (44.5, 65)
+			return (44.75, 65)
 		default:
-			return (40, 65)
+			return (40.5, 65)
 		}
 	}
 	
@@ -469,6 +484,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@objc
 	func reloadAudio() {
+		startup = false
 		Audio.stop()
 		playAudio(getText())
 	}
@@ -480,6 +496,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	@objc
 	func audioControlsClicked() {
+		startup = false
 		switch playState {
 		case .ready:
 			Audio.resume()
