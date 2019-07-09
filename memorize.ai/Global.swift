@@ -4,6 +4,7 @@ import AudioToolbox
 import WebKit
 import Down
 import SwiftGifOrigin
+import DeviceKit
 
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
@@ -74,7 +75,7 @@ extension WKWebView {
 						html,
 						body {
 							font-family: Helvetica;
-							font-size: \(fontSize)px;
+							font-size: \(fontSize / (Device.allPads.contains(CURRENT_DEVICE) ? 2 : 1))px;
 							color: #\(textColor);
 							background-color: #\(backgroundColor);
 						}
