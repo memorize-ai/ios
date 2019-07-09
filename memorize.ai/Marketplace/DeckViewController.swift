@@ -94,7 +94,6 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 		guard let deckId = deck.id, let hasImage = deck.hasImage else { return }
-		loadFlowLayouts()
 		loadCreator()
 		listeners["decks/\(deckId)"] = firestore.document("decks/\(deckId)").addSnapshotListener { snapshot, error in
 			if error == nil, let snapshot = snapshot, let deckName = snapshot.get("name") as? String, let subtitle = snapshot.get("subtitle") as? String, let description = snapshot.get("description") as? String, let tags = snapshot.get("tags") as? [String], let isPublic = snapshot.get("public") as? Bool, let count = snapshot.get("count") as? Int, let creatorId = snapshot.get("creator") as? String, let created = snapshot.getDate("created"), let updated = snapshot.getDate("updated") {
@@ -297,6 +296,11 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if isMovingFromParent {
 			removeAllListeners()
 		}
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		loadFlowLayouts()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
