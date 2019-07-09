@@ -6472,7 +6472,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gk-3l-SaD">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="20" y="20" width="374" height="716"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -6480,7 +6480,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mgb-ot-W2X">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="20" y="20" width="374" height="716"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -6490,14 +6490,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sTK-6Z-bMM" firstAttribute="trailing" secondItem="Mgb-ot-W2X" secondAttribute="trailing" id="3j0-Xy-9Jn"/>
+                            <constraint firstItem="sTK-6Z-bMM" firstAttribute="trailing" secondItem="Mgb-ot-W2X" secondAttribute="trailing" constant="20" id="3j0-Xy-9Jn"/>
                             <constraint firstAttribute="bottom" secondItem="7Gk-3l-SaD" secondAttribute="bottom" id="4le-EU-aRS"/>
                             <constraint firstItem="sTK-6Z-bMM" firstAttribute="bottom" secondItem="Mgb-ot-W2X" secondAttribute="bottom" id="87X-tT-akN"/>
                             <constraint firstItem="7Gk-3l-SaD" firstAttribute="top" secondItem="sTK-6Z-bMM" secondAttribute="top" id="AnB-6F-ffL"/>
-                            <constraint firstItem="7Gk-3l-SaD" firstAttribute="leading" secondItem="sTK-6Z-bMM" secondAttribute="leading" id="Fgg-nd-2kY"/>
-                            <constraint firstAttribute="trailing" secondItem="7Gk-3l-SaD" secondAttribute="trailing" id="d5K-qc-eJn"/>
+                            <constraint firstItem="7Gk-3l-SaD" firstAttribute="leading" secondItem="sTK-6Z-bMM" secondAttribute="leading" constant="20" id="Fgg-nd-2kY"/>
+                            <constraint firstAttribute="trailing" secondItem="7Gk-3l-SaD" secondAttribute="trailing" constant="20" id="d5K-qc-eJn"/>
                             <constraint firstItem="Mgb-ot-W2X" firstAttribute="top" secondItem="sTK-6Z-bMM" secondAttribute="top" id="m5i-RM-Qoa"/>
-                            <constraint firstItem="Mgb-ot-W2X" firstAttribute="leading" secondItem="sTK-6Z-bMM" secondAttribute="leading" id="skJ-ye-anF"/>
+                            <constraint firstItem="Mgb-ot-W2X" firstAttribute="leading" secondItem="sTK-6Z-bMM" secondAttribute="leading" constant="20" id="skJ-ye-anF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sTK-6Z-bMM"/>
                     </view>
