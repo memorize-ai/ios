@@ -76,7 +76,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			}
 		}
 		expand(false)
-		view.layoutIfNeeded()
 		if decks.isEmpty {
 			navigationController?.popViewController(animated: true)
 			return
