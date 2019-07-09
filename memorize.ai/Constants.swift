@@ -14,3 +14,4 @@ let DEFAULT_RED_COLOR = #colorLiteral(red: 0.8459790349, green: 0.2873021364, bl
 let CARD_POLL_INTERVAL: TimeInterval = 1
 let PLACEHOLDER_DATE = Date()
 let CURRENT_DEVICE = Device.realDevice(from: Device.current)
+let MEMORIZE_AI_BASE_URL = "https://memorize.ai"

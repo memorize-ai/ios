@@ -25,7 +25,7 @@ class User {
 	}
 	
 	static func url(slug: String) -> URL? {
-		return URL(string: "https://memorize.ai/\(urlString(slug: slug))")
+		return URL(string: "\(MEMORIZE_AI_BASE_URL)/\(urlString(slug: slug))")
 	}
 	
 	static func getImageFromStorage(completion: @escaping (UIImage?) -> Void) {

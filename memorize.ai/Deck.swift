@@ -91,7 +91,7 @@ class Deck {
 	}
 	
 	static func url(id: String) -> URL? {
-		return URL(string: "https://memorize.ai/d/\(id)")
+		return URL(string: "\(MEMORIZE_AI_BASE_URL)/d/\(id)")
 	}
 	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
