@@ -1,13 +1,12 @@
 import UIKit
 import CoreData
 
-fileprivate let EXPIRATION_OFFSET_SECONDS: TimeInterval = 7 * 24 * 60 * 60
+fileprivate let EXPIRATION_OFFSET_SECONDS: TimeInterval = 5 * 24 * 60 * 60
 
 class Cache {
 	static var decks = [Cache]()
 	static var uploads = [Cache]()
 	static var users = [Cache]()
-	static var didLoad = false
 	
 	let type: CacheType
 	let key: String
