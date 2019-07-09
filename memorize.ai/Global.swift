@@ -27,7 +27,7 @@ func initializeBottomSafeAreaInset(_ view: UIView) {
 func saveManagedContext() -> Bool {
 	guard let managedContext = managedContext else { return false }
 	guard managedContext.hasChanges else { return true }
-	return (try? managedContext.save()) == nil
+	return (try? managedContext.save()) != nil
 }
 
 func buzz() {
