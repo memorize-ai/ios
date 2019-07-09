@@ -40,12 +40,6 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
-		flowLayout.scrollDirection = .horizontal
-		flowLayout.minimumLineSpacing = 0
-		flowLayout.minimumInteritemSpacing = 0
-		collectionView.collectionViewLayout = flowLayout
 		navigationItem.title = "\(card == nil ? "New" : "Edit") Card"
 		disable(leftArrow)
 		guard let cardEditor = storyboard?.instantiateViewController(withIdentifier: "cardEditor") as? CardEditorViewController, let cardPreview = storyboard?.instantiateViewController(withIdentifier: "cardPreview") as? CardPreviewViewController else { return }
@@ -85,6 +79,16 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+		flowLayout.scrollDirection = .horizontal
+		flowLayout.minimumLineSpacing = 0
+		flowLayout.minimumInteritemSpacing = 0
+		collectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
