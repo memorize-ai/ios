@@ -24,6 +24,8 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 	}
 	
+	static var decksDidChange = false
+	
 	let actions = [
 		Action(name: "new card", action: newCard),
 		Action(name: "edit", action: editDeck),
@@ -81,9 +83,12 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else {
 			deck = decks.first
 		}
-		decksCollectionView.reloadData()
-		cardsCollectionView.reloadData()
-		reloadActions()
+		if DecksViewController.decksDidChange {
+			decksCollectionView.reloadData()
+			cardsCollectionView.reloadData()
+			reloadActions()
+			DecksViewController.decksDidChange = false
+		}
 		updateCurrentViewController()
 	}
 	

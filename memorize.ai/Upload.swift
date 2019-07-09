@@ -49,7 +49,7 @@ class Upload {
 				return cache.getImage()
 			} else {
 				guard let image = UIImage(data: data) else { return nil }
-				Cache.new(Cache(type: .upload, key: id, image: image, data: data, format: .image))
+				Cache.new(.upload, key: id, image: image, data: data, format: .image)
 				return image
 			}
 		case .audio:
@@ -97,7 +97,7 @@ class Upload {
 		} else {
 			storageReference?.getData(maxSize: MAX_FILE_SIZE) { data, error in
 				guard error == nil, let data = data else { return completion(nil, error) }
-				Cache.new(Cache(type: .upload, key: self.id, data: data, format: self.type.fileFormat))
+				Cache.new(.upload, key: self.id, data: data, format: self.type.fileFormat)
 				self.data = data
 				completion(data, nil)
 			}

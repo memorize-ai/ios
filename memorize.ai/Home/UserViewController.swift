@@ -426,6 +426,10 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						guard deckError == nil, let deckSnapshot = deckSnapshot else { return }
 						if let localDeck = Deck.getFromAll(deckId) {
 							localDeck.update(deckSnapshot, type: .deck)
+							if !(localDeck.hasImage || localDeck.image == nil) {
+								localDeck.image = nil
+								Cache.new(.deck, key: deckId, format: .image)
+							}
 						} else {
 							allDecks.append(Deck(
 								id: deckId,
@@ -489,16 +493,19 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 											}
 											self.reloadReview()
 											ChangeHandler.call(.cardModified)
+											DecksViewController.decksDidChange = true
 										}
 									case .modified:
 										Card.get(cardId, deckId: deckId)?.update(card, type: .card)
 										self.reloadReview()
 										ChangeHandler.call(.cardModified)
+										DecksViewController.decksDidChange = true
 									case .removed:
 										localDeck.cards = localDeck.cards.filter { $0.id != cardId }
 										Listener.remove("users/\(id)/decks/\(deckId)/cards/\(cardId)")
 										self.reloadReview()
 										ChangeHandler.call(.cardRemoved)
+										DecksViewController.decksDidChange = true
 									@unknown default:
 										return
 									}
@@ -506,14 +513,20 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							}
 						}
 						ChangeHandler.call(.deckModified)
+						DecksViewController.decksDidChange = true
 					}
 				case .modified:
-					Deck.getFromAll(deckId)?.update(deck, type: .user)
+					guard let localDeck = Deck.getFromAll(deckId) else { break }
+					let wasHidden = localDeck.hidden
+					localDeck.update(deck, type: .user)
+					if localDeck.hidden && wasHidden { break }
 					ChangeHandler.call(.deckModified)
+					DecksViewController.decksDidChange = true
 				case .removed:
 					allDecks = allDecks.filter { $0.id != deckId }
 					Listener.remove("decks/\(deckId)")
 					ChangeHandler.call(.deckRemoved)
+					DecksViewController.decksDidChange = true
 				@unknown default:
 					return
 				}

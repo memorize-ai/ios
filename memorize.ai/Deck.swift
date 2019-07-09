@@ -82,7 +82,7 @@ class Deck {
 	@discardableResult
 	static func cache(_ id: String, image: UIImage?) -> UIImage? {
 		if let image = image {
-			Cache.new(Cache(type: .deck, key: id, image: image, format: .image))
+			Cache.new(.deck, key: id, image: image, format: .image)
 		} else {
 			Cache.remove(.deck, key: id)
 		}
@@ -90,7 +90,8 @@ class Deck {
 	}
 	
 	static func imageFromCache(_ id: String) -> UIImage? {
-		return Cache.get(.deck, key: id)?.getImage()
+		guard let cache = Cache.get(.deck, key: id) else { return nil }
+		return cache.getImage() ?? DEFAULT_DECK_IMAGE
 	}
 	
 	static func url(id: String) -> URL? {

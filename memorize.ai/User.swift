@@ -12,7 +12,7 @@ class User {
 	@discardableResult
 	static func cache(_ id: String, image: UIImage?) -> UIImage? {
 		if let image = image {
-			Cache.new(Cache(type: .user, key: id, image: image, format: .image))
+			Cache.new(.user, key: id, image: image, format: .image)
 		} else {
 			Cache.remove(.user, key: id)
 		}
@@ -20,7 +20,8 @@ class User {
 	}
 	
 	static func imageFromCache(_ id: String) -> UIImage? {
-		return Cache.get(.user, key: id)?.getImage()
+		guard let cache = Cache.get(.user, key: id) else { return nil }
+		return cache.getImage() ?? DEFAULT_PROFILE_PICTURE
 	}
 	
 	static func urlString(slug: String) -> String {

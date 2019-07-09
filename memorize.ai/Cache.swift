@@ -69,7 +69,7 @@ class Cache {
 		}
 	}
 	
-	static func new(type: CacheType, key: String, image: UIImage? = nil, data: Data? = nil, format: FileFormat, properties: [String] = [], expiration: Date = Cache.getExpirationFromNow()) {
+	static func new(_ type: CacheType, key: String, image: UIImage? = nil, data: Data? = nil, format: FileFormat, properties: [String] = [], expiration: Date = Cache.getExpirationFromNow()) {
 		func setManagedCache(_ managedCache: NSManagedObject) {
 			Cache.setManagedCache(managedCache, key: key, image: image, data: data, format: format, properties: properties, expiration: expiration)
 		}
