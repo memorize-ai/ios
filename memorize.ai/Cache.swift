@@ -57,9 +57,7 @@ class Cache {
 			managedCaches.forEach {
 				managedContext.delete($0)
 				if let key = $0.value(forKey: "key") as? String {
-					arrayForType(type) {
-						$0.removeAll { $0.key == key }
-					}
+					removeCache(type: type, key: key)
 				}
 			}
 		} else {
@@ -94,7 +92,7 @@ class Cache {
 				updateCache(cache)
 			} else {
 				let cache = Cache(type: type, key: key, image: image, data: data, format: format, properties: properties, expiration: expiration)
-				if let managedCache = getManagedCache(type, key: key) {
+				if let managedCache = getManagedCache(type, array: $0, key: key) {
 					setManagedCache(managedCache)
 					saveManagedContext()
 				} else {
@@ -107,7 +105,16 @@ class Cache {
 	
 	@discardableResult
 	static func get(_ type: CacheType, key: String) -> Cache? {
-		if let cache = (arrayForType(type).first { $0.key == key }) {
+		var cache: Cache?
+		switch type {
+		case .deck:
+			cache = decks.first { $0.key == key }
+		case .upload:
+			cache = uploads.first { $0.key == key }
+		case .user:
+			cache = users.first { $0.key == key }
+		}
+		if let cache = cache {
 			let expiration = getExpirationFromNow()
 			if let managedCache = cache.managed {
 				managedCache.setValue(Int32(expiration.timeIntervalSince1970), forKey: "expiration")
@@ -134,9 +141,7 @@ class Cache {
 	static func remove(_ type: CacheType, key: String) -> Bool {
 		guard let managedContext = managedContext, let managedCache = getManagedCache(type, key: key) else { return false }
 		managedContext.delete(managedCache)
-		arrayForType(type) {
-			$0.removeAll { $0.key == key }
-		}
+		removeCache(type: type, key: key)
 		return true
 	}
 	
@@ -184,18 +189,14 @@ class Cache {
 		return Date(timeIntervalSinceNow: EXPIRATION_OFFSET_SECONDS)
 	}
 	
-	@discardableResult
-	private static func arrayForType(_ type: CacheType, completion: ((inout [Cache]) -> Void)? = nil) -> [Cache] {
+	private static func arrayForType(_ type: CacheType, completion: ((inout [Cache]) -> Void)? = nil) {
 		switch type {
 		case .deck:
 			completion?(&decks)
-			return decks
 		case .upload:
 			completion?(&uploads)
-			return uploads
 		case .user:
 			completion?(&users)
-			return users
 		}
 	}
 	
@@ -207,8 +208,31 @@ class Cache {
 		managedCache.setValue(Int32(expiration.timeIntervalSince1970), forKey: "expiration")
 	}
 	
-	private static func getManagedCache(_ type: CacheType, key: String) -> NSManagedObject? {
-		let cache = arrayForType(type).first { $0.key == key }
+	private static func removeCache(type: CacheType, key: String) {
+		switch type {
+		case .deck:
+			decks.removeAll { $0.key == key }
+		case .upload:
+			uploads.removeAll { $0.key == key }
+		case .user:
+			users.removeAll { $0.key == key }
+		}
+	}
+	
+	private static func getManagedCache(_ type: CacheType, array: [Cache]? = nil, key: String) -> NSManagedObject? {
+		var cache: Cache?
+		if let array = array {
+			cache = array.first { $0.key == key }
+		} else {
+			switch type {
+			case .deck:
+				cache = decks.first { $0.key == key }
+			case .upload:
+				cache = uploads.first { $0.key == key }
+			case .user:
+				cache = users.first { $0.key == key }
+			}
+		}
 		if let managedCache = cache?.managed {
 			return managedCache
 		}
