@@ -414,11 +414,15 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
+	func isIpad() -> Bool {
+		return Device.allPads.contains(CURRENT_DEVICE)
+	}
+	
 	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
 		switch true {
 		case Device.allDevicesWithRoundedDisplayCorners.contains(CURRENT_DEVICE):
-			return (0, 0)
-		case Device.allPads.contains(CURRENT_DEVICE):
+			return isIpad() ? (47, 65) : (0, 0)
+		case isIpad():
 			return (44.5, 65)
 		default:
 			return (40, 65)
