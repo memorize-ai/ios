@@ -143,10 +143,10 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 					cell.imageView.image = image
 					searchResult.image = image
 					searchResult.deck?.image = image
-					Deck.cache(searchResult.id, image: image)
+					Deck.cache(searchResult.id, image: nil)
 					self.decksCollectionView.reloadData()
 				} else {
-					Deck.cache(searchResult.id, image: DEFAULT_DECK_IMAGE)
+					Deck.cache(searchResult.id, image: nil)
 				}
 			}
 		} else {

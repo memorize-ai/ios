@@ -314,7 +314,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 						storage.child("decks/\(deck.id)").delete { error in
 							if error == nil {
 								deck.image = nil
-								Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
+								Deck.cache(deck.id, image: nil)
 								buzz()
 								self.hideActivityIndicator()
 								self.disable()
@@ -363,7 +363,7 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 										self.navigationController?.popViewController(animated: true)
 									}
 								} else {
-									Deck.cache(deckId, image: DEFAULT_DECK_IMAGE)
+									Deck.cache(deckId, image: nil)
 									self.navigationController?.popViewController(animated: true)
 								}
 							}

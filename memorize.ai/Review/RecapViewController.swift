@@ -55,7 +55,7 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 			}
 		} else {
 			element.deck.image = nil
-			Deck.cache(element.deck.id, image: DEFAULT_DECK_IMAGE)
+			Deck.cache(element.deck.id, image: nil)
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 		}
 		cell.load(element.card.front)

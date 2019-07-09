@@ -39,13 +39,13 @@ class CardRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 					Deck.cache(deck.id, image: image)
 					self.ratingsTableView.reloadData()
 				} else {
-					Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
+					Deck.cache(deck.id, image: nil)
 				}
 			}
 		} else {
 			cell.deckImageView.image = DEFAULT_DECK_IMAGE
 			deck.image = nil
-			Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
+			Deck.cache(deck.id, image: nil)
 		}
 		cell.deckNameLabel.text = deck.name
 		cell.cardLabel.text = card.front.clean()

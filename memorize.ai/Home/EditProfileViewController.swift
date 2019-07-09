@@ -268,7 +268,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				if error == nil {
 					profilePicture = nil
 					User.save(image: nil)
-					User.cache(id, image: DEFAULT_PROFILE_PICTURE)
+					User.cache(id, image: nil)
 					completion(true)
 				} else {
 					completion(false)

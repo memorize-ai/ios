@@ -57,7 +57,7 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 		} else {
 			cell.setImage(DEFAULT_DECK_IMAGE)
 			deck.image = nil
-			Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
+			Deck.cache(deck.id, image: nil)
 		}
 		cell.deckNameLabel.text = deck.name
 		if let rating = deck.rating {

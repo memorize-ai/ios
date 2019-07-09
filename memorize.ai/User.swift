@@ -11,11 +11,7 @@ var selectedDeckId: String?
 class User {
 	@discardableResult
 	static func cache(_ id: String, image: UIImage?) -> UIImage? {
-		if let image = image {
-			Cache.new(.user, key: id, image: image, format: .image)
-		} else {
-			Cache.remove(.user, key: id)
-		}
+		Cache.new(.user, key: id, image: image, format: .image)
 		return image
 	}
 	

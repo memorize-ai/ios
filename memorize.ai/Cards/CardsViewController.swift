@@ -74,7 +74,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else {
 			cell.imageView.image = DEFAULT_DECK_IMAGE
 			deck.image = nil
-			Deck.cache(deck.id, image: DEFAULT_DECK_IMAGE)
+			Deck.cache(deck.id, image: nil)
 		}
 		cell.load(element.front)
 		cell.draft(element.hasDraft)

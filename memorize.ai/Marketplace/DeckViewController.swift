@@ -137,7 +137,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						User.cache(creatorId, image: creatorImage)
 					} else {
 						self.deck.creator.image = DEFAULT_PROFILE_PICTURE
-						User.cache(creatorId, image: DEFAULT_PROFILE_PICTURE)
+						User.cache(creatorId, image: nil)
 					}
 					self.loadCreator()
 				}
@@ -185,7 +185,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 										newDeck.image = creatorImage
 										Deck.cache(creatorDeckId, image: creatorImage)
 									} else {
-										Deck.cache(creatorDeckId, image: DEFAULT_DECK_IMAGE)
+										Deck.cache(creatorDeckId, image: nil)
 									}
 									self.moreByCreatorCollectionView.reloadData()
 								}
@@ -265,7 +265,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					Deck.cache(deckId, image: image)
 				} else {
 					self.deckImageView.image = DEFAULT_DECK_IMAGE
-					Deck.cache(deckId, image: DEFAULT_DECK_IMAGE)
+					Deck.cache(deckId, image: nil)
 				}
 			}
 		} else {
@@ -445,7 +445,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 							User.cache(userId, image: userImage)
 						} else {
 							newRating.user.image = DEFAULT_PROFILE_PICTURE
-							User.cache(userId, image: DEFAULT_PROFILE_PICTURE)
+							User.cache(userId, image: nil)
 						}
 						ChangeHandler.call(.ratingUserImageModified)
 						self.ratingsCollectionView.reloadData()
@@ -703,7 +703,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					newDeck.image = image
 					Deck.cache(deckId, image: image)
 				} else {
-					Deck.cache(deckId, image: DEFAULT_DECK_IMAGE)
+					Deck.cache(deckId, image: nil)
 				}
 				self.similarDecksCollectionView.reloadData()
 			}
