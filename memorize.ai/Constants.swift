@@ -17,3 +17,4 @@ let CURRENT_DEVICE = Device.realDevice(from: Device.current)
 let CURRENT_DEVICE_IS_IPAD = Device.allPads.contains(CURRENT_DEVICE)
 let CURRENT_DEVICE_HAS_ROUNDED_CORNERS = Device.allDevicesWithRoundedDisplayCorners.contains(CURRENT_DEVICE)
 let MEMORIZE_AI_BASE_URL = "https://memorize.ai"
+let PLACEHOLDER_FIELD_VALUE = "x"

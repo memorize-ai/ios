@@ -278,7 +278,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.loadCardRatings(deckId)
 					ChangeHandler.call(.deckRatingAdded)
 				case .modified:
-					if rating.get("x") == nil {
+					if rating.get(PLACEHOLDER_FIELD_VALUE) == nil {
 						if let deckRating = DeckRating.get(deckId) {
 							deckRating.update(rating)
 						} else {
