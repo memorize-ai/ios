@@ -401,8 +401,8 @@
                                     <outlet property="delegate" destination="XhB-Ss-34n" id="MCf-wV-w1R"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
-                                <rect key="frame" x="0.0" y="450" width="414" height="286"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-Ab-81s">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waV-L4-S5d">
                                         <rect key="frame" x="40" y="279.33333333333331" width="334" height="177.33333333333331"/>
@@ -6759,7 +6759,7 @@
         <segue reference="MiA-Dd-bWk"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
-        <segue reference="MlG-TU-DGT"/>
+        <segue reference="p0r-eq-3dv"/>
         <segue reference="0Yj-jn-rSr"/>
         <segue reference="y6W-0c-pPw"/>
         <segue reference="MYP-cc-USk"/>
