@@ -131,7 +131,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	func setPlayState(_ playState: Audio.PlayState) {
 		self.playState = playState
-		setBarButtonItems()
+		setBarButtonItems(animated: false)
 	}
 	
 	func handleAudio() {

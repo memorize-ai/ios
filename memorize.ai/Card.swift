@@ -76,7 +76,7 @@ class Card {
 	}
 	
 	static func escape(_ text: String) -> String {
-		return removeAudioUrls(text.replacingOccurrences(of: "\\", with: "\\\\"))
+		return removeAudioUrls(convertFileUrls(text).replacingOccurrences(of: "\\", with: "\\\\"))
 	}
 	
 	static func removeAudioUrls(_ text: String) -> String {

@@ -541,7 +541,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	func setPlayState(_ playState: Audio.PlayState) {
 		self.playState = playState
-		setBarButtonItems(forAudio: true, previewButton: hasPreviewButton)
+		setBarButtonItems(forAudio: true, previewButton: hasPreviewButton, animated: false)
 	}
 	
 	func handleAudio(animated: Bool = true) {
