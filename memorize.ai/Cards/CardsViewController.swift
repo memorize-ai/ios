@@ -1,22 +1,14 @@
 import UIKit
 import WebKit
 
-class CardsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class CardsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	
 	var cards = [Card]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 84)
-		flowLayout.minimumLineSpacing = 10
-		flowLayout.minimumInteritemSpacing = 10
-		flowLayout.sectionInset.top = 8
-		flowLayout.sectionInset.bottom = 8
-		flowLayout.sectionInset.left = 8
-		flowLayout.sectionInset.right = 8
-		cardsCollectionView.collectionViewLayout = flowLayout
+		setFlowLayouts()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +30,26 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
 		guard let editCardVC = segue.destination as? EditCardViewController, let card = sender as? Card else { return }
 		editCardVC.deck = card.getDeck
 		editCardVC.card = card
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.cardsCollectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 84)
+		flowLayout.minimumLineSpacing = 10
+		flowLayout.minimumInteritemSpacing = 10
+		flowLayout.sectionInset.top = 8
+		flowLayout.sectionInset.bottom = 8
+		flowLayout.sectionInset.left = 8
+		flowLayout.sectionInset.right = 8
+		cardsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	func loadCards() {

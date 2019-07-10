@@ -1,17 +1,14 @@
 import UIKit
 import WebKit
 
-class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class RecapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var recapCollectionView: UICollectionView!
 	
 	var cards = [(id: String, deck: Deck, card: Card, rating: PerformanceRating, next: Date?)]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 68)
-		flowLayout.sectionInset.top = 8
-		recapCollectionView.collectionViewLayout = flowLayout
+		setFlowLayouts()
 		navigationItem.setHidesBackButton(true, animated: true)
 		let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(back))
 		navigationItem.setRightBarButton(done, animated: true)
@@ -25,6 +22,21 @@ class RecapViewController: UIViewController, UICollectionViewDataSource, UIColle
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.recapCollectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 16, height: 68)
+		flowLayout.sectionInset.top = 8
+		recapCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	@objc

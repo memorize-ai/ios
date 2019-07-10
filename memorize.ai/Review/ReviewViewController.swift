@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import WebKit
 
-class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var progressView: UIProgressView!
 	@IBOutlet weak var frontWebView: WKWebView!
 	@IBOutlet weak var backWebView: WKWebView!
@@ -30,10 +30,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		backButton.layer.borderColor = UIColor.darkGray.cgColor
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 40)
-		flowLayout.minimumLineSpacing = 8
-		ratingCollectionView.collectionViewLayout = flowLayout
+		setFlowLayouts()
 		likeButton.adjustsImageWhenHighlighted = false
 		dislikeButton.adjustsImageWhenHighlighted = false
 	}
@@ -72,6 +69,21 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		super.prepare(for: segue, sender: sender)
 		guard let recapVC = segue.destination as? RecapViewController else { return }
 		recapVC.cards = reviewedCards
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.ratingCollectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 40)
+		flowLayout.minimumLineSpacing = 8
+		ratingCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	func setBarButtonItems(animated: Bool = true) {

@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import WebKit
 
-class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, FlowLayout {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	@IBOutlet weak var decksCollectionViewWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var cardsCollectionView: UICollectionView!
@@ -114,6 +114,19 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		} else if let deckSettingsVC = segue.destination as? DeckSettingsViewController {
 			deckSettingsVC.deck = deck
 		}
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+		}
+	}
+	
+	func setFlowLayouts() {
+		decksCollectionView.reloadData()
+		cardsCollectionView.reloadData()
+		reloadActions()
 	}
 	
 	var filteredActions: [Action] {

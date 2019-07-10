@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import WebKit
 
-class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
@@ -85,10 +85,6 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			Card.poll()
 		}
 		navigationItem.setHidesBackButton(true, animated: true)
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 80, height: 40)
-		flowLayout.minimumLineSpacing = 8
-		cardsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -129,12 +125,32 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		updateCurrentViewController()
 	}
 	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		setFlowLayouts()
+	}
+	
 	override func viewSafeAreaInsetsDidChange() {
 		initializeBottomSafeAreaInset(view)
 		if didSignUp {
 			didSignUp = false
 			showNotification("Click on the user icon in the top left to view your profile", type: .normal, delay: 4)
 		}
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.cardsCollectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: cardsCollectionView.bounds.width, height: 40)
+		flowLayout.minimumLineSpacing = 8
+		cardsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	@IBAction

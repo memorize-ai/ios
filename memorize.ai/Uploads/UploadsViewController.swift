@@ -1,6 +1,6 @@
 import UIKit
 
-class UploadsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class UploadsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var allFilterButton: UIButton!
 	@IBOutlet weak var imagesFilterButton: UIButton!
 	@IBOutlet weak var gifsFilterButton: UIButton!
@@ -15,10 +15,7 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let flowLayout = UICollectionViewFlowLayout()
-		let size = view.bounds.width / 2 - 40
-		flowLayout.itemSize = CGSize(width: size, height: size)
-		uploadsCollectionView.collectionViewLayout = flowLayout
+		setFlowLayouts()
 		if !audioAllowed {
 			audioFilterButton.setTitleColor(#colorLiteral(red: 0.9198423028, green: 0.9198423028, blue: 0.9198423028, alpha: 1), for: .normal)
 			audioFilterButton.isEnabled = false
@@ -33,6 +30,21 @@ class UploadsViewController: UIViewController, UISearchBarDelegate, UICollection
 			}
 		}
 		updateCurrentViewController()
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.uploadsCollectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		let size = view.bounds.width / 2 - 40
+		flowLayout.itemSize = CGSize(width: size, height: size)
+		uploadsCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	func reloadUploads() {

@@ -1,7 +1,7 @@
 import UIKit
 import InstantSearchClient
 
-class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	
@@ -33,10 +33,7 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: SEARCH_RESULT_CELL_HEIGHT)
-		flowLayout.minimumLineSpacing = 30
-		decksCollectionView.collectionViewLayout = flowLayout
+		setFlowLayouts()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +55,21 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 		deckVC.deck.id = selectedResult.id
 		deckVC.deck.hasImage = selectedResult.hasImage
 		deckVC.deck.image = selectedResult.image
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.decksCollectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: SEARCH_RESULT_CELL_HEIGHT)
+		flowLayout.minimumLineSpacing = 30
+		decksCollectionView.collectionViewLayout = flowLayout
 	}
 	
 	@IBAction

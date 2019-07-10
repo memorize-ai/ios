@@ -1,7 +1,7 @@
 import UIKit
 import DeviceKit
 
-class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class EditCardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingActivityIndicatory: UIActivityIndicatorView!
@@ -96,12 +96,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		guard startup else { return }
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
-		flowLayout.scrollDirection = .horizontal
-		flowLayout.minimumLineSpacing = 0
-		flowLayout.minimumInteritemSpacing = 0
-		collectionView.collectionViewLayout = flowLayout
+		setFlowLayouts()
 		scrollToTop()
 	}
 	
@@ -124,6 +119,23 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			reviewVC.previewCards = [Card(id: "~", front: text.front, back: text.back, created: PLACEHOLDER_DATE, updated: PLACEHOLDER_DATE, likes: 0, dislikes: 0, deck: "~")]
 			reviewVC.previewDeck = deck?.name
 		}
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.collectionView.reloadData()
+		}
+	}
+	
+	func setFlowLayouts() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+		flowLayout.scrollDirection = .horizontal
+		flowLayout.minimumLineSpacing = 0
+		flowLayout.minimumInteritemSpacing = 0
+		collectionView.collectionViewLayout = flowLayout
 	}
 	
 	func scrollToTop() {

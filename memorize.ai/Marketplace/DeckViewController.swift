@@ -3,7 +3,7 @@ import Firebase
 import SafariServices
 import WebKit
 
-class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class DeckViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var deckImageView: UIImageView!
 	@IBOutlet weak var deckImageActivityIndicator: UIActivityIndicatorView!
@@ -300,7 +300,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		loadFlowLayouts()
+		setFlowLayouts()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -324,6 +324,18 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		coordinator.animate(alongsideTransition: nil) { _ in
+			self.setFlowLayouts()
+			self.cardPreviewCollectionView.reloadData()
+			self.ratingsCollectionView.reloadData()
+			self.infoCollectionView.reloadData()
+			self.moreByCreatorCollectionView.reloadData()
+			self.similarDecksCollectionView.reloadData()
+		}
+	}
+	
 	var hasDeck: Bool {
 		return Deck.has(deck.id)
 	}
@@ -344,7 +356,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	func loadFlowLayouts() {
+	func setFlowLayouts() {
 		let cardPreviewCollectionViewHeight = cardPreviewCollectionView.bounds.height
 		cardPreviewCollectionView.collectionViewLayout = flowLayout(
 			width: cardPreviewCollectionViewHeight * 0.7,
