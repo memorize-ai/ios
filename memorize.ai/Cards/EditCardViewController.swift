@@ -18,7 +18,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
-	let COLLECTION_VIEW_TOP_OFFSET: CGFloat = 20
+	let COLLECTION_VIEW_TOP_OFFSET: CGFloat = 10
 	let COLLECTION_VIEW_BOTTOM_OFFSET: CGFloat = 17
 	
 	var cardEditor: CardEditorViewController?
@@ -578,7 +578,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			[
 				cardPreview.frontWebViewTopConstraint,
 				cardPreview.backWebViewTopConstraint
-			].forEach { $0.constant = constraints.top - COLLECTION_VIEW_TOP_OFFSET }
+			].forEach { $0.constant = constraints.top + COLLECTION_VIEW_TOP_OFFSET }
 			[
 				cardEditor.frontTextViewBottomConstraint,
 				cardEditor.backTextViewBottomConstraint,
