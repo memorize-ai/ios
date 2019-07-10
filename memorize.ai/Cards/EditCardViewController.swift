@@ -483,7 +483,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		case CURRENT_DEVICE_IS_IPAD:
 			return (48.5, 65)
 		default:
-			return (40, 65)
+			return (40.5, 65)
 		}
 	}
 	
