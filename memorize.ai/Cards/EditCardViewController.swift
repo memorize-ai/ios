@@ -481,7 +481,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		case CURRENT_DEVICE_HAS_ROUNDED_CORNERS:
 			return CURRENT_DEVICE_IS_IPAD ? (51, 65) : (68.5, 73.5)
 		case CURRENT_DEVICE_IS_IPAD:
-			return (44.5, 65)
+			return (48.5, 65)
 		default:
 			return (40, 65)
 		}
