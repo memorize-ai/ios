@@ -1511,7 +1511,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="s5k-dB-H60">
-                                <rect key="frame" x="40" y="263" width="334" height="393"/>
+                                <rect key="frame" x="40" y="264" width="334" height="392"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -1559,7 +1559,7 @@
                             <constraint firstItem="SYM-Qc-9Sh" firstAttribute="trailing" secondItem="s5k-dB-H60" secondAttribute="trailing" constant="40" id="Fw4-T9-D23"/>
                             <constraint firstItem="BJZ-cg-g16" firstAttribute="top" secondItem="TA4-FT-i2J" secondAttribute="bottom" constant="10" id="GfG-Gv-fGR"/>
                             <constraint firstItem="sFK-4W-fkD" firstAttribute="leading" secondItem="SYM-Qc-9Sh" secondAttribute="leading" constant="40" id="Os1-qn-jd1"/>
-                            <constraint firstItem="s5k-dB-H60" firstAttribute="top" secondItem="6uK-bA-X9r" secondAttribute="bottom" id="QHC-CD-aIN"/>
+                            <constraint firstItem="s5k-dB-H60" firstAttribute="top" secondItem="6uK-bA-X9r" secondAttribute="bottom" constant="1" id="QHC-CD-aIN"/>
                             <constraint firstItem="BAZ-X8-uur" firstAttribute="top" secondItem="s5k-dB-H60" secondAttribute="bottom" constant="10" id="UrA-5P-C4u"/>
                             <constraint firstItem="TA4-FT-i2J" firstAttribute="top" secondItem="SYM-Qc-9Sh" secondAttribute="top" constant="30" id="XcD-Ql-sOp"/>
                             <constraint firstItem="SYM-Qc-9Sh" firstAttribute="trailing" secondItem="BJZ-cg-g16" secondAttribute="trailing" constant="40" id="Yq6-JH-wkb"/>
