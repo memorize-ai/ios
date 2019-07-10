@@ -19,3 +19,4 @@ let CURRENT_DEVICE_HAS_ROUNDED_CORNERS = Device.allDevicesWithRoundedDisplayCorn
 let MEMORIZE_AI_BASE_URL = "https://memorize.ai"
 let MEMORIZE_AI_SUPPORT_EMAIL = "support@memorize.ai"
 let PLACEHOLDER_FIELD_VALUE = "x"
+let APP_VERSION = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String

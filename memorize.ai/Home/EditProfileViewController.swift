@@ -1,7 +1,8 @@
 import UIKit
 import SafariServices
+import MessageUI
 
-class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 	@IBOutlet weak var pictureView: UIView!
 	@IBOutlet weak var pictureImageView: UIImageView!
 	@IBOutlet weak var changeButton: UIButton!
@@ -31,7 +32,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		Option(image: #imageLiteral(resourceName: "Decks"), name: "Deck Ratings", action: showDeckRatings),
 		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings),
 		Option(image: #imageLiteral(resourceName: "Book"), name: "Tutorial", action: showTutorial)
-	]
+	] + (MFMailComposeViewController.canSendMail() ? [Option(image: #imageLiteral(resourceName: "Mail"), name: "Contact Us", action: showContactUsEmail)] : [])
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -151,11 +152,31 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		performSegue(withIdentifier: "tutorial", sender: self)
 	}
 	
+	func showContactUsEmail() {
+		guard MFMailComposeViewController.canSendMail() else { return showNotification("You must add an email account to this device in settings before you can send mail", type: .error) }
+		guard let id = id, let name = name, let email = email else { return }
+		let profileLink = slug == nil ? nil : User.url(slug: slug ?? "...")?.absoluteString
+		let mailComposeVC = MFMailComposeViewController()
+		mailComposeVC.delegate = self
+		mailComposeVC.setToRecipients([MEMORIZE_AI_SUPPORT_EMAIL])
+		mailComposeVC.setMessageBody("""
+		
+		
+		=== User info ===
+		ID: \(id)
+		Name: \(name)
+		Email: \(email)\(profileLink == nil ? "" : "\nProfile link: \(profileLink ?? "unknown")")
+		iOS App version: \(APP_VERSION ?? "1.0")
+		iOS version: \(UIDevice.current.systemVersion)
+		""", isHTML: false)
+		present(mailComposeVC, animated: true, completion: nil)
+	}
+	
 	@IBAction
 	func signOut() {
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
-		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		let signOut = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive) { _ in
 			if (try? auth.signOut()) == nil { return self.showNotification("Unable to sign out. Please try again", type: .error) }
 			Listener.removeAll()
 			uploads.removeAll()
@@ -169,9 +190,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			allDecks.removeAll()
 			User.delete()
 			self.performSegue(withIdentifier: "signOut", sender: self)
-		}
-		alertController.addAction(cancel)
-		alertController.addAction(signOut)
+		})
 		present(alertController, animated: true, completion: nil)
 	}
 	
