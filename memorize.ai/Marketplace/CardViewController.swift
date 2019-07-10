@@ -30,7 +30,7 @@ class CardViewController: UIViewController {
 			handleAudio()
 		}
 		cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
-		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
 			self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
 			self.cardView.transform = .identity
 		}, completion: nil)

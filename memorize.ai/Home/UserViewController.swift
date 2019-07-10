@@ -401,7 +401,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			reviewButton.isHidden = false
 			dueCardsLabel.isHidden = false
 			cardsCollectionViewBottomConstraint.constant = 20
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.25, options: .curveEaseOut, animations: {
 				self.view.layoutIfNeeded()
 				self.reviewButton.transform = .identity
 				self.dueCardsLabel.transform = .identity
@@ -409,7 +409,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else if !reviewButton.isHidden && dueCards.isEmpty {
 			dueCardsLabel.text = "0 cards due"
 			cardsCollectionViewBottomConstraint.constant = -60
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.25, options: .curveEaseIn, animations: {
 				self.view.layoutIfNeeded()
 				self.reviewButton.transform = CGAffineTransform(translationX: 0, y: 79)
 				self.dueCardsLabel.transform = CGAffineTransform(translationX: 0, y: 25)
