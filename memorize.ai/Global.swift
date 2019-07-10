@@ -63,33 +63,33 @@ extension WKWebView {
 	func render(_ text: String, fontSize: Int, textColor: String = "000", backgroundColor: String = "fff") {
 		let escapedText = Card.escape(text)
 		loadHTMLString("""
-			<!DOCTYPE html>
-			<html>
-				<head>
-					<link rel="stylesheet" href="katex.min.css">
-					<script src="katex.min.js"></script>
-					<script src="auto-render.min.js"></script>
-					<link rel="stylesheet" href="prism.css">
-					<style>
-						html,
-						body {
-							font-family: Helvetica;
-							font-size: \(fontSize / (Device.allPads.contains(CURRENT_DEVICE) ? 2 : 1))px;
-							color: #\(textColor);
-							background-color: #\(backgroundColor);
-						}
-						img {
-							max-width: 100%;
-							height: auto;
-						}
-					</style>
-				</head>
-				<body>
-					<div>\((try? Down(markdownString: escapedText).toHTML()) ?? escapedText)</div>
-					<script>renderMathInElement(document.body)</script>
-					<script src="prism.js"></script>
-				</body>
-			</html>
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<link rel="stylesheet" href="katex.min.css">
+				<script src="katex.min.js"></script>
+				<script src="auto-render.min.js"></script>
+				<link rel="stylesheet" href="prism.css">
+				<style>
+					html,
+					body {
+						font-family: Helvetica;
+						font-size: \(fontSize / (Device.allPads.contains(CURRENT_DEVICE) ? 2 : 1))px;
+						color: #\(textColor);
+						background-color: #\(backgroundColor);
+					}
+					img {
+						max-width: 100%;
+						height: auto;
+					}
+				</style>
+			</head>
+			<body>
+				<div>\((try? Down(markdownString: escapedText).toHTML()) ?? escapedText)</div>
+				<script>renderMathInElement(document.body)</script>
+				<script src="prism.js"></script>
+			</body>
+		</html>
 		""", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true))
 	}
 }
