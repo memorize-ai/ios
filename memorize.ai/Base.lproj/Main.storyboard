@@ -6190,6 +6190,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <integer key="value" value="1"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="removeDraft" destination="3Bm-Xc-u3A" eventType="touchUpInside" id="hIe-Gg-dqe"/>
@@ -6227,6 +6228,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <integer key="value" value="1"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="deleteRating" destination="3Bm-Xc-u3A" eventType="touchUpInside" id="bDw-ub-CAO"/>
