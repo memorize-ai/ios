@@ -479,7 +479,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
 		switch true {
 		case CURRENT_DEVICE_HAS_ROUNDED_CORNERS:
-			return CURRENT_DEVICE_IS_IPAD ? (51, 65) : (68, 73.5)
+			return CURRENT_DEVICE_IS_IPAD ? (51, 65) : (67.5, 73.5)
 		case CURRENT_DEVICE_IS_IPAD:
 			return (48.5, 65)
 		default:
