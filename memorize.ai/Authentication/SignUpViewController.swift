@@ -122,8 +122,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 								ChangeHandler.call(.profileModified)
 								User.save()
 								self.hideActivityIndicator()
-								shouldShowEditProfileTip = true
-								didSignUp = true
+								User.shouldShowEditProfileTip = true
+								User.shouldShowViewProfileTip = true
+								User.shouldShowEditCardTip = true
 								self.performSegue(withIdentifier: "signUp", sender: self)
 							} else if let error = error {
 								self.showError(error)

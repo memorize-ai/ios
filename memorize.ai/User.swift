@@ -9,6 +9,31 @@ var token: String?
 var selectedDeckId: String?
 
 class User {
+	static var shouldShowEditProfileTip: Bool {
+		get {
+			return defaults.value(forKey: "shouldShowEditProfileTip") as? Bool ?? true
+		}
+		set {
+			defaults.setValue(newValue, forKey: "shouldShowEditProfileTip")
+		}
+	}
+	static var shouldShowViewProfileTip: Bool {
+		get {
+			return defaults.value(forKey: "shouldShowViewProfileTip") as? Bool ?? true
+		}
+		set {
+			defaults.setValue(newValue, forKey: "shouldShowViewProfileTip")
+		}
+	}
+	static var shouldShowEditCardTip: Bool {
+		get {
+			return defaults.value(forKey: "shouldShowEditCardTip") as? Bool ?? true
+		}
+		set {
+			defaults.setValue(newValue, forKey: "shouldShowEditCardTip")
+		}
+	}
+	
 	@discardableResult
 	static func cache(_ id: String, image: UIImage?) -> UIImage? {
 		Cache.new(.user, key: id, image: image, format: .image)

@@ -18,7 +18,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
-	let COLLECTION_VIEW_TOP_OFFSET: CGFloat = 10
+	let COLLECTION_VIEW_TOP_OFFSET: CGFloat = isIpad() ? 13 : -16
 	let COLLECTION_VIEW_BOTTOM_OFFSET: CGFloat = 17
 	
 	var cardEditor: CardEditorViewController?
@@ -72,6 +72,28 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			}
 			cardPreview.update(side, text: text)
 			self.setBarButtonItems(forAudio: false, animated: false)
+		}
+		if User.shouldShowEditCardTip {
+			User.shouldShowEditCardTip = false
+			showNotification("Swipe left to preview", type: .normal, delay: 4)
+			cardEditor.frontTextView.text = """
+			# Swipe left to preview
+			
+			# Swipe right to edit
+			
+			**Click the right arrow on the bottom to edit the back of the card**
+			
+			\\(\\frac{12}{13}\\)
+			
+			```javascript
+			const x = 1 + 2
+			```
+			
+			**Click "Remove draft" to clear**
+			"""
+			cardEditor.backTextView.text = "**Click on the left arrow at the bottom to edit the front of the card**"
+			cardPreview.update(.front, text: cardEditor.frontTextView.text)
+			cardPreview.update(.back, text: cardEditor.backTextView.text)
 		}
 	}
 	
@@ -454,10 +476,6 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		}
 	}
 	
-	func isIpad() -> Bool {
-		return Device.allPads.contains(CURRENT_DEVICE)
-	}
-	
 	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
 		switch true {
 		case Device.allDevicesWithRoundedDisplayCorners.contains(CURRENT_DEVICE):
@@ -608,4 +626,8 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 enum EditCardView {
 	case editor
 	case preview
+}
+
+fileprivate func isIpad() -> Bool {
+	return Device.allPads.contains(CURRENT_DEVICE)
 }
