@@ -89,7 +89,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			const x = 1 + 2
 			```
 			
-			**Click "Remove draft" to clear**
+			**Click "Remove draft" at the bottom to clear**
 			"""
 			cardEditor.backTextView.text = "**Click on the left arrow at the bottom to edit the front of the card**"
 			cardPreview.update(.front, text: cardEditor.frontTextView.text)
