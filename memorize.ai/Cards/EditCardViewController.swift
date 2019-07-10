@@ -18,7 +18,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	@IBOutlet weak var deleteCardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var deleteCardActivityIndicator: UIActivityIndicatorView!
 	
-	let COLLECTION_VIEW_TOP_OFFSET: CGFloat = isIpad() ? 13 : -16
+	let COLLECTION_VIEW_TOP_OFFSET: CGFloat = CURRENT_DEVICE_IS_IPAD ? 13 : CURRENT_DEVICE_HAS_ROUNDED_CORNERS ? -16 : 7
 	let COLLECTION_VIEW_BOTTOM_OFFSET: CGFloat = 17
 	
 	var cardEditor: CardEditorViewController?
@@ -478,9 +478,9 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	
 	func getSubviewConstraints() -> (top: CGFloat, bottom: CGFloat) {
 		switch true {
-		case Device.allDevicesWithRoundedDisplayCorners.contains(CURRENT_DEVICE):
-			return isIpad() ? (48.5, 65) : (68.5, 73.5)
-		case isIpad():
+		case CURRENT_DEVICE_HAS_ROUNDED_CORNERS:
+			return CURRENT_DEVICE_IS_IPAD ? (51, 65) : (68.5, 73.5)
+		case CURRENT_DEVICE_IS_IPAD:
 			return (44.5, 65)
 		default:
 			return (40, 65)
@@ -626,8 +626,4 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 enum EditCardView {
 	case editor
 	case preview
-}
-
-fileprivate func isIpad() -> Bool {
-	return Device.allPads.contains(CURRENT_DEVICE)
 }
