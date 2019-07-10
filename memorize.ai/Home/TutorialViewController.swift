@@ -1,6 +1,5 @@
 import UIKit
 import WebKit
-import Down
 
 fileprivate var tutorial: String?
 
