@@ -31,6 +31,7 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 	
 	let EMOJIS = "😀😃😄😁😆😅😂🤣☺️🥰😘😗😇😊☺️🙂🙃😉😌😍😋😛😝🤪😜🤩😎🤓🥳😭😤"
 	let DELAY = 20
+	let GUESS_COUNT = 5
 	let DIFFICULTIES = [
 		Difficulty(count: 10, name: "EASY", backgroundColor: #colorLiteral(red: 0.337254902, green: 0.8235294118, blue: 0.2, alpha: 1)),
 		Difficulty(count: 15, name: "MEDIUM", backgroundColor: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)),
@@ -41,12 +42,16 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 	
 	var gameState = GameState.ready
 	var currentDifficulty: Difficulty?
+	var currentEmojis = [String]()
+	var emojisToGuess = [String]()
 	var timer: Timer?
 	var seconds = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		currentDifficulty = DIFFICULTIES[0]
+		currentDifficulty = DIFFICULTIES.first
+		emojiLabel.text = "---"
+		setMainLabelTimerText()
 	}
 	
 	@IBAction
@@ -59,12 +64,16 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		case .timerIsOn:
 			return
 		case .timerDidEnd:
-			nextGuess()
+			didGetCountCorrect(currentEmojis.filter { $0 == self.emojisToGuess.first }.count == Int(countTextField.text?.trimAll() ?? "")) {
+				self.emojisToGuess.removeFirst()
+				self.nextGuess()
+			}
 		}
 	}
 	
 	func chooseEmojis(_ count: Int) -> [String] {
-		return (1...count).compactMap { _ in EMOJIS.randomElement() }.map(String.init)
+		currentEmojis = (1...count).compactMap { _ in EMOJIS.randomElement() }.map(String.init)
+		return currentEmojis
 	}
 	
 	func setEmojiLabel() {
@@ -76,19 +85,25 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		setMainLabelTimerText()
 		blockView.alpha = 0
 		blockView.isHidden = false
-		UIView.animate(withDuration: 0.15, animations: {
+		UIView.animate(withDuration: 0.15) {
 			self.blockView.alpha = 1
-		}) {
-			guard $0 else { return }
-			self.blockView.isHidden = false
 		}
 		timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
 			self.seconds -= 1
 			self.setMainLabelTimerText()
 			guard self.seconds <= 0 else { return }
 			self.timer?.invalidate()
-			self.gameState = .timerDidEnd
-			self.changeGameState()
+			self.difficultyCollectionView.isHidden = true
+			self.changeGameStateButton.setTitle("SUBMIT", for: .normal)
+			UIView.animate(withDuration: 0.15, animations: {
+				self.blockView.alpha = 0
+			}) {
+				guard $0 else { return }
+				self.blockView.isHidden = true
+				self.emojisToGuess = (1...self.currentEmojis.count / 2).compactMap { _ in self.currentEmojis.randomElement() }
+				self.gameState = .timerDidEnd
+				self.changeGameState()
+			}
 		}
 	}
 	
@@ -97,7 +112,24 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 	}
 	
 	func nextGuess() {
-		
+		if let emoji = emojisToGuess.first {
+			mainLabel.text = "How many \(emoji) were there?"
+		} else {
+			// Show completion
+		}
+	}
+	
+	func didGetCountCorrect(_ correct: Bool, completion: @escaping () -> Void) {
+		UIView.animate(withDuration: 0.15, animations: {
+			self.view.backgroundColor = correct ? #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1) : #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+		}) {
+			guard $0 else { return }
+			UIView.animate(withDuration: 0.15, animations: {
+				self.view.backgroundColor = .white
+			}) {
+				if $0 { completion() }
+			}
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
