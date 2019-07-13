@@ -53,7 +53,7 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 	func changeGameState() {
 		switch gameState {
 		case .ready:
-			setMainLabelEmojiText()
+			setEmojiLabel()
 			startTimer()
 			gameState = .timerIsOn
 		case .timerIsOn:
@@ -67,8 +67,8 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		return (1...count).compactMap { _ in EMOJIS.randomElement() }.map(String.init)
 	}
 	
-	func setMainLabelEmojiText() {
-		mainLabel.text = chooseEmojis(currentDifficulty?.count ?? 10).joined()
+	func setEmojiLabel() {
+		emojiLabel.text = chooseEmojis(currentDifficulty?.count ?? 10).joined()
 	}
 	
 	func startTimer() {
