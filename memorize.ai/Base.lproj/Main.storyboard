@@ -5609,10 +5609,10 @@
             </objects>
             <point key="canvasLocation" x="2193" y="-537"/>
         </scene>
-        <!--View Controller-->
+        <!--Emoji Game-->
         <scene sceneID="0He-Bm-J4T">
             <objects>
-                <viewController id="LSD-uz-9XL" sceneMemberID="viewController">
+                <viewController title="Emoji Game" id="LSD-uz-9XL" customClass="EmojiGameViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PIq-S9-g6H">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5665,9 +5665,12 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="changeGameState" destination="LSD-uz-9XL" eventType="touchUpInside" id="ZtF-a5-7Zu"/>
+                                </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEW-0e-Y9G">
-                                <rect key="frame" x="20" y="229.33333333333334" width="374" height="416.66666666666663"/>
+                                <rect key="frame" x="20" y="229" width="374" height="417"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -5697,6 +5700,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9dg-B8-FNO"/>
                     </view>
+                    <connections>
+                        <outlet property="blockView" destination="WEW-0e-Y9G" id="cye-ay-Y3d"/>
+                        <outlet property="changeGameStateButton" destination="FSx-FF-S8q" id="4S2-li-9hv"/>
+                        <outlet property="countBarView" destination="yKJ-bk-b8i" id="GWM-lv-c5p"/>
+                        <outlet property="countTextField" destination="sCQ-oJ-HZh" id="VCD-kS-4pZ"/>
+                        <outlet property="emojiLabel" destination="Djx-Id-HET" id="zzP-9C-pd8"/>
+                        <outlet property="mainLabel" destination="bXN-Dm-o0B" id="bYT-3H-Jtq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXL-k4-xYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
