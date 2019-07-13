@@ -31,6 +31,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		Option(image: #imageLiteral(resourceName: "Cloud"), name: "Uploads", action: showUploads),
 		Option(image: #imageLiteral(resourceName: "Decks"), name: "Deck Ratings", action: showDeckRatings),
 		Option(image: #imageLiteral(resourceName: "Cards"), name: "Card Ratings", action: showCardRatings),
+		Option(image: #imageLiteral(resourceName: "Rating 4"), name: "Emoji Game", action: showEmojiGame), // Change image
 		Option(image: #imageLiteral(resourceName: "Book"), name: "Tutorial", action: showTutorial)
 	] + (MFMailComposeViewController.canSendMail() ? [Option(image: #imageLiteral(resourceName: "Mail"), name: "Contact Us", action: showContactUsEmail)] : [])
 	
@@ -146,6 +147,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func showCardRatings() {
 		performSegue(withIdentifier: "cardRatings", sender: self)
+	}
+	
+	func showEmojiGame() {
+		performSegue(withIdentifier: "emojiGame", sender: self)
 	}
 	
 	func showTutorial() {

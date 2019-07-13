@@ -1,6 +1,6 @@
 import UIKit
 
-class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 	@IBOutlet weak var emojiLabel: UILabel!
 	@IBOutlet weak var mainLabel: UILabel!
 	@IBOutlet weak var blockView: UIView!
@@ -46,12 +46,14 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		currentDifficulty = DIFFICULTIES[0]
 	}
 	
 	@IBAction
 	func changeGameState() {
 		switch gameState {
 		case .ready:
+			setMainLabelEmojiText()
 			startTimer()
 			gameState = .timerIsOn
 		case .timerIsOn:
@@ -65,8 +67,13 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		return (1...count).compactMap { _ in EMOJIS.randomElement() }.map(String.init)
 	}
 	
+	func setMainLabelEmojiText() {
+		mainLabel.text = chooseEmojis(currentDifficulty?.count ?? 10).joined()
+	}
+	
 	func startTimer() {
 		seconds = DELAY
+		setMainLabelTimerText()
 		blockView.alpha = 0
 		blockView.isHidden = false
 		UIView.animate(withDuration: 0.15, animations: {
@@ -77,7 +84,7 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		}
 		timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
 			self.seconds -= 1
-			self.setMainLabelTimerText(self.seconds)
+			self.setMainLabelTimerText()
 			guard self.seconds <= 0 else { return }
 			self.timer?.invalidate()
 			self.gameState = .timerDidEnd
@@ -85,7 +92,7 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		}
 	}
 	
-	func setMainLabelTimerText(_ seconds: Int) {
+	func setMainLabelTimerText() {
 		mainLabel.text = "\(seconds)s left"
 	}
 	
