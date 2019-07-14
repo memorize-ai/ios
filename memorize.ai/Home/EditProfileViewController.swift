@@ -4,7 +4,11 @@ import MessageUI
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 	@IBOutlet weak var backgroundImageView: UIImageView!
+	@IBOutlet weak var editBackgroundImageView: UIImageView!
+	@IBOutlet weak var editBackgroundImageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var profilePictureImageView: UIImageView!
+	@IBOutlet weak var editProfilePictureImageView: UIImageView!
+	@IBOutlet weak var editProfilePictureActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var bioLabel: UILabel!
 	@IBOutlet weak var bioLabelHeightConstraint: NSLayoutConstraint!
