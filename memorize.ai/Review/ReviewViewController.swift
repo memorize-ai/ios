@@ -316,6 +316,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		return previewCards?[current] ?? dueCards[current].card
 	}
 	
+	var count: Int {
+		return isReview ? dueCards.count : previewCards?.count ?? 0
+	}
+	
 	func enable(_ button: UIButton) {
 		button.isEnabled = true
 		button.tintColor = .darkGray
@@ -377,7 +381,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	}
 	
 	func setProgress() {
-		progressView.setProgress(Float(current) / Float(isReview ? dueCards.count : previewCards?.count ?? 0), animated: true)
+		progressView.setProgress(Float(current) / Float(count), animated: true)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -399,7 +403,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 		current += 1
 		setProgress()
-		let count = isReview ? dueCards.count : previewCards?.count ?? 0
+		let count = self.count
 		UIView.animate(withDuration: 0.125, animations: {
 			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 			self.leftButton.alpha = 0
