@@ -564,6 +564,9 @@
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aer-wb-2MW">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="changeBackgroundImage" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="Afw-da-z7a"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -595,6 +598,9 @@
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4X-9N-YJj">
                                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                        <connections>
+                                                                            <action selector="changeProfilePicture" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="qjS-ma-P8g"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
@@ -691,6 +697,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                                 <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="changeBio" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="yih-m5-DI1"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vM-Yb-KIm">
                                                 <rect key="frame" x="19.999999999999996" y="427.66666666666669" width="44.666666666666657" height="21"/>
@@ -717,6 +726,9 @@
                                                             <constraint firstAttribute="width" constant="22" id="VGl-xW-fdK"/>
                                                         </constraints>
                                                         <state key="normal" image="Edit Dark"/>
+                                                        <connections>
+                                                            <action selector="changeEmail" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="xzQ-Iq-Gwf"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -809,6 +821,9 @@
                                                             <constraint firstAttribute="width" constant="22" id="4gH-rA-Jbg"/>
                                                         </constraints>
                                                         <state key="normal" image="Edit Black"/>
+                                                        <connections>
+                                                            <action selector="changeName" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="dqr-Z4-nJj"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -923,8 +938,18 @@
                     </view>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
+                        <outlet property="backgroundImageView" destination="p3g-0Q-Mqn" id="VS5-3b-LPq"/>
+                        <outlet property="bioLabel" destination="E70-0G-UJw" id="7UK-g5-YGR"/>
+                        <outlet property="bioLabelHeightConstraint" destination="gUU-d5-lz6" id="g6c-Br-fxi"/>
+                        <outlet property="bioMoreLabel" destination="cQH-la-3vh" id="TQM-eT-eVQ"/>
+                        <outlet property="emailLabel" destination="FLD-tH-AbZ" id="S4f-Dv-ZVU"/>
+                        <outlet property="nameLabel" destination="Lff-0Q-WuX" id="w5c-8B-6ZI"/>
                         <outlet property="optionsTableView" destination="PEy-EW-krH" id="YVI-7m-Kve"/>
                         <outlet property="optionsTableViewHeightConstraint" destination="Eam-4f-c54" id="pdD-2S-Ys8"/>
+                        <outlet property="profileLinkButton" destination="erk-bd-xg0" id="dYm-9L-UGC"/>
+                        <outlet property="profileLinkLabel" destination="jXp-UY-uC8" id="gQo-W5-OHv"/>
+                        <outlet property="profilePictureImageView" destination="B9Q-s3-Q6P" id="L2b-hc-WTS"/>
+                        <outlet property="showFullBioButton" destination="UTN-ty-JE3" id="0PH-tF-91K"/>
                         <segue destination="P5L-vG-lcW" kind="show" identifier="signOut" id="h5F-6A-J1r"/>
                         <segue destination="yB2-kU-aKZ" kind="show" identifier="settings" id="Xcq-8A-2Np"/>
                         <segue destination="PDB-ip-5Km" kind="show" identifier="uploads" id="MJl-Ks-n56"/>

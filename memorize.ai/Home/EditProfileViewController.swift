@@ -3,14 +3,16 @@ import SafariServices
 import MessageUI
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
-	@IBOutlet weak var pictureView: UIView!
-	@IBOutlet weak var pictureImageView: UIImageView!
-	@IBOutlet weak var changeButton: UIButton!
-	@IBOutlet weak var pictureActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var backgroundImageView: UIImageView!
+	@IBOutlet weak var profilePictureImageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var bioLabel: UILabel!
+	@IBOutlet weak var bioLabelHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var bioMoreLabel: UILabel!
+	@IBOutlet weak var showFullBioButton: UIButton!
 	@IBOutlet weak var emailLabel: UILabel!
-	@IBOutlet weak var linkLabel: UILabel!
-	@IBOutlet weak var linkButton: UIButton!
+	@IBOutlet weak var profileLinkLabel: UILabel!
+	@IBOutlet weak var profileLinkButton: UIButton!
 	@IBOutlet weak var optionsTableView: UITableView!
 	@IBOutlet weak var optionsTableViewHeightConstraint: NSLayoutConstraint!
 	
@@ -102,6 +104,31 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				}
 			}
 		}
+	}
+	
+	@IBAction
+	func changeBackgroundImage() {
+		
+	}
+	
+	@IBAction
+	func changeProfilePicture() {
+		
+	}
+	
+	@IBAction
+	func changeName() {
+		
+	}
+	
+	@IBAction
+	func changeBio() {
+		
+	}
+	
+	@IBAction
+	func changeEmail() {
+		
 	}
 	
 	@objc
