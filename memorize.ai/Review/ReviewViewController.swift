@@ -15,8 +15,10 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	@IBOutlet weak var ratingCollectionView: UICollectionView!
 	@IBOutlet weak var ratingCollectionViewHeightConstraint: NSLayoutConstraint!
 	
+	typealias DueCard = (deck: Deck, card: Card)
+	
 	var current = 0
-	var dueCards = [(deck: Deck, card: Card)]()
+	var dueCards = [DueCard]()
 	var reviewedCards = [(id: String, deck: Deck, card: Card, rating: PerformanceRating, next: Date?)]()
 	var shouldSegue = false
 	var previewDeck: String?
@@ -43,7 +45,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			navigationController.navigationBar.barTintColor = .white
 			navigationController.navigationBar.tintColor = .darkGray
 		}
-		dueCards = decks.flatMap { deck in Card.sort(deck.cards.filter { $0.isDue() }, by: .due).map { (deck: deck, card: $0) } }
+		dueCards = getDueCards()
 		currentCardRatingType = currentCard.ratingType
 		handleAudio()
 		ChangeHandler.updateAndCall(.cardModified) { change in
@@ -53,6 +55,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 				self.load(card.front, webView: self.frontWebView)
 				self.load(card.back, webView: self.backWebView)
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
+			} else if change == .cardNextModified {
+				self.reloadDueCards()
 			}
 		}
 	}
@@ -84,6 +88,18 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		flowLayout.itemSize = CGSize(width: view.bounds.width - 40, height: 40)
 		flowLayout.minimumLineSpacing = 8
 		ratingCollectionView.collectionViewLayout = flowLayout
+	}
+	
+	func getDueCards() -> [DueCard] {
+		return decks.flatMap { deck in Card.sort(deck.cards.filter { $0.isDue() }, by: .due).map { (deck: deck, card: $0) } }
+	}
+	
+	func reloadDueCards() {
+		let onlyDueCards = dueCards[current..<dueCards.count]
+		dueCards.append(contentsOf: getDueCards().filter { dueCard in
+			!onlyDueCards.contains { $0.card.id == dueCard.card.id && $0.deck.id == dueCard.deck.id }
+		})
+		setProgress()
 	}
 	
 	func setBarButtonItems(animated: Bool = true) {
@@ -325,16 +341,43 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	func push(rating: Int) {
 		isPushing = true
 		guard let id = id else { return isPushing = false }
+		func handlePushing() {
+			if shouldSegue {
+				goToRecap()
+			}
+			isPushing = false
+		}
 		let element = dueCards[current]
 		var documentReference: DocumentReference?
 		documentReference = firestore.collection("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
 			guard error == nil, let documentReference = documentReference else { return self.isPushing = false }
-			self.reviewedCards.append((id: documentReference.documentID, deck: element.deck, card: element.card, rating: PerformanceRating.get(rating), next: nil))
-			if self.shouldSegue {
-				self.goToRecap()
+			let historyId = documentReference.documentID
+			for i in 0..<self.reviewedCards.count {
+				let reviewedCard = self.reviewedCards[i]
+				guard reviewedCard.card.id == element.card.id && reviewedCard.deck.id == element.deck.id else { continue }
+				self.reviewedCards[i] = (
+					id: historyId,
+					deck: element.deck,
+					card: element.card,
+					rating: PerformanceRating.get(rating),
+					next: nil
+				)
+				handlePushing()
+				return
 			}
-			self.isPushing = false
+			self.reviewedCards.append((
+				id: historyId,
+				deck: element.deck,
+				card: element.card,
+				rating: PerformanceRating.get(rating),
+				next: nil
+			))
+			handlePushing()
 		}
+	}
+	
+	func setProgress() {
+		progressView.setProgress(Float(current) / Float(isReview ? dueCards.count : previewCards?.count ?? 0), animated: true)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -355,8 +398,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 			push(rating: normalize(rating: indexPath.item))
 		}
 		current += 1
+		setProgress()
 		let count = isReview ? dueCards.count : previewCards?.count ?? 0
-		progressView.setProgress(Float(current) / Float(count), animated: true)
 		UIView.animate(withDuration: 0.125, animations: {
 			self.leftButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
 			self.leftButton.alpha = 0
