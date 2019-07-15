@@ -127,17 +127,17 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 					}
 					self.loadCreator()
 				}
-				if let cachedImage = User.imageFromCache(creatorId) {
+				if let cachedImage = try? User.imageFromCache(creatorId, type: .profilePicture) {
 					self.deck.creator.image = cachedImage
 					self.loadCreator()
 				}
-				storage.child("users/\(creatorId)").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
+				storage.child("users/\(creatorId)/profile").getData(maxSize: MAX_FILE_SIZE) { creatorData, creatorError in
 					if creatorError == nil, let creatorData = creatorData, let creatorImage = UIImage(data: creatorData) {
 						self.deck.creator.image = creatorImage
-						User.cache(creatorId, image: creatorImage)
+						User.cache(creatorId, image: creatorImage, type: .profilePicture)
 					} else {
 						self.deck.creator.image = DEFAULT_PROFILE_PICTURE
-						User.cache(creatorId, image: nil)
+						User.cache(creatorId, image: nil, type: .profilePicture)
 					}
 					self.loadCreator()
 				}
@@ -446,18 +446,18 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						newRating.user.url = url
 						self.ratingsCollectionView.reloadData()
 					}
-					if let cachedImage = User.imageFromCache(userId) {
+					if let cachedImage = try? User.imageFromCache(userId, type: .profilePicture) {
 						newRating.user.image = cachedImage
 						ChangeHandler.call(.ratingUserImageModified)
 						self.ratingsCollectionView.reloadData()
 					}
-					storage.child("users/\(userId)").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
+					storage.child("users/\(userId)/profile").getData(maxSize: MAX_FILE_SIZE) { userData, userError in
 						if userError == nil, let userData = userData, let userImage = UIImage(data: userData) {
 							newRating.user.image = userImage
-							User.cache(userId, image: userImage)
+							User.cache(userId, image: userImage, type: .profilePicture)
 						} else {
 							newRating.user.image = DEFAULT_PROFILE_PICTURE
-							User.cache(userId, image: nil)
+							User.cache(userId, image: nil, type: .profilePicture)
 						}
 						ChangeHandler.call(.ratingUserImageModified)
 						self.ratingsCollectionView.reloadData()
