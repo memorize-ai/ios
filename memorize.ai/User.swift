@@ -95,7 +95,10 @@ class User {
 			defaults.set(slug, forKey: "slug")
 		}
 		if let data = profilePicture?.jpegData(compressionQuality: 1) {
-			defaults.set(data, forKey: "image")
+			defaults.set(data, forKey: "profilePicture")
+		}
+		if let data = backgroundImage?.jpegData(compressionQuality: 1) {
+			defaults.set(data, forKey: "backgroundImage")
 		}
 		if let selectedDeckId = selectedDeckId {
 			save(selectedDeckId: selectedDeckId)
@@ -149,24 +152,32 @@ class User {
 		email = nil
 		slug = nil
 		profilePicture = nil
+		backgroundImage = nil
 		token = nil
 	}
 	
-	static func get() -> (id: String, name: String, email: String, slug: String?, image: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
+	static func get() -> (id: String, name: String, email: String, slug: String?, profilePicture: UIImage?, backgroundImage: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
 		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email") else { return nil }
 		return (
-			id,
-			name,
-			email,
-			defaults.string(forKey: "slug"),
-			getImage(),
-			defaults.bool(forKey: "darkMode"),
-			defaults.string(forKey: "selectedDeck")
+			id: id,
+			name: name,
+			email: email,
+			slug: defaults.string(forKey: "slug"),
+			profilePicture: getImage(.profilePicture),
+			backgroundImage: getImage(.backgroundImage),
+			darkMode: defaults.bool(forKey: "darkMode"),
+			selectedDeckId: defaults.string(forKey: "selectedDeck")
 		)
 	}
 	
-	static func getImage() -> UIImage? {
-		guard let data = defaults.data(forKey: "image") else { return nil }
-		return UIImage(data: data)
+	static func getImage(_ type: ImageType) -> UIImage? {
+		switch type {
+		case .profilePicture:
+			guard let data = defaults.data(forKey: "profilePicture") else { return nil }
+			return UIImage(data: data)
+		case .backgroundImage:
+			guard let data = defaults.data(forKey: "backgroundImage") else { return nil }
+			return UIImage(data: data)
+		}
 	}
 }
