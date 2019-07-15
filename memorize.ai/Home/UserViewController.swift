@@ -386,8 +386,8 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func reloadProfileBarButtonItem() {
-		User.getImageFromStorage { image in
-			self.loadBarButtonItems(image: image ?? DEFAULT_PROFILE_PICTURE)
+		User.getImageFromStorage { profilePicture, _ in
+			self.loadBarButtonItems(image: profilePicture ?? DEFAULT_PROFILE_PICTURE)
 			ChangeHandler.call(.profilePicture)
 		}
 	}
