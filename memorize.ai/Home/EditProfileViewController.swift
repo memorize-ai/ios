@@ -206,8 +206,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			setLoading(true)
+		if let currentImageEditing = currentImageEditing, let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+			setLoading(currentImageEditing, loading: true)
 			uploadImage(image) { success in
 				self.setLoading(false)
 				if success {
@@ -226,6 +226,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func chooseImage(_ type: User.ImageType, resetHandler: (() -> Void)? = nil) {
+		currentImageEditing = type
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -238,7 +239,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			self.present(picker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Your Uploads", style: .default) { _ in
-			self.currentImageEditing = type
 			self.performSegue(withIdentifier: "uploads", sender: true)
 		})
 		if let resetHandler = resetHandler {
@@ -264,40 +264,25 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
-	func uploadImage(_ image: UIImage?, completion: @escaping (Bool) -> Void) {
+	func uploadImage(_ image: UIImage?, type: User.ImageType, completion: @escaping (Bool) -> Void) {
 		guard let id = id else { return completion(false) }
 		if let image = image?.fixedRotation {
-			if let data = image.compressedData {
-				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
-					if error == nil {
-						storage.child("users/\(id)").downloadURL { url, error in
-							if error == nil, let url = url, let currentUser = auth.currentUser {
-								User.save(image: data)
-								User.cache(id, image: image)
-								currentUser.createProfileChangeRequest().photoURL = url
-								completion(true)
-							} else {
-								completion(false)
-							}
-						}
-					} else {
-						completion(false)
+			guard let data = image.compressedData else { return completion(false) }
+			storage.child("users/\(id)/\(type.rawValue)").putData(data, metadata: JPEG_METADATA) { _, error in
+				guard error == nil else { return completion(false) }
+				switch type {
+				case .backgroundImage:
+					completion(true)
+				case .profilePicture:
+					storage.child("users/\(id)/profile").downloadURL { url, error in
+						guard error == nil, let url = url, let changeRequest = auth.currentUser?.createProfileChangeRequest() else { return completion(false) }
+						changeRequest.photoURL = url
+						changeRequest.commitChanges { completion($0 == nil) }
 					}
 				}
-			} else {
-				completion(false)
 			}
 		} else {
-			storage.child("users/\(id)").delete { error in
-				if error == nil {
-					profilePicture = nil
-					User.save(image: nil)
-					User.cache(id, image: nil)
-					completion(true)
-				} else {
-					completion(false)
-				}
-			}
+			storage.child("users/\(id)/\(type.rawValue)").delete { completion($0 == nil) }
 		}
 	}
 	
