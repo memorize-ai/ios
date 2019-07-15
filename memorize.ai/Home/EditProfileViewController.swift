@@ -207,23 +207,32 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let currentImageEditing = currentImageEditing, let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+			switch currentImageEditing {
+			case .profilePicture:
+				profilePictureImageView.image = image
+			case .backgroundImage:
+				backgroundImageView.image = image
+			}
 			setLoading(currentImageEditing, loading: true)
 			uploadImage(image, type: currentImageEditing) { success in
 				self.setLoading(currentImageEditing, loading: false)
 				switch currentImageEditing {
 				case .profilePicture:
 					if success {
-						profilePicture = image
+						self.showNotification("Updated profile picture", type: .success)
 					} else {
+						self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 						self.showNotification("Unable to set profile picture. Please try again", type: .error)
 					}
+				case .backgroundImage:
+					if success {
+						self.showNotification("Updated background image", type: .success)
+					} else {
+						self.backgroundImageView.image = backgroundImage
+						self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
+						self.showNotification("Unable to set background image. Please try again", type: .error)
+					}
 				}
-				if success {
-					profilePicture = image
-				} else {
-					self.showNotification("Unable to set profile picture. Please try again", type: .error)
-				}
-				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 			}
 		}
 		dismiss(animated: true, completion: nil)
