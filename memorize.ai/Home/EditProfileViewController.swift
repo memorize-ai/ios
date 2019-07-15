@@ -50,7 +50,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.profileModified, .settingAdded) { change in
 			if change == .profileModified || change == .profilePicture {
+				self.backgroundImageView.image = backgroundImage
+				self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
+				self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 				self.nameLabel.text = name
+				self.bioLabel.text =
 				self.emailLabel.text = email
 				if let slug = slug {
 					self.linkLabel.text = "PROFILE LINK"
@@ -128,17 +132,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		
 	}
 	
-	@objc
-	func share() {
-		if let slug = slug, let url = User.url(slug: slug) {
-			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-			activityVC.popoverPresentationController?.sourceView = view
-			present(activityVC, animated: true, completion: nil)
-		} else {
-			showNotification("Loading profile url...", type: .normal)
-		}
-	}
-	
 	@IBAction
 	func resetPassword() {
 		guard let email = email else { return }
@@ -150,6 +143,31 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			}
 		})
 		present(alertController, animated: true, completion: nil)
+	}
+	
+	@objc
+	func share() {
+		if let slug = slug, let url = User.url(slug: slug) {
+			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+			activityVC.popoverPresentationController?.sourceView = view
+			present(activityVC, animated: true, completion: nil)
+		} else {
+			showNotification("Loading profile url...", type: .normal)
+		}
+	}
+	
+	func load() {
+		backgroundImageView.image = backgroundImage
+		if backgroundImage == nil {
+			backgroundImageView.backgroundColor = .lightGray
+			
+		} else {
+			backgroundImageView.backgroundColor = .white
+		}
+		backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
+		self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+		self.nameLabel.text = name
+		self.bioLabel.text =
 	}
 	
 	func resizeOptionsTableView() {
