@@ -16,7 +16,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var showFullBioButton: UIButton!
 	@IBOutlet weak var emailLabel: UILabel!
 	@IBOutlet weak var profileLinkLabel: UILabel!
-	@IBOutlet weak var profileLinkButton: UIButton!
+	@IBOutlet weak var profileLinkTextLabel: UILabel!
 	@IBOutlet weak var optionsTableView: UITableView!
 	@IBOutlet weak var optionsTableViewHeightConstraint: NSLayoutConstraint!
 	
@@ -50,22 +50,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.profileModified, .settingAdded) { change in
 			if change == .profileModified || change == .profilePicture {
-				self.backgroundImageView.image = backgroundImage
-				self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
-				self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
-				self.nameLabel.text = name
-				self.bioLabel.text =
-				self.emailLabel.text = email
-				if let slug = slug {
-					self.linkLabel.text = "PROFILE LINK"
-					self.linkButton.setTitle(User.urlString(slug: slug), for: .normal)
-					self.linkButton.isEnabled = true
-				} else {
-					self.linkLabel.text = "PROFILE LINK (LOADING)"
-					self.linkButton.setTitle(User.urlString(slug: "..."), for: .normal)
-					self.linkButton.isEnabled = false
-				}
-				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+				self.load()
 			}
 		}
 		resizeOptionsTableView()
@@ -158,16 +143,13 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func load() {
 		backgroundImageView.image = backgroundImage
-		if backgroundImage == nil {
-			backgroundImageView.backgroundColor = .lightGray
-			
-		} else {
-			backgroundImageView.backgroundColor = .white
-		}
 		backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
-		self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
-		self.nameLabel.text = name
-		self.bioLabel.text =
+		profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+		nameLabel.text = name
+		bioLabel.text = bio
+		emailLabel.text = email
+		profileLinkLabel.text = "PROFILE LINK\(slug == nil ? " (LOADING)" : "")"
+		profileLinkTextLabel.text = User.urlString(slug: slug ?? "...")
 	}
 	
 	func resizeOptionsTableView() {
