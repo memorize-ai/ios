@@ -36,6 +36,15 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 		return frontTextView.isHidden ? backTextView : frontTextView
 	}
 	
+	private func focusTextView(forSide side: CardSide) {
+		switch side {
+		case .front:
+			frontTextView.becomeFirstResponder()
+		case .back:
+			backTextView.becomeFirstResponder()
+		}
+	}
+	
 	func update(_ side: CardSide, text: String) {
 		switch side {
 		case .front:
@@ -79,6 +88,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 			frontTextView.isHidden = true
 			backTextView.isHidden = false
 		}
+		focusTextView(forSide: side)
 	}
 	
 	func swap(completion: ((CardSide) -> Void)?) {
@@ -92,6 +102,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				self.backTextView.isHidden = true
 				self.backTextView.transform = .identity
 				self.backTextView.alpha = 1
+				self.focusTextView(forSide: .front)
 				self.frontTextView.transform = CGAffineTransform(translationX: -halfWidth, y: 0)
 				self.frontTextView.alpha = 0
 				self.frontTextView.isHidden = false
@@ -112,6 +123,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				self.frontTextView.isHidden = true
 				self.frontTextView.transform = .identity
 				self.frontTextView.alpha = 1
+				self.focusTextView(forSide: .back)
 				self.backTextView.transform = CGAffineTransform(translationX: halfWidth, y: 0)
 				self.backTextView.alpha = 0
 				self.backTextView.isHidden = false
