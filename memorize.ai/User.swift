@@ -4,6 +4,7 @@ var id: String?
 var name: String?
 var email: String?
 var slug: String?
+var bio: String?
 var profilePicture: UIImage?
 var backgroundImage: UIImage?
 var token: String?
@@ -87,10 +88,11 @@ class User {
 	}
 	
 	static func save() {
-		guard let id = id, let name = name, let email = email else { return }
+		guard let id = id, let name = name, let email = email, let bio = bio else { return }
 		defaults.set(id, forKey: "id")
 		defaults.set(name, forKey: "name")
 		defaults.set(email, forKey: "email")
+		defaults.set(bio, forKey: "bio")
 		if let slug = slug {
 			defaults.set(slug, forKey: "slug")
 		}
@@ -143,6 +145,7 @@ class User {
 		defaults.removeObject(forKey: "name")
 		defaults.removeObject(forKey: "email")
 		defaults.removeObject(forKey: "slug")
+		defaults.removeObject(forKey: "bio")
 		defaults.removeObject(forKey: "profilePicture")
 		defaults.removeObject(forKey: "backgroundImage")
 		defaults.removeObject(forKey: "darkMode")
@@ -151,18 +154,20 @@ class User {
 		name = nil
 		email = nil
 		slug = nil
+		bio = nil
 		profilePicture = nil
 		backgroundImage = nil
 		token = nil
 	}
 	
-	static func get() -> (id: String, name: String, email: String, slug: String?, profilePicture: UIImage?, backgroundImage: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
-		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email") else { return nil }
+	static func get() -> (id: String, name: String, email: String, slug: String?, bio: String, profilePicture: UIImage?, backgroundImage: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
+		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email"), let bio = defaults.string(forKey: "bio") else { return nil }
 		return (
 			id: id,
 			name: name,
 			email: email,
 			slug: defaults.string(forKey: "slug"),
+			bio: bio,
 			profilePicture: getImage(.profilePicture),
 			backgroundImage: getImage(.backgroundImage),
 			darkMode: defaults.bool(forKey: "darkMode"),
