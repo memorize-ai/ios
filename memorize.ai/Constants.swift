@@ -13,7 +13,11 @@ let DEFAULT_BLUE_COLOR = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alp
 let DEFAULT_RED_COLOR = #colorLiteral(red: 0.8459790349, green: 0.2873021364, blue: 0.2579272389, alpha: 1)
 let CARD_POLL_INTERVAL: TimeInterval = 1
 let PLACEHOLDER_DATE = Date()
+#if targetEnvironment(simulator)
 let CURRENT_DEVICE = Device.current.realDevice
+#else
+let CURRENT_DEVICE = Device.current
+#endif
 let CURRENT_DEVICE_IS_IPAD = CURRENT_DEVICE.isOneOf(Device.allPads)
 let CURRENT_DEVICE_HAS_ROUNDED_CORNERS = CURRENT_DEVICE.isOneOf(Device.allDevicesWithRoundedDisplayCorners)
 let MEMORIZE_AI_BASE_URL = "https://memorize.ai"
