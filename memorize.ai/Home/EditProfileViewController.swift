@@ -208,8 +208,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		if let currentImageEditing = currentImageEditing, let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 			setLoading(currentImageEditing, loading: true)
-			uploadImage(image) { success in
-				self.setLoading(false)
+			uploadImage(image, type: currentImageEditing) { success in
+				self.setLoading(currentImageEditing, loading: false)
+				switch currentImageEditing {
+				case .profilePicture:
+					if success {
+						profilePicture = image
+					} else {
+						self.showNotification("Unable to set profile picture. Please try again", type: .error)
+					}
+				}
 				if success {
 					profilePicture = image
 				} else {
@@ -253,14 +261,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func setLoading(_ type: User.ImageType, loading: Bool) {
 		switch type {
-		case .backgroundImage:
-			editBackgroundImageButton.isEnabled = !loading
-			editBackgroundImageView.isHidden = loading
-			editBackgroundImageActivityIndicator.setAnimating(loading)
 		case .profilePicture:
 			editProfilePictureButton.isEnabled = !loading
 			editProfilePictureImageView.isHidden = loading
 			editProfilePictureActivityIndicator.setAnimating(loading)
+		case .backgroundImage:
+			editBackgroundImageButton.isEnabled = !loading
+			editBackgroundImageView.isHidden = loading
+			editBackgroundImageActivityIndicator.setAnimating(loading)
 		}
 	}
 	
@@ -271,18 +279,40 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			storage.child("users/\(id)/\(type.rawValue)").putData(data, metadata: JPEG_METADATA) { _, error in
 				guard error == nil else { return completion(false) }
 				switch type {
-				case .backgroundImage:
-					completion(true)
 				case .profilePicture:
 					storage.child("users/\(id)/profile").downloadURL { url, error in
 						guard error == nil, let url = url, let changeRequest = auth.currentUser?.createProfileChangeRequest() else { return completion(false) }
 						changeRequest.photoURL = url
-						changeRequest.commitChanges { completion($0 == nil) }
+						changeRequest.commitChanges { error in
+							guard error == nil else { return completion(false) }
+							profilePicture = image
+							User.save(profilePicture: data)
+							User.cache(id, image: image, type: .profilePicture)
+							completion(true)
+						}
 					}
+				case .backgroundImage:
+					backgroundImage = image
+					User.save(backgroundImage: data)
+					User.cache(id, image: image, type: .backgroundImage)
+					completion(true)
 				}
 			}
 		} else {
-			storage.child("users/\(id)/\(type.rawValue)").delete { completion($0 == nil) }
+			storage.child("users/\(id)/\(type.rawValue)").delete { error in
+				guard error == nil else { return completion(false) }
+				switch type {
+				case .profilePicture:
+					profilePicture = nil
+					User.save(profilePicture: nil)
+					User.cache(id, image: nil, type: .profilePicture)
+				case .backgroundImage:
+					backgroundImage = nil
+					User.save(backgroundImage: nil)
+					User.cache(id, image: nil, type: .backgroundImage)
+				}
+				completion(true)
+			}
 		}
 	}
 	
