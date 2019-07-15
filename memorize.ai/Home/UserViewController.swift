@@ -37,11 +37,12 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			if auth.currentUser == nil {
 				signIn()
 			} else if let user = User.get() {
-				loadProfileBarButtonItem(user.image)
+				loadProfileBarButtonItem(user.profilePicture)
 				id = user.id
 				name = user.name
 				email = user.email
-				profilePicture = user.image
+				profilePicture = user.profilePicture
+				backgroundImage = user.backgroundImage
 				selectedDeckId = user.selectedDeckId
 				loadingImage.isHidden = true
 				loadingView.isHidden = true
