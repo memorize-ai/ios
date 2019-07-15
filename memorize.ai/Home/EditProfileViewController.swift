@@ -65,10 +65,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		if let uploadsVC = segue.destination as? UploadsViewController, sender as? Bool ?? false {
 			uploadsVC.audioAllowed = false
 			uploadsVC.completion = { upload in
-				if upload.type == .audio {
-					self.showNotification("Upload must be an image or gif", type: .error)
-					return
-				}
+				if upload.type == .audio { return self.showNotification("Upload must be an image or gif", type: .error) }
 				self.setLoading(true)
 				if let image = upload.image {
 					self.uploadImage(image) { success in
@@ -97,7 +94,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func changeBackgroundImage() {
-		
+		chooseImage(.backgroundImage) {
+			
+		}
 	}
 	
 	@IBAction
@@ -226,7 +225,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		dismiss(animated: true, completion: nil)
 	}
 	
-	func chooseImage(resetHandler: (() -> Void)? = nil) {
+	func chooseImage(_ type: User.ImageType, resetHandler: (() -> Void)? = nil) {
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -239,6 +238,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			self.present(picker, animated: true, completion: nil)
 		})
 		alert.addAction(UIAlertAction(title: "Your Uploads", style: .default) { _ in
+			self.currentImageEditing = type
 			self.performSegue(withIdentifier: "uploads", sender: true)
 		})
 		if let resetHandler = resetHandler {
@@ -254,14 +254,13 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	func setLoading(_ type: User.ImageType, loading: Bool) {
 		switch type {
 		case .backgroundImage:
-			
-		}
-		changeButton.isEnabled = !isLoading
-		if isLoading {
-			pictureImageView.image = nil
-			pictureActivityIndicator.startAnimating()
-		} else {
-			pictureActivityIndicator.stopAnimating()
+			editBackgroundImageButton.isEnabled = !loading
+			editBackgroundImageView.isHidden = loading
+			editBackgroundImageActivityIndicator.setAnimating(loading)
+		case .profilePicture:
+			editProfilePictureButton.isEnabled = !loading
+			editProfilePictureImageView.isHidden = loading
+			editProfilePictureActivityIndicator.setAnimating(loading)
 		}
 	}
 	
