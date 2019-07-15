@@ -77,9 +77,11 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 			User.shouldShowEditCardTip = false
 			showNotification("Swipe left to preview", type: .normal, delay: 4)
 			cardEditor.frontTextView.text = """
-			# Swipe left to preview
+			# Tutorial card
 			
-			# Swipe right to edit
+			## Swipe left to preview
+			
+			## Swipe right to edit
 			
 			**Click the right arrow on the bottom to edit the back of the card**
 			
