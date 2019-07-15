@@ -5,9 +5,11 @@ import MessageUI
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 	@IBOutlet weak var backgroundImageView: UIImageView!
 	@IBOutlet weak var editBackgroundImageView: UIImageView!
+	@IBOutlet weak var editBackgroundImageButton: UIButton!
 	@IBOutlet weak var editBackgroundImageActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var profilePictureImageView: UIImageView!
 	@IBOutlet weak var editProfilePictureImageView: UIImageView!
+	@IBOutlet weak var editProfilePictureButton: UIButton!
 	@IBOutlet weak var editProfilePictureActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var bioLabel: UILabel!
@@ -40,6 +42,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		Option(image: #imageLiteral(resourceName: "Smiling Emoji"), name: "Emoji Game", action: showEmojiGame),
 		Option(image: #imageLiteral(resourceName: "Book"), name: "Tutorial", action: showTutorial)
 	] + (MFMailComposeViewController.canSendMail() ? [Option(image: #imageLiteral(resourceName: "Mail"), name: "Contact Us", action: showContactUsEmail)] : [])
+	var currentImageEditing: User.ImageType?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -104,17 +107,68 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func changeName() {
-		
+		let alertController = UIAlertController(title: "Change name", message: nil, preferredStyle: .alert)
+		alertController.addTextField {
+			$0.placeholder = "Name"
+			$0.text = name
+			$0.clearButtonMode = .whileEditing
+		}
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
+			let newName = alertController.textFields?.first?.text?.trim() ?? ""
+			if newName.isEmpty { return self.showNotification("Name cannot be blank", type: .error) }
+			if newName == name { return self.showNotification("Please choose a different name", type: .error) }
+			guard let id = id else { return }
+			firestore.document("users/\(id)").updateData(["name": newName]) { error in
+				self.showNotification(error == nil ? "Changed name" : "Unable to change name. Please try again", type: error == nil ? .success : .error)
+			}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction
 	func changeBio() {
-		
+		performSegue(withIdentifier: "editBio", sender: self)
 	}
 	
 	@IBAction
 	func changeEmail() {
-		
+		let alertController = UIAlertController(title: "Change email", message: nil, preferredStyle: .alert)
+		alertController.addTextField {
+			$0.placeholder = "Email"
+			$0.text = email
+			$0.keyboardType = .emailAddress
+			$0.clearButtonMode = .whileEditing
+		}
+		alertController.addTextField {
+			$0.placeholder = "Confirm password"
+			$0.isSecureTextEntry = true
+			$0.clearButtonMode = .whileEditing
+		}
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
+			guard let email = email, let id = id else { return }
+			let newEmail = alertController.textFields?.first?.text?.trim() ?? ""
+			if newEmail.isEmpty { return self.showNotification("Email cannot be blank", type: .error) }
+			let password = alertController.textFields?.last?.text?.trim() ?? ""
+			if password.isEmpty { return self.showNotification("Password cannot be blank", type: .error) }
+			self.showNotification("Changing email...", type: .normal)
+			auth.signIn(withEmail: email, password: password) { _, error in
+				guard error == nil else { return self.showNotification("Invalid password", type: .error) }
+				guard newEmail.isValidEmail else { return self.showNotification("Invalid email", type: .error) }
+				firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
+					guard error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser else { return self.showNotification("Unable to validate email. Please try again", type: .error) }
+					guard snapshot.isEmpty else { return self.showNotification("Email is already in use", type: .error) }
+					currentUser.updateEmail(to: newEmail) { error in
+						guard error == nil else { return self.showNotification("Unable to change email. Please try again", type: .error) }
+						firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
+							self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
+						}
+					}
+				}
+			}
+		})
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction
@@ -150,6 +204,102 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		emailLabel.text = email
 		profileLinkLabel.text = "PROFILE LINK\(slug == nil ? " (LOADING)" : "")"
 		profileLinkTextLabel.text = User.urlString(slug: slug ?? "...")
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+			setLoading(true)
+			uploadImage(image) { success in
+				self.setLoading(false)
+				if success {
+					profilePicture = image
+				} else {
+					self.showNotification("Unable to set profile picture. Please try again", type: .error)
+				}
+				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+			}
+		}
+		dismiss(animated: true, completion: nil)
+	}
+	
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		dismiss(animated: true, completion: nil)
+	}
+	
+	func chooseImage(resetHandler: (() -> Void)? = nil) {
+		let picker = UIImagePickerController()
+		picker.delegate = self
+		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+		alert.addAction(UIAlertAction(title: "Take Photo", style: .default) { _ in
+			picker.sourceType = .camera
+			self.present(picker, animated: true, completion: nil)
+		})
+		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { _ in
+			picker.sourceType = .photoLibrary
+			self.present(picker, animated: true, completion: nil)
+		})
+		alert.addAction(UIAlertAction(title: "Your Uploads", style: .default) { _ in
+			self.performSegue(withIdentifier: "uploads", sender: true)
+		})
+		if let resetHandler = resetHandler {
+			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
+				resetHandler()
+			})
+		}
+		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		alert.popoverPresentationController?.sourceView = view
+		present(alert, animated: true, completion: nil)
+	}
+	
+	func setLoading(_ type: User.ImageType, loading: Bool) {
+		switch type {
+		case .backgroundImage:
+			
+		}
+		changeButton.isEnabled = !isLoading
+		if isLoading {
+			pictureImageView.image = nil
+			pictureActivityIndicator.startAnimating()
+		} else {
+			pictureActivityIndicator.stopAnimating()
+		}
+	}
+	
+	func uploadImage(_ image: UIImage?, completion: @escaping (Bool) -> Void) {
+		guard let id = id else { return completion(false) }
+		if let image = image?.fixedRotation {
+			if let data = image.compressedData {
+				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
+					if error == nil {
+						storage.child("users/\(id)").downloadURL { url, error in
+							if error == nil, let url = url, let currentUser = auth.currentUser {
+								User.save(image: data)
+								User.cache(id, image: image)
+								currentUser.createProfileChangeRequest().photoURL = url
+								completion(true)
+							} else {
+								completion(false)
+							}
+						}
+					} else {
+						completion(false)
+					}
+				}
+			} else {
+				completion(false)
+			}
+		} else {
+			storage.child("users/\(id)").delete { error in
+				if error == nil {
+					profilePicture = nil
+					User.save(image: nil)
+					User.cache(id, image: nil)
+					completion(true)
+				} else {
+					completion(false)
+				}
+			}
+		}
 	}
 	
 	func resizeOptionsTableView() {
@@ -220,182 +370,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			self.performSegue(withIdentifier: "signOut", sender: self)
 		})
 		present(alertController, animated: true, completion: nil)
-	}
-	
-	@IBAction
-	func chooseImage() {
-		let picker = UIImagePickerController()
-		picker.delegate = self
-		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-		alert.addAction(UIAlertAction(title: "Take Photo", style: .default) { _ in
-			picker.sourceType = .camera
-			self.present(picker, animated: true, completion: nil)
-		})
-		alert.addAction(UIAlertAction(title: "Choose Photo", style: .default) { _ in
-			picker.sourceType = .photoLibrary
-			self.present(picker, animated: true, completion: nil)
-		})
-		alert.addAction(UIAlertAction(title: "Your Uploads", style: .default) { _ in
-			self.performSegue(withIdentifier: "uploads", sender: true)
-		})
-		if profilePicture != nil {
-			alert.addAction(UIAlertAction(title: "Reset", style: .destructive) { _ in
-				self.setLoading(true)
-				self.uploadImage(nil) { success in
-					self.setLoading(false)
-					if success {
-						profilePicture = nil
-					} else {
-						self.showNotification("Unable to set profile picture. Please try again", type: .error)
-					}
-					self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
-				}
-			})
-		}
-		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-		alert.popoverPresentationController?.sourceView = view
-		present(alert, animated: true, completion: nil)
-	}
-	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-			setLoading(true)
-			uploadImage(image) { success in
-				self.setLoading(false)
-				if success {
-					profilePicture = image
-				} else {
-					self.showNotification("Unable to set profile picture. Please try again", type: .error)
-				}
-				self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
-			}
-		}
-		dismiss(animated: true, completion: nil)
-	}
-	
-	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		dismiss(animated: true, completion: nil)
-	}
-	
-	func setLoading(_ isLoading: Bool) {
-		changeButton.isEnabled = !isLoading
-		if isLoading {
-			pictureImageView.image = nil
-			pictureActivityIndicator.startAnimating()
-		} else {
-			pictureActivityIndicator.stopAnimating()
-		}
-	}
-	
-	func uploadImage(_ image: UIImage?, completion: @escaping (Bool) -> Void) {
-		guard let id = id else { return completion(false) }
-		if let image = image?.fixedRotation {
-			if let data = image.compressedData {
-				storage.child("users/\(id)").putData(data, metadata: JPEG_METADATA) { _, error in
-					if error == nil {
-						storage.child("users/\(id)").downloadURL { url, error in
-							if error == nil, let url = url, let currentUser = auth.currentUser {
-								User.save(image: data)
-								User.cache(id, image: image)
-								currentUser.createProfileChangeRequest().photoURL = url
-								completion(true)
-							} else {
-								completion(false)
-							}
-						}
-					} else {
-						completion(false)
-					}
-				}
-			} else {
-				completion(false)
-			}
-		} else {
-			storage.child("users/\(id)").delete { error in
-				if error == nil {
-					profilePicture = nil
-					User.save(image: nil)
-					User.cache(id, image: nil)
-					completion(true)
-				} else {
-					completion(false)
-				}
-			}
-		}
-	}
-	
-	@IBAction
-	func nameClicked() {
-		let alertController = UIAlertController(title: "Change name", message: nil, preferredStyle: .alert)
-		alertController.addTextField {
-			$0.placeholder = "Name"
-			$0.text = name
-			$0.clearButtonMode = .whileEditing
-		}
-		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
-			let newName = alertController.textFields?.first?.text?.trim() ?? ""
-			if newName.isEmpty { return self.showNotification("Name cannot be blank", type: .error) }
-			if newName == name { return self.showNotification("Please choose a different name", type: .error) }
-			guard let id = id else { return }
-			firestore.document("users/\(id)").updateData(["name": newName]) { error in
-				self.showNotification(error == nil ? "Changed name" : "Unable to change name. Please try again", type: error == nil ? .success : .error)
-			}
-		})
-		present(alertController, animated: true, completion: nil)
-	}
-	
-	@IBAction
-	func emailClicked() {
-		let alertController = UIAlertController(title: "Change email", message: nil, preferredStyle: .alert)
-		alertController.addTextField {
-			$0.placeholder = "Email"
-			$0.text = email
-			$0.keyboardType = .emailAddress
-			$0.clearButtonMode = .whileEditing
-		}
-		alertController.addTextField {
-			$0.placeholder = "Confirm password"
-			$0.isSecureTextEntry = true
-			$0.clearButtonMode = .whileEditing
-		}
-		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-		alertController.addAction(UIAlertAction(title: "Change", style: .default) { _ in
-			guard let email = email, let id = id else { return }
-			let newEmail = alertController.textFields?.first?.text?.trim() ?? ""
-			if newEmail.isEmpty { return self.showNotification("Email cannot be blank", type: .error) }
-			let password = alertController.textFields?.last?.text?.trim() ?? ""
-			if password.isEmpty { return self.showNotification("Password cannot be blank", type: .error) }
-			self.showNotification("Changing email...", type: .normal)
-			auth.signIn(withEmail: email, password: password) { _, error in
-				guard error == nil else { return self.showNotification("Invalid password", type: .error) }
-				guard newEmail.isValidEmail else { return self.showNotification("Invalid email", type: .error) }
-				firestore.collection("users").whereField("email", isEqualTo: newEmail).getDocuments { snapshot, error in
-					guard error == nil, let snapshot = snapshot?.documents, let currentUser = auth.currentUser else { return self.showNotification("Unable to validate email. Please try again", type: .error) }
-					guard snapshot.isEmpty else { return self.showNotification("Email is already in use", type: .error) }
-					currentUser.updateEmail(to: newEmail) { error in
-						guard error == nil else { return self.showNotification("Unable to change email. Please try again", type: .error) }
-						firestore.document("users/\(id)").updateData(["email": newEmail]) { error in
-							self.showNotification(error == nil ? "Changed email" : "Unable to change email. Please try again", type: error == nil ? .success : .error)
-						}
-					}
-				}
-			}
-		})
-		present(alertController, animated: true, completion: nil)
-	}
-	
-	@IBAction
-	func linkClicked() {
-		if let slug = slug {
-			if let url = User.url(slug: slug) {
-				present(SFSafariViewController(url: url), animated: true, completion: nil)
-			} else {
-				showNotification("Unable to load profile url. Please try again", type: .error)
-			}
-		} else {
-			showNotification("Loading profile url...", type: .normal)
-		}
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

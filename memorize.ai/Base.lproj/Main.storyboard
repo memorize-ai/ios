@@ -986,8 +986,10 @@
                         <outlet property="bioLabelHeightConstraint" destination="gUU-d5-lz6" id="g6c-Br-fxi"/>
                         <outlet property="bioMoreLabel" destination="cQH-la-3vh" id="TQM-eT-eVQ"/>
                         <outlet property="editBackgroundImageActivityIndicator" destination="mY6-on-2mw" id="Lkw-yt-iOD"/>
+                        <outlet property="editBackgroundImageButton" destination="Aer-wb-2MW" id="yQD-oF-7Of"/>
                         <outlet property="editBackgroundImageView" destination="4ys-hL-8Ge" id="wa0-le-O04"/>
                         <outlet property="editProfilePictureActivityIndicator" destination="cpb-Ul-FWh" id="eyf-BA-HdF"/>
+                        <outlet property="editProfilePictureButton" destination="E4X-9N-YJj" id="fNM-0I-Uzy"/>
                         <outlet property="editProfilePictureImageView" destination="0rW-Vi-U2M" id="Bob-bY-COs"/>
                         <outlet property="emailLabel" destination="FLD-tH-AbZ" id="S4f-Dv-ZVU"/>
                         <outlet property="nameLabel" destination="Lff-0Q-WuX" id="w5c-8B-6ZI"/>
