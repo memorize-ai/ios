@@ -95,7 +95,19 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBAction
 	func changeBackgroundImage() {
 		chooseImage(.backgroundImage) {
-			
+			self.backgroundImageView.image = nil
+			self.backgroundImageView.backgroundColor = .lightGray
+			self.setLoading(.backgroundImage, loading: true)
+			self.uploadImage(nil, type: .backgroundImage) { success in
+				self.setLoading(.backgroundImage, loading: false)
+				if success {
+					self.showNotification("Updated background image", type: .success)
+				} else {
+					self.backgroundImageView.image = backgroundImage
+					self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
+					self.showNotification("Unable to reset background image. Please try again", type: .error)
+				}
+			}
 		}
 	}
 	
