@@ -43,14 +43,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		pictureImageView.layer.borderWidth = 0.5
-		pictureImageView.layer.borderColor = UIColor.lightGray.cgColor
-		pictureImageView.layer.masksToBounds = true
-		navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share)), animated: false)
-		if User.shouldShowEditProfileTip {
-			User.shouldShowEditProfileTip = false
-			showNotification("You can click on your profile picture, name, or email to change it", type: .normal, delay: 4)
-		}
+		navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share)), animated: true)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
