@@ -101,7 +101,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			self.uploadImage(nil, type: .backgroundImage) { success in
 				self.setLoading(.backgroundImage, loading: false)
 				if success {
-					self.showNotification("Updated background image", type: .success)
+					self.showNotification("Reset background image", type: .success)
 				} else {
 					self.backgroundImageView.image = backgroundImage
 					self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
@@ -113,7 +113,19 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func changeProfilePicture() {
-		
+		chooseImage(.profilePicture) {
+			self.profilePictureImageView.image = DEFAULT_PROFILE_PICTURE
+			self.setLoading(.profilePicture, loading: true)
+			self.uploadImage(nil, type: .profilePicture) { success in
+				self.setLoading(.profilePicture, loading: false)
+				if success {
+					self.showNotification("Reset profile picture", type: .success)
+				} else {
+					self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+					self.showNotification("Unable to reset profile picture. Please try again", type: .error)
+				}
+			}
+		}
 	}
 	
 	@IBAction
