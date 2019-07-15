@@ -5,18 +5,20 @@ var name: String?
 var email: String?
 var slug: String?
 var profilePicture: UIImage?
+var backgroundImage: UIImage?
 var token: String?
 var selectedDeckId: String?
 
 class User {
-	static var shouldShowEditProfileTip: Bool {
-		get {
-			return defaults.value(forKey: "shouldShowEditProfileTip") as? Bool ?? true
-		}
-		set {
-			defaults.setValue(newValue, forKey: "shouldShowEditProfileTip")
-		}
+	enum ImageType: String {
+		case profilePicture = "profile"
+		case backgroundImage = "background"
 	}
+	
+	enum ImageFetchError: Error {
+		case cacheNotFound
+	}
+	
 	static var shouldShowViewProfileTip: Bool {
 		get {
 			return defaults.value(forKey: "shouldShowViewProfileTip") as? Bool ?? true
@@ -35,14 +37,14 @@ class User {
 	}
 	
 	@discardableResult
-	static func cache(_ id: String, image: UIImage?) -> UIImage? {
-		Cache.new(.user, key: id, image: image, format: .image)
+	static func cache(_ id: String, image: UIImage?, type: ImageType) -> UIImage? {
+		Cache.new(.user, key: "\(type.rawValue)/\(id)", image: image, format: .image)
 		return image
 	}
 	
-	static func imageFromCache(_ id: String) -> UIImage? {
-		guard let cache = Cache.get(.user, key: id) else { return nil }
-		return cache.getImage() ?? DEFAULT_PROFILE_PICTURE
+	static func imageFromCache(_ id: String, type: ImageType) throws -> UIImage? {
+		guard let cache = Cache.get(.user, key: "\(type.rawValue)/\(id)") else { throw ImageFetchError.cacheNotFound }
+		return cache.getImage()
 	}
 	
 	static func urlString(slug: String) -> String {
@@ -53,17 +55,29 @@ class User {
 		return URL(string: "\(MEMORIZE_AI_BASE_URL)/\(urlString(slug: slug))")
 	}
 	
-	static func getImageFromStorage(completion: @escaping (UIImage?) -> Void) {
-		guard let id = id else { return completion(nil) }
-		func callCompletion(_ image: UIImage?, data: Data?) {
-			profilePicture = image
-			save(image: data)
-			cache(id, image: image ?? DEFAULT_PROFILE_PICTURE)
-			completion(image)
+	static func getImageFromStorage(completion: @escaping (UIImage?, UIImage?) -> Void) {
+		guard let id = id else { return completion(nil, nil) }
+		func callCompletion(profile: UIImage?, profileData: Data?, background: UIImage?, backgroundData: Data?) {
+			profilePicture = profile
+			backgroundImage = background
+			save(profilePicture: profileData)
+			save(backgroundImage: backgroundData)
+			cache(id, image: profile, type: .profilePicture)
+			cache(id, image: background, type: .backgroundImage)
+			completion(profile, background)
 		}
-		storage.child("users/\(id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
-			guard error == nil, let unwrappedData = data, let image = UIImage(data: unwrappedData) else { return callCompletion(nil, data: data) }
-			callCompletion(image, data: unwrappedData)
+		storage.child("users/\(id)/profile").getData(maxSize: MAX_FILE_SIZE) { data, error in
+			var profile: (image: UIImage?, data: Data)?
+			if error == nil, let data = data {
+				profile = (UIImage(data: data), data)
+			}
+			storage.child("users/\(id)/background").getData(maxSize: MAX_FILE_SIZE) { data, error in
+				if error == nil, let data = data {
+					callCompletion(profile: profile?.image, profileData: profile?.data, background: UIImage(data: data), backgroundData: data)
+				} else {
+					callCompletion(profile: profile?.image, profileData: profile?.data, background: nil, backgroundData: nil)
+				}
+			}
 		}
 	}
 	
@@ -88,11 +102,19 @@ class User {
 		}
 	}
 	
-	static func save(image: Data?) {
-		if let image = image {
-			defaults.set(image, forKey: "image")
+	static func save(profilePicture data: Data?) {
+		if let data = data {
+			defaults.set(data, forKey: "profilePicture")
 		} else {
-			defaults.removeObject(forKey: "image")
+			defaults.removeObject(forKey: "profilePicture")
+		}
+	}
+	
+	static func save(backgroundImage data: Data?) {
+		if let data = data {
+			defaults.set(data, forKey: "backgroundImage")
+		} else {
+			defaults.removeObject(forKey: "backgroundImage")
 		}
 	}
 	
@@ -118,7 +140,8 @@ class User {
 		defaults.removeObject(forKey: "name")
 		defaults.removeObject(forKey: "email")
 		defaults.removeObject(forKey: "slug")
-		defaults.removeObject(forKey: "image")
+		defaults.removeObject(forKey: "profilePicture")
+		defaults.removeObject(forKey: "backgroundImage")
 		defaults.removeObject(forKey: "darkMode")
 		save(selectedDeckId: nil)
 		id = nil
