@@ -66,28 +66,38 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			uploadsVC.audioAllowed = false
 			uploadsVC.completion = { upload in
 				if upload.type == .audio { return self.showNotification("Upload must be an image or gif", type: .error) }
+				let errorMessage = "Unable to set \(currentImageEditing.description). Please try again"
 				self.setLoading(currentImageEditing, loading: true)
-				if let image = upload.image {
+				let image = upload.image
+				switch currentImageEditing {
+				case .profilePicture:
 					self.setProfilePictureImageView(image)
-					self.uploadImage(image, type: currentImageEditing) { success in
-						self.setLoading(false)
-						if success {
-							profilePicture = image
-						} else {
-							self.showNotification("Unable to set profile picture. Please try again", type: .error)
-						}
-						self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
-					}
+				case .backgroundImage:
+					self.setBackgroundImageView(image)
+				}
+				if let image = image {
+					// TODO
 				} else {
-					self.setProfilePictureImageView(nil)
 					upload.load { _, error in
-						self.setLoading(false)
 						if error == nil, let image = upload.image {
-							profilePicture = image
+							switch currentImageEditing {
+							case .profilePicture:
+								self.setProfilePictureImageView(image)
+							case .backgroundImage:
+								self.setBackgroundImageView(image)
+							}
+							self.uploadImage(image, type: currentImageEditing) { success in
+								self.setLoading(currentImageEditing, loading: false)
+								if success {
+									self.showNotification("Updated \(currentImageEditing.description)", type: .success)
+								} else {
+									self.setBackgroundImageView(backgroundImage)
+									self.showNotification(errorMessage, type: .error)
+								}
+							}
 						} else {
-							self.showNotification("Unable to set profile picture. Please try again", type: .error)
+							self.showNotification(errorMessage, type: .error)
 						}
-						self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 					}
 				}
 			}
