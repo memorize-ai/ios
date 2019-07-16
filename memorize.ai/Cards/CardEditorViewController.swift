@@ -102,7 +102,6 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				self.backTextView.isHidden = true
 				self.backTextView.transform = .identity
 				self.backTextView.alpha = 1
-				self.focusTextView(forSide: .front)
 				self.frontTextView.transform = CGAffineTransform(translationX: -halfWidth, y: 0)
 				self.frontTextView.alpha = 0
 				self.frontTextView.isHidden = false
@@ -111,6 +110,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 					self.frontTextView.alpha = 1
 				}) {
 					guard $0 else { return }
+					self.focusTextView(forSide: .front)
 					completion?(.front)
 				}
 			}
@@ -123,7 +123,6 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 				self.frontTextView.isHidden = true
 				self.frontTextView.transform = .identity
 				self.frontTextView.alpha = 1
-				self.focusTextView(forSide: .back)
 				self.backTextView.transform = CGAffineTransform(translationX: halfWidth, y: 0)
 				self.backTextView.alpha = 0
 				self.backTextView.isHidden = false
@@ -132,6 +131,7 @@ class CardEditorViewController: UIViewController, UITextViewDelegate {
 					self.backTextView.alpha = 1
 				}) {
 					guard $0 else { return }
+					self.focusTextView(forSide: .back)
 					completion?(.back)
 				}
 			}
