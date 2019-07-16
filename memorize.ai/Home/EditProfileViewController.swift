@@ -73,6 +73,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func changeBackgroundImage() {
+		if backgroundImage == nil { return chooseImage(.backgroundImage) }
 		chooseImage(.backgroundImage) {
 			self.setBackgroundImageView(nil)
 			self.setLoading(.backgroundImage, loading: true)
@@ -90,6 +91,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func changeProfilePicture() {
+		if profilePicture == nil { return chooseImage(.profilePicture) }
 		chooseImage(.profilePicture) {
 			self.setProfilePictureImageView(DEFAULT_PROFILE_PICTURE)
 			self.setLoading(.profilePicture, loading: true)
