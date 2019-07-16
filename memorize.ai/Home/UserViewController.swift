@@ -68,6 +68,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 						name = snapshot.get("name") as? String ?? name
 						email = snapshot.get("email") as? String ?? email
 						slug = snapshot.get("slug") as? String
+						bio = snapshot.get("bio") as? String ?? bio
 						self.createHelloLabel()
 						User.save()
 						ChangeHandler.call(.profileModified)
