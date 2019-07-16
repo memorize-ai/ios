@@ -8,6 +8,7 @@ target 'memorize.ai' do
 	pod 'Firebase/Storage'
 	pod 'Firebase/Messaging'
 	pod 'Firebase/Functions'
+	pod 'Firebase/DynamicLinks'
 	pod 'InstantSearchClient'
 	pod 'Down', :git => 'https://github.com/iwasrobbed/Down.git'
 	pod 'SwiftyMimeTypes'
