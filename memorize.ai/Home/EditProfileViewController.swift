@@ -62,13 +62,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: self)
-		if let uploadsVC = segue.destination as? UploadsViewController, sender as? Bool ?? false {
+		if let uploadsVC = segue.destination as? UploadsViewController, sender as? Bool ?? false, let currentImageEditing = currentImageEditing {
 			uploadsVC.audioAllowed = false
 			uploadsVC.completion = { upload in
 				if upload.type == .audio { return self.showNotification("Upload must be an image or gif", type: .error) }
-				self.setLoading(true)
+				self.setLoading(currentImageEditing, loading: true)
 				if let image = upload.image {
-					self.uploadImage(image) { success in
+					self.setProfilePictureImageView(image)
+					self.uploadImage(image, type: currentImageEditing) { success in
 						self.setLoading(false)
 						if success {
 							profilePicture = image
@@ -78,6 +79,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 						self.pictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
 					}
 				} else {
+					self.setProfilePictureImageView(nil)
 					upload.load { _, error in
 						self.setLoading(false)
 						if error == nil, let image = upload.image {
@@ -95,16 +97,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBAction
 	func changeBackgroundImage() {
 		chooseImage(.backgroundImage) {
-			self.backgroundImageView.image = nil
-			self.backgroundImageView.backgroundColor = .lightGray
+			self.setBackgroundImageView(nil)
 			self.setLoading(.backgroundImage, loading: true)
 			self.uploadImage(nil, type: .backgroundImage) { success in
 				self.setLoading(.backgroundImage, loading: false)
 				if success {
 					self.showNotification("Reset background image", type: .success)
 				} else {
-					self.backgroundImageView.image = backgroundImage
-					self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
+					self.setBackgroundImageView(backgroundImage)
 					self.showNotification("Unable to reset background image. Please try again", type: .error)
 				}
 			}
@@ -114,14 +114,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBAction
 	func changeProfilePicture() {
 		chooseImage(.profilePicture) {
-			self.profilePictureImageView.image = DEFAULT_PROFILE_PICTURE
+			self.setProfilePictureImageView(DEFAULT_PROFILE_PICTURE)
 			self.setLoading(.profilePicture, loading: true)
 			self.uploadImage(nil, type: .profilePicture) { success in
 				self.setLoading(.profilePicture, loading: false)
 				if success {
 					self.showNotification("Reset profile picture", type: .success)
 				} else {
-					self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+					self.setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
 					self.showNotification("Unable to reset profile picture. Please try again", type: .error)
 				}
 			}
@@ -219,9 +219,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func load() {
-		backgroundImageView.image = backgroundImage
-		backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
-		profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+		setBackgroundImageView(backgroundImage)
+		setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
 		nameLabel.text = name
 		bioLabel.text = bio
 		emailLabel.text = email
@@ -233,9 +232,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		if let currentImageEditing = currentImageEditing, let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 			switch currentImageEditing {
 			case .profilePicture:
-				profilePictureImageView.image = image
+				setProfilePictureImageView(image)
 			case .backgroundImage:
-				backgroundImageView.image = image
+				setBackgroundImageView(image)
 			}
 			setLoading(currentImageEditing, loading: true)
 			uploadImage(image, type: currentImageEditing) { success in
@@ -245,15 +244,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 					if success {
 						self.showNotification("Updated profile picture", type: .success)
 					} else {
-						self.profilePictureImageView.image = profilePicture ?? DEFAULT_PROFILE_PICTURE
+						self.setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
 						self.showNotification("Unable to set profile picture. Please try again", type: .error)
 					}
 				case .backgroundImage:
 					if success {
 						self.showNotification("Updated background image", type: .success)
 					} else {
-						self.backgroundImageView.image = backgroundImage
-						self.backgroundImageView.backgroundColor = backgroundImage == nil ? .lightGray : .white
+						self.setBackgroundImageView(backgroundImage)
 						self.showNotification("Unable to set background image. Please try again", type: .error)
 					}
 				}
@@ -347,6 +345,18 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				completion(true)
 			}
 		}
+	}
+	
+	func setProfilePictureImageView(_ image: UIImage?) {
+		profilePictureImageView.image = image
+		let isImageNil = image == nil
+		profilePictureImageView.layer.borderWidth = isImageNil ? 0.5 : 0
+		profilePictureImageView.layer.borderColor = isImageNil ? UIColor.lightGray.cgColor : nil
+	}
+	
+	func setBackgroundImageView(_ image: UIImage?) {
+		backgroundImageView.image = image
+		backgroundImageView.backgroundColor = image == nil ? .lightGray : .white
 	}
 	
 	func resizeOptionsTableView() {
