@@ -95,8 +95,12 @@ class Deck: Linkable {
 		return cache.getImage() ?? DEFAULT_DECK_IMAGE
 	}
 	
-	static func url(id: String) -> URL? {
-		return URL(string: "\(MEMORIZE_AI_BASE_URL)/d/\(id)")
+	static func dynamicLink(id: String) -> URL? {
+		return createDynamicLink("d/\(id)")
+	}
+	
+	static func link(id: String) -> URL? {
+		return createLink("d/\(id)")
 	}
 	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
