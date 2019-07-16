@@ -2,8 +2,10 @@ import Foundation
 
 var invites = [Invite]()
 
-class Invite {
+class Invite: Linkable {
 	let id: String
+	let link: URL?
+	let dynamicLink: URL?
 	var role: Role
 	let date: Date
 	var confirmed: Date?
@@ -17,6 +19,9 @@ class Invite {
 		self.confirmed = confirmed
 		self.status = status
 		self.sender = sender
+		let ext = "i/\(id)"
+		dynamicLink = createDynamicLink(ext)
+		link = createLink(ext)
 	}
 }
 

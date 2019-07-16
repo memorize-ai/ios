@@ -1,8 +1,10 @@
 import Foundation
 import Firebase
 
-class Card {
+class Card: Linkable {
 	let id: String
+	let dynamicLink: URL?
+	let link: URL?
 	var front: String
 	var back: String
 	let created: Date
@@ -37,6 +39,9 @@ class Card {
 		self.next = next
 		self.history = history
 		self.deck = deck
+		let ext = "d/\(deck)/c/\(id)"
+		dynamicLink = createDynamicLink(ext)
+		link = createLink(ext)
 	}
 	
 	convenience init(id: String, front: String, back: String, created: Date, updated: Date, likes: Int, dislikes: Int, deck: String) {

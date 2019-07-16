@@ -6,8 +6,10 @@ var decks: [Deck] {
 	return allDecks.filter { !$0.hidden }
 }
 
-class Deck {
+class Deck: Linkable {
 	let id: String
+	let dynamicLink: URL?
+	let link: URL?
 	var hasImage: Bool
 	var image: UIImage?
 	var name: String
@@ -53,6 +55,9 @@ class Deck {
 		self.mastered = mastered
 		self.role = role
 		self.hidden = hidden
+		let ext = "d/\(id)"
+		dynamicLink = createDynamicLink(ext)
+		link = createLink(ext)
 	}
 	
 	var cardDraft: CardDraft? {

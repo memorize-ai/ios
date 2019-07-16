@@ -10,7 +10,18 @@ var backgroundImage: UIImage?
 var token: String?
 var selectedDeckId: String?
 
-class User {
+class User: Linkable {
+	let id: String
+	let dynamicLink: URL?
+	let link: URL?
+	
+	init(id: String) {
+		self.id = id
+		let ext = "u/\(id)"
+		dynamicLink = createDynamicLink(ext)
+		link = createLink(ext)
+	}
+	
 	enum ImageType: String {
 		case profilePicture = "profile"
 		case backgroundImage = "background"
