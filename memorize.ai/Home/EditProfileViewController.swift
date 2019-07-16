@@ -66,40 +66,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			uploadsVC.audioAllowed = false
 			uploadsVC.completion = { upload in
 				if upload.type == .audio { return self.showNotification("Upload must be an image or gif", type: .error) }
-				let errorMessage = "Unable to set \(currentImageEditing.description). Please try again"
-				self.setLoading(currentImageEditing, loading: true)
-				let image = upload.image
-				switch currentImageEditing {
-				case .profilePicture:
-					self.setProfilePictureImageView(image)
-				case .backgroundImage:
-					self.setBackgroundImageView(image)
-				}
-				if let image = image {
-					// TODO
-				} else {
-					upload.load { _, error in
-						if error == nil, let image = upload.image {
-							switch currentImageEditing {
-							case .profilePicture:
-								self.setProfilePictureImageView(image)
-							case .backgroundImage:
-								self.setBackgroundImageView(image)
-							}
-							self.uploadImage(image, type: currentImageEditing) { success in
-								self.setLoading(currentImageEditing, loading: false)
-								if success {
-									self.showNotification("Updated \(currentImageEditing.description)", type: .success)
-								} else {
-									self.setBackgroundImageView(backgroundImage)
-									self.showNotification(errorMessage, type: .error)
-								}
-							}
-						} else {
-							self.showNotification(errorMessage, type: .error)
-						}
-					}
-				}
+				self.handleUpload(upload, type: currentImageEditing)
 			}
 		}
 	}
@@ -353,6 +320,49 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 					User.cache(id, image: nil, type: .backgroundImage)
 				}
 				completion(true)
+			}
+		}
+	}
+	
+	func handleUpload(_ upload: Upload, type imageType: User.ImageType) {
+		let errorMessage = "Unable to set \(imageType.description). Please try again"
+		func setImage(_ image: UIImage?) {
+			switch imageType {
+			case .profilePicture:
+				setProfilePictureImageView(image)
+			case .backgroundImage:
+				setBackgroundImageView(image)
+			}
+		}
+		func uploadImage(_ image: UIImage) {
+			self.uploadImage(image, type: imageType) { success in
+				self.setLoading(imageType, loading: false)
+				if success {
+					self.showNotification("Updated \(imageType.description)", type: .success)
+				} else {
+					switch imageType {
+					case .profilePicture:
+						self.setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
+					case .backgroundImage:
+						self.setBackgroundImageView(backgroundImage)
+					}
+					self.showNotification(errorMessage, type: .error)
+				}
+			}
+		}
+		self.setLoading(imageType, loading: true)
+		let image = upload.image
+		setImage(image)
+		if let image = image {
+			uploadImage(image)
+		} else {
+			upload.load { _, error in
+				if error == nil, let image = upload.image {
+					setImage(image)
+					uploadImage(image)
+				} else {
+					self.showNotification(errorMessage, type: .error)
+				}
 			}
 		}
 	}
