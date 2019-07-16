@@ -199,10 +199,20 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		setBackgroundImageView(backgroundImage)
 		setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
 		nameLabel.text = name
-		bioLabel.text = bio
+		setBio()
 		emailLabel.text = email
 		profileLinkLabel.text = "PROFILE LINK\(slug == nil ? " (LOADING)" : "")"
 		profileLinkTextLabel.text = User.urlString(slug: slug ?? "...")
+	}
+	
+	func setBio() {
+		if let bio = bio, !bio.isEmpty {
+			bioLabel.text = bio
+			bioLabel.textColor = .black
+		} else {
+			bioLabel.text = "(no bio)"
+			bioLabel.textColor = .darkGray
+		}
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
