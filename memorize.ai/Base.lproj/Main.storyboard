@@ -672,6 +672,11 @@
                                                             <constraint firstAttribute="trailing" secondItem="B9Q-s3-Q6P" secondAttribute="trailing" id="qe7-le-0J2"/>
                                                             <constraint firstAttribute="bottom" secondItem="yMM-Wf-KcC" secondAttribute="bottom" id="whE-hY-fkR"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
