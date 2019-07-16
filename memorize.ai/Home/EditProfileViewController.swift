@@ -376,7 +376,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func setBackgroundImageView(_ image: UIImage?) {
 		backgroundImageView.image = image
-		backgroundImageView.backgroundColor = image == nil ? .lightGray : .white
+		backgroundImageView.backgroundColor = image == nil ? DEFAULT_BACKGROUND_IMAGE_COLOR : .white
 	}
 	
 	func resizeOptionsTableView() {

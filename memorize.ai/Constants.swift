@@ -7,6 +7,7 @@ let COMPRESSION_QUALITY: CGFloat = 0.5
 let JPEG_METADATA = StorageMetadata(mime: "image/jpeg")
 let DEFAULT_E = 2.5
 let DEFAULT_PROFILE_PICTURE = #imageLiteral(resourceName: "Person")
+let DEFAULT_BACKGROUND_IMAGE_COLOR: UIColor = .lightGray
 let DEFAULT_DECK_IMAGE = #imageLiteral(resourceName: "Gray Deck")
 let UPLOAD_SOUND_ICON = #imageLiteral(resourceName: "Sound")
 let DEFAULT_BLUE_COLOR = #colorLiteral(red: 0, green: 0.5694751143, blue: 1, alpha: 1)
