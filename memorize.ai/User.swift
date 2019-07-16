@@ -14,6 +14,15 @@ class User {
 	enum ImageType: String {
 		case profilePicture = "profile"
 		case backgroundImage = "background"
+		
+		var description: String {
+			switch self {
+			case .profilePicture:
+				return "profile picture"
+			case .backgroundImage:
+				return "background image"
+			}
+		}
 	}
 	
 	enum ImageFetchError: Error {
