@@ -84,10 +84,16 @@ class DeckSettingsViewController: UIViewController, UITableViewDataSource, UITab
 	
 	@objc
 	func share() {
-		if let deckId = deck?.id, let url = Deck.url(id: deckId) {
-			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-			activityVC.popoverPresentationController?.sourceView = view
-			present(activityVC, animated: true, completion: nil)
+		if let deckId = deck?.id, let name = deck?.name, let creatorId = deck?.creator, let hasImage = deck?.hasImage {
+			firestore.document("users/\(creatorId)").getDocument { snapshot, error in
+				guard error == nil, let creatorName = snapshot?.get("name") as? String else { return self.showNotification("Unable to share deck. Please try again", type: .error) }
+				Deck.getDynamicLink(id: deckId, name: name, creatorName: creatorName, hasImage: hasImage) { url in
+					guard let url = url else { return self.showNotification("Unable to share deck. Please try again", type: .error) }
+					let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+					activityVC.popoverPresentationController?.sourceView = self.view
+					self.present(activityVC, animated: true, completion: nil)
+				}
+			}
 		} else {
 			showNotification("Unable to share deck. Please try again", type: .error)
 		}
