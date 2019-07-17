@@ -347,8 +347,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	@objc
 	func share() {
-		if let deckId = deck.id, let name = deck.name, let creatorName = deck.creator.name {
-			Deck.getDynamicLink(id: deckId, name: name, creatorName: creatorName) { url in
+		if let deckId = deck.id, let name = deck.name, let creatorName = deck.creator.name, let hasImage = deck.hasImage {
+			Deck.getDynamicLink(id: deckId, name: name, creatorName: creatorName, hasImage: hasImage) { url in
 				guard let url = url else { return self.showNotification("Unable to share deck. Please try again", type: .error) }
 				let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
 				activityVC.popoverPresentationController?.sourceView = self.view

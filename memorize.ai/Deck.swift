@@ -90,7 +90,7 @@ class Deck {
 		return cache.getImage() ?? DEFAULT_DECK_IMAGE
 	}
 	
-	static func getDynamicLink(id: String, name: String, creatorName: String, completion: @escaping (URL?) -> Void) {
+	static func getDynamicLink(id: String, name: String, creatorName: String, hasImage: Bool = true, completion: @escaping (URL?) -> Void) {
 		func callCompletion(_ url: String?) {
 			completion(createDynamicLink(
 				"d/\(id)",
@@ -99,8 +99,12 @@ class Deck {
 				imageURL: url ?? "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-deck-image.png?alt=media&token=8329a28b-494c-4e1a-9b88-8ff614b2bb96"
 			))
 		}
-		storage.child("decks/\(id)").downloadURL { url, error in
-			callCompletion(error == nil ? url?.absoluteString : nil)
+		if hasImage {
+			storage.child("decks/\(id)").downloadURL { url, error in
+				callCompletion(error == nil ? url?.absoluteString : nil)
+			}
+		} else {
+			callCompletion(nil)
 		}
 	}
 	
