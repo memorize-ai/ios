@@ -15,7 +15,6 @@
 		4D052AC12204259C0093B64E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D052ABF2204259C0093B64E /* LaunchScreen.storyboard */; };
 		4D052ACC2204259C0093B64E /* memorize_aiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052ACB2204259C0093B64E /* memorize_aiTests.swift */; };
 		4D052AD72204259C0093B64E /* memorize_aiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052AD62204259C0093B64E /* memorize_aiUITests.swift */; };
-		4D052AE5220427260093B64E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D052AE4220427260093B64E /* GoogleService-Info.plist */; };
 		4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */; };
 		4D12041A22A8E7EE00DAC7D9 /* CardPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */; };
 		4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1882C0226E696000F29F99 /* CardsViewController.swift */; };
@@ -26,6 +25,7 @@
 		4D37C73B22DA4022008B4156 /* EmojiGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D37C73A22DA4022008B4156 /* EmojiGameViewController.swift */; };
 		4D3D7C5A22C52CA000D34700 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D7C5922C52CA000D34700 /* TutorialViewController.swift */; };
 		4D4A312A22DD7CD600D6F271 /* DynamicLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A312922DD7CD600D6F271 /* DynamicLink.swift */; };
+		4D4A312C22DDB41300D6F271 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A312B22DDB41200D6F271 /* GoogleService-Info.plist */; };
 		4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */; };
 		4D5F1F12229E19EF00AC7732 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F11229E19EF00AC7732 /* Deck.swift */; };
 		4D5F1F14229E1A3400AC7732 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5F1F13229E1A3400AC7732 /* Card.swift */; };
@@ -205,7 +205,6 @@
 		4D052AD22204259C0093B64E /* memorize.aiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = memorize.aiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D052AD62204259C0093B64E /* memorize_aiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memorize_aiUITests.swift; sourceTree = "<group>"; };
 		4D052AD82204259C0093B64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D052AE4220427260093B64E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D12041722A8E7DC00DAC7D9 /* CardEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditorViewController.swift; sourceTree = "<group>"; };
 		4D12041922A8E7EE00DAC7D9 /* CardPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewViewController.swift; sourceTree = "<group>"; };
 		4D1882C0226E696000F29F99 /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +215,7 @@
 		4D37C73A22DA4022008B4156 /* EmojiGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGameViewController.swift; sourceTree = "<group>"; };
 		4D3D7C5922C52CA000D34700 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		4D4A312922DD7CD600D6F271 /* DynamicLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLink.swift; sourceTree = "<group>"; };
+		4D4A312B22DDB41200D6F271 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D4D00AE2206CEB1008F0ABD /* DecksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		4D5F1F11229E19EF00AC7732 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		4D5F1F13229E1A3400AC7732 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -482,7 +482,7 @@
 				4D052AB32204259B0093B64E /* AppDelegate.swift */,
 				4D052ABF2204259C0093B64E /* LaunchScreen.storyboard */,
 				4D052AC22204259C0093B64E /* Info.plist */,
-				4D052AE4220427260093B64E /* GoogleService-Info.plist */,
+				4D4A312B22DDB41200D6F271 /* GoogleService-Info.plist */,
 				4DC857DD221B824400FD2100 /* memorize.ai.entitlements */,
 				4D052ABA2204259B0093B64E /* memorize_ai.xcdatamodeld */,
 				4D6438F722056528006F4F2D /* Nunito */,
@@ -887,7 +887,6 @@
 				4DB8AE2B2287CE1800A08AFA /* KaTeX_Main-Regular.woff2 in Resources */,
 				4DB8AE302287CE1800A08AFA /* KaTeX_Caligraphic-Regular.woff in Resources */,
 				4DB8AE2D2287CE1800A08AFA /* KaTeX_Caligraphic-Bold.woff2 in Resources */,
-				4D052AE5220427260093B64E /* GoogleService-Info.plist in Resources */,
 				4DB8AE562287CE1800A08AFA /* KaTeX_Script-Regular.woff in Resources */,
 				4DB8AE162287CE1800A08AFA /* auto-render.mjs in Resources */,
 				4D64390B22056528006F4F2D /* Nunito-SemiBold.ttf in Resources */,
@@ -900,6 +899,7 @@
 				4D64390722056528006F4F2D /* Nunito-ExtraBold.ttf in Resources */,
 				4DB8AE4A2287CE1800A08AFA /* KaTeX_Math-Italic.ttf in Resources */,
 				4D64390D22056528006F4F2D /* Nunito-BoldItalic.ttf in Resources */,
+				4D4A312C22DDB41300D6F271 /* GoogleService-Info.plist in Resources */,
 				4DB8AE552287CE1800A08AFA /* KaTeX_Fraktur-Bold.woff in Resources */,
 				4D64390C22056528006F4F2D /* Nunito-Bold.ttf in Resources */,
 				4DB8AE282287CE1800A08AFA /* KaTeX_Main-BoldItalic.woff in Resources */,
