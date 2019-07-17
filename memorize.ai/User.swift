@@ -10,18 +10,7 @@ var backgroundImage: UIImage?
 var token: String?
 var selectedDeckId: String?
 
-class User: Linkable {
-	let id: String
-	let dynamicLink: URL?
-	let link: URL?
-	
-	init(id: String) {
-		self.id = id
-		let ext = "u/\(id)"
-		dynamicLink = createDynamicLink(ext)
-		link = createLink(ext)
-	}
-	
+class User {
 	enum ImageType: String {
 		case profilePicture = "profile"
 		case backgroundImage = "background"
@@ -54,6 +43,20 @@ class User: Linkable {
 		}
 		set {
 			defaults.setValue(newValue, forKey: "shouldShowEditCardTip")
+		}
+	}
+	
+	static func getDynamicLink(id: String, name: String, slug: String, completion: @escaping (URL?) -> Void) {
+		func callCompletion(_ url: String?) {
+			completion(createDynamicLink(
+				urlString(slug: slug),
+				title: "\(name) on memorize.ai",
+				description: "\(name)'s profile on memorize.ai",
+				imageURL: url ?? "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-profile-picture.png?alt=media&token=5c5c8826-0eab-4234-a1a6-b7cfc5af021e"
+			))
+		}
+		storage.child("users/\(id)/profile").downloadURL { url, error in
+			callCompletion(error == nil ? url?.absoluteString : nil)
 		}
 	}
 	
