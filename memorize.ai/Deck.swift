@@ -6,10 +6,8 @@ var decks: [Deck] {
 	return allDecks.filter { !$0.hidden }
 }
 
-class Deck: Linkable {
+class Deck {
 	let id: String
-	let dynamicLink: URL?
-	let link: URL?
 	var hasImage: Bool
 	var image: UIImage?
 	var name: String
@@ -55,9 +53,6 @@ class Deck: Linkable {
 		self.mastered = mastered
 		self.role = role
 		self.hidden = hidden
-		let ext = "d/\(id)"
-		dynamicLink = createDynamicLink(ext)
-		link = createLink(ext)
 	}
 	
 	var cardDraft: CardDraft? {
@@ -95,12 +90,18 @@ class Deck: Linkable {
 		return cache.getImage() ?? DEFAULT_DECK_IMAGE
 	}
 	
-	static func dynamicLink(id: String) -> URL? {
-		return createDynamicLink("d/\(id)")
-	}
-	
-	static func link(id: String) -> URL? {
-		return createLink("d/\(id)")
+	static func getDynamicLink(id: String, name: String, creatorName: String, completion: @escaping (URL?) -> Void) {
+		func callCompletion(_ url: String?) {
+			completion(createDynamicLink(
+				"d/\(id)",
+				title: "Check out \(name) on memorize.ai",
+				description: "Check out \(name) created by \(creatorName) on memorize.ai",
+				imageURL: url ?? "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-deck-image.png?alt=media&token=8329a28b-494c-4e1a-9b88-8ff614b2bb96"
+			))
+		}
+		storage.child("decks/\(id)").downloadURL { url, error in
+			callCompletion(error == nil ? url?.absoluteString : nil)
+		}
 	}
 	
 	static func new(_ deckId: String, completion: @escaping (Error?) -> Void) {
