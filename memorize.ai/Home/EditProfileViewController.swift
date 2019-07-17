@@ -439,6 +439,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		present(mailComposeVC, animated: true, completion: nil)
 	}
 	
+	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+		dismiss(animated: true, completion: nil)
+	}
+	
 	@IBAction
 	func signOut() {
 		let alertController = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
