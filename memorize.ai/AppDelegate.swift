@@ -2,6 +2,7 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
+import FirebaseDynamicLinks
 import Fabric
 import Crashlytics
 
@@ -19,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 		Messaging.messaging().delegate = self
 		Fabric.with([Crashlytics.self])
 		return true
+	}
+	
+	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+		guard let url = userActivity.webpageURL else { return false }
+		return DynamicLinks.dynamicLinks().handleUniversalLink(url) { dynamicLink, error in
+			
+		}
 	}
 	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
