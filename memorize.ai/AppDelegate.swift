@@ -29,16 +29,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 			let dynamicLinkId = String(dynamicLink.suffix(dynamicLink.count - "\(MEMORIZE_AI_BASE_URL)/d/".count))
 			switch true {
 			case dynamicLink.starts(with: "\(MEMORIZE_AI_BASE_URL)/d/"):
-				if let hasImage = Deck.get(dynamicLinkId)?.hasImage {
-					callDynamicLinkHandler(.deck(id: dynamicLinkId, hasImage: hasImage))
+				func showDeck(hasImage: Bool, image: UIImage?) {
+					if let currentViewController = currentViewController {
+						guard let deckVC = currentViewController.storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return currentViewController.showNotification("Unable to load deck. Please try again", type: .error) }
+						deckVC.deck.id = dynamicLinkId
+						deckVC.deck.hasImage = hasImage
+						deckVC.deck.image = image
+						currentViewController.navigationController?.pushViewController(deckVC, animated: true)
+					} else {
+						pendingDynamicLink = .deck(id: dynamicLinkId, hasImage: hasImage)
+					}
+				}
+				if let deck = Deck.get(dynamicLinkId) {
+					showDeck(hasImage: deck.hasImage, image: deck.image)
 				} else {
 					firestore.document("decks/\(dynamicLinkId)").getDocument { snapshot, error in
 						guard error == nil, let snapshot = snapshot else { return }
-						callDynamicLinkHandler(.deck(id: dynamicLinkId, hasImage: snapshot.get("hasImage") as? Bool ?? false))
+						showDeck(hasImage: snapshot.get("hasImage") as? Bool ?? false, image: nil)
 					}
 				}
 			case dynamicLink.starts(with: "\(MEMORIZE_AI_BASE_URL)/u/"):
-				callDynamicLinkHandler(.user(id: dynamicLinkId))
+				print("user dynamic link") //$ Display user profile
 			default:
 				return
 			}

@@ -1,8 +1,7 @@
 import Foundation
 import FirebaseDynamicLinks
 
-var dynamicLinkHandler: ((DynamicLinkType) -> Void)?
-var loadedDynamicLink: DynamicLinkType?
+var pendingDynamicLink: DynamicLinkType?
 
 @discardableResult
 func createDynamicLink(_ ext: String? = nil, title: String, description: String, imageURL imageUrl: URL, minimumVersion: String = "1.0", completion: @escaping (URL?) -> Void) -> URL? {
@@ -20,11 +19,6 @@ func createDynamicLink(_ ext: String? = nil, title: String, description: String,
 
 func createLink(_ ext: String? = nil) -> URL? {
 	return URL(string: "\(MEMORIZE_AI_BASE_URL)\(ext == nil ? "" : "/\(ext ?? "")")")
-}
-
-func callDynamicLinkHandler(_ type: DynamicLinkType) {
-	dynamicLinkHandler?(type)
-	loadedDynamicLink = type
 }
 
 enum DynamicLinkType {
