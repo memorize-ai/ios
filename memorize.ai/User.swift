@@ -47,17 +47,11 @@ class User {
 	}
 	
 	static func getDynamicLink(id: String, name: String, slug: String, completion: @escaping (URL?) -> Void) {
-		func callCompletion(_ url: String?) {
-			completion(createDynamicLink(
-				urlString(slug: slug),
-				title: "\(name) on memorize.ai",
-				description: "\(name)'s profile on memorize.ai",
-				imageURL: url ?? "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-profile-picture.png?alt=media&token=5c5c8826-0eab-4234-a1a6-b7cfc5af021e"
-			))
+		func callCompletion(_ url: URL?) {
+			guard let url = url ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-profile-picture.png?alt=media&token=5c5c8826-0eab-4234-a1a6-b7cfc5af021e") else { return completion(nil) }
+			createDynamicLink(urlString(slug: slug), title: "\(name) on memorize.ai", description: "\(name)'s profile on memorize.ai", imageURL: url, completion: completion)
 		}
-		storage.child("users/\(id)/profile").downloadURL { url, error in
-			callCompletion(error == nil ? url?.absoluteString : nil)
-		}
+		storage.child("users/\(id)/profile").downloadURL { callCompletion($1 == nil ? $0 : nil) }
 	}
 	
 	@discardableResult

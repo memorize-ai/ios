@@ -91,18 +91,12 @@ class Deck {
 	}
 	
 	static func getDynamicLink(id: String, name: String, creatorName: String, hasImage: Bool = true, completion: @escaping (URL?) -> Void) {
-		func callCompletion(_ url: String?) {
-			completion(createDynamicLink(
-				"d/\(id)",
-				title: "Check out \(name) on memorize.ai",
-				description: "Check out \(name) created by \(creatorName) on memorize.ai",
-				imageURL: url ?? "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-deck-image.png?alt=media&token=8329a28b-494c-4e1a-9b88-8ff614b2bb96"
-			))
+		func callCompletion(_ url: URL?) {
+			guard let url = url ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/memorize-ai.appspot.com/o/static%2Fdefault-deck-image.png?alt=media&token=8329a28b-494c-4e1a-9b88-8ff614b2bb96") else { return completion(nil) }
+			createDynamicLink("d/\(id)", title: "Check out \(name) on memorize.ai", description: "Check out \(name) created by \(creatorName) on memorize.ai", imageURL: url, completion: completion)
 		}
 		if hasImage {
-			storage.child("decks/\(id)").downloadURL { url, error in
-				callCompletion(error == nil ? url?.absoluteString : nil)
-			}
+			storage.child("decks/\(id)").downloadURL { callCompletion($1 == nil ? $0 : nil) }
 		} else {
 			callCompletion(nil)
 		}
