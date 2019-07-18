@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 					showDeck(hasImage: deck.hasImage, image: deck.image)
 				} else {
 					firestore.document("decks/\(dynamicLinkId)").getDocument { snapshot, error in
-						guard error == nil, let snapshot = snapshot else { return }
+						guard error == nil, let snapshot = snapshot else { return currentViewController?.showNotification("Unable to load deck. Please try again", type: .error) ?? () }
 						showDeck(hasImage: snapshot.get("hasImage") as? Bool ?? false, image: nil)
 					}
 				}

@@ -161,7 +161,21 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if let pendingDynamicLink = pendingDynamicLink {
 			switch pendingDynamicLink {
 			case .deck(id: let deckId, hasImage: let hasImage):
-				
+				func showDeck(hasImage: Bool, image: UIImage?) {
+					guard let deckVC = storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return showNotification("Unable to load deck. Please try again", type: .error) }
+					deckVC.deck.id = deckId
+					deckVC.deck.hasImage = hasImage
+					deckVC.deck.image = image
+					navigationController?.pushViewController(deckVC, animated: true)
+				}
+				if let deck = Deck.get(deckId) {
+					showDeck(hasImage: deck.hasImage, image: deck.image)
+				} else {
+					firestore.document("decks/\(deckId)").getDocument { snapshot, error in
+						guard error == nil, let snapshot = snapshot else { return self.showNotification("Unable to load deck. Please try again", type: .error) }
+						showDeck(hasImage: snapshot.get("hasImage") as? Bool ?? false, image: nil)
+					}
+				}
 			case .user(id: _):
 				print("user dynamic link") //$ Display user profile
 			}
