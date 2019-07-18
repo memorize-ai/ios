@@ -155,10 +155,8 @@ enum UploadType: String {
 	
 	var fileFormat: FileFormat {
 		switch self {
-		case .image:
+		case .image, .gif:
 			return .image
-		case .gif:
-			return .image // Change to gif
 		case .audio:
 			return .audio
 		}

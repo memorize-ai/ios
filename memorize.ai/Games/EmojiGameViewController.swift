@@ -115,7 +115,7 @@ class EmojiGameViewController: UIViewController, UICollectionViewDataSource, UIC
 		if let emoji = emojisToGuess.first {
 			mainLabel.text = "How many \(emoji) were there?"
 		} else {
-			// Show completion
+			//$ Show completion
 		}
 	}
 	
