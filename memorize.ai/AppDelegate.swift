@@ -44,8 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	    if context.hasChanges {
 	        do {
 	            try context.save()
-	        } catch {
-	            let error = error as NSError
+	        } catch let error as NSError {
 	            fatalError("Unresolved error \(error), \(error.userInfo)")
 	        }
 	    }
