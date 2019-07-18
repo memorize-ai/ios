@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 			switch true {
 			case dynamicLink.starts(with: "\(MEMORIZE_AI_BASE_URL)/d/"):
 				func showDeck(hasImage: Bool, image: UIImage?) {
-					if let currentViewController = currentViewController {
+					if let currentViewController = currentViewController, User.signedIn {
 						guard let deckVC = currentViewController.storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return currentViewController.showNotification("Unable to load deck. Please try again", type: .error) }
 						deckVC.deck.id = dynamicLinkId
 						deckVC.deck.hasImage = hasImage

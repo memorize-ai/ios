@@ -45,6 +45,9 @@ class User {
 			defaults.setValue(newValue, forKey: "shouldShowEditCardTip")
 		}
 	}
+	static var signedIn: Bool {
+		return get() != nil
+	}
 	
 	static func getDynamicLink(id: String, name: String, slug: String, completion: @escaping (URL?) -> Void) {
 		func callCompletion(_ url: URL?) {
