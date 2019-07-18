@@ -167,12 +167,17 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 					deckVC.deck.hasImage = hasImage
 					deckVC.deck.image = image
 					navigationController?.pushViewController(deckVC, animated: true)
+					memorize_ai.pendingDynamicLink = nil
 				}
 				if let deck = Deck.get(deckId) {
 					showDeck(hasImage: deck.hasImage, image: deck.image)
 				} else {
 					firestore.document("decks/\(deckId)").getDocument { snapshot, error in
-						guard error == nil, let snapshot = snapshot else { return self.showNotification("Unable to load deck. Please try again", type: .error) }
+						guard error == nil, let snapshot = snapshot else {
+							self.showNotification("Unable to load deck. Please try again", type: .error)
+							memorize_ai.pendingDynamicLink = nil
+							return
+						}
 						showDeck(hasImage: snapshot.get("hasImage") as? Bool ?? false, image: nil)
 					}
 				}
