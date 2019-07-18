@@ -1,4 +1,4 @@
-platform :ios, '12.1'
+platform :ios, '10.0'
 
 target 'memorize.ai' do
 	use_frameworks!
