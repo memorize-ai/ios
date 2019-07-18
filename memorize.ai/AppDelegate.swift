@@ -25,7 +25,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 		guard let url = userActivity.webpageURL else { return false }
 		return DynamicLinks.dynamicLinks().handleUniversalLink(url) { dynamicLink, error in
-			
+			guard error == nil, let dynamicLink = dynamicLink?.url?.absoluteString else { return }
+			let dynamicLinkId = String(dynamicLink.suffix(dynamicLink.count - "\(MEMORIZE_AI_BASE_URL)/d/".count))
+			switch true {
+			case dynamicLink.starts(with: "\(MEMORIZE_AI_BASE_URL)/d/"):
+				if let hasImage = Deck.get(dynamicLinkId)?.hasImage {
+					callDynamicLinkHandler(.deck(id: dynamicLinkId, hasImage: hasImage))
+				} else {
+					firestore.document("decks/\(dynamicLinkId)").getDocument { snapshot, error in
+						guard error == nil, let snapshot = snapshot else { return }
+						callDynamicLinkHandler(.deck(id: dynamicLinkId, hasImage: snapshot.get("hasImage") as? Bool ?? false))
+					}
+				}
+			case dynamicLink.starts(with: "\(MEMORIZE_AI_BASE_URL)/u/"):
+				callDynamicLinkHandler(.user(id: dynamicLinkId))
+			default:
+				return
+			}
 		}
 	}
 	
