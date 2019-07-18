@@ -81,6 +81,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				loadCardDrafts()
 				loadRatings()
 				loadRatingDrafts()
+				handlePendingDynamicLink()
 			} else {
 				signIn()
 			}
@@ -106,6 +107,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		loadProfileBarButtonItem(nil)
 		cardsCollectionView.reloadData()
 		if shouldLoadDecks {
+			shouldLoadDecks = false
 			updateLastOnline()
 			loadBarButtonItems(image: DEFAULT_PROFILE_PICTURE)
 			reloadProfileBarButtonItem()
@@ -122,7 +124,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			registerForNotifications?()
 			StoreReview.onStartup()
 			Cache.removeAllExpired()
-			shouldLoadDecks = false
+			handlePendingDynamicLink()
 		}
 		updateCurrentViewController()
 	}
@@ -153,6 +155,17 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 		flowLayout.itemSize = CGSize(width: cardsCollectionView.bounds.width, height: 40)
 		flowLayout.minimumLineSpacing = 8
 		cardsCollectionView.collectionViewLayout = flowLayout
+	}
+	
+	func handlePendingDynamicLink() {
+		if let pendingDynamicLink = pendingDynamicLink {
+			switch pendingDynamicLink {
+			case .deck(id: let deckId, hasImage: let hasImage):
+				
+			case .user(id: _):
+				print("user dynamic link") //$ Display user profile
+			}
+		}
 	}
 	
 	@IBAction
