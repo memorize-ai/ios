@@ -115,11 +115,18 @@ class User {
 	}
 	
 	static func save() {
-		guard let id = id, let name = name, let email = email, let bio = bio else { return }
+		guard let id = id, let name = name, let email = email, let bio = bio, let reputation = reputation, let isEmailPublic = isEmailPublic, let isContactAllowed = isContactAllowed, let followersCount = followersCount, let followingCount = followingCount, let totalProfileViews = totalProfileViews, let uniqueProfileViews = uniqueProfileViews else { return }
 		defaults.set(id, forKey: "id")
 		defaults.set(name, forKey: "name")
 		defaults.set(email, forKey: "email")
 		defaults.set(bio, forKey: "bio")
+		defaults.set(reputation, forKey: "reputation")
+		defaults.set(isEmailPublic, forKey: "publicEmail")
+		defaults.set(isContactAllowed, forKey: "allowContact")
+		defaults.set(followersCount, forKey: "followers")
+		defaults.set(followingCount, forKey: "following")
+		defaults.set(totalProfileViews, forKey: "totalViews")
+		defaults.set(uniqueProfileViews, forKey: "uniqueViews")
 		if let slug = slug {
 			defaults.set(slug, forKey: "slug")
 		}
