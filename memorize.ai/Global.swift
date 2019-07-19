@@ -260,6 +260,12 @@ extension Int {
 		return Double(self).formatted
 	}
 	
+	var formattedWithCommas: String {
+		let numberFormatter = NumberFormatter()
+		numberFormatter.numberStyle = .decimal
+		return numberFormatter.string(from: NSNumber(value: self)) ?? String(self)
+	}
+	
 	var plural: String {
 		return Double(self).plural
 	}
