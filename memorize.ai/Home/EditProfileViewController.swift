@@ -45,6 +45,12 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let settingsButton = UIButton(type: .custom)
+		settingsButton.setImage(#imageLiteral(resourceName: "Settings White"), for: .normal)
+		settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
+		settingsButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+		settingsButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+		navigationItem.setRightBarButton(UIBarButtonItem(customView: settingsButton), animated: true)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -434,6 +440,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		view.layoutIfNeeded()
 	}
 	
+	@objc
 	func showSettings() {
 		performSegue(withIdentifier: "settings", sender: self)
 	}
