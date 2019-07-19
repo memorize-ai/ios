@@ -43,6 +43,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		Option(image: #imageLiteral(resourceName: "Book"), name: "Tutorial", action: showTutorial)
 	] + (MFMailComposeViewController.canSendMail() ? [Option(image: #imageLiteral(resourceName: "Mail"), name: "Contact Us", action: showContactUsEmail)] : [])
 	var currentImageEditing: User.ImageType?
+	var isBioExpanded = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -201,6 +202,13 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
+	@IBAction
+	func showFullBio() {
+		showFullBioButton.isEnabled = false
+		isBioExpanded = true
+		setBio()
+	}
+	
 	func load() {
 		setBackgroundImageView(backgroundImage)
 		setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
@@ -212,12 +220,20 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func setBio() {
-		if let bio = bio, !bio.isEmpty {
-			bioLabel.text = bio
-			bioLabel.textColor = .black
-		} else {
+		guard let bio = bio else { return }
+		if bio.isEmpty {
 			bioLabel.text = "(no bio)"
 			bioLabel.textColor = .darkGray
+		} else {
+			bioLabel.text = bio
+			bioLabel.textColor = .black
+		}
+		if isBioExpanded {
+			bioMoreLabel.isHidden = true
+			bioLabelHeightConstraint?.isActive = false
+			view.layoutIfNeeded()
+		} else {
+			bioMoreLabel.isHidden = !bioLabel.isTruncated
 		}
 	}
 	
