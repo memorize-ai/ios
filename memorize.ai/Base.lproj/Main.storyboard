@@ -603,41 +603,41 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYH-jX-HdN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="114" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="123" height="55"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kJ-4c-4oc">
-                                                                <rect key="frame" x="8" y="8" width="98" height="34"/>
+                                                                <rect key="frame" x="8" y="8" width="107" height="39"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Share" translatesAutoresizingMaskIntoConstraints="NO" id="aqn-xu-IIJ">
-                                                                        <rect key="frame" x="4" y="4" width="24" height="24"/>
+                                                                        <rect key="frame" x="8" y="6" width="25" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="aqn-xu-IIJ" secondAttribute="height" id="pcD-jt-dll"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHARE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifC-DE-8gv">
-                                                                        <rect key="frame" x="34" y="5" width="58" height="24"/>
+                                                                        <rect key="frame" x="39" y="7.6666666666666714" width="58" height="24"/>
                                                                         <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
-                                                                <color key="backgroundColor" white="0.67000000000000004" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="ifC-DE-8gv" firstAttribute="leading" secondItem="aqn-xu-IIJ" secondAttribute="trailing" constant="6" id="APE-r1-vzi"/>
                                                                     <constraint firstItem="ifC-DE-8gv" firstAttribute="centerY" secondItem="5kJ-4c-4oc" secondAttribute="centerY" id="OaZ-Mz-dGi"/>
-                                                                    <constraint firstItem="aqn-xu-IIJ" firstAttribute="top" secondItem="5kJ-4c-4oc" secondAttribute="top" constant="4" id="Rk7-RH-L2d"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="ifC-DE-8gv" secondAttribute="trailing" constant="6" id="YoI-So-Bga"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="aqn-xu-IIJ" secondAttribute="bottom" constant="6" id="qFA-jF-kH4"/>
-                                                                    <constraint firstItem="aqn-xu-IIJ" firstAttribute="leading" secondItem="5kJ-4c-4oc" secondAttribute="leading" constant="4" id="ugE-E4-IWO"/>
+                                                                    <constraint firstItem="aqn-xu-IIJ" firstAttribute="top" secondItem="5kJ-4c-4oc" secondAttribute="top" constant="6" id="Rk7-RH-L2d"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="ifC-DE-8gv" secondAttribute="trailing" constant="10" id="YoI-So-Bga"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="aqn-xu-IIJ" secondAttribute="bottom" constant="8" id="qFA-jF-kH4"/>
+                                                                    <constraint firstItem="aqn-xu-IIJ" firstAttribute="leading" secondItem="5kJ-4c-4oc" secondAttribute="leading" constant="8" id="ugE-E4-IWO"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                        <integer key="value" value="25"/>
+                                                                        <real key="value" value="19.5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdm-hp-qP5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="114" height="50"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdm-hp-qP5">
+                                                                <rect key="frame" x="74" y="0.0" width="8" height="50"/>
                                                                 <connections>
                                                                     <action selector="share" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="o3B-Nr-MsF"/>
                                                                 </connections>
@@ -648,7 +648,7 @@
                                                             <constraint firstAttribute="trailing" secondItem="5kJ-4c-4oc" secondAttribute="trailing" constant="8" id="OeG-9m-vvk"/>
                                                             <constraint firstAttribute="bottom" secondItem="Mdm-hp-qP5" secondAttribute="bottom" id="Qnm-zv-frt"/>
                                                             <constraint firstItem="5kJ-4c-4oc" firstAttribute="leading" secondItem="hYH-jX-HdN" secondAttribute="leading" constant="8" id="XjU-fk-0Df"/>
-                                                            <constraint firstAttribute="height" constant="50" id="eZt-18-v3h"/>
+                                                            <constraint firstAttribute="height" constant="55" id="eZt-18-v3h"/>
                                                             <constraint firstAttribute="trailing" secondItem="Mdm-hp-qP5" secondAttribute="trailing" id="iSs-wz-bmy"/>
                                                             <constraint firstItem="Mdm-hp-qP5" firstAttribute="top" secondItem="hYH-jX-HdN" secondAttribute="top" id="xMc-XU-wH7"/>
                                                             <constraint firstAttribute="bottom" secondItem="5kJ-4c-4oc" secondAttribute="bottom" constant="8" id="yAv-tK-HWv"/>
@@ -660,11 +660,11 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="p3g-0Q-Mqn" secondAttribute="trailing" id="4lD-Vn-OPB"/>
                                                     <constraint firstAttribute="bottom" secondItem="p3g-0Q-Mqn" secondAttribute="bottom" id="7Ca-ly-Z6N"/>
+                                                    <constraint firstItem="hYH-jX-HdN" firstAttribute="top" secondItem="U4V-IC-N8R" secondAttribute="top" id="G1I-II-Elz"/>
                                                     <constraint firstItem="p3g-0Q-Mqn" firstAttribute="top" secondItem="U4V-IC-N8R" secondAttribute="top" id="Im8-sM-f66"/>
-                                                    <constraint firstItem="hYH-jX-HdN" firstAttribute="top" secondItem="U4V-IC-N8R" secondAttribute="top" id="Rd6-Yo-hJX"/>
+                                                    <constraint firstItem="hYH-jX-HdN" firstAttribute="leading" secondItem="U4V-IC-N8R" secondAttribute="leading" id="Lsb-R1-nQx"/>
                                                     <constraint firstAttribute="bottom" secondItem="4mK-3s-hfC" secondAttribute="bottom" id="esY-NP-azj"/>
                                                     <constraint firstAttribute="height" constant="150" id="ffe-FS-z46"/>
-                                                    <constraint firstItem="hYH-jX-HdN" firstAttribute="leading" secondItem="U4V-IC-N8R" secondAttribute="leading" id="jVf-Ii-NKi"/>
                                                     <constraint firstAttribute="trailing" secondItem="4mK-3s-hfC" secondAttribute="trailing" id="m6S-x0-dq7"/>
                                                     <constraint firstItem="p3g-0Q-Mqn" firstAttribute="leading" secondItem="U4V-IC-N8R" secondAttribute="leading" id="wkG-hF-Wcb"/>
                                                 </constraints>
