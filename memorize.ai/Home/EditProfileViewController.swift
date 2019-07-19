@@ -17,8 +17,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var bioMoreLabel: UILabel!
 	@IBOutlet weak var showFullBioButton: UIButton!
 	@IBOutlet weak var emailLabel: UILabel!
-	@IBOutlet weak var profileLinkLabel: UILabel!
-	@IBOutlet weak var profileLinkTextLabel: UILabel!
 	@IBOutlet weak var optionsTableView: UITableView!
 	@IBOutlet weak var optionsTableViewHeightConstraint: NSLayoutConstraint!
 	
@@ -192,12 +190,19 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	@IBAction
 	func share() {
-		if let slug = slug, let url = User.url(slug: slug) {
+		getProfileLink { url in
+			guard let url = url else { return self.showNotification("Unable to share. Please try again", type: .error) }
 			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-			activityVC.popoverPresentationController?.sourceView = view
-			present(activityVC, animated: true, completion: nil)
+			activityVC.popoverPresentationController?.sourceView = self.view
+			self.present(activityVC, animated: true, completion: nil)
+		}
+	}
+	
+	func getProfileLink(completion: @escaping (URL?) -> Void) {
+		if let id = id, let name = name, let slug = slug {
+			User.getDynamicLink(id: id, name: name, slug: slug, completion: completion)
 		} else {
-			showNotification("Loading profile url...", type: .normal)
+			showNotification("Loading profile link...", type: .normal)
 		}
 	}
 	
@@ -219,8 +224,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		nameLabel.text = name
 		setBio()
 		emailLabel.text = email
-		profileLinkLabel.text = "PROFILE LINK\(slug == nil ? " (LOADING)" : "")"
-		profileLinkTextLabel.text = User.urlString(slug: slug ?? "...")
 	}
 	
 	func setBio() {
@@ -457,21 +460,24 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	func showContactUsEmail() {
 		guard MFMailComposeViewController.canSendMail() else { return showNotification("You must add an email account to this device in settings before you can send mail", type: .error) }
-		guard let id = id, let name = name, let email = email else { return }
-		let profileLink = slug == nil ? nil : User.url(slug: slug ?? "...")?.absoluteString
-		let mailComposeVC = MFMailComposeViewController()
-		mailComposeVC.delegate = self
-		mailComposeVC.setToRecipients([MEMORIZE_AI_SUPPORT_EMAIL])
-		mailComposeVC.setMessageBody("""
-		\n\n=== User info ===
-		ID: \(id)
-		Name: \(name)
-		Email: \(email)\(profileLink == nil ? "" : "\nProfile link: \(profileLink ?? "unknown")")
-		iOS App version: \(APP_VERSION ?? "1.0")
-		iOS version: \(UIDevice.current.systemVersion)
-		Device: \(CURRENT_DEVICE.description)
-		""", isHTML: false)
-		present(mailComposeVC, animated: true, completion: nil)
+		guard let id = id, let name = name, let email = email, let slug = slug else { return showNotification("Unable to load your profile link. Please try again", type: .error) }
+		getProfileLink { url in
+			guard let url = url?.absoluteString else { return self.showNotification("Unable to load your profile link. Please try again", type: .error) }
+			let mailComposeVC = MFMailComposeViewController()
+			mailComposeVC.delegate = self
+			mailComposeVC.setToRecipients([MEMORIZE_AI_SUPPORT_EMAIL])
+			mailComposeVC.setMessageBody("""
+			\n\n=== User info ===
+			ID: \(id)
+			Name: \(name)
+			Email: \(email)
+			Profile link: <a href="\(url)">memorize.ai/\(User.urlString(slug: slug))</a>
+			iOS App version: \(APP_VERSION ?? "1.0")
+			iOS version: \(UIDevice.current.systemVersion)
+			Device: \(CURRENT_DEVICE.description)
+			""", isHTML: true)
+			self.present(mailComposeVC, animated: true, completion: nil)
+		}
 	}
 	
 	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

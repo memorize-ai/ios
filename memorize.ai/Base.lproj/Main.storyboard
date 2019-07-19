@@ -548,7 +548,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="813"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q21-sq-ltA">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="670.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="592.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4V-IC-N8R">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -811,14 +811,8 @@
                                                     <constraint firstItem="FLD-tH-AbZ" firstAttribute="top" secondItem="A4A-lf-ben" secondAttribute="top" id="oEd-f8-lda"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE LINK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXp-UY-uC8">
-                                                <rect key="frame" x="20" y="532.66666666666663" width="98" height="20.666666666666629"/>
-                                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
-                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PEy-EW-krH">
-                                                <rect key="frame" x="0.0" y="600.66666666666663" width="414" height="70"/>
+                                                <rect key="frame" x="0.0" y="522.66666666666663" width="414" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="Eam-4f-c54"/>
@@ -900,12 +894,6 @@
                                                     <constraint firstItem="Lff-0Q-WuX" firstAttribute="top" secondItem="F41-6W-175" secondAttribute="top" id="x9A-zH-PIn"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="u/..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-Vd-uoP">
-                                                <rect key="frame" x="20" y="557.33333333333337" width="25.333333333333329" height="23.333333333333371"/>
-                                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AkS-Og-thE">
                                                 <rect key="frame" x="160" y="100" width="100" height="100"/>
                                                 <subviews>
@@ -1064,7 +1052,6 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="PEy-EW-krH" firstAttribute="top" secondItem="LLH-Vd-uoP" secondAttribute="bottom" constant="20" id="1ZG-T1-hdk"/>
                                             <constraint firstItem="AkS-Og-thE" firstAttribute="top" secondItem="q21-sq-ltA" secondAttribute="top" constant="100" id="5fv-LE-beF"/>
                                             <constraint firstItem="A4A-lf-ben" firstAttribute="top" secondItem="3vM-Yb-KIm" secondAttribute="bottom" constant="4" id="5m2-ci-k0m"/>
                                             <constraint firstItem="gZP-Nw-hCW" firstAttribute="width" secondItem="wYh-Kh-IUN" secondAttribute="width" id="6Pc-kt-LS5"/>
@@ -1073,9 +1060,7 @@
                                             <constraint firstItem="SQb-id-eDq" firstAttribute="top" secondItem="xQn-WH-I12" secondAttribute="bottom" constant="4" id="9Bc-gP-m7t"/>
                                             <constraint firstAttribute="trailing" secondItem="A4A-lf-ben" secondAttribute="trailing" constant="20" id="AyE-qB-Ja4"/>
                                             <constraint firstAttribute="trailing" secondItem="qBe-ZN-xoY" secondAttribute="trailing" id="Bou-GK-Wbv"/>
-                                            <constraint firstItem="jXp-UY-uC8" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="CZj-Yp-BU3"/>
                                             <constraint firstItem="F41-6W-175" firstAttribute="top" secondItem="AkS-Og-thE" secondAttribute="bottom" constant="10" id="E03-Rt-YN3"/>
-                                            <constraint firstItem="LLH-Vd-uoP" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="Fb7-Dj-1Ij"/>
                                             <constraint firstItem="gZP-Nw-hCW" firstAttribute="top" secondItem="F41-6W-175" secondAttribute="bottom" constant="10" id="Fqa-7F-JYe"/>
                                             <constraint firstItem="U4V-IC-N8R" firstAttribute="top" secondItem="q21-sq-ltA" secondAttribute="top" id="Fqm-i5-cOp"/>
                                             <constraint firstAttribute="bottom" secondItem="PEy-EW-krH" secondAttribute="bottom" id="I0G-8x-Lu5"/>
@@ -1087,24 +1072,21 @@
                                             <constraint firstItem="wYh-Kh-IUN" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="Yyj-L4-Gep"/>
                                             <constraint firstItem="466-gl-pRK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="aYh-TI-GWw"/>
                                             <constraint firstItem="F41-6W-175" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="b6k-Iv-kG7"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LLH-Vd-uoP" secondAttribute="trailing" constant="20" id="bxy-0j-Ry7"/>
                                             <constraint firstAttribute="trailing" secondItem="gZP-Nw-hCW" secondAttribute="trailing" constant="20" id="cJN-1q-f9p"/>
                                             <constraint firstItem="UTN-ty-JE3" firstAttribute="top" secondItem="xQn-WH-I12" secondAttribute="bottom" constant="1" id="dgW-uj-sMK"/>
+                                            <constraint firstItem="PEy-EW-krH" firstAttribute="top" secondItem="A4A-lf-ben" secondAttribute="bottom" constant="20" id="fyT-nk-Y0d"/>
                                             <constraint firstItem="3vM-Yb-KIm" firstAttribute="top" secondItem="466-gl-pRK" secondAttribute="bottom" constant="1.6666666666666856" id="gyT-U3-rUM"/>
                                             <constraint firstItem="3vM-Yb-KIm" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="h9l-R0-9vy"/>
-                                            <constraint firstItem="jXp-UY-uC8" firstAttribute="top" secondItem="A4A-lf-ben" secondAttribute="bottom" constant="30" id="hA7-NR-Vjr"/>
                                             <constraint firstItem="qBe-ZN-xoY" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" id="hFU-Bo-dMD"/>
                                             <constraint firstAttribute="trailing" secondItem="F41-6W-175" secondAttribute="trailing" constant="20" id="hu2-I6-O2l"/>
                                             <constraint firstAttribute="trailing" secondItem="PEy-EW-krH" secondAttribute="trailing" id="inH-eM-Wfn"/>
                                             <constraint firstItem="xQn-WH-I12" firstAttribute="top" secondItem="wYh-Kh-IUN" secondAttribute="bottom" constant="20" id="jfR-dq-qIg"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="466-gl-pRK" secondAttribute="trailing" constant="20" id="k1M-bq-tOt"/>
                                             <constraint firstItem="PEy-EW-krH" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" id="kgL-1o-Pul"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jXp-UY-uC8" secondAttribute="trailing" constant="20" id="luj-mT-LBX"/>
                                             <constraint firstAttribute="trailing" secondItem="U4V-IC-N8R" secondAttribute="trailing" id="mXC-4t-doI"/>
                                             <constraint firstItem="466-gl-pRK" firstAttribute="centerX" secondItem="q21-sq-ltA" secondAttribute="centerX" id="pda-eO-k7W"/>
                                             <constraint firstItem="gZP-Nw-hCW" firstAttribute="leading" secondItem="wYh-Kh-IUN" secondAttribute="trailing" constant="20" id="tRL-0b-Osp"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3vM-Yb-KIm" secondAttribute="trailing" constant="20" id="tqM-c4-MtE"/>
-                                            <constraint firstItem="LLH-Vd-uoP" firstAttribute="top" secondItem="jXp-UY-uC8" secondAttribute="bottom" constant="4" id="ubI-8r-lhM"/>
                                             <constraint firstItem="SQb-id-eDq" firstAttribute="leading" secondItem="q21-sq-ltA" secondAttribute="leading" constant="20" id="viz-f8-KSx"/>
                                             <constraint firstItem="xQn-WH-I12" firstAttribute="top" secondItem="gZP-Nw-hCW" secondAttribute="bottom" constant="20" id="xXF-bX-Ptl"/>
                                             <constraint firstItem="wYh-Kh-IUN" firstAttribute="top" secondItem="F41-6W-175" secondAttribute="bottom" constant="10" id="z7q-zS-q8m"/>
@@ -1192,8 +1174,6 @@
                         <outlet property="nameLabel" destination="Lff-0Q-WuX" id="w5c-8B-6ZI"/>
                         <outlet property="optionsTableView" destination="PEy-EW-krH" id="YVI-7m-Kve"/>
                         <outlet property="optionsTableViewHeightConstraint" destination="Eam-4f-c54" id="pdD-2S-Ys8"/>
-                        <outlet property="profileLinkLabel" destination="jXp-UY-uC8" id="gQo-W5-OHv"/>
-                        <outlet property="profileLinkTextLabel" destination="LLH-Vd-uoP" id="sQt-5q-WtK"/>
                         <outlet property="profilePictureImageView" destination="B9Q-s3-Q6P" id="L2b-hc-WTS"/>
                         <outlet property="showFullBioButton" destination="UTN-ty-JE3" id="0PH-tF-91K"/>
                         <segue destination="P5L-vG-lcW" kind="show" identifier="signOut" id="h5F-6A-J1r"/>
