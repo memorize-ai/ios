@@ -652,7 +652,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	@IBAction
 	func showDecks() {
-		guard enabled.first ?? false else { return }
+		guard enabled[0] else { return }
 		performSegue(withIdentifier: "decks", sender: self)
 	}
 	
