@@ -191,6 +191,13 @@ class User {
 		email = nil
 		slug = nil
 		bio = nil
+		reputation = nil
+		isEmailPublic = nil
+		isContactAllowed = nil
+		followersCount = nil
+		followingCount = nil
+		totalProfileViews = nil
+		uniqueProfileViews = nil
 		profilePicture = nil
 		backgroundImage = nil
 		token = nil
