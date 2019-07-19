@@ -12,6 +12,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var editProfilePictureButton: UIButton!
 	@IBOutlet weak var editProfilePictureActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var reputationCountLabel: UILabel!
+	@IBOutlet weak var followersCountLabel: UILabel!
+	@IBOutlet weak var followersLabel: UILabel!
 	@IBOutlet weak var bioLabel: UILabel!
 	@IBOutlet weak var bioLabelHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var bioMoreLabel: UILabel!
@@ -228,6 +231,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		setBackgroundImageView(backgroundImage)
 		setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
 		nameLabel.text = name
+		reputationCountLabel.text = reputation?.formattedWithCommas ?? "ERROR"
+		followersCountLabel.text = followersCount?.formattedWithCommas ?? "ERROR"
+		followersLabel.text = "FOLLOWER\(followersCount == 1 ? "" : "S")"
 		setBio()
 		emailLabel.text = email
 	}
