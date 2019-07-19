@@ -20,4 +20,10 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 	func textViewDidChange(_ textView: UITextView) {
 		<#code#>
 	}
+	
+	func setSaveButtonEnabled(_ enabled: Bool) {
+		guard let barButton = navigationItem.rightBarButtonItem else { return }
+		barButton.isEnabled = enabled
+		barButton.tintColor = enabled ? .white : #colorLiteral(red: 0.9841352105, green: 0.9841352105, blue: 0.9841352105, alpha: 1)
+	}
 }
