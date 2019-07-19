@@ -5,6 +5,13 @@ var name: String?
 var email: String?
 var slug: String?
 var bio: String?
+var reputation: Int?
+var isEmailPublic: Bool?
+var isContactAllowed: Bool?
+var followersCount: Int?
+var followingCount: Int?
+var totalProfileViews: Int?
+var uniqueProfileViews: Int?
 var profilePicture: UIImage?
 var backgroundImage: UIImage?
 var token: String?
