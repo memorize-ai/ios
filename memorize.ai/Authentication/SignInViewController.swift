@@ -115,10 +115,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 				guard let id = id else { return }
 				listeners["users/\(id)"] = firestore.document("users/\(id)").addSnapshotListener { snapshot, error in
 					if error == nil, let snapshot = snapshot {
-						name = snapshot.get("name") as? String ?? "Error"
-						email = snapshot.get("email") as? String ?? "Error"
-						slug = snapshot.get("slug") as? String
-						bio = snapshot.get("bio") as? String ?? "Error"
+						User.setFieldsWithSnapshot(snapshot)
 						ChangeHandler.call(.profileModified)
 						User.save()
 					} else if let error = error {
@@ -127,10 +124,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 				}
 				firestore.document("users/\(id)").getDocument { snapshot, error in
 					if error == nil, let snapshot = snapshot {
-						name = snapshot.get("name") as? String ?? "Error"
-						email = snapshot.get("email") as? String ?? "Error"
-						slug = snapshot.get("slug") as? String
-						bio = snapshot.get("bio") as? String ?? "Error"
+						User.setFieldsWithSnapshot(snapshot)
 						ChangeHandler.call(.profileModified)
 						User.save()
 						self.hideActivityIndicator()
