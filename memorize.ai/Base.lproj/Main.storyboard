@@ -660,12 +660,12 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="466-gl-pRK">
-                                                <rect key="frame" x="179" y="319.66666666666669" width="56" height="36"/>
+                                                <rect key="frame" x="176" y="319.66666666666669" width="62" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="56" id="d1e-cI-7ku"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
-                                                <state key="normal" title="Edit"/>
+                                                <state key="normal" title="Edit Bio"/>
                                                 <connections>
                                                     <action selector="changeBio" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="yih-m5-DI1"/>
                                                 </connections>
