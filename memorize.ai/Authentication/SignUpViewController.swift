@@ -109,6 +109,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 								email = snapshot.get("email") as? String ?? "Error"
 								slug = snapshot.get("slug") as? String
 								bio = snapshot.get("bio") as? String ?? "Error"
+								reputation = snapshot.get("reputation") as? Int ?? 0
+								isEmailPublic = snapshot.get("publicEmail") as? Bool ?? true
+								isContactAllowed = snapshot.get("allowContact") as? Bool ?? true
+								followersCount = snapshot.get("followersCount") as? Int ?? 0
+								followingCount = snapshot.get("followingCount") as? Int ?? 0
+								let views = snapshot.get("views") as? [String : Any]
+								totalProfileViews = views?["total"] as? Int ?? 0
+								uniqueProfileViews = views?["unique"] as? Int ?? 0
 								ChangeHandler.call(.profileModified)
 								User.save()
 							} else if let error = error {
@@ -121,6 +129,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 								email = snapshot.get("email") as? String ?? "Error"
 								slug = snapshot.get("slug") as? String
 								bio = snapshot.get("bio") as? String ?? "Error"
+								reputation = snapshot.get("reputation") as? Int ?? 0
+								isEmailPublic = snapshot.get("publicEmail") as? Bool ?? true
+								isContactAllowed = snapshot.get("allowContact") as? Bool ?? true
+								followersCount = snapshot.get("followersCount") as? Int ?? 0
+								followingCount = snapshot.get("followingCount") as? Int ?? 0
+								let views = snapshot.get("views") as? [String : Any]
+								totalProfileViews = views?["total"] as? Int ?? 0
+								uniqueProfileViews = views?["unique"] as? Int ?? 0
 								ChangeHandler.call(.profileModified)
 								User.save()
 								self.hideActivityIndicator()
