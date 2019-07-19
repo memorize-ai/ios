@@ -47,7 +47,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share)), animated: true)
+		navigationItem.setRightBarButton(UIBarButtonItem(title: "View Profile", style: .plain, target: self, action: #selector(viewProfile)), animated: true)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -191,7 +191,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		present(alertController, animated: true, completion: nil)
 	}
 	
-	@objc
+	@IBAction
 	func share() {
 		if let slug = slug, let url = User.url(slug: slug) {
 			let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
@@ -200,6 +200,11 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		} else {
 			showNotification("Loading profile url...", type: .normal)
 		}
+	}
+	
+	@objc
+	func viewProfile() {
+		performSegue(withIdentifier: "viewProfile", sender: self)
 	}
 	
 	@IBAction
