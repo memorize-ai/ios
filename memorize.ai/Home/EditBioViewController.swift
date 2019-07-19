@@ -2,10 +2,22 @@ import UIKit
 
 class EditBioViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var bioTextView: UITextView!
+	@IBOutlet weak var bioTextViewBottomConstraint: NSLayoutConstraint!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.setRightBarButton(UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveBio)), animated: true)
+		bioTextView.setKeyboard(.plain)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		KeyboardHandler.addListener(self, up: keyboardUp, down: keyboardDown)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		KeyboardHandler.removeListener(self)
 	}
 	
 	@objc
@@ -17,6 +29,16 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 			self.bioTextView.text = trimmedText
 			self.showNotification("Saved", type: .success)
 		}
+	}
+	
+	func keyboardUp() {
+		bioTextViewBottomConstraint.constant = keyboardOffset
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: view.layoutIfNeeded)
+	}
+	
+	func keyboardDown() {
+		bioTextViewBottomConstraint.constant = 0
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded)
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {

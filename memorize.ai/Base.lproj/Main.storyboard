@@ -1047,6 +1047,7 @@
                     </view>
                     <connections>
                         <outlet property="bioTextView" destination="RSs-9n-h6M" id="H50-Xj-rVd"/>
+                        <outlet property="bioTextViewBottomConstraint" destination="vwZ-5I-u4S" id="qUg-bm-gFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fJ-YU-rRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
