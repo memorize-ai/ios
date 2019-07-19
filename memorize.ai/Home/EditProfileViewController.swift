@@ -47,7 +47,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationItem.setRightBarButton(UIBarButtonItem(title: "View Profile", style: .plain, target: self, action: #selector(viewProfile)), animated: true)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -202,7 +201,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
-	@objc
+	@IBAction
 	func viewProfile() {
 		performSegue(withIdentifier: "viewProfile", sender: self)
 	}
