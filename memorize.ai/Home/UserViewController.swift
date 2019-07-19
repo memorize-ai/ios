@@ -41,6 +41,15 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 				id = user.id
 				name = user.name
 				email = user.email
+				slug = user.slug
+				bio = user.bio
+				reputation = user.reputation
+				isEmailPublic = user.isEmailPublic
+				isContactAllowed = user.isContactAllowed
+				followersCount = user.followersCount
+				followingCount = user.followingCount
+				totalProfileViews = user.totalProfileViews
+				uniqueProfileViews = user.uniqueProfileViews
 				profilePicture = user.profilePicture
 				backgroundImage = user.backgroundImage
 				selectedDeckId = user.selectedDeckId
@@ -65,10 +74,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 							self.signIn()
 						}
 					} else if let snapshot = snapshot {
-						name = snapshot.get("name") as? String ?? name
-						email = snapshot.get("email") as? String ?? email
-						slug = snapshot.get("slug") as? String
-						bio = snapshot.get("bio") as? String ?? bio
+						User.setFieldsWithSnapshot(snapshot)
 						self.createHelloLabel()
 						User.save()
 						ChangeHandler.call(.profileModified)
