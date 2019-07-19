@@ -24,9 +24,14 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 	@objc
 	func saveBio() {
 		guard let id = id else { return }
+		setSaveButtonEnabled(false)
 		let trimmedText = bioTextView.text.trim()
 		firestore.document("users/\(id)").updateData(["bio": trimmedText]) { error in
-			guard error == nil else { return self.showNotification("Unable to save. Please try again", type: .error) }
+			guard error == nil else {
+				self.setSaveButtonEnabled(true)
+				self.showNotification("Unable to save. Please try again", type: .error)
+				return
+			}
 			self.bioTextView.text = trimmedText
 			self.showNotification("Saved", type: .success)
 		}
@@ -45,7 +50,7 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 	func loadBio() {
 		guard let bio = bio else { return }
 		bioTextView.text = bio
-		setSaveButtonEnabled(!bio.isEmpty)
+		setSaveButtonEnabled(false)
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
