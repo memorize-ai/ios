@@ -8,6 +8,7 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 		super.viewDidLoad()
 		navigationItem.setRightBarButton(UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveBio)), animated: true)
 		bioTextView.setKeyboard(.plain)
+		loadBio()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +40,12 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 	func keyboardDown() {
 		bioTextViewBottomConstraint.constant = 0
 		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveLinear, animations: view.layoutIfNeeded)
+	}
+	
+	func loadBio() {
+		guard let bio = bio else { return }
+		bioTextView.text = bio
+		setSaveButtonEnabled(!bio.isEmpty)
 	}
 	
 	func textViewDidChange(_ textView: UITextView) {
