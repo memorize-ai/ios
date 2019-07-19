@@ -168,14 +168,23 @@ class User {
 	}
 	
 	static func delete() {
-		defaults.removeObject(forKey: "id")
-		defaults.removeObject(forKey: "name")
-		defaults.removeObject(forKey: "email")
-		defaults.removeObject(forKey: "slug")
-		defaults.removeObject(forKey: "bio")
-		defaults.removeObject(forKey: "profilePicture")
-		defaults.removeObject(forKey: "backgroundImage")
-		defaults.removeObject(forKey: "darkMode")
+		[
+			"id",
+			"name",
+			"email",
+			"bio",
+			"slug",
+			"reputation",
+			"publicEmail",
+			"allowContact",
+			"followers",
+			"following",
+			"totalViews",
+			"uniqueViews",
+			"profilePicture",
+			"backgroundImage",
+			"darkMode"
+		].forEach(defaults.removeObject(forKey:))
 		save(selectedDeckId: nil)
 		id = nil
 		name = nil
