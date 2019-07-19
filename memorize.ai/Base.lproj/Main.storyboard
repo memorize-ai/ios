@@ -636,8 +636,8 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdm-hp-qP5">
-                                                                <rect key="frame" x="74" y="0.0" width="8" height="50"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdm-hp-qP5">
+                                                                <rect key="frame" x="0.0" y="0.0" width="123" height="55"/>
                                                                 <connections>
                                                                     <action selector="share" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="o3B-Nr-MsF"/>
                                                                 </connections>
