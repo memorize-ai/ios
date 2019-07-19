@@ -22,6 +22,7 @@ class EditBioViewController: UIViewController, UITextViewDelegate {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		KeyboardHandler.addListener(self, up: keyboardUp, down: keyboardDown)
+		updateCurrentViewController()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
