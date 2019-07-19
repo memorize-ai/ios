@@ -98,7 +98,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 			if error == nil, let user = authResult?.user {
 				id = user.uid
 				guard let id = id else { return }
-				firestore.document("users/\(id)").setData(["name": nameText, "email": emailText, "bio": ""]) { error in
+				firestore.document("users/\(id)").setData([
+					"name": nameText,
+					"email": emailText,
+					"bio": "",
+					"reputation": 0,
+					"publicEmail": true,
+					"allowContact": true,
+					"followersCount": 0,
+					"followingCount": 0,
+					"views": ["total": 0, "unique": 0]
+				]) { error in
 					self.hideActivityIndicator()
 					if let error = error {
 						self.showError(error)
