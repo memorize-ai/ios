@@ -12,10 +12,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	var forgotPasswordTextField: UITextField?
 	var emailText: String?
 	
-	deinit {
-		KeyboardHandler.removeListener(self)
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		disable()
@@ -25,6 +21,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		super.viewWillAppear(animated)
 		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		KeyboardHandler.removeListener(self)
 	}
 	
 	@IBAction

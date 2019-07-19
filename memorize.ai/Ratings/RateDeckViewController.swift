@@ -22,10 +22,6 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 	var previousViewController: UIViewController?
 	var submitAction: (() -> Void)?
 	
-	deinit {
-		KeyboardHandler.removeListener(self)
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.title = "\(deck?.hasRating ?? false ? "Edit" : "New") Rating"
@@ -57,6 +53,11 @@ class RateDeckViewController: UIViewController, UITextFieldDelegate, UITextViewD
 		}
 		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		KeyboardHandler.removeListener(self)
 	}
 	
 	var stars: [UIButton] {

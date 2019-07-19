@@ -35,10 +35,6 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 	var lastTags = ""
 	var lastSubtitle = ""
 	
-	deinit {
-		KeyboardHandler.removeListener(self)
-	}
-	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationItem.title = "\(deck == nil ? "New" : "Edit") Deck"
@@ -65,6 +61,11 @@ class EditDeckViewController: UIViewController, UINavigationControllerDelegate, 
 		}
 		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		KeyboardHandler.removeListener(self)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

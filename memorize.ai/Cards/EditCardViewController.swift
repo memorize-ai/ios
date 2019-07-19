@@ -36,10 +36,6 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 	var bottomSubviewOffset: CGFloat = 0
 	var startup = true
 	
-	deinit {
-		KeyboardHandler.removeListener(self)
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.title = "\(card == nil ? "New" : "Edit") Card"
@@ -115,6 +111,7 @@ class EditCardViewController: UIViewController, UICollectionViewDataSource, UICo
 		if isMovingFromParent {
 			DecksViewController.decksDidChange = true
 		}
+		KeyboardHandler.removeListener(self)
 	}
 	
 	override func viewDidLayoutSubviews() {

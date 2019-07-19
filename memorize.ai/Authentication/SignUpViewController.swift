@@ -13,10 +13,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var signUpActivityIndicator: UIActivityIndicatorView!
 	
-	deinit {
-		KeyboardHandler.removeListener(self)
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		disable()
@@ -26,6 +22,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 		super.viewWillAppear(animated)
 		KeyboardHandler.addListener(self, up: keyboardWillShow, down: keyboardWillHide)
 		updateCurrentViewController()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		KeyboardHandler.removeListener(self)
 	}
 	
 	@IBAction

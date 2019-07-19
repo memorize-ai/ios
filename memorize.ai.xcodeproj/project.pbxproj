@@ -151,6 +151,7 @@
 		4DCB002522936CD30072FED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB002422936CD30072FED4 /* Constants.swift */; };
 		4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF83DD22A378F3006B73A4 /* Listener.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
+		4DD8FAC322E171BD0008B28E /* EditBioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC222E171BD0008B28E /* EditBioViewController.swift */; };
 		4DDD3F2722B1F9FC00BA2C98 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2622B1F9FB00BA2C98 /* History.swift */; };
 		4DDD3F2922B1FC4E00BA2C98 /* DeckRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2822B1FC4E00BA2C98 /* DeckRatingsViewController.swift */; };
 		4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */; };
@@ -341,6 +342,7 @@
 		4DC857DD221B824400FD2100 /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
 		4DCB002422936CD30072FED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DCF83DD22A378F3006B73A4 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
+		4DD8FAC222E171BD0008B28E /* EditBioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBioViewController.swift; sourceTree = "<group>"; };
 		4DDD3F2622B1F9FB00BA2C98 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		4DDD3F2822B1FC4E00BA2C98 /* DeckRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckRatingsViewController.swift; sourceTree = "<group>"; };
 		4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDeckViewController.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 			children = (
 				4D052AB52204259B0093B64E /* UserViewController.swift */,
 				4D3607832211426E00492ACD /* EditProfileViewController.swift */,
+				4DD8FAC222E171BD0008B28E /* EditBioViewController.swift */,
 				4D1A7246229611D6004FA89E /* SettingsViewController.swift */,
 				4D3D7C5922C52CA000D34700 /* TutorialViewController.swift */,
 			);
@@ -1082,6 +1085,7 @@
 				4DEA540722A5CF6400C5CCEF /* EditUploadViewController.swift in Sources */,
 				4DA9D0CD22C80D250057AD0D /* KeyboardHandler.swift in Sources */,
 				4DE8322722B03E6000DDD1F9 /* DeckSettingsViewController.swift in Sources */,
+				4DD8FAC322E171BD0008B28E /* EditBioViewController.swift in Sources */,
 				4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */,
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D3D7C5A22C52CA000D34700 /* TutorialViewController.swift in Sources */,
