@@ -77,13 +77,15 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		chooseImage(.backgroundImage) {
 			self.setBackgroundImageView(nil)
 			self.setLoading(.backgroundImage, loading: true)
-			self.uploadImage(nil, type: .backgroundImage) { success in
+			self.uploadImage(nil, type: .backgroundImage) { success, shouldShowNotification in
 				self.setLoading(.backgroundImage, loading: false)
 				if success {
 					self.showNotification("Reset background image", type: .success)
 				} else {
 					self.setBackgroundImageView(backgroundImage)
-					self.showNotification("Unable to reset background image. Please try again", type: .error)
+					if shouldShowNotification {
+						self.showNotification("Unable to reset background image. Please try again", type: .error)
+					}
 				}
 			}
 		}
@@ -95,13 +97,15 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		chooseImage(.profilePicture) {
 			self.setProfilePictureImageView(DEFAULT_PROFILE_PICTURE)
 			self.setLoading(.profilePicture, loading: true)
-			self.uploadImage(nil, type: .profilePicture) { success in
+			self.uploadImage(nil, type: .profilePicture) { success, shouldShowNotification in
 				self.setLoading(.profilePicture, loading: false)
 				if success {
 					self.showNotification("Reset profile picture", type: .success)
 				} else {
 					self.setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
-					self.showNotification("Unable to reset profile picture. Please try again", type: .error)
+					if shouldShowNotification {
+						self.showNotification("Unable to reset profile picture. Please try again", type: .error)
+					}
 				}
 			}
 		}
@@ -226,7 +230,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 				setBackgroundImageView(image)
 			}
 			setLoading(currentImageEditing, loading: true)
-			uploadImage(image, type: currentImageEditing) { success in
+			uploadImage(image, type: currentImageEditing) { success, shouldShowNotification in
 				self.setLoading(currentImageEditing, loading: false)
 				switch currentImageEditing {
 				case .profilePicture:
@@ -234,14 +238,18 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 						self.showNotification("Updated profile picture", type: .success)
 					} else {
 						self.setProfilePictureImageView(profilePicture ?? DEFAULT_PROFILE_PICTURE)
-						self.showNotification("Unable to set profile picture. Please try again", type: .error)
+						if shouldShowNotification {
+							self.showNotification("Unable to set profile picture. Please try again", type: .error)
+						}
 					}
 				case .backgroundImage:
 					if success {
 						self.showNotification("Updated background image", type: .success)
 					} else {
 						self.setBackgroundImageView(backgroundImage)
-						self.showNotification("Unable to set background image. Please try again", type: .error)
+						if shouldShowNotification {
+							self.showNotification("Unable to set background image. Please try again", type: .error)
+						}
 					}
 				}
 			}
@@ -292,35 +300,40 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		}
 	}
 	
-	func uploadImage(_ image: UIImage?, type: User.ImageType, completion: @escaping (Bool) -> Void) {
-		guard let id = id else { return completion(false) }
+	func uploadImage(_ image: UIImage?, type: User.ImageType, completion: @escaping (Bool, Bool) -> Void) {
+		guard let id = id else { return completion(false, true) }
 		if let image = image?.fixedRotation {
-			guard let data = image.compressedData else { return completion(false) }
+			guard let data = image.compressedData else { return completion(false, true) }
+			if data.count > MAX_FILE_SIZE {
+				showNotification("Image exceeds 50 MB. Please choose another image", type: .error)
+				completion(false, false)
+				return
+			}
 			storage.child("users/\(id)/\(type.rawValue)").putData(data, metadata: JPEG_METADATA) { _, error in
-				guard error == nil else { return completion(false) }
+				guard error == nil else { return completion(false, true) }
 				switch type {
 				case .profilePicture:
 					storage.child("users/\(id)/profile").downloadURL { url, error in
-						guard error == nil, let url = url, let changeRequest = auth.currentUser?.createProfileChangeRequest() else { return completion(false) }
+						guard error == nil, let url = url, let changeRequest = auth.currentUser?.createProfileChangeRequest() else { return completion(false, true) }
 						changeRequest.photoURL = url
 						changeRequest.commitChanges { error in
-							guard error == nil else { return completion(false) }
+							guard error == nil else { return completion(false, true) }
 							profilePicture = image
 							User.save(profilePicture: data)
 							User.cache(id, image: image, type: .profilePicture)
-							completion(true)
+							completion(true, true)
 						}
 					}
 				case .backgroundImage:
 					backgroundImage = image
 					User.save(backgroundImage: data)
 					User.cache(id, image: image, type: .backgroundImage)
-					completion(true)
+					completion(true, true)
 				}
 			}
 		} else {
 			storage.child("users/\(id)/\(type.rawValue)").delete { error in
-				guard error == nil else { return completion(false) }
+				guard error == nil else { return completion(false, true) }
 				switch type {
 				case .profilePicture:
 					profilePicture = nil
@@ -331,7 +344,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 					User.save(backgroundImage: nil)
 					User.cache(id, image: nil, type: .backgroundImage)
 				}
-				completion(true)
+				completion(true, true)
 			}
 		}
 	}
@@ -347,7 +360,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			}
 		}
 		func uploadImage(_ image: UIImage) {
-			self.uploadImage(image, type: imageType) { success in
+			self.uploadImage(image, type: imageType) { success, shouldShowNotification in
 				self.setLoading(imageType, loading: false)
 				if success {
 					self.showNotification("Updated \(imageType.description)", type: .success)
@@ -358,7 +371,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 					case .backgroundImage:
 						self.setBackgroundImageView(backgroundImage)
 					}
-					self.showNotification(errorMessage, type: .error)
+					if shouldShowNotification {
+						self.showNotification(errorMessage, type: .error)
+					}
 				}
 			}
 		}
