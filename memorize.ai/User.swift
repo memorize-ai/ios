@@ -203,7 +203,7 @@ class User {
 		token = nil
 	}
 	
-	static func get() -> (id: String, name: String, email: String, slug: String?, bio: String, profilePicture: UIImage?, backgroundImage: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
+	static func get() -> (id: String, name: String, email: String, slug: String?, bio: String, reputation: Int, isEmailPublic: Bool, isContactAllowed: Bool, followersCount: Int, followingCount: Int, totalProfileViews: Int, uniqueProfileViews: Int, profilePicture: UIImage?, backgroundImage: UIImage?, darkMode: Bool, selectedDeckId: String?)? {
 		guard let id = defaults.string(forKey: "id"), let name = defaults.string(forKey: "name"), let email = defaults.string(forKey: "email"), let bio = defaults.string(forKey: "bio") else { return nil }
 		return (
 			id: id,
@@ -211,6 +211,13 @@ class User {
 			email: email,
 			slug: defaults.string(forKey: "slug"),
 			bio: bio,
+			reputation: defaults.integer(forKey: "reputation"),
+			isEmailPublic: defaults.bool(forKey: "publicEmail"),
+			isContactAllowed: defaults.bool(forKey: "allowContact"),
+			followersCount: defaults.integer(forKey: "followers"),
+			followingCount: defaults.integer(forKey: "following"),
+			totalProfileViews: defaults.integer(forKey: "totalViews"),
+			uniqueProfileViews: defaults.integer(forKey: "uniqueViews"),
 			profilePicture: getImage(.profilePicture),
 			backgroundImage: getImage(.backgroundImage),
 			darkMode: defaults.bool(forKey: "darkMode"),
