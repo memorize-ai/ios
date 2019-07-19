@@ -53,7 +53,7 @@ class User {
 		}
 	}
 	static var signedIn: Bool {
-		return get() != nil
+		return defaults.string(forKey: "id") != nil
 	}
 	
 	static func getDynamicLink(id: String, name: String, slug: String, completion: @escaping (URL?) -> Void) {
