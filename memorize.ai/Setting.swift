@@ -146,6 +146,8 @@ enum SettingType: String {
 	case darkMode = "dark-mode"
 	case notifications = "notifications"
 	case emailNotifications = "email-notifications"
+	case publicEmail = "public-email"
+	case allowContact = "allow-contact"
 	case algorithm = "algorithm"
 	case unknown
 }
