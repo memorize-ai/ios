@@ -5,6 +5,11 @@ class DeckRatingsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	var cells = [Int : DeckRatingPreviewTableViewCell]()
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		ratingsTableView.tableFooterView = UIView()
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.deckModified) { change in

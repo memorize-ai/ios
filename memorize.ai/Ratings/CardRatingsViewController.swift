@@ -3,6 +3,11 @@ import UIKit
 class CardRatingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var ratingsTableView: UITableView!
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		ratingsTableView.tableFooterView = UIView()
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		ChangeHandler.updateAndCall(.deckModified) { change in
