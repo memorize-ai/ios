@@ -25,6 +25,7 @@ class ReputationHistoryItem {
 	init(id: String, date: Date, amount: Int, description: String, after: Int, uid: String?, deckId: String?) {
 		self.id = id
 		self.date = date
+		self.amount = amount
 		self.description = description
 		self.after = after
 		self.uid = uid
@@ -41,6 +42,26 @@ class ReputationHistoryItem {
 			uid: snapshot.get("uid") as? String,
 			deckId: snapshot.get("deckId") as? String
 		)
+	}
+	
+	static func loadAll() {
+		guard let id = memorize_ai.id else { return }
+		listeners["users/\(id)/reputationHistory"] = firestore.collection("users/\(id)/reputationHistory").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot?.documentChanges else { return }
+			snapshot.forEach {
+				switch $0.type {
+				case .added:
+					ReputationHistoryItem($0.document).addToReputationHistory()
+					ChangeHandler.call(.reputationHistoryAdded)
+				case .modified:
+					ChangeHandler.call(.reputationHistoryModified)
+				case .removed:
+					ChangeHandler.call(.reputationHistoryRemoved)
+				@unknown default:
+					break
+				}
+			}
+		}
 	}
 	
 	@discardableResult
