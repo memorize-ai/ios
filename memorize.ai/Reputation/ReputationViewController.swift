@@ -43,6 +43,22 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 		cell.editingAccessoryType = historyItem.uid == nil && historyItem.deckId == nil ? .none : .disclosureIndicator
 		return cell
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let historyItem = reputationHistory[indexPath.section].items[indexPath.row]
+		if let uid = historyItem.uid {
+			print(uid) //$ Show user's profile
+		} else if let deckId = historyItem.deckId {
+			if let deck = Deck.get(deckId) {
+				DeckViewController.show(self, id: deckId, hasImage: deck.hasImage, image: deck.image)
+			} else {
+				firestore.document("decks/\(deckId)").getDocument { snapshot, error in
+					guard error == nil, let snapshot = snapshot else { return self.showNotification("Unable to view deck. Please try again", type: .error) }
+					DeckViewController.show(self, id: deckId, hasImage: snapshot.get("hasImage") as? Bool ?? false)
+				}
+			}
+		}
+	}
 }
 
 class ReputationHistoryTableViewCell: UITableViewCell {

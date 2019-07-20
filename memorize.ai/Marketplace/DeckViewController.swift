@@ -337,7 +337,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	@discardableResult
-	static func show(_ viewController: UIViewController, id deckId: String, hasImage: Bool, image: UIImage?) -> Bool {
+	static func show(_ viewController: UIViewController, id deckId: String, hasImage: Bool, image: UIImage? = nil) -> Bool {
 		guard let deckVC = viewController.storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return false }
 		deckVC.deck.id = deckId
 		deckVC.deck.hasImage = hasImage
