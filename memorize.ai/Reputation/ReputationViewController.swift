@@ -40,6 +40,7 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 		cell.amountLabel.textColor = amountIsNegative ? #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1) : #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
 		cell.descriptionLabel.text = historyItem.description
 		cell.afterLabel.text = historyItem.after.formattedWithCommas
+		cell.editingAccessoryType = historyItem.uid == nil && historyItem.deckId == nil ? .none : .disclosureIndicator
 		return cell
 	}
 }
