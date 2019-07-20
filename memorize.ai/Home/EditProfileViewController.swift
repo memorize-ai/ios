@@ -489,7 +489,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			mailComposeVC.delegate = self
 			mailComposeVC.setToRecipients([MEMORIZE_AI_SUPPORT_EMAIL])
 			mailComposeVC.setMessageBody("""
-			<br><br>=== User info ===<br>
+			<br><br><hr><br>
 			ID: \(id)<br>
 			Name: \(name)<br>
 			Email: \(email)<br>
