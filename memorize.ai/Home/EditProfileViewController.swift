@@ -15,6 +15,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	@IBOutlet weak var reputationCountLabel: UILabel!
 	@IBOutlet weak var followersCountLabel: UILabel!
 	@IBOutlet weak var followersLabel: UILabel!
+	@IBOutlet weak var viewsCountLabel: UILabel!
+	@IBOutlet weak var viewsLabel: UILabel!
+	@IBOutlet weak var uniqueViewsCountLabel: UILabel!
+	@IBOutlet weak var followingCountLabel: UILabel!
 	@IBOutlet weak var bioLabel: UILabel!
 	@IBOutlet weak var bioLabelHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var bioMoreLabel: UILabel!
@@ -234,6 +238,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		reputationCountLabel.text = reputation?.formattedWithCommas ?? "ERROR"
 		followersCountLabel.text = followersCount?.formattedWithCommas ?? "ERROR"
 		followersLabel.text = "FOLLOWER\(followersCount == 1 ? "" : "S")"
+		viewsCountLabel.text = totalProfileViews?.formattedWithCommas ?? "ERROR"
+		viewsLabel.text = "VIEW\(totalProfileViews == 1 ? "" : "S")"
+		uniqueViewsCountLabel.text = uniqueProfileViews?.formattedWithCommas ?? "ERROR"
+		followingCountLabel.text = followingCount?.formattedWithCommas ?? "ERROR"
 		setBio()
 		emailLabel.text = email
 	}
