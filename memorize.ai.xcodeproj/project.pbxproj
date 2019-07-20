@@ -155,6 +155,7 @@
 		4DD8FAC622E3CBB80008B28E /* ReputationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC522E3CBB80008B28E /* ReputationViewController.swift */; };
 		4DD8FAC822E3CBC20008B28E /* EarnReputationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC722E3CBC20008B28E /* EarnReputationViewController.swift */; };
 		4DD8FACA22E3CC9F0008B28E /* ReputationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC922E3CC9F0008B28E /* ReputationHistory.swift */; };
+		4DD8FACC22E3DF080008B28E /* ReputationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FACB22E3DF080008B28E /* ReputationValue.swift */; };
 		4DDD3F2722B1F9FC00BA2C98 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2622B1F9FB00BA2C98 /* History.swift */; };
 		4DDD3F2922B1FC4E00BA2C98 /* DeckRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2822B1FC4E00BA2C98 /* DeckRatingsViewController.swift */; };
 		4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */; };
@@ -349,6 +350,7 @@
 		4DD8FAC522E3CBB80008B28E /* ReputationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReputationViewController.swift; sourceTree = "<group>"; };
 		4DD8FAC722E3CBC20008B28E /* EarnReputationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnReputationViewController.swift; sourceTree = "<group>"; };
 		4DD8FAC922E3CC9F0008B28E /* ReputationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReputationHistory.swift; sourceTree = "<group>"; };
+		4DD8FACB22E3DF080008B28E /* ReputationValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReputationValue.swift; sourceTree = "<group>"; };
 		4DDD3F2622B1F9FB00BA2C98 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		4DDD3F2822B1FC4E00BA2C98 /* DeckRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckRatingsViewController.swift; sourceTree = "<group>"; };
 		4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDeckViewController.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */,
 				4DA965EA22CC18C000FD7353 /* StoreReview.swift */,
 				4DD8FAC922E3CC9F0008B28E /* ReputationHistory.swift */,
+				4DD8FACB22E3DF080008B28E /* ReputationValue.swift */,
 				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
 				4D5F1F21229F217200AC7732 /* Keyboard.swift */,
 				4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */,
@@ -1121,6 +1124,7 @@
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
 				4D9F1A9A2207A382002E2FDF /* SearchViewController.swift in Sources */,
 				4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */,
+				4DD8FACC22E3DF080008B28E /* ReputationValue.swift in Sources */,
 				4DC29C1922D5760D0055A67D /* FlowLayout.swift in Sources */,
 				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
 				4DDD3F2D22B1FD7700BA2C98 /* CardRatingsViewController.swift in Sources */,
