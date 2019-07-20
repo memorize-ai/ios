@@ -1,7 +1,7 @@
 import UIKit
 import InstantSearchClient
 
-class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
+class SearchViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	
@@ -75,6 +75,11 @@ class SearchDeckViewController: UIViewController, UISearchBarDelegate, UICollect
 	@IBAction
 	func back() {
 		navigationController?.popViewController(animated: true)
+	}
+	
+	@IBAction
+	func toggleFilters() {
+		//$ Show filters
 	}
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -61,7 +61,7 @@
 		4D99409D22C55B6900C7F43A /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D99409C22C55B6900C7F43A /* RatingViewController.swift */; };
 		4D9E7700228E53B9007EC018 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FE228E53B9007EC018 /* prism.js */; };
 		4D9E7701228E53B9007EC018 /* prism.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E76FF228E53B9007EC018 /* prism.css */; };
-		4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */; };
+		4D9F1A9A2207A382002E2FDF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9F1A992207A382002E2FDF /* SearchViewController.swift */; };
 		4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2DC22A4604400669570 /* Algolia.swift */; };
 		4DA2C2DF22A48AA400669570 /* UploadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */; };
 		4DA2C2E122A48E5400669570 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA2C2E022A48E5400669570 /* Upload.swift */; };
@@ -252,7 +252,7 @@
 		4D99409C22C55B6900C7F43A /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		4D9E76FE228E53B9007EC018 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
 		4D9E76FF228E53B9007EC018 /* prism.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = prism.css; sourceTree = "<group>"; };
-		4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDeckViewController.swift; sourceTree = "<group>"; };
+		4D9F1A992207A382002E2FDF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4DA2C2DC22A4604400669570 /* Algolia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algolia.swift; sourceTree = "<group>"; };
 		4DA2C2DE22A48AA400669570 /* UploadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsViewController.swift; sourceTree = "<group>"; };
 		4DA2C2E022A48E5400669570 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
@@ -545,7 +545,7 @@
 		4D49928C22BC8C2B006D53C5 /* Marketplace */ = {
 			isa = PBXGroup;
 			children = (
-				4D9F1A992207A382002E2FDF /* SearchDeckViewController.swift */,
+				4D9F1A992207A382002E2FDF /* SearchViewController.swift */,
 				4DAA38FB2207F0FB00EB443E /* DeckViewController.swift */,
 				4DAA38FD2208D4F500EB443E /* CardViewController.swift */,
 				4D99409C22C55B6900C7F43A /* RatingViewController.swift */,
@@ -1101,7 +1101,7 @@
 				4D12041A22A8E7EE00DAC7D9 /* CardPreviewViewController.swift in Sources */,
 				4DE7FD3C22B1B8CA00B82F38 /* DeckPermissionsViewController.swift in Sources */,
 				4D64391A22057DBD006F4F2D /* SignUpViewController.swift in Sources */,
-				4D9F1A9A2207A382002E2FDF /* SearchDeckViewController.swift in Sources */,
+				4D9F1A9A2207A382002E2FDF /* SearchViewController.swift in Sources */,
 				4D1882C1226E696000F29F99 /* CardsViewController.swift in Sources */,
 				4DC29C1922D5760D0055A67D /* FlowLayout.swift in Sources */,
 				4D64391822057D88006F4F2D /* StartUpViewController.swift in Sources */,
