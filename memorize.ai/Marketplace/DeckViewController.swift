@@ -37,7 +37,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var moreByCreatorCollectionView: UICollectionView!
 	@IBOutlet weak var similarDecksCollectionView: UICollectionView!
 	
-	typealias DeckUser = (id: String, image: UIImage?, name: String?, url: URL?)
+	typealias DeckUser = (id: String, image: UIImage?, name: String?)
 	
 	class Rating {
 		let rating: DeckRating
@@ -75,8 +75,7 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		creator: (
 			id: String?,
 			image: UIImage?,
-			name: String?,
-			url: URL?
+			name: String?
 		),
 		created: Date?,
 		updated: Date?
@@ -119,9 +118,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 				guard self.shouldLoadDeckAttributes else { return }
 				self.shouldLoadDeckAttributes = false
 				self.listeners["users/\(creatorId)"] = firestore.document("users/\(creatorId)").addSnapshotListener { creatorSnapshot, creatorError in
-					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String, let creatorSlug = creatorSnapshot.get("slug") as? String, let creatorUrl = User.url(slug: creatorSlug) {
+					if creatorError == nil, let creatorSnapshot = creatorSnapshot, let creatorName = creatorSnapshot.get("name") as? String {
 						self.deck.creator.name = creatorName
-						self.deck.creator.url = creatorUrl
 					} else {
 						self.showNotification("Unable to load deck creator", type: .error)
 					}
@@ -448,15 +446,13 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 						user: (
 							id: userId,
 							image: nil,
-							name: nil,
-							url: nil
+							name: nil
 						)
 					)
 					self.ratings.append(newRating)
 					firestore.document("users/\(userId)").addSnapshotListener { userSnapshot, userError in
-						guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String, let userSlug = userSnapshot.get("slug") as? String, let url = User.url(slug: userSlug) else { return }
+						guard userError == nil, let userSnapshot = userSnapshot, let userName = userSnapshot.get("name") as? String else { return }
 						newRating.user.name = userName
-						newRating.user.url = url
 						self.ratingsCollectionView.reloadData()
 					}
 					if let cachedImage = try? User.imageFromCache(userId, type: .profilePicture) {
@@ -584,8 +580,8 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	@IBAction
 	func showCreatorProfile() {
-		if let url = deck.creator.url {
-			present(SFSafariViewController(url: url), animated: true, completion: nil)
+		if let creatorId = deck.creator.id {
+			print(creatorId) //$ Show creator profile
 		} else {
 			showNotification("Loading creator...", type: .normal)
 		}

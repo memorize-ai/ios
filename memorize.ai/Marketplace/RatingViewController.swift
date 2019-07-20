@@ -37,8 +37,8 @@ class RatingViewController: UIViewController {
 	
 	@IBAction
 	func userClicked() {
-		if let url = rating?.user.url {
-			present(SFSafariViewController(url: url), animated: true, completion: nil)
+		if let userId = rating?.user.id {
+			print(userId) //$ Show user profile
 		} else {
 			showNotification("Loading user...", type: .normal)
 		}
