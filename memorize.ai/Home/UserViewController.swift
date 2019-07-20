@@ -677,7 +677,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBAction
 	func showMarketplace() {
 		guard enabled[3] else { return }
-		performSegue(withIdentifier: "searchDeck", sender: self)
+		performSegue(withIdentifier: "search", sender: self)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

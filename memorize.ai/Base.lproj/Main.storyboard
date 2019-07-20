@@ -55,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3Q-4n-6f8">
-                                <rect key="frame" x="40" y="154" width="334" height="222.66666666666663"/>
+                                <rect key="frame" x="40" y="157.33333333333337" width="334" height="222.66666666666663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7r-AC-yGd">
                                         <rect key="frame" x="0.0" y="0.0" width="162" height="106.33333333333333"/>
@@ -64,7 +64,7 @@
                                                 <rect key="frame" x="6" y="6.0000000000000036" width="150" height="62.333333333333343"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nEC-0C-2j1">
-                                                <rect key="frame" x="6" y="98.333333333333343" width="150" height="2"/>
+                                                <rect key="frame" x="6" y="98.333333333333314" width="150" height="2"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="Pz2-FU-sa9"/>
@@ -76,7 +76,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DECKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPU-9y-v95">
-                                                <rect key="frame" x="6" y="76.333333333333343" width="150" height="18"/>
+                                                <rect key="frame" x="6" y="76.333333333333314" width="150" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="NIM-lH-d1h"/>
                                                 </constraints>
@@ -121,7 +121,7 @@
                                                 <rect key="frame" x="6" y="6.0000000000000036" width="150" height="62.333333333333343"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0y-qa-OWZ">
-                                                <rect key="frame" x="6" y="98.333333333333343" width="150" height="2"/>
+                                                <rect key="frame" x="6" y="98.333333333333314" width="150" height="2"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="1yV-Ke-RJd"/>
@@ -133,7 +133,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CARDS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrT-ez-AFa">
-                                                <rect key="frame" x="6" y="76.333333333333343" width="150" height="18"/>
+                                                <rect key="frame" x="6" y="76.333333333333314" width="150" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="reW-A8-bTn"/>
                                                 </constraints>
@@ -172,13 +172,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBx-vL-L2O">
-                                        <rect key="frame" x="0.0" y="116.33333333333331" width="162" height="106.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="116.33333333333334" width="162" height="106.33333333333334"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Create" translatesAutoresizingMaskIntoConstraints="NO" id="GqI-tX-WJX">
                                                 <rect key="frame" x="6" y="6.0000000000000036" width="150" height="62.333333333333343"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Slx-Ig-Xw9">
-                                                <rect key="frame" x="6" y="98.333333333333371" width="150" height="2"/>
+                                                <rect key="frame" x="6" y="98.333333333333314" width="150" height="2"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="fRy-TO-bi7"/>
@@ -190,7 +190,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE DECK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2i-Ke-5jX">
-                                                <rect key="frame" x="6" y="76.333333333333371" width="150" height="18"/>
+                                                <rect key="frame" x="6" y="76.333333333333314" width="150" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="68w-4x-ZUa"/>
                                                 </constraints>
@@ -229,13 +229,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-Kj-qcf">
-                                        <rect key="frame" x="172" y="116.33333333333331" width="162" height="106.33333333333331"/>
+                                        <rect key="frame" x="172" y="116.33333333333334" width="162" height="106.33333333333334"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search" translatesAutoresizingMaskIntoConstraints="NO" id="PTZ-OL-QU0">
                                                 <rect key="frame" x="6" y="6.0000000000000036" width="150" height="62.333333333333343"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eww-r4-OB1">
-                                                <rect key="frame" x="6" y="98.333333333333371" width="150" height="2"/>
+                                                <rect key="frame" x="6" y="98.333333333333314" width="150" height="2"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="2vt-T2-J0y"/>
@@ -246,8 +246,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MARKETPLACE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-b5-yvU">
-                                                <rect key="frame" x="6" y="76.333333333333371" width="150" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEARCH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-b5-yvU">
+                                                <rect key="frame" x="6" y="76.333333333333314" width="150" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="CXh-0P-esU"/>
                                                 </constraints>
@@ -310,7 +310,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNl-ur-4dR">
-                                <rect key="frame" x="40" y="114" width="334" height="20"/>
+                                <rect key="frame" x="40" y="114" width="334" height="23.333333333333343"/>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <color key="textColor" red="0.24315250570398905" green="0.24315250570398905" blue="0.24315250570398905" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -341,7 +341,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kOp-YG-uZ1">
-                                <rect key="frame" x="40" y="396.66666666666674" width="334" height="299.33333333333326"/>
+                                <rect key="frame" x="40" y="400" width="334" height="296"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9SN-2J-pR5">
                                     <size key="itemSize" width="334" height="42"/>
@@ -405,10 +405,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waV-L4-S5d">
-                                        <rect key="frame" x="40" y="281.33333333333331" width="334" height="173.33333333333331"/>
+                                        <rect key="frame" x="40" y="279.33333333333331" width="334" height="177.33333333333331"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unable to connect to the internet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="YdV-P6-REl">
-                                                <rect key="frame" x="0.0" y="150" width="334" height="23.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="150" width="334" height="27.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="20"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -432,7 +432,7 @@
                                         </constraints>
                                     </view>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCb-yz-ZJR">
-                                        <rect key="frame" x="160.66666666666666" y="474.66666666666669" width="93" height="32"/>
+                                        <rect key="frame" x="160.66666666666666" y="476.66666666666669" width="93" height="36.000000000000057"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93" id="XGZ-sm-n7K"/>
                                         </constraints>
@@ -527,7 +527,7 @@
                         <segue destination="wRy-Ck-hDU" kind="show" identifier="decks" id="kz7-Sb-oco"/>
                         <segue destination="8UJ-MN-Ymr" kind="show" identifier="editProfile" id="XDy-0K-4BY"/>
                         <segue destination="fwd-VK-lMc" kind="show" identifier="createDeck" id="zq2-cu-WBD"/>
-                        <segue destination="YCz-Zd-eG2" kind="show" identifier="searchDeck" id="xrl-eN-ji3"/>
+                        <segue destination="YCz-Zd-eG2" kind="show" identifier="search" id="xrl-eN-ji3"/>
                         <segue destination="aBN-oB-3fZ" kind="show" identifier="review" id="p0r-eq-3dv"/>
                         <segue destination="d1u-DQ-CcU" kind="show" identifier="cards" id="Dje-Nj-cyH"/>
                     </connections>
@@ -7428,7 +7428,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="PcJ-Cf-5WB"/>
         <segue reference="dEU-yB-E5T"/>
-        <segue reference="h5F-6A-J1r"/>
+        <segue reference="1zn-0n-nWw"/>
         <segue reference="Reh-O7-sEd"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
