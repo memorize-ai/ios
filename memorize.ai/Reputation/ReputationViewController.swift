@@ -1,7 +1,17 @@
 import UIKit
 
+fileprivate var shouldLoadReputationHistory = true
+
 class ReputationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var reputationHistoryTableView: UITableView!
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		if shouldLoadReputationHistory {
+			shouldLoadReputationHistory = false
+			ReputationHistoryItem.loadAll()
+		}
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
