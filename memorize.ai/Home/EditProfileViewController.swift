@@ -485,16 +485,17 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		getProfileLink { url in
 			guard let url = url?.absoluteString else { return self.showNotification("Unable to load your profile link. Please try again", type: .error) }
 			let mailComposeVC = MFMailComposeViewController()
+			mailComposeVC.mailComposeDelegate = self
 			mailComposeVC.delegate = self
 			mailComposeVC.setToRecipients([MEMORIZE_AI_SUPPORT_EMAIL])
 			mailComposeVC.setMessageBody("""
-			\n\n=== User info ===
-			ID: \(id)
-			Name: \(name)
-			Email: \(email)
-			Profile link: <a href="\(url)">memorize.ai/\(User.urlString(slug: slug))</a>
-			iOS App version: \(APP_VERSION ?? "1.0")
-			iOS version: \(UIDevice.current.systemVersion)
+			<br><br>=== User info ===<br>
+			ID: \(id)<br>
+			Name: \(name)<br>
+			Email: \(email)<br>
+			Profile link: <a href="\(url)">\(User.urlString(slug: slug))</a><br>
+			iOS App version: \(APP_VERSION ?? "1.0")<br>
+			iOS version: \(UIDevice.current.systemVersion)<br>
 			Device: \(CURRENT_DEVICE.description)
 			""", isHTML: true)
 			self.present(mailComposeVC, animated: true, completion: nil)
@@ -502,7 +503,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 	}
 	
 	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true)
 	}
 	
 	@IBAction
