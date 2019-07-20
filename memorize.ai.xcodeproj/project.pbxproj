@@ -152,6 +152,9 @@
 		4DCF83DE22A378F3006B73A4 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCF83DD22A378F3006B73A4 /* Listener.swift */; };
 		4DCFA2CA8854BA83CB5EAF29 /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8175857A7DBF4324F32E0BB6 /* Pods_memorize_aiTests.framework */; };
 		4DD8FAC322E171BD0008B28E /* EditBioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC222E171BD0008B28E /* EditBioViewController.swift */; };
+		4DD8FAC622E3CBB80008B28E /* ReputationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC522E3CBB80008B28E /* ReputationViewController.swift */; };
+		4DD8FAC822E3CBC20008B28E /* EarnReputationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC722E3CBC20008B28E /* EarnReputationViewController.swift */; };
+		4DD8FACA22E3CC9F0008B28E /* ReputationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8FAC922E3CC9F0008B28E /* ReputationHistory.swift */; };
 		4DDD3F2722B1F9FC00BA2C98 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2622B1F9FB00BA2C98 /* History.swift */; };
 		4DDD3F2922B1FC4E00BA2C98 /* DeckRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2822B1FC4E00BA2C98 /* DeckRatingsViewController.swift */; };
 		4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */; };
@@ -343,6 +346,9 @@
 		4DCB002422936CD30072FED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4DCF83DD22A378F3006B73A4 /* Listener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
 		4DD8FAC222E171BD0008B28E /* EditBioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBioViewController.swift; sourceTree = "<group>"; };
+		4DD8FAC522E3CBB80008B28E /* ReputationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReputationViewController.swift; sourceTree = "<group>"; };
+		4DD8FAC722E3CBC20008B28E /* EarnReputationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnReputationViewController.swift; sourceTree = "<group>"; };
+		4DD8FAC922E3CC9F0008B28E /* ReputationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReputationHistory.swift; sourceTree = "<group>"; };
 		4DDD3F2622B1F9FB00BA2C98 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		4DDD3F2822B1FC4E00BA2C98 /* DeckRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckRatingsViewController.swift; sourceTree = "<group>"; };
 		4DDD3F2A22B1FCB900BA2C98 /* RateDeckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDeckViewController.swift; sourceTree = "<group>"; };
@@ -459,6 +465,7 @@
 				4D5F1F1F229E1C4D00AC7732 /* Invite.swift */,
 				4D5F1F1B229E1AEE00AC7732 /* PerformanceRating.swift */,
 				4DA965EA22CC18C000FD7353 /* StoreReview.swift */,
+				4DD8FAC922E3CC9F0008B28E /* ReputationHistory.swift */,
 				4D5F1F17229E1AC400AC7732 /* Permission.swift */,
 				4D5F1F21229F217200AC7732 /* Keyboard.swift */,
 				4DA9D0CC22C80D250057AD0D /* KeyboardHandler.swift */,
@@ -472,6 +479,7 @@
 				4D052AB72204259B0093B64E /* Main.storyboard */,
 				4D64391622057D3A006F4F2D /* Authentication */,
 				4D44043D224D7D8400AEABD2 /* Home */,
+				4DD8FAC422E3CBA40008B28E /* Reputation */,
 				4D37C73922DA400C008B4156 /* Games */,
 				4DBFE50422B1F89400EDF0C7 /* Uploads */,
 				4DBFE50522B1F8A300EDF0C7 /* Ratings */,
@@ -712,6 +720,15 @@
 				4DDD3F2C22B1FD7700BA2C98 /* CardRatingsViewController.swift */,
 			);
 			path = Ratings;
+			sourceTree = "<group>";
+		};
+		4DD8FAC422E3CBA40008B28E /* Reputation */ = {
+			isa = PBXGroup;
+			children = (
+				4DD8FAC522E3CBB80008B28E /* ReputationViewController.swift */,
+				4DD8FAC722E3CBC20008B28E /* EarnReputationViewController.swift */,
+			);
+			path = Reputation;
 			sourceTree = "<group>";
 		};
 		4DDD3F3022B34B0900BA2C98 /* Modals */ = {
@@ -1083,6 +1100,7 @@
 				4DDD3F3222B34B5900BA2C98 /* NotificationViewController.swift in Sources */,
 				4D85C60D220638A2005B08DD /* SignInViewController.swift in Sources */,
 				4DEA540722A5CF6400C5CCEF /* EditUploadViewController.swift in Sources */,
+				4DD8FACA22E3CC9F0008B28E /* ReputationHistory.swift in Sources */,
 				4DA9D0CD22C80D250057AD0D /* KeyboardHandler.swift in Sources */,
 				4DE8322722B03E6000DDD1F9 /* DeckSettingsViewController.swift in Sources */,
 				4DD8FAC322E171BD0008B28E /* EditBioViewController.swift in Sources */,
@@ -1115,6 +1133,7 @@
 				4D37C73B22DA4022008B4156 /* EmojiGameViewController.swift in Sources */,
 				4D12041822A8E7DC00DAC7D9 /* CardEditorViewController.swift in Sources */,
 				4DDD3F2B22B1FCB900BA2C98 /* RateDeckViewController.swift in Sources */,
+				4DD8FAC622E3CBB80008B28E /* ReputationViewController.swift in Sources */,
 				4DE7FD4022B1D72700B82F38 /* RatingDraft.swift in Sources */,
 				4DAA38FC2207F0FB00EB443E /* DeckViewController.swift in Sources */,
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
@@ -1122,6 +1141,7 @@
 				4DF9724A220779AE00FF8BED /* EditDeckViewController.swift in Sources */,
 				4D2CB86A22AA0A7900092FD4 /* CardDraft.swift in Sources */,
 				4DDD3F2922B1FC4E00BA2C98 /* DeckRatingsViewController.swift in Sources */,
+				4DD8FAC822E3CBC20008B28E /* EarnReputationViewController.swift in Sources */,
 				4D052ABC2204259B0093B64E /* memorize_ai.xcdatamodeld in Sources */,
 				4D4D00AF2206CEB1008F0ABD /* DecksViewController.swift in Sources */,
 				4D5F1F20229E1C4D00AC7732 /* Invite.swift in Sources */,

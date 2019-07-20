@@ -1301,7 +1301,7 @@
         <!--Reputation-->
         <scene sceneID="Z0a-XC-vAb">
             <objects>
-                <viewController title="Reputation" id="fmf-0E-3d3" sceneMemberID="viewController">
+                <viewController title="Reputation" id="fmf-0E-3d3" customClass="ReputationViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lFA-oN-yXk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1318,7 +1318,7 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="636"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Fye-48-xYO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Fye-48-xYO" customClass="ReputationHistoryTableViewCell" customModule="memorize_ai" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fye-48-xYO" id="m6c-ZA-jbe">
@@ -1359,8 +1359,17 @@
                                                 <constraint firstItem="tpd-h6-YqT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="m6c-ZA-jbe" secondAttribute="top" constant="4" id="mKs-EL-4Gx"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="afterLabel" destination="tpd-h6-YqT" id="46k-pO-mKs"/>
+                                            <outlet property="amountLabel" destination="UbL-op-n52" id="YP1-gl-7D0"/>
+                                            <outlet property="descriptionLabel" destination="nMT-K3-vKU" id="yQv-We-Jce"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="fmf-0E-3d3" id="Gq6-En-MW6"/>
+                                    <outlet property="delegate" destination="fmf-0E-3d3" id="5MF-bY-abM"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1375,6 +1384,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ylc-Dl-b5a"/>
                     </view>
+                    <connections>
+                        <outlet property="reputationHistoryTableView" destination="01D-Wc-xEw" id="cla-v5-P69"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ekS-SB-LdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1388,13 +1400,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ofY-1T-n2K">
-                                <rect key="frame" x="87" y="304" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ofY-1T-n2K">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="0uf-c6-BTq">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0uf-c6-BTq" id="y0H-44-ewN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ofY-1T-n2K" firstAttribute="leading" secondItem="mji-OA-0Fe" secondAttribute="leading" id="0yU-f7-bHR"/>
+                            <constraint firstItem="ofY-1T-n2K" firstAttribute="top" secondItem="mji-OA-0Fe" secondAttribute="top" id="1zL-OU-jzI"/>
+                            <constraint firstItem="mji-OA-0Fe" firstAttribute="trailing" secondItem="ofY-1T-n2K" secondAttribute="trailing" id="DBH-lH-Maz"/>
+                            <constraint firstAttribute="bottom" secondItem="ofY-1T-n2K" secondAttribute="bottom" id="WGc-Nb-4e6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mji-OA-0Fe"/>
                     </view>
                 </viewController>
