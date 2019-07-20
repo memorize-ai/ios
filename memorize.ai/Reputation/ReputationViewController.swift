@@ -3,8 +3,14 @@ import UIKit
 class ReputationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var reputationHistoryTableView: UITableView!
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		ChangeHandler.update { change in
+			if change == .reputationHistoryAdded || change == .reputationHistoryModified || change == .reputationHistoryRemoved {
+				self.reputationHistoryTableView.reloadData()
+			}
+		}
+		updateCurrentViewController()
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
