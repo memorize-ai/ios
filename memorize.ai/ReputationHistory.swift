@@ -1,9 +1,19 @@
 import Foundation
 import Firebase
 
-var reputationHistory = [ReputationHistory]()
+var reputationHistory = [GroupedReputationHistoryArray]()
 
-class ReputationHistory {
+class GroupedReputationHistoryArray {
+	let date: Date
+	var items: [ReputationHistoryItem]
+	
+	init(date: Date, items: [ReputationHistoryItem]) {
+		self.date = date
+		self.items = items
+	}
+}
+
+class ReputationHistoryItem {
 	let id: String
 	let date: Date
 	let amount: Int
@@ -31,5 +41,17 @@ class ReputationHistory {
 			uid: snapshot.get("uid") as? String,
 			deckId: snapshot.get("deckId") as? String
 		)
+	}
+	
+	@discardableResult
+	func addToReputationHistory() -> ReputationHistoryItem {
+		let current = Calendar.current
+		if let groupedArray = (reputationHistory.first { current.isDate(self.date, inSameDayAs: $0.date) }) {
+			groupedArray.items.append(self)
+		} else {
+			reputationHistory.append(GroupedReputationHistoryArray(date: date, items: [self]))
+		}
+		reputationHistory.sort { $0.date > $1.date }
+		return self
 	}
 }
