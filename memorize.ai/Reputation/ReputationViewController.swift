@@ -7,12 +7,24 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 		super.viewDidLoad()
 	}
 	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return reputationHistory.count
+	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		<#code#>
+		return reputationHistory[section].items.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		<#code#>
+		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? ReputationHistoryTableViewCell else { return _cell }
+		let historyItem = reputationHistory[indexPath.section].items[indexPath.row]
+		let amountIsNegative = historyItem.amount < 0
+		cell.amountLabel.text = "\(amountIsNegative ? "-" : "+")\(historyItem.amount.formattedWithCommas)"
+		cell.amountLabel.textColor = amountIsNegative ? #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1) : #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
+		cell.descriptionLabel.text = historyItem.description
+		cell.afterLabel.text = historyItem.after.formattedWithCommas
+		return cell
 	}
 }
 
