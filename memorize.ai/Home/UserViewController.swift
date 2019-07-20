@@ -168,11 +168,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 			switch pendingDynamicLink {
 			case .deck(id: let deckId, hasImage: let hasImage):
 				func showDeck(hasImage: Bool, image: UIImage?) {
-					guard let deckVC = storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return showNotification("Unable to load deck. Please try again", type: .error) }
-					deckVC.deck.id = deckId
-					deckVC.deck.hasImage = hasImage
-					deckVC.deck.image = image
-					navigationController?.pushViewController(deckVC, animated: true)
+					DeckViewController.show(self, id: deckId, hasImage: hasImage, image: image)
 					memorize_ai.pendingDynamicLink = nil
 				}
 				if let deck = Deck.get(deckId) {
