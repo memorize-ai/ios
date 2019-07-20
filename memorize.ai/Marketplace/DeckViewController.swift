@@ -336,6 +336,16 @@ class DeckViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
+	@discardableResult
+	static func show(_ viewController: UIViewController, id deckId: String, hasImage: Bool, image: UIImage?) -> Bool {
+		guard let deckVC = viewController.storyboard?.instantiateViewController(withIdentifier: "deck") as? DeckViewController else { return false }
+		deckVC.deck.id = deckId
+		deckVC.deck.hasImage = hasImage
+		deckVC.deck.image = image
+		viewController.navigationController?.pushViewController(deckVC, animated: true)
+		return true
+	}
+	
 	var hasDeck: Bool {
 		return Deck.has(deck.id)
 	}
