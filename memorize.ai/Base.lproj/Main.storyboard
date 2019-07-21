@@ -694,6 +694,7 @@
                                                                 <connections>
                                                                     <action selector="share" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="HWV-Ng-Za4"/>
                                                                     <action selector="viewProfile" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="hR9-1U-Sx6"/>
+                                                                    <segue destination="3CG-2q-IFu" kind="show" id="6Zu-iU-OSJ"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -7332,6 +7333,21 @@
             </objects>
             <point key="canvasLocation" x="2892.753623188406" y="808.69565217391312"/>
         </scene>
+        <!--User View Controller-->
+        <scene sceneID="KEW-Uy-bDQ">
+            <objects>
+                <viewController id="3CG-2q-IFu" customClass="UserViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="73k-wc-6rF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="w88-5i-s1O"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CUU-Qj-Bg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3590" y="809"/>
+        </scene>
         <!--Card Preview View Controller-->
         <scene sceneID="t2l-7r-MMn">
             <objects>
@@ -7626,7 +7642,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="324-2A-P4S"/>
         <segue reference="dEU-yB-E5T"/>
-        <segue reference="1zn-0n-nWw"/>
+        <segue reference="h5F-6A-J1r"/>
         <segue reference="NJF-dv-A8u"/>
         <segue reference="xrl-eN-ji3"/>
         <segue reference="zq2-cu-WBD"/>
