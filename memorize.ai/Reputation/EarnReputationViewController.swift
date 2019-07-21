@@ -1,14 +1,12 @@
 import UIKit
 
-fileprivate var shouldLoadReputationValues = true
-
 class EarnReputationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet weak var reputationTableView: UITableView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		if shouldLoadReputationValues {
-			shouldLoadReputationValues = false
+		if ReputationValue.shouldLoad {
+			ReputationValue.shouldLoad = false
 			ReputationValue.loadAll()
 		}
 		reputationTableView.tableFooterView = UIView()

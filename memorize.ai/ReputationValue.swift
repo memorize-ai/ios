@@ -3,6 +3,8 @@ import Firebase
 var reputationValues = [ReputationValue]()
 
 class ReputationValue {
+	static var shouldLoad = true
+	
 	let id: String
 	var amount: Int
 	var description: String

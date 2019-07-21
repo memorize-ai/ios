@@ -522,6 +522,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 			deckRatings.removeAll()
 			cardRatings.removeAll()
 			allDecks.removeAll()
+			ReputationHistoryItem.shouldLoad = true
+			ReputationValue.shouldLoad = true
 			User.delete()
 			self.performSegue(withIdentifier: "signOut", sender: self)
 		})

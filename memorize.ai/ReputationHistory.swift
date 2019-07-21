@@ -14,6 +14,8 @@ class GroupedReputationHistoryArray {
 }
 
 class ReputationHistoryItem {
+	static var shouldLoad = true
+	
 	let id: String
 	let date: Date
 	let amount: Int
