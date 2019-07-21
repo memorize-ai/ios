@@ -5,11 +5,13 @@ var reputationValues = [ReputationValue]()
 class ReputationValue {
 	let id: String
 	var amount: Int
+	var description: String
 	var order: Int
 	
-	init(id: String, amount: Int, order: Int) {
+	init(id: String, amount: Int, description: String, order: Int) {
 		self.id = id
 		self.amount = amount
+		self.description = description
 		self.order = order
 	}
 	
@@ -17,6 +19,7 @@ class ReputationValue {
 		self.init(
 			id: snapshot.documentID,
 			amount: snapshot.get("amount") as? Int ?? 0,
+			description: snapshot.get("description") as? String ?? "Error",
 			order: snapshot.get("order") as? Int ?? 0
 		)
 	}
@@ -67,6 +70,7 @@ class ReputationValue {
 	@discardableResult
 	func update(_ snapshot: DocumentSnapshot) -> ReputationValue {
 		amount = snapshot.get("amount") as? Int ?? amount
+		description = snapshot.get("description") as? String ?? description
 		order = snapshot.get("order") as? Int ?? order
 		ReputationValue.sortReputationValues()
 		return self
