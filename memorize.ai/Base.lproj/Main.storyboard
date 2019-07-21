@@ -1410,7 +1410,35 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0uf-c6-BTq" id="y0H-44-ewN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoR-dH-cJy">
+                                                    <rect key="frame" x="20" y="8.3333333333333339" width="24" height="27.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join memorize.ai" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yqG-NY-d1F">
+                                                    <rect key="frame" x="56.000000000000007" y="4" width="126.66666666666669" height="35.666666666666664"/>
+                                                    <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yqG-NY-d1F" firstAttribute="leading" secondItem="hoR-dH-cJy" secondAttribute="trailing" constant="12" id="79m-jg-A0n"/>
+                                                <constraint firstAttribute="bottom" secondItem="yqG-NY-d1F" secondAttribute="bottom" constant="4" id="ICR-xS-J2S"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yqG-NY-d1F" secondAttribute="trailing" constant="20" id="MmA-Yt-YUW"/>
+                                                <constraint firstItem="hoR-dH-cJy" firstAttribute="centerY" secondItem="y0H-44-ewN" secondAttribute="centerY" id="X0P-v6-NzY"/>
+                                                <constraint firstItem="yqG-NY-d1F" firstAttribute="top" secondItem="y0H-44-ewN" secondAttribute="top" constant="4" id="ggy-tb-HeH"/>
+                                                <constraint firstItem="hoR-dH-cJy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y0H-44-ewN" secondAttribute="top" constant="4" id="m4B-r7-AZ2"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hoR-dH-cJy" secondAttribute="bottom" constant="4" id="vsW-Dc-VFH"/>
+                                                <constraint firstItem="hoR-dH-cJy" firstAttribute="leading" secondItem="y0H-44-ewN" secondAttribute="leading" constant="20" id="y1V-Hq-N8i"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="amountLabel" destination="hoR-dH-cJy" id="5bJ-qv-fhS"/>
+                                            <outlet property="descriptionLabel" destination="yqG-NY-d1F" id="ZBC-d0-WuF"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1434,7 +1462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgf-NN-5Af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="133"/>
+            <point key="canvasLocation" x="2192.753623188406" y="132.88043478260872"/>
         </scene>
         <!--Edit Bio-->
         <scene sceneID="R9z-7e-vPt">

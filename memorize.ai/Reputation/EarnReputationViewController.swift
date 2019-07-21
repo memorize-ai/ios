@@ -26,4 +26,6 @@ class EarnReputationViewController: UIViewController {
 }
 
 class EarnReputationTableViewCell: UITableViewCell {
+	@IBOutlet weak var amountLabel: UILabel!
+	@IBOutlet weak var descriptionLabel: UILabel!
 }
