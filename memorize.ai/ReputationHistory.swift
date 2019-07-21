@@ -71,6 +71,7 @@ class ReputationHistoryItem {
 		let current = Calendar.current
 		if let groupedArray = (reputationHistory.first { current.isDate(self.date, inSameDayAs: $0.date) }) {
 			groupedArray.items.append(self)
+			groupedArray.items.sort { $0.date > $1.date }
 		} else {
 			reputationHistory.append(GroupedReputationHistoryArray(date: date, items: [self]))
 		}
