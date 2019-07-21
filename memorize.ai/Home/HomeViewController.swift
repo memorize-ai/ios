@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import WebKit
 
-class UserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var loadingView: UIView!
 	@IBOutlet weak var loadingImage: UIImageView!
 	@IBOutlet weak var offlineView: UIView!
