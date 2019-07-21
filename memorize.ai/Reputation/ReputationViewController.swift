@@ -42,6 +42,9 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 		cell.amountLabel.textColor = amountIsNegative ? #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1) : #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
 		cell.descriptionLabel.text = historyItem.description
 		cell.afterLabel.text = historyItem.after.formattedWithCommas
+		cell.amountLabel.sizeToFit()
+		cell.afterLabel.sizeToFit()
+		cell.descriptionLabelLeadingConstraint.constant = cell.amountLabel.bounds.width + 40
 		cell.editingAccessoryType = historyItem.uid == nil && historyItem.deckId == nil ? .none : .disclosureIndicator
 		return cell
 	}
@@ -66,5 +69,6 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 class ReputationHistoryTableViewCell: UITableViewCell {
 	@IBOutlet weak var amountLabel: UILabel!
 	@IBOutlet weak var descriptionLabel: UILabel!
+	@IBOutlet weak var descriptionLabelLeadingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var afterLabel: UILabel!
 }

@@ -1318,27 +1318,30 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="636"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Fye-48-xYO" customClass="ReputationHistoryTableViewCell" customModule="memorize_ai" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="59" id="Fye-48-xYO" customClass="ReputationHistoryTableViewCell" customModule="memorize_ai" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fye-48-xYO" id="m6c-ZA-jbe">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbL-op-n52">
-                                                    <rect key="frame" x="20" y="8.3333333333333339" width="24" height="27.333333333333329"/>
+                                                    <rect key="frame" x="20" y="15.666666666666666" width="24" height="27.333333333333336"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joined memorize.ai" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMT-K3-vKU">
-                                                    <rect key="frame" x="55.999999999999986" y="4" width="145.66666666666663" height="35.666666666666664"/>
+                                                    <rect key="frame" x="50" y="4" width="145.66666666666666" height="50.666666666666664"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="f6M-72-EnF"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="65" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpd-h6-YqT">
-                                                    <rect key="frame" x="370" y="8" width="24" height="28"/>
+                                                    <rect key="frame" x="370" y="15.333333333333336" width="24" height="28"/>
                                                     <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1351,9 +1354,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="tpd-h6-YqT" secondAttribute="trailing" constant="20" id="8Qk-Lw-Ix0"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UbL-op-n52" secondAttribute="bottom" constant="4" id="APE-rb-wLo"/>
                                                 <constraint firstItem="UbL-op-n52" firstAttribute="centerY" secondItem="m6c-ZA-jbe" secondAttribute="centerY" id="MVh-if-bIc"/>
+                                                <constraint firstItem="nMT-K3-vKU" firstAttribute="leading" secondItem="m6c-ZA-jbe" secondAttribute="leading" constant="50" id="QDm-zf-v39"/>
                                                 <constraint firstItem="nMT-K3-vKU" firstAttribute="top" secondItem="m6c-ZA-jbe" secondAttribute="top" constant="4" id="U4X-6H-qR3"/>
                                                 <constraint firstItem="tpd-h6-YqT" firstAttribute="centerY" secondItem="m6c-ZA-jbe" secondAttribute="centerY" id="Usq-Ig-V5N"/>
-                                                <constraint firstItem="nMT-K3-vKU" firstAttribute="leading" secondItem="UbL-op-n52" secondAttribute="trailing" constant="12" id="VeN-1G-b31"/>
                                                 <constraint firstAttribute="bottom" secondItem="nMT-K3-vKU" secondAttribute="bottom" constant="4" id="WhF-qw-tbY"/>
                                                 <constraint firstItem="UbL-op-n52" firstAttribute="top" relation="greaterThanOrEqual" secondItem="m6c-ZA-jbe" secondAttribute="top" constant="4" id="hzq-0u-ga2"/>
                                                 <constraint firstItem="tpd-h6-YqT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="m6c-ZA-jbe" secondAttribute="top" constant="4" id="mKs-EL-4Gx"/>
@@ -1363,6 +1366,7 @@
                                             <outlet property="afterLabel" destination="tpd-h6-YqT" id="46k-pO-mKs"/>
                                             <outlet property="amountLabel" destination="UbL-op-n52" id="YP1-gl-7D0"/>
                                             <outlet property="descriptionLabel" destination="nMT-K3-vKU" id="yQv-We-Jce"/>
+                                            <outlet property="descriptionLabelLeadingConstraint" destination="QDm-zf-v39" id="zhD-et-88V"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
