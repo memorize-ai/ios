@@ -63,4 +63,8 @@ enum Change {
 	case reputationHistoryAdded
 	case reputationHistoryModified
 	case reputationHistoryRemoved
+	
+	case reputationValueAdded
+	case reputationValueModified
+	case reputationValueRemoved
 }
