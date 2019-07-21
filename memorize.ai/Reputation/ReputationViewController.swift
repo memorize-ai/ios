@@ -25,6 +25,10 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 		return reputationHistory.count
 	}
 	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return reputationHistory[section].date.formatCompact()
+	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return reputationHistory[section].items.count
 	}
