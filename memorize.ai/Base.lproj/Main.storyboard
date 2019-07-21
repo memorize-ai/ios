@@ -1395,7 +1395,7 @@
         <!--Earn Reputation-->
         <scene sceneID="uNG-Nx-iRB">
             <objects>
-                <viewController title="Earn Reputation" id="j18-kM-9qo" sceneMemberID="viewController">
+                <viewController title="Earn Reputation" id="j18-kM-9qo" customClass="EarnReputationViewController" customModule="memorize_ai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SZA-JG-jem">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1404,7 +1404,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="0uf-c6-BTq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="0uf-c6-BTq" customClass="EarnReputationTableViewCell" customModule="memorize_ai" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0uf-c6-BTq" id="y0H-44-ewN">
@@ -1413,6 +1413,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="j18-kM-9qo" id="KiA-Ti-OLt"/>
+                                    <outlet property="delegate" destination="j18-kM-9qo" id="Bcs-wc-um8"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1424,6 +1428,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mji-OA-0Fe"/>
                     </view>
+                    <connections>
+                        <outlet property="reputationTableView" destination="ofY-1T-n2K" id="oDX-Rd-odl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgf-NN-5Af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
