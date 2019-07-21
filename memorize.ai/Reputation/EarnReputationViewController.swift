@@ -33,7 +33,7 @@ class EarnReputationViewController: UIViewController, UITableViewDataSource, UIT
 		guard let cell = _cell as? EarnReputationTableViewCell else { return _cell }
 		let reputationValue = reputationValues[indexPath.row]
 		let amountIsNegative = reputationValue.amount < 0
-		cell.amountLabel.text = "\(amountIsNegative ? "-" : "+")\(reputationValue.amount.formattedWithCommas)"
+		cell.amountLabel.text = "\(amountIsNegative ? "-" : "+")\(abs(reputationValue.amount).formattedWithCommas)"
 		cell.amountLabel.textColor = amountIsNegative ? #colorLiteral(red: 0.8, green: 0.2, blue: 0.2, alpha: 1) : #colorLiteral(red: 0.2823529412, green: 0.8, blue: 0.4980392157, alpha: 1)
 		cell.descriptionLabel.text = reputationValue.description
 		return cell
