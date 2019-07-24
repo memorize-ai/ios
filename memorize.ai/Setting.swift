@@ -42,6 +42,8 @@ class Setting {
 		switch slug {
 		case "general":
 			return .general
+		case "notifications":
+			return .notifications
 		case "advanced":
 			return .advanced
 		default:
@@ -127,13 +129,16 @@ class SectionedSettings {
 
 enum SettingSection: Int {
 	case general = 0
-	case advanced = 1
+	case notifications = 1
+	case advanced = 2
 	case unknown = -1
 	
 	var title: String {
 		switch self {
 		case .general:
 			return "General"
+		case .notifications:
+			return "Notifications"
 		case .advanced:
 			return "Advanced"
 		case .unknown:
@@ -144,10 +149,11 @@ enum SettingSection: Int {
 
 enum SettingType: String {
 	case darkMode = "dark-mode"
-	case notifications = "notifications"
 	case emailNotifications = "email-notifications"
 	case publicEmail = "public-email"
 	case allowContact = "allow-contact"
+	case cardNotifications = "card-notifications"
+	case followerNotifications = "follower-notifications"
 	case algorithm = "algorithm"
 	case unknown
 }
