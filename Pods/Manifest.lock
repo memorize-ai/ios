@@ -5,6 +5,10 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - CFAlertViewController (3.1)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - Crashlytics (3.13.4):
     - Fabric (~> 1.10.2)
   - DeviceKit (2.0.0)
@@ -133,6 +137,7 @@ PODS:
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
   - GTMSessionFetcher/Core (1.2.2)
+  - Hero (1.4.0)
   - InstantSearchClient (7.0.0)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
@@ -140,11 +145,15 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Notepad (0.3.0)
   - Protobuf (3.9.0)
   - SwiftyMimeTypes (2.1.0)
   - SwiftySound (1.1.0)
+  - SwipeCellKit (2.6.0)
 
 DEPENDENCIES:
+  - CFAlertViewController
+  - ChameleonFramework/Swift
   - Crashlytics
   - DeviceKit
   - Down (from `https://github.com/iwasrobbed/Down.git`)
@@ -156,13 +165,18 @@ DEPENDENCIES:
   - Firebase/Functions
   - Firebase/Messaging
   - Firebase/Storage
+  - Hero
   - InstantSearchClient
+  - Notepad
   - SwiftyMimeTypes
   - SwiftySound
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL-GRPC
+    - CFAlertViewController
+    - ChameleonFramework
     - Crashlytics
     - DeviceKit
     - Fabric
@@ -183,12 +197,15 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - Hero
     - InstantSearchClient
     - leveldb-library
     - nanopb
+    - Notepad
     - Protobuf
     - SwiftyMimeTypes
     - SwiftySound
+    - SwipeCellKit
 
 EXTERNAL SOURCES:
   Down:
@@ -201,6 +218,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  CFAlertViewController: a27cf0512d0fa9ef6a3b966862039c295fb0ef69
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
   DeviceKit: 72d36709552d4b3582abd76a53949148acad9811
   Down: 3c758f2388fa739663023f400e742a988fa1e21d
@@ -222,13 +241,16 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   InstantSearchClient: c9c1522c59f109514c6a37a7ec2a622e069ba56b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Notepad: c087ac7cf523e68ca8d557f8be88ddc65e64b530
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SwiftyMimeTypes: df2392d0f7b7c06bb3a65909e0d1efc09f5b6b6b
   SwiftySound: eb46cc2399cf7d94f58c372f38216e15e0a6de3e
+  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 1093ca50947891f0d3d2f7f1553df353a73c508c
+PODFILE CHECKSUM: 73d29fc00173552918a4f313dd12a8e349f9ce3d
 
 COCOAPODS: 1.7.4
