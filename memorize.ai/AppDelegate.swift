@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 		}
 		Messaging.messaging().delegate = self
 		Fabric.with([Crashlytics.self])
-		if let notificationData = launchOptions?[.remoteNotification] {
-			print(notificationData)
+		if let notificationData = launchOptions?[.remoteNotification] as? [AnyHashable : Any] {
+			Notification.handle(notificationData)
 		}
 		return true
 	}
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	}
 	
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-		print(response.notification.request.content.userInfo)
+		Notification.handle(response.notification.request.content.userInfo)
 		completionHandler()
 	}
 	
