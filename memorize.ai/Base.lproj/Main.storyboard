@@ -692,9 +692,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxc-Wp-Saj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="55"/>
                                                                 <connections>
-                                                                    <action selector="share" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="HWV-Ng-Za4"/>
                                                                     <action selector="viewProfile" destination="8UJ-MN-Ymr" eventType="touchUpInside" id="hR9-1U-Sx6"/>
-                                                                    <segue destination="3CG-2q-IFu" kind="show" id="6Zu-iU-OSJ"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1293,6 +1291,7 @@
                         <segue destination="Ono-gw-nzX" kind="show" identifier="tutorial" id="boo-9C-hs4"/>
                         <segue destination="LSD-uz-9XL" kind="show" identifier="emojiGame" id="gkY-9p-12D"/>
                         <segue destination="Ph8-u7-qDb" kind="show" identifier="editBio" id="Ref-y7-MZe"/>
+                        <segue destination="3CG-2q-IFu" kind="show" identifier="viewProfile" id="1Bt-B8-XUj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHv-jT-Qi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
