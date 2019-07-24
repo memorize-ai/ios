@@ -153,7 +153,7 @@ PODS:
 
 DEPENDENCIES:
   - CFAlertViewController
-  - ChameleonFramework/Swift
+  - ChameleonFramework/Swift (from `https://github.com/kenmueller/Chameleon.git`)
   - Crashlytics
   - DeviceKit
   - Down (from `https://github.com/iwasrobbed/Down.git`)
@@ -176,7 +176,6 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL-GRPC
     - CFAlertViewController
-    - ChameleonFramework
     - Crashlytics
     - DeviceKit
     - Fabric
@@ -208,10 +207,15 @@ SPEC REPOS:
     - SwipeCellKit
 
 EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/kenmueller/Chameleon.git
   Down:
     :git: https://github.com/iwasrobbed/Down.git
 
 CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: ae8e6db9d90d07e2b33a298010c51764e89444c4
+    :git: https://github.com/kenmueller/Chameleon.git
   Down:
     :commit: 4c72856a5c80e5fe70d656a5ac7443e02e52a434
     :git: https://github.com/iwasrobbed/Down.git
@@ -251,6 +255,6 @@ SPEC CHECKSUMS:
   SwiftySound: eb46cc2399cf7d94f58c372f38216e15e0a6de3e
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 73d29fc00173552918a4f313dd12a8e349f9ce3d
+PODFILE CHECKSUM: de569ffcc608500e4a0f9c43161f8ab445153626
 
 COCOAPODS: 1.7.5
