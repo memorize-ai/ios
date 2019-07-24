@@ -132,7 +132,7 @@ extension String {
 	}
 	
 	func clean() -> String {
-		return Card.removeAudioUrls(replacingOccurrences(of: #"#|\\[\(\)\[\]]|\\|\*\*|_|\n*```\w*\n*"#, with: "", options: .regularExpression)).trim()
+		return Card.removeAudioUrls(replacingOccurrences(of: #"#|\\[\(\)\[\]]|\\|\*\*|_|\n*```\w*\n*|!\[.*\]\(.*\)"#, with: "", options: .regularExpression)).trim()
 	}
 	
 	func match(_ regex: String) -> [[String]] {
