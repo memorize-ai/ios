@@ -52,8 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 		}
 	}
 	
+	func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+		InstanceID.instanceID().instanceID { result, error in
+			guard error == nil, let result = result else { return }
+			token = result.token
+		}
+	}
+	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-		token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
 		User.pushToken()
 	}
 	
