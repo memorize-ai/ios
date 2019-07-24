@@ -1,20 +1,17 @@
 import UIKit
 
 class Notification {
-	private static var pending: ((UIViewController) -> Void)?
-	
-	static func handleNotification(_ data: [AnyHashable : Any]) {
+	static func handle(_ data: [AnyHashable : Any]) {
 		guard let currentViewController = currentViewController, let type = data["type"] as? String else { return }
 		switch type {
 		case "cards-due":
-			
+			return
+		case "new-follower", "unfollowed":
+			return //$ Show user profile
+		case "reputation-milestone":
+			return //$ Show reputation milestone modal
 		default:
 			return
 		}
-	}
-	
-	static func callPendingNotification(_ viewController: UIViewController) {
-		pending?(viewController)
-		pending = nil
 	}
 }
