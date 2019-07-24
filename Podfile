@@ -20,7 +20,7 @@ target 'memorize.ai' do
 	pod 'Hero'
 	pod 'Notepad'
 	pod 'SwipeCellKit'
-	pod 'ChameleonFramework/Swift'
+	pod 'ChameleonFramework/Swift', :git => 'https://github.com/kenmueller/Chameleon.git'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
 	end
