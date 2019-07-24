@@ -45,7 +45,9 @@ class ReputationViewController: UIViewController, UITableViewDataSource, UITable
 		cell.amountLabel.sizeToFit()
 		cell.afterLabel.sizeToFit()
 		cell.descriptionLabelLeadingConstraint.constant = cell.amountLabel.bounds.width + 40
-		cell.editingAccessoryType = historyItem.uid == nil && historyItem.deckId == nil ? .none : .disclosureIndicator
+		let noAccessory = historyItem.uid == nil && historyItem.deckId == nil
+		cell.accessoryType = noAccessory ? .none : .disclosureIndicator
+		cell.afterLabelTrailingConstraint.constant = noAccessory ? 40 : 0
 		return cell
 	}
 	
@@ -71,4 +73,5 @@ class ReputationHistoryTableViewCell: UITableViewCell {
 	@IBOutlet weak var descriptionLabel: UILabel!
 	@IBOutlet weak var descriptionLabelLeadingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var afterLabel: UILabel!
+	@IBOutlet weak var afterLabelTrailingConstraint: NSLayoutConstraint!
 }
