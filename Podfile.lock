@@ -214,7 +214,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
-    :commit: ae8e6db9d90d07e2b33a298010c51764e89444c4
+    :commit: 965fdf541e5b7ac7db5bc90647f4444afa8d4286
     :git: https://github.com/kenmueller/Chameleon.git
   Down:
     :commit: 4c72856a5c80e5fe70d656a5ac7443e02e52a434
