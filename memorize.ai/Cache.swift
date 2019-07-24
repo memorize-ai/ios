@@ -153,10 +153,8 @@ class Cache {
 			return nil
 		}
 		switch format {
-		case .image:
+		case .image, .gif:
 			image = UIImage(data: data)
-		case .gif:
-			image = UIImage.gif(data: data)
 		default:
 			image = nil
 			return nil

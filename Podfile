@@ -14,7 +14,6 @@ target 'memorize.ai' do
 	pod 'SwiftyMimeTypes'
 	pod 'SwiftySound'
 	pod 'DeviceKit'
-	pod 'SwiftGifOrigin'
 	pod 'Fabric'
 	pod 'Crashlytics'
 	target 'memorize.aiTests' do
