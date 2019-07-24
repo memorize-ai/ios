@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 		}
 		Messaging.messaging().delegate = self
 		Fabric.with([Crashlytics.self])
+		if let notificationData = launchOptions?[.remoteNotification] {
+			print(notificationData)
+		}
 		return true
 	}
 	
@@ -61,6 +64,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 		User.pushToken()
+	}
+	
+	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+		print(response.notification.request.content.userInfo)
+		completionHandler()
 	}
 	
 	func applicationWillTerminate(_ application: UIApplication) {

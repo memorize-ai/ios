@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D00AA8422E844DB00874F4B /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00AA8322E844DB00874F4B /* NotificationHandler.swift */; };
 		4D052AB42204259B0093B64E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052AB32204259B0093B64E /* AppDelegate.swift */; };
 		4D052AB62204259B0093B64E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D052AB52204259B0093B64E /* HomeViewController.swift */; };
 		4D052AB92204259B0093B64E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D052AB72204259B0093B64E /* Main.storyboard */; };
@@ -197,6 +198,7 @@
 		06AAEFB76E9502EA6E136E64 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
 		121674A74187238BFFCEC274 /* Pods-memorize.aiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1427E8A3FFD8404A861DF9A1 /* Pods_memorize_ai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D00AA8322E844DB00874F4B /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		4D052AB02204259B0093B64E /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D052AB32204259B0093B64E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D052AB52204259B0093B64E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				4DC29C1822D5760D0055A67D /* FlowLayout.swift */,
 				4DB8AE65228C920800A08AFA /* ChangeHandler.swift */,
 				4D4A312922DD7CD600D6F271 /* DynamicLink.swift */,
+				4D00AA8322E844DB00874F4B /* NotificationHandler.swift */,
 				4DCF83DD22A378F3006B73A4 /* Listener.swift */,
 				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
 				4D61E19722CCF035009590DD /* Cache.swift */,
@@ -1119,6 +1122,7 @@
 				4DE8322722B03E6000DDD1F9 /* DeckSettingsViewController.swift in Sources */,
 				4DD8FAC322E171BD0008B28E /* EditBioViewController.swift in Sources */,
 				4DA2C2DD22A4604400669570 /* Algolia.swift in Sources */,
+				4D00AA8422E844DB00874F4B /* NotificationHandler.swift in Sources */,
 				4D8A345122090E9E0021474A /* ReviewViewController.swift in Sources */,
 				4D3D7C5A22C52CA000D34700 /* TutorialViewController.swift in Sources */,
 				4D1A7247229611D6004FA89E /* SettingsViewController.swift in Sources */,
