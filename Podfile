@@ -17,7 +17,7 @@ target 'memorize.ai' do
 	pod 'Fabric'
 	pod 'Crashlytics'
 	pod 'CFAlertViewController'
-	pod 'Hero'
+	pod 'Hero', :git => 'https://github.com/kenmueller/Hero.git'
 	pod 'Notepad'
 	pod 'SwipeCellKit'
 	pod 'ChameleonFramework/Swift', :git => 'https://github.com/kenmueller/Chameleon.git'
