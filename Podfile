@@ -16,6 +16,11 @@ target 'memorize.ai' do
 	pod 'DeviceKit'
 	pod 'Fabric'
 	pod 'Crashlytics'
+	pod 'CFAlertViewController'
+	pod 'Hero'
+	pod 'Notepad'
+	pod 'SwipeCellKit'
+	pod 'ChameleonFramework/Swift'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
 	end
