@@ -454,6 +454,7 @@
 		4D052AB22204259B0093B64E /* memorize.ai */ = {
 			isa = PBXGroup;
 			children = (
+				4D052AB32204259B0093B64E /* AppDelegate.swift */,
 				4D64391422057886006F4F2D /* Global.swift */,
 				4DCB002422936CD30072FED4 /* Constants.swift */,
 				4DC29C1822D5760D0055A67D /* FlowLayout.swift */,
@@ -495,7 +496,6 @@
 				4D8A344F22090E8A0021474A /* Review */,
 				4DDD3F3022B34B0900BA2C98 /* Modals */,
 				4D052ABD2204259C0093B64E /* Assets.xcassets */,
-				4D052AB32204259B0093B64E /* AppDelegate.swift */,
 				4D052ABF2204259C0093B64E /* LaunchScreen.storyboard */,
 				4D052AC22204259C0093B64E /* Info.plist */,
 				4D4A312B22DDB41200D6F271 /* GoogleService-Info.plist */,
