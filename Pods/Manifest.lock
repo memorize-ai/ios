@@ -165,7 +165,7 @@ DEPENDENCIES:
   - Firebase/Functions
   - Firebase/Messaging
   - Firebase/Storage
-  - Hero
+  - Hero (from `https://github.com/kenmueller/Hero.git`)
   - InstantSearchClient
   - Notepad
   - SwiftyMimeTypes
@@ -196,7 +196,6 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
-    - Hero
     - InstantSearchClient
     - leveldb-library
     - nanopb
@@ -211,14 +210,19 @@ EXTERNAL SOURCES:
     :git: https://github.com/kenmueller/Chameleon.git
   Down:
     :git: https://github.com/iwasrobbed/Down.git
+  Hero:
+    :git: https://github.com/kenmueller/Hero.git
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
-    :commit: 965fdf541e5b7ac7db5bc90647f4444afa8d4286
+    :commit: f41669a6a8a91203c06cfb6fbc0a7f5769dae3f9
     :git: https://github.com/kenmueller/Chameleon.git
   Down:
     :commit: 4c72856a5c80e5fe70d656a5ac7443e02e52a434
     :git: https://github.com/iwasrobbed/Down.git
+  Hero:
+    :commit: e55a1bf77ba5d75af9b563e82a6e5760664258a0
+    :git: https://github.com/kenmueller/Hero.git
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
@@ -255,6 +259,6 @@ SPEC CHECKSUMS:
   SwiftySound: eb46cc2399cf7d94f58c372f38216e15e0a6de3e
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: de569ffcc608500e4a0f9c43161f8ab445153626
+PODFILE CHECKSUM: 613b0918564870a12699ae00a6ef831d39c6bbf0
 
 COCOAPODS: 1.7.5
