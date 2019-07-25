@@ -21,6 +21,9 @@ target 'memorize.ai' do
 	pod 'Notepad'
 	pod 'SwipeCellKit'
 	pod 'ChameleonFramework/Swift', :git => 'https://github.com/kenmueller/Chameleon.git'
+	pod 'TutorialKit'
+	pod 'SideMenuSwift'
+	pod 'ESTabBarController-swift'
 	target 'memorize.aiTests' do
 		inherit! :search_paths
 	end
