@@ -2,24 +2,21 @@ import UIKit
 import Firebase
 import WebKit
 
-class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	@IBOutlet weak var decksCollectionViewWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
 	@IBOutlet weak var cardsTableView: UITableView!
+	@IBOutlet weak var deckIsEmptyLabel: UILabel!
 	
 	class Action {
-		var name: String?
-		var image: UIImage?
+		var name: String
+		var image: UIImage
 		let action: (DecksViewController) -> () -> Void
 		
-		init(name: String, action: @escaping (DecksViewController) -> () -> Void) {
-			self.name = name
-			self.action = action
-		}
-		
-		init(image: UIImage, action: @escaping (DecksViewController) -> () -> Void) {
+		init(image: UIImage, name: String, action: @escaping (DecksViewController) -> () -> Void) {
 			self.image = image
+			self.name = name
 			self.action = action
 		}
 	}
@@ -27,10 +24,10 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	static var decksDidChange = false
 	
 	let actions = [
-		Action(name: "new card", action: newCard),
-		Action(name: "edit", action: editDeck),
-		Action(image: #imageLiteral(resourceName: "Ellipsis"), action: showAdvancedSettings),
-		Action(name: "visit page", action: visitPage)
+		Action(image: #imageLiteral(resourceName: "Ellipsis"), name: "NEW CARD", action: newCard),
+		Action(image: #imageLiteral(resourceName: "Ellipsis"), name: "EDIT", action: editDeck),
+		Action(image: #imageLiteral(resourceName: "Ellipsis"), name: "MORE", action: showAdvancedSettings),
+		Action(image: #imageLiteral(resourceName: "Ellipsis"), name: "VISIT PAGE", action: visitPage)
 	]
 	var deck: Deck?
 	var cardsDue = false
@@ -49,16 +46,16 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else if let deck = decks.first {
 					self.deck = deck
 					self.decksCollectionView.reloadData()
-					self.cardsTableView.reloadData()
+					self.reloadCardsTableView()
 					self.reloadActions()
 				} else {
 					self.deck = nil
 					self.decksCollectionView.reloadData()
-					self.cardsTableView.reloadData()
+					self.reloadCardsTableView()
 					self.navigationController?.popViewController(animated: true)
 				}
 			} else if change == .cardModified || change == .cardRemoved {
-				self.cardsTableView.reloadData()
+				self.reloadCardsTableView()
 			} else if change == .cardDue {
 				let noneDue = Deck.allDue().isEmpty
 				if self.cardsDue && noneDue {
@@ -70,7 +67,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				}
 			} else if change == .cardDraftAdded || change == .cardDraftModified || change == .cardDraftRemoved {
 				self.reloadActions()
-				self.cardsTableView.reloadData()
+				self.reloadCardsTableView()
 			}
 		}
 		expand(false)
@@ -85,7 +82,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 		if DecksViewController.decksDidChange {
 			decksCollectionView.reloadData()
-			cardsTableView.reloadData()
+			reloadCardsTableView()
 			reloadActions()
 			DecksViewController.decksDidChange = false
 		}
@@ -164,42 +161,29 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		actionsCollectionView.reloadData()
 	}
 	
+	func reloadCardsTableView() {
+		cardsTableView.reloadData()
+		deckIsEmptyLabel.isHidden = !(deck?.cards.isEmpty ?? true)
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		switch collectionView.tag {
 		case decksCollectionView.tag:
 			return CGSize(width: expanded ? 2 * view.bounds.width / 3 - 16 : 84, height: 84)
 		case actionsCollectionView.tag:
-			guard let name = filteredActions[indexPath.item].name as NSString?, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) else { return CGSize(width: 36, height: 36) }
-			return CGSize(width: name.size(withAttributes: [.font: extraBold]).width + 4, height: 36)
+			guard let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) else { return CGSize(width: 0, height: 0) }
+			return CGSize(width: filteredActions[indexPath.item].name.size(withAttributes: [.font: extraBold]).width + 40, height: 41)
 		default:
 			return CGSize(width: 0, height: 0)
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		switch collectionView.tag {
-		case decksCollectionView.tag:
-			return 8
-		case actionsCollectionView.tag:
-			return 4
-		case cardsCollectionView.tag:
-			return 10
-		default:
-			return 0
-		}
+		return 3
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		switch collectionView.tag {
-		case decksCollectionView.tag:
-			return 8
-		case actionsCollectionView.tag:
-			return 20
-		case cardsCollectionView.tag:
-			return 10
-		default:
-			return 0
-		}
+		return 3
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -208,8 +192,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 			return decks.count
 		case actionsCollectionView.tag:
 			return filteredActions.count
-		case cardsCollectionView.tag:
-			return deck?.cards.count ?? 0
 		default:
 			return 0
 		}
@@ -302,25 +284,41 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		switch collectionView.tag {
+		case decksCollectionView.tag:
+			
+		}
 		guard collectionView.tag == decksCollectionView.tag else { return }
 		let selectedDeck = decks[indexPath.item]
 		User.save(selectedDeck: selectedDeck)
 		deck = selectedDeck
 		decksCollectionView.reloadData()
 		reloadActions()
-		cardsCollectionView.reloadData()
+		reloadCardsTableView()
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return deck?.cards.count ?? 0
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let _cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		guard let cell = _cell as? DecksViewControllerCardTableViewCell, let deck = deck else { return _cell }
+		let card = deck.cards[indexPath.row]
+		return cell.load(text: card.front, isDue: card.isDue(), hasDraft: card.hasDraft)
 	}
 }
 
 class DecksViewControllerCardTableViewCell: UITableViewCell {
 	@IBOutlet weak var label: UILabel!
 	
-	func load(text: String, isDue: Bool, hasDraft: Bool) {
+	func load(text: String, isDue: Bool, hasDraft: Bool) -> DecksViewControllerCardTableViewCell {
 		label.text = text.clean()
 		if let font = UIFont(name: "Nunito-\(isDue ? "SemiBold" : "Regular")", size: 17) {
 			label.font = font
 		}
 		accessoryType = hasDraft ? .disclosureIndicator : .none
+		return self
 	}
 }
 
