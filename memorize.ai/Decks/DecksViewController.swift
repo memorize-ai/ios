@@ -5,8 +5,8 @@ import WebKit
 class DecksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 	@IBOutlet weak var decksCollectionView: UICollectionView!
 	@IBOutlet weak var decksCollectionViewWidthConstraint: NSLayoutConstraint!
-	@IBOutlet weak var cardsCollectionView: UICollectionView!
 	@IBOutlet weak var actionsCollectionView: UICollectionView!
+	@IBOutlet weak var cardsTableView: UITableView!
 	
 	class Action {
 		var name: String?
@@ -35,7 +35,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	var deck: Deck?
 	var cardsDue = false
 	var expanded = false
-	var originalCardsCollectionViewWidth: CGFloat?
+	var originalCardsTableViewWidth: CGFloat?
 	var startup = true
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -49,16 +49,16 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				} else if let deck = decks.first {
 					self.deck = deck
 					self.decksCollectionView.reloadData()
-					self.cardsCollectionView.reloadData()
+					self.cardsTableView.reloadData()
 					self.reloadActions()
 				} else {
 					self.deck = nil
 					self.decksCollectionView.reloadData()
-					self.cardsCollectionView.reloadData()
+					self.cardsTableView.reloadData()
 					self.navigationController?.popViewController(animated: true)
 				}
 			} else if change == .cardModified || change == .cardRemoved {
-				self.cardsCollectionView.reloadData()
+				self.cardsTableView.reloadData()
 			} else if change == .cardDue {
 				let noneDue = Deck.allDue().isEmpty
 				if self.cardsDue && noneDue {
@@ -70,7 +70,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 				}
 			} else if change == .cardDraftAdded || change == .cardDraftModified || change == .cardDraftRemoved {
 				self.reloadActions()
-				self.cardsCollectionView.reloadData()
+				self.cardsTableView.reloadData()
 			}
 		}
 		expand(false)
@@ -85,7 +85,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		}
 		if DecksViewController.decksDidChange {
 			decksCollectionView.reloadData()
-			cardsCollectionView.reloadData()
+			cardsTableView.reloadData()
 			reloadActions()
 			DecksViewController.decksDidChange = false
 		}
@@ -96,7 +96,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		super.viewDidLayoutSubviews()
 		guard startup else { return }
 		startup = false
-		originalCardsCollectionViewWidth = cardsCollectionView.bounds.width
+		originalCardsTableViewWidth = cardsTableView.bounds.width
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -171,8 +171,6 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		case actionsCollectionView.tag:
 			guard let name = filteredActions[indexPath.item].name as NSString?, let extraBold = UIFont(name: "Nunito-ExtraBold", size: 17) else { return CGSize(width: 36, height: 36) }
 			return CGSize(width: name.size(withAttributes: [.font: extraBold]).width + 4, height: 36)
-		case cardsCollectionView.tag:
-			return CGSize(width: (originalCardsCollectionViewWidth ?? 20) - 20, height: 37)
 		default:
 			return CGSize(width: 0, height: 0)
 		}
@@ -314,70 +312,35 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 }
 
-class ThinCardCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var barView: UIView!
+class DecksViewControllerCardTableViewCell: UITableViewCell {
 	@IBOutlet weak var label: UILabel!
-	@IBOutlet weak var draftImageView: UIImageView!
-	@IBOutlet weak var draftImageViewWidthConstraint: NSLayoutConstraint!
-	@IBOutlet weak var draftImageViewTrailingConstraint: NSLayoutConstraint!
 	
-	var action: (() -> Void)?
-	
-	@IBAction
-	func click() {
-		action?()
-	}
-	
-	func due(_ isDue: Bool) {
-		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-	}
-	
-	func load(_ text: String) {
+	func load(text: String, isDue: Bool, hasDraft: Bool) {
 		label.text = text.clean()
-	}
-	
-	func setDraft(_ hasDraft: Bool) {
-		draftImageViewWidthConstraint.constant = hasDraft ? 25 : 0
-		draftImageViewTrailingConstraint.constant = hasDraft ? 6 : 0
+		if let font = UIFont(name: "Nunito-\(isDue ? "SemiBold" : "Regular")", size: 17) {
+			label.font = font
+		}
+		accessoryType = hasDraft ? .disclosureIndicator : .none
 	}
 }
 
 class DeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
-	
-	func due(_ isDue: Bool) {
-		layer.borderWidth = isDue ? 2 : 1
-		layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-	}
+	@IBOutlet weak var isDueView: UIView!
 }
 
 class ExpandedDeckCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var barView: UIView!
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var imageActivityIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var isDueView: UIView!
 	@IBOutlet weak var nameLabel: UILabel!
-	
-	func due(_ isDue: Bool) {
-		barView.backgroundColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-		imageView.layer.borderWidth = 2
-		imageView.layer.borderColor = isDue ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-	}
 }
 
 class ActionCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var button: UIButton!
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var label: UILabel!
 	
-	var action: (() -> Void)?
-	
-	@IBAction
-	func click() {
-		action?()
-	}
-	
-	func load(_ viewController: DecksViewController, action: DecksViewController.Action) {
-		button.setTitle(action.name, for: .normal)
-		button.setImage(action.image, for: .normal)
-		self.action = action.action(viewController)
+	func load(action: DecksViewController.Action) {
+		imageView.image = action.image
+		label.text = action.name
 	}
 }

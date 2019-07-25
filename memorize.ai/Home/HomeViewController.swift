@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import WebKit
+import ChameleonFramework
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var loadingView: UIView!
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		super.viewDidLoad()
 		if startup {
 			navigationController?.setNavigationBarHidden(true, animated: false)
+			setNavigationBarColor()
 			loadingView.isHidden = false
 			loadingImage.isHidden = false
 			if auth.currentUser == nil {
@@ -161,6 +163,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		flowLayout.itemSize = CGSize(width: cardsCollectionView.bounds.width, height: 40)
 		flowLayout.minimumLineSpacing = 8
 		cardsCollectionView.collectionViewLayout = flowLayout
+	}
+	
+	func setNavigationBarColor() {
+		guard let navigationBar = navigationController?.navigationBar else { return }
+		navigationBar.barTintColor = UIColor(gradientStyle: .leftToRight, withFrame: navigationBar.frame, andColors: [DEFAULT_BLUE_COLOR, #colorLiteral(red: 0, green: 0.7477753365, blue: 1, alpha: 1)])
 	}
 	
 	func handlePendingDynamicLink() {
