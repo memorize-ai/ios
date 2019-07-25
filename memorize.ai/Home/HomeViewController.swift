@@ -693,7 +693,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func showTutorial() {
-		
+		TutorialKit.setDefaultBlurAmount(0.3)
+		if let font = UIFont(name: "Nunito-Bold", size: 25) {
+			TutorialKit.setDefaultMessageFont(font)
+		}
+		TutorialKit.setDefaultMessageColor(.black)
+		TutorialKit.addTutorialSequence([
+			[
+				TKHighlightViewTag: 1000,
+				TKMessage: "Press review",
+				TKMessagePoint: NSValue(cgPoint: CGPoint(x: view.bounds.width / 2, y: reviewButton.frame.origin.y - 50))
+			]
+		], name: "HomeViewController")
+		TutorialKit.advanceTutorialSequence(withName: "HomeViewController")
 	}
 	
 	@IBAction
