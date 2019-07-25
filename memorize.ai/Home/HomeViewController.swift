@@ -2,6 +2,8 @@ import UIKit
 import Firebase
 import WebKit
 import ChameleonFramework
+import CFAlertViewController
+import TutorialKit
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
 	@IBOutlet weak var loadingView: UIView!
@@ -62,6 +64,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 				startup = false
 				ChangeHandler.call(.profileModified)
 				registerForNotifications?()
+//				if StoreReview.sessionCount == 0 {
+					askForTutorial()
+//				}
 				StoreReview.onStartup()
 				Cache.removeAllExpired()
 				guard let id = id else { return }
@@ -657,6 +662,38 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			enabled[$0] = !(($0 == 0 && decks.isEmpty) || ($0 == 1 && Card.all.isEmpty))
 			toggle(label, barView, enabled: enabled[$0])
 		}
+	}
+	
+	func askForTutorial() {
+		let alertController = CFAlertViewController(
+			title: "Hi there! 😎",
+			message: "Want to see a tutorial?\nIf not, you can always find it in settings.",
+			textAlignment: .left,
+			preferredStyle: .alert,
+			didDismissAlertHandler: nil
+		)
+		alertController.addAction(CFAlertAction(
+			title: "VIEW TUTORIAL",
+			style: .Default,
+			alignment: .justified,
+			backgroundColor: UIColor(red: 46.0 / 255.0, green: 204.0 / 255.0, blue: 113.0 / 255.0, alpha: 1),
+			textColor: nil
+		) { _ in
+			self.showTutorial()
+		})
+		alertController.addAction(CFAlertAction(
+			title: "CANCEL",
+			style: .Cancel,
+			alignment: .justified,
+			backgroundColor: nil,
+			textColor: nil,
+			handler: nil
+		))
+		present(alertController, animated: true)
+	}
+	
+	func showTutorial() {
+		
 	}
 	
 	@IBAction
