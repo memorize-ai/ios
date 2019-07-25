@@ -2735,18 +2735,24 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QtA-C8-gUx">
+                                                    <rect key="frame" x="37" y="37" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ghF-wC-ANp" secondAttribute="trailing" constant="6" id="8io-8h-qi5"/>
                                             <constraint firstAttribute="trailing" secondItem="k7v-0u-mGO" secondAttribute="trailing" id="GOX-Qy-hAT"/>
                                             <constraint firstItem="ghF-wC-ANp" firstAttribute="top" secondItem="O8o-sc-AmE" secondAttribute="top" constant="6" id="XcG-ZK-kCn"/>
+                                            <constraint firstItem="QtA-C8-gUx" firstAttribute="centerY" secondItem="O8o-sc-AmE" secondAttribute="centerY" id="aSk-iw-kT4"/>
                                             <constraint firstAttribute="bottom" secondItem="k7v-0u-mGO" secondAttribute="bottom" id="ba2-oP-77w"/>
                                             <constraint firstItem="k7v-0u-mGO" firstAttribute="top" secondItem="O8o-sc-AmE" secondAttribute="top" id="dMV-xf-Hz8"/>
+                                            <constraint firstItem="QtA-C8-gUx" firstAttribute="centerX" secondItem="O8o-sc-AmE" secondAttribute="centerX" id="jww-13-YK0"/>
                                             <constraint firstItem="k7v-0u-mGO" firstAttribute="leading" secondItem="O8o-sc-AmE" secondAttribute="leading" id="vdX-2o-pNV"/>
                                         </constraints>
                                         <size key="customSize" width="94" height="94"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="QtA-C8-gUx" id="GR1-yT-Pue"/>
                                             <outlet property="imageView" destination="k7v-0u-mGO" id="0mn-uM-XOD"/>
                                             <outlet property="isDueView" destination="ghF-wC-ANp" id="u2r-qt-wXi"/>
                                         </connections>
@@ -2783,13 +2789,18 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="In9-CV-8Hl">
+                                                            <rect key="frame" x="37" y="37" width="20" height="20"/>
+                                                        </activityIndicatorView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="H57-V1-8U1" firstAttribute="top" secondItem="NlO-jZ-bD3" secondAttribute="top" constant="6" id="0Rv-bX-Wpx"/>
+                                                        <constraint firstItem="In9-CV-8Hl" firstAttribute="centerY" secondItem="NlO-jZ-bD3" secondAttribute="centerY" id="1sH-f3-2tr"/>
                                                         <constraint firstAttribute="trailing" secondItem="jsg-5y-oTf" secondAttribute="trailing" id="3jt-p7-Oup"/>
                                                         <constraint firstAttribute="bottom" secondItem="jsg-5y-oTf" secondAttribute="bottom" id="QGC-bh-a70"/>
                                                         <constraint firstAttribute="trailing" secondItem="H57-V1-8U1" secondAttribute="trailing" constant="6" id="QbC-mC-TZn"/>
+                                                        <constraint firstItem="In9-CV-8Hl" firstAttribute="centerX" secondItem="NlO-jZ-bD3" secondAttribute="centerX" id="SxS-TL-P9G"/>
                                                         <constraint firstAttribute="width" secondItem="NlO-jZ-bD3" secondAttribute="height" id="dsh-cn-SeL"/>
                                                         <constraint firstItem="jsg-5y-oTf" firstAttribute="leading" secondItem="NlO-jZ-bD3" secondAttribute="leading" id="g7u-Cf-pht"/>
                                                         <constraint firstItem="jsg-5y-oTf" firstAttribute="top" secondItem="NlO-jZ-bD3" secondAttribute="top" id="jzy-11-WiH"/>
@@ -2808,6 +2819,7 @@
                                         </constraints>
                                         <size key="customSize" width="94" height="94"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="In9-CV-8Hl" id="fwI-aW-VQ2"/>
                                             <outlet property="imageView" destination="jsg-5y-oTf" id="FK6-D2-PdE"/>
                                             <outlet property="isDueView" destination="H57-V1-8U1" id="TFe-nD-e4a"/>
                                             <outlet property="nameLabel" destination="ScH-5E-11t" id="dXC-oI-vZ4"/>
@@ -2863,9 +2875,13 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wRy-Ck-hDU" id="mdm-J4-wJj"/>
+                                    <outlet property="delegate" destination="wRy-Ck-hDU" id="uBl-yx-fjA"/>
+                                </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This deck is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhQ-yT-5uW">
-                                <rect key="frame" x="101.66666666666666" y="108" width="312.33333333333337" height="628"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This deck is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhQ-yT-5uW">
+                                <rect key="frame" x="102" y="261" width="312" height="475"/>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

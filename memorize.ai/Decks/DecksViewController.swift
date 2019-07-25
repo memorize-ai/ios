@@ -157,7 +157,7 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func reloadActions() {
-		actions.first?.name = "new card\(deck?.hasCardDraft ?? false ? "*" : "")"
+		actions.first?.name = "NEW CARD\(deck?.hasCardDraft ?? false ? "*" : "")"
 		actionsCollectionView.reloadData()
 	}
 	
@@ -198,103 +198,83 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		switch collectionView.tag {
-		case decksCollectionView.tag:
+		if collectionView.tag == decksCollectionView.tag {
 			if expanded {
 				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "expanded", for: indexPath)
 				guard let cell = _cell as? ExpandedDeckCollectionViewCell else { return _cell }
-				let element = decks[indexPath.item]
-				cell.due(!element.allDue().isEmpty)
-				if let image = element.image {
-					cell.imageView.image = image
-				} else if element.hasImage {
-					if let cachedImage = Deck.imageFromCache(element.id) {
+				let deck = decks[indexPath.item]
+				cell.load(image: deck.hasImage ? deck.image : DEFAULT_DECK_IMAGE, selected: deck.id == self.deck?.id, isDue: !deck.allDue().isEmpty, name: deck.name)
+				if deck.hasImage && deck.image == nil {
+					if let cachedImage = Deck.imageFromCache(deck.id) {
+						cell.activityIndicator.stopAnimating()
 						cell.imageView.image = cachedImage
-						element.image = cachedImage
+						deck.image = cachedImage
 					} else {
 						cell.imageView.image = nil
-						cell.imageActivityIndicator.startAnimating()
+						cell.activityIndicator.startAnimating()
 					}
-					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+					storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-						cell.imageActivityIndicator.stopAnimating()
+						cell.activityIndicator.stopAnimating()
 						cell.imageView.image = image
-						element.image = image
-						Deck.cache(element.id, image: image)
+						deck.image = image
+						Deck.cache(deck.id, image: image)
 						self.decksCollectionView.reloadData()
 					}
-				} else {
-					cell.imageView.image = DEFAULT_DECK_IMAGE
-					element.image = nil
-					Deck.cache(element.id, image: nil)
+				} else if !deck.hasImage {
+					deck.image = nil
+					Deck.cache(deck.id, image: nil)
 				}
-				cell.nameLabel.text = element.name
-				cell.layer.borderWidth = element.id == deck?.id ? 2 : 0
-				cell.layer.borderColor = element.id == deck?.id ? DEFAULT_BLUE_COLOR.cgColor : nil
 				return cell
 			} else {
 				let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 				guard let cell = _cell as? DeckCollectionViewCell else { return _cell }
-				let element = decks[indexPath.item]
-				cell.due(!element.allDue().isEmpty)
-				if let image = element.image {
-					cell.imageView.image = image
-				} else if element.hasImage {
-					if let cachedImage = Deck.imageFromCache(element.id) {
+				let deck = decks[indexPath.item]
+				cell.load(image: deck.hasImage ? deck.image : DEFAULT_DECK_IMAGE, selected: deck.id == self.deck?.id, isDue: !deck.allDue().isEmpty)
+				if deck.hasImage && deck.image == nil {
+					if let cachedImage = Deck.imageFromCache(deck.id) {
+						cell.activityIndicator.stopAnimating()
 						cell.imageView.image = cachedImage
-						element.image = cachedImage
+						deck.image = cachedImage
 					} else {
 						cell.imageView.image = nil
-						cell.imageActivityIndicator.startAnimating()
+						cell.activityIndicator.startAnimating()
 					}
-					storage.child("decks/\(element.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
+					storage.child("decks/\(deck.id)").getData(maxSize: MAX_FILE_SIZE) { data, error in
 						guard error == nil, let data = data, let image = UIImage(data: data) else { return }
-						cell.imageActivityIndicator.stopAnimating()
+						cell.activityIndicator.stopAnimating()
 						cell.imageView.image = image
-						element.image = image
-						Deck.cache(element.id, image: image)
+						deck.image = image
+						Deck.cache(deck.id, image: image)
 						self.decksCollectionView.reloadData()
 					}
-				} else {
-					cell.imageView.image = DEFAULT_DECK_IMAGE
-					element.image = nil
-					Deck.cache(element.id, image: nil)
-				}
-				if element.id == deck?.id {
-					cell.layer.borderWidth = 3
+				} else if !deck.hasImage {
+					deck.image = nil
+					Deck.cache(deck.id, image: nil)
 				}
 				return cell
 			}
-		case actionsCollectionView.tag:
+		} else {
 			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
 			guard let cell = _cell as? ActionCollectionViewCell else { return _cell }
-			cell.load(self, action: filteredActions[indexPath.item])
-			return cell
-		default:
-			let _cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-			guard let cell = _cell as? ThinCardCollectionViewCell, let element = deck?.cards[indexPath.item] else { return _cell }
-			cell.due(element.isDue())
-			cell.load(element.front)
-			cell.setDraft(element.hasDraft)
-			cell.action = {
-				self.performSegue(withIdentifier: "editCard", sender: self.deck?.cards[indexPath.item])
-			}
-			return cell
+			return cell.load(action: filteredActions[indexPath.item])
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		switch collectionView.tag {
 		case decksCollectionView.tag:
-			
+			let selectedDeck = decks[indexPath.item]
+			User.save(selectedDeck: selectedDeck)
+			deck = selectedDeck
+			decksCollectionView.reloadData()
+			reloadActions()
+			reloadCardsTableView()
+		case actionsCollectionView.tag:
+			filteredActions[indexPath.item].action(self)()
+		default:
+			return
 		}
-		guard collectionView.tag == decksCollectionView.tag else { return }
-		let selectedDeck = decks[indexPath.item]
-		User.save(selectedDeck: selectedDeck)
-		deck = selectedDeck
-		decksCollectionView.reloadData()
-		reloadActions()
-		reloadCardsTableView()
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -306,6 +286,16 @@ class DecksViewController: UIViewController, UICollectionViewDataSource, UIColle
 		guard let cell = _cell as? DecksViewControllerCardTableViewCell, let deck = deck else { return _cell }
 		let card = deck.cards[indexPath.row]
 		return cell.load(text: card.front, isDue: card.isDue(), hasDraft: card.hasDraft)
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		guard let deck = deck else { return }
+		switch deck.role {
+		case .editor, .admin, .owner:
+			performSegue(withIdentifier: "editCard", sender: deck.cards[indexPath.row])
+		default:
+			return
+		}
 	}
 }
 
@@ -324,21 +314,39 @@ class DecksViewControllerCardTableViewCell: UITableViewCell {
 
 class DeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var isDueView: UIView!
+	
+	func load(image: UIImage?, selected: Bool, isDue: Bool) {
+		imageView.image = image
+		layer.borderWidth = selected ? 2 : 0
+		layer.borderColor = UIColor.lightGray.cgColor
+		isDueView.isHidden = !isDue
+	}
 }
 
 class ExpandedDeckCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var isDueView: UIView!
 	@IBOutlet weak var nameLabel: UILabel!
+	
+	func load(image: UIImage?, selected: Bool, isDue: Bool, name: String) {
+		imageView.image = image
+		layer.borderWidth = selected ? 2 : 0
+		layer.borderColor = UIColor.lightGray.cgColor
+		isDueView.isHidden = !isDue
+		nameLabel.text = name
+	}
 }
 
 class ActionCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var label: UILabel!
 	
-	func load(action: DecksViewController.Action) {
+	func load(action: DecksViewController.Action) -> ActionCollectionViewCell {
 		imageView.image = action.image
 		label.text = action.name
+		return self
 	}
 }
