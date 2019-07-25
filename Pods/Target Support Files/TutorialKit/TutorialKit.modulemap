@@ -1,0 +1,6 @@
+framework module TutorialKit {
+  umbrella header "TutorialKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
