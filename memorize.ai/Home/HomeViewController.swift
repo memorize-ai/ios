@@ -65,7 +65,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 				ChangeHandler.call(.profileModified)
 				registerForNotifications?()
 //				if StoreReview.sessionCount == 0 {
-					askForTutorial()
+//					askForTutorial()
 //				}
 				StoreReview.onStartup()
 				Cache.removeAllExpired()
