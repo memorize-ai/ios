@@ -2,7 +2,7 @@ import UIKit
 import Firebase
 import WebKit
 
-class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, FlowLayout {
+class ReviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, WKNavigationDelegate, FlowLayout {
 	@IBOutlet weak var progressView: UIProgressView!
 	@IBOutlet weak var frontWebView: WKWebView!
 	@IBOutlet weak var backWebView: WKWebView!
@@ -28,6 +28,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	var currentSide = CardSide.front
 	var didPause = false
 	var currentCardRatingType = CardRatingType.none
+	var shouldStartTimer = true
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,6 +36,8 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		setFlowLayouts()
 		likeButton.adjustsImageWhenHighlighted = false
 		dislikeButton.adjustsImageWhenHighlighted = false
+		frontWebView.navigationDelegate = self
+		backWebView.navigationDelegate = self
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -342,7 +345,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		performSegue(withIdentifier: "recap", sender: self)
 	}
 	
-	func push(rating: Int) {
+	func push(rating: Int, time: Int) {
 		isPushing = true
 		guard let id = id else { return isPushing = false }
 		func handlePushing() {
@@ -353,7 +356,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 		let element = dueCards[current]
 		var documentReference: DocumentReference?
-		documentReference = firestore.collection("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating]) { error in
+		documentReference = firestore.collection("users/\(id)/decks/\(element.deck.id)/cards/\(element.card.id)/history").addDocument(data: ["rating": rating, "time": time]) { error in
 			guard error == nil, let documentReference = documentReference else { return self.isPushing = false }
 			let historyId = documentReference.documentID
 			for i in 0..<self.reviewedCards.count {
@@ -380,6 +383,13 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}
 	}
 	
+	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+		guard webView.tag == frontWebView.tag && shouldStartTimer else { return }
+		shouldStartTimer = false
+		Time.shared.reset()
+		Time.shared.start()
+	}
+	
 	func setProgress() {
 		progressView.setProgress(Float(current) / Float(count), animated: true)
 	}
@@ -399,7 +409,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if isReview {
-			push(rating: normalize(rating: indexPath.item))
+			push(rating: normalize(rating: indexPath.item), time: Time.shared.stop())
 		}
 		current += 1
 		setProgress()
@@ -412,6 +422,7 @@ class ReviewViewController: UIViewController, UICollectionViewDataSource, UIColl
 		}) {
 			guard $0 else { return }
 			if self.current < count {
+				self.shouldStartTimer = true
 				self.navigationItem.title = self.isReview ? self.dueCards[self.current].deck.name : self.previewDeck
 				let card = self.currentCard
 				self.currentCardRatingType = card.ratingType

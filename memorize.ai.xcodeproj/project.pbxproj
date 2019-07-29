@@ -24,6 +24,7 @@
 		4D34DB6722B9D3B600D5C9C9 /* UploadActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D34DB6622B9D3B600D5C9C9 /* UploadActionsViewController.swift */; };
 		4D3607842211426E00492ACD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3607832211426E00492ACD /* EditProfileViewController.swift */; };
 		4D37C73B22DA4022008B4156 /* EmojiGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D37C73A22DA4022008B4156 /* EmojiGameViewController.swift */; };
+		4D3A9D7D22EECEB200C0EA64 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A9D7C22EECEB200C0EA64 /* Timer.swift */; };
 		4D3D7C5A22C52CA000D34700 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D7C5922C52CA000D34700 /* TutorialViewController.swift */; };
 		4D4A312A22DD7CD600D6F271 /* DynamicLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A312922DD7CD600D6F271 /* DynamicLink.swift */; };
 		4D4A312C22DDB41300D6F271 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A312B22DDB41200D6F271 /* GoogleService-Info.plist */; };
@@ -221,6 +222,7 @@
 		4D34DB6622B9D3B600D5C9C9 /* UploadActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadActionsViewController.swift; sourceTree = "<group>"; };
 		4D3607832211426E00492ACD /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		4D37C73A22DA4022008B4156 /* EmojiGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGameViewController.swift; sourceTree = "<group>"; };
+		4D3A9D7C22EECEB200C0EA64 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		4D3D7C5922C52CA000D34700 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		4D4A312922DD7CD600D6F271 /* DynamicLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLink.swift; sourceTree = "<group>"; };
 		4D4A312B22DDB41200D6F271 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				4DB8AE65228C920800A08AFA /* ChangeHandler.swift */,
 				4D4A312922DD7CD600D6F271 /* DynamicLink.swift */,
 				4D00AA8322E844DB00874F4B /* NotificationHandler.swift */,
+				4D3A9D7C22EECEB200C0EA64 /* Timer.swift */,
 				4DCF83DD22A378F3006B73A4 /* Listener.swift */,
 				4D5F1F1D229E1B0C00AC7732 /* User.swift */,
 				4D61E19722CCF035009590DD /* Cache.swift */,
@@ -1158,6 +1161,7 @@
 				4D64391522057886006F4F2D /* Global.swift in Sources */,
 				4DD6D26822E528C200A2479C /* UserViewController.swift in Sources */,
 				4DDD3F2F22B1FF2400BA2C98 /* CardRating.swift in Sources */,
+				4D3A9D7D22EECEB200C0EA64 /* Timer.swift in Sources */,
 				4DF9724A220779AE00FF8BED /* EditDeckViewController.swift in Sources */,
 				4D2CB86A22AA0A7900092FD4 /* CardDraft.swift in Sources */,
 				4DDD3F2922B1FC4E00BA2C98 /* DeckRatingsViewController.swift in Sources */,
