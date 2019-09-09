@@ -118,9 +118,9 @@ class Card {
 	static func sort(_ cards: [Card], by type: CardSortType) -> [Card] {
 		switch type {
 		case .due:
-			return cards.sorted { $0.front < $1.front }
-		case .front:
 			return cards.sorted { $0.next.timeIntervalSinceNow < $1.next.timeIntervalSinceNow }
+		case .front:
+			return cards.sorted { $0.front < $1.front }
 		}
 	}
 	
