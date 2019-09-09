@@ -160,14 +160,13 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 		mailComposeVC.delegate = self
 		mailComposeVC.setToRecipients([MEMORIZE_AI_SUPPORT_EMAIL])
 		mailComposeVC.setMessageBody("""
-		
-		
-		=== User info ===
+		\n\n=== User info ===
 		ID: \(id)
 		Name: \(name)
 		Email: \(email)\(profileLink == nil ? "" : "\nProfile link: \(profileLink ?? "unknown")")
 		iOS App version: \(APP_VERSION ?? "1.0")
 		iOS version: \(UIDevice.current.systemVersion)
+		Device: \(CURRENT_DEVICE.description)
 		""", isHTML: false)
 		present(mailComposeVC, animated: true, completion: nil)
 	}
