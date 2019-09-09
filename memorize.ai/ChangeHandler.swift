@@ -27,6 +27,7 @@ enum Change {
 	case cardModified
 	case cardRemoved
 	case cardDue
+	case cardNextModified
 	
 	case historyModified
 	case historyRemoved

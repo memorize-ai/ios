@@ -487,9 +487,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 											guard cardError == nil, let cardSnapshot = cardSnapshot else { return }
 											if let localCard = Card.get(cardId, deckId: deckId) {
 												if cardSnapshot.exists {
+													let oldNext = localCard.next
 													localCard.update(cardSnapshot, type: .user)
+													if localCard.next != oldNext {
+														ChangeHandler.call(.cardNextModified)
+													}
 												} else {
 													localCard.reset()
+													ChangeHandler.call(.cardNextModified)
 												}
 											} else {
 												localDeck.cards.append(Card(
@@ -510,6 +515,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
 													history: [],
 													deck: deckId
 												))
+												ChangeHandler.call(.cardNextModified)
 											}
 											self.reloadReview()
 											ChangeHandler.call(.cardModified)
