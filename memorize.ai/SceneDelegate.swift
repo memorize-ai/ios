@@ -9,7 +9,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			let windowScene = scene as? UIWindowScene
 		else { return }
 		let window = UIWindow(windowScene: windowScene)
-		window.rootViewController = UIHostingController(rootView: HomeView().environment(\.managedObjectContext, context))
+		window.rootViewController = UIHostingController(
+			rootView: HomeView()
+				.environmentObject(DeckStore())
+				.environment(\.managedObjectContext, context)
+		)
 		self.window = window
 		window.makeKeyAndVisible()
 	}

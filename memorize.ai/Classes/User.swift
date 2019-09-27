@@ -1,4 +1,4 @@
-final class Deck: Identifiable, Equatable {
+final class User: Identifiable, Equatable {
 	let id: String
 	var name: String
 	
@@ -7,7 +7,7 @@ final class Deck: Identifiable, Equatable {
 		self.name = name
 	}
 	
-	static func == (lhs: Deck, rhs: Deck) -> Bool {
+	static func == (lhs: User, rhs: User) -> Bool {
 		lhs.id == rhs.id
 	}
 }
