@@ -10,10 +10,10 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4B1071F839CC2292A18E8FB4 /* Pods_memorize_ai_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51DCE10D82E2BC63677803B /* Pods_memorize_ai_memorize_aiUITests.framework */; };
+		4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEC233DF9A0004F1F65 /* HomeView.swift */; };
 		4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */; };
 		4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */; };
 		4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */; };
-		4DAA4F44233DE1A600EF7467 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F43233DE1A600EF7467 /* ContentView.swift */; };
 		4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F45233DE1A800EF7467 /* Assets.xcassets */; };
 		4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F48233DE1A800EF7467 /* Preview Assets.xcassets */; };
 		4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */; };
@@ -40,11 +40,11 @@
 
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
+		4D703AEC233DF9A0004F1F65 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4DAA4F39233DE1A600EF7467 /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4DAA4F41233DE1A600EF7467 /* memorize_ai.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = memorize_ai.xcdatamodel; sourceTree = "<group>"; };
-		4DAA4F43233DE1A600EF7467 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4DAA4F45233DE1A800EF7467 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DAA4F48233DE1A800EF7467 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4DAA4F4B233DE1A800EF7467 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,6 +103,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4D703AEB233DF98E004F1F65 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4D703AEC233DF9A0004F1F65 /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4DAA4F30233DE1A600EF7467 = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +138,7 @@
 			children = (
 				4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */,
 				4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */,
-				4DAA4F43233DE1A600EF7467 /* ContentView.swift */,
+				4D703AEB233DF98E004F1F65 /* Views */,
 				4DAA4F45233DE1A800EF7467 /* Assets.xcassets */,
 				4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */,
 				4DAA4F4D233DE1A800EF7467 /* Info.plist */,
@@ -419,8 +427,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
+				4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */,
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
-				4DAA4F44233DE1A600EF7467 /* ContentView.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
