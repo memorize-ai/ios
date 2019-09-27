@@ -14,6 +14,7 @@
 		4D1F9B0E233E83D600693571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
+		4D1F9B1D233EC5EF00693571 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B1C233EC5EF00693571 /* Deck.swift */; };
 		4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEC233DF9A0004F1F65 /* HomeView.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
@@ -50,6 +51,7 @@
 		4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D1F9B17233EBF2200693571 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D1F9B18233EBF2200693571 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4D1F9B1C233EC5EF00693571 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		4D703AEC233DF9A0004F1F65 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -115,6 +117,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4D1F9B1B233EC5E400693571 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4D1F9B1C233EC5EF00693571 /* Deck.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		4D703AEB233DF98E004F1F65 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +173,7 @@
 				4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */,
 				4D703AF5233E728B004F1F65 /* Global.swift */,
 				4D703AEE233DFA45004F1F65 /* Constants.swift */,
+				4D1F9B1B233EC5E400693571 /* Classes */,
 				4D703AEB233DF98E004F1F65 /* Views */,
 				4DAA4F45233DE1A800EF7467 /* Assets.xcassets */,
 				4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */,
@@ -475,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D1F9B1D233EC5EF00693571 /* Deck.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
