@@ -1,5 +1,7 @@
 platform :ios, '13.0'
 
+inhibit_all_warnings!
+
 target 'memorize.ai' do
 	use_frameworks!
 	
