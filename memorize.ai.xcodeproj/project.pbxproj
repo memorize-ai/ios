@@ -10,7 +10,13 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4B1071F839CC2292A18E8FB4 /* Pods_memorize_ai_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51DCE10D82E2BC63677803B /* Pods_memorize_ai_memorize_aiUITests.framework */; };
+		4D1F9B0D233E83D600693571 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */; };
+		4D1F9B0E233E83D600693571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */; };
+		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
+		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEC233DF9A0004F1F65 /* HomeView.swift */; };
+		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
+		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
 		4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */; };
 		4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */; };
 		4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */; };
@@ -40,7 +46,13 @@
 
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
+		4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
+		4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4D1F9B17233EBF2200693571 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4D1F9B18233EBF2200693571 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D703AEC233DF9A0004F1F65 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		4DAA4F39233DE1A600EF7467 /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +123,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4D703AF0233E7107004F1F65 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */,
+				4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		4DAA4F30233DE1A600EF7467 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +141,8 @@
 				4DAA4F3A233DE1A600EF7467 /* Products */,
 				B3433C0A521544427171835D /* Pods */,
 				4C5AA85A9D0C569AE4AD39FF /* Frameworks */,
+				4D1F9B18233EBF2200693571 /* LICENSE */,
+				4D1F9B17233EBF2200693571 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,12 +161,15 @@
 			children = (
 				4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */,
 				4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */,
+				4D703AF5233E728B004F1F65 /* Global.swift */,
+				4D703AEE233DFA45004F1F65 /* Constants.swift */,
 				4D703AEB233DF98E004F1F65 /* Views */,
 				4DAA4F45233DE1A800EF7467 /* Assets.xcassets */,
 				4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */,
 				4DAA4F4D233DE1A800EF7467 /* Info.plist */,
 				4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */,
 				4DAA4F47233DE1A800EF7467 /* Preview Content */,
+				4D703AF0233E7107004F1F65 /* Firebase */,
 			);
 			path = memorize.ai;
 			sourceTree = "<group>";
@@ -197,6 +223,7 @@
 				DB7128814B102006B1204414 /* [CP] Check Pods Manifest.lock */,
 				4DAA4F35233DE1A600EF7467 /* Sources */,
 				4DAA4F36233DE1A600EF7467 /* Frameworks */,
+				4D703AF7233E73B1004F1F65 /* Set up Firebase GoogleService-Info.plist */,
 				4DAA4F37233DE1A600EF7467 /* Resources */,
 				50E4CD5A8A481C7EB464E791 /* [CP] Embed Pods Frameworks */,
 			);
@@ -296,7 +323,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D1F9B19233EBF2200693571 /* README.md in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
+				4D1F9B0D233E83D600693571 /* GoogleService-Info-Dev.plist in Resources */,
+				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
+				4D1F9B0E233E83D600693571 /* GoogleService-Info.plist in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
 				4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */,
 			);
@@ -340,6 +371,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4D703AF7233E73B1004F1F65 /* Set up Firebase GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set up Firebase GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GOOGLESERVICE_INFO_BASE_PATH=\"$PROJECT_DIR/$TARGET_NAME/Firebase\"\n\nGOOGLESERVICE_INFO_PROD='GoogleService-Info.plist'\nGOOGLESERVICE_INFO_DEV='GoogleService-Info-Dev.plist'\n\nGOOGLESERVICE_INFO_DESTINATION=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\n\nif [ \"$CONFIGURATION\" == 'Release' ]\nthen\n\techo \"Using $GOOGLESERVICE_INFO_PROD\"\n\tcp \"$GOOGLESERVICE_INFO_BASE_PATH/$GOOGLESERVICE_INFO_PROD\" \"$GOOGLESERVICE_INFO_DESTINATION\"\nelse\n\techo \"Using $GOOGLESERVICE_INFO_DEV\"\n\tcp \"$GOOGLESERVICE_INFO_BASE_PATH/$GOOGLESERVICE_INFO_DEV\" \"$GOOGLESERVICE_INFO_DESTINATION\"\nfi\n";
 		};
 		50E4CD5A8A481C7EB464E791 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -426,7 +475,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
+				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
 				4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */,
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
