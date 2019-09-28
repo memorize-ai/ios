@@ -10,8 +10,6 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4B1071F839CC2292A18E8FB4 /* Pods_memorize_ai_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51DCE10D82E2BC63677803B /* Pods_memorize_ai_memorize_aiUITests.framework */; };
-		4D1F9B0D233E83D600693571 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */; };
-		4D1F9B0E233E83D600693571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D1F9B1D233EC5EF00693571 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B1C233EC5EF00693571 /* Deck.swift */; };
@@ -378,9 +376,7 @@
 			files = (
 				4D1F9B19233EBF2200693571 /* README.md in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
-				4D1F9B0D233E83D600693571 /* GoogleService-Info-Dev.plist in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
-				4D1F9B0E233E83D600693571 /* GoogleService-Info.plist in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
 				4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */,
 			);
@@ -441,7 +437,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLESERVICE_INFO_BASE_PATH=\"$PROJECT_DIR/$TARGET_NAME/Firebase\"\n\nGOOGLESERVICE_INFO_PROD='GoogleService-Info.plist'\nGOOGLESERVICE_INFO_DEV='GoogleService-Info-Dev.plist'\n\nGOOGLESERVICE_INFO_DESTINATION=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\n\nif [ \"$CONFIGURATION\" == 'Release' ]\nthen\n\techo \"Using $GOOGLESERVICE_INFO_PROD\"\n\tcp \"$GOOGLESERVICE_INFO_BASE_PATH/$GOOGLESERVICE_INFO_PROD\" \"$GOOGLESERVICE_INFO_DESTINATION\"\nelse\n\techo \"Using $GOOGLESERVICE_INFO_DEV\"\n\tcp \"$GOOGLESERVICE_INFO_BASE_PATH/$GOOGLESERVICE_INFO_DEV\" \"$GOOGLESERVICE_INFO_DESTINATION\"\nfi\n";
+			shellScript = "GOOGLESERVICE_INFO_BASE_PATH=\"$PROJECT_DIR/$TARGET_NAME/Firebase\"\n\nGOOGLESERVICE_INFO_PROD='GoogleService-Info.plist'\nGOOGLESERVICE_INFO_DEV='GoogleService-Info-Dev.plist'\n\nGOOGLESERVICE_INFO_DESTINATION=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/GoogleService-Info.plist\"\n\nif [ \"$CONFIGURATION\" == 'Release' ]\nthen\n\techo \"Using $GOOGLESERVICE_INFO_PROD\"\n\tcp \"$GOOGLESERVICE_INFO_BASE_PATH/$GOOGLESERVICE_INFO_PROD\" \"$GOOGLESERVICE_INFO_DESTINATION\"\nelse\n\techo \"Using $GOOGLESERVICE_INFO_DEV\"\n\tcp \"$GOOGLESERVICE_INFO_BASE_PATH/$GOOGLESERVICE_INFO_DEV\" \"$GOOGLESERVICE_INFO_DESTINATION\"\nfi\n";
 		};
 		50E4CD5A8A481C7EB464E791 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
