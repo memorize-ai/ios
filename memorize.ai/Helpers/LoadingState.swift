@@ -2,7 +2,7 @@ import Foundation
 
 enum LoadingState {
 	case `default`
-	case loading(date: Date = Date())
-	case success(date: Date = Date())
-	case failure(date: Date = Date(), message: String)
+	case loading(date: Date = .init())
+	case success(date: Date = .init())
+	case failure(date: Date = .init(), message: String)
 }

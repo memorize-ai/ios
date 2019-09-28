@@ -3,11 +3,10 @@ import FirebaseFirestore
 
 final class DeckStore: ObservableObject {
 	@Published var decks: [Deck]
-	@Published var loadingState: LoadingState
+	@Published var loadingState = LoadingState.default
 	
-	init(_ decks: [Deck] = [], loadingState: LoadingState = .default) {
+	init(_ decks: [Deck] = []) {
 		self.decks = decks
-		self.loadingState = loadingState
 	}
 	
 	@discardableResult

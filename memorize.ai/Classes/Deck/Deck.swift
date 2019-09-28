@@ -2,10 +2,12 @@ import FirebaseFirestore
 
 final class Deck: Identifiable, Equatable {
 	let id: String
+	let cardStore: CardStore
 	var name: String?
 	
-	init(id: String, name: String? = nil) {
+	init(id: String, cardStore: CardStore = .init(), name: String? = nil) {
 		self.id = id
+		self.cardStore = cardStore
 		self.name = name
 	}
 	
