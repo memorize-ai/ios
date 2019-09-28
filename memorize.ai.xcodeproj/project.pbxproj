@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,10 @@
 		4D1F9B1F233EC72100693571 /* DeckStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B1E233EC72100693571 /* DeckStore.swift */; };
 		4D1F9B21233EC99600693571 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B20233EC99600693571 /* UserStore.swift */; };
 		4D1F9B23233ECA0E00693571 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B22233ECA0E00693571 /* User.swift */; };
+		4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B24233ED1AD00693571 /* LoadingState.swift */; };
+		4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* PromiseKit */; };
+		4D1F9B2B233EDEB200693571 /* Firebase+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2A233EDEB200693571 /* Firebase+PromiseKit.swift */; };
+		4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2D233EEBDB00693571 /* UnknownError.swift */; };
 		4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEC233DF9A0004F1F65 /* HomeView.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
@@ -55,9 +59,12 @@
 		4D1F9B17233EBF2200693571 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D1F9B18233EBF2200693571 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D1F9B1C233EC5EF00693571 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
-		4D1F9B1E233EC72100693571 /* DeckStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStore.swift; sourceTree = "<group>"; };
+		4D1F9B1E233EC72100693571 /* DeckStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStore.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4D1F9B20233EC99600693571 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		4D1F9B22233ECA0E00693571 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4D1F9B24233ED1AD00693571 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		4D1F9B2A233EDEB200693571 /* Firebase+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+PromiseKit.swift"; sourceTree = "<group>"; };
+		4D1F9B2D233EEBDB00693571 /* UnknownError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownError.swift; sourceTree = "<group>"; };
 		4D703AEC233DF9A0004F1F65 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -91,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */,
+				4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +140,23 @@
 				4D1F9B20233EC99600693571 /* UserStore.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		4D1F9B29233EDEA200693571 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4D1F9B2A233EDEB200693571 /* Firebase+PromiseKit.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4D1F9B2C233EEBC900693571 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4D1F9B24233ED1AD00693571 /* LoadingState.swift */,
+				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		4D703AEB233DF98E004F1F65 /* Views */ = {
@@ -182,6 +207,8 @@
 				4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */,
 				4D703AF5233E728B004F1F65 /* Global.swift */,
 				4D703AEE233DFA45004F1F65 /* Constants.swift */,
+				4D1F9B29233EDEA200693571 /* Extensions */,
+				4D1F9B2C233EEBC900693571 /* Helpers */,
 				4D1F9B1B233EC5E400693571 /* Classes */,
 				4D703AEB233DF98E004F1F65 /* Views */,
 				4DAA4F45233DE1A800EF7467 /* Assets.xcassets */,
@@ -252,6 +279,9 @@
 			dependencies = (
 			);
 			name = memorize.ai;
+			packageProductDependencies = (
+				4D1F9B27233EDE4E00693571 /* PromiseKit */,
+			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
 			productType = "com.apple.product-type.application";
@@ -327,6 +357,9 @@
 				Base,
 			);
 			mainGroup = 4DAA4F30233DE1A600EF7467;
+			packageReferences = (
+				4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -504,7 +537,10 @@
 				4D1F9B21233EC99600693571 /* UserStore.swift in Sources */,
 				4D1F9B1F233EC72100693571 /* DeckStore.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
+				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
+				4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */,
+				4D1F9B2B233EDEB200693571 /* Firebase+PromiseKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +873,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D1F9B27233EDE4E00693571 /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */ = {

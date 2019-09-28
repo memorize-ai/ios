@@ -8,7 +8,7 @@ struct HomeView: View {
 			HStack {
 				Text("ID: \(deck.id)")
 					.padding(.trailing, 20)
-				Text("Name: \(deck.name)")
+				Text("Name: \(deck.name ?? "")")
 			}
 		}
 	}
@@ -18,10 +18,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		HomeView()
-			.environmentObject(DeckStore([
-				.init(id: "123", name: "Chemistry"),
-				.init(id: "456", name: "Math")
-			]))
+			.environmentObject(DeckStore().observeAll(user: .init(id: "abc", name: "")))
 	}
 }
 #endif
