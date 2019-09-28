@@ -20,13 +20,16 @@ final class DeckStore: ObservableObject {
 				case .added:
 					let deck = Deck(id: deckId)
 					deck.publicDocument.addSnapshotListener().done { publicDeckSnapshot in
+						self.objectWillChange.send()
 						deck.updatePublicData(document: publicDeckSnapshot)
 					}.catch { error in
 						self.loadingState = .failure(message: error.localizedDescription)
 					}
 					self.decks.append(deck)
 				case .modified:
-					self.get(id: deckId)?.updateUserData(document: document)
+					guard let deck = self.get(id: deckId) else { return }
+					self.objectWillChange.send()
+					deck.updateUserData(document: document)
 				case .removed:
 					self.decks = self.decks.filter { $0.id != deckId }
 				@unknown default:
