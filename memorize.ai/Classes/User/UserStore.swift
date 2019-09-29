@@ -6,4 +6,10 @@ final class UserStore: ObservableObject {
 	init(_ user: User) {
 		self.user = user
 	}
+	
+	@discardableResult
+	func prepareForUpdate() -> Self {
+		objectWillChange.send()
+		return self
+	}
 }

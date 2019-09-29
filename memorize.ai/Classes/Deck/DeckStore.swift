@@ -10,6 +10,12 @@ final class DeckStore: ObservableObject {
 	}
 	
 	@discardableResult
+	func prepareForUpdate() -> Self {
+		objectWillChange.send()
+		return self
+	}
+	
+	@discardableResult
 	func observeAll(user: User) -> Self {
 		loadingState = .loading()
 		firestore.collection("users/\(user.id)/decks").addSnapshotListener().done { snapshot in
@@ -38,7 +44,7 @@ final class DeckStore: ObservableObject {
 		let deck = Deck(id: id)
 		decks.append(deck)
 		deck.publicDocument.addSnapshotListener().done { publicDeckSnapshot in
-			self.objectWillChange.send()
+			self.prepareForUpdate()
 			deck.updatePublicData(document: publicDeckSnapshot)
 		}.catch { error in
 			self.loadingState = .failure(message: error.localizedDescription)
@@ -47,7 +53,7 @@ final class DeckStore: ObservableObject {
 	
 	private func handleDeckModified(id: String, userDocument: DocumentSnapshot) {
 		guard let deck = get(id: id) else { return }
-		objectWillChange.send()
+		prepareForUpdate()
 		deck.updateUserData(document: userDocument)
 	}
 	
