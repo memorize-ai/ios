@@ -7,10 +7,4 @@ final class CardStore: ObservableObject {
 	init(_ cards: [Card] = []) {
 		self.cards = cards
 	}
-	
-	@discardableResult
-	func prepareForUpdate() -> Self {
-		objectWillChange.send()
-		return self
-	}
 }

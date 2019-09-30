@@ -23,6 +23,7 @@
 		4D1F9B322340141F00693571 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B312340141F00693571 /* SignInView.swift */; };
 		4D1F9BC723401A9800693571 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9BC623401A9800693571 /* Card.swift */; };
 		4D4D483D23401E8D002FEFB6 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D483C23401E8D002FEFB6 /* CardStore.swift */; };
+		4D59E6BC2341E5CA008DC2A7 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59E6BB2341E5CA008DC2A7 /* Storable.swift */; };
 		4D703AED233DF9A0004F1F65 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEC233DF9A0004F1F65 /* HomeView.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
@@ -69,6 +70,7 @@
 		4D1F9B312340141F00693571 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		4D1F9BC623401A9800693571 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4D4D483C23401E8D002FEFB6 /* CardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
+		4D59E6BB2341E5CA008DC2A7 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		4D703AEC233DF9A0004F1F65 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				4D1F9B24233ED1AD00693571 /* LoadingState.swift */,
 				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
+				4D59E6BB2341E5CA008DC2A7 /* Storable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				4D1F9B322340141F00693571 /* SignInView.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
+				4D59E6BC2341E5CA008DC2A7 /* Storable.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */,
 				4D1F9B2B233EDEB200693571 /* Firebase+PromiseKit.swift in Sources */,

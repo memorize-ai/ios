@@ -1,12 +1,18 @@
 import FirebaseFirestore
 
-final class Deck: Identifiable, Equatable {
+final class Deck: Identifiable, Equatable, Storable {
 	let id: String
+	let prepareForUpdate: (() -> Void)?
 	let cardStore: CardStore
-	var name: String?
+	var name: String? {
+		willSet {
+			prepareForUpdate?()
+		}
+	}
 	
-	init(id: String, cardStore: CardStore = .init(), name: String? = nil) {
+	init(id: String, prepareForUpdate: (() -> Void)? = nil, cardStore: CardStore = .init(), name: String? = nil) {
 		self.id = id
+		self.prepareForUpdate = prepareForUpdate
 		self.cardStore = cardStore
 		self.name = name
 	}
