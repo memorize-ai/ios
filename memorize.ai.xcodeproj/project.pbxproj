@@ -37,6 +37,7 @@
 		4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F45233DE1A800EF7467 /* Assets.xcassets */; };
 		4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F48233DE1A800EF7467 /* Preview Assets.xcassets */; };
 		4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */; };
+		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */,
 				05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */,
 				4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */,
 			);
@@ -337,6 +339,7 @@
 			name = memorize.ai;
 			packageProductDependencies = (
 				4D1F9B27233EDE4E00693571 /* PromiseKit */,
+				4DC923A523458F1900F901EA /* SwiftUIX */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -416,6 +419,7 @@
 			mainGroup = 4DAA4F30233DE1A600EF7467;
 			packageReferences = (
 				4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -947,6 +951,14 @@
 				kind = branch;
 			};
 		};
+		4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -954,6 +966,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
+		};
+		4DC923A523458F1900F901EA /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
 
