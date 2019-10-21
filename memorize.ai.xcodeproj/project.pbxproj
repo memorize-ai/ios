@@ -23,6 +23,8 @@
 		4D1F9BC723401A9800693571 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9BC623401A9800693571 /* Card.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
 		4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */; };
+		4D402E70235E50610011C6B6 /* RectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* RectangleButton.swift */; };
+		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D4D483D23401E8D002FEFB6 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D483C23401E8D002FEFB6 /* CardStore.swift */; };
 		4D59E6BC2341E5CA008DC2A7 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59E6BB2341E5CA008DC2A7 /* Storable.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */; };
@@ -74,6 +76,8 @@
 		4D1F9BC623401A9800693571 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
 		4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Tests.swift; sourceTree = "<group>"; };
+		4D402E6F235E50610011C6B6 /* RectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleButton.swift; sourceTree = "<group>"; };
+		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D4D483C23401E8D002FEFB6 /* CardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
 		4D59E6BB2341E5CA008DC2A7 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+PromiseKit.swift"; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */,
 				4D1F9B2A233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift */,
 				4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */,
+				4D402E71235E591E0011C6B6 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
 			isa = PBXGroup;
 			children = (
+				4D402E6F235E50610011C6B6 /* RectangleButton.swift */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -599,6 +605,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D1F9B1D233EC5EF00693571 /* Deck.swift in Sources */,
+				4D402E70235E50610011C6B6 /* RectangleButton.swift in Sources */,
+				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,
 				4D4D483D23401E8D002FEFB6 /* CardStore.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
