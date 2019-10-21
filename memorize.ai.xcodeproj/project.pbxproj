@@ -23,6 +23,7 @@
 		4D1F9B322340141F00693571 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B312340141F00693571 /* SignInView.swift */; };
 		4D1F9BC723401A9800693571 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9BC623401A9800693571 /* Card.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
+		4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */; };
 		4D4D483D23401E8D002FEFB6 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D483C23401E8D002FEFB6 /* CardStore.swift */; };
 		4D59E6BC2341E5CA008DC2A7 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59E6BB2341E5CA008DC2A7 /* Storable.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */; };
@@ -74,6 +75,7 @@
 		4D1F9B312340141F00693571 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		4D1F9BC623401A9800693571 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
+		4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Tests.swift; sourceTree = "<group>"; };
 		4D4D483C23401E8D002FEFB6 /* CardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
 		4D59E6BB2341E5CA008DC2A7 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+PromiseKit.swift"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				4D71AD0C2340289E00C1C4FA /* Deck_Tests.swift */,
+				4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */,
 				4DAA4F58233DE1A800EF7467 /* Info.plist */,
 			);
 			path = memorize.aiTests;
@@ -626,6 +629,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D71AD0D2340289E00C1C4FA /* Deck_Tests.swift in Sources */,
+				4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

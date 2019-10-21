@@ -1,5 +1,6 @@
-import XCTest
 @testable import memorize_ai
+
+import XCTest
 
 final class Deck_Tests: XCTestCase {
 	func testEquatable() {
