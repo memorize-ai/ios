@@ -27,8 +27,6 @@ struct RectangleButton<Content: View>: View {
 	var body: some View {
 		Button(action: action) {
 			content()
-				.padding(.horizontal, 37)
-				.padding(.vertical)
 				.background(backgroundColor)
 				.cornerRadius(cornerRadius)
 				.border(borderColor, width: borderWidth)
@@ -41,8 +39,9 @@ struct RectangleButton_Previews: PreviewProvider {
 	static var previews: some View {
 		RectangleButton(action: {}) {
 			Text("SIGN UP")
-				.bold()
-				.foregroundColor(.purple)
+				.frame(maxWidth: 132, maxHeight: 40)
+				.font(.muli(.bold, size: 14))
+				.foregroundColor(.darkBlue)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(Color.gray)
