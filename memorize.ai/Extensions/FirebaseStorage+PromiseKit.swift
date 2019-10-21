@@ -6,7 +6,7 @@ extension StorageReference {
 		Promise { seal in
 			getData(maxSize: maxSize) { data, error in
 				guard error == nil, let data = data else {
-					return seal.reject(error ?? UnknownError.default)
+					return seal.reject(error ?? UNKNOWN_ERROR)
 				}
 				seal.fulfill(data)
 			}
