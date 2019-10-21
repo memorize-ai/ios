@@ -11,7 +11,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		let window = UIWindow(windowScene: windowScene)
 		window.rootViewController = UIHostingController(
 			rootView: InitialView()
-				.environmentObject(DeckStore().observeAll(user: .init(id: "abc", name: "")))
 				.environment(\.managedObjectContext, context)
 		)
 		self.window = window
