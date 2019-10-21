@@ -171,8 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				4D1F9B24233ED1AD00693571 /* LoadingState.swift */,
-				4D2ECD83235D90C7008312B1 /* Tilde.swift */,
 				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
+				4D2ECD87235D96D1008312B1 /* Operators */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -218,6 +218,14 @@
 				4D4D483C23401E8D002FEFB6 /* CardStore.swift */,
 			);
 			path = Card;
+			sourceTree = "<group>";
+		};
+		4D2ECD87235D96D1008312B1 /* Operators */ = {
+			isa = PBXGroup;
+			children = (
+				4D2ECD83235D90C7008312B1 /* Tilde.swift */,
+			);
+			path = Operators;
 			sourceTree = "<group>";
 		};
 		4D703AEB233DF98E004F1F65 /* Views */ = {
