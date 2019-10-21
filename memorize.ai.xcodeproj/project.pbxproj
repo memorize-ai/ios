@@ -39,6 +39,7 @@
 		4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E82235E6FB80011C6B6 /* Muli-Light.ttf */; };
 		4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */; };
 		4D402E92235E6FB80011C6B6 /* Muli-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */; };
+		4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E93235E72B80011C6B6 /* MuliFont.swift */; };
 		4D4D483D23401E8D002FEFB6 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D483C23401E8D002FEFB6 /* CardStore.swift */; };
 		4D59E6BC2341E5CA008DC2A7 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59E6BB2341E5CA008DC2A7 /* Storable.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */; };
@@ -106,6 +107,7 @@
 		4D402E82235E6FB80011C6B6 /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
 		4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
 		4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-LightItalic.ttf"; sourceTree = "<group>"; };
+		4D402E93235E72B80011C6B6 /* MuliFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuliFont.swift; sourceTree = "<group>"; };
 		4D4D483C23401E8D002FEFB6 /* CardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
 		4D59E6BB2341E5CA008DC2A7 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+PromiseKit.swift"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		4D1F9B2C233EEBC900693571 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4D402E93235E72B80011C6B6 /* MuliFont.swift */,
 				4D1F9B24233ED1AD00693571 /* LoadingState.swift */,
 				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
 				4D2ECD87235D96D1008312B1 /* Operators */,
@@ -687,6 +690,7 @@
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D1F9B21233EC99600693571 /* UserStore.swift in Sources */,
+				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4D1F9BC723401A9800693571 /* Card.swift in Sources */,
 				4D1F9B1F233EC72100693571 /* DeckStore.swift in Sources */,
 				4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */,
