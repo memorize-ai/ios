@@ -143,14 +143,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4D1F9B1B233EC5E400693571 /* Classes */ = {
+		4D1F9B1B233EC5E400693571 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4D1F9BC323401A7200693571 /* Deck */,
 				4D1F9BC523401A8A00693571 /* Card */,
 				4D1F9BC423401A7D00693571 /* User */,
 			);
-			path = Classes;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		4D1F9B29233EDEA200693571 /* Extensions */ = {
@@ -267,7 +267,7 @@
 				4D1F9B29233EDEA200693571 /* Extensions */,
 				4DC923A7234594FB00F901EA /* Protocols */,
 				4D1F9B2C233EEBC900693571 /* Helpers */,
-				4D1F9B1B233EC5E400693571 /* Classes */,
+				4D1F9B1B233EC5E400693571 /* Models */,
 				4D703AEB233DF98E004F1F65 /* Views */,
 				4DAA4F45233DE1A800EF7467 /* Assets.xcassets */,
 				4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */,
