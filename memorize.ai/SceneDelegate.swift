@@ -10,7 +10,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		else { return }
 		let window = UIWindow(windowScene: windowScene)
 		window.rootViewController = UIHostingController(
-			rootView: HomeView()
+			rootView: InitialView()
 				.environmentObject(DeckStore().observeAll(user: .init(id: "abc", name: "")))
 				.environment(\.managedObjectContext, context)
 		)
