@@ -23,8 +23,6 @@ final class DeckStore: ObservableObject {
 					self.handleDeckModified(id: deckId, userDocument: userDocument)
 				case .removed:
 					self.decks = self.decks.filter { $0.id != deckId }
-				@unknown default:
-					return
 				}
 			}
 			self.loadingState = .success()

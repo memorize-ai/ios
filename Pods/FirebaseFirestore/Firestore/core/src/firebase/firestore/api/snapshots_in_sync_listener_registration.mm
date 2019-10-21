@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-#include "Firestore/core/src/firebase/firestore/api/listener_registration.h"
+#include <utility>
+
+#include "Firestore/core/src/firebase/firestore/api/snapshots_in_sync_listener_registration.h"
 
 #include "Firestore/core/src/firebase/firestore/core/firestore_client.h"
 
@@ -22,29 +24,20 @@ namespace firebase {
 namespace firestore {
 namespace api {
 
-ListenerRegistration::ListenerRegistration(
+SnapshotsInSyncListenerRegistration::SnapshotsInSyncListenerRegistration(
     std::shared_ptr<core::FirestoreClient> client,
-    std::shared_ptr<core::AsyncEventListener<core::ViewSnapshot>>
-        async_listener,
-    std::shared_ptr<core::QueryListener> query_listener)
-    : client_(std::move(client)),
-      async_listener_(std::move(async_listener)),
-      query_listener_(std::move(query_listener)) {
+    std::shared_ptr<core::AsyncEventListener<util::Empty>> async_listener)
+    : client_(std::move(client)), async_listener_(std::move(async_listener)) {
 }
 
-void ListenerRegistration::Remove() {
+void SnapshotsInSyncListenerRegistration::Remove() {
   auto async_listener = async_listener_.lock();
   if (async_listener) {
     async_listener->Mute();
     async_listener_.reset();
   }
 
-  auto query_listener = query_listener_.lock();
-  if (query_listener) {
-    client_->RemoveListener(query_listener);
-    query_listener_.reset();
-  }
-
+  client_->RemoveSnapshotsInSyncListener(async_listener);
   client_.reset();
 }
 
