@@ -25,6 +25,20 @@
 		4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */; };
 		4D402E70235E50610011C6B6 /* RectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* RectangleButton.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
+		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
+		4D402E86235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E78235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf */; };
+		4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E79235E6FB80011C6B6 /* Muli-BoldItalic.ttf */; };
+		4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E7A235E6FB80011C6B6 /* Muli-Black.ttf */; };
+		4D402E89235E6FB80011C6B6 /* Muli-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E7B235E6FB80011C6B6 /* Muli-ExtraBold.ttf */; };
+		4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E7C235E6FB80011C6B6 /* Muli-Bold.ttf */; };
+		4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E7D235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf */; };
+		4D402E8C235E6FB80011C6B6 /* Muli-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E7E235E6FB80011C6B6 /* Muli-Italic.ttf */; };
+		4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E7F235E6FB80011C6B6 /* Muli-SemiBold.ttf */; };
+		4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E80235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf */; };
+		4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E81235E6FB80011C6B6 /* Muli-BlackItalic.ttf */; };
+		4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E82235E6FB80011C6B6 /* Muli-Light.ttf */; };
+		4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */; };
+		4D402E92235E6FB80011C6B6 /* Muli-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */; };
 		4D4D483D23401E8D002FEFB6 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D483C23401E8D002FEFB6 /* CardStore.swift */; };
 		4D59E6BC2341E5CA008DC2A7 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59E6BB2341E5CA008DC2A7 /* Storable.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */; };
@@ -78,6 +92,20 @@
 		4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Tests.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* RectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleButton.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
+		4D402E78235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		4D402E79235E6FB80011C6B6 /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BoldItalic.ttf"; sourceTree = "<group>"; };
+		4D402E7A235E6FB80011C6B6 /* Muli-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Black.ttf"; sourceTree = "<group>"; };
+		4D402E7B235E6FB80011C6B6 /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
+		4D402E7C235E6FB80011C6B6 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
+		4D402E7D235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		4D402E7E235E6FB80011C6B6 /* Muli-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Italic.ttf"; sourceTree = "<group>"; };
+		4D402E7F235E6FB80011C6B6 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
+		4D402E80235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		4D402E81235E6FB80011C6B6 /* Muli-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BlackItalic.ttf"; sourceTree = "<group>"; };
+		4D402E82235E6FB80011C6B6 /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
+		4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
+		4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-LightItalic.ttf"; sourceTree = "<group>"; };
 		4D4D483C23401E8D002FEFB6 /* CardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
 		4D59E6BB2341E5CA008DC2A7 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+PromiseKit.swift"; sourceTree = "<group>"; };
@@ -215,6 +243,35 @@
 			path = Operators;
 			sourceTree = "<group>";
 		};
+		4D402E75235E6FA50011C6B6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4D402E76235E6FB80011C6B6 /* Muli */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4D402E76235E6FB80011C6B6 /* Muli */ = {
+			isa = PBXGroup;
+			children = (
+				4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */,
+				4D402E78235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf */,
+				4D402E79235E6FB80011C6B6 /* Muli-BoldItalic.ttf */,
+				4D402E7A235E6FB80011C6B6 /* Muli-Black.ttf */,
+				4D402E7B235E6FB80011C6B6 /* Muli-ExtraBold.ttf */,
+				4D402E7C235E6FB80011C6B6 /* Muli-Bold.ttf */,
+				4D402E7D235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf */,
+				4D402E7E235E6FB80011C6B6 /* Muli-Italic.ttf */,
+				4D402E7F235E6FB80011C6B6 /* Muli-SemiBold.ttf */,
+				4D402E80235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf */,
+				4D402E81235E6FB80011C6B6 /* Muli-BlackItalic.ttf */,
+				4D402E82235E6FB80011C6B6 /* Muli-Light.ttf */,
+				4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */,
+				4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */,
+			);
+			path = Muli;
+			sourceTree = "<group>";
+		};
 		4D703AEB233DF98E004F1F65 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +331,7 @@
 				4DAA4F4D233DE1A800EF7467 /* Info.plist */,
 				4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */,
 				4DAA4F47233DE1A800EF7467 /* Preview Content */,
+				4D402E75235E6FA50011C6B6 /* Fonts */,
 				4D703AF0233E7107004F1F65 /* Firebase */,
 			);
 			path = memorize.ai;
@@ -455,10 +513,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D1F9B19233EBF2200693571 /* README.md in Resources */,
+				4D402E86235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf in Resources */,
+				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
+				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
+				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
+				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
+				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
+				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
+				4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */,
+				4D402E89235E6FB80011C6B6 /* Muli-ExtraBold.ttf in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
+				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
+				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
+				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
 				4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */,
+				4D402E8C235E6FB80011C6B6 /* Muli-Italic.ttf in Resources */,
+				4D402E92235E6FB80011C6B6 /* Muli-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

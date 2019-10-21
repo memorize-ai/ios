@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Muli-ExtraLight.ttf</string>
+		<string>Muli-ExtraLightItalic.ttf</string>
+		<string>Muli-BoldItalic.ttf</string>
+		<string>Muli-Black.ttf</string>
+		<string>Muli-ExtraBold.ttf</string>
+		<string>Muli-Bold.ttf</string>
+		<string>Muli-ExtraBoldItalic.ttf</string>
+		<string>Muli-Italic.ttf</string>
+		<string>Muli-SemiBold.ttf</string>
+		<string>Muli-SemiBoldItalic.ttf</string>
+		<string>Muli-BlackItalic.ttf</string>
+		<string>Muli-Light.ttf</string>
+		<string>Muli-Regular.ttf</string>
+		<string>Muli-LightItalic.ttf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
