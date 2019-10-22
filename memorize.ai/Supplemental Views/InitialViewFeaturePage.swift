@@ -12,7 +12,15 @@ struct InitialViewFeaturePage: View {
 				image
 					.resizable()
 					.aspectRatio(contentMode: .fit)
+					.padding(.horizontal, 25)
+					.padding(.top, 45)
+				Spacer()
 				Text(title)
+					.font(.muli(.bold, size: 24))
+					.foregroundColor(.darkGray)
+					.multilineTextAlignment(.center)
+					.padding(.horizontal, 40)
+					.padding(.bottom, 42)
 			}
 			.frame(height: height)
 			.background(Color.white)
