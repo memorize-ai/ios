@@ -25,6 +25,7 @@
 		4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */; };
 		4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */; };
 		4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */; };
+		4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
 		4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
@@ -98,6 +99,7 @@
 		4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangles.swift; sourceTree = "<group>"; };
+		4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangle.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
 		4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Tests.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 			children = (
 				4D402E6F235E50610011C6B6 /* CustomRectangle.swift */,
 				4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */,
+				4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */,
 				4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */,
 				4D2AC7E2235EC83C00A3EF1E /* InitialViewBottomButtons.swift */,
 			);
@@ -713,6 +716,7 @@
 				4D1F9B1F233EC72100693571 /* DeckStore.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */,
+				4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
