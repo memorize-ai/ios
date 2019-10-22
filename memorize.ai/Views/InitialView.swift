@@ -2,11 +2,13 @@ import SwiftUI
 
 struct InitialView: View {
 	var body: some View {
-		VStack {
-			Spacer()
-			ZStack(alignment: .bottom) {
-				InitialViewBottomGradient()
-				InitialViewBottomButtons()
+		NavigationView {
+			VStack {
+				Spacer()
+				ZStack(alignment: .bottom) {
+					InitialViewBottomGradient()
+					InitialViewBottomButtons()
+				}
 			}
 		}
 	}
