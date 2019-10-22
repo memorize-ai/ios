@@ -5,7 +5,13 @@ struct InitialViewPaginatedFeaturesIndicator: View {
 	let activePageIndex: Int
 	
 	var body: some View {
-		Text("Pages: \(pageCount), activePageIndex: \(activePageIndex)")
+		HStack {
+			ForEach(0..<pageCount) { pageIndex in
+				InitialViewPaginatedFeaturesIndicatorCircle(
+					active: pageIndex == self.activePageIndex
+				)
+			}
+		}
 	}
 }
 
