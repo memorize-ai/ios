@@ -2,7 +2,14 @@ import SwiftUI
 
 struct LogInView: View {
 	var body: some View {
-		Text("LogInView")
+		VStack {
+			ZStack {
+				AuthenticationViewTopGradient()
+//				AuthenticationViewTopControls()
+			}
+			Spacer()
+		}
+		.background(Color.lightGrayBackground)
 	}
 }
 
