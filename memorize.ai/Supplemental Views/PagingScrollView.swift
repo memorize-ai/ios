@@ -56,10 +56,9 @@ struct PagingScrollView: View {
 	func logicalScrollOffset(trueOffset: CGFloat) -> CGFloat {
 		leadingOffset - trueOffset
 	}
-
-
+	
 	var body: some View {
-		GeometryReader { outerGeometry in
+		GeometryReader { _ in
 			HStack(spacing: self.tilePadding) {
 				ForEach(0..<self.items.count) { index in
 					self.items[index]
@@ -68,7 +67,7 @@ struct PagingScrollView: View {
 				}
 			}
 			.offset(x: self.stackOffset)
-			.background(Color.black.opacity(0.00001))
+			.background(Color.black.opacity(.ulpOfOne))
 			.frame(width: self.contentWidth)
 			.simultaneousGesture(
 				DragGesture(minimumDistance: 1, coordinateSpace: .local)
