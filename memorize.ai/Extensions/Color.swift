@@ -5,4 +5,5 @@ extension Color {
 	static let lightBlue = Self("LightBlue")
 	static let mediumBlue = Self("MediumBlue")
 	static let darkBlue = Self("DarkBlue")
+	static let lightGrayBackground = Self("LightGrayBackground")
 }

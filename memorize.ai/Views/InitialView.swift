@@ -10,6 +10,8 @@ struct InitialView: View {
 					InitialViewBottomButtons()
 				}
 			}
+			.background(Color.lightGrayBackground)
+			.edgesIgnoringSafeArea(.top)
 		}
 	}
 }
