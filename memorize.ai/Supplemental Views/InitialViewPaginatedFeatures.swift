@@ -42,14 +42,15 @@ struct InitialViewPaginatedFeatures: View {
 	}
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: -25) {
 			GeometryReader(content: pagingScrollView)
-				.padding(.top, 30)
 			InitialViewPaginatedFeaturesIndicator(
 				pageCount: Self.pageCount,
 				activePageIndex: activePageIndex
 			)
+			.padding(.top, 160)
 		}
+		.padding(.top, 200)
 	}
 }
 
