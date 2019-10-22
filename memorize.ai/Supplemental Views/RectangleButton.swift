@@ -48,13 +48,13 @@ struct RectangleButton_Previews: PreviewProvider {
 				Text("SIGN UP")
 					.frame(maxWidth: 132, maxHeight: 40)
 					.font(.muli(.bold, size: 14))
-					.foregroundColor(.init("DarkBlue"))
+					.foregroundColor(.darkBlue)
 			}
-			RectangleButton(borderColor: .init("DarkBlue"), borderWidth: 3, action: {}) {
+			RectangleButton(borderColor: .darkBlue, borderWidth: 3, action: {}) {
 				Text("SIGN UP")
 					.frame(maxWidth: 132, maxHeight: 40)
 					.font(.muli(.bold, size: 14))
-					.foregroundColor(.init("DarkBlue"))
+					.foregroundColor(.darkBlue)
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
