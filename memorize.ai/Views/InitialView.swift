@@ -4,7 +4,10 @@ struct InitialView: View {
 	var body: some View {
 		VStack {
 			Spacer()
-			InitialViewBottomGradient()
+			ZStack(alignment: .bottom) {
+				InitialViewBottomGradient()
+				InitialViewBottomButtons()
+			}
 		}
 	}
 }
