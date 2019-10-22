@@ -12,7 +12,7 @@ struct PagingScrollView: View {
 	private let leadingOffset: CGFloat
 	private let stackOffset: CGFloat
 	private let itemCount: Int
-	private let scrollDampingFactor: CGFloat = 0.66
+	private let scrollDampingFactor: CGFloat = 2 / 3
 	
 	init<Content: View>(
 		activePageIndex: Binding<Int>,
