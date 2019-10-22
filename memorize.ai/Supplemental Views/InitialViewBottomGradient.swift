@@ -17,8 +17,8 @@ struct InitialViewBottomGradient: View {
 			}
 			.fill(LinearGradient(
 				gradient: .init(colors: [.lightBlue, .mediumBlue]),
-				startPoint: .init(x: 0.5, y: 0),
-				endPoint: .init(x: 0.5, y: 1)
+				startPoint: .top,
+				endPoint: .bottom
 			))
 		}
 		.frame(height: Self.height)

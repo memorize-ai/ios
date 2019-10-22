@@ -4,6 +4,7 @@ struct InitialView: View {
 	var body: some View {
 		NavigationView {
 			VStack {
+				InitialViewStackedRectangles()
 				Spacer()
 				ZStack(alignment: .bottom) {
 					InitialViewBottomGradient()
