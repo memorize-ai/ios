@@ -5,25 +5,25 @@ struct CustomRectangle<Content: View>: View {
 	let borderColor: Color
 	let borderWidth: CGFloat
 	let cornerRadius: CGFloat
-	let content: () -> Content
+	let content: Content
 	
 	init(
 		backgroundColor: Color = .white,
 		borderColor: Color = .white,
 		borderWidth: CGFloat = 0,
 		cornerRadius: CGFloat = 5,
-		content: @escaping () -> Content
+		content: () -> Content
 	) {
 		self.backgroundColor = backgroundColor
 		self.borderColor = borderColor
 		self.borderWidth = borderWidth
 		self.cornerRadius = cornerRadius
-		self.content = content
+		self.content = content()
 	}
 	
 	var body: some View {
 		let roundedRectangle = RoundedRectangle(cornerRadius: cornerRadius)
-		return content()
+		return content
 			.background(
 				backgroundColor
 					.clipShape(roundedRectangle)
