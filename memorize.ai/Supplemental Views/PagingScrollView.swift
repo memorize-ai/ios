@@ -76,7 +76,7 @@ struct PagingScrollView: View {
 					}
 					.onEnded { value in
 						let velocityDiff = (value.predictedEndTranslation.width - self.dragOffset) * self.scrollDampingFactor
-						withAnimation(.interpolatingSpring(mass: 0.1, stiffness: 20, damping: 1.5, initialVelocity: 0)) {
+						withAnimation(.interpolatingSpring(mass: 0.1, stiffness: 20, damping: 3, initialVelocity: 0)) {
 							self.activePageIndex = self.indexPageForOffset(self.currentScrollOffset + velocityDiff)
 							self.dragOffset = 0
 						}
