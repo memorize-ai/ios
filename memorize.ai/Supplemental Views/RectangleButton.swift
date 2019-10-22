@@ -25,11 +25,17 @@ struct RectangleButton<Content: View>: View {
 	}
 	
 	var body: some View {
-		Button(action: action) {
+		let roundedRectangle = RoundedRectangle(cornerRadius: cornerRadius)
+		return Button(action: action) {
 			content()
-				.background(backgroundColor)
-				.cornerRadius(cornerRadius)
-				.border(borderColor, width: borderWidth)
+				.background(
+					backgroundColor
+						.clipShape(roundedRectangle)
+				)
+				.overlay(
+					roundedRectangle
+						.stroke(borderColor, lineWidth: borderWidth)
+				)
 		}
 	}
 }
@@ -37,11 +43,19 @@ struct RectangleButton<Content: View>: View {
 #if DEBUG
 struct RectangleButton_Previews: PreviewProvider {
 	static var previews: some View {
-		RectangleButton(action: {}) {
-			Text("SIGN UP")
-				.frame(maxWidth: 132, maxHeight: 40)
-				.font(.muli(.bold, size: 14))
-				.foregroundColor(.darkBlue)
+		VStack(spacing: 20) {
+			RectangleButton(action: {}) {
+				Text("SIGN UP")
+					.frame(maxWidth: 132, maxHeight: 40)
+					.font(.muli(.bold, size: 14))
+					.foregroundColor(.init("DarkBlue"))
+			}
+			RectangleButton(borderColor: .init("DarkBlue"), borderWidth: 3, action: {}) {
+				Text("SIGN UP")
+					.frame(maxWidth: 132, maxHeight: 40)
+					.font(.muli(.bold, size: 14))
+					.foregroundColor(.init("DarkBlue"))
+			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(Color.gray)
