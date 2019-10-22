@@ -41,9 +41,7 @@ struct InitialViewPaginatedFeatures: View {
 	}
 	
 	var body: some View {
-		GeometryReader { geometry in
-			self.pagingScrollView(geometry)
-		}
+		GeometryReader(content: pagingScrollView)
 	}
 }
 
