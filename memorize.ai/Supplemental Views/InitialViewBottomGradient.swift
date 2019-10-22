@@ -9,7 +9,7 @@ struct InitialViewBottomGradient: View {
 			Path { path in
 				let width = geometry.size.width
 				path.addLines([
-					.init(x: 0, y: Self.midHeight),
+					.init(x: 0, y: Self.height - Self.midHeight),
 					.init(x: width, y: 0),
 					.init(x: width, y: Self.height),
 					.init(x: 0, y: Self.height)
