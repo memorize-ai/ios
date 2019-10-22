@@ -400,9 +400,9 @@
 			children = (
 				4D402E6F235E50610011C6B6 /* CustomRectangle.swift */,
 				4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */,
-				4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */,
 				4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */,
 				4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */,
+				4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */,
 				4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */,
 				4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */,
 				4D2AC7E2235EC83C00A3EF1E /* InitialViewBottomButtons.swift */,

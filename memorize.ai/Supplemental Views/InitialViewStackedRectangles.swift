@@ -26,6 +26,7 @@ struct InitialViewStackedRectangles: View {
 						.padding(.top, -115)
 					}
 				}
+				.padding(.top, 30)
 				HStack {
 					VStack(alignment: .leading) {
 						InitialViewStackedRectangle(
@@ -38,17 +39,17 @@ struct InitialViewStackedRectangles: View {
 							width: geometry.size.width
 						)
 						.padding(.leading, -geometry.size.width * 208 / 375)
-						.padding(.top, -115)
+						.padding(.top, -100)
 						InitialViewStackedRectangle(
 							color: Color.darkBlue.opacity(0.1),
 							width: geometry.size.width
 						)
 						.padding(.leading, -geometry.size.width * 321 / 375)
-						.padding(.top, -50)
+						.padding(.top, -74)
 					}
 					Spacer()
 				}
-				.padding(.top, 50)
+				.padding(.top, 80)
 			}
 		}
 	}
