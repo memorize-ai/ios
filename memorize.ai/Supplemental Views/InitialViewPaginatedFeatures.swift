@@ -5,6 +5,7 @@ struct InitialViewPaginatedFeatures: View {
 	static let maxTileWidth: CGFloat = 500
 	static let tileAspectRatio: CGFloat = 385 / 343
 	static let tilePadding: CGFloat = 16
+	static let pageCount = 3
 	
 	@State var activePageIndex = 0
 	
@@ -14,7 +15,7 @@ struct InitialViewPaginatedFeatures: View {
 		let tileHeight = tileWidth * Self.tileAspectRatio
 		return PagingScrollView(
 			activePageIndex: $activePageIndex,
-			itemCount: 3,
+			itemCount: Self.pageCount,
 			pageWidth: screenWidth,
 			tileWidth: tileWidth,
 			tilePadding: Self.tilePadding
@@ -41,8 +42,14 @@ struct InitialViewPaginatedFeatures: View {
 	}
 	
 	var body: some View {
-		GeometryReader(content: pagingScrollView)
-			.padding(.top, 30)
+		VStack {
+			GeometryReader(content: pagingScrollView)
+				.padding(.top, 30)
+			InitialViewPaginatedFeaturesIndicator(
+				pageCount: Self.pageCount,
+				activePageIndex: activePageIndex
+			)
+		}
 	}
 }
 
