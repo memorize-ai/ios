@@ -49,7 +49,7 @@ struct InitialViewStackedRectangles: View {
 					}
 					Spacer()
 				}
-				.padding(.top, 80)
+				.padding(.top, 90)
 			}
 		}
 	}
