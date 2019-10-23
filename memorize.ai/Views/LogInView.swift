@@ -4,7 +4,7 @@ struct LogInView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			VStack {
-				ZStack {
+				ZStack(alignment: .top) {
 					AuthenticationViewTopGradient([
 						.bluePurple,
 						.lightGreen
