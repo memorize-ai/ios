@@ -15,13 +15,25 @@ struct AuthenticationViewTopControls: View {
 			}
 			Spacer()
 			Text(alternativeMessage)
-				.font(.muli(.regular, size: 12))
+				.font(.muli(.regular, size: 13))
 				.foregroundColor(Color.white.opacity(0.5))
+				.padding(.bottom, 1)
 			Button(action: {}) {
-				Text(alternativeButtonText)
+				CustomRectangle(
+					backgroundColor: .transparent,
+					borderColor: Color.mediumGray.opacity(0.1624),
+					borderWidth: 1.5,
+					cornerRadius: 5
+				) {
+					Text(alternativeButtonText)
+						.font(.muli(.bold, size: 12))
+						.foregroundColor(Color.white.opacity(0.7))
+						.frame(width: 68, height: 26)
+				}
 			}
 		}
-		.padding(.horizontal, 33)
+		.padding(.leading, 33)
+		.padding(.trailing, 16)
 		.padding(.top, 30)
 		.removeNavigationBar()
 	}
