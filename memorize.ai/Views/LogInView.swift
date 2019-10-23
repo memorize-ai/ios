@@ -12,7 +12,9 @@ struct LogInView: View {
 						.lightGreen
 					], fullHeight: geometry.size.height)
 					AuthenticationViewTopControls(
-						presentationMode: self.presentationMode
+						presentationMode: self.presentationMode,
+						alternativeMessage: "Don't have an account yet?",
+						alternativeButtonText: "SIGN UP"
 					)
 				}
 				Spacer()

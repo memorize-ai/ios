@@ -2,6 +2,9 @@ import SwiftUI
 
 struct AuthenticationViewTopControls: View {
 	@Binding var presentationMode: PresentationMode
+
+	let alternativeMessage: String
+	let alternativeButtonText: String
 	
 	var body: some View {
 		HStack {
@@ -11,6 +14,12 @@ struct AuthenticationViewTopControls: View {
 				LeftArrowHead(height: 20)
 			}
 			Spacer()
+			Text(alternativeMessage)
+				.font(.muli(.regular, size: 12))
+				.foregroundColor(Color.white.opacity(0.5))
+			Button(action: {}) {
+				Text(alternativeButtonText)
+			}
 		}
 		.padding(.horizontal, 33)
 		.padding(.top, 30)
