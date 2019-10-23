@@ -1,10 +1,11 @@
 import SwiftUI
 
-struct AuthenticationViewTopControls: View {
+struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 	@Binding var presentationMode: PresentationMode
 
 	let alternativeMessage: String
 	let alternativeButtonText: String
+	let alternativeButtonDestination: AlternativeDestination
 	
 	var body: some View {
 		HStack {
@@ -18,7 +19,7 @@ struct AuthenticationViewTopControls: View {
 				.font(.muli(.regular, size: 13))
 				.foregroundColor(Color.white.opacity(0.5))
 				.padding(.bottom, 1)
-			Button(action: {}) {
+			NavigationLink(destination: alternativeButtonDestination) {
 				CustomRectangle(
 					backgroundColor: .transparent,
 					borderColor: Color.mediumGray.opacity(0.1624),
@@ -26,9 +27,9 @@ struct AuthenticationViewTopControls: View {
 					cornerRadius: 5
 				) {
 					Text(alternativeButtonText)
-						.font(.muli(.bold, size: 12))
+						.font(.muli(.bold, size: 13))
 						.foregroundColor(Color.white.opacity(0.7))
-						.frame(width: 68, height: 26)
+						.frame(width: 70, height: 26)
 				}
 			}
 		}

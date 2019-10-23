@@ -14,7 +14,8 @@ struct LogInView: View {
 					AuthenticationViewTopControls(
 						presentationMode: self.presentationMode,
 						alternativeMessage: "Don't have an account yet?",
-						alternativeButtonText: "SIGN UP"
+						alternativeButtonText: "SIGN UP",
+						alternativeButtonDestination: SignUpView()
 					)
 				}
 				Spacer()
