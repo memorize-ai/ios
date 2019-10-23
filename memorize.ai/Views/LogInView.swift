@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LogInView: View {
+	@Environment(\.presentationMode) var presentationMode
+	
 	var body: some View {
 		GeometryReader { geometry in
 			VStack {
@@ -9,7 +11,9 @@ struct LogInView: View {
 						.bluePurple,
 						.lightGreen
 					], fullHeight: geometry.size.height)
-	//				AuthenticationViewTopControls()
+					AuthenticationViewTopControls(
+						presentationMode: self.presentationMode
+					)
 				}
 				Spacer()
 			}

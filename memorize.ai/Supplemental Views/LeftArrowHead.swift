@@ -1,34 +1,37 @@
 import SwiftUI
 
 struct LeftArrowHead: View {
-	let color: Color
-	let thickness: CGFloat
+	enum Style {
+		case transparentWhite
+	}
 	
-	init(color: Color, thickness: CGFloat = 0.2) {
-		self.color = color
-		self.thickness = thickness
+	let image: Image
+	let height: CGFloat
+	
+	init(_ style: Style = .transparentWhite, height: CGFloat) {
+		switch style {
+		case .transparentWhite:
+			image = .init("TransparentWhiteLeftArrowHead")
+		}
+		self.height = height
 	}
 	
 	var body: some View {
-		let sideLength = thickness / sqrt(2)
-		let hypotenuseLength = thickness * sqrt(2)
-		Path { path in
-			path.addLines([
-				.init(x: 0, y: 0.5),
-				.init(x: 1 - sideLength, y: 0),
-				.init(x: 1, y: sideLength),
-				.init(x: hypotenuseLength, y: 0.5),
-				.init(x: 1, y: 1 - sideLength),
-				.init(x: 1 - sideLength, y: 1)
-			])
-		}
+		image
+			.resizable()
+			.renderingMode(.original)
+			.aspectRatio(contentMode: .fit)
+			.frame(height: height)
 	}
 }
 
 #if DEBUG
 struct LeftArrowHead_Previews: PreviewProvider {
 	static var previews: some View {
-		LeftArrowHead(color: .black)
+		LeftArrowHead(height: 50)
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
+			.background(Color.gray)
+			.edgesIgnoringSafeArea(.all)
 	}
 }
 #endif
