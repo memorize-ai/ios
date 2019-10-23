@@ -2,14 +2,19 @@ import SwiftUI
 
 struct LogInView: View {
 	var body: some View {
-		VStack {
-			ZStack {
-				AuthenticationViewTopGradient()
-//				AuthenticationViewTopControls()
+		GeometryReader { geometry in
+			VStack {
+				ZStack {
+					AuthenticationViewTopGradient([
+						.bluePurple,
+						.lightGreen
+					], fullHeight: geometry.size.height)
+	//				AuthenticationViewTopControls()
+				}
+				Spacer()
 			}
-			Spacer()
+			.background(Color.lightGrayBackground)
 		}
-		.background(Color.lightGrayBackground)
 	}
 }
 

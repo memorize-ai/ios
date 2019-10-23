@@ -9,4 +9,6 @@ extension Color {
 	static let lightGray = Self("LightGray")
 	static let darkGray = Self("DarkGray")
 	static let neonGreen = Self("NeonGreen")
+	static let lightGreen = Self("LightGreen")
+	static let bluePurple = Self("BluePurple")
 }
