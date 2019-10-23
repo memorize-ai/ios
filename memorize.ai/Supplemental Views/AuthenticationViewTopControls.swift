@@ -29,7 +29,7 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 					Text(alternativeButtonText)
 						.font(.muli(.bold, size: 13))
 						.foregroundColor(Color.white.opacity(0.7))
-						.frame(width: 70, height: 26)
+						.frame(width: 70, height: 28)
 				}
 			}
 		}
