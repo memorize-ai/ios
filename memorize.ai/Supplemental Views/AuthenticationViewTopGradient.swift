@@ -46,6 +46,7 @@ struct AuthenticationViewTopGradient_Previews: PreviewProvider {
 				.lightGreen
 			], fullHeight: geometry.size.height)
 		}
+		.edgesIgnoringSafeArea(.all)
 	}
 }
 #endif

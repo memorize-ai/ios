@@ -13,8 +13,9 @@ struct LogInView: View {
 				}
 				Spacer()
 			}
-			.background(Color.lightGrayBackground)
 		}
+		.background(Color.lightGrayBackground)
+		.edgesIgnoringSafeArea(.all)
 	}
 }
 
