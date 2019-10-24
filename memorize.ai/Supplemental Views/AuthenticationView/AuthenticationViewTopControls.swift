@@ -18,7 +18,7 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 			Text(alternativeMessage)
 				.font(.muli(.regular, size: 13))
 				.foregroundColor(Color.white.opacity(0.5))
-				.padding(.bottom, 1)
+				.padding([.trailing, .bottom], 1)
 			NavigationLink(destination: alternativeButtonDestination) {
 				CustomRectangle(
 					backgroundColor: .transparent,
