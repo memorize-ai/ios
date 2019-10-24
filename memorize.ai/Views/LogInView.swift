@@ -5,20 +5,18 @@ struct LogInView: View {
 	
 	var body: some View {
 		GeometryReader { geometry in
-			VStack {
-				ZStack(alignment: .top) {
-					AuthenticationViewTopGradient([
-						.bluePurple,
-						.lightGreen
-					], fullHeight: geometry.size.height)
-					AuthenticationViewTopControls(
-						presentationMode: self.presentationMode,
-						alternativeMessage: "Don't have an account yet?",
-						alternativeButtonText: "SIGN UP",
-						alternativeButtonDestination: SignUpView()
-					)
-				}
-				Spacer()
+			ZStack(alignment: .top) {
+				AuthenticationViewTopGradient([
+					.bluePurple,
+					.lightGreen
+				], fullHeight: geometry.size.height)
+				AuthenticationViewTopControls(
+					presentationMode: self.presentationMode,
+					alternativeMessage: "Don't have an account yet?",
+					alternativeButtonText: "SIGN UP",
+					alternativeButtonDestination: SignUpView()
+				)
+				AuthenticationViewContentBox()
 			}
 		}
 		.background(Color.lightGrayBackground)

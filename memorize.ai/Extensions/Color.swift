@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension Color {
-	static let transparent = Self.white.opacity(0)
+	static let transparent = white.opacity(0)
 	static let lightBlue = Self("LightBlue")
 	static let mediumBlue = Self("MediumBlue")
 	static let darkBlue = Self("DarkBlue")
@@ -12,4 +12,5 @@ extension Color {
 	static let neonGreen = Self("NeonGreen")
 	static let lightGreen = Self("LightGreen")
 	static let bluePurple = Self("BluePurple")
+	static let grayShadow = black.opacity(0.0787)
 }

@@ -5,6 +5,10 @@ struct CustomRectangle<Content: View>: View {
 	let borderColor: Color
 	let borderWidth: CGFloat
 	let cornerRadius: CGFloat
+	let shadowColor: Color
+	let shadowRadius: CGFloat
+	let shadowXOffset: CGFloat
+	let shadowYOffset: CGFloat
 	let content: Content
 	
 	init(
@@ -12,12 +16,20 @@ struct CustomRectangle<Content: View>: View {
 		borderColor: Color = .white,
 		borderWidth: CGFloat = 0,
 		cornerRadius: CGFloat = 5,
+		shadowColor: Color = .grayShadow,
+		shadowRadius: CGFloat = 0,
+		shadowXOffset: CGFloat = 0,
+		shadowYOffset: CGFloat = 0,
 		content: () -> Content
 	) {
 		self.backgroundColor = backgroundColor
 		self.borderColor = borderColor
 		self.borderWidth = borderWidth
 		self.cornerRadius = cornerRadius
+		self.shadowColor = shadowColor
+		self.shadowRadius = shadowRadius
+		self.shadowXOffset = shadowXOffset
+		self.shadowYOffset = shadowYOffset
 		self.content = content()
 	}
 	
@@ -27,6 +39,12 @@ struct CustomRectangle<Content: View>: View {
 			.background(
 				backgroundColor
 					.clipShape(roundedRectangle)
+					.shadow(
+						color: shadowColor,
+						radius: shadowRadius,
+						x: shadowXOffset,
+						y: shadowYOffset
+					)
 			)
 			.overlay(
 				roundedRectangle
