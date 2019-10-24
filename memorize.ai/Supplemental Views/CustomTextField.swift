@@ -6,6 +6,9 @@ struct CustomTextField: View {
 	@Binding var text: String
 	
 	let placeholder: String
+	let contentType: UITextContentType
+	let keyboardType: UIKeyboardType
+	let secure: Bool
 	let internalPadding: CGFloat
 	let textColor: Color
 	let font: Font
@@ -15,6 +18,9 @@ struct CustomTextField: View {
 	init(
 		_ text: Binding<String>,
 		placeholder: String = "",
+		contentType: UITextContentType = .name,
+		keyboardType: UIKeyboardType = .default,
+		secure: Bool = false,
 		internalPadding: CGFloat = 10,
 		textColor: Color = .darkText,
 		font: Font = .muli(.regular, size: 14),
@@ -23,6 +29,9 @@ struct CustomTextField: View {
 	) {
 		_text = text
 		self.placeholder = placeholder
+		self.contentType = contentType
+		self.keyboardType = keyboardType
+		self.secure = secure
 		self.internalPadding = internalPadding
 		self.textColor = textColor
 		self.font = font
@@ -30,13 +39,21 @@ struct CustomTextField: View {
 		self.cornerRadius = cornerRadius
 	}
 	
+	var textField: some View {
+		secure
+			? AnyView(SecureField(placeholder, text: $text))
+			: AnyView(TextField(placeholder, text: $text))
+	}
+	
 	var body: some View {
-		TextField(placeholder, text: $text)
+		textField
 			.padding(internalPadding)
 			.background(backgroundColor)
 			.foregroundColor(textColor)
 			.font(font)
 			.cornerRadius(cornerRadius)
+			.textContentType(contentType)
+			.keyboardType(keyboardType)
 	}
 }
 

@@ -8,8 +8,18 @@ struct LogInViewContentBox: View {
 		VStack(spacing: 20) {
 			VStack(spacing: 32) {
 				VStack(spacing: 12) {
-					CustomTextField($email, placeholder: "Email")
-					CustomTextField($password, placeholder: "Password")
+					CustomTextField(
+						$email,
+						placeholder: "Email",
+						contentType: .emailAddress,
+						keyboardType: .emailAddress
+					)
+					CustomTextField(
+						$password,
+						placeholder: "Password",
+						contentType: .password,
+						secure: true
+					)
 				}
 				Button(action: {}) {
 					CustomRectangle(backgroundColor: .neonGreen) {
