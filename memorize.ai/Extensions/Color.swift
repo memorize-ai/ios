@@ -13,4 +13,5 @@ extension Color {
 	static let lightGreen = Self("LightGreen")
 	static let bluePurple = Self("BluePurple")
 	static let grayShadow = black.opacity(0.0787)
+	static let darkText = Self("DarkText")
 }

@@ -57,6 +57,7 @@
 		4D71AD0D2340289E00C1C4FA /* Deck_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D71AD0C2340289E00C1C4FA /* Deck_Tests.swift */; };
 		4D71AD0F23402B3D00C1C4FA /* Main_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D71AD0E23402B3D00C1C4FA /* Main_UITests.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
+		4DA721CD23614863002008ED /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA721CC23614863002008ED /* CustomTextField.swift */; };
 		4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */; };
 		4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */; };
 		4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */; };
@@ -141,6 +142,7 @@
 		4D71AD0C2340289E00C1C4FA /* Deck_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck_Tests.swift; sourceTree = "<group>"; };
 		4D71AD0E23402B3D00C1C4FA /* Main_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_UITests.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
+		4DA721CC23614863002008ED /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4DAA4F39233DE1A600EF7467 /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +211,13 @@
 				EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D17BDEE23614DE700AF1989 /* LogInView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LogInView;
 			sourceTree = "<group>";
 		};
 		4D1F9B1B233EC5E400693571 /* Models */ = {
@@ -441,6 +450,8 @@
 				4D402E6F235E50610011C6B6 /* CustomRectangle.swift */,
 				4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */,
 				4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */,
+				4DA721CC23614863002008ED /* CustomTextField.swift */,
+				4D17BDEE23614DE700AF1989 /* LogInView */,
 				4DAD2CDB2361151C001DA77B /* AuthenticationView */,
 				4D690254235FAC7C00533E20 /* InitialView */,
 			);
@@ -769,6 +780,7 @@
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
+				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */,
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
 				4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */,

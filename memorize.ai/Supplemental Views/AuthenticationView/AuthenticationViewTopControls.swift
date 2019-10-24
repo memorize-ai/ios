@@ -22,7 +22,7 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 			NavigationLink(destination: alternativeButtonDestination) {
 				CustomRectangle(
 					backgroundColor: .transparent,
-					borderColor: Color.mediumGray.opacity(0.1624),
+					borderColor: Color.lightGray.opacity(0.1624),
 					borderWidth: 1.5,
 					cornerRadius: 5
 				) {
