@@ -18,6 +18,7 @@ struct AuthenticationViewContentBox: View {
 				VStack {
 					Text(self.title)
 						.font(.muli(.bold, size: 28))
+						.foregroundColor(.darkGray)
 						.frame(maxWidth: .infinity, alignment: .leading)
 						.padding(.leading, 16)
 						.padding(.top, 35)
