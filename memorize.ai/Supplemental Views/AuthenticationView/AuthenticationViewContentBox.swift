@@ -1,10 +1,8 @@
 import SwiftUI
 
-struct AuthenticationViewContentBox: View {
-	static let horizontalPadding: CGFloat = 96
-	static let verticalPadding: CGFloat = 212
-	
+struct AuthenticationViewContentBox<Content: View>: View {
 	let title: String
+	let content: Content
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -20,13 +18,14 @@ struct AuthenticationViewContentBox: View {
 						.font(.muli(.bold, size: 28))
 						.foregroundColor(.darkGray)
 						.frame(maxWidth: .infinity, alignment: .leading)
-						.padding(.leading, 16)
 						.padding(.top, 35)
+					self.content
 					Spacer()
 				}
+				.padding(.horizontal, 16)
 				.frame(
-					width: geometry.size.width - Self.horizontalPadding,
-					height: geometry.size.height - Self.verticalPadding
+					width: geometry.size.width - 96,
+					height: geometry.size.height - 212
 				)
 			}
 		}
@@ -37,7 +36,8 @@ struct AuthenticationViewContentBox: View {
 struct AuthenticationViewContentBox_Previews: PreviewProvider {
 	static var previews: some View {
 		AuthenticationViewContentBox(
-			title: "Welcome back"
+			title: "Welcome back",
+			content: EmptyView()
 		)
 	}
 }
