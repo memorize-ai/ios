@@ -4,6 +4,8 @@ struct AuthenticationViewContentBox: View {
 	static let horizontalPadding: CGFloat = 96
 	static let verticalPadding: CGFloat = 212
 	
+	let title: String
+	
 	var body: some View {
 		GeometryReader { geometry in
 			CustomRectangle(
@@ -14,7 +16,12 @@ struct AuthenticationViewContentBox: View {
 				shadowYOffset: 5
 			) {
 				VStack {
-					Text("AuthenticationViewContentBox")
+					Text(self.title)
+						.font(.muli(.bold, size: 28))
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.padding(.leading, 16)
+						.padding(.top, 35)
+					Spacer()
 				}
 				.frame(
 					width: geometry.size.width - Self.horizontalPadding,
@@ -28,7 +35,9 @@ struct AuthenticationViewContentBox: View {
 #if DEBUG
 struct AuthenticationViewContentBox_Previews: PreviewProvider {
 	static var previews: some View {
-		AuthenticationViewContentBox()
+		AuthenticationViewContentBox(
+			title: "Welcome back"
+		)
 	}
 }
 #endif

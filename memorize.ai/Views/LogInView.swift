@@ -7,8 +7,7 @@ struct LogInView: View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
 				AuthenticationViewTopGradient([
-					.bluePurple,
-					.lightGreen
+					.bluePurple, .lightGreen
 				], fullHeight: geometry.size.height)
 				AuthenticationViewTopControls(
 					presentationMode: self.presentationMode,
@@ -16,7 +15,9 @@ struct LogInView: View {
 					alternativeButtonText: "SIGN UP",
 					alternativeButtonDestination: SignUpView()
 				)
-				AuthenticationViewContentBox()
+				AuthenticationViewContentBox(
+					title: "Welcome back"
+				)
 			}
 		}
 		.background(Color.lightGrayBackground)
