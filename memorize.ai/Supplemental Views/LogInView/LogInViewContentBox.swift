@@ -11,12 +11,14 @@ struct LogInViewContentBox: View {
 					CustomTextField($email, placeholder: "Email")
 					CustomTextField($password, placeholder: "Password")
 				}
-				CustomRectangle(backgroundColor: .neonGreen) {
-					Text("LOG IN")
-						.font(.muli(.bold, size: 14))
-						.foregroundColor(.white)
-						.frame(maxWidth: .infinity)
-						.frame(height: 40)
+				Button(action: {}) {
+					CustomRectangle(backgroundColor: .neonGreen) {
+						Text("LOG IN")
+							.font(.muli(.bold, size: 14))
+							.foregroundColor(.white)
+							.frame(maxWidth: .infinity)
+							.frame(height: 40)
+					}
 				}
 			}
 			NavigationLink(destination: ForgotPasswordView()) {
