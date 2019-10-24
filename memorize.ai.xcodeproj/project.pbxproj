@@ -68,6 +68,7 @@
 		4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */; };
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
+		4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -159,6 +160,7 @@
 		4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewContentBox.swift; sourceTree = "<group>"; };
 		4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewContentBox.swift; sourceTree = "<group>"; };
 		4DBA39672360ED0F00B91596 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				4DF2E0F4235E44C300468CD1 /* InitialView.swift */,
 				4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */,
 				4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */,
+				4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				4D1F9B21233EC99600693571 /* UserStore.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
+				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */,
 				4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */,
 				4D1F9BC723401A9800693571 /* Card.swift in Sources */,

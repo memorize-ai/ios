@@ -5,15 +5,24 @@ struct LogInViewContentBox: View {
 	@State var password = ""
 	
 	var body: some View {
-		VStack {
-			VStack(spacing: 12) {
-				CustomTextField($email, placeholder: "Email")
-				CustomTextField($password, placeholder: "Password")
+		VStack(spacing: 20) {
+			VStack(spacing: 32) {
+				VStack(spacing: 12) {
+					CustomTextField($email, placeholder: "Email")
+					CustomTextField($password, placeholder: "Password")
+				}
+				CustomRectangle(backgroundColor: .neonGreen) {
+					Text("LOG IN")
+						.font(.muli(.bold, size: 14))
+						.foregroundColor(.white)
+						.frame(maxWidth: .infinity)
+						.frame(height: 40)
+				}
 			}
-			CustomRectangle(backgroundColor: .neonGreen) {
-				Text("LOG IN")
-					.font(.muli(.bold, size: 14))
-					.foregroundColor(.white)
+			NavigationLink(destination: ForgotPasswordView()) {
+				Text("Forgot password?")
+					.font(.muli(.bold, size: 12))
+					.foregroundColor(.darkBlue)
 			}
 		}
 	}
