@@ -12,7 +12,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		HomeView()
-			.environmentObject(UserStore(User(
+			.environmentObject(UserStore(.init(
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com"
