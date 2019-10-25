@@ -4,17 +4,17 @@ final class LogInViewModel: ObservableObject {
 	@Published var email = "" {
 		didSet {
 			guard loadingState.didFail else { return }
-			loadingState = .default
+			loadingState = .none
 		}
 	}
 	@Published var password = "" {
 		didSet {
 			guard loadingState.didFail else { return }
-			loadingState = .default
+			loadingState = .none
 		}
 	}
 	@Published var user: User?
-	@Published var loadingState = LoadingState.default {
+	@Published var loadingState = LoadingState.none {
 		didSet {
 			shouldGoToHomeView = loadingState.didSucceed
 		}
