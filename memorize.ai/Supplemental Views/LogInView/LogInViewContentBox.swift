@@ -8,13 +8,22 @@ struct LogInViewContentBox: View {
 	}
 	
 	func logIn() {
+		model.loadingState = .loading()
+		let email = model.email
 		auth.signIn(
-			withEmail: model.email,
+			withEmail: email,
 			password: model.password
 		).done { result in
-			print(result)
+			self.model.user = .init(
+				id: result.user.uid,
+				name: result.user.displayName ?? "Unknown",
+				email: email
+			)
+			self.model.loadingState = .success()
 		}.catch { error in
-			print(error)
+			self.model.loadingState = .failure(
+				message: error.localizedDescription
+			)
 		}
 	}
 	
