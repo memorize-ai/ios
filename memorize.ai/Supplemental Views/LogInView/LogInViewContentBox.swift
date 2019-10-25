@@ -35,12 +35,14 @@ struct LogInViewContentBox: View {
 						$model.email,
 						placeholder: "Email",
 						contentType: .emailAddress,
-						keyboardType: .emailAddress
+						keyboardType: .emailAddress,
+						capitalization: .none
 					)
 					CustomTextField(
 						$model.password,
 						placeholder: "Password",
 						contentType: .password,
+						capitalization: .none,
 						secure: true
 					)
 				}

@@ -8,6 +8,7 @@ struct CustomTextField: View {
 	let placeholder: String
 	let contentType: UITextContentType
 	let keyboardType: UIKeyboardType
+	let capitalization: UITextAutocapitalizationType
 	let secure: Bool
 	let internalPadding: CGFloat
 	let textColor: Color
@@ -20,6 +21,7 @@ struct CustomTextField: View {
 		placeholder: String = "",
 		contentType: UITextContentType = .name,
 		keyboardType: UIKeyboardType = .default,
+		capitalization: UITextAutocapitalizationType = .sentences,
 		secure: Bool = false,
 		internalPadding: CGFloat = 10,
 		textColor: Color = .darkText,
@@ -31,6 +33,7 @@ struct CustomTextField: View {
 		self.placeholder = placeholder
 		self.contentType = contentType
 		self.keyboardType = keyboardType
+		self.capitalization = capitalization
 		self.secure = secure
 		self.internalPadding = internalPadding
 		self.textColor = textColor
@@ -54,6 +57,7 @@ struct CustomTextField: View {
 			.cornerRadius(cornerRadius)
 			.textContentType(contentType)
 			.keyboardType(keyboardType)
+			.autocapitalization(capitalization)
 	}
 }
 
