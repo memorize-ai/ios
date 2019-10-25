@@ -23,7 +23,6 @@
 		4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */; };
 		4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
-		4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -48,8 +47,6 @@
 		4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
-		4D71AD0D2340289E00C1C4FA /* Deck_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D71AD0C2340289E00C1C4FA /* Deck_Tests.swift */; };
-		4D71AD0F23402B3D00C1C4FA /* Main_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D71AD0E23402B3D00C1C4FA /* Main_UITests.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
 		4DA721CD23614863002008ED /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA721CC23614863002008ED /* CustomTextField.swift */; };
 		4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */; };
@@ -65,6 +62,8 @@
 		4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */; };
 		4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */; };
 		4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512623627D0300A83509 /* LogInViewModel.swift */; };
+		4DD25129236280F800A83509 /* Main_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD25128236280F800A83509 /* Main_UITests.swift */; };
+		4DD2512B2362812100A83509 /* Main_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512A2362812100A83509 /* Main_Tests.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -106,7 +105,6 @@
 		4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangles.swift; sourceTree = "<group>"; };
 		4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangle.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
-		4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Tests.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -131,8 +129,6 @@
 		4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewTopControls.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		4D71AD0C2340289E00C1C4FA /* Deck_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck_Tests.swift; sourceTree = "<group>"; };
-		4D71AD0E23402B3D00C1C4FA /* Main_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_UITests.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
 		4DA721CC23614863002008ED /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4DAA4F39233DE1A600EF7467 /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +149,8 @@
 		4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewBottomGradient.swift; sourceTree = "<group>"; };
 		4DD2512623627D0300A83509 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		4DD25128236280F800A83509 /* Main_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_UITests.swift; sourceTree = "<group>"; };
+		4DD2512A2362812100A83509 /* Main_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_Tests.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -379,8 +377,7 @@
 		4DAA4F55233DE1A800EF7467 /* memorize.aiTests */ = {
 			isa = PBXGroup;
 			children = (
-				4D71AD0C2340289E00C1C4FA /* Deck_Tests.swift */,
-				4D2ECD85235D94ED008312B1 /* Operator_Tests.swift */,
+				4DD2512A2362812100A83509 /* Main_Tests.swift */,
 				4DAA4F58233DE1A800EF7467 /* Info.plist */,
 			);
 			path = memorize.aiTests;
@@ -389,7 +386,7 @@
 		4DAA4F60233DE1A900EF7467 /* memorize.aiUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4D71AD0E23402B3D00C1C4FA /* Main_UITests.swift */,
+				4DD25128236280F800A83509 /* Main_UITests.swift */,
 				4DAA4F63233DE1A900EF7467 /* Info.plist */,
 			);
 			path = memorize.aiUITests;
@@ -522,6 +519,7 @@
 					};
 					4DAA4F51233DE1A800EF7467 = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 						TestTargetID = 4DAA4F38233DE1A600EF7467;
 					};
 					4DAA4F5C233DE1A800EF7467 = {
@@ -768,8 +766,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D71AD0D2340289E00C1C4FA /* Deck_Tests.swift in Sources */,
-				4D2ECD86235D94ED008312B1 /* Operator_Tests.swift in Sources */,
+				4DD2512B2362812100A83509 /* Main_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,7 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D71AD0F23402B3D00C1C4FA /* Main_UITests.swift in Sources */,
+				4DD25129236280F800A83509 /* Main_UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +969,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JUP7FZ7QC3;
 				INFOPLIST_FILE = memorize.aiTests/Info.plist;
@@ -983,6 +981,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ai.memorize.memorize-aiTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/memorize.ai.app/memorize.ai";
@@ -995,6 +994,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JUP7FZ7QC3;
 				INFOPLIST_FILE = memorize.aiTests/Info.plist;
