@@ -59,18 +59,20 @@ struct CustomRectangle_Previews: PreviewProvider {
 		VStack(spacing: 20) {
 			CustomRectangle {
 				Text("SIGN UP")
-					.frame(maxWidth: 132, maxHeight: 40)
+					.frame(maxWidth: 132)
+					.frame(height: 40)
 					.font(.muli(.bold, size: 14))
 					.foregroundColor(.darkBlue)
 			}
 			CustomRectangle(borderColor: .darkBlue, borderWidth: 3) {
 				Text("SIGN UP")
-					.frame(maxWidth: 132, maxHeight: 40)
+					.frame(maxWidth: 132)
+					.frame(height: 40)
 					.font(.muli(.bold, size: 14))
 					.foregroundColor(.darkBlue)
 			}
 		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.align(to: .center)
 		.background(Color.gray)
 		.edgesIgnoringSafeArea(.all)
 	}

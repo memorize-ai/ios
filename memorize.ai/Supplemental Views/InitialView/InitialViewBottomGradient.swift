@@ -5,22 +5,20 @@ struct InitialViewBottomGradient: View {
 	static let midHeight: CGFloat = 91.64
 	
 	var body: some View {
-		GeometryReader { geometry in
-			Path { path in
-				let width = geometry.size.width
-				path.addLines([
-					.init(x: 0, y: Self.height - Self.midHeight),
-					.init(x: width, y: 0),
-					.init(x: width, y: Self.height),
-					.init(x: 0, y: Self.height)
-				])
-			}
-			.fill(LinearGradient(
-				gradient: .init(colors: [.lightBlue, .mediumBlue]),
-				startPoint: .top,
-				endPoint: .bottom
-			))
+		Path { path in
+			let width = SCREEN_SIZE.width
+			path.addLines([
+				.init(x: 0, y: Self.height - Self.midHeight),
+				.init(x: width, y: 0),
+				.init(x: width, y: Self.height),
+				.init(x: 0, y: Self.height)
+			])
 		}
+		.fill(LinearGradient(
+			gradient: .init(colors: [.lightBlue, .mediumBlue]),
+			startPoint: .top,
+			endPoint: .bottom
+		))
 		.frame(height: Self.height)
 	}
 }

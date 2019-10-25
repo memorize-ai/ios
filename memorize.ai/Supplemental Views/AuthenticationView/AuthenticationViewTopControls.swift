@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 	@Binding var presentationMode: PresentationMode
-
+	
 	let alternativeMessage: String
 	let alternativeButtonText: String
 	let alternativeButtonDestination: AlternativeDestination

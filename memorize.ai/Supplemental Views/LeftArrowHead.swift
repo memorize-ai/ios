@@ -29,7 +29,7 @@ struct LeftArrowHead: View {
 struct LeftArrowHead_Previews: PreviewProvider {
 	static var previews: some View {
 		LeftArrowHead(height: 50)
-			.frame(maxWidth: .infinity, maxHeight: .infinity)
+			.align(to: .center)
 			.background(Color.gray)
 			.edgesIgnoringSafeArea(.all)
 	}

@@ -4,15 +4,19 @@ struct InitialView: View {
 	var body: some View {
 		NavigationView {
 			VStack {
-				ZStack {
-					InitialViewStackedRectangles()
-					InitialViewPaginatedFeatures()
+				GeometryReader { _ in
+					ZStack {
+						InitialViewStackedRectangles()
+							.padding(.top, -25)
+						InitialViewPaginatedFeatures()
+					}
+					.align(to: .top)
 				}
-				Spacer()
 				ZStack(alignment: .bottom) {
 					InitialViewBottomGradient()
 					InitialViewBottomButtons()
 				}
+				.align(to: .bottom)
 			}
 			.background(Color.lightGrayBackground)
 			.edgesIgnoringSafeArea(.top)

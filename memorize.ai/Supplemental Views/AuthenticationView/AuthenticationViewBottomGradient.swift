@@ -5,15 +5,13 @@ struct AuthenticationViewBottomGradient: View {
 	static let aspectRatio: CGFloat = 54 / 251.93
 	
 	let gradient: [Color]
-	let screenWidth: CGFloat
 	
-	init(_ gradient: [Color], screenWidth: CGFloat) {
+	init(_ gradient: Color...) {
 		self.gradient = gradient
-		self.screenWidth = screenWidth
 	}
 	
 	var body: some View {
-		let width = screenWidth * Self.screenToWidthRatio
+		let width = SCREEN_SIZE.width * Self.screenToWidthRatio
 		let height = width * Self.aspectRatio
 		return Path { path in
 			path.addLines([
@@ -35,10 +33,10 @@ struct AuthenticationViewBottomGradient: View {
 struct AuthenticationViewBottomGradient_Previews: PreviewProvider {
 	static var previews: some View {
 		GeometryReader { geometry in
-			AuthenticationViewBottomGradient([
+			AuthenticationViewBottomGradient(
 				.lightGreen,
 				.bluePurple
-			], screenWidth: geometry.size.width)
+			)
 		}
 	}
 }

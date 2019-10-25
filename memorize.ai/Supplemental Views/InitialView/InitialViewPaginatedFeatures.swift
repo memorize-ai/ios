@@ -9,31 +9,27 @@ struct InitialViewPaginatedFeatures: View {
 	
 	@State var activePageIndex = 0
 	
-	func pagingScrollView(_ geometry: GeometryProxy) -> some View {
-		let screenWidth = geometry.size.width
-		let tileWidth = min(Self.maxTileWidth, screenWidth - 32)
+	var pagingScrollView: some View {
+		let tileWidth = min(Self.maxTileWidth, SCREEN_SIZE.width - 32)
 		let tileHeight = tileWidth * Self.tileAspectRatio
 		return PagingScrollView(
 			activePageIndex: $activePageIndex,
 			itemCount: Self.pageCount,
-			pageWidth: screenWidth,
+			pageWidth: SCREEN_SIZE.width,
 			tileWidth: tileWidth,
 			tilePadding: Self.tilePadding
 		) {
 			InitialViewFeaturePage(
-				width: tileWidth,
 				height: tileHeight,
 				image: .init("Feature"),
 				title: "The ultimate memorization tool"
 			)
 			InitialViewFeaturePage(
-				width: tileWidth,
 				height: tileHeight,
 				image: .init("Feature"),
 				title: "The ultimate memorization tool"
 			)
 			InitialViewFeaturePage(
-				width: tileWidth,
 				height: tileHeight,
 				image: .init("Feature"),
 				title: "The ultimate memorization tool"
@@ -42,15 +38,14 @@ struct InitialViewPaginatedFeatures: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: -25) {
-			GeometryReader(content: pagingScrollView)
+		VStack(spacing: 170) {
+			pagingScrollView
+				.padding(.top, 300)
 			InitialViewPaginatedFeaturesIndicator(
 				pageCount: Self.pageCount,
 				activePageIndex: activePageIndex
 			)
-			.padding(.top, 160)
 		}
-		.padding(.top, 200)
 	}
 }
 

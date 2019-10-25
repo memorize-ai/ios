@@ -8,7 +8,8 @@ struct InitialViewBottomButtons: View {
 					Text("SIGN UP")
 						.font(.muli(.bold, size: 14))
 						.foregroundColor(.darkBlue)
-						.frame(maxWidth: 300, maxHeight: 40)
+						.frame(maxWidth: 300)
+						.frame(height: 40)
 				}
 			}
 			NavigationLink(destination: LogInView()) {
@@ -20,7 +21,8 @@ struct InitialViewBottomButtons: View {
 					Text("LOG IN")
 						.font(.muli(.bold, size: 14))
 						.foregroundColor(.white)
-						.frame(maxWidth: 300, maxHeight: 40)
+						.frame(maxWidth: 300)
+						.frame(height: 40)
 				}
 			}
 		}

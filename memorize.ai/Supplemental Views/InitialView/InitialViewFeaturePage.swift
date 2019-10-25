@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct InitialViewFeaturePage: View {
-	let width: CGFloat
 	let height: CGFloat
 	let image: Image
 	let title: String
@@ -36,14 +35,11 @@ struct InitialViewFeaturePage: View {
 #if DEBUG
 struct InitialViewFeaturePage_Previews: PreviewProvider {
 	static var previews: some View {
-		GeometryReader { geometry in
-			InitialViewFeaturePage(
-				width: geometry.size.width - 32,
-				height: (geometry.size.width - 32) * InitialViewPaginatedFeatures.tileAspectRatio,
-				image: .init("Feature"),
-				title: "The ultimate memorization tool"
-			)
-		}
+		InitialViewFeaturePage(
+			height: (SCREEN_SIZE.width - 32) * InitialViewPaginatedFeatures.tileAspectRatio,
+			image: .init("Feature"),
+			title: "The ultimate memorization tool"
+		)
 	}
 }
 #endif

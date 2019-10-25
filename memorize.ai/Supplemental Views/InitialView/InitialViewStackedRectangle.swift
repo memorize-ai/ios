@@ -5,9 +5,9 @@ struct InitialViewStackedRectangle: View {
 	static let contentHeight: CGFloat = 55
 	
 	let color: Color
-	let width: CGFloat
 	
 	var body: some View {
+		let width = SCREEN_SIZE.width
 		let height = width * Self.aspectRatio
 		return Path { path in
 			path.addLines([
@@ -25,7 +25,7 @@ struct InitialViewStackedRectangle: View {
 #if DEBUG
 struct InitialViewStackedRectangle_Previews: PreviewProvider {
 	static var previews: some View {
-		InitialViewStackedRectangle(color: .darkBlue, width: 199)
+		InitialViewStackedRectangle(color: .darkBlue)
 	}
 }
 #endif
