@@ -15,6 +15,8 @@ struct CustomTextField: View {
 	let font: Font
 	let backgroundColor: Color
 	let cornerRadius: CGFloat
+	let borderColor: Color
+	let borderWidth: CGFloat
 	
 	init(
 		_ text: Binding<String>,
@@ -27,7 +29,9 @@ struct CustomTextField: View {
 		textColor: Color = .darkText,
 		font: Font = .muli(.regular, size: 14),
 		backgroundColor: Color = Self.defaultBackgroundColor,
-		cornerRadius: CGFloat = 5
+		cornerRadius: CGFloat = 5,
+		borderColor: Color = Self.defaultBackgroundColor,
+		borderWidth: CGFloat = 0
 	) {
 		_text = text
 		self.placeholder = placeholder
@@ -40,6 +44,8 @@ struct CustomTextField: View {
 		self.font = font
 		self.backgroundColor = backgroundColor
 		self.cornerRadius = cornerRadius
+		self.borderColor = borderColor
+		self.borderWidth = borderWidth
 	}
 	
 	var textField: some View {
@@ -58,6 +64,10 @@ struct CustomTextField: View {
 			.textContentType(contentType)
 			.keyboardType(keyboardType)
 			.autocapitalization(capitalization)
+			.overlay(
+				RoundedRectangle(cornerRadius: cornerRadius)
+					.stroke(borderColor, lineWidth: borderWidth)
+			)
 	}
 }
 

@@ -7,6 +7,10 @@ struct LogInViewContentBox: View {
 		model.email.isEmpty || model.password.isEmpty
 	}
 	
+	var textFieldBorderWidth: CGFloat {
+		model.loadingState.didFail ? 1 : 0
+	}
+	
 	var logInButtonContent: some View {
 		model.loadingState.isLoading
 			? AnyView(
@@ -43,14 +47,18 @@ struct LogInViewContentBox: View {
 						placeholder: "Email",
 						contentType: .emailAddress,
 						keyboardType: .emailAddress,
-						capitalization: .none
+						capitalization: .none,
+						borderColor: .darkRed,
+						borderWidth: textFieldBorderWidth
 					)
 					CustomTextField(
 						$model.password,
 						placeholder: "Password",
 						contentType: .password,
 						capitalization: .none,
-						secure: true
+						secure: true,
+						borderColor: .darkRed,
+						borderWidth: textFieldBorderWidth
 					)
 				}
 				Button(action: model.logIn) {

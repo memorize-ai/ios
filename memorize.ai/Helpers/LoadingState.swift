@@ -15,9 +15,18 @@ enum LoadingState {
 		}
 	}
 	
-	var wasSuccessful: Bool {
+	var didSucceed: Bool {
 		switch self {
 		case .success(date: _):
+			return true
+		default:
+			return false
+		}
+	}
+	
+	var didFail: Bool {
+		switch self {
+		case .failure(date: _, message: _):
 			return true
 		default:
 			return false

@@ -1,12 +1,22 @@
 import Combine
 
 final class LogInViewModel: ObservableObject {
-	@Published var email = ""
-	@Published var password = ""
+	@Published var email = "" {
+		didSet {
+			guard loadingState.didFail else { return }
+			loadingState = .default
+		}
+	}
+	@Published var password = "" {
+		didSet {
+			guard loadingState.didFail else { return }
+			loadingState = .default
+		}
+	}
 	@Published var user: User?
 	@Published var loadingState = LoadingState.default {
 		didSet {
-			shouldGoToHomeView = loadingState.wasSuccessful
+			shouldGoToHomeView = loadingState.didSucceed
 		}
 	}
 	@Published var shouldGoToHomeView = false

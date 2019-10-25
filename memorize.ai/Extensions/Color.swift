@@ -15,4 +15,5 @@ extension Color {
 	static let grayShadow = black.opacity(0.0787)
 	static let darkText = Self("DarkText")
 	static let disabledButtonBackground = Self("DisabledButtonBackground")
+	static let darkRed = Self("DarkRed")
 }
