@@ -64,6 +64,13 @@ struct LogInViewContentBox: View {
 					.font(.muli(.bold, size: 12))
 					.foregroundColor(.darkBlue)
 			}
+			if model.user != nil {
+				NavigateTo(
+					HomeView()
+						.environmentObject(UserStore(model.user!)),
+					when: $model.shouldGoToHomeView
+				)
+			}
 		}
 	}
 }

@@ -66,6 +66,8 @@
 		4DD2512B2362812100A83509 /* Main_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512A2362812100A83509 /* Main_Tests.swift */; };
 		4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */; };
 		4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */; };
+		4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD52362D90F0007E3E6 /* HomeView.swift */; };
+		4DD34CD82362E33A0007E3E6 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD72362E33A0007E3E6 /* UserStore.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -155,6 +157,8 @@
 		4DD2512A2362812100A83509 /* Main_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_Tests.swift; sourceTree = "<group>"; };
 		4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTo.swift; sourceTree = "<group>"; };
+		4DD34CD52362D90F0007E3E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4DD34CD72362E33A0007E3E6 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -222,7 +226,7 @@
 		4D1F9B1B233EC5E400693571 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4D1F9B22233ECA0E00693571 /* User.swift */,
+				4DD34CD92362E3930007E3E6 /* User */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,6 +313,7 @@
 				4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */,
 				4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */,
 				4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */,
+				4DD34CD52362D90F0007E3E6 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -413,6 +418,15 @@
 				4DD2512623627D0300A83509 /* LogInViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		4DD34CD92362E3930007E3E6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				4D1F9B22233ECA0E00693571 /* User.swift */,
+				4DD34CD72362E33A0007E3E6 /* UserStore.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
@@ -741,6 +755,7 @@
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
+				4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */,
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */,
@@ -752,6 +767,7 @@
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
+				4DD34CD82362E33A0007E3E6 /* UserStore.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */,
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
