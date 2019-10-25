@@ -7,7 +7,13 @@ struct LogInView: View {
 	
 	var body: some View {
 		GeometryReader { geometry in
-			VStack {
+			ZStack {
+				AuthenticationViewBottomGradient([
+					.lightGreen,
+					.bluePurple
+				], screenWidth: geometry.size.width)
+				.frame(maxWidth: .infinity, alignment: .trailing)
+				.frame(maxHeight: .infinity, alignment: .bottom)
 				ZStack(alignment: .top) {
 					AuthenticationViewTopGradient([
 						.bluePurple,
@@ -24,11 +30,6 @@ struct LogInView: View {
 						content: LogInViewContentBox(model: self.model)
 					)
 				}
-				AuthenticationViewBottomGradient([
-					.lightGreen,
-					.bluePurple
-				], screenWidth: geometry.size.width)
-				.frame(maxWidth: .infinity, alignment: .trailing)
 			}
 		}
 		.background(Color.lightGrayBackground)
