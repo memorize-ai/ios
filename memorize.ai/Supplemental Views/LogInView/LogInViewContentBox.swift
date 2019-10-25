@@ -43,6 +43,17 @@ struct LogInViewContentBox: View {
 			)
 	}
 	
+	var navigateToHomeView: some View {
+		guard let user = model.user else { return AnyView(EmptyView()) }
+		return AnyView(
+			NavigateTo(
+				HomeView()
+					.environmentObject(UserStore(user)),
+				when: $model.shouldGoToHomeView
+			)
+		)
+	}
+	
 	var body: some View {
 		VStack(spacing: 20) {
 			VStack(spacing: 32) {
@@ -78,13 +89,7 @@ struct LogInViewContentBox: View {
 					.font(.muli(.bold, size: 12))
 					.foregroundColor(.darkBlue)
 			}
-			if model.user != nil {
-				NavigateTo(
-					HomeView()
-						.environmentObject(UserStore(model.user!)),
-					when: $model.shouldGoToHomeView
-				)
-			}
+			navigateToHomeView
 		}
 	}
 }
