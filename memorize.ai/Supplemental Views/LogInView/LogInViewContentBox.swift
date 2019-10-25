@@ -7,10 +7,6 @@ struct LogInViewContentBox: View {
 		model.email.isEmpty || model.password.isEmpty
 	}
 	
-	var textFieldBorderWidth: CGFloat {
-		model.loadingState.didFail ? 1 : 0
-	}
-	
 	var logInButtonContent: some View {
 		model.loadingState.isLoading
 			? AnyView(
@@ -49,7 +45,7 @@ struct LogInViewContentBox: View {
 						keyboardType: .emailAddress,
 						capitalization: .none,
 						borderColor: .darkRed,
-						borderWidth: textFieldBorderWidth
+						borderWidth: model.shouldShowEmailRedBorder ? 1 : 0
 					)
 					CustomTextField(
 						$model.password,
@@ -58,7 +54,7 @@ struct LogInViewContentBox: View {
 						capitalization: .none,
 						secure: true,
 						borderColor: .darkRed,
-						borderWidth: textFieldBorderWidth
+						borderWidth: model.shouldShowPasswordRedBorder ? 1 : 0
 					)
 				}
 				Button(action: model.logIn) {
@@ -71,6 +67,18 @@ struct LogInViewContentBox: View {
 					}
 				}
 				.disabled(isLogInButtonDisabled)
+				.alert(isPresented: $model.shouldShowErrorModal) {
+					guard let errorModal = model.errorModal else {
+						return .init(
+							title: .init(LogInViewModel.unknownErrorTitle),
+							message: .init(LogInViewModel.unknownErrorDescription)
+						)
+					}
+					return .init(
+						title: .init(errorModal.title),
+						message: .init(errorModal.description)
+					)
+				}
 			}
 			NavigationLink(destination: ForgotPasswordView()) {
 				Text("Forgot password?")

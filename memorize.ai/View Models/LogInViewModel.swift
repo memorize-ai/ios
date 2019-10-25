@@ -1,23 +1,34 @@
 import Combine
+import FirebaseAuth
 
 final class LogInViewModel: ObservableObject {
+	static let unknownErrorTitle = "Unknown error"
+	static let unknownErrorDescription = "Sorry about that! Please try again"
+	
 	@Published var email = "" {
 		didSet {
 			guard loadingState.didFail else { return }
-			loadingState = .none
+			shouldShowEmailRedBorder = false
 		}
 	}
 	@Published var password = "" {
 		didSet {
 			guard loadingState.didFail else { return }
-			loadingState = .none
+			shouldShowPasswordRedBorder = false
 		}
 	}
-	@Published var user: User?
+	@Published var shouldShowEmailRedBorder = false
+	@Published var shouldShowPasswordRedBorder = false
 	@Published var loadingState = LoadingState.none
+	@Published var shouldShowErrorModal = false
+	
+	var user: User?
+	var errorModal: (title: String, description: String)?
 	
 	func logIn() {
 		loadingState = .loading()
+		shouldShowEmailRedBorder = false
+		shouldShowPasswordRedBorder = false
 		auth.signIn(
 			withEmail: email,
 			password: password
@@ -28,9 +39,63 @@ final class LogInViewModel: ObservableObject {
 				email: self.email
 			)
 			self.loadingState = .success()
-		}.catch { error in
-			self.loadingState = .failure(
-				message: error.localizedDescription
+		}.catch(failLogIn)
+	}
+	
+	func failLogIn(error: Error) {
+		loadingState = .failure(message: error.localizedDescription)
+		handleError(code: AuthErrorCode(rawValue: error._code))
+		shouldShowErrorModal = true
+	}
+	
+	func applyError(
+		title: String,
+		description: String,
+		invalidEmail: Bool,
+		invalidPassword: Bool
+	) {
+		errorModal = (title, description)
+		shouldShowEmailRedBorder = invalidEmail
+		shouldShowPasswordRedBorder = invalidPassword
+		shouldShowErrorModal = true
+	}
+	
+	func handleError(code errorCode: AuthErrorCode?) {
+		switch errorCode {
+		case .invalidEmail:
+			applyError(
+				title: "Invalid email",
+				description: "Your email should be of the form xyz@xyz.xyz",
+				invalidEmail: true,
+				invalidPassword: false
+			)
+		case .networkError:
+			applyError(
+				title: "Network error",
+				description: "There was a problem connecting to our servers. Please try again",
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		case .userNotFound:
+			applyError(
+				title: "Email not found",
+				description: "There is no user with the email \(email). Would you like to sign up instead?",
+				invalidEmail: true,
+				invalidPassword: false
+			)
+		case .wrongPassword:
+			applyError(
+				title: "Incorrect passwod",
+				description: "The password you entered was incorrect",
+				invalidEmail: false,
+				invalidPassword: true
+			)
+		default:
+			applyError(
+				title: Self.unknownErrorTitle,
+				description: Self.unknownErrorDescription,
+				invalidEmail: false,
+				invalidPassword: false
 			)
 		}
 	}
