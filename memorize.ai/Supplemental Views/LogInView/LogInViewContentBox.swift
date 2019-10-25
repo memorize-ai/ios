@@ -27,6 +27,22 @@ struct LogInViewContentBox: View {
 		}
 	}
 	
+	var logInButtonContent: some View {
+		model.loadingState.isLoading
+			? AnyView(
+				ActivityIndicator()
+					.frame(maxWidth: .infinity)
+					.frame(height: 40)
+			)
+			: AnyView(
+				Text("LOG IN")
+					.font(.muli(.bold, size: 14))
+					.foregroundColor(.white)
+					.frame(maxWidth: .infinity)
+					.frame(height: 40)
+			)
+	}
+	
 	var body: some View {
 		VStack(spacing: 20) {
 			VStack(spacing: 32) {
@@ -52,11 +68,7 @@ struct LogInViewContentBox: View {
 							? .disabledButtonBackground
 							: .neonGreen
 					) {
-						Text("LOG IN")
-							.font(.muli(.bold, size: 14))
-							.foregroundColor(.white)
-							.frame(maxWidth: .infinity)
-							.frame(height: 40)
+						logInButtonContent
 					}
 				}
 				.disabled(isLogInButtonDisabled)
