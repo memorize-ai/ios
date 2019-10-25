@@ -7,26 +7,6 @@ struct LogInViewContentBox: View {
 		model.email.isEmpty || model.password.isEmpty
 	}
 	
-	func logIn() {
-		model.loadingState = .loading()
-		let email = model.email
-		auth.signIn(
-			withEmail: email,
-			password: model.password
-		).done { result in
-			self.model.user = .init(
-				id: result.user.uid,
-				name: result.user.displayName ?? "Unknown",
-				email: email
-			)
-			self.model.loadingState = .success()
-		}.catch { error in
-			self.model.loadingState = .failure(
-				message: error.localizedDescription
-			)
-		}
-	}
-	
 	var logInButtonContent: some View {
 		model.loadingState.isLoading
 			? AnyView(
@@ -73,7 +53,7 @@ struct LogInViewContentBox: View {
 						secure: true
 					)
 				}
-				Button(action: logIn) {
+				Button(action: model.logIn) {
 					CustomRectangle(
 						backgroundColor: isLogInButtonDisabled
 							? .disabledButtonBackground
