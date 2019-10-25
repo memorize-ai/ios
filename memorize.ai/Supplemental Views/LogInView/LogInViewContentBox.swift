@@ -4,6 +4,10 @@ struct LogInViewContentBox: View {
 	@State var email = ""
 	@State var password = ""
 	
+	var isLogInButtonDisabled: Bool {
+		email.isEmpty || password.isEmpty
+	}
+	
 	var body: some View {
 		VStack(spacing: 20) {
 			VStack(spacing: 32) {
@@ -22,7 +26,11 @@ struct LogInViewContentBox: View {
 					)
 				}
 				Button(action: {}) {
-					CustomRectangle(backgroundColor: .neonGreen) {
+					CustomRectangle(
+						backgroundColor: isLogInButtonDisabled
+							? .disabledButtonBackground
+							: .neonGreen
+					) {
 						Text("LOG IN")
 							.font(.muli(.bold, size: 14))
 							.foregroundColor(.white)
@@ -30,6 +38,7 @@ struct LogInViewContentBox: View {
 							.frame(height: 40)
 					}
 				}
+				.disabled(isLogInButtonDisabled)
 			}
 			NavigationLink(destination: ForgotPasswordView()) {
 				Text("Forgot password?")
