@@ -14,12 +14,7 @@ final class LogInViewModel: ObservableObject {
 		}
 	}
 	@Published var user: User?
-	@Published var loadingState = LoadingState.none {
-		didSet {
-			shouldGoToHomeView = loadingState.didSucceed
-		}
-	}
-	@Published var shouldGoToHomeView = false
+	@Published var loadingState = LoadingState.none
 	
 	func logIn() {
 		loadingState = .loading()

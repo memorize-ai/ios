@@ -33,7 +33,7 @@ struct LogInViewContentBox: View {
 			NavigateTo(
 				HomeView()
 					.environmentObject(UserStore(user)),
-				when: $model.shouldGoToHomeView
+				when: $model.loadingState.didSucceed
 			)
 		)
 	}
