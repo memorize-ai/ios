@@ -1,11 +1,21 @@
 import SwiftUI
 
 struct LogInViewContentBox: View {
-	@State var email = ""
-	@State var password = ""
+	@ObservedObject var model: LogInViewModel
 	
 	var isLogInButtonDisabled: Bool {
-		email.isEmpty || password.isEmpty
+		model.email.isEmpty || model.password.isEmpty
+	}
+	
+	func logIn() {
+		auth.signIn(
+			withEmail: model.email,
+			password: model.password
+		).done { result in
+			print(result)
+		}.catch { error in
+			print(error)
+		}
 	}
 	
 	var body: some View {
@@ -13,19 +23,19 @@ struct LogInViewContentBox: View {
 			VStack(spacing: 32) {
 				VStack(spacing: 12) {
 					CustomTextField(
-						$email,
+						$model.email,
 						placeholder: "Email",
 						contentType: .emailAddress,
 						keyboardType: .emailAddress
 					)
 					CustomTextField(
-						$password,
+						$model.password,
 						placeholder: "Password",
 						contentType: .password,
 						secure: true
 					)
 				}
-				Button(action: {}) {
+				Button(action: logIn) {
 					CustomRectangle(
 						backgroundColor: isLogInButtonDisabled
 							? .disabledButtonBackground
@@ -52,7 +62,7 @@ struct LogInViewContentBox: View {
 #if DEBUG
 struct LogInViewContentBox_Previews: PreviewProvider {
 	static var previews: some View {
-		LogInViewContentBox()
+		LogInViewContentBox(model: LogInViewModel())
 	}
 }
 #endif

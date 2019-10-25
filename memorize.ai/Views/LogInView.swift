@@ -2,6 +2,8 @@ import SwiftUI
 
 struct LogInView: View {
 	@Environment(\.presentationMode) var presentationMode
+
+	@ObservedObject var model = LogInViewModel()
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -19,7 +21,7 @@ struct LogInView: View {
 					)
 					AuthenticationViewContentBox(
 						title: "Welcome back",
-						content: LogInViewContentBox()
+						content: LogInViewContentBox(model: self.model)
 					)
 				}
 				AuthenticationViewBottomGradient([
