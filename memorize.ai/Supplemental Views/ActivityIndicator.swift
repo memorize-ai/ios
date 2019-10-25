@@ -27,10 +27,7 @@ struct ActivityIndicator: View {
 		let dimension = radius * 2
 		return Path { path in
 			path.addArc(
-				center: .init(
-					x: radius,
-					y: radius
-				),
+				center: .init(x: radius, y: radius),
 				radius: radius,
 				startAngle: .degrees(0),
 				endAngle: .degrees(degrees),
