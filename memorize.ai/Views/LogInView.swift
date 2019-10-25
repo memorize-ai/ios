@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LogInView: View {
 	@Environment(\.presentationMode) var presentationMode
-
+	
 	@ObservedObject var model = LogInViewModel()
 	
 	var body: some View {
