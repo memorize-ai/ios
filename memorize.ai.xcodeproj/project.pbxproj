@@ -65,6 +65,7 @@
 		4DD25129236280F800A83509 /* Main_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD25128236280F800A83509 /* Main_UITests.swift */; };
 		4DD2512B2362812100A83509 /* Main_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512A2362812100A83509 /* Main_Tests.swift */; };
 		4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */; };
+		4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -153,6 +154,7 @@
 		4DD25128236280F800A83509 /* Main_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_UITests.swift; sourceTree = "<group>"; };
 		4DD2512A2362812100A83509 /* Main_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_Tests.swift; sourceTree = "<group>"; };
 		4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTo.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */,
 				4DA721CC23614863002008ED /* CustomTextField.swift */,
 				4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */,
+				4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */,
 				4D17BDEE23614DE700AF1989 /* LogInView */,
 				4DAD2CDB2361151C001DA77B /* AuthenticationView */,
 				4D690254235FAC7C00533E20 /* InitialView */,
@@ -752,6 +755,7 @@
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */,
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
+				4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */,
 				4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */,
 				4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
