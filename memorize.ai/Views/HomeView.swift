@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct HomeView: View {
+	@EnvironmentObject var currentUserStore: UserStore
+	
 	var body: some View {
-		Text("HomeView")
+		Text("Hello, \(currentUserStore.user.name)")
 	}
 }
 
@@ -10,6 +12,11 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		HomeView()
+			.environmentObject(UserStore(User(
+				id: "0",
+				name: "Ken Mueller",
+				email: "kenmueller0@gmail.com"
+			)))
 	}
 }
 #endif
