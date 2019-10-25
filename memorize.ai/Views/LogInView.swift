@@ -18,16 +18,17 @@ struct LogInView: View {
 					.lightGreen
 				)
 				AuthenticationViewTopControls(
-					presentationMode: self.presentationMode,
+					presentationMode: presentationMode,
 					alternativeMessage: "Don't have an account yet?",
 					alternativeButtonText: "SIGN UP",
 					alternativeButtonDestination: SignUpView()
 				)
-				AuthenticationViewContentBox(
-					title: "Welcome back",
-					content: LogInViewContentBox(model: self.model)
-				)
 			}
+			.align(to: .top)
+			AuthenticationViewContentBox(
+				title: "Welcome back",
+				content: LogInViewContentBox(model: model)
+			)
 		}
 		.background(Color.lightGrayBackground)
 		.edgesIgnoringSafeArea(.all)

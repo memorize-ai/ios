@@ -19,14 +19,14 @@ struct AuthenticationViewTopGradient: View {
 		Path { path in
 			let width = SCREEN_SIZE.width
 			path.addLines([
-				.init(x: 0, y: self.height),
+				.init(x: 0, y: height),
 				.init(x: 0, y: 0),
 				.init(x: width, y: 0),
-				.init(x: width, y: self.height - Self.contentHeightDifference)
+				.init(x: width, y: height - Self.contentHeightDifference)
 			])
 		}
 		.fill(LinearGradient(
-			gradient: .init(colors: self.gradient),
+			gradient: .init(colors: gradient),
 			startPoint: .top,
 			endPoint: .bottom
 		))
