@@ -3,11 +3,11 @@ import SwiftUI
 struct InitialView: View {
 	var body: some View {
 		NavigationView {
-			VStack {
+			ZStack {
 				GeometryReader { _ in
 					ZStack {
 						InitialViewStackedRectangles()
-							.padding(.top, -25)
+							.padding(.top, -140)
 						InitialViewPaginatedFeatures()
 					}
 					.align(to: .top)

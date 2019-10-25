@@ -38,9 +38,9 @@ struct InitialViewPaginatedFeatures: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 170) {
+		VStack(spacing: -15) {
 			pagingScrollView
-				.padding(.top, 300)
+				.padding(.top, 220)
 			InitialViewPaginatedFeaturesIndicator(
 				pageCount: Self.pageCount,
 				activePageIndex: activePageIndex

@@ -23,7 +23,6 @@ struct InitialViewStackedRectangles: View {
 					.padding(.top, -115)
 				}
 			}
-//			.padding(.top, 30)
 			HStack {
 				VStack(alignment: .leading) {
 					InitialViewStackedRectangle(
