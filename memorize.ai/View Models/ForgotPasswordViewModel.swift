@@ -38,11 +38,7 @@ final class ForgotPasswordViewModel: ObservableObject {
 		handleError(code: AuthErrorCode(error: error))
 	}
 	
-	func applyError(
-		title: String,
-		description: String,
-		invalidEmail: Bool
-	) {
+	func applyError(title: String, description: String, invalidEmail: Bool) {
 		errorModal = (title, description)
 		shouldShowEmailRedBorder = invalidEmail
 		shouldShowErrorModal = true
