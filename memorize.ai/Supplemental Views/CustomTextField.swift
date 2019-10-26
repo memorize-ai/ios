@@ -48,26 +48,26 @@ struct CustomTextField: View {
 		self.borderWidth = borderWidth
 	}
 	
-	var textField: some View {
-		secure
-			? AnyView(SecureField(placeholder, text: $text))
-			: AnyView(TextField(placeholder, text: $text))
-	}
-	
 	var body: some View {
-		textField
-			.padding(internalPadding)
-			.background(backgroundColor)
-			.foregroundColor(textColor)
-			.font(font)
-			.cornerRadius(cornerRadius)
-			.textContentType(contentType)
-			.keyboardType(keyboardType)
-			.autocapitalization(capitalization)
-			.overlay(
-				RoundedRectangle(cornerRadius: cornerRadius)
-					.stroke(borderColor, lineWidth: borderWidth)
-			)
+		Group {
+			if secure {
+				SecureField(placeholder, text: $text)
+			} else {
+				TextField(placeholder, text: $text)
+			}
+		}
+		.padding(internalPadding)
+		.background(backgroundColor)
+		.foregroundColor(textColor)
+		.font(font)
+		.cornerRadius(cornerRadius)
+		.textContentType(contentType)
+		.keyboardType(keyboardType)
+		.autocapitalization(capitalization)
+		.overlay(
+			RoundedRectangle(cornerRadius: cornerRadius)
+				.stroke(borderColor, lineWidth: borderWidth)
+		)
 	}
 }
 

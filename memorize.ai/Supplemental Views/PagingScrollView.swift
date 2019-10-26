@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct PagingScrollView: View {
+struct PagingScrollView<PageContent: View>: View {
 	@State var dragOffset: CGFloat = 0
 	@Binding var activePageIndex: Int
-	let items: [AnyView]
+	let items: [PageContent]
 	let pageWidth: CGFloat
 	let tileWidth: CGFloat
 	private let tilePadding: CGFloat
@@ -14,15 +14,15 @@ struct PagingScrollView: View {
 	private let itemCount: Int
 	private let scrollDampingFactor: CGFloat = 2 / 3
 	
-	init<Content: View>(
+	init(
 		activePageIndex: Binding<Int>,
 		itemCount: Int,
 		pageWidth: CGFloat,
 		tileWidth: CGFloat,
 		tilePadding: CGFloat,
-		@ViewBuilder content: () -> Content
+		@ViewBuilder content: () -> PageContent
 	) {
-		items = [AnyView(content())]
+		items = [content()]
 		_activePageIndex = activePageIndex
 		self.pageWidth = pageWidth
 		self.tileWidth = tileWidth
