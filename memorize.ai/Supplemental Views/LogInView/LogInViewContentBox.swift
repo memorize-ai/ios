@@ -45,7 +45,7 @@ struct LogInViewContentBox: View {
 						keyboardType: .emailAddress,
 						capitalization: .none,
 						borderColor: .darkRed,
-						borderWidth: model.shouldShowEmailRedBorder ? 1 : 0
+						borderWidth: *model.shouldShowEmailRedBorder
 					)
 					CustomTextField(
 						$model.password,
@@ -54,7 +54,7 @@ struct LogInViewContentBox: View {
 						capitalization: .none,
 						secure: true,
 						borderColor: .darkRed,
-						borderWidth: model.shouldShowPasswordRedBorder ? 1 : 0
+						borderWidth: *model.shouldShowPasswordRedBorder
 					)
 				}
 				Button(action: model.logIn) {
