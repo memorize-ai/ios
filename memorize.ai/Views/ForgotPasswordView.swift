@@ -28,7 +28,7 @@ struct ForgotPasswordView: View {
 				}
 				.align(to: .leading)
 				.padding(.leading, 33)
-				.padding(.top, 30)
+				.padding(.top, 34)
 			}
 			.align(to: .top)
 			AuthenticationViewContentBox(
@@ -38,6 +38,7 @@ struct ForgotPasswordView: View {
 		}
 		.background(Color.lightGrayBackground)
 		.edgesIgnoringSafeArea(.all)
+		.removeNavigationBar()
 	}
 }
 

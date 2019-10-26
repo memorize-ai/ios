@@ -32,6 +32,7 @@ struct LogInView: View {
 		}
 		.background(Color.lightGrayBackground)
 		.edgesIgnoringSafeArea(.all)
+		.removeNavigationBar()
 	}
 }
 

@@ -36,7 +36,6 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 		.padding(.leading, 33)
 		.padding(.trailing, 16)
 		.padding(.top, 30)
-		.removeNavigationBar()
 	}
 }
 
