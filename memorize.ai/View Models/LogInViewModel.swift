@@ -48,7 +48,7 @@ final class LogInViewModel: ObservableObject {
 	
 	func failLogIn(error: Error) {
 		loadingState = .failure(message: error.localizedDescription)
-		handleError(code: AuthErrorCode(rawValue: error._code))
+		handleError(code: AuthErrorCode(error: error))
 		shouldShowErrorModal = true
 	}
 	

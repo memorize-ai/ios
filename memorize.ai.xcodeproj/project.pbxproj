@@ -61,6 +61,7 @@
 		4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */; };
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
+		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
 		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
 		4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */; };
 		4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */; };
@@ -156,6 +157,7 @@
 		4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewContentBox.swift; sourceTree = "<group>"; };
 		4DBA39672360ED0F00B91596 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		4DC8115B2363E46400CCFF98 /* Asterisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asterisk.swift; sourceTree = "<group>"; };
+		4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCode.swift; sourceTree = "<group>"; };
 		4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewBottomGradient.swift; sourceTree = "<group>"; };
 		4DD2512623627D0300A83509 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */,
 				4D402E71235E591E0011C6B6 /* Color.swift */,
 				4DBA39672360ED0F00B91596 /* View.swift */,
+				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */,
 				4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */,
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
+				4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */,
 				4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
