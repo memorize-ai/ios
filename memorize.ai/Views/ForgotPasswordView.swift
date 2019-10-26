@@ -33,7 +33,7 @@ struct ForgotPasswordView: View {
 			.align(to: .top)
 			AuthenticationViewContentBox(
 				title: "Forgot password",
-				content: EmptyView() // ForgotPasswordViewContentBox(model: model)
+				content: ForgotPasswordViewContentBox(model: model)
 			)
 		}
 		.background(Color.lightGrayBackground)
