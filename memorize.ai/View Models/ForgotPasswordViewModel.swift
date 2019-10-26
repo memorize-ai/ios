@@ -1,10 +1,11 @@
 import Combine
+import SwiftUI
 import FirebaseAuth
 
 final class ForgotPasswordViewModel: ObservableObject {
 	static let unknownErrorTitle = "Unknown error"
 	static let unknownErrorDescription = "Sorry about that! Please try again"
-	
+		
 	@Published var email: String {
 		didSet {
 			guard loadingState.didFail else { return }

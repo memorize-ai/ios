@@ -9,6 +9,10 @@ struct ForgotPasswordView: View {
 		model = .init(email: email)
 	}
 	
+	func goBack() {
+		presentationMode.wrappedValue.dismiss()
+	}
+	
 	var body: some View {
 		ZStack {
 			AuthenticationViewBottomGradient(
@@ -21,9 +25,7 @@ struct ForgotPasswordView: View {
 					.bluePurple,
 					.lightGreen
 				)
-				Button(action: {
-					self.presentationMode.wrappedValue.dismiss()
-				}) {
+				Button(action: goBack) {
 					LeftArrowHead(height: 20)
 				}
 				.align(to: .leading)

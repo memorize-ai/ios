@@ -1,22 +1,19 @@
 import SwiftUI
 
 struct ForgotPasswordViewContentBox: View {
+	@Environment(\.presentationMode) var presentationMode
+	
 	@ObservedObject var model: ForgotPasswordViewModel
 	
-	var resetButtonContent: some View {
-		model.loadingState.isLoading
-			? AnyView(
-				ActivityIndicator()
-					.frame(maxWidth: .infinity)
-					.frame(height: 40)
-			)
-			: AnyView(
-				Text("RESET PASSWORD")
-					.font(.muli(.bold, size: 14))
-					.foregroundColor(.white)
-					.frame(maxWidth: .infinity)
-					.frame(height: 40)
-			)
+	func goBack() {
+		presentationMode.wrappedValue.dismiss()
+	}
+	
+	var shouldGoBack: some View {
+		if model.loadingState.didSucceed {
+			goBack()
+		}
+		return EmptyView()
 	}
 	
 	var body: some View {
@@ -36,15 +33,38 @@ struct ForgotPasswordViewContentBox: View {
 						? .disabledButtonBackground
 						: .neonGreen
 				) {
-					resetButtonContent
+					Group {
+						if model.loadingState.isLoading {
+							ActivityIndicator()
+						} else {
+							Text("RESET PASSWORD")
+								.font(.muli(.bold, size: 14))
+								.foregroundColor(.white)
+						}
+					}
+					.frame(maxWidth: .infinity)
+					.frame(height: 40)
 				}
 			}
 			.disabled(model.isResetButtonDisabled)
-			Text("You will receive a password reset link for your registered email address")
+			.alert(isPresented: $model.shouldShowErrorModal) {
+				guard let errorModal = model.errorModal else {
+					return .init(
+						title: .init(LogInViewModel.unknownErrorTitle),
+						message: .init(LogInViewModel.unknownErrorDescription)
+					)
+				}
+				return .init(
+					title: .init(errorModal.title),
+					message: .init(errorModal.description)
+				)
+			}
+			Text("You will receive a password reset link by email")
 				.font(.muli(.regular, size: 11))
 				.foregroundColor(.darkText)
 				.multilineTextAlignment(.center)
 				.padding(.horizontal)
+			shouldGoBack
 		}
 		.padding(.top, 6)
 	}

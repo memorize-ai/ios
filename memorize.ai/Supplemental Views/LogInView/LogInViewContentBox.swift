@@ -3,22 +3,6 @@ import SwiftUI
 struct LogInViewContentBox: View {
 	@ObservedObject var model: LogInViewModel
 	
-	var logInButtonContent: some View {
-		model.loadingState.isLoading
-			? AnyView(
-				ActivityIndicator()
-					.frame(maxWidth: .infinity)
-					.frame(height: 40)
-			)
-			: AnyView(
-				Text("LOG IN")
-					.font(.muli(.bold, size: 14))
-					.foregroundColor(.white)
-					.frame(maxWidth: .infinity)
-					.frame(height: 40)
-			)
-	}
-	
 	var navigateToHomeView: some View {
 		guard let user = model.user else { return AnyView(EmptyView()) }
 		return AnyView(
@@ -59,7 +43,17 @@ struct LogInViewContentBox: View {
 							? .disabledButtonBackground
 							: .neonGreen
 					) {
-						logInButtonContent
+						Group {
+							if model.loadingState.isLoading {
+								ActivityIndicator()
+							} else {
+								Text("LOG IN")
+									.font(.muli(.bold, size: 14))
+									.foregroundColor(.white)
+							}
+						}
+						.frame(maxWidth: .infinity)
+						.frame(height: 40)
 					}
 				}
 				.disabled(model.isLogInButtonDisabled)
