@@ -10,10 +10,9 @@ target 'memorize.ai' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'
 	
+	pod 'GoogleSignIn'
+	
 	target 'memorize.aiTests' do
 		inherit! :search_paths
-	end
-	
-	target 'memorize.aiUITests' do
 	end
 end
