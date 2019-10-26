@@ -3,10 +3,6 @@ import SwiftUI
 struct LogInViewContentBox: View {
 	@ObservedObject var model: LogInViewModel
 	
-	var isLogInButtonDisabled: Bool {
-		model.email.isEmpty || model.password.isEmpty
-	}
-	
 	var logInButtonContent: some View {
 		model.loadingState.isLoading
 			? AnyView(
@@ -59,14 +55,14 @@ struct LogInViewContentBox: View {
 				}
 				Button(action: model.logIn) {
 					CustomRectangle(
-						backgroundColor: isLogInButtonDisabled
+						backgroundColor: model.isLogInButtonDisabled
 							? .disabledButtonBackground
 							: .neonGreen
 					) {
 						logInButtonContent
 					}
 				}
-				.disabled(isLogInButtonDisabled)
+				.disabled(model.isLogInButtonDisabled)
 				.alert(isPresented: $model.shouldShowErrorModal) {
 					guard let errorModal = model.errorModal else {
 						return .init(

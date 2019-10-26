@@ -25,6 +25,10 @@ final class LogInViewModel: ObservableObject {
 	var user: User?
 	var errorModal: (title: String, description: String)?
 	
+	var isLogInButtonDisabled: Bool {
+		email.isEmpty || password.isEmpty
+	}
+	
 	func logIn() {
 		loadingState = .loading()
 		shouldShowEmailRedBorder = false
