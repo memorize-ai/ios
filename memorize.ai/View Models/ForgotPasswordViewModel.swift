@@ -6,4 +6,8 @@ final class ForgotPasswordViewModel: ObservableObject {
 	init(email: String = "") {
 		self.email = email
 	}
+	
+	var isResetButtonDisabled: Bool {
+		email.isEmpty
+	}
 }
