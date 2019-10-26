@@ -23,4 +23,16 @@ extension Auth {
 			}
 		}
 	}
+	
+	func sendPasswordReset(withEmail email: String) -> Promise<Void> {
+		.init { seal in
+			sendPasswordReset(withEmail: email) { error in
+				if let error = error {
+					seal.reject(error)
+				} else {
+					seal.fulfill(())
+				}
+			}
+		}
+	}
 }
