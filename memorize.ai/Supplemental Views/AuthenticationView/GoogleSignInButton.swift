@@ -2,7 +2,19 @@ import SwiftUI
 
 struct GoogleSignInButton: View {
 	var body: some View {
-		Text("GoogleSignInButton")
+		CustomRectangle(backgroundColor: .mediumGray) {
+			HStack {
+				Image("GoogleIcon")
+					.resizable()
+					.frame(width: 22, height: 22)
+				Text("Sign in with Google")
+					.font(.muli(.regular, size: 14))
+					.foregroundColor(.darkText)
+					.padding(.bottom, 3)
+			}
+			.frame(maxWidth: .infinity)
+			.frame(height: 40)
+		}
 	}
 }
 
