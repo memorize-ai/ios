@@ -64,6 +64,7 @@ struct LogInViewContentBox: View {
 					.font(.muli(.bold, size: 12))
 					.foregroundColor(.darkBlue)
 			}
+			GoogleSignInButton()
 			if model.user != nil {
 				NavigateTo(
 					HomeView()
@@ -78,7 +79,7 @@ struct LogInViewContentBox: View {
 #if DEBUG
 struct LogInViewContentBox_Previews: PreviewProvider {
 	static var previews: some View {
-		LogInViewContentBox(model: LogInViewModel())
+		LogInViewContentBox(model: .init())
 	}
 }
 #endif

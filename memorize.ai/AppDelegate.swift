@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import FirebaseCore
+import GoogleSignIn
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 			name: "Default Configuration",
 			sessionRole: connectingSceneSession.role
 		)
+	}
+	
+	func application(
+		_ app: UIApplication,
+		open url: URL,
+		options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+	) -> Bool {
+		GIDSignIn.sharedInstance().handle(url)
 	}
 	
 	lazy var persistentContainer: NSPersistentContainer = {

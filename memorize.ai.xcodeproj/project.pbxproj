@@ -77,6 +77,7 @@
 		4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77D235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift */; };
 		4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77F235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift */; };
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
+		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		4DD8D77D235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeaturesIndicator.swift; sourceTree = "<group>"; };
 		4DD8D77F235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeaturesIndicatorCircle.swift; sourceTree = "<group>"; };
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4F4C9DD2FC5AC65507BFA8D3 /* Pods-memorize.aiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.release.xcconfig"; path = "Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.release.xcconfig"; sourceTree = "<group>"; };
 		601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.release.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.release.xcconfig"; sourceTree = "<group>"; };
 		64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -420,6 +422,7 @@
 				4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */,
 				4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */,
 				4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */,
+				4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */,
 			);
 			path = AuthenticationView;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
+				4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */,
 				4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
