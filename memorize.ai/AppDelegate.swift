@@ -4,12 +4,14 @@ import FirebaseCore
 import GoogleSignIn
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	func application(
 		_ application: UIApplication,
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
 	) -> Bool {
 		FirebaseApp.configure()
+		GIDSignIn.sharedInstance().clientID = FIREBASE_CLIENT_ID
+		GIDSignIn.sharedInstance().delegate = self
 		return true
 	}
 	
@@ -30,6 +32,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 		options: [UIApplication.OpenURLOptionsKey: Any] = [:]
 	) -> Bool {
 		GIDSignIn.sharedInstance().handle(url)
+	}
+	
+	func sign(
+		_ signIn: GIDSignIn!,
+		didSignInFor user: GIDGoogleUser!,
+		withError error: Error!
+	) {
+		// TODO
 	}
 	
 	lazy var persistentContainer: NSPersistentContainer = {

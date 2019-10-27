@@ -327,8 +327,8 @@
 		4D703AF0233E7107004F1F65 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */,
 				4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */,
+				4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
