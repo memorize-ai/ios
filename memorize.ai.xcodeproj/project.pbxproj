@@ -9,12 +9,11 @@
 /* Begin PBXBuildFile section */
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
-		4B1071F839CC2292A18E8FB4 /* Pods_memorize_ai_memorize_aiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51DCE10D82E2BC63677803B /* Pods_memorize_ai_memorize_aiUITests.framework */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D1F9B23233ECA0E00693571 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B22233ECA0E00693571 /* User.swift */; };
 		4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B24233ED1AD00693571 /* LoadingState.swift */; };
-		4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* PromiseKit */; };
+		4D1F9B28233EDE4E00693571 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* SwiftPackageProductDependency */; };
 		4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2A233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift */; };
 		4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2D233EEBDB00693571 /* UnknownError.swift */; };
 		4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E2235EC83C00A3EF1E /* InitialViewBottomButtons.swift */; };
@@ -62,7 +61,7 @@
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
-		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
+		4DC923A623458F1900F901EA /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftPackageProductDependency */; };
 		4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */; };
 		4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */; };
 		4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512623627D0300A83509 /* LogInViewModel.swift */; };
@@ -176,10 +175,7 @@
 		4F4C9DD2FC5AC65507BFA8D3 /* Pods-memorize.aiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.release.xcconfig"; path = "Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.release.xcconfig"; sourceTree = "<group>"; };
 		601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.release.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.release.xcconfig"; sourceTree = "<group>"; };
 		64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6BF55E66E6034DC99EB98759 /* Pods-memorize.ai-memorize.aiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai-memorize.aiUITests.release.xcconfig"; path = "Target Support Files/Pods-memorize.ai-memorize.aiUITests/Pods-memorize.ai-memorize.aiUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C51DCE10D82E2BC63677803B /* Pods_memorize_ai_memorize_aiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai_memorize_aiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D836782DC0AEEE0EE28E0E49 /* Pods-memorize.aiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.debug.xcconfig"; path = "Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.debug.xcconfig"; sourceTree = "<group>"; };
-		DC3BAF53D0EC7CFBE986AC05 /* Pods-memorize.ai-memorize.aiUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai-memorize.aiUITests.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai-memorize.aiUITests/Pods-memorize.ai-memorize.aiUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_aiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -188,9 +184,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */,
+				4DC923A623458F1900F901EA /* BuildFile in Frameworks */,
 				05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */,
-				4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */,
+				4D1F9B28233EDE4E00693571 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +202,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B1071F839CC2292A18E8FB4 /* Pods_memorize_ai_memorize_aiUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */,
-				C51DCE10D82E2BC63677803B /* Pods_memorize_ai_memorize_aiUITests.framework */,
 				EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */,
 			);
 			name = Frameworks;
@@ -470,8 +464,6 @@
 			children = (
 				0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */,
 				601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */,
-				DC3BAF53D0EC7CFBE986AC05 /* Pods-memorize.ai-memorize.aiUITests.debug.xcconfig */,
-				6BF55E66E6034DC99EB98759 /* Pods-memorize.ai-memorize.aiUITests.release.xcconfig */,
 				D836782DC0AEEE0EE28E0E49 /* Pods-memorize.aiTests.debug.xcconfig */,
 				4F4C9DD2FC5AC65507BFA8D3 /* Pods-memorize.aiTests.release.xcconfig */,
 			);
@@ -491,6 +483,7 @@
 				4D703AF7233E73B1004F1F65 /* Set up Firebase GoogleService-Info.plist */,
 				4DAA4F37233DE1A600EF7467 /* Resources */,
 				50E4CD5A8A481C7EB464E791 /* [CP] Embed Pods Frameworks */,
+				83C05117551538FBEE57B45A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -498,8 +491,8 @@
 			);
 			name = memorize.ai;
 			packageProductDependencies = (
-				4D1F9B27233EDE4E00693571 /* PromiseKit */,
-				4DC923A523458F1900F901EA /* SwiftUIX */,
+				4D1F9B27233EDE4E00693571 /* SwiftPackageProductDependency */,
+				4DC923A523458F1900F901EA /* SwiftPackageProductDependency */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -528,11 +521,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DAA4F6C233DE1A900EF7467 /* Build configuration list for PBXNativeTarget "memorize.aiUITests" */;
 			buildPhases = (
-				12855C29CC3311FF4A347742 /* [CP] Check Pods Manifest.lock */,
 				4DAA4F59233DE1A800EF7467 /* Sources */,
 				4DAA4F5A233DE1A800EF7467 /* Frameworks */,
 				4DAA4F5B233DE1A800EF7467 /* Resources */,
-				A86D9A7D454A5C9537501B22 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -579,8 +570,8 @@
 			);
 			mainGroup = 4DAA4F30233DE1A600EF7467;
 			packageReferences = (
-				4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */,
-				4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				4D1F9B26233EDE4E00693571 /* RemoteSwiftPackageReference */,
+				4DC923A423458F1900F901EA /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -637,28 +628,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12855C29CC3311FF4A347742 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-memorize.ai-memorize.aiUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4D703AF7233E73B1004F1F65 /* Set up Firebase GoogleService-Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,6 +663,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-memorize.ai/Pods-memorize.ai-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		83C05117551538FBEE57B45A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-memorize.ai/Pods-memorize.ai-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-memorize.ai/Pods-memorize.ai-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-memorize.ai/Pods-memorize.ai-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8D493CFC0130DA5E4E9134DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -714,23 +700,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A86D9A7D454A5C9537501B22 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-memorize.ai-memorize.aiUITests/Pods-memorize.ai-memorize.aiUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-memorize.ai-memorize.aiUITests/Pods-memorize.ai-memorize.aiUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-memorize.ai-memorize.aiUITests/Pods-memorize.ai-memorize.aiUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DB7128814B102006B1204414 /* [CP] Check Pods Manifest.lock */ = {
@@ -1062,7 +1031,6 @@
 		};
 		4DAA4F6D233DE1A900EF7467 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC3BAF53D0EC7CFBE986AC05 /* Pods-memorize.ai-memorize.aiUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1085,7 +1053,6 @@
 		};
 		4DAA4F6E233DE1A900EF7467 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BF55E66E6034DC99EB98759 /* Pods-memorize.ai-memorize.aiUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1147,7 +1114,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+		4D1F9B26233EDE4E00693571 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mxcl/PromiseKit.git";
 			requirement = {
@@ -1155,7 +1122,7 @@
 				kind = branch;
 			};
 		};
-		4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+		4DC923A423458F1900F901EA /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
 			requirement = {
@@ -1166,14 +1133,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4D1F9B27233EDE4E00693571 /* PromiseKit */ = {
+		4D1F9B27233EDE4E00693571 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			package = 4D1F9B26233EDE4E00693571 /* RemoteSwiftPackageReference */;
 			productName = PromiseKit;
 		};
-		4DC923A523458F1900F901EA /* SwiftUIX */ = {
+		4DC923A523458F1900F901EA /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			package = 4DC923A423458F1900F901EA /* RemoteSwiftPackageReference */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
