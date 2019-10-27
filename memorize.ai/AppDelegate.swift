@@ -2,6 +2,7 @@ import UIKit
 import CoreData
 import FirebaseCore
 import GoogleSignIn
+import PromiseKit
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -39,7 +40,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		didSignInFor user: GIDGoogleUser!,
 		withError error: Error!
 	) {
-		// TODO
+		guard let completion = GIDSignIn.completion else { return }
+		if let error = error {
+			completion(.init(error: error))
+		}
+		if let user = user {
+			completion(.init { $0.fulfill(user) })
+		}
 	}
 	
 	lazy var persistentContainer: NSPersistentContainer = {

@@ -1,5 +1,7 @@
 import Combine
 import FirebaseAuth
+import GoogleSignIn
+import PromiseKit
 
 final class LogInViewModel: ObservableObject {
 	static let unknownErrorTitle = "Unknown error"
@@ -27,6 +29,14 @@ final class LogInViewModel: ObservableObject {
 	
 	var isLogInButtonDisabled: Bool {
 		email.isEmpty || password.isEmpty
+	}
+	
+	func googleSignInCompletion(promise: Promise<GIDGoogleUser>) {
+		promise.done { user in
+			print(user)
+		}.catch { error in
+			print(error)
+		}
 	}
 	
 	func logIn() {

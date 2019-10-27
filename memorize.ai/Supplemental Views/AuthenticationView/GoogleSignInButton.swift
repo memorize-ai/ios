@@ -2,7 +2,10 @@ import SwiftUI
 import GoogleSignIn
 
 struct GoogleSignInButton: View {
+	let completion: GoogleSignInCompletion
+	
 	func logInWithGoogle() {
+		GIDSignIn.completion = completion
 		GIDSignIn.sharedInstance().presentingViewController =
 			UIApplication.shared.windows.last?.rootViewController
 		GIDSignIn.sharedInstance().signIn()
@@ -31,7 +34,7 @@ struct GoogleSignInButton: View {
 #if DEBUG
 struct GoogleSignInButton_Previews: PreviewProvider {
 	static var previews: some View {
-		GoogleSignInButton()
+		GoogleSignInButton { _ in }
 	}
 }
 #endif
