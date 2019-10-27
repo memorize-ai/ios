@@ -13,7 +13,7 @@
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D1F9B23233ECA0E00693571 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B22233ECA0E00693571 /* User.swift */; };
 		4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B24233ED1AD00693571 /* LoadingState.swift */; };
-		4D1F9B28233EDE4E00693571 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* SwiftPackageProductDependency */; };
+		4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* PromiseKit */; };
 		4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2A233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift */; };
 		4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2D233EEBDB00693571 /* UnknownError.swift */; };
 		4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E2235EC83C00A3EF1E /* InitialViewBottomButtons.swift */; };
@@ -61,7 +61,7 @@
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
-		4DC923A623458F1900F901EA /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftPackageProductDependency */; };
+		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
 		4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */; };
 		4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */; };
 		4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512623627D0300A83509 /* LogInViewModel.swift */; };
@@ -184,9 +184,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DC923A623458F1900F901EA /* BuildFile in Frameworks */,
+				4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */,
 				05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */,
-				4D1F9B28233EDE4E00693571 /* BuildFile in Frameworks */,
+				4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,8 +491,8 @@
 			);
 			name = memorize.ai;
 			packageProductDependencies = (
-				4D1F9B27233EDE4E00693571 /* SwiftPackageProductDependency */,
-				4DC923A523458F1900F901EA /* SwiftPackageProductDependency */,
+				4D1F9B27233EDE4E00693571 /* PromiseKit */,
+				4DC923A523458F1900F901EA /* SwiftUIX */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -570,8 +570,8 @@
 			);
 			mainGroup = 4DAA4F30233DE1A600EF7467;
 			packageReferences = (
-				4D1F9B26233EDE4E00693571 /* RemoteSwiftPackageReference */,
-				4DC923A423458F1900F901EA /* RemoteSwiftPackageReference */,
+				4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -1114,7 +1114,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4D1F9B26233EDE4E00693571 /* RemoteSwiftPackageReference */ = {
+		4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mxcl/PromiseKit.git";
 			requirement = {
@@ -1122,7 +1122,7 @@
 				kind = branch;
 			};
 		};
-		4DC923A423458F1900F901EA /* RemoteSwiftPackageReference */ = {
+		4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
 			requirement = {
@@ -1133,14 +1133,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4D1F9B27233EDE4E00693571 /* SwiftPackageProductDependency */ = {
+		4D1F9B27233EDE4E00693571 /* PromiseKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4D1F9B26233EDE4E00693571 /* RemoteSwiftPackageReference */;
+			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
 		};
-		4DC923A523458F1900F901EA /* SwiftPackageProductDependency */ = {
+		4DC923A523458F1900F901EA /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4DC923A423458F1900F901EA /* RemoteSwiftPackageReference */;
+			package = 4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
