@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import FirebaseCore
+import FirebaseAuth
 import GoogleSignIn
 import PromiseKit
 
@@ -38,15 +39,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	func sign(
 		_ signIn: GIDSignIn!,
 		didSignInFor user: GIDGoogleUser!,
-		withError error: Error!
+		withError error: Error?
 	) {
 		guard let completion = GIDSignIn.completion else { return }
-		if let error = error {
-			completion(.init(error: error))
+		guard error == nil, let userAuth = user.authentication else {
+			return completion(.init(error: error ?? UNKNOWN_ERROR))
 		}
-		if let user = user {
-			completion(.init { $0.fulfill(user) })
-		}
+		completion(auth.signIn(with: GoogleAuthProvider.credential(
+			withIDToken: userAuth.idToken,
+			accessToken: userAuth.accessToken
+		)))
 	}
 	
 	lazy var persistentContainer: NSPersistentContainer = {

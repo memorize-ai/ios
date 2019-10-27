@@ -24,6 +24,17 @@ extension Auth {
 		}
 	}
 	
+	func signIn(with credential: AuthCredential) -> Promise<AuthDataResult> {
+		.init { seal in
+			signIn(with: credential) { result, error in
+				guard error == nil, let result = result else {
+					return seal.reject(error ?? UNKNOWN_ERROR)
+				}
+				seal.fulfill(result)
+			}
+		}
+	}
+	
 	func sendPasswordReset(withEmail email: String) -> Promise<Void> {
 		.init { seal in
 			sendPasswordReset(withEmail: email) { error in

@@ -1,7 +1,8 @@
 import GoogleSignIn
+import FirebaseAuth
 import PromiseKit
 
-typealias GoogleSignInCompletion = (Promise<GIDGoogleUser>) -> Void
+typealias GoogleSignInCompletion = (Promise<AuthDataResult>) -> Void
 
 extension GIDSignIn {
 	static var completion: GoogleSignInCompletion?
