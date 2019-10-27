@@ -31,26 +31,6 @@ final class LogInViewModel: ObservableObject {
 		email.isEmpty || password.isEmpty
 	}
 	
-	func googleSignInCompletion(promise: Promise<AuthDataResult>) {
-		loadingState = .loading()
-		shouldShowEmailRedBorder = false
-		shouldShowPasswordRedBorder = false
-		promise.done { result in
-			print(result)
-			self.user = .init(
-				id: result.user.uid,
-				name: result.user.displayName ?? "Unknown",
-				email: result.user.email ?? ""
-			)
-			self.loadingState = .success()
-		}.catch { error in
-			print(error)
-			self.loadingState = .failure(
-				message: error.localizedDescription
-			)
-		}
-	}
-	
 	func logIn() {
 		loadingState = .loading()
 		shouldShowEmailRedBorder = false

@@ -25,4 +25,16 @@ extension DocumentReference {
 			}
 		}
 	}
+	
+	func setData(_ documentData: [String: Any]) -> Promise<Void> {
+		.init { seal in
+			setData(documentData) { error in
+				if let error = error {
+					seal.reject(error)
+				} else {
+					seal.fulfill(())
+				}
+			}
+		}
+	}
 }
