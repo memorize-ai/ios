@@ -2,9 +2,11 @@ import SwiftUI
 
 struct AuthenticationViewOrText: View {
 	var body: some View {
-		Text("OR")
-			.font(.muli(.regular, size: 12))
-			.foregroundColor(.darkText)
+		LabeledDivider(color: .darkText) {
+			Text("OR")
+				.font(.muli(.regular, size: 12))
+				.foregroundColor(.darkText)
+		}
 	}
 }
 

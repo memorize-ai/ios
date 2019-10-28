@@ -6,33 +6,36 @@ struct LogInView: View {
 	@ObservedObject var model = LogInViewModel()
 	
 	var body: some View {
-		ZStack {
-			AuthenticationViewBottomGradient(
-				.lightGreen,
-				.bluePurple
-			)
-			.align(to: .bottomTrailing)
-			ZStack(alignment: .top) {
-				AuthenticationViewTopGradient(
-					.bluePurple,
-					.lightGreen
+		GeometryReader { geometry in
+			ZStack {
+				AuthenticationViewBottomGradient(
+					.lightGreen,
+					.bluePurple
 				)
-				AuthenticationViewTopControls(
-					presentationMode: presentationMode,
-					alternativeMessage: "Don't have an account yet?",
-					alternativeButtonText: "SIGN UP",
-					alternativeButtonDestination: SignUpView()
+				.align(to: .bottomTrailing)
+				ZStack(alignment: .top) {
+					AuthenticationViewTopGradient(
+						.bluePurple,
+						.lightGreen
+					)
+					AuthenticationViewTopControls(
+						presentationMode: self.presentationMode,
+						alternativeMessage: "Don't have an account yet?",
+						alternativeButtonText: "SIGN UP",
+						alternativeButtonDestination: SignUpView()
+					)
+					.padding(.top, geometry.safeAreaInsets.top / 2)
+				}
+				.align(to: .top)
+				AuthenticationViewContentBox(
+					title: "Welcome back",
+					content: LogInViewContentBox(model: self.model)
 				)
 			}
-			.align(to: .top)
-			AuthenticationViewContentBox(
-				title: "Welcome back",
-				content: LogInViewContentBox(model: model)
-			)
+			.background(Color.lightGrayBackground)
+			.edgesIgnoringSafeArea(.all)
+			.removeNavigationBar()
 		}
-		.background(Color.lightGrayBackground)
-		.edgesIgnoringSafeArea(.all)
-		.removeNavigationBar()
 	}
 }
 
