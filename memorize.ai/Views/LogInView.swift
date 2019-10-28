@@ -39,7 +39,13 @@ struct LogInView: View {
 #if DEBUG
 struct LogInView_Previews: PreviewProvider {
 	static var previews: some View {
-		LogInView()
+		previewForDevices([
+			"iPhone 8 Plus",
+			"iPhone XS Max",
+			"iPhone SE"
+		]) {
+			LogInView()
+		}
 	}
 }
 #endif

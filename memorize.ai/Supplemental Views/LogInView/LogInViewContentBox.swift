@@ -64,6 +64,7 @@ struct LogInViewContentBox: View {
 					.font(.muli(.bold, size: 12))
 					.foregroundColor(.darkBlue)
 			}
+			AuthenticationViewOrText()
 			GoogleSignInButton()
 			if model.user != nil {
 				NavigateTo(
