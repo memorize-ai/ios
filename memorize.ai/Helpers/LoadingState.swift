@@ -7,7 +7,9 @@ enum LoadingState: Equatable {
 	case failure(date: Date = .init(), message: String)
 	
 	var isNone: Bool {
-		get { self == .none }
+		get {
+			self == .none
+		}
 		set {
 			guard newValue else { return }
 			self = .none
