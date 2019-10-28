@@ -1,6 +1,6 @@
 import Foundation
 
-enum LoadingState {
+enum LoadingState: Equatable {
 	case none
 	case loading(date: Date = .init())
 	case success(date: Date = .init())
@@ -8,12 +8,7 @@ enum LoadingState {
 	
 	var isNone: Bool {
 		get {
-			switch self {
-			case .none:
-				return true
-			default:
-				return false
-			}
+			self == .none
 		}
 		set {
 			guard newValue else { return }
@@ -23,10 +18,9 @@ enum LoadingState {
 	
 	var isLoading: Bool {
 		get {
-			switch self {
-			case .loading(date: _):
+			if case .loading(date: _) = self {
 				return true
-			default:
+			} else {
 				return false
 			}
 		}
@@ -37,10 +31,9 @@ enum LoadingState {
 	
 	var didSucceed: Bool {
 		get {
-			switch self {
-			case .success(date: _):
+			if case .success(date: _) = self {
 				return true
-			default:
+			} else {
 				return false
 			}
 		}
@@ -51,10 +44,9 @@ enum LoadingState {
 	
 	var didFail: Bool {
 		get {
-			switch self {
-			case .failure(date: _, message: _):
+			if case .failure(date: _, message: _) = self {
 				return true
-			default:
+			} else {
 				return false
 			}
 		}
