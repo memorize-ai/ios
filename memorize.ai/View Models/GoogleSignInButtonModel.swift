@@ -5,6 +5,7 @@ import PromiseKit
 
 final class GoogleSignInButtonModel: ObservableObject {
 	@Published var loadingState = LoadingState.none
+	@Published var shouldShowActivityIndicator = false
 	@Published var shouldProgressToHomeView = false
 	@Published var shouldProgressToChooseTopicsView = false
 	
@@ -19,6 +20,7 @@ final class GoogleSignInButtonModel: ObservableObject {
 	}
 	
 	func logInCompletion(promise: Promise<AuthDataResult>) {
+		shouldShowActivityIndicator = true
 		promise.done { result in
 			let user = result.user
 			guard
@@ -37,6 +39,7 @@ final class GoogleSignInButtonModel: ObservableObject {
 				} else {
 					self.shouldProgressToHomeView = true
 				}
+				self.loadingState = .success()
 			}.catch { error in
 				self.loadingState = .failure(
 					message: error.localizedDescription

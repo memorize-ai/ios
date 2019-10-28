@@ -7,15 +7,21 @@ struct GoogleSignInButton: View {
 		Group {
 			Button(action: model.logIn) {
 				CustomRectangle(backgroundColor: .mediumGray) {
-					HStack {
-						Image("GoogleIcon")
-							.resizable()
-							.renderingMode(.original)
-							.frame(width: 22, height: 22)
-						Text("Sign in with Google")
-							.font(.muli(.regular, size: 14))
-							.foregroundColor(.darkText)
-							.padding(.bottom, 3)
+					Group {
+						if model.shouldShowActivityIndicator {
+							ActivityIndicator()
+						} else {
+							HStack {
+								Image("GoogleIcon")
+									.resizable()
+									.renderingMode(.original)
+									.frame(width: 22, height: 22)
+								Text("Sign in with Google")
+									.font(.muli(.regular, size: 14))
+									.foregroundColor(.darkText)
+									.padding(.bottom, 3)
+							}
+						}
 					}
 					.frame(maxWidth: .infinity)
 					.frame(height: 40)
