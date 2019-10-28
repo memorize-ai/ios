@@ -61,6 +61,7 @@
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */; };
 		4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */; };
+		4DC6435B2366D80400DEEED1 /* previewForDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6435A2366D80400DEEED1 /* previewForDevices.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
 		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
@@ -161,6 +162,7 @@
 		4DBA39672360ED0F00B91596 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButtonModel.swift; sourceTree = "<group>"; };
 		4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsView.swift; sourceTree = "<group>"; };
+		4DC6435A2366D80400DEEED1 /* previewForDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewForDevices.swift; sourceTree = "<group>"; };
 		4DC8115B2363E46400CCFF98 /* Asterisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asterisk.swift; sourceTree = "<group>"; };
 		4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCode.swift; sourceTree = "<group>"; };
 		4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				4D402E93235E72B80011C6B6 /* MuliFont.swift */,
 				4D1F9B24233ED1AD00693571 /* LoadingState.swift */,
 				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
+				4DC6435A2366D80400DEEED1 /* previewForDevices.swift */,
 				4D2ECD87235D96D1008312B1 /* Operators */,
 			);
 			path = Helpers;
@@ -783,6 +786,7 @@
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
+				4DC6435B2366D80400DEEED1 /* previewForDevices.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */,
