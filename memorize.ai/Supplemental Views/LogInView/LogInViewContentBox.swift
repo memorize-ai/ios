@@ -13,7 +13,6 @@ struct LogInViewContentBox: View {
 						contentType: .emailAddress,
 						keyboardType: .emailAddress,
 						capitalization: .none,
-						borderColor: .darkRed,
 						borderWidth: *model.shouldShowEmailRedBorder
 					)
 					CustomTextField(
@@ -22,7 +21,6 @@ struct LogInViewContentBox: View {
 						contentType: .password,
 						capitalization: .none,
 						secure: true,
-						borderColor: .darkRed,
 						borderWidth: *model.shouldShowPasswordRedBorder
 					)
 				}

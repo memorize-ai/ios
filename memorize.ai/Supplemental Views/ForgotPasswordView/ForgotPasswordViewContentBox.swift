@@ -24,7 +24,6 @@ struct ForgotPasswordViewContentBox: View {
 				contentType: .emailAddress,
 				keyboardType: .emailAddress,
 				capitalization: .none,
-				borderColor: .darkRed,
 				borderWidth: *model.shouldShowEmailRedBorder
 			)
 			Button(action: model.sendResetEmail) {

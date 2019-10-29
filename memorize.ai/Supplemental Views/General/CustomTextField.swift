@@ -30,7 +30,7 @@ struct CustomTextField: View {
 		font: Font = .muli(.regular, size: 14),
 		backgroundColor: Color = Self.defaultBackgroundColor,
 		cornerRadius: CGFloat = 5,
-		borderColor: Color = Self.defaultBackgroundColor,
+		borderColor: Color = .darkRed,
 		borderWidth: CGFloat = 0
 	) {
 		_text = text
