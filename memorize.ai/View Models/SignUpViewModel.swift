@@ -134,6 +134,35 @@ final class SignUpViewModel: ViewModel {
 	}
 	
 	func handleFirestoreError(code errorCode: FirestoreErrorCode?) {
-		// TODO: Handle firestore error
+		switch errorCode {
+		case .dataLoss, .deadlineExceeded:
+			applyError(
+				title: "Network error",
+				description: "There was a problem connecting to our servers. Please try again",
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		case .permissionDenied:
+			applyError(
+				title: "Permission denied",
+				description: "There was a problem with our servers. Please try again",
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		case .resourceExhausted:
+			applyError(
+				title: "Server overload",
+				description: "Our servers are overloaded right now. Please try again",
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		default:
+			applyError(
+				title: Self.unknownErrorTitle,
+				description: Self.unknownErrorDescription,
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		}
 	}
 }
