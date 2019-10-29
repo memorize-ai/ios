@@ -98,6 +98,27 @@ final class GoogleSignInButtonModel: ViewModel {
 	}
 	
 	func handleFirestoreError(code errorCode: FirestoreErrorCode?) {
-		// TODO: Switch over `errorCode`
+		switch errorCode {
+		case .dataLoss, .deadlineExceeded:
+			applyError(
+				title: "Network error",
+				description: "There was a problem connecting to our servers. Please try again"
+			)
+		case .permissionDenied:
+			applyError(
+				title: "Permission denied",
+				description: "There was a problem with our servers. Please try again"
+			)
+		case .resourceExhausted:
+			applyError(
+				title: "Server overload",
+				description: "Our servers are overloaded right now. Please try again"
+			)
+		default:
+			applyError(
+				title: Self.unknownErrorTitle,
+				description: Self.unknownErrorDescription
+			)
+		}
 	}
 }
