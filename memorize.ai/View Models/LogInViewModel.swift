@@ -90,6 +90,13 @@ final class LogInViewModel: ViewModel {
 				invalidEmail: true,
 				invalidPassword: false
 			)
+		case .tooManyRequests:
+			applyError(
+				title: "Too many requests",
+				description: "Please try again later",
+				invalidEmail: false,
+				invalidPassword: false
+			)
 		case .wrongPassword:
 			applyError(
 				title: "Incorrect passwod",

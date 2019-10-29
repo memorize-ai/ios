@@ -4,6 +4,9 @@ import FirebaseFirestore
 import PromiseKit
 
 final class SignUpViewModel: ViewModel {
+	static let unknownErrorTitle = "Unknown error"
+	static let unknownErrorDescription = "Sorry about that! Please try again"
+	
 	@Published var name = ""
 	@Published var email = ""
 	@Published var password = ""
@@ -83,11 +86,54 @@ final class SignUpViewModel: ViewModel {
 		shouldShowPasswordRedBorder = invalidPassword
 	}
 	
-	func handleAuthError(code: AuthErrorCode?) {
-		// TODO: Handle auth error
+	func handleAuthError(code errorCode: AuthErrorCode?) {
+		switch errorCode {
+		case .emailAlreadyInUse:
+			applyError(
+				title: "User already exists",
+				description: "A user already exists with email \(email). Would you like to log in instead?",
+				invalidEmail: true,
+				invalidPassword: false
+			)
+		case .invalidEmail:
+			applyError(
+				title: "Invalid email",
+				description: "Your email should be of the form xyz@xyz.xyz",
+				invalidEmail: true,
+				invalidPassword: false
+			)
+		case .networkError:
+			applyError(
+				title: "Network error",
+				description: "There was a problem connecting to our servers. Please try again",
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		case .tooManyRequests:
+			applyError(
+				title: "Too many requests",
+				description: "Please try again later",
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		case .weakPassword:
+			applyError(
+				title: "Weak password",
+				description: "Your password is easily guessed. Try another one",
+				invalidEmail: false,
+				invalidPassword: true
+			)
+		default:
+			applyError(
+				title: Self.unknownErrorTitle,
+				description: Self.unknownErrorDescription,
+				invalidEmail: false,
+				invalidPassword: false
+			)
+		}
 	}
 	
-	func handleFirestoreError(code: FirestoreErrorCode?) {
+	func handleFirestoreError(code errorCode: FirestoreErrorCode?) {
 		// TODO: Handle firestore error
 	}
 }

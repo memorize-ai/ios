@@ -33,22 +33,25 @@ final class GoogleSignInButtonModel: ViewModel {
 				email: email
 			)
 			self.user = newUser
-			self.createUser(from: newUser).done {
-				if additionalInfo.isNewUser {
+			if additionalInfo.isNewUser {
+				self.createUser(from: newUser).done {
 					self.shouldProgressToChooseTopicsView = true
-				} else {
-					self.shouldProgressToHomeView = true
+					self.loadingState = .success()
+				}.catch { error in
+					self.loadingState = .failure(
+						message: error.localizedDescription
+					)
+					// TODO: Handle error
 				}
+			} else {
+				self.shouldProgressToHomeView = true
 				self.loadingState = .success()
-			}.catch { error in
-				self.loadingState = .failure(
-					message: error.localizedDescription
-				)
 			}
 		}.catch { error in
 			self.loadingState = .failure(
 				message: error.localizedDescription
 			)
+			// TODO: Handle error
 		}
 	}
 	

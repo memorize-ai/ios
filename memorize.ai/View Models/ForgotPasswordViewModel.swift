@@ -60,6 +60,12 @@ final class ForgotPasswordViewModel: ViewModel {
 				description: "There was a problem connecting to our servers. Please try again",
 				invalidEmail: false
 			)
+		case .tooManyRequests:
+			applyError(
+				title: "Too many requests",
+				description: "Please try again later",
+				invalidEmail: false
+			)
 		case .userNotFound:
 			applyError(
 				title: "Email not found",
