@@ -54,6 +54,13 @@ struct SignUpViewContentBox: View {
 			}
 			AuthenticationViewOrText()
 			GoogleSignInButton()
+			if model.user != nil {
+				NavigateTo(
+					ChooseTopicsView()
+						.environmentObject(UserStore(model.user!)),
+					when: $model.loadingState.didSucceed
+				)
+			}
 		}
 	}
 }
