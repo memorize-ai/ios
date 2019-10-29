@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct LeftArrowHead: View {
+struct XButton: View {
 	let height: CGFloat
 	
 	var body: some View {
-		Image.transparentWhiteLeftArrowHead
+		Image.xButton
 			.resizable()
 			.renderingMode(.original)
 			.aspectRatio(contentMode: .fit)
@@ -13,9 +13,9 @@ struct LeftArrowHead: View {
 }
 
 #if DEBUG
-struct LeftArrowHead_Previews: PreviewProvider {
+struct XButton_Previews: PreviewProvider {
 	static var previews: some View {
-		LeftArrowHead(height: 50)
+		XButton(height: 50)
 			.align(to: .center)
 			.background(Color.gray)
 			.edgesIgnoringSafeArea(.all)

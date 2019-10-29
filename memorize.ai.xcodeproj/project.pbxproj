@@ -23,6 +23,10 @@
 		4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
 		4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */; };
+		4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */; };
+		4D32A5302368F64D0072AA70 /* PostSignUpViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52F2368F64D0072AA70 /* PostSignUpViewBottomGradient.swift */; };
+		4D32A5322368FB710072AA70 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5312368FB710072AA70 /* Image.swift */; };
+		4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5332368FC2E0072AA70 /* XButton.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -127,6 +131,10 @@
 		4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangle.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
 		4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpView.swift; sourceTree = "<group>"; };
+		4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTopGradient.swift; sourceTree = "<group>"; };
+		4D32A52F2368F64D0072AA70 /* PostSignUpViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewBottomGradient.swift; sourceTree = "<group>"; };
+		4D32A5312368FB710072AA70 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		4D32A5332368FC2E0072AA70 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -269,6 +277,7 @@
 				4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */,
 				4DF8C96023656C9E001141C9 /* GIDSignIn.swift */,
 				4D402E71235E591E0011C6B6 /* Color.swift */,
+				4D32A5312368FB710072AA70 /* Image.swift */,
 				4DBA39672360ED0F00B91596 /* View.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
@@ -302,6 +311,8 @@
 			isa = PBXGroup;
 			children = (
 				4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */,
+				4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */,
+				4D32A52F2368F64D0072AA70 /* PostSignUpViewBottomGradient.swift */,
 			);
 			path = PostSignUpView;
 			sourceTree = "<group>";
@@ -341,6 +352,7 @@
 				4D402E6F235E50610011C6B6 /* CustomRectangle.swift */,
 				4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */,
 				4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */,
+				4D32A5332368FC2E0072AA70 /* XButton.swift */,
 				4DA721CC23614863002008ED /* CustomTextField.swift */,
 				4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */,
 				4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */,
@@ -827,6 +839,7 @@
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */,
 				4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */,
+				4D32A5302368F64D0072AA70 /* PostSignUpViewBottomGradient.swift in Sources */,
 				4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */,
 				4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */,
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
@@ -835,9 +848,12 @@
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
+				4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */,
 				4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */,
+				4D32A5322368FB710072AA70 /* Image.swift in Sources */,
 				4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */,
 				4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */,
+				4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
 				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
