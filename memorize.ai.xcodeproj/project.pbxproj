@@ -44,6 +44,10 @@
 		4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */; };
 		4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */; };
 		4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */; };
+		4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */; };
+		4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC72367F3AF00F6FD07 /* AuthenticationView.swift */; };
+		4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCCA2367FA8E00F6FD07 /* ViewModel.swift */; };
+		4D64BCCE2368004300F6FD07 /* SignUpViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCCD2368004300F6FD07 /* SignUpViewContentBox.swift */; };
 		4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D690255235FADAD00533E20 /* AuthenticationViewTopGradient.swift */; };
 		4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
@@ -141,6 +145,10 @@
 		4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseStorage+PromiseKit.swift"; sourceTree = "<group>"; };
 		4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewOrText.swift; sourceTree = "<group>"; };
 		4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledDivider.swift; sourceTree = "<group>"; };
+		4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		4D64BCC72367F3AF00F6FD07 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		4D64BCCA2367FA8E00F6FD07 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		4D64BCCD2368004300F6FD07 /* SignUpViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewContentBox.swift; sourceTree = "<group>"; };
 		4D690255235FADAD00533E20 /* AuthenticationViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewTopGradient.swift; sourceTree = "<group>"; };
 		4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewTopControls.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -311,6 +319,36 @@
 			path = Muli;
 			sourceTree = "<group>";
 		};
+		4D64BCC42367CFA700F6FD07 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				4D402E6F235E50610011C6B6 /* CustomRectangle.swift */,
+				4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */,
+				4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */,
+				4DA721CC23614863002008ED /* CustomTextField.swift */,
+				4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */,
+				4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */,
+				4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		4D64BCC92367FA6F00F6FD07 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4D64BCCA2367FA8E00F6FD07 /* ViewModel.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4D64BCCC2368002F00F6FD07 /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				4D64BCCD2368004300F6FD07 /* SignUpViewContentBox.swift */,
+			);
+			path = SignUpView;
+			sourceTree = "<group>";
+		};
 		4D690254235FAC7C00533E20 /* InitialView */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +426,7 @@
 				4D703AF5233E728B004F1F65 /* Global.swift */,
 				4D703AEE233DFA45004F1F65 /* Constants.swift */,
 				4D1F9B29233EDEA200693571 /* Extensions */,
+				4D64BCC92367FA6F00F6FD07 /* Protocols */,
 				4D1F9B2C233EEBC900693571 /* Helpers */,
 				4D1F9B1B233EC5E400693571 /* Models */,
 				4DD2512523627CEE00A83509 /* View Models */,
@@ -433,6 +472,7 @@
 		4DAD2CDB2361151C001DA77B /* AuthenticationView */ = {
 			isa = PBXGroup;
 			children = (
+				4D64BCC72367F3AF00F6FD07 /* AuthenticationView.swift */,
 				4D690255235FADAD00533E20 /* AuthenticationViewTopGradient.swift */,
 				4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */,
 				4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */,
@@ -448,6 +488,7 @@
 			children = (
 				4DD2512623627D0300A83509 /* LogInViewModel.swift */,
 				4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */,
+				4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */,
 				4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */,
 			);
 			path = "View Models";
@@ -465,17 +506,12 @@
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
 			isa = PBXGroup;
 			children = (
-				4D402E6F235E50610011C6B6 /* CustomRectangle.swift */,
-				4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */,
-				4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */,
-				4DA721CC23614863002008ED /* CustomTextField.swift */,
-				4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */,
-				4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */,
-				4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */,
+				4D64BCC42367CFA700F6FD07 /* General */,
 				4D690254235FAC7C00533E20 /* InitialView */,
 				4DAD2CDB2361151C001DA77B /* AuthenticationView */,
 				4D17BDEE23614DE700AF1989 /* LogInView */,
 				4D8993292363D1120042AC9F /* ForgotPasswordView */,
+				4D64BCCC2368002F00F6FD07 /* SignUpView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -759,6 +795,7 @@
 				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
+				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
 				4DBA39682360ED0F00B91596 /* View.swift in Sources */,
 				4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */,
@@ -776,6 +813,7 @@
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
 				4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
+				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */,
@@ -783,6 +821,7 @@
 				4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
+				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
 				4DD34CD82362E33A0007E3E6 /* UserStore.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
@@ -799,6 +838,7 @@
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */,
 				4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */,
+				4D64BCCE2368004300F6FD07 /* SignUpViewContentBox.swift in Sources */,
 				4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */,
 				4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */,
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,

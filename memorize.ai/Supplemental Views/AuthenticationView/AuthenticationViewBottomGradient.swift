@@ -6,7 +6,7 @@ struct AuthenticationViewBottomGradient: View {
 	
 	let gradient: [Color]
 	
-	init(_ gradient: Color...) {
+	init(_ gradient: [Color]) {
 		self.gradient = gradient
 	}
 	
@@ -32,12 +32,10 @@ struct AuthenticationViewBottomGradient: View {
 #if DEBUG
 struct AuthenticationViewBottomGradient_Previews: PreviewProvider {
 	static var previews: some View {
-		GeometryReader { geometry in
-			AuthenticationViewBottomGradient(
-				.lightGreen,
-				.bluePurple
-			)
-		}
+		AuthenticationViewBottomGradient([
+			.lightGreen,
+			.bluePurple
+		])
 	}
 }
 #endif

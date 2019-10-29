@@ -16,4 +16,6 @@ extension Color {
 	static let darkText = Self("DarkText")
 	static let disabledButtonBackground = Self("DisabledButtonBackground")
 	static let darkRed = Self("DarkRed")
+	static let extraBluePurple = Self("ExtraBluePurple")
+	static let darkerLightBlue = Self("DarkerLightBlue")
 }

@@ -3,7 +3,7 @@ import FirebaseAuth
 import GoogleSignIn
 import PromiseKit
 
-final class GoogleSignInButtonModel: ObservableObject {
+final class GoogleSignInButtonModel: ViewModel {
 	@Published var loadingState = LoadingState.none
 	@Published var shouldShowActivityIndicator = false
 	@Published var shouldProgressToHomeView = false

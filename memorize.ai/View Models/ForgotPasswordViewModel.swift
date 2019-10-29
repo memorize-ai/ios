@@ -1,7 +1,7 @@
 import Combine
 import FirebaseAuth
 
-final class ForgotPasswordViewModel: ObservableObject {
+final class ForgotPasswordViewModel: ViewModel {
 	static let unknownErrorTitle = "Unknown error"
 	static let unknownErrorDescription = "Sorry about that! Please try again"
 	

@@ -3,7 +3,7 @@ import FirebaseAuth
 import GoogleSignIn
 import PromiseKit
 
-final class LogInViewModel: ObservableObject {
+final class LogInViewModel: ViewModel {
 	static let unknownErrorTitle = "Unknown error"
 	static let unknownErrorDescription = "Sorry about that! Please try again"
 	

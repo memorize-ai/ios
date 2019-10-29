@@ -8,7 +8,7 @@ struct AuthenticationViewTopGradient: View {
 	let height: CGFloat
 	
 	init(
-		_ gradient: Color...,
+		_ gradient: [Color],
 		height: CGFloat = SCREEN_SIZE.height * Self.fullHeightRatio
 	) {
 		self.gradient = gradient
@@ -37,10 +37,10 @@ struct AuthenticationViewTopGradient: View {
 #if DEBUG
 struct AuthenticationViewTopGradient_Previews: PreviewProvider {
 	static var previews: some View {
-		AuthenticationViewTopGradient(
+		AuthenticationViewTopGradient([
 			.bluePurple,
 			.lightGreen
-		)
+		])
 		.edgesIgnoringSafeArea(.all)
 	}
 }
