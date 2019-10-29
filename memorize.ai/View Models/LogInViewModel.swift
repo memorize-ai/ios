@@ -19,8 +19,10 @@ final class LogInViewModel: ViewModel {
 			shouldShowPasswordRedBorder = false
 		}
 	}
+	
 	@Published var shouldShowEmailRedBorder = false
 	@Published var shouldShowPasswordRedBorder = false
+	
 	@Published var loadingState = LoadingState.none
 	@Published var shouldShowErrorModal = false
 	

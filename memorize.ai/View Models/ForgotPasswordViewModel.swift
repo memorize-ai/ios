@@ -11,8 +11,10 @@ final class ForgotPasswordViewModel: ViewModel {
 			shouldShowEmailRedBorder = false
 		}
 	}
-	@Published var loadingState = LoadingState.none
+	
 	@Published var shouldShowEmailRedBorder = false
+	
+	@Published var loadingState = LoadingState.none
 	@Published var shouldShowErrorModal = false
 	
 	var errorModal: (title: String, description: String)?
