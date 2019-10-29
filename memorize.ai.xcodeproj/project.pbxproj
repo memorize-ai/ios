@@ -55,6 +55,7 @@
 		4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */; };
 		4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
+		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
 		4DA721CD23614863002008ED /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA721CC23614863002008ED /* CustomTextField.swift */; };
 		4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */; };
@@ -157,6 +158,7 @@
 		4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewContentBox.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
 		4DA721CC23614863002008ED /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4DAA4F39233DE1A600EF7467 /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,6 +269,7 @@
 				4D402E71235E591E0011C6B6 /* Color.swift */,
 				4DBA39672360ED0F00B91596 /* View.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
+				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
 				4DA0FD292368364200F9F0D3 /* String.swift */,
 			);
 			path = Extensions;
@@ -828,6 +831,7 @@
 				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
 				4DD34CD82362E33A0007E3E6 /* UserStore.swift in Sources */,
+				4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */,
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
