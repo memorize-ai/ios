@@ -5,6 +5,9 @@ import GoogleSignIn
 import PromiseKit
 
 final class GoogleSignInButtonModel: ViewModel {
+	static let unknownErrorTitle = "Unknown error"
+	static let unknownErrorDescription = "Sorry about that! Please try again"
+	
 	@Published var loadingState = LoadingState.none
 	@Published var shouldShowErrorModal = false
 	
@@ -75,7 +78,23 @@ final class GoogleSignInButtonModel: ViewModel {
 	}
 	
 	func handleAuthError(code errorCode: AuthErrorCode?) {
-		// TODO: Switch over `errorCode`
+		switch errorCode {
+		case .networkError:
+			applyError(
+				title: "Network error",
+				description: "There was a problem connecting to our servers. Please try again"
+			)
+		case .tooManyRequests:
+			applyError(
+				title: "Too many requests",
+				description: "Please try again later"
+			)
+		default:
+			applyError(
+				title: Self.unknownErrorTitle,
+				description: Self.unknownErrorDescription
+			)
+		}
 	}
 	
 	func handleFirestoreError(code errorCode: FirestoreErrorCode?) {
