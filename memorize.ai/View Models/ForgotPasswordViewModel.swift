@@ -38,12 +38,12 @@ final class ForgotPasswordViewModel: ViewModel {
 	func failPasswordReset(error: Error) {
 		loadingState = .failure(message: error.localizedDescription)
 		handleError(code: AuthErrorCode(error: error))
+		shouldShowErrorModal = true
 	}
 	
 	func applyError(title: String, description: String, invalidEmail: Bool) {
 		errorModal = (title, description)
 		shouldShowEmailRedBorder = invalidEmail
-		shouldShowErrorModal = true
 	}
 	
 	func handleError(code: AuthErrorCode?) {

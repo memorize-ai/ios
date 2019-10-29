@@ -1,5 +1,6 @@
 import Combine
 import FirebaseAuth
+import FirebaseFirestore
 import PromiseKit
 
 final class SignUpViewModel: ViewModel {
@@ -54,16 +55,39 @@ final class SignUpViewModel: ViewModel {
 	}
 	
 	func failAuthSignUp(error: Error) {
-		// TODO: Fail auth sign up
+		loadingState = .failure(message: error.localizedDescription)
+		handleAuthError(code: AuthErrorCode(error: error))
+		shouldShowErrorModal = true
 	}
 	
 	func failFirestoreSignUp(error: Error) {
-		// TODO: Fail firestore sign up
+		loadingState = .failure(message: error.localizedDescription)
+		handleFirestoreError(code: FirestoreErrorCode(error: error))
+		shouldShowErrorModal = true
 	}
 	
 	func resetRedBorders() {
 		shouldShowNameRedBorder = false
 		shouldShowEmailRedBorder = false
 		shouldShowPasswordRedBorder = false
+	}
+	
+	func applyError(
+		title: String,
+		description: String,
+		invalidEmail: Bool,
+		invalidPassword: Bool
+	) {
+		errorModal = (title, description)
+		shouldShowEmailRedBorder = invalidEmail
+		shouldShowPasswordRedBorder = invalidPassword
+	}
+	
+	func handleAuthError(code: AuthErrorCode?) {
+		// TODO: Handle auth error
+	}
+	
+	func handleFirestoreError(code: FirestoreErrorCode?) {
+		// TODO: Handle firestore error
 	}
 }

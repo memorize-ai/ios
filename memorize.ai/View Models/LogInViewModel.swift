@@ -65,7 +65,6 @@ final class LogInViewModel: ViewModel {
 		errorModal = (title, description)
 		shouldShowEmailRedBorder = invalidEmail
 		shouldShowPasswordRedBorder = invalidPassword
-		shouldShowErrorModal = true
 	}
 	
 	func handleError(code errorCode: AuthErrorCode?) {
