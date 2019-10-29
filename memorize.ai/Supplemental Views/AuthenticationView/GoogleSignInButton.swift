@@ -27,6 +27,18 @@ struct GoogleSignInButton: View {
 					.frame(height: 40)
 				}
 			}
+			.alert(isPresented: $model.shouldShowErrorModal) {
+				guard let errorModal = model.errorModal else {
+					return .init(
+						title: .init(GoogleSignInButtonModel.unknownErrorTitle),
+						message: .init(GoogleSignInButtonModel.unknownErrorDescription)
+					)
+				}
+				return .init(
+					title: .init(errorModal.title),
+					message: .init(errorModal.description)
+				)
+			}
 			if model.user != nil {
 				NavigateTo(
 					HomeView()
