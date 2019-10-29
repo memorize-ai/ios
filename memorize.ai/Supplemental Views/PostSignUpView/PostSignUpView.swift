@@ -12,8 +12,11 @@ struct PostSignUpView<
 	
 	var body: some View {
 		ZStack {
-			PostSignUpViewBottomGradient()
-				.align(to: .bottomTrailing)
+			AuthenticationViewBottomGradient([
+				.darkerLightBlue,
+				.extraBluePurple
+			])
+			.align(to: .bottomTrailing)
 			ZStack(alignment: .top) {
 				PostSignUpViewTopGradient()
 				VStack {

@@ -24,7 +24,6 @@
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
 		4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */; };
 		4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */; };
-		4D32A5302368F64D0072AA70 /* PostSignUpViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52F2368F64D0072AA70 /* PostSignUpViewBottomGradient.swift */; };
 		4D32A5322368FB710072AA70 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5312368FB710072AA70 /* Image.swift */; };
 		4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5332368FC2E0072AA70 /* XButton.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
@@ -132,7 +131,6 @@
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
 		4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpView.swift; sourceTree = "<group>"; };
 		4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTopGradient.swift; sourceTree = "<group>"; };
-		4D32A52F2368F64D0072AA70 /* PostSignUpViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewBottomGradient.swift; sourceTree = "<group>"; };
 		4D32A5312368FB710072AA70 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		4D32A5332368FC2E0072AA70 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 			children = (
 				4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */,
 				4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */,
-				4D32A52F2368F64D0072AA70 /* PostSignUpViewBottomGradient.swift */,
 			);
 			path = PostSignUpView;
 			sourceTree = "<group>";
@@ -839,7 +836,6 @@
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */,
 				4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */,
-				4D32A5302368F64D0072AA70 /* PostSignUpViewBottomGradient.swift in Sources */,
 				4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */,
 				4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */,
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
