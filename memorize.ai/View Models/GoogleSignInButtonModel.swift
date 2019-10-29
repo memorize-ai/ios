@@ -1,18 +1,20 @@
 import Combine
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 import PromiseKit
 
 final class GoogleSignInButtonModel: ViewModel {
 	@Published var loadingState = LoadingState.none
-	@Published var shouldShowActivityIndicator = false
+	@Published var shouldShowErrorModal = false
+	
 	@Published var shouldProgressToHomeView = false
 	@Published var shouldProgressToChooseTopicsView = false
 	
 	var user: User?
+	var errorModal: (title: String, description: String)?
 	
 	func logIn() {
-		loadingState = .loading()
 		GIDSignIn.completion = logInCompletion
 		GIDSignIn.sharedInstance().presentingViewController =
 			UIApplication.shared.windows.last?.rootViewController
@@ -20,7 +22,7 @@ final class GoogleSignInButtonModel: ViewModel {
 	}
 	
 	func logInCompletion(promise: Promise<AuthDataResult>) {
-		shouldShowActivityIndicator = true
+		loadingState = .loading()
 		promise.done { result in
 			let user = result.user
 			guard
@@ -34,25 +36,19 @@ final class GoogleSignInButtonModel: ViewModel {
 			)
 			self.user = newUser
 			if additionalInfo.isNewUser {
-				self.createUser(from: newUser).done {
-					self.shouldProgressToChooseTopicsView = true
-					self.loadingState = .success()
-				}.catch { error in
-					self.loadingState = .failure(
-						message: error.localizedDescription
-					)
-					// TODO: Handle error
-				}
+				self.handleNewUser(from: newUser)
 			} else {
 				self.shouldProgressToHomeView = true
 				self.loadingState = .success()
 			}
-		}.catch { error in
-			self.loadingState = .failure(
-				message: error.localizedDescription
-			)
-			// TODO: Handle error
-		}
+		}.catch(failAuthGoogleSignUp)
+	}
+	
+	func handleNewUser(from user: User) {
+		createUser(from: user).done {
+			self.shouldProgressToChooseTopicsView = true
+			self.loadingState = .success()
+		}.catch(failFirestoreGoogleSignUp)
 	}
 	
 	func createUser(from user: User) -> Promise<Void> {
@@ -60,5 +56,29 @@ final class GoogleSignInButtonModel: ViewModel {
 			"name": user.name,
 			"email": user.email
 		])
+	}
+	
+	func failAuthGoogleSignUp(error: Error) {
+		loadingState = .failure(message: error.localizedDescription)
+		handleAuthError(code: AuthErrorCode(error: error))
+		shouldShowErrorModal = true
+	}
+	
+	func failFirestoreGoogleSignUp(error: Error) {
+		loadingState = .failure(message: error.localizedDescription)
+		handleFirestoreError(code: FirestoreErrorCode(error: error))
+		shouldShowErrorModal = true
+	}
+	
+	func applyError(title: String, description: String) {
+		errorModal = (title, description)
+	}
+	
+	func handleAuthError(code errorCode: AuthErrorCode?) {
+		// TODO: Switch over `errorCode`
+	}
+	
+	func handleFirestoreError(code errorCode: FirestoreErrorCode?) {
+		// TODO: Switch over `errorCode`
 	}
 }

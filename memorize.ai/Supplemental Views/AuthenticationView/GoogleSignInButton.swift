@@ -8,7 +8,7 @@ struct GoogleSignInButton: View {
 			Button(action: model.logIn) {
 				CustomRectangle(backgroundColor: .mediumGray) {
 					Group {
-						if model.shouldShowActivityIndicator {
+						if model.loadingState.isLoading {
 							ActivityIndicator()
 						} else {
 							HStack {
