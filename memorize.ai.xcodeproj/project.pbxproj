@@ -22,6 +22,7 @@
 		4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */; };
 		4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
+		4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -125,6 +126,7 @@
 		4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangles.swift; sourceTree = "<group>"; };
 		4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangle.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
+		4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpView.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -294,6 +296,14 @@
 				4DC8115B2363E46400CCFF98 /* Asterisk.swift */,
 			);
 			path = Operators;
+			sourceTree = "<group>";
+		};
+		4D32A52A2368F0C80072AA70 /* PostSignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */,
+			);
+			path = PostSignUpView;
 			sourceTree = "<group>";
 		};
 		4D402E75235E6FA50011C6B6 /* Fonts */ = {
@@ -518,6 +528,7 @@
 				4D17BDEE23614DE700AF1989 /* LogInView */,
 				4D8993292363D1120042AC9F /* ForgotPasswordView */,
 				4D64BCCC2368002F00F6FD07 /* SignUpView */,
+				4D32A52A2368F0C80072AA70 /* PostSignUpView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -803,6 +814,7 @@
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
 				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
+				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
 				4DBA39682360ED0F00B91596 /* View.swift in Sources */,
 				4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */,

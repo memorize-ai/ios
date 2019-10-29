@@ -1,18 +1,15 @@
 import SwiftUI
 
 struct LogInView: View {
-	let model = LogInViewModel()
-	
 	var body: some View {
 		AuthenticationView(
-			model: model,
 			topGradient: [.bluePurple, .lightGreen],
 			bottomGradient: [.lightGreen, .bluePurple],
 			alternativeMessage: "Don't have an account yet?",
 			alternativeButtonText: "SIGN UP",
 			alternativeButtonDestination: SignUpView(),
 			title: "Welcome back",
-			contentBox: LogInViewContentBox(model: model)
+			contentBox: LogInViewContentBox(model: .init())
 		)
 	}
 }

@@ -1,22 +1,21 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
-	let model: ForgotPasswordViewModel
+	let email: String
 	
 	init(email: String = "") {
-		model = .init(email: email)
+		self.email = email
 	}
 	
 	var body: some View {
 		AuthenticationView(
-			model: model,
 			topGradient: [.bluePurple, .lightGreen],
 			bottomGradient: [.lightGreen, .bluePurple],
 			alternativeMessage: nil,
 			alternativeButtonText: nil,
 			alternativeButtonDestination: nil as EmptyView?,
 			title: "Forgot password",
-			contentBox: ForgotPasswordViewContentBox(model: model)
+			contentBox: ForgotPasswordViewContentBox(model: .init(email: email))
 		)
 	}
 }

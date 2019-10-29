@@ -1,13 +1,7 @@
 import SwiftUI
 
-struct AuthenticationView<
-	Model: ViewModel,
-	ContentBox: View,
-	AlternativeDestination: View
->: View {
+struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View {
 	@Environment(\.presentationMode) var presentationMode
-	
-	@ObservedObject var model: Model
 	
 	let topGradient: [Color]
 	let bottomGradient: [Color]
@@ -63,16 +57,14 @@ struct AuthenticationView<
 #if DEBUG
 struct AuthenticationView_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = LogInViewModel()
-		return AuthenticationView(
-			model: model,
+		AuthenticationView(
 			topGradient: [.bluePurple, .lightGreen],
 			bottomGradient: [.lightGreen, .bluePurple],
 			alternativeMessage: "Don't have an account yet?",
 			alternativeButtonText: "SIGN UP",
 			alternativeButtonDestination: SignUpView(),
 			title: "Welcome back",
-			contentBox: LogInViewContentBox(model: model)
+			contentBox: LogInViewContentBox(model: .init())
 		)
 	}
 }
