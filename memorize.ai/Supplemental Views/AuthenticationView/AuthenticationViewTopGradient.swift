@@ -20,7 +20,7 @@ struct AuthenticationViewTopGradient: View {
 			let width = SCREEN_SIZE.width
 			path.addLines([
 				.init(x: 0, y: height),
-				.init(x: 0, y: 0),
+				.zero,
 				.init(x: width, y: 0),
 				.init(x: width, y: height - Self.contentHeightDifference)
 			])
