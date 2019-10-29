@@ -12,7 +12,9 @@ final class SignUpViewModel: ViewModel {
 	@Published var loadingState = LoadingState.none
 	
 	var isSignUpButtonDisabled: Bool {
-		name.isEmpty || email.isEmpty || password.isEmpty
+		name.isTrimmedEmpty ||
+		email.isTrimmedEmpty ||
+		password.isTrimmedEmpty
 	}
 	
 	func signUp() {

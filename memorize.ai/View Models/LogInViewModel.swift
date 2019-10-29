@@ -30,7 +30,7 @@ final class LogInViewModel: ViewModel {
 	var errorModal: (title: String, description: String)?
 	
 	var isLogInButtonDisabled: Bool {
-		email.isEmpty || password.isEmpty
+		email.isTrimmedEmpty || password.isTrimmedEmpty
 	}
 	
 	func logIn() {

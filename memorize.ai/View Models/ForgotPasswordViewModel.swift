@@ -24,7 +24,7 @@ final class ForgotPasswordViewModel: ViewModel {
 	}
 	
 	var isResetButtonDisabled: Bool {
-		email.isEmpty
+		email.isTrimmedEmpty
 	}
 	
 	func sendResetEmail() {
