@@ -3,7 +3,7 @@ import SwiftUI
 struct TopicCell: View {
 	static let dimension: CGFloat = 109
 	
-	let topic: Topic
+	@ObservedObject var topic: Topic
 	
 	var body: some View {
 		ZStack(alignment: .bottom) {
@@ -48,7 +48,6 @@ struct TopicCell_Previews: PreviewProvider {
 	static var previews: some View {
 		TopicCell(topic: .init(
 			id: "0",
-			willChange: {},
 			name: "Geography",
 			image: .init("GeographyTopic")
 		))

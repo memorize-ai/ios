@@ -22,7 +22,6 @@ final class UserStore: ObservableObject {
 					self.topics.append(
 						Topic(
 							id: topicId,
-							willChange: self.objectWillChange.send,
 							name: document.get("name") as? String ?? "Unknown"
 						).load()
 					)

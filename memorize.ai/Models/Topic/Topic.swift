@@ -1,23 +1,16 @@
 import SwiftUI
 import FirebaseFirestore
 
-final class Topic: Identifiable, Equatable {
+final class Topic: ObservableObject, Identifiable, Equatable {
 	let id: String
-	let willChange: () -> Void
 	
-	var name: String { willSet { willChange() } }
-	var image: Image? { willSet { willChange() } }
+	@Published var name: String
+	@Published var image: Image?
 	
-	var loadingState = LoadingState.none { willSet { willChange() } }
+	@Published var loadingState = LoadingState.none
 	
-	init(
-		id: String,
-		willChange: @escaping () -> Void,
-		name: String,
-		image: Image? = nil
-	) {
+	init(id: String, name: String, image: Image? = nil) {
 		self.id = id
-		self.willChange = willChange
 		self.name = name
 		self.image = image
 	}
