@@ -66,6 +66,7 @@
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
 		4DA721CD23614863002008ED /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA721CC23614863002008ED /* CustomTextField.swift */; };
+		4DA800A9236A4A4D00E26FE8 /* TopicCellCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA800A8236A4A4D00E26FE8 /* TopicCellCheck.swift */; };
 		4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */; };
 		4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */; };
 		4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA4F40233DE1A600EF7467 /* memorize_ai.xcdatamodeld */; };
@@ -181,6 +182,7 @@
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
 		4DA721CC23614863002008ED /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		4DA800A8236A4A4D00E26FE8 /* TopicCellCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCellCheck.swift; sourceTree = "<group>"; };
 		4DAA4F39233DE1A600EF7467 /* memorize.ai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memorize.ai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 			children = (
 				4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */,
 				4DBFB7B82369553500D75B45 /* TopicCell.swift */,
+				4DA800A8236A4A4D00E26FE8 /* TopicCellCheck.swift */,
 			);
 			path = ChooseTopicsView;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
+				4DA800A9236A4A4D00E26FE8 /* TopicCellCheck.swift in Sources */,
 				4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */,
 				4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */,
 				4D32A5322368FB710072AA70 /* Image.swift in Sources */,
