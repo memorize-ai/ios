@@ -1,15 +1,22 @@
 import SwiftUI
 
 struct TopicCellCheck: View {
-	@Binding var isSelected: Bool
+	let isSelected: Bool
 	
 	var body: some View {
-		Button(action: {
-			self.isSelected.toggle()
-		}) {
-			Circle()
-				.frame(width: 24, height: 24)
+		Group { // TODO: Add animation
+			if isSelected {
+				Circle() // TODO: Show check
+			} else {
+				Circle()
+					.foregroundColor(Color.white.opacity(0.24))
+					.overlay(
+						Circle()
+							.stroke(Color.white, lineWidth: 1)
+					)
+			}
 		}
+		.frame(width: 24, height: 24)
 	}
 }
 
@@ -17,8 +24,8 @@ struct TopicCellCheck: View {
 struct TopicCellCheck_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack(spacing: 20) {
-			TopicCellCheck(isSelected: .constant(false))
-			TopicCellCheck(isSelected: .constant(true))
+			TopicCellCheck(isSelected: false)
+			TopicCellCheck(isSelected: true)
 		}
 	}
 }
