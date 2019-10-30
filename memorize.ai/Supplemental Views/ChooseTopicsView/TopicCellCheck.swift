@@ -6,7 +6,8 @@ struct TopicCellCheck: View {
 	var body: some View {
 		Group {
 			if isSelected {
-				Circle() // TODO: Show check
+				Circle()
+					.foregroundColor(.neonGreen)
 			} else {
 				Circle()
 					.foregroundColor(Color.white.opacity(0.24))
