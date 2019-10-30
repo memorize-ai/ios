@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "QGrid",
-        "repositoryURL": "https://github.com/Q-Mobile/QGrid",
-        "state": {
-          "branch": "master",
-          "revision": "40607aec336a8097c94bcadb81762592d89073ac",
-          "version": null
-        }
-      },
-      {
         "package": "SwiftUIX",
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {

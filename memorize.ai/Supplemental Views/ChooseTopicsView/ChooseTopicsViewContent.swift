@@ -1,5 +1,4 @@
 import SwiftUI
-import QGrid
 
 struct ChooseTopicsViewContent: View {
 	@EnvironmentObject var currentUserStore: UserStore
@@ -8,11 +7,14 @@ struct ChooseTopicsViewContent: View {
 	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
 	
 	var body: some View {
-		QGrid(
-			currentUserStore.topics,
-			columns: Self.numberOfColumns
-		) { topic in
-			TopicCell(topic: topic)
+		ScrollView {
+			Grid(
+				elements: currentUserStore.topics.map { TopicCell(topic: $0) },
+				columns: Self.numberOfColumns,
+				horizontalSpacing: 8,
+				verticalSpacing: 8
+			)
+			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
 	}
 }
