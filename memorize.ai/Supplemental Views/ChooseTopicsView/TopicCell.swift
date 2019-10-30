@@ -15,8 +15,11 @@ struct TopicCell: View {
 		ZStack(alignment: .bottom) {
 			Group {
 				if topic.image == nil {
-					Color.gray
-					ActivityIndicator()
+					Color.lightGrayBackground
+					ActivityIndicator(
+						color: Color.black.opacity(0.2),
+						thickness: 1.5
+					)
 				} else {
 					topic.image?
 						.resizable()
@@ -24,7 +27,9 @@ struct TopicCell: View {
 				}
 				LinearGradient(
 					gradient: .init(colors: [
-						.transparent,
+						Color.black.opacity(
+							topic.image == nil ? 0.25 : 0.1
+						),
 						Color.black.opacity(0.6)
 					]),
 					startPoint: .top,
