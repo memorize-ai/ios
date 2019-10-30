@@ -9,10 +9,13 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 	
 	@Published var loadingState = LoadingState.none
 	
-	init(id: String, name: String, image: Image? = nil) {
+	@Published var isSelected: Bool
+	
+	init(id: String, name: String, image: Image? = nil, isSelected: Bool = false) {
 		self.id = id
 		self.name = name
 		self.image = image
+		self.isSelected = isSelected
 	}
 	
 	@discardableResult
