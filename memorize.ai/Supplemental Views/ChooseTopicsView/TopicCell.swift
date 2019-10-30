@@ -51,11 +51,6 @@ struct TopicCell_Previews: PreviewProvider {
 			name: "Geography",
 			image: .init("GeographyTopic")
 		))
-		.environmentObject(UserStore(.init(
-			id: "0",
-			name: "Ken Mueller",
-			email: "kenmueller0@gmail.com"
-		)))
 	}
 }
 #endif
