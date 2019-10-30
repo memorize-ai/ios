@@ -27,6 +27,7 @@
 		4D32A5322368FB710072AA70 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5312368FB710072AA70 /* Image.swift */; };
 		4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5332368FC2E0072AA70 /* XButton.swift */; };
 		4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */; };
+		4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -135,6 +136,7 @@
 		4D32A5312368FB710072AA70 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		4D32A5332368FC2E0072AA70 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTrailingButton.swift; sourceTree = "<group>"; };
+		4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTitle.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */,
 				4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */,
 				4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */,
+				4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */,
 			);
 			path = PostSignUpView;
 			sourceTree = "<group>";
@@ -871,6 +874,7 @@
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
 				4DC6435B2366D80400DEEED1 /* previewForDevices.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
+				4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */,
 				4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */,

@@ -32,7 +32,7 @@ struct PostSignUpView<
 					.padding(.leading, 33)
 					.padding(.trailing, 25)
 					.padding(.top, 34)
-					Text(title)
+					PostSignUpViewTitle(text: title)
 				}
 				content
 			}
