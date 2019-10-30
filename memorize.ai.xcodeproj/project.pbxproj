@@ -285,9 +285,9 @@
 				4D402E71235E591E0011C6B6 /* Color.swift */,
 				4D32A5312368FB710072AA70 /* Image.swift */,
 				4DBA39672360ED0F00B91596 /* View.swift */,
+				4DA0FD292368364200F9F0D3 /* String.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
-				4DA0FD292368364200F9F0D3 /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
