@@ -41,7 +41,7 @@ struct TopicCell: View {
 					.padding(.bottom, 16)
 			}
 			TopicCellCheck(isSelected: $topic.isSelected)
-				.padding([.trailing, .top])
+				.padding([.trailing, .top], 8)
 		}
 		.cornerRadius(5)
 	}

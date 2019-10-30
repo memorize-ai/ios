@@ -7,7 +7,8 @@ struct TopicCellCheck: View {
 		Button(action: {
 			self.isSelected.toggle()
 		}) {
-			Text(isSelected ? "Y" : "N")
+			Circle()
+				.frame(width: 24, height: 24)
 		}
 	}
 }
