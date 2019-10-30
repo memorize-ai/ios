@@ -15,7 +15,7 @@ struct ChooseTopicsView: View {
 			leadingButton: leadingButton,
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: RecommendedDecksView(),
-			content: EmptyView() // TODO: Change this
+			content: ChooseTopicsViewContent()
 		)
 	}
 }
