@@ -13,18 +13,31 @@ struct TopicCell: View {
 	
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			if topic.image == nil {
-				EmptyView() // TODO: Change this to skeleton
-			} else {
-				topic.image!
-					.resizable()
-					.scaledToFill()
-					.frame(
-						width: Self.dimension,
-						height: Self.dimension
-					)
+			Group {
+				if topic.image == nil {
+					Color.gray
+					ActivityIndicator()
+				} else {
+					topic.image?
+						.resizable()
+						.scaledToFill()
+				}
+				LinearGradient(
+					gradient: .init(colors: [
+						.transparent,
+						Color.black.opacity(0.6)
+					]),
+					startPoint: .top,
+					endPoint: .bottom
+				)
 			}
+			.frame(
+				width: Self.dimension,
+				height: Self.dimension
+			)
 			Text(topic.name)
+				.font(.muli(.regular, size: 14))
+				.foregroundColor(.white)
 				.padding(.bottom, 16)
 		}
 		.cornerRadius(5)
