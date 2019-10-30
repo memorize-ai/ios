@@ -6,7 +6,7 @@ struct GridRow<Element: View>: View {
 	
 	var body: some View {
 		HStack(spacing: spacing) {
-			ForEach(0..<elements.count) {
+			ForEach(0..<elements.count, id: \.self) {
 				self.elements[$0]
 			}
 		}

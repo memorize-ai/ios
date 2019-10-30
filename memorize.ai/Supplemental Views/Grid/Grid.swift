@@ -17,7 +17,7 @@ struct Grid<Element: View>: View {
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: verticalSpacing) {
-			ForEach(0..<chunked.count) {
+			ForEach(0..<chunked.count, id: \.self) {
 				GridRow(
 					spacing: self.horizontalSpacing,
 					elements: self.chunked[$0]
