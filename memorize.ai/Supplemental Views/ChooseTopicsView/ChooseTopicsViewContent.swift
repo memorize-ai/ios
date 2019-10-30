@@ -10,9 +10,7 @@ struct ChooseTopicsViewContent: View {
 	var body: some View {
 		QGrid(
 			currentUserStore.topics,
-			columns: Self.numberOfColumns,
-			vSpacing: 8,
-			hSpacing: 8
+			columns: Self.numberOfColumns
 		) { topic in
 			TopicCell(topic: topic)
 		}

@@ -12,7 +12,22 @@ struct TopicCell: View {
 	}
 	
 	var body: some View {
-		Text(topic.name)
+		ZStack(alignment: .bottom) {
+			if topic.image == nil {
+				EmptyView() // TODO: Change this to skeleton
+			} else {
+				topic.image!
+					.resizable()
+					.scaledToFill()
+					.frame(
+						width: Self.dimension,
+						height: Self.dimension
+					)
+			}
+			Text(topic.name)
+				.padding(.bottom, 16)
+		}
+		.cornerRadius(5)
 	}
 }
 
@@ -21,8 +36,8 @@ struct TopicCell_Previews: PreviewProvider {
 	static var previews: some View {
 		TopicCell(topic: .init(
 			id: "0",
-			name: "Math",
-			image: nil
+			name: "Geography",
+			image: .init("GeographyTopic")
 		))
 		.environmentObject(UserStore(.init(
 			id: "0",

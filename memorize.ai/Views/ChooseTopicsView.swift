@@ -22,11 +22,17 @@ struct ChooseTopicsView: View {
 struct ChooseTopicsView_Previews: PreviewProvider {
 	static var previews: some View {
 		ChooseTopicsView()
-			.environmentObject(UserStore(.init(
-				id: "0",
-				name: "Ken Mueller",
-				email: "kenmueller0@gmail.com"
-			)))
+			.environmentObject(UserStore(
+				.init(
+					id: "0",
+					name: "Ken Mueller",
+					email: "kenmueller0@gmail.com"
+				),
+				topics: [
+					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
+					.init(id: "1", name: "Geography", image: .init("GeographyTopic"))
+				]
+			))
 	}
 }
 #endif
