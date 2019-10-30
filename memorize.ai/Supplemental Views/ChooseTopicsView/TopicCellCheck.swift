@@ -4,7 +4,7 @@ struct TopicCellCheck: View {
 	let isSelected: Bool
 	
 	var body: some View {
-		Group { // TODO: Add animation
+		Group {
 			if isSelected {
 				Circle() // TODO: Show check
 			} else {
@@ -16,6 +16,7 @@ struct TopicCellCheck: View {
 					)
 			}
 		}
+		.animation(.linear(duration: 0.1))
 		.frame(width: 24, height: 24)
 	}
 }
