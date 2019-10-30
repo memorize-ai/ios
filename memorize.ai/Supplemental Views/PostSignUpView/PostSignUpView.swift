@@ -2,12 +2,13 @@ import SwiftUI
 
 struct PostSignUpView<
 	LeadingButton: View,
-	TrailingButton: View,
+	TrailingButtonDestination: View,
 	Content: View
 >: View {
 	let title: String
 	let leadingButton: LeadingButton
-	let trailingButton: TrailingButton
+	let trailingButtonTitle: String
+	let trailingButtonDestination: TrailingButtonDestination
 	let content: Content
 	
 	var body: some View {
@@ -23,8 +24,14 @@ struct PostSignUpView<
 					HStack {
 						leadingButton
 						Spacer()
-						trailingButton
+						PostSignUpViewTrailingButton(
+							text: trailingButtonTitle,
+							destination: trailingButtonDestination
+						)
 					}
+					.padding(.leading, 33)
+					.padding(.trailing, 25)
+					.padding(.top, 34)
 					Text(title)
 				}
 				content
@@ -42,7 +49,8 @@ struct PostSignUpView_Previews: PreviewProvider {
 		PostSignUpView(
 			title: "Choose your interests",
 			leadingButton: XButton(height: 20),
-			trailingButton: XButton(height: 20), // TODO: Change this to NEXT button
+			trailingButtonTitle: "NEXT",
+			trailingButtonDestination: EmptyView(),
 			content: EmptyView()
 		)
 	}

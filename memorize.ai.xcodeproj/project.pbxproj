@@ -26,6 +26,7 @@
 		4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */; };
 		4D32A5322368FB710072AA70 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5312368FB710072AA70 /* Image.swift */; };
 		4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5332368FC2E0072AA70 /* XButton.swift */; };
+		4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -133,6 +134,7 @@
 		4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTopGradient.swift; sourceTree = "<group>"; };
 		4D32A5312368FB710072AA70 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		4D32A5332368FC2E0072AA70 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
+		4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTrailingButton.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			children = (
 				4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */,
 				4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */,
+				4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */,
 			);
 			path = PostSignUpView;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
 				4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */,
 				4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */,
+				4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */,
 				4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,

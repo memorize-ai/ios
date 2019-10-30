@@ -8,7 +8,6 @@ struct AuthenticationViewContentBox<Content: View>: View {
 		CustomRectangle(
 			borderColor: .lightGray,
 			borderWidth: 1.5,
-			cornerRadius: 5,
 			shadowRadius: 5,
 			shadowYOffset: 5
 		) {

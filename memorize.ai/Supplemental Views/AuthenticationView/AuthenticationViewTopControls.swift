@@ -22,9 +22,8 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 			NavigationLink(destination: alternativeButtonDestination) {
 				CustomRectangle(
 					backgroundColor: .transparent,
-					borderColor: Color.lightGray.opacity(0.1624),
-					borderWidth: 1.5,
-					cornerRadius: 5
+					borderColor: .transparentLightGray,
+					borderWidth: 1.5
 				) {
 					Text(alternativeButtonText)
 						.font(.muli(.bold, size: 13))
