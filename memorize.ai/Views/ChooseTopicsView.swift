@@ -4,7 +4,13 @@ struct ChooseTopicsView: View {
 	@EnvironmentObject var currentUserStore: UserStore
 	
 	var body: some View {
-		Text("Choosing topics for \(currentUserStore.user.name)")
+		PostSignUpView(
+			title: "Choose your interests",
+			leadingButton: XButton(height: 20), // TODO: Add button
+			trailingButtonTitle: "NEXT",
+			trailingButtonDestination: EmptyView(), // TODO: Change this
+			content: EmptyView() // TODO: Change this
+		)
 	}
 }
 
