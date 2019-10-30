@@ -6,6 +6,7 @@ struct AuthenticationViewContentBox<Content: View>: View {
 	
 	var body: some View {
 		CustomRectangle(
+			background: Color.white,
 			borderColor: .lightGray,
 			borderWidth: 1.5,
 			shadowRadius: 5,

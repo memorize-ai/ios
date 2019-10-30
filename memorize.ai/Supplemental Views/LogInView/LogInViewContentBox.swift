@@ -26,9 +26,9 @@ struct LogInViewContentBox: View {
 				}
 				Button(action: model.logIn) {
 					CustomRectangle(
-						backgroundColor: model.isLogInButtonDisabled
-							? .disabledButtonBackground
-							: .neonGreen
+						background: model.isLogInButtonDisabled
+							? Color.disabledButtonBackground
+							: Color.neonGreen
 					) {
 						Group {
 							if model.loadingState.isLoading {

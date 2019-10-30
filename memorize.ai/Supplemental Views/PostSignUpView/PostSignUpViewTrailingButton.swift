@@ -7,7 +7,7 @@ struct PostSignUpViewTrailingButton<Destination: View>: View {
 	var body: some View {
 		NavigationLink(destination: destination) {
 			CustomRectangle(
-				backgroundColor: .transparent,
+				background: Color.transparent,
 				borderColor: .transparentLightGray,
 				borderWidth: 1.5
 			) {

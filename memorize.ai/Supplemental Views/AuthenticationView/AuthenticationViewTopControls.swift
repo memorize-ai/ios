@@ -21,7 +21,7 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 				.padding([.trailing, .bottom], 1)
 			NavigationLink(destination: alternativeButtonDestination) {
 				CustomRectangle(
-					backgroundColor: .transparent,
+					background: Color.transparent,
 					borderColor: .transparentLightGray,
 					borderWidth: 1.5
 				) {

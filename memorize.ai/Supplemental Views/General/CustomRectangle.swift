@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct CustomRectangle<Content: View>: View {
-	let backgroundColor: Color
+struct CustomRectangle<Background: View, Content: View>: View {
+	let background: Background
 	let borderColor: Color
 	let borderWidth: CGFloat
 	let cornerRadius: CGFloat
@@ -12,7 +12,7 @@ struct CustomRectangle<Content: View>: View {
 	let content: Content
 	
 	init(
-		backgroundColor: Color = .white,
+		background: Background,
 		borderColor: Color = .white,
 		borderWidth: CGFloat = 0,
 		cornerRadius: CGFloat = 5,
@@ -22,7 +22,7 @@ struct CustomRectangle<Content: View>: View {
 		shadowYOffset: CGFloat = 0,
 		content: () -> Content
 	) {
-		self.backgroundColor = backgroundColor
+		self.background = background
 		self.borderColor = borderColor
 		self.borderWidth = borderWidth
 		self.cornerRadius = cornerRadius
@@ -37,7 +37,7 @@ struct CustomRectangle<Content: View>: View {
 		let roundedRectangle = RoundedRectangle(cornerRadius: cornerRadius)
 		return content
 			.background(
-				backgroundColor
+				background
 					.clipShape(roundedRectangle)
 					.shadow(
 						color: shadowColor,
@@ -57,14 +57,18 @@ struct CustomRectangle<Content: View>: View {
 struct CustomRectangle_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack(spacing: 20) {
-			CustomRectangle {
+			CustomRectangle(background: Color.white) {
 				Text("SIGN UP")
 					.frame(maxWidth: 132)
 					.frame(height: 40)
 					.font(.muli(.bold, size: 14))
 					.foregroundColor(.darkBlue)
 			}
-			CustomRectangle(borderColor: .darkBlue, borderWidth: 3) {
+			CustomRectangle(
+				background: Color.white,
+				borderColor: .darkBlue,
+				borderWidth: 3
+			) {
 				Text("SIGN UP")
 					.frame(maxWidth: 132)
 					.frame(height: 40)

@@ -1,19 +1,20 @@
 import SwiftUI
+import QGrid
 
 struct ChooseTopicsViewContent: View {
+	@EnvironmentObject var currentUserStore: UserStore
+	
 	static let cellSpacing: CGFloat = 8
-	static let cellWidth: CGFloat = 109
-	static let cellHeight: CGFloat = 109
-	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(cellWidth)
+	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
 	
 	var body: some View {
-		ScrollView {
-			Grid(
-				elements: [Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello"), Text("Hello")].map { $0.frame(width: Self.cellWidth, height: Self.cellHeight) },
-				columns: Self.numberOfColumns,
-				horizontalSpacing: Self.cellSpacing,
-				verticalSpacing: Self.cellSpacing
-			)
+		QGrid(
+			currentUserStore.topics,
+			columns: Self.numberOfColumns,
+			vSpacing: 8,
+			hSpacing: 8
+		) { topic in
+			TopicCell(topic: topic)
 		}
 	}
 }
@@ -22,6 +23,11 @@ struct ChooseTopicsViewContent: View {
 struct ChooseTopicsViewContent_Previews: PreviewProvider {
 	static var previews: some View {
 		ChooseTopicsViewContent()
+			.environmentObject(UserStore(.init(
+				id: "0",
+				name: "Ken Mueller",
+				email: "kenmueller0@gmail.com"
+			)))
 	}
 }
 #endif

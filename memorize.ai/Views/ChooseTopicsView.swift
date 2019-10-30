@@ -1,8 +1,6 @@
 import SwiftUI
 
-struct ChooseTopicsView: View {
-	@EnvironmentObject var currentUserStore: UserStore
-	
+struct ChooseTopicsView: View {	
 	var leadingButton: some View {
 		NavigationLink(destination: HomeView()) {
 			XButton(height: 20)

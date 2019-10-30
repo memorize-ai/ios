@@ -28,9 +28,9 @@ struct ForgotPasswordViewContentBox: View {
 			)
 			Button(action: model.sendResetEmail) {
 				CustomRectangle(
-					backgroundColor: model.isResetButtonDisabled
-						? .disabledButtonBackground
-						: .neonGreen
+					background: model.isResetButtonDisabled
+						? Color.disabledButtonBackground
+						: Color.neonGreen
 				) {
 					Group {
 						if model.loadingState.isLoading {

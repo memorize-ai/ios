@@ -34,9 +34,9 @@ struct SignUpViewContentBox: View {
 				}
 				Button(action: model.signUp) {
 					CustomRectangle(
-						backgroundColor: model.isSignUpButtonDisabled
-							? .disabledButtonBackground
-							: .darkBlue
+						background: model.isSignUpButtonDisabled
+							? Color.disabledButtonBackground
+							: Color.darkBlue
 					) {
 						Group {
 							if model.loadingState.isLoading {

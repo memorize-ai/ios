@@ -6,7 +6,7 @@ struct GoogleSignInButton: View {
 	var body: some View {
 		Group {
 			Button(action: model.logIn) {
-				CustomRectangle(backgroundColor: .mediumGray) {
+				CustomRectangle(background: Color.mediumGray) {
 					Group {
 						if model.loadingState.isLoading {
 							ActivityIndicator()

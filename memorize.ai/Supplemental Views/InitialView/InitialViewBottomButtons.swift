@@ -4,7 +4,7 @@ struct InitialViewBottomButtons: View {
 	var body: some View {
 		HStack(spacing: 16) {
 			NavigationLink(destination: SignUpView()) {
-				CustomRectangle {
+				CustomRectangle(background: Color.white) {
 					Text("SIGN UP")
 						.font(.muli(.bold, size: 14))
 						.foregroundColor(.darkBlue)
@@ -14,7 +14,7 @@ struct InitialViewBottomButtons: View {
 			}
 			NavigationLink(destination: LogInView()) {
 				CustomRectangle(
-					backgroundColor: .transparent,
+					background: Color.transparent,
 					borderColor: Color.white.opacity(0.4),
 					borderWidth: 2
 				) {
