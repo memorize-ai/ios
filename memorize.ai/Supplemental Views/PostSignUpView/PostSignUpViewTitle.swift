@@ -10,6 +10,7 @@ struct PostSignUpViewTitle: View {
 			.multilineTextAlignment(.leading)
 			.align(to: .leading)
 			.padding(.leading, 50)
+			.padding(.trailing, 60)
 			.padding(.top, 8)
 	}
 }
