@@ -77,6 +77,9 @@
 		4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */; };
 		4DBFB7B5236948A600D75B45 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7B4236948A600D75B45 /* Grid.swift */; };
 		4DBFB7B7236948FC00D75B45 /* GridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7B6236948FC00D75B45 /* GridRow.swift */; };
+		4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7B82369553500D75B45 /* TopicCell.swift */; };
+		4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7BB2369617D00D75B45 /* Topic.swift */; };
+		4DBFB7BE2369620900D75B45 /* TopicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7BD2369620900D75B45 /* TopicStore.swift */; };
 		4DC6435B2366D80400DEEED1 /* previewForDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6435A2366D80400DEEED1 /* previewForDevices.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
@@ -196,6 +199,9 @@
 		4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsView.swift; sourceTree = "<group>"; };
 		4DBFB7B4236948A600D75B45 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		4DBFB7B6236948FC00D75B45 /* GridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRow.swift; sourceTree = "<group>"; };
+		4DBFB7B82369553500D75B45 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
+		4DBFB7BB2369617D00D75B45 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		4DBFB7BD2369620900D75B45 /* TopicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicStore.swift; sourceTree = "<group>"; };
 		4DC6435A2366D80400DEEED1 /* previewForDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewForDevices.swift; sourceTree = "<group>"; };
 		4DC8115B2363E46400CCFF98 /* Asterisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asterisk.swift; sourceTree = "<group>"; };
 		4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCode.swift; sourceTree = "<group>"; };
@@ -275,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD34CD92362E3930007E3E6 /* User */,
+				4DBFB7BA2369617000D75B45 /* Topic */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -532,6 +539,15 @@
 			path = Grid;
 			sourceTree = "<group>";
 		};
+		4DBFB7BA2369617000D75B45 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				4DBFB7BB2369617D00D75B45 /* Topic.swift */,
+				4DBFB7BD2369620900D75B45 /* TopicStore.swift */,
+			);
+			path = Topic;
+			sourceTree = "<group>";
+		};
 		4DD2512523627CEE00A83509 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */,
+				4DBFB7B82369553500D75B45 /* TopicCell.swift */,
 			);
 			path = ChooseTopicsView;
 			sourceTree = "<group>";
@@ -864,6 +881,7 @@
 				4DBA39682360ED0F00B91596 /* View.swift in Sources */,
 				4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */,
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
+				4DBFB7BE2369620900D75B45 /* TopicStore.swift in Sources */,
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
@@ -876,6 +894,7 @@
 				4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */,
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
 				4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */,
+				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
@@ -888,6 +907,7 @@
 				4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
+				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,
 				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
 				4DD34CD82362E33A0007E3E6 /* UserStore.swift in Sources */,
