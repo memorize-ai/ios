@@ -33,8 +33,9 @@ struct PostSignUpView<
 					.padding(.trailing, 25)
 					.padding(.top, 34)
 					PostSignUpViewTitle(text: title)
+					content
+						.padding(.top)
 				}
-				content
 			}
 			.align(to: .top)
 		}
