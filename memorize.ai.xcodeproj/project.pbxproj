@@ -75,6 +75,8 @@
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */; };
 		4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */; };
+		4DBFB7B5236948A600D75B45 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7B4236948A600D75B45 /* Grid.swift */; };
+		4DBFB7B7236948FC00D75B45 /* GridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7B6236948FC00D75B45 /* GridRow.swift */; };
 		4DC6435B2366D80400DEEED1 /* previewForDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6435A2366D80400DEEED1 /* previewForDevices.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
@@ -192,6 +194,8 @@
 		4DBA39672360ED0F00B91596 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButtonModel.swift; sourceTree = "<group>"; };
 		4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsView.swift; sourceTree = "<group>"; };
+		4DBFB7B4236948A600D75B45 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		4DBFB7B6236948FC00D75B45 /* GridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRow.swift; sourceTree = "<group>"; };
 		4DC6435A2366D80400DEEED1 /* previewForDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewForDevices.swift; sourceTree = "<group>"; };
 		4DC8115B2363E46400CCFF98 /* Asterisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asterisk.swift; sourceTree = "<group>"; };
 		4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCode.swift; sourceTree = "<group>"; };
@@ -519,6 +523,15 @@
 			path = AuthenticationView;
 			sourceTree = "<group>";
 		};
+		4DBFB7B32369489A00D75B45 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				4DBFB7B4236948A600D75B45 /* Grid.swift */,
+				4DBFB7B6236948FC00D75B45 /* GridRow.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
 		4DD2512523627CEE00A83509 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				4D64BCC42367CFA700F6FD07 /* General */,
+				4DBFB7B32369489A00D75B45 /* Grid */,
 				4D690254235FAC7C00533E20 /* InitialView */,
 				4DAD2CDB2361151C001DA77B /* AuthenticationView */,
 				4D17BDEE23614DE700AF1989 /* LogInView */,
@@ -839,6 +853,8 @@
 				4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */,
 				4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
+				4DBFB7B5236948A600D75B45 /* Grid.swift in Sources */,
+				4DBFB7B7236948FC00D75B45 /* GridRow.swift in Sources */,
 				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
