@@ -40,6 +40,7 @@ struct PostSignUpView<
 		}
 		.background(Color.lightGrayBackground)
 		.edgesIgnoringSafeArea(.all)
+		.removeNavigationBar()
 	}
 }
 

@@ -3,12 +3,18 @@ import SwiftUI
 struct ChooseTopicsView: View {
 	@EnvironmentObject var currentUserStore: UserStore
 	
+	var leadingButton: some View {
+		NavigationLink(destination: HomeView()) {
+			XButton(height: 20)
+		}
+	}
+	
 	var body: some View {
 		PostSignUpView(
 			title: "Choose your interests",
-			leadingButton: XButton(height: 20), // TODO: Add button
+			leadingButton: leadingButton,
 			trailingButtonTitle: "NEXT",
-			trailingButtonDestination: EmptyView(), // TODO: Change this
+			trailingButtonDestination: RecommendedDecksView(),
 			content: EmptyView() // TODO: Change this
 		)
 	}
