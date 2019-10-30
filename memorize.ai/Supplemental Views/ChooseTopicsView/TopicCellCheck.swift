@@ -6,8 +6,13 @@ struct TopicCellCheck: View {
 	var body: some View {
 		Group {
 			if isSelected {
-				Circle()
+				Image(systemName: .checkmarkCircleFill)
+					.resizable()
 					.foregroundColor(.neonGreen)
+					.background(
+						Color.white
+							.clipShape(Circle())
+					)
 			} else {
 				Circle()
 					.foregroundColor(Color.white.opacity(0.24))
