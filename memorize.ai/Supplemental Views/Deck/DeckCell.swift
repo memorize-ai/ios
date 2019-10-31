@@ -29,6 +29,7 @@ struct DeckCell: View {
 						Text(deck.numberOfRatings.formatted)
 							.font(.muli(.regular, size: 11))
 							.foregroundColor(.lightGrayText)
+							.padding(.leading, -3)
 					}
 					HStack {
 						Image.grayDownloadIcon
@@ -39,6 +40,7 @@ struct DeckCell: View {
 						Text(deck.numberOfDownloads.formatted)
 							.font(.muli(.regular, size: 11))
 							.foregroundColor(.lightGrayText)
+							.padding(.leading, -1)
 					}
 				}
 				.align(to: .leading)
