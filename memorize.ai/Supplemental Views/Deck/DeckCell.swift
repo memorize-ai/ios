@@ -31,6 +31,8 @@ struct DeckCell: View {
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 10)
 						Text(deck.numberOfDownloads.formatted)
+							.font(.muli(.regular, size: 11))
+							.foregroundColor(.lightGrayText)
 					}
 				}
 				.align(to: .leading)
