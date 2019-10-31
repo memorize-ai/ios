@@ -17,6 +17,7 @@ struct ChooseTopicsViewContent: View {
 			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
 		.onAppear {
+			guard self.currentUserStore.topicsLoadingState.isNone else { return }
 			self.currentUserStore.loadTopics()
 		}
 	}
