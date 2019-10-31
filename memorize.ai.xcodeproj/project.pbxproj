@@ -61,6 +61,7 @@
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
 		4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444A8236B81980043298C /* EmptyDeckCell.swift */; };
+		4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */; };
 		4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */; };
 		4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
@@ -185,6 +186,7 @@
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		4D8444A8236B81980043298C /* EmptyDeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDeckCell.swift; sourceTree = "<group>"; };
+		4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCellWithGetButton.swift; sourceTree = "<group>"; };
 		4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewContentBox.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */,
 				4DEB359F236ACE4900E3DBC4 /* DeckStar.swift */,
 				4D8444A8236B81980043298C /* EmptyDeckCell.swift */,
+				4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 				4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */,
 				4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
+				4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */,
 				4DD7AADD236A72B500F12D39 /* RecommendedDecksViewContent.swift in Sources */,
 				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
 				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,

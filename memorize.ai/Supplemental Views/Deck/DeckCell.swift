@@ -54,7 +54,6 @@ struct DeckCell<Content: View>: View {
 				}
 				.padding(.horizontal, 8)
 				.padding(.top, 4)
-				.padding(.bottom, 16)
 				content
 			}
 			.frame(width: width)
@@ -65,16 +64,20 @@ struct DeckCell<Content: View>: View {
 #if DEBUG
 struct DeckCell_Previews: PreviewProvider {
 	static var previews: some View {
-		DeckCell(deck: .init(
-			id: "0",
-			name: "Geometry Prep",
-			subtitle: "Angles, lines, triangles and other polygons",
-			numberOfViews: 1000000000,
-			numberOfUniqueViews: 200000,
-			numberOfRatings: 12400,
-			averageRating: 4.5,
-			numberOfDownloads: 196400
-		), width: 165) { EmptyView() }
+		DeckCell(
+			deck: .init(
+				id: "0",
+				name: "Geometry Prep",
+				subtitle: "Angles, lines, triangles and other polygons",
+				numberOfViews: 1000000000,
+				numberOfUniqueViews: 200000,
+				numberOfRatings: 12400,
+				averageRating: 4.5,
+				numberOfDownloads: 196400
+			),
+			width: 165,
+			content: EmptyView.init
+		)
 	}
 }
 #endif

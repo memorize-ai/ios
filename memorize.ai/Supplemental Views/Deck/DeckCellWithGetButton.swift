@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct EmptyDeckCell: View {
+struct DeckCellWithGetButton: View {
 	let deck: Deck
 	let width: CGFloat
 	
@@ -9,17 +9,20 @@ struct EmptyDeckCell: View {
 			deck: deck,
 			width: width
 		) {
-			Rectangle()
-				.frame(width: 0, height: 0)
-				.padding(.top, 6)
+			CustomRectangle(
+				background: Color.darkBlue,
+				cornerRadius: 8
+			) {
+				Text("GET")
+			}
 		}
 	}
 }
 
 #if DEBUG
-struct EmptyDeckCell_Previews: PreviewProvider {
+struct DeckCellWithGetButton_Previews: PreviewProvider {
 	static var previews: some View {
-		EmptyDeckCell(
+		DeckCellWithGetButton(
 			deck: .init(
 				id: "0",
 				name: "Geometry Prep",
