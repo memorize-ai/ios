@@ -13,8 +13,28 @@ struct DeckCell: View {
 				Image("GeometryPrepDeck")
 					.resizable()
 					.renderingMode(.original)
-					.scaledToFit()
-				Text(deck.name)
+					.aspectRatio(contentMode: .fit)
+					.frame(height: 111)
+				Group {
+					Text(deck.name)
+						.font(.muli(.bold, size: 13.5))
+						.foregroundColor(.darkGray)
+						.padding(.top, 4)
+					Text(deck.subtitle)
+						.font(.muli(.regular, size: 11))
+						.foregroundColor(.lightGrayText)
+						.padding(.top, 4)
+					HStack {
+						Image.grayDownloadIcon
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 10)
+						Text(deck.numberOfDownloads.formatted)
+					}
+				}
+				.align(to: .leading)
+				.padding(.horizontal, 8)
 			}
 			.cornerRadius(8)
 		}
@@ -26,13 +46,13 @@ struct DeckCell_Previews: PreviewProvider {
 	static var previews: some View {
 		DeckCell(deck: .init(
 			id: "0",
-			name: "GeometryPrep",
+			name: "Geometry Prep",
 			subtitle: "Angles, lines, triangles and other polygons",
-			numberOfViews: 1000,
-			numberOfUniqueViews: 200,
-			numberOfRatings: 124,
+			numberOfViews: 1000000000,
+			numberOfUniqueViews: 200000,
+			numberOfRatings: 12400,
 			averageRating: 4.5,
-			numberOfDownloads: 196
+			numberOfDownloads: 196400
 		))
 		.frame(width: 165)
 	}
