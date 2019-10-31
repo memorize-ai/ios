@@ -17,7 +17,7 @@ struct RecommendedDecksView: View {
 			leadingButton: leadingButton,
 			trailingButtonTitle: "DONE",
 			trailingButtonDestination: HomeView(),
-			content: EmptyView() // TODO: Change this
+			content: RecommendedDecksViewContent()
 		)
 	}
 }
