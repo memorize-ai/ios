@@ -14,10 +14,17 @@ struct TopicCell: View {
 					Group {
 						if topic.image == nil {
 							Color.lightGrayBackground
-							ActivityIndicator(
-								color: Color.black.opacity(0.2),
-								thickness: 1.5
-							)
+							if topic.loadingState.isLoading {
+								ActivityIndicator(
+									color: Color.black.opacity(0.2),
+									thickness: 1.5
+								)
+							} else {
+								Image(systemName: .exclamationmarkTriangle)
+									.resizable()
+									.scaleEffect(0.25)
+									.foregroundColor(.darkGray)
+							}
 						} else {
 							topic.image?
 								.resizable()
@@ -55,13 +62,15 @@ struct TopicCell: View {
 #if DEBUG
 struct TopicCell_Previews: PreviewProvider {
 	static var previews: some View {
-		VStack(spacing: 20) {
-			TopicCell(topic: .init(
-				id: "0",
-				name: "Geography",
-				image: .init("GeographyTopic"),
-				isSelected: true
-			))
+		let failedTopic = Topic(
+			id: "0",
+			name: "Geography",
+			image: .init("GeographyTopic"),
+			isSelected: true
+		)
+		failedTopic.loadingState = .failure(message: "Self-invoked")
+		return VStack(spacing: 20) {
+			TopicCell(topic: failedTopic)
 			TopicCell(topic: .init(
 				id: "0",
 				name: "Geography",
