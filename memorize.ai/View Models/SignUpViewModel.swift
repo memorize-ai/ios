@@ -7,28 +7,28 @@ final class SignUpViewModel: ViewModel {
 	static let unknownErrorTitle = "Unknown error"
 	static let unknownErrorDescription = "Sorry about that! Please try again"
 	
-	@Published var name = ""
-	@Published var email = ""
-	@Published var password = ""
-	
-	@Published var shouldShowNameRedBorder = false {
+	@Published var name = "" {
 		didSet {
 			guard loadingState.didFail else { return }
 			shouldShowNameRedBorder = false
 		}
 	}
-	@Published var shouldShowEmailRedBorder = false {
+	@Published var email = "" {
 		didSet {
 			guard loadingState.didFail else { return }
 			shouldShowEmailRedBorder = false
 		}
 	}
-	@Published var shouldShowPasswordRedBorder = false {
+	@Published var password = "" {
 		didSet {
 			guard loadingState.didFail else { return }
 			shouldShowPasswordRedBorder = false
 		}
 	}
+	
+	@Published var shouldShowNameRedBorder = false
+	@Published var shouldShowEmailRedBorder = false
+	@Published var shouldShowPasswordRedBorder = false
 	
 	@Published var loadingState = LoadingState.none
 	@Published var shouldShowErrorModal = false
