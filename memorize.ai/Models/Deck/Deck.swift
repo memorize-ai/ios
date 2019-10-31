@@ -7,6 +7,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	
 	@Published var image: Image?
 	@Published var name: String
+	@Published var subtitle: String
 	@Published var numberOfViews: Int
 	@Published var numberOfUniqueViews: Int
 	@Published var numberOfRatings: Int
@@ -19,6 +20,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		id: String,
 		image: Image? = nil,
 		name: String,
+		subtitle: String,
 		numberOfViews: Int,
 		numberOfUniqueViews: Int,
 		numberOfRatings: Int,
@@ -28,6 +30,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		self.id = id
 		self.image = image
 		self.name = name
+		self.subtitle = subtitle
 		self.numberOfViews = numberOfViews
 		self.numberOfUniqueViews = numberOfUniqueViews
 		self.numberOfRatings = numberOfRatings
@@ -72,9 +75,10 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 					deck?.updatePublicDataFromSnapshot(snapshot)
 				} else {
 					didFulfill = true
-					deck = .init(
+					deck = Deck(
 						id: id,
 						name: snapshot.get("name") as? String ?? "Unknown",
+						subtitle: snapshot.get("subtitle") as? String ?? "(empty)",
 						numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
 						numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
 						numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,

@@ -105,6 +105,7 @@
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
+		4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC3236AA3810000CA7A /* DeckCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +229,7 @@
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
 		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		4DFA0DC3236AA3810000CA7A /* DeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		4F4C9DD2FC5AC65507BFA8D3 /* Pods-memorize.aiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.release.xcconfig"; path = "Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.release.xcconfig"; sourceTree = "<group>"; };
 		601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.release.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.release.xcconfig"; sourceTree = "<group>"; };
 		64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -594,6 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				4D184D90236975B100A84998 /* Grid */,
+				4DFA0DC2236A8CBE0000CA7A /* Deck */,
 				4D64BCC42367CFA700F6FD07 /* General */,
 				4D690254235FAC7C00533E20 /* InitialView */,
 				4DAD2CDB2361151C001DA77B /* AuthenticationView */,
@@ -611,6 +614,14 @@
 			isa = PBXGroup;
 			children = (
 				4DFA0DC0236A7B170000CA7A /* Deck.swift */,
+			);
+			path = Deck;
+			sourceTree = "<group>";
+		};
+		4DFA0DC2236A8CBE0000CA7A /* Deck */ = {
+			isa = PBXGroup;
+			children = (
+				4DFA0DC3236AA3810000CA7A /* DeckCell.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -893,6 +904,7 @@
 				4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
 				4DD7AADD236A72B500F12D39 /* RecommendedDecksViewContent.swift in Sources */,
+				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
 				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
