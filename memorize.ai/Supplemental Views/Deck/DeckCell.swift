@@ -1,25 +1,34 @@
 import SwiftUI
 
-struct DeckCell: View {
+struct DeckCell<Content: View>: View {
 	@ObservedObject var deck: Deck
+	
+	let width: CGFloat
+	let content: Content
+	
+	init(deck: Deck, width: CGFloat, content: () -> Content) {
+		self.deck = deck
+		self.width = width
+		self.content = content()
+	}
 	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: .lightGray,
-			borderWidth: 1.5
+			borderWidth: 1.5,
+			cornerRadius: 8
 		) {
 			VStack {
 				Image("GeometryPrepDeck")
 					.resizable()
 					.renderingMode(.original)
-					.aspectRatio(contentMode: .fit)
-					.frame(height: 111)
-				Group {
+					.aspectRatio(contentMode: .fill)
+					.frame(height: width * 111 / 165)
+				VStack(alignment: .leading) {
 					Text(deck.name)
 						.font(.muli(.bold, size: 13.5))
 						.foregroundColor(.darkGray)
-						.padding(.top, 4)
 					Text(deck.subtitle)
 						.font(.muli(.regular, size: 11))
 						.foregroundColor(.lightGrayText)
@@ -43,10 +52,12 @@ struct DeckCell: View {
 							.padding(.leading, -1)
 					}
 				}
-				.align(to: .leading)
 				.padding(.horizontal, 8)
+				.padding(.top, 4)
+				.padding(.bottom, 16)
+				content
 			}
-			.cornerRadius(8)
+			.frame(width: width)
 		}
 	}
 }
@@ -63,8 +74,7 @@ struct DeckCell_Previews: PreviewProvider {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400
-		))
-		.frame(width: 165)
+		), width: 165) { EmptyView() }
 	}
 }
 #endif
