@@ -25,7 +25,7 @@ struct DeckCell: View {
 						.foregroundColor(.lightGrayText)
 						.padding(.top, 4)
 					HStack {
-						Text(String(deck.averageRating))
+						DeckStars(stars: deck.averageRating)
 						Text(deck.numberOfRatings.formatted)
 							.font(.muli(.regular, size: 11))
 							.foregroundColor(.lightGrayText)

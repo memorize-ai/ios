@@ -103,6 +103,7 @@
 		4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */; };
 		4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB3599236AC3C800E3DBC4 /* Int.swift */; };
 		4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359B236AC89B00E3DBC4 /* Double.swift */; };
+		4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */; };
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
@@ -229,6 +230,7 @@
 		4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewContent.swift; sourceTree = "<group>"; };
 		4DEB3599236AC3C800E3DBC4 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		4DEB359B236AC89B00E3DBC4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStars.swift; sourceTree = "<group>"; };
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 			isa = PBXGroup;
 			children = (
 				4DFA0DC3236AA3810000CA7A /* DeckCell.swift */,
+				4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
+				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4DA800A9236A4A4D00E26FE8 /* TopicCellCheck.swift in Sources */,
