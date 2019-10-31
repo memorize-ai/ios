@@ -1,8 +1,24 @@
 import SwiftUI
 
 struct RecommendedDecksView: View {
+	@Environment(\.presentationMode) var presentationMode
+	
+	var leadingButton: some View {
+		Button(action: {
+			self.presentationMode.wrappedValue.dismiss()
+		}) {
+			LeftArrowHead(height: 20)
+		}
+	}
+	
 	var body: some View {
-		Text("RecommendedDecksView")
+		PostSignUpView(
+			title: "Recommended decks",
+			leadingButton: leadingButton,
+			trailingButtonTitle: "DONE",
+			trailingButtonDestination: HomeView(),
+			content: EmptyView() // TODO: Change this
+		)
 	}
 }
 
