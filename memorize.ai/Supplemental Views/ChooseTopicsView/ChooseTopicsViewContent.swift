@@ -11,8 +11,8 @@ struct ChooseTopicsViewContent: View {
 			Grid(
 				elements: currentUserStore.topics.map { TopicCell(topic: $0) },
 				columns: Self.numberOfColumns,
-				horizontalSpacing: 8,
-				verticalSpacing: 8
+				horizontalSpacing: Self.cellSpacing,
+				verticalSpacing: Self.cellSpacing
 			)
 			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
