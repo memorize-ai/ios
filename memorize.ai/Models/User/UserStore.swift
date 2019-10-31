@@ -15,8 +15,13 @@ final class UserStore: ObservableObject {
 	
 	func loadTopics() {
 		topicsLoadingState = .loading()
-		firestore.collection("topics").addSnapshotListener().done { snapshot in
-			snapshot.documentChanges.forEach { change in
+		firestore.collection("topics").addSnapshotListener { snapshot, error in
+			guard error == nil, let documentChanges = snapshot?.documentChanges else {
+				return self.topicsLoadingState = .failure(
+					message: (error ?? UNKNOWN_ERROR).localizedDescription
+				)
+			}
+			documentChanges.forEach { change in
 				let document = change.document
 				let topicId = document.documentID
 				switch change.type {
@@ -40,10 +45,6 @@ final class UserStore: ObservableObject {
 				}
 			}
 			self.topicsLoadingState = .success()
-		}.catch { error in
-			self.topicsLoadingState = .failure(
-				message: error.localizedDescription
-			)
 		}
 	}
 	
