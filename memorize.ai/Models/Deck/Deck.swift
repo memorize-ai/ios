@@ -7,13 +7,32 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	
 	@Published var image: Image?
 	@Published var name: String
+	@Published var numberOfViews: Int
+	@Published var numberOfUniqueViews: Int
+	@Published var numberOfRatings: Int
+	@Published var averageRating: Double
+	@Published var numberOfDownloads: Int
 	
 	@Published var imageLoadingState = LoadingState.none
 	
-	init(id: String, image: Image? = nil, name: String) {
+	init(
+		id: String,
+		image: Image? = nil,
+		name: String,
+		numberOfViews: Int,
+		numberOfUniqueViews: Int,
+		numberOfRatings: Int,
+		averageRating: Double,
+		numberOfDownloads: Int
+	) {
 		self.id = id
 		self.image = image
 		self.name = name
+		self.numberOfViews = numberOfViews
+		self.numberOfUniqueViews = numberOfUniqueViews
+		self.numberOfRatings = numberOfRatings
+		self.averageRating = averageRating
+		self.numberOfDownloads = numberOfDownloads
 	}
 	
 	@discardableResult
@@ -55,7 +74,12 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 					didFulfill = true
 					deck = .init(
 						id: id,
-						name: snapshot.get("name") as? String ?? "Unknown"
+						name: snapshot.get("name") as? String ?? "Unknown",
+						numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
+						numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
+						numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
+						averageRating: snapshot.get("averageRating") as? Double ?? 0,
+						numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0
 					)
 					seal.fulfill(deck!)
 				}
