@@ -17,6 +17,24 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	}
 	
 	@discardableResult
+	func loadImage() -> Self {
+		imageLoadingState = .loading()
+		storage.child("decks/\(id)").getData().done { data in
+			guard let image = Image(data: data) else {
+				return self.imageLoadingState = .failure(
+					message: "Malformed data"
+				)
+			}
+			self.image = image
+			self.imageLoadingState = .success()
+		}.catch { error in
+			self.imageLoadingState = .failure(
+				message: error.localizedDescription
+			)
+		}
+	}
+	
+	@discardableResult
 	func updatePublicDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
 		return self
