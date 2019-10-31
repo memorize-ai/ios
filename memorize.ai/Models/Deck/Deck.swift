@@ -32,6 +32,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 				message: error.localizedDescription
 			)
 		}
+		return self
 	}
 	
 	@discardableResult
