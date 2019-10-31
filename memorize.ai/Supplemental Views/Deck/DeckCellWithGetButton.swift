@@ -14,7 +14,13 @@ struct DeckCellWithGetButton: View {
 				cornerRadius: 8
 			) {
 				Text("GET")
+					.font(.muli(.bold, size: 12))
+					.foregroundColor(.white)
+					.frame(height: 33)
+					.frame(maxWidth: .infinity)
 			}
+			.padding([.horizontal, .bottom], 18)
+			.padding(.top, 10)
 		}
 	}
 }
