@@ -37,4 +37,16 @@ extension DocumentReference {
 			}
 		}
 	}
+	
+	func updateData(_ fields: [AnyHashable: Any]) -> Promise<Void> {
+		.init { seal in
+			updateData(fields) { error in
+				if let error = error {
+					seal.reject(error)
+				} else {
+					seal.fulfill(())
+				}
+			}
+		}
+	}
 }
