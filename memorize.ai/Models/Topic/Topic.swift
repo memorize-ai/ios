@@ -15,7 +15,7 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 		}
 	}
 	
-	var onSelect: ((Bool) -> Void)?
+	let onSelect: ((Bool) -> Void)?
 	
 	init(
 		id: String,
