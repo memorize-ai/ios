@@ -1,4 +1,6 @@
 import Combine
+import FirebaseFirestore
+import PromiseKit
 
 final class UserStore: ObservableObject {
 	@Published var user: User
@@ -45,7 +47,12 @@ final class UserStore: ObservableObject {
 		}
 	}
 	
-	func onTopicSelect(id topicId: String, isSelected: Bool) {
-		// TODO: Push to Firestore
+	@discardableResult
+	func onTopicSelect(id topicId: String, isSelected: Bool) -> Promise<Void> {
+		firestore.document("users/\(user.id)").updateData([
+			"topics": isSelected
+				? FieldValue.arrayUnion([topicId])
+				: FieldValue.arrayRemove([topicId])
+		])
 	}
 }
