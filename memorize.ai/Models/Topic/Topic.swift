@@ -9,13 +9,26 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 	
 	@Published var loadingState = LoadingState.none
 	
-	@Published var isSelected: Bool
+	@Published var isSelected: Bool {
+		didSet {
+			onSelect?(isSelected)
+		}
+	}
 	
-	init(id: String, name: String, image: Image? = nil, isSelected: Bool = false) {
+	var onSelect: ((Bool) -> Void)?
+	
+	init(
+		id: String,
+		name: String,
+		image: Image? = nil,
+		isSelected: Bool = false,
+		onSelect: ((Bool) -> Void)? = nil
+	) {
 		self.id = id
 		self.name = name
 		self.image = image
 		self.isSelected = isSelected
+		self.onSelect = onSelect
 	}
 	
 	@discardableResult

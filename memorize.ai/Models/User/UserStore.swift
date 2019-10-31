@@ -23,7 +23,12 @@ final class UserStore: ObservableObject {
 						Topic(
 							id: topicId,
 							name: document.get("name") as? String ?? "Unknown"
-						).load()
+						) { isSelected in
+							self.onTopicSelect(
+								id: topicId,
+								isSelected: isSelected
+							)
+						}.load()
 					)
 				case .modified:
 					self.topics.first { $0.id == topicId }?
@@ -38,5 +43,9 @@ final class UserStore: ObservableObject {
 				message: error.localizedDescription
 			)
 		}
+	}
+	
+	func onTopicSelect(id topicId: String, isSelected: Bool) {
+		// TODO: Push to Firestore
 	}
 }
