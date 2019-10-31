@@ -101,6 +101,8 @@
 		4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77F235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift */; };
 		4DD9CEF323691C2700EC138F /* RecommendedDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */; };
 		4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */; };
+		4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB3599236AC3C800E3DBC4 /* Int.swift */; };
+		4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359B236AC89B00E3DBC4 /* Double.swift */; };
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
@@ -225,6 +227,8 @@
 		4DD8D77F235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeaturesIndicatorCircle.swift; sourceTree = "<group>"; };
 		4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksView.swift; sourceTree = "<group>"; };
 		4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewContent.swift; sourceTree = "<group>"; };
+		4DEB3599236AC3C800E3DBC4 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		4DEB359B236AC89B00E3DBC4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 				4D32A5312368FB710072AA70 /* Image.swift */,
 				4DBA39672360ED0F00B91596 /* View.swift */,
 				4DA0FD292368364200F9F0D3 /* String.swift */,
+				4DEB359B236AC89B00E3DBC4 /* Double.swift */,
+				4DEB3599236AC3C800E3DBC4 /* Int.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
 			);
@@ -964,12 +970,14 @@
 				4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */,
+				4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */,
 				4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */,
 				4D64BCCE2368004300F6FD07 /* SignUpViewContentBox.swift in Sources */,
 				4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */,
 				4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */,
 				4D184D94236975C100A84998 /* GridRow.swift in Sources */,
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
+				4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */,
 				4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */,
 				4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */,
 			);
