@@ -25,6 +25,12 @@ struct DeckCell: View {
 						.foregroundColor(.lightGrayText)
 						.padding(.top, 4)
 					HStack {
+						Text(String(deck.averageRating))
+						Text(deck.numberOfRatings.formatted)
+							.font(.muli(.regular, size: 11))
+							.foregroundColor(.lightGrayText)
+					}
+					HStack {
 						Image.grayDownloadIcon
 							.resizable()
 							.renderingMode(.original)
