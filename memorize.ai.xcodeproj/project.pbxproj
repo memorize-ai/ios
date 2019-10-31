@@ -104,6 +104,7 @@
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
+		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +227,7 @@
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
+		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		4F4C9DD2FC5AC65507BFA8D3 /* Pods-memorize.aiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.release.xcconfig"; path = "Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.release.xcconfig"; sourceTree = "<group>"; };
 		601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.release.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.release.xcconfig"; sourceTree = "<group>"; };
 		64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +295,7 @@
 			children = (
 				4DD34CD92362E3930007E3E6 /* User */,
 				4DBFB7BA2369617000D75B45 /* Topic */,
+				4DFA0DBF236A7B0A0000CA7A /* Deck */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -602,6 +605,14 @@
 				4DD7AADB236A713100F12D39 /* RecommendedDecksView */,
 			);
 			path = "Supplemental Views";
+			sourceTree = "<group>";
+		};
+		4DFA0DBF236A7B0A0000CA7A /* Deck */ = {
+			isa = PBXGroup;
+			children = (
+				4DFA0DC0236A7B170000CA7A /* Deck.swift */,
+			);
+			path = Deck;
 			sourceTree = "<group>";
 		};
 		B3433C0A521544427171835D /* Pods */ = {
@@ -935,6 +946,7 @@
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
+				4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */,
 				4DC6435B2366D80400DEEED1 /* previewForDevices.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
 				4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */,
