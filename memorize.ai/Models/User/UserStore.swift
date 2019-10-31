@@ -34,7 +34,7 @@ final class UserStore: ObservableObject {
 					self.topics.first { $0.id == topicId }?
 						.updateFromSnapshot(document)
 				case .removed:
-					self.topics = self.topics.filter { $0.id != topicId }
+					self.topics.removeAll { $0.id == topicId }
 				}
 			}
 			self.topicsLoadingState = .success()
