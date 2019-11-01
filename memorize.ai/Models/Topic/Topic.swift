@@ -6,6 +6,7 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 	
 	@Published var name: String
 	@Published var image: Image?
+	@Published var topDecks: [String]
 	
 	@Published var loadingState = LoadingState.none
 	
@@ -21,12 +22,14 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 		id: String,
 		name: String,
 		image: Image? = nil,
+		topDecks: [String],
 		isSelected: Bool = false,
 		onSelect: ((Bool) -> Void)? = nil
 	) {
 		self.id = id
 		self.name = name
 		self.image = image
+		self.topDecks = topDecks
 		self.isSelected = isSelected
 		self.onSelect = onSelect
 	}
@@ -53,6 +56,7 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
+		topDecks = snapshot.get("topDecks") as? [String] ?? topDecks
 		return self
 	}
 	

@@ -29,7 +29,8 @@ final class UserStore: ObservableObject {
 					self.topics.append(
 						Topic(
 							id: topicId,
-							name: document.get("name") as? String ?? "Unknown"
+							name: document.get("name") as? String ?? "Unknown",
+							topDecks: document.get("topDecks") as? [String] ?? []
 						) { isSelected in
 							self.onTopicSelect(
 								id: topicId,

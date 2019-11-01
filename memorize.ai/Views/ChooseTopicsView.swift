@@ -29,20 +29,20 @@ struct ChooseTopicsView_Previews: PreviewProvider {
 					email: "kenmueller0@gmail.com"
 				),
 				topics: [
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML", image: nil),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography", image: nil),
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography", image: nil),
-					.init(id: "0", name: "HTML", image: nil),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML", image: nil),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic"))
+					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),
+					.init(id: "1", name: "Geography", image: .init("GeographyTopic"), topDecks: []),
+					.init(id: "0", name: "HTML", image: nil, topDecks: []),
+					.init(id: "1", name: "Geography", image: .init("GeographyTopic"), topDecks: []),
+					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),
+					.init(id: "1", name: "Geography", image: nil, topDecks: []),
+					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),
+					.init(id: "1", name: "Geography", image: nil, topDecks: []),
+					.init(id: "0", name: "HTML", image: nil, topDecks: []),
+					.init(id: "1", name: "Geography", image: .init("GeographyTopic"), topDecks: []),
+					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),
+					.init(id: "1", name: "Geography", image: .init("GeographyTopic"), topDecks: []),
+					.init(id: "0", name: "HTML", image: nil, topDecks: []),
+					.init(id: "1", name: "Geography", image: .init("GeographyTopic"), topDecks: [])
 				]
 			))
 	}

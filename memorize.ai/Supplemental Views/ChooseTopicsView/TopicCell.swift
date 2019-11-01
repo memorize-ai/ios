@@ -66,6 +66,7 @@ struct TopicCell_Previews: PreviewProvider {
 			id: "0",
 			name: "Geography",
 			image: .init("GeographyTopic"),
+			topDecks: [],
 			isSelected: true
 		)
 		failedTopic.loadingState = .failure(message: "Self-invoked")
@@ -75,18 +76,21 @@ struct TopicCell_Previews: PreviewProvider {
 				id: "0",
 				name: "Geography",
 				image: nil,
+				topDecks: [],
 				isSelected: true
 			))
 			TopicCell(topic: .init(
 				id: "0",
 				name: "Geography",
 				image: .init("GeographyTopic"),
+				topDecks: [],
 				isSelected: false
 			))
 			TopicCell(topic: .init(
 				id: "0",
 				name: "Geography",
 				image: nil,
+				topDecks: [],
 				isSelected: false
 			))
 		}
