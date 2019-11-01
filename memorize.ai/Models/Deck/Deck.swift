@@ -6,6 +6,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	let id: String
 	let dateCreated: Date
 	
+	@Published var hasImage: Bool
 	@Published var image: Image?
 	@Published var name: String
 	@Published var subtitle: String
@@ -20,6 +21,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	
 	init(
 		id: String,
+		hasImage: Bool,
 		image: Image? = nil,
 		name: String,
 		subtitle: String,
@@ -32,6 +34,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		dateLastUpdated: Date
 	) {
 		self.id = id
+		self.hasImage = hasImage
 		self.image = image
 		self.name = name
 		self.subtitle = subtitle
@@ -65,6 +68,8 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	
 	@discardableResult
 	func updatePublicDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		hasImage = snapshot.get("hasImage") as? Bool ?? false
+		if !hasImage { image = nil }
 		name = snapshot.get("name") as? String ?? name
 		subtitle = snapshot.get("subtitle") as? String ?? subtitle
 		numberOfViews = snapshot.get("viewCount") as? Int ?? numberOfViews
@@ -90,13 +95,16 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 					didFulfill = true
 					deck = Deck(
 						id: id,
+						hasImage: snapshot.get("hasImage") as? Bool ?? false,
 						name: snapshot.get("name") as? String ?? "Unknown",
 						subtitle: snapshot.get("subtitle") as? String ?? "(empty)",
 						numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
 						numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
 						numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
 						averageRating: snapshot.get("averageRating") as? Double ?? 0,
-						numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0
+						numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
+						dateCreated: snapshot.getDate("created") ?? .init(),
+						dateLastUpdated: snapshot.getDate("updated") ?? .init()
 					)
 					seal.fulfill(deck!)
 				}
