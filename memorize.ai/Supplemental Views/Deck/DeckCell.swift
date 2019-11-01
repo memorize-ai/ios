@@ -20,7 +20,7 @@ struct DeckCell<Content: View>: View {
 			cornerRadius: 8
 		) {
 			VStack {
-				Image("GeometryPrepDeck")
+				deck.image?
 					.resizable()
 					.renderingMode(.original)
 					.aspectRatio(contentMode: .fill)
@@ -67,13 +67,17 @@ struct DeckCell_Previews: PreviewProvider {
 		DeckCell(
 			deck: .init(
 				id: "0",
+				hasImage: true,
+				image: .init("GeometryPrepDeck"),
 				name: "Geometry Prep",
 				subtitle: "Angles, lines, triangles and other polygons",
 				numberOfViews: 1000000000,
 				numberOfUniqueViews: 200000,
 				numberOfRatings: 12400,
 				averageRating: 4.5,
-				numberOfDownloads: 196400
+				numberOfDownloads: 196400,
+				dateCreated: .init(),
+				dateLastUpdated: .init()
 			),
 			width: 165,
 			content: EmptyView.init

@@ -40,13 +40,17 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 			DeckCellWithGetButton(
 				deck: .init(
 					id: "0",
+					hasImage: true,
+					image: .init("GeometryPrepDeck"),
 					name: "Geometry Prep",
 					subtitle: "Angles, lines, triangles and other polygons",
 					numberOfViews: 1000000000,
 					numberOfUniqueViews: 200000,
 					numberOfRatings: 12400,
 					averageRating: 4.5,
-					numberOfDownloads: 196400
+					numberOfDownloads: 196400,
+					dateCreated: .init(),
+					dateLastUpdated: .init()
 				),
 				width: 165,
 				isLoading: false
@@ -54,13 +58,17 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 			DeckCellWithGetButton(
 				deck: .init(
 					id: "0",
+					hasImage: true,
+					image: .init("GeometryPrepDeck"),
 					name: "Geometry Prep",
 					subtitle: "Angles, lines, triangles and other polygons",
 					numberOfViews: 1000000000,
 					numberOfUniqueViews: 200000,
 					numberOfRatings: 12400,
 					averageRating: 4.5,
-					numberOfDownloads: 196400
+					numberOfDownloads: 196400,
+					dateCreated: .init(),
+					dateLastUpdated: .init()
 				),
 				width: 165,
 				isLoading: true
