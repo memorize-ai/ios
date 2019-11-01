@@ -6,6 +6,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	let id: String
 	let dateCreated: Date
 	
+	@Published var topics: [String]
 	@Published var hasImage: Bool
 	@Published var image: Image?
 	@Published var name: String
@@ -21,6 +22,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	
 	init(
 		id: String,
+		topics: [String],
 		hasImage: Bool,
 		image: Image? = nil,
 		name: String,
@@ -34,6 +36,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		dateLastUpdated: Date
 	) {
 		self.id = id
+		self.topics = topics
 		self.hasImage = hasImage
 		self.image = image
 		self.name = name
@@ -95,6 +98,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 					didFulfill = true
 					deck = Deck(
 						id: id,
+						topics: snapshot.get("topics") as? [String] ?? [],
 						hasImage: snapshot.get("hasImage") as? Bool ?? false,
 						name: snapshot.get("name") as? String ?? "Unknown",
 						subtitle: snapshot.get("subtitle") as? String ?? "(empty)",

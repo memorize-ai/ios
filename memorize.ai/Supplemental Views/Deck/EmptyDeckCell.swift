@@ -22,6 +22,7 @@ struct EmptyDeckCell_Previews: PreviewProvider {
 		EmptyDeckCell(
 			deck: .init(
 				id: "0",
+				topics: [],
 				hasImage: true,
 				image: .init("GeometryPrepDeck"),
 				name: "Geometry Prep",

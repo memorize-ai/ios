@@ -40,6 +40,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 			DeckCellWithGetButton(
 				deck: .init(
 					id: "0",
+					topics: [],
 					hasImage: true,
 					image: .init("GeometryPrepDeck"),
 					name: "Geometry Prep",
@@ -58,6 +59,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 			DeckCellWithGetButton(
 				deck: .init(
 					id: "0",
+					topics: [],
 					hasImage: true,
 					image: .init("GeometryPrepDeck"),
 					name: "Geometry Prep",

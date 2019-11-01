@@ -67,6 +67,7 @@ struct DeckCell_Previews: PreviewProvider {
 		DeckCell(
 			deck: .init(
 				id: "0",
+				topics: [],
 				hasImage: true,
 				image: .init("GeometryPrepDeck"),
 				name: "Geometry Prep",
