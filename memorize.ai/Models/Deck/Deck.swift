@@ -4,6 +4,7 @@ import PromiseKit
 
 final class Deck: ObservableObject, Identifiable, Equatable {
 	let id: String
+	let dateCreated: Date
 	
 	@Published var image: Image?
 	@Published var name: String
@@ -13,6 +14,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	@Published var numberOfRatings: Int
 	@Published var averageRating: Double
 	@Published var numberOfDownloads: Int
+	@Published var dateLastUpdated: Date
 	
 	@Published var imageLoadingState = LoadingState.none
 	
@@ -25,7 +27,9 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		numberOfUniqueViews: Int,
 		numberOfRatings: Int,
 		averageRating: Double,
-		numberOfDownloads: Int
+		numberOfDownloads: Int,
+		dateCreated: Date,
+		dateLastUpdated: Date
 	) {
 		self.id = id
 		self.image = image
@@ -36,6 +40,8 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		self.numberOfRatings = numberOfRatings
 		self.averageRating = averageRating
 		self.numberOfDownloads = numberOfDownloads
+		self.dateCreated = dateCreated
+		self.dateLastUpdated = dateLastUpdated
 	}
 	
 	@discardableResult
@@ -60,6 +66,13 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	@discardableResult
 	func updatePublicDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
+		subtitle = snapshot.get("subtitle") as? String ?? subtitle
+		numberOfViews = snapshot.get("viewCount") as? Int ?? numberOfViews
+		numberOfUniqueViews = snapshot.get("uniqueViewCount") as? Int ?? numberOfUniqueViews
+		numberOfRatings = snapshot.get("ratingCount") as? Int ?? numberOfRatings
+		averageRating = snapshot.get("averageRating") as? Double ?? averageRating
+		numberOfDownloads = snapshot.get("downloadCount") as? Int ?? numberOfDownloads
+		dateLastUpdated = snapshot.getDate("updated") ?? dateLastUpdated
 		return self
 	}
 	
