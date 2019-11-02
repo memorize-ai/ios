@@ -35,7 +35,8 @@ final class GoogleSignInButtonModel: ViewModel {
 			let newUser = User(
 				id: user.uid,
 				name: user.displayName ?? "Unknown",
-				email: email
+				email: email,
+				interests: []
 			)
 			self.user = newUser
 			if additionalInfo.isNewUser {

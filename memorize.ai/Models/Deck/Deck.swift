@@ -50,6 +50,23 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		self.dateLastUpdated = dateLastUpdated
 	}
 	
+	convenience init(snapshot: DocumentSnapshot) {
+		self.init(
+			id: snapshot.documentID,
+			topics: snapshot.get("topics") as? [String] ?? [],
+			hasImage: snapshot.get("hasImage") as? Bool ?? false,
+			name: snapshot.get("name") as? String ?? "Unknown",
+			subtitle: snapshot.get("subtitle") as? String ?? "(empty)",
+			numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
+			numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
+			numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
+			averageRating: snapshot.get("averageRating") as? Double ?? 0,
+			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
+			dateCreated: snapshot.getDate("created") ?? .init(),
+			dateLastUpdated: snapshot.getDate("updated") ?? .init()
+		)
+	}
+	
 	@discardableResult
 	func loadImage() -> Self {
 		imageLoadingState = .loading()
@@ -96,20 +113,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 					deck?.updatePublicDataFromSnapshot(snapshot)
 				} else {
 					didFulfill = true
-					deck = Deck(
-						id: id,
-						topics: snapshot.get("topics") as? [String] ?? [],
-						hasImage: snapshot.get("hasImage") as? Bool ?? false,
-						name: snapshot.get("name") as? String ?? "Unknown",
-						subtitle: snapshot.get("subtitle") as? String ?? "(empty)",
-						numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
-						numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
-						numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
-						averageRating: snapshot.get("averageRating") as? Double ?? 0,
-						numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
-						dateCreated: snapshot.getDate("created") ?? .init(),
-						dateLastUpdated: snapshot.getDate("updated") ?? .init()
-					)
+					deck = .init(snapshot: snapshot)
 					seal.fulfill(deck!)
 				}
 			}

@@ -3,13 +3,26 @@ import SwiftUI
 struct ChooseTopicsViewContent: View {
 	@EnvironmentObject var currentUserStore: UserStore
 	
+	@ObservedObject var model: ChooseTopicsViewModel
+	
+	init(currentUser: User) {
+		model = ChooseTopicsViewModel(currentUser: currentUser)
+	}
+	
 	static let cellSpacing: CGFloat = 8
 	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
 	
 	var body: some View {
 		ScrollView {
 			Grid(
-				elements: currentUserStore.topics.map { TopicCell(topic: $0) },
+				elements: currentUserStore.topics.map { topic in
+					TopicCell(
+						topic: topic,
+						isSelected: model.isTopicSelected(topic)
+					) {
+						self.model.toggleTopicSelect(topic)
+					}
+				},
 				columns: Self.numberOfColumns,
 				horizontalSpacing: Self.cellSpacing,
 				verticalSpacing: Self.cellSpacing
@@ -26,12 +39,14 @@ struct ChooseTopicsViewContent: View {
 #if DEBUG
 struct ChooseTopicsViewContent_Previews: PreviewProvider {
 	static var previews: some View {
-		ChooseTopicsViewContent()
-			.environmentObject(UserStore(.init(
-				id: "0",
-				name: "Ken Mueller",
-				email: "kenmueller0@gmail.com"
-			)))
+		let currentUser = User(
+			id: "0",
+			name: "Ken Mueller",
+			email: "kenmueller0@gmail.com",
+			interests: []
+		)
+		return ChooseTopicsViewContent(currentUser: currentUser)
+			.environmentObject(UserStore(currentUser))
 	}
 }
 #endif

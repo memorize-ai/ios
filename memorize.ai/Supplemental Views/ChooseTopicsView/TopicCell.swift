@@ -5,10 +5,11 @@ struct TopicCell: View {
 	
 	@ObservedObject var topic: Topic
 	
+	let isSelected: Bool
+	let toggleSelect: () -> Void
+	
 	var body: some View {
-		Button(action: {
-			self.topic.isSelected.toggle()
-		}) {
+		Button(action: toggleSelect) {
 			ZStack(alignment: .topTrailing) {
 				ZStack(alignment: .bottom) {
 					Group {
@@ -51,7 +52,7 @@ struct TopicCell: View {
 						.foregroundColor(.white)
 						.padding(.bottom, 16)
 				}
-				TopicCellCheck(isSelected: topic.isSelected)
+				TopicCellCheck(isSelected: isSelected)
 					.padding([.trailing, .top], 8)
 			}
 			.cornerRadius(5)
@@ -66,33 +67,45 @@ struct TopicCell_Previews: PreviewProvider {
 			id: "0",
 			name: "Geography",
 			image: .init("GeographyTopic"),
-			topDecks: [],
-			isSelected: true
+			topDecks: []
 		)
 		failedTopic.loadingState = .failure(message: "Self-invoked")
 		return VStack(spacing: 20) {
-			TopicCell(topic: failedTopic)
-			TopicCell(topic: .init(
-				id: "0",
-				name: "Geography",
-				image: nil,
-				topDecks: [],
-				isSelected: true
-			))
-			TopicCell(topic: .init(
-				id: "0",
-				name: "Geography",
-				image: .init("GeographyTopic"),
-				topDecks: [],
-				isSelected: false
-			))
-			TopicCell(topic: .init(
-				id: "0",
-				name: "Geography",
-				image: nil,
-				topDecks: [],
-				isSelected: false
-			))
+			TopicCell(
+				topic: failedTopic,
+				isSelected: false,
+				toggleSelect: {}
+			)
+			TopicCell(
+				topic: .init(
+					id: "0",
+					name: "Geography",
+					image: nil,
+					topDecks: []
+				),
+				isSelected: true,
+				toggleSelect: {}
+			)
+			TopicCell(
+				topic: .init(
+					id: "0",
+					name: "Geography",
+					image: .init("GeographyTopic"),
+					topDecks: []
+				),
+				isSelected: false,
+				toggleSelect: {}
+			)
+			TopicCell(
+				topic: .init(
+					id: "0",
+					name: "Geography",
+					image: nil,
+					topDecks: []
+				),
+				isSelected: true,
+				toggleSelect: {}
+			)
 		}
 	}
 }

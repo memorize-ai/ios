@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct RecommendedDecksViewContent: View {
+	@EnvironmentObject var currentUserStore: UserStore
+	
 	var body: some View {
-		Text("RecommendedDecksViewContent")
+		EmptyView() // TODO: Change this
 	}
 }
 
@@ -10,6 +12,12 @@ struct RecommendedDecksViewContent: View {
 struct RecommendedDecksViewContent_Previews: PreviewProvider {
 	static var previews: some View {
 		RecommendedDecksViewContent()
+			.environmentObject(UserStore(.init(
+				id: "0",
+				name: "Ken Mueller",
+				email: "kenmueller0@gmail.com",
+				interests: []
+			)))
 	}
 }
 #endif

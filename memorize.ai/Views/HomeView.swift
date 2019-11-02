@@ -15,7 +15,8 @@ struct HomeView_Previews: PreviewProvider {
 			.environmentObject(UserStore(.init(
 				id: "0",
 				name: "Ken Mueller",
-				email: "kenmueller0@gmail.com"
+				email: "kenmueller0@gmail.com",
+				interests: []
 			)))
 	}
 }

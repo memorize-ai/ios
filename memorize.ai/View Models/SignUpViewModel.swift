@@ -61,7 +61,8 @@ final class SignUpViewModel: ViewModel {
 		user = .init(
 			id: uid,
 			name: name,
-			email: email
+			email: email,
+			interests: []
 		)
 	}
 	

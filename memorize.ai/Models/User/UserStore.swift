@@ -31,12 +31,7 @@ final class UserStore: ObservableObject {
 							id: topicId,
 							name: document.get("name") as? String ?? "Unknown",
 							topDecks: document.get("topDecks") as? [String] ?? []
-						) { isSelected in
-							self.onTopicSelect(
-								id: topicId,
-								isSelected: isSelected
-							)
-						}.load()
+						).load()
 					)
 				case .modified:
 					self.topics.first { $0.id == topicId }?
@@ -47,14 +42,5 @@ final class UserStore: ObservableObject {
 			}
 			self.topicsLoadingState = .success()
 		}
-	}
-	
-	@discardableResult
-	func onTopicSelect(id topicId: String, isSelected: Bool) -> Promise<Void> {
-		firestore.document("users/\(user.id)").updateData([
-			"topics": isSelected
-				? FieldValue.arrayUnion([topicId])
-				: FieldValue.arrayRemove([topicId])
-		])
 	}
 }
