@@ -6,7 +6,7 @@ struct ChooseTopicsViewContent: View {
 	@ObservedObject var model: ChooseTopicsViewModel
 	
 	init(currentUser: User) {
-		model = ChooseTopicsViewModel(currentUser: currentUser)
+		model = .init(currentUser: currentUser)
 	}
 	
 	static let cellSpacing: CGFloat = 8
