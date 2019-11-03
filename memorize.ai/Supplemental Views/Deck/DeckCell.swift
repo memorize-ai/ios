@@ -20,11 +20,24 @@ struct DeckCell<Content: View>: View {
 			cornerRadius: 8
 		) {
 			VStack {
-				deck.image?
-					.resizable()
-					.renderingMode(.original)
-					.aspectRatio(contentMode: .fill)
-					.frame(height: width * 111 / 165)
+				Group {
+					if deck.hasImage {
+						if deck.image == nil {
+							ZStack {
+								Color.lightGrayBackground
+								ActivityIndicator(color: .gray)
+							}
+						} else {
+							deck.image?
+								.resizable()
+								.renderingMode(.original)
+								.aspectRatio(contentMode: .fill)
+						}
+					} else {
+						Text("No image") // TODO: Change this
+					}
+				}
+				.frame(height: width * 111 / 165)
 				VStack(alignment: .leading) {
 					Text(deck.name)
 						.font(.muli(.bold, size: 13.5))
@@ -64,25 +77,63 @@ struct DeckCell<Content: View>: View {
 #if DEBUG
 struct DeckCell_Previews: PreviewProvider {
 	static var previews: some View {
-		DeckCell(
-			deck: .init(
-				id: "0",
-				topics: [],
-				hasImage: true,
-				image: .init("GeometryPrepDeck"),
-				name: "Geometry Prep",
-				subtitle: "Angles, lines, triangles and other polygons",
-				numberOfViews: 1000000000,
-				numberOfUniqueViews: 200000,
-				numberOfRatings: 12400,
-				averageRating: 4.5,
-				numberOfDownloads: 196400,
-				dateCreated: .init(),
-				dateLastUpdated: .init()
-			),
-			width: 165,
-			content: EmptyView.init
-		)
+		VStack(spacing: 20) {
+			DeckCell(
+				deck: .init(
+					id: "0",
+					topics: [],
+					hasImage: true,
+					image: .init("GeometryPrepDeck"),
+					name: "Geometry Prep",
+					subtitle: "Angles, lines, triangles and other polygons",
+					numberOfViews: 1000000000,
+					numberOfUniqueViews: 200000,
+					numberOfRatings: 12400,
+					averageRating: 4.5,
+					numberOfDownloads: 196400,
+					dateCreated: .init(),
+					dateLastUpdated: .init()
+				),
+				width: 165,
+				content: EmptyView.init
+			)
+			DeckCell(
+				deck: .init(
+					id: "0",
+					topics: [],
+					hasImage: true,
+					name: "Geometry Prep",
+					subtitle: "Angles, lines, triangles and other polygons",
+					numberOfViews: 1000000000,
+					numberOfUniqueViews: 200000,
+					numberOfRatings: 12400,
+					averageRating: 4.5,
+					numberOfDownloads: 196400,
+					dateCreated: .init(),
+					dateLastUpdated: .init()
+				),
+				width: 165,
+				content: EmptyView.init
+			)
+			DeckCell(
+				deck: .init(
+					id: "0",
+					topics: [],
+					hasImage: false,
+					name: "Geometry Prep",
+					subtitle: "Angles, lines, triangles and other polygons",
+					numberOfViews: 1000000000,
+					numberOfUniqueViews: 200000,
+					numberOfRatings: 12400,
+					averageRating: 4.5,
+					numberOfDownloads: 196400,
+					dateCreated: .init(),
+					dateLastUpdated: .init()
+				),
+				width: 165,
+				content: EmptyView.init
+			)
+		}
 	}
 }
 #endif
