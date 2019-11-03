@@ -43,9 +43,9 @@ struct DeckCell<Content: View>: View {
 					} else {
 						ZStack {
 							Color.lightGrayBackground
-							Text("(no image)")
-								.font(.muli(.bold, size: 13))
+							Image(systemName: .questionmark)
 								.foregroundColor(.gray)
+								.scaleEffect(1.5)
 						}
 					}
 				}
