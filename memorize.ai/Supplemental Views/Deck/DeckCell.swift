@@ -41,7 +41,12 @@ struct DeckCell<Content: View>: View {
 								.aspectRatio(contentMode: .fill)
 						}
 					} else {
-						Text("No image") // TODO: Change this
+						ZStack {
+							Color.lightGrayBackground
+							Text("(no image)")
+								.font(.muli(.bold, size: 13))
+								.foregroundColor(.gray)
+						}
 					}
 				}
 				.frame(height: width * 111 / 165)
@@ -99,7 +104,7 @@ struct DeckCell_Previews: PreviewProvider {
 			dateLastUpdated: .init()
 		)
 		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
-		return  VStack(spacing: 20) {
+		return VStack(spacing: 20) {
 			HStack(spacing: 20) {
 				DeckCell(
 					deck: .init(
