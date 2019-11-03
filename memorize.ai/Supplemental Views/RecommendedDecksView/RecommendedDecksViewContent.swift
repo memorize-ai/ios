@@ -11,8 +11,8 @@ struct RecommendedDecksViewContent: View {
 	
 	@ObservedObject var model: RecommendedDecksViewModel
 	
-	init(currentUser: User) {
-		model = .init(currentUser: currentUser)
+	init(currentUserStore: UserStore) {
+		model = .init(currentUserStore: currentUserStore)
 	}
 	
 	var body: some View {
@@ -41,14 +41,14 @@ struct RecommendedDecksViewContent: View {
 #if DEBUG
 struct RecommendedDecksViewContent_Previews: PreviewProvider {
 	static var previews: some View {
-		let currentUser = User(
+		let currentUserStore = UserStore(.init(
 			id: "0",
 			name: "Ken Mueller",
 			email: "kenmueller0@gmail.com",
 			interests: []
-		)
-		return RecommendedDecksViewContent(currentUser: currentUser)
-			.environmentObject(UserStore(currentUser))
+		))
+		return RecommendedDecksViewContent(currentUserStore: currentUserStore)
+			.environmentObject(currentUserStore)
 	}
 }
 #endif

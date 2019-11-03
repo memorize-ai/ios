@@ -2,21 +2,33 @@ import Combine
 import PromiseKit
 
 final class RecommendedDecksViewModel: ViewModel {
-	let currentUser: User
+	let currentUserStore: UserStore
 	
 	@Published var decks = [Deck]()
 	@Published var decksLoadingState = LoadingState.none
 	
-	init(currentUser: User) {
-		self.currentUser = currentUser
+	init(currentUserStore: UserStore) {
+		self.currentUserStore = currentUserStore
 	}
 	
 	func loadDecks() {
 		decksLoadingState = .loading()
-		// TODO: Load decks
-	}
-	
-	func getDeckIds() -> Promise<[String]> {
-		.value([]) // TODO: Change this
+		for topicId in currentUserStore.user.interests {
+			if decksLoadingState.didFail { return }
+			guard let topic = (currentUserStore.topics.first {
+				$0.id == topicId
+			}) else { continue }
+			for deckId in topic.topDecks.prefix(Int.max /* TODO: Change this */) {
+				if decksLoadingState.didFail { return }
+				Deck.fromId(deckId).done { deck in
+					self.decks.append(deck.loadImage())
+					self.decksLoadingState = .success()
+				}.catch { error in
+					self.decksLoadingState = .failure(
+						message: error.localizedDescription
+					)
+				}
+			}
+		}
 	}
 }

@@ -20,7 +20,7 @@ struct RecommendedDecksView: View {
 			trailingButtonTitle: "DONE",
 			trailingButtonDestination: HomeView(),
 			content: RecommendedDecksViewContent(
-				currentUser: currentUserStore.user
+				currentUserStore: currentUserStore
 			)
 		)
 	}
