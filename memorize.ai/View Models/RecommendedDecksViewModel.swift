@@ -2,11 +2,9 @@ import Combine
 
 final class RecommendedDecksViewModel: ViewModel {
 	@Published var decks = [Deck]()
-	
-	var shouldLoadDecks = true
+	@Published var decksLoadingState = LoadingState.none
 	
 	func loadDecks() {
-		shouldLoadDecks = false
 		// TODO: Load decks
 	}
 }

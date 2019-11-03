@@ -28,7 +28,7 @@ struct RecommendedDecksViewContent: View {
 			)
 		}
 		.onAppear {
-			guard self.model.shouldLoadDecks else { return }
+			guard self.model.decksLoadingState.isNone else { return }
 			self.model.loadDecks()
 		}
 	}
