@@ -1,6 +1,6 @@
 import Combine
 
-final class ChooseTopicsViewModel: ObservableObject {
+final class ChooseTopicsViewModel: ViewModel {
 	let currentUser: User
 	
 	@Published var selectedTopics = [String]()
