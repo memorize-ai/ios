@@ -2,6 +2,8 @@ import Combine
 import PromiseKit
 
 final class RecommendedDecksViewModel: ViewModel {
+	static let maxDecksPerTopic = 3
+	
 	let currentUserStore: UserStore
 	
 	@Published var decks = [Deck]()
@@ -18,7 +20,7 @@ final class RecommendedDecksViewModel: ViewModel {
 			guard let topic = (currentUserStore.topics.first {
 				$0.id == topicId
 			}) else { continue }
-			for deckId in topic.topDecks.prefix(Int.max /* TODO: Change this */) {
+			for deckId in topic.topDecks.prefix(Self.maxDecksPerTopic) {
 				if decksLoadingState.didFail { return }
 				Deck.fromId(deckId).done { deck in
 					self.decks.append(deck.loadImage())
