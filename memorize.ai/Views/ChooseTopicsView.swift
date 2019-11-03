@@ -4,7 +4,10 @@ struct ChooseTopicsView: View {
 	@EnvironmentObject var currentUserStore: UserStore
 	
 	var leadingButton: some View {
-		NavigationLink(destination: HomeView()) {
+		NavigationLink(
+			destination: HomeView()
+				.environmentObject(currentUserStore)
+		) {
 			XButton(height: 20)
 		}
 	}
@@ -14,8 +17,11 @@ struct ChooseTopicsView: View {
 			title: "Choose your interests",
 			leadingButton: leadingButton,
 			trailingButtonTitle: "NEXT",
-			trailingButtonDestination: RecommendedDecksView(),
-			content: ChooseTopicsViewContent(currentUser: currentUserStore.user)
+			trailingButtonDestination: RecommendedDecksView()
+				.environmentObject(currentUserStore),
+			content: ChooseTopicsViewContent(
+				currentUser: currentUserStore.user
+			)
 		)
 	}
 }

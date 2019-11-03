@@ -2,6 +2,8 @@ import SwiftUI
 
 struct RecommendedDecksView: View {
 	@Environment(\.presentationMode) var presentationMode
+	
+	@EnvironmentObject var currentUserStore: UserStore
 		
 	var leadingButton: some View {
 		Button(action: {
@@ -16,7 +18,8 @@ struct RecommendedDecksView: View {
 			title: "Recommended decks",
 			leadingButton: leadingButton,
 			trailingButtonTitle: "DONE",
-			trailingButtonDestination: HomeView(),
+			trailingButtonDestination: HomeView()
+				.environmentObject(currentUserStore),
 			content: RecommendedDecksViewContent()
 		)
 	}
