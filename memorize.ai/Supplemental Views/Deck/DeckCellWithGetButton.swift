@@ -15,10 +15,10 @@ struct DeckCellWithGetButton: View {
 				) {
 					Group {
 						if isLoading {
+							ActivityIndicator(radius: 8)
+						} else {
 							Text("GET")
 								.font(.muli(.bold, size: 12))
-						} else {
-							ActivityIndicator(radius: 8)
 						}
 					}
 					.foregroundColor(.white)
