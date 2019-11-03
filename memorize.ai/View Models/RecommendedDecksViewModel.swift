@@ -1,36 +1,38 @@
 import Combine
-import PromiseKit
 
 final class RecommendedDecksViewModel: ViewModel {
-	static let maxDecksPerTopic = 3
-	
-	let currentUserStore: UserStore
-	
 	@Published var decks = [Deck]()
 	@Published var decksLoadingState = LoadingState.none
 	
-	init(currentUserStore: UserStore) {
-		self.currentUserStore = currentUserStore
-	}
-	
-	func loadDecks() {
+	func loadDecks(interests: [String], topics: [Topic]) {
 		decksLoadingState = .loading()
-		for topicId in currentUserStore.user.interests {
+		let maxDecksPerTopic = getMaxDecksPerTopic(
+			numberOfInterests: interests.count
+		)
+		for topicId in interests {
 			if decksLoadingState.didFail { return }
-			guard let topic = (currentUserStore.topics.first {
+			guard let topic = (topics.first {
 				$0.id == topicId
 			}) else { continue }
-			for deckId in topic.topDecks.prefix(Self.maxDecksPerTopic) {
+			for deckId in topic.topDecks.prefix(maxDecksPerTopic) {
 				if decksLoadingState.didFail { return }
-				Deck.fromId(deckId).done { deck in
-					self.decks.append(deck.loadImage())
-					self.decksLoadingState = .success()
-				}.catch { error in
-					self.decksLoadingState = .failure(
-						message: error.localizedDescription
-					)
-				}
+				loadDeck(id: deckId)
 			}
 		}
+	}
+	
+	func loadDeck(id: String) {
+		Deck.fromId(id).done { deck in
+			self.decks.append(deck.loadImage())
+			self.decksLoadingState = .success()
+		}.catch { error in
+			self.decksLoadingState = .failure(
+				message: error.localizedDescription
+			)
+		}
+	}
+	
+	func getMaxDecksPerTopic(numberOfInterests: Int) -> Int {
+		3 // TODO: Calculate this dynamically
 	}
 }

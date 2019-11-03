@@ -9,11 +9,7 @@ struct RecommendedDecksViewContent: View {
 	
 	@EnvironmentObject var currentUserStore: UserStore
 	
-	@ObservedObject var model: RecommendedDecksViewModel
-	
-	init(currentUserStore: UserStore) {
-		model = .init(currentUserStore: currentUserStore)
-	}
+	@ObservedObject var model = RecommendedDecksViewModel()
 	
 	var body: some View {
 		ScrollView {
@@ -33,7 +29,10 @@ struct RecommendedDecksViewContent: View {
 		}
 		.onAppear {
 			guard self.model.decksLoadingState.isNone else { return }
-			self.model.loadDecks()
+			self.model.loadDecks(
+				interests: self.currentUserStore.user.interests,
+				topics: self.currentUserStore.topics
+			)
 		}
 	}
 }
@@ -41,14 +40,13 @@ struct RecommendedDecksViewContent: View {
 #if DEBUG
 struct RecommendedDecksViewContent_Previews: PreviewProvider {
 	static var previews: some View {
-		let currentUserStore = UserStore(.init(
-			id: "0",
-			name: "Ken Mueller",
-			email: "kenmueller0@gmail.com",
-			interests: []
-		))
-		return RecommendedDecksViewContent(currentUserStore: currentUserStore)
-			.environmentObject(currentUserStore)
+		RecommendedDecksViewContent()
+			.environmentObject(UserStore(.init(
+				id: "0",
+				name: "Ken Mueller",
+				email: "kenmueller0@gmail.com",
+				interests: []
+			)))
 	}
 }
 #endif
