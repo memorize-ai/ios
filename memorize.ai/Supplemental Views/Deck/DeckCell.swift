@@ -21,7 +21,14 @@ struct DeckCell<Content: View>: View {
 		) {
 			VStack {
 				Group {
-					if deck.hasImage {
+					if deck.imageLoadingState.didFail {
+						ZStack {
+							Color.lightGrayBackground
+							Image(systemName: .exclamationmarkTriangle)
+								.foregroundColor(.gray)
+								.scaleEffect(1.5)
+						}
+					} else if deck.hasImage {
 						if deck.image == nil {
 							ZStack {
 								Color.lightGrayBackground
@@ -77,62 +84,86 @@ struct DeckCell<Content: View>: View {
 #if DEBUG
 struct DeckCell_Previews: PreviewProvider {
 	static var previews: some View {
-		VStack(spacing: 20) {
-			DeckCell(
-				deck: .init(
-					id: "0",
-					topics: [],
-					hasImage: true,
-					image: .init("GeometryPrepDeck"),
-					name: "Geometry Prep",
-					subtitle: "Angles, lines, triangles and other polygons",
-					numberOfViews: 1000000000,
-					numberOfUniqueViews: 200000,
-					numberOfRatings: 12400,
-					averageRating: 4.5,
-					numberOfDownloads: 196400,
-					dateCreated: .init(),
-					dateLastUpdated: .init()
-				),
-				width: 165,
-				content: EmptyView.init
-			)
-			DeckCell(
-				deck: .init(
-					id: "0",
-					topics: [],
-					hasImage: true,
-					name: "Geometry Prep",
-					subtitle: "Angles, lines, triangles and other polygons",
-					numberOfViews: 1000000000,
-					numberOfUniqueViews: 200000,
-					numberOfRatings: 12400,
-					averageRating: 4.5,
-					numberOfDownloads: 196400,
-					dateCreated: .init(),
-					dateLastUpdated: .init()
-				),
-				width: 165,
-				content: EmptyView.init
-			)
-			DeckCell(
-				deck: .init(
-					id: "0",
-					topics: [],
-					hasImage: false,
-					name: "Geometry Prep",
-					subtitle: "Angles, lines, triangles and other polygons",
-					numberOfViews: 1000000000,
-					numberOfUniqueViews: 200000,
-					numberOfRatings: 12400,
-					averageRating: 4.5,
-					numberOfDownloads: 196400,
-					dateCreated: .init(),
-					dateLastUpdated: .init()
-				),
-				width: 165,
-				content: EmptyView.init
-			)
+		let failedDeck = Deck(
+			id: "0",
+			topics: [],
+			hasImage: true,
+			name: "Geometry Prep",
+			subtitle: "Angles, lines, triangles and other polygons",
+			numberOfViews: 1000000000,
+			numberOfUniqueViews: 200000,
+			numberOfRatings: 12400,
+			averageRating: 4.5,
+			numberOfDownloads: 196400,
+			dateCreated: .init(),
+			dateLastUpdated: .init()
+		)
+		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
+		return  VStack(spacing: 20) {
+			HStack(spacing: 20) {
+				DeckCell(
+					deck: .init(
+						id: "0",
+						topics: [],
+						hasImage: true,
+						image: .init("GeometryPrepDeck"),
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					),
+					width: 165,
+					content: EmptyView.init
+				)
+				DeckCell(
+					deck: .init(
+						id: "0",
+						topics: [],
+						hasImage: true,
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					),
+					width: 165,
+					content: EmptyView.init
+				)
+			}
+			HStack(spacing: 20) {
+				DeckCell(
+					deck: .init(
+						id: "0",
+						topics: [],
+						hasImage: false,
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					),
+					width: 165,
+					content: EmptyView.init
+				)
+				DeckCell(
+					deck: failedDeck,
+					width: 165,
+					content: EmptyView.init
+				)
+			}
 		}
 	}
 }
