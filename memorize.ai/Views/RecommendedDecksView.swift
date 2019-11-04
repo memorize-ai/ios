@@ -5,6 +5,7 @@ struct RecommendedDecksView: View {
 		PostSignUpView(
 			title: "Test",
 			leadingButton: EmptyView(),
+			leadingButtonIsBackButton: true,
 			trailingButtonTitle: "TEST",
 			trailingButtonDestination: EmptyView(),
 			content: RecommendedDecksViewContent()

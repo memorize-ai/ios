@@ -16,6 +16,7 @@ struct ChooseTopicsView: View {
 		PostSignUpView(
 			title: "Choose your interests",
 			leadingButton: leadingButton,
+			leadingButtonIsBackButton: false,
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: RecommendedDecksView()
 				.environmentObject(currentUserStore),

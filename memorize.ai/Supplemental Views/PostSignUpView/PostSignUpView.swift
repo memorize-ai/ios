@@ -5,8 +5,11 @@ struct PostSignUpView<
 	TrailingButtonDestination: View,
 	Content: View
 >: View {
+	@Environment(\.presentationMode) var presentationMode
+	
 	let title: String
 	let leadingButton: LeadingButton
+	let leadingButtonIsBackButton: Bool
 	let trailingButtonTitle: String
 	let trailingButtonDestination: TrailingButtonDestination
 	let content: Content
@@ -22,7 +25,15 @@ struct PostSignUpView<
 				PostSignUpViewTopGradient()
 				VStack {
 					HStack {
-						leadingButton
+						if leadingButtonIsBackButton {
+							Button(action: {
+								self.presentationMode.wrappedValue.dismiss()
+							}) {
+								LeftArrowHead(height: 20)
+							}
+						} else {
+							leadingButton
+						}
 						Spacer()
 						PostSignUpViewTrailingButton(
 							text: trailingButtonTitle,
@@ -51,6 +62,7 @@ struct PostSignUpView_Previews: PreviewProvider {
 		PostSignUpView(
 			title: "Choose your interests",
 			leadingButton: XButton(height: 20),
+			leadingButtonIsBackButton: false,
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: EmptyView(),
 			content: EmptyView()
