@@ -7,7 +7,7 @@ struct RecommendedDecksView: View {
 			leadingButton: EmptyView(),
 			trailingButtonTitle: "TEST",
 			trailingButtonDestination: EmptyView(),
-			content: TestView()
+			content: RecommendedDecksViewContent()
 		)
 	}
 }

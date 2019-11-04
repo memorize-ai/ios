@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TestView: View {
+struct RecommendedDecksViewContent: View {
 	static let deckCellWidth: CGFloat = 165
 	static let numberOfColumns =
 		Int(SCREEN_SIZE.width) / Int(deckCellWidth)
@@ -9,7 +9,7 @@ struct TestView: View {
 	
 	@EnvironmentObject var currentUserStore: UserStore
 	
-	@ObservedObject var model = TestViewModel()
+	@ObservedObject var model = RecommendedDecksViewModel()
 	
 	var body: some View {
 		print("VIEW_DECKS_COUNT:", model.decks.count)
