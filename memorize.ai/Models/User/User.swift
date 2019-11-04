@@ -8,17 +8,23 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var name: String
 	@Published var email: String
 	@Published var interests: [String]
+	@Published var numberOfDecks: Int
+	@Published var decks: [Deck]
 	
 	init(
 		id: String,
 		name: String,
 		email: String,
-		interests: [String]
+		interests: [String],
+		numberOfDecks: Int,
+		decks: [Deck] = []
 	) {
 		self.id = id
 		self.name = name
 		self.email = email
 		self.interests = interests
+		self.numberOfDecks = numberOfDecks
+		self.decks = decks
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -26,7 +32,9 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			id: snapshot.documentID,
 			name: snapshot.get("name") as? String ?? "Unknown",
 			email: snapshot.get("email") as? String ?? "Unknown",
-			interests: snapshot.get("topics") as? [String] ?? []
+			interests: snapshot.get("topics") as? [String] ?? [],
+			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0,
+			decks: []
 		)
 	}
 	
