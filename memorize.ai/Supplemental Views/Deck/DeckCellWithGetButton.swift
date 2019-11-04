@@ -1,23 +1,39 @@
 import SwiftUI
 
 struct DeckCellWithGetButton: View {
-	let deck: Deck
+	@ObservedObject var deck: Deck
+	
+	let user: User
 	let width: CGFloat
-	let isLoading: Bool
-	let onGetClick: () -> Void
+	
+	var hasDeck: Bool {
+		user.hasDeck(deck)
+	}
+	
+	var isGetLoading: Bool {
+		deck.getLoadingState.isLoading
+	}
+	
+	func buttonAction() {
+		if hasDeck {
+			deck.remove(user: user)
+		} else {
+			deck.get(user: user)
+		}
+	}
 	
 	var body: some View {
 		DeckCell(deck: deck, width: width) {
-			Button(action: onGetClick) {
+			Button(action: buttonAction) {
 				CustomRectangle(
 					background: Color.darkBlue,
 					cornerRadius: 8
 				) {
 					Group {
-						if isLoading {
+						if isGetLoading {
 							ActivityIndicator(radius: 8)
 						} else {
-							Text("GET")
+							Text(hasDeck ? "REMOVE" : "GET")
 								.font(.muli(.bold, size: 12))
 						}
 					}
@@ -28,7 +44,7 @@ struct DeckCellWithGetButton: View {
 				.padding([.horizontal, .bottom], 18)
 				.padding(.top, 10)
 			}
-			.disabled(isLoading)
+			.disabled(isGetLoading)
 		}
 	}
 }
@@ -53,9 +69,15 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					dateCreated: .init(),
 					dateLastUpdated: .init()
 				),
-				width: 165,
-				isLoading: false
-			) {}
+				user: .init(
+					id: "0",
+					name: "Ken Mueller",
+					email: "kenmueller0@gmail.com",
+					interests: [],
+					numberOfDecks: 0
+				),
+				width: 165
+			)
 			DeckCellWithGetButton(
 				deck: .init(
 					id: "0",
@@ -72,9 +94,15 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					dateCreated: .init(),
 					dateLastUpdated: .init()
 				),
-				width: 165,
-				isLoading: true
-			) {}
+				user: .init(
+					id: "0",
+					name: "Ken Mueller",
+					email: "kenmueller0@gmail.com",
+					interests: [],
+					numberOfDecks: 0
+				),
+				width: 165
+			)
 		}
 	}
 }

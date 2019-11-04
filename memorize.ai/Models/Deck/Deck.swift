@@ -22,7 +22,6 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@Published var imageLoadingState = LoadingState.none
 	@Published var getLoadingState = LoadingState.none
-	@Published var removeLoadingState = LoadingState.none
 	
 	init(
 		id: String,
@@ -108,12 +107,12 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func remove(user: User) -> Self {
-		removeLoadingState = .loading()
+		getLoadingState = .loading()
 		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
 			user.decks.removeAll { $0 == self }
-			self.removeLoadingState = .success()
+			self.getLoadingState = .success()
 		}.catch { error in
-			self.removeLoadingState = .failure(
+			self.getLoadingState = .failure(
 				message: error.localizedDescription
 			)
 		}

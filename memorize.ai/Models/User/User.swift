@@ -56,6 +56,14 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 	}
 	
+	func hasDeckWithId(_ deckId: String) -> Bool {
+		decks.contains { $0.id == deckId }
+	}
+	
+	func hasDeck(_ deck: Deck) -> Bool {
+		decks.contains(deck)
+	}
+	
 	static func == (lhs: User, rhs: User) -> Bool {
 		lhs.id == rhs.id
 	}
