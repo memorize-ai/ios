@@ -34,7 +34,9 @@ final class RecommendedDecksViewModel: ViewModel {
 	}
 	
 	func getMaxDecksPerTopic(numberOfInterests: Int) -> Int {
-		3 // TODO: Calculate this dynamically
+		numberOfInterests * 3 < 30
+			? 30 / numberOfInterests
+			: 3
 	}
 	
 	func didLoadDeck(id: String) -> Bool {
