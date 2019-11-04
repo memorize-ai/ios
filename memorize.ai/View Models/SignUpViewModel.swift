@@ -62,7 +62,8 @@ final class SignUpViewModel: ViewModel {
 			id: uid,
 			name: name,
 			email: email,
-			interests: []
+			interests: [],
+			numberOfDecks: 0
 		)
 	}
 	

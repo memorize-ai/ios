@@ -43,7 +43,8 @@ struct ChooseTopicsViewContent_Previews: PreviewProvider {
 			id: "0",
 			name: "Ken Mueller",
 			email: "kenmueller0@gmail.com",
-			interests: []
+			interests: [],
+			numberOfDecks: 0
 		)
 		return ChooseTopicsViewContent(currentUser: currentUser)
 			.environmentObject(UserStore(currentUser))

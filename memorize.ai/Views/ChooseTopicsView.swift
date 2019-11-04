@@ -36,7 +36,8 @@ struct ChooseTopicsView_Previews: PreviewProvider {
 					id: "0",
 					name: "Ken Mueller",
 					email: "kenmueller0@gmail.com",
-					interests: []
+					interests: [],
+					numberOfDecks: 0
 				),
 				topics: [
 					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),

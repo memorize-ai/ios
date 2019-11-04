@@ -45,7 +45,8 @@ final class LogInViewModel: ViewModel {
 				id: result.user.uid,
 				name: result.user.displayName ?? "Unknown",
 				email: self.email,
-				interests: []
+				interests: [],
+				numberOfDecks: 0
 			)
 			self.loadingState = .success()
 		}.catch(failLogIn)

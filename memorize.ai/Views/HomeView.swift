@@ -16,7 +16,8 @@ struct HomeView_Previews: PreviewProvider {
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",
-				interests: []
+				interests: [],
+				numberOfDecks: 0
 			)))
 	}
 }
