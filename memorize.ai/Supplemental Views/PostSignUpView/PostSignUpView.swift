@@ -40,8 +40,8 @@ struct PostSignUpView<
 			.align(to: .top)
 		}
 		.background(Color.lightGrayBackground)
-		.edgesIgnoringSafeArea(.all)
 		.removeNavigationBar()
+		.edgesIgnoringSafeArea(.all)
 	}
 }
 
