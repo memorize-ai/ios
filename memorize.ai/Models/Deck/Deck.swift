@@ -3,6 +3,8 @@ import FirebaseFirestore
 import PromiseKit
 
 final class Deck: ObservableObject, Identifiable, Equatable {
+	static var cache = [Deck]()
+	
 	let id: String
 	let dateCreated: Date
 	
@@ -105,6 +107,9 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 		var didFulfill = false
 		var deck: Deck?
 		return .init { seal in
+			if let cachedDeck = (cache.first { $0.id == id }) {
+				return seal.fulfill(cachedDeck)
+			}
 			firestore.document("decks/\(id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let snapshot = snapshot else {
 					return seal.reject(error ?? UNKNOWN_ERROR)
@@ -114,6 +119,7 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 				} else {
 					didFulfill = true
 					deck = .init(snapshot: snapshot)
+					cache.append(deck!)
 					seal.fulfill(deck!)
 				}
 			}
