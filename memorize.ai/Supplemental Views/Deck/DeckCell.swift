@@ -22,18 +22,14 @@ struct DeckCell<Content: View>: View {
 			VStack {
 				Group {
 					if deck.imageLoadingState.didFail {
-						ZStack {
-							Color.lightGrayBackground
-							Image(systemName: .exclamationmarkTriangle)
-								.foregroundColor(.gray)
-								.scaleEffect(1.5)
-						}
+						Image(systemName: .exclamationmarkTriangle)
+							.foregroundColor(.gray)
+							.scaleEffect(1.5)
+							.background(Color.lightGrayBackground)
 					} else if deck.hasImage {
 						if deck.image == nil {
-							ZStack {
-								Color.lightGrayBackground
-								ActivityIndicator(color: .gray)
-							}
+							ActivityIndicator(color: .gray)
+								.background(Color.lightGrayBackground)
 						} else {
 							deck.image?
 								.resizable()
@@ -41,12 +37,10 @@ struct DeckCell<Content: View>: View {
 								.aspectRatio(contentMode: .fill)
 						}
 					} else {
-						ZStack {
-							Color.lightGrayBackground
-							Image(systemName: .questionmark)
-								.foregroundColor(.gray)
-								.scaleEffect(1.5)
-						}
+						Image(systemName: .questionmark)
+							.foregroundColor(.gray)
+							.scaleEffect(1.5)
+							.background(Color.lightGrayBackground)
 					}
 				}
 				.frame(height: width * 111 / 165)
@@ -104,70 +98,74 @@ struct DeckCell_Previews: PreviewProvider {
 			dateLastUpdated: .init()
 		)
 		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
-		return VStack(spacing: 20) {
-			HStack(spacing: 20) {
-				DeckCell(
-					deck: .init(
-						id: "0",
-						topics: [],
-						hasImage: true,
-						image: .init("GeometryPrepDeck"),
-						name: "Geometry Prep",
-						subtitle: "Angles, lines, triangles and other polygons",
-						numberOfViews: 1000000000,
-						numberOfUniqueViews: 200000,
-						numberOfRatings: 12400,
-						averageRating: 4.5,
-						numberOfDownloads: 196400,
-						dateCreated: .init(),
-						dateLastUpdated: .init()
-					),
-					width: 165,
-					content: EmptyView.init
-				)
-				DeckCell(
-					deck: .init(
-						id: "0",
-						topics: [],
-						hasImage: true,
-						name: "Geometry Prep",
-						subtitle: "Angles, lines, triangles and other polygons",
-						numberOfViews: 1000000000,
-						numberOfUniqueViews: 200000,
-						numberOfRatings: 12400,
-						averageRating: 4.5,
-						numberOfDownloads: 196400,
-						dateCreated: .init(),
-						dateLastUpdated: .init()
-					),
-					width: 165,
-					content: EmptyView.init
-				)
-			}
-			HStack(spacing: 20) {
-				DeckCell(
-					deck: .init(
-						id: "0",
-						topics: [],
-						hasImage: false,
-						name: "Geometry Prep",
-						subtitle: "Angles, lines, triangles and other polygons",
-						numberOfViews: 1000000000,
-						numberOfUniqueViews: 200000,
-						numberOfRatings: 12400,
-						averageRating: 4.5,
-						numberOfDownloads: 196400,
-						dateCreated: .init(),
-						dateLastUpdated: .init()
-					),
-					width: 165,
-					content: EmptyView.init
-				)
-				DeckCell(
-					deck: failedDeck,
-					width: 165,
-					content: EmptyView.init
-				)
+		return ZStack {
+			Color.gray
+				.edgesIgnoringSafeArea(.all)
+			VStack(spacing: 20) {
+				HStack(spacing: 20) {
+					DeckCell(
+						deck: .init(
+							id: "0",
+							topics: [],
+							hasImage: true,
+							image: .init("GeometryPrepDeck"),
+							name: "Geometry Prep",
+							subtitle: "Angles, lines, triangles and other polygons",
+							numberOfViews: 1000000000,
+							numberOfUniqueViews: 200000,
+							numberOfRatings: 12400,
+							averageRating: 4.5,
+							numberOfDownloads: 196400,
+							dateCreated: .init(),
+							dateLastUpdated: .init()
+						),
+						width: 165,
+						content: EmptyView.init
+					)
+					DeckCell(
+						deck: .init(
+							id: "0",
+							topics: [],
+							hasImage: true,
+							name: "Geometry Prep",
+							subtitle: "Angles, lines, triangles and other polygons",
+							numberOfViews: 1000000000,
+							numberOfUniqueViews: 200000,
+							numberOfRatings: 12400,
+							averageRating: 4.5,
+							numberOfDownloads: 196400,
+							dateCreated: .init(),
+							dateLastUpdated: .init()
+						),
+						width: 165,
+						content: EmptyView.init
+					)
+				}
+				HStack(spacing: 20) {
+					DeckCell(
+						deck: .init(
+							id: "0",
+							topics: [],
+							hasImage: false,
+							name: "Geometry Prep",
+							subtitle: "Angles, lines, triangles and other polygons",
+							numberOfViews: 1000000000,
+							numberOfUniqueViews: 200000,
+							numberOfRatings: 12400,
+							averageRating: 4.5,
+							numberOfDownloads: 196400,
+							dateCreated: .init(),
+							dateLastUpdated: .init()
+						),
+						width: 165,
+						content: EmptyView.init
+					)
+					DeckCell(
+						deck: failedDeck,
+						width: 165,
+						content: EmptyView.init
+					)
+				}
 			}
 		}
 	}
