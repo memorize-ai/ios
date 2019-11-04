@@ -58,6 +58,7 @@ struct DeckCell<Content: View>: View {
 					Text(deck.subtitle)
 						.font(.muli(.regular, size: 11))
 						.foregroundColor(.lightGrayText)
+						.lineLimit(3)
 						.padding(.top, 4)
 					HStack {
 						DeckStars(stars: deck.averageRating)
