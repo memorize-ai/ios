@@ -2,7 +2,7 @@ import Combine
 import FirebaseFirestore
 import PromiseKit
 
-final class User: ObservableObject, Identifiable, Equatable {
+final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	let id: String
 	
 	@Published var name: String
@@ -50,5 +50,9 @@ final class User: ObservableObject, Identifiable, Equatable {
 	
 	static func == (lhs: User, rhs: User) -> Bool {
 		lhs.id == rhs.id
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
 	}
 }

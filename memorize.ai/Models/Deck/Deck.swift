@@ -2,7 +2,7 @@ import SwiftUI
 import FirebaseFirestore
 import PromiseKit
 
-final class Deck: ObservableObject, Identifiable, Equatable {
+final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static var cache = [String: Deck]()
 	
 	let id: String
@@ -128,5 +128,9 @@ final class Deck: ObservableObject, Identifiable, Equatable {
 	
 	static func == (lhs: Deck, rhs: Deck) -> Bool {
 		lhs.id == rhs.id
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
 	}
 }

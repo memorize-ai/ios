@@ -1,7 +1,7 @@
 import SwiftUI
 import FirebaseFirestore
 
-final class Topic: ObservableObject, Identifiable, Equatable {
+final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	let id: String
 	
 	@Published var name: String
@@ -50,5 +50,9 @@ final class Topic: ObservableObject, Identifiable, Equatable {
 	
 	static func == (lhs: Topic, rhs: Topic) -> Bool {
 		lhs.id == rhs.id
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
 	}
 }
