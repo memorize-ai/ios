@@ -38,4 +38,16 @@ extension DocumentReference {
 			}
 		}
 	}
+	
+	func delete() -> Promise<Void> {
+		.init { seal in
+			delete { error in
+				if let error = error {
+					seal.reject(error)
+				} else {
+					seal.fulfill(())
+				}
+			}
+		}
+	}
 }
