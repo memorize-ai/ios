@@ -12,8 +12,7 @@ struct RecommendedDecksViewContent: View {
 	@ObservedObject var model = RecommendedDecksViewModel()
 	
 	var body: some View {
-		print("VIEW_DECKS_COUNT:", model.decks.count)
-		return ScrollView {
+		ScrollView {
 			Grid(
 				elements: model.decks.map { deck in
 					DeckCellWithGetButton(
