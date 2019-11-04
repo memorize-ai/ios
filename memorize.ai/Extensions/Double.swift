@@ -10,7 +10,7 @@ extension Double {
 			: String(decimalResult)
 		switch true {
 		case logResult < 3:
-			return .init(self)
+			return isInt ? .init(Int(self)) : .init(oneDecimalPlace)
 		case logResult < 6:
 			return "\(formattedDecimalResult)k"
 		case logResult < 9:
