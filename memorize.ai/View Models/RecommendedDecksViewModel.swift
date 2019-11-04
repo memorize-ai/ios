@@ -1,6 +1,6 @@
 import Combine
 
-final class RecommendedDecksViewModel: ObservableObject {
+final class TestViewModel: ViewModel {
 	@Published var decks = [Deck]()
 	@Published var decksLoadingState = LoadingState.none
 	

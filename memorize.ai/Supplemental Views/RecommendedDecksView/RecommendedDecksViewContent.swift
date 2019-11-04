@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RecommendedDecksViewContent: View {
+struct TestView: View {
 	static let deckCellWidth: CGFloat = 165
 	static let numberOfColumns =
 		Int(SCREEN_SIZE.width) / Int(deckCellWidth)
@@ -9,7 +9,7 @@ struct RecommendedDecksViewContent: View {
 	
 	@EnvironmentObject var currentUserStore: UserStore
 	
-	@ObservedObject var model = RecommendedDecksViewModel()
+	@ObservedObject var model = TestViewModel()
 	
 	var body: some View {
 		print("VIEW_DECKS_COUNT:", model.decks.count)
@@ -38,17 +38,3 @@ struct RecommendedDecksViewContent: View {
 		}
 	}
 }
-
-#if DEBUG
-struct RecommendedDecksViewContent_Previews: PreviewProvider {
-	static var previews: some View {
-		RecommendedDecksViewContent()
-			.environmentObject(UserStore(.init(
-				id: "0",
-				name: "Ken Mueller",
-				email: "kenmueller0@gmail.com",
-				interests: []
-			)))
-	}
-}
-#endif
