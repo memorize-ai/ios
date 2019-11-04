@@ -21,6 +21,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var dateLastUpdated: Date
 	
 	@Published var imageLoadingState = LoadingState.none
+	@Published var getLoadingState = LoadingState.none
+	@Published var removeLoadingState = LoadingState.none
 	
 	init(
 		id: String,
@@ -82,6 +84,36 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			self.imageLoadingState = .success()
 		}.catch { error in
 			self.imageLoadingState = .failure(
+				message: error.localizedDescription
+			)
+		}
+		return self
+	}
+	
+	@discardableResult
+	func get(user: User) -> Self {
+		getLoadingState = .loading()
+		firestore.document("users/\(user.id)/decks/\(id)").setData([
+			"added": Date()
+		]).done {
+			user.decks.append(self)
+			self.getLoadingState = .success()
+		}.catch { error in
+			self.getLoadingState = .failure(
+				message: error.localizedDescription
+			)
+		}
+		return self
+	}
+	
+	@discardableResult
+	func remove(user: User) -> Self {
+		removeLoadingState = .loading()
+		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
+			user.decks.removeAll { $0 == self }
+			self.removeLoadingState = .success()
+		}.catch { error in
+			self.removeLoadingState = .failure(
 				message: error.localizedDescription
 			)
 		}
