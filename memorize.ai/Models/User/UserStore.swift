@@ -21,7 +21,7 @@ final class UserStore: ObservableObject {
 					message: (error ?? UNKNOWN_ERROR).localizedDescription
 				)
 			}
-			documentChanges.forEach { change in
+			for change in documentChanges {
 				let document = change.document
 				let topicId = document.documentID
 				switch change.type {
@@ -40,6 +40,7 @@ final class UserStore: ObservableObject {
 					self.topics.removeAll { $0.id == topicId }
 				}
 			}
+			self.topics.sort(by: \.name)
 			self.topicsLoadingState = .success()
 		}
 	}

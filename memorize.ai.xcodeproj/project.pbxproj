@@ -107,6 +107,7 @@
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
+		4DE9722823701EE900616E42 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE9722723701EE900616E42 /* Array.swift */; };
 		4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB3599236AC3C800E3DBC4 /* Int.swift */; };
 		4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359B236AC89B00E3DBC4 /* Double.swift */; };
 		4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */; };
@@ -241,6 +242,7 @@
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
+		4DE9722723701EE900616E42 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		4DEB3599236AC3C800E3DBC4 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		4DEB359B236AC89B00E3DBC4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStars.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				4DA0FD292368364200F9F0D3 /* String.swift */,
 				4DEB359B236AC89B00E3DBC4 /* Double.swift */,
 				4DEB3599236AC3C800E3DBC4 /* Int.swift */,
+				4DE9722723701EE900616E42 /* Array.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
 				4D8444AC236BFE080043298C /* DocumentSnapshot.swift */,
@@ -964,6 +967,7 @@
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
+				4DE9722823701EE900616E42 /* Array.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4DA800A9236A4A4D00E26FE8 /* TopicCellCheck.swift in Sources */,
