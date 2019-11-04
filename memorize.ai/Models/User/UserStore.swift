@@ -26,13 +26,11 @@ final class UserStore: ObservableObject {
 				let topicId = document.documentID
 				switch change.type {
 				case .added:
-					self.topics.append(
-						Topic(
-							id: topicId,
-							name: document.get("name") as? String ?? "Unknown",
-							topDecks: document.get("topDecks") as? [String] ?? []
-						).load()
-					)
+					self.topics.append(Topic(
+						id: topicId,
+						name: document.get("name") as? String ?? "Unknown",
+						topDecks: document.get("topDecks") as? [String] ?? []
+					).load())
 				case .modified:
 					self.topics.first { $0.id == topicId }?
 						.updateFromSnapshot(document)
