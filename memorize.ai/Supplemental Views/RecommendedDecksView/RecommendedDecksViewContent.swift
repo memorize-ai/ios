@@ -12,7 +12,8 @@ struct RecommendedDecksViewContent: View {
 	@ObservedObject var model = RecommendedDecksViewModel()
 	
 	var body: some View {
-		ScrollView {
+		print("VIEW_DECKS_COUNT:", model.decks.count)
+		return ScrollView {
 			Grid(
 				elements: model.decks.map { deck in
 					DeckCellWithGetButton(
@@ -26,6 +27,7 @@ struct RecommendedDecksViewContent: View {
 				horizontalSpacing: Self.horizontalCellSpacing,
 				verticalSpacing: Self.verticalCellSpacing
 			)
+			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
 		.onAppear {
 			guard self.model.decksLoadingState.isNone else { return }
