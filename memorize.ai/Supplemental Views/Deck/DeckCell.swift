@@ -109,8 +109,8 @@ struct DeckCell_Previews: PreviewProvider {
 		return ZStack {
 			Color.gray
 				.edgesIgnoringSafeArea(.all)
-			VStack(spacing: 20) {
-				HStack(spacing: 20) {
+			Grid(
+				elements: [
 					DeckCell(
 						deck: .init(
 							id: "0",
@@ -129,14 +129,14 @@ struct DeckCell_Previews: PreviewProvider {
 						),
 						width: 165,
 						content: EmptyView.init
-					)
+					),
 					DeckCell(
 						deck: .init(
 							id: "0",
 							topics: [],
 							hasImage: true,
 							name: "Geometry Prep",
-							subtitle: "Angles, lines, triangles and other polygons",
+							subtitle: "Text here",
 							numberOfViews: 1000000000,
 							numberOfUniqueViews: 200000,
 							numberOfRatings: 12400,
@@ -147,16 +147,14 @@ struct DeckCell_Previews: PreviewProvider {
 						),
 						width: 165,
 						content: EmptyView.init
-					)
-				}
-				HStack(spacing: 20) {
+					),
 					DeckCell(
 						deck: .init(
 							id: "0",
 							topics: [],
 							hasImage: false,
 							name: "Geometry Prep",
-							subtitle: "Angles, lines, triangles and other polygons",
+							subtitle: "Angles, lines, triangles and other polygons. Angles, lines, triangles and other polygons.",
 							numberOfViews: 1000000000,
 							numberOfUniqueViews: 200000,
 							numberOfRatings: 12400,
@@ -167,14 +165,17 @@ struct DeckCell_Previews: PreviewProvider {
 						),
 						width: 165,
 						content: EmptyView.init
-					)
+					),
 					DeckCell(
 						deck: failedDeck,
 						width: 165,
 						content: EmptyView.init
 					)
-				}
-			}
+				],
+				columns: 2,
+				horizontalSpacing: 20,
+				verticalSpacing: 20
+			)
 		}
 	}
 }

@@ -15,12 +15,18 @@ struct Grid<Element: View>: View {
 		return temp
 	}
 	
+	func elementsForColumn(_ column: Int) -> [Element] {
+		chunked.reduce([]) { acc, row in
+			row.count > column ? acc + [row[column]] : acc
+		}
+	}
+	
 	var body: some View {
-		VStack(alignment: .leading, spacing: verticalSpacing) {
-			ForEach(0..<chunked.count, id: \.self) {
-				GridRow(
-					spacing: self.horizontalSpacing,
-					elements: self.chunked[$0]
+		HStack(spacing: horizontalSpacing) {
+			ForEach(0..<columns, id: \.self) {
+				GridColumn(
+					spacing: self.verticalSpacing,
+					elements: self.elementsForColumn($0)
 				)
 			}
 		}
@@ -31,7 +37,14 @@ struct Grid<Element: View>: View {
 struct Grid_Previews: PreviewProvider {
 	static var previews: some View {
 		Grid(
-			elements: [EmptyView()],
+			elements: [
+				Text("Element"),
+				Text("Element"),
+				Text("Element"),
+				Text("Element"),
+				Text("Element"),
+				Text("Element")
+			],
 			columns: 2,
 			horizontalSpacing: 8,
 			verticalSpacing: 8

@@ -10,7 +10,7 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4D184D93236975C000A84998 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D91236975C000A84998 /* Grid.swift */; };
-		4D184D94236975C100A84998 /* GridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D92236975C000A84998 /* GridRow.swift */; };
+		4D184D94236975C100A84998 /* GridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D92236975C000A84998 /* GridColumn.swift */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D1F9B23233ECA0E00693571 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B22233ECA0E00693571 /* User.swift */; };
@@ -139,7 +139,7 @@
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
 		4D184D91236975C000A84998 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		4D184D92236975C000A84998 /* GridRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridRow.swift; sourceTree = "<group>"; };
+		4D184D92236975C000A84998 /* GridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumn.swift; sourceTree = "<group>"; };
 		4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D1F9B17233EBF2200693571 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				4D184D91236975C000A84998 /* Grid.swift */,
-				4D184D92236975C000A84998 /* GridRow.swift */,
+				4D184D92236975C000A84998 /* GridColumn.swift */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -1011,7 +1011,7 @@
 				4D64BCCE2368004300F6FD07 /* SignUpViewContentBox.swift in Sources */,
 				4D1F9B25233ED1AD00693571 /* LoadingState.swift in Sources */,
 				4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */,
-				4D184D94236975C100A84998 /* GridRow.swift in Sources */,
+				4D184D94236975C100A84998 /* GridColumn.swift in Sources */,
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
 				4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */,
 				4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */,
