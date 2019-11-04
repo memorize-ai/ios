@@ -19,4 +19,16 @@ extension View {
 			)
 		}
 	}
+	
+	func cornerRadius(
+		_ radius: CGFloat,
+		corners: UIRectCorner,
+		antialiased: Bool = true
+	) -> some View {
+		clipShape(SpecificRoundedCorners(
+			radius: radius,
+			corners: corners,
+			antialiased: antialiased
+		))
+	}
 }

@@ -106,6 +106,7 @@
 		4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
+		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
 		4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB3599236AC3C800E3DBC4 /* Int.swift */; };
 		4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359B236AC89B00E3DBC4 /* Double.swift */; };
 		4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */; };
@@ -239,6 +240,7 @@
 		4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewContent.swift; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
+		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
 		4DEB3599236AC3C800E3DBC4 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		4DEB359B236AC89B00E3DBC4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStars.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				4DD34CD12362D0080007E3E6 /* ActivityIndicator.swift */,
 				4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */,
 				4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */,
+				4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */,
 				4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */,
 				4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */,
+				4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */,
 				4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */,
 				4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,

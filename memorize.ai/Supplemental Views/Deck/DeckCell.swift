@@ -22,14 +22,18 @@ struct DeckCell<Content: View>: View {
 			VStack {
 				Group {
 					if deck.imageLoadingState.didFail {
-						Image(systemName: .exclamationmarkTriangle)
-							.foregroundColor(.gray)
-							.scaleEffect(1.5)
-							.background(Color.lightGrayBackground)
+						ZStack {
+							Color.lightGrayBackground
+							Image(systemName: .exclamationmarkTriangle)
+								.foregroundColor(.gray)
+								.scaleEffect(1.5)
+						}
 					} else if deck.hasImage {
 						if deck.image == nil {
-							ActivityIndicator(color: .gray)
-								.background(Color.lightGrayBackground)
+							ZStack {
+								Color.lightGrayBackground
+								ActivityIndicator(color: .gray)
+							}
 						} else {
 							deck.image?
 								.resizable()
@@ -37,12 +41,15 @@ struct DeckCell<Content: View>: View {
 								.aspectRatio(contentMode: .fill)
 						}
 					} else {
-						Image(systemName: .questionmark)
-							.foregroundColor(.gray)
-							.scaleEffect(1.5)
-							.background(Color.lightGrayBackground)
+						ZStack {
+							Color.lightGrayBackground
+							Image(systemName: .questionmark)
+								.foregroundColor(.gray)
+								.scaleEffect(1.5)
+						}
 					}
 				}
+				.cornerRadius(8, corners: [.topLeft, .topRight])
 				.frame(height: width * 111 / 165)
 				VStack(alignment: .leading) {
 					Text(deck.name)
