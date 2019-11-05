@@ -17,10 +17,18 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			let windowScene = scene as? UIWindowScene
 		else { return }
 		let window = UIWindow(windowScene: windowScene)
-		window.rootViewController = UIHostingController(
-			rootView: InitialView()
-				.environment(\.managedObjectContext, context)
-		)
+		if let currentUser = auth.currentUser {
+			window.rootViewController = UIHostingController(
+				rootView: MainTabView()
+					// TODO: Add currentUserStore environment object
+					.environment(\.managedObjectContext, context)
+			)
+		} else {
+			window.rootViewController = UIHostingController(
+				rootView: InitialView()
+					.environment(\.managedObjectContext, context)
+			)
+		}
 		self.window = window
 		window.makeKeyAndVisible()
 	}
