@@ -32,7 +32,7 @@ struct SideBar<Content: View>: View {
 					.shadow(
 						color: .black,
 						radius: isShowing ? 5 : 0,
-						x: isShowing ? -1 : 0
+						x: isShowing ? -3 : 0
 				)
 				VStack {
 					ZStack(alignment: .top) {
