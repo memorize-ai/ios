@@ -17,9 +17,8 @@ struct RecommendedDecksViewContent: View {
 				elements: model.decks.map { deck in
 					DeckCellWithGetButton(
 						deck: deck,
-						width: Self.deckCellWidth,
-						isLoading: false, // TODO: Change this
-						onGetClick: {} // TODO: Change this
+						user: currentUserStore.user,
+						width: Self.deckCellWidth
 					)
 				},
 				columns: Self.numberOfColumns,
