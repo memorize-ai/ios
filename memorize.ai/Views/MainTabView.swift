@@ -1,13 +1,12 @@
 import SwiftUI
 
 struct MainTabView: View {
-	@EnvironmentObject var currentUserStore: UserStore
-	
-	@State var selection = 0
+	@State var isSideBarShowing = true // TODO: Change to false
+	@State var tabViewSelection = 0
 	
 	var body: some View {
-		SideBar {
-			TabView(selection: $selection) {
+		SideBar(isShowing: $isSideBarShowing) {
+			TabView(selection: $tabViewSelection) {
 				HomeView()
 					.tabItem {
 						Image(systemName: .exclamationmarkTriangle)
