@@ -37,7 +37,7 @@ struct SideBar<Content: View>: View {
 				VStack {
 					ZStack(alignment: .top) {
 						SideBarTopGradient(width: extendedWidth)
-						// TOOD: Add search bar here
+						// TODO: Add search bar here
 					}
 					ForEach(currentUserStore.user.decks) { deck in
 						Text(deck.name)
