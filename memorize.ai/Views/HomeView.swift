@@ -4,9 +4,7 @@ struct HomeView: View {
 	@EnvironmentObject var currentUserStore: UserStore
 	
 	var body: some View {
-		SideBar {
-			Text("Hello, \(currentUserStore.user.name)")
-		}
+		Text("Hello, \(currentUserStore.user.name)")
 	}
 }
 

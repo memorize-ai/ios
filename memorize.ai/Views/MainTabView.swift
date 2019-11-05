@@ -6,31 +6,33 @@ struct MainTabView: View {
 	@State var selection = 0
 	
 	var body: some View {
-		TabView(selection: $selection) {
-			HomeView()
-				.tabItem {
-					Image(systemName: .exclamationmarkTriangle)
-					Text("Home")
-				}
-				.tag(0)
-			Text("Marketplace")
-				.tabItem {
-					Image(systemName: .exclamationmarkTriangle)
-					Text("Market")
-				}
-				.tag(1)
-			Text("Decks")
-				.tabItem {
-					Image(systemName: .exclamationmarkTriangle)
-					Text("Decks")
-				}
-				.tag(2)
-			Text("You")
-				.tabItem {
-					Image(systemName: .exclamationmarkTriangle)
-					Text("You")
-				}
-				.tag(3)
+		SideBar {
+			TabView(selection: $selection) {
+				HomeView()
+					.tabItem {
+						Image(systemName: .exclamationmarkTriangle)
+						Text("Home")
+					}
+					.tag(0)
+				Text("Marketplace")
+					.tabItem {
+						Image(systemName: .exclamationmarkTriangle)
+						Text("Market")
+					}
+					.tag(1)
+				Text("Decks")
+					.tabItem {
+						Image(systemName: .exclamationmarkTriangle)
+						Text("Decks")
+					}
+					.tag(2)
+				Text("You")
+					.tabItem {
+						Image(systemName: .exclamationmarkTriangle)
+						Text("You")
+					}
+					.tag(3)
+			}
 		}
 	}
 }
