@@ -15,7 +15,7 @@ struct DeckCellWithGetButton: View {
 	}
 	
 	var buttonBackground: Color {
-		hasDeck ? .bluePurple : .darkBlue
+		hasDeck ? .purple : .darkBlue
 	}
 	
 	func buttonAction() {
@@ -66,29 +66,31 @@ struct DeckCellWithGetButton: View {
 #if DEBUG
 struct DeckCellWithGetButton_Previews: PreviewProvider {
 	static var previews: some View {
-		VStack(spacing: 20) {
+		let deck1 = Deck(
+			id: "0",
+			topics: [],
+			hasImage: true,
+			image: .init("GeometryPrepDeck"),
+			name: "Basic Web Development",
+			subtitle: "Mostly just HTML",
+			numberOfViews: 1000000000,
+			numberOfUniqueViews: 200000,
+			numberOfRatings: 12400,
+			averageRating: 4.5,
+			numberOfDownloads: 196400,
+			dateCreated: .init(),
+			dateLastUpdated: .init()
+		)
+		return VStack(spacing: 20) {
 			DeckCellWithGetButton(
-				deck: .init(
-					id: "0",
-					topics: [],
-					hasImage: true,
-					image: .init("GeometryPrepDeck"),
-					name: "Basic Web Development",
-					subtitle: "Mostly just HTML",
-					numberOfViews: 1000000000,
-					numberOfUniqueViews: 200000,
-					numberOfRatings: 12400,
-					averageRating: 4.5,
-					numberOfDownloads: 196400,
-					dateCreated: .init(),
-					dateLastUpdated: .init()
-				),
+				deck: deck1,
 				user: .init(
 					id: "0",
 					name: "Ken Mueller",
 					email: "kenmueller0@gmail.com",
 					interests: [],
-					numberOfDecks: 0
+					numberOfDecks: 1,
+					decks: [deck1]
 				),
 				width: 165
 			)
