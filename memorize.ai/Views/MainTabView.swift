@@ -46,7 +46,69 @@ struct MainTabView_Previews: PreviewProvider {
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",
 				interests: [],
-				numberOfDecks: 0
+				numberOfDecks: 4,
+				decks: [
+					.init(
+						id: "0",
+						topics: [],
+						hasImage: true,
+						image: .init("GeometryPrepDeck"),
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					),
+					.init(
+						id: "1",
+						topics: [],
+						hasImage: true,
+						image: .init("GeometryPrepDeck"),
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					),
+					.init(
+						id: "2",
+						topics: [],
+						hasImage: true,
+						image: .init("GeometryPrepDeck"),
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					),
+					.init(
+						id: "3",
+						topics: [],
+						hasImage: true,
+						image: .init("GeometryPrepDeck"),
+						name: "Geometry Prep",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init()
+					)
+				]
 			)))
 	}
 }
