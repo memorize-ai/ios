@@ -3,13 +3,17 @@ import SwiftUI
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	var window: UIWindow?
 	
+	var appDelegate: AppDelegate? {
+		UIApplication.shared.delegate as? AppDelegate
+	}
+	
 	func scene(
 		_ scene: UIScene,
 		willConnectTo session: UISceneSession,
 		options connectionOptions: UIScene.ConnectionOptions
 	) {
 		guard
-			let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
+			let context = appDelegate?.persistentContainer.viewContext,
 			let windowScene = scene as? UIWindowScene
 		else { return }
 		let window = UIWindow(windowScene: windowScene)
@@ -22,6 +26,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	}
 
 	func sceneDidEnterBackground(_ scene: UIScene) {
-		(UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+		appDelegate?.saveContext()
 	}
 }
