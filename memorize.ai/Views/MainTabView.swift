@@ -7,7 +7,7 @@ struct MainTabView: View {
 	var body: some View {
 		SideBar(isShowing: $isSideBarShowing) {
 			TabView(selection: $tabViewSelection) {
-				HomeView()
+				HomeView(isSideBarShowing: $isSideBarShowing)
 					.tabItem {
 						Image(systemName: .exclamationmarkTriangle)
 						Text("Home")

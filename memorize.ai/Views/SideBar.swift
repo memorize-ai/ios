@@ -19,7 +19,11 @@ struct SideBar<Content: View>: View {
 			ZStack {
 				content
 				if isShowing {
-					Color.black.opacity(0.3954)
+					Color.black
+						.opacity(0.3954)
+						.onTapGesture {
+							self.isShowing = false
+						}
 				}
 			}
 			.offset(x: isShowing ? extendedWidth : 0)
