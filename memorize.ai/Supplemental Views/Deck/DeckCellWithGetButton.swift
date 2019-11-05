@@ -14,6 +14,10 @@ struct DeckCellWithGetButton: View {
 		deck.getLoadingState.isLoading
 	}
 	
+	var buttonBackground: Color {
+		hasDeck ? .bluePurple : .darkBlue
+	}
+	
 	func buttonAction() {
 		if hasDeck {
 			deck.remove(user: user)
@@ -26,7 +30,7 @@ struct DeckCellWithGetButton: View {
 		DeckCell(deck: deck, width: width) {
 			Button(action: buttonAction) {
 				CustomRectangle(
-					background: Color.darkBlue,
+					background: buttonBackground,
 					cornerRadius: 8
 				) {
 					Group {
