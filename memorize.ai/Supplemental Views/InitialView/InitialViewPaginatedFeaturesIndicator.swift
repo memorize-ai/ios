@@ -6,7 +6,7 @@ struct InitialViewPaginatedFeaturesIndicator: View {
 	
 	var body: some View {
 		HStack {
-			ForEach(0..<pageCount) { pageIndex in
+			ForEach(0..<pageCount, id: \.self) { pageIndex in
 				InitialViewPaginatedFeaturesIndicatorCircle(
 					active: pageIndex == self.activePageIndex
 				)

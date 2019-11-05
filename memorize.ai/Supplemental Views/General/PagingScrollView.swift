@@ -60,7 +60,7 @@ struct PagingScrollView<PageContent: View>: View {
 	var body: some View {
 		GeometryReader { _ in
 			HStack(spacing: self.tilePadding) {
-				ForEach(0..<self.items.count) { index in
+				ForEach(0..<self.items.count, id: \.self) { index in
 					self.items[index]
 						.offset(x: self.currentScrollOffset)
 						.frame(width: self.tileWidth)
