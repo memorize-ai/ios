@@ -10,6 +10,7 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99C2371DEA200FE8E5E /* MainTabView.swift */; };
+		4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99E2371EDD200FE8E5E /* SideBar.swift */; };
 		4D184D93236975C000A84998 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D91236975C000A84998 /* Grid.swift */; };
 		4D184D94236975C100A84998 /* GridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D92236975C000A84998 /* GridColumn.swift */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
@@ -142,6 +143,7 @@
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
 		4D16D99C2371DEA200FE8E5E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		4D16D99E2371EDD200FE8E5E /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		4D184D91236975C000A84998 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		4D184D92236975C000A84998 /* GridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumn.swift; sourceTree = "<group>"; };
 		4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */,
 				4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */,
 				4D16D99C2371DEA200FE8E5E /* MainTabView.swift */,
+				4D16D99E2371EDD200FE8E5E /* SideBar.swift */,
 				4DD34CD52362D90F0007E3E6 /* HomeView.swift */,
 			);
 			path = Views;
@@ -962,6 +965,7 @@
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
+				4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */,
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
