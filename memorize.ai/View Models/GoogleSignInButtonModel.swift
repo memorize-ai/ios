@@ -66,17 +66,16 @@ final class GoogleSignInButtonModel: ViewModel {
 	func failAuthGoogleSignUp(error: Error) {
 		loadingState = .failure(message: error.localizedDescription)
 		handleAuthError(code: AuthErrorCode(error: error))
-		shouldShowErrorModal = true
 	}
 	
 	func failFirestoreGoogleSignUp(error: Error) {
 		loadingState = .failure(message: error.localizedDescription)
 		handleFirestoreError(code: FirestoreErrorCode(error: error))
-		shouldShowErrorModal = true
 	}
 	
 	func applyError(title: String, description: String) {
 		errorModal = (title, description)
+		shouldShowErrorModal = true
 	}
 	
 	func handleAuthError(code errorCode: AuthErrorCode?) {
@@ -92,10 +91,7 @@ final class GoogleSignInButtonModel: ViewModel {
 				description: "Please try again later"
 			)
 		default:
-			applyError(
-				title: Self.unknownErrorTitle,
-				description: Self.unknownErrorDescription
-			)
+			return
 		}
 	}
 	
