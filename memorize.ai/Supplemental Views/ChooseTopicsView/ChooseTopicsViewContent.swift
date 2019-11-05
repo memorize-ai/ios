@@ -13,7 +13,7 @@ struct ChooseTopicsViewContent: View {
 	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
 	
 	var body: some View {
-		ScrollView {
+		ScrollView(showsIndicators: false) {
 			Grid(
 				elements: currentUserStore.topics.map { topic in
 					TopicCell(

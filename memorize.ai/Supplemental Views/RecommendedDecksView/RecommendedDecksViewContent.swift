@@ -12,7 +12,7 @@ struct RecommendedDecksViewContent: View {
 	@ObservedObject var model = RecommendedDecksViewModel()
 	
 	var body: some View {
-		ScrollView {
+		ScrollView(showsIndicators: false) {
 			Grid(
 				elements: model.decks.map { deck in
 					DeckCellWithGetButton(
