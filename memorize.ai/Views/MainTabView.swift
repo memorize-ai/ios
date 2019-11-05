@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-	@State var isSideBarShowing = true // TODO: Change to false
+	@State var isSideBarShowing = false
 	@State var tabViewSelection = 0
 	
 	var body: some View {

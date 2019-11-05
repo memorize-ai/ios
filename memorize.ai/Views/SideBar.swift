@@ -14,10 +14,6 @@ struct SideBar<Content: View>: View {
 		self.content = content()
 	}
 	
-	var offset: CGFloat {
-		isShowing ? extendedWidth : 0
-	}
-	
 	var body: some View {
 		ZStack(alignment: .leading) {
 			ZStack {
@@ -26,18 +22,26 @@ struct SideBar<Content: View>: View {
 					Color.black.opacity(0.3954)
 				}
 			}
-			.offset(x: offset)
+			.offset(x: isShowing ? extendedWidth : 0)
 			ZStack {
 				Color.lightGrayBackground
-					.shadow(color: .black, radius: 5, x: -1)
+					.shadow(
+						color: .black,
+						radius: isShowing ? 5 : 0,
+						x: isShowing ? -1 : 0
+				)
 				VStack {
+//					ZStack(alignment: .top) {
+//						SideBarTopGradient(width: offset)
+//					}
 					ForEach(currentUserStore.user.decks) { deck in
 						Text(deck.name)
 					}
 				}
 			}
-			.frame(width: offset)
+			.frame(width: extendedWidth)
 			.frame(maxHeight: .infinity)
+			.offset(x: isShowing ? 0 : -extendedWidth)
 		}
 		.edgesIgnoringSafeArea(.all)
 	}
