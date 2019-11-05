@@ -1,4 +1,5 @@
 import Combine
+import FirebaseAuth
 import FirebaseFirestore
 import PromiseKit
 
@@ -33,8 +34,17 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			name: snapshot.get("name") as? String ?? "Unknown",
 			email: snapshot.get("email") as? String ?? "Unknown",
 			interests: snapshot.get("topics") as? [String] ?? [],
-			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0,
-			decks: []
+			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0
+		)
+	}
+	
+	convenience init(authUser user: FirebaseAuth.User) {
+		self.init(
+			id: user.uid,
+			name: user.displayName ?? "Unknown",
+			email: user.email ?? "Unknown",
+			interests: [],
+			numberOfDecks: 0
 		)
 	}
 	

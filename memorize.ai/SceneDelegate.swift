@@ -20,7 +20,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		if let currentUser = auth.currentUser {
 			window.rootViewController = UIHostingController(
 				rootView: MainTabView()
-					// TODO: Add currentUserStore environment object
+					.environmentObject(UserStore(.init(authUser: currentUser)))
 					.environment(\.managedObjectContext, context)
 			)
 		} else {
