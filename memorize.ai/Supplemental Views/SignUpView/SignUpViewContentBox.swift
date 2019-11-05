@@ -69,7 +69,7 @@ struct SignUpViewContentBox: View {
 			GoogleSignInButton()
 			if model.user != nil {
 				NavigateTo(
-					ChooseTopicsView()
+					ChooseTopicsView(currentUser: model.user!)
 						.environmentObject(UserStore(model.user!)),
 					when: $model.loadingState.didSucceed
 				)

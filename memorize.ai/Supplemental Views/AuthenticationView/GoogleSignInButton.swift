@@ -46,7 +46,7 @@ struct GoogleSignInButton: View {
 					when: $model.shouldProgressToHomeView
 				)
 				NavigateTo(
-					ChooseTopicsView()
+					ChooseTopicsView(currentUser: model.user!)
 						.environmentObject(UserStore(model.user!)),
 					when: $model.shouldProgressToChooseTopicsView
 				)
