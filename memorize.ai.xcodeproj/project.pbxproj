@@ -12,6 +12,7 @@
 		4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99C2371DEA200FE8E5E /* MainTabView.swift */; };
 		4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99E2371EDD200FE8E5E /* SideBar.swift */; };
 		4D16D9A22371F55600FE8E5E /* SideBarDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */; };
+		4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A523723A6200FE8E5E /* SideBarTopGradient.swift */; };
 		4D184D93236975C000A84998 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D91236975C000A84998 /* Grid.swift */; };
 		4D184D94236975C100A84998 /* GridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D92236975C000A84998 /* GridColumn.swift */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
@@ -146,6 +147,7 @@
 		4D16D99C2371DEA200FE8E5E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4D16D99E2371EDD200FE8E5E /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRow.swift; sourceTree = "<group>"; };
+		4D16D9A523723A6200FE8E5E /* SideBarTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTopGradient.swift; sourceTree = "<group>"; };
 		4D184D91236975C000A84998 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		4D184D92236975C000A84998 /* GridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumn.swift; sourceTree = "<group>"; };
 		4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
@@ -310,6 +312,8 @@
 		4D16D9A02371F54800FE8E5E /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
+				4D16D99E2371EDD200FE8E5E /* SideBar.swift */,
+				4D16D9A523723A6200FE8E5E /* SideBarTopGradient.swift */,
 				4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */,
 			);
 			path = SideBar;
@@ -483,7 +487,6 @@
 				4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */,
 				4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */,
 				4D16D99C2371DEA200FE8E5E /* MainTabView.swift */,
-				4D16D99E2371EDD200FE8E5E /* SideBar.swift */,
 				4DD34CD52362D90F0007E3E6 /* HomeView.swift */,
 			);
 			path = Views;
@@ -959,6 +962,7 @@
 				4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */,
 				4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */,
 				4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */,
+				4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */,
 				4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
 				4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */,

@@ -35,12 +35,14 @@ struct SideBar<Content: View>: View {
 						x: isShowing ? -1 : 0
 				)
 				VStack {
-//					ZStack(alignment: .top) {
-//						SideBarTopGradient(width: offset)
-//					}
+					ZStack(alignment: .top) {
+						SideBarTopGradient(width: extendedWidth)
+						// TOOD: Add search bar here
+					}
 					ForEach(currentUserStore.user.decks) { deck in
 						Text(deck.name)
 					}
+					Spacer()
 				}
 			}
 			.frame(width: extendedWidth)
