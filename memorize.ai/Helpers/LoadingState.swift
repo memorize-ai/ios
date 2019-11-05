@@ -54,4 +54,11 @@ enum LoadingState: Equatable {
 			self = newValue ? .failure(message: "Unknown") : .none
 		}
 	}
+	
+	var failureMessage: String? {
+		if case .failure(date: _, message: let message) = self {
+			return message
+		}
+		return nil
+	}
 }

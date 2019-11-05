@@ -49,6 +49,16 @@ struct DeckCellWithGetButton: View {
 				.padding(.top, 10)
 			}
 			.disabled(isGetLoading)
+			.alert(isPresented: $deck.getLoadingState.didFail) {
+				.init(
+					title: .init(
+						"Unable to \(hasDeck ? "remove" : "get") deck"
+					),
+					message: .init(
+						deck.getLoadingState.failureMessage ?? "Unknown error"
+					)
+				)
+			}
 		}
 	}
 }
