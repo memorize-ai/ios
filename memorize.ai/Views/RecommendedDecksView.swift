@@ -9,7 +9,7 @@ struct RecommendedDecksView: View {
 			leadingButton: EmptyView(),
 			leadingButtonIsBackButton: true,
 			trailingButtonTitle: "DONE",
-			trailingButtonDestination: HomeView()
+			trailingButtonDestination: MainTabView()
 				.environmentObject(currentUserStore),
 			content: RecommendedDecksViewContent()
 		)
