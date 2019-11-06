@@ -138,6 +138,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
+	@discardableResult
+	func updateUserDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
+		userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+		return self
+	}
+	
 	static func fromId(_ id: String) -> Promise<Deck> {
 		var didFulfill = false
 		var deck: Deck?
