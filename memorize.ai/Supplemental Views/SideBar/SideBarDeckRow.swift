@@ -48,6 +48,7 @@ struct SideBarDeckRow: View {
 				)
 			}
 		}
+		.padding(.leading)
 		.background(backgroundColor)
 		.onTapGesture {
 			self.selectedDeck = self.deck

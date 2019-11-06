@@ -9,6 +9,7 @@ struct SideBarSection: View {
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			SideBarSectionTitle(title)
+				.padding(.leading)
 			VStack(spacing: 12) {
 				ForEach(decks) { deck in
 					SideBarDeckRow(
@@ -18,7 +19,6 @@ struct SideBarSection: View {
 				}
 			}
 		}
-		.padding(.leading)
 		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 }
