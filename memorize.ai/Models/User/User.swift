@@ -48,6 +48,14 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
+	var dueDecks: [Deck] {
+		decks.filter { $0.userData?.isDue ?? false }
+	}
+	
+	var favoriteDecks: [Deck] {
+		decks.filter { $0.userData?.isFavorite ?? false }
+	}
+	
 	@discardableResult
 	func addInterest(topicId: String) -> Promise<Void> {
 		firestore.document("users/\(id)").updateData([

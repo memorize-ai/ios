@@ -5,9 +5,18 @@ struct SideBarSections: View {
 	
 	var body: some View {
 		VStack {
-			SideBarSection(title: "Due")
-			SideBarSection(title: "Favorites")
-			SideBarSection(title: "All")
+			SideBarSection(
+				title: "Due",
+				decks: currentUser.dueDecks
+			)
+			SideBarSection(
+				title: "Favorites",
+				decks: currentUser.favoriteDecks
+			)
+			SideBarSection(
+				title: "All",
+				decks: currentUser.decks
+			)
 		}
 	}
 }
