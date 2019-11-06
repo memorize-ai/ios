@@ -37,6 +37,7 @@
 		4D3B949423724419002F441E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949323724419002F441E /* SearchBar.swift */; };
 		4D3B949623727260002F441E /* SideBarSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949523727260002F441E /* SideBarSectionTitle.swift */; };
 		4D3B949823727347002F441E /* SideBarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949723727347002F441E /* SideBarSection.swift */; };
+		4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949923728E19002F441E /* Deck+UserData.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -176,6 +177,7 @@
 		4D3B949323724419002F441E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		4D3B949523727260002F441E /* SideBarSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSectionTitle.swift; sourceTree = "<group>"; };
 		4D3B949723727347002F441E /* SideBarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSection.swift; sourceTree = "<group>"; };
+		4D3B949923728E19002F441E /* Deck+UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+UserData.swift"; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -678,6 +680,7 @@
 			isa = PBXGroup;
 			children = (
 				4DFA0DC0236A7B170000CA7A /* Deck.swift */,
+				4D3B949923728E19002F441E /* Deck+UserData.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */,
 				4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
+				4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */,
 				4D184D93236975C000A84998 /* Grid.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
 				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,

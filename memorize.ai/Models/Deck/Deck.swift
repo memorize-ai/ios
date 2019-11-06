@@ -20,6 +20,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfDownloads: Int
 	@Published var dateLastUpdated: Date
 	
+	@Published var userData: UserData?
+	
 	@Published var imageLoadingState = LoadingState.none
 	@Published var getLoadingState = LoadingState.none
 	
@@ -36,7 +38,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		averageRating: Double,
 		numberOfDownloads: Int,
 		dateCreated: Date,
-		dateLastUpdated: Date
+		dateLastUpdated: Date,
+		userData: UserData? = nil
 	) {
 		self.id = id
 		self.topics = topics
@@ -51,6 +54,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfDownloads = numberOfDownloads
 		self.dateCreated = dateCreated
 		self.dateLastUpdated = dateLastUpdated
+		self.userData = userData
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
