@@ -58,6 +58,7 @@ struct SideBar<Content: View>: View {
 			.offset(x: isShowing ? 0 : -extendedWidth)
 		}
 		.edgesIgnoringSafeArea(.all)
+		.statusBar(hidden: isShowing)
 		.animation(.easeOut(duration: 0.2))
 	}
 }
