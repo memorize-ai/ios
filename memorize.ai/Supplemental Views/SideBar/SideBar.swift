@@ -60,6 +60,7 @@ struct SideBar<Content: View>: View {
 			.offset(x: isShowing ? 0 : -extendedWidth)
 		}
 		.edgesIgnoringSafeArea(.all)
+		.animation(.linear(duration: 0.2))
 	}
 }
 
