@@ -36,7 +36,7 @@ struct SideBar<Content: View>: View {
 						radius: isShowing ? 5 : 0,
 						x: isShowing ? -3 : 0
 					)
-				VStack {
+				VStack(alignment: .leading) {
 					ZStack(alignment: .top) {
 						SideBarTopGradient(width: extendedWidth)
 						SearchBar(
@@ -46,9 +46,12 @@ struct SideBar<Content: View>: View {
 						)
 						.padding([.horizontal, .top])
 					}
-					ForEach(currentUserStore.user.decks) { deck in
-						Text(deck.name)
+					Group {
+						SideBarSection(title: "Due")
+						SideBarSection(title: "Starred")
+						SideBarSection(title: "All")
 					}
+					.padding(.horizontal)
 					Spacer()
 				}
 			}
