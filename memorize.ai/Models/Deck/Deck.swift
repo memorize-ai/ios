@@ -77,6 +77,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadImage() -> Self {
+		guard hasImage else { return self }
 		imageLoadingState = .loading
 		storage.child("decks/\(id)").getData().done { data in
 			guard let image = Image(data: data) else {
