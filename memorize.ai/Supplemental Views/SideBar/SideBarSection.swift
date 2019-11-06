@@ -10,7 +10,7 @@ struct SideBarSection: View {
 		VStack(alignment: .leading, spacing: 8) {
 			SideBarSectionTitle(title)
 				.padding(.leading)
-			VStack(spacing: 12) {
+			VStack(spacing: 4) {
 				ForEach(decks) { deck in
 					SideBarDeckRow(
 						deck: deck,

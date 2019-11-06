@@ -5,11 +5,13 @@ struct SideBarDeckRow: View {
 	
 	@Binding var selectedDeck: Deck?
 	
-	var backgroundColor: Color {
-		guard let selectedDeck = selectedDeck else {
-			return .lightGrayBackground
-		}
+	var isSelected: Bool {
+		guard let selectedDeck = selectedDeck else { return false }
 		return selectedDeck == deck
+	}
+	
+	var backgroundColor: Color {
+		isSelected
 			? .darkBlue
 			: .lightGrayBackground
 	}
@@ -49,6 +51,7 @@ struct SideBarDeckRow: View {
 			}
 		}
 		.padding(.leading)
+		.padding(.vertical, 6)
 		.background(backgroundColor)
 		.onTapGesture {
 			self.selectedDeck = self.deck
