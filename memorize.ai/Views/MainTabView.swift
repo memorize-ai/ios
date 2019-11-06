@@ -55,7 +55,7 @@ struct MainTabView_Previews: PreviewProvider {
 			userData: .init(
 				dateAdded: .init(),
 				isFavorite: true,
-				numberOfDueCards: 1
+				numberOfDueCards: 12
 			)
 		)
 		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
@@ -84,7 +84,7 @@ struct MainTabView_Previews: PreviewProvider {
 						userData: .init(
 							dateAdded: .init(),
 							isFavorite: false,
-							numberOfDueCards: 2
+							numberOfDueCards: 23
 						)
 					),
 					.init(
@@ -139,7 +139,7 @@ struct MainTabView_Previews: PreviewProvider {
 						userData: .init(
 							dateAdded: .init(),
 							isFavorite: true,
-							numberOfDueCards: 1
+							numberOfDueCards: 36
 						)
 					),
 					.init(
@@ -158,7 +158,7 @@ struct MainTabView_Previews: PreviewProvider {
 						userData: .init(
 							dateAdded: .init(),
 							isFavorite: false,
-							numberOfDueCards: 1
+							numberOfDueCards: 568
 						)
 					),
 					.init(

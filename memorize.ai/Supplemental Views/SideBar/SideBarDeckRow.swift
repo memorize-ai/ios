@@ -50,11 +50,12 @@ struct SideBarDeckRow: View {
 			Spacer()
 			if deck.userData?.isDue ?? false {
 				SideBarDeckRowDueCardsBadge(
-					count: deck.userData?.numberOfDueCards ?? 0
+					count: deck.userData?.numberOfDueCards ?? 0,
+					isSelected: isSelected
 				)
 			}
 		}
-		.padding(.leading)
+		.padding(.horizontal)
 		.padding(.vertical, 6)
 		.background(backgroundColor)
 		.onTapGesture {
