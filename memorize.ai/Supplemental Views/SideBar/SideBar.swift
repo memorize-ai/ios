@@ -47,9 +47,7 @@ struct SideBar<Content: View>: View {
 						.padding([.horizontal, .top])
 					}
 					ScrollView {
-						SideBarSection(title: "Due")
-						SideBarSection(title: "Starred")
-						SideBarSection(title: "All")
+						SideBarSections(currentUser: currentUserStore.user)
 					}
 				}
 			}
