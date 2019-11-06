@@ -21,13 +21,11 @@ struct SideBar<Content: View>: View {
 		ZStack(alignment: .leading) {
 			ZStack {
 				content
-				if isShowing {
-					Color.black
-						.opacity(0.3954)
-						.onTapGesture {
-							self.isShowing = false
-						}
-				}
+				Color.black
+					.opacity(isShowing ? 0.3954 : 0)
+					.onTapGesture {
+						self.isShowing = false
+					}
 			}
 			.offset(x: isShowing ? extendedWidth : 0)
 			ZStack {
