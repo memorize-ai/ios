@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MainTabView: View {
+	@EnvironmentObject var currentUserStore: UserStore
+	
 	@State var isSideBarShowing = false
 	@State var tabViewSelection = 0
 	
@@ -32,6 +34,12 @@ struct MainTabView: View {
 					}
 					.tag(3)
 			}
+		}
+		.onAppear {
+			let currentUser = self.currentUserStore.user
+			guard currentUser.decksLoadingState.isNone else { return }
+			currentUser.decks.removeAll()
+			currentUser.loadDecks()
 		}
 	}
 }
