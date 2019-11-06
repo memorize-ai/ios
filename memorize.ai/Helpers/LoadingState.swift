@@ -1,6 +1,9 @@
 import Foundation
 
 enum LoadingState: Equatable {
+	static var loading: LoadingState { .loading() }
+	static var success: LoadingState { .success() }
+	
 	case none
 	case loading(date: Date = .init())
 	case success(date: Date = .init())
@@ -25,7 +28,7 @@ enum LoadingState: Equatable {
 			}
 		}
 		set {
-			self = newValue ? .loading() : .none
+			self = newValue ? .loading : .none
 		}
 	}
 	
@@ -38,7 +41,7 @@ enum LoadingState: Equatable {
 			}
 		}
 		set {
-			self = newValue ? .success() : .none
+			self = newValue ? .success : .none
 		}
 	}
 	

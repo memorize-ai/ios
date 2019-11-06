@@ -28,10 +28,10 @@ final class ForgotPasswordViewModel: ViewModel {
 	}
 	
 	func sendResetEmail() {
-		loadingState = .loading()
+		loadingState = .loading
 		shouldShowEmailRedBorder = false
 		auth.sendPasswordReset(withEmail: email).done {
-			self.loadingState = .success()
+			self.loadingState = .success
 		}.catch(failPasswordReset)
 	}
 	

@@ -14,7 +14,7 @@ final class UserStore: ObservableObject {
 	}
 	
 	func loadTopics() {
-		topicsLoadingState = .loading()
+		topicsLoadingState = .loading
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
 				return self.topicsLoadingState = .failure(
@@ -39,7 +39,7 @@ final class UserStore: ObservableObject {
 				}
 			}
 			self.topics.sort(by: \.name)
-			self.topicsLoadingState = .success()
+			self.topicsLoadingState = .success
 		}
 	}
 }

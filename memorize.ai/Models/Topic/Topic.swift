@@ -24,7 +24,7 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func load() -> Self {
-		loadingState = .loading()
+		loadingState = .loading
 		storage.child("topics/\(id)").getData().done { data in
 			guard let image = Image(data: data) else {
 				return self.loadingState = .failure(
@@ -32,7 +32,7 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 				)
 			}
 			self.image = image
-			self.loadingState = .success()
+			self.loadingState = .success
 		}.catch { error in
 			self.loadingState = .failure(
 				message: error.localizedDescription

@@ -43,7 +43,7 @@ final class SignUpViewModel: ViewModel {
 	}
 	
 	func signUp() {
-		loadingState = .loading()
+		loadingState = .loading
 		resetRedBorders()
 		auth.createUser(
 			withEmail: email,
@@ -52,7 +52,7 @@ final class SignUpViewModel: ViewModel {
 			let uid = result.user.uid
 			self.createUserInFirestore(uid: uid).done {
 				self.setUser(uid: uid)
-				self.loadingState = .success()
+				self.loadingState = .success
 			}.catch(self.failFirestoreSignUp)
 		}.catch(failAuthSignUp)
 	}

@@ -25,7 +25,7 @@ final class GoogleSignInButtonModel: ViewModel {
 	}
 	
 	func logInCompletion(promise: Promise<AuthDataResult>) {
-		loadingState = .loading()
+		loadingState = .loading
 		promise.done { result in
 			let user = result.user
 			guard
@@ -44,7 +44,7 @@ final class GoogleSignInButtonModel: ViewModel {
 				self.handleNewUser(from: newUser)
 			} else {
 				self.shouldProgressToHomeView = true
-				self.loadingState = .success()
+				self.loadingState = .success
 			}
 		}.catch(failAuthGoogleSignUp)
 	}
@@ -52,7 +52,7 @@ final class GoogleSignInButtonModel: ViewModel {
 	func handleNewUser(from user: User) {
 		createUser(from: user).done {
 			self.shouldProgressToChooseTopicsView = true
-			self.loadingState = .success()
+			self.loadingState = .success
 		}.catch(failFirestoreGoogleSignUp)
 	}
 	

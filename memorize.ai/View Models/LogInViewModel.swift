@@ -34,7 +34,7 @@ final class LogInViewModel: ViewModel {
 	}
 	
 	func logIn() {
-		loadingState = .loading()
+		loadingState = .loading
 		shouldShowEmailRedBorder = false
 		shouldShowPasswordRedBorder = false
 		auth.signIn(
@@ -48,7 +48,7 @@ final class LogInViewModel: ViewModel {
 				interests: [],
 				numberOfDecks: 0
 			)
-			self.loadingState = .success()
+			self.loadingState = .success
 		}.catch(failLogIn)
 	}
 	

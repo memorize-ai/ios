@@ -77,7 +77,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadImage() -> Self {
-		imageLoadingState = .loading()
+		imageLoadingState = .loading
 		storage.child("decks/\(id)").getData().done { data in
 			guard let image = Image(data: data) else {
 				return self.imageLoadingState = .failure(
@@ -85,7 +85,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				)
 			}
 			self.image = image
-			self.imageLoadingState = .success()
+			self.imageLoadingState = .success
 		}.catch { error in
 			self.imageLoadingState = .failure(
 				message: error.localizedDescription
@@ -96,7 +96,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadUserData(user: User) -> Self {
-		userDataLoadingState = .loading()
+		userDataLoadingState = .loading
 		firestore.document("users/\(user.id)/decks/\(id)").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot else {
 				return self.userDataLoadingState = .failure(
@@ -104,19 +104,19 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				)
 			}
 			self.updateUserDataFromSnapshot(snapshot)
-			self.userDataLoadingState = .success()
+			self.userDataLoadingState = .success
 		}
 		return self
 	}
 	
 	@discardableResult
 	func get(user: User) -> Self {
-		getLoadingState = .loading()
+		getLoadingState = .loading
 		firestore.document("users/\(user.id)/decks/\(id)").setData([
 			"added": Date()
 		]).done {
 			user.decks.append(self)
-			self.getLoadingState = .success()
+			self.getLoadingState = .success
 		}.catch { error in
 			self.getLoadingState = .failure(
 				message: error.localizedDescription
@@ -127,10 +127,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func remove(user: User) -> Self {
-		getLoadingState = .loading()
+		getLoadingState = .loading
 		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
 			user.decks.removeAll { $0 == self }
-			self.getLoadingState = .success()
+			self.getLoadingState = .success
 		}.catch { error in
 			self.getLoadingState = .failure(
 				message: error.localizedDescription
