@@ -10,6 +10,10 @@ struct SideBarDeckRow: View {
 		return selectedDeck == deck
 	}
 	
+	var alternateImageForegroundColor: Color {
+		isSelected ? .white : .gray
+	}
+	
 	var backgroundColor: Color {
 		isSelected
 			? .darkBlue
@@ -21,7 +25,7 @@ struct SideBarDeckRow: View {
 			Group {
 				if deck.imageLoadingState.didFail {
 					Image(systemName: .exclamationmarkTriangle)
-						.foregroundColor(.gray)
+						.foregroundColor(alternateImageForegroundColor)
 						.scaleEffect(1.5)
 				} else if deck.hasImage {
 					if deck.image == nil {
@@ -34,15 +38,15 @@ struct SideBarDeckRow: View {
 					}
 				} else {
 					Image(systemName: .questionmark)
-						.foregroundColor(.gray)
+						.foregroundColor(alternateImageForegroundColor)
 						.scaleEffect(1.5)
 				}
 			}
 			.frame(width: 40, height: 40)
 			.clipShape(Circle())
 			Text(deck.name)
-				.font(.muli(.regular, size: 16))
-				.foregroundColor(.darkGray)
+				.font(.muli(isSelected ? .bold : .regular, size: 16))
+				.foregroundColor(isSelected ? .white : .darkGray)
 			Spacer()
 			if deck.userData?.isDue ?? false {
 				SideBarDeckRowDueCardsBadge(
