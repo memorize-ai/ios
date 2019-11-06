@@ -23,6 +23,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var userData: UserData?
 	
 	@Published var imageLoadingState = LoadingState.none
+	@Published var userDataLoadingState = LoadingState.none
 	@Published var getLoadingState = LoadingState.none
 	
 	init(
@@ -94,6 +95,21 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
+	func loadUserData(user: User) -> Self {
+		userDataLoadingState = .loading()
+		firestore.document("users/\(user.id)/decks/\(id)").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot else {
+				return self.userDataLoadingState = .failure(
+					message: (error ?? UNKNOWN_ERROR).localizedDescription
+				)
+			}
+			self.updateUserDataFromSnapshot(snapshot)
+			self.userDataLoadingState = .success()
+		}
+		return self
+	}
+	
+	@discardableResult
 	func get(user: User) -> Self {
 		getLoadingState = .loading()
 		firestore.document("users/\(user.id)/decks/\(id)").setData([
@@ -140,8 +156,12 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func updateUserDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
-		userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
-		userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+		if userData == nil {
+			userData = .init(snapshot: snapshot)
+		} else {
+			userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
+			userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+		}
 		return self
 	}
 	

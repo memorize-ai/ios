@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseFirestore
 
 extension Deck {
 	struct UserData {
@@ -9,6 +10,12 @@ extension Deck {
 		
 		var isDue: Bool {
 			numberOfDueCards > 0
+		}
+		
+		init(snapshot: DocumentSnapshot) {
+			self.dateAdded = snapshot.get("added") as? Date ?? .init()
+			self.isFavorite = snapshot.get("favorite") as? Bool ?? false
+			self.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
 		}
 	}
 }
