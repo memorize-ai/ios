@@ -39,7 +39,12 @@ struct SideBar<Content: View>: View {
 				VStack {
 					ZStack(alignment: .top) {
 						SideBarTopGradient(width: extendedWidth)
-						SearchBar($searchText, placeholder: "Decks")
+						SearchBar(
+							$searchText,
+							placeholder: "Decks",
+							internalPadding: 12
+						)
+						.padding([.horizontal, .top])
 					}
 					ForEach(currentUserStore.user.decks) { deck in
 						Text(deck.name)
