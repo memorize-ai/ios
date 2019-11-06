@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 
 extension Deck {
-	struct UserData {
+	struct UserData: Hashable {
 		let dateAdded: Date
 		
 		var isFavorite: Bool
