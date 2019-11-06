@@ -48,7 +48,8 @@ struct SideBar<Content: View>: View {
 					ScrollView {
 						SideBarSections(
 							currentUser: currentUserStore.user,
-							selectedDeck: $selectedDeck
+							selectedDeck: $selectedDeck,
+							searchText: searchText
 						)
 					}
 				}

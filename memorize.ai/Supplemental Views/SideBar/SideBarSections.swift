@@ -5,28 +5,57 @@ struct SideBarSections: View {
 	
 	@Binding var selectedDeck: Deck?
 	
+	var searchText: String
+	
+	func normalizeText(_ text: String) -> String {
+		text
+			.lowercased()
+			.replacingOccurrences(of: " ", with: "")
+	}
+	
+	func filterForSearchText(_ decks: [Deck]) -> [Deck] {
+		searchText.isTrimmedEmpty
+			? decks
+			: decks.filter { deck in
+				normalizeText(deck.name)
+					.contains(normalizeText(searchText))
+			}
+	}
+	
+	var dueDecks: [Deck] {
+		filterForSearchText(currentUser.dueDecks)
+	}
+	
+	var favoriteDecks: [Deck] {
+		filterForSearchText(currentUser.favoriteDecks)
+	}
+	
+	var allDecks: [Deck] {
+		filterForSearchText(currentUser.decks)
+	}
+	
 	var body: some View {
 		VStack {
-			if !currentUser.dueDecks.isEmpty {
+			if !dueDecks.isEmpty {
 				SideBarSection(
 					title: "Due",
-					decks: currentUser.dueDecks,
+					decks: dueDecks,
 					selectedDeck: $selectedDeck
 				)
 				SideBarSectionDivider()
 			}
-			if !currentUser.favoriteDecks.isEmpty {
+			if !favoriteDecks.isEmpty {
 				SideBarSection(
 					title: "Favorites",
-					decks: currentUser.favoriteDecks,
+					decks: favoriteDecks,
 					selectedDeck: $selectedDeck
 				)
 				SideBarSectionDivider()
 			}
-			if !currentUser.decks.isEmpty {
+			if !allDecks.isEmpty {
 				SideBarSection(
 					title: "All",
-					decks: currentUser.decks,
+					decks: allDecks,
 					selectedDeck: $selectedDeck
 				)
 			}
@@ -45,7 +74,8 @@ struct SideBarSections_Previews: PreviewProvider {
 				interests: [],
 				numberOfDecks: 0
 			),
-			selectedDeck: .constant(nil)
+			selectedDeck: .constant(nil),
+			searchText: ""
 		)
 	}
 }
