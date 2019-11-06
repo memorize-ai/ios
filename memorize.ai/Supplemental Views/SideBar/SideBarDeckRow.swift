@@ -28,6 +28,8 @@ struct SideBarDeckRow: View {
 			.frame(width: 40, height: 40)
 			.clipShape(Circle())
 			Text(deck.name)
+				.font(.muli(.regular, size: 16))
+				.foregroundColor(.darkGray)
 		}
 	}
 }
