@@ -39,7 +39,27 @@ struct MainTabView: View {
 #if DEBUG
 struct MainTabView_Previews: PreviewProvider {
 	static var previews: some View {
-		MainTabView()
+		let failedDeck = Deck(
+			id: "6",
+			topics: [],
+			hasImage: true,
+			name: "Geometry Prep #7",
+			subtitle: "Angles, lines, triangles and other polygons",
+			numberOfViews: 1000000000,
+			numberOfUniqueViews: 200000,
+			numberOfRatings: 12400,
+			averageRating: 4.5,
+			numberOfDownloads: 196400,
+			dateCreated: .init(),
+			dateLastUpdated: .init(),
+			userData: .init(
+				dateAdded: .init(),
+				isFavorite: true,
+				numberOfDueCards: 1
+			)
+		)
+		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
+		return MainTabView()
 			.environmentObject(UserStore(.init(
 				id: "0",
 				name: "Ken Mueller",
@@ -121,7 +141,46 @@ struct MainTabView_Previews: PreviewProvider {
 							isFavorite: true,
 							numberOfDueCards: 1
 						)
-					)
+					),
+					.init(
+						id: "4",
+						topics: [],
+						hasImage: false,
+						name: "Geometry Prep #5",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init(),
+						userData: .init(
+							dateAdded: .init(),
+							isFavorite: false,
+							numberOfDueCards: 1
+						)
+					),
+					.init(
+						id: "5",
+						topics: [],
+						hasImage: true,
+						name: "Geometry Prep #6",
+						subtitle: "Angles, lines, triangles and other polygons",
+						numberOfViews: 1000000000,
+						numberOfUniqueViews: 200000,
+						numberOfRatings: 12400,
+						averageRating: 4.5,
+						numberOfDownloads: 196400,
+						dateCreated: .init(),
+						dateLastUpdated: .init(),
+						userData: .init(
+							dateAdded: .init(),
+							isFavorite: true,
+							numberOfDueCards: 1
+						)
+					),
+					failedDeck
 				]
 			)))
 	}

@@ -5,6 +5,28 @@ struct SideBarDeckRow: View {
 	
 	var body: some View {
 		HStack {
+			Group {
+				if deck.imageLoadingState.didFail {
+					Image(systemName: .exclamationmarkTriangle)
+						.foregroundColor(.gray)
+						.scaleEffect(1.5)
+				} else if deck.hasImage {
+					if deck.image == nil {
+						ActivityIndicator(color: .gray)
+					} else {
+						deck.image?
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fill)
+					}
+				} else {
+					Image(systemName: .questionmark)
+						.foregroundColor(.gray)
+						.scaleEffect(1.5)
+				}
+			}
+			.frame(width: 40, height: 40)
+			.clipShape(Circle())
 			Text(deck.name)
 		}
 	}
