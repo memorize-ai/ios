@@ -12,6 +12,8 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfDecks: Int
 	@Published var decks: [Deck]
 	
+	@Published var decksLoadingState = LoadingState.none
+	
 	init(
 		id: String,
 		name: String,
@@ -57,6 +59,40 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
+	func loadDecks(loadImages: Bool = true) -> Self {
+		decksLoadingState = .loading
+		firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in
+			guard error == nil, let documentChanges = snapshot?.documentChanges else {
+				return self.decksLoadingState = .failure(
+					message: (error ?? UNKNOWN_ERROR).localizedDescription
+				)
+			}
+			for change in documentChanges {
+				let userDataSnapshot = change.document
+				let deckId = userDataSnapshot.documentID
+				switch change.type {
+				case .added:
+					Deck.fromId(deckId).done { deck in
+						deck.updateUserDataFromSnapshot(userDataSnapshot)
+						self.decks.append(loadImages ? deck.loadImage() : deck)
+					}.catch { error in
+						self.decksLoadingState = .failure(
+							message: error.localizedDescription
+						)
+					}
+				case .modified:
+					self.deckWithId(deckId)?
+						.updateUserDataFromSnapshot(userDataSnapshot)
+				case .removed:
+					self.decks.removeAll { $0.id == deckId }
+				}
+			}
+			self.decksLoadingState = .success
+		}
+		return self
+	}
+	
+	@discardableResult
 	func addInterest(topicId: String) -> Promise<Void> {
 		firestore.document("users/\(id)").updateData([
 			"topics": FieldValue.arrayUnion([topicId])
@@ -80,6 +116,10 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	func hasDeck(_ deck: Deck) -> Bool {
 		decks.contains(deck)
+	}
+	
+	func deckWithId(_ deckId: String) -> Deck? {
+		decks.first { $0.id == deckId }
 	}
 	
 	static func == (lhs: User, rhs: User) -> Bool {
