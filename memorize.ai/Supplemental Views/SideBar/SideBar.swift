@@ -6,6 +6,7 @@ struct SideBar<Content: View>: View {
 	@EnvironmentObject var currentUserStore: UserStore
 	
 	@State var searchText = ""
+	@State var selectedDeck: Deck?
 	
 	@Binding var isShowing: Bool
 	
@@ -47,7 +48,10 @@ struct SideBar<Content: View>: View {
 						.padding([.horizontal, .top])
 					}
 					ScrollView {
-						SideBarSections(currentUser: currentUserStore.user)
+						SideBarSections(
+							currentUser: currentUserStore.user,
+							selectedDeck: $selectedDeck
+						)
 					}
 				}
 			}

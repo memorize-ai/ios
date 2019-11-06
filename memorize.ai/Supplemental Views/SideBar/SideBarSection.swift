@@ -4,11 +4,18 @@ struct SideBarSection: View {
 	let title: String
 	let decks: [Deck]
 	
+	@Binding var selectedDeck: Deck?
+	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			SideBarSectionTitle(title)
 			VStack(spacing: 12) {
-				ForEach(decks, content: SideBarDeckRow.init)
+				ForEach(decks) { deck in
+					SideBarDeckRow(
+						deck: deck,
+						selectedDeck: self.$selectedDeck
+					)
+				}
 			}
 		}
 		.padding(.leading)
@@ -19,7 +26,11 @@ struct SideBarSection: View {
 #if DEBUG
 struct SideBarSection_Previews: PreviewProvider {
 	static var previews: some View {
-		SideBarSection(title: "Due", decks: [])
+		SideBarSection(
+			title: "Due",
+			decks: [],
+			selectedDeck: .constant(nil)
+		)
 	}
 }
 #endif
