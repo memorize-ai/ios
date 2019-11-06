@@ -5,4 +5,5 @@ extension Image {
 	static let xButton = Self("XButton")
 	static let grayDownloadIcon = Self("GrayDownloadIcon")
 	static let deckStar = Self("DeckStar")
+	static let grayMagnifyingGlass = Self("GrayMagnifyingGlass")
 }

@@ -5,6 +5,8 @@ struct SideBar<Content: View>: View {
 	
 	@EnvironmentObject var currentUserStore: UserStore
 	
+	@State var searchText = ""
+	
 	@Binding var isShowing: Bool
 	
 	let content: Content
@@ -33,11 +35,11 @@ struct SideBar<Content: View>: View {
 						color: .black,
 						radius: isShowing ? 5 : 0,
 						x: isShowing ? -3 : 0
-				)
+					)
 				VStack {
 					ZStack(alignment: .top) {
 						SideBarTopGradient(width: extendedWidth)
-						// TODO: Add search bar here
+						SearchBar($searchText, placeholder: "Decks")
 					}
 					ForEach(currentUserStore.user.decks) { deck in
 						Text(deck.name)
