@@ -5,11 +5,11 @@ struct SideBarSection: View {
 	let decks: [Deck]
 	
 	var body: some View {
-		VStack {
+		VStack(alignment: .leading) {
 			SideBarSectionTitle(title)
-				.padding(.leading)
 			ForEach(decks, content: SideBarDeckRow.init)
 		}
+		.padding(.leading)
 		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 }
