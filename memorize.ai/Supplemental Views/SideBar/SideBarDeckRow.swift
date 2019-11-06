@@ -30,6 +30,12 @@ struct SideBarDeckRow: View {
 			Text(deck.name)
 				.font(.muli(.regular, size: 16))
 				.foregroundColor(.darkGray)
+			Spacer()
+			if deck.userData?.isDue ?? false {
+				SideBarDeckRowDueCardsBadge(
+					count: deck.userData?.numberOfDueCards ?? 0
+				)
+			}
 		}
 	}
 }
