@@ -9,7 +9,7 @@ struct SideBarSectionTitle: View {
 	
 	var body: some View {
 		Text(text)
-			.font(.muli(.bold, size: 13))
+			.font(.muli(.extraBold, size: 13))
 			.foregroundColor(.extraPurple)
 	}
 }

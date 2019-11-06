@@ -5,18 +5,26 @@ struct SideBarSections: View {
 	
 	var body: some View {
 		VStack {
-			SideBarSection(
-				title: "Due",
-				decks: currentUser.dueDecks
-			)
-			SideBarSection(
-				title: "Favorites",
-				decks: currentUser.favoriteDecks
-			)
-			SideBarSection(
-				title: "All",
-				decks: currentUser.decks
-			)
+			if !currentUser.dueDecks.isEmpty {
+				SideBarSection(
+					title: "Due",
+					decks: currentUser.dueDecks
+				)
+				SideBarSectionDivider()
+			}
+			if !currentUser.favoriteDecks.isEmpty {
+				SideBarSection(
+					title: "Favorites",
+					decks: currentUser.favoriteDecks
+				)
+				SideBarSectionDivider()
+			}
+			if !currentUser.decks.isEmpty {
+				SideBarSection(
+					title: "All",
+					decks: currentUser.decks
+				)
+			}
 		}
 	}
 }
