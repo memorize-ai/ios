@@ -52,7 +52,7 @@ struct MainTabView_Previews: PreviewProvider {
 						topics: [],
 						hasImage: true,
 						image: .init("GeometryPrepDeck"),
-						name: "Geometry Prep",
+						name: "Geometry Prep #1",
 						subtitle: "Angles, lines, triangles and other polygons",
 						numberOfViews: 1000000000,
 						numberOfUniqueViews: 200000,
@@ -60,14 +60,19 @@ struct MainTabView_Previews: PreviewProvider {
 						averageRating: 4.5,
 						numberOfDownloads: 196400,
 						dateCreated: .init(),
-						dateLastUpdated: .init()
+						dateLastUpdated: .init(),
+						userData: .init(
+							dateAdded: .init(),
+							isFavorite: false,
+							numberOfDueCards: 2
+						)
 					),
 					.init(
 						id: "1",
 						topics: [],
 						hasImage: true,
 						image: .init("GeometryPrepDeck"),
-						name: "Geometry Prep",
+						name: "Geometry Prep #2",
 						subtitle: "Angles, lines, triangles and other polygons",
 						numberOfViews: 1000000000,
 						numberOfUniqueViews: 200000,
@@ -75,14 +80,19 @@ struct MainTabView_Previews: PreviewProvider {
 						averageRating: 4.5,
 						numberOfDownloads: 196400,
 						dateCreated: .init(),
-						dateLastUpdated: .init()
+						dateLastUpdated: .init(),
+						userData: .init(
+							dateAdded: .init(),
+							isFavorite: true,
+							numberOfDueCards: 0
+						)
 					),
 					.init(
 						id: "2",
 						topics: [],
 						hasImage: true,
 						image: .init("GeometryPrepDeck"),
-						name: "Geometry Prep",
+						name: "Geometry Prep #3",
 						subtitle: "Angles, lines, triangles and other polygons",
 						numberOfViews: 1000000000,
 						numberOfUniqueViews: 200000,
@@ -97,7 +107,7 @@ struct MainTabView_Previews: PreviewProvider {
 						topics: [],
 						hasImage: true,
 						image: .init("GeometryPrepDeck"),
-						name: "Geometry Prep",
+						name: "Geometry Prep #4",
 						subtitle: "Angles, lines, triangles and other polygons",
 						numberOfViews: 1000000000,
 						numberOfUniqueViews: 200000,
@@ -105,7 +115,12 @@ struct MainTabView_Previews: PreviewProvider {
 						averageRating: 4.5,
 						numberOfDownloads: 196400,
 						dateCreated: .init(),
-						dateLastUpdated: .init()
+						dateLastUpdated: .init(),
+						userData: .init(
+							dateAdded: .init(),
+							isFavorite: true,
+							numberOfDueCards: 1
+						)
 					)
 				]
 			)))
