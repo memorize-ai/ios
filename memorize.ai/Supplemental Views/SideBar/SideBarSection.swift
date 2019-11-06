@@ -6,7 +6,9 @@ struct SideBarSection: View {
 	var body: some View {
 		VStack {
 			SideBarSectionTitle(title)
+				.padding(.leading)
 		}
+		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 }
 

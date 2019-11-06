@@ -36,7 +36,7 @@ struct SideBar<Content: View>: View {
 						radius: isShowing ? 5 : 0,
 						x: isShowing ? -3 : 0
 					)
-				VStack(alignment: .leading) {
+				VStack(alignment: .leading, spacing: 18) {
 					ZStack(alignment: .top) {
 						SideBarTopGradient(width: extendedWidth)
 						SearchBar(
@@ -46,13 +46,11 @@ struct SideBar<Content: View>: View {
 						)
 						.padding([.horizontal, .top])
 					}
-					Group {
+					ScrollView {
 						SideBarSection(title: "Due")
 						SideBarSection(title: "Starred")
 						SideBarSection(title: "All")
 					}
-					.padding(.horizontal)
-					Spacer()
 				}
 			}
 			.frame(width: extendedWidth)
