@@ -13,6 +13,13 @@ struct SideBarSections: View {
 			.replacingOccurrences(of: " ", with: "")
 	}
 	
+	func sortByNumberOfDueCards(_ decks: [Deck]) -> [Deck] {
+		decks.sorted {
+			$0.userData?.numberOfDueCards ?? 0 >
+			$1.userData?.numberOfDueCards ?? 0
+		}
+	}
+	
 	func filterForSearchText(_ decks: [Deck]) -> [Deck] {
 		searchText.isTrimmedEmpty
 			? decks
@@ -23,15 +30,21 @@ struct SideBarSections: View {
 	}
 	
 	var dueDecks: [Deck] {
-		filterForSearchText(currentUser.dueDecks)
+		sortByNumberOfDueCards(filterForSearchText(
+			currentUser.dueDecks
+		))
 	}
 	
 	var favoriteDecks: [Deck] {
-		filterForSearchText(currentUser.favoriteDecks)
+		sortByNumberOfDueCards(filterForSearchText(
+			currentUser.favoriteDecks
+		))
 	}
 	
 	var allDecks: [Deck] {
-		filterForSearchText(currentUser.decks)
+		sortByNumberOfDueCards(filterForSearchText(
+			currentUser.decks
+		))
 	}
 	
 	var body: some View {
