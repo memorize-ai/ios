@@ -2,6 +2,7 @@ import Combine
 import FirebaseAuth
 import GoogleSignIn
 import PromiseKit
+import LoadingState
 
 final class LogInViewModel: ViewModel {
 	static let unknownErrorTitle = "Unknown error"
@@ -23,7 +24,7 @@ final class LogInViewModel: ViewModel {
 	@Published var shouldShowEmailRedBorder = false
 	@Published var shouldShowPasswordRedBorder = false
 	
-	@Published var loadingState = LoadingState.none
+	@Published var loadingState = LoadingState()
 	@Published var shouldShowErrorModal = false
 	
 	var user: User?

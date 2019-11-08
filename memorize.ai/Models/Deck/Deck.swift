@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseFirestore
 import PromiseKit
+import LoadingState
 
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static var cache = [String: Deck]()
@@ -22,9 +23,9 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@Published var userData: UserData?
 	
-	@Published var imageLoadingState = LoadingState.none
-	@Published var userDataLoadingState = LoadingState.none
-	@Published var getLoadingState = LoadingState.none
+	@Published var imageLoadingState = LoadingState()
+	@Published var userDataLoadingState = LoadingState()
+	@Published var getLoadingState = LoadingState()
 	
 	init(
 		id: String,

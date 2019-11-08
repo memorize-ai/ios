@@ -55,7 +55,7 @@ struct DeckCellWithGetButton: View {
 						"Unable to \(hasDeck ? "remove" : "get") deck"
 					),
 					message: .init(
-						deck.getLoadingState.failureMessage ?? "Unknown error"
+						deck.getLoadingState.errorMessage ?? "Unknown error"
 					)
 				)
 			}

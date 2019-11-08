@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
+import LoadingState
 
 final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	let id: String
@@ -8,7 +9,7 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var image: Image?
 	@Published var topDecks: [String]
 	
-	@Published var loadingState = LoadingState.none
+	@Published var loadingState = LoadingState()
 	
 	init(
 		id: String,

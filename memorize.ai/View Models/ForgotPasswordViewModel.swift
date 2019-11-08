@@ -1,5 +1,6 @@
 import Combine
 import FirebaseAuth
+import LoadingState
 
 final class ForgotPasswordViewModel: ViewModel {
 	static let unknownErrorTitle = "Unknown error"
@@ -14,7 +15,7 @@ final class ForgotPasswordViewModel: ViewModel {
 	
 	@Published var shouldShowEmailRedBorder = false
 	
-	@Published var loadingState = LoadingState.none
+	@Published var loadingState = LoadingState()
 	@Published var shouldShowErrorModal = false
 	
 	var errorModal: (title: String, description: String)?

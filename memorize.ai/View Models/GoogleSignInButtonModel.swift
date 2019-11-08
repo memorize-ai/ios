@@ -3,12 +3,13 @@ import FirebaseAuth
 import FirebaseFirestore
 import GoogleSignIn
 import PromiseKit
+import LoadingState
 
 final class GoogleSignInButtonModel: ViewModel {
 	static let unknownErrorTitle = "Unknown error"
 	static let unknownErrorDescription = "Sorry about that! Please try again"
 	
-	@Published var loadingState = LoadingState.none
+	@Published var loadingState = LoadingState()
 	@Published var shouldShowErrorModal = false
 	
 	@Published var shouldProgressToHomeView = false

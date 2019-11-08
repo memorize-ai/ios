@@ -2,6 +2,7 @@ import Combine
 import FirebaseAuth
 import FirebaseFirestore
 import PromiseKit
+import LoadingState
 
 final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	let id: String
@@ -12,7 +13,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfDecks: Int
 	@Published var decks: [Deck]
 	
-	@Published var decksLoadingState = LoadingState.none
+	@Published var decksLoadingState = LoadingState()
 	
 	init(
 		id: String,

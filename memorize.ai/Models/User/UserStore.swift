@@ -1,12 +1,13 @@
 import Combine
 import FirebaseFirestore
 import PromiseKit
+import LoadingState
 
 final class UserStore: ObservableObject {
 	@Published var user: User
 	
 	@Published var topics: [Topic]
-	@Published var topicsLoadingState = LoadingState.none
+	@Published var topicsLoadingState = LoadingState()
 	
 	init(_ user: User, topics: [Topic] = []) {
 		self.user = user

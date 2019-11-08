@@ -1,8 +1,9 @@
 import Combine
+import LoadingState
 
 final class RecommendedDecksViewModel: ViewModel {
 	@Published var decks = [Deck]()
-	@Published var decksLoadingState = LoadingState.none
+	@Published var decksLoadingState = LoadingState()
 	
 	var loadedDecks = [String]()
 	

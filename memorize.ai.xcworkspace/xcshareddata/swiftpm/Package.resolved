@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "LoadingState",
+        "repositoryURL": "https://github.com/kenmueller/LoadingState",
+        "state": {
+          "branch": "master",
+          "revision": "c63a374f7bd30fa9913e0e7bcbdda22f1e0b249d",
+          "version": null
+        }
+      },
+      {
         "package": "PromiseKit",
         "repositoryURL": "https://github.com/mxcl/PromiseKit.git",
         "state": {
