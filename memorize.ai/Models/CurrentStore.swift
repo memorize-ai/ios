@@ -3,7 +3,7 @@ import FirebaseFirestore
 import PromiseKit
 import LoadingState
 
-final class UserStore: ObservableObject {
+final class CurrentStore: ObservableObject {
 	@Published var user: User
 	
 	@Published var topics: [Topic]

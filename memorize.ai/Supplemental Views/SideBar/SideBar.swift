@@ -3,7 +3,7 @@ import SwiftUI
 struct SideBar<Content: View>: View {
 	let extendedWidth = SCREEN_SIZE.width - 36
 	
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	@State var searchText = ""
 	@State var selectedDeck: Deck?
@@ -47,7 +47,7 @@ struct SideBar<Content: View>: View {
 					}
 					ScrollView {
 						SideBarSections(
-							currentUser: currentUserStore.user,
+							currentUser: current.user,
 							selectedDeck: $selectedDeck,
 							searchText: searchText
 						)
@@ -70,7 +70,7 @@ struct SideBar_Previews: PreviewProvider {
 		SideBar(isShowing: .constant(true)) {
 			Text("Content")
 		}
-		.environmentObject(UserStore(.init(
+		.environmentObject(CurrentStore(.init(
 			id: "0",
 			name: "Ken Mueller",
 			email: "kenmueller0@gmail.com",

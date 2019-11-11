@@ -20,7 +20,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		if let currentUser = auth.currentUser {
 			window.rootViewController = UIHostingController(
 				rootView: MainTabView()
-					.environmentObject(UserStore(.init(authUser: currentUser)))
+					.environmentObject(CurrentStore(.init(authUser: currentUser)))
 					.environment(\.managedObjectContext, context)
 			)
 		} else {

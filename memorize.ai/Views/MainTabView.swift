@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	@State var isSideBarShowing = false
 	@State var tabViewSelection = 0
@@ -36,7 +36,7 @@ struct MainTabView: View {
 			}
 		}
 		.onAppear {
-			let currentUser = self.currentUserStore.user
+			let currentUser = self.current.user
 			guard currentUser.decksLoadingState.isNone else { return }
 			currentUser.decks.removeAll()
 			currentUser.loadDecks()
@@ -66,9 +66,9 @@ struct MainTabView_Previews: PreviewProvider {
 				numberOfDueCards: 12
 			)
 		)
-		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
+		failedDeck.imageLoadingState.fail(message: "Self-invoked")
 		return MainTabView()
-			.environmentObject(UserStore(.init(
+			.environmentObject(CurrentStore(.init(
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChooseTopicsView: View {
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	let content: ChooseTopicsViewContent
 	
@@ -14,7 +14,7 @@ struct ChooseTopicsView: View {
 	var leadingButton: some View {
 		NavigationLink(
 			destination: MainTabView()
-				.environmentObject(currentUserStore)
+				.environmentObject(current)
 		) {
 			XButton(height: 20)
 		}
@@ -27,7 +27,7 @@ struct ChooseTopicsView: View {
 			leadingButtonIsBackButton: false,
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: RecommendedDecksView()
-				.environmentObject(currentUserStore),
+				.environmentObject(current),
 			content: content
 		)
 	}
@@ -44,7 +44,7 @@ struct ChooseTopicsView_Previews: PreviewProvider {
 			numberOfDecks: 0
 		)
 		return ChooseTopicsView(currentUser: currentUser)
-			.environmentObject(UserStore(
+			.environmentObject(CurrentStore(
 				currentUser,
 				topics: [
 					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),

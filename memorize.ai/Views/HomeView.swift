@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	@Binding var isSideBarShowing: Bool
 	
@@ -12,7 +12,7 @@ struct HomeView: View {
 			}) {
 				Text("Show side bar")
 			}
-			Text("Hello, \(currentUserStore.user.name)")
+			Text("Hello, \(current.user.name)")
 		}
 	}
 }
@@ -21,7 +21,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		HomeView(isSideBarShowing: .constant(false))
-			.environmentObject(UserStore(.init(
+			.environmentObject(CurrentStore(.init(
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",

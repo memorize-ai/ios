@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RecommendedDecksView: View {
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	var body: some View {
 		PostSignUpView(
@@ -10,7 +10,7 @@ struct RecommendedDecksView: View {
 			leadingButtonIsBackButton: true,
 			trailingButtonTitle: "DONE",
 			trailingButtonDestination: MainTabView()
-				.environmentObject(currentUserStore),
+				.environmentObject(current),
 			content: RecommendedDecksViewContent()
 		)
 	}
@@ -20,7 +20,7 @@ struct RecommendedDecksView: View {
 struct RecommendedDecksView_Previews: PreviewProvider {
 	static var previews: some View {
 		RecommendedDecksView()
-			.environmentObject(UserStore(.init(
+			.environmentObject(CurrentStore(.init(
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",

@@ -7,7 +7,7 @@ struct RecommendedDecksViewContent: View {
 	static let horizontalCellSpacing: CGFloat = 10
 	static let verticalCellSpacing: CGFloat = 20
 	
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	@ObservedObject var model = RecommendedDecksViewModel()
 	
@@ -17,7 +17,7 @@ struct RecommendedDecksViewContent: View {
 				elements: model.decks.map { deck in
 					DeckCellWithGetButton(
 						deck: deck,
-						user: currentUserStore.user,
+						user: current.user,
 						width: Self.deckCellWidth
 					)
 				},
@@ -30,8 +30,8 @@ struct RecommendedDecksViewContent: View {
 		.onAppear {
 			guard self.model.decksLoadingState.isNone else { return }
 			self.model.loadDecks(
-				interests: self.currentUserStore.user.interests,
-				topics: self.currentUserStore.topics
+				interests: self.current.user.interests,
+				topics: self.current.topics
 			)
 		}
 	}

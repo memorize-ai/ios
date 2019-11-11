@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChooseTopicsViewContent: View {
-	@EnvironmentObject var currentUserStore: UserStore
+	@EnvironmentObject var current: CurrentStore
 	
 	@ObservedObject var model: ChooseTopicsViewModel
 	
@@ -15,7 +15,7 @@ struct ChooseTopicsViewContent: View {
 	var body: some View {
 		ScrollView(showsIndicators: false) {
 			Grid(
-				elements: currentUserStore.topics.map { topic in
+				elements: current.topics.map { topic in
 					TopicCell(
 						topic: topic,
 						isSelected: model.isTopicSelected(topic)
@@ -30,8 +30,8 @@ struct ChooseTopicsViewContent: View {
 			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
 		.onAppear {
-			guard self.currentUserStore.topicsLoadingState.isNone else { return }
-			self.currentUserStore.loadTopics()
+			guard self.current.topicsLoadingState.isNone else { return }
+			self.current.loadTopics()
 		}
 	}
 }
@@ -47,7 +47,7 @@ struct ChooseTopicsViewContent_Previews: PreviewProvider {
 			numberOfDecks: 0
 		)
 		return ChooseTopicsViewContent(currentUser: currentUser)
-			.environmentObject(UserStore(currentUser))
+			.environmentObject(CurrentStore(currentUser))
 	}
 }
 #endif
