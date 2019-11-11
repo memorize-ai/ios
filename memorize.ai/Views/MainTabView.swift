@@ -35,6 +35,7 @@ struct MainTabView: View {
 					.tag(3)
 			}
 		}
+		.removeNavigationBar()
 		.onAppear {
 			self.currentStore.loadUser()
 			self.currentStore.user.loadDecks()
