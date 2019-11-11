@@ -5,6 +5,7 @@ import LoadingState
 
 final class CurrentStore: ObservableObject {
 	@Published var user: User
+	@Published var userLoadingState = LoadingState()
 	
 	@Published var topics: [Topic]
 	@Published var topicsLoadingState = LoadingState()
@@ -14,7 +15,12 @@ final class CurrentStore: ObservableObject {
 		self.topics = topics
 	}
 	
-	func loadTopics() {
+	func loadUser() -> Self {
+		// TODO: Load user
+		return self
+	}
+	
+	func loadTopics() -> Self {
 		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
@@ -41,5 +47,6 @@ final class CurrentStore: ObservableObject {
 			self.topics.sort(by: \.name)
 			self.topicsLoadingState.succeed()
 		}
+		return self
 	}
 }
