@@ -31,7 +31,7 @@ final class CurrentStore: ObservableObject {
 						id: topicId,
 						name: document.get("name") as? String ?? "Unknown",
 						topDecks: document.get("topDecks") as? [String] ?? []
-					).load())
+					).loadImage())
 				case .modified:
 					self.topics.first { $0.id == topicId }?
 						.updateFromSnapshot(document)
