@@ -1,3 +1,7 @@
+import SwiftUI
+
+let SIDE_BAR_ANIMATION = Animation.easeOut(duration: 0.2)
+
 let FIREBASE_STORAGE_MAX_FILE_SIZE: Int64 = 50 * 1024 * 1024
 
 #if DEBUG

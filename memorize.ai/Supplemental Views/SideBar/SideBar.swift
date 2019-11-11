@@ -26,6 +26,7 @@ struct SideBar<Content: View>: View {
 					.onTapGesture {
 						self.isShowing = false
 					}
+					.edgesIgnoringSafeArea(.all)
 			}
 			.offset(x: isShowing ? extendedWidth : 0)
 			ZStack {
@@ -57,10 +58,9 @@ struct SideBar<Content: View>: View {
 			.frame(width: extendedWidth)
 			.frame(maxHeight: .infinity)
 			.offset(x: isShowing ? 0 : -extendedWidth)
+			.edgesIgnoringSafeArea(.all)
 		}
-		.edgesIgnoringSafeArea(.all)
-		.statusBar(hidden: isShowing)
-		.animation(.easeOut(duration: 0.2))
+		.animation(SIDE_BAR_ANIMATION)
 	}
 }
 

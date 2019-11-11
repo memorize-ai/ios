@@ -1,41 +1,52 @@
 import SwiftUI
 
 struct MainTabView: View {
+	enum Selection {
+		case home
+		case marketplace
+		case decks
+		case you
+	}
+	
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@State var isSideBarShowing = false
-	@State var tabViewSelection = 0
+	@State var tabViewSelection = Selection.home
 	
 	var body: some View {
-		SideBar(isShowing: $isSideBarShowing) {
-			TabView(selection: $tabViewSelection) {
-				HomeView(isSideBarShowing: $isSideBarShowing)
-					.tabItem {
-						Image(systemName: .exclamationmarkTriangle)
-						Text("Home")
-					}
-					.tag(0)
-				Text("Marketplace")
-					.tabItem {
-						Image(systemName: .exclamationmarkTriangle)
-						Text("Market")
-					}
-					.tag(1)
-				Text("Decks")
-					.tabItem {
-						Image(systemName: .exclamationmarkTriangle)
-						Text("Decks")
-					}
-					.tag(2)
-				Text("You")
-					.tabItem {
-						Image(systemName: .exclamationmarkTriangle)
-						Text("You")
-					}
-					.tag(3)
+		NavigationView {
+			SideBar(isShowing: $isSideBarShowing) {
+				TabView(selection: $tabViewSelection) {
+					HomeView(isSideBarShowing: $isSideBarShowing)
+						.tabItem {
+							Image(systemName: .exclamationmarkTriangle)
+							Text("Home")
+						}
+						.tag(Selection.home)
+					Text("Marketplace")
+						.tabItem {
+							Image(systemName: .exclamationmarkTriangle)
+							Text("Marketplace")
+						}
+						.tag(Selection.marketplace)
+					Text("Decks")
+						.tabItem {
+							Image(systemName: .exclamationmarkTriangle)
+							Text("Decks")
+						}
+						.tag(Selection.decks)
+					Text("You")
+						.tabItem {
+							Image(systemName: .exclamationmarkTriangle)
+							Text("You")
+						}
+						.tag(Selection.you)
+				}
 			}
+			.removeNavigationBar()
 		}
-		.removeNavigationBar()
+		.statusBar(hidden: isSideBarShowing)
+		.animation(.linear(duration: 0.2))
 		.onAppear {
 			self.currentStore.loadUser()
 			self.currentStore.user.loadDecks()
