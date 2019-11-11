@@ -36,10 +36,8 @@ struct MainTabView: View {
 			}
 		}
 		.onAppear {
-			let currentUser = self.currentStore.user
-			guard currentUser.decksLoadingState.isNone else { return }
-			currentUser.decks.removeAll()
-			currentUser.loadDecks()
+			self.currentStore.loadUser()
+			self.currentStore.user.loadDecks()
 		}
 	}
 }

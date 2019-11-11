@@ -70,11 +70,17 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadDecks(loadImages: Bool = true) -> Self {
+		guard decksLoadingState.isNone else { return self }
+		var isInitialIteration = true
 		decksLoadingState.startLoading()
 		firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
 				self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 				return
+			}
+			if isInitialIteration {
+				isInitialIteration = false
+				self.decks.removeAll()
 			}
 			for change in documentChanges {
 				let userDataSnapshot = change.document

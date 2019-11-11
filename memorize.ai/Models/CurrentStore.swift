@@ -17,6 +17,7 @@ final class CurrentStore: ObservableObject {
 	
 	@discardableResult
 	func loadUser() -> Self {
+		guard userLoadingState.isNone else { return self }
 		userLoadingState.startLoading()
 		firestore.document("users/\(user.id)").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot else {
@@ -33,6 +34,7 @@ final class CurrentStore: ObservableObject {
 	
 	@discardableResult
 	func loadTopics() -> Self {
+		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
