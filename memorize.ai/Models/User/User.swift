@@ -60,6 +60,15 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
+	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		name = snapshot.get("name") as? String ?? name
+		email = snapshot.get("email") as? String ?? email
+		interests = snapshot.get("interests") as? [String] ?? interests
+		numberOfDecks = snapshot.get("deckCount") as? Int ?? numberOfDecks
+		return self
+	}
+	
+	@discardableResult
 	func loadDecks(loadImages: Bool = true) -> Self {
 		decksLoadingState.startLoading()
 		firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in

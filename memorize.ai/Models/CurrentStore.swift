@@ -15,11 +15,23 @@ final class CurrentStore: ObservableObject {
 		self.topics = topics
 	}
 	
+	@discardableResult
 	func loadUser() -> Self {
-		// TODO: Load user
+		userLoadingState.startLoading()
+		firestore.document("users/\(user.id)").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot else {
+				self.userLoadingState.fail(
+					error: error ?? UNKNOWN_ERROR
+				)
+				return
+			}
+			self.user.updateFromSnapshot(snapshot)
+			self.userLoadingState.succeed()
+		}
 		return self
 	}
 	
+	@discardableResult
 	func loadTopics() -> Self {
 		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
