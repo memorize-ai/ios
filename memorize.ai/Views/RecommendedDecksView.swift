@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RecommendedDecksView: View {
-	@EnvironmentObject var current: CurrentStore
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	var body: some View {
 		PostSignUpView(
@@ -10,7 +10,7 @@ struct RecommendedDecksView: View {
 			leadingButtonIsBackButton: true,
 			trailingButtonTitle: "DONE",
 			trailingButtonDestination: MainTabView()
-				.environmentObject(current),
+				.environmentObject(currentStore),
 			content: RecommendedDecksViewContent()
 		)
 	}

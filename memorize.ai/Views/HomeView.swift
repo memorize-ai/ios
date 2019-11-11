@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
-	@EnvironmentObject var current: CurrentStore
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	@Binding var isSideBarShowing: Bool
 	
@@ -12,7 +12,7 @@ struct HomeView: View {
 			}) {
 				Text("Show side bar")
 			}
-			Text("Hello, \(current.user.name)")
+			Text("Hello, \(currentStore.user.name)")
 		}
 	}
 }

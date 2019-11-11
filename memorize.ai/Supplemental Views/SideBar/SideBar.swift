@@ -3,7 +3,7 @@ import SwiftUI
 struct SideBar<Content: View>: View {
 	let extendedWidth = SCREEN_SIZE.width - 36
 	
-	@EnvironmentObject var current: CurrentStore
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	@State var searchText = ""
 	@State var selectedDeck: Deck?
@@ -47,7 +47,7 @@ struct SideBar<Content: View>: View {
 					}
 					ScrollView {
 						SideBarSections(
-							currentUser: current.user,
+							currentUser: currentStore.user,
 							selectedDeck: $selectedDeck,
 							searchText: searchText
 						)
