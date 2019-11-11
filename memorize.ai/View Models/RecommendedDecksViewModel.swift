@@ -8,7 +8,7 @@ final class RecommendedDecksViewModel: ViewModel {
 	var loadedDecks = [String]()
 	
 	func loadDecks(interests: [String], topics: [Topic]) {
-		decksLoadingState = .loading
+		decksLoadingState.startLoading()
 		let maxDecksPerTopic = getMaxDecksPerTopic(
 			numberOfInterests: interests.count
 		)
@@ -26,11 +26,9 @@ final class RecommendedDecksViewModel: ViewModel {
 	func loadDeck(id: String) {
 		Deck.fromId(id).done { deck in
 			self.decks.append(deck)
-			self.decksLoadingState = .success
+			self.decksLoadingState.succeed()
 		}.catch { error in
-			self.decksLoadingState = .failure(
-				message: error.localizedDescription
-			)
+			self.decksLoadingState.fail(error: error)
 		}
 	}
 	

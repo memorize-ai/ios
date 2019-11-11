@@ -61,12 +61,11 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadDecks(loadImages: Bool = true) -> Self {
-		decksLoadingState = .loading
+		decksLoadingState.startLoading()
 		firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
-				return self.decksLoadingState = .failure(
-					message: (error ?? UNKNOWN_ERROR).localizedDescription
-				)
+				self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				return
 			}
 			for change in documentChanges {
 				let userDataSnapshot = change.document
@@ -77,9 +76,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 						deck.updateUserDataFromSnapshot(userDataSnapshot)
 						self.decks.append(loadImages ? deck.loadImage() : deck)
 					}.catch { error in
-						self.decksLoadingState = .failure(
-							message: error.localizedDescription
-						)
+						self.decksLoadingState.fail(error: error)
 					}
 				case .modified:
 					self.deckWithId(deckId)?
@@ -88,7 +85,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 					self.decks.removeAll { $0.id == deckId }
 				}
 			}
-			self.decksLoadingState = .success
+			self.decksLoadingState.succeed()
 		}
 		return self
 	}

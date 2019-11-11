@@ -35,7 +35,7 @@ final class LogInViewModel: ViewModel {
 	}
 	
 	func logIn() {
-		loadingState = .loading
+		loadingState.startLoading()
 		shouldShowEmailRedBorder = false
 		shouldShowPasswordRedBorder = false
 		auth.signIn(
@@ -49,12 +49,12 @@ final class LogInViewModel: ViewModel {
 				interests: [],
 				numberOfDecks: 0
 			)
-			self.loadingState = .success
+			self.loadingState.succeed()
 		}.catch(failLogIn)
 	}
 	
 	func failLogIn(error: Error) {
-		loadingState = .failure(message: error.localizedDescription)
+		loadingState.fail(error: error)
 		handleError(code: AuthErrorCode(error: error))
 		shouldShowErrorModal = true
 	}

@@ -79,64 +79,58 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func loadImage() -> Self {
 		guard hasImage else { return self }
-		imageLoadingState = .loading
+		imageLoadingState.startLoading()
 		storage.child("decks/\(id)").getData().done { data in
 			guard let image = Image(data: data) else {
-				return self.imageLoadingState = .failure(
-					message: "Malformed data"
-				)
+				self.imageLoadingState.fail(message: "Malformed data")
+				return
 			}
 			self.image = image
-			self.imageLoadingState = .success
+			self.imageLoadingState.succeed()
 		}.catch { error in
-			self.imageLoadingState = .failure(
-				message: error.localizedDescription
-			)
+			self.imageLoadingState.fail(error: error)
 		}
 		return self
 	}
 	
 	@discardableResult
 	func loadUserData(user: User) -> Self {
-		userDataLoadingState = .loading
+		userDataLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot else {
-				return self.userDataLoadingState = .failure(
-					message: (error ?? UNKNOWN_ERROR).localizedDescription
+				self.userDataLoadingState.fail(
+					error: error ?? UNKNOWN_ERROR
 				)
+				return
 			}
 			self.updateUserDataFromSnapshot(snapshot)
-			self.userDataLoadingState = .success
+			self.userDataLoadingState.succeed()
 		}
 		return self
 	}
 	
 	@discardableResult
 	func get(user: User) -> Self {
-		getLoadingState = .loading
+		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").setData([
 			"added": Date()
 		]).done {
 			user.decks.append(self)
-			self.getLoadingState = .success
+			self.getLoadingState.succeed()
 		}.catch { error in
-			self.getLoadingState = .failure(
-				message: error.localizedDescription
-			)
+			self.getLoadingState.fail(error: error)
 		}
 		return self
 	}
 	
 	@discardableResult
 	func remove(user: User) -> Self {
-		getLoadingState = .loading
+		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
 			user.decks.removeAll { $0 == self }
-			self.getLoadingState = .success
+			self.getLoadingState.succeed()
 		}.catch { error in
-			self.getLoadingState = .failure(
-				message: error.localizedDescription
-			)
+			self.getLoadingState.fail(error: error)
 		}
 		return self
 	}

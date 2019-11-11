@@ -25,19 +25,16 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadImage() -> Self {
-		loadingState = .loading
+		loadingState.startLoading()
 		storage.child("topics/\(id)").getData().done { data in
 			guard let image = Image(data: data) else {
-				return self.loadingState = .failure(
-					message: "Malformed data"
-				)
+				self.loadingState.fail(message: "Malformed data")
+				return
 			}
 			self.image = image
-			self.loadingState = .success
+			self.loadingState.succeed()
 		}.catch { error in
-			self.loadingState = .failure(
-				message: error.localizedDescription
-			)
+			self.loadingState.fail(error: error)
 		}
 		return self
 	}

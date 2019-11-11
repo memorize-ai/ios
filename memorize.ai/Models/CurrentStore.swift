@@ -15,12 +15,11 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	func loadTopics() {
-		topicsLoadingState = .loading
+		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
-				return self.topicsLoadingState = .failure(
-					message: (error ?? UNKNOWN_ERROR).localizedDescription
-				)
+				self.topicsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				return
 			}
 			for change in documentChanges {
 				let document = change.document
@@ -40,7 +39,7 @@ final class CurrentStore: ObservableObject {
 				}
 			}
 			self.topics.sort(by: \.name)
-			self.topicsLoadingState = .success
+			self.topicsLoadingState.succeed()
 		}
 	}
 }

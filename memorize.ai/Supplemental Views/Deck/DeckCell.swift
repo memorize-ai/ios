@@ -106,7 +106,7 @@ struct DeckCell_Previews: PreviewProvider {
 			dateCreated: .init(),
 			dateLastUpdated: .init()
 		)
-		failedDeck.imageLoadingState = .failure(message: "Self-invoked")
+		failedDeck.imageLoadingState.fail(message: "Self-invoked")
 		return ZStack {
 			Color.gray
 				.edgesIgnoringSafeArea(.all)

@@ -69,7 +69,7 @@ struct TopicCell_Previews: PreviewProvider {
 			image: .init("GeographyTopic"),
 			topDecks: []
 		)
-		failedTopic.loadingState = .failure(message: "Self-invoked")
+		failedTopic.loadingState.fail(message: "Self-invoked")
 		return VStack(spacing: 20) {
 			TopicCell(
 				topic: failedTopic,
