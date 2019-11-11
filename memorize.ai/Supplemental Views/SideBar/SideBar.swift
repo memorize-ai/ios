@@ -70,7 +70,7 @@ struct SideBar_Previews: PreviewProvider {
 		SideBar(isShowing: .constant(true)) {
 			Text("Content")
 		}
-		.environmentObject(CurrentStore(.init(
+		.environmentObject(CurrentStore(user: .init(
 			id: "0",
 			name: "Ken Mueller",
 			email: "kenmueller0@gmail.com",

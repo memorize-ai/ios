@@ -68,7 +68,7 @@ struct MainTabView_Previews: PreviewProvider {
 		)
 		failedDeck.imageLoadingState.fail(message: "Self-invoked")
 		return MainTabView()
-			.environmentObject(CurrentStore(.init(
+			.environmentObject(CurrentStore(user: .init(
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",

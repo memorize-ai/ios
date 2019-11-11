@@ -20,7 +20,7 @@ struct RecommendedDecksView: View {
 struct RecommendedDecksView_Previews: PreviewProvider {
 	static var previews: some View {
 		RecommendedDecksView()
-			.environmentObject(CurrentStore(.init(
+			.environmentObject(CurrentStore(user: .init(
 				id: "0",
 				name: "Ken Mueller",
 				email: "kenmueller0@gmail.com",

@@ -70,7 +70,9 @@ struct SignUpViewContentBox: View {
 			if model.user != nil {
 				NavigateTo(
 					ChooseTopicsView(currentUser: model.user!)
-						.environmentObject(CurrentStore(model.user!)),
+						.environmentObject(CurrentStore(
+							user: model.user!
+						)),
 					when: $model.loadingState.didSucceed
 				)
 			}

@@ -42,12 +42,16 @@ struct GoogleSignInButton: View {
 			if model.user != nil {
 				NavigateTo(
 					MainTabView()
-						.environmentObject(CurrentStore(model.user!)),
+						.environmentObject(CurrentStore(
+							user: model.user!
+						)),
 					when: $model.shouldProgressToHomeView
 				)
 				NavigateTo(
 					ChooseTopicsView(currentUser: model.user!)
-						.environmentObject(CurrentStore(model.user!)),
+						.environmentObject(CurrentStore(
+							user: model.user!
+						)),
 					when: $model.shouldProgressToChooseTopicsView
 				)
 			}

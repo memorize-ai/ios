@@ -67,7 +67,9 @@ struct LogInViewContentBox: View {
 			if model.user != nil {
 				NavigateTo(
 					MainTabView()
-						.environmentObject(CurrentStore(model.user!)),
+						.environmentObject(CurrentStore(
+							user: model.user!
+						)),
 					when: $model.loadingState.didSucceed
 				)
 			}

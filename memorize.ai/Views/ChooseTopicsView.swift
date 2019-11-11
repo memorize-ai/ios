@@ -45,7 +45,7 @@ struct ChooseTopicsView_Previews: PreviewProvider {
 		)
 		return ChooseTopicsView(currentUser: currentUser)
 			.environmentObject(CurrentStore(
-				currentUser,
+				user: currentUser,
 				topics: [
 					.init(id: "0", name: "HTML", image: .init("HTMLTopic"), topDecks: []),
 					.init(id: "1", name: "Geography", image: .init("GeographyTopic"), topDecks: []),

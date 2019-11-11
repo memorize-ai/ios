@@ -9,7 +9,7 @@ final class CurrentStore: ObservableObject {
 	@Published var topics: [Topic]
 	@Published var topicsLoadingState = LoadingState()
 	
-	init(_ user: User, topics: [Topic] = []) {
+	init(user: User, topics: [Topic] = []) {
 		self.user = user
 		self.topics = topics
 	}

@@ -47,7 +47,7 @@ struct ChooseTopicsViewContent_Previews: PreviewProvider {
 			numberOfDecks: 0
 		)
 		return ChooseTopicsViewContent(currentUser: currentUser)
-			.environmentObject(CurrentStore(currentUser))
+			.environmentObject(CurrentStore(user: currentUser))
 	}
 }
 #endif
