@@ -3,9 +3,9 @@ import SwiftUI
 struct MainTabView: View {
 	enum Selection {
 		case home
-		case marketplace
+		case market
 		case decks
-		case you
+		case profile
 	}
 	
 	@EnvironmentObject var currentStore: CurrentStore
@@ -19,28 +19,44 @@ struct MainTabView: View {
 				TabView(selection: $tabViewSelection) {
 					HomeView(isSideBarShowing: $isSideBarShowing)
 						.tabItem {
-							Image(systemName: .exclamationmarkTriangle)
-							Text("Home")
+							MainTabViewItem(
+								title: "Home",
+								isSelected: tabViewSelection == .home,
+								selectedImage: .selectedHomeTabBarItem,
+								unselectedImage: .homeTabBarItem
+							)
 						}
 						.tag(Selection.home)
-					Text("Marketplace")
+					Text("Marketplace") // TODO: Change to a custom view
 						.tabItem {
-							Image(systemName: .exclamationmarkTriangle)
-							Text("Marketplace")
+							MainTabViewItem(
+								title: "Market",
+								isSelected: tabViewSelection == .market,
+								selectedImage: .selectedMarketTabBarItem,
+								unselectedImage: .marketTabBarItem
+							)
 						}
-						.tag(Selection.marketplace)
-					Text("Decks")
+						.tag(Selection.market)
+					Text("Decks") // TODO: Change to a custom view
 						.tabItem {
-							Image(systemName: .exclamationmarkTriangle)
-							Text("Decks")
+							MainTabViewItem(
+								title: "Decks",
+								isSelected: tabViewSelection == .decks,
+								selectedImage: .selectedDecksTabBarItem,
+								unselectedImage: .decksTabBarItem
+							)
 						}
 						.tag(Selection.decks)
-					Text("You")
+					Text("You") // TODO: Change to a custom view
 						.tabItem {
-							Image(systemName: .exclamationmarkTriangle)
-							Text("You")
+							MainTabViewItem(
+								title: "You",
+								isSelected: tabViewSelection == .profile,
+								selectedImage: .selectedProfileTabBarItem,
+								unselectedImage: .profileTabBarItem
+							)
 						}
-						.tag(Selection.you)
+						.tag(Selection.profile)
 				}
 			}
 			.removeNavigationBar()

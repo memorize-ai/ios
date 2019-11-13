@@ -57,6 +57,8 @@
 		4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */; };
 		4D402E92235E6FB80011C6B6 /* Muli-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */; };
 		4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E93235E72B80011C6B6 /* MuliFont.swift */; };
+		4D458A39237BEA8500A9776A /* MainTabViewItemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A38237BEA8500A9776A /* MainTabViewItemImage.swift */; };
+		4D458A3B237BEBCD00A9776A /* MainTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A3A237BEBCD00A9776A /* MainTabViewItem.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */; };
 		4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */; };
@@ -200,6 +202,8 @@
 		4D402E83235E6FB80011C6B6 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
 		4D402E84235E6FB80011C6B6 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-LightItalic.ttf"; sourceTree = "<group>"; };
 		4D402E93235E72B80011C6B6 /* MuliFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuliFont.swift; sourceTree = "<group>"; };
+		4D458A38237BEA8500A9776A /* MainTabViewItemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabViewItemImage.swift; path = memorize.ai/MainTabViewItemImage.swift; sourceTree = SOURCE_ROOT; };
+		4D458A3A237BEBCD00A9776A /* MainTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabViewItem.swift; path = "memorize.ai/Supplemental Views/MainTabViewItem.swift"; sourceTree = SOURCE_ROOT; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+PromiseKit.swift"; sourceTree = "<group>"; };
 		4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseStorage+PromiseKit.swift"; sourceTree = "<group>"; };
@@ -506,7 +510,6 @@
 				4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */,
 				4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */,
 				4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */,
-				4D16D99C2371DEA200FE8E5E /* MainTabView.swift */,
 				4DD34CD52362D90F0007E3E6 /* HomeView.swift */,
 			);
 			path = Views;
@@ -665,6 +668,16 @@
 			path = ChooseTopicsView;
 			sourceTree = "<group>";
 		};
+		4DDCC9A4237BE9DD00EFC857 /* MainTabView */ = {
+			isa = PBXGroup;
+			children = (
+				4D16D99C2371DEA200FE8E5E /* MainTabView.swift */,
+				4D458A3A237BEBCD00A9776A /* MainTabViewItem.swift */,
+				4D458A38237BEA8500A9776A /* MainTabViewItemImage.swift */,
+			);
+			path = MainTabView;
+			sourceTree = "<group>";
+		};
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +693,7 @@
 				4DD9CEF423691E6900EC138F /* ChooseTopicsView */,
 				4DD7AADB236A713100F12D39 /* RecommendedDecksView */,
 				4D16D9A02371F54800FE8E5E /* SideBar */,
+				4DDCC9A4237BE9DD00EFC857 /* MainTabView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -1019,6 +1033,7 @@
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
+				4D458A39237BEA8500A9776A /* MainTabViewItemImage.swift in Sources */,
 				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
 				4DE9722823701EE900616E42 /* Array.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
@@ -1055,6 +1070,7 @@
 				4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
+				4D458A3B237BEBCD00A9776A /* MainTabViewItem.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
 				4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */,
 				4DE9722C2370DC0800616E42 /* MinusMinus.swift in Sources */,
