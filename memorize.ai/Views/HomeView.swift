@@ -7,7 +7,7 @@ struct HomeView: View {
 		ZStack(alignment: .top) {
 			HomeViewTopGradient()
 				.edgesIgnoringSafeArea(.all)
-			VStack {
+			VStack(spacing: 20) {
 				HomeViewTopControls(
 					isSideBarShowing: $isSideBarShowing
 				)
@@ -15,6 +15,7 @@ struct HomeView: View {
 					HomeViewPerformanceCard()
 				}
 			}
+			.padding(.horizontal, 23)
 		}
 	}
 }

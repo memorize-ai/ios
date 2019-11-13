@@ -33,7 +33,6 @@ struct HomeViewTopControls: View {
 				}
 			}
 		}
-		.padding(.horizontal, 23)
 	}
 }
 
