@@ -10,6 +10,7 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
+		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
 		4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99C2371DEA200FE8E5E /* MainTabView.swift */; };
 		4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99E2371EDD200FE8E5E /* SideBar.swift */; };
 		4D16D9A22371F55600FE8E5E /* SideBarDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */; };
@@ -157,6 +158,7 @@
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
+		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		4D16D99C2371DEA200FE8E5E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4D16D99E2371EDD200FE8E5E /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRow.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 			children = (
 				4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */,
 				4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */,
+				4D0C0285237CB4940062BC14 /* HostingController.swift */,
 				4D703AF5233E728B004F1F65 /* Global.swift */,
 				4D703AEE233DFA45004F1F65 /* Constants.swift */,
 				4D1F9B29233EDEA200693571 /* Extensions */,
@@ -1034,6 +1037,7 @@
 				4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
+				4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */,
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
 				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
