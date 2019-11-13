@@ -8,7 +8,9 @@ struct HomeView: View {
 	var body: some View {
 		ZStack(alignment: .top) {
 			HomeViewTopGradient()
-			HomeViewTopControls()
+			HomeViewTopControls(
+				isSideBarShowing: $isSideBarShowing
+			)
 		}
 		.edgesIgnoringSafeArea(.all)
 	}
