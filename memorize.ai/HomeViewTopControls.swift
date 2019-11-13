@@ -34,7 +34,6 @@ struct HomeViewTopControls: View {
 			}
 		}
 		.padding(.horizontal, 23)
-		.padding(.top)
 	}
 }
 
