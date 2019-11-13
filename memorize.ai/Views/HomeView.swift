@@ -6,10 +6,11 @@ struct HomeView: View {
 	@Binding var isSideBarShowing: Bool
 	
 	var body: some View {
-		VStack {
+		ZStack(alignment: .top) {
 			HomeViewTopGradient()
-				.edgesIgnoringSafeArea(.all)
+			HomeViewTopControls()
 		}
+		.edgesIgnoringSafeArea(.all)
 	}
 }
 
