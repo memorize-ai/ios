@@ -6,14 +6,7 @@ struct HomeView: View {
 	@Binding var isSideBarShowing: Bool
 	
 	var body: some View {
-		VStack(spacing: 20) {
-			Button(action: {
-				withAnimation(SIDE_BAR_ANIMATION) {
-					self.isSideBarShowing = true
-				}
-			}) {
-				Text("Show side bar")
-			}
+		VStack {
 			Text("Hello, \(currentStore.user.name)")
 		}
 	}

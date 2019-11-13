@@ -1,12 +1,9 @@
 import SwiftUI
 
 struct HamburgerMenu: View {
-	@Binding var isSideBarShowing: Bool
-	
 	let color: Color
 	
-	init(_ isSideBarShowing: Binding<Bool>, color: Color = .white) {
-		_isSideBarShowing = isSideBarShowing
+	init(color: Color = .white) {
 		self.color = color
 	}
 	
@@ -32,7 +29,7 @@ struct HamburgerMenu_Previews: PreviewProvider {
 		ZStack {
 			Color.gray
 				.edgesIgnoringSafeArea(.all)
-			HamburgerMenu(.constant(true))
+			HamburgerMenu()
 		}
 	}
 }
