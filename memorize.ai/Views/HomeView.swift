@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct HomeView: View {
-	@EnvironmentObject var currentStore: CurrentStore
-	
 	@Binding var isSideBarShowing: Bool
 	
 	var body: some View {
