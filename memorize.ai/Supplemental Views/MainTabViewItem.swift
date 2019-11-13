@@ -6,8 +6,28 @@ struct MainTabViewItem: View {
 	let selectedImage: Image
 	let unselectedImage: Image
 	
+	var image: Image {
+		isSelected
+			? selectedImage
+			: unselectedImage
+	}
+	
+	var textColor: Color {
+		isSelected
+			? .darkGray
+			: .lightGrayText
+	}
+	
 	var body: some View {
-		Text("MainTabViewItem")
+		VStack {
+			image
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 26)
+			Text(title)
+				.font(.muli(.semiBold, size: 12))
+				.foregroundColor(textColor)
+		}
 	}
 }
 
