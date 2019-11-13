@@ -8,7 +8,9 @@ struct HomeView: View {
 	var body: some View {
 		VStack(spacing: 20) {
 			Button(action: {
-				self.isSideBarShowing = true
+				withAnimation(SIDE_BAR_ANIMATION) {
+					self.isSideBarShowing = true
+				}
 			}) {
 				Text("Show side bar")
 			}

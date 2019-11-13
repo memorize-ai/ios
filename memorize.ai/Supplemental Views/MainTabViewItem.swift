@@ -1,15 +1,19 @@
 import SwiftUI
 
-struct MainTabViewItem: View {
+struct MainTabViewItem<SelectedContent: View, UnselectedContent: View>: View {
 	let title: String
 	let isSelected: Bool
-	let selectedImage: Image
-	let unselectedImage: Image
+	let selectedContent: SelectedContent
+	let unselectedContent: UnselectedContent
 	
-	var image: Image {
-		isSelected
-			? selectedImage
-			: unselectedImage
+	var content: some View {
+		Group {
+			if isSelected {
+				selectedContent
+			} else {
+				unselectedContent
+			}
+		}
 	}
 	
 	var textColor: Color {
@@ -20,8 +24,7 @@ struct MainTabViewItem: View {
 	
 	var body: some View {
 		VStack {
-			image
-				.resizable()
+			content
 				.aspectRatio(contentMode: .fit)
 				.frame(width: 26)
 			Text(title)
@@ -38,14 +41,14 @@ struct MainTabViewItem_Previews: PreviewProvider {
 			MainTabViewItem(
 				title: "You",
 				isSelected: true,
-				selectedImage: .selectedProfileTabBarItem,
-				unselectedImage: .profileTabBarItem
+				selectedContent: Image.selectedProfileTabBarItem,
+				unselectedContent: Image.profileTabBarItem
 			)
 			MainTabViewItem(
 				title: "You",
 				isSelected: false,
-				selectedImage: .selectedProfileTabBarItem,
-				unselectedImage: .profileTabBarItem
+				selectedContent: Image.selectedProfileTabBarItem,
+				unselectedContent: Image.profileTabBarItem
 			)
 		}
 	}

@@ -17,15 +17,19 @@ struct SideBar<Content: View>: View {
 		self.content = content()
 	}
 	
+	func hide() {
+		withAnimation(SIDE_BAR_ANIMATION) {
+			isShowing = false
+		}
+	}
+	
 	var body: some View {
 		ZStack(alignment: .leading) {
 			ZStack {
 				content
 				Color.black
 					.opacity(isShowing ? 0.3954 : 0)
-					.onTapGesture {
-						self.isShowing = false
-					}
+					.onTapGesture(perform: hide)
 					.edgesIgnoringSafeArea(.all)
 			}
 			.offset(x: isShowing ? extendedWidth : 0)
@@ -60,7 +64,6 @@ struct SideBar<Content: View>: View {
 			.offset(x: isShowing ? 0 : -extendedWidth)
 			.edgesIgnoringSafeArea(.all)
 		}
-		.animation(SIDE_BAR_ANIMATION)
 	}
 }
 

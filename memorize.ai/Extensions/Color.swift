@@ -22,4 +22,5 @@ extension Color {
 	static let lightGrayText = Self("LightGrayText")
 	static let lightGrayBorder = Self("LightGrayBorder")
 	static let extraPurple = Self("ExtraPurple")
+	static let lightGrayLine = Self("LightGrayLine")
 }
