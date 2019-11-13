@@ -9,9 +9,14 @@ struct HomeView: View {
 		ZStack(alignment: .top) {
 			HomeViewTopGradient()
 				.edgesIgnoringSafeArea(.all)
-			HomeViewTopControls(
-				isSideBarShowing: $isSideBarShowing
-			)
+			VStack {
+				HomeViewTopControls(
+					isSideBarShowing: $isSideBarShowing
+				)
+				ScrollView {
+					HomeViewPerformanceCard()
+				}
+			}
 		}
 	}
 }
