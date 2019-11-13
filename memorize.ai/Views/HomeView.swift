@@ -7,7 +7,8 @@ struct HomeView: View {
 	
 	var body: some View {
 		VStack {
-			Text("Hello, \(currentStore.user.name)")
+			HomeViewTopGradient()
+				.edgesIgnoringSafeArea(.all)
 		}
 	}
 }
