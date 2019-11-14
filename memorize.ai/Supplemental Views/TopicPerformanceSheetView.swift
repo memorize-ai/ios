@@ -11,14 +11,24 @@ struct TopicPerformanceSheetView: View {
 		Button(action: {
 			self.presentationMode.wrappedValue.dismiss()
 		}) {
-			XButton(.purple, height: 20)
+			XButton(.purple, height: 16)
 		}
 	}
 	
 	var body: some View {
-		HStack {
-			Text(topic.name)
-			xButton
+		VStack {
+			ZStack {
+				Color.lightGrayBackground
+				HStack {
+					Text(topic.name)
+						.font(.muli(.bold, size: 20))
+						.foregroundColor(.darkGray)
+					Spacer()
+					xButton
+				}
+				.padding(.horizontal, 25)
+			}
+			.frame(height: 64)
 		}
 	}
 }
