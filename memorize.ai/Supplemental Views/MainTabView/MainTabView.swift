@@ -273,25 +273,25 @@ struct MainTabView_Previews: PreviewProvider {
 			.init(
 				id: "0",
 				name: "Math",
-				image: .init("GeometryTopic"),
+				image: .init("HTMLTopic"),
 				topDecks: []
 			),
 			.init(
 				id: "1",
 				name: "Geometry",
-				image: .init("GeometryTopic"),
+				image: .init("GeographyTopic"),
 				topDecks: []
 			),
 			.init(
 				id: "2",
 				name: "History",
-				image: .init("GeometryTopic"),
+				image: .init("HTMLTopic"),
 				topDecks: []
 			),
 			.init(
 				id: "3",
 				name: "Web Dev",
-				image: .init("GeometryTopic"),
+				image: .init("GeographyTopic"),
 				topDecks: []
 			)
 		]
