@@ -78,11 +78,11 @@ struct MainTabView: View {
 	
 	var body: some View {
 		NavigationView {
-			ZStack {
-				Color.lightGrayBackground
-					.edgesIgnoringSafeArea(.all)
-				SideBar(isShowing: $isSideBarShowing) {
-					VStack(spacing: 0) {
+			SideBar(isShowing: $isSideBarShowing) {
+				VStack(spacing: 0) {
+					ZStack {
+						Color.lightGrayBackground
+							.edgesIgnoringSafeArea([.horizontal, .top])
 						SwitchOver(tabViewSelection)
 							.case(.home) {
 								HomeView(isSideBarShowing: $isSideBarShowing)
@@ -95,21 +95,20 @@ struct MainTabView: View {
 							}
 							.case(.profile) {
 								Text("You") // TODO: Change to a custom view
-							}
-						Spacer()
-						Rectangle()
-							.fill(Color.lightGrayLine.opacity(0.5))
-							.frame(height: 1)
-						ZStack {
-							Color.lightGray
-								.edgesIgnoringSafeArea(.all)
-							tabBarItems
 						}
-						.frame(height: 72)
 					}
+					Rectangle()
+						.fill(Color.lightGrayLine.opacity(0.5))
+						.frame(height: 1)
+					ZStack {
+						Color.lightGray
+							.edgesIgnoringSafeArea(.all)
+						tabBarItems
+					}
+					.frame(height: 72)
 				}
-				.removeNavigationBar()
 			}
+			.removeNavigationBar()
 		}
 		.onAppear {
 			self.currentStore.loadUser()
