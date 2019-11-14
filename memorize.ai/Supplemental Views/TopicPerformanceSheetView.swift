@@ -16,19 +16,37 @@ struct TopicPerformanceSheetView: View {
 	}
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			ZStack {
 				Color.lightGrayBackground
-				HStack {
+				HStack(spacing: 25) {
 					Text(topic.name)
 						.font(.muli(.bold, size: 20))
 						.foregroundColor(.darkGray)
+						.lineLimit(1)
 					Spacer()
 					xButton
 				}
 				.padding(.horizontal, 25)
 			}
 			.frame(height: 64)
+			ScrollView {
+				VStack(spacing: 25) {
+					Rectangle()
+						.frame(height: 200) // TODO: Change to actual graph
+					Rectangle()
+						.foregroundColor(.lightGrayBorder)
+						.frame(height: 1)
+					Text("Decks")
+						.font(.muli(.bold, size: 18))
+						.foregroundColor(.darkGray)
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.padding(.top, -6)
+					// TODO: Add deck rows
+				}
+				.padding(.top, 25)
+			}
+			.padding(.horizontal, 25)
 		}
 	}
 }

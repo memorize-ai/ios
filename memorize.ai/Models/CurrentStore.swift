@@ -13,6 +13,8 @@ final class CurrentStore: ObservableObject {
 	@Published var interestsLoadingState = LoadingState()
 	@Published var topicLoadingState = LoadingState()
 	
+	@Published var selectedDeck: Deck?
+	
 	init(user: User, topics: [Topic] = []) {
 		self.user = user
 		self.topics = topics
