@@ -1,14 +1,24 @@
 import SwiftUI
 
 struct TopicPerformanceSheetView: View {
+	@Environment(\.presentationMode) var presentationMode
+	
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@ObservedObject var topic: Topic
 	
+	var xButton: some View {
+		Button(action: {
+			self.presentationMode.wrappedValue.dismiss()
+		}) {
+			XButton(.purple, height: 20)
+		}
+	}
+	
 	var body: some View {
 		HStack {
 			Text(topic.name)
-			XButton(.purple, height: 20)
+			xButton
 		}
 	}
 }
