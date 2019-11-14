@@ -38,15 +38,14 @@ struct ChooseTopicsViewContent: View {
 #if DEBUG
 struct ChooseTopicsViewContent_Previews: PreviewProvider {
 	static var previews: some View {
-		let currentUser = User(
+		ChooseTopicsViewContent(currentUser: .init(
 			id: "0",
 			name: "Ken Mueller",
 			email: "kenmueller0@gmail.com",
 			interests: [],
 			numberOfDecks: 0
-		)
-		return ChooseTopicsViewContent(currentUser: currentUser)
-			.environmentObject(CurrentStore(user: currentUser))
+		))
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif
