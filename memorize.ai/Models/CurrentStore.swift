@@ -10,11 +10,18 @@ final class CurrentStore: ObservableObject {
 	@Published var topics: [Topic]
 	@Published var topicsLoadingState = LoadingState()
 	
+	@Published var interestsLoadingState = LoadingState()
 	@Published var topicLoadingState = LoadingState()
 	
 	init(user: User, topics: [Topic] = []) {
 		self.user = user
 		self.topics = topics
+	}
+	
+	var interests: [Topic?] {
+		user.interests.map { topicId in
+			topics.first { $0.id == topicId }
+		}
 	}
 	
 	@discardableResult
@@ -41,6 +48,21 @@ final class CurrentStore: ObservableObject {
 			self.topicLoadingState.succeed()
 		}.catch { error in
 			self.topicLoadingState.fail(error: error)
+		}
+		return self
+	}
+	
+	@discardableResult
+	func loadInterests() -> Self {
+		guard interestsLoadingState.isNone else { return self }
+		interestsLoadingState.startLoading()
+		for topicId in user.interests {
+			Topic.fromId(topicId).done { topic in
+				self.topics.append(topic)
+				self.interestsLoadingState.succeed()
+			}.catch { error in
+				self.interestsLoadingState.fail(error: error)
+			}
 		}
 		return self
 	}

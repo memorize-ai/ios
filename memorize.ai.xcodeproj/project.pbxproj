@@ -13,6 +13,7 @@
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
 		4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */; };
 		4D0C028A237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */; };
+		4D0C028D237D3EB50062BC14 /* BasicTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C028C237D3EB50062BC14 /* BasicTopicCell.swift */; };
 		4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99C2371DEA200FE8E5E /* MainTabView.swift */; };
 		4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99E2371EDD200FE8E5E /* SideBar.swift */; };
 		4D16D9A22371F55600FE8E5E /* SideBarDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */; };
@@ -163,6 +164,7 @@
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPerformanceCard.swift; sourceTree = "<group>"; };
 		4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTopicPerformanceList.swift; sourceTree = "<group>"; };
+		4D0C028C237D3EB50062BC14 /* BasicTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicTopicCell.swift; path = memorize.ai/BasicTopicCell.swift; sourceTree = SOURCE_ROOT; };
 		4D16D99C2371DEA200FE8E5E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4D16D99E2371EDD200FE8E5E /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRow.swift; sourceTree = "<group>"; };
@@ -337,6 +339,14 @@
 				EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D0C028B237D3EA90062BC14 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				4D0C028C237D3EB50062BC14 /* BasicTopicCell.swift */,
+			);
+			path = Topic;
 			sourceTree = "<group>";
 		};
 		4D16D9A02371F54800FE8E5E /* SideBar */ = {
@@ -715,6 +725,7 @@
 			children = (
 				4D184D90236975B100A84998 /* Grid */,
 				4DFA0DC2236A8CBE0000CA7A /* Deck */,
+				4D0C028B237D3EA90062BC14 /* Topic */,
 				4D64BCC42367CFA700F6FD07 /* General */,
 				4D16D9A02371F54800FE8E5E /* SideBar */,
 				4D458A5E237C97A900A9776A /* HamburgerMenu */,
@@ -1071,6 +1082,7 @@
 				4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */,
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
+				4D0C028D237D3EB50062BC14 /* BasicTopicCell.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
 				4DE9722823701EE900616E42 /* Array.swift in Sources */,

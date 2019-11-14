@@ -6,8 +6,8 @@ struct HomeViewTopicPerformanceList: View {
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack {
-				ForEach(currentStore.user.interests, id: \.self) { topicId in
-					Text(topicId) // TODO: Replace with topic cell
+				ForEach(currentStore.interests, id: \.self) { topic in
+					Text(topic?.name ?? "Loading...") // TODO: Replace with topic cell
 				}
 			}
 		}
