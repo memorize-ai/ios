@@ -2,7 +2,9 @@ import SwiftUI
 
 struct HomeViewRecommendedDecksSection: View {
 	var body: some View {
-		Text("HomeViewRecommendedDecksSection")
+		Text("Recommended Decks")
+			.font(.muli(.bold, size: 17))
+			.foregroundColor(.darkGray)
 	}
 }
 
