@@ -20,6 +20,7 @@ struct HomeViewTopicPerformanceList: View {
 		}
 		.sheet(isPresented: $shouldShowTopicPerformance) {
 			TopicPerformanceSheetView(
+				currentUser: self.currentStore.user,
 				topic: self.selectedTopic
 			)
 			.environmentObject(self.currentStore)

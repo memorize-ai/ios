@@ -5,7 +5,14 @@ struct TopicPerformanceSheetView: View {
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
+	@ObservedObject var currentUser: User
 	@ObservedObject var topic: Topic
+	
+	var decks: [Deck] {
+		currentUser.decks.filter { deck in
+			deck.topics.contains(topic.id)
+		}
+	}
 	
 	var xButton: some View {
 		Button(action: {
@@ -32,29 +39,32 @@ struct TopicPerformanceSheetView: View {
 			.frame(height: 64)
 			ScrollView {
 				VStack(spacing: 25) {
-					Group {
-						Rectangle()
-							.frame(height: 200) // TODO: Change to actual graph
-						Rectangle()
-							.foregroundColor(.lightGrayBorder)
-							.frame(height: 1)
-						Text("Decks")
-							.font(.muli(.bold, size: 18))
-							.foregroundColor(.darkGray)
-							.frame(maxWidth: .infinity, alignment: .leading)
-							.padding(.top, -6)
-					}
-					.padding(.horizontal, 25)
-					VStack(spacing: 4) {
-						ForEach(currentStore.user.decks) { deck in
-							DeckRow(
-								deck: deck,
-								selectedDeck: self.$currentStore.selectedDeck,
-								unselectedBackgroundColor: .white
-							)
+					Rectangle() // TODO: Change to actual graph
+						.frame(height: 200)
+						.padding(.horizontal, 25)
+					if !decks.isEmpty {
+						Group {
+							Rectangle()
+								.foregroundColor(.lightGrayBorder)
+								.frame(height: 1)
+							Text("Decks")
+								.font(.muli(.bold, size: 18))
+								.foregroundColor(.darkGray)
+								.frame(maxWidth: .infinity, alignment: .leading)
+								.padding(.top, -6)
 						}
+						.padding(.horizontal, 25)
+						VStack(spacing: 4) {
+							ForEach(decks) { deck in
+								DeckRow(
+									deck: deck,
+									selectedDeck: self.$currentStore.selectedDeck,
+									unselectedBackgroundColor: .white
+								)
+							}
+						}
+						.padding(.top, -12)
 					}
-					.padding(.top, -12)
 				}
 				.padding(.top, 25)
 			}
@@ -65,12 +75,15 @@ struct TopicPerformanceSheetView: View {
 #if DEBUG
 struct TopicPerformanceSheetView_Previews: PreviewProvider {
 	static var previews: some View {
-		TopicPerformanceSheetView(topic: .init(
-			id: "0",
-			name: "Geography",
-			image: .init("GeographyTopic"),
-			topDecks: []
-		))
+		TopicPerformanceSheetView(
+			currentUser: PREVIEW_CURRENT_STORE.user,
+			topic: .init(
+				id: "0",
+				name: "Geography",
+				image: .init("GeographyTopic"),
+				topDecks: []
+			)
+		)
 		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
