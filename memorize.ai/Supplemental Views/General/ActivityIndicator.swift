@@ -29,7 +29,7 @@ struct ActivityIndicator: View {
 			path.addArc(
 				center: .init(x: radius, y: radius),
 				radius: radius,
-				startAngle: .degrees(0),
+				startAngle: .zero,
 				endAngle: .degrees(degrees),
 				clockwise: false
 			)
