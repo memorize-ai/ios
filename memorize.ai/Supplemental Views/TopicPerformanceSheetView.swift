@@ -44,9 +44,9 @@ struct TopicPerformanceSheetView: View {
 						.padding(.top, -6)
 					// TODO: Add deck rows
 				}
+				.padding(.horizontal, 25)
 				.padding(.top, 25)
 			}
-			.padding(.horizontal, 25)
 		}
 	}
 }
