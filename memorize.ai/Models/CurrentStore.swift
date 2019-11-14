@@ -35,6 +35,7 @@ final class CurrentStore: ObservableObject {
 			}
 			self.user.updateFromSnapshot(snapshot)
 			self.userLoadingState.succeed()
+			self.loadInterests()
 		}
 		return self
 	}
@@ -53,12 +54,12 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadInterests() -> Self {
+	func loadInterests(loadImages: Bool = true) -> Self {
 		guard interestsLoadingState.isNone else { return self }
 		interestsLoadingState.startLoading()
-		for topicId in user.interests {
+		for topicId in user.interests where !(topics.contains { $0.id == topicId }) {
 			Topic.fromId(topicId).done { topic in
-				self.topics.append(topic)
+				self.topics.append(loadImages ? topic.loadImage() : topic)
 				self.interestsLoadingState.succeed()
 			}.catch { error in
 				self.interestsLoadingState.fail(error: error)

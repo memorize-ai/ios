@@ -63,7 +63,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
 		email = snapshot.get("email") as? String ?? email
-		interests = snapshot.get("interests") as? [String] ?? interests
+		interests = snapshot.get("topics") as? [String] ?? interests
 		numberOfDecks = snapshot.get("deckCount") as? Int ?? numberOfDecks
 		return self
 	}

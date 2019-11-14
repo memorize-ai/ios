@@ -112,7 +112,6 @@ struct MainTabView: View {
 		}
 		.onAppear {
 			self.currentStore.loadUser()
-			self.currentStore.loadInterests()
 			self.currentStore.user.loadDecks()
 		}
 	}
