@@ -13,6 +13,7 @@ struct HomeView: View {
 				)
 				ScrollView {
 					HomeViewPerformanceCard()
+					HomeViewRecommendedDecksSection()
 				}
 			}
 			.padding(.horizontal, 23)
