@@ -5,23 +5,44 @@ struct HomeViewTopicPerformanceList: View {
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
+	@State var shouldShowTopicPerformance = false
+	@State var selectedTopic: Topic!
+	
+	func topicCell(forTopic topic: Topic) -> some View {
+		Button(action: {
+			self.shouldShowTopicPerformance = true
+			self.selectedTopic = topic
+		}) {
+			BasicTopicCell(
+				topic: topic,
+				dimension: Self.cellDimension
+			)
+		}
+		.sheet(isPresented: $shouldShowTopicPerformance) {
+			TopicPerformanceSheetView(
+				topic: self.selectedTopic
+			)
+		}
+	}
+	
+	var interests: some View {
+		ForEach(currentStore.interests, id: \.self) { topic in
+			Group {
+				if topic == nil {
+					LoadingTopicCell(
+						dimension: Self.cellDimension
+					)
+				} else {
+					self.topicCell(forTopic: topic!)
+				}
+			}
+		}
+	}
+	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack {
-				ForEach(currentStore.interests, id: \.self) { topic in
-					Group {
-						if topic == nil {
-							LoadingTopicCell(
-								dimension: Self.cellDimension
-							)
-						} else {
-							BasicTopicCell(
-								topic: topic!,
-								dimension: Self.cellDimension
-							)
-						}
-					}
-				}
+				interests
 			}
 			.padding(.leading)
 		}
