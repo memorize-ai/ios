@@ -12,6 +12,7 @@
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
 		4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */; };
+		4D0C028A237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */; };
 		4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99C2371DEA200FE8E5E /* MainTabView.swift */; };
 		4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99E2371EDD200FE8E5E /* SideBar.swift */; };
 		4D16D9A22371F55600FE8E5E /* SideBarDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */; };
@@ -161,6 +162,7 @@
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPerformanceCard.swift; sourceTree = "<group>"; };
+		4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTopicPerformanceList.swift; sourceTree = "<group>"; };
 		4D16D99C2371DEA200FE8E5E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4D16D99E2371EDD200FE8E5E /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		4D16D9A12371F55600FE8E5E /* SideBarDeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRow.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */,
 				4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */,
 				4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */,
+				4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -1028,6 +1031,7 @@
 				4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */,
 				4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */,
 				4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */,
+				4D0C028A237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift in Sources */,
 				4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */,
 				4D3B949E2372BAEF002F441E /* SideBarSectionDivider.swift in Sources */,
 				4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */,

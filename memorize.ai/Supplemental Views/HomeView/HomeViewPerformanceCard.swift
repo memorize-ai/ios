@@ -1,21 +1,33 @@
 import SwiftUI
 
 struct HomeViewPerformanceCard: View {
-	@EnvironmentObject var currentStore: CurrentStore
-	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
-			borderColor: .lightGray,
-			borderWidth: 1,
+//			borderColor: .lightGray,
+//			borderWidth: 1,
 			cornerRadius: 8
 		) {
 			VStack {
-				Text("Overall performance")
-					.font(.muli(.bold, size: 17))
-					.foregroundColor(.darkGray)
-					.align(to: .leading)
-					.padding(.horizontal)
+				Group {
+					Text("Overall performance")
+						.font(.muli(.bold, size: 17))
+						.foregroundColor(.darkGray)
+						.align(to: .leading)
+					Rectangle()
+						.frame(height: 200) // TODO: Change to actual graph
+					Rectangle()
+						.foregroundColor(.lightGrayBorder)
+						.frame(height: 1)
+						.padding(.top, 12)
+						.padding(.bottom, 8)
+					Text("Performance for each interest")
+						.font(.muli(.bold, size: 14))
+						.foregroundColor(.darkGray)
+						.align(to: .leading)
+				}
+				.padding(.horizontal)
+				HomeViewTopicPerformanceList()
 			}
 			.padding(.vertical)
 		}
