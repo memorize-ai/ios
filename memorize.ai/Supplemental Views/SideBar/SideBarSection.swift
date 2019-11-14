@@ -12,9 +12,10 @@ struct SideBarSection: View {
 				.padding(.leading)
 			VStack(spacing: 4) {
 				ForEach(decks) { deck in
-					SideBarDeckRow(
+					DeckRow(
 						deck: deck,
-						selectedDeck: self.$selectedDeck
+						selectedDeck: self.$selectedDeck,
+						unselectedBackgroundColor: .lightGrayBackground
 					)
 				}
 			}

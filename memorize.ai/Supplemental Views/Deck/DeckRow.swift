@@ -1,9 +1,11 @@
 import SwiftUI
 
-struct SideBarDeckRow: View {
+struct DeckRow: View {
 	@ObservedObject var deck: Deck
 	
 	@Binding var selectedDeck: Deck?
+	
+	let unselectedBackgroundColor: Color
 	
 	var isSelected: Bool {
 		guard let selectedDeck = selectedDeck else { return false }
@@ -17,7 +19,7 @@ struct SideBarDeckRow: View {
 	var backgroundColor: Color {
 		isSelected
 			? .darkBlue
-			: .lightGrayBackground
+			: unselectedBackgroundColor
 	}
 	
 	var body: some View {
@@ -65,9 +67,9 @@ struct SideBarDeckRow: View {
 }
 
 #if DEBUG
-struct SideBarDeckRow_Previews: PreviewProvider {
+struct DeckRow_Previews: PreviewProvider {
 	static var previews: some View {
-		SideBarDeckRow(
+		DeckRow(
 			deck: .init(
 				id: "0",
 				topics: [],
@@ -83,7 +85,8 @@ struct SideBarDeckRow_Previews: PreviewProvider {
 				dateCreated: .init(),
 				dateLastUpdated: .init()
 			),
-			selectedDeck: .constant(nil)
+			selectedDeck: .constant(nil),
+			unselectedBackgroundColor: .white
 		)
 	}
 }

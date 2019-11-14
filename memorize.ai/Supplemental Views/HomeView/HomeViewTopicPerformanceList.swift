@@ -22,6 +22,7 @@ struct HomeViewTopicPerformanceList: View {
 			TopicPerformanceSheetView(
 				topic: self.selectedTopic
 			)
+			.environmentObject(self.currentStore)
 		}
 	}
 	

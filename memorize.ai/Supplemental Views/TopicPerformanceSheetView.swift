@@ -32,19 +32,30 @@ struct TopicPerformanceSheetView: View {
 			.frame(height: 64)
 			ScrollView {
 				VStack(spacing: 25) {
-					Rectangle()
-						.frame(height: 200) // TODO: Change to actual graph
-					Rectangle()
-						.foregroundColor(.lightGrayBorder)
-						.frame(height: 1)
-					Text("Decks")
-						.font(.muli(.bold, size: 18))
-						.foregroundColor(.darkGray)
-						.frame(maxWidth: .infinity, alignment: .leading)
-						.padding(.top, -6)
-					// TODO: Add deck rows
+					Group {
+						Rectangle()
+							.frame(height: 200) // TODO: Change to actual graph
+						Rectangle()
+							.foregroundColor(.lightGrayBorder)
+							.frame(height: 1)
+						Text("Decks")
+							.font(.muli(.bold, size: 18))
+							.foregroundColor(.darkGray)
+							.frame(maxWidth: .infinity, alignment: .leading)
+							.padding(.top, -6)
+					}
+					.padding(.horizontal, 25)
+					VStack(spacing: 4) {
+						ForEach(currentStore.user.decks) { deck in
+							DeckRow(
+								deck: deck,
+								selectedDeck: self.$currentStore.selectedDeck,
+								unselectedBackgroundColor: .white
+							)
+						}
+					}
+					.padding(.top, -12)
 				}
-				.padding(.horizontal, 25)
 				.padding(.top, 25)
 			}
 		}
