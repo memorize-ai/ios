@@ -2,7 +2,8 @@ import SwiftUI
 
 extension Image {
 	static let transparentWhiteLeftArrowHead = Self("TransparentWhiteLeftArrowHead")
-	static let xButton = Self("XButton")
+	static let transparentWhiteXButton = Self("TransparentWhiteXButton")
+	static let purpleXButton = Self("PurpleXButton")
 	static let grayDownloadIcon = Self("GrayDownloadIcon")
 	static let deckStar = Self("DeckStar")
 	static let grayMagnifyingGlass = Self("GrayMagnifyingGlass")

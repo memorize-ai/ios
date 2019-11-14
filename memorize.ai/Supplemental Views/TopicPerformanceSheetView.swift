@@ -1,10 +1,15 @@
 import SwiftUI
 
 struct TopicPerformanceSheetView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	@ObservedObject var topic: Topic
 	
 	var body: some View {
-		Text(topic.name)
+		HStack {
+			Text(topic.name)
+			XButton(.purple, height: 20)
+		}
 	}
 }
 
@@ -17,6 +22,7 @@ struct TopicPerformanceSheetView_Previews: PreviewProvider {
 			image: .init("GeographyTopic"),
 			topDecks: []
 		))
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

@@ -61,7 +61,7 @@ struct PostSignUpView_Previews: PreviewProvider {
 	static var previews: some View {
 		PostSignUpView(
 			title: "Choose your interests",
-			leadingButton: XButton(height: 20),
+			leadingButton: XButton(.transparentWhite, height: 20),
 			leadingButtonIsBackButton: false,
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: EmptyView(),
