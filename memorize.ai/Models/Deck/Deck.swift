@@ -78,7 +78,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadImage() -> Self {
-		guard hasImage else { return self }
+		guard imageLoadingState.isNone && hasImage else { return self }
 		imageLoadingState.startLoading()
 		storage.child("decks/\(id)").getData().done { data in
 			guard let image = Image(data: data) else {
@@ -95,6 +95,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func loadUserData(user: User) -> Self {
+		guard userDataLoadingState.isNone else { return self }
 		userDataLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot else {
@@ -177,11 +178,16 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				} else {
 					didFulfill = true
 					deck = .init(snapshot: snapshot)
-					cache[id] = deck!
-					seal.fulfill(deck!)
+					seal.fulfill(deck!.cache())
 				}
 			}
 		}
+	}
+	
+	@discardableResult
+	func cache() -> Self {
+		Self.cache[id] = self
+		return self
 	}
 	
 	static func == (lhs: Deck, rhs: Deck) -> Bool {

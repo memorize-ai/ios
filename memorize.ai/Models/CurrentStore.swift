@@ -10,6 +10,8 @@ final class CurrentStore: ObservableObject {
 	@Published var topics: [Topic]
 	@Published var topicsLoadingState = LoadingState()
 	
+	@Published var topicLoadingState = LoadingState()
+	
 	init(user: User, topics: [Topic] = []) {
 		self.user = user
 		self.topics = topics
@@ -21,9 +23,7 @@ final class CurrentStore: ObservableObject {
 		userLoadingState.startLoading()
 		firestore.document("users/\(user.id)").addSnapshotListener { snapshot, error in
 			guard error == nil, let snapshot = snapshot else {
-				self.userLoadingState.fail(
-					error: error ?? UNKNOWN_ERROR
-				)
+				self.userLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 				return
 			}
 			self.user.updateFromSnapshot(snapshot)
@@ -33,7 +33,20 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadTopics() -> Self {
+	func loadTopic(_ topicId: String, loadImage: Bool = true) -> Self {
+		if (topics.contains { $0.id == topicId }) { return self }
+		topicLoadingState.startLoading()
+		Topic.fromId(topicId).done { topic in
+			self.topics.append(loadImage ? topic.loadImage() : topic)
+			self.topicLoadingState.succeed()
+		}.catch { error in
+			self.topicLoadingState.fail(error: error)
+		}
+		return self
+	}
+	
+	@discardableResult
+	func loadAllTopics() -> Self {
 		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
@@ -46,12 +59,14 @@ final class CurrentStore: ObservableObject {
 				let topicId = document.documentID
 				switch change.type {
 				case .added:
+					if (self.topics.contains { $0.id == topicId }) { continue }
 					self.topics.append(Topic(
 						id: topicId,
 						name: document.get("name") as? String ?? "Unknown",
 						topDecks: document.get("topDecks") as? [String] ?? []
-					).loadImage())
+					).loadImage().cache())
 				case .modified:
+					if (self.topics.contains { $0.id == topicId }) { continue }
 					self.topics.first { $0.id == topicId }?
 						.updateFromSnapshot(document)
 				case .removed:

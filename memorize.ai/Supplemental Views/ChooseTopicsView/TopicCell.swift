@@ -15,7 +15,7 @@ struct TopicCell: View {
 					Group {
 						if topic.image == nil {
 							Color.lightGrayBackground
-							if topic.loadingState.isLoading {
+							if topic.imageLoadingState.isLoading {
 								ActivityIndicator(
 									color: Color.black.opacity(0.2),
 									thickness: 1.5
@@ -69,7 +69,7 @@ struct TopicCell_Previews: PreviewProvider {
 			image: .init("GeographyTopic"),
 			topDecks: []
 		)
-		failedTopic.loadingState.fail(message: "Self-invoked")
+		failedTopic.imageLoadingState.fail(message: "Self-invoked")
 		return VStack(spacing: 20) {
 			TopicCell(
 				topic: failedTopic,
