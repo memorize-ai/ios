@@ -3,13 +3,27 @@ import SwiftUI
 struct FloatingReviewButton: View {
 	@ObservedObject var user: User
 	
+	var color: Color {
+		let count = user.numberOfDueCards
+		if count < 10 { return .neonGreen }
+		if count < 100 { return .neonOrange }
+		return .neonRed
+	}
+	
+	var numberOfDueCardsText: some View {
+		Text(user.numberOfDueCards.formatted)
+			.font(.muli(.regular, size: 12))
+			.foregroundColor(color)
+			.minimumScaleFactor(0.25)
+	}
+	
 	var body: some View {
 		Button(action: {
 			// TODO: Review all cards
 		}) {
 			ZStack {
 				Circle()
-					.foregroundColor(.neonGreen)
+					.foregroundColor(color)
 					.overlay(
 						Circle()
 							.stroke(Color.lightGray)
@@ -20,7 +34,10 @@ struct FloatingReviewButton: View {
 						y: 5
 					)
 					.frame(width: 64, height: 64)
-				Text(String(user.numberOfDueCards)) // TODO: Add styling
+				DeckIcon {
+					self.numberOfDueCardsText
+				}
+				.scaleEffect(1.2)
 			}
 		}
 	}
