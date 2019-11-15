@@ -63,18 +63,16 @@ struct TopicPerformanceSheetView: View {
 						}
 					}
 					.padding(.horizontal, 25)
-					if !decks.isEmpty {
-						VStack(spacing: 4) {
-							ForEach(decks) { deck in
-								DeckRow(
-									deck: deck,
-									selectedDeck: self.$currentStore.selectedDeck,
-									unselectedBackgroundColor: .white
-								)
-							}
+					VStack(spacing: 4) {
+						ForEach(decks) { deck in
+							DeckRow(
+								deck: deck,
+								selectedDeck: self.$currentStore.selectedDeck,
+								unselectedBackgroundColor: .white
+							)
 						}
-						.padding(.top, -12)
 					}
+					.padding(.top, -12)
 				}
 				.padding(.top, 25)
 			}
