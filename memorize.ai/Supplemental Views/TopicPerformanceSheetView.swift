@@ -39,21 +39,31 @@ struct TopicPerformanceSheetView: View {
 			.frame(height: 64)
 			ScrollView {
 				VStack(spacing: 25) {
-					Rectangle() // TODO: Change to actual graph
-						.frame(height: 200)
-						.padding(.horizontal, 25)
-					if !decks.isEmpty {
-						Group {
-							Rectangle()
-								.foregroundColor(.lightGrayBorder)
-								.frame(height: 1)
+					Group {
+						Rectangle()
+							.frame(height: 200) // TODO: Change to actual graph
+						Rectangle()
+							.foregroundColor(.lightGrayBorder)
+							.frame(height: 1)
+						HStack {
 							Text("Decks")
 								.font(.muli(.bold, size: 18))
 								.foregroundColor(.darkGray)
-								.frame(maxWidth: .infinity, alignment: .leading)
 								.padding(.top, -6)
+							Spacer()
+							Button(action: {
+								// TODO: Go to search view with selected topic
+							}) {
+								HStack {
+									Image(systemName: .plusCircle)
+									Text("Add")
+										.font(.muli(.semiBold, size: 15))
+								}
+							}
 						}
-						.padding(.horizontal, 25)
+					}
+					.padding(.horizontal, 25)
+					if !decks.isEmpty {
 						VStack(spacing: 4) {
 							ForEach(decks) { deck in
 								DeckRow(
