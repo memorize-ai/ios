@@ -54,6 +54,7 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 								.resizable()
 								.renderingMode(.original)
 								.aspectRatio(contentMode: .fill)
+								.frame(height: width * Self.imageAspectRatio)
 						}
 					} else {
 						ZStack {
