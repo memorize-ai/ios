@@ -4,6 +4,8 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 	static let defaultWidth: CGFloat = 200
 	static let imageAspectRatio: CGFloat = 3 / 5
 	
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	@ObservedObject var deck: Deck
 	
 	let width: CGFloat
@@ -117,6 +119,10 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 			}
 			.frame(width: width)
 		}
+		.onTapGesture {
+			self.currentStore.selectedDeck = self.deck
+			// TODO: Go to decks view with this deck selected
+		}
 	}
 }
 
@@ -127,9 +133,11 @@ struct OwnedDeckCellWithPerformanceGraph_Previews: PreviewProvider {
 			OwnedDeckCellWithPerformanceGraph(
 				deck: PREVIEW_CURRENT_STORE.user.decks[0]
 			)
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			OwnedDeckCellWithPerformanceGraph(
 				deck: PREVIEW_CURRENT_STORE.user.decks[1]
 			)
+			.environmentObject(PREVIEW_CURRENT_STORE)
 		}
 	}
 }
