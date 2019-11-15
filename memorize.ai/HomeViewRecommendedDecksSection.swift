@@ -10,6 +10,7 @@ struct HomeViewRecommendedDecksSection: View {
 					.font(.muli(.bold, size: 20))
 					.foregroundColor(.darkGray)
 					.align(to: .leading)
+					.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
 						ForEach(currentStore.recommendedDecks) { deck in
@@ -20,6 +21,7 @@ struct HomeViewRecommendedDecksSection: View {
 							)
 						}
 					}
+					.padding(.horizontal, 23)
 				}
 			}
 		}

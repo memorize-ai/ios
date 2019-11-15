@@ -11,13 +11,14 @@ struct HomeView: View {
 				HomeViewTopControls(
 					isSideBarShowing: $isSideBarShowing
 				)
+				.padding(.horizontal, 23)
 				ScrollView {
 					HomeViewPerformanceCard()
+						.padding(.horizontal, 23)
 					HomeViewRecommendedDecksSection()
 						.padding(.top)
 				}
 			}
-			.padding(.horizontal, 23)
 		}
 	}
 }
