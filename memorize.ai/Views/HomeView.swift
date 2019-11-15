@@ -22,7 +22,7 @@ struct HomeView: View {
 					HomeViewMyDecksSection(
 						currentUser: currentStore.user
 					)
-					.padding(.top)
+					.padding(.top, 5)
 				}
 			}
 		}
