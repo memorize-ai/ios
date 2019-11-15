@@ -9,11 +9,17 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 	@ObservedObject var deck: Deck
 	
 	let width: CGFloat
+	let imageBackgroundColor: Color
 	let noCardsDueEmoji: String
 	
-	init(deck: Deck, width: CGFloat = Self.defaultWidth) {
+	init(
+		deck: Deck,
+		width: CGFloat = Self.defaultWidth,
+		imageBackgroundColor: Color = .lightGrayBackground
+	) {
 		self.deck = deck
 		self.width = width
+		self.imageBackgroundColor = imageBackgroundColor
 		noCardsDueEmoji = [
 			"😃",
 			"😇",
@@ -40,7 +46,7 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 				Group {
 					if deck.imageLoadingState.didFail {
 						ZStack {
-							Color.lightGrayBackground
+							imageBackgroundColor
 							Image(systemName: .exclamationmarkTriangle)
 								.foregroundColor(.gray)
 								.scaleEffect(1.5)
@@ -48,7 +54,7 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 					} else if deck.hasImage {
 						if deck.image == nil {
 							ZStack {
-								Color.lightGrayBackground
+								imageBackgroundColor
 								ActivityIndicator(color: .gray)
 							}
 						} else {
@@ -60,7 +66,7 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 						}
 					} else {
 						ZStack {
-							Color.lightGrayBackground
+							imageBackgroundColor
 							Image(systemName: .questionmark)
 								.foregroundColor(.gray)
 								.scaleEffect(1.5)

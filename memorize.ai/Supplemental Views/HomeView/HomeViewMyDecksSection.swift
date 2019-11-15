@@ -12,15 +12,17 @@ struct HomeViewMyDecksSection: View {
 					.align(to: .leading)
 					.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack {
+					HStack(spacing: 8) {
 						ForEach(currentUser.decks) { deck in
 							OwnedDeckCellWithPerformanceGraph(
-								deck: deck
+								deck: deck,
+								imageBackgroundColor: .white
 							)
 						}
 					}
 					.padding(.horizontal, 23)
 				}
+				.padding(.bottom)
 			}
 		}
 	}
