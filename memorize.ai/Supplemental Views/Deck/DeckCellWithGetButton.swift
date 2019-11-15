@@ -15,7 +15,7 @@ struct DeckCellWithGetButton: View {
 	}
 	
 	var buttonBackground: Color {
-		hasDeck ? .purple : .darkBlue
+		hasDeck ? .purple : .extraPurple
 	}
 	
 	func buttonAction() {
@@ -31,7 +31,7 @@ struct DeckCellWithGetButton: View {
 			Button(action: buttonAction) {
 				CustomRectangle(
 					background: buttonBackground,
-					cornerRadius: 8
+					cornerRadius: 16.5
 				) {
 					Group {
 						if isGetLoading {
