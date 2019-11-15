@@ -58,7 +58,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			"2",
 			"3"
 		],
-		numberOfDecks: 4,
+		numberOfDecks: 7,
 		decks: [
 			.init(
 				id: "0",
