@@ -4,7 +4,23 @@ struct HomeViewMyDecksSection: View {
 	@ObservedObject var currentUser: User
 	
 	var body: some View {
-		Text("My decks")
+		VStack {
+			if !currentUser.decks.isEmpty {
+				Text("My decks")
+					.font(.muli(.bold, size: 20))
+					.foregroundColor(.darkGray)
+					.align(to: .leading)
+					.padding(.horizontal, 23)
+				ScrollView(.horizontal, showsIndicators: false) {
+					HStack {
+						ForEach(currentUser.decks) { deck in
+							Text(deck.name) // TODO: Change to cell
+						}
+					}
+					.padding(.horizontal, 23)
+				}
+			}
+		}
 	}
 }
 

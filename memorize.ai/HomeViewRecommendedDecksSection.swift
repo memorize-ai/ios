@@ -6,7 +6,7 @@ struct HomeViewRecommendedDecksSection: View {
 	var body: some View {
 		VStack {
 			if !currentStore.recommendedDecks.isEmpty {
-				Text("Recommended Decks")
+				Text("Recommended decks")
 					.font(.muli(.bold, size: 20))
 					.foregroundColor(.darkGray)
 					.align(to: .leading)
