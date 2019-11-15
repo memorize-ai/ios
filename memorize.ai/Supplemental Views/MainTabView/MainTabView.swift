@@ -48,10 +48,14 @@ struct MainTabView: View {
 			MainTabViewItem(
 				title: "Decks",
 				isSelected: tabViewSelection == .decks,
-				selectedContent: Image.selectedDecksTabBarItem
-					.resizable(),
-				unselectedContent: Image.decksTabBarItem
-					.resizable()
+				selectedContent: DeckIcon<EmptyView>(
+					color: .extraPurple
+				)
+				.offset(y: 2),
+				unselectedContent: DeckIcon<EmptyView>(
+					color: .unselectedTabBarItem
+				)
+				.offset(y: 2)
 			)
 			.onTapGesture {
 				self.tabViewSelection = .decks

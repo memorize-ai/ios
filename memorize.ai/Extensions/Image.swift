@@ -12,8 +12,6 @@ extension Image {
 	static let selectedHomeTabBarItem = Self("SelectedHomeTabBarItem")
 	static let marketTabBarItem = Self("MarketTabBarItem")
 	static let selectedMarketTabBarItem = Self("SelectedMarketTabBarItem")
-	static let decksTabBarItem = Self("DecksTabBarItem")
-	static let selectedDecksTabBarItem = Self("SelectedDecksTabBarItem")
 	static let profileTabBarItem = Self("ProfileTabBarItem")
 	static let selectedProfileTabBarItem = Self("SelectedProfileTabBarItem")
 }

@@ -15,17 +15,16 @@ struct DeckIcon<Content: View>: View {
 	var rectangle: some View {
 		RoundedRectangle(cornerRadius: 4)
 			.foregroundColor(color)
+			.frame(width: 26, height: 18)
 	}
 	
 	var body: some View {
 		ZStack(alignment: .topLeading) {
 			rectangle
-				.frame(width: 28, height: 20)
 				.padding([.leading, .top], 4.5)
 				.opacity(0.5)
 			ZStack {
 				rectangle
-					.frame(width: 28, height: 20)
 				content
 			}
 		}
