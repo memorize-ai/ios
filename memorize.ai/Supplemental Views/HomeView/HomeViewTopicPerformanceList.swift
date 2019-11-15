@@ -46,7 +46,7 @@ struct HomeViewTopicPerformanceList: View {
 			HStack {
 				interests
 			}
-			.padding(.leading)
+			.padding(.horizontal)
 		}
 	}
 }
