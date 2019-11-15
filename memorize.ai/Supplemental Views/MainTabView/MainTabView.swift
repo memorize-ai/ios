@@ -110,10 +110,6 @@ struct MainTabView: View {
 							.align(to: .bottomTrailing)
 							.padding([.trailing, .bottom], 16)
 							.offset(x: floatingReviewButtonXOffset)
-							.animation(.interpolatingSpring(
-								stiffness: 0.5,
-								damping: 0.5
-							))
 					}
 					Rectangle()
 						.fill(Color.lightGrayLine.opacity(0.5))
