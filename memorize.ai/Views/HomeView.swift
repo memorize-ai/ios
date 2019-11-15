@@ -17,6 +17,8 @@ struct HomeView: View {
 						.padding(.horizontal, 23)
 					HomeViewRecommendedDecksSection()
 						.padding(.top)
+					HomeViewMyDecksSection()
+						.padding(.top)
 				}
 			}
 		}
