@@ -26,10 +26,14 @@ struct MainTabView: View {
 			MainTabViewItem(
 				title: "Home",
 				isSelected: tabViewSelection == .home,
-				selectedContent: Image.selectedHomeTabBarItem
-					.resizable(),
-				unselectedContent: Image.homeTabBarItem
-					.resizable()
+				selectedContent: {
+					Image.selectedHomeTabBarItem
+						.resizable()
+				},
+				unselectedContent: {
+					Image.homeTabBarItem
+						.resizable()
+				}
 			)
 			.onTapGesture {
 				self.tabViewSelection = .home
@@ -38,14 +42,18 @@ struct MainTabView: View {
 			MainTabViewItem(
 				title: "Market",
 				isSelected: tabViewSelection == .market,
-				selectedContent: Image.selectedMarketTabBarItem
-					.resizable()
-					.scaleEffect(0.9)
-					.offset(y: 4),
-				unselectedContent: Image.marketTabBarItem
-					.resizable()
-					.scaleEffect(0.9)
-					.offset(y: 4)
+				selectedContent: {
+					Image.selectedMarketTabBarItem
+						.resizable()
+						.scaleEffect(0.9)
+						.offset(y: 4)
+				},
+				unselectedContent: {
+					Image.marketTabBarItem
+						.resizable()
+						.scaleEffect(0.9)
+						.offset(y: 4)
+				}
 			)
 			.onTapGesture {
 				self.tabViewSelection = .market
@@ -54,14 +62,18 @@ struct MainTabView: View {
 			MainTabViewItem(
 				title: "Decks",
 				isSelected: tabViewSelection == .decks,
-				selectedContent: DeckIcon<EmptyView>(
-					color: .extraPurple
-				)
-				.offset(y: 2),
-				unselectedContent: DeckIcon<EmptyView>(
-					color: .unselectedTabBarItem
-				)
-				.offset(y: 2)
+				selectedContent: {
+					DeckIcon<EmptyView>(
+						color: .extraPurple
+					)
+					.offset(y: 2)
+				},
+				unselectedContent: {
+					DeckIcon<EmptyView>(
+						color: .unselectedTabBarItem
+					)
+					.offset(y: 2)
+				}
 			)
 			.onTapGesture {
 				self.tabViewSelection = .decks
@@ -70,14 +82,18 @@ struct MainTabView: View {
 			MainTabViewItem(
 				title: "You",
 				isSelected: tabViewSelection == .profile,
-				selectedContent: Image.selectedProfileTabBarItem
-					.resizable()
-					.scaleEffect(0.9)
-					.offset(y: 3),
-				unselectedContent: Image.profileTabBarItem
-					.resizable()
-					.scaleEffect(0.9)
-					.offset(y: 3)
+				selectedContent: {
+					Image.selectedProfileTabBarItem
+						.resizable()
+						.scaleEffect(0.9)
+						.offset(y: 3)
+				},
+				unselectedContent: {
+					Image.profileTabBarItem
+						.resizable()
+						.scaleEffect(0.9)
+						.offset(y: 3)
+				}
 			)
 			.onTapGesture {
 				self.tabViewSelection = .profile

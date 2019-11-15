@@ -6,6 +6,18 @@ struct MainTabViewItem<SelectedContent: View, UnselectedContent: View>: View {
 	let selectedContent: SelectedContent
 	let unselectedContent: UnselectedContent
 	
+	init(
+		title: String,
+		isSelected: Bool,
+		selectedContent: () -> SelectedContent,
+		unselectedContent: () -> UnselectedContent
+	) {
+		self.title = title
+		self.isSelected = isSelected
+		self.selectedContent = selectedContent()
+		self.unselectedContent = unselectedContent()
+	}
+	
 	var content: some View {
 		Group {
 			if isSelected {
@@ -41,14 +53,22 @@ struct MainTabViewItem_Previews: PreviewProvider {
 			MainTabViewItem(
 				title: "You",
 				isSelected: true,
-				selectedContent: Image.selectedProfileTabBarItem,
-				unselectedContent: Image.profileTabBarItem
+				selectedContent: {
+					Image.selectedProfileTabBarItem
+				},
+				unselectedContent: {
+					Image.profileTabBarItem
+				}
 			)
 			MainTabViewItem(
 				title: "You",
 				isSelected: false,
-				selectedContent: Image.selectedProfileTabBarItem,
-				unselectedContent: Image.profileTabBarItem
+				selectedContent: {
+					Image.selectedProfileTabBarItem
+				},
+				unselectedContent: {
+					Image.profileTabBarItem
+				}
 			)
 		}
 	}
