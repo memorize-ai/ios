@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	@Binding var isSideBarShowing: Bool
 	
 	var body: some View {
@@ -17,8 +19,10 @@ struct HomeView: View {
 						.padding(.horizontal, 23)
 					HomeViewRecommendedDecksSection()
 						.padding(.top)
-					HomeViewMyDecksSection()
-						.padding(.top)
+					HomeViewMyDecksSection(
+						currentUser: currentStore.user
+					)
+					.padding(.top)
 				}
 			}
 		}
