@@ -15,15 +15,17 @@ struct DeckCellWithGetButton: View {
 	}
 	
 	var buttonBackground: Color {
-		hasDeck ? .purple : .extraPurple
+		hasDeck ? .white : .extraPurple
+	}
+	
+	var buttonTextColor: Color {
+		hasDeck ? .extraPurple : .white
 	}
 	
 	func buttonAction() {
-		if hasDeck {
-			deck.remove(user: user)
-		} else {
-			deck.get(user: user)
-		}
+		_ = hasDeck
+			? deck.remove(user: user)
+			: deck.get(user: user)
 	}
 	
 	var body: some View {
@@ -31,6 +33,8 @@ struct DeckCellWithGetButton: View {
 			Button(action: buttonAction) {
 				CustomRectangle(
 					background: buttonBackground,
+					borderColor: .lightGrayLine,
+					borderWidth: hasDeck ? 1 : 0,
 					cornerRadius: 16.5
 				) {
 					Group {
@@ -41,7 +45,7 @@ struct DeckCellWithGetButton: View {
 								.font(.muli(.bold, size: 12))
 						}
 					}
-					.foregroundColor(.white)
+					.foregroundColor(buttonTextColor)
 					.frame(height: 33)
 					.frame(maxWidth: .infinity)
 				}
