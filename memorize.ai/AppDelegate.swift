@@ -54,10 +54,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "memorize_ai")
 		container.loadPersistentStores { _, error in
-			#if DEBUG
 			guard let error = error as NSError? else { return }
 			fatalError("Unresolved error \(error), \(error.userInfo)")
-			#endif
 		}
 		return container
 	}()
@@ -67,11 +65,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		guard context.hasChanges else { return }
 		do {
 			try context.save()
-		} catch {
-			#if DEBUG
-			let nsError = error as NSError
-			fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-			#endif
+		} catch let error as NSError {
+			fatalError("Unresolved error \(error), \(error.userInfo)")
 		}
 	}
 }
