@@ -111,8 +111,7 @@ struct MainTabView: View {
 			.removeNavigationBar()
 		}
 		.onAppear {
-			self.currentStore.loadUser()
-			self.currentStore.user.loadDecks()
+			self.currentStore.initializeIfNeeded()
 		}
 	}
 }

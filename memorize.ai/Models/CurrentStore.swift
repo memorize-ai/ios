@@ -13,11 +13,23 @@ final class CurrentStore: ObservableObject {
 	@Published var interestsLoadingState = LoadingState()
 	@Published var topicLoadingState = LoadingState()
 	
+	@Published var recommendedDecks: [Deck]
+	@Published var recommendedDecksLoadingState = LoadingState()
+	
 	@Published var selectedDeck: Deck?
 	
-	init(user: User, topics: [Topic] = []) {
+	init(user: User, topics: [Topic] = [], recommendedDecks: [Deck] = []) {
 		self.user = user
 		self.topics = topics
+		self.recommendedDecks = recommendedDecks
+	}
+	
+	@discardableResult
+	func initializeIfNeeded() -> Self {
+		loadUser()
+		loadRecommendedDecks()
+		user.loadDecks()
+		return self
 	}
 	
 	var interests: [Topic?] {
@@ -101,6 +113,12 @@ final class CurrentStore: ObservableObject {
 			self.topics.sort(by: \.name)
 			self.topicsLoadingState.succeed()
 		}
+		return self
+	}
+	
+	@discardableResult
+	func loadRecommendedDecks() -> Self {
+		// TODO: Load recommended decks
 		return self
 	}
 }
