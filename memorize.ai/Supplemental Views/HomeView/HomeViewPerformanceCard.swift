@@ -11,7 +11,7 @@ struct HomeViewPerformanceCard: View {
 			VStack {
 				Group {
 					Text("Overall performance")
-						.font(.muli(.bold, size: 17))
+						.font(.muli(.bold, size: 20))
 						.foregroundColor(.darkGray)
 						.align(to: .leading)
 					Rectangle()
@@ -22,7 +22,7 @@ struct HomeViewPerformanceCard: View {
 						.padding(.top, 12)
 						.padding(.bottom, 8)
 					Text("Performance for each interest")
-						.font(.muli(.bold, size: 14))
+						.font(.muli(.bold, size: 17))
 						.foregroundColor(.darkGray)
 						.align(to: .leading)
 				}
