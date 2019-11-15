@@ -95,7 +95,7 @@ struct MainTabView: View {
 							}
 							.case(.profile) {
 								Text("You") // TODO: Change to a custom view
-						}
+							}
 					}
 					Rectangle()
 						.fill(Color.lightGrayLine.opacity(0.5))
