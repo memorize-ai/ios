@@ -14,6 +14,12 @@ struct MainTabView: View {
 	@State var isSideBarShowing = false
 	@State var tabViewSelection = Selection.home
 	
+	var floatingReviewButtonXOffset: CGFloat {
+		currentStore.user.numberOfDueCards > 0
+			? 0
+			: 100
+	}
+	
 	var tabBarItems: some View {
 		HStack(alignment: .bottom) {
 			Spacer()
@@ -103,6 +109,11 @@ struct MainTabView: View {
 						FloatingReviewButton(user: currentStore.user)
 							.align(to: .bottomTrailing)
 							.padding([.trailing, .bottom], 16)
+							.offset(x: floatingReviewButtonXOffset)
+							.animation(.interpolatingSpring(
+								stiffness: 0.5,
+								damping: 0.5
+							))
 					}
 					Rectangle()
 						.fill(Color.lightGrayLine.opacity(0.5))
