@@ -96,6 +96,9 @@ struct MainTabView: View {
 							.case(.profile) {
 								Text("You") // TODO: Change to a custom view
 							}
+						FloatingReviewButton(user: currentStore.user)
+							.align(to: .bottomTrailing)
+							.padding([.trailing, .bottom], 16)
 					}
 					Rectangle()
 						.fill(Color.lightGrayLine.opacity(0.5))

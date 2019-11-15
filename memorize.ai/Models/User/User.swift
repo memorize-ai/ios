@@ -59,6 +59,12 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		decks.filter { $0.userData?.isFavorite ?? false }
 	}
 	
+	var numberOfDueCards: Int {
+		decks.reduce(0) { acc, deck in
+			acc + (deck.userData?.numberOfDueCards ?? 0)
+		}
+	}
+	
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
