@@ -14,7 +14,9 @@ struct HomeViewMyDecksSection: View {
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
 						ForEach(currentUser.decks) { deck in
-							Text(deck.name) // TODO: Change to cell
+							OwnedDeckCellWithPerformanceGraph(
+								deck: deck
+							)
 						}
 					}
 					.padding(.horizontal, 23)
