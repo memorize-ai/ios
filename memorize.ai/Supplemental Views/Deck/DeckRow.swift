@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct DeckRow: View {
-	@ObservedObject var deck: Deck
+	@EnvironmentObject var currentStore: CurrentStore
 	
-	@Binding var selectedDeck: Deck?
+	@ObservedObject var deck: Deck
 	
 	let unselectedBackgroundColor: Color
 	
 	var isSelected: Bool {
-		guard let selectedDeck = selectedDeck else { return false }
+		guard let selectedDeck = currentStore.selectedDeck else { return false }
 		return selectedDeck == deck
 	}
 	
@@ -61,7 +61,7 @@ struct DeckRow: View {
 		.padding(.vertical, 6)
 		.background(backgroundColor)
 		.onTapGesture {
-			self.selectedDeck = self.deck
+			self.currentStore.goToDecksView(withDeck: self.deck)
 		}
 	}
 }
@@ -85,9 +85,9 @@ struct DeckRow_Previews: PreviewProvider {
 				dateCreated: .init(),
 				dateLastUpdated: .init()
 			),
-			selectedDeck: .constant(nil),
 			unselectedBackgroundColor: .white
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

@@ -67,7 +67,6 @@ struct TopicPerformanceSheetView: View {
 						ForEach(decks) { deck in
 							DeckRow(
 								deck: deck,
-								selectedDeck: self.$currentStore.selectedDeck,
 								unselectedBackgroundColor: .white
 							)
 						}

@@ -3,8 +3,6 @@ import SwiftUI
 struct SideBarSections: View {
 	@ObservedObject var currentUser: User
 	
-	@Binding var selectedDeck: Deck?
-	
 	var searchText: String
 	
 	func normalizeText(_ text: String) -> String {
@@ -52,24 +50,21 @@ struct SideBarSections: View {
 			if !dueDecks.isEmpty {
 				SideBarSection(
 					title: "Due",
-					decks: dueDecks,
-					selectedDeck: $selectedDeck
+					decks: dueDecks
 				)
 				SideBarSectionDivider()
 			}
 			if !favoriteDecks.isEmpty {
 				SideBarSection(
 					title: "Favorites",
-					decks: favoriteDecks,
-					selectedDeck: $selectedDeck
+					decks: favoriteDecks
 				)
 				SideBarSectionDivider()
 			}
 			if !allDecks.isEmpty {
 				SideBarSection(
 					title: "All",
-					decks: allDecks,
-					selectedDeck: $selectedDeck
+					decks: allDecks
 				)
 			}
 		}
@@ -87,9 +82,9 @@ struct SideBarSections_Previews: PreviewProvider {
 				interests: [],
 				numberOfDecks: 0
 			),
-			selectedDeck: .constant(nil),
 			searchText: ""
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

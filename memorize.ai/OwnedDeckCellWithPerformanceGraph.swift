@@ -30,11 +30,6 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 		].randomElement()!
 	}
 	
-	func onTapGesture() {
-		currentStore.selectedDeck = deck
-		currentStore.mainTabViewSelection = .decks
-	}
-	
 	var cardsDueMessage: String {
 		let count = deck.userData?.numberOfDueCards ?? 0
 		return "\(count.formatted) card\(count == 1 ? "" : "s") due"
@@ -130,7 +125,9 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 			}
 			.frame(width: width)
 		}
-		.onTapGesture(perform: onTapGesture)
+		.onTapGesture {
+			self.currentStore.goToDecksView(withDeck: self.deck)
+		}
 	}
 }
 

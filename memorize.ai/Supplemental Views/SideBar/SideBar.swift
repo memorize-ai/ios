@@ -53,7 +53,6 @@ struct SideBar<Content: View>: View {
 					ScrollView {
 						SideBarSections(
 							currentUser: currentStore.user,
-							selectedDeck: $currentStore.selectedDeck,
 							searchText: searchText
 						)
 					}

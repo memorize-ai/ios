@@ -27,6 +27,12 @@ final class CurrentStore: ObservableObject {
 		self.recommendedDecks = recommendedDecks
 	}
 	
+	var interests: [Topic?] {
+		user.interests.map { topicId in
+			topics.first { $0.id == topicId }
+		}
+	}
+	
 	@discardableResult
 	func initializeIfNeeded() -> Self {
 		loadUser()
@@ -35,10 +41,11 @@ final class CurrentStore: ObservableObject {
 		return self
 	}
 	
-	var interests: [Topic?] {
-		user.interests.map { topicId in
-			topics.first { $0.id == topicId }
-		}
+	@discardableResult
+	func goToDecksView(withDeck deck: Deck) -> Self {
+		selectedDeck = deck
+		mainTabViewSelection = .decks
+		return self
 	}
 	
 	@discardableResult

@@ -3,9 +3,7 @@ import SwiftUI
 struct SideBarSection: View {
 	let title: String
 	let decks: [Deck]
-	
-	@Binding var selectedDeck: Deck?
-	
+		
 	var body: some View {
 		VStack(alignment: .leading, spacing: 8) {
 			SideBarSectionTitle(title)
@@ -14,7 +12,6 @@ struct SideBarSection: View {
 				ForEach(decks) { deck in
 					DeckRow(
 						deck: deck,
-						selectedDeck: self.$selectedDeck,
 						unselectedBackgroundColor: .lightGrayBackground
 					)
 				}
@@ -29,9 +26,9 @@ struct SideBarSection_Previews: PreviewProvider {
 	static var previews: some View {
 		SideBarSection(
 			title: "Due",
-			decks: [],
-			selectedDeck: .constant(nil)
+			decks: []
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif
