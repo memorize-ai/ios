@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct MainTabViewItem<SelectedContent: View, UnselectedContent: View>: View {
+struct MainTabViewItem<
+	SelectedContent: View,
+	UnselectedContent: View
+>: View {
 	let title: String
 	let isSelected: Bool
 	let selectedContent: SelectedContent
