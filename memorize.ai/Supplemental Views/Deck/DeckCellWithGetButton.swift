@@ -2,8 +2,8 @@ import SwiftUI
 
 struct DeckCellWithGetButton: View {
 	@ObservedObject var deck: Deck
+	@ObservedObject var user: User
 	
-	let user: User
 	let width: CGFloat
 	
 	var hasDeck: Bool {
@@ -114,13 +114,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					dateCreated: .init(),
 					dateLastUpdated: .init()
 				),
-				user: .init(
-					id: "0",
-					name: "Ken Mueller",
-					email: "kenmueller0@gmail.com",
-					interests: [],
-					numberOfDecks: 0
-				),
+				user: PREVIEW_CURRENT_STORE.user,
 				width: 165
 			)
 		}
