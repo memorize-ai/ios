@@ -33,7 +33,7 @@ struct DeckCellWithGetButton: View {
 			Button(action: buttonAction) {
 				CustomRectangle(
 					background: buttonBackground,
-					borderColor: .lightGrayLine,
+					borderColor: .extraPurple,
 					borderWidth: hasDeck ? 1 : 0,
 					cornerRadius: 16.5
 				) {
