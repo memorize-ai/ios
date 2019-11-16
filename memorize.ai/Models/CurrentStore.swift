@@ -1,4 +1,4 @@
-import Combine
+import SwiftUI
 import FirebaseFirestore
 import PromiseKit
 import LoadingState
@@ -43,8 +43,11 @@ final class CurrentStore: ObservableObject {
 	
 	@discardableResult
 	func goToDecksView(withDeck deck: Deck) -> Self {
-		selectedDeck = deck
-		mainTabViewSelection = .decks
+		withAnimation(SIDE_BAR_ANIMATION) {
+			selectedDeck = deck
+			isSideBarShowing = false
+			mainTabViewSelection = .decks
+		}
 		return self
 	}
 	
