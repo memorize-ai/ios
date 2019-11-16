@@ -10,9 +10,14 @@ struct MainTabView: View {
 	}
 	
 	@EnvironmentObject var currentStore: CurrentStore
+		
+	func setSelection(to selection: Selection) {
+		currentStore.mainTabViewSelection = selection
+	}
 	
-	@State var isSideBarShowing = false
-	@State var tabViewSelection = Selection.home
+	var currentSelection: Selection {
+		currentStore.mainTabViewSelection
+	}
 	
 	var floatingReviewButtonXOffset: CGFloat {
 		currentStore.user.numberOfDueCards > 0
@@ -25,7 +30,7 @@ struct MainTabView: View {
 			Spacer()
 			MainTabViewItem(
 				title: "Home",
-				isSelected: tabViewSelection == .home,
+				isSelected: currentSelection == .home,
 				selectedContent: {
 					Image.selectedHomeTabBarItem
 						.resizable()
@@ -36,12 +41,12 @@ struct MainTabView: View {
 				}
 			)
 			.onTapGesture {
-				self.tabViewSelection = .home
+				self.setSelection(to: .home)
 			}
 			Spacer()
 			MainTabViewItem(
 				title: "Market",
-				isSelected: tabViewSelection == .market,
+				isSelected: currentSelection == .market,
 				selectedContent: {
 					Image.selectedMarketTabBarItem
 						.resizable()
@@ -56,12 +61,12 @@ struct MainTabView: View {
 				}
 			)
 			.onTapGesture {
-				self.tabViewSelection = .market
+				self.setSelection(to: .market)
 			}
 			Spacer()
 			MainTabViewItem(
 				title: "Decks",
-				isSelected: tabViewSelection == .decks,
+				isSelected: currentSelection == .decks,
 				selectedContent: {
 					DeckIcon<EmptyView>(
 						color: .extraPurple
@@ -76,12 +81,12 @@ struct MainTabView: View {
 				}
 			)
 			.onTapGesture {
-				self.tabViewSelection = .decks
+				self.setSelection(to: .decks)
 			}
 			Spacer()
 			MainTabViewItem(
 				title: "You",
-				isSelected: tabViewSelection == .profile,
+				isSelected: currentSelection == .profile,
 				selectedContent: {
 					Image.selectedProfileTabBarItem
 						.resizable()
@@ -96,7 +101,7 @@ struct MainTabView: View {
 				}
 			)
 			.onTapGesture {
-				self.tabViewSelection = .profile
+				self.setSelection(to: .profile)
 			}
 			Spacer()
 		}
@@ -104,20 +109,20 @@ struct MainTabView: View {
 	
 	var body: some View {
 		NavigationView {
-			SideBar(isShowing: $isSideBarShowing) {
+			SideBar {
 				VStack(spacing: 0) {
 					ZStack {
 						Color.lightGrayBackground
 							.edgesIgnoringSafeArea([.horizontal, .top])
-						SwitchOver(tabViewSelection)
+						SwitchOver(currentSelection)
 							.case(.home) {
-								HomeView(isSideBarShowing: $isSideBarShowing)
+								HomeView()
 							}
 							.case(.market) {
 								Text("Market") // TODO: Change to a custom view
 							}
 							.case(.decks) {
-								Text("Decks") // TODO: Change to a custom view
+								DecksView()
 							}
 							.case(.profile) {
 								Text("You") // TODO: Change to a custom view

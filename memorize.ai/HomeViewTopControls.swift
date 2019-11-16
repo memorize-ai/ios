@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeViewTopControls: View {
-	@Binding var isSideBarShowing: Bool
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	var searchBarBackgroundColor: Color {
 		Color.lightGray.opacity(0.2)
@@ -9,7 +9,7 @@ struct HomeViewTopControls: View {
 	
 	var body: some View {
 		HStack(spacing: 20) {
-			ShowSideBarButton($isSideBarShowing) {
+			ShowSideBarButton {
 				HamburgerMenu()
 			}
 			NavigationLink(destination: Text("SearchView")) { // TODO: Change to a custom view
@@ -39,7 +39,8 @@ struct HomeViewTopControls: View {
 #if DEBUG
 struct HomeViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeViewTopControls(isSideBarShowing: .constant(false))
+		HomeViewTopControls()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

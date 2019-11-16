@@ -1,19 +1,18 @@
 import SwiftUI
 
 struct ShowSideBarButton<Content: View>: View {
-	@Binding var isShowing: Bool
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	let content: Content
 	
-	init(_ isShowing: Binding<Bool>, content: () -> Content) {
-		_isShowing = isShowing
+	init(content: () -> Content) {
 		self.content = content()
 	}
 	
 	var body: some View {
 		Button(action: {
 			withAnimation(SIDE_BAR_ANIMATION) {
-				self.isShowing = true
+				self.currentStore.isSideBarShowing = true
 			}
 		}) {
 			content
@@ -24,9 +23,10 @@ struct ShowSideBarButton<Content: View>: View {
 #if DEBUG
 struct ShowSideBarButton_Previews: PreviewProvider {
 	static var previews: some View {
-		ShowSideBarButton(.constant(false)) {
+		ShowSideBarButton {
 			HamburgerMenu()
 		}
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

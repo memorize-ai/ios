@@ -6,20 +6,21 @@ struct SideBar<Content: View>: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@State var searchText = ""
-	
-	@Binding var isShowing: Bool
-	
+		
 	let content: Content
 	
-	init(isShowing: Binding<Bool>, content: () -> Content) {
-		_isShowing = isShowing
+	init(content: () -> Content) {
 		self.content = content()
 	}
 	
 	func hide() {
 		withAnimation(SIDE_BAR_ANIMATION) {
-			isShowing = false
+			currentStore.isSideBarShowing = false
 		}
+	}
+	
+	var isShowing: Bool {
+		currentStore.isSideBarShowing
 	}
 	
 	var body: some View {
@@ -69,7 +70,7 @@ struct SideBar<Content: View>: View {
 #if DEBUG
 struct SideBar_Previews: PreviewProvider {
 	static var previews: some View {
-		SideBar(isShowing: .constant(true)) {
+		SideBar {
 			Text("Content")
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)

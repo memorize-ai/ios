@@ -18,6 +18,9 @@ final class CurrentStore: ObservableObject {
 	
 	@Published var selectedDeck: Deck?
 	
+	@Published var mainTabViewSelection = MainTabView.Selection.home
+	@Published var isSideBarShowing = false
+	
 	init(user: User, topics: [Topic] = [], recommendedDecks: [Deck] = []) {
 		self.user = user
 		self.topics = topics
