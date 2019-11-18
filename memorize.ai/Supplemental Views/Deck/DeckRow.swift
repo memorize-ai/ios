@@ -6,6 +6,22 @@ struct DeckRow: View {
 	@ObservedObject var deck: Deck
 	
 	let unselectedBackgroundColor: Color
+	let onClick: (() -> Void)?
+	
+	init(
+		deck: Deck,
+		unselectedBackgroundColor: Color,
+		onClick: (() -> Void)? = nil
+	) {
+		self.deck = deck
+		self.unselectedBackgroundColor = unselectedBackgroundColor
+		self.onClick = onClick
+	}
+	
+	func onTapGesture() {
+		onClick?()
+		currentStore.goToDecksView(withDeck: deck)
+	}
 	
 	var isSelected: Bool {
 		guard let selectedDeck = currentStore.selectedDeck else { return false }
@@ -60,9 +76,7 @@ struct DeckRow: View {
 		.padding(.horizontal)
 		.padding(.vertical, 6)
 		.background(backgroundColor)
-		.onTapGesture {
-			self.currentStore.goToDecksView(withDeck: self.deck)
-		}
+		.onTapGesture(perform: onTapGesture)
 	}
 }
 

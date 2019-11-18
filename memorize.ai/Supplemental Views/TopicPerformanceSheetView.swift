@@ -8,6 +8,10 @@ struct TopicPerformanceSheetView: View {
 	@ObservedObject var currentUser: User
 	@ObservedObject var topic: Topic
 	
+	func hide() {
+		presentationMode.wrappedValue.dismiss()
+	}
+	
 	var decks: [Deck] {
 		currentUser.decks.filter { deck in
 			deck.topics.contains(topic.id)
@@ -15,9 +19,7 @@ struct TopicPerformanceSheetView: View {
 	}
 	
 	var xButton: some View {
-		Button(action: {
-			self.presentationMode.wrappedValue.dismiss()
-		}) {
+		Button(action: hide) {
 			XButton(.purple, height: 16)
 		}
 	}
@@ -67,7 +69,8 @@ struct TopicPerformanceSheetView: View {
 						ForEach(decks) { deck in
 							DeckRow(
 								deck: deck,
-								unselectedBackgroundColor: .white
+								unselectedBackgroundColor: .white,
+								onClick: self.hide
 							)
 						}
 					}
