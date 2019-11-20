@@ -10,11 +10,11 @@ struct MarketView: View {
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
-	@State var searchText = ""
-	
+	@ObservedObject var model = MarketViewModel()
+		
 	var grid: some View {
 		Grid(
-			elements: [].map { deck in // TODO: Change this to decks
+			elements: model.searchResults.map { deck in
 				DeckCellWithGetButton(
 					deck: deck,
 					user: currentStore.user,
@@ -34,13 +34,14 @@ struct MarketView: View {
 				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 20) {
 				Group {
-					MarketViewTopControls(searchText: $searchText)
+					MarketViewTopControls(searchText: $model.searchText)
 					MarketViewTopButtons()
 				}
 				.padding(.horizontal, Self.horizontalPadding)
 				grid
 			}
 		}
+		.onAppear(perform: model.loadSearchResults)
 	}
 }
 

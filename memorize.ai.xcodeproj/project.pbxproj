@@ -39,6 +39,7 @@
 		4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A5332368FC2E0072AA70 /* XButton.swift */; };
 		4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */; };
 		4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */; };
+		4D35BC442385F20A00A440CF /* MarketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35BC432385F20A00A440CF /* MarketViewModel.swift */; };
 		4D3B949423724419002F441E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949323724419002F441E /* SearchBar.swift */; };
 		4D3B949623727260002F441E /* SideBarSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949523727260002F441E /* SideBarSectionTitle.swift */; };
 		4D3B949823727347002F441E /* SideBarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949723727347002F441E /* SideBarSection.swift */; };
@@ -206,6 +207,7 @@
 		4D32A5332368FC2E0072AA70 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		4D32A535236910BB0072AA70 /* PostSignUpViewTrailingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTrailingButton.swift; sourceTree = "<group>"; };
 		4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTitle.swift; sourceTree = "<group>"; };
+		4D35BC432385F20A00A440CF /* MarketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewModel.swift; sourceTree = SOURCE_ROOT; };
 		4D3B949323724419002F441E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		4D3B949523727260002F441E /* SideBarSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSectionTitle.swift; sourceTree = "<group>"; };
 		4D3B949723727347002F441E /* SideBarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSection.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */,
 				4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */,
 				4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */,
+				4D35BC432385F20A00A440CF /* MarketViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1205,6 +1208,7 @@
 				4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,
+				4D35BC442385F20A00A440CF /* MarketViewModel.swift in Sources */,
 				4D3B949C2372A06F002F441E /* SideBarSections.swift in Sources */,
 				4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */,
 				4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */,
