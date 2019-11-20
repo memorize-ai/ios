@@ -12,15 +12,19 @@ struct MarketView: View {
 	
 	@ObservedObject var model = MarketViewModel()
 	
+	var gridElements: [DeckCellWithGetButton] {
+		model.searchResults.map { deck in
+			DeckCellWithGetButton(
+				deck: deck,
+				user: currentStore.user,
+				width: Self.deckCellWidth
+			)
+		}
+	}
+	
 	var grid: some View {
 		Grid(
-			elements: model.searchResults.map { deck in
-				DeckCellWithGetButton(
-					deck: deck,
-					user: currentStore.user,
-					width: Self.deckCellWidth
-				)
-			},
+			elements: gridElements,
 			columns: Self.numberOfColumns,
 			horizontalSpacing: Self.horizontalCellSpacing,
 			verticalSpacing: Self.verticalCellSpacing
