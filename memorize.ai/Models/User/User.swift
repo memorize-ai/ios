@@ -72,6 +72,8 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	static func xpNeededForLevel(_ level: Int) -> Int {
 		switch level {
+		case 0:
+			return 0
 		case 1:
 			return 1
 		case 2:
