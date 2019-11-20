@@ -3,6 +3,18 @@ import SwiftUI
 struct UserLevelView: View {
 	@ObservedObject var user: User
 	
+	var sliderPercent: CGFloat {
+		let xpNeededForCurrentLevel =
+			User.xpNeededForLevel(user.level)
+		return .init(
+			user.xp
+				- xpNeededForCurrentLevel
+		) / .init(
+			User.xpNeededForLevel(user.level + 1)
+				- xpNeededForCurrentLevel
+		)
+	}
+	
 	var body: some View {
 		VStack(alignment: .leading) {
 			HStack(spacing: 6) {
@@ -16,8 +28,8 @@ struct UserLevelView: View {
 					.font(.muli(.bold, size: 13))
 					.foregroundColor(.lightGrayText)
 			}
-			HStack {
-				UserLevelSlider()
+			HStack(spacing: 14) {
+				UserLevelSlider(percent: sliderPercent)
 				Text("lvl \((user.level + 1).formatted)")
 					.font(.muli(.bold, size: 13))
 					.foregroundColor(.darkGray)
