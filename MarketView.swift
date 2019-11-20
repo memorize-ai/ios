@@ -11,7 +11,7 @@ struct MarketView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@ObservedObject var model = MarketViewModel()
-		
+	
 	var grid: some View {
 		Grid(
 			elements: model.searchResults.map { deck in
