@@ -97,6 +97,7 @@
 		4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */; };
 		4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBD2385277400C85EC2 /* UserLevelView.swift */; };
 		4D9AAEC023852F5E00C85EC2 /* UserLevelSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBF23852F5E00C85EC2 /* UserLevelSlider.swift */; };
+		4D9AAEC32385D25500C85EC2 /* MarketViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -261,6 +262,7 @@
 		4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4D9AAEBD2385277400C85EC2 /* UserLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLevelView.swift; sourceTree = "<group>"; };
 		4D9AAEBF23852F5E00C85EC2 /* UserLevelSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLevelSlider.swift; sourceTree = "<group>"; };
+		4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopControls.swift; path = memorize.ai/MarketViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -614,6 +616,14 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		4D9AAEC12385CEFB00C85EC2 /* MarketView */ = {
+			isa = PBXGroup;
+			children = (
+				4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */,
+			);
+			path = MarketView;
+			sourceTree = "<group>";
+		};
 		4DAA4F30233DE1A600EF7467 = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +790,7 @@
 				4DD9CEF423691E6900EC138F /* ChooseTopicsView */,
 				4DD7AADB236A713100F12D39 /* RecommendedDecksView */,
 				4D458A61237C9ABE00A9776A /* HomeView */,
+				4D9AAEC12385CEFB00C85EC2 /* MarketView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -1140,6 +1151,7 @@
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4DA800A9236A4A4D00E26FE8 /* TopicCellCheck.swift in Sources */,
 				4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */,
+				4D9AAEC32385D25500C85EC2 /* MarketViewTopControls.swift in Sources */,
 				4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */,
 				4D32A5322368FB710072AA70 /* Image.swift in Sources */,
 				4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */,
