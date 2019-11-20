@@ -18,6 +18,9 @@ struct UserLevelView: View {
 			}
 			HStack {
 				UserLevelSlider()
+				Text("lvl \((user.level + 1).formatted)")
+					.font(.muli(.bold, size: 13))
+					.foregroundColor(.darkGray)
 			}
 		}
 	}
