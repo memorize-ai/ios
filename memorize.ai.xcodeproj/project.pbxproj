@@ -67,6 +67,7 @@
 		4D458A60237C97CC00A9776A /* HamburgerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A5F237C97CC00A9776A /* HamburgerMenu.swift */; };
 		4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */; };
 		4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A64237C9B4700A9776A /* ShowSideBarButton.swift */; };
+		4D51F5402385DF9300C6B59B /* MarketViewTopButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */; };
 		4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54C03D237F7C83003765C1 /* DecksView.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
@@ -232,6 +233,7 @@
 		4D458A5F237C97CC00A9776A /* HamburgerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HamburgerMenu.swift; path = memorize.ai/HamburgerMenu.swift; sourceTree = SOURCE_ROOT; };
 		4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopGradient.swift; path = memorize.ai/HomeViewTopGradient.swift; sourceTree = SOURCE_ROOT; };
 		4D458A64237C9B4700A9776A /* ShowSideBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSideBarButton.swift; sourceTree = "<group>"; };
+		4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopButtons.swift; path = "memorize.ai/Supplemental Views/MarketViewTopButtons.swift"; sourceTree = SOURCE_ROOT; };
 		4D54C03D237F7C83003765C1 /* DecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksView.swift; sourceTree = SOURCE_ROOT; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 			isa = PBXGroup;
 			children = (
 				4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */,
+				4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */,
 			);
 			path = MarketView;
 			sourceTree = "<group>";
@@ -1211,6 +1214,7 @@
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
 				4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */,
 				4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */,
+				4D51F5402385DF9300C6B59B /* MarketViewTopButtons.swift in Sources */,
 				4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

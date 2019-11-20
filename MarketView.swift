@@ -35,7 +35,7 @@ struct MarketView: View {
 			VStack(spacing: 20) {
 				MarketViewTopControls(searchText: $searchText)
 					.padding(.horizontal, Self.horizontalPadding)
-				// TODO: Add buttons
+				MarketViewTopButtons()
 				grid
 			}
 		}
