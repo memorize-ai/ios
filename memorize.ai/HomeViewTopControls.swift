@@ -12,7 +12,9 @@ struct HomeViewTopControls: View {
 			ShowSideBarButton {
 				HamburgerMenu()
 			}
-			NavigationLink(destination: Text("SearchView")) { // TODO: Change to a custom view
+			Button(action: {
+				self.currentStore.mainTabViewSelection = .market
+			}) {
 				CustomRectangle(
 					background: searchBarBackgroundColor,
 					cornerRadius: 24
