@@ -40,24 +40,29 @@ struct SideBar<Content: View>: View {
 						radius: isShowing ? 5 : 0,
 						x: isShowing ? -3 : 0
 					)
-				VStack(alignment: .leading, spacing: 18) {
-					ZStack(alignment: .top) {
-						SideBarTopGradient(width: extendedWidth)
-						SearchBar(
-							$searchText,
-							placeholder: "Decks",
-							internalPadding: 12
-						)
-						.padding([.horizontal, .top])
+				VStack(spacing: 0) {
+					VStack(alignment: .leading, spacing: 18) {
+						ZStack(alignment: .top) {
+							SideBarTopGradient(width: extendedWidth)
+							SearchBar(
+								$searchText,
+								placeholder: "Decks",
+								internalPadding: 12
+							)
+							.padding([.horizontal, .top])
+						}
+						ScrollView {
+							SideBarSections(
+								currentUser: currentStore.user,
+								searchText: searchText
+							)
+						}
 					}
-					ScrollView {
-						SideBarSections(
-							currentUser: currentStore.user,
-							searchText: searchText
-						)
+					VStack(spacing: 2) {
+						SideBarSectionDivider()
+						UserLevelView(user: currentStore.user)
+							.padding([.horizontal, .bottom])
 					}
-					UserLevelView(user: currentStore.user)
-						.padding([.horizontal, .bottom])
 				}
 			}
 			.frame(width: extendedWidth)
