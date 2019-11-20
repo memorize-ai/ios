@@ -56,6 +56,7 @@ struct SideBar<Content: View>: View {
 							searchText: searchText
 						)
 					}
+					UserLevelView()
 				}
 			}
 			.frame(width: extendedWidth)
@@ -69,7 +70,8 @@ struct SideBar<Content: View>: View {
 #if DEBUG
 struct SideBar_Previews: PreviewProvider {
 	static var previews: some View {
-		SideBar {
+		PREVIEW_CURRENT_STORE.isSideBarShowing = true
+		return SideBar {
 			Text("Content")
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)
