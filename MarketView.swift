@@ -33,9 +33,11 @@ struct MarketView: View {
 			HomeViewTopGradient()
 				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 20) {
-				MarketViewTopControls(searchText: $searchText)
-					.padding(.horizontal, Self.horizontalPadding)
-				MarketViewTopButtons()
+				Group {
+					MarketViewTopControls(searchText: $searchText)
+					MarketViewTopButtons()
+				}
+				.padding(.horizontal, Self.horizontalPadding)
 				grid
 			}
 		}
