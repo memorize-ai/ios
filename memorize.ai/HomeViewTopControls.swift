@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct HomeViewTopControls: View {
-	@EnvironmentObject var currentStore: CurrentStore
-	
-	var searchBarBackgroundColor: Color {
+	static var searchBarBackgroundColor =
 		Color.lightGray.opacity(0.2)
-	}
+	
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	var body: some View {
 		HStack(spacing: 20) {
@@ -16,7 +15,7 @@ struct HomeViewTopControls: View {
 				self.currentStore.mainTabViewSelection = .market
 			}) {
 				CustomRectangle(
-					background: searchBarBackgroundColor,
+					background: Self.searchBarBackgroundColor,
 					cornerRadius: 24
 				) {
 					HStack(spacing: 10) {

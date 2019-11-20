@@ -10,6 +10,8 @@ struct MarketView: View {
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
+	@State var searchText = ""
+	
 	var grid: some View {
 		Grid(
 			elements: [].map { deck in // TODO: Change this to decks
@@ -31,7 +33,7 @@ struct MarketView: View {
 			HomeViewTopGradient()
 				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 20) {
-				MarketViewTopControls()
+				MarketViewTopControls(searchText: $searchText)
 					.padding(.horizontal, Self.horizontalPadding)
 				// TODO: Add buttons
 				grid
