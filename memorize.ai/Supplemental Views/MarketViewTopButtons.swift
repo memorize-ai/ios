@@ -2,7 +2,10 @@ import SwiftUI
 
 struct MarketViewTopButtons: View {
 	var body: some View {
-		Text("MarketViewTopButtons")
+		HStack(spacing: 13) {
+			MarketViewSearchStateButton()
+			MarketViewSearchStateButton()
+		}
 	}
 }
 
