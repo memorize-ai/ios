@@ -1,6 +1,10 @@
 import SwiftUI
 
 struct MarketViewSearchStateButton: View {
+	let icon: Image
+	let title: String
+	let onClick: () -> Void
+	
 	var body: some View {
 		Text("MarketViewSearchStateButton")
 	}
@@ -9,7 +13,16 @@ struct MarketViewSearchStateButton: View {
 #if DEBUG
 struct MarketViewSearchStateButton_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewSearchStateButton()
+		VStack {
+			MarketViewSearchStateButton(
+				icon: .sortIcon,
+				title: "SORT"
+			) {}
+			MarketViewSearchStateButton(
+				icon: .filterIcon,
+				title: "FILTER"
+			) {}
+		}
 	}
 }
 #endif
