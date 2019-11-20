@@ -119,13 +119,13 @@ struct MainTabView: View {
 								HomeView()
 							}
 							.case(.market) {
-								Text("Market") // TODO: Change to a custom view
+								MarketView()
 							}
 							.case(.decks) {
 								DecksView()
 							}
 							.case(.profile) {
-								Text("You") // TODO: Change to a custom view
+								ProfileView()
 							}
 						FloatingReviewButton(user: currentStore.user)
 							.align(to: .bottomTrailing)
