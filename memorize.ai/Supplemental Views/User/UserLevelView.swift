@@ -4,7 +4,7 @@ struct UserLevelView: View {
 	@ObservedObject var user: User
 	
 	var body: some View {
-		VStack {
+		VStack(alignment: .leading) {
 			HStack(spacing: 6) {
 				Text("lvl \(user.level.formatted)")
 					.font(.muli(.extraBold, size: 13))

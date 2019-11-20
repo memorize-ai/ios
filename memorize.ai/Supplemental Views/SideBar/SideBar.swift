@@ -57,6 +57,7 @@ struct SideBar<Content: View>: View {
 						)
 					}
 					UserLevelView(user: currentStore.user)
+						.padding([.horizontal, .bottom])
 				}
 			}
 			.frame(width: extendedWidth)
