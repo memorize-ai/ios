@@ -16,6 +16,9 @@ struct UserLevelView: View {
 					.font(.muli(.bold, size: 13))
 					.foregroundColor(.lightGrayText)
 			}
+			HStack {
+				UserLevelSlider()
+			}
 		}
 	}
 }
