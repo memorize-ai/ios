@@ -94,6 +94,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					email: "kenmueller0@gmail.com",
 					interests: [],
 					numberOfDecks: 1,
+					xp: 930,
 					decks: [deck1]
 				),
 				width: 165

@@ -59,6 +59,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			"3"
 		],
 		numberOfDecks: 7,
+		xp: 930,
 		decks: [
 			.init(
 				id: "0",

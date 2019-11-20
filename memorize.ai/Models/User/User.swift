@@ -11,6 +11,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var email: String
 	@Published var interests: [String]
 	@Published var numberOfDecks: Int
+	@Published var xp: Int
 	@Published var decks: [Deck]
 	
 	@Published var decksLoadingState = LoadingState()
@@ -21,6 +22,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		email: String,
 		interests: [String],
 		numberOfDecks: Int,
+		xp: Int,
 		decks: [Deck] = []
 	) {
 		self.id = id
@@ -28,6 +30,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		self.email = email
 		self.interests = interests
 		self.numberOfDecks = numberOfDecks
+		self.xp = xp
 		self.decks = decks
 	}
 	
@@ -37,7 +40,8 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			name: snapshot.get("name") as? String ?? "Unknown",
 			email: snapshot.get("email") as? String ?? "Unknown",
 			interests: snapshot.get("topics") as? [String] ?? [],
-			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0
+			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0,
+			xp: snapshot.get("xp") as? Int ?? 0
 		)
 	}
 	
@@ -47,7 +51,8 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			name: user.displayName ?? "Unknown",
 			email: user.email ?? "Unknown",
 			interests: [],
-			numberOfDecks: 0
+			numberOfDecks: 0,
+			xp: 0
 		)
 	}
 	
@@ -65,12 +70,37 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 	}
 	
+	static func xpNeededForLevel(_ level: Int) -> Int {
+		switch level {
+		case 1:
+			return 1
+		case 2:
+			return 5
+		case 3:
+			return 10
+		case 4:
+			return 50
+		default:
+			return xpNeededForLevel(level - 1) + 25 * (level - 4)
+		}
+	}
+	
+	var level: Int {
+		for level in 1... {
+			if xp < Self.xpNeededForLevel(level) {
+				return level - 1
+			}
+		}
+		return -1
+	}
+	
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
 		email = snapshot.get("email") as? String ?? email
 		interests = snapshot.get("topics") as? [String] ?? interests
 		numberOfDecks = snapshot.get("deckCount") as? Int ?? numberOfDecks
+		xp = snapshot.get("xp") as? Int ?? xp
 		return self
 	}
 	
