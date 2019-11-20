@@ -6,7 +6,7 @@ struct CustomTextField: View {
 	@Binding var text: String
 	
 	let placeholder: String
-	let contentType: UITextContentType
+	let contentType: UITextContentType?
 	let keyboardType: UIKeyboardType
 	let capitalization: UITextAutocapitalizationType
 	let secure: Bool
@@ -21,7 +21,7 @@ struct CustomTextField: View {
 	init(
 		_ text: Binding<String>,
 		placeholder: String = "",
-		contentType: UITextContentType = .name,
+		contentType: UITextContentType? = nil,
 		keyboardType: UIKeyboardType = .default,
 		capitalization: UITextAutocapitalizationType = .sentences,
 		secure: Bool = false,
