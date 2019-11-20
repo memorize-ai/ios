@@ -56,7 +56,7 @@ struct SideBar<Content: View>: View {
 							searchText: searchText
 						)
 					}
-					UserLevelView()
+					UserLevelView(user: currentStore.user)
 				}
 			}
 			.frame(width: extendedWidth)

@@ -1,15 +1,31 @@
 import SwiftUI
 
 struct UserLevelView: View {
+	@ObservedObject var user: User
+	
 	var body: some View {
-		Text("UserLevelView")
+		VStack {
+			HStack(spacing: 6) {
+				Text("lvl \(user.level.formatted)")
+					.font(.muli(.extraBold, size: 13))
+					.foregroundColor(.extraPurple)
+				Circle()
+					.foregroundColor(.lightGrayText)
+					.frame(width: 4, height: 4)
+				Text("\(user.xp.formatted) xp")
+					.font(.muli(.bold, size: 13))
+					.foregroundColor(.lightGrayText)
+			}
+		}
 	}
 }
 
 #if DEBUG
 struct UserLevelView_Previews: PreviewProvider {
 	static var previews: some View {
-		UserLevelView()
+		UserLevelView(
+			user: PREVIEW_CURRENT_STORE.user
+		)
 	}
 }
 #endif
