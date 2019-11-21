@@ -17,6 +17,7 @@ struct MarketViewFilterPopUp: View {
 struct MarketViewFilterPopUp_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketViewFilterPopUp()
+			.environmentObject(MarketViewModel())
 	}
 }
 #endif
