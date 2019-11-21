@@ -16,11 +16,8 @@ struct PopUp<Content: View>: View {
 	var body: some View {
 		GeometryReader { geometry in
 			VStack(spacing: 0) {
-				Group {
-					self.content
-				}
-				.padding(.horizontal, 30)
-				PopUpDivider()
+				self.content
+				PopUpDivider(horizontalPadding: 0)
 				Button(action: {
 					self.isShowing = false
 				}) {

@@ -15,6 +15,7 @@ struct PopUpButton<Icon: View>: View {
 					.foregroundColor(textColor)
 				Spacer()
 			}
+			.padding(.horizontal, 30)
 		}
 		.frame(height: 50)
 	}
