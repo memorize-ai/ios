@@ -2,24 +2,29 @@ import SwiftUI
 
 struct InitialView: View {
 	var body: some View {
-		NavigationView {
-			ZStack {
-				GeometryReader { _ in
-					ZStack {
-						InitialViewStackedRectangles()
-							.padding(.top, -140)
-						InitialViewPaginatedFeatures()
+		GeometryReader { geometry in
+			NavigationView {
+				ZStack {
+					GeometryReader { _ in
+						ZStack {
+							InitialViewStackedRectangles()
+								.padding(.top, -140)
+							InitialViewPaginatedFeatures()
+						}
+						.align(to: .top)
 					}
-					.align(to: .top)
+					ZStack(alignment: .bottom) {
+						InitialViewBottomGradient(
+							addedHeight: geometry.safeAreaInsets.bottom
+						)
+						InitialViewBottomButtons()
+							.padding(.bottom, geometry.safeAreaInsets.bottom)
+					}
+					.align(to: .bottom)
 				}
-				ZStack(alignment: .bottom) {
-					InitialViewBottomGradient()
-					InitialViewBottomButtons()
-				}
-				.align(to: .bottom)
+				.background(Color.lightGrayBackground)
+				.edgesIgnoringSafeArea(.all)
 			}
-			.background(Color.lightGrayBackground)
-			.edgesIgnoringSafeArea(.top)
 		}
 	}
 }

@@ -15,44 +15,48 @@ struct PostSignUpView<
 	let content: Content
 	
 	var body: some View {
-		ZStack {
-			AuthenticationViewBottomGradient([
-				.darkerLightBlue,
-				.extraBluePurple
-			])
-			.align(to: .bottomTrailing)
-			ZStack(alignment: .top) {
-				PostSignUpViewTopGradient()
-				VStack {
-					HStack {
-						if leadingButtonIsBackButton {
-							Button(action: {
-								self.presentationMode.wrappedValue.dismiss()
-							}) {
-								LeftArrowHead(height: 20)
+		GeometryReader { geometry in
+			ZStack {
+				AuthenticationViewBottomGradient([
+					.darkerLightBlue,
+					.extraBluePurple
+				])
+				.align(to: .bottomTrailing)
+				ZStack(alignment: .top) {
+					PostSignUpViewTopGradient(
+						addedHeight: geometry.safeAreaInsets.top
+					)
+					VStack {
+						HStack {
+							if self.leadingButtonIsBackButton {
+								Button(action: {
+									self.presentationMode.wrappedValue.dismiss()
+								}) {
+									LeftArrowHead(height: 20)
+								}
+							} else {
+								self.leadingButton
 							}
-						} else {
-							leadingButton
+							Spacer()
+							PostSignUpViewTrailingButton(
+								text: self.trailingButtonTitle,
+								destination: self.trailingButtonDestination
+							)
 						}
-						Spacer()
-						PostSignUpViewTrailingButton(
-							text: trailingButtonTitle,
-							destination: trailingButtonDestination
-						)
+						.padding(.leading, 33)
+						.padding(.trailing, 25)
+						.padding(.top, geometry.safeAreaInsets.top + 15)
+						PostSignUpViewTitle(text: self.title)
+						self.content
+							.padding(.top)
 					}
-					.padding(.leading, 33)
-					.padding(.trailing, 25)
-					.padding(.top, 34)
-					PostSignUpViewTitle(text: title)
-					content
-						.padding(.top)
 				}
+				.align(to: .top)
 			}
-			.align(to: .top)
+			.background(Color.lightGrayBackground)
+			.removeNavigationBar()
+			.edgesIgnoringSafeArea(.all)
 		}
-		.background(Color.lightGrayBackground)
-		.removeNavigationBar()
-		.edgesIgnoringSafeArea(.all)
 	}
 }
 

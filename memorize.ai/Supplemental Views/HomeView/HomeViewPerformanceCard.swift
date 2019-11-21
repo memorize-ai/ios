@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeViewPerformanceCard: View {
+	@ObservedObject var currentUser: User
+	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
@@ -16,15 +18,17 @@ struct HomeViewPerformanceCard: View {
 						.align(to: .leading)
 					Rectangle()
 						.frame(height: 200) // TODO: Change to actual graph
-					Rectangle()
-						.foregroundColor(.lightGrayBorder)
-						.frame(height: 1)
-						.padding(.top, 12)
-						.padding(.bottom, 8)
-					Text("Performance for each interest")
-						.font(.muli(.bold, size: 17))
-						.foregroundColor(.darkGray)
-						.align(to: .leading)
+					if !currentUser.interests.isEmpty {
+						Rectangle()
+							.foregroundColor(.lightGrayBorder)
+							.frame(height: 1)
+							.padding(.top, 12)
+							.padding(.bottom, 8)
+						Text("Performance for each interest")
+							.font(.muli(.bold, size: 17))
+							.foregroundColor(.darkGray)
+							.align(to: .leading)
+					}
 				}
 				.padding(.horizontal)
 				HomeViewTopicPerformanceList()
@@ -37,8 +41,10 @@ struct HomeViewPerformanceCard: View {
 #if DEBUG
 struct HomeViewPerformanceCard_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeViewPerformanceCard()
-			.environmentObject(PREVIEW_CURRENT_STORE)
+		HomeViewPerformanceCard(
+			currentUser: PREVIEW_CURRENT_STORE.user
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

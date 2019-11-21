@@ -10,10 +10,16 @@ struct AuthenticationViewBottomGradient: View {
 		self.gradient = gradient
 	}
 	
+	var width: CGFloat {
+		SCREEN_SIZE.width * Self.screenToWidthRatio
+	}
+	
+	var height: CGFloat {
+		width * Self.aspectRatio
+	}
+	
 	var body: some View {
-		let width = SCREEN_SIZE.width * Self.screenToWidthRatio
-		let height = width * Self.aspectRatio
-		return Path { path in
+		Path { path in
 			path.addLines([
 				.init(x: 0, y: height),
 				.init(x: width, y: 0),

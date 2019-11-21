@@ -1,17 +1,23 @@
 import SwiftUI
 
 struct InitialViewBottomGradient: View {
-	static let height: CGFloat = 171.64
+	static let baseHeight: CGFloat = 171.64
 	static let midHeight: CGFloat = 91.64
+	
+	let addedHeight: CGFloat
+	
+	var height: CGFloat {
+		Self.baseHeight + addedHeight
+	}
 	
 	var body: some View {
 		Path { path in
 			let width = SCREEN_SIZE.width
 			path.addLines([
-				.init(x: 0, y: Self.height - Self.midHeight),
+				.init(x: 0, y: height),
+				.init(x: 0, y: Self.baseHeight - Self.midHeight),
 				.init(x: width, y: 0),
-				.init(x: width, y: Self.height),
-				.init(x: 0, y: Self.height)
+				.init(x: width, y: height)
 			])
 		}
 		.fill(LinearGradient(
@@ -19,14 +25,14 @@ struct InitialViewBottomGradient: View {
 			startPoint: .top,
 			endPoint: .bottom
 		))
-		.frame(height: Self.height)
+		.frame(height: height)
 	}
 }
 
 #if DEBUG
 struct InitialViewBottomGradient_Previews: PreviewProvider {
 	static var previews: some View {
-		InitialViewBottomGradient()
+		InitialViewBottomGradient(addedHeight: 30)
 	}
 }
 #endif

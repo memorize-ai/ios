@@ -4,21 +4,27 @@ struct HomeView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 		
 	var body: some View {
-		ZStack(alignment: .top) {
-			HomeViewTopGradient()
+		GeometryReader { geometry in
+			ZStack(alignment: .top) {
+				HomeViewTopGradient(
+					addedHeight: geometry.safeAreaInsets.top
+				)
 				.edgesIgnoringSafeArea(.all)
-			VStack(spacing: 20) {
-				HomeViewTopControls()
-					.padding(.horizontal, 23)
-				ScrollView {
-					HomeViewPerformanceCard()
+				VStack(spacing: 20) {
+					HomeViewTopControls()
 						.padding(.horizontal, 23)
-					HomeViewRecommendedDecksSection()
-						.padding(.top)
-					HomeViewMyDecksSection(
-						currentUser: currentStore.user
-					)
-					.padding(.top, 5)
+					ScrollView {
+						HomeViewPerformanceCard(
+							currentUser: self.currentStore.user
+						)
+						.padding(.horizontal, 23)
+						HomeViewRecommendedDecksSection()
+							.padding(.top)
+						HomeViewMyDecksSection(
+							currentUser: self.currentStore.user
+						)
+						.padding(.top, 5)
+					}
 				}
 			}
 		}

@@ -16,7 +16,7 @@ struct ChooseTopicsView: View {
 			destination: MainTabView()
 				.environmentObject(currentStore)
 		) {
-			XButton(.transparentWhite, height: 20)
+			XButton(.transparentWhite, height: 15)
 		}
 	}
 	

@@ -17,29 +17,33 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 				AuthenticationViewBottomGradient(self.bottomGradient)
 				.align(to: .bottomTrailing)
 				ZStack(alignment: .top) {
-					AuthenticationViewTopGradient(self.topGradient)
-					if
-						self.alternativeMessage == nil ||
-						self.alternativeButtonText == nil ||
-						self.alternativeButtonDestination == nil
-					{
-						Button(action: {
-							self.presentationMode.wrappedValue.dismiss()
-						}) {
-							LeftArrowHead(height: 20)
+					AuthenticationViewTopGradient(
+						self.topGradient,
+						addedHeight: geometry.safeAreaInsets.top
+					)
+					Group {
+						if
+							self.alternativeMessage == nil ||
+							self.alternativeButtonText == nil ||
+							self.alternativeButtonDestination == nil
+						{
+							Button(action: {
+								self.presentationMode.wrappedValue.dismiss()
+							}) {
+								LeftArrowHead(height: 20)
+							}
+							.align(to: .leading)
+							.padding(.leading, 33)
+						} else {
+							AuthenticationViewTopControls(
+								presentationMode: self.presentationMode,
+								alternativeMessage: self.alternativeMessage!,
+								alternativeButtonText: self.alternativeButtonText!,
+								alternativeButtonDestination: self.alternativeButtonDestination!
+							)
 						}
-						.align(to: .leading)
-						.padding(.leading, 33)
-						.padding(.top, 34)
-					} else {
-						AuthenticationViewTopControls(
-							presentationMode: self.presentationMode,
-							alternativeMessage: self.alternativeMessage!,
-							alternativeButtonText: self.alternativeButtonText!,
-							alternativeButtonDestination: self.alternativeButtonDestination!
-						)
-						.padding(.top, geometry.safeAreaInsets.top / 2)
 					}
+					.padding(.top, geometry.safeAreaInsets.top / 2)
 				}
 				.align(to: .top)
 				AuthenticationViewContentBox(

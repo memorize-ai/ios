@@ -33,7 +33,8 @@ final class RecommendedDecksViewModel: ViewModel {
 	}
 	
 	func getMaxDecksPerTopic(numberOfInterests: Int) -> Int {
-		numberOfInterests < 10
+		if numberOfInterests == 0 { return 0 } // TODO: Show top decks when you have no interests
+		return numberOfInterests < 10
 			? 30 / numberOfInterests
 			: 3
 	}

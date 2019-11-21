@@ -1,18 +1,24 @@
 import SwiftUI
 
 struct HomeViewTopGradient: View {
-	static let height = SCREEN_SIZE.height / 2.25
+	static let baseHeight = SCREEN_SIZE.height / 2.25
 	static let heightDifference: CGFloat = 80.79
+	
+	let addedHeight: CGFloat
+	
+	var height: CGFloat {
+		Self.baseHeight + addedHeight
+	}
 	
 	var body: some View {
 		Path { path in
 			path.addLines([
-				.init(x: 0, y: Self.height),
+				.init(x: 0, y: height),
 				.zero,
 				.init(x: SCREEN_SIZE.width, y: 0),
 				.init(
 					x: SCREEN_SIZE.width,
-					y: Self.height - Self.heightDifference
+					y: height - Self.heightDifference
 				)
 			])
 		}
@@ -24,14 +30,14 @@ struct HomeViewTopGradient: View {
 			startPoint: .top,
 			endPoint: .bottom
 		))
-		.frame(height: Self.height)
+		.frame(height: height)
 	}
 }
 
 #if DEBUG
 struct HomeViewTopGradient_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeViewTopGradient()
+		HomeViewTopGradient(addedHeight: 0)
 	}
 }
 #endif

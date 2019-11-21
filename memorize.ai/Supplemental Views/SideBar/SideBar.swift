@@ -24,51 +24,58 @@ struct SideBar<Content: View>: View {
 	}
 	
 	var body: some View {
-		ZStack(alignment: .leading) {
-			ZStack {
-				content
-				Color.black
-					.opacity(isShowing ? 0.3954 : 0)
-					.onTapGesture(perform: hide)
-					.edgesIgnoringSafeArea(.all)
-			}
-			.offset(x: isShowing ? extendedWidth : 0)
-			ZStack {
-				Color.lightGrayBackground
-					.shadow(
-						color: .black,
-						radius: isShowing ? 5 : 0,
-						x: isShowing ? -3 : 0
-					)
-				VStack(spacing: 0) {
-					VStack(alignment: .leading, spacing: 18) {
-						ZStack(alignment: .top) {
-							SideBarTopGradient(width: extendedWidth)
-							SearchBar(
-								$searchText,
-								placeholder: "Decks",
-								internalPadding: 12
-							)
-							.padding([.horizontal, .top])
+		GeometryReader { geometry in
+			ZStack(alignment: .leading) {
+				ZStack {
+					self.content
+					Color.black
+						.opacity(self.isShowing ? 0.3954 : 0)
+						.onTapGesture(perform: self.hide)
+						.edgesIgnoringSafeArea(.all)
+				}
+				.offset(x: self.isShowing ? self.extendedWidth : 0)
+				ZStack {
+					Color.lightGrayBackground
+						.shadow(
+							color: .black,
+							radius: self.isShowing ? 5 : 0,
+							x: self.isShowing ? -3 : 0
+						)
+					VStack(spacing: 0) {
+						VStack(alignment: .leading, spacing: 18) {
+							ZStack(alignment: .top) {
+								SideBarTopGradient(
+									width: self.extendedWidth,
+									addedHeight: geometry.safeAreaInsets.top
+								)
+								SearchBar(
+									self.$searchText,
+									placeholder: "Decks",
+									internalPadding: 12
+								)
+								.padding(.horizontal)
+								.padding(.top, geometry.safeAreaInsets.top + 12)
+							}
+							ScrollView {
+								SideBarSections(
+									currentUser: self.currentStore.user,
+									searchText: self.searchText
+								)
+							}
 						}
-						ScrollView {
-							SideBarSections(
-								currentUser: currentStore.user,
-								searchText: searchText
-							)
+						VStack(spacing: 2) {
+							SideBarSectionDivider()
+							UserLevelView(user: self.currentStore.user)
+								.padding([.horizontal, .bottom])
 						}
-					}
-					VStack(spacing: 2) {
-						SideBarSectionDivider()
-						UserLevelView(user: currentStore.user)
-							.padding([.horizontal, .bottom])
+						.padding(.bottom, geometry.safeAreaInsets.bottom)
 					}
 				}
+				.frame(width: self.extendedWidth)
+				.frame(maxHeight: .infinity)
+				.offset(x: self.isShowing ? 0 : -self.extendedWidth)
+				.edgesIgnoringSafeArea(.all)
 			}
-			.frame(width: extendedWidth)
-			.frame(maxHeight: .infinity)
-			.offset(x: isShowing ? 0 : -extendedWidth)
-			.edgesIgnoringSafeArea(.all)
 		}
 	}
 }
