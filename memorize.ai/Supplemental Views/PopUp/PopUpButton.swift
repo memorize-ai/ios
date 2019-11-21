@@ -13,8 +13,10 @@ struct PopUpButton<Icon: View>: View {
 				Text(text)
 					.font(.muli(.semiBold, size: 17))
 					.foregroundColor(textColor)
+				Spacer()
 			}
 		}
+		.frame(height: 50)
 	}
 }
 

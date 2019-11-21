@@ -46,7 +46,17 @@ struct PopUp<Content: View>: View {
 struct PopUp_Previews: PreviewProvider {
 	static var previews: some View {
 		PopUp(isShowing: .constant(true)) {
-			Text("Content")
+			PopUpButton(
+				icon: XButton(.purple, height: 15),
+				text: "Remove",
+				textColor: .extraPurple
+			) {}
+			PopUpDivider()
+			PopUpButton(
+				icon: XButton(.purple, height: 15),
+				text: "Remove",
+				textColor: .extraPurple
+			) {}
 		}
 	}
 }
