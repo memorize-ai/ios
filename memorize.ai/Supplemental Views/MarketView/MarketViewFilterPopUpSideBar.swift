@@ -3,10 +3,54 @@ import SwiftUI
 struct MarketViewFilterPopUpSideBar: View {
 	@EnvironmentObject var model: MarketViewModel
 	
+	var topicsButton: some View {
+		MarketViewFilterPopUpSideBarButton(
+			selectedIcon: {
+				
+			},
+			unselectedIcon: {
+				
+			},
+			isSelected: model.filterPopUpSideBarSelection == .topics
+		) {
+			self.model.filterPopUpSideBarSelection = .topics
+		}
+	}
+	
+	var ratingButton: some View {
+		MarketViewFilterPopUpSideBarButton(
+			selectedIcon: {
+				
+			},
+			unselectedIcon: {
+				
+			},
+			isSelected: model.filterPopUpSideBarSelection == .rating
+		) {
+			self.model.filterPopUpSideBarSelection = .rating
+		}
+	}
+	
+	var downloadsButton: some View {
+		MarketViewFilterPopUpSideBarButton(
+			selectedIcon: {
+				
+			},
+			unselectedIcon: {
+				
+			},
+			isSelected: model.filterPopUpSideBarSelection == .downloads
+		) {
+			self.model.filterPopUpSideBarSelection = .downloads
+		}
+	}
+	
 	var body: some View {
 		HStack(spacing: 0) {
 			VStack {
-				// TODO: Add elements
+				topicsButton
+				ratingButton
+				downloadsButton
 				Spacer()
 			}
 			.frame(width: 50)
