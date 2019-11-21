@@ -32,7 +32,7 @@ extension View {
 		))
 	}
 	
-	func foregroundColor(_ color: UIColor) -> some View {
+	func foregroundColor(literal color: UIColor) -> some View {
 		foregroundColor(.init(color))
 	}
 }

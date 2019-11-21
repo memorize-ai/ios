@@ -35,7 +35,7 @@ struct PopUp<Content: View>: View {
 			ZStack(alignment: .bottom) {
 				Color.black
 					.opacity(self.isShowing ? 0.2 : 0)
-					.onTapGesture(perform: self.hide)
+					.onTapGesture(perform: self.hide) // FIXME: Not clickable
 					.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 0) {
 					if self.contentHeight > self.maxContentHeight {
@@ -50,9 +50,8 @@ struct PopUp<Content: View>: View {
 					}
 					PopUpDivider(horizontalPadding: 0)
 					Button(action: self.hide) {
-						ZStack {
+						ZStack(alignment: .top) {
 							Color.lightGrayBackground
-								.edgesIgnoringSafeArea(.all)
 							HStack(spacing: 20) {
 								XButton(.purple, height: 15)
 								Text("Cancel")
@@ -61,9 +60,10 @@ struct PopUp<Content: View>: View {
 								Spacer()
 							}
 							.padding(.horizontal, 30)
+							.padding(.top, 13)
 						}
 					}
-					.frame(height: 50)
+					.frame(height: 50 + geometry.safeAreaInsets.bottom)
 				}
 				.background(Color.white)
 				.offset(
@@ -73,6 +73,7 @@ struct PopUp<Content: View>: View {
 				)
 			}
 		}
+		.edgesIgnoringSafeArea(.all)
 	}
 }
 
