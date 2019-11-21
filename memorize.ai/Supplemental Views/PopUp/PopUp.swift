@@ -13,16 +13,24 @@ struct PopUp<Content: View>: View {
 		self.content = content()
 	}
 	
+	func hide() {
+		// TODO: Hide view with animation
+		isShowing = false
+	}
+	
 	var body: some View {
-		GeometryReader { geometry in
+		ZStack(alignment: .bottom) {
+			Color.black
+				.opacity(isShowing ? 0.2 : 0)
+				.onTapGesture(perform: hide)
+				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 0) {
 				self.content
 				PopUpDivider(horizontalPadding: 0)
-				Button(action: {
-					self.isShowing = false
-				}) {
+				Button(action: hide) {
 					ZStack {
 						Color.lightGrayBackground
+							.edgesIgnoringSafeArea(.all)
 						HStack(spacing: 20) {
 							XButton(.purple, height: 15)
 							Text("Cancel")
@@ -35,6 +43,7 @@ struct PopUp<Content: View>: View {
 				}
 				.frame(height: 50)
 			}
+			.background(Color.white)
 		}
 	}
 }
@@ -42,18 +51,21 @@ struct PopUp<Content: View>: View {
 #if DEBUG
 struct PopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		PopUp(isShowing: .constant(true)) {
-			PopUpButton(
-				icon: XButton(.purple, height: 15),
-				text: "Remove",
-				textColor: .extraPurple
-			) {}
-			PopUpDivider()
-			PopUpButton(
-				icon: XButton(.purple, height: 15),
-				text: "Remove",
-				textColor: .extraPurple
-			) {}
+		ZStack(alignment: .bottom) {
+			Color.lightGrayBackground
+			PopUp(isShowing: .constant(true)) {
+				PopUpButton(
+					icon: XButton(.purple, height: 15),
+					text: "Remove",
+					textColor: .extraPurple
+				) {}
+				PopUpDivider()
+				PopUpButton(
+					icon: XButton(.purple, height: 15),
+					text: "Remove",
+					textColor: .extraPurple
+				) {}
+			}
 		}
 	}
 }
