@@ -5,14 +5,17 @@ struct PopUp<Content: View>: View {
 	
 	let contentHeight: CGFloat
 	let content: Content
+	let onHide: (() -> Void)?
 	
 	init(
 		isShowing: Binding<Bool>,
 		contentHeight: CGFloat,
+		onHide: (() -> Void)? = nil,
 		@ViewBuilder content: () -> Content
 	) {
 		_isShowing = isShowing
 		self.contentHeight = contentHeight
+		self.onHide = onHide
 		self.content = content()
 	}
 	
@@ -28,6 +31,7 @@ struct PopUp<Content: View>: View {
 		popUpWithAnimation {
 			isShowing = false
 		}
+		onHide?()
 	}
 	
 	var body: some View {
