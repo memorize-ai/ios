@@ -1,12 +1,15 @@
 import SwiftUI
 
 struct MarketViewFilterPopUp: View {
+	static let contentFullHeightRatio: CGFloat = 424 / 667
+	static let contentHeight = SCREEN_SIZE.height * contentFullHeightRatio
+	
 	@EnvironmentObject var model: MarketViewModel
 	
 	var body: some View {
 		PopUp(
 			isShowing: $model.isFilterPopUpShowing,
-			contentHeight: 0 // TODO: Filter pop up view content height
+			contentHeight: Self.contentHeight
 		) {
 			EmptyView() // TODO: Filter pop up view content
 		}
