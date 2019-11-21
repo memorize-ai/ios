@@ -120,6 +120,7 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 							}
 							.case(.market) {
 								MarketView()
+									.environmentObject(MarketViewModel())
 							}
 							.case(.decks) {
 								DecksView()

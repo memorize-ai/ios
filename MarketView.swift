@@ -9,26 +9,7 @@ struct MarketView: View {
 	static let horizontalPadding: CGFloat = 23
 	
 	@EnvironmentObject var currentStore: CurrentStore
-	
-	@ObservedObject var model = MarketViewModel()
-	
-	var sortPopUp: some View {
-		PopUp(
-			isShowing: $model.isSortPopUpShowing,
-			contentHeight: 50 * 3 + 2
-		) {
-			EmptyView() // TODO: Sort pop up view content
-		}
-	}
-	
-	var filterPopUp: some View {
-		PopUp(
-			isShowing: $model.isFilterPopUpShowing,
-			contentHeight: 0 // TODO: Filter pop up view content height
-		) {
-			EmptyView() // TODO: Filter pop up view content
-		}
-	}
+	@EnvironmentObject var model: MarketViewModel
 	
 	var gridElements: [DeckCellWithGetButton] {
 		model.searchResults.map { deck in
@@ -53,8 +34,8 @@ struct MarketView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
-				self.sortPopUp
-				self.filterPopUp
+				MarketViewSortPopUp()
+				MarketViewFilterPopUp()
 				ZStack(alignment: .top) {
 					HomeViewTopGradient(
 						addedHeight: geometry.safeAreaInsets.top
@@ -81,6 +62,7 @@ struct MarketView: View {
 struct MarketView_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketView()
+			.environmentObject(MarketViewModel())
 	}
 }
 #endif

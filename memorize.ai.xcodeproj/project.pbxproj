@@ -135,6 +135,8 @@
 		4DD5FE82238709A400E70251 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE81238709A400E70251 /* PopUp.swift */; };
 		4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE8323870C7200E70251 /* PopUpDivider.swift */; };
 		4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE8523870ED400E70251 /* PopUpButton.swift */; };
+		4DD5FE882387357F00E70251 /* MarketViewSortPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE872387357F00E70251 /* MarketViewSortPopUp.swift */; };
+		4DD5FE8A238735F600E70251 /* MarketViewFilterPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE89238735F600E70251 /* MarketViewFilterPopUp.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -311,6 +313,8 @@
 		4DD5FE81238709A400E70251 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		4DD5FE8323870C7200E70251 /* PopUpDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDivider.swift; sourceTree = "<group>"; };
 		4DD5FE8523870ED400E70251 /* PopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButton.swift; sourceTree = "<group>"; };
+		4DD5FE872387357F00E70251 /* MarketViewSortPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewSortPopUp.swift; sourceTree = "<group>"; };
+		4DD5FE89238735F600E70251 /* MarketViewFilterPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewFilterPopUp.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -634,6 +638,8 @@
 				4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */,
 				4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */,
 				4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */,
+				4DD5FE872387357F00E70251 /* MarketViewSortPopUp.swift */,
+				4DD5FE89238735F600E70251 /* MarketViewFilterPopUp.swift */,
 			);
 			path = MarketView;
 			sourceTree = "<group>";
@@ -1122,6 +1128,7 @@
 				4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */,
 				4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */,
 				4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */,
+				4DD5FE8A238735F600E70251 /* MarketViewFilterPopUp.swift in Sources */,
 				4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */,
 				4D0C028A237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift in Sources */,
 				4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */,
@@ -1184,6 +1191,7 @@
 				4D32A5322368FB710072AA70 /* Image.swift in Sources */,
 				4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */,
 				4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */,
+				4DD5FE882387357F00E70251 /* MarketViewSortPopUp.swift in Sources */,
 				4D9AAEC023852F5E00C85EC2 /* UserLevelSlider.swift in Sources */,
 				4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
