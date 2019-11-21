@@ -13,6 +13,9 @@ final class MarketViewModel: ObservableObject {
 		}
 	}
 	
+	@Published var isSortPopUpShowing = false
+	@Published var isFilterPopUpShowing = false
+	
 	@Published var sortAlgorithm = SortAlgorithm.relevance
 	
 	@Published var topicsFilter: [Topic]?
