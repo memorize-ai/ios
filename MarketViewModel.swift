@@ -23,5 +23,10 @@ final class MarketViewModel: ObservableObject {
 	
 	func loadSearchResults() {
 		// TODO: Load search results
+		print("LOAD_SEARCH_RESULTS:")
+		print("\tsortAlgorithm = \(sortAlgorithm)")
+		print("\ttopicsFilter = \(String(describing: topicsFilter))")
+		print("\tratingFilter = \(String(describing: ratingFilter))")
+		print("\tdownloadsFilter = \(String(describing: downloadsFilter))")
 	}
 }
