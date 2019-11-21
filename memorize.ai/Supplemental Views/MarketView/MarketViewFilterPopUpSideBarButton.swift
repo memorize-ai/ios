@@ -14,15 +14,18 @@ struct MarketViewFilterPopUpSideBarButton<
 	}
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			Button(action: onClick) {
 				ZStack {
 					backgroundColor
-					if isSelected {
-						selectedIcon()
-					} else {
-						unselectedIcon()
+					Group {
+						if isSelected {
+							selectedIcon()
+						} else {
+							unselectedIcon()
+						}
 					}
+					.padding(14)
 				}
 			}
 			.frame(height: 50)

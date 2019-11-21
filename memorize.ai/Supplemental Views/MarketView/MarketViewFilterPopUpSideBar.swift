@@ -6,10 +6,16 @@ struct MarketViewFilterPopUpSideBar: View {
 	var topicsButton: some View {
 		MarketViewFilterPopUpSideBarButton(
 			selectedIcon: {
-				
+				Image.selectedFilterSideBarTopicsIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
 			},
 			unselectedIcon: {
-				
+				Image.filterSideBarTopicsIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
 			},
 			isSelected: model.filterPopUpSideBarSelection == .topics
 		) {
@@ -20,10 +26,16 @@ struct MarketViewFilterPopUpSideBar: View {
 	var ratingButton: some View {
 		MarketViewFilterPopUpSideBarButton(
 			selectedIcon: {
-				
+				Image.selectedFilterSideBarRatingIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
 			},
 			unselectedIcon: {
-				
+				Image.filterSideBarRatingIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
 			},
 			isSelected: model.filterPopUpSideBarSelection == .rating
 		) {
@@ -34,10 +46,16 @@ struct MarketViewFilterPopUpSideBar: View {
 	var downloadsButton: some View {
 		MarketViewFilterPopUpSideBarButton(
 			selectedIcon: {
-				
+				Image.selectedFilterSideBarDownloadsIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
 			},
 			unselectedIcon: {
-				
+				Image.filterSideBarDownloadsIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
 			},
 			isSelected: model.filterPopUpSideBarSelection == .downloads
 		) {
@@ -47,7 +65,7 @@ struct MarketViewFilterPopUpSideBar: View {
 	
 	var body: some View {
 		HStack(spacing: 0) {
-			VStack {
+			VStack(spacing: 0) {
 				topicsButton
 				ratingButton
 				downloadsButton
