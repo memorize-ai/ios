@@ -12,17 +12,17 @@ struct MarketViewFilterPopUp: View {
 			isShowing: $model.isFilterPopUpShowing,
 			contentHeight: Self.contentHeight
 		) {
-			HStack {
+			HStack(spacing: 0) {
 				MarketViewFilterPopUpSideBar()
 				SwitchOver(model.filterPopUpSideBarSelection)
 					.case(.topics) {
-						EmptyView() // TODO: Show topics list
+						Text("Topics") // TODO: Show topics list
 					}
 					.case(.rating) {
-						EmptyView() // TODO: Show rating slider
+						Text("Rating") // TODO: Show rating slider
 					}
 					.case(.downloads) {
-						EmptyView() // TODO: Show downloads slider
+						Text("Downloads") // TODO: Show downloads slider
 					}
 			}
 		}
