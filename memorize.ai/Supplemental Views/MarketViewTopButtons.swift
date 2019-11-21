@@ -9,13 +9,17 @@ struct MarketViewTopButtons: View {
 				icon: .sortIcon,
 				title: "SORT"
 			) {
-				self.model.isSortPopUpShowing = true
+				popUpWithAnimation {
+					self.model.isSortPopUpShowing = true
+				}
 			}
 			MarketViewSearchStateButton(
 				icon: .filterIcon,
 				title: "FILTER"
 			) {
-				self.model.isFilterPopUpShowing = true
+				popUpWithAnimation {
+					self.model.isFilterPopUpShowing = true
+				}
 			}
 		}
 	}
