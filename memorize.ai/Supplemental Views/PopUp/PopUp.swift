@@ -3,14 +3,21 @@ import SwiftUI
 struct PopUp<Content: View>: View {
 	@Binding var isShowing: Bool
 	
+	let contentHeight: CGFloat
 	let content: Content
 	
 	init(
 		isShowing: Binding<Bool>,
+		contentHeight: CGFloat,
 		@ViewBuilder content: () -> Content
 	) {
 		_isShowing = isShowing
+		self.contentHeight = contentHeight
 		self.content = content()
+	}
+	
+	var maxHeight: CGFloat {
+		SCREEN_SIZE.height * 2 / 3
 	}
 	
 	func hide() {
@@ -25,7 +32,16 @@ struct PopUp<Content: View>: View {
 				.onTapGesture(perform: hide)
 				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 0) {
-				self.content
+				if contentHeight > maxHeight {
+					ScrollView {
+						VStack(spacing: 0) {
+							content
+						}
+					}
+					.frame(height: maxHeight)
+				} else {
+					content
+				}
 				PopUpDivider(horizontalPadding: 0)
 				Button(action: hide) {
 					ZStack {
@@ -53,7 +69,7 @@ struct PopUp_Previews: PreviewProvider {
 	static var previews: some View {
 		ZStack(alignment: .bottom) {
 			Color.lightGrayBackground
-			PopUp(isShowing: .constant(true)) {
+			PopUp(isShowing: .constant(true), contentHeight: 50 * 2 + 1) {
 				PopUpButton(
 					icon: XButton(.purple, height: 15),
 					text: "Remove",
