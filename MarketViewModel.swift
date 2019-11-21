@@ -7,12 +7,6 @@ final class MarketViewModel: ObservableObject {
 		case recentlyUpdated
 	}
 	
-	enum Filter {
-		case topics([Topic])
-		case rating(greaterThan: Double)
-		case downloads(greaterThan: Int)
-	}
-	
 	@Published var searchText = "" {
 		didSet {
 			loadSearchResults()
@@ -20,7 +14,10 @@ final class MarketViewModel: ObservableObject {
 	}
 	
 	@Published var sortAlgorithm = SortAlgorithm.relevance
-	@Published var filters = [Filter]()
+	
+	@Published var topicsFilter: [Topic]?
+	@Published var ratingFilter: Double?
+	@Published var downloadsFilter: Int?
 	
 	@Published var searchResults = [Deck]()
 	
