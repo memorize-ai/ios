@@ -35,7 +35,7 @@ struct PopUp<Content: View>: View {
 			ZStack(alignment: .bottom) {
 				Color.black
 					.opacity(self.isShowing ? 0.2 : 0)
-					.onTapGesture(perform: self.hide) // FIXME: Not clickable
+					.onTapGesture(perform: self.hide)
 					.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 0) {
 					if self.contentHeight > self.maxContentHeight {

@@ -34,8 +34,6 @@ struct MarketView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
-				MarketViewSortPopUp()
-				MarketViewFilterPopUp()
 				ZStack(alignment: .top) {
 					HomeViewTopGradient(
 						addedHeight: geometry.safeAreaInsets.top
@@ -52,6 +50,8 @@ struct MarketView: View {
 						self.grid
 					}
 				}
+				MarketViewSortPopUp()
+				MarketViewFilterPopUp()
 			}
 		}
 		.onAppear(perform: self.model.loadSearchResults)
