@@ -31,4 +31,8 @@ extension View {
 			antialiased: antialiased
 		))
 	}
+	
+	func foregroundColor(_ color: UIColor) -> some View {
+		foregroundColor(.init(color))
+	}
 }

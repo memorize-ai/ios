@@ -132,6 +132,8 @@
 		4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */; };
 		4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD52362D90F0007E3E6 /* HomeView.swift */; };
 		4DD34CD82362E33A0007E3E6 /* CurrentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD72362E33A0007E3E6 /* CurrentStore.swift */; };
+		4DD5FE82238709A400E70251 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE81238709A400E70251 /* PopUp.swift */; };
+		4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE8323870C7200E70251 /* PopUpDivider.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -305,6 +307,8 @@
 		4DD34CD32362D79C0007E3E6 /* NavigateTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTo.swift; sourceTree = "<group>"; };
 		4DD34CD52362D90F0007E3E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4DD34CD72362E33A0007E3E6 /* CurrentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStore.swift; sourceTree = "<group>"; };
+		4DD5FE81238709A400E70251 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+		4DD5FE8323870C7200E70251 /* PopUpDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDivider.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -752,6 +756,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		4DD5FE802387097300E70251 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				4DD5FE81238709A400E70251 /* PopUp.swift */,
+				4DD5FE8323870C7200E70251 /* PopUpDivider.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		4DD7AADB236A713100F12D39 /* RecommendedDecksView */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +801,7 @@
 				4D0C028B237D3EA90062BC14 /* Topic */,
 				4D64BCC42367CFA700F6FD07 /* General */,
 				4D16D9A02371F54800FE8E5E /* SideBar */,
+				4DD5FE802387097300E70251 /* PopUp */,
 				4D458A5E237C97A900A9776A /* HamburgerMenu */,
 				4DDCC9A4237BE9DD00EFC857 /* MainTabView */,
 				4D690254235FAC7C00533E20 /* InitialView */,
@@ -1150,6 +1164,7 @@
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
 				4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */,
 				4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */,
+				4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */,
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4D0C028D237D3EB50062BC14 /* BasicTopicCell.swift in Sources */,
@@ -1205,6 +1220,7 @@
 				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
 				4D3B949623727260002F441E /* SideBarSectionTitle.swift in Sources */,
 				4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */,
+				4DD5FE82238709A400E70251 /* PopUp.swift in Sources */,
 				4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,
