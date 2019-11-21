@@ -134,6 +134,7 @@
 		4DD34CD82362E33A0007E3E6 /* CurrentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD34CD72362E33A0007E3E6 /* CurrentStore.swift */; };
 		4DD5FE82238709A400E70251 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE81238709A400E70251 /* PopUp.swift */; };
 		4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE8323870C7200E70251 /* PopUpDivider.swift */; };
+		4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5FE8523870ED400E70251 /* PopUpButton.swift */; };
 		4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */; };
 		4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */; };
 		4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */; };
@@ -309,6 +310,7 @@
 		4DD34CD72362E33A0007E3E6 /* CurrentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStore.swift; sourceTree = "<group>"; };
 		4DD5FE81238709A400E70251 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		4DD5FE8323870C7200E70251 /* PopUpDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDivider.swift; sourceTree = "<group>"; };
+		4DD5FE8523870ED400E70251 /* PopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButton.swift; sourceTree = "<group>"; };
 		4DD8D774235F06C6009D1261 /* InitialViewPaginatedFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeatures.swift; sourceTree = "<group>"; };
 		4DD8D776235F5AC4009D1261 /* InitialViewFeaturePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFeaturePage.swift; sourceTree = "<group>"; };
 		4DD8D77B235F65B0009D1261 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -760,6 +762,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD5FE81238709A400E70251 /* PopUp.swift */,
+				4DD5FE8523870ED400E70251 /* PopUpButton.swift */,
 				4DD5FE8323870C7200E70251 /* PopUpDivider.swift */,
 			);
 			path = PopUp;
@@ -1140,6 +1143,7 @@
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
 				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
+				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
 				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
 				4DBA39682360ED0F00B91596 /* View.swift in Sources */,
