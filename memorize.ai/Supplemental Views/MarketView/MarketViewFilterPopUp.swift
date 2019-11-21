@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUIX
 
 struct MarketViewFilterPopUp: View {
 	static let contentFullHeightRatio: CGFloat = 424 / 667
@@ -11,7 +12,19 @@ struct MarketViewFilterPopUp: View {
 			isShowing: $model.isFilterPopUpShowing,
 			contentHeight: Self.contentHeight
 		) {
-			EmptyView() // TODO: Filter pop up view content
+			HStack {
+				MarketViewFilterPopUpSideBar()
+				SwitchOver(model.filterPopUpSideBarSelection)
+					.case(.topics) {
+						EmptyView() // TODO: Show topics list
+					}
+					.case(.rating) {
+						EmptyView() // TODO: Show rating slider
+					}
+					.case(.downloads) {
+						EmptyView() // TODO: Show downloads slider
+					}
+			}
 		}
 	}
 }

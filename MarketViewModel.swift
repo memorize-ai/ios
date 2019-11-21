@@ -1,6 +1,12 @@
 import Combine
 
 final class MarketViewModel: ObservableObject {
+	enum FilterPopUpSideBarSelection {
+		case topics
+		case rating
+		case downloads
+	}
+	
 	enum SortAlgorithm {
 		case relevance
 		case top
@@ -15,6 +21,8 @@ final class MarketViewModel: ObservableObject {
 	
 	@Published var isSortPopUpShowing = false
 	@Published var isFilterPopUpShowing = false
+	
+	@Published var filterPopUpSideBarSelection = FilterPopUpSideBarSelection.topics
 	
 	@Published var sortAlgorithm = SortAlgorithm.relevance
 	
