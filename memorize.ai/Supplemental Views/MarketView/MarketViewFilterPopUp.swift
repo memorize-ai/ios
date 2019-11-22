@@ -37,7 +37,7 @@ struct MarketViewFilterPopUp: View {
 							trailingText:
 								"download\(model.downloadsFilter == 1 ? "" : "s")",
 							lowerBound: 0,
-							upperBound: 10000
+							upperBound: 10e3
 						)
 					}
 					.frame(height: Self.contentHeight)
