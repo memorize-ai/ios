@@ -40,8 +40,9 @@ struct MarketViewFilterPopUpContentWithSlider: View {
 				maximumValueLabel: sliderValueLabel(upperBound),
 				label: EmptyView.init
 			)
+			Spacer()
 		}
-		.padding(.horizontal)
+		.padding()
 	}
 }
 

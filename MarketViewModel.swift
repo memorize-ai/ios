@@ -27,8 +27,8 @@ final class MarketViewModel: ObservableObject {
 	@Published var sortAlgorithm = SortAlgorithm.relevance
 	
 	@Published var topicsFilter: [Topic]?
-	@Published var ratingFilter: Double?
-	@Published var downloadsFilter: Int?
+	@Published var ratingFilter = 0.0
+	@Published var downloadsFilter = 0.0
 	
 	@Published var searchResults = [Deck]()
 	
@@ -38,8 +38,8 @@ final class MarketViewModel: ObservableObject {
 		print("\tsearchText = \"\(searchText)\"")
 		print("\tsortAlgorithm = \(sortAlgorithm)")
 		print("\ttopicsFilter = \(String(describing: topicsFilter))")
-		print("\tratingFilter = \(String(describing: ratingFilter))")
-		print("\tdownloadsFilter = \(String(describing: downloadsFilter))")
+		print("\tratingFilter = \(ratingFilter)")
+		print("\tdownloadsFilter = \(downloadsFilter)")
 	}
 	
 	func isTopicSelected(_ topic: Topic) -> Bool {

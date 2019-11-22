@@ -21,10 +21,24 @@ struct MarketViewFilterPopUp: View {
 						MarketViewFilterPopUpTopicsContent()
 					}
 					.case(.rating) {
-						Text("Rating") // TODO: Show rating slider
+						MarketViewFilterPopUpContentWithSlider(
+							value: $model.ratingFilter,
+							leadingText: "Must have over",
+							trailingText:
+								"star\(model.ratingFilter == 1 ? "" : "s")",
+							lowerBound: 0,
+							upperBound: 5
+						)
 					}
 					.case(.downloads) {
-						Text("Downloads") // TODO: Show downloads slider
+						MarketViewFilterPopUpContentWithSlider(
+							value: $model.downloadsFilter,
+							leadingText: "Must have over",
+							trailingText:
+								"download\(model.downloadsFilter == 1 ? "" : "s")",
+							lowerBound: 0,
+							upperBound: 10 * 1000
+						)
 					}
 					.frame(height: Self.contentHeight)
 				Spacer()
