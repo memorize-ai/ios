@@ -45,22 +45,22 @@ struct MarketViewFilterPopUpSideBarButton_Previews: PreviewProvider {
 		VStack {
 			MarketViewFilterPopUpSideBarButton(
 				selectedIcon: {
-					Image.grayDownloadIcon // TODO: Change to white download icon
+					Image.selectedFilterSideBarDownloadsIcon
 						.resizable()
 				},
 				unselectedIcon: {
-					Image.grayDownloadIcon
+					Image.filterSideBarDownloadsIcon
 						.resizable()
 				},
 				isSelected: true
 			) {}
 			MarketViewFilterPopUpSideBarButton(
 				selectedIcon: {
-					Image.grayDownloadIcon // TODO: Change to white download icon
+					Image.selectedFilterSideBarDownloadsIcon
 						.resizable()
 				},
 				unselectedIcon: {
-					Image.grayDownloadIcon
+					Image.filterSideBarDownloadsIcon
 						.resizable()
 				},
 				isSelected: false
