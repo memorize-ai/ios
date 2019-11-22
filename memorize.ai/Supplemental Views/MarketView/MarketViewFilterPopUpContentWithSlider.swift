@@ -14,18 +14,34 @@ struct MarketViewFilterPopUpContentWithSlider: View {
 			.foregroundColor(.lightGrayText)
 	}
 	
+	func sliderValueLabel(_ value: Double) -> some View {
+		Text(value.formatted)
+			.font(.muli(.bold, size: 16))
+			.foregroundColor(.darkGray)
+	}
+	
 	var body: some View {
-		HStack(spacing: 6) {
-			lightText(leadingText)
-			CustomRectangle(background: Color.darkBlue) {
-				Text(value.formatted)
-					.font(.muli(.extraBold, size: 16))
-					.foregroundColor(.white)
-					.padding(.horizontal, 8)
-					.padding(.vertical, 4)
+		VStack(alignment: .leading) {
+			HStack(spacing: 6) {
+				lightText(leadingText)
+				CustomRectangle(background: Color.darkBlue) {
+					Text(value.formatted)
+						.font(.muli(.extraBold, size: 16))
+						.foregroundColor(.white)
+						.padding(.horizontal, 8)
+						.padding(.vertical, 4)
+				}
+				lightText(trailingText)
 			}
-			lightText(trailingText)
+			Slider(
+				value: $value,
+				in: lowerBound...upperBound,
+				minimumValueLabel: sliderValueLabel(lowerBound),
+				maximumValueLabel: sliderValueLabel(upperBound),
+				label: EmptyView.init
+			)
 		}
+		.padding(.horizontal)
 	}
 }
 
