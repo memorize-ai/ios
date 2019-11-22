@@ -28,7 +28,7 @@ struct MarketViewFilterPopUpContentWithSlider: View {
 				CustomRectangle(
 					background: value.isZero
 						? Color.darkGray
-						: Color.darkBlue // TODO: Add animation
+						: Color.darkBlue
 				) {
 					Text(
 						formatAsInt
