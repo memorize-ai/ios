@@ -7,6 +7,7 @@ struct MarketViewFilterPopUpContentWithSlider: View {
 	let trailingText: String
 	let lowerBound: Double
 	let upperBound: Double
+	let formatAsInt: Bool
 	
 	func lightText(_ text: String) -> some View {
 		Text(text)
@@ -24,13 +25,22 @@ struct MarketViewFilterPopUpContentWithSlider: View {
 		VStack(alignment: .leading) {
 			HStack(spacing: 6) {
 				lightText(leadingText)
-				CustomRectangle(background: Color.darkBlue) {
-					Text(value.formatted)
-						.font(.muli(.extraBold, size: 16))
-						.foregroundColor(.white)
-						.padding(.horizontal, 8)
-						.padding(.vertical, 4)
+				CustomRectangle(
+					background: value.isZero
+						? Color.darkGray
+						: Color.darkBlue // TODO: Add animation
+				) {
+					Text(
+						formatAsInt
+							? value.formattedAsInt
+							: value.formatted
+					)
+					.font(.muli(.extraBold, size: 16))
+					.foregroundColor(.white)
+					.padding(.horizontal, 8)
+					.padding(.vertical, 4)
 				}
+				.opacity(value.isZero ? 0.5 : 1)
 				lightText(trailingText)
 			}
 			Slider(
@@ -47,15 +57,24 @@ struct MarketViewFilterPopUpContentWithSlider: View {
 }
 
 #if DEBUG
-struct MarketViewFilterPopUpContentWithSlider_Previews: PreviewProvider {
-	static var previews: some View {
+struct MarketViewFilterPopUpContentWithSlider_Preview: View {
+	@State var value = 7800.0
+	
+	var body: some View {
 		MarketViewFilterPopUpContentWithSlider(
-			value: .constant(7800),
+			value: $value,
 			leadingText: "Must have over",
 			trailingText: "downloads",
 			lowerBound: 0,
-			upperBound: 10000
+			upperBound: 10000,
+			formatAsInt: true
 		)
+	}
+}
+
+struct MarketViewFilterPopUpContentWithSlider_Previews: PreviewProvider {
+	static var previews: some View {
+		MarketViewFilterPopUpContentWithSlider_Preview()
 	}
 }
 #endif

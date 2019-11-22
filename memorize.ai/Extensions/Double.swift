@@ -22,6 +22,12 @@ extension Double {
 		}
 	}
 	
+	var formattedAsInt: String {
+		abs(self) < 1000
+			? String(Int(self))
+			: formatted
+	}
+	
 	var oneDecimalPlace: Double {
 		(self * 10).rounded() / 10
 	}

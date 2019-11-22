@@ -27,7 +27,8 @@ struct MarketViewFilterPopUp: View {
 							trailingText:
 								"star\(model.ratingFilter == 1 ? "" : "s")",
 							lowerBound: 0,
-							upperBound: 5
+							upperBound: 5,
+							formatAsInt: false
 						)
 					}
 					.case(.downloads) {
@@ -37,7 +38,8 @@ struct MarketViewFilterPopUp: View {
 							trailingText:
 								"download\(model.downloadsFilter == 1 ? "" : "s")",
 							lowerBound: 0,
-							upperBound: 10e3
+							upperBound: 10e3,
+							formatAsInt: true
 						)
 					}
 					.frame(height: Self.contentHeight)
