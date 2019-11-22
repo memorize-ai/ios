@@ -40,4 +40,14 @@ final class MarketViewModel: ObservableObject {
 		print("\tratingFilter = \(String(describing: ratingFilter))")
 		print("\tdownloadsFilter = \(String(describing: downloadsFilter))")
 	}
+	
+	func isTopicSelected(_ topic: Topic) -> Bool {
+		topicsFilter?.contains(topic) ?? true
+	}
+	
+	func toggleTopicSelect(_ topic: Topic) {
+		isTopicSelected(topic)
+			? topicsFilter?.removeAll { $0 == topic }
+			: topicsFilter?.append(topic)
+	}
 }

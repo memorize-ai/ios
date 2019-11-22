@@ -62,6 +62,7 @@ struct MarketView: View {
 struct MarketView_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketView()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			.environmentObject(MarketViewModel())
 	}
 }

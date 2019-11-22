@@ -14,9 +14,10 @@ struct MarketViewFilterPopUp: View {
 		) {
 			HStack(spacing: 0) {
 				MarketViewFilterPopUpSideBar()
+				Spacer()
 				SwitchOver(model.filterPopUpSideBarSelection)
 					.case(.topics) {
-						Text("Topics") // TODO: Show topics list
+						MarketViewFilterPopUpTopicsContent()
 					}
 					.case(.rating) {
 						Text("Rating") // TODO: Show rating slider
@@ -24,6 +25,8 @@ struct MarketViewFilterPopUp: View {
 					.case(.downloads) {
 						Text("Downloads") // TODO: Show downloads slider
 					}
+					.frame(height: Self.contentHeight)
+				Spacer()
 			}
 		}
 	}
@@ -33,6 +36,7 @@ struct MarketViewFilterPopUp: View {
 struct MarketViewFilterPopUp_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketViewFilterPopUp()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			.environmentObject(MarketViewModel())
 	}
 }
