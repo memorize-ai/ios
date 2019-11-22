@@ -10,7 +10,8 @@ struct MarketViewFilterPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $model.isFilterPopUpShowing,
-			contentHeight: Self.contentHeight
+			contentHeight: Self.contentHeight,
+			onHide: model.loadSearchResults
 		) {
 			HStack(spacing: 0) {
 				MarketViewFilterPopUpSideBar()
