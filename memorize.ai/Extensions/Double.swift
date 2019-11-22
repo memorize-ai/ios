@@ -4,7 +4,7 @@ extension Double {
 	var formatted: String {
 		let logResult = log10(abs(self))
 		let decimalResult =
-			(self / pow(10, floor(logResult))).oneDecimalPlace
+			(self / pow(10, min(3, floor(logResult)))).oneDecimalPlace
 		let formattedDecimalResult = decimalResult.isInt
 			? String(Int(decimalResult))
 			: String(decimalResult)
