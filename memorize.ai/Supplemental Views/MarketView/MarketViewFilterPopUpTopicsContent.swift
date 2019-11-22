@@ -32,9 +32,6 @@ struct MarketViewFilterPopUpTopicsContent: View {
 			)
 			.padding(.top, 8)
 		}
-		.onAppear {
-			self.currentStore.loadAllTopics()
-		}
 	}
 }
 

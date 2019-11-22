@@ -1,7 +1,13 @@
 import SwiftUI
 
 struct MarketViewTopButtons: View {
-	@ObservedObject var model: MarketViewModel
+	@EnvironmentObject var currentStore: CurrentStore
+	@EnvironmentObject var model: MarketViewModel
+	
+	func loadTopicsIfNeeded() {
+		guard model.filterPopUpSideBarSelection == .topics else { return }
+		currentStore.loadAllTopics()
+	}
 	
 	var body: some View {
 		HStack(spacing: 13) {
@@ -20,6 +26,7 @@ struct MarketViewTopButtons: View {
 				popUpWithAnimation {
 					self.model.isFilterPopUpShowing = true
 				}
+				self.loadTopicsIfNeeded()
 			}
 		}
 	}
@@ -28,7 +35,9 @@ struct MarketViewTopButtons: View {
 #if DEBUG
 struct MarketViewTopButtons_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewTopButtons(model: .init())
+		MarketViewTopButtons()
+			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(MarketViewModel())
 	}
 }
 #endif

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MarketViewTopControls: View {
-	@Binding var searchText: String
+	@EnvironmentObject var model: MarketViewModel
 	
 	var body: some View {
 		HStack(spacing: 20) {
@@ -18,7 +18,7 @@ struct MarketViewTopControls: View {
 						.renderingMode(.original)
 						.aspectRatio(contentMode: .fit)
 						.frame(width: 14)
-					TextField("", text: $searchText)
+					TextField("", text: $model.searchText)
 						.font(.muli(.regular, size: 17))
 						.foregroundColor(.white)
 						.padding(.vertical)
@@ -35,7 +35,8 @@ struct MarketViewTopControls: View {
 #if DEBUG
 struct MarketViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewTopControls(searchText: .constant(""))
+		MarketViewTopControls()
+			.environmentObject(MarketViewModel())
 	}
 }
 #endif

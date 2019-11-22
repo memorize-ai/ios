@@ -40,10 +40,8 @@ struct MarketView: View {
 				.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 20) {
 					Group {
-						MarketViewTopControls(
-							searchText: self.$model.searchText
-						)
-						MarketViewTopButtons(model: self.model)
+						MarketViewTopControls()
+						MarketViewTopButtons()
 					}
 					.padding(.horizontal, Self.horizontalPadding)
 					self.grid
