@@ -33,25 +33,21 @@ struct MarketView: View {
 	
 	var body: some View {
 		GeometryReader { geometry in
-			ZStack {
-				ZStack(alignment: .top) {
-					HomeViewTopGradient(
-						addedHeight: geometry.safeAreaInsets.top
-					)
-					.edgesIgnoringSafeArea(.all)
-					VStack(spacing: 20) {
-						Group {
-							MarketViewTopControls(
-								searchText: self.$model.searchText
-							)
-							MarketViewTopButtons(model: self.model)
-						}
-						.padding(.horizontal, Self.horizontalPadding)
-						self.grid
+			ZStack(alignment: .top) {
+				HomeViewTopGradient(
+					addedHeight: geometry.safeAreaInsets.top
+				)
+				.edgesIgnoringSafeArea(.all)
+				VStack(spacing: 20) {
+					Group {
+						MarketViewTopControls(
+							searchText: self.$model.searchText
+						)
+						MarketViewTopButtons(model: self.model)
 					}
+					.padding(.horizontal, Self.horizontalPadding)
+					self.grid
 				}
-				MarketViewSortPopUp()
-				MarketViewFilterPopUp()
 			}
 		}
 		.onAppear(perform: self.model.loadSearchResults)

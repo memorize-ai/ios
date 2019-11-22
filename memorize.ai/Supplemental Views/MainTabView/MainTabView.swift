@@ -10,6 +10,8 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 	}
 	
 	@EnvironmentObject var currentStore: CurrentStore
+	
+	@ObservedObject var marketViewModel = MarketViewModel()
 		
 	func setSelection(to selection: Selection) {
 		currentStore.mainTabViewSelection = selection
@@ -110,38 +112,44 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 	var body: some View {
 		NavigationView {
 			SideBar {
-				VStack(spacing: 0) {
-					ZStack {
-						Color.lightGrayBackground
-							.edgesIgnoringSafeArea([.horizontal, .top])
-						SwitchOver(currentSelection)
-							.case(.home) {
-								HomeView()
-							}
-							.case(.market) {
-								MarketView()
-									.environmentObject(MarketViewModel())
-							}
-							.case(.decks) {
-								DecksView()
-							}
-							.case(.profile) {
-								ProfileView()
-							}
-						FloatingReviewButton(user: currentStore.user)
-							.align(to: .bottomTrailing)
-							.padding([.trailing, .bottom], 16)
-							.offset(x: floatingReviewButtonXOffset)
+				ZStack {
+					VStack(spacing: 0) {
+						ZStack {
+							Color.lightGrayBackground
+								.edgesIgnoringSafeArea([.horizontal, .top])
+							SwitchOver(currentSelection)
+								.case(.home) {
+									HomeView()
+								}
+								.case(.market) {
+									MarketView()
+										.environmentObject(marketViewModel)
+								}
+								.case(.decks) {
+									DecksView()
+								}
+								.case(.profile) {
+									ProfileView()
+								}
+							FloatingReviewButton(user: currentStore.user)
+								.align(to: .bottomTrailing)
+								.padding([.trailing, .bottom], 16)
+								.offset(x: floatingReviewButtonXOffset)
+						}
+						Rectangle()
+							.fill(Color.lightGrayLine.opacity(0.5))
+							.frame(height: 1)
+						ZStack {
+							Color.lightGray
+								.edgesIgnoringSafeArea(.all)
+							tabBarItems
+						}
+						.frame(height: 72)
 					}
-					Rectangle()
-						.fill(Color.lightGrayLine.opacity(0.5))
-						.frame(height: 1)
-					ZStack {
-						Color.lightGray
-							.edgesIgnoringSafeArea(.all)
-						tabBarItems
-					}
-					.frame(height: 72)
+					MarketViewSortPopUp()
+						.environmentObject(marketViewModel)
+					MarketViewFilterPopUp()
+						.environmentObject(marketViewModel)
 				}
 			}
 			.removeNavigationBar()
