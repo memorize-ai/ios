@@ -30,6 +30,7 @@ struct MarketViewFilterPopUpTopicsContent: View {
 				horizontalSpacing: Self.cellSpacing,
 				verticalSpacing: Self.cellSpacing
 			)
+			.frame(maxWidth: .infinity)
 			.padding(.top, 8)
 		}
 	}
