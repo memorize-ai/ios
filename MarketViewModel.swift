@@ -1,4 +1,5 @@
 import Combine
+import LoadingState
 
 final class MarketViewModel: ObservableObject {
 	enum FilterPopUpSideBarSelection {
@@ -31,9 +32,27 @@ final class MarketViewModel: ObservableObject {
 	@Published var downloadsFilter = 0.0
 	
 	@Published var searchResults = [Deck]()
+	@Published var searchResultsLoadingState = LoadingState()
 	
 	func loadSearchResults() {
-		// TODO: Load search results
+		searchResultsLoadingState.startLoading()
+		Deck.search(
+			query: searchText,
+			filterForTopics: topicsFilter,
+			averageRatingGreaterThan: ratingFilter.isZero
+				? nil
+				: ratingFilter,
+			numberOfDownloadsGreaterThan: downloadsFilter.isZero
+				? nil
+				: .init(downloadsFilter)
+		).done { decks in
+			self.searchResults = decks.map { $0.loadImage() }
+			self.searchResultsLoadingState.succeed()
+		}.catch { error in
+			self.searchResultsLoadingState.fail(error: error)
+		}
+		
+		// TODO: Remove these
 		print("LOAD_SEARCH_RESULTS:")
 		print("\tsearchText = \"\(searchText)\"")
 		print("\tsortAlgorithm = \(sortAlgorithm)")
