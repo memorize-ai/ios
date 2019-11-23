@@ -11,3 +11,8 @@ let FIREBASE_CLIENT_ID =
 let FIREBASE_CLIENT_ID =
 	"629763488334-it1ah74o98fl27f0nvjorjks5ms0auqu.apps.googleusercontent.com"
 #endif
+
+let APP_SEARCH_API_ENDPOINT = "https://host-fig55q.api.swiftype.com"
+
+let DECKS_ENGINE_NAME = "memorize-ai-decks"
+let DECKS_SEARCH_KEY = "search-no3fo2msypcfjc1p14upkg1c"

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": "master",
+          "revision": "80d379bea0860991a6392b0dc52dcad0c466ce8f",
+          "version": null
+        }
+      },
+      {
         "package": "LoadingState",
         "repositoryURL": "https://github.com/kenmueller/LoadingState",
         "state": {
