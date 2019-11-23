@@ -4,7 +4,21 @@ struct DecksView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	var body: some View {
-		Text("DecksView, Current deck: \(currentStore.selectedDeck?.name ?? "(none)")")
+		GeometryReader { geometry in
+			ZStack(alignment: .top) {
+				HomeViewTopGradient(
+					addedHeight: geometry.safeAreaInsets.top
+				)
+				.edgesIgnoringSafeArea(.all)
+				VStack(spacing: 20) {
+					DecksViewTopControls()
+						.padding(.horizontal, 23)
+					ScrollView {
+						EmptyView() // TODO: Replace with content
+					}
+				}
+			}
+		}
 	}
 }
 
