@@ -17,7 +17,7 @@ struct DecksViewDeckOptionsPopUp: View {
 			.resizable()
 			.renderingMode(.original)
 			.aspectRatio(contentMode: .fit)
-			.frame(width: 20, height: 20)
+			.frame(width: 21, height: 21)
 	}
 	
 	var body: some View {
