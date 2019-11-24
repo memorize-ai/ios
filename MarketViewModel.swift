@@ -17,6 +17,7 @@ final class MarketViewModel: ObservableObject {
 	
 	@Published var searchText = "" {
 		didSet {
+			switchSortAlgorithmIfNeeded()
 			loadSearchResults()
 		}
 	}
@@ -28,12 +29,34 @@ final class MarketViewModel: ObservableObject {
 	
 	@Published var sortAlgorithm = Deck.SortAlgorithm.recommended
 	
-	@Published var topicsFilter: [Topic]?
-	@Published var ratingFilter = 0.0
-	@Published var downloadsFilter = 0.0
+	@Published var topicsFilter: [Topic]? {
+		didSet {
+			switchSortAlgorithmIfNeeded()
+		}
+	}
+	
+	@Published var ratingFilter = 0.0 {
+		didSet {
+			switchSortAlgorithmIfNeeded()
+		}
+	}
+	
+	@Published var downloadsFilter = 0.0 {
+		didSet {
+			switchSortAlgorithmIfNeeded()
+		}
+	}
 	
 	@Published var searchResults = [Deck]()
 	@Published var searchResultsLoadingState = LoadingState()
+	
+	func switchSortAlgorithmIfNeeded() {
+		if searchText.isEmpty && topicsFilter == nil && ratingFilter.isZero && downloadsFilter.isZero {
+			sortAlgorithm = .recommended
+		} else if sortAlgorithm == .recommended {
+			sortAlgorithm = .relevance
+		}
+	}
 	
 	var deckSearchRatingFilter: Double? {
 		ratingFilter.isZero
