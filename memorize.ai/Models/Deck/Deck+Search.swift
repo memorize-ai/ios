@@ -41,15 +41,15 @@ extension Deck {
 	}
 	
 	static func search(
-		query: String,
-		filterForTopics topicsFilter: [Topic]?,
-		averageRatingGreaterThan ratingFilter: Double?,
-		numberOfDownloadsGreaterThan downloadsFilter: Int?,
-		sortBy sortAlgorithm: SortAlgorithm
+		query: String = "",
+		filterForTopics topicsFilter: [String]? = nil,
+		averageRatingGreaterThan ratingFilter: Double? = nil,
+		numberOfDownloadsGreaterThan downloadsFilter: Int? = nil,
+		sortBy sortAlgorithm: SortAlgorithm = .relevance
 	) -> Promise<[Deck]> {
 		var filters = [String: Any]()
 		if let topicsFilter = topicsFilter {
-			filters["topics"] = topicsFilter.map(~\.id)
+			filters["topics"] = topicsFilter
 		}
 		if let ratingFilter = ratingFilter {
 			filters["average_rating"] = ["from": ratingFilter]

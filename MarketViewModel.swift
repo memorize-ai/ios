@@ -32,7 +32,7 @@ final class MarketViewModel: ObservableObject {
 		searchResultsLoadingState.startLoading()
 		Deck.search(
 			query: searchText,
-			filterForTopics: topicsFilter,
+			filterForTopics: topicsFilter?.map(~\.id),
 			averageRatingGreaterThan: ratingFilter.isZero
 				? nil
 				: ratingFilter,

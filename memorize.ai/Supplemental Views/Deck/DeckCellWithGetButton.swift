@@ -5,6 +5,19 @@ struct DeckCellWithGetButton: View {
 	@ObservedObject var user: User
 	
 	let width: CGFloat
+	let shouldManuallyModifyDecks: Bool
+	
+	init(
+		deck: Deck,
+		user: User,
+		width: CGFloat,
+		shouldManuallyModifyDecks: Bool = false
+	) {
+		self.deck = deck
+		self.user = user
+		self.width = width
+		self.shouldManuallyModifyDecks = shouldManuallyModifyDecks
+	}
 	
 	var hasDeck: Bool {
 		user.hasDeck(deck)
@@ -26,6 +39,11 @@ struct DeckCellWithGetButton: View {
 		_ = hasDeck
 			? deck.remove(user: user)
 			: deck.get(user: user)
+		if shouldManuallyModifyDecks {
+			hasDeck
+				? user.decks.removeAll { $0 == deck }
+				: user.decks.append(deck)
+		}
 	}
 	
 	var body: some View {

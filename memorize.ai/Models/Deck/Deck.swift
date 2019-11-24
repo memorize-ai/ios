@@ -116,7 +116,6 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		firestore.document("users/\(user.id)/decks/\(id)").setData([
 			"added": Date()
 		]).done {
-			user.decks.append(self)
 			self.getLoadingState.succeed()
 		}.catch { error in
 			self.getLoadingState.fail(error: error)
@@ -128,7 +127,6 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func remove(user: User) -> Self {
 		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
-			user.decks.removeAll { $0 == self }
 			self.getLoadingState.succeed()
 		}.catch { error in
 			self.getLoadingState.fail(error: error)

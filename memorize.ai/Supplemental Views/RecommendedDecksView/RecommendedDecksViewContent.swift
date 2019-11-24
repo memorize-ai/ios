@@ -18,7 +18,8 @@ struct RecommendedDecksViewContent: View {
 					DeckCellWithGetButton(
 						deck: deck,
 						user: currentStore.user,
-						width: Self.deckCellWidth
+						width: Self.deckCellWidth,
+						shouldManuallyModifyDecks: true
 					)
 				},
 				columns: Self.numberOfColumns,
@@ -28,10 +29,8 @@ struct RecommendedDecksViewContent: View {
 			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
 		.onAppear {
-			guard self.model.decksLoadingState.isNone else { return }
 			self.model.loadDecks(
-				interests: self.currentStore.user.interests,
-				topics: self.currentStore.topics
+				topics: self.currentStore.user.interests
 			)
 		}
 	}
