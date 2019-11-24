@@ -28,10 +28,10 @@ struct DecksViewTopControls: View {
 				Text(currentStore.selectedDeck!.name)
 					.font(.muli(.bold, size: 17))
 					.foregroundColor(.white)
-			}
-			Spacer()
-			VerticalTripleDots {
-				// TODO: Show options pop-up
+				Spacer()
+				VerticalTripleDots {
+					// TODO: Show options pop-up
+				}
 			}
 		}
 	}
