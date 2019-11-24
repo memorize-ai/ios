@@ -1,7 +1,25 @@
+import SwiftUI
 import Alamofire
 import PromiseKit
 
 extension Deck {
+	convenience init(searchResultJSON json: [String: [String: Any]]) {
+		self.init(
+			id: json["id"]?["raw"] as? String ?? "0",
+			topics: json["topics"]?["raw"] as? [String] ?? [],
+			hasImage: json["has_image"]?["raw"] as? Bool ?? false,
+			name: json["name"]?["raw"] as? String ?? "Unknown",
+			subtitle: json["subtitle"]?["raw"] as? String ?? "(none)",
+			numberOfViews: json["view_count"]?["raw"] as? Int ?? 0,
+			numberOfUniqueViews: json["unique_view_count"]?["raw"] as? Int ?? 0,
+			numberOfRatings: json["rating_count"]?["raw"] as? Int ?? 0,
+			averageRating: json["average_rating"]?["raw"] as? Double ?? 0,
+			numberOfDownloads: json["download_count"]?["raw"] as? Int ?? 0,
+			dateCreated: (json["created"]?["raw"] as? String)?.toDate() ?? .init(),
+			dateLastUpdated: (json["updated"]?["raw"] as? String)?.toDate() ?? .init()
+		)
+	}
+	
 	static func search(
 		query: String,
 		filterForTopics topicsFilter: [Topic]?,
@@ -9,7 +27,6 @@ extension Deck {
 		numberOfDownloadsGreaterThan downloadsFilter: Int?
 	) -> Promise<[Deck]> {
 		var filters = [String: Any]()
-		
 		if let topicsFilter = topicsFilter {
 			filters["topics"] = topicsFilter.map(~\.id)
 		}
@@ -19,7 +36,6 @@ extension Deck {
 		if let downloadsFilter = downloadsFilter {
 			filters["download_count"] = ["from": downloadsFilter]
 		}
-		
 		return .init { seal in
 			AF.request(
 				"\(APP_SEARCH_API_ENDPOINT)/api/as/v1/engines/\(DECKS_ENGINE_NAME)/search",
@@ -47,7 +63,6 @@ extension Deck {
 	}
 	
 	private static func translateSearchResponseJSON(_ json: [String: Any]) -> [Deck] {
-		print("JSON_RESPONSE:", json)
-		return []
+		(json["results"] as? [[String: [String: Any]]] ?? []).map(Deck.init)
 	}
 }
