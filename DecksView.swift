@@ -28,6 +28,7 @@ struct DecksView_Previews: PreviewProvider {
 	static var previews: some View {
 		DecksView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(DecksViewModel())
 	}
 }
 #endif
