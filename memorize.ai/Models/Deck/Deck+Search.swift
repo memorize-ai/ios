@@ -39,7 +39,6 @@ extension Deck {
 		return .init { seal in
 			AF.request(
 				"\(APP_SEARCH_API_ENDPOINT)/api/as/v1/engines/\(DECKS_ENGINE_NAME)/search",
-				method: .get,
 				parameters: [
 					"query": query,
 					"filters": filters
