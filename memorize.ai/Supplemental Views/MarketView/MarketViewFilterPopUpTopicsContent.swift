@@ -41,7 +41,9 @@ struct MarketViewFilterPopUpTopicsContent_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketViewFilterPopUpTopicsContent()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(MarketViewModel())
+			.environmentObject(MarketViewModel(
+				currentUser: PREVIEW_CURRENT_STORE.user
+			))
 	}
 }
 #endif

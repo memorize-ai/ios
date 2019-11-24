@@ -11,7 +11,11 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
-	@ObservedObject var marketViewModel = MarketViewModel()
+	@ObservedObject var marketViewModel: MarketViewModel
+	
+	init(currentUser: User) {
+		marketViewModel = .init(currentUser: currentUser)
+	}
 		
 	func setSelection(to selection: Selection) {
 		currentStore.mainTabViewSelection = selection
@@ -163,7 +167,7 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 #if DEBUG
 struct MainTabView_Previews: PreviewProvider {
 	static var previews: some View {
-		MainTabView()
+		MainTabView(currentUser: PREVIEW_CURRENT_STORE.user)
 			.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }

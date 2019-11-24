@@ -36,7 +36,9 @@ struct MarketViewTopControls: View {
 struct MarketViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketViewTopControls()
-			.environmentObject(MarketViewModel())
+			.environmentObject(MarketViewModel(
+				currentUser: PREVIEW_CURRENT_STORE.user
+			))
 	}
 }
 #endif

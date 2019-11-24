@@ -5,6 +5,7 @@ import PromiseKit
 extension Deck {
 	enum SortAlgorithm {
 		case relevance
+		case recommended
 		case top
 		case new
 		case recentlyUpdated
@@ -13,7 +14,7 @@ extension Deck {
 			switch self {
 			case .relevance:
 				return nil
-			case .top:
+			case .recommended, .top:
 				return ["score": "desc"]
 			case .new:
 				return ["created": "desc"]

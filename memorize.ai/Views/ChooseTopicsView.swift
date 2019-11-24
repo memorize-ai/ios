@@ -13,8 +13,10 @@ struct ChooseTopicsView: View {
 	
 	var leadingButton: some View {
 		NavigationLink(
-			destination: MainTabView()
-				.environmentObject(currentStore)
+			destination: MainTabView(
+				currentUser: currentStore.user
+			)
+			.environmentObject(currentStore)
 		) {
 			XButton(.transparentWhite, height: 15)
 		}

@@ -2,6 +2,12 @@ import Combine
 import LoadingState
 
 final class MarketViewModel: ObservableObject {
+	let currentUser: User
+	
+	init(currentUser: User) {
+		self.currentUser = currentUser
+	}
+	
 	enum FilterPopUpSideBarSelection {
 		case topics
 		case rating
@@ -19,7 +25,7 @@ final class MarketViewModel: ObservableObject {
 	
 	@Published var filterPopUpSideBarSelection = FilterPopUpSideBarSelection.topics
 	
-	@Published var sortAlgorithm = Deck.SortAlgorithm.relevance
+	@Published var sortAlgorithm = Deck.SortAlgorithm.recommended
 	
 	@Published var topicsFilter: [Topic]?
 	@Published var ratingFilter = 0.0
@@ -28,17 +34,27 @@ final class MarketViewModel: ObservableObject {
 	@Published var searchResults = [Deck]()
 	@Published var searchResultsLoadingState = LoadingState()
 	
+	var deckSearchRatingFilter: Double? {
+		sortAlgorithm == .recommended || ratingFilter.isZero
+			? nil
+			: ratingFilter
+	}
+	
+	var deckSearchDownloadsFilter: Int? {
+		sortAlgorithm == .recommended || downloadsFilter.isZero
+			? nil
+			: .init(downloadsFilter)
+	}
+	
 	func loadSearchResults() {
 		searchResultsLoadingState.startLoading()
 		Deck.search(
-			query: searchText,
-			filterForTopics: topicsFilter?.map(~\.id),
-			averageRatingGreaterThan: ratingFilter.isZero
-				? nil
-				: ratingFilter,
-			numberOfDownloadsGreaterThan: downloadsFilter.isZero
-				? nil
-				: .init(downloadsFilter),
+			query: sortAlgorithm == .recommended ? "" : searchText,
+			filterForTopics: sortAlgorithm == .recommended
+				? currentUser.interests
+				: topicsFilter?.map(~\.id),
+			averageRatingGreaterThan: deckSearchRatingFilter,
+			numberOfDownloadsGreaterThan: deckSearchDownloadsFilter,
 			sortBy: sortAlgorithm
 		).done { decks in
 			self.searchResults = decks.map { $0.loadImage() }

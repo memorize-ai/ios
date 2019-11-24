@@ -41,7 +41,7 @@ struct GoogleSignInButton: View {
 			}
 			if model.user != nil {
 				NavigateTo(
-					MainTabView()
+					MainTabView(currentUser: model.user!)
 						.environmentObject(CurrentStore(
 							user: model.user!
 						)),

@@ -66,7 +66,7 @@ struct LogInViewContentBox: View {
 			GoogleSignInButton()
 			if model.user != nil {
 				NavigateTo(
-					MainTabView()
+					MainTabView(currentUser: model.user!)
 						.environmentObject(CurrentStore(
 							user: model.user!
 						)),

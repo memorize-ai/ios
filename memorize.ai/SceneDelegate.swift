@@ -18,11 +18,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		else { return }
 		let window = UIWindow(windowScene: windowScene)
 		if let currentUser = auth.currentUser {
+			let currentUser = User(authUser: currentUser)
 			window.rootViewController = HostingController(
-				rootView: MainTabView()
-					.environmentObject(CurrentStore(user: .init(
-						authUser: currentUser
-					)))
+				rootView: MainTabView(currentUser: currentUser)
+					.environmentObject(CurrentStore(user: currentUser))
 					.environment(\.managedObjectContext, context)
 			)
 		} else {
