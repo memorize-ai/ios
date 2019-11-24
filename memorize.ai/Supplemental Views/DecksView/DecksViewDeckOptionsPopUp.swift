@@ -8,6 +8,11 @@ struct DecksViewDeckOptionsPopUp: View {
 		currentStore.selectedDeck
 	}
 	
+	var isOwner: Bool {
+		guard let selectedDeck = selectedDeck else { return false }
+		return selectedDeck.creatorId == currentStore.user.id
+	}
+	
 	var isFavorite: Bool {
 		selectedDeck?.userData?.isFavorite ?? false
 	}
@@ -23,7 +28,7 @@ struct DecksViewDeckOptionsPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
-			contentHeight: 50 * 1 + 0
+			contentHeight: 50 * 8 + 2
 		) {
 			PopUpButton(
 				icon: resizeImage(
@@ -35,6 +40,61 @@ struct DecksViewDeckOptionsPopUp: View {
 				textColor: .darkGray
 			) {
 				// TODO: Toggle favorite
+			}
+			PopUpButton(
+				icon: resizeImage(.shareIcon),
+				text: "Share",
+				textColor: .darkGray
+			) {
+				// TODO: Share deck
+			}
+			if isOwner {
+				PopUpButton(
+					icon: resizeImage(.editSectionsIcon),
+					text: "Edit sections",
+					textColor: .darkGray
+				) {
+					// TODO: Edit sections
+				}
+			}
+			PopUpButton(
+				icon: resizeImage(.performanceCheckIcon),
+				text: "Performance",
+				textColor: .darkGray
+			) {
+				// TODO: View performance
+			}
+			PopUpDivider()
+			PopUpButton(
+				icon: resizeImage(.selectedMarketTabBarItem),
+				text: "Visit page",
+				textColor: .darkGray
+			) {
+				// TODO: Visit marketplace page
+			}
+			PopUpButton(
+				icon: resizeImage(.analyticsIcon),
+				text: "Analytics",
+				textColor: .darkGray
+			) {
+				// TODO: View analytics
+			}
+			PopUpDivider()
+			PopUpButton(
+				icon: resizeImage(.purpleXButton),
+				text: "Remove from library",
+				textColor: .darkGray
+			) {
+				// TODO: Removed deck from user library
+			}
+			if isOwner {
+				PopUpButton(
+					icon: resizeImage(.trashIcon),
+					text: "Destroy",
+					textColor: .darkGray
+				) {
+					// TODO: Remove deck from marketplace
+				}
 			}
 		}
 	}

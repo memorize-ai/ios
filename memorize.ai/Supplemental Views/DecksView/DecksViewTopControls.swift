@@ -33,6 +33,7 @@ struct DecksViewTopControls: View {
 				Text(selectedDeck.name)
 					.font(.muli(.bold, size: 17))
 					.foregroundColor(.white)
+					.lineLimit(1)
 				Spacer()
 				VerticalTripleDots {
 					popUpWithAnimation {
@@ -41,6 +42,7 @@ struct DecksViewTopControls: View {
 				}
 			}
 		}
+		.frame(height: 40)
 	}
 }
 
