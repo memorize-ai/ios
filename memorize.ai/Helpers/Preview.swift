@@ -48,6 +48,26 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		)
 	)
 	failedDeck.imageLoadingState.fail(message: "Self-invoked")
+	let selectedDeck = Deck(
+		id: "1",
+		topics: [],
+		hasImage: true,
+		image: .init("GeometryPrepDeck"),
+		name: "Geometry Prep #2",
+		subtitle: "Angles, lines, triangles and other polygons",
+		numberOfViews: 1000000000,
+		numberOfUniqueViews: 200000,
+		numberOfRatings: 12400,
+		averageRating: 4.5,
+		numberOfDownloads: 196400,
+		dateCreated: .init(),
+		dateLastUpdated: .init(),
+		userData: .init(
+			dateAdded: .init(),
+			isFavorite: true,
+			numberOfDueCards: 0
+		)
+	)
 	let currentStore = CurrentStore(user: .init(
 		id: "0",
 		name: "Ken Mueller",
@@ -81,26 +101,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 					numberOfDueCards: 23
 				)
 			),
-			.init(
-				id: "1",
-				topics: [],
-				hasImage: true,
-				image: .init("GeometryPrepDeck"),
-				name: "Geometry Prep #2",
-				subtitle: "Angles, lines, triangles and other polygons",
-				numberOfViews: 1000000000,
-				numberOfUniqueViews: 200000,
-				numberOfRatings: 12400,
-				averageRating: 4.5,
-				numberOfDownloads: 196400,
-				dateCreated: .init(),
-				dateLastUpdated: .init(),
-				userData: .init(
-					dateAdded: .init(),
-					isFavorite: true,
-					numberOfDueCards: 0
-				)
-			),
+			selectedDeck,
 			.init(
 				id: "2",
 				topics: [],
@@ -177,6 +178,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			failedDeck
 		]
 	))
+	currentStore.selectedDeck = selectedDeck
 	currentStore.topics = [
 		.init(
 			id: "0",
