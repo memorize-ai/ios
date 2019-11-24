@@ -181,26 +181,22 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		.init(
 			id: "0",
 			name: "Math",
-			image: .init("HTMLTopic"),
-			topDecks: []
+			image: .init("HTMLTopic")
 		),
 		.init(
 			id: "1",
 			name: "Geometry",
-			image: .init("GeographyTopic"),
-			topDecks: []
+			image: .init("GeographyTopic")
 		),
 		.init(
 			id: "2",
 			name: "History",
-			image: .init("HTMLTopic"),
-			topDecks: []
+			image: .init("HTMLTopic")
 		),
 		.init(
 			id: "3",
 			name: "Web Dev",
-			image: .init("GeographyTopic"),
-			topDecks: []
+			image: .init("GeographyTopic")
 		)
 	]
 	currentStore.recommendedDecks = [

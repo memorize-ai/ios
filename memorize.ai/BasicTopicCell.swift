@@ -62,8 +62,7 @@ struct BasicTopicCell_Previews: PreviewProvider {
 			BasicTopicCell(
 				topic: .init(
 					id: "0",
-					name: "Math",
-					topDecks: []
+					name: "Math"
 				),
 				dimension: 109
 			)
@@ -71,8 +70,7 @@ struct BasicTopicCell_Previews: PreviewProvider {
 				topic: .init(
 					id: "0",
 					name: "Geography",
-					image: .init("GeographyTopic"),
-					topDecks: []
+					image: .init("GeographyTopic")
 				),
 				dimension: 109
 			)

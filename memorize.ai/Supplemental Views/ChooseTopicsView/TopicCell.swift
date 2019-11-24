@@ -66,46 +66,36 @@ struct TopicCell_Previews: PreviewProvider {
 		let failedTopic = Topic(
 			id: "0",
 			name: "Geography",
-			image: .init("GeographyTopic"),
-			topDecks: []
+			image: .init("GeographyTopic")
 		)
 		failedTopic.imageLoadingState.fail(message: "Self-invoked")
 		return VStack(spacing: 20) {
 			TopicCell(
 				topic: failedTopic,
-				isSelected: false,
-				toggleSelect: {}
-			)
+				isSelected: false
+			) {}
+			TopicCell(
+				topic: .init(
+					id: "0",
+					name: "Geography"
+				),
+				isSelected: true
+			) {}
 			TopicCell(
 				topic: .init(
 					id: "0",
 					name: "Geography",
-					image: nil,
-					topDecks: []
+					image: .init("GeographyTopic")
 				),
-				isSelected: true,
-				toggleSelect: {}
-			)
+				isSelected: false
+			) {}
 			TopicCell(
 				topic: .init(
 					id: "0",
-					name: "Geography",
-					image: .init("GeographyTopic"),
-					topDecks: []
+					name: "Geography"
 				),
-				isSelected: false,
-				toggleSelect: {}
-			)
-			TopicCell(
-				topic: .init(
-					id: "0",
-					name: "Geography",
-					image: nil,
-					topDecks: []
-				),
-				isSelected: true,
-				toggleSelect: {}
-			)
+				isSelected: true
+			) {}
 		}
 	}
 }

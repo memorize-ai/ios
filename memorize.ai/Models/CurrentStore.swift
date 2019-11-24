@@ -112,8 +112,7 @@ final class CurrentStore: ObservableObject {
 					if (self.topics.contains { $0.id == topicId }) { continue }
 					self.topics.append(Topic(
 						id: topicId,
-						name: document.get("name") as? String ?? "Unknown",
-						topDecks: document.get("topDecks") as? [String] ?? []
+						name: document.get("name") as? String ?? "Unknown"
 					).loadImage().cache())
 				case .modified:
 					if (self.topics.contains { $0.id == topicId }) { continue }

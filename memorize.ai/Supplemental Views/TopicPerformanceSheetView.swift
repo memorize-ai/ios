@@ -90,8 +90,7 @@ struct TopicPerformanceSheetView_Previews: PreviewProvider {
 			topic: .init(
 				id: "0",
 				name: "Geography",
-				image: .init("GeographyTopic"),
-				topDecks: []
+				image: .init("GeographyTopic")
 			)
 		)
 		.environmentObject(PREVIEW_CURRENT_STORE)

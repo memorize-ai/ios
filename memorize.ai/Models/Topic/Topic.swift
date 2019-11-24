@@ -10,27 +10,23 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@Published var name: String
 	@Published var image: Image?
-	@Published var topDecks: [String]
 	
 	@Published var imageLoadingState = LoadingState()
 	
 	init(
 		id: String,
 		name: String,
-		image: Image? = nil,
-		topDecks: [String]
+		image: Image? = nil
 	) {
 		self.id = id
 		self.name = name
 		self.image = image
-		self.topDecks = topDecks
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
 		self.init(
 			id: snapshot.documentID,
-			name: snapshot.get("name") as? String ?? "Unknown",
-			topDecks: snapshot.get("topDecks") as? [String] ?? []
+			name: snapshot.get("name") as? String ?? "Unknown"
 		)
 	}
 	
@@ -54,7 +50,6 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
-		topDecks = snapshot.get("topDecks") as? [String] ?? topDecks
 		return self
 	}
 	
