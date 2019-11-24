@@ -12,7 +12,7 @@ struct HomeViewMyDecksSection: View {
 					.align(to: .leading)
 					.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack(spacing: 8) {
+					HStack(alignment: .top, spacing: 8) {
 						ForEach(currentUser.decks) { deck in
 							OwnedDeckCellWithPerformanceGraph(
 								deck: deck,

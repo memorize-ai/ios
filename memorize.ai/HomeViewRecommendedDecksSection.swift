@@ -12,7 +12,7 @@ struct HomeViewRecommendedDecksSection: View {
 					.align(to: .leading)
 					.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack {
+					HStack(alignment: .top) {
 						ForEach(currentStore.recommendedDecks) { deck in
 							DeckCellWithGetButton(
 								deck: deck,

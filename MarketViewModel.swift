@@ -1,4 +1,5 @@
 import Combine
+import PromiseKit
 import LoadingState
 
 final class MarketViewModel: ObservableObject {
@@ -35,41 +36,37 @@ final class MarketViewModel: ObservableObject {
 	@Published var searchResultsLoadingState = LoadingState()
 	
 	var deckSearchRatingFilter: Double? {
-		sortAlgorithm == .recommended || ratingFilter.isZero
+		ratingFilter.isZero
 			? nil
 			: ratingFilter
 	}
 	
 	var deckSearchDownloadsFilter: Int? {
-		sortAlgorithm == .recommended || downloadsFilter.isZero
+		downloadsFilter.isZero
 			? nil
 			: .init(downloadsFilter)
 	}
 	
+	var searchResultsPromise: Promise<[Deck]> {
+		sortAlgorithm == .recommended
+			? currentUser.recommendedDecks()
+			: Deck.search(
+				query: searchText,
+				filterForTopics: topicsFilter?.map(~\.id),
+				averageRatingGreaterThan: deckSearchRatingFilter,
+				numberOfDownloadsGreaterThan: deckSearchDownloadsFilter,
+				sortBy: sortAlgorithm
+			)
+	}
+	
 	func loadSearchResults() {
 		searchResultsLoadingState.startLoading()
-		Deck.search(
-			query: sortAlgorithm == .recommended ? "" : searchText,
-			filterForTopics: sortAlgorithm == .recommended
-				? currentUser.interests
-				: topicsFilter?.map(~\.id),
-			averageRatingGreaterThan: deckSearchRatingFilter,
-			numberOfDownloadsGreaterThan: deckSearchDownloadsFilter,
-			sortBy: sortAlgorithm
-		).done { decks in
+		searchResultsPromise.done { decks in
 			self.searchResults = decks.map { $0.loadImage() }
 			self.searchResultsLoadingState.succeed()
 		}.catch { error in
 			self.searchResultsLoadingState.fail(error: error)
 		}
-		
-		// TODO: Remove these
-		print("LOAD_SEARCH_RESULTS:")
-		print("\tsearchText = \"\(searchText)\"")
-		print("\tsortAlgorithm = \(sortAlgorithm)")
-		print("\ttopicsFilter = \(String(describing: topicsFilter))")
-		print("\tratingFilter = \(ratingFilter)")
-		print("\tdownloadsFilter = \(downloadsFilter)")
 	}
 	
 	func isTopicSelected(_ topic: Topic) -> Bool {

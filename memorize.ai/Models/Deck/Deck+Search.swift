@@ -92,4 +92,11 @@ extension Deck {
 	private static func translateSearchResponseJSON(_ json: [String: Any]) -> [Deck] {
 		(json["results"] as? [[String: [String: Any]]] ?? []).map(Deck.init)
 	}
+	
+	static func recommendedDecks(forUser user: User) -> Promise<[Deck]> {
+		search(
+			filterForTopics: user.interests.isEmpty ? nil : user.interests,
+			sortBy: .recommended
+		)
+	}
 }

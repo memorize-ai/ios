@@ -173,6 +173,10 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		decks.first { $0.id == deckId }
 	}
 	
+	func recommendedDecks() -> Promise<[Deck]> {
+		Deck.recommendedDecks(forUser: self)
+	}
+	
 	static func == (lhs: User, rhs: User) -> Bool {
 		lhs.id == rhs.id
 	}
