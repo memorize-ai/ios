@@ -9,16 +9,12 @@ extension Deck {
 		case new
 		case recentlyUpdated
 		
-		var jsonEncoded: Any? {
+		var jsonEncoded: [String: String]? {
 			switch self {
 			case .relevance:
 				return nil
 			case .top:
-				return [
-					["rating_count": "desc"],
-					["average_rating": "desc"],
-					["download_count": "desc"]
-				]
+				return ["score": "desc"]
 			case .new:
 				return ["created": "desc"]
 			case .recentlyUpdated:

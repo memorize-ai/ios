@@ -44,7 +44,7 @@ struct MarketView: View {
 						MarketViewTopButtons()
 					}
 					.padding(.horizontal, Self.horizontalPadding)
-					ScrollView {
+					ScrollView(showsIndicators: false) {
 						self.grid
 					}
 				}
