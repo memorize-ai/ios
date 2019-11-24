@@ -8,25 +8,30 @@ struct DecksViewTopControls: View {
 			ShowSideBarButton {
 				HamburgerMenu()
 			}
-			if currentStore.selectedDeck!.hasImage {
-				Group {
-					if currentStore.selectedDeck!.image == nil {
-						Color.white
-							.opacity(0.5)
-							.frame(width: 40, height: 40)
-					} else {
-						currentStore.selectedDeck!.image!
-							.resizable()
-							.aspectRatio(contentMode: .fill)
-							.frame(width: 40, height: 40)
-							.clipped()
+			HStack(spacing: 10) {
+				if currentStore.selectedDeck!.hasImage {
+					Group {
+						if currentStore.selectedDeck!.image == nil {
+							Color.white
+								.opacity(0.5)
+								.frame(width: 40, height: 40)
+						} else {
+							currentStore.selectedDeck!.image!
+								.resizable()
+								.aspectRatio(contentMode: .fill)
+								.frame(width: 40, height: 40)
+								.clipped()
+						}
 					}
+					.cornerRadius(5)
 				}
-				.cornerRadius(5)
+				Text(currentStore.selectedDeck!.name)
+					.font(.muli(.bold, size: 17))
+					.foregroundColor(.white)
 			}
 			Spacer()
 			VerticalTripleDots {
-				
+				// TODO: Show options pop-up
 			}
 		}
 	}
