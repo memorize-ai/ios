@@ -12,7 +12,9 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@ObservedObject var currentUser: User
+	
 	@ObservedObject var marketViewModel: MarketViewModel
+	@ObservedObject var decksViewModel = DecksViewModel()
 	
 	init(currentUser: User) {
 		self.currentUser = currentUser
@@ -135,6 +137,7 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 								}
 								.case(.decks) {
 									DecksView()
+										.environmentObject(decksViewModel)
 								}
 								.case(.profile) {
 									ProfileView()

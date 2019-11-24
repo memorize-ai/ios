@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DecksView: View {
 	@EnvironmentObject var currentStore: CurrentStore
+	@EnvironmentObject var model: DecksViewModel
 	
 	var body: some View {
 		GeometryReader { geometry in
