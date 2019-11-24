@@ -5,6 +5,7 @@ import LoadingState
 
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static var cache = [String: Deck]()
+	static var imageCache = [String: Image]()
 	
 	let id: String
 	let dateCreated: Date
@@ -80,15 +81,21 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadImage() -> Self {
 		guard imageLoadingState.isNone && hasImage else { return self }
 		imageLoadingState.startLoading()
-		storage.child("decks/\(id)").getData().done { data in
-			guard let image = Image(data: data) else {
-				self.imageLoadingState.fail(message: "Malformed data")
-				return
+		if let cachedImage = Self.imageCache[id] {
+			image = cachedImage
+			imageLoadingState.succeed()
+		} else {
+			storage.child("decks/\(id)").getData().done { data in
+				guard let image = Image(data: data) else {
+					self.imageLoadingState.fail(message: "Malformed data")
+					return
+				}
+				self.image = image
+				Self.imageCache[self.id] = image
+				self.imageLoadingState.succeed()
+			}.catch { error in
+				self.imageLoadingState.fail(error: error)
 			}
-			self.image = image
-			self.imageLoadingState.succeed()
-		}.catch { error in
-			self.imageLoadingState.fail(error: error)
 		}
 		return self
 	}
