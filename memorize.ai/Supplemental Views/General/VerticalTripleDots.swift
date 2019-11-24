@@ -16,10 +16,12 @@ struct VerticalTripleDots: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 2.5) {
-			circle
-			circle
-			circle
+		Button(action: onClick) {
+			VStack(spacing: 2.5) {
+				circle
+				circle
+				circle
+			}
 		}
 	}
 }

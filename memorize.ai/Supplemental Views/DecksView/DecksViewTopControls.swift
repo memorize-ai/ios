@@ -35,7 +35,9 @@ struct DecksViewTopControls: View {
 					.foregroundColor(.white)
 				Spacer()
 				VerticalTripleDots {
-					self.model.isDeckOptionsPopUpShowing = true
+					popUpWithAnimation {
+						self.model.isDeckOptionsPopUpShowing = true
+					}
 				}
 			}
 		}
