@@ -8,12 +8,6 @@ final class MarketViewModel: ObservableObject {
 		case downloads
 	}
 	
-	enum SortAlgorithm {
-		case relevance
-		case top
-		case recentlyUpdated
-	}
-	
 	@Published var searchText = "" {
 		didSet {
 			loadSearchResults()
@@ -25,7 +19,7 @@ final class MarketViewModel: ObservableObject {
 	
 	@Published var filterPopUpSideBarSelection = FilterPopUpSideBarSelection.topics
 	
-	@Published var sortAlgorithm = SortAlgorithm.relevance
+	@Published var sortAlgorithm = Deck.SortAlgorithm.relevance
 	
 	@Published var topicsFilter: [Topic]?
 	@Published var ratingFilter = 0.0
@@ -44,7 +38,8 @@ final class MarketViewModel: ObservableObject {
 				: ratingFilter,
 			numberOfDownloadsGreaterThan: downloadsFilter.isZero
 				? nil
-				: .init(downloadsFilter)
+				: .init(downloadsFilter),
+			sortBy: sortAlgorithm
 		).done { decks in
 			self.searchResults = decks.map { $0.loadImage() }
 			self.searchResultsLoadingState.succeed()

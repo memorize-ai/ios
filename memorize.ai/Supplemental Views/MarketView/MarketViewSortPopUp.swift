@@ -11,12 +11,12 @@ struct MarketViewSortPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $model.isSortPopUpShowing,
-			contentHeight: 50 * 3 + 2,
+			contentHeight: 50 * 4 + 3,
 			onHide: model.loadSearchResults
 		) {
 			PopUpButton(
 				icon: model.sortAlgorithm == .relevance ? check : nil,
-				text: "Most relevant",
+				text: "Relevance",
 				textColor: model.sortAlgorithm == .relevance
 					? .darkBlue
 					: .lightGrayText
@@ -32,6 +32,16 @@ struct MarketViewSortPopUp: View {
 					: .lightGrayText
 			) {
 				self.model.sortAlgorithm = .top
+			}
+			PopUpDivider()
+			PopUpButton(
+				icon: model.sortAlgorithm == .new ? check : nil,
+				text: "New",
+				textColor: model.sortAlgorithm == .new
+					? .darkBlue
+					: .lightGrayText
+			) {
+				self.model.sortAlgorithm = .new
 			}
 			PopUpDivider()
 			PopUpButton(

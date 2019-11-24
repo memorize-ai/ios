@@ -3,6 +3,30 @@ import Alamofire
 import PromiseKit
 
 extension Deck {
+	enum SortAlgorithm {
+		case relevance
+		case top
+		case new
+		case recentlyUpdated
+		
+		var jsonEncoded: Any? {
+			switch self {
+			case .relevance:
+				return nil
+			case .top:
+				return [
+					["rating_count": "desc"],
+					["average_rating": "desc"],
+					["download_count": "desc"]
+				]
+			case .new:
+				return ["created": "desc"]
+			case .recentlyUpdated:
+				return ["updated": "desc"]
+			}
+		}
+	}
+	
 	convenience init(searchResultJSON json: [String: [String: Any]]) {
 		self.init(
 			id: json["id"]?["raw"] as? String ?? "0",
@@ -24,7 +48,8 @@ extension Deck {
 		query: String,
 		filterForTopics topicsFilter: [Topic]?,
 		averageRatingGreaterThan ratingFilter: Double?,
-		numberOfDownloadsGreaterThan downloadsFilter: Int?
+		numberOfDownloadsGreaterThan downloadsFilter: Int?,
+		sortBy sortAlgorithm: SortAlgorithm
 	) -> Promise<[Deck]> {
 		var filters = [String: Any]()
 		if let topicsFilter = topicsFilter {
@@ -36,13 +61,19 @@ extension Deck {
 		if let downloadsFilter = downloadsFilter {
 			filters["download_count"] = ["from": downloadsFilter]
 		}
+		
+		var parameters = ["query": query as Any]
+		if !filters.isEmpty {
+			parameters["filters"] = filters
+		}
+		if let sort = sortAlgorithm.jsonEncoded {
+			parameters["sort"] = sort
+		}
+		
 		return .init { seal in
 			AF.request(
 				"\(APP_SEARCH_API_ENDPOINT)/api/as/v1/engines/\(DECKS_ENGINE_NAME)/search",
-				parameters: [
-					"query": query,
-					"filters": filters
-				],
+				parameters: parameters,
 				headers: [
 					.init(name: "Content-Type", value: "application/json"),
 					.init(name: "Authorization", value: "Bearer \(DECKS_SEARCH_KEY)")
