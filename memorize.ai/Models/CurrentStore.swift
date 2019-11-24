@@ -36,7 +36,9 @@ final class CurrentStore: ObservableObject {
 	@discardableResult
 	func initializeIfNeeded() -> Self {
 		loadUser()
-		user.loadDecks()
+		user.loadDecks {
+			self.selectedDeck = $0
+		}
 		return self
 	}
 	

@@ -1,4 +1,4 @@
-import Combine
+import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import PromiseKit
@@ -107,9 +107,10 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func loadDecks(loadImages: Bool = true) -> Self {
+	func loadDecks(loadImages: Bool = true, setSelectedDeck: ((Deck) -> Void)? = nil) -> Self {
 		guard decksLoadingState.isNone else { return self }
 		var isInitialIteration = true
+		var shouldSetSelectedDeck = true
 		decksLoadingState.startLoading()
 		firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
@@ -128,6 +129,10 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 					Deck.fromId(deckId).done { deck in
 						deck.updateUserDataFromSnapshot(userDataSnapshot)
 						self.decks.append(loadImages ? deck.loadImage() : deck)
+						if shouldSetSelectedDeck {
+							shouldSetSelectedDeck = false
+							setSelectedDeck?(deck)
+						}
 					}.catch { error in
 						self.decksLoadingState.fail(error: error)
 					}

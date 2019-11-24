@@ -4,12 +4,12 @@ struct DecksViewDeckOptionsPopUp: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
-	var selectedDeck: Deck {
-		currentStore.selectedDeck!
+	var selectedDeck: Deck? {
+		currentStore.selectedDeck
 	}
 	
 	var isFavorite: Bool {
-		selectedDeck.userData?.isFavorite ?? false
+		selectedDeck?.userData?.isFavorite ?? false
 	}
 	
 	func resizeImage(_ image: Image) -> some View {
