@@ -11,9 +11,11 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
+	@ObservedObject var currentUser: User
 	@ObservedObject var marketViewModel: MarketViewModel
 	
 	init(currentUser: User) {
+		self.currentUser = currentUser
 		marketViewModel = .init(currentUser: currentUser)
 	}
 		
@@ -69,25 +71,27 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 			.onTapGesture {
 				self.setSelection(to: .market)
 			}
-			Spacer()
-			MainTabViewItem(
-				title: "Decks",
-				isSelected: currentSelection == .decks,
-				selectedContent: {
-					DeckIcon<EmptyView>(
-						color: .extraPurple
-					)
-					.offset(y: 2)
-				},
-				unselectedContent: {
-					DeckIcon<EmptyView>(
-						color: .unselectedTabBarItem
-					)
-					.offset(y: 2)
+			if !currentUser.decks.isEmpty {
+				Spacer()
+				MainTabViewItem(
+					title: "Decks",
+					isSelected: currentSelection == .decks,
+					selectedContent: {
+						DeckIcon<EmptyView>(
+							color: .extraPurple
+						)
+						.offset(y: 2)
+					},
+					unselectedContent: {
+						DeckIcon<EmptyView>(
+							color: .unselectedTabBarItem
+						)
+						.offset(y: 2)
+					}
+				)
+				.onTapGesture {
+					self.setSelection(to: .decks)
 				}
-			)
-			.onTapGesture {
-				self.setSelection(to: .decks)
 			}
 			Spacer()
 			MainTabViewItem(
