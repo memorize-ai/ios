@@ -2,6 +2,10 @@ import SwiftUI
 
 final class DecksViewModel: ObservableObject {
 	@Published var isDeckOptionsPopUpShowing = false
+	
+	@Published var selectedSection: Deck.Section!
+	@Published var isSectionOptionsPopUpShowing = false
+	
 	@Published var expandedSections = [Deck.Section]()
 	
 	func isSectionExpanded(_ section: Deck.Section) -> Bool {

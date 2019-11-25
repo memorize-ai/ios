@@ -63,7 +63,8 @@ struct DecksViewSectionHeader: View {
 				.frame(width: 21, height: 21)
 			}
 			VerticalTripleDots(color: .darkBlue) {
-				// TODO: Show deck section options pop-up
+				self.model.selectedSection = self.section
+				self.model.isSectionOptionsPopUpShowing = true
 			}
 			.padding(.leading, 3)
 		}
