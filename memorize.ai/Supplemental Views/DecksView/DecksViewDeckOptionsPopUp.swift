@@ -17,12 +17,12 @@ struct DecksViewDeckOptionsPopUp: View {
 		selectedDeck?.userData?.isFavorite ?? false
 	}
 	
-	func resizeImage(_ image: Image) -> some View {
+	func resizeImage(_ image: Image, dimension: CGFloat = 21) -> some View {
 		image
 			.resizable()
 			.renderingMode(.original)
 			.aspectRatio(contentMode: .fit)
-			.frame(width: 21, height: 21)
+			.frame(width: dimension, height: dimension)
 	}
 	
 	var body: some View {
@@ -42,7 +42,11 @@ struct DecksViewDeckOptionsPopUp: View {
 				// TODO: Toggle favorite
 			}
 			PopUpButton(
-				icon: resizeImage(.shareIcon),
+				icon: Image(systemName: .squareAndArrowUp)
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.foregroundColor(.darkBlue)
+					.frame(width: 21, height: 21),
 				text: "Share",
 				textColor: .darkGray
 			) {
@@ -81,7 +85,8 @@ struct DecksViewDeckOptionsPopUp: View {
 			}
 			PopUpDivider()
 			PopUpButton(
-				icon: resizeImage(.purpleXButton),
+				icon: XButton(.purple, height: 15)
+					.padding(.horizontal, 2.5),
 				text: "Remove from library",
 				textColor: .darkGray
 			) {
@@ -103,9 +108,11 @@ struct DecksViewDeckOptionsPopUp: View {
 #if DEBUG
 struct DecksViewDeckOptionsPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewDeckOptionsPopUp()
+		let model = DecksViewModel()
+		model.isDeckOptionsPopUpShowing = true
+		return DecksViewDeckOptionsPopUp()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(DecksViewModel())
+			.environmentObject(model)
 	}
 }
 #endif

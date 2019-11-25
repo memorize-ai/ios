@@ -58,6 +58,7 @@ struct PopUp<Content: View>: View {
 							Color.lightGrayBackground
 							HStack(spacing: 20) {
 								XButton(.purple, height: 15)
+									.padding(.horizontal, 2.5)
 								Text("Cancel")
 									.font(.muli(.extraBold, size: 17))
 									.foregroundColor(.darkGray)
