@@ -17,20 +17,24 @@ struct DecksView: View {
 					addedHeight: geometry.safeAreaInsets.top
 				)
 				.edgesIgnoringSafeArea(.all)
-				VStack(spacing: 20) {
+				VStack {
 					DecksViewTopControls(
 						selectedDeck: self.selectedDeck
 					)
 					.padding(.horizontal, Self.horizontalPadding)
-					ScrollView {
-						VStack {
-							DecksViewSections(
-								selectedDeck: self.selectedDeck
-							)
+					ZStack {
+						Rectangle()
+							.foregroundColor(.lightGrayBackground)
+						ScrollView {
+							VStack {
+								DecksViewSections(
+									selectedDeck: self.selectedDeck
+								)
+							}
+							.frame(maxWidth: .infinity)
+							.padding(.horizontal, Self.horizontalPadding)
+							.padding(.top, 20)
 						}
-						.frame(maxWidth: .infinity)
-						.padding(.horizontal, Self.horizontalPadding)
-						.padding(.top, 1)
 					}
 				}
 			}
