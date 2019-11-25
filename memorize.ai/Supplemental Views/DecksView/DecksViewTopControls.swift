@@ -1,12 +1,9 @@
 import SwiftUI
 
 struct DecksViewTopControls: View {
-	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
-	var selectedDeck: Deck {
-		currentStore.selectedDeck!
-	}
+	@ObservedObject var selectedDeck: Deck
 	
 	var body: some View {
 		HStack(spacing: 23) {
@@ -49,8 +46,10 @@ struct DecksViewTopControls: View {
 #if DEBUG
 struct DecksViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewTopControls()
-			.environmentObject(PREVIEW_CURRENT_STORE)
+		DecksViewTopControls(
+			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

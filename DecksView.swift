@@ -12,8 +12,10 @@ struct DecksView: View {
 				)
 				.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 20) {
-					DecksViewTopControls()
-						.padding(.horizontal, 23)
+					DecksViewTopControls(
+						selectedDeck: self.currentStore.selectedDeck!
+					)
+					.padding(.horizontal, 23)
 					ScrollView {
 						EmptyView() // TODO: Replace with content
 					}
