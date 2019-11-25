@@ -28,9 +28,9 @@ struct DecksView: View {
 								selectedDeck: self.selectedDeck
 							)
 						}
-						.frame(
-							width: SCREEN_SIZE.width - Self.horizontalPadding * 2
-						)
+						.frame(maxWidth: .infinity)
+						.padding(.horizontal, Self.horizontalPadding)
+						.padding(.top, 1)
 					}
 				}
 			}
