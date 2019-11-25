@@ -62,6 +62,10 @@ struct DecksViewSectionHeader: View {
 				}
 				.frame(width: 21, height: 21)
 			}
+			VerticalTripleDots(color: .darkBlue) {
+				// TODO: Show deck section options pop-up
+			}
+			.padding(.leading, 3)
 		}
 	}
 }
