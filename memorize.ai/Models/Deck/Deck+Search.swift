@@ -36,7 +36,7 @@ extension Deck {
 			numberOfRatings: json["rating_count"]?["raw"] as? Int ?? 0,
 			averageRating: json["average_rating"]?["raw"] as? Double ?? 0,
 			numberOfDownloads: json["download_count"]?["raw"] as? Int ?? 0,
-			creatorId: json["creator"]?["raw"] as? String ?? "0",
+			creatorId: json["creator_id"]?["raw"] as? String ?? "0",
 			dateCreated: (json["created"]?["raw"] as? String)?.toDate() ?? .init(),
 			dateLastUpdated: (json["updated"]?["raw"] as? String)?.toDate() ?? .init()
 		)
