@@ -125,7 +125,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func get(user: User) -> Self {
 		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").setData([
-			"added": Date()
+			"added": FieldValue.serverTimestamp()
 		]).done {
 			self.getLoadingState.succeed()
 		}.catch { error in
