@@ -24,10 +24,12 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var dateLastUpdated: Date
 	
 	@Published var userData: UserData?
+	@Published var sections: [Section]
 	
 	@Published var imageLoadingState = LoadingState()
 	@Published var userDataLoadingState = LoadingState()
 	@Published var getLoadingState = LoadingState()
+	@Published var sectionsLoadingState = LoadingState()
 	
 	init(
 		id: String,
@@ -44,7 +46,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		creatorId: String,
 		dateCreated: Date,
 		dateLastUpdated: Date,
-		userData: UserData? = nil
+		userData: UserData? = nil,
+		sections: [Section] = []
 	) {
 		self.id = id
 		self.topics = topics
@@ -61,6 +64,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.dateCreated = dateCreated
 		self.dateLastUpdated = dateLastUpdated
 		self.userData = userData
+		self.sections = sections
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -117,6 +121,33 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			}
 			self.updateUserDataFromSnapshot(snapshot)
 			self.userDataLoadingState.succeed()
+		}
+		return self
+	}
+	
+	@discardableResult
+	func loadSections() -> Self {
+		guard sectionsLoadingState.isNone else { return self }
+		sectionsLoadingState.startLoading()
+		firestore.collection("decks/\(id)/sections").addSnapshotListener { snapshot, error in
+			guard error == nil, let documentChanges = snapshot?.documentChanges else {
+				self.sectionsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				return
+			}
+			for change in documentChanges {
+				let document = change.document
+				let sectionId = document.documentID
+				switch change.type {
+				case .added:
+					self.sections.append(.init(snapshot: document))
+				case .modified:
+					self.sections.first { $0.id == sectionId }?
+						.updateFromSnapshot(document)
+				case .removed:
+					self.sections.removeAll { $0.id == sectionId }
+				}
+			}
+			self.sectionsLoadingState.succeed()
 		}
 		return self
 	}
