@@ -5,7 +5,7 @@ struct DecksViewSections: View {
 	
 	var body: some View {
 		ForEach(selectedDeck.sections) { section in
-			DecksViewSectionHeader(section: section)
+			DecksViewSectionHeader(section: section, isExpanded: .constant(true)) // TODO: Change .constant
 		}
 	}
 }
