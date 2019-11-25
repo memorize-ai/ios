@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct DecksViewSectionHeader: View {
-	@ObservedObject var section: Deck.Section
+	@EnvironmentObject var model: DecksViewModel
 	
-	@Binding var isExpanded: Bool
+	@ObservedObject var section: Deck.Section
 	
 	var cardCountMessage: String {
 		"(\(section.numberOfCards.formatted) card\(section.numberOfCards == 1 ? "" : "s"))"
@@ -34,13 +34,13 @@ struct DecksViewSectionHeader: View {
 				.font(.muli(.bold, size: 15))
 				.foregroundColor(.darkBlue)
 			Button(action: {
-				self.isExpanded.toggle()
+				self.model.toggleSectionExpanded(self.section)
 			}) {
 				ZStack {
 					Circle()
 						.stroke(Color.lightGrayBorder)
 					Group {
-						if isExpanded {
+						if model.isSectionExpanded(section) {
 							minusIcon
 						} else {
 							plusIcon
@@ -55,25 +55,15 @@ struct DecksViewSectionHeader: View {
 }
 
 #if DEBUG
-struct DecksViewSectionHeader_Preview: View {
-	@State var isExpanded = false
-	
-	var body: some View {
-		DecksViewSectionHeader(
-			section: .init(
-				id: "0",
-				name: "CSS",
-				numberOfCards: 56
-			),
-			isExpanded: $isExpanded
-		)
-		.padding(.horizontal, DecksView.horizontalPadding)
-	}
-}
-
 struct DecksViewSectionHeader_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewSectionHeader_Preview()
+		DecksViewSectionHeader(section: .init(
+			id: "0",
+			name: "CSS",
+			numberOfCards: 56
+		))
+		.padding(.horizontal, DecksView.horizontalPadding)
+		.environmentObject(DecksViewModel())
 	}
 }
 #endif

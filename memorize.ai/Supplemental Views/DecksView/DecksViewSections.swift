@@ -1,11 +1,13 @@
 import SwiftUI
 
 struct DecksViewSections: View {
+	@EnvironmentObject var model: DecksViewModel
+	
 	@ObservedObject var selectedDeck: Deck
 	
 	var body: some View {
 		ForEach(selectedDeck.sections) { section in
-			DecksViewSectionHeader(section: section, isExpanded: .constant(true)) // TODO: Change .constant
+			DecksViewSectionHeader(section: section)
 		}
 	}
 }
@@ -16,6 +18,7 @@ struct DecksViewSections_Previews: PreviewProvider {
 		DecksViewSections(
 			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
 		)
+		.environmentObject(DecksViewModel())
 	}
 }
 #endif
