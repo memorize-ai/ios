@@ -35,6 +35,7 @@ extension Image {
 	static let analyticsIcon = Self("AnalyticsIcon")
 	static let editSectionsIcon = Self("EditSectionsIcon")
 	static let performanceCheckIcon = Self("PerformanceCheckIcon")
+	static let purpleShoppingCartIcon = Self("PurpleShoppingCartIcon")
 	static let purpleStarIcon = Self("PurpleStarIcon")
 	static let selectedPurpleStarIcon = Self("SelectedPurpleStarIcon")
 	static let shareIcon = Self("ShareIcon")

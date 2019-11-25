@@ -70,7 +70,7 @@ struct DecksViewDeckOptionsPopUp: View {
 			}
 			PopUpDivider()
 			PopUpButton(
-				icon: resizeImage(.selectedMarketTabBarItem),
+				icon: resizeImage(.purpleShoppingCartIcon),
 				text: "Visit page",
 				textColor: .darkGray
 			) {
