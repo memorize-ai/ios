@@ -4,6 +4,10 @@ struct DecksView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
+	var selectedDeck: Deck {
+		currentStore.selectedDeck!
+	}
+	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -13,7 +17,7 @@ struct DecksView: View {
 				.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 20) {
 					DecksViewTopControls(
-						selectedDeck: self.currentStore.selectedDeck!
+						selectedDeck: self.selectedDeck
 					)
 					.padding(.horizontal, 23)
 					ScrollView {
@@ -21,6 +25,9 @@ struct DecksView: View {
 					}
 				}
 			}
+		}
+		.onAppear {
+			self.selectedDeck.loadSections()
 		}
 	}
 }
