@@ -4,17 +4,14 @@ struct DecksViewDeckOptionsPopUp: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
-	var selectedDeck: Deck? {
-		currentStore.selectedDeck
-	}
+	@ObservedObject var selectedDeck: Deck
 	
 	var isOwner: Bool {
-		guard let selectedDeck = selectedDeck else { return false }
-		return selectedDeck.creatorId == currentStore.user.id
+		selectedDeck.creatorId == currentStore.user.id
 	}
 	
 	var isFavorite: Bool {
-		selectedDeck?.userData?.isFavorite ?? false
+		selectedDeck.userData?.isFavorite ?? false
 	}
 	
 	func resizeImage(_ image: Image, dimension: CGFloat = 21) -> some View {
@@ -39,7 +36,11 @@ struct DecksViewDeckOptionsPopUp: View {
 				text: "\(isFavorite ? "Remove from" : "Add to") favorites",
 				textColor: .darkGray
 			) {
-				// TODO: Toggle favorite
+				self.selectedDeck.userData?.isFavorite.toggle()
+				self.selectedDeck.setFavorite(
+					to: self.isFavorite,
+					forUser: self.currentStore.user
+				)
 			}
 			PopUpButton(
 				icon: Image(systemName: .squareAndArrowUp)
@@ -110,9 +111,11 @@ struct DecksViewDeckOptionsPopUp_Previews: PreviewProvider {
 	static var previews: some View {
 		let model = DecksViewModel()
 		model.isDeckOptionsPopUpShowing = true
-		return DecksViewDeckOptionsPopUp()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(model)
+		return DecksViewDeckOptionsPopUp(
+			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
+		.environmentObject(model)
 	}
 }
 #endif

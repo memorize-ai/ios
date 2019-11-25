@@ -161,8 +161,12 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 						.environmentObject(marketViewModel)
 					MarketViewFilterPopUp()
 						.environmentObject(marketViewModel)
-					DecksViewDeckOptionsPopUp()
+					if currentStore.selectedDeck != nil {
+						DecksViewDeckOptionsPopUp(
+							selectedDeck: currentStore.selectedDeck!
+						)
 						.environmentObject(decksViewModel)
+					}
 				}
 			}
 			.removeNavigationBar()

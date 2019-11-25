@@ -146,6 +146,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
+	func setFavorite(to newValue: Bool, forUser user: User) -> Promise<Void> {
+		firestore.document("users/\(user.id)/decks/\(id)").updateData([
+			"favorite": newValue
+		])
+	}
+	
+	@discardableResult
 	func updatePublicDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		hasImage = snapshot.get("hasImage") as? Bool ?? false
 		if !hasImage { image = nil }
