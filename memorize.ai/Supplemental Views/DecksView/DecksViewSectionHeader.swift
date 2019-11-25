@@ -7,6 +7,10 @@ struct DecksViewSectionHeader: View {
 	
 	@ObservedObject var section: Deck.Section
 	
+	var isLocked: Bool {
+		!(deck.userData?.unlockedSections.contains(section.id) ?? false)
+	}
+	
 	var cardCountMessage: String {
 		"(\(section.numberOfCards.formatted) card\(section.numberOfCards == 1 ? "" : "s"))"
 	}
@@ -27,6 +31,12 @@ struct DecksViewSectionHeader: View {
 	
 	var body: some View {
 		HStack(spacing: 12) {
+			if isLocked {
+				Image.lock
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 16)
+			}
 			Text(section.name)
 				.font(.muli(.bold, size: 17))
 			Rectangle()
