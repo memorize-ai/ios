@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct DecksView: View {
+	static let horizontalPadding: CGFloat = 23
+	
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
@@ -19,10 +21,17 @@ struct DecksView: View {
 					DecksViewTopControls(
 						selectedDeck: self.selectedDeck
 					)
-					.padding(.horizontal, 23)
-					DecksViewSections(
-						selectedDeck: self.selectedDeck
-					)
+					.padding(.horizontal, Self.horizontalPadding)
+					ScrollView {
+						VStack {
+							DecksViewSections(
+								selectedDeck: self.selectedDeck
+							)
+						}
+						.frame(
+							width: SCREEN_SIZE.width - Self.horizontalPadding * 2
+						)
+					}
 				}
 			}
 		}

@@ -4,10 +4,8 @@ struct DecksViewSections: View {
 	@ObservedObject var selectedDeck: Deck
 	
 	var body: some View {
-		ScrollView {
-			ForEach(selectedDeck.sections) { section in
-				DecksViewSectionHeader(section: section)
-			}
+		ForEach(selectedDeck.sections) { section in
+			DecksViewSectionHeader(section: section)
 		}
 	}
 }
