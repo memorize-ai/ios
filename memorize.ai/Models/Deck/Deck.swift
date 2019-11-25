@@ -205,6 +205,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		} else {
 			userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
 			userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+			userData?.unlockedSections = snapshot.get("unlockedSections") as? [String] ?? []
 		}
 		return self
 	}

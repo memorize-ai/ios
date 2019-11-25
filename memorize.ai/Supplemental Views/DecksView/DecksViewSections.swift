@@ -7,7 +7,10 @@ struct DecksViewSections: View {
 	
 	var body: some View {
 		ForEach(selectedDeck.sections) { section in
-			DecksViewSectionHeader(section: section)
+			DecksViewSectionHeader(
+				deck: self.selectedDeck,
+				section: section
+			)
 		}
 	}
 }

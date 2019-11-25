@@ -40,4 +40,6 @@ extension Image {
 	static let selectedPurpleStarIcon = Self("SelectedPurpleStarIcon")
 	static let shareIcon = Self("ShareIcon")
 	static let trashIcon = Self("TrashIcon")
+	
+	static let lock = Self("Lock")
 }

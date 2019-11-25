@@ -3,6 +3,8 @@ import SwiftUI
 struct DecksViewSectionHeader: View {
 	@EnvironmentObject var model: DecksViewModel
 	
+	@ObservedObject var deck: Deck
+	
 	@ObservedObject var section: Deck.Section
 	
 	var cardCountMessage: String {
@@ -57,11 +59,14 @@ struct DecksViewSectionHeader: View {
 #if DEBUG
 struct DecksViewSectionHeader_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewSectionHeader(section: .init(
-			id: "0",
-			name: "CSS",
-			numberOfCards: 56
-		))
+		DecksViewSectionHeader(
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			section: .init(
+				id: "0",
+				name: "CSS",
+				numberOfCards: 56
+			)
+		)
 		.padding(.horizontal, DecksView.horizontalPadding)
 		.environmentObject(DecksViewModel())
 	}

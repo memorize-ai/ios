@@ -7,19 +7,27 @@ extension Deck {
 		
 		var isFavorite: Bool
 		var numberOfDueCards: Int
+		var unlockedSections: [String]
 		
 		#if DEBUG
-		init(dateAdded: Date, isFavorite: Bool, numberOfDueCards: Int) {
+		init(
+			dateAdded: Date,
+			isFavorite: Bool,
+			numberOfDueCards: Int,
+			unlockedSections: [String] = []
+		) {
 			self.dateAdded = dateAdded
 			self.isFavorite = isFavorite
 			self.numberOfDueCards = numberOfDueCards
+			self.unlockedSections = unlockedSections
 		}
 		#endif
 		
 		init(snapshot: DocumentSnapshot) {
-			self.dateAdded = snapshot.get("added") as? Date ?? .init()
-			self.isFavorite = snapshot.get("favorite") as? Bool ?? false
-			self.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+			dateAdded = snapshot.get("added") as? Date ?? .init()
+			isFavorite = snapshot.get("favorite") as? Bool ?? false
+			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+			unlockedSections = snapshot.get("unlockedSections") as? [String] ?? []
 		}
 		
 		var isDue: Bool {
