@@ -8,6 +8,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static var imageCache = [String: Image]()
 	
 	let id: String
+	let creatorId: String
 	let dateCreated: Date
 	
 	@Published var topics: [String]
@@ -40,6 +41,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfRatings: Int,
 		averageRating: Double,
 		numberOfDownloads: Int,
+		creatorId: String,
 		dateCreated: Date,
 		dateLastUpdated: Date,
 		userData: UserData? = nil
@@ -55,6 +57,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfRatings = numberOfRatings
 		self.averageRating = averageRating
 		self.numberOfDownloads = numberOfDownloads
+		self.creatorId = creatorId
 		self.dateCreated = dateCreated
 		self.dateLastUpdated = dateLastUpdated
 		self.userData = userData
@@ -72,6 +75,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
 			averageRating: snapshot.get("averageRating") as? Double ?? 0,
 			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
+			creatorId: snapshot.get("creator") as? String ?? "0",
 			dateCreated: snapshot.getDate("created") ?? .init(),
 			dateLastUpdated: snapshot.getDate("updated") ?? .init()
 		)

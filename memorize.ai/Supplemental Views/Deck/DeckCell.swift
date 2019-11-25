@@ -103,6 +103,7 @@ struct DeckCell_Previews: PreviewProvider {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init()
 		)
@@ -125,6 +126,7 @@ struct DeckCell_Previews: PreviewProvider {
 							numberOfRatings: 12400,
 							averageRating: 4.5,
 							numberOfDownloads: 196400,
+							creatorId: "0",
 							dateCreated: .init(),
 							dateLastUpdated: .init()
 						),
@@ -143,6 +145,7 @@ struct DeckCell_Previews: PreviewProvider {
 							numberOfRatings: 12400,
 							averageRating: 4.5,
 							numberOfDownloads: 196400,
+							creatorId: "0",
 							dateCreated: .init(),
 							dateLastUpdated: .init()
 						),
@@ -161,6 +164,7 @@ struct DeckCell_Previews: PreviewProvider {
 							numberOfRatings: 12400,
 							averageRating: 4.5,
 							numberOfDownloads: 196400,
+							creatorId: "0",
 							dateCreated: .init(),
 							dateLastUpdated: .init()
 						),

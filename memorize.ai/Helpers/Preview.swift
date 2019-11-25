@@ -39,6 +39,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		numberOfRatings: 12400,
 		averageRating: 4.5,
 		numberOfDownloads: 196400,
+		creatorId: "0",
 		dateCreated: .init(),
 		dateLastUpdated: .init(),
 		userData: .init(
@@ -60,6 +61,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		numberOfRatings: 12400,
 		averageRating: 4.5,
 		numberOfDownloads: 196400,
+		creatorId: "0",
 		dateCreated: .init(),
 		dateLastUpdated: .init(),
 		userData: .init(
@@ -93,6 +95,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
+				creatorId: "0",
 				dateCreated: .init(),
 				dateLastUpdated: .init(),
 				userData: .init(
@@ -114,6 +117,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
+				creatorId: "0",
 				dateCreated: .init(),
 				dateLastUpdated: .init()
 			),
@@ -129,6 +133,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
+				creatorId: "0",
 				dateCreated: .init(),
 				dateLastUpdated: .init(),
 				userData: .init(
@@ -148,6 +153,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
+				creatorId: "0",
 				dateCreated: .init(),
 				dateLastUpdated: .init(),
 				userData: .init(
@@ -167,6 +173,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
+				creatorId: "0",
 				dateCreated: .init(),
 				dateLastUpdated: .init(),
 				userData: .init(
@@ -214,6 +221,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init(),
 			userData: .init(
@@ -234,6 +242,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init(),
 			userData: .init(
@@ -254,6 +263,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init()
 		),
@@ -269,6 +279,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init(),
 			userData: .init(
@@ -288,6 +299,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init(),
 			userData: .init(
@@ -307,6 +319,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init(),
 			userData: .init(

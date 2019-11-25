@@ -100,6 +100,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
+			creatorId: "0",
 			dateCreated: .init(),
 			dateLastUpdated: .init()
 		)
@@ -130,6 +131,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					numberOfRatings: 250,
 					averageRating: 4.5,
 					numberOfDownloads: 400,
+					creatorId: "0",
 					dateCreated: .init(),
 					dateLastUpdated: .init()
 				),
