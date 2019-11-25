@@ -20,9 +20,9 @@ struct DecksView: View {
 						selectedDeck: self.selectedDeck
 					)
 					.padding(.horizontal, 23)
-					ScrollView {
-						EmptyView() // TODO: Replace with content
-					}
+					DecksViewSections(
+						selectedDeck: self.selectedDeck
+					)
 				}
 			}
 		}

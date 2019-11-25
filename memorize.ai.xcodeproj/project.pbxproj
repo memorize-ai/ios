@@ -96,6 +96,7 @@
 		4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AC236BFE080043298C /* DocumentSnapshot.swift */; };
 		4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */; };
 		4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */; };
+		4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */; };
 		4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEB823851F8100C85EC2 /* MarketView.swift */; };
 		4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */; };
 		4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBD2385277400C85EC2 /* UserLevelView.swift */; };
@@ -281,6 +282,7 @@
 		4D8444AC236BFE080043298C /* DocumentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSnapshot.swift; sourceTree = "<group>"; };
 		4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewContentBox.swift; sourceTree = "<group>"; };
+		4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewSections.swift; sourceTree = "<group>"; };
 		4D9AAEB823851F8100C85EC2 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = SOURCE_ROOT; };
 		4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4D9AAEBD2385277400C85EC2 /* UserLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLevelView.swift; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 			children = (
 				4DD5FE982388D93E00E70251 /* DecksViewTopControls.swift */,
 				4DD5FEA5238B3D3D00E70251 /* DecksViewDeckOptionsPopUp.swift */,
+				4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */,
 				4DD5FEA7238C617800E70251 /* DecksViewSectionHeader.swift */,
 			);
 			path = DecksView;
@@ -1289,6 +1292,7 @@
 				4DD5FE82238709A400E70251 /* PopUp.swift in Sources */,
 				4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
+				4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */,
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,
 				4D35BC442385F20A00A440CF /* MarketViewModel.swift in Sources */,
 				4D3B949C2372A06F002F441E /* SideBarSections.swift in Sources */,
