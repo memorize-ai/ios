@@ -25,7 +25,7 @@ struct DecksViewDeckOptionsPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
-			contentHeight: 50 * 8 + 2
+			contentHeight: .init(50 * (isOwner ? 8 : 6) + 2)
 		) {
 			PopUpButton(
 				icon: resizeImage(
