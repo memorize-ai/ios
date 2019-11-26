@@ -4,7 +4,18 @@ struct DecksViewCardCell: View {
 	@ObservedObject var card: Card
 	
 	var body: some View {
-		Text("DecksViewCardCell")
+		CustomRectangle(
+			background: Color.white,
+			borderColor: Color.lightGrayBorder,
+			borderWidth: 1,
+			cornerRadius: 8,
+			shadowRadius: 5,
+			shadowYOffset: 5
+		) {
+			Text(card.front)
+				.frame(maxWidth: .infinity, alignment: .leading)
+				.frame(minHeight: 75, alignment: .top)
+		}
 	}
 }
 
@@ -20,6 +31,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 			numberOfSkips: 40,
 			userData: .init(dueDate: .init())
 		))
+		.padding(.horizontal, DecksView.horizontalPadding)
 	}
 }
 #endif
