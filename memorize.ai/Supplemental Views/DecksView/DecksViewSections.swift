@@ -1,16 +1,14 @@
 import SwiftUI
 
 struct DecksViewSections: View {
-	@EnvironmentObject var model: DecksViewModel
-	
 	@ObservedObject var selectedDeck: Deck
 	
 	var body: some View {
 		ForEach(selectedDeck.sections) { section in
-			DecksViewSectionHeader(
-				deck: self.selectedDeck,
-				section: section
-			)
+			VStack {
+				DecksViewSectionHeader(section: section)
+				DecksViewSectionBody(section: section)
+			}
 		}
 	}
 }
@@ -21,6 +19,7 @@ struct DecksViewSections_Previews: PreviewProvider {
 		DecksViewSections(
 			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 		.environmentObject(DecksViewModel())
 	}
 }

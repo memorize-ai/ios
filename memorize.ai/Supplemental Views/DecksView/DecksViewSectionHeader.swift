@@ -4,7 +4,6 @@ struct DecksViewSectionHeader: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
-	@ObservedObject var deck: Deck
 	@ObservedObject var section: Deck.Section
 	
 	var cardCountMessage: String {
@@ -75,15 +74,12 @@ struct DecksViewSectionHeader: View {
 #if DEBUG
 struct DecksViewSectionHeader_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewSectionHeader(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: .init(
-				id: "0",
-				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
-				name: "CSS",
-				numberOfCards: 56
-			)
-		)
+		DecksViewSectionHeader(section: .init(
+			id: "0",
+			parent: PREVIEW_CURRENT_STORE.user.decks.first!,
+			name: "CSS",
+			numberOfCards: 56
+		))
 		.padding(.horizontal, DecksView.horizontalPadding)
 		.environmentObject(PREVIEW_CURRENT_STORE)
 		.environmentObject(DecksViewModel())
