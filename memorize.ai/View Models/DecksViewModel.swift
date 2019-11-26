@@ -12,9 +12,12 @@ final class DecksViewModel: ObservableObject {
 		expandedSections.contains(section)
 	}
 	
-	func toggleSectionExpanded(_ section: Deck.Section) {
-		isSectionExpanded(section)
-			? expandedSections.removeAll { $0 == section }
-			: expandedSections.append(section)
+	func toggleSectionExpanded(_ section: Deck.Section, forUser user: User) {
+		if isSectionExpanded(section) {
+			expandedSections.removeAll { $0 == section }
+		} else {
+			expandedSections.append(section)
+			section.loadCards(withUserDataForUser: user)
+		}
 	}
 }

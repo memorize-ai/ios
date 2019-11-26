@@ -16,9 +16,10 @@ struct DecksViewSectionOptionsPopUp: View {
 			isShowing: $model.isSectionOptionsPopUpShowing,
 			contentHeight: 50 * 0 + 0
 		) {
-			PopUpButton(icon: <#T##_?#>, text: <#T##String#>, textColor: <#T##Color#>) {
-				
-			}
+			EmptyView()
+//			PopUpButton(icon: <#T##_?#>, text: <#T##String#>, textColor: <#T##Color#>) {
+//
+//			}
 		}
 	}
 }
@@ -30,6 +31,7 @@ struct DecksViewSectionOptionsPopUp_Previews: PreviewProvider {
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			section: .init(
 				id: "0",
+				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				name: "CSS",
 				numberOfCards: 56
 			)

@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct DecksViewSectionHeader: View {
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var deck: Deck
-	
 	@ObservedObject var section: Deck.Section
 	
 	var isLocked: Bool {
@@ -46,7 +46,10 @@ struct DecksViewSectionHeader: View {
 				.font(.muli(.bold, size: 15))
 				.foregroundColor(.darkBlue)
 			Button(action: {
-				self.model.toggleSectionExpanded(self.section)
+				self.model.toggleSectionExpanded(
+					self.section,
+					forUser: self.currentStore.user
+				)
 			}) {
 				ZStack {
 					Circle()
@@ -63,8 +66,10 @@ struct DecksViewSectionHeader: View {
 				.frame(width: 21, height: 21)
 			}
 			VerticalTripleDots(color: .darkBlue) {
-				self.model.selectedSection = self.section
-				self.model.isSectionOptionsPopUpShowing = true
+				popUpWithAnimation {
+					self.model.selectedSection = self.section
+					self.model.isSectionOptionsPopUpShowing = true
+				}
 			}
 			.padding(.leading, 3)
 		}
@@ -78,11 +83,13 @@ struct DecksViewSectionHeader_Previews: PreviewProvider {
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			section: .init(
 				id: "0",
+				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				name: "CSS",
 				numberOfCards: 56
 			)
 		)
 		.padding(.horizontal, DecksView.horizontalPadding)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 		.environmentObject(DecksViewModel())
 	}
 }
