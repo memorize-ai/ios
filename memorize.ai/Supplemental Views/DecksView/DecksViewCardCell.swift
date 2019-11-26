@@ -12,9 +12,15 @@ struct DecksViewCardCell: View {
 			shadowRadius: 5,
 			shadowYOffset: 5
 		) {
-			Text(card.front)
-				.frame(maxWidth: .infinity, alignment: .leading)
-				.frame(minHeight: 75, alignment: .top)
+			ZStack(alignment: .topTrailing) {
+				Text(card.front)
+					.frame(maxWidth: .infinity, alignment: .leading)
+				Image(systemName: .speaker3Fill)
+					.foregroundColor(.darkBlue)
+					.padding([.trailing, .top], 4)
+			}
+			.padding(8)
+			.frame(minHeight: 75, alignment: .top)
 		}
 	}
 }
