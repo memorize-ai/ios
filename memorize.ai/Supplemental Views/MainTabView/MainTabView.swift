@@ -167,6 +167,12 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 						)
 						.environmentObject(decksViewModel)
 					}
+					if decksViewModel.selectedSection != nil {
+						DecksViewSectionOptionsPopUp(
+							section: decksViewModel.selectedSection!
+						)
+						.environmentObject(decksViewModel)
+					}
 				}
 			}
 			.removeNavigationBar()
