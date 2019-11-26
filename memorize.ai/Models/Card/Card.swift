@@ -45,23 +45,44 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	var hasSound: Bool {
-		textIncludesAudioTag(front) || textIncludesAudioTag(back)
-	}
-	
-	private func textIncludesAudioTag(_ text: String) -> Bool {
-		text.range(of: #"<audio src="(.+)">"#, options: .regularExpression) != nil
+		Self.textIncludesAudioTag(front) || Self.textIncludesAudioTag(back)
 	}
 	
 	var firstImageUrlInFront: String? {
 		guard let range = front.range(
-			of: #"<img src="(.+)">"#,
+			of: #"<\s*img[^>]*src="(.+?)"[^>]*>"#,
 			options: .regularExpression
 		) else { return nil }
 		return .init(front[range].dropFirst(10).dropLast(2))
 	}
 	
 	static func stripFormatting(_ text: String) -> String {
-		text // TODO: Strip formatting
+		replaceHtmlElements(replaceHtmlVoidElements(text))
+			.replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
+	}
+	
+	private static func textIncludesAudioTag(_ text: String) -> Bool {
+		text.range(of: #"<\s*audio[^>]*src="(.+?)"[^>]*>"#, options: .regularExpression) != nil
+	}
+	
+	private static func replaceHtmlElements(_ text: String) -> String {
+		return text.replacingOccurrences(
+			of: HTML_ELEMENTS
+				.map { "<\\s*\($0)[^>]*>(.*?)<\\s*/\\s*\($0)\\s*>" }
+				.joined(separator: "|"),
+			with: "$1",
+			options: .regularExpression
+		)
+	}
+	
+	private static func replaceHtmlVoidElements(_ text: String) -> String {
+		return text.replacingOccurrences(
+			of: HTML_VOID_ELEMENTS
+				.map { "<\\s*\($0)[^>]*>" }
+				.joined(separator: "|"),
+			with: " ",
+			options: .regularExpression
+		)
 	}
 	
 	@discardableResult
