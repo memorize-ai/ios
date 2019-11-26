@@ -166,12 +166,13 @@ struct MainTabView: View { // TODO: Fix issue where everything moves up when com
 							selectedDeck: currentStore.selectedDeck!
 						)
 						.environmentObject(decksViewModel)
-					}
-					if decksViewModel.selectedSection != nil {
-						DecksViewSectionOptionsPopUp(
-							section: decksViewModel.selectedSection!
-						)
-						.environmentObject(decksViewModel)
+						if decksViewModel.selectedSection != nil {
+							DecksViewSectionOptionsPopUp(
+								deck: currentStore.selectedDeck!,
+								section: decksViewModel.selectedSection!
+							)
+							.environmentObject(decksViewModel)
+						}
 					}
 				}
 			}

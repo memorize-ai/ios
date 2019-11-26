@@ -1,6 +1,7 @@
 import Combine
 import FirebaseFirestore
 import PromiseKit
+import LoadingState
 
 extension Deck {
 	final class Section: ObservableObject, Identifiable, Equatable, Hashable {
@@ -9,10 +10,14 @@ extension Deck {
 		@Published var name: String
 		@Published var numberOfCards: Int
 		
-		init(id: String, name: String, numberOfCards: Int) {
+		@Published var cards: [Card]
+		@Published var cardsLoadingState = LoadingState()
+		
+		init(id: String, name: String, numberOfCards: Int, cards: [Card] = []) {
 			self.id = id
 			self.name = name
 			self.numberOfCards = numberOfCards
+			self.cards = cards
 		}
 		
 		convenience init(snapshot: DocumentSnapshot) {

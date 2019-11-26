@@ -41,6 +41,8 @@
 		4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */; };
 		4D35BC442385F20A00A440CF /* MarketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D35BC432385F20A00A440CF /* MarketViewModel.swift */; };
 		4D365795238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D365794238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift */; };
+		4D365798238CB09F007C3D1F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D365797238CB09F007C3D1F /* Card.swift */; };
+		4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D365799238CB168007C3D1F /* Card+UserData.swift */; };
 		4D3B949423724419002F441E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949323724419002F441E /* SearchBar.swift */; };
 		4D3B949623727260002F441E /* SideBarSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949523727260002F441E /* SideBarSectionTitle.swift */; };
 		4D3B949823727347002F441E /* SideBarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949723727347002F441E /* SideBarSection.swift */; };
@@ -228,6 +230,8 @@
 		4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTitle.swift; sourceTree = "<group>"; };
 		4D35BC432385F20A00A440CF /* MarketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewModel.swift; sourceTree = SOURCE_ROOT; };
 		4D365794238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewSectionOptionsPopUp.swift; sourceTree = "<group>"; };
+		4D365797238CB09F007C3D1F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		4D365799238CB168007C3D1F /* Card+UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+UserData.swift"; sourceTree = "<group>"; };
 		4D3B949323724419002F441E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		4D3B949523727260002F441E /* SideBarSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSectionTitle.swift; sourceTree = "<group>"; };
 		4D3B949723727347002F441E /* SideBarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSection.swift; sourceTree = "<group>"; };
@@ -460,6 +464,7 @@
 				4DD34CD92362E3930007E3E6 /* User */,
 				4DBFB7BA2369617000D75B45 /* Topic */,
 				4DFA0DBF236A7B0A0000CA7A /* Deck */,
+				4D365796238CB094007C3D1F /* Card */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -516,6 +521,15 @@
 				4D32A537236913D20072AA70 /* PostSignUpViewTitle.swift */,
 			);
 			path = PostSignUpView;
+			sourceTree = "<group>";
+		};
+		4D365796238CB094007C3D1F /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				4D365797238CB09F007C3D1F /* Card.swift */,
+				4D365799238CB168007C3D1F /* Card+UserData.swift */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		4D402E75235E6FA50011C6B6 /* Fonts */ = {
@@ -1256,6 +1270,7 @@
 				4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */,
 				4D184D93236975C000A84998 /* Grid.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
+				4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */,
 				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,
 				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
@@ -1270,6 +1285,7 @@
 				4D16D9A22371F55600FE8E5E /* DeckRow.swift in Sources */,
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
 				4DD5FEAA238C620500E70251 /* Deck+Section.swift in Sources */,
+				4D365798238CB09F007C3D1F /* Card.swift in Sources */,
 				4DD9CEF323691C2700EC138F /* RecommendedDecksView.swift in Sources */,
 				4D0C028F237D41C80062BC14 /* LoadingTopicCell.swift in Sources */,
 				4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */,
