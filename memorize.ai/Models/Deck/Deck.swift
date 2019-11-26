@@ -85,6 +85,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
+	var documentReference: DocumentReference {
+		firestore.document("decks/\(id)")
+	}
+	
 	@discardableResult
 	func loadImage() -> Self {
 		guard imageLoadingState.isNone && hasImage else { return self }
@@ -129,7 +133,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadSections() -> Self {
 		guard sectionsLoadingState.isNone else { return self }
 		sectionsLoadingState.startLoading()
-		firestore.collection("decks/\(id)/sections").addSnapshotListener { snapshot, error in
+		documentReference.collection("sections").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
 				self.sectionsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 				return
@@ -139,7 +143,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				let sectionId = document.documentID
 				switch change.type {
 				case .added:
-					self.sections.append(.init(snapshot: document))
+					self.sections.append(.init(parent: self, snapshot: document))
 				case .modified:
 					self.sections.first { $0.id == sectionId }?
 						.updateFromSnapshot(document)
