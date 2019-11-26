@@ -6,7 +6,7 @@ struct DecksViewCardCell: View {
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
-			borderColor: Color.lightGrayBorder,
+			borderColor: .lightGrayBorder,
 			borderWidth: 1,
 			cornerRadius: 8,
 			shadowRadius: 5,
