@@ -56,6 +56,10 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
+	var documentReference: DocumentReference {
+		firestore.document("users/\(id)")
+	}
+	
 	var dueDecks: [Deck] {
 		decks.filter { $0.userData?.isDue ?? false }
 	}
@@ -112,7 +116,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		var isInitialIteration = true
 		var shouldSetSelectedDeck = true
 		decksLoadingState.startLoading()
-		firestore.collection("users/\(id)/decks").addSnapshotListener { snapshot, error in
+		documentReference.collection("decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
 				self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 				return
@@ -150,7 +154,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func addInterest(topicId: String) -> Promise<Void> {
-		firestore.document("users/\(id)").updateData([
+		documentReference.updateData([
 			"topics": FieldValue.arrayUnion([topicId])
 		]).done {
 			self.interests.append(topicId)
@@ -159,7 +163,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func removeInterest(topicId: String) -> Promise<Void> {
-		firestore.document("users/\(id)").updateData([
+		documentReference.updateData([
 			"topics": FieldValue.arrayRemove([topicId])
 		]).done {
 			self.interests.removeAll { $0 == topicId }
