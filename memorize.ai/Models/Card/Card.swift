@@ -1,5 +1,6 @@
 import Combine
 import FirebaseFirestore
+import LoadingState
 
 final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	let id: String
@@ -11,6 +12,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfSkips: Int
 	
 	@Published var userData: UserData?
+	@Published var userDataLoadingState = LoadingState()
 	
 	init(
 		id: String,
@@ -60,6 +62,28 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		} else {
 			userData?.dueDate = snapshot.getDate("due") ?? .init()
 		}
+		return self
+	}
+	
+	@discardableResult
+	func loadUserData(forUser user: User, deck: Deck) -> Self {
+		guard userDataLoadingState.isNone else { return self }
+		userDataLoadingState.startLoading()
+		user
+			.documentReference
+			.collection("decks/\(deck.id)/cards")
+			.document(id)
+			.addSnapshotListener { snapshot, error in
+				guard
+					error == nil,
+					let snapshot = snapshot
+				else {
+					self.userDataLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+					return
+				}
+				self.updateUserDataFromSnapshot(snapshot)
+				self.userDataLoadingState.succeed()
+			}
 		return self
 	}
 	
