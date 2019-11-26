@@ -52,6 +52,18 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		text.range(of: #"<audio src="(.+)">"#, options: .regularExpression) != nil
 	}
 	
+	var firstImageUrlInFront: String? {
+		guard let range = front.range(
+			of: #"<img src="(.+)">"#,
+			options: .regularExpression
+		) else { return nil }
+		return .init(front[range].dropFirst(10).dropLast(2))
+	}
+	
+	static func stripFormatting(_ text: String) -> String {
+		text // TODO: Strip formatting
+	}
+	
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		let sectionId = snapshot.get("section") as? String ?? ""

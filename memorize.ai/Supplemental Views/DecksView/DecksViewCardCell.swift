@@ -13,7 +13,7 @@ struct DecksViewCardCell: View {
 			shadowYOffset: 5
 		) {
 			HStack(alignment: .top) {
-				Text(card.front)
+				Text(Card.stripFormatting(card.front))
 					.font(.muli(.semiBold, size: 15))
 					.foregroundColor(.darkGray)
 					.lineLimit(5)
@@ -36,7 +36,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 		DecksViewCardCell(card: .init(
 			id: "0",
 			sectionId: "CSS",
-			front: "This is the front of the card<audio src=\"a\">ddasdflasjdfljlasdjfkljaldsjflkajlfdfjkjjjjjjjjjjjjjjjjjj",
+			front: "This is the front of the card<audio src=\"a\">ddasdflasjdfljlasdjfkljaldsjflkajlfdfjkjjjjjjjjjjjjjjjjjj<img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\">",
 			back: "This is the back of the card",
 			numberOfViews: 670,
 			numberOfSkips: 40,
