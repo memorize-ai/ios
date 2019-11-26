@@ -38,7 +38,7 @@ extension Deck {
 		}
 		
 		@discardableResult
-		func loadCards(withUserData loadWithUserData: Bool = false) -> Self {
+		func loadCards(withUserDataForUser user: User? = nil) -> Self {
 			guard cardsLoadingState.isNone else { return self }
 			cardsLoadingState.startLoading()
 			parent
@@ -46,7 +46,30 @@ extension Deck {
 				.collection("cards")
 				.whereField("section", isEqualTo: id)
 				.addSnapshotListener { snapshot, error in
-					guard error == nil, let documentChanges = 
+					guard
+						error == nil,
+						let documentChanges = snapshot?.documentChanges
+					else {
+						self.cardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+						return
+					}
+					for change in documentChanges {
+						let document = change.document
+						let cardId = document.documentID
+						switch change.type {
+						case .added:
+							let card = Card(snapshot: document)
+							self.cards.append(user.map { user in
+								card.loadUserData(forUser: user, deck: self.parent)
+							} ?? card)
+						case .modified:
+							self.cards.first { $0.id == cardId }?
+								.updateFromSnapshot(document)
+						case .removed:
+							self.cards.removeAll { $0.id == cardId }
+						}
+					}
+					self.cardsLoadingState.succeed()
 				}
 			return self
 		}
