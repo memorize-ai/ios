@@ -37,6 +37,10 @@ extension Deck {
 			)
 		}
 		
+		var isUnlocked: Bool {
+			parent.userData?.unlockedSections.contains(id) ?? false
+		}
+		
 		@discardableResult
 		func loadCards(withUserDataForUser user: User? = nil) -> Self {
 			guard cardsLoadingState.isNone else { return self }
