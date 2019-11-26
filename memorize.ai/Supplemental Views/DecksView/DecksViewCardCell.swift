@@ -12,12 +12,17 @@ struct DecksViewCardCell: View {
 			shadowRadius: 5,
 			shadowYOffset: 5
 		) {
-			ZStack(alignment: .topTrailing) {
+			HStack(alignment: .top) {
 				Text(card.front)
-					.frame(maxWidth: .infinity, alignment: .leading)
-				Image(systemName: .speaker3Fill)
-					.foregroundColor(.darkBlue)
-					.padding([.trailing, .top], 4)
+					.font(.muli(.semiBold, size: 15))
+					.foregroundColor(.darkGray)
+					.lineLimit(5)
+					.align(to: .leading)
+				if card.hasSound {
+					Image(systemName: .speaker3Fill)
+						.foregroundColor(.darkBlue)
+						.padding([.trailing, .top], 3)
+				}
 			}
 			.padding(8)
 			.frame(minHeight: 75, alignment: .top)
@@ -31,7 +36,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 		DecksViewCardCell(card: .init(
 			id: "0",
 			sectionId: "CSS",
-			front: "This is the front of the card",
+			front: "This is the front of the card<audio src=\"a\">ddasdflasjdfljlasdjfkljaldsjflkajlfdfjkjjjjjjjjjjjjjjjjjj",
 			back: "This is the back of the card",
 			numberOfViews: 670,
 			numberOfSkips: 40,

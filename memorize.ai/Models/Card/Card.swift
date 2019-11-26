@@ -44,10 +44,18 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
+	var hasSound: Bool {
+		textIncludesAudioTag(front) || textIncludesAudioTag(back)
+	}
+	
+	private func textIncludesAudioTag(_ text: String) -> Bool {
+		text.range(of: #"<audio src="(.+)">"#, options: .regularExpression) != nil
+	}
+	
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
-		let sectionId = snapshot.get("section") as? String
-		self.sectionId = sectionId?.isEmpty ?? true ? nil : sectionId
+		let sectionId = snapshot.get("section") as? String ?? ""
+		self.sectionId = sectionId.isEmpty ? nil : sectionId
 		front = snapshot.get("front") as? String ?? front
 		back = snapshot.get("back") as? String ?? back
 		numberOfViews = snapshot.get("viewCount") as? Int ?? 0
