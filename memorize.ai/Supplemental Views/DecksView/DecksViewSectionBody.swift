@@ -1,16 +1,35 @@
 import SwiftUI
+import SwiftUIX
 
 struct DecksViewSectionBody: View {
 	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var section: Deck.Section
 	
+	var isExpanded: Bool {
+		model.isSectionExpanded(section)
+	}
+	
 	var body: some View {
 		VStack(spacing: 8) {
-			ForEach(section.cards) { card in
-				DecksViewCardCell(card: card)
+			if isExpanded {
+				SwitchOver(section.cardsLoadingState)
+					.case(.loading) {
+						ActivityIndicator(color: .gray)
+					}
+					.case(.success) {
+						ForEach(section.cards) { card in
+							DecksViewCardCell(card: card)
+						}
+					}
+					.case(.failure) {
+						Image(systemName: .exclamationmarkTriangle)
+							.foregroundColor(.gray)
+							.scaleEffect(1.5)
+					}
 			}
 		}
+		.animation(.linear(duration: 0.1))
 	}
 }
 
