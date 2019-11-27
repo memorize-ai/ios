@@ -30,7 +30,7 @@ struct DecksViewSectionHeader: View {
 				Image.lock
 					.resizable()
 					.aspectRatio(contentMode: .fit)
-					.frame(width: 16)
+					.frame(width: 16, height: 21)
 			}
 			Text(section.name)
 				.font(.muli(.bold, size: 17))

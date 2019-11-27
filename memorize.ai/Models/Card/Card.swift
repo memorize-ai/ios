@@ -58,6 +58,11 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		return dueDate <= .now
 	}
 	
+	var dueMessage: String {
+		guard let dueDate = userData?.dueDate else { return "" }
+		return "Due \(Date().compare(against: dueDate))"
+	}
+	
 	var previewImageUrl: String? {
 		guard let range = front.range(
 			of: #"<\s*img[^>]*src="(.+?)"[^>]*>"#,
