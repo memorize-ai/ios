@@ -16,10 +16,9 @@ struct DecksViewSectionOptionsPopUp: View {
 			isShowing: $model.isSectionOptionsPopUpShowing,
 			contentHeight: 50 * 0 + 0
 		) {
-			EmptyView()
-//			PopUpButton(icon: <#T##_?#>, text: <#T##String#>, textColor: <#T##Color#>) {
-//
-//			}
+			EmptyView() // TODO: Replace with content
+			// If owner: "Review", "Add cards", "Edit", "Share unlock link", Divider, "Delete"
+			// If not owner: "Review", "Unlock"/"Lock"
 		}
 	}
 }
