@@ -86,7 +86,11 @@ struct DecksViewSectionOptionsPopUp: View {
 					// TODO: Edit section
 				}
 				PopUpButton(
-					icon: nil as EmptyView?, // TODO: Replace with link icon
+					icon: Image(systemName: .link)
+						.resizable()
+						.foregroundColor(.darkBlue)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 21, height: 21),
 					text: "Share unlock link",
 					textColor: .darkGray
 				) {
@@ -106,7 +110,11 @@ struct DecksViewSectionOptionsPopUp: View {
 				}
 			} else if isLocked {
 				PopUpButton(
-					icon: nil as EmptyView?, // TODO: Replace with unlock icon
+					icon: Image(systemName: .lockSlashFill)
+						.resizable()
+						.foregroundColor(.darkBlue)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 21, height: 21),
 					text: "Unlock",
 					textColor: .darkGray
 				) {
