@@ -62,11 +62,11 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func loadPreviewImage() -> Bool {
+	func loadPreviewImage() -> Self {
 		guard
 			previewImageLoadingState.isNone,
 			let url = try? previewImageUrl?.asURL()
-		else { return false }
+		else { return self }
 		previewImageLoadingState.startLoading()
 		URLSession.shared.dataTask(with: url) { data, _, error in
 			guard error == nil, let data = data, let image = Image(data: data) else {
@@ -76,7 +76,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 			self.previewImage = image
 			self.previewImageLoadingState.succeed()
 		}.resume()
-		return true
+		return self
 	}
 	
 	static func stripFormatting(_ text: String) -> String {
