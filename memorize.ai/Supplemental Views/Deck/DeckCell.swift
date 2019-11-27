@@ -104,8 +104,8 @@ struct DeckCell_Previews: PreviewProvider {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init()
+			dateCreated: .now,
+			dateLastUpdated: .now
 		)
 		failedDeck.imageLoadingState.fail(message: "Self-invoked")
 		return ZStack {
@@ -127,8 +127,8 @@ struct DeckCell_Previews: PreviewProvider {
 							averageRating: 4.5,
 							numberOfDownloads: 196400,
 							creatorId: "0",
-							dateCreated: .init(),
-							dateLastUpdated: .init()
+							dateCreated: .now,
+							dateLastUpdated: .now
 						),
 						width: 165,
 						content: EmptyView.init
@@ -146,8 +146,8 @@ struct DeckCell_Previews: PreviewProvider {
 							averageRating: 4.5,
 							numberOfDownloads: 196400,
 							creatorId: "0",
-							dateCreated: .init(),
-							dateLastUpdated: .init()
+							dateCreated: .now,
+							dateLastUpdated: .now
 						),
 						width: 165,
 						content: EmptyView.init
@@ -165,8 +165,8 @@ struct DeckCell_Previews: PreviewProvider {
 							averageRating: 4.5,
 							numberOfDownloads: 196400,
 							creatorId: "0",
-							dateCreated: .init(),
-							dateLastUpdated: .init()
+							dateCreated: .now,
+							dateLastUpdated: .now
 						),
 						width: 165,
 						content: EmptyView.init

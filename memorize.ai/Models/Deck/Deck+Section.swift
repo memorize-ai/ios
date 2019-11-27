@@ -41,6 +41,12 @@ extension Deck {
 			parent.userData?.unlockedSections.contains(id) ?? false
 		}
 		
+		var numberOfDueCards: Int {
+			cards.reduce(0) { acc, card in
+				acc + *card.isDue
+			}
+		}
+		
 		@discardableResult
 		func loadCards(withUserDataForUser user: User? = nil) -> Self {
 			guard cardsLoadingState.isNone else { return self }

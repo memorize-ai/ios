@@ -53,6 +53,11 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		Self.textIncludesAudioTag(front) || Self.textIncludesAudioTag(back)
 	}
 	
+	var isDue: Bool {
+		guard let dueDate = userData?.dueDate else { return false }
+		return dueDate <= .now
+	}
+	
 	var previewImageUrl: String? {
 		guard let range = front.range(
 			of: #"<\s*img[^>]*src="(.+?)"[^>]*>"#,
@@ -124,7 +129,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		if userData == nil {
 			userData = .init(snapshot: snapshot)
 		} else {
-			userData?.dueDate = snapshot.getDate("due") ?? .init()
+			userData?.dueDate = snapshot.getDate("due") ?? .now
 		}
 		return self
 	}

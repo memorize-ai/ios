@@ -70,7 +70,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 			back: "This is the back of the card",
 			numberOfViews: 670,
 			numberOfSkips: 40,
-			userData: .init(dueDate: .init())
+			userData: .init(dueDate: .now)
 		))
 		.padding(.horizontal, DecksView.horizontalPadding)
 	}

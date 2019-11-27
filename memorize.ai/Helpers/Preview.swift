@@ -40,10 +40,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		averageRating: 4.5,
 		numberOfDownloads: 196400,
 		creatorId: "0",
-		dateCreated: .init(),
-		dateLastUpdated: .init(),
+		dateCreated: .now,
+		dateLastUpdated: .now,
 		userData: .init(
-			dateAdded: .init(),
+			dateAdded: .now,
 			isFavorite: true,
 			numberOfDueCards: 12
 		)
@@ -62,10 +62,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		averageRating: 4.5,
 		numberOfDownloads: 196400,
 		creatorId: "0",
-		dateCreated: .init(),
-		dateLastUpdated: .init(),
+		dateCreated: .now,
+		dateLastUpdated: .now,
 		userData: .init(
-			dateAdded: .init(),
+			dateAdded: .now,
 			isFavorite: true,
 			numberOfDueCards: 0
 		)
@@ -96,10 +96,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
 				creatorId: "0",
-				dateCreated: .init(),
-				dateLastUpdated: .init(),
+				dateCreated: .now,
+				dateLastUpdated: .now,
 				userData: .init(
-					dateAdded: .init(),
+					dateAdded: .now,
 					isFavorite: false,
 					numberOfDueCards: 23
 				)
@@ -118,8 +118,8 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
 				creatorId: "0",
-				dateCreated: .init(),
-				dateLastUpdated: .init()
+				dateCreated: .now,
+				dateLastUpdated: .now
 			),
 			.init(
 				id: "3",
@@ -134,10 +134,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
 				creatorId: "0",
-				dateCreated: .init(),
-				dateLastUpdated: .init(),
+				dateCreated: .now,
+				dateLastUpdated: .now,
 				userData: .init(
-					dateAdded: .init(),
+					dateAdded: .now,
 					isFavorite: true,
 					numberOfDueCards: 36
 				)
@@ -154,10 +154,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
 				creatorId: "0",
-				dateCreated: .init(),
-				dateLastUpdated: .init(),
+				dateCreated: .now,
+				dateLastUpdated: .now,
 				userData: .init(
-					dateAdded: .init(),
+					dateAdded: .now,
 					isFavorite: false,
 					numberOfDueCards: 568
 				)
@@ -174,10 +174,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
 				creatorId: "0",
-				dateCreated: .init(),
-				dateLastUpdated: .init(),
+				dateCreated: .now,
+				dateLastUpdated: .now,
 				userData: .init(
-					dateAdded: .init(),
+					dateAdded: .now,
 					isFavorite: true,
 					numberOfDueCards: 1
 				)
@@ -222,10 +222,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init(),
+			dateCreated: .now,
+			dateLastUpdated: .now,
 			userData: .init(
-				dateAdded: .init(),
+				dateAdded: .now,
 				isFavorite: false,
 				numberOfDueCards: 23
 			)
@@ -243,10 +243,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init(),
+			dateCreated: .now,
+			dateLastUpdated: .now,
 			userData: .init(
-				dateAdded: .init(),
+				dateAdded: .now,
 				isFavorite: true,
 				numberOfDueCards: 0
 			)
@@ -264,8 +264,8 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init()
+			dateCreated: .now,
+			dateLastUpdated: .now
 		),
 		.init(
 			id: "3",
@@ -280,10 +280,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init(),
+			dateCreated: .now,
+			dateLastUpdated: .now,
 			userData: .init(
-				dateAdded: .init(),
+				dateAdded: .now,
 				isFavorite: true,
 				numberOfDueCards: 36
 			)
@@ -300,10 +300,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init(),
+			dateCreated: .now,
+			dateLastUpdated: .now,
 			userData: .init(
-				dateAdded: .init(),
+				dateAdded: .now,
 				isFavorite: false,
 				numberOfDueCards: 568
 			)
@@ -320,10 +320,10 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init(),
+			dateCreated: .now,
+			dateLastUpdated: .now,
 			userData: .init(
-				dateAdded: .init(),
+				dateAdded: .now,
 				isFavorite: true,
 				numberOfDueCards: 1
 			)

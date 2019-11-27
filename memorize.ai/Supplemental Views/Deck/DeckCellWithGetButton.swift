@@ -101,8 +101,8 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
 			creatorId: "0",
-			dateCreated: .init(),
-			dateLastUpdated: .init()
+			dateCreated: .now,
+			dateLastUpdated: .now
 		)
 		return VStack(spacing: 20) {
 			DeckCellWithGetButton(
@@ -132,8 +132,8 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					averageRating: 4.5,
 					numberOfDownloads: 400,
 					creatorId: "0",
-					dateCreated: .init(),
-					dateLastUpdated: .init()
+					dateCreated: .now,
+					dateLastUpdated: .now
 				),
 				user: PREVIEW_CURRENT_STORE.user,
 				width: 165

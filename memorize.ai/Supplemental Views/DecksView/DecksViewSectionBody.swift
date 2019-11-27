@@ -69,7 +69,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 					back: "This is the back of the card",
 					numberOfViews: 670,
 					numberOfSkips: 40,
-					userData: .init(dueDate: .init())
+					userData: .init(dueDate: .now)
 				),
 				.init(
 					id: "1",
@@ -78,7 +78,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 					back: "This is the back of the second card",
 					numberOfViews: 670,
 					numberOfSkips: 40,
-					userData: .init(dueDate: .init())
+					userData: .init(dueDate: .now)
 				)
 			]
 		))

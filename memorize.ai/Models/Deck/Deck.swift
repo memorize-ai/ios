@@ -80,8 +80,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			averageRating: snapshot.get("averageRating") as? Double ?? 0,
 			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
 			creatorId: snapshot.get("creator") as? String ?? "0",
-			dateCreated: snapshot.getDate("created") ?? .init(),
-			dateLastUpdated: snapshot.getDate("updated") ?? .init()
+			dateCreated: snapshot.getDate("created") ?? .now,
+			dateLastUpdated: snapshot.getDate("updated") ?? .now
 		)
 	}
 	

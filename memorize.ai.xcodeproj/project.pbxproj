@@ -77,6 +77,7 @@
 		4D51F5422385E02E00C6B59B /* MarketViewSearchStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */; };
 		4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54C03D237F7C83003765C1 /* DecksView.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
+		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
 		4D59FA89237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA88237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift */; };
 		4D59FA8B237F2010007CAA74 /* FloatingReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA8A237F2010007CAA74 /* FloatingReviewButton.swift */; };
@@ -268,6 +269,7 @@
 		4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewSearchStateButton.swift; sourceTree = "<group>"; };
 		4D54C03D237F7C83003765C1 /* DecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksView.swift; sourceTree = SOURCE_ROOT; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
+		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
 		4D59FA88237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OwnedDeckCellWithPerformanceGraph.swift; path = memorize.ai/OwnedDeckCellWithPerformanceGraph.swift; sourceTree = SOURCE_ROOT; };
 		4D59FA8A237F2010007CAA74 /* FloatingReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FloatingReviewButton.swift; path = "memorize.ai/Supplemental Views/FloatingReviewButton.swift"; sourceTree = SOURCE_ROOT; };
@@ -487,6 +489,7 @@
 				4DEB359B236AC89B00E3DBC4 /* Double.swift */,
 				4DEB3599236AC3C800E3DBC4 /* Int.swift */,
 				4DE9722723701EE900616E42 /* Array.swift */,
+				4D598E91238E3D3300B608FA /* Date.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
 				4D8444AC236BFE080043298C /* DocumentSnapshot.swift */,
@@ -1317,6 +1320,7 @@
 				4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */,
 				4DD5FE82238709A400E70251 /* PopUp.swift in Sources */,
 				4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */,
+				4D598E92238E3D3300B608FA /* Date.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */,
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,

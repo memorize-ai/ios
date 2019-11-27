@@ -24,7 +24,7 @@ extension Deck {
 		#endif
 		
 		init(snapshot: DocumentSnapshot) {
-			dateAdded = snapshot.get("added") as? Date ?? .init()
+			dateAdded = snapshot.getDate("added") ?? .now
 			isFavorite = snapshot.get("favorite") as? Bool ?? false
 			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
 			unlockedSections = snapshot.get("unlockedSections") as? [String] ?? []

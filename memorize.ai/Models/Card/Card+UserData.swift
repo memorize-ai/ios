@@ -12,7 +12,7 @@ extension Card {
 		#endif
 		
 		init(snapshot: DocumentSnapshot) {
-			dueDate = snapshot.getDate("due") ?? .init()
+			dueDate = snapshot.getDate("due") ?? .now
 		}
 	}
 }
