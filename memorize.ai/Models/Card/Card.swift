@@ -83,8 +83,10 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 				self.previewImageLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 				return
 			}
-			self.previewImage = image
-			self.previewImageLoadingState.succeed()
+			DispatchQueue.main.async {
+				self.previewImage = image
+				self.previewImageLoadingState.succeed()
+			}
 		}.resume()
 		return self
 	}
