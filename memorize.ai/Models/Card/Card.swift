@@ -1,4 +1,4 @@
-import Combine
+import SwiftUI
 import FirebaseFirestore
 import LoadingState
 
@@ -14,6 +14,9 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var userData: UserData?
 	@Published var userDataLoadingState = LoadingState()
 	
+	@Published var previewImage: Image?
+	@Published var previewImageLoadingState = LoadingState()
+	
 	init(
 		id: String,
 		sectionId: String?,
@@ -21,7 +24,8 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		back: String,
 		numberOfViews: Int,
 		numberOfSkips: Int,
-		userData: UserData? = nil
+		userData: UserData? = nil,
+		previewImage: Image? = nil
 	) {
 		self.id = id
 		self.sectionId = sectionId
@@ -30,6 +34,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfViews = numberOfViews
 		self.numberOfSkips = numberOfSkips
 		self.userData = userData
+		self.previewImage = previewImage
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -48,12 +53,30 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		Self.textIncludesAudioTag(front) || Self.textIncludesAudioTag(back)
 	}
 	
-	var firstImageUrlInFront: String? {
+	var previewImageUrl: String? {
 		guard let range = front.range(
 			of: #"<\s*img[^>]*src="(.+?)"[^>]*>"#,
 			options: .regularExpression
 		) else { return nil }
 		return .init(front[range].dropFirst(10).dropLast(2))
+	}
+	
+	@discardableResult
+	func loadPreviewImage() -> Bool {
+		guard
+			previewImageLoadingState.isNone,
+			let url = try? previewImageUrl?.asURL()
+		else { return false }
+		previewImageLoadingState.startLoading()
+		URLSession.shared.dataTask(with: url) { data, _, error in
+			guard error == nil, let data = data, let image = Image(data: data) else {
+				self.previewImageLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				return
+			}
+			self.previewImage = image
+			self.previewImageLoadingState.succeed()
+		}.resume()
+		return true
 	}
 	
 	static func stripFormatting(_ text: String) -> String {
