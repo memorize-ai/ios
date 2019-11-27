@@ -29,6 +29,7 @@ struct DecksViewSectionBody: View {
 					}
 			}
 		}
+		.padding(.top, 6)
 		.animation(.linear(duration: 0.1))
 	}
 }
