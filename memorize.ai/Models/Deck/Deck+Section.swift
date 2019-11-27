@@ -47,6 +47,10 @@ extension Deck {
 			}
 		}
 		
+		var isDue: Bool {
+			numberOfDueCards > 0
+		}
+		
 		@discardableResult
 		func loadCards(withUserDataForUser user: User? = nil) -> Self {
 			guard cardsLoadingState.isNone else { return self }
