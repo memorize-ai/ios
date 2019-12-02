@@ -163,6 +163,8 @@
 		4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8D77F235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift */; };
 		4DD9CEF323691C2700EC138F /* RecommendedDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */; };
 		4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */; };
+		4DDACF042395BC3F0073C004 /* MarketDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF032395BC3F0073C004 /* MarketDeckView.swift */; };
+		4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF062395BCF20073C004 /* MarketDeckViewTopControls.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
@@ -359,6 +361,8 @@
 		4DD8D77F235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPaginatedFeaturesIndicatorCircle.swift; sourceTree = "<group>"; };
 		4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksView.swift; sourceTree = "<group>"; };
 		4DD9CEF523691E9000EC138F /* ChooseTopicsViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewContent.swift; sourceTree = "<group>"; };
+		4DDACF032395BC3F0073C004 /* MarketDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckView.swift; sourceTree = "<group>"; };
+		4DDACF062395BCF20073C004 /* MarketDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewTopControls.swift; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -650,6 +654,7 @@
 				4DD9CEF223691C2700EC138F /* RecommendedDecksView.swift */,
 				4DD34CD52362D90F0007E3E6 /* HomeView.swift */,
 				4D9AAEB823851F8100C85EC2 /* MarketView.swift */,
+				4DDACF032395BC3F0073C004 /* MarketDeckView.swift */,
 				4D54C03D237F7C83003765C1 /* DecksView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
@@ -861,6 +866,14 @@
 			path = ChooseTopicsView;
 			sourceTree = "<group>";
 		};
+		4DDACF052395BCE30073C004 /* MarketDeckView */ = {
+			isa = PBXGroup;
+			children = (
+				4DDACF062395BCF20073C004 /* MarketDeckViewTopControls.swift */,
+			);
+			path = MarketDeckView;
+			sourceTree = "<group>";
+		};
 		4DDCC9A4237BE9DD00EFC857 /* MainTabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +905,7 @@
 				4DD7AADB236A713100F12D39 /* RecommendedDecksView */,
 				4D458A61237C9ABE00A9776A /* HomeView */,
 				4D9AAEC12385CEFB00C85EC2 /* MarketView */,
+				4DDACF052395BCE30073C004 /* MarketDeckView */,
 				4DD5FE972388D92E00E70251 /* DecksView */,
 			);
 			path = "Supplemental Views";
@@ -1258,6 +1272,7 @@
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4DD5FEA8238C617800E70251 /* DecksViewSectionHeader.swift in Sources */,
 				4D0C028D237D3EB50062BC14 /* BasicTopicCell.swift in Sources */,
+				4DDACF042395BC3F0073C004 /* MarketDeckView.swift in Sources */,
 				4D365795238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
 				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
@@ -1312,6 +1327,7 @@
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
 				4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */,
 				4DE9722C2370DC0800616E42 /* MinusMinus.swift in Sources */,
+				4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */,
 				4DC6435B2366D80400DEEED1 /* Preview.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
 				4DD5FE9023875C1400E70251 /* MarketViewFilterPopUpTopicsContent.swift in Sources */,
