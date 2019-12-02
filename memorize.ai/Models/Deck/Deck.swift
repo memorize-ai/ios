@@ -25,11 +25,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@Published var userData: UserData?
 	@Published var sections: [Section]
+	@Published var creator: User?
 	
 	@Published var imageLoadingState = LoadingState()
 	@Published var userDataLoadingState = LoadingState()
 	@Published var getLoadingState = LoadingState()
 	@Published var sectionsLoadingState = LoadingState()
+	@Published var creatorLoadingState = LoadingState()
 	
 	init(
 		id: String,
@@ -47,7 +49,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		dateCreated: Date,
 		dateLastUpdated: Date,
 		userData: UserData? = nil,
-		sections: [Section] = []
+		sections: [Section] = [],
+		creator: User? = nil
 	) {
 		self.id = id
 		self.topics = topics
@@ -65,6 +68,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.dateLastUpdated = dateLastUpdated
 		self.userData = userData
 		self.sections = sections
+		self.creator = creator
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -152,6 +156,25 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				}
 			}
 			self.sectionsLoadingState.succeed()
+		}
+		return self
+	}
+	
+	@discardableResult
+	func loadCreator() -> Self {
+		guard creatorLoadingState.isNone else { return self }
+		creatorLoadingState.startLoading()
+		firestore.document("users/\(creatorId)").addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot else {
+				self.creatorLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				return
+			}
+			if let creator = self.creator {
+				creator.updateFromSnapshot(snapshot)
+			} else {
+				self.creator = .init(snapshot: snapshot)
+			}
+			self.creatorLoadingState.succeed()
 		}
 		return self
 	}
