@@ -16,10 +16,14 @@ struct DecksViewSectionOptionsPopUp: View {
 	}
 	
 	var contentHeight: CGFloat {
-		.init(50 * (*section.isDue + 1 + (isOwner ? 4 : *isLocked)) + *isOwner)
+		.init(50 * (
+			*section.isDue +
+			1 +
+			(isOwner ? 4 : *isLocked)
+		) + *isOwner)
 	}
 	
-	func reviewIcon(withText text: String? = nil) -> some View {
+	var reviewIcon: some View {
 		ZStack(alignment: .topLeading) {
 			RoundedRectangle(cornerRadius: 4)
 				.stroke(Color.darkBlue.opacity(0.5), lineWidth: 1.5)
@@ -29,14 +33,27 @@ struct DecksViewSectionOptionsPopUp: View {
 				RoundedRectangle(cornerRadius: 4)
 					.stroke(Color.darkBlue, lineWidth: 1.5)
 					.background(Color.white)
-				if text != nil {
-					Text(text ?? "")
-						.font(.muli(.bold, size: 11))
-						.foregroundColor(.darkBlue)
-						.minimumScaleFactor(0.2)
-				}
+				Text(section.numberOfDueCards.formatted)
+					.font(.muli(.bold, size: 11))
+					.foregroundColor(.darkBlue)
+					.minimumScaleFactor(0.2)
 			}
 			.frame(width: 20, height: 14)
+		}
+	}
+	
+	var learnIcon: some View {
+		VStack(alignment: .leading, spacing: 4) {
+			Group {
+				Capsule()
+					.frame(width: 21)
+				Capsule()
+					.frame(width: 21 / 2)
+				Capsule()
+					.frame(width: 21 * 2 / 3)
+			}
+			.foregroundColor(.darkBlue)
+			.frame(height: 2)
 		}
 	}
 	
@@ -47,9 +64,7 @@ struct DecksViewSectionOptionsPopUp: View {
 		) {
 			if section.isDue {
 				PopUpButton(
-					icon: reviewIcon(
-						withText: section.numberOfDueCards.formatted
-					),
+					icon: reviewIcon,
 					text: "Review",
 					textColor: .darkGray
 				) {
@@ -57,11 +72,11 @@ struct DecksViewSectionOptionsPopUp: View {
 				}
 			}
 			PopUpButton(
-				icon: reviewIcon(),
-				text: "Review all",
+				icon: learnIcon,
+				text: "Learn",
 				textColor: .darkGray
 			) {
-				// TODO: Review all cards in section
+				// TODO: Learn section
 			}
 			if isOwner {
 				PopUpButton(
