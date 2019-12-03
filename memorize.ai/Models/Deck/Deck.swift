@@ -4,6 +4,8 @@ import PromiseKit
 import LoadingState
 
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
+	static let maxNumberOfPreviewCards = 20
+	
 	static var cache = [String: Deck]()
 	static var imageCache = [String: Image]()
 	
@@ -191,7 +193,31 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadPreviewCards() -> Self {
 		guard previewCardsLoadingState.isNone else { return self }
 		previewCardsLoadingState.startLoading()
-		documentReference.collection("cards").order(by: "") // TODO: Load preview cards
+		documentReference
+			.collection("cards")
+			.order(by: "viewCount")
+			.limit(to: Self.maxNumberOfPreviewCards)
+			.addSnapshotListener { snapshot, error in
+				guard error == nil, let documentChanges = snapshot?.documentChanges else {
+					self.previewCardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+					return
+				}
+				for change in documentChanges {
+					let document = change.document
+					let cardId = document.documentID
+					switch change.type {
+					case .added:
+						self.previewCards.append(.init(snapshot: document))
+					case .modified:
+						self.previewCards.first { $0.id == cardId }?
+							.updateFromSnapshot(document)
+						self.previewCards.sort(by: \.numberOfViews)
+					case .removed:
+						self.previewCards.removeAll { $0.id == cardId }
+					}
+				}
+				self.previewCardsLoadingState.succeed()
+			}
 		return self
 	}
 	
