@@ -19,6 +19,7 @@ struct DeckStar: View {
 			.frame(height: dimension - 1)
 			Image.deckStar
 				.resizable()
+				.renderingMode(.original)
 				.aspectRatio(contentMode: .fit)
 				.frame(width: dimension, height: dimension)
 		}

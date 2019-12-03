@@ -12,3 +12,12 @@ let SCREEN_SIZE = UIScreen.main.bounds
 func popUpWithAnimation(body: () -> Void) {
 	withAnimation(.easeIn(duration: 0.15), body)
 }
+
+func playHaptic(
+	_ style: UIImpactFeedbackGenerator.FeedbackStyle = .medium,
+	handler: (UIImpactFeedbackGenerator) -> Void
+) {
+	let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
+	impactFeedbackGenerator.prepare()
+	handler(impactFeedbackGenerator)
+}

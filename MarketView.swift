@@ -11,19 +11,22 @@ struct MarketView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: MarketViewModel
 	
-	var gridElements: [DeckCellWithGetButton] {
-		model.searchResults.map { deck in
-			DeckCellWithGetButton(
-				deck: deck,
-				user: currentStore.user,
-				width: Self.deckCellWidth
-			)
-		}
-	}
+	@State var selectedDeck: Deck!
+	@State var isDeckSelected = false
 	
 	var grid: some View {
 		Grid(
-			elements: gridElements,
+			elements: model.searchResults.map { deck in
+				DeckCellWithGetButton(
+					deck: deck,
+					user: currentStore.user,
+					width: Self.deckCellWidth
+				)
+				.onTapGesture {
+					self.selectedDeck = deck
+					self.isDeckSelected = true
+				}
+			},
 			columns: Self.numberOfColumns,
 			horizontalSpacing: Self.horizontalCellSpacing,
 			verticalSpacing: Self.verticalCellSpacing
@@ -47,6 +50,13 @@ struct MarketView: View {
 					ScrollView(showsIndicators: false) {
 						self.grid
 					}
+				}
+				if self.isDeckSelected {
+					NavigateTo(
+						MarketDeckView()
+							.environmentObject(self.selectedDeck),
+						when: self.$isDeckSelected
+					)
 				}
 			}
 		}

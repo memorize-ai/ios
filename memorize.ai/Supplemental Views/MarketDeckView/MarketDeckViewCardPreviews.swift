@@ -7,7 +7,7 @@ struct MarketDeckViewCardPreviews: View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack {
 				ForEach(deck.previewCards) { card in
-					EmptyView() // TODO: Replace with card preview cell
+					Text(card.front)
 				}
 			}
 			.padding(.horizontal, 23)
