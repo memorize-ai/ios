@@ -24,7 +24,7 @@ struct MarketDeckViewInfoPanels: View {
 	var ratingPanel: some View {
 		VStack(alignment: .leading) {
 			HStack {
-				// TODO: Add stars
+				Text("Stars") // TODO: Add stars
 				Text(averageRating)
 					.font(.muli(.extraBold, size: 19))
 					.foregroundColor(Color.white.opacity(0.7))
@@ -61,7 +61,6 @@ struct MarketDeckViewInfoPanels: View {
 			Spacer()
 		}
 		.padding(.horizontal, 23)
-		.frame(height: 30)
 	}
 }
 
