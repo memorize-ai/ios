@@ -14,6 +14,7 @@ struct MarketDeckView: View {
 					ScrollView {
 						MarketDeckViewHeader()
 						MarketDeckViewInfoPanels()
+						MarketDeckViewCardPreviews()
 					}
 				}
 			}

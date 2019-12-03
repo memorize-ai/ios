@@ -27,12 +27,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var userData: UserData?
 	@Published var sections: [Section]
 	@Published var creator: User?
+	@Published var previewCards: [Card]
 	
 	@Published var imageLoadingState = LoadingState()
 	@Published var userDataLoadingState = LoadingState()
 	@Published var getLoadingState = LoadingState()
 	@Published var sectionsLoadingState = LoadingState()
 	@Published var creatorLoadingState = LoadingState()
+	@Published var previewCardsLoadingState = LoadingState()
 	
 	init(
 		id: String,
@@ -52,7 +54,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		dateLastUpdated: Date,
 		userData: UserData? = nil,
 		sections: [Section] = [],
-		creator: User? = nil
+		creator: User? = nil,
+		previewCards: [Card] = []
 	) {
 		self.id = id
 		self.topics = topics
@@ -72,6 +75,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.userData = userData
 		self.sections = sections
 		self.creator = creator
+		self.previewCards = previewCards
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -180,6 +184,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			}
 			self.creatorLoadingState.succeed()
 		}
+		return self
+	}
+	
+	@discardableResult
+	func loadPreviewCards() -> Self {
+		guard previewCardsLoadingState.isNone else { return self }
+		previewCardsLoadingState.startLoading()
+		documentReference.collection("cards").order(by: "") // TODO: Load preview cards
 		return self
 	}
 	
