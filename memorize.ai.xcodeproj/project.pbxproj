@@ -121,6 +121,11 @@
 		4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */; };
 		4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */; };
 		4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */; };
+		4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */; };
+		4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 4DB9FF4B2396D62A00B8DD38 /* WebView */; };
+		4DB9FF4F2396D7D300B8DD38 /* HTML in Frameworks */ = {isa = PBXBuildFile; productRef = 4DB9FF4E2396D7D300B8DD38 /* HTML */; };
+		4DB9FF512396D87D00B8DD38 /* Card+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */; };
+		4DB9FF532396DA1800B8DD38 /* Card+Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9FF522396DA1800B8DD38 /* Card+Side.swift */; };
 		4DBA39682360ED0F00B91596 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA39672360ED0F00B91596 /* View.swift */; };
 		4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */; };
 		4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */; };
@@ -324,6 +329,9 @@
 		4DAA4F63233DE1A900EF7467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewContentBox.swift; sourceTree = "<group>"; };
 		4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewContentBox.swift; sourceTree = "<group>"; };
+		4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewCell.swift; sourceTree = "<group>"; };
+		4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+HTML.swift"; sourceTree = "<group>"; };
+		4DB9FF522396DA1800B8DD38 /* Card+Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Side.swift"; sourceTree = "<group>"; };
 		4DBA39672360ED0F00B91596 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButtonModel.swift; sourceTree = "<group>"; };
 		4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsView.swift; sourceTree = "<group>"; };
@@ -396,7 +404,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
 				4DD5FE9C2389DE8500E70251 /* Alamofire in Frameworks */,
+				4DB9FF4F2396D7D300B8DD38 /* HTML in Frameworks */,
 				4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */,
 				05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */,
 				4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */,
@@ -545,6 +555,8 @@
 			children = (
 				4D365797238CB09F007C3D1F /* Card.swift */,
 				4D365799238CB168007C3D1F /* Card+UserData.swift */,
+				4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */,
+				4DB9FF522396DA1800B8DD38 /* Card+Side.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -799,6 +811,14 @@
 			path = AuthenticationView;
 			sourceTree = "<group>";
 		};
+		4DB9FF452396CC6100B8DD38 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		4DBFB7BA2369617000D75B45 /* Topic */ = {
 			isa = PBXGroup;
 			children = (
@@ -898,6 +918,7 @@
 				4D184D90236975B100A84998 /* Grid */,
 				4D9AAEBC2385276B00C85EC2 /* User */,
 				4DFA0DC2236A8CBE0000CA7A /* Deck */,
+				4DB9FF452396CC6100B8DD38 /* Card */,
 				4D0C028B237D3EA90062BC14 /* Topic */,
 				4D64BCC42367CFA700F6FD07 /* General */,
 				4D16D9A02371F54800FE8E5E /* SideBar */,
@@ -982,6 +1003,8 @@
 				4DC923A523458F1900F901EA /* SwiftUIX */,
 				4DDFF1BD2374F8E900999FD5 /* LoadingState */,
 				4DD5FE9B2389DE8500E70251 /* Alamofire */,
+				4DB9FF4B2396D62A00B8DD38 /* WebView */,
+				4DB9FF4E2396D7D300B8DD38 /* HTML */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -1063,6 +1086,8 @@
 				4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				4DDFF1BC2374F8E900999FD5 /* XCRemoteSwiftPackageReference "LoadingState" */,
 				4DD5FE9A2389DE8500E70251 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */,
+				4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -1243,6 +1268,7 @@
 				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
 				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,
 				4D458A60237C97CC00A9776A /* HamburgerMenu.swift in Sources */,
+				4DB9FF532396DA1800B8DD38 /* Card+Side.swift in Sources */,
 				4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */,
 				4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
@@ -1312,6 +1338,7 @@
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
 				4DD34CD82362E33A0007E3E6 /* CurrentStore.swift in Sources */,
 				4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */,
+				4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */,
 				4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */,
 				4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
@@ -1337,6 +1364,7 @@
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
 				4D458A3B237BEBCD00A9776A /* MainTabViewItem.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,
+				4DB9FF512396D87D00B8DD38 /* Card+HTML.swift in Sources */,
 				4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */,
 				4DE9722C2370DC0800616E42 /* MinusMinus.swift in Sources */,
 				4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */,
@@ -1720,6 +1748,22 @@
 				kind = branch;
 			};
 		};
+		4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/WebView";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/HTML";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		4DC923A423458F1900F901EA /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
@@ -1751,6 +1795,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
+		};
+		4DB9FF4B2396D62A00B8DD38 /* WebView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */;
+			productName = WebView;
+		};
+		4DB9FF4E2396D7D300B8DD38 /* HTML */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */;
+			productName = HTML;
 		};
 		4DC923A523458F1900F901EA /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

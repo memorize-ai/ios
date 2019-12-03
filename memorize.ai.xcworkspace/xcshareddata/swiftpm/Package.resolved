@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "HTML",
+        "repositoryURL": "https://github.com/kenmueller/HTML",
+        "state": {
+          "branch": "master",
+          "revision": "9ce705908502706d4f31d978871277b72f9e2f65",
+          "version": null
+        }
+      },
+      {
         "package": "LoadingState",
         "repositoryURL": "https://github.com/kenmueller/LoadingState",
         "state": {
@@ -34,6 +43,15 @@
         "state": {
           "branch": "master",
           "revision": "6d673cb23176cfccb609db2f55fb22a53ef7a500",
+          "version": null
+        }
+      },
+      {
+        "package": "WebView",
+        "repositoryURL": "https://github.com/kenmueller/WebView",
+        "state": {
+          "branch": "master",
+          "revision": "ca3b51bccadd7aa651ff9263daf416089d636ca7",
           "version": null
         }
       }

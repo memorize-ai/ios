@@ -97,7 +97,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
-		numberOfCards: 19640,
+				numberOfCards: 19640,
 				creatorId: "0",
 				dateCreated: .now,
 				dateLastUpdated: .now,
@@ -105,7 +105,33 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 					dateAdded: .now,
 					isFavorite: false,
 					numberOfDueCards: 23
-				)
+				),
+				previewCards: [
+					.init(
+						id: "10",
+						sectionId: "",
+						front: "This is a card with some sound. <audio src=\"audio.wav\"></audio>",
+						back: "This is the back.",
+						numberOfViews: 0,
+						numberOfSkips: 0
+					),
+					.init(
+						id: "10",
+						sectionId: "",
+						front: "<h1>This is a card with an image.</h1><img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\">",
+						back: "<b>This is the back.</b>",
+						numberOfViews: 0,
+						numberOfSkips: 0
+					),
+					.init(
+						id: "10",
+						sectionId: "",
+						front: "<h1>This is a list</h1><ul><li>First element</li><li>Second element</li><li>Third element</li></ul><p><b>This is the end of the card</b></p>",
+						back: "This is the back.",
+						numberOfViews: 0,
+						numberOfSkips: 0
+					)
+				]
 			),
 			selectedDeck,
 			.init(
@@ -120,7 +146,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
-		numberOfCards: 19640,
+				numberOfCards: 19640,
 				creatorId: "0",
 				dateCreated: .now,
 				dateLastUpdated: .now
@@ -137,7 +163,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
-		numberOfCards: 19640,
+				numberOfCards: 19640,
 				creatorId: "0",
 				dateCreated: .now,
 				dateLastUpdated: .now,
@@ -158,7 +184,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
-		numberOfCards: 19640,
+				numberOfCards: 19640,
 				creatorId: "0",
 				dateCreated: .now,
 				dateLastUpdated: .now,
@@ -179,7 +205,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
-		numberOfCards: 19640,
+				numberOfCards: 19640,
 				creatorId: "0",
 				dateCreated: .now,
 				dateLastUpdated: .now,
@@ -228,7 +254,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
-		numberOfCards: 19640,
+			numberOfCards: 19640,
 			creatorId: "0",
 			dateCreated: .now,
 			dateLastUpdated: .now,
@@ -250,7 +276,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
-		numberOfCards: 19640,
+			numberOfCards: 19640,
 			creatorId: "0",
 			dateCreated: .now,
 			dateLastUpdated: .now,
@@ -272,7 +298,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
-		numberOfCards: 19640,
+			numberOfCards: 19640,
 			creatorId: "0",
 			dateCreated: .now,
 			dateLastUpdated: .now
@@ -289,7 +315,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
-		numberOfCards: 19640,
+			numberOfCards: 19640,
 			creatorId: "0",
 			dateCreated: .now,
 			dateLastUpdated: .now,
@@ -310,7 +336,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
-		numberOfCards: 19640,
+			numberOfCards: 19640,
 			creatorId: "0",
 			dateCreated: .now,
 			dateLastUpdated: .now,
@@ -331,7 +357,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfRatings: 12400,
 			averageRating: 4.5,
 			numberOfDownloads: 196400,
-		numberOfCards: 19640,
+			numberOfCards: 19640,
 			creatorId: "0",
 			dateCreated: .now,
 			dateLastUpdated: .now,
