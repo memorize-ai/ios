@@ -6,6 +6,7 @@ struct CardPreviewCell: View {
 	@ObservedObject var card: Card
 	
 	@State var side = Card.Side.front
+	@State var degrees = 0.0
 	
 	var toggleIcon: some View {
 		ZStack {
@@ -16,6 +17,7 @@ struct CardPreviewCell: View {
 				.renderingMode(.original)
 				.aspectRatio(contentMode: .fit)
 				.padding(6)
+				.rotationEffect(.degrees(degrees))
 		}
 		.padding([.trailing, .bottom], 10)
 		.frame(width: 40, height: 40)
@@ -35,6 +37,9 @@ struct CardPreviewCell: View {
 						.foregroundColor(Color.gray.opacity(0.7))
 					Button(action: {
 						self.side.toggle()
+						withAnimation {
+							self.degrees += 180
+						}
 					}) {
 						toggleIcon
 					}
