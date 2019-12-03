@@ -3,6 +3,9 @@ import SwiftUI
 struct HomeViewRecommendedDecksSection: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
+	@State var selectedDeck: Deck!
+	@State var isDeckSelected = false
+	
 	var body: some View {
 		VStack {
 			if !currentStore.recommendedDecks.isEmpty {
@@ -19,10 +22,21 @@ struct HomeViewRecommendedDecksSection: View {
 								user: self.currentStore.user,
 								width: 144
 							)
+							.onTapGesture {
+								self.selectedDeck = deck
+								self.isDeckSelected = true
+							}
 						}
 					}
 					.padding(.horizontal, 23)
 				}
+			}
+			if isDeckSelected {
+				NavigateTo(
+					MarketDeckView()
+						.environmentObject(selectedDeck),
+					when: $isDeckSelected
+				)
 			}
 		}
 	}
