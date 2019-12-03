@@ -29,10 +29,15 @@ struct CardPreviewCell: View {
 		) {
 			ZStack(alignment: .bottomTrailing) {
 				WebView(html: card.renderSide(side))
-				Button(action: {
-					self.side.toggle()
-				}) {
-					toggleIcon
+				HStack {
+					Text(side == .front ? "FRONT" : "BACK")
+						.font(.muli(.bold, size: 10))
+						.foregroundColor(Color.gray.opacity(0.7))
+					Button(action: {
+						self.side.toggle()
+					}) {
+						toggleIcon
+					}
 				}
 			}
 		}
