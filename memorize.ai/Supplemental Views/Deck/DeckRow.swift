@@ -96,6 +96,7 @@ struct DeckRow_Previews: PreviewProvider {
 				numberOfRatings: 12400,
 				averageRating: 4.5,
 				numberOfDownloads: 196400,
+				numberOfCards: 19640,
 				creatorId: "0",
 				dateCreated: .now,
 				dateLastUpdated: .now

@@ -21,6 +21,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfRatings: Int
 	@Published var averageRating: Double
 	@Published var numberOfDownloads: Int
+	@Published var numberOfCards: Int
 	@Published var dateLastUpdated: Date
 	
 	@Published var userData: UserData?
@@ -45,6 +46,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfRatings: Int,
 		averageRating: Double,
 		numberOfDownloads: Int,
+		numberOfCards: Int,
 		creatorId: String,
 		dateCreated: Date,
 		dateLastUpdated: Date,
@@ -63,6 +65,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfRatings = numberOfRatings
 		self.averageRating = averageRating
 		self.numberOfDownloads = numberOfDownloads
+		self.numberOfCards = numberOfCards
 		self.creatorId = creatorId
 		self.dateCreated = dateCreated
 		self.dateLastUpdated = dateLastUpdated
@@ -83,6 +86,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
 			averageRating: snapshot.get("averageRating") as? Double ?? 0,
 			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
+			numberOfCards: snapshot.get("cardCount") as? Int ?? 0,
 			creatorId: snapshot.get("creator") as? String ?? "0",
 			dateCreated: snapshot.getDate("created") ?? .now,
 			dateLastUpdated: snapshot.getDate("updated") ?? .now
