@@ -7,13 +7,34 @@ struct CardPreviewCell: View {
 	
 	@State var side = Card.Side.front
 	
+	var toggleIcon: some View {
+		ZStack {
+			Circle()
+				.foregroundColor(.lightGray)
+			Image.swapIcon
+				.resizable()
+				.renderingMode(.original)
+				.aspectRatio(contentMode: .fit)
+				.padding(6)
+		}
+		.padding([.trailing, .bottom], 10)
+		.frame(width: 40, height: 40)
+	}
+	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: .lightGray,
 			borderWidth: 1.5
 		) {
-			WebView(html: card.renderSide(side))
+			ZStack(alignment: .bottomTrailing) {
+				WebView(html: card.renderSide(side))
+				Button(action: {
+					self.side.toggle()
+				}) {
+					toggleIcon
+				}
+			}
 		}
 	}
 }

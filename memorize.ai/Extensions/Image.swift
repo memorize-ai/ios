@@ -42,4 +42,6 @@ extension Image {
 	static let trashIcon = Self("TrashIcon")
 	
 	static let lock = Self("Lock")
+	
+	static let swapIcon = Self("SwapIcon")
 }
