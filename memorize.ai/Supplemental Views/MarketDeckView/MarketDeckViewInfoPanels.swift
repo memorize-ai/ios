@@ -3,6 +3,14 @@ import SwiftUI
 struct MarketDeckViewInfoPanels: View {
 	@EnvironmentObject var deck: Deck
 	
+	var averageRating: String {
+		.init(deck.averageRating.oneDecimalPlace)
+	}
+	
+	var numberOfRatings: String {
+		"\(deck.numberOfRatings.formatted) Rating\(deck.numberOfRatings == 1 ? "" : "s")"
+	}
+	
 	var divider: some View {
 		Group {
 			Spacer()
@@ -14,7 +22,17 @@ struct MarketDeckViewInfoPanels: View {
 	}
 	
 	var ratingPanel: some View {
-		EmptyView() // TODO: Add content
+		VStack(alignment: .leading) {
+			HStack {
+				// TODO: Add stars
+				Text(averageRating)
+					.font(.muli(.extraBold, size: 19))
+					.foregroundColor(Color.white.opacity(0.7))
+			}
+			Text(numberOfRatings)
+				.font(.muli(.bold, size: 12))
+				.foregroundColor(.white)
+		}
 	}
 	
 	func textPanel(content: String, description: String) -> some View {
