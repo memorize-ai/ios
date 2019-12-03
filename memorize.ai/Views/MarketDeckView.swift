@@ -24,6 +24,7 @@ struct MarketDeckView: View {
 struct MarketDeckView_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketDeckView()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			.environmentObject(
 				PREVIEW_CURRENT_STORE.user.decks.first!
 			)
