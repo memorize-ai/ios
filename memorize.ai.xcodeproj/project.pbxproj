@@ -166,6 +166,8 @@
 		4DDACF042395BC3F0073C004 /* MarketDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF032395BC3F0073C004 /* MarketDeckView.swift */; };
 		4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF062395BCF20073C004 /* MarketDeckViewTopControls.swift */; };
 		4DDACF092395BFA80073C004 /* MarketDeckViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF082395BFA80073C004 /* MarketDeckViewHeader.swift */; };
+		4DDACF0B2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */; };
+		4DDACF0D2395EB4E0073C004 /* MarketDeckViewInfoPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0C2395EB4E0073C004 /* MarketDeckViewInfoPanel.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
@@ -365,6 +367,8 @@
 		4DDACF032395BC3F0073C004 /* MarketDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckView.swift; sourceTree = "<group>"; };
 		4DDACF062395BCF20073C004 /* MarketDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewTopControls.swift; sourceTree = "<group>"; };
 		4DDACF082395BFA80073C004 /* MarketDeckViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewHeader.swift; sourceTree = "<group>"; };
+		4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfoPanels.swift; sourceTree = "<group>"; };
+		4DDACF0C2395EB4E0073C004 /* MarketDeckViewInfoPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfoPanel.swift; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -873,6 +877,8 @@
 			children = (
 				4DDACF062395BCF20073C004 /* MarketDeckViewTopControls.swift */,
 				4DDACF082395BFA80073C004 /* MarketDeckViewHeader.swift */,
+				4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */,
+				4DDACF0C2395EB4E0073C004 /* MarketDeckViewInfoPanel.swift */,
 			);
 			path = MarketDeckView;
 			sourceTree = "<group>";
@@ -1244,6 +1250,7 @@
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
 				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
+				4DDACF0D2395EB4E0073C004 /* MarketDeckViewInfoPanel.swift in Sources */,
 				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
 				4DD5FE9E2389E22000E70251 /* Deck+Search.swift in Sources */,
 				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
@@ -1301,6 +1308,7 @@
 				4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */,
 				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,
 				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
+				4DDACF0B2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift in Sources */,
 				4DD8D77E235F842A009D1261 /* InitialViewPaginatedFeaturesIndicator.swift in Sources */,
 				4DD34CD82362E33A0007E3E6 /* CurrentStore.swift in Sources */,
 				4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */,

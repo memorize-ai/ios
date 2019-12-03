@@ -13,6 +13,7 @@ struct MarketDeckView: View {
 						.padding(.horizontal, 23)
 					ScrollView {
 						MarketDeckViewHeader()
+						MarketDeckViewInfoPanels()
 					}
 				}
 			}
