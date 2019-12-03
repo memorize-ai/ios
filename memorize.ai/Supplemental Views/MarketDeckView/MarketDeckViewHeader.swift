@@ -20,13 +20,23 @@ struct MarketDeckViewHeader: View {
 					.padding(.trailing, 23)
 				VStack(alignment: .leading) {
 					Text(deck.name)
+						.font(.muli(.bold, size: 20))
+						.foregroundColor(.white)
+						.lineLimit(3)
 					HStack {
 						Image(systemName: .personFill)
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+							.frame(height: 15)
 						if !deck.creatorLoadingState.didFail {
 							Text(deck.creator?.name ?? "Loading...")
+								.font(.muli(.bold, size: 14))
 						}
 					}
-					HStack {
+					.foregroundColor(Color.white.opacity(0.7))
+					.padding(.top, -5)
+					.padding(.bottom, 5)
+					HStack(spacing: 10) {
 						Button(action: {
 							// TODO: Open/get deck
 						}) {
