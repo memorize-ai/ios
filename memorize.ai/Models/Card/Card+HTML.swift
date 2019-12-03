@@ -2,8 +2,19 @@ import HTML
 
 extension Card {
 	private static let css = """
-	
-	""" // TODO: Add CSS
+	body > :not(ul):not(ol) {
+		margin: 0 40px 40px 40px;
+	}
+	body > ul, ol {
+		margin-top: 0;
+		margin-left: 80px;
+		margin-right: 40px;
+	}
+	img {
+		border-radius: 32px;
+		width: calc(100% - 80px);
+	}
+	"""
 	
 	private static func htmlWithText(_ text: String) -> HTMLElement {
 		HTMLElement.html
@@ -16,6 +27,9 @@ extension Card {
 			}
 			.child {
 				HTMLElement.body
+					.paddingTop("36px")
+					.fontFamily("Helvetica")
+					.fontSize("45px")
 					.child(text)
 			}
 	}
