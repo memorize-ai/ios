@@ -1,12 +1,12 @@
 ZSSRichTextEditor
 =============
 
+The Editor
+---
+
 `ZSSRichTextEditor` is a beautiful Rich Text `WYSIWYG Editor` for `iOS`. It includes all of the standard editor tools one would expect from a `WYSIWYG` editor as well as an amazing source view with syntax highlighting.
 
 ![Toolbar](http://f.cl.ly/items/0L3c0N3u142Q2S0v1Y0o/demo1.gif "Toolbar")
-
-Using the Editor
----
 
 The editor is used how any other text input area in iOS is used. A selection of text or content is made, then tapping on the toolbar item below will apply that style. A Source View is also included, you can make changes and this will be reflected in the editor preview.
 
@@ -65,6 +65,19 @@ Show only specified buttons in the toolbar:
 self.enabledToolbarItems = @[ZSSRichTextEditorToolbarBold, ZSSRichTextEditorToolbarH1, ZSSRichTextEditorToolbarParagraph];
 ```
 
+Always show the toolbar even when the keyboard is hidden:
+```objective-c
+self.alwaysShowToolbar = YES;
+```
+
+Set A Placeholder
+---
+
+```objective-c
+[self setPlaceholder:@"This is a placeholder that will show when there is no content(html)"];
+
+```
+
 Insert Link and Insert Image
 ---
 
@@ -120,6 +133,56 @@ UIButton *myButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, butt
 
 ```
 
+Custom CSS
+---
+
+```objective-c
+NSString *customCSS = @"a {text-decoration:none;} a:hover {color:#FF0000;}";
+[self setCSS:customCSS];
+
+```
+
+Receive Editor Did Change Events
+---
+
+Add the following to your viewDidLoad method:
+
+```objective-c
+self.receiveEditorDidChangeEvents = YES;
+```
+
+Then you will receive events in the following method:
+
+```objective-c
+- (void)editorDidChangeWithText:(NSString *)text andHTML:(NSString *)html {
+    
+    NSLog(@"Text Has Changed: %@", text);
+    
+    NSLog(@"HTML Has Changed: %@", html);
+    
+}
+```
+
+Receive Hashtag & Mention Events
+---
+
+Hashtags:
+```objective-c
+- (void)hashtagRecognizedWithWord:(NSString *)word {
+    
+    NSLog(@"Hashtag has been recognized: %@", word);
+    
+}
+```
+Mentions:
+```objective-c
+- (void)mentionRecognizedWithWord:(NSString *)word {
+    
+    NSLog(@"Mention has been recognized: %@", word);
+    
+}
+```
+
 Supported Functions
 ---
 
@@ -132,6 +195,7 @@ ZSSRichTextEditor has the following functions:
 *   Strikethrough
 *   Underline
 *   Remove Formatting
+*   Font
 *   Justify Left
 *   Justify Center
 *   Justify Right
@@ -158,9 +222,14 @@ ZSSRichTextEditor has the following functions:
 *   Text Color
 *   Background Color
 
-Requirements
+Installation
 --------------
+You can use `CocoaPods` or manually using the following instructions:
+
 `ZSSRichTextEditor` requires iOS7 as well as `CoreGraphics.framework` and `CoreText.framework`.
+
+- Copy the `Source` folder to your project.
+- Subclass `ZSSRichTextEditor` and implement the methods as mentioned above.
 
 **When using `ZSSRichTextEditor` in your own project, XCode will automatically add `ZSSRichTextEditor.js` to compile sources under build phases, this will cause `ZSSRichTextEditor` to not work correctly as the javascript file won't be included in your app. Instead, remove it from compile sources and add it to copy bundle resources.**
 

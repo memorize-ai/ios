@@ -296,7 +296,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - ZSSRichTextEditor (0.5.2.1)
+  - ZSSRichTextEditor (0.5.2.2)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -304,7 +304,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - GoogleSignIn
-  - ZSSRichTextEditor
+  - ZSSRichTextEditor (from `https://github.com/nnhubbard/ZSSRichTextEditor.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
@@ -332,7 +332,16 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
-    - ZSSRichTextEditor
+
+EXTERNAL SOURCES:
+  ZSSRichTextEditor:
+    :branch: master
+    :git: https://github.com/nnhubbard/ZSSRichTextEditor.git
+
+CHECKOUT OPTIONS:
+  ZSSRichTextEditor:
+    :commit: e2bc2c7e6be43ca234dc2dcb0a5b8f8db6be918c
+    :git: https://github.com/nnhubbard/ZSSRichTextEditor.git
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -359,8 +368,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  ZSSRichTextEditor: 56ed060d6d7a98fb6be9fceb8074ced22160349b
+  ZSSRichTextEditor: f58c612e4e981bf10d3cf64980ac5c4b1f5138f4
 
-PODFILE CHECKSUM: 38377fd5c25023cc00345939df16922a80506d29
+PODFILE CHECKSUM: d0725edbf0f19b8a2cb120e97bc3cde9ba389118
 
 COCOAPODS: 1.8.4

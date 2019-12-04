@@ -83,10 +83,18 @@
     RGBColorFromUIColor(_color, &rgbColor);
     
     HRColorPickerStyle style;
+    
+// j5136p1 12/08/2014 : Set size to mainScreen size and if a navigationviewcontroller exists we change it to navigation controller view size
+    CGSize viewSize = [[UIScreen mainScreen] applicationFrame].size;
+    
+// j5136p1 12/08/2014 : if a navigationviewcontroller exists we change it to navigation controller view size to fit ex. modal views
+    if (self.navigationController)
+        viewSize = CGSizeMake(self.navigationController.view.frame.size.width, self.navigationController.view.frame.size.height);
+    
     if (_fullColor) {
-        style = [HRColorPickerView fitScreenFullColorStyle];
+        style = [HRColorPickerView fitScreenFullColorStyleWithSize:viewSize];
     }else{
-        style = [HRColorPickerView fitScreenStyle];
+        style = [HRColorPickerView fitScreenStyleWithSize:viewSize];
     }
     
     colorPickerView = [[HRColorPickerView alloc] initWithStyle:style defaultColor:rgbColor];
@@ -152,18 +160,8 @@
 
 #pragma mark - View lifecycle
 
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

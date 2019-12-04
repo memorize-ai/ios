@@ -12,7 +12,7 @@ target 'memorize.ai' do
 	
 	pod 'GoogleSignIn'
 	
-	pod 'ZSSRichTextEditor'
+	pod 'ZSSRichTextEditor', :git => 'https://github.com/nnhubbard/ZSSRichTextEditor.git', :branch => 'master'
 	
 	target 'memorize.aiTests' do
 		inherit! :search_paths
