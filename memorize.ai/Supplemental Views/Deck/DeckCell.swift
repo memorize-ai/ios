@@ -92,7 +92,7 @@ struct DeckCell<Content: View>: View {
 #if DEBUG
 struct DeckCell_Previews: PreviewProvider {
 	static var previews: some View {
-		let failedDeck = Deck(
+		let failedDeck = Deck._new(
 			id: "0",
 			topics: [],
 			hasImage: true,
@@ -115,7 +115,7 @@ struct DeckCell_Previews: PreviewProvider {
 			Grid(
 				elements: [
 					DeckCell(
-						deck: .init(
+						deck: ._new(
 							id: "0",
 							topics: [],
 							hasImage: true,
@@ -136,7 +136,7 @@ struct DeckCell_Previews: PreviewProvider {
 						content: EmptyView.init
 					),
 					DeckCell(
-						deck: .init(
+						deck: ._new(
 							id: "0",
 							topics: [],
 							hasImage: true,
@@ -156,7 +156,7 @@ struct DeckCell_Previews: PreviewProvider {
 						content: EmptyView.init
 					),
 					DeckCell(
-						deck: .init(
+						deck: ._new(
 							id: "0",
 							topics: [],
 							hasImage: false,

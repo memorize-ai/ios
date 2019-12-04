@@ -84,7 +84,7 @@ struct DeckRow: View {
 struct DeckRow_Previews: PreviewProvider {
 	static var previews: some View {
 		DeckRow(
-			deck: .init(
+			deck: ._new(
 				id: "0",
 				topics: [],
 				hasImage: true,

@@ -28,7 +28,7 @@ func previewForDevices<Content: View>(
 }
 
 let PREVIEW_CURRENT_STORE: CurrentStore = {
-	let failedDeck = Deck(
+	let failedDeck = Deck._new(
 		id: "6",
 		topics: [],
 		hasImage: true,
@@ -50,7 +50,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		)
 	)
 	failedDeck.imageLoadingState.fail(message: "Self-invoked")
-	let selectedDeck = Deck(
+	let selectedDeck = Deck._new(
 		id: "1",
 		topics: [],
 		hasImage: true,
@@ -85,7 +85,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		numberOfDecks: 7,
 		xp: 930,
 		decks: [
-			.init(
+			._new(
 				id: "0",
 				topics: [],
 				hasImage: true,
@@ -134,7 +134,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				]
 			),
 			selectedDeck,
-			.init(
+			._new(
 				id: "2",
 				topics: [],
 				hasImage: true,
@@ -151,7 +151,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				dateCreated: .now,
 				dateLastUpdated: .now
 			),
-			.init(
+			._new(
 				id: "3",
 				topics: [],
 				hasImage: true,
@@ -173,7 +173,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 					numberOfDueCards: 36
 				)
 			),
-			.init(
+			._new(
 				id: "4",
 				topics: [],
 				hasImage: false,
@@ -194,7 +194,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 					numberOfDueCards: 568
 				)
 			),
-			.init(
+			._new(
 				id: "5",
 				topics: [],
 				hasImage: true,
@@ -242,7 +242,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		)
 	]
 	currentStore.recommendedDecks = [
-		.init(
+		._new(
 			id: "0",
 			topics: [],
 			hasImage: true,
@@ -264,7 +264,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfDueCards: 23
 			)
 		),
-		.init(
+		._new(
 			id: "1",
 			topics: [],
 			hasImage: true,
@@ -286,7 +286,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfDueCards: 0
 			)
 		),
-		.init(
+		._new(
 			id: "2",
 			topics: [],
 			hasImage: true,
@@ -303,7 +303,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			dateCreated: .now,
 			dateLastUpdated: .now
 		),
-		.init(
+		._new(
 			id: "3",
 			topics: [],
 			hasImage: true,
@@ -325,7 +325,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfDueCards: 36
 			)
 		),
-		.init(
+		._new(
 			id: "4",
 			topics: [],
 			hasImage: false,
@@ -346,7 +346,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				numberOfDueCards: 568
 			)
 		),
-		.init(
+		._new(
 			id: "5",
 			topics: [],
 			hasImage: true,

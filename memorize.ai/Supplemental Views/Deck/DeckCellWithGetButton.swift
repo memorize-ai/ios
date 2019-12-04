@@ -88,7 +88,7 @@ struct DeckCellWithGetButton: View {
 #if DEBUG
 struct DeckCellWithGetButton_Previews: PreviewProvider {
 	static var previews: some View {
-		let deck1 = Deck(
+		let deck1 = Deck._new(
 			id: "0",
 			topics: [],
 			hasImage: true,
@@ -120,7 +120,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 				width: 165
 			)
 			DeckCellWithGetButton(
-				deck: .init(
+				deck: ._new(
 					id: "0",
 					topics: [],
 					hasImage: true,

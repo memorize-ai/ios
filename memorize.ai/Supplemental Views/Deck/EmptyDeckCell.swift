@@ -20,7 +20,7 @@ struct EmptyDeckCell: View {
 struct EmptyDeckCell_Previews: PreviewProvider {
 	static var previews: some View {
 		EmptyDeckCell(
-			deck: .init(
+			deck: ._new(
 				id: "0",
 				topics: [],
 				hasImage: true,

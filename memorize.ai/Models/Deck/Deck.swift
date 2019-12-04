@@ -18,12 +18,15 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var image: Image?
 	@Published var name: String
 	@Published var subtitle: String
+	@Published var description: String
 	@Published var numberOfViews: Int
 	@Published var numberOfUniqueViews: Int
 	@Published var numberOfRatings: Int
 	@Published var averageRating: Double
 	@Published var numberOfDownloads: Int
 	@Published var numberOfCards: Int
+	@Published var numberOfCurrentUsers: Int
+	@Published var numberOfAllTimeUsers: Int
 	@Published var dateLastUpdated: Date
 	
 	@Published var userData: UserData?
@@ -45,12 +48,15 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		image: Image? = nil,
 		name: String,
 		subtitle: String,
+		description: String,
 		numberOfViews: Int,
 		numberOfUniqueViews: Int,
 		numberOfRatings: Int,
 		averageRating: Double,
 		numberOfDownloads: Int,
 		numberOfCards: Int,
+		numberOfCurrentUsers: Int,
+		numberOfAllTimeUsers: Int,
 		creatorId: String,
 		dateCreated: Date,
 		dateLastUpdated: Date,
@@ -65,12 +71,15 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.image = image
 		self.name = name
 		self.subtitle = subtitle
+		self.description = description
 		self.numberOfViews = numberOfViews
 		self.numberOfUniqueViews = numberOfUniqueViews
 		self.numberOfRatings = numberOfRatings
 		self.averageRating = averageRating
 		self.numberOfDownloads = numberOfDownloads
 		self.numberOfCards = numberOfCards
+		self.numberOfCurrentUsers = numberOfCurrentUsers
+		self.numberOfAllTimeUsers = numberOfAllTimeUsers
 		self.creatorId = creatorId
 		self.dateCreated = dateCreated
 		self.dateLastUpdated = dateLastUpdated
@@ -86,18 +95,73 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			topics: snapshot.get("topics") as? [String] ?? [],
 			hasImage: snapshot.get("hasImage") as? Bool ?? false,
 			name: snapshot.get("name") as? String ?? "Unknown",
-			subtitle: snapshot.get("subtitle") as? String ?? "(empty)",
+			subtitle: snapshot.get("subtitle") as? String ?? "(error)",
+			description: snapshot.get("description") as? String ?? "(error)",
 			numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
 			numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
 			numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
 			averageRating: snapshot.get("averageRating") as? Double ?? 0,
 			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
 			numberOfCards: snapshot.get("cardCount") as? Int ?? 0,
+			numberOfCurrentUsers: snapshot.get("currentUserCount") as? Int ?? 0,
+			numberOfAllTimeUsers: snapshot.get("allTimeUserCount") as? Int ?? 0,
 			creatorId: snapshot.get("creator") as? String ?? "0",
 			dateCreated: snapshot.getDate("created") ?? .now,
 			dateLastUpdated: snapshot.getDate("updated") ?? .now
 		)
 	}
+	
+	#if DEBUG
+	static func _new(
+		id: String = "0",
+		topics: [String] = [],
+		hasImage: Bool = false,
+		image: Image? = nil,
+		name: String = "",
+		subtitle: String = "",
+		description: String = "",
+		numberOfViews: Int = 0,
+		numberOfUniqueViews: Int = 0,
+		numberOfRatings: Int = 0,
+		averageRating: Double = 0,
+		numberOfDownloads: Int = 0,
+		numberOfCards: Int = 0,
+		numberOfCurrentUsers: Int = 0,
+		numberOfAllTimeUsers: Int = 0,
+		creatorId: String = "0",
+		dateCreated: Date = .now,
+		dateLastUpdated: Date = .now,
+		userData: UserData? = nil,
+		sections: [Section] = [],
+		creator: User? = nil,
+		previewCards: [Card] = []
+	) -> Self {
+		.init(
+			id: id,
+			topics: topics,
+			hasImage: hasImage,
+			image: image,
+			name: name,
+			subtitle: subtitle,
+			description: description,
+			numberOfViews: numberOfViews,
+			numberOfUniqueViews: numberOfUniqueViews,
+			numberOfRatings: numberOfRatings,
+			averageRating: averageRating,
+			numberOfDownloads: numberOfDownloads,
+			numberOfCards: numberOfCards,
+			numberOfCurrentUsers: numberOfCurrentUsers,
+			numberOfAllTimeUsers: numberOfAllTimeUsers,
+			creatorId: creatorId,
+			dateCreated: dateCreated,
+			dateLastUpdated: dateLastUpdated,
+			userData: userData,
+			sections: sections,
+			creator: creator,
+			previewCards: previewCards
+		)
+	}
+	#endif
 	
 	var documentReference: DocumentReference {
 		firestore.document("decks/\(id)")
