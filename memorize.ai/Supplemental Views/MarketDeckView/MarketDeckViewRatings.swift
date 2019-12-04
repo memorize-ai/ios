@@ -43,7 +43,7 @@ struct MarketDeckViewRatings: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				VStack {
+				VStack(spacing: 20) {
 					HStack {
 						VStack(alignment: .leading, spacing: 8) {
 							DeckStars(stars: deck.averageRating)
@@ -69,6 +69,10 @@ struct MarketDeckViewRatings: View {
 							starRow(stars: 1, count: deck.numberOf1StarRatings)
 						}
 					}
+					Text("Tap to rate")
+						.font(.muli(.semiBold, size: 18))
+						.foregroundColor(.lightGrayText)
+						.align(to: .leading)
 				}
 				.padding()
 			}
