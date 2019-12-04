@@ -318,15 +318,20 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func updatePublicDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		topics = snapshot.get("topics") as? [String] ?? topics
 		hasImage = snapshot.get("hasImage") as? Bool ?? false
 		if !hasImage { image = nil }
 		name = snapshot.get("name") as? String ?? name
 		subtitle = snapshot.get("subtitle") as? String ?? subtitle
+		description = snapshot.get("description") as? String ?? description
 		numberOfViews = snapshot.get("viewCount") as? Int ?? numberOfViews
 		numberOfUniqueViews = snapshot.get("uniqueViewCount") as? Int ?? numberOfUniqueViews
 		numberOfRatings = snapshot.get("ratingCount") as? Int ?? numberOfRatings
 		averageRating = snapshot.get("averageRating") as? Double ?? averageRating
 		numberOfDownloads = snapshot.get("downloadCount") as? Int ?? numberOfDownloads
+		numberOfCards = snapshot.get("cardCount") as? Int ?? numberOfCards
+		numberOfCurrentUsers = snapshot.get("currentUserCount") as? Int ?? numberOfCurrentUsers
+		numberOfAllTimeUsers = snapshot.get("allTimeUserCount") as? Int ?? numberOfAllTimeUsers
 		dateLastUpdated = snapshot.getDate("updated") ?? dateLastUpdated
 		return self
 	}

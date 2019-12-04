@@ -12,6 +12,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var interests: [String]
 	@Published var numberOfDecks: Int
 	@Published var xp: Int
+	@Published var allDecks: [String]
 	@Published var decks: [Deck]
 	
 	@Published var decksLoadingState = LoadingState()
@@ -23,6 +24,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		interests: [String],
 		numberOfDecks: Int,
 		xp: Int,
+		allDecks: [String] = [],
 		decks: [Deck] = []
 	) {
 		self.id = id
@@ -31,6 +33,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		self.interests = interests
 		self.numberOfDecks = numberOfDecks
 		self.xp = xp
+		self.allDecks = allDecks
 		self.decks = decks
 	}
 	
@@ -41,7 +44,8 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			email: snapshot.get("email") as? String ?? "Unknown",
 			interests: snapshot.get("topics") as? [String] ?? [],
 			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0,
-			xp: snapshot.get("xp") as? Int ?? 0
+			xp: snapshot.get("xp") as? Int ?? 0,
+			allDecks: snapshot.get("allDecks") as? [String] ?? []
 		)
 	}
 	
@@ -107,6 +111,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		interests = snapshot.get("topics") as? [String] ?? interests
 		numberOfDecks = snapshot.get("deckCount") as? Int ?? numberOfDecks
 		xp = snapshot.get("xp") as? Int ?? xp
+		allDecks = snapshot.get("allDecks") as? [String] ?? allDecks
 		return self
 	}
 	
