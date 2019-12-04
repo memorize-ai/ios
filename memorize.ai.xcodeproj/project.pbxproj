@@ -102,6 +102,8 @@
 		4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AC236BFE080043298C /* DocumentSnapshot.swift */; };
 		4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */; };
 		4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */; };
+		4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EA4239838BB00EF040B /* MarketDeckViewRatings.swift */; };
+		4D8B2EA72398394B00EF040B /* MarketDeckViewSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EA62398394B00EF040B /* MarketDeckViewSectionTitle.swift */; };
 		4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */; };
 		4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEB823851F8100C85EC2 /* MarketView.swift */; };
 		4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */; };
@@ -306,6 +308,8 @@
 		4D8444AC236BFE080043298C /* DocumentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSnapshot.swift; sourceTree = "<group>"; };
 		4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewContentBox.swift; sourceTree = "<group>"; };
+		4D8B2EA4239838BB00EF040B /* MarketDeckViewRatings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewRatings.swift; sourceTree = "<group>"; };
+		4D8B2EA62398394B00EF040B /* MarketDeckViewSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewSectionTitle.swift; sourceTree = "<group>"; };
 		4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewSections.swift; sourceTree = "<group>"; };
 		4D9AAEB823851F8100C85EC2 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = SOURCE_ROOT; };
 		4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -905,6 +909,8 @@
 				4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */,
 				4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */,
 				4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */,
+				4D8B2EA62398394B00EF040B /* MarketDeckViewSectionTitle.swift */,
+				4D8B2EA4239838BB00EF040B /* MarketDeckViewRatings.swift */,
 			);
 			path = MarketDeckView;
 			sourceTree = "<group>";
@@ -1266,6 +1272,7 @@
 				4D59FA8D237F36A0007CAA74 /* DeckIcon.swift in Sources */,
 				4D59FA8B237F2010007CAA74 /* FloatingReviewButton.swift in Sources */,
 				4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */,
+				4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */,
 				4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
@@ -1349,6 +1356,7 @@
 				4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */,
 				4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */,
 				4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */,
+				4D8B2EA72398394B00EF040B /* MarketDeckViewSectionTitle.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DE9722A2370DB8800616E42 /* PlusPlus.swift in Sources */,
 				4DEB35A0236ACE4900E3DBC4 /* DeckStar.swift in Sources */,

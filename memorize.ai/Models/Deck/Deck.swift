@@ -22,6 +22,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfViews: Int
 	@Published var numberOfUniqueViews: Int
 	@Published var numberOfRatings: Int
+	@Published var numberOf1StarRatings: Int
+	@Published var numberOf2StarRatings: Int
+	@Published var numberOf3StarRatings: Int
+	@Published var numberOf4StarRatings: Int
+	@Published var numberOf5StarRatings: Int
 	@Published var averageRating: Double
 	@Published var numberOfDownloads: Int
 	@Published var numberOfCards: Int
@@ -53,6 +58,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfViews: Int,
 		numberOfUniqueViews: Int,
 		numberOfRatings: Int,
+		numberOf1StarRatings: Int,
+		numberOf2StarRatings: Int,
+		numberOf3StarRatings: Int,
+		numberOf4StarRatings: Int,
+		numberOf5StarRatings: Int,
 		averageRating: Double,
 		numberOfDownloads: Int,
 		numberOfCards: Int,
@@ -76,6 +86,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfViews = numberOfViews
 		self.numberOfUniqueViews = numberOfUniqueViews
 		self.numberOfRatings = numberOfRatings
+		self.numberOf1StarRatings = numberOf1StarRatings
+		self.numberOf2StarRatings = numberOf2StarRatings
+		self.numberOf3StarRatings = numberOf3StarRatings
+		self.numberOf4StarRatings = numberOf4StarRatings
+		self.numberOf5StarRatings = numberOf5StarRatings
 		self.averageRating = averageRating
 		self.numberOfDownloads = numberOfDownloads
 		self.numberOfCards = numberOfCards
@@ -101,6 +116,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
 			numberOfUniqueViews: snapshot.get("uniqueViewCount") as? Int ?? 0,
 			numberOfRatings: snapshot.get("ratingCount") as? Int ?? 0,
+			numberOf1StarRatings: snapshot.get("1StarRatingCount") as? Int ?? 0,
+			numberOf2StarRatings: snapshot.get("2StarRatingCount") as? Int ?? 0,
+			numberOf3StarRatings: snapshot.get("3StarRatingCount") as? Int ?? 0,
+			numberOf4StarRatings: snapshot.get("4StarRatingCount") as? Int ?? 0,
+			numberOf5StarRatings: snapshot.get("5StarRatingCount") as? Int ?? 0,
 			averageRating: snapshot.get("averageRating") as? Double ?? 0,
 			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
 			numberOfCards: snapshot.get("cardCount") as? Int ?? 0,
@@ -124,6 +144,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfViews: Int = 0,
 		numberOfUniqueViews: Int = 0,
 		numberOfRatings: Int = 0,
+		numberOf1StarRatings: Int = 0,
+		numberOf2StarRatings: Int = 0,
+		numberOf3StarRatings: Int = 0,
+		numberOf4StarRatings: Int = 0,
+		numberOf5StarRatings: Int = 0,
 		averageRating: Double = 0,
 		numberOfDownloads: Int = 0,
 		numberOfCards: Int = 0,
@@ -148,6 +173,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfViews: numberOfViews,
 			numberOfUniqueViews: numberOfUniqueViews,
 			numberOfRatings: numberOfRatings,
+			numberOf1StarRatings: numberOf1StarRatings,
+			numberOf2StarRatings: numberOf2StarRatings,
+			numberOf3StarRatings: numberOf3StarRatings,
+			numberOf4StarRatings: numberOf4StarRatings,
+			numberOf5StarRatings: numberOf5StarRatings,
 			averageRating: averageRating,
 			numberOfDownloads: numberOfDownloads,
 			numberOfCards: numberOfCards,

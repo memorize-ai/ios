@@ -17,6 +17,11 @@ struct MarketDeckView: View {
 						MarketDeckViewCardPreviews()
 						MarketDeckViewDescription()
 						MarketDeckViewTopicList()
+						Rectangle()
+							.foregroundColor(.gray)
+							.padding(.horizontal, 23)
+							.frame(height: 2)
+						MarketDeckViewRatings()
 					}
 				}
 			}
