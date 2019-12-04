@@ -161,6 +161,7 @@ bool ParseContext::write() const {
     case UserDataSource::Update:
       return true;
     case UserDataSource::Argument:
+    case UserDataSource::ArrayArgument:
       return false;
     default:
       ThrowInvalidArgument("Unexpected case for UserDataSource: %s",
@@ -181,10 +182,15 @@ void ParseContext::ValidatePath() const {
 
 void ParseContext::ValidatePathSegment(absl::string_view segment) const {
   absl::string_view designator{RESERVED_FIELD_DESIGNATOR};
+  if (segment.empty()) {
+    ThrowInvalidArgument("Invalid data. Document fields must not be empty%s",
+                         FieldDescription());
+  }
   if (write() && absl::StartsWith(segment, designator) &&
       absl::EndsWith(segment, designator)) {
-    ThrowInvalidArgument("Document fields cannot begin and end with %s%s",
-                         RESERVED_FIELD_DESIGNATOR, FieldDescription());
+    ThrowInvalidArgument(
+        "Invalid data. Document fields cannot begin and end with \"%s\"%s",
+        RESERVED_FIELD_DESIGNATOR, FieldDescription());
   }
 }
 

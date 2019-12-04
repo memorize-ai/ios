@@ -12,6 +12,8 @@ target 'memorize.ai' do
 	
 	pod 'GoogleSignIn'
 	
+	pod 'ZSSRichTextEditor'
+	
 	target 'memorize.aiTests' do
 		inherit! :search_paths
 	end
