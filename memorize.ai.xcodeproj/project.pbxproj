@@ -119,6 +119,7 @@
 		4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F45233DE1A800EF7467 /* Assets.xcassets */; };
 		4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F48233DE1A800EF7467 /* Preview Assets.xcassets */; };
 		4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA4F4A233DE1A800EF7467 /* LaunchScreen.storyboard */; };
+		4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */; };
 		4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */; };
 		4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */; };
 		4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */; };
@@ -327,6 +328,7 @@
 		4DAA4F58233DE1A800EF7467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DAA4F5D233DE1A900EF7467 /* memorize.aiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = memorize.aiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA4F63233DE1A900EF7467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewDescription.swift; sourceTree = "<group>"; };
 		4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewContentBox.swift; sourceTree = "<group>"; };
 		4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewContentBox.swift; sourceTree = "<group>"; };
 		4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewCell.swift; sourceTree = "<group>"; };
@@ -899,6 +901,7 @@
 				4DDACF082395BFA80073C004 /* MarketDeckViewHeader.swift */,
 				4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */,
 				4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */,
+				4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */,
 			);
 			path = MarketDeckView;
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */,
 				4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */,
 				4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */,
+				4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DE9722A2370DB8800616E42 /* PlusPlus.swift in Sources */,
 				4DEB35A0236ACE4900E3DBC4 /* DeckStar.swift in Sources */,

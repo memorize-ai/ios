@@ -92,6 +92,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				image: .init("GeometryPrepDeck"),
 				name: "Geometry Prep #1",
 				subtitle: "Angles, lines, triangles and other polygons",
+				description: "This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons.",
 				numberOfViews: 1000000000,
 				numberOfUniqueViews: 200000,
 				numberOfRatings: 12400,
