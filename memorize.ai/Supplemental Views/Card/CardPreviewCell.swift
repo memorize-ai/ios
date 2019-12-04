@@ -31,6 +31,7 @@ struct CardPreviewCell: View {
 		) {
 			ZStack(alignment: .bottomTrailing) {
 				WebView(html: card.renderSide(side))
+					.cornerRadius(5)
 				HStack {
 					Text(side == .front ? "FRONT" : "BACK")
 						.font(.muli(.bold, size: 10))
@@ -52,10 +53,14 @@ struct CardPreviewCell: View {
 #if DEBUG
 struct CardPreviewCell_Previews: PreviewProvider {
 	static var previews: some View {
-		CardPreviewCell(
-			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[1]
-		)
-		.frame(width: 246, height: 354)
+		ZStack {
+			Color.gray
+				.edgesIgnoringSafeArea(.all)
+			CardPreviewCell(
+				card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[1]
+			)
+			.frame(width: 246, height: 354)
+		}
 	}
 }
 #endif

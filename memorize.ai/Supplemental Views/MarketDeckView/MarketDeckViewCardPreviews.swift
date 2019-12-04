@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct MarketDeckViewCardPreviews: View {
+	static let cellWidth = min(SCREEN_SIZE.width, 246)
+	static let cellHeight = cellWidth * 354 / 246
+	
 	@EnvironmentObject var deck: Deck
 	
 	var body: some View {
@@ -8,6 +11,10 @@ struct MarketDeckViewCardPreviews: View {
 			HStack {
 				ForEach(deck.previewCards) { card in
 					CardPreviewCell(card: card)
+						.frame(
+							width: Self.cellWidth,
+							height: Self.cellHeight
+						)
 				}
 			}
 			.padding(.horizontal, 23)
