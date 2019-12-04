@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftUIX
 
-struct MainTabView: View { // TODO: Fix issue where everything moves up when coming from onboarding views
+struct MainTabView: View {
 	enum Selection {
 		case home
 		case market
