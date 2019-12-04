@@ -45,12 +45,23 @@ struct MarketDeckViewRatings: View {
 			) {
 				VStack {
 					HStack {
-						VStack {
+						VStack(alignment: .leading, spacing: 8) {
 							DeckStars(stars: deck.averageRating)
 								.scaleEffect(1.2)
+								.offset(x: 9)
+							Text(deck.averageRating.oneDecimalPlace.formatted)
+								.font(.muli(.bold, size: 50))
+								.foregroundColor(.darkGray)
+							HStack(spacing: 0) {
+								Text(deck.numberOfRatings.formatted)
+									.foregroundColor(.darkGray)
+								Text(" Reviews")
+									.foregroundColor(.lightGrayText)
+							}
+							.font(.muli(.bold, size: 13.5))
 						}
 						Spacer()
-						VStack(spacing: 4) {
+						VStack(alignment: .leading, spacing: 4) {
 							starRow(stars: 5, count: deck.numberOf5StarRatings)
 							starRow(stars: 4, count: deck.numberOf4StarRatings)
 							starRow(stars: 3, count: deck.numberOf3StarRatings)
@@ -59,6 +70,7 @@ struct MarketDeckViewRatings: View {
 						}
 					}
 				}
+				.padding()
 			}
 		}
 		.padding(.horizontal, 23)
