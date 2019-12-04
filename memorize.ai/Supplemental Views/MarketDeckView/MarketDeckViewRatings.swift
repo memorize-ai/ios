@@ -33,6 +33,15 @@ struct MarketDeckViewRatings: View {
 		}
 	}
 	
+	func tappableStar(
+		isSelected: Bool,
+		action: @escaping () -> Void
+	) -> some View {
+		Button(action: action) {
+			DeckStar(fill: *isSelected, dimension: 40)
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			MarketDeckViewSectionTitle("Ratings")
@@ -73,6 +82,25 @@ struct MarketDeckViewRatings: View {
 						.font(.muli(.semiBold, size: 18))
 						.foregroundColor(.lightGrayText)
 						.align(to: .leading)
+					HStack {
+						tappableStar(isSelected: false) {
+							// TODO: Handle click
+						}
+						tappableStar(isSelected: false) {
+							// TODO: Handle click
+						}
+						tappableStar(isSelected: false) {
+							// TODO: Handle click
+						}
+						tappableStar(isSelected: false) {
+							// TODO: Handle click
+						}
+						tappableStar(isSelected: false) {
+							// TODO: Handle click
+						}
+						Spacer()
+					}
+					.padding(.top, -12)
 				}
 				.padding()
 			}
