@@ -16,6 +16,7 @@ struct MarketDeckView: View {
 						MarketDeckViewInfoPanels()
 						MarketDeckViewCardPreviews()
 						MarketDeckViewDescription()
+						MarketDeckViewTopicList()
 					}
 				}
 			}
