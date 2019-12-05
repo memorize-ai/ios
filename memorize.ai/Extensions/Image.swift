@@ -46,4 +46,6 @@ extension Image {
 	static let swapIcon = Self("SwapIcon")
 	
 	static let grayStar = Self("GrayStar")
+	static let greenFilledStar = Self("GreenFilledStar")
+	static let greenTransparentStar = Self("GreenTransparentStar")
 }

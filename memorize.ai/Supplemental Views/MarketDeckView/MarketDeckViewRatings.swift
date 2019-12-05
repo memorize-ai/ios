@@ -27,10 +27,10 @@ struct MarketDeckViewRatings: View {
 					Capsule()
 						.opacity(0.3)
 					Capsule()
-						.frame(
-							width: geometry.size.width *
-								.init(count) / .init(self.deck.numberOfRatings)
-						)
+//						.frame(
+//							width: geometry.size.width *
+//								.init(count) / .init(self.deck.numberOfRatings)
+//						)
 				}
 				.foregroundColor(.darkBlue)
 			}
@@ -49,7 +49,13 @@ struct MarketDeckViewRatings: View {
 				? self.deck.removeRating(forUser: self.currentUser)
 				: self.deck.addRating(stars, forUser: self.currentUser)
 		}) {
-			DeckStar(fill: *(rating == stars), dimension: 40)
+			(rating >= stars
+				? Image.greenFilledStar
+				: Image.greenTransparentStar)
+				.resizable()
+				.renderingMode(.original)
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 40, height: 40)
 		}
 	}
 	
