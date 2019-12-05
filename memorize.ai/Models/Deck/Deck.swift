@@ -13,6 +13,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	let creatorId: String
 	let dateCreated: Date
 	
+	var snapshotListener: ListenerRegistration?
+	
 	@Published var topics: [String]
 	@Published var hasImage: Bool
 	@Published var image: Image?
@@ -78,7 +80,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		sections: [Section] = [],
 		creator: User? = nil,
 		previewCards: [Card] = [],
-		similarDecks: [Deck] = []
+		similarDecks: [Deck] = [],
+		snapshotListener: ListenerRegistration?
 	) {
 		self.id = id
 		self.topics = topics
@@ -108,9 +111,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.creator = creator
 		self.previewCards = previewCards
 		self.similarDecks = similarDecks
+		self.snapshotListener = snapshotListener
 	}
 	
-	convenience init(snapshot: DocumentSnapshot) {
+	convenience init(snapshot: DocumentSnapshot, snapshotListener: ListenerRegistration?) {
 		self.init(
 			id: snapshot.documentID,
 			topics: snapshot.get("topics") as? [String] ?? [],
@@ -133,7 +137,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfAllTimeUsers: snapshot.get("allTimeUserCount") as? Int ?? 0,
 			creatorId: snapshot.get("creator") as? String ?? "0",
 			dateCreated: snapshot.getDate("created") ?? .now,
-			dateLastUpdated: snapshot.getDate("updated") ?? .now
+			dateLastUpdated: snapshot.getDate("updated") ?? .now,
+			snapshotListener: snapshotListener
 		)
 	}
 	
@@ -166,7 +171,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		sections: [Section] = [],
 		creator: User? = nil,
 		previewCards: [Card] = [],
-		similarDecks: [Deck] = []
+		similarDecks: [Deck] = [],
+		snapshotListener: ListenerRegistration? = nil
 	) -> Self {
 		.init(
 			id: id,
@@ -196,13 +202,31 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			sections: sections,
 			creator: creator,
 			previewCards: previewCards,
-			similarDecks: similarDecks
+			similarDecks: similarDecks,
+			snapshotListener: snapshotListener
 		)
 	}
 	#endif
 	
 	var documentReference: DocumentReference {
 		firestore.document("decks/\(id)")
+	}
+	
+	@discardableResult
+	func addObserver() -> Self {
+		guard snapshotListener == nil else { return self }
+		snapshotListener = documentReference.addSnapshotListener { snapshot, error in
+			guard error == nil, let snapshot = snapshot else { return }
+			self.updatePublicDataFromSnapshot(snapshot)
+		}
+		return self
+	}
+	
+	@discardableResult
+	func removeObserver() -> Self {
+		snapshotListener?.remove()
+		snapshotListener = nil
+		return self
 	}
 	
 	@discardableResult
@@ -469,7 +493,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			if let cachedDeck = cache[id] {
 				return seal.fulfill(cachedDeck)
 			}
-			firestore.document("decks/\(id)").addSnapshotListener { snapshot, error in
+			var snapshotListener: ListenerRegistration?
+			snapshotListener = firestore.document("decks/\(id)").addSnapshotListener { snapshot, error in
 				guard error == nil, let snapshot = snapshot else {
 					return seal.reject(error ?? UNKNOWN_ERROR)
 				}
@@ -477,7 +502,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 					deck?.updatePublicDataFromSnapshot(snapshot)
 				} else {
 					didFulfill = true
-					deck = .init(snapshot: snapshot)
+					deck = .init(snapshot: snapshot, snapshotListener: snapshotListener)
 					seal.fulfill(deck!.cache())
 				}
 			}
