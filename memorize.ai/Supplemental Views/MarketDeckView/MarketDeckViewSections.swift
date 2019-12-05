@@ -17,19 +17,6 @@ struct MarketDeckViewSections: View {
 			: .init(deck.sections.prefix(Self.sectionPrefix))
 	}
 	
-	func sectionRow(forSection section: Deck.Section) -> some View {
-		HStack {
-			Text(section.name)
-				.font(.muli(.semiBold, size: 17))
-			Rectangle()
-				.foregroundColor(literal: #colorLiteral(red: 0.8666666667, green: 0.8666666667, blue: 0.8666666667, alpha: 1))
-				.frame(height: 1)
-			Text("(\(section.numberOfCards.formatted) card\(section.numberOfCards == 1 ? "" : "s"))")
-				.font(.muli(.regular, size: 17))
-				.foregroundColor(.lightGrayText)
-		}
-	}
-	
 	var body: some View {
 		VStack {
 			MarketDeckViewSectionTitle("Sections")
@@ -41,7 +28,9 @@ struct MarketDeckViewSections: View {
 				shadowYOffset: 5
 			) {
 				VStack {
-					ForEach(prefixedSections, content: sectionRow)
+					ForEach(prefixedSections) { section in
+						MarketDeckViewSectionRow(section: section)
+					}
 					if numberOfSections > Self.sectionPrefix {
 						Button(action: {
 							self.isExpanded.toggle()
