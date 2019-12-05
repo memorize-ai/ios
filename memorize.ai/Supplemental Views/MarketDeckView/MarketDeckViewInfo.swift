@@ -15,7 +15,7 @@ struct MarketDeckViewInfo: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 8) {
+		VStack(spacing: 16) {
 			MarketDeckViewSectionTitle("Info")
 			CustomRectangle(
 				background: Color.white,
