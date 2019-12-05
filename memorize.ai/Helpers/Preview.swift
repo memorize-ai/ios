@@ -72,6 +72,122 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			numberOfDueCards: 0
 		)
 	)
+	let firstDeck = Deck._new(
+		id: "0",
+		topics: [],
+		hasImage: true,
+		image: .init("GeometryPrepDeck"),
+		name: "Geometry Prep #1",
+		subtitle: "Angles, lines, triangles and other polygons",
+		description: "This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons.",
+		numberOfViews: 1000000000,
+		numberOfUniqueViews: 200000,
+		numberOfRatings: 12400,
+		numberOf1StarRatings: 100,
+		numberOf2StarRatings: 100,
+		numberOf3StarRatings: 100,
+		numberOf4StarRatings: 200,
+		numberOf5StarRatings: 11900,
+		averageRating: 4.5,
+		numberOfDownloads: 196400,
+		numberOfCards: 19640,
+		creatorId: "0",
+		dateCreated: .now,
+		dateLastUpdated: .now,
+		userData: .init(
+			dateAdded: .now,
+			isFavorite: false,
+			numberOfDueCards: 23
+		),
+		previewCards: [
+			.init(
+				id: "10",
+				sectionId: "",
+				front: "This is a card with some sound. <audio src=\"audio.wav\"></audio>",
+				back: "This is the back.",
+				numberOfViews: 0,
+				numberOfSkips: 0
+			),
+			.init(
+				id: "10",
+				sectionId: "",
+				front: "<h1>This is a card with an image.</h1><img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\"><ul><li>First element</li><li>Second element</li><li>Third element</li></ul>",
+				back: "<b>This is the back.</b>",
+				numberOfViews: 0,
+				numberOfSkips: 0
+			),
+			.init(
+				id: "10",
+				sectionId: "",
+				front: "<h1>This is a list</h1><ul><li>First element</li><li>Second element</li><li>Third element</li></ul><p><b>This is the end of the card</b></p>",
+				back: "This is the back.",
+				numberOfViews: 0,
+				numberOfSkips: 0
+			)
+		]
+	)
+	firstDeck.sections = [
+		.init(
+			id: "0",
+			parent: firstDeck,
+			name: "Section 1",
+			numberOfCards: 10
+		),
+		.init(
+			id: "1",
+			parent: firstDeck,
+			name: "Section 2",
+			numberOfCards: 20
+		),
+		.init(
+			id: "2",
+			parent: firstDeck,
+			name: "Section 3",
+			numberOfCards: 6
+		),
+		.init(
+			id: "3",
+			parent: firstDeck,
+			name: "Section 4",
+			numberOfCards: 0
+		),
+		.init(
+			id: "4",
+			parent: firstDeck,
+			name: "Section 5",
+			numberOfCards: 9
+		),
+		.init(
+			id: "5",
+			parent: firstDeck,
+			name: "Section 6",
+			numberOfCards: 7
+		),
+		.init(
+			id: "6",
+			parent: firstDeck,
+			name: "Section 7",
+			numberOfCards: 5
+		),
+		.init(
+			id: "7",
+			parent: firstDeck,
+			name: "Section 8",
+			numberOfCards: 3
+		),
+		.init(
+			id: "8",
+			parent: firstDeck,
+			name: "Section 9",
+			numberOfCards: 679
+		),
+		.init(
+			id: "9",
+			parent: firstDeck,
+			name: " Section 10",
+			numberOfCards: 1905
+		)
+	]
 	let currentStore = CurrentStore(user: .init(
 		id: "0",
 		name: "Ken Mueller",
@@ -85,60 +201,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		numberOfDecks: 7,
 		xp: 930,
 		decks: [
-			._new(
-				id: "0",
-				topics: [],
-				hasImage: true,
-				image: .init("GeometryPrepDeck"),
-				name: "Geometry Prep #1",
-				subtitle: "Angles, lines, triangles and other polygons",
-				description: "This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons.",
-				numberOfViews: 1000000000,
-				numberOfUniqueViews: 200000,
-				numberOfRatings: 12400,
-				numberOf1StarRatings: 100,
-				numberOf2StarRatings: 100,
-				numberOf3StarRatings: 100,
-				numberOf4StarRatings: 200,
-				numberOf5StarRatings: 11900,
-				averageRating: 4.5,
-				numberOfDownloads: 196400,
-				numberOfCards: 19640,
-				creatorId: "0",
-				dateCreated: .now,
-				dateLastUpdated: .now,
-				userData: .init(
-					dateAdded: .now,
-					isFavorite: false,
-					numberOfDueCards: 23
-				),
-				previewCards: [
-					.init(
-						id: "10",
-						sectionId: "",
-						front: "This is a card with some sound. <audio src=\"audio.wav\"></audio>",
-						back: "This is the back.",
-						numberOfViews: 0,
-						numberOfSkips: 0
-					),
-					.init(
-						id: "10",
-						sectionId: "",
-						front: "<h1>This is a card with an image.</h1><img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\"><ul><li>First element</li><li>Second element</li><li>Third element</li></ul>",
-						back: "<b>This is the back.</b>",
-						numberOfViews: 0,
-						numberOfSkips: 0
-					),
-					.init(
-						id: "10",
-						sectionId: "",
-						front: "<h1>This is a list</h1><ul><li>First element</li><li>Second element</li><li>Third element</li></ul><p><b>This is the end of the card</b></p>",
-						back: "This is the back.",
-						numberOfViews: 0,
-						numberOfSkips: 0
-					)
-				]
-			),
+			firstDeck,
 			selectedDeck,
 			._new(
 				id: "2",
