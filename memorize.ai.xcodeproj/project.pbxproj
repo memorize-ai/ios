@@ -196,6 +196,7 @@
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
 		4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594B2399734E00A78ADF /* PublishDeckView.swift */; };
 		4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */; };
+		4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
@@ -410,6 +411,7 @@
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		4DF4594B2399734E00A78ADF /* PublishDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckView.swift; sourceTree = "<group>"; };
 		4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewModel.swift; sourceTree = "<group>"; };
+		4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewTopControls.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
 		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
@@ -978,6 +980,7 @@
 		4DF4594F2399785400A78ADF /* PublishDeckView */ = {
 			isa = PBXGroup;
 			children = (
+				4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */,
 			);
 			path = PublishDeckView;
 			sourceTree = "<group>";
@@ -1331,6 +1334,7 @@
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D59FA89237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
+				4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */,
 				4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */,

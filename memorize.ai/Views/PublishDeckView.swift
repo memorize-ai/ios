@@ -8,7 +8,20 @@ struct PublishDeckView: View {
 	}
 	
 	var body: some View {
-		Text("PublishDeckView")
+		GeometryReader { geometry in
+			ZStack(alignment: .top) {
+				HomeViewTopGradient(
+					addedHeight: geometry.safeAreaInsets.top
+				)
+				.edgesIgnoringSafeArea(.all)
+				VStack {
+					PublishDeckViewTopControls()
+						.environmentObject(self.model)
+					.padding(.horizontal, 23)
+					Spacer()
+				}
+			}
+		}
 	}
 }
 

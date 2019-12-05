@@ -13,4 +13,8 @@ final class PublishDeckViewModel: ObservableObject {
 		subtitle = deck?.subtitle ?? ""
 		description = deck?.description ?? ""
 	}
+	
+	func publish() {
+		// TODO: Publish deck
+	}
 }
