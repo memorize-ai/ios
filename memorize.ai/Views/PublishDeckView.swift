@@ -18,10 +18,11 @@ struct PublishDeckView: View {
 					PublishDeckViewTopControls()
 						.environmentObject(self.model)
 						.padding(.horizontal, 23)
-					PublishDeckViewContentBox()
-						.environmentObject(self.model)
-						.padding(.horizontal, 8)
-					Spacer() // TODO: Remove this
+					ScrollView {
+						PublishDeckViewContentBox()
+							.environmentObject(self.model)
+							.padding(.horizontal, 12)
+					}
 				}
 			}
 		}
