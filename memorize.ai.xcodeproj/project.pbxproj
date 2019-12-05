@@ -194,6 +194,8 @@
 		4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */; };
 		4DEB35A0236ACE4900E3DBC4 /* DeckStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359F236ACE4900E3DBC4 /* DeckStar.swift */; };
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
+		4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594B2399734E00A78ADF /* PublishDeckView.swift */; };
+		4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
@@ -406,6 +408,8 @@
 		4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStars.swift; sourceTree = "<group>"; };
 		4DEB359F236ACE4900E3DBC4 /* DeckStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStar.swift; sourceTree = "<group>"; };
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		4DF4594B2399734E00A78ADF /* PublishDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckView.swift; sourceTree = "<group>"; };
+		4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewModel.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
 		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
@@ -693,6 +697,7 @@
 				4D9AAEB823851F8100C85EC2 /* MarketView.swift */,
 				4DDACF032395BC3F0073C004 /* MarketDeckView.swift */,
 				4D54C03D237F7C83003765C1 /* DecksView.swift */,
+				4DF4594B2399734E00A78ADF /* PublishDeckView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
 			path = Views;
@@ -857,6 +862,7 @@
 				4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */,
 				4D35BC432385F20A00A440CF /* MarketViewModel.swift */,
 				4DD5FEA1238B084700E70251 /* DecksViewModel.swift */,
+				4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -964,8 +970,16 @@
 				4D9AAEC12385CEFB00C85EC2 /* MarketView */,
 				4DDACF052395BCE30073C004 /* MarketDeckView */,
 				4DD5FE972388D92E00E70251 /* DecksView */,
+				4DF4594F2399785400A78ADF /* PublishDeckView */,
 			);
 			path = "Supplemental Views";
+			sourceTree = "<group>";
+		};
+		4DF4594F2399785400A78ADF /* PublishDeckView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PublishDeckView;
 			sourceTree = "<group>";
 		};
 		4DFA0DBF236A7B0A0000CA7A /* Deck */ = {
@@ -1353,6 +1367,7 @@
 				4D32A5322368FB710072AA70 /* Image.swift in Sources */,
 				4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */,
 				4DBF49E72365947800F942A8 /* GoogleSignInButtonModel.swift in Sources */,
+				4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */,
 				4DD5FE882387357F00E70251 /* MarketViewSortPopUp.swift in Sources */,
 				4D9AAEC023852F5E00C85EC2 /* UserLevelSlider.swift in Sources */,
 				4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */,
@@ -1415,6 +1430,7 @@
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */,
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,
+				4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */,
 				4D35BC442385F20A00A440CF /* MarketViewModel.swift in Sources */,
 				4D3B949C2372A06F002F441E /* SideBarSections.swift in Sources */,
 				4DD8D775235F06C6009D1261 /* InitialViewPaginatedFeatures.swift in Sources */,
