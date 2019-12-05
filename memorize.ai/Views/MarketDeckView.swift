@@ -31,14 +31,17 @@ struct MarketDeckView: View {
 						}
 						MarketDeckViewInfo()
 							.padding(.top, 24)
-						MarketDeckViewSimilarDecks()
-							.padding(.top, 24)
+						if !self.deck.similarDecks.isEmpty {
+							MarketDeckViewSimilarDecks()
+								.padding(.top, 24)
+						}
 					}
 				}
 			}
 		}
 		.onAppear {
 			self.deck.loadSections()
+			self.deck.loadSimilarDecks()
 		}
 	}
 }
