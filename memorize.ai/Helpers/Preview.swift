@@ -92,8 +92,8 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		numberOfDownloads: 196400,
 		numberOfCards: 19640,
 		creatorId: "0",
-		dateCreated: .now,
-		dateLastUpdated: .now,
+		dateCreated: Date().addingTimeInterval(-5000),
+		dateLastUpdated: Date().addingTimeInterval(-1000),
 		userData: .init(
 			dateAdded: .now,
 			isFavorite: false,

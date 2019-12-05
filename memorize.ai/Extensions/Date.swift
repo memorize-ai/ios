@@ -19,4 +19,8 @@ extension Date {
 				? "in \(Self.distanceFormatter.string(from: self, to: otherDate) ?? "(error)")"
 				: "\(Self.distanceFormatter.string(from: otherDate, to: self) ?? "(error)") ago"
 	}
+	
+	var formatted: String {
+		description // TODO: Add custom formatting
+	}
 }

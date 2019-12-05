@@ -3,8 +3,19 @@ import SwiftUI
 struct MarketDeckViewInfo: View {
 	@EnvironmentObject var deck: Deck
 	
+	func row(key: String, value: String) -> some View {
+		HStack(alignment: .top, spacing: 4) {
+			Text(key)
+				.foregroundColor(.lightGrayText)
+				.lineLimit(1)
+			Spacer()
+			Text(value)
+		}
+		.font(.muli(.bold, size: 18))
+	}
+	
 	var body: some View {
-		VStack {
+		VStack(spacing: 8) {
 			MarketDeckViewSectionTitle("Info")
 			CustomRectangle(
 				background: Color.white,
@@ -13,9 +24,28 @@ struct MarketDeckViewInfo: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				EmptyView() // TODO: Add content
+				VStack(spacing: 16) {
+					row(
+						key: "Active users",
+						value: deck.numberOfCurrentUsers.formatted
+					)
+					row(
+						key: "All-time users",
+						value: deck.numberOfAllTimeUsers.formatted
+					)
+					row(
+						key: "Last updated",
+						value: Date().compare(against: deck.dateLastUpdated)
+					)
+					row(
+						key: "Date created",
+						value: deck.dateCreated.formatted
+					)
+				}
+				.padding(12)
 			}
 		}
+		.padding(.horizontal, 23)
 	}
 }
 
