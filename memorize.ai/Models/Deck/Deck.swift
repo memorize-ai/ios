@@ -407,18 +407,18 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadSimilarDecks() -> PMKFinalizer {
 		similarDecksLoadingState.startLoading()
 		return when(
-			fulfilled: name.split(separator: " ").compactMap { word in
-				let trimmed = word.trimmingCharacters(in: .whitespaces)
-				return trimmed.isEmpty
-					? nil
-					: Self.search(query: trimmed)
-			} + [
+			fulfilled: [
 				Self.search(query: name),
 				Self.search(
 					filterForTopics: topics,
 					sortBy: .top
 				)
-			]
+			] + name.split(separator: " ").compactMap { word in
+				let trimmed = word.trimmingCharacters(in: .whitespaces)
+				return trimmed.isEmpty
+					? nil
+					: Self.search(query: trimmed)
+			}
 		).done { result in
 			self.similarDecks = Set(result.reduce([], +)).filter { $0 != self }
 			self.similarDecksLoadingState.succeed()
