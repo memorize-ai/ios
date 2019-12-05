@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "TextView",
+        "repositoryURL": "https://github.com/kenmueller/TextView.git",
+        "state": {
+          "branch": "master",
+          "revision": "d1dc2006fa5a1ddbe458ab730a39569260c4ffc1",
+          "version": null
+        }
+      },
+      {
         "package": "WebView",
         "repositoryURL": "https://github.com/kenmueller/WebView",
         "state": {

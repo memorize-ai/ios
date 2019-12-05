@@ -198,6 +198,7 @@
 		4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */; };
 		4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */; };
 		4DF45953239996D800A78ADF /* PublishDeckViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */; };
+		4DF4595623999E6500A78ADF /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = 4DF4595523999E6500A78ADF /* TextView */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
@@ -430,6 +431,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DF4595623999E6500A78ADF /* TextView in Frameworks */,
 				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
 				4DD5FE9C2389DE8500E70251 /* Alamofire in Frameworks */,
 				4DB9FF4F2396D7D300B8DD38 /* HTML in Frameworks */,
@@ -1052,6 +1054,7 @@
 				4DD5FE9B2389DE8500E70251 /* Alamofire */,
 				4DB9FF4B2396D62A00B8DD38 /* WebView */,
 				4DB9FF4E2396D7D300B8DD38 /* HTML */,
+				4DF4595523999E6500A78ADF /* TextView */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -1135,6 +1138,7 @@
 				4DD5FE9A2389DE8500E70251 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */,
 				4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */,
+				4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -1848,6 +1852,14 @@
 				kind = branch;
 			};
 		};
+		4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/TextView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1880,6 +1892,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4DDFF1BC2374F8E900999FD5 /* XCRemoteSwiftPackageReference "LoadingState" */;
 			productName = LoadingState;
+		};
+		4DF4595523999E6500A78ADF /* TextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */;
+			productName = TextView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
