@@ -19,6 +19,7 @@ struct MarketDeckView: View {
 						MarketDeckViewInfoPanels()
 						MarketDeckViewCardPreviews()
 						MarketDeckViewDescription()
+							.padding(.top, 6)
 						MarketDeckViewTopicList()
 						MarketDeckViewRatings(
 							currentUser: self.currentStore.user

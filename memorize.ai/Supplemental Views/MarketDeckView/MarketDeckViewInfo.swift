@@ -24,7 +24,7 @@ struct MarketDeckViewInfo: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				VStack(spacing: 16) {
+				VStack(spacing: 22) {
 					row(
 						key: "Active users",
 						value: deck.numberOfCurrentUsers.formatted
