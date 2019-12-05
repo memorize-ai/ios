@@ -34,6 +34,10 @@ struct MarketDeckViewInfo: View {
 						value: deck.numberOfAllTimeUsers.formatted
 					)
 					row(
+						key: "Favorites",
+						value: deck.numberOfFavorites.formatted
+					)
+					row(
 						key: "Last updated",
 						value: Date().compare(against: deck.dateLastUpdated)
 					)

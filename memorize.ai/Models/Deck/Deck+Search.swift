@@ -45,6 +45,7 @@ extension Deck {
 			numberOfCards: json["card_count"]?["raw"] as? Int ?? 0,
 			numberOfCurrentUsers: json["current_user_count"]?["raw"] as? Int ?? 0,
 			numberOfAllTimeUsers: json["all_time_user_count"]?["raw"] as? Int ?? 0,
+			numberOfFavorites: json["favorite_count"]?["raw"] as? Int ?? 0,
 			creatorId: json["creator_id"]?["raw"] as? String ?? "0",
 			dateCreated: (json["created"]?["raw"] as? String)?.toDate() ?? .now,
 			dateLastUpdated: (json["updated"]?["raw"] as? String)?.toDate() ?? .now,

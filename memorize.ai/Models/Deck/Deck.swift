@@ -34,6 +34,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfCards: Int
 	@Published var numberOfCurrentUsers: Int
 	@Published var numberOfAllTimeUsers: Int
+	@Published var numberOfFavorites: Int
 	@Published var dateLastUpdated: Date
 	
 	@Published var userData: UserData?
@@ -73,6 +74,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfCards: Int,
 		numberOfCurrentUsers: Int,
 		numberOfAllTimeUsers: Int,
+		numberOfFavorites: Int,
 		creatorId: String,
 		dateCreated: Date,
 		dateLastUpdated: Date,
@@ -103,6 +105,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfCards = numberOfCards
 		self.numberOfCurrentUsers = numberOfCurrentUsers
 		self.numberOfAllTimeUsers = numberOfAllTimeUsers
+		self.numberOfFavorites = numberOfFavorites
 		self.creatorId = creatorId
 		self.dateCreated = dateCreated
 		self.dateLastUpdated = dateLastUpdated
@@ -135,6 +138,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfCards: snapshot.get("cardCount") as? Int ?? 0,
 			numberOfCurrentUsers: snapshot.get("currentUserCount") as? Int ?? 0,
 			numberOfAllTimeUsers: snapshot.get("allTimeUserCount") as? Int ?? 0,
+			numberOfFavorites: snapshot.get("favoriteCount") as? Int ?? 0,
 			creatorId: snapshot.get("creator") as? String ?? "0",
 			dateCreated: snapshot.getDate("created") ?? .now,
 			dateLastUpdated: snapshot.getDate("updated") ?? .now,
@@ -164,6 +168,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfCards: Int = 0,
 		numberOfCurrentUsers: Int = 0,
 		numberOfAllTimeUsers: Int = 0,
+		numberOfFavorites: Int = 0,
 		creatorId: String = "0",
 		dateCreated: Date = .now,
 		dateLastUpdated: Date = .now,
@@ -195,6 +200,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			numberOfCards: numberOfCards,
 			numberOfCurrentUsers: numberOfCurrentUsers,
 			numberOfAllTimeUsers: numberOfAllTimeUsers,
+			numberOfFavorites: numberOfFavorites,
 			creatorId: creatorId,
 			dateCreated: dateCreated,
 			dateLastUpdated: dateLastUpdated,
