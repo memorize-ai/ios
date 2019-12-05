@@ -469,11 +469,17 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfViews = snapshot.get("viewCount") as? Int ?? numberOfViews
 		numberOfUniqueViews = snapshot.get("uniqueViewCount") as? Int ?? numberOfUniqueViews
 		numberOfRatings = snapshot.get("ratingCount") as? Int ?? numberOfRatings
+		numberOf1StarRatings = snapshot.get("1StarRatingCount") as? Int ?? numberOf1StarRatings
+		numberOf2StarRatings = snapshot.get("2StarRatingCount") as? Int ?? numberOf2StarRatings
+		numberOf3StarRatings = snapshot.get("3StarRatingCount") as? Int ?? numberOf3StarRatings
+		numberOf4StarRatings = snapshot.get("4StarRatingCount") as? Int ?? numberOf4StarRatings
+		numberOf5StarRatings = snapshot.get("5StarRatingCount") as? Int ?? numberOf5StarRatings
 		averageRating = snapshot.get("averageRating") as? Double ?? averageRating
 		numberOfDownloads = snapshot.get("downloadCount") as? Int ?? numberOfDownloads
 		numberOfCards = snapshot.get("cardCount") as? Int ?? numberOfCards
 		numberOfCurrentUsers = snapshot.get("currentUserCount") as? Int ?? numberOfCurrentUsers
 		numberOfAllTimeUsers = snapshot.get("allTimeUserCount") as? Int ?? numberOfAllTimeUsers
+		numberOfFavorites = snapshot.get("favoriteCount") as? Int ?? numberOfFavorites
 		dateLastUpdated = snapshot.getDate("updated") ?? dateLastUpdated
 		return self
 	}
