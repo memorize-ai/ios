@@ -38,6 +38,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var sections: [Section]
 	@Published var creator: User?
 	@Published var previewCards: [Card]
+	@Published var similarDecks: [Deck]
 	
 	@Published var imageLoadingState = LoadingState()
 	@Published var userDataLoadingState = LoadingState()
@@ -47,6 +48,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var previewCardsLoadingState = LoadingState()
 	@Published var topicsLoadingState = LoadingState()
 	@Published var ratingLoadingState = LoadingState()
+	@Published var similarDecksLoadingState = LoadingState()
 	
 	init(
 		id: String,
@@ -75,7 +77,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		userData: UserData? = nil,
 		sections: [Section] = [],
 		creator: User? = nil,
-		previewCards: [Card] = []
+		previewCards: [Card] = [],
+		similarDecks: [Deck] = []
 	) {
 		self.id = id
 		self.topics = topics
@@ -104,6 +107,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.sections = sections
 		self.creator = creator
 		self.previewCards = previewCards
+		self.similarDecks = similarDecks
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -161,7 +165,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		userData: UserData? = nil,
 		sections: [Section] = [],
 		creator: User? = nil,
-		previewCards: [Card] = []
+		previewCards: [Card] = [],
+		similarDecks: [Deck] = []
 	) -> Self {
 		.init(
 			id: id,
@@ -190,7 +195,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			userData: userData,
 			sections: sections,
 			creator: creator,
-			previewCards: previewCards
+			previewCards: previewCards,
+			similarDecks: similarDecks
 		)
 	}
 	#endif
@@ -365,6 +371,30 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func removeRating(forUser user: User) -> PMKFinalizer {
 		setRating(FieldValue.delete(), forUser: user)
+	}
+	
+	@discardableResult
+	func loadSimilarDecks() -> PMKFinalizer {
+		similarDecksLoadingState.startLoading()
+		return when(
+			fulfilled: name.split(separator: " ").compactMap { word in
+				let trimmed = word.trimmingCharacters(in: .whitespaces)
+				return trimmed.isEmpty
+					? nil
+					: Self.search(query: trimmed)
+			} + [
+				Self.search(query: name),
+				Self.search(
+					filterForTopics: topics,
+					sortBy: .top
+				)
+			]
+		).done { result in
+			self.similarDecks = Set(result.reduce([], +)).filter { $0 != self }
+			self.similarDecksLoadingState.succeed()
+		}.catch { error in
+			self.similarDecksLoadingState.fail(error: error)
+		}
 	}
 	
 	@discardableResult
