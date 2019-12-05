@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MarketDeckView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -21,7 +23,9 @@ struct MarketDeckView: View {
 							.foregroundColor(.gray)
 							.padding(.horizontal, 23)
 							.frame(height: 2)
-						MarketDeckViewRatings()
+						MarketDeckViewRatings(
+							currentUser: self.currentStore.user
+						)
 					}
 				}
 			}

@@ -3,6 +3,16 @@ import SwiftUI
 struct MarketDeckViewRatings: View {
 	@EnvironmentObject var deck: Deck
 	
+	@ObservedObject var currentUser: User
+	
+	var hasDeck: Bool {
+		currentUser.hasDeck(deck)
+	}
+	
+	var rating: Int? {
+		deck.userData?.rating
+	}
+	
 	func starRow(stars: Int, count: Int) -> some View {
 		HStack {
 			Text(String(stars))
@@ -78,41 +88,50 @@ struct MarketDeckViewRatings: View {
 							starRow(stars: 1, count: deck.numberOf1StarRatings)
 						}
 					}
-					Text("Tap to rate")
-						.font(.muli(.semiBold, size: 18))
-						.foregroundColor(.lightGrayText)
-						.align(to: .leading)
-					HStack {
-						tappableStar(isSelected: false) {
-							// TODO: Handle click
+					if hasDeck {
+						Text("Tap to rate")
+							.font(.muli(.semiBold, size: 18))
+							.foregroundColor(.lightGrayText)
+							.align(to: .leading)
+						HStack {
+							tappableStar(isSelected: false) {
+								// TODO: Handle click
+							}
+							tappableStar(isSelected: false) {
+								// TODO: Handle click
+							}
+							tappableStar(isSelected: false) {
+								// TODO: Handle click
+							}
+							tappableStar(isSelected: false) {
+								// TODO: Handle click
+							}
+							tappableStar(isSelected: false) {
+								// TODO: Handle click
+							}
+							Spacer()
 						}
-						tappableStar(isSelected: false) {
-							// TODO: Handle click
-						}
-						tappableStar(isSelected: false) {
-							// TODO: Handle click
-						}
-						tappableStar(isSelected: false) {
-							// TODO: Handle click
-						}
-						tappableStar(isSelected: false) {
-							// TODO: Handle click
-						}
-						Spacer()
+						.padding(.top, -12)
+						.opacity(
+							deck.userDataLoadingState.isLoading ? 0.5 : 1
+						)
+						.disabled(deck.userDataLoadingState.isLoading)
 					}
-					.padding(.top, -12)
 				}
 				.padding()
 			}
 		}
 		.padding(.horizontal, 23)
+		.onAppear {
+			self.deck.loadUserData(user: self.currentUser)
+		}
 	}
 }
 
 #if DEBUG
 struct MarketDeckViewRatings_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketDeckViewRatings()
+		MarketDeckViewRatings(currentUser: PREVIEW_CURRENT_STORE.user)
 			.environmentObject(
 				PREVIEW_CURRENT_STORE.user.decks.first!
 			)

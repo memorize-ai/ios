@@ -400,6 +400,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
 			userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
 			userData?.unlockedSections = snapshot.get("unlockedSections") as? [String] ?? []
+			let newRating = snapshot.get("rating") as? Int
+			userData?.rating = newRating == 0 ? nil : newRating
 		}
 		return self
 	}
