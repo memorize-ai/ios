@@ -37,8 +37,8 @@ struct MarketDeckViewSections: View {
 						}) {
 							Text(
 								isExpanded
-									? "SHOW LESS"
-									: "SHOW ALL \(numberOfSections) SECTIONS"
+									? "Show less"
+									: "Show all \(numberOfSections) sections"
 							)
 							.font(.muli(.bold, size: 18))
 							.foregroundColor(.extraPurple)
