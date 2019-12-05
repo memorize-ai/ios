@@ -1,20 +1,39 @@
 import SwiftUI
 
 struct MarketDeckViewSimilarDecks: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	@EnvironmentObject var deck: Deck
+	
+	@State var selectedDeck: Deck!
+	@State var isDeckSelected = false
+	
 	var body: some View {
 		VStack(spacing: 16) {
 			MarketDeckViewSectionTitle("Similar decks")
-			CustomRectangle(
-				background: Color.white,
-				borderColor: .lightGray,
-				borderWidth: 1.5,
-				shadowRadius: 5,
-				shadowYOffset: 5
-			) {
-				EmptyView() // TODO: Replace with content
+			ScrollView(.horizontal, showsIndicators: false) {
+				HStack {
+					ForEach(deck.similarDecks) { similarDeck in
+						DeckCellWithGetButton(
+							deck: similarDeck,
+							user: self.currentStore.user,
+							width: 144
+						)
+						.onTapGesture {
+							self.selectedDeck = similarDeck
+							self.isDeckSelected = true
+						}
+					}
+				}
+				.padding(.horizontal, 23)
+			}
+			if isDeckSelected {
+				NavigateTo(
+					MarketDeckView()
+						.environmentObject(selectedDeck),
+					when: $isDeckSelected
+				)
 			}
 		}
-		.padding(.horizontal, 23)
 	}
 }
 
@@ -22,6 +41,11 @@ struct MarketDeckViewSimilarDecks: View {
 struct MarketDeckViewSimilarDecks_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketDeckViewSimilarDecks()
+			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(
+				PREVIEW_CURRENT_STORE.user.decks.first!
+			)
+		
 	}
 }
 #endif
