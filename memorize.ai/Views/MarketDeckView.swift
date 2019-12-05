@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MarketDeckView: View {
 	@EnvironmentObject var currentStore: CurrentStore
+	@EnvironmentObject var deck: Deck
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -23,9 +24,15 @@ struct MarketDeckView: View {
 							currentUser: self.currentStore.user
 						)
 						.padding(.top, 12)
+						if !self.deck.sections.isEmpty {
+							MarketDeckViewSections()
+						}
 					}
 				}
 			}
+		}
+		.onAppear {
+			self.deck.loadSections()
 		}
 	}
 }
