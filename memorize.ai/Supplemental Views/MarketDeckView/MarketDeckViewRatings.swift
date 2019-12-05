@@ -27,20 +27,22 @@ struct MarketDeckViewRatings: View {
 					Capsule()
 						.opacity(0.3)
 					Capsule()
-//						.frame(
-//							width: geometry.size.width *
-//								.init(count) / .init(self.deck.numberOfRatings)
-//						)
+						.frame(
+							width: geometry.size.width *
+								.init(count) / .init(self.deck.numberOfRatings)
+						)
 				}
 				.foregroundColor(.darkBlue)
 			}
 			.frame(maxWidth: 122)
 			.frame(height: 4)
-			Text(count.formatted)
-				.font(.muli(.semiBold, size: 16))
-				.foregroundColor(.darkGray)
-				.frame(minWidth: 45, alignment: .leading)
 		}
+	}
+	
+	func starCountLabel(_ count: Int) -> some View {
+		Text(count.formatted)
+			.font(.muli(.semiBold, size: 16))
+			.foregroundColor(.darkGray)
 	}
 	
 	func tappableStar(stars: Int) -> some View {
@@ -87,12 +89,19 @@ struct MarketDeckViewRatings: View {
 							.font(.muli(.bold, size: 13.5))
 						}
 						Spacer()
-						VStack(alignment: .leading, spacing: 4) {
+						VStack(spacing: 4) {
 							starRow(stars: 5, count: deck.numberOf5StarRatings)
 							starRow(stars: 4, count: deck.numberOf4StarRatings)
 							starRow(stars: 3, count: deck.numberOf3StarRatings)
 							starRow(stars: 2, count: deck.numberOf2StarRatings)
 							starRow(stars: 1, count: deck.numberOf1StarRatings)
+						}
+						VStack(alignment: .leading, spacing: 4) {
+							starCountLabel(deck.numberOf5StarRatings)
+							starCountLabel(deck.numberOf4StarRatings)
+							starCountLabel(deck.numberOf3StarRatings)
+							starCountLabel(deck.numberOf2StarRatings)
+							starCountLabel(deck.numberOf1StarRatings)
 						}
 					}
 					if hasDeck {
