@@ -46,6 +46,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var creatorLoadingState = LoadingState()
 	@Published var previewCardsLoadingState = LoadingState()
 	@Published var topicsLoadingState = LoadingState()
+	@Published var ratingLoadingState = LoadingState()
 	
 	init(
 		id: String,
@@ -339,6 +340,31 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		topics.map { topicId in
 			allTopics.first { $0.id == topicId }
 		}
+	}
+	
+	@discardableResult
+	private func setRating(_ rating: Any, forUser user: User) -> PMKFinalizer {
+		ratingLoadingState.startLoading()
+		return user.documentReference
+			.collection("decks")
+			.document(id)
+			.updateData(["rating": rating])
+			.done {
+				self.ratingLoadingState.succeed()
+			}
+			.catch { error in
+				self.ratingLoadingState.fail(error: error)
+			}
+	}
+	
+	@discardableResult
+	func addRating(_ rating: Int, forUser user: User) -> PMKFinalizer {
+		setRating(rating, forUser: user)
+	}
+	
+	@discardableResult
+	func removeRating(forUser user: User) -> PMKFinalizer {
+		setRating(FieldValue.delete(), forUser: user)
 	}
 	
 	@discardableResult

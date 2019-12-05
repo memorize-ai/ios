@@ -9,8 +9,8 @@ struct MarketDeckViewRatings: View {
 		currentUser.hasDeck(deck)
 	}
 	
-	var rating: Int? {
-		deck.userData?.rating
+	var rating: Int {
+		deck.userData?.rating ?? 0
 	}
 	
 	func starRow(stars: Int, count: Int) -> some View {
@@ -43,12 +43,13 @@ struct MarketDeckViewRatings: View {
 		}
 	}
 	
-	func tappableStar(
-		isSelected: Bool,
-		action: @escaping () -> Void
-	) -> some View {
-		Button(action: action) {
-			DeckStar(fill: *isSelected, dimension: 40)
+	func tappableStar(stars: Int) -> some View {
+		Button(action: {
+			_ = self.rating == stars
+				? self.deck.removeRating(forUser: self.currentUser)
+				: self.deck.addRating(stars, forUser: self.currentUser)
+		}) {
+			DeckStar(fill: *(rating == stars), dimension: 40)
 		}
 	}
 	
@@ -94,21 +95,11 @@ struct MarketDeckViewRatings: View {
 							.foregroundColor(.lightGrayText)
 							.align(to: .leading)
 						HStack {
-							tappableStar(isSelected: false) {
-								// TODO: Handle click
-							}
-							tappableStar(isSelected: false) {
-								// TODO: Handle click
-							}
-							tappableStar(isSelected: false) {
-								// TODO: Handle click
-							}
-							tappableStar(isSelected: false) {
-								// TODO: Handle click
-							}
-							tappableStar(isSelected: false) {
-								// TODO: Handle click
-							}
+							tappableStar(stars: 1)
+							tappableStar(stars: 2)
+							tappableStar(stars: 3)
+							tappableStar(stars: 4)
+							tappableStar(stars: 5)
 							Spacer()
 						}
 						.padding(.top, -12)
