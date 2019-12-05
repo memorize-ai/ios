@@ -48,6 +48,10 @@ struct PublishDeckViewContentBox: View {
 					placeholder: "Subtitle (eg. The best way to study for the SAT)",
 					capitalization: .sentences
 				)
+				MultilineTextField(
+					"Description",
+					text: $model.description
+				)
 			}
 			.padding()
 		}

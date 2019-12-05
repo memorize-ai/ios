@@ -199,6 +199,7 @@
 		4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */; };
 		4DF45953239996D800A78ADF /* PublishDeckViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */; };
 		4DF4595623999E6500A78ADF /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = 4DF4595523999E6500A78ADF /* TextView */; };
+		4DF459582399A44A00A78ADF /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF459572399A44A00A78ADF /* MultilineTextField.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
@@ -415,6 +416,7 @@
 		4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewModel.swift; sourceTree = "<group>"; };
 		4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewTopControls.swift; sourceTree = "<group>"; };
 		4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewContentBox.swift; sourceTree = "<group>"; };
+		4DF459572399A44A00A78ADF /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
 		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 				4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */,
 				4D59FA8A237F2010007CAA74 /* FloatingReviewButton.swift */,
 				4DD5FEA3238B249E00E70251 /* VerticalTripleDots.swift */,
+				4DF459572399A44A00A78ADF /* MultilineTextField.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */,
+				4DF459582399A44A00A78ADF /* MultilineTextField.swift in Sources */,
 				4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */,
 				4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */,
 				4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */,
