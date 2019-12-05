@@ -39,7 +39,7 @@ struct MarketDeckViewInfo: View {
 					)
 					row(
 						key: "Date created",
-						value: deck.dateCreated.formatted
+						value: deck.dateCreated.formattedCompact
 					)
 				}
 				.padding(12)

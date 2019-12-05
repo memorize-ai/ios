@@ -20,7 +20,17 @@ extension Date {
 				: "\(Self.distanceFormatter.string(from: otherDate, to: self) ?? "(error)") ago"
 	}
 	
+	func format(_ format: String) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = format
+		return dateFormatter.string(from: self)
+	}
+	
 	var formatted: String {
-		description // TODO: Add custom formatting
+		format("MMM d, yyyy @ h:mm a")
+	}
+	
+	var formattedCompact: String {
+		format("MMM d, yyyy")
 	}
 }
