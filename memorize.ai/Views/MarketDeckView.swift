@@ -31,6 +31,8 @@ struct MarketDeckView: View {
 						}
 						MarketDeckViewInfo()
 							.padding(.top, 24)
+						MarketDeckViewSimilarDecks()
+							.padding(.top, 24)
 					}
 				}
 			}
