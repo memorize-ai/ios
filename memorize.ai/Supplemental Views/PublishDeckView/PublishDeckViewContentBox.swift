@@ -39,9 +39,14 @@ struct PublishDeckViewContentBox: View {
 				}
 				CustomTextField(
 					$model.name,
-					placeholder: "Deck name (eg. SAT Math Prep)",
+					placeholder: "Name (eg. SAT Math Prep)",
 					contentType: .name,
 					capitalization: .words
+				)
+				CustomTextField(
+					$model.subtitle,
+					placeholder: "Subtitle (eg. The best way to study for the SAT)",
+					capitalization: .sentences
 				)
 			}
 			.padding()
