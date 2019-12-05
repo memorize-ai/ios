@@ -22,18 +22,17 @@ struct MarketDeckViewRatings: View {
 				.resizable()
 				.aspectRatio(contentMode: .fit)
 				.frame(width: 16, height: 16)
-			GeometryReader { geometry in
-				ZStack(alignment: .leading) {
-					Capsule()
-						.opacity(0.3)
-					Capsule()
-						.frame(
-							width: geometry.size.width *
-								.init(count) / .init(self.deck.numberOfRatings)
-						)
-				}
-				.foregroundColor(.darkBlue)
+			ZStack {
+				Capsule()
+					.opacity(0.3)
+				Capsule()
+					.scaleEffect(
+						x: .init(count) &/ .init(self.deck.numberOfRatings),
+						y: 1,
+						anchor: .leading
+					)
 			}
+			.foregroundColor(.darkBlue)
 			.frame(maxWidth: 122)
 			.frame(height: 4)
 		}

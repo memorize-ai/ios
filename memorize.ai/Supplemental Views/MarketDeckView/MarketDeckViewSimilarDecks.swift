@@ -10,6 +10,7 @@ struct MarketDeckViewSimilarDecks: View {
 	var body: some View {
 		VStack(spacing: 16) {
 			MarketDeckViewSectionTitle("Similar decks")
+				.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack {
 					ForEach(deck.similarDecks) { similarDeck in
