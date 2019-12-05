@@ -40,8 +40,10 @@ struct MarketDeckView: View {
 			}
 		}
 		.onAppear {
-			self.deck.loadSections()
-			self.deck.loadSimilarDecks()
+			self.deck
+				.addObserver()
+				.loadSections()
+				.loadSimilarDecks()
 		}
 	}
 }
