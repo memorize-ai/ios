@@ -106,6 +106,7 @@
 		4D8B2EA72398394B00EF040B /* MarketDeckViewSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EA62398394B00EF040B /* MarketDeckViewSectionTitle.swift */; };
 		4D8B2EAB2398B0E700EF040B /* MarketDeckViewSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EAA2398B0E700EF040B /* MarketDeckViewSections.swift */; };
 		4D8B2EAD2398BC0000EF040B /* MarketDeckViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EAC2398BC0000EF040B /* MarketDeckViewSectionRow.swift */; };
+		4D8B2EAF2398BDF200EF040B /* MarketDeckViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EAE2398BDF200EF040B /* MarketDeckViewInfo.swift */; };
 		4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */; };
 		4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEB823851F8100C85EC2 /* MarketView.swift */; };
 		4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */; };
@@ -314,6 +315,7 @@
 		4D8B2EA62398394B00EF040B /* MarketDeckViewSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewSectionTitle.swift; sourceTree = "<group>"; };
 		4D8B2EAA2398B0E700EF040B /* MarketDeckViewSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewSections.swift; sourceTree = "<group>"; };
 		4D8B2EAC2398BC0000EF040B /* MarketDeckViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewSectionRow.swift; sourceTree = "<group>"; };
+		4D8B2EAE2398BDF200EF040B /* MarketDeckViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfo.swift; sourceTree = "<group>"; };
 		4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewSections.swift; sourceTree = "<group>"; };
 		4D9AAEB823851F8100C85EC2 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = SOURCE_ROOT; };
 		4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 				4D8B2EA4239838BB00EF040B /* MarketDeckViewRatings.swift */,
 				4D8B2EAA2398B0E700EF040B /* MarketDeckViewSections.swift */,
 				4D8B2EAC2398BC0000EF040B /* MarketDeckViewSectionRow.swift */,
+				4D8B2EAE2398BDF200EF040B /* MarketDeckViewInfo.swift */,
 			);
 			path = MarketDeckView;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 				4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */,
 				4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */,
 				4D184D93236975C000A84998 /* Grid.swift in Sources */,
+				4D8B2EAF2398BDF200EF040B /* MarketDeckViewInfo.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
 				4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */,
 				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,

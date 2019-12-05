@@ -28,6 +28,8 @@ struct MarketDeckView: View {
 							MarketDeckViewSections()
 								.padding(.top, 12)
 						}
+						MarketDeckViewInfo()
+							.padding(.top, 12)
 					}
 				}
 			}
