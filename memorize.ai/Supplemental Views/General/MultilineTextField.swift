@@ -86,38 +86,43 @@ struct MultilineTextField: View {
 	@Binding var text: String
 	
 	let placeholder: String
-	let onCommit: (() -> Void)?
+	let font: UIFont
+	let onDone: (() -> Void)?
 	
 	@State private var dynamicHeight: CGFloat = 100
-	@State private var showingPlaceholder = false
+	@State private var isShowingPlaceholder = false
 	
 	private var internalText: Binding<String> {
 		.init(get: { self.text }) {
 			self.text = $0
-			self.showingPlaceholder = $0.isEmpty
+			self.isShowingPlaceholder = $0.isEmpty
 		}
 	}
-
-init (_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil) {
-self.placeholder = placeholder
-self.onCommit = onCommit
-self._text = text
-self._showingPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
-}
-
-var body: some View {
-UITextViewWrapper(text: self.internalText, calculatedHeight: $dynamicHeight, onDone: onCommit)
-.frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
-.overlay(placeholderView, alignment: .topLeading)
-}
-
-var placeholderView: some View {
-Group {
-if showingPlaceholder {
-Text(placeholder).foregroundColor(.gray)
-.padding(.leading, 4)
-.padding(.top, 8)
-}
-}
-}
+	
+	init(
+		text: Binding<String>,
+		placeholder: String = "",
+		font: UIFont = .preferredFont(forTextStyle: .body),
+		onDone: (() -> Void)? = nil
+	) {
+		_text = text
+		_isShowingPlaceholder = .init(initialValue: text.wrappedValue.isEmpty)
+		self.placeholder = placeholder
+		self.font = font
+		self.onDone = onDone
+	}
+	
+	var placeholderView: some View {
+		Text(placeholder)
+			.foregroundColor(.gray)
+			.padding(.leading, 4)
+			.padding(.top, 8)
+			.opacity(*isShowingPlaceholder)
+	}
+		
+	var body: some View {
+		Wrapper(text: internalText, calculatedHeight: $dynamicHeight, font: font, onDone: onDone)
+			.frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
+			.overlay(placeholderView, alignment: .topLeading)
+	}
 }
