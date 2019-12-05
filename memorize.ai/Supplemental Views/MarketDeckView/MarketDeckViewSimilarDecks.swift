@@ -2,7 +2,19 @@ import SwiftUI
 
 struct MarketDeckViewSimilarDecks: View {
 	var body: some View {
-		Text("MarketDeckViewSimilarDecks")
+		VStack(spacing: 16) {
+			MarketDeckViewSectionTitle("Similar decks")
+			CustomRectangle(
+				background: Color.white,
+				borderColor: .lightGray,
+				borderWidth: 1.5,
+				shadowRadius: 5,
+				shadowYOffset: 5
+			) {
+				EmptyView() // TODO: Replace with content
+			}
+		}
+		.padding(.horizontal, 23)
 	}
 }
 
