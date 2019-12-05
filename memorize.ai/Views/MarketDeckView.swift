@@ -26,6 +26,7 @@ struct MarketDeckView: View {
 						.padding(.top, 12)
 						if !self.deck.sections.isEmpty {
 							MarketDeckViewSections()
+								.padding(.top, 12)
 						}
 					}
 				}
