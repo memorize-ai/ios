@@ -39,8 +39,10 @@ struct MultilineTextField: View {
 		
 		@Binding var text: String
 		@Binding var calculatedHeight: CGFloat
+		@Binding var shouldSelect: Bool
 		
 		let font: UIFont
+		let textColor: UIColor
 		let onDone: (() -> Void)?
 		
 		static func recalculateHeight(forView view: UIView, result: Binding<CGFloat>) {
@@ -60,23 +62,26 @@ struct MultilineTextField: View {
 		}
 		
 		func makeUIView(context: Context) -> UITextView {
-			let textField = UITextView()
-			textField.delegate = context.coordinator
-			textField.font = font
-			textField.isScrollEnabled = false
+			let textView = UITextView()
+			textView.delegate = context.coordinator
+			textView.font = font
+			textView.textColor = textColor
+			textView.isScrollEnabled = false
+			textView.backgroundColor = nil
 			if onDone != nil {
-				textField.returnKeyType = .done
+				textView.returnKeyType = .done
 			}
-			textField.setContentCompressionResistancePriority(
+			textView.setContentCompressionResistancePriority(
 				.defaultLow,
 				for: .horizontal
 			)
-			return textField
+			return textView
 		}
 		
 		func updateUIView(_ textView: UITextView, context: Context) {
 			textView.text = text
-			if !(textView.window == nil || textView.isFirstResponder) {
+			if shouldSelect {
+				shouldSelect = false
 				textView.becomeFirstResponder()
 			}
 			Self.recalculateHeight(forView: textView, result: $calculatedHeight)
@@ -87,10 +92,14 @@ struct MultilineTextField: View {
 	
 	let placeholder: String
 	let font: UIFont
+	let textColor: UIColor
+	let placeholderColor: Color
+	let backgroundColor: Color
 	let onDone: (() -> Void)?
 	
 	@State private var dynamicHeight: CGFloat = 100
 	@State private var isShowingPlaceholder = false
+	@State private var shouldSelect = false
 	
 	private var internalText: Binding<String> {
 		.init(get: { self.text }) {
@@ -103,26 +112,45 @@ struct MultilineTextField: View {
 		text: Binding<String>,
 		placeholder: String = "",
 		font: UIFont = .preferredFont(forTextStyle: .body),
+		textColor: UIColor = .gray,
+		placeholderColor: Color = .black,
+		backgroundColor: Color = .transparent,
 		onDone: (() -> Void)? = nil
 	) {
 		_text = text
 		_isShowingPlaceholder = .init(initialValue: text.wrappedValue.isEmpty)
 		self.placeholder = placeholder
 		self.font = font
+		self.textColor = textColor
+		self.placeholderColor = placeholderColor
+		self.backgroundColor = backgroundColor
 		self.onDone = onDone
 	}
 	
 	var placeholderView: some View {
 		Text(placeholder)
-			.foregroundColor(.gray)
+			.font(.muli(.regular, size: 14))
+			.foregroundColor(placeholderColor)
 			.padding(.leading, 4)
 			.padding(.top, 8)
 			.opacity(*isShowingPlaceholder)
+			.onTapGesture {
+				self.shouldSelect = true
+			}
 	}
 		
 	var body: some View {
-		Wrapper(text: internalText, calculatedHeight: $dynamicHeight, font: font, onDone: onDone)
-			.frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
-			.overlay(placeholderView, alignment: .topLeading)
+		Wrapper(
+			text: internalText,
+			calculatedHeight: $dynamicHeight,
+			shouldSelect: $shouldSelect,
+			font: font,
+			textColor: textColor,
+			onDone: onDone
+		)
+		.frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
+		.background(backgroundColor)
+		.cornerRadius(5)
+		.overlay(placeholderView, alignment: .topLeading)
 	}
 }

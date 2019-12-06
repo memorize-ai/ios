@@ -49,8 +49,15 @@ struct PublishDeckViewContentBox: View {
 					capitalization: .sentences
 				)
 				MultilineTextField(
-					"Description",
-					text: $model.description
+					text: $model.description,
+					placeholder: "Description (can be empty)",
+					font: UIFont(
+						name: MuliFont.regular.rawValue,
+						size: 14
+					) ?? .preferredFont(forTextStyle: .body),
+					textColor: #colorLiteral(red: 0.4666666667, green: 0.4666666667, blue: 0.4666666667, alpha: 1),
+					placeholderColor: Color.darkText.opacity(0.5),
+					backgroundColor: CustomTextField.defaultBackgroundColor
 				)
 			}
 			.padding()
