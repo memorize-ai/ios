@@ -28,6 +28,7 @@ struct PublishDeckView_Previews: PreviewProvider {
 	static var previews: some View {
 		PublishDeckView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(PublishDeckViewModel())
 	}
 }
 #endif
