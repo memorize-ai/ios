@@ -131,7 +131,7 @@ struct MultilineTextField: View {
 		Text(placeholder)
 			.font(.muli(.regular, size: 14))
 			.foregroundColor(placeholderColor)
-			.padding(.leading, 4)
+			.padding(.leading, 10)
 			.padding(.top, 8)
 			.opacity(*isShowingPlaceholder)
 			.onTapGesture {
@@ -149,6 +149,7 @@ struct MultilineTextField: View {
 			onDone: onDone
 		)
 		.frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
+		.padding(.leading, 6)
 		.background(backgroundColor)
 		.cornerRadius(5)
 		.overlay(placeholderView, alignment: .topLeading)
