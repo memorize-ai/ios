@@ -1,8 +1,6 @@
 import SwiftUI
 
-struct PublishDeckView: View {
-	@EnvironmentObject var model: PublishDeckViewModel
-	
+struct PublishDeckView: View { // FIXME: Doesn't update the view when model updates the first time this is opened
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
