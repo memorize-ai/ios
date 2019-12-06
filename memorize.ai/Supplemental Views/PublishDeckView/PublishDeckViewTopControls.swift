@@ -33,13 +33,22 @@ struct PublishDeckViewTopControls: View {
 					borderColor: .transparentLightGray,
 					borderWidth: 1.5
 				) {
-					Text(model.deck == nil ? "Create" : "Edit")
-						.font(.muli(.bold, size: 17))
-						.foregroundColor(Color.white.opacity(0.7))
-						.padding(.horizontal, 10)
-						.frame(height: 30)
+					Group {
+						if model.publishLoadingState.isLoading {
+							ActivityIndicator()
+								.padding(.horizontal, 25)
+						} else {
+							Text(model.deck == nil ? "Create" : "Edit")
+								.font(.muli(.bold, size: 17))
+								.foregroundColor(Color.white.opacity(0.7))
+								.padding(.horizontal, 10)
+						}
+					}
+					.frame(height: 30)
 				}
+				.opacity(model.isPublishButtonDisabled ? 0.5 : 1)
 			}
+			.disabled(model.isPublishButtonDisabled)
 		}
 	}
 }

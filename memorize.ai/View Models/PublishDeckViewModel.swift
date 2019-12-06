@@ -22,6 +22,10 @@ final class PublishDeckViewModel: ObservableObject {
 		description = deck?.description ?? ""
 	}
 	
+	var isPublishButtonDisabled: Bool {
+		name.isEmpty
+	}
+	
 	func isTopicSelected(_ topic: Topic) -> Bool {
 		topics.contains(topic.id)
 	}

@@ -81,7 +81,7 @@ struct PublishDeckViewContentBox: View {
 				)
 				MultilineTextField(
 					text: $model.description,
-					placeholder: "Description (can be empty)",
+					placeholder: "Description",
 					font: UIFont(
 						name: MuliFont.regular.rawValue,
 						size: 14
