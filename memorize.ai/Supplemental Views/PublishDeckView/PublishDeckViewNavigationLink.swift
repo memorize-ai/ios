@@ -13,8 +13,11 @@ struct PublishDeckViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: PublishDeckView(deck: deck)
+			destination: PublishDeckView()
 				.environmentObject(currentStore)
+				.environmentObject(
+					PublishDeckViewModel(deck: deck)
+				)
 				.removeNavigationBar()
 		) {
 			label

@@ -1,11 +1,7 @@
 import SwiftUI
 
 struct PublishDeckView: View {
-	@ObservedObject var model: PublishDeckViewModel
-		
-	init(deck: Deck? = nil) {
-		model = .init(deck: deck)
-	}
+	@EnvironmentObject var model: PublishDeckViewModel
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -16,11 +12,9 @@ struct PublishDeckView: View {
 				.edgesIgnoringSafeArea(.all)
 				VStack {
 					PublishDeckViewTopControls()
-						.environmentObject(self.model)
 						.padding(.horizontal, 23)
 					ScrollView {
 						PublishDeckViewContentBox()
-							.environmentObject(self.model)
 							.padding(.horizontal, 12)
 					}
 				}
