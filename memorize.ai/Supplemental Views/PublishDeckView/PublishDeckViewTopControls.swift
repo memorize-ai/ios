@@ -3,6 +3,7 @@ import SwiftUI
 struct PublishDeckViewTopControls: View {
 	@Environment(\.presentationMode) var presentationMode
 	
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: PublishDeckViewModel
 	
 	var title: String {
@@ -22,7 +23,11 @@ struct PublishDeckViewTopControls: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			Button(action: model.publish) {
+			Button(action: {
+				self.model.publish(
+					currentUser: self.currentStore.user
+				)
+			}) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: .transparentLightGray,
