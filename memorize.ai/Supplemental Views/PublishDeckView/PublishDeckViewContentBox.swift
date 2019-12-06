@@ -1,10 +1,41 @@
 import SwiftUI
 
 struct PublishDeckViewContentBox: View {
+	static let topicCellSpacing: CGFloat = 8
+	static let numberOfTopicColumns =
+		Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
+	
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: PublishDeckViewModel
 	
+	var maxWidth: CGFloat {
+		SCREEN_SIZE.width - (12 + 20) * 2
+	}
+	
 	var imageDimension: CGFloat {
-		min(160, SCREEN_SIZE.width - (12 + 20) * 2)
+		min(160, maxWidth)
+	}
+	
+	var topicGrid: some View {
+		ScrollView(showsIndicators: false) {
+			Grid(
+				elements: currentStore.topics.map { topic in
+					TopicCell(
+						topic: topic,
+						isSelected: model.isTopicSelected(topic)
+					) {
+						self.model.toggleTopicSelect(topic)
+					}
+				},
+				columns: Self.numberOfTopicColumns,
+				horizontalSpacing: Self.topicCellSpacing,
+				verticalSpacing: Self.topicCellSpacing
+			)
+			.frame(maxWidth: maxWidth)
+		}
+		.onAppear {
+			self.currentStore.loadAllTopics()
+		}
 	}
 	
 	var body: some View {
@@ -59,6 +90,16 @@ struct PublishDeckViewContentBox: View {
 					placeholderColor: Color.darkText.opacity(0.5),
 					backgroundColor: CustomTextField.defaultBackgroundColor
 				)
+				VStack(spacing: 16) {
+					if model.topics.isEmpty {
+						Text("Warning: Decks need topics to be recommended")
+							.font(.muli(.bold, size: 13))
+							.foregroundColor(.darkRed)
+							.align(to: .leading)
+					}
+					topicGrid
+				}
+				.padding(.top, 12)
 			}
 			.padding()
 		}
@@ -69,6 +110,7 @@ struct PublishDeckViewContentBox: View {
 struct PublishDeckViewContentBox_Previews: PreviewProvider {
 	static var previews: some View {
 		PublishDeckViewContentBox()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			.environmentObject(PublishDeckViewModel())
 	}
 }
