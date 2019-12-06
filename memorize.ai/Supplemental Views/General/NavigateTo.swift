@@ -16,8 +16,7 @@ struct NavigateTo<Destination: View>: View {
 	var body: some View {
 		NavigationLink(
 			destination: destination
-				.navigationBarTitle("")
-				.navigationBarHidden(true),
+				.removeNavigationBar(),
 			isActive: $isActive
 		) {
 			EmptyView()

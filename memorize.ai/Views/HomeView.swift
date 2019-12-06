@@ -14,6 +14,9 @@ struct HomeView: View {
 					HomeViewTopControls()
 						.padding(.horizontal, 23)
 					ScrollView {
+						PublishDeckViewNavigationLink {
+							Text("Create deck") // TODO: Add formatting
+						}
 						HomeViewPerformanceCard(
 							currentUser: self.currentStore.user
 						)
