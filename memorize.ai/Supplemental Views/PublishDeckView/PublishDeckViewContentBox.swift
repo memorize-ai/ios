@@ -48,7 +48,9 @@ struct PublishDeckViewContentBox: View {
 		) {
 			VStack {
 				Button(action: {
-					// TODO: Show camera roll
+					popUpWithAnimation {
+						self.model.isImagePopUpShowing = true
+					}
 				}) {
 					Group {
 						if self.model.image == nil {

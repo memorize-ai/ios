@@ -12,6 +12,11 @@ final class PublishDeckViewModel: ObservableObject {
 	@Published var description: String
 	
 	@Published var publishLoadingState = LoadingState()
+    
+    @Published var isImagePopUpShowing = false
+	@Published var isImagePickerShowing = false
+	
+	var imagePickerSource: ImagePicker.Source!
 	
 	init(deck: Deck? = nil) {
 		self.deck = deck
@@ -24,6 +29,12 @@ final class PublishDeckViewModel: ObservableObject {
 	
 	var isPublishButtonDisabled: Bool {
 		name.isEmpty
+	}
+	
+	func showImagePicker(source: ImagePicker.Source) {
+		imagePickerSource = source
+		isImagePickerShowing = true
+		isImagePopUpShowing = false
 	}
 	
 	func isTopicSelected(_ topic: Topic) -> Bool {

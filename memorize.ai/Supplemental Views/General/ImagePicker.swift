@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
+	typealias Source = UIImagePickerController.SourceType
+	
 	final class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 		@Binding var isShowing: Bool
 		@Binding var image: Image?
@@ -27,12 +29,12 @@ struct ImagePicker: UIViewControllerRepresentable {
 	@Binding var isShowing: Bool
 	@Binding var image: Image?
 	
-	let source: UIImagePickerController.SourceType
+	let source: Source
 	
 	init(
 		isShowing: Binding<Bool>,
 		image: Binding<Image?>,
-		source: UIImagePickerController.SourceType = .photoLibrary
+		source: Source = .photoLibrary
 	) {
 		_isShowing = isShowing
 		_image = image
