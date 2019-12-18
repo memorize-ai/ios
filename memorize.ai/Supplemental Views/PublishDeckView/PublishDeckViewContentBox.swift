@@ -53,8 +53,16 @@ struct PublishDeckViewContentBox: View {
 					Group {
 						if self.model.image == nil {
 							VStack {
-								// TODO: Add icon
-								Text("Add image")
+                                Image.addImage
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40)
+								Text("Add Image")
+                                    .font(.muli(.regular, size: 17))
+                                    .foregroundColor(.lightGrayText)
+                                    .padding(.horizontal)
+                                    .padding(.top, 3)
 							}
 						} else {
 							model.image?
