@@ -292,7 +292,7 @@
 		4D458A5F237C97CC00A9776A /* HamburgerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HamburgerMenu.swift; path = memorize.ai/HamburgerMenu.swift; sourceTree = SOURCE_ROOT; };
 		4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopGradient.swift; path = memorize.ai/HomeViewTopGradient.swift; sourceTree = SOURCE_ROOT; };
 		4D458A64237C9B4700A9776A /* ShowSideBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSideBarButton.swift; sourceTree = "<group>"; };
-		4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; usesTabs = 1; };
 		4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopButtons.swift; path = "memorize.ai/Supplemental Views/MarketViewTopButtons.swift"; sourceTree = SOURCE_ROOT; };
 		4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewSearchStateButton.swift; sourceTree = "<group>"; };
 		4D54C03D237F7C83003765C1 /* DecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksView.swift; sourceTree = SOURCE_ROOT; };
@@ -415,7 +415,7 @@
 		4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStars.swift; sourceTree = "<group>"; };
 		4DEB359F236ACE4900E3DBC4 /* DeckStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStar.swift; sourceTree = "<group>"; };
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
-		4DF4594B2399734E00A78ADF /* PublishDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckView.swift; sourceTree = "<group>"; };
+		4DF4594B2399734E00A78ADF /* PublishDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckView.swift; sourceTree = "<group>"; usesTabs = 1; };
 		4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewModel.swift; sourceTree = "<group>"; };
 		4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewTopControls.swift; sourceTree = "<group>"; };
 		4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewContentBox.swift; sourceTree = "<group>"; };
