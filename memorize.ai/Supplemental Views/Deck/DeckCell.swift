@@ -35,7 +35,7 @@ struct DeckCell<Content: View>: View {
 								ActivityIndicator(color: .gray)
 							}
 						} else {
-							deck.image?
+							deck.image_?
 								.resizable()
 								.renderingMode(.original)
 								.aspectRatio(contentMode: .fill)

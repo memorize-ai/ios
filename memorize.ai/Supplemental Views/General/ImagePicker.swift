@@ -5,9 +5,9 @@ struct ImagePicker: UIViewControllerRepresentable {
 	
 	final class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 		@Binding var isShowing: Bool
-		@Binding var image: Image?
+		@Binding var image: UIImage?
 		
-		init(isShowing: Binding<Bool>, image: Binding<Image?>) {
+		init(isShowing: Binding<Bool>, image: Binding<UIImage?>) {
 			_isShowing = isShowing
 			_image = image
 		}
@@ -17,7 +17,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 			didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
 		) {
 			guard let image = info[.originalImage] as? UIImage else { return }
-			self.image = .init(uiImage: image)
+			self.image = image
 			isShowing = false
 		}
 		
@@ -27,13 +27,13 @@ struct ImagePicker: UIViewControllerRepresentable {
 	}
 	
 	@Binding var isShowing: Bool
-	@Binding var image: Image?
+	@Binding var image: UIImage?
 	
 	let source: Source
 	
 	init(
 		isShowing: Binding<Bool>,
-		image: Binding<Image?>,
+		image: Binding<UIImage?>,
 		source: Source = .photoLibrary
 	) {
 		_isShowing = isShowing

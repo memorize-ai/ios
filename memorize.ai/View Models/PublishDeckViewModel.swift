@@ -6,7 +6,14 @@ import LoadingState
 final class PublishDeckViewModel: ObservableObject {
 	let deck: Deck?
 	
-	@Published var image: Image? { didSet { print("did set image"); didChangeImage = true } }
+	@Published var image: UIImage? {
+		willSet {
+			image_ = newValue.map { .init(uiImage: $0) }
+		}
+		didSet {
+			didChangeImage = true
+		}
+	}
 	@Published var topics: [String]
 	@Published var name: String
 	@Published var subtitle: String
@@ -17,6 +24,7 @@ final class PublishDeckViewModel: ObservableObject {
     @Published var isImagePopUpShowing = false
 	@Published var isImagePickerShowing = false
 	
+	var image_: Image?
 	var imagePickerSource: ImagePicker.Source!
 	var didChangeImage = false
 	

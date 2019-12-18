@@ -12,7 +12,7 @@ struct MarketDeckViewHeader: View {
 	var body: some View {
 		VStack {
 			HStack(spacing: 0) {
-				deck.image?
+				deck.image_?
 					.resizable()
 					.aspectRatio(contentMode: .fill)
 					.frame(maxWidth: 117, idealHeight: 117, maxHeight: 117)

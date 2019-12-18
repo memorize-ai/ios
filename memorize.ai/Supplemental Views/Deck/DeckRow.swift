@@ -49,7 +49,7 @@ struct DeckRow: View {
 					if deck.image == nil {
 						ActivityIndicator(color: .gray)
 					} else {
-						deck.image?
+						deck.image_?
 							.resizable()
 							.renderingMode(.original)
 							.aspectRatio(contentMode: .fill)
@@ -88,7 +88,7 @@ struct DeckRow_Previews: PreviewProvider {
 				id: "0",
 				topics: [],
 				hasImage: true,
-				image: .init("GeometryPrepDeck"),
+				image: "GeometryPrepDeck",
 				name: "Geometry Prep",
 				subtitle: "Angles, lines, triangles and other polygons",
 				numberOfViews: 1000000000,

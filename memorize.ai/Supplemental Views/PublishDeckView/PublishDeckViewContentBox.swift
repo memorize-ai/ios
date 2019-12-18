@@ -67,7 +67,7 @@ struct PublishDeckViewContentBox: View {
                                     .padding(.top, 3)
 							}
 						} else {
-							model.image?
+							model.image_?
 								.resizable()
 								.renderingMode(.original)
 								.aspectRatio(contentMode: .fill)

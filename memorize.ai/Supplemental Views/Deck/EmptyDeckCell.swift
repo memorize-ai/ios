@@ -24,7 +24,7 @@ struct EmptyDeckCell_Previews: PreviewProvider {
 				id: "0",
 				topics: [],
 				hasImage: true,
-				image: .init("GeometryPrepDeck"),
+				image: "GeometryPrepDeck",
 				name: "Geometry Prep",
 				subtitle: "Angles, lines, triangles and other polygons",
 				numberOfViews: 1000000000,

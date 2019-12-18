@@ -8,7 +8,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static let maxNumberOfPreviewCards = 20
 	
 	static var cache = [String: Deck]()
-	static var imageCache = [String: Image]()
+	static var imageCache = [String: UIImage]()
 	
 	let id: String
 	let creatorId: String
@@ -18,7 +18,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@Published var topics: [String]
 	@Published var hasImage: Bool
-	@Published var image: Image?
+	@Published var image: UIImage? {
+		willSet {
+			image_ = newValue.map { .init(uiImage: $0) }
+		}
+	}
 	@Published var name: String
 	@Published var subtitle: String
 	@Published var description: String
@@ -54,11 +58,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var ratingLoadingState = LoadingState()
 	@Published var similarDecksLoadingState = LoadingState()
 	
+	var image_: Image?
+	
 	init(
 		id: String,
 		topics: [String],
 		hasImage: Bool,
-		image: Image? = nil,
+		image: UIImage? = nil,
 		name: String,
 		subtitle: String,
 		description: String,
@@ -152,7 +158,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		id: String = "0",
 		topics: [String] = [],
 		hasImage: Bool = false,
-		image: Image? = nil,
+		image imageName: String? = nil,
 		name: String = "",
 		subtitle: String = "",
 		description: String = "",
@@ -184,7 +190,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			id: id,
 			topics: topics,
 			hasImage: hasImage,
-			image: image,
+			image: imageName.map { .init(imageLiteralResourceName: $0) },
 			name: name,
 			subtitle: subtitle,
 			description: description,
@@ -249,7 +255,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			imageLoadingState.succeed()
 		} else {
 			storage.child("decks/\(id)").getData().done { data in
-				guard let image = Image(data: data) else {
+				guard let image = UIImage(data: data) else {
 					self.imageLoadingState.fail(message: "Malformed data")
 					return
 				}

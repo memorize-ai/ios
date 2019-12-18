@@ -18,7 +18,7 @@ struct DecksViewTopControls: View {
 								.opacity(0.5)
 								.frame(width: 40, height: 40)
 						} else {
-							selectedDeck.image!
+							selectedDeck.image_?
 								.resizable()
 								.aspectRatio(contentMode: .fill)
 								.frame(width: 40, height: 40)
