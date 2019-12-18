@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
+import FirebaseStorage
 import PromiseKit
 import LoadingState
 
@@ -218,6 +219,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		firestore.document("decks/\(id)")
 	}
 	
+	var storageReference: StorageReference {
+		storage.child("decks/\(id)")
+	}
+	
 	@discardableResult
 	func addObserver() -> Self {
 		guard snapshotListener == nil else { return self }
@@ -401,6 +406,24 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func removeRating(forUser user: User) -> PMKFinalizer {
 		setRating(FieldValue.delete(), forUser: user)
+	}
+	
+	@discardableResult
+	func setImage(_ image: UIImage?) -> Promise<Void> {
+		guard let image = image else {
+			return storageReference.delete()
+		}
+		guard let data = image.compressedData else {
+			return .init(error: CustomError(
+				message: "Malformed image data"
+			))
+		}
+		return storageReference.putData(data, metadata: .jpeg)
+	}
+	
+	@discardableResult
+	func removeImage() -> Promise<Void> {
+		setImage(nil)
 	}
 	
 	@discardableResult

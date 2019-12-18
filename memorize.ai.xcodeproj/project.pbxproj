@@ -25,13 +25,15 @@
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D1F9B23233ECA0E00693571 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B22233ECA0E00693571 /* User.swift */; };
 		4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* PromiseKit */; };
-		4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2A233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift */; };
+		4D1F9B2B233EDEB200693571 /* FirebaseFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2A233EDEB200693571 /* FirebaseFirestore.swift */; };
 		4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2D233EEBDB00693571 /* UnknownError.swift */; };
 		4D2AC7E3235EC83C00A3EF1E /* InitialViewBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E2235EC83C00A3EF1E /* InitialViewBottomButtons.swift */; };
 		4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */; };
 		4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */; };
 		4D2AC7E9235ED46900A3EF1E /* InitialViewStackedRectangles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */; };
 		4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */; };
+		4D2C7E6323AAB20E0061B48D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C7E6223AAB20E0061B48D /* UIImage.swift */; };
+		4D2C7E6523AAB2E10061B48D /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C7E6423AAB2E10061B48D /* CustomError.swift */; };
 		4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ECD83235D90C7008312B1 /* Tilde.swift */; };
 		4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */; };
 		4D32A52E2368F4B30072AA70 /* PostSignUpViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */; };
@@ -83,8 +85,8 @@
 		4D59FA89237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA88237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift */; };
 		4D59FA8B237F2010007CAA74 /* FloatingReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA8A237F2010007CAA74 /* FloatingReviewButton.swift */; };
 		4D59FA8D237F36A0007CAA74 /* DeckIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA8C237F36A0007CAA74 /* DeckIcon.swift */; };
-		4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */; };
-		4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */; };
+		4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth.swift */; };
+		4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage.swift */; };
 		4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */; };
 		4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA8237DF23B0082B66F /* TopicPerformanceSheetView.swift */; };
 		4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */; };
@@ -244,13 +246,15 @@
 		4D1F9B17233EBF2200693571 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D1F9B18233EBF2200693571 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D1F9B22233ECA0E00693571 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		4D1F9B2A233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseFirestore+PromiseKit.swift"; sourceTree = "<group>"; };
+		4D1F9B2A233EDEB200693571 /* FirebaseFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestore.swift; sourceTree = "<group>"; };
 		4D1F9B2D233EEBDB00693571 /* UnknownError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownError.swift; sourceTree = "<group>"; };
 		4D2AC7E2235EC83C00A3EF1E /* InitialViewBottomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomButtons.swift; sourceTree = "<group>"; };
 		4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		4D2AC7E8235ED46900A3EF1E /* InitialViewStackedRectangles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangles.swift; sourceTree = "<group>"; };
 		4D2AC7EA235EDE5300A3EF1E /* InitialViewStackedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewStackedRectangle.swift; sourceTree = "<group>"; };
+		4D2C7E6223AAB20E0061B48D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		4D2C7E6423AAB2E10061B48D /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		4D2ECD83235D90C7008312B1 /* Tilde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tilde.swift; sourceTree = "<group>"; };
 		4D32A52B2368F0E90072AA70 /* PostSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpView.swift; sourceTree = "<group>"; };
 		4D32A52D2368F4B30072AA70 /* PostSignUpViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignUpViewTopGradient.swift; sourceTree = "<group>"; };
@@ -302,8 +306,8 @@
 		4D59FA88237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OwnedDeckCellWithPerformanceGraph.swift; path = memorize.ai/OwnedDeckCellWithPerformanceGraph.swift; sourceTree = SOURCE_ROOT; };
 		4D59FA8A237F2010007CAA74 /* FloatingReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FloatingReviewButton.swift; path = "memorize.ai/Supplemental Views/FloatingReviewButton.swift"; sourceTree = SOURCE_ROOT; };
 		4D59FA8C237F36A0007CAA74 /* DeckIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckIcon.swift; sourceTree = "<group>"; };
-		4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+PromiseKit.swift"; sourceTree = "<group>"; };
-		4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseStorage+PromiseKit.swift"; sourceTree = "<group>"; };
+		4D6097662342FE8E002F1643 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
+		4D6097682342FEC2002F1643 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewRecommendedDecksSection.swift; path = memorize.ai/HomeViewRecommendedDecksSection.swift; sourceTree = SOURCE_ROOT; };
 		4D60FCA8237DF23B0082B66F /* TopicPerformanceSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopicPerformanceSheetView.swift; path = "memorize.ai/Supplemental Views/TopicPerformanceSheetView.swift"; sourceTree = SOURCE_ROOT; };
 		4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewOrText.swift; sourceTree = "<group>"; };
@@ -532,9 +536,9 @@
 		4D1F9B29233EDEA200693571 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4D6097662342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift */,
-				4D1F9B2A233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift */,
-				4D6097682342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift */,
+				4D6097662342FE8E002F1643 /* FirebaseAuth.swift */,
+				4D1F9B2A233EDEB200693571 /* FirebaseFirestore.swift */,
+				4D6097682342FEC2002F1643 /* FirebaseStorage.swift */,
 				4DF8C96023656C9E001141C9 /* GIDSignIn.swift */,
 				4D402E71235E591E0011C6B6 /* Color.swift */,
 				4D32A5312368FB710072AA70 /* Image.swift */,
@@ -544,6 +548,7 @@
 				4DEB3599236AC3C800E3DBC4 /* Int.swift */,
 				4DE9722723701EE900616E42 /* Array.swift */,
 				4D598E91238E3D3300B608FA /* Date.swift */,
+				4D2C7E6223AAB20E0061B48D /* UIImage.swift */,
 				4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */,
 				4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */,
 				4D8444AC236BFE080043298C /* DocumentSnapshot.swift */,
@@ -556,6 +561,7 @@
 			children = (
 				4D402E93235E72B80011C6B6 /* MuliFont.swift */,
 				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
+				4D2C7E6423AAB2E10061B48D /* CustomError.swift */,
 				4DC6435A2366D80400DEEED1 /* Preview.swift */,
 				4D2ECD87235D96D1008312B1 /* Operators */,
 			);
@@ -1347,7 +1353,7 @@
 				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
 				4DBA39682360ED0F00B91596 /* View.swift in Sources */,
-				4D6097692342FEC2002F1643 /* FirebaseStorage+PromiseKit.swift in Sources */,
+				4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */,
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D59FA89237E7735007CAA74 /* OwnedDeckCellWithPerformanceGraph.swift in Sources */,
@@ -1398,6 +1404,7 @@
 				4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */,
 				4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */,
 				4D184D93236975C000A84998 /* Grid.swift in Sources */,
+				4D2C7E6323AAB20E0061B48D /* UIImage.swift in Sources */,
 				4D8B2EAF2398BDF200EF040B /* MarketDeckViewInfo.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
 				4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */,
@@ -1442,10 +1449,11 @@
 				4DE9722C2370DC0800616E42 /* MinusMinus.swift in Sources */,
 				4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */,
 				4DC6435B2366D80400DEEED1 /* Preview.swift in Sources */,
-				4D6097672342FE8E002F1643 /* FirebaseAuth+PromiseKit.swift in Sources */,
+				4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */,
 				4DD5FE9023875C1400E70251 /* MarketViewFilterPopUpTopicsContent.swift in Sources */,
 				4DD5FE992388D93E00E70251 /* DecksViewTopControls.swift in Sources */,
 				4D3B949623727260002F441E /* SideBarSectionTitle.swift in Sources */,
+				4D2C7E6523AAB2E10061B48D /* CustomError.swift in Sources */,
 				4D32A538236913D20072AA70 /* PostSignUpViewTitle.swift in Sources */,
 				4DD5FE82238709A400E70251 /* PopUp.swift in Sources */,
 				4D9AAEBE2385277400C85EC2 /* UserLevelView.swift in Sources */,
@@ -1467,7 +1475,7 @@
 				4D3B949823727347002F441E /* SideBarSection.swift in Sources */,
 				4D36579C238D9B4A007C3D1F /* DecksViewSectionBody.swift in Sources */,
 				4D3B949423724419002F441E /* SearchBar.swift in Sources */,
-				4D1F9B2B233EDEB200693571 /* FirebaseFirestore+PromiseKit.swift in Sources */,
+				4D1F9B2B233EDEB200693571 /* FirebaseFirestore.swift in Sources */,
 				4D184D94236975C100A84998 /* GridColumn.swift in Sources */,
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
 				4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */,

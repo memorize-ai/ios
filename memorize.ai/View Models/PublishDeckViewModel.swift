@@ -1,11 +1,12 @@
 import SwiftUI
 import FirebaseFirestore
+import PromiseKit
 import LoadingState
 
 final class PublishDeckViewModel: ObservableObject {
 	let deck: Deck?
 	
-	@Published var image: Image?
+	@Published var image: Image? { didSet { print("did set image"); didChangeImage = true } }
 	@Published var topics: [String]
 	@Published var name: String
 	@Published var subtitle: String
@@ -17,6 +18,7 @@ final class PublishDeckViewModel: ObservableObject {
 	@Published var isImagePickerShowing = false
 	
 	var imagePickerSource: ImagePicker.Source!
+	var didChangeImage = false
 	
 	init(deck: Deck? = nil) {
 		self.deck = deck
@@ -51,6 +53,23 @@ final class PublishDeckViewModel: ObservableObject {
 	func publish(currentUser: User) { // TODO: Also upload/delete image
 		publishLoadingState.startLoading()
 		if let deck = deck {
+			when(fulfilled: [
+				deck.documentReference.updateData([
+					"topics": topics,
+					"hasImage": image != nil,
+					"name": name,
+					"subtitle": subtitle,
+					"description": description
+				])
+			] + (
+				didChangeImage
+					? [deck.setImage(image)]
+					: []
+			)).done {
+				self.publishLoadingState.succeed()
+			}.catch { error in
+				self.publishLoadingState.fail(error: error)
+			}
 			deck.documentReference.updateData([
 				"topics": topics,
 				"hasImage": image != nil,
