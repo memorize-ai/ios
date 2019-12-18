@@ -73,6 +73,7 @@
 		4D458A60237C97CC00A9776A /* HamburgerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A5F237C97CC00A9776A /* HamburgerMenu.swift */; };
 		4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */; };
 		4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D458A64237C9B4700A9776A /* ShowSideBarButton.swift */; };
+		4D51C17D23A9DBD90093A3A2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */; };
 		4D51F5402385DF9300C6B59B /* MarketViewTopButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */; };
 		4D51F5422385E02E00C6B59B /* MarketViewSearchStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */; };
 		4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54C03D237F7C83003765C1 /* DecksView.swift */; };
@@ -291,6 +292,7 @@
 		4D458A5F237C97CC00A9776A /* HamburgerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HamburgerMenu.swift; path = memorize.ai/HamburgerMenu.swift; sourceTree = SOURCE_ROOT; };
 		4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopGradient.swift; path = memorize.ai/HomeViewTopGradient.swift; sourceTree = SOURCE_ROOT; };
 		4D458A64237C9B4700A9776A /* ShowSideBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSideBarButton.swift; sourceTree = "<group>"; };
+		4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4D51F53F2385DF9300C6B59B /* MarketViewTopButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopButtons.swift; path = "memorize.ai/Supplemental Views/MarketViewTopButtons.swift"; sourceTree = SOURCE_ROOT; };
 		4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewSearchStateButton.swift; sourceTree = "<group>"; };
 		4D54C03D237F7C83003765C1 /* DecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksView.swift; sourceTree = SOURCE_ROOT; };
@@ -660,6 +662,7 @@
 				4D59FA8A237F2010007CAA74 /* FloatingReviewButton.swift */,
 				4DD5FEA3238B249E00E70251 /* VerticalTripleDots.swift */,
 				4DF459572399A44A00A78ADF /* MultilineTextField.swift */,
+				4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1317,6 +1320,7 @@
 				4D59FA8D237F36A0007CAA74 /* DeckIcon.swift in Sources */,
 				4D59FA8B237F2010007CAA74 /* FloatingReviewButton.swift in Sources */,
 				4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */,
+				4D51C17D23A9DBD90093A3A2 /* ImagePicker.swift in Sources */,
 				4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */,
 				4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
