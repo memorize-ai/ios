@@ -50,4 +50,6 @@ extension Image {
 	static let greenTransparentStar = Self("GreenTransparentStar")
     
     static let addImage = Self("AddImage")
+	
+	static let grayDropDownArrowHead = Self("GrayDropDownArrowHead")
 }
