@@ -101,7 +101,8 @@ struct AddCardsViewCardCell_Previews: PreviewProvider {
 			.padding(.horizontal, 10)
 		}
 		.environmentObject(AddCardsViewModel(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			user: PREVIEW_CURRENT_STORE.user
 		))
 	}
 }

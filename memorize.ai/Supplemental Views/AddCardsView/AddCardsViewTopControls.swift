@@ -49,7 +49,8 @@ struct AddCardsViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
 		AddCardsViewTopControls()
 			.environmentObject(AddCardsViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				user: PREVIEW_CURRENT_STORE.user
 			))
 	}
 }

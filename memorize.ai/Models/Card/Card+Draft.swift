@@ -9,7 +9,16 @@ extension Card {
 		let id: String
 		let parent: Deck
 		
-		@Published var section: Deck.Section? { didSet { onChange?() } }
+		var sectionId: String?
+		
+		@Published var section: Deck.Section? {
+			willSet {
+				sectionId = newValue?.id
+			}
+			didSet {
+				onChange?()
+			}
+		}
 		@Published var front: String { didSet { onChange?() } }
 		@Published var back: String { didSet { onChange?() } }
 		
@@ -20,14 +29,15 @@ extension Card {
 		init(
 			id: String = UUID().uuidString,
 			parent: Deck,
-			section: Deck.Section? = nil,
+			sectionId: String? = nil,
 			front: String = "",
 			back: String = "",
 			onChange: (() -> Void)? = nil
 		) {
 			self.id = id
 			self.parent = parent
-			self.section = section
+			self.sectionId = sectionId
+			section = parent.sections.first { $0.id == sectionId }
 			self.front = front
 			self.back = back
 			self.onChange = onChange
@@ -36,16 +46,25 @@ extension Card {
 		convenience init(
 			parent: Deck,
 			card: Card,
-			section: Deck.Section?,
 			onChange: (() -> Void)? = nil
 		) {
 			self.init(
 				id: card.id,
 				parent: parent,
-				section: section,
+				sectionId: card.sectionId,
 				front: card.front,
 				back: card.back,
 				onChange: onChange
+			)
+		}
+		
+		convenience init(parent: Deck, snapshot: DocumentSnapshot) {
+			self.init(
+				id: snapshot.documentID,
+				parent: parent,
+				sectionId: snapshot.get("section") as? String,
+				front: snapshot.get("front") as? String ?? "",
+				back: snapshot.get("back") as? String ?? ""
 			)
 		}
 		

@@ -15,7 +15,10 @@ struct AddCardsViewNavigationLink<Label: View>: View {
 		NavigationLink(
 			destination: AddCardsView()
 				.environmentObject(currentStore)
-				.environmentObject(AddCardsViewModel(deck: deck))
+				.environmentObject(AddCardsViewModel(
+					deck: deck,
+					user: currentStore.user
+				))
 				.removeNavigationBar()
 		) {
 			label

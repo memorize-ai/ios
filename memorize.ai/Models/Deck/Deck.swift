@@ -456,6 +456,17 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 	}
 	
+	func loadCardDrafts(forUser user: User) -> Promise<[Card.Draft]> {
+		return user.documentReference
+			.collection("decks/\(id)/drafts")
+			.getDocuments()
+			.map { snapshot in
+				snapshot.documents.map { document in
+					.init(parent: self, snapshot: document)
+				}
+			}
+	}
+	
 	@discardableResult
 	func get(user: User) -> Self {
 		getLoadingState.startLoading()

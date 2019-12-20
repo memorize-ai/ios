@@ -6,11 +6,21 @@ extension CollectionReference {
 		.init { seal in
 			var documentReference: DocumentReference?
 			documentReference = addDocument(data: data) { error in
-				if let error = error {
-					seal.reject(error)
-				} else if let documentReference = documentReference {
-					seal.fulfill(documentReference)
+				guard error == nil, let documentReference = documentReference else {
+					return seal.reject(error ?? UNKNOWN_ERROR)
 				}
+				seal.fulfill(documentReference)
+			}
+		}
+	}
+	
+	func getDocuments() -> Promise<QuerySnapshot> {
+		.init { seal in
+			getDocuments { snapshot, error in
+				guard error == nil, let snapshot = snapshot else {
+					return seal.reject(error ?? UNKNOWN_ERROR)
+				}
+				seal.fulfill(snapshot)
 			}
 		}
 	}
