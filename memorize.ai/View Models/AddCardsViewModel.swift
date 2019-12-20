@@ -16,6 +16,10 @@ final class AddCardsViewModel: ViewModel {
 		false // TODO: Change this
 	}
 	
+	func removeCard(_ card: Card.Draft) {
+		cards.removeAll { $0 == card }
+	}
+	
 	func publish() {
 		// TODO: Publish cards
 	}

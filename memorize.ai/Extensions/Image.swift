@@ -52,4 +52,5 @@ extension Image {
     static let addImage = Self("AddImage")
 	
 	static let grayDropDownArrowHead = Self("GrayDropDownArrowHead")
+	static let whiteTrashIcon = Self("WhiteTrashIcon")
 }

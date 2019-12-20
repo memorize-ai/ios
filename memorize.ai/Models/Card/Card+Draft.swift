@@ -43,6 +43,10 @@ extension Card {
 			parent.documentReference.collection("cards")
 		}
 		
+		var title: String {
+			Card.stripFormatting(front)
+		}
+		
 		var isPublishable: Bool {
 			!(front.isEmpty || back.isEmpty)
 		}
