@@ -15,9 +15,7 @@ struct HomeView: View {
 						.padding(.horizontal, 23)
 					ScrollView {
 						PublishDeckViewNavigationLink {
-							CustomRectangle(
-								background: Color.white
-							) {
+							CustomRectangle(background: Color.white) {
 								HStack(spacing: 3) {
 									Image(systemName: .plus)
 										.font(Font.title.weight(.bold))
