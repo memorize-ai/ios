@@ -4,7 +4,7 @@ import PromiseKit
 import LoadingState
 
 extension Card {
-	final class Preview: ObservableObject, Identifiable, Equatable, Hashable {
+	final class Draft: ObservableObject, Identifiable, Equatable, Hashable {
 		let id: String
 		let parent: Deck
 		
@@ -42,7 +42,7 @@ extension Card {
 				])
 		}
 		
-		static func == (lhs: Preview, rhs: Preview) -> Bool {
+		static func == (lhs: Draft, rhs: Draft) -> Bool {
 			lhs.id == rhs.id
 		}
 		
