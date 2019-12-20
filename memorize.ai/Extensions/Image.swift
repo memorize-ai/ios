@@ -32,7 +32,6 @@ extension Image {
 	static let filterSideBarDownloadsIcon = Self("FilterSideBarDownloadsIcon")
 	static let selectedFilterSideBarDownloadsIcon = Self("SelectedFilterSideBarDownloadsIcon")
 	
-	static let analyticsIcon = Self("AnalyticsIcon")
 	static let editSectionsIcon = Self("EditSectionsIcon")
 	static let performanceCheckIcon = Self("PerformanceCheckIcon")
 	static let purpleShoppingCartIcon = Self("PurpleShoppingCartIcon")

@@ -25,7 +25,7 @@ struct DecksViewDeckOptionsPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
-			contentHeight: .init(50 * (isOwner ? 8 : 6) + 2)
+			contentHeight: .init(50 * (isOwner ? 7 : 5) + 2)
 		) {
 			PopUpButton(
 				icon: resizeImage(
@@ -76,13 +76,6 @@ struct DecksViewDeckOptionsPopUp: View {
 				textColor: .darkGray
 			) {
 				// TODO: Visit marketplace page
-			}
-			PopUpButton(
-				icon: resizeImage(.analyticsIcon),
-				text: "Analytics",
-				textColor: .darkGray
-			) {
-				// TODO: View analytics
 			}
 			PopUpDivider()
 			PopUpButton(

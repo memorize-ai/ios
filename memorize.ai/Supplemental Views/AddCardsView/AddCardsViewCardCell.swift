@@ -3,13 +3,27 @@ import SwiftUI
 struct AddCardsViewCardCell: View {
 	@EnvironmentObject var model: AddCardsViewModel
 	
+	@ObservedObject var deck: Deck
 	@ObservedObject var card: Card.Draft
+	
+	init(card: Card.Draft) {
+		deck = card.parent
+		self.card = card
+	}
 	
 	var title: String {
 		let cardTitle = card.title
 		return cardTitle.isEmpty
 			? "NEW CARD"
 			: cardTitle
+	}
+	
+	var isSectionLoading: Bool {
+		card.sectionId != nil && card.section == nil
+	}
+	
+	var sectionTitle: String {
+		card.section?.name ?? "Add section"
 	}
 	
 	var topControls: some View {
@@ -38,9 +52,13 @@ struct AddCardsViewCardCell: View {
 				background: Color.mediumGray.opacity(0.68)
 			) {
 				HStack {
-					Text("Add section")
-						.font(.muli(.regular, size: 18))
-						.foregroundColor(.lightGrayText)
+					if isSectionLoading {
+						ActivityIndicator(color: .lightGrayText)
+					} else {
+						Text(sectionTitle)
+							.font(.muli(.regular, size: 18))
+							.foregroundColor(.lightGrayText)
+					}
 					Spacer()
 					Image.grayDropDownArrowHead
 						.resizable()

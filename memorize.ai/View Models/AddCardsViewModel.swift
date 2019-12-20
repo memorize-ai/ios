@@ -10,7 +10,7 @@ final class AddCardsViewModel: ViewModel {
 	@Published var publishLoadingState = LoadingState()
 	
 	init(deck: Deck, user: User) {
-		self.deck = deck
+		self.deck = deck.loadSections()
 		
 		cardsLoadingState.startLoading()
 		deck.loadCardDrafts(forUser: user).done {
