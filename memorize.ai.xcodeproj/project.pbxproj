@@ -101,6 +101,8 @@
 		4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */; };
 		4D6BA52B23ACB19E00D3F9D1 /* AddCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */; };
 		4D6BA53023ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */; };
+		4D6BA53323ACB81700D3F9D1 /* AddCardsViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */; };
+		4D6BA53523ACB83000D3F9D1 /* AddCardsViewCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */; };
 		4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
@@ -326,6 +328,8 @@
 		4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsView.swift; sourceTree = "<group>"; };
 		4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewModel.swift; sourceTree = "<group>"; };
 		4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewNavigationLink.swift; sourceTree = "<group>"; };
+		4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewTopControls.swift; sourceTree = "<group>"; };
+		4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewCardCell.swift; sourceTree = "<group>"; };
 		4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewModel.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -716,6 +720,8 @@
 			isa = PBXGroup;
 			children = (
 				4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */,
+				4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */,
+				4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */,
 			);
 			path = AddCardsView;
 			sourceTree = "<group>";
@@ -1400,6 +1406,7 @@
 				4DD5FE8C2387404D00E70251 /* MarketViewFilterPopUpSideBar.swift in Sources */,
 				4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */,
 				4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */,
+				4D6BA53523ACB83000D3F9D1 /* AddCardsViewCardCell.swift in Sources */,
 				4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */,
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
@@ -1429,6 +1436,7 @@
 				4D184D93236975C000A84998 /* Grid.swift in Sources */,
 				4D2C7E6323AAB20E0061B48D /* UIImage.swift in Sources */,
 				4D8B2EAF2398BDF200EF040B /* MarketDeckViewInfo.swift in Sources */,
+				4D6BA53323ACB81700D3F9D1 /* AddCardsViewTopControls.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
 				4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */,
 				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,

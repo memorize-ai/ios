@@ -4,7 +4,26 @@ struct AddCardsView: View {
 	@EnvironmentObject var model: AddCardsViewModel
 	
 	var body: some View {
-		Text("Hello, World!")
+		GeometryReader { geometry in
+			ZStack(alignment: .top) {
+				HomeViewTopGradient(
+					addedHeight: geometry.safeAreaInsets.top
+				)
+				.edgesIgnoringSafeArea(.all)
+				VStack {
+					AddCardsViewTopControls()
+						.padding(.horizontal, 23)
+					ScrollView {
+						VStack(spacing: 20) {
+							ForEach(self.model.cards) { card in
+								AddCardsViewCardCell(card: card)
+							}
+						}
+						.padding(.horizontal, 10)
+					}
+				}
+			}
+		}
 	}
 }
 
