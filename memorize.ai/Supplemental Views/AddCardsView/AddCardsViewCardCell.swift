@@ -50,7 +50,10 @@ struct AddCardsViewCardCell: View {
 	
 	var section: some View {
 		Button(action: {
-			// TODO: Add section
+			self.model.currentCard = self.card
+			popUpWithAnimation {
+				self.model.isAddSectionPopUpShowing = true
+			}
 		}) {
 			CustomRectangle(
 				background: Color.mediumGray.opacity(0.68)

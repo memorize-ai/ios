@@ -9,9 +9,12 @@ final class AddCardsViewModel: ViewModel {
 	@Published var cards = [Card.Draft]()
 	
 	@Published var isRemoveDraftPopUpShowing = false
+	@Published var isAddSectionPopUpShowing = false
 	
 	@Published var cardsLoadingState = LoadingState()
 	@Published var publishLoadingState = LoadingState()
+	
+	var currentCard: Card.Draft!
 	
 	init(deck: Deck, user: User) {
 		self.deck = deck.loadSections()
