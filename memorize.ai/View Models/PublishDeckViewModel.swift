@@ -3,7 +3,7 @@ import FirebaseFirestore
 import PromiseKit
 import LoadingState
 
-final class PublishDeckViewModel: ObservableObject {
+final class PublishDeckViewModel: ViewModel {
 	let deck: Deck?
 	
 	@Published var image: UIImage? {

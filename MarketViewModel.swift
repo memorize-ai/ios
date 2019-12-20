@@ -2,7 +2,7 @@ import Combine
 import PromiseKit
 import LoadingState
 
-final class MarketViewModel: ObservableObject {
+final class MarketViewModel: ViewModel {
 	let currentUser: User
 	
 	init(currentUser: User) {

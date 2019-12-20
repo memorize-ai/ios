@@ -1,6 +1,6 @@
 import SwiftUI
 
-final class DecksViewModel: ObservableObject {
+final class DecksViewModel: ViewModel {
 	@Published var isDeckOptionsPopUpShowing = false
 	
 	@Published var selectedSection: Deck.Section?
