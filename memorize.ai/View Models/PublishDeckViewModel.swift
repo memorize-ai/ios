@@ -58,6 +58,13 @@ final class PublishDeckViewModel: ObservableObject {
 			: topics.append(topicId)
 	}
 	
+	func uploadDeckImage(deckId: String, data: Data?) -> Promise<Void> {
+		guard let data = data else { return .init() }
+		return storage
+			.child("decks/\(deckId)")
+			.putData(data, metadata: .jpeg)
+	}
+	
 	func publish(currentUser: User) {
 		publishLoadingState.startLoading()
 		if let deck = deck {
@@ -103,18 +110,18 @@ final class PublishDeckViewModel: ObservableObject {
 				"created": FieldValue.serverTimestamp(),
 				"updated": FieldValue.serverTimestamp()
 			]).done { document in
-				if let data = self.image?.compressedData {
-					storage
-						.child("decks/\(document.documentID)")
-						.putData(data, metadata: .jpeg)
-						.done {
-							self.publishLoadingState.succeed()
-						}
-						.catch { error in
-							self.publishLoadingState.fail(error: error)
-						}
-				} else {
+				let deckId = document.documentID
+				when(fulfilled: [
+					self.uploadDeckImage(
+						deckId: deckId,
+						data: self.image?.compressedData
+					),
+					currentUser.getDeck(withId: deckId)
+				]).done {
 					self.publishLoadingState.succeed()
+				}
+				.catch { error in
+					self.publishLoadingState.fail(error: error)
 				}
 			}.catch { error in
 				self.publishLoadingState.fail(error: error)

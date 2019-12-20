@@ -175,6 +175,13 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 	}
 	
+	@discardableResult
+	func getDeck(withId deckId: String) -> Promise<Void> {
+		documentReference.collection("decks").document(deckId).setData([
+			"added": FieldValue.serverTimestamp()
+		])
+	}
+	
 	func hasDeckWithId(_ deckId: String) -> Bool {
 		decks.contains { $0.id == deckId }
 	}
