@@ -9,33 +9,43 @@ extension Card {
 		let id: String
 		let parent: Deck
 		
-		@Published var section: Deck.Section?
-		@Published var front: String
-		@Published var back: String
+		@Published var section: Deck.Section? { didSet { onChange?() } }
+		@Published var front: String { didSet { onChange?() } }
+		@Published var back: String { didSet { onChange?() } }
 		
 		@Published var publishLoadingState = LoadingState()
+		
+		var onChange: (() -> Void)?
 		
 		init(
 			id: String = UUID().uuidString,
 			parent: Deck,
 			section: Deck.Section? = nil,
 			front: String = "",
-			back: String = ""
+			back: String = "",
+			onChange: (() -> Void)? = nil
 		) {
 			self.id = id
 			self.parent = parent
 			self.section = section
 			self.front = front
 			self.back = back
+			self.onChange = onChange
 		}
 		
-		convenience init(parent: Deck, card: Card, section: Deck.Section?) {
+		convenience init(
+			parent: Deck,
+			card: Card,
+			section: Deck.Section?,
+			onChange: (() -> Void)? = nil
+		) {
 			self.init(
 				id: card.id,
 				parent: parent,
 				section: section,
 				front: card.front,
-				back: card.back
+				back: card.back,
+				onChange: onChange
 			)
 		}
 		
