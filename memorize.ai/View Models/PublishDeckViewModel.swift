@@ -65,7 +65,7 @@ final class PublishDeckViewModel: ObservableObject {
 			.putData(data, metadata: .jpeg)
 	}
 	
-	func publish(currentUser: User) {
+	func publish(currentUser: User, completion: @escaping () -> Void) {
 		publishLoadingState.startLoading()
 		if let deck = deck {
 			when(fulfilled: [
@@ -82,6 +82,7 @@ final class PublishDeckViewModel: ObservableObject {
 					: []
 			)).done {
 				self.publishLoadingState.succeed()
+				completion()
 			}.catch { error in
 				self.publishLoadingState.fail(error: error)
 			}
@@ -111,6 +112,7 @@ final class PublishDeckViewModel: ObservableObject {
 				"updated": FieldValue.serverTimestamp()
 			]).done { document in
 				let deckId = document.documentID
+				Deck.imageCache[deckId] = self.image
 				when(fulfilled: [
 					self.uploadDeckImage(
 						deckId: deckId,
@@ -119,6 +121,7 @@ final class PublishDeckViewModel: ObservableObject {
 					currentUser.getDeck(withId: deckId)
 				]).done {
 					self.publishLoadingState.succeed()
+					completion()
 				}.catch { error in
 					self.publishLoadingState.fail(error: error)
 				}

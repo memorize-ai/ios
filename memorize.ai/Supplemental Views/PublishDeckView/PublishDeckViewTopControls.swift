@@ -12,11 +12,13 @@ struct PublishDeckViewTopControls: View {
 			: model.name
 	}
 	
+	func goBack() {
+		presentationMode.wrappedValue.dismiss()
+	}
+	
 	var body: some View {
 		HStack(spacing: 22) {
-			Button(action: {
-				self.presentationMode.wrappedValue.dismiss()
-			}) {
+			Button(action: goBack) {
 				XButton(.transparentWhite, height: 18)
 			}
 			Text(title)
@@ -25,7 +27,8 @@ struct PublishDeckViewTopControls: View {
 			Spacer()
 			Button(action: {
 				self.model.publish(
-					currentUser: self.currentStore.user
+					currentUser: self.currentStore.user,
+					completion: self.goBack
 				)
 			}) {
 				CustomRectangle(
