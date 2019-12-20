@@ -4,6 +4,7 @@ import LoadingState
 
 final class AddCardsViewModel: ViewModel {
 	let deck: Deck
+	let user: User
 	
 	@Published var cards = [Card.Draft]()
 	
@@ -12,6 +13,7 @@ final class AddCardsViewModel: ViewModel {
 	
 	init(deck: Deck, user: User) {
 		self.deck = deck.loadSections()
+		self.user = user
 		
 		cardsLoadingState.startLoading()
 		deck.loadCardDrafts(forUser: user).done { cards in
@@ -59,6 +61,7 @@ final class AddCardsViewModel: ViewModel {
 			card.publishLoadingState.startLoading()
 			return card.publishAsNew().done { _ in
 				self.cards.removeAll { $0 == card }
+				card.removeDraft(forUser: self.user)
 				card.publishLoadingState.succeed()
 			}
 		}

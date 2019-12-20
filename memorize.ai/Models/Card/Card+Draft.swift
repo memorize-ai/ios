@@ -104,6 +104,14 @@ extension Card {
 			])
 		}
 		
+		@discardableResult
+		func removeDraft(forUser user: User) -> Promise<Void> {
+			user.documentReference
+				.collection("decks/\(parent.id)/drafts")
+				.document(id)
+				.delete()
+		}
+		
 		static func == (lhs: Draft, rhs: Draft) -> Bool {
 			lhs.id == rhs.id
 		}
