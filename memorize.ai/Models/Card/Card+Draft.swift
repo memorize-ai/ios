@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import FirebaseFirestore
 import PromiseKit
 import LoadingState
 
@@ -28,18 +29,32 @@ extension Card {
 			self.back = back
 		}
 		
+		var cards: CollectionReference {
+			parent.documentReference.collection("cards")
+		}
+		
 		var isPublishable: Bool {
 			!(front.isEmpty || back.isEmpty)
 		}
 		
 		@discardableResult
-		func publish(asNewCard isNew: Bool) -> Promise<Void> {
-			let collection = parent.documentReference.collection("cards")
-			return isNew
-				? collection.addDocument(data: [
-					"section": section?.id ?? "",
-					
-				])
+		func publishAsUpdate() -> Promise<Void> {
+			cards.document(id).updateData([
+				"section": section?.id ?? "",
+				"front": front,
+				"back": back
+			])
+		}
+		
+		@discardableResult
+		func publishAsNew() -> Promise<DocumentReference> {
+			cards.addDocument(data: [
+				"section": section?.id ?? "",
+				"front": front,
+				"back": back,
+				"viewCount": 0,
+				"skipCount": 0
+			])
 		}
 		
 		static func == (lhs: Draft, rhs: Draft) -> Bool {
