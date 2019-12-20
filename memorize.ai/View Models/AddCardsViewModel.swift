@@ -47,6 +47,9 @@ final class AddCardsViewModel: ViewModel {
 	
 	func removeCard(_ card: Card.Draft) {
 		cards.removeAll { $0 == card }
+		if cards.isEmpty {
+			cards = [.init(parent: deck)]
+		}
 	}
 	
 	func publish() {
