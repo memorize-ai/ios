@@ -30,17 +30,41 @@ struct DecksViewBottomControls: View {
 		.background(backgroundColor)
 	}
 	
+	var addCardsButton: some View {
+		NavigationLink(
+			destination: EmptyView() // TODO: Change this
+		) {
+			button(text: "Add cards", backgroundColor: .darkRed)
+		}
+	}
+	
+	var learnButton: some View {
+		NavigationLink(
+			destination: EmptyView() // TODO: Change this
+		) {
+			button(text: "Learn", backgroundColor: .darkBlue)
+		}
+	}
+	
+	var reviewButton: some View {
+		NavigationLink(
+			destination: EmptyView() // TODO: Change this
+		) {
+			button(
+				text: "Review • \(numberOfDueCards.formatted)",
+				backgroundColor: .green
+			)
+		}
+	}
+	
 	var body: some View {
 		HStack {
 			if isOwner {
-				button(text: "Add cards", backgroundColor: .darkRed)
+				addCardsButton
 			}
-			button(text: "Learn", backgroundColor: .darkBlue)
+			learnButton
 			if isDue {
-				button(
-					text: "Review • \(numberOfDueCards.formatted)",
-					backgroundColor: .green
-				)
+				reviewButton
 			}
 		}
 	}
