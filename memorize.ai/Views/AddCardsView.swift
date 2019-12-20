@@ -6,20 +6,43 @@ struct AddCardsView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
-				HomeViewTopGradient(
-					addedHeight: geometry.safeAreaInsets.top
-				)
+				Group {
+					Color.lightGrayBackground
+					HomeViewTopGradient(
+						addedHeight: geometry.safeAreaInsets.top
+					)
+				}
 				.edgesIgnoringSafeArea(.all)
 				VStack {
 					AddCardsViewTopControls()
 						.padding(.horizontal, 23)
-					ScrollView {
-						VStack(spacing: 20) {
-							ForEach(self.model.cards) { card in
-								AddCardsViewCardCell(card: card)
+					VStack(spacing: 0) {
+						ScrollView {
+							VStack(spacing: 20) {
+								ForEach(self.model.cards) { card in
+									AddCardsViewCardCell(card: card)
+								}
+							}
+							.padding(.horizontal, 10)
+						}
+						Button(action: {
+							// TODO: Remove draft
+						}) {
+							VStack(spacing: 0) {
+								Rectangle()
+									.foregroundColor(.lightGrayLine)
+									.frame(height: 1)
+								ZStack {
+									Color.white
+										.edgesIgnoringSafeArea(.all)
+									Text("Remove draft")
+										.font(.muli(.semiBold, size: 18))
+										.foregroundColor(.darkRed)
+								}
+								.frame(height: 15 + geometry.safeAreaInsets.bottom)
 							}
 						}
-						.padding(.horizontal, 10)
+						.edgesIgnoringSafeArea(.all)
 					}
 				}
 			}
