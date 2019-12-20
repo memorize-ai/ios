@@ -31,9 +31,7 @@ struct DecksViewBottomControls: View {
 	}
 	
 	var addCardsButton: some View {
-		NavigationLink(
-			destination: EmptyView() // TODO: Change this
-		) {
+		AddCardsViewNavigationLink(deck: selectedDeck) {
 			button(text: "Add cards", backgroundColor: .darkRed)
 		}
 	}

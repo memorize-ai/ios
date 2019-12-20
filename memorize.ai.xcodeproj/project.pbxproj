@@ -98,8 +98,9 @@
 		4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D690255235FADAD00533E20 /* AuthenticationViewTopGradient.swift */; };
 		4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */; };
 		4D6BA52723ACABB600D3F9D1 /* DecksViewBottomControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52623ACABB600D3F9D1 /* DecksViewBottomControls.swift */; };
-		4D6BA52923ACB02000D3F9D1 /* PublishCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52823ACB02000D3F9D1 /* PublishCardsView.swift */; };
-		4D6BA52B23ACB19E00D3F9D1 /* PublishCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52A23ACB19E00D3F9D1 /* PublishCardsViewModel.swift */; };
+		4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */; };
+		4D6BA52B23ACB19E00D3F9D1 /* AddCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */; };
+		4D6BA53023ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */; };
 		4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
@@ -322,8 +323,9 @@
 		4D690255235FADAD00533E20 /* AuthenticationViewTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewTopGradient.swift; sourceTree = "<group>"; };
 		4D690257235FADEA00533E20 /* AuthenticationViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewTopControls.swift; sourceTree = "<group>"; };
 		4D6BA52623ACABB600D3F9D1 /* DecksViewBottomControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewBottomControls.swift; sourceTree = "<group>"; };
-		4D6BA52823ACB02000D3F9D1 /* PublishCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCardsView.swift; sourceTree = "<group>"; };
-		4D6BA52A23ACB19E00D3F9D1 /* PublishCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCardsViewModel.swift; sourceTree = "<group>"; };
+		4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsView.swift; sourceTree = "<group>"; };
+		4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewModel.swift; sourceTree = "<group>"; };
+		4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewNavigationLink.swift; sourceTree = "<group>"; };
 		4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewModel.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -710,6 +712,14 @@
 			path = InitialView;
 			sourceTree = "<group>";
 		};
+		4D6BA53123ACB38500D3F9D1 /* AddCardsView */ = {
+			isa = PBXGroup;
+			children = (
+				4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */,
+			);
+			path = AddCardsView;
+			sourceTree = "<group>";
+		};
 		4D703AEB233DF98E004F1F65 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,7 +733,7 @@
 				4D9AAEB823851F8100C85EC2 /* MarketView.swift */,
 				4DDACF032395BC3F0073C004 /* MarketDeckView.swift */,
 				4D54C03D237F7C83003765C1 /* DecksView.swift */,
-				4D6BA52823ACB02000D3F9D1 /* PublishCardsView.swift */,
+				4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */,
 				4DF4594B2399734E00A78ADF /* PublishDeckView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
@@ -890,7 +900,7 @@
 				4D35BC432385F20A00A440CF /* MarketViewModel.swift */,
 				4DD5FEA1238B084700E70251 /* DecksViewModel.swift */,
 				4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */,
-				4D6BA52A23ACB19E00D3F9D1 /* PublishCardsViewModel.swift */,
+				4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1000,6 +1010,7 @@
 				4DDACF052395BCE30073C004 /* MarketDeckView */,
 				4DD5FE972388D92E00E70251 /* DecksView */,
 				4DF4594F2399785400A78ADF /* PublishDeckView */,
+				4D6BA53123ACB38500D3F9D1 /* AddCardsView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -1341,7 +1352,7 @@
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,
-				4D6BA52923ACB02000D3F9D1 /* PublishCardsView.swift in Sources */,
+				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,
 				4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */,
 				4DD5FE8E2387438400E70251 /* MarketViewFilterPopUpSideBarButton.swift in Sources */,
 				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
@@ -1362,6 +1373,7 @@
 				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
 				4DD5FE9E2389E22000E70251 /* Deck+Search.swift in Sources */,
 				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
+				4D6BA53023ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,
 				4DBA39682360ED0F00B91596 /* View.swift in Sources */,
 				4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */,
@@ -1460,7 +1472,7 @@
 				4DE9722C2370DC0800616E42 /* MinusMinus.swift in Sources */,
 				4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */,
 				4DC6435B2366D80400DEEED1 /* Preview.swift in Sources */,
-				4D6BA52B23ACB19E00D3F9D1 /* PublishCardsViewModel.swift in Sources */,
+				4D6BA52B23ACB19E00D3F9D1 /* AddCardsViewModel.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */,
 				4DD5FE9023875C1400E70251 /* MarketViewFilterPopUpTopicsContent.swift in Sources */,
 				4DD5FE992388D93E00E70251 /* DecksViewTopControls.swift in Sources */,
