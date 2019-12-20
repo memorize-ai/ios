@@ -29,6 +29,16 @@ extension Card {
 			self.back = back
 		}
 		
+		convenience init(parent: Deck, card: Card, section: Deck.Section?) {
+			self.init(
+				id: card.id,
+				parent: parent,
+				section: section,
+				front: card.front,
+				back: card.back
+			)
+		}
+		
 		var cards: CollectionReference {
 			parent.documentReference.collection("cards")
 		}

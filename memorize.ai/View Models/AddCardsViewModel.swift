@@ -4,7 +4,7 @@ import LoadingState
 final class AddCardsViewModel: ViewModel {
 	let deck: Deck
 	
-	@Published var cards = [Card]()
+	@Published var cards = [Card.Draft]()
 	
 	@Published var publishLoadingState = LoadingState()
 	
