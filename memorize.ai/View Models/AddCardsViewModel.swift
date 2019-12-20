@@ -13,8 +13,13 @@ final class AddCardsViewModel: ViewModel {
 		self.deck = deck.loadSections()
 		
 		cardsLoadingState.startLoading()
-		deck.loadCardDrafts(forUser: user).done {
-			self.cards = $0
+		deck.loadCardDrafts(forUser: user).done { cards in
+			self.cards = cards.map { card in
+				card.onChange = {
+					self.cardDidChange(card)
+				}
+				return card
+			}
 			self.cardsLoadingState.succeed()
 		}.catch { error in
 			self.cardsLoadingState.fail(error: error)
@@ -23,6 +28,10 @@ final class AddCardsViewModel: ViewModel {
 	
 	var isPublishButtonDisabled: Bool {
 		false // TODO: Change this
+	}
+	
+	func cardDidChange(_ card: Card.Draft) {
+		// TODO: Handle card change
 	}
 	
 	func removeCard(_ card: Card.Draft) {
