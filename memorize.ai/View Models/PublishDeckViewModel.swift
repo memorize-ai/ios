@@ -58,7 +58,7 @@ final class PublishDeckViewModel: ObservableObject {
 			: topics.append(topicId)
 	}
 	
-	func publish(currentUser: User) { // TODO: Also upload/delete image
+	func publish(currentUser: User) {
 		publishLoadingState.startLoading()
 		if let deck = deck {
 			when(fulfilled: [
@@ -74,17 +74,6 @@ final class PublishDeckViewModel: ObservableObject {
 					? [deck.setImage(image)]
 					: []
 			)).done {
-				self.publishLoadingState.succeed()
-			}.catch { error in
-				self.publishLoadingState.fail(error: error)
-			}
-			deck.documentReference.updateData([
-				"topics": topics,
-				"hasImage": image != nil,
-				"name": name,
-				"subtitle": subtitle,
-				"description": description
-			]).done {
 				self.publishLoadingState.succeed()
 			}.catch { error in
 				self.publishLoadingState.fail(error: error)
@@ -113,8 +102,20 @@ final class PublishDeckViewModel: ObservableObject {
 				"creator": currentUser.id,
 				"created": FieldValue.serverTimestamp(),
 				"updated": FieldValue.serverTimestamp()
-			]).done { _ in
-				self.publishLoadingState.succeed()
+			]).done { document in
+				if let data = self.image?.compressedData {
+					storage
+						.child("decks/\(document.documentID)")
+						.putData(data, metadata: .jpeg)
+						.done {
+							self.publishLoadingState.succeed()
+						}
+						.catch { error in
+							self.publishLoadingState.fail(error: error)
+						}
+				} else {
+					self.publishLoadingState.succeed()
+				}
 			}.catch { error in
 				self.publishLoadingState.fail(error: error)
 			}
