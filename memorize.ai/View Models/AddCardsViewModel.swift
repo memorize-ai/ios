@@ -27,7 +27,12 @@ final class AddCardsViewModel: ViewModel {
 	}
 	
 	var isPublishButtonDisabled: Bool {
-		false // TODO: Change this
+		for card in cards {
+			if card.isPublishable {
+				return false
+			}
+		}
+		return true
 	}
 	
 	func cardDidChange(_ card: Card.Draft) {
