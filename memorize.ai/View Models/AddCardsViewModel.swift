@@ -1,4 +1,5 @@
 import Combine
+import PromiseKit
 import LoadingState
 
 final class AddCardsViewModel: ViewModel {
@@ -14,7 +15,7 @@ final class AddCardsViewModel: ViewModel {
 		
 		cardsLoadingState.startLoading()
 		deck.loadCardDrafts(forUser: user).done { cards in
-			cards.forEach { card in
+			for card in cards {
 				card.onChange = {
 					self.cardDidChange(card)
 				}
@@ -52,7 +53,23 @@ final class AddCardsViewModel: ViewModel {
 		}
 	}
 	
+	var publishCardsPromiseArray: [Promise<Void>] {
+		cards.map { card in
+			guard card.isPublishable else { return .init() }
+			card.publishLoadingState.startLoading()
+			return card.publishAsNew().done { _ in
+				self.cards.removeAll { $0 == card }
+				card.publishLoadingState.succeed()
+			}
+		}
+	}
+	
 	func publish() {
-		// TODO: Publish cards
+		publishLoadingState.startLoading()
+		when(fulfilled: publishCardsPromiseArray).done {
+			self.publishLoadingState.succeed()
+		}.catch { error in
+			self.publishLoadingState.fail(error: error)
+		}
 	}
 }
