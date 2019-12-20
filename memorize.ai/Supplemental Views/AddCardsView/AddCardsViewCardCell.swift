@@ -12,7 +12,7 @@ struct AddCardsViewCardCell: View {
 struct AddCardsViewCardCell_Previews: PreviewProvider {
 	static var previews: some View {
 		AddCardsViewCardCell(
-			card: PREVIEW_CURRENT_STORE.user.decks[0].sections[0].cards[0]
+			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
 		)
 	}
 }
