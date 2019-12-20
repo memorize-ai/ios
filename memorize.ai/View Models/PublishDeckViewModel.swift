@@ -119,8 +119,7 @@ final class PublishDeckViewModel: ObservableObject {
 					currentUser.getDeck(withId: deckId)
 				]).done {
 					self.publishLoadingState.succeed()
-				}
-				.catch { error in
+				}.catch { error in
 					self.publishLoadingState.fail(error: error)
 				}
 			}.catch { error in
