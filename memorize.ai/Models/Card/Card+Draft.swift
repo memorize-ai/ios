@@ -80,6 +80,10 @@ extension Card {
 			!(front.isEmpty || back.isEmpty)
 		}
 		
+		var isEmpty: Bool {
+			sectionId == nil && front.isEmpty && back.isEmpty
+		}
+		
 		@discardableResult
 		func publishAsUpdate() -> Promise<Void> {
 			cards.document(id).updateData([

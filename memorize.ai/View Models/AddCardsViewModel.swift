@@ -36,7 +36,11 @@ final class AddCardsViewModel: ViewModel {
 	}
 	
 	func cardDidChange(_ card: Card.Draft) {
-		// TODO: Handle card change
+		guard cards.last == card && !card.isEmpty else { return }
+		cards.append(.init(
+			parent: deck,
+			sectionId: card.sectionId
+		))
 	}
 	
 	func removeCard(_ card: Card.Draft) {
