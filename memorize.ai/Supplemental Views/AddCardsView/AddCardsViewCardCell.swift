@@ -1,19 +1,32 @@
 import SwiftUI
 
 struct AddCardsViewCardCell: View {
+	@EnvironmentOb
 	@ObservedObject var card: Card
 	
+	var section
+	
 	var body: some View {
-		Text("Hello, World!")
+		CustomRectangle(
+			background: Color.white
+		) {
+			VStack {
+				
+			}
+		}
 	}
 }
 
 #if DEBUG
 struct AddCardsViewCardCell_Previews: PreviewProvider {
 	static var previews: some View {
-		AddCardsViewCardCell(
-			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
-		)
+		ZStack {
+			Color.blue
+				.edgesIgnoringSafeArea(.all)
+			AddCardsViewCardCell(
+				card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
+			)
+		}
 	}
 }
 #endif
