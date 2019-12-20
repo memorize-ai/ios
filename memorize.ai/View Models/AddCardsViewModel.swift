@@ -42,6 +42,15 @@ final class AddCardsViewModel: ViewModel {
 		return true
 	}
 	
+	var hasDraft: Bool {
+		for card in cards {
+			if !card.isEmpty {
+				return true
+			}
+		}
+		return false
+	}
+	
 	func cardDidChange(_ card: Card.Draft) {
 		_ = card.isEmpty
 			? card.removeDraft(forUser: user)
