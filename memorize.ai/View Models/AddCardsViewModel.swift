@@ -14,12 +14,14 @@ final class AddCardsViewModel: ViewModel {
 		
 		cardsLoadingState.startLoading()
 		deck.loadCardDrafts(forUser: user).done { cards in
-			self.cards = cards.map { card in
+			cards.forEach { card in
 				card.onChange = {
 					self.cardDidChange(card)
 				}
-				return card
 			}
+			self.cards = cards.isEmpty
+				? [.init(parent: deck)]
+				: cards
 			self.cardsLoadingState.succeed()
 		}.catch { error in
 			self.cardsLoadingState.fail(error: error)
