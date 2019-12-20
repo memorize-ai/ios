@@ -8,6 +8,8 @@ final class AddCardsViewModel: ViewModel {
 	
 	@Published var cards = [Card.Draft]()
 	
+	@Published var isRemoveDraftPopUpShowing = false
+	
 	@Published var cardsLoadingState = LoadingState()
 	@Published var publishLoadingState = LoadingState()
 	
@@ -41,6 +43,9 @@ final class AddCardsViewModel: ViewModel {
 	}
 	
 	func cardDidChange(_ card: Card.Draft) {
+		_ = card.isEmpty
+			? card.removeDraft(forUser: user)
+			: card.updateDraft(forUser: user)
 		guard cards.last == card && !card.isEmpty else { return }
 		cards.append(.init(
 			parent: deck,
@@ -50,9 +55,22 @@ final class AddCardsViewModel: ViewModel {
 	
 	func removeCard(_ card: Card.Draft) {
 		cards.removeAll { $0 == card }
+		card.removeDraft(forUser: user)
 		if cards.isEmpty {
 			cards = [.init(parent: deck)]
 		}
+	}
+	
+	@discardableResult
+	func removeAllDrafts() -> Promise<[Void]> {
+		user.documentReference
+			.collection("decks/\(deck.id)/drafts")
+			.getDocuments()
+			.map { snapshot in
+				snapshot.documents.map { document in
+					document.reference.delete()
+				}
+			}
 	}
 	
 	var publishCardsPromiseArray: [Promise<Void>] {

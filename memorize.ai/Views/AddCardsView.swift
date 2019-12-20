@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AddCardsView: View {
+	@Environment(\.presentationMode) var presentationMode
+	
 	@EnvironmentObject var model: AddCardsViewModel
 	
 	var body: some View {
@@ -26,7 +28,9 @@ struct AddCardsView: View {
 							.padding(.horizontal, 10)
 						}
 						Button(action: {
-							// TODO: Remove draft
+							popUpWithAnimation {
+								self.model.isRemoveDraftPopUpShowing = true
+							}
 						}) {
 							VStack(spacing: 0) {
 								Rectangle()
@@ -43,6 +47,25 @@ struct AddCardsView: View {
 							}
 						}
 						.edgesIgnoringSafeArea(.all)
+					}
+				}
+				PopUp(
+					isShowing: self.$model.isRemoveDraftPopUpShowing,
+					contentHeight: 50 + 1 + 50
+				) {
+					Text("Are you sure?")
+						.font(.muli(.bold, size: 18))
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.frame(height: 50)
+						.padding(.horizontal, 30)
+					PopUpDivider()
+					PopUpButton(
+						icon: nil as EmptyView?,
+						text: "Remove",
+						textColor: .darkRed
+					) {
+						self.model.removeAllDrafts()
+						self.presentationMode.wrappedValue.dismiss()
 					}
 				}
 			}
