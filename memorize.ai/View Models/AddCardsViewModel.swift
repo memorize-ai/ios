@@ -64,10 +64,13 @@ final class AddCardsViewModel: ViewModel {
 		}
 	}
 	
-	func publish() {
+	func publish(onDone: (() -> Void)? = nil) {
 		publishLoadingState.startLoading()
 		when(fulfilled: publishCardsPromiseArray).done {
 			self.publishLoadingState.succeed()
+			if self.cards.isEmpty {
+				onDone?()
+			}
 		}.catch { error in
 			self.publishLoadingState.fail(error: error)
 		}

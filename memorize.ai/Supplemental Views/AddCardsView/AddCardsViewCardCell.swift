@@ -32,14 +32,18 @@ struct AddCardsViewCardCell: View {
 				.font(.muli(.extraBold, size: 15))
 				.foregroundColor(.white)
 			Spacer()
-			Button(action: {
-				self.model.removeCard(self.card)
-			}) {
-				Image.whiteTrashIcon
-					.resizable()
-					.renderingMode(.original)
-					.aspectRatio(contentMode: .fit)
-					.frame(height: 17)
+			if card.publishLoadingState.isLoading {
+				ActivityIndicator(color: .white)
+			} else {
+				Button(action: {
+					self.model.removeCard(self.card)
+				}) {
+					Image.whiteTrashIcon
+						.resizable()
+						.renderingMode(.original)
+						.aspectRatio(contentMode: .fit)
+						.frame(height: 17)
+				}
 			}
 		}
 	}

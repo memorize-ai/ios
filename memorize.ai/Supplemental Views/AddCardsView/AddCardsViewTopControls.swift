@@ -18,7 +18,9 @@ struct AddCardsViewTopControls: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			Button(action: model.publish) {
+			Button(action: {
+				self.model.publish(onDone: self.goBack)
+			}) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: .transparentLightGray,
