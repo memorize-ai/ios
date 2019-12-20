@@ -22,19 +22,24 @@ struct DecksView: View {
 						selectedDeck: self.selectedDeck
 					)
 					.padding(.horizontal, Self.horizontalPadding)
-					ZStack {
-						Rectangle()
-							.foregroundColor(.lightGrayBackground)
-						ScrollView {
-							VStack {
-								DecksViewSections(
-									selectedDeck: self.selectedDeck
-								)
+					VStack(spacing: 0) {
+						ZStack {
+							Rectangle()
+								.foregroundColor(.lightGrayBackground)
+							ScrollView {
+								VStack {
+									DecksViewSections(
+										selectedDeck: self.selectedDeck
+									)
+								}
+								.frame(maxWidth: .infinity)
+								.padding(.horizontal, Self.horizontalPadding)
+								.padding(.top, 20)
 							}
-							.frame(maxWidth: .infinity)
-							.padding(.horizontal, Self.horizontalPadding)
-							.padding(.top, 20)
 						}
+						DecksViewBottomControls(
+							selectedDeck: self.selectedDeck
+						)
 					}
 				}
 			}

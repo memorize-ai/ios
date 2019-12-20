@@ -49,7 +49,6 @@ struct DecksViewTopControls_Previews: PreviewProvider {
 		DecksViewTopControls(
 			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
 		)
-		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif
