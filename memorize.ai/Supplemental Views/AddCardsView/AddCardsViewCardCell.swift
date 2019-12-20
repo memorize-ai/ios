@@ -74,7 +74,13 @@ struct AddCardsViewCardCell: View {
 					Rectangle()
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
+					Text("FRONT")
+						.font(.muli(.bold, size: 15))
+						.frame(maxWidth: .infinity, alignment: .leading)
 					front
+					Text("BACK")
+						.font(.muli(.bold, size: 15))
+						.frame(maxWidth: .infinity, alignment: .leading)
 					back
 				}
 				.padding()
