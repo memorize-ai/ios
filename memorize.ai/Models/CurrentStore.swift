@@ -45,7 +45,7 @@ final class CurrentStore: ObservableObject {
 	@discardableResult
 	func goToDecksView(withDeck deck: Deck) -> Self {
 		withAnimation(SIDE_BAR_ANIMATION) {
-			selectedDeck = deck
+			selectedDeck = deck.loadSections()
 			isSideBarShowing = false
 			mainTabViewSelection = .decks
 		}
