@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PublishDeckView: View { // FIXME: Doesn't update the view when model updates the first time this is opened
-    @EnvironmentObject var model: PublishDeckViewModel
+	@EnvironmentObject var model: PublishDeckViewModel
 	
 	var imagePopUp: some View {
 		PopUp(
@@ -62,7 +62,7 @@ struct PublishDeckView_Previews: PreviewProvider {
 	static var previews: some View {
 		PublishDeckView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(PublishDeckViewModel())
+//			.environmentObject(PublishDeckViewModel())
 	}
 }
 #endif
