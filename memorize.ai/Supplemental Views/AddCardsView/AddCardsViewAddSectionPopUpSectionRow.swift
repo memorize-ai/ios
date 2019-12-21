@@ -46,6 +46,7 @@ struct AddCardsViewAddSectionPopUpSectionRow: View {
 						.frame(width: 17)
 				}
 			}
+			.frame(height: 22)
 			.padding(.leading, 25)
 			.padding(.trailing, 30)
 			.padding(.vertical, 12)

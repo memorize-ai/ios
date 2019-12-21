@@ -1,13 +1,17 @@
 import SwiftUI
 
 struct AddCardsViewAddSectionPopUp: View {
-	static let contentFullHeightRatio: CGFloat = 424 / 667
-	static let contentHeight = SCREEN_SIZE.height * contentFullHeightRatio
-	
 	@EnvironmentObject var model: AddCardsViewModel
 	
 	@ObservedObject var deck: Deck
 	@ObservedObject var card: Card.Draft
+	
+	var contentHeight: CGFloat {
+		.init(40 + 20 * 2) +
+		.init(22 + 12 * 2 + 1) *
+		.init(deck.sections.count + 1) -
+		1
+	}
 	
 	var sectionList: some View {
 		ForEach(deck.sections) { section in
@@ -26,26 +30,26 @@ struct AddCardsViewAddSectionPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: self.$model.isAddSectionPopUpShowing,
-			contentHeight: 50 * 0 + 0
+			contentHeight: contentHeight
 		) {
-			CustomRectangle(
-				background: Color.mediumGray
-			) {
-				HStack(spacing: 3) {
-					Image(systemName: .plus)
-						.font(Font.title.weight(.semibold))
-						.scaleEffect(0.65)
-					Text("ADD NEW SECTION")
-						.font(.muli(.bold, size: 16))
+			Button(action: {
+				// TODO: Add new section
+			}) {
+				CustomRectangle(background: Color.mediumGray) {
+					HStack(spacing: 3) {
+						Image(systemName: .plus)
+							.font(Font.title.weight(.semibold))
+							.scaleEffect(0.65)
+						Text("ADD NEW SECTION")
+							.font(.muli(.bold, size: 16))
+					}
+					.foregroundColor(.darkBlue)
+					.frame(maxWidth: .infinity)
+					.frame(height: 40)
 				}
-				.foregroundColor(.darkBlue)
-				.padding(.leading, 12)
-				.padding(.trailing)
-				.padding(.vertical, 10)
-				.frame(maxWidth: .infinity)
+				.padding(.horizontal, 30)
+				.padding(.vertical)
 			}
-			.padding(.horizontal, 30)
-			.padding(.vertical)
 			VStack(spacing: 0) {
 				Button(action: {
 					self.card.sectionId = nil
@@ -70,14 +74,15 @@ struct AddCardsViewAddSectionPopUp: View {
 							.font(.muli(.semiBold, size: 17))
 							.foregroundColor(.darkGray)
 					}
+					.frame(height: 22)
 					.padding(.leading, 25)
 					.padding(.trailing, 30)
 					.padding(.vertical, 12)
-					if !deck.sections.isEmpty {
-						PopUpDivider(horizontalPadding: 20)
-					}
-					sectionList
 				}
+				if !deck.sections.isEmpty {
+					PopUpDivider(horizontalPadding: 20)
+				}
+				sectionList
 			}
 		}
 	}
