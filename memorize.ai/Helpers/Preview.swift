@@ -184,7 +184,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		.init(
 			id: "9",
 			parent: firstDeck,
-			name: " Section 10",
+			name: "Section 10",
 			numberOfCards: 1905
 		)
 	]

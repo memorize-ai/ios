@@ -7,15 +7,17 @@ struct AddCardsViewAddSectionPopUp: View {
 	@EnvironmentObject var model: AddCardsViewModel
 	
 	@ObservedObject var deck: Deck
+	@ObservedObject var card: Card.Draft
 	
 	var sectionList: some View {
 		ForEach(deck.sections) { section in
 			VStack(spacing: 0) {
 				AddCardsViewAddSectionPopUpSectionRow(
-					section: section
+					section: section,
+					card: self.card
 				)
-				if section == self.deck.sections.last {
-					PopUpDivider()
+				if section != self.deck.sections.last {
+					PopUpDivider(horizontalPadding: 20)
 				}
 			}
 		}
@@ -44,8 +46,38 @@ struct AddCardsViewAddSectionPopUp: View {
 			}
 			.padding(.horizontal, 30)
 			.padding(.vertical)
-			// TODO: Add unsectioned
-			sectionList
+			VStack(spacing: 0) {
+				Button(action: {
+					self.card.sectionId = nil
+				}) {
+					HStack(spacing: 20) {
+						if card.sectionId == nil {
+							Image.blueCheck
+								.resizable()
+								.renderingMode(.original)
+								.aspectRatio(contentMode: .fit)
+								.frame(width: 20)
+						}
+						Text("Unsectioned")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(
+								card.sectionId == nil
+									? .darkBlue
+									: .darkGray
+							)
+						Spacer()
+						Text("(\(section.numberOfCards.formatted))")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(.darkGray)
+					}
+					.padding(.leading, 25)
+					.padding(.trailing, 30)
+					.padding(.vertical, 12)
+				if !deck.sections.isEmpty {
+					PopUpDivider(horizontalPadding: 20)
+				}
+				sectionList
+			}
 		}
 	}
 }
@@ -59,7 +91,11 @@ struct AddCardsViewAddSectionPopUp_Previews: PreviewProvider {
 		)
 		model.isAddSectionPopUpShowing = true
 		return AddCardsViewAddSectionPopUp(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!
+			deck: PREVIEW_CURRENT_STORE.user.decks[0],
+			card: .init(
+				parent: PREVIEW_CURRENT_STORE.user.decks[0],
+				card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
+			)
 		)
 		.environmentObject(model)
 	}
