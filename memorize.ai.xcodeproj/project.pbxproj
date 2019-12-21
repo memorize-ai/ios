@@ -104,6 +104,8 @@
 		4D6BA53323ACB81700D3F9D1 /* AddCardsViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */; };
 		4D6BA53523ACB83000D3F9D1 /* AddCardsViewCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */; };
 		4D6BA53723ACBBBD00D3F9D1 /* Card+Draft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53623ACBBBD00D3F9D1 /* Card+Draft.swift */; };
+		4D6BA53923AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53823AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift */; };
+		4D6BA53B23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6BA53A23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift */; };
 		4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
@@ -332,6 +334,8 @@
 		4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewTopControls.swift; sourceTree = "<group>"; };
 		4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewCardCell.swift; sourceTree = "<group>"; };
 		4D6BA53623ACBBBD00D3F9D1 /* Card+Draft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Draft.swift"; sourceTree = "<group>"; };
+		4D6BA53823AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewAddSectionPopUp.swift; sourceTree = "<group>"; };
+		4D6BA53A23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewAddSectionPopUpSectionRow.swift; sourceTree = "<group>"; };
 		4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewModel.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -725,6 +729,8 @@
 				4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */,
 				4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */,
 				4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */,
+				4D6BA53823AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift */,
+				4D6BA53A23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift */,
 			);
 			path = AddCardsView;
 			sourceTree = "<group>";
@@ -1399,10 +1405,12 @@
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4DD8D780235F85EE009D1261 /* InitialViewPaginatedFeaturesIndicatorCircle.swift in Sources */,
+				4D6BA53923AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift in Sources */,
 				4DF459582399A44A00A78ADF /* MultilineTextField.swift in Sources */,
 				4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */,
 				4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */,
 				4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */,
+				4D6BA53B23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift in Sources */,
 				4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */,
 				4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */,
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,

@@ -69,12 +69,6 @@ struct AddCardsView: View {
 						self.presentationMode.wrappedValue.dismiss()
 					}
 				}
-				PopUp(
-					isShowing: self.$model.isAddSectionPopUpShowing,
-					contentHeight: 50 * 0 + 0
-				) {
-					// TODO: Move into separate file
-				}
 			}
 		}
 	}
