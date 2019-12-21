@@ -66,17 +66,18 @@ struct AddCardsViewAddSectionPopUp: View {
 									: .darkGray
 							)
 						Spacer()
-						Text("(\(section.numberOfCards.formatted))")
+						Text("(\(deck.numberOfUnsectionedCards.formatted))")
 							.font(.muli(.semiBold, size: 17))
 							.foregroundColor(.darkGray)
 					}
 					.padding(.leading, 25)
 					.padding(.trailing, 30)
 					.padding(.vertical, 12)
-				if !deck.sections.isEmpty {
-					PopUpDivider(horizontalPadding: 20)
+					if !deck.sections.isEmpty {
+						PopUpDivider(horizontalPadding: 20)
+					}
+					sectionList
 				}
-				sectionList
 			}
 		}
 	}

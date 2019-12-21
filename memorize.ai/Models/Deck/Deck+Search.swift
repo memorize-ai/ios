@@ -43,6 +43,7 @@ extension Deck {
 			averageRating: json["average_rating"]?["raw"] as? Double ?? 0,
 			numberOfDownloads: json["download_count"]?["raw"] as? Int ?? 0,
 			numberOfCards: json["card_count"]?["raw"] as? Int ?? 0,
+			numberOfUnsectionedCards: json["unsectioned_card_count"]?["raw"] as? Int ?? 0,
 			numberOfCurrentUsers: json["current_user_count"]?["raw"] as? Int ?? 0,
 			numberOfAllTimeUsers: json["all_time_user_count"]?["raw"] as? Int ?? 0,
 			numberOfFavorites: json["favorite_count"]?["raw"] as? Int ?? 0,

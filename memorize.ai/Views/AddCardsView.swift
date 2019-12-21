@@ -69,6 +69,12 @@ struct AddCardsView: View {
 						self.presentationMode.wrappedValue.dismiss()
 					}
 				}
+				if self.model.currentCard != nil {
+					AddCardsViewAddSectionPopUp(
+						deck: self.model.deck,
+						card: self.model.currentCard!
+					)
+				}
 			}
 		}
 	}

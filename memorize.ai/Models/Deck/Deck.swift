@@ -37,6 +37,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var averageRating: Double
 	@Published var numberOfDownloads: Int
 	@Published var numberOfCards: Int
+	@Published var numberOfUnsectionedCards: Int
 	@Published var numberOfCurrentUsers: Int
 	@Published var numberOfAllTimeUsers: Int
 	@Published var numberOfFavorites: Int
@@ -79,6 +80,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		averageRating: Double,
 		numberOfDownloads: Int,
 		numberOfCards: Int,
+		numberOfUnsectionedCards: Int,
 		numberOfCurrentUsers: Int,
 		numberOfAllTimeUsers: Int,
 		numberOfFavorites: Int,
@@ -110,6 +112,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		self.averageRating = averageRating
 		self.numberOfDownloads = numberOfDownloads
 		self.numberOfCards = numberOfCards
+		self.numberOfUnsectionedCards = numberOfUnsectionedCards
 		self.numberOfCurrentUsers = numberOfCurrentUsers
 		self.numberOfAllTimeUsers = numberOfAllTimeUsers
 		self.numberOfFavorites = numberOfFavorites
@@ -143,6 +146,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			averageRating: snapshot.get("averageRating") as? Double ?? 0,
 			numberOfDownloads: snapshot.get("downloadCount") as? Int ?? 0,
 			numberOfCards: snapshot.get("cardCount") as? Int ?? 0,
+			numberOfUnsectionedCards: snapshot.get("unsectionedCardCount") as? Int ?? 0,
 			numberOfCurrentUsers: snapshot.get("currentUserCount") as? Int ?? 0,
 			numberOfAllTimeUsers: snapshot.get("allTimeUserCount") as? Int ?? 0,
 			numberOfFavorites: snapshot.get("favoriteCount") as? Int ?? 0,
@@ -173,6 +177,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		averageRating: Double = 0,
 		numberOfDownloads: Int = 0,
 		numberOfCards: Int = 0,
+		numberOfUnsectionedCards: Int = 0,
 		numberOfCurrentUsers: Int = 0,
 		numberOfAllTimeUsers: Int = 0,
 		numberOfFavorites: Int = 0,
@@ -205,6 +210,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			averageRating: averageRating,
 			numberOfDownloads: numberOfDownloads,
 			numberOfCards: numberOfCards,
+			numberOfUnsectionedCards: numberOfUnsectionedCards,
 			numberOfCurrentUsers: numberOfCurrentUsers,
 			numberOfAllTimeUsers: numberOfAllTimeUsers,
 			numberOfFavorites: numberOfFavorites,

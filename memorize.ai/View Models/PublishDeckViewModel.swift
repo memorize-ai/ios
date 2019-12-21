@@ -104,6 +104,7 @@ final class PublishDeckViewModel: ViewModel {
 				"averageRating": 0,
 				"downloadCount": 0,
 				"cardCount": 0,
+				"unsectionedCardCount": 0,
 				"currentUserCount": 0,
 				"allTimeUserCount": 0,
 				"favoriteCount": 0,
