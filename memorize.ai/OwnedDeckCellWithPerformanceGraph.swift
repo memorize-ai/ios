@@ -58,7 +58,7 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 								ActivityIndicator(color: .gray)
 							}
 						} else {
-							deck.image_?
+							deck.displayImage?
 								.resizable()
 								.renderingMode(.original)
 								.aspectRatio(contentMode: .fill)

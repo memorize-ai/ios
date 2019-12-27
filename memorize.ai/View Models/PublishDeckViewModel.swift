@@ -8,7 +8,7 @@ final class PublishDeckViewModel: ViewModel {
 	
 	@Published var image: UIImage? {
 		willSet {
-			image_ = newValue.map { .init(uiImage: $0) }
+			displayImage = newValue.map { .init(uiImage: $0) }
 		}
 		didSet {
 			didChangeImage = true
@@ -24,7 +24,7 @@ final class PublishDeckViewModel: ViewModel {
     @Published var isImagePopUpShowing = false
 	@Published var isImagePickerShowing = false
 	
-	var image_: Image?
+	var displayImage: Image?
 	var imagePickerSource: ImagePicker.Source!
 	var didChangeImage = false
 	

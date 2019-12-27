@@ -20,7 +20,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var hasImage: Bool
 	@Published var image: UIImage? {
 		willSet {
-			image_ = newValue.map { .init(uiImage: $0) }
+			displayImage = newValue.map { .init(uiImage: $0) }
 		}
 	}
 	@Published var name: String
@@ -59,7 +59,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var ratingLoadingState = LoadingState()
 	@Published var similarDecksLoadingState = LoadingState()
 	
-	var image_: Image?
+	var displayImage: Image?
 	
 	init(
 		id: String,

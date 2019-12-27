@@ -12,7 +12,7 @@ struct MarketDeckViewHeader: View {
 	var body: some View {
 		VStack {
 			HStack(spacing: 0) {
-				deck.image_?
+				deck.displayImage?
 					.resizable()
 					.aspectRatio(contentMode: .fill)
 					.frame(maxWidth: 117, idealHeight: 117, maxHeight: 117)
@@ -38,35 +38,46 @@ struct MarketDeckViewHeader: View {
 					.padding(.bottom, 5)
 					HStack(spacing: 10) {
 						Button(action: {
-							// TODO: Open/get deck
+							if self.hasDeck {
+								self.currentStore.goToDecksView(withDeck: self.deck)
+							} else {
+								self.deck.get(user: self.currentStore.user)
+							}
 						}) {
 							CustomRectangle(
 								background: Color.white
 							) {
-								Text(hasDeck ? "OPEN" : "GET")
-									.font(.muli(.bold, size: 15))
-									.foregroundColor(.extraPurple)
+								Group {
+									if deck.getLoadingState.isLoading {
+										ActivityIndicator(color: .extraPurple)
+									} else {
+										Text(hasDeck ? "OPEN" : "GET")
+											.font(.muli(.bold, size: 15))
+											.foregroundColor(.extraPurple)
+									}
+								}
+								.frame(maxWidth: 84)
+								.frame(height: 32)
+							}
+						}
+						Button(action: {
+							// TODO: Remove deck
+						}) {
+							CustomRectangle(
+								background: Color.transparent,
+								borderColor: Color.white.opacity(0.3),
+								borderWidth: 1.5
+							) {
+								Text("REMOVE")
+									.font(.muli(.bold, size: 13))
+									.foregroundColor(Color.white.opacity(0.7))
 									.frame(maxWidth: 84)
 									.frame(height: 32)
 							}
 						}
-						if hasDeck {
-							Button(action: {
-								// TODO: Remove deck
-							}) {
-								CustomRectangle(
-									background: Color.transparent,
-									borderColor: Color.white.opacity(0.3),
-									borderWidth: 1.5
-								) {
-									Text("REMOVE")
-										.font(.muli(.bold, size: 13))
-										.foregroundColor(Color.white.opacity(0.7))
-										.frame(maxWidth: 84)
-										.frame(height: 32)
-								}
-							}
-						}
+						.disabled(!hasDeck)
+						.opacity(*hasDeck)
+						.animation(.easeIn(duration: 0.3))
 					}
 				}
 			}
@@ -82,11 +93,15 @@ struct MarketDeckViewHeader: View {
 #if DEBUG
 struct MarketDeckViewHeader_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketDeckViewHeader()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(
-				PREVIEW_CURRENT_STORE.user.decks.first!
+		ZStack {
+			Color.gray
+				.edgesIgnoringSafeArea(.all)
+			MarketDeckViewHeader()
+				.environmentObject(PREVIEW_CURRENT_STORE)
+				.environmentObject(
+					PREVIEW_CURRENT_STORE.user.decks.first!
 			)
+		}
 	}
 }
 #endif
