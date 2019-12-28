@@ -9,14 +9,22 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 			contentHeight: 50 * 2
 		) {
 			PopUpButton(
-				icon: nil as EmptyView?, // TODO: Add image
+				icon: Image.camera
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 21, height: 21),
 				text: "Camera",
 				textColor: .darkGray
 			) {
 				self.model.showImagePicker(source: .camera)
 			}
 			PopUpButton(
-				icon: nil as EmptyView?, // TODO: Add image
+				icon: Image.photoLibrary
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 21, height: 21),
 				text: "Photo library",
 				textColor: .darkGray
 			) {
@@ -60,9 +68,11 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 #if DEBUG
 struct PublishDeckView_Previews: PreviewProvider {
 	static var previews: some View {
-		PublishDeckView()
+		let model = PublishDeckViewModel()
+		model.isImagePopUpShowing = true
+		return PublishDeckView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-//			.environmentObject(PublishDeckViewModel())
+			.environmentObject(model)
 	}
 }
 #endif

@@ -55,4 +55,7 @@ extension Image {
 	static let pencil = Self("Pencil")
 	static let grayTrashIcon = Self("GrayTrashIcon")
 	static let blueCheck = Self("BlueCheck")
+	
+	static let camera = Self("Camera")
+	static let photoLibrary = Self("PhotoLibrary")
 }

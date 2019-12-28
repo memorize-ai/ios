@@ -47,22 +47,10 @@ struct TopicPerformanceSheetView: View {
 						Rectangle()
 							.foregroundColor(.lightGrayBorder)
 							.frame(height: 1)
-						HStack {
-							Text("Decks")
-								.font(.muli(.bold, size: 18))
-								.foregroundColor(.darkGray)
-								.padding(.top, -6)
-							Spacer()
-							Button(action: {
-								// TODO: Go to search view with selected topic
-							}) {
-								HStack {
-									Image(systemName: .plusCircle)
-									Text("Add")
-										.font(.muli(.semiBold, size: 15))
-								}
-							}
-						}
+						Text("Decks")
+							.font(.muli(.bold, size: 18))
+							.foregroundColor(.darkGray)
+							.padding(.top, -6)
 					}
 					.padding(.horizontal, 25)
 					VStack(spacing: 4) {
