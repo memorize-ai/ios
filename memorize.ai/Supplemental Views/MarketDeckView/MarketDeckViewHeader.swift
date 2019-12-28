@@ -9,6 +9,12 @@ struct MarketDeckViewHeader: View {
 		currentStore.user.hasDeck(deck)
 	}
 	
+	func getDeck() {
+		_ = hasDeck
+			? deck.remove(user: currentStore.user)
+			: deck.get(user: currentStore.user)
+	}
+	
 	var body: some View {
 		VStack {
 			HStack(spacing: 0) {
@@ -36,47 +42,26 @@ struct MarketDeckViewHeader: View {
 					.foregroundColor(Color.white.opacity(0.7))
 					.padding(.top, -5)
 					.padding(.bottom, 5)
-					HStack(spacing: 10) {
-						Button(action: {
-							if self.hasDeck {
-								self.currentStore.goToDecksView(withDeck: self.deck)
-							} else {
-								self.deck.get(user: self.currentStore.user)
-							}
-						}) {
-							CustomRectangle(
-								background: Color.white
-							) {
-								Group {
-									if deck.getLoadingState.isLoading {
-										ActivityIndicator(color: .extraPurple)
-									} else {
-										Text(hasDeck ? "OPEN" : "GET")
-											.font(.muli(.bold, size: 15))
-											.foregroundColor(.extraPurple)
-									}
+					Button(action: getDeck) {
+						CustomRectangle(
+							background: hasDeck
+								? Color.transparent
+								: Color.white,
+							borderColor: Color.white.opacity(0.3),
+							borderWidth: hasDeck ? 1.5 : 0
+						) {
+							Group {
+								if deck.getLoadingState.isLoading {
+									ActivityIndicator(color: .extraPurple)
+								} else {
+									Text(hasDeck ? "REMOVE" : "GET")
+										.font(.muli(.bold, size: 15))
+										.foregroundColor(.extraPurple)
 								}
-								.frame(maxWidth: 84)
-								.frame(height: 32)
 							}
+							.frame(maxWidth: 84)
+							.frame(height: 32)
 						}
-						Button(action: {
-							// TODO: Remove deck
-						}) {
-							CustomRectangle(
-								background: Color.transparent,
-								borderColor: Color.white.opacity(0.3),
-								borderWidth: 1.5
-							) {
-								Text("REMOVE")
-									.font(.muli(.bold, size: 13))
-									.foregroundColor(Color.white.opacity(0.7))
-									.frame(maxWidth: 84)
-									.frame(height: 32)
-							}
-						}
-						.disabled(!hasDeck)
-						.opacity(*hasDeck)
 						.animation(.easeIn(duration: 0.3))
 					}
 				}
