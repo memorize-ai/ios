@@ -80,13 +80,21 @@ struct DecksViewDeckOptionsPopUp: View {
 				// TODO: View performance
 			}
 			PopUpDivider()
-			PopUpButton(
-				icon: resizeImage(.purpleShoppingCartIcon),
-				text: "Visit page",
-				textColor: .darkGray
+			NavigationLink(
+				destination: MarketDeckView()
+					.environmentObject(selectedDeck)
+					.removeNavigationBar()
 			) {
-				// TODO: Visit marketplace page
+				HStack(spacing: 20) {
+					resizeImage(.purpleShoppingCartIcon)
+					Text("Visit page")
+						.font(.muli(.semiBold, size: 17))
+						.foregroundColor(.darkGray)
+					Spacer()
+				}
+				.padding(.horizontal, 30)
 			}
+			.frame(height: 50)
 			PopUpDivider()
 			PopUpButton(
 				icon: XButton(.purple, height: 15)
