@@ -5,8 +5,6 @@ struct MarketDeckViewTopControls: View {
 	
 	@EnvironmentObject var deck: Deck
 	
-	let shareView = ShareView()
-	
 	var body: some View {
 		HStack {
 			Button(action: {
@@ -16,9 +14,9 @@ struct MarketDeckViewTopControls: View {
 			}
 			Spacer()
 			Button(action: {
-				self.shareView.share(items: [self.deck.shareMessage])
+				share(items: [self.deck.shareMessage])
 			}) {
-				ZStack {
+				Group {
 					if deck.creatorLoadingState.isLoading {
 						ActivityIndicator()
 					} else {
@@ -27,7 +25,6 @@ struct MarketDeckViewTopControls: View {
 							.aspectRatio(contentMode: .fit)
 							.foregroundColor(Color.white.opacity(0.8))
 					}
-					shareView
 				}
 				.frame(width: 23, height: 23)
 			}
