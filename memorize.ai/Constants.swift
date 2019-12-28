@@ -21,3 +21,6 @@ let HTML_ELEMENTS = ["a", "abbr", "acronym", "abbr", "address", "applet", "objec
 let HTML_VOID_ELEMENTS = ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]
 
 let IMAGE_COMPRESSION_QUALITY: CGFloat = 0.5
+
+let APP_STORE_URL = "https://apps.apple.com/us/app/memorize-ai/id1462251805"
+let WEB_URL = "https://memorize.ai"

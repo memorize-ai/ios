@@ -84,7 +84,7 @@ struct MarketDeckViewHeader_Previews: PreviewProvider {
 				.environmentObject(PREVIEW_CURRENT_STORE)
 				.environmentObject(
 					PREVIEW_CURRENT_STORE.user.decks.first!
-			)
+				)
 		}
 	}
 }
