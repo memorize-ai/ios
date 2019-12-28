@@ -6,6 +6,8 @@ struct DecksViewDeckOptionsPopUp: View {
 	
 	@ObservedObject var selectedDeck: Deck
 	
+	let shareView = ShareView()
+	
 	var isOwner: Bool {
 		selectedDeck.creatorId == currentStore.user.id
 	}
@@ -42,16 +44,35 @@ struct DecksViewDeckOptionsPopUp: View {
 					forUser: self.currentStore.user
 				)
 			}
-			PopUpButton(
-				icon: Image(systemName: .squareAndArrowUp)
-					.resizable()
-					.aspectRatio(contentMode: .fit)
-					.foregroundColor(.darkBlue)
-					.frame(width: 21, height: 21),
-				text: "Share",
-				textColor: .darkGray
-			) {
-				// TODO: Share deck
+			Button(action: {
+				self.shareView.share(items: [
+					self.selectedDeck.shareMessage
+				])
+			}) {
+				ZStack {
+					HStack(spacing: 20) {
+						if selectedDeck.creatorLoadingState.isLoading {
+							ActivityIndicator(color: .darkBlue)
+						} else {
+							Image(systemName: .squareAndArrowUp)
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.foregroundColor(.darkBlue)
+								.frame(width: 21, height: 21)
+						}
+						Text("Share")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(.darkGray)
+						Spacer()
+					}
+					.padding(.horizontal, 30)
+					shareView
+				}
+			}
+			.frame(height: 50)
+			.disabled(!selectedDeck.creatorLoadingState.didSucceed)
+			.onAppear {
+				self.selectedDeck.loadCreator()
 			}
 			if isOwner {
 				PopUpButton(

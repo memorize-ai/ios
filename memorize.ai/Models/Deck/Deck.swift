@@ -235,6 +235,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		storage.child("decks/\(id)")
 	}
 	
+	var shareMessage: String {
+		"Check out \(name) by \(creator?.name ?? "(unknown)") on memorize.ai\n\nDownload on the App Store: \(APP_STORE_URL)\nLearn more at \(WEB_URL)"
+	}
+	
 	@discardableResult
 	func addObserver() -> Self {
 		guard snapshotListener == nil else { return self }
