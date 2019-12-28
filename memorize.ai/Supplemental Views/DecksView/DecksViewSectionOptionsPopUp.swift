@@ -80,16 +80,6 @@ struct DecksViewSectionOptionsPopUp: View {
 			}
 			if isOwner {
 				PopUpButton(
-					icon: Image(systemName: .plusCircle)
-						.resizable()
-						.foregroundColor(.darkBlue)
-						.frame(width: 21, height: 21),
-					text: "Add cards",
-					textColor: .darkGray
-				) {
-					// TODO: Add cards
-				}
-				PopUpButton(
 					icon: Image.editSectionsIcon
 						.resizable()
 						.renderingMode(.original)
@@ -109,7 +99,7 @@ struct DecksViewSectionOptionsPopUp: View {
 					text: "Share unlock link",
 					textColor: .darkGray
 				) {
-					// TODO: Share unlock link
+					share(items: [self.section.unlockLink])
 				}
 				PopUpDivider()
 				PopUpButton(

@@ -51,6 +51,10 @@ extension Deck {
 			numberOfDueCards > 0
 		}
 		
+		var unlockLink: String {
+			"\(WEB_URL)/d/\(parent.id)/s/\(id)/u"
+		}
+		
 		@discardableResult
 		func loadCards(withUserDataForUser user: User? = nil) -> Self {
 			guard cardsLoadingState.isNone else { return self }
