@@ -478,6 +478,15 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
+	func delete() -> Self {
+		_ = documentReference.delete() as Promise<Void>
+		_ = firestore
+			.document("users/\(creatorId)/decks/\(id)")
+			.delete() as Promise<Void>
+		return self
+	}
+	
+	@discardableResult
 	func get(user: User) -> Self {
 		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").setData([

@@ -53,6 +53,15 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
+	func reloadSelectedDeck() -> Self {
+		selectedDeck = user.decks.first
+		if selectedDeck == nil && mainTabViewSelection == .decks {
+			mainTabViewSelection = .home
+		}
+		return self
+	}
+	
+	@discardableResult
 	func loadUser() -> Self {
 		guard userLoadingState.isNone else { return self }
 		userLoadingState.startLoading()

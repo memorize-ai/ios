@@ -6,6 +6,8 @@ final class DecksViewModel: ViewModel {
 	@Published var selectedSection: Deck.Section?
 	@Published var isSectionOptionsPopUpShowing = false
 	
+	@Published var isDestroyAlertShowing = false
+	
 	@Published var expandedSections = [Deck.Section]()
 	
 	func isSectionExpanded(_ section: Deck.Section) -> Bool {

@@ -32,20 +32,6 @@ struct DecksViewSectionBody: View {
 							.foregroundColor(.gray)
 							.scaleEffect(1.5)
 					}
-				if isOwner {
-					Button(action: {
-						// TODO: Add cards to section
-					}) {
-						HStack(spacing: 10) {
-							Image(systemName: .plusCircle)
-								.scaleEffect(1.15)
-							Text("Add cards")
-								.font(.muli(.bold, size: 17))
-						}
-						.foregroundColor(.darkBlue)
-					}
-					.padding(.top, 6)
-				}
 			}
 		}
 		.padding(.top, 6)

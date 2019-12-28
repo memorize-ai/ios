@@ -94,7 +94,11 @@ struct DecksViewDeckOptionsPopUp: View {
 				text: "Remove from library",
 				textColor: .darkGray
 			) {
-				// TODO: Removed deck from user library
+				self.selectedDeck.remove(user: self.currentStore.user)
+				popUpWithAnimation {
+					self.model.isDeckOptionsPopUpShowing = false
+					self.currentStore.reloadSelectedDeck()
+				}
 			}
 			if isOwner {
 				PopUpButton(
@@ -102,7 +106,21 @@ struct DecksViewDeckOptionsPopUp: View {
 					text: "Destroy",
 					textColor: .darkGray
 				) {
-					// TODO: Remove deck from marketplace
+					self.model.isDestroyAlertShowing = true
+				}
+				.alert(isPresented: $model.isDestroyAlertShowing) {
+					.init(
+						title: .init("Are you sure?"),
+						message: .init("This deck and all of its content will be deleted. This cannot be undone."),
+						primaryButton: .destructive(.init("Destroy")) {
+							self.selectedDeck.delete()
+							popUpWithAnimation {
+								self.model.isDeckOptionsPopUpShowing = false
+								self.currentStore.reloadSelectedDeck()
+							}
+						},
+						secondaryButton: .cancel()
+					)
 				}
 			}
 		}
