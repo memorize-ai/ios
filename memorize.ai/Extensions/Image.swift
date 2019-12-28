@@ -47,6 +47,7 @@ extension Image {
 	static let grayStar = Self("GrayStar")
 	static let greenFilledStar = Self("GreenFilledStar")
 	static let greenTransparentStar = Self("GreenTransparentStar")
+	static let whiteTransparentStar = Self("WhiteTransparentStar")
     
     static let addImage = Self("AddImage")
 	
