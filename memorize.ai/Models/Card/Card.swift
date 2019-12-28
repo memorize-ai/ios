@@ -80,7 +80,9 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		previewImageLoadingState.startLoading()
 		URLSession.shared.dataTask(with: url) { data, _, error in
 			guard error == nil, let data = data, let image = Image(data: data) else {
-				self.previewImageLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				DispatchQueue.main.async {
+					self.previewImageLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				}
 				return
 			}
 			DispatchQueue.main.async {
