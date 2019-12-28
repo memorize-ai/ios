@@ -7,6 +7,10 @@ struct MarketDeckViewTopControls: View {
 	
 	let shareView = ShareView()
 	
+	var shareMessage: String {
+		"Check out \(self.deck.name) by \(self.deck.creator?.name ?? "(unknown)") on memorize.ai\n\nDownload on the App Store: \(APP_STORE_URL)\nLearn more at \(WEB_URL)"
+	}
+	
 	var body: some View {
 		HStack {
 			Button(action: {
@@ -16,14 +20,7 @@ struct MarketDeckViewTopControls: View {
 			}
 			Spacer()
 			Button(action: {
-				self.shareView.share(items: [
-					"""
-					Check out \(self.deck.name) by \(self.deck.creator?.name ?? "(unknown)") on memorize.ai
-					
-					Download on the App Store: \(APP_STORE_URL)
-					Learn more at \(WEB_URL)
-					"""
-				])
+				self.shareView.share(items: [self.shareMessage])
 			}) {
 				ZStack {
 					if deck.creatorLoadingState.isLoading {
@@ -33,10 +30,10 @@ struct MarketDeckViewTopControls: View {
 							.resizable()
 							.aspectRatio(contentMode: .fit)
 							.foregroundColor(Color.white.opacity(0.8))
-							.frame(width: 23, height: 23)
 					}
 					shareView
 				}
+				.frame(width: 23, height: 23)
 			}
 			.disabled(!deck.creatorLoadingState.didSucceed)
 		}

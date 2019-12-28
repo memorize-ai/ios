@@ -55,7 +55,11 @@ struct MarketDeckViewHeader: View {
 								} else {
 									Text(hasDeck ? "REMOVE" : "GET")
 										.font(.muli(.bold, size: 15))
-										.foregroundColor(.extraPurple)
+										.foregroundColor(
+											hasDeck
+												? Color.white.opacity(0.6)
+												: .extraPurple
+										)
 								}
 							}
 							.frame(maxWidth: 84)
