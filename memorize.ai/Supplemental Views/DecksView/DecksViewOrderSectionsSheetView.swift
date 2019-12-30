@@ -5,31 +5,20 @@ struct DecksViewOrderSectionsSheetView: View {
 	@ObservedObject var deck: Deck
 	
 	func onSectionMove(from source: Int, to destination: Int) {
-		print(source, destination)
+		if source == destination { return }
+		
+		let section = deck.sections.remove(at: source)
+		deck.sections.insert(section, at: destination)
 		
 		let batch = firestore.batch()
 		
-		batch.updateData(
-			["index": destination],
-			forDocument: deck.sections[source].documentReference
-		)
-		
-		if source < destination {
-			for section in deck.sections[source..<destination] {
-				batch.updateData(
-					["index": FieldValue.increment(-1.0)],
-					forDocument: section.documentReference
-				)
-			}
-		} else {
-			for section in deck.sections[destination + 1...source] {
-				batch.updateData(
-					["index": FieldValue.increment(1.0)],
-					forDocument: section.documentReference
-				)
-			}
+		for i in 0..<deck.sections.count {
+			batch.updateData(
+				["index": i],
+				forDocument: deck.sections[i].documentReference
+			)
 		}
-		
+
 		batch.commit()
 	}
 	
@@ -39,13 +28,11 @@ struct DecksViewOrderSectionsSheetView: View {
 				Text(section.name)
 			}
 			.onMove { sources, destination in
-				guard
-					let source = sources.first,
-					source != destination
-				else { return }
+				guard let source = sources.first else { return }
+				print(source, destination)
 				self.onSectionMove(
 					from: source,
-					to: destination
+					to: destination - *(source < destination)
 				)
 			}
 		}
