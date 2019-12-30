@@ -46,6 +46,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 			id: "0",
 			parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 			name: "CSS",
+			index: 0,
 			numberOfCards: 56,
 			cards: [
 				.init(

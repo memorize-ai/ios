@@ -27,7 +27,7 @@ struct DecksView: View {
 							Rectangle()
 								.foregroundColor(.lightGrayBackground)
 							ScrollView {
-								VStack {
+								VStack(spacing: 16) {
 									DecksViewSections(
 										selectedDeck: self.selectedDeck
 									)

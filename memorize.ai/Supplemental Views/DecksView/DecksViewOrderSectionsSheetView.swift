@@ -4,6 +4,13 @@ struct DecksViewOrderSectionsSheetView: View {
 	@ObservedObject var deck: Deck
 	
 	func onSectionMove(from source: Int, to destination: Int) {
+		if source == destination { return }
+		
+		let maxIndex = deck.sections.count - 1
+		
+		let source = min(source, maxIndex)
+		let destination = min(destination, maxIndex)
+		
 		let batch = firestore.batch()
 		batch.updateData(
 			["index": destination],
@@ -14,6 +21,7 @@ struct DecksViewOrderSectionsSheetView: View {
 			forDocument: deck.sections[destination].documentReference
 		)
 		batch.commit()
+		deck.sections.swapAt(source, destination)
 	}
 	
 	var body: some View {

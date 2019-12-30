@@ -9,6 +9,7 @@ extension Deck {
 		let parent: Deck
 		
 		@Published var name: String
+		@Published var index: Int
 		@Published var numberOfCards: Int
 		
 		@Published var cards: [Card]
@@ -22,12 +23,14 @@ extension Deck {
 			id: String,
 			parent: Deck,
 			name: String,
+			index: Int,
 			numberOfCards: Int,
 			cards: [Card] = []
 		) {
 			self.id = id
 			self.parent = parent
 			self.name = name
+			self.index = index
 			self.numberOfCards = numberOfCards
 			self.cards = cards
 		}
@@ -37,6 +40,7 @@ extension Deck {
 				id: snapshot.documentID,
 				parent: parent,
 				name: snapshot.get("name") as? String ?? "Unknown",
+				index: snapshot.get("index") as? Int ?? 0,
 				numberOfCards: snapshot.get("cardCount") as? Int ?? 0
 			)
 		}
@@ -99,6 +103,7 @@ extension Deck {
 		@discardableResult
 		func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 			name = snapshot.get("name") as? String ?? name
+			index = snapshot.get("index") as? Int ?? index
 			numberOfCards = snapshot.get("cardCount") as? Int ?? 0
 			return self
 		}

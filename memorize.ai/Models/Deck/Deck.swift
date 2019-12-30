@@ -240,6 +240,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		"Check out \(name) by \(creator?.name ?? "(unknown)") on memorize.ai\n\nDownload on the App Store: \(APP_STORE_URL)\nLearn more at \(WEB_URL)"
 	}
 	
+	var nextSectionIndex: Int {
+		sections.count
+	}
+	
 	@discardableResult
 	func addObserver() -> Self {
 		guard snapshotListener == nil else { return self }
@@ -319,6 +323,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 					self.sections.removeAll { $0.id == sectionId }
 				}
 			}
+			self.sections.sort { $0.index < $1.index }
 			self.sectionsLoadingState.succeed()
 		}
 		return self
@@ -606,7 +611,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			guard let name = alertController.textFields?.first?.text else { return }
 			self.createSectionLoadingState.startLoading()
 			self.documentReference.collection("sections").addDocument(data: [
-				"name": name
+				"name": name,
+				"index": self.nextSectionIndex
 			]).done { ref in
 				self.createSectionLoadingState.succeed()
 				completion?(ref.documentID)

@@ -14,6 +14,16 @@ struct DecksViewDeckOptionsPopUp: View {
 		selectedDeck.userData?.isFavorite ?? false
 	}
 	
+	var canOrderSections: Bool {
+		selectedDeck.sections.count > 1
+	}
+	
+	func hide() {
+		popUpWithAnimation {
+			model.isDeckOptionsPopUpShowing = false
+		}
+	}
+	
 	func resizeImage(_ image: Image, dimension: CGFloat = 21) -> some View {
 		image
 			.resizable()
@@ -25,7 +35,10 @@ struct DecksViewDeckOptionsPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
-			contentHeight: .init(50 * (isOwner ? 7 : 5) + 2)
+			contentHeight: .init(
+				50 * (isOwner ? (7 + *canOrderSections) : 5) +
+				2 + *isOwner
+			)
 		) {
 			PopUpButton(
 				icon: resizeImage(
@@ -63,24 +76,40 @@ struct DecksViewDeckOptionsPopUp: View {
 			.onAppear {
 				self.selectedDeck.loadCreator()
 			}
-			if isOwner {
-				PopUpButton(
-					icon: resizeImage(.editSectionsIcon),
-					text: "Order sections",
-					textColor: .darkGray
-				) {
-					self.model.isOrderSectionsSheetShowing = true
-				}
-				.sheet(isPresented: $model.isOrderSectionsSheetShowing) {
-					DecksViewOrderSectionsSheetView(deck: self.selectedDeck)
-				}
-			}
 			PopUpButton(
 				icon: resizeImage(.performanceCheckIcon),
 				text: "Performance",
 				textColor: .darkGray
 			) {
 				// TODO: View performance
+			}
+			if isOwner {
+				PopUpDivider()
+				PopUpButton(
+					icon: Image(systemName: .plusCircle)
+						.resizable()
+						.aspectRatio(contentMode: .fit)
+						.foregroundColor(.darkBlue)
+						.frame(width: 21, height: 21),
+					text: "Add new section",
+					textColor: .darkGray
+				) {
+					self.selectedDeck.showCreateSectionAlert { _ in
+						self.hide()
+					}
+				}
+				if canOrderSections {
+					PopUpButton(
+						icon: resizeImage(.editSectionsIcon),
+						text: "Order sections",
+						textColor: .darkGray
+					) {
+						self.model.isOrderSectionsSheetShowing = true
+					}
+					.sheet(isPresented: $model.isOrderSectionsSheetShowing) {
+						DecksViewOrderSectionsSheetView(deck: self.selectedDeck)
+					}
+				}
 			}
 			PopUpDivider()
 			NavigationLink(

@@ -131,60 +131,70 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			id: "0",
 			parent: firstDeck,
 			name: "Section 1",
+			index: 0,
 			numberOfCards: 10
 		),
 		.init(
 			id: "1",
 			parent: firstDeck,
 			name: "Section 2",
+			index: 1,
 			numberOfCards: 20
 		),
 		.init(
 			id: "2",
 			parent: firstDeck,
 			name: "Section 3",
+			index: 2,
 			numberOfCards: 6
 		),
 		.init(
 			id: "3",
 			parent: firstDeck,
 			name: "Section 4",
+			index: 3,
 			numberOfCards: 0
 		),
 		.init(
 			id: "4",
 			parent: firstDeck,
 			name: "Section 5",
+			index: 4,
 			numberOfCards: 9
 		),
 		.init(
 			id: "5",
 			parent: firstDeck,
 			name: "Section 6",
+			index: 5,
 			numberOfCards: 7
 		),
 		.init(
 			id: "6",
 			parent: firstDeck,
 			name: "Section 7",
+			index: 6,
 			numberOfCards: 5
 		),
 		.init(
 			id: "7",
 			parent: firstDeck,
 			name: "Section 8",
+			index: 7,
 			numberOfCards: 3
 		),
 		.init(
 			id: "8",
 			parent: firstDeck,
 			name: "Section 9",
+			index: 8,
 			numberOfCards: 679
 		),
 		.init(
 			id: "9",
 			parent: firstDeck,
 			name: "Section 10",
+			index: 9,
 			numberOfCards: 1905
 		)
 	]
