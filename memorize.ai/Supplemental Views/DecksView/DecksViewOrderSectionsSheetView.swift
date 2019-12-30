@@ -1,27 +1,36 @@
 import SwiftUI
+import FirebaseFirestore
 
 struct DecksViewOrderSectionsSheetView: View {
 	@ObservedObject var deck: Deck
 	
 	func onSectionMove(from source: Int, to destination: Int) {
-		if source == destination { return }
-		
-		let maxIndex = deck.sections.count - 1
-		
-		let source = min(source, maxIndex)
-		let destination = min(destination, maxIndex)
+		print(source, destination)
 		
 		let batch = firestore.batch()
+		
 		batch.updateData(
 			["index": destination],
 			forDocument: deck.sections[source].documentReference
 		)
-		batch.updateData(
-			["index": source],
-			forDocument: deck.sections[destination].documentReference
-		)
+		
+		if source < destination {
+			for section in deck.sections[source..<destination] {
+				batch.updateData(
+					["index": FieldValue.increment(-1.0)],
+					forDocument: section.documentReference
+				)
+			}
+		} else {
+			for section in deck.sections[destination + 1...source] {
+				batch.updateData(
+					["index": FieldValue.increment(1.0)],
+					forDocument: section.documentReference
+				)
+			}
+		}
+		
 		batch.commit()
-		deck.sections.swapAt(source, destination)
 	}
 	
 	var body: some View {
@@ -30,8 +39,14 @@ struct DecksViewOrderSectionsSheetView: View {
 				Text(section.name)
 			}
 			.onMove { sources, destination in
-				guard let source = sources.first else { return }
-				self.onSectionMove(from: source, to: destination)
+				guard
+					let source = sources.first,
+					source != destination
+				else { return }
+				self.onSectionMove(
+					from: source,
+					to: destination
+				)
 			}
 		}
 		.environment(\.editMode, .constant(.active))
