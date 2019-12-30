@@ -81,7 +81,10 @@ struct DecksViewDeckOptionsPopUp: View {
 				text: "Performance",
 				textColor: .darkGray
 			) {
-				// TODO: View performance
+				self.model.isPerformanceSheetViewShowing = true
+			}
+			.sheet(isPresented: $model.isPerformanceSheetViewShowing) {
+				DecksViewPerformanceSheetView(deck: self.selectedDeck)
 			}
 			if isOwner {
 				PopUpDivider()
