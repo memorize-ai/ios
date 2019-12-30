@@ -14,6 +14,8 @@ extension Deck {
 		@Published var cards: [Card]
 		@Published var cardsLoadingState = LoadingState()
 		
+		@Published var renameLoadingState = LoadingState()
+		
 		init(
 			id: String,
 			parent: Deck,
@@ -35,6 +37,10 @@ extension Deck {
 				name: snapshot.get("name") as? String ?? "Unknown",
 				numberOfCards: snapshot.get("cardCount") as? Int ?? 0
 			)
+		}
+		
+		var documentReference: DocumentReference {
+			parent.documentReference.collection("sections").document(id)
 		}
 		
 		var isUnlocked: Bool {
@@ -97,6 +103,31 @@ extension Deck {
 			name = snapshot.get("name") as? String ?? name
 			numberOfCards = snapshot.get("cardCount") as? Int ?? 0
 			return self
+		}
+		
+		func showRenameAlert(title: String = "Rename section", message: String? = nil) {
+			let alertController = UIAlertController(
+				title: title,
+				message: message,
+				preferredStyle: .alert
+			)
+			alertController.addTextField { textField in
+				textField.placeholder = "Section name"
+				textField.text = self.name
+			}
+			alertController.addAction(.init(title: "Cancel", style: .cancel))
+			alertController.addAction(.init(title: "Rename", style: .default) { _ in
+				guard let name = alertController.textFields?.first?.text else { return }
+				self.renameLoadingState.startLoading()
+				self.documentReference.updateData([
+					"name": name
+				]).done {
+					self.renameLoadingState.succeed()
+				}.catch { error in
+					self.renameLoadingState.fail(error: error)
+				}
+			})
+			currentViewController.present(alertController, animated: true)
 		}
 		
 		static func == (lhs: Section, rhs: Section) -> Bool {

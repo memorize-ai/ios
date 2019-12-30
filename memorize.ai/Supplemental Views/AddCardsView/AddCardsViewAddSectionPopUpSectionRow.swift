@@ -28,7 +28,7 @@ struct AddCardsViewAddSectionPopUpSectionRow: View {
 					.font(.muli(.semiBold, size: 17))
 					.foregroundColor(.darkGray)
 				Button(action: {
-					// TODO: Rename section
+					self.section.showRenameAlert()
 				}) {
 					Image.pencil
 						.resizable()

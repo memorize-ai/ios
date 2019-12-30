@@ -85,10 +85,10 @@ struct DecksViewSectionOptionsPopUp: View {
 						.renderingMode(.original)
 						.aspectRatio(contentMode: .fit)
 						.frame(width: 21, height: 21),
-					text: "Edit",
+					text: "Rename",
 					textColor: .darkGray
 				) {
-					// TODO: Edit section
+					self.section.showRenameAlert()
 				}
 				PopUpButton(
 					icon: Image(systemName: .link)
