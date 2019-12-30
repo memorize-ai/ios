@@ -29,7 +29,6 @@ struct DecksViewOrderSectionsSheetView: View {
 			}
 			.onMove { sources, destination in
 				guard let source = sources.first else { return }
-				print(source, destination)
 				self.onSectionMove(
 					from: source,
 					to: destination - *(source < destination)
