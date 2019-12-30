@@ -15,6 +15,7 @@ extension Deck {
 		@Published var cardsLoadingState = LoadingState()
 		
 		@Published var renameLoadingState = LoadingState()
+		@Published var unlockLoadingState = LoadingState()
 		
 		init(
 			id: String,
@@ -41,10 +42,6 @@ extension Deck {
 		
 		var documentReference: DocumentReference {
 			parent.documentReference.collection("sections").document(id)
-		}
-		
-		var isUnlocked: Bool {
-			parent.userData?.unlockedSections.contains(id) ?? false
 		}
 		
 		var numberOfDueCards: Int {
@@ -105,7 +102,13 @@ extension Deck {
 			return self
 		}
 		
-		func showRenameAlert(title: String = "Rename section", message: String? = nil) {
+		func isUnlocked(forUser user: User) -> Bool {
+			user.id == parent.creatorId ||
+			parent.userData?.unlockedSections.contains(id) ?? false
+		}
+		
+		@discardableResult
+		func showRenameAlert(title: String = "Rename section", message: String? = nil) -> Self {
 			let alertController = UIAlertController(
 				title: title,
 				message: message,
@@ -128,6 +131,40 @@ extension Deck {
 				}
 			})
 			currentViewController.present(alertController, animated: true)
+			return self
+		}
+		
+		@discardableResult
+		func showUnlockAlert(
+			forUser user: User,
+			message: String? = "Are you sure?",
+			completion: (() -> Void)? = nil
+		) -> Self {
+			let alertController = UIAlertController(
+				title: "Unlock \(name)",
+				message: message,
+				preferredStyle: .alert
+			)
+			alertController.addAction(.init(title: "Cancel", style: .cancel))
+			alertController.addAction(.init(title: "Unlock", style: .default) { _ in
+				self.unlock(forUser: user)
+				completion?()
+			})
+			currentViewController.present(alertController, animated: true)
+			return self
+		}
+		
+		@discardableResult
+		func unlock(forUser user: User) -> Self {
+			unlockLoadingState.startLoading()
+			user.documentReference.collection("decks").document(parent.id).updateData([
+				"unlockedSections": FieldValue.arrayUnion([id])
+			]).done {
+				self.unlockLoadingState.succeed()
+			}.catch { error in
+				self.unlockLoadingState.fail(error: error)
+			}
+			return self
 		}
 		
 		static func == (lhs: Section, rhs: Section) -> Bool {

@@ -12,7 +12,7 @@ struct DecksViewSectionOptionsPopUp: View {
 	}
 	
 	var isLocked: Bool {
-		!section.isUnlocked
+		!section.isUnlocked(forUser: currentStore.user)
 	}
 	
 	var contentHeight: CGFloat {
@@ -123,7 +123,11 @@ struct DecksViewSectionOptionsPopUp: View {
 					text: "Unlock",
 					textColor: .darkGray
 				) {
-					// TODO: Unlock section
+					self.section.showUnlockAlert(forUser: self.currentStore.user) {
+						popUpWithAnimation {
+							self.model.isSectionOptionsPopUpShowing = false
+						}
+					}
 				}
 			}
 		}
