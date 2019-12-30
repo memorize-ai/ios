@@ -72,7 +72,7 @@ struct DecksViewDeckOptionsPopUp: View {
 					self.model.isOrderSectionsSheetShowing = true
 				}
 				.sheet(isPresented: $model.isOrderSectionsSheetShowing) {
-					Text("Order sections")
+					DecksViewOrderSectionsSheetView(deck: self.selectedDeck)
 				}
 			}
 			PopUpButton(
