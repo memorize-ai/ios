@@ -128,6 +128,7 @@
 		4D9AAEC023852F5E00C85EC2 /* UserLevelSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBF23852F5E00C85EC2 /* UserLevelSlider.swift */; };
 		4D9AAEC32385D25500C85EC2 /* MarketViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */; };
 		4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */; };
+		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -359,6 +360,7 @@
 		4D9AAEBF23852F5E00C85EC2 /* UserLevelSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLevelSlider.swift; sourceTree = "<group>"; };
 		4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopControls.swift; path = memorize.ai/MarketViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetView.swift; sourceTree = "<group>"; };
+		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				4D36579D238D9D5F007C3D1F /* DecksViewCardCell.swift */,
 				4D365794238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift */,
 				4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */,
+				4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */,
 			);
 			path = DecksView;
 			sourceTree = "<group>";
@@ -1379,6 +1382,7 @@
 				4D458A60237C97CC00A9776A /* HamburgerMenu.swift in Sources */,
 				4DB9FF532396DA1800B8DD38 /* Card+Side.swift in Sources */,
 				4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */,
+				4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */,
 				4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,

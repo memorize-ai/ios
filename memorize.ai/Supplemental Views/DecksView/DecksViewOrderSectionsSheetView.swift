@@ -2,6 +2,8 @@ import SwiftUI
 import FirebaseFirestore
 
 struct DecksViewOrderSectionsSheetView: View {
+	@Environment(\.presentationMode) var presentationMode
+	
 	@ObservedObject var deck: Deck
 	
 	func onSectionMove(from source: Int, to destination: Int) {
@@ -22,20 +24,53 @@ struct DecksViewOrderSectionsSheetView: View {
 		batch.commit()
 	}
 	
-	var body: some View {
-		List {
-			ForEach(deck.sections) { section in
-				Text(section.name)
-			}
-			.onMove { sources, destination in
-				guard let source = sources.first else { return }
-				self.onSectionMove(
-					from: source,
-					to: destination - *(source < destination)
-				)
-			}
+	func hide() {
+		presentationMode.wrappedValue.dismiss()
+	}
+	
+	var xButton: some View {
+		Button(action: hide) {
+			XButton(.purple, height: 16)
 		}
-		.environment(\.editMode, .constant(.active))
+	}
+	
+	var body: some View {
+		VStack(spacing: 0) {
+			ZStack {
+				Color.lightGrayBackground
+				HStack(spacing: 25) {
+					Text("Order sections")
+						.font(.muli(.bold, size: 20))
+						.foregroundColor(.darkGray)
+						.lineLimit(1)
+					Spacer()
+					xButton
+				}
+				.padding(.horizontal, 25)
+			}
+			.frame(height: 64)
+			List {
+				ForEach(deck.sections) { section in
+					DecksViewOrderSectionsSheetViewSectionRow(
+						section: section
+					)
+				}
+				.onMove { sources, destination in
+					guard let source = sources.first else { return }
+					self.onSectionMove(
+						from: source,
+						to: destination - *(source < destination)
+					)
+				}
+			}
+			.environment(\.editMode, .constant(.active))
+		}
+		.onAppear {
+			UITableView.appearance().separatorStyle = .none
+		}
+		.onDisappear {
+			UITableView.appearance().separatorStyle = .singleLine
+		}
 	}
 }
 

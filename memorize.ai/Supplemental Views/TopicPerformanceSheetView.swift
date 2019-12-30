@@ -50,6 +50,7 @@ struct TopicPerformanceSheetView: View {
 						Text("Decks")
 							.font(.muli(.bold, size: 18))
 							.foregroundColor(.darkGray)
+							.frame(maxWidth: .infinity, alignment: .leading)
 							.padding(.top, -6)
 					}
 					.padding(.horizontal, 25)
