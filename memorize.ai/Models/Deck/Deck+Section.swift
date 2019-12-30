@@ -116,7 +116,7 @@ extension Deck {
 				preferredStyle: .alert
 			)
 			alertController.addTextField { textField in
-				textField.placeholder = "Section name"
+				textField.placeholder = "Name"
 				textField.text = self.name
 			}
 			alertController.addAction(.init(title: "Cancel", style: .cancel))

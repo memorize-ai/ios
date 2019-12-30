@@ -58,6 +58,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var topicsLoadingState = LoadingState()
 	@Published var ratingLoadingState = LoadingState()
 	@Published var similarDecksLoadingState = LoadingState()
+	@Published var createSectionLoadingState = LoadingState()
 	
 	var displayImage: Image?
 	
@@ -583,6 +584,37 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func cache() -> Self {
 		Self.cache[id] = self
+		return self
+	}
+	
+	@discardableResult
+	func showCreateSectionAlert(
+		title: String = "Create section",
+		message: String? = nil,
+		completion: ((String) -> Void)? = nil
+	) -> Self {
+		let alertController = UIAlertController(
+			title: title,
+			message: message,
+			preferredStyle: .alert
+		)
+		alertController.addTextField { textField in
+			textField.placeholder = "Name"
+		}
+		alertController.addAction(.init(title: "Cancel", style: .cancel))
+		alertController.addAction(.init(title: "Create", style: .default) { _ in
+			guard let name = alertController.textFields?.first?.text else { return }
+			self.createSectionLoadingState.startLoading()
+			self.documentReference.collection("sections").addDocument(data: [
+				"name": name
+			]).done { ref in
+				self.createSectionLoadingState.succeed()
+				completion?(ref.documentID)
+			}.catch { error in
+				self.createSectionLoadingState.fail(error: error)
+			}
+		})
+		currentViewController.present(alertController, animated: true)
 		return self
 	}
 	

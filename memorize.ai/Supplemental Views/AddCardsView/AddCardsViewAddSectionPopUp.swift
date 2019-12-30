@@ -33,15 +33,23 @@ struct AddCardsViewAddSectionPopUp: View {
 			contentHeight: contentHeight
 		) {
 			Button(action: {
-				// TODO: <1> Add new section
+				self.deck.showCreateSectionAlert { sectionId in
+					self.card.section = self.deck.sections.first {
+						$0.id == sectionId
+					}
+				}
 			}) {
 				CustomRectangle(background: Color.mediumGray) {
 					HStack(spacing: 3) {
-						Image(systemName: .plus)
-							.font(Font.title.weight(.semibold))
-							.scaleEffect(0.65)
-						Text("ADD NEW SECTION")
-							.font(.muli(.bold, size: 16))
+						if deck.createSectionLoadingState.isLoading {
+							ActivityIndicator(color: .darkBlue)
+						} else {
+							Image(systemName: .plus)
+								.font(Font.title.weight(.semibold))
+								.scaleEffect(0.65)
+							Text("ADD NEW SECTION")
+								.font(.muli(.bold, size: 16))
+						}
 					}
 					.foregroundColor(.darkBlue)
 					.frame(maxWidth: .infinity)
@@ -52,7 +60,7 @@ struct AddCardsViewAddSectionPopUp: View {
 			}
 			VStack(spacing: 0) {
 				Button(action: {
-					self.card.sectionId = nil
+					self.card.section = nil
 				}) {
 					HStack(spacing: 20) {
 						if card.sectionId == nil {
