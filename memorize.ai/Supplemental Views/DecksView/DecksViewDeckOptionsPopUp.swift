@@ -66,10 +66,13 @@ struct DecksViewDeckOptionsPopUp: View {
 			if isOwner {
 				PopUpButton(
 					icon: resizeImage(.editSectionsIcon),
-					text: "Edit sections",
+					text: "Order sections",
 					textColor: .darkGray
 				) {
-					// TODO: <1> Edit sections
+					self.model.isOrderSectionsSheetShowing = true
+				}
+				.sheet(isPresented: $model.isOrderSectionsSheetShowing) {
+					Text("Order sections")
 				}
 			}
 			PopUpButton(
