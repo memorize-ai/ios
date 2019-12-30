@@ -55,13 +55,17 @@ struct AddCardsView: View {
 					contentHeight: 50 + 1 + 50
 				) {
 					Text("Are you sure?")
-						.font(.muli(.bold, size: 18))
+						.font(.muli(.regular, size: 18))
 						.frame(maxWidth: .infinity, alignment: .leading)
 						.frame(height: 50)
 						.padding(.horizontal, 30)
 					PopUpDivider()
 					PopUpButton(
-						icon: nil as EmptyView?,
+						icon: Image.redTrashIcon
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 21, height: 21),
 						text: "Remove",
 						textColor: .darkRed
 					) {
