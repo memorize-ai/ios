@@ -9,8 +9,10 @@ struct DecksViewOrderSectionsSheetView: View {
 	func onSectionMove(from source: Int, to destination: Int) {
 		if source == destination { return }
 		
-		let section = deck.sections.remove(at: source)
-		deck.sections.insert(section, at: destination)
+		deck.sections.insert(
+			deck.sections.remove(at: source),
+			at: destination
+		)
 		
 		let batch = firestore.batch()
 		
