@@ -33,7 +33,7 @@ struct AddCardsViewAddSectionPopUp: View {
 			contentHeight: contentHeight
 		) {
 			Button(action: {
-				// TODO: Add new section
+				// TODO: <1> Add new section
 			}) {
 				CustomRectangle(background: Color.mediumGray) {
 					HStack(spacing: 3) {

@@ -16,6 +16,7 @@ extension Deck {
 		
 		@Published var renameLoadingState = LoadingState()
 		@Published var unlockLoadingState = LoadingState()
+		@Published var deleteLoadingState = LoadingState()
 		
 		init(
 			id: String,
@@ -163,6 +164,36 @@ extension Deck {
 				self.unlockLoadingState.succeed()
 			}.catch { error in
 				self.unlockLoadingState.fail(error: error)
+			}
+			return self
+		}
+		
+		@discardableResult
+		func showDeleteAlert(
+			message: String? = "Are you sure? All of the cards in this section will be permanently deleted. This action cannot be undone.",
+			completion: (() -> Void)? = nil
+		) -> Self {
+			let alertController = UIAlertController(
+				title: "Delete \(name)",
+				message: message,
+				preferredStyle: .alert
+			)
+			alertController.addAction(.init(title: "Cancel", style: .cancel))
+			alertController.addAction(.init(title: "Delete", style: .destructive) { _ in
+				self.delete()
+				completion?()
+			})
+			currentViewController.present(alertController, animated: true)
+			return self
+		}
+		
+		@discardableResult
+		func delete() -> Self {
+			deleteLoadingState.startLoading()
+			documentReference.delete().done {
+				self.deleteLoadingState.succeed()
+			}.catch { error in
+				self.deleteLoadingState.fail(error: error)
 			}
 			return self
 		}

@@ -69,7 +69,7 @@ struct DecksViewDeckOptionsPopUp: View {
 					text: "Edit sections",
 					textColor: .darkGray
 				) {
-					// TODO: Edit sections
+					// TODO: <1> Edit sections
 				}
 			}
 			PopUpButton(

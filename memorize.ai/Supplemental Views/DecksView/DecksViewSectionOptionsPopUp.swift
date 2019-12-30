@@ -23,6 +23,12 @@ struct DecksViewSectionOptionsPopUp: View {
 		) + *isOwner)
 	}
 	
+	func hide() {
+		popUpWithAnimation {
+			model.isSectionOptionsPopUpShowing = false
+		}
+	}
+	
 	var reviewIcon: some View {
 		ZStack(alignment: .topLeading) {
 			RoundedRectangle(cornerRadius: 4)
@@ -111,7 +117,7 @@ struct DecksViewSectionOptionsPopUp: View {
 					text: "Delete",
 					textColor: .darkGray
 				) {
-					// TODO: Delete section
+					self.section.showDeleteAlert(completion: self.hide)
 				}
 			} else if isLocked {
 				PopUpButton(
@@ -123,11 +129,10 @@ struct DecksViewSectionOptionsPopUp: View {
 					text: "Unlock",
 					textColor: .darkGray
 				) {
-					self.section.showUnlockAlert(forUser: self.currentStore.user) {
-						popUpWithAnimation {
-							self.model.isSectionOptionsPopUpShowing = false
-						}
-					}
+					self.section.showUnlockAlert(
+						forUser: self.currentStore.user,
+						completion: self.hide
+					)
 				}
 			}
 		}
