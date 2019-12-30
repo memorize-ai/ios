@@ -37,7 +37,7 @@ struct AddCardsViewAddSectionPopUpSectionRow: View {
 						.frame(width: 19)
 				}
 				Button(action: {
-					// TODO: <1> Delete section
+					self.section.showDeleteAlert()
 				}) {
 					Image.grayTrashIcon
 						.resizable()
