@@ -24,7 +24,7 @@ struct AddCardsViewCardCell: View {
 	}
 	
 	var sectionTitle: String {
-		card.section?.name ?? "Add section"
+		card.section?.name ?? "Unsectioned"
 	}
 	
 	var topControls: some View {
