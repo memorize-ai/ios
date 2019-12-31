@@ -130,6 +130,8 @@
 		4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */; };
 		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
 		4D9BF86323BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86223BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift */; };
+		4D9BF86923BAC6A500388DEF /* froala.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86823BAC6A400388DEF /* froala.js */; };
+		4D9BF86B23BAC6AB00388DEF /* froala.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86A23BAC6AB00388DEF /* froala.css */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -363,6 +365,8 @@
 		4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetView.swift; sourceTree = "<group>"; };
 		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
 		4D9BF86223BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewPerformanceSheetView.swift; sourceTree = "<group>"; };
+		4D9BF86823BAC6A400388DEF /* froala.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = froala.js; sourceTree = "<group>"; };
+		4D9BF86A23BAC6AB00388DEF /* froala.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = froala.css; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -803,6 +807,23 @@
 			path = MarketView;
 			sourceTree = "<group>";
 		};
+		4D9BF86623BAC68B00388DEF /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4D9BF86723BAC69700388DEF /* Froala */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		4D9BF86723BAC69700388DEF /* Froala */ = {
+			isa = PBXGroup;
+			children = (
+				4D9BF86A23BAC6AB00388DEF /* froala.css */,
+				4D9BF86823BAC6A400388DEF /* froala.js */,
+			);
+			path = Froala;
+			sourceTree = "<group>";
+		};
 		4DAA4F30233DE1A600EF7467 = {
 			isa = PBXGroup;
 			children = (
@@ -849,6 +870,7 @@
 				4DAA4F47233DE1A800EF7467 /* Preview Content */,
 				4D402E75235E6FA50011C6B6 /* Fonts */,
 				4D703AF0233E7107004F1F65 /* Firebase */,
+				4D9BF86623BAC68B00388DEF /* Libraries */,
 			);
 			path = memorize.ai;
 			sourceTree = "<group>";
@@ -1224,10 +1246,12 @@
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
 				4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */,
+				4D9BF86B23BAC6AB00388DEF /* froala.css in Resources */,
 				4D402E89235E6FB80011C6B6 /* Muli-ExtraBold.ttf in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
+				4D9BF86923BAC6A500388DEF /* froala.js in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
