@@ -54,6 +54,7 @@
 		4D3B949C2372A06F002F441E /* SideBarSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949B2372A06F002F441E /* SideBarSections.swift */; };
 		4D3B949E2372BAEF002F441E /* SideBarSectionDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949D2372BAEF002F441E /* SideBarSectionDivider.swift */; };
 		4D3B94A0237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949F237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift */; };
+		4D3FE57323BC11620010FFD3 /* FroalaEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -289,6 +290,7 @@
 		4D3B949B2372A06F002F441E /* SideBarSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSections.swift; sourceTree = "<group>"; };
 		4D3B949D2372BAEF002F441E /* SideBarSectionDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSectionDivider.swift; sourceTree = "<group>"; };
 		4D3B949F237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRowDueCardsBadge.swift; sourceTree = "<group>"; };
+		4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FroalaEditor.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -698,6 +700,7 @@
 				4DD5FEA3238B249E00E70251 /* VerticalTripleDots.swift */,
 				4DF459572399A44A00A78ADF /* MultilineTextField.swift */,
 				4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */,
+				4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1510,6 +1513,7 @@
 				4DD9CEF323691C2700EC138F /* RecommendedDecksView.swift in Sources */,
 				4D0C028F237D41C80062BC14 /* LoadingTopicCell.swift in Sources */,
 				4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */,
+				4D3FE57323BC11620010FFD3 /* FroalaEditor.swift in Sources */,
 				4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */,
 				4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */,
 				4D2AC7EB235EDE5300A3EF1E /* InitialViewStackedRectangle.swift in Sources */,

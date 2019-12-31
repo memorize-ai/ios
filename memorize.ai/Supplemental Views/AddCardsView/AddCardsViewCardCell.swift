@@ -27,6 +27,24 @@ struct AddCardsViewCardCell: View {
 		card.section?.name ?? "Unsectioned"
 	}
 	
+	func headerText(_ text: String) -> some View {
+		Text(text)
+			.font(.muli(.bold, size: 15))
+			.frame(maxWidth: .infinity, alignment: .leading)
+			.padding(.top, 2)
+	}
+	
+	func editor() -> some View {
+		CustomRectangle(
+			background: Color.white,
+			borderColor: Color.gray.opacity(0.2),
+			borderWidth: 1
+		) {
+			FroalaEditor()
+				.frame(height: 200)
+		}
+	}
+	
 	var topControls: some View {
 		HStack(alignment: .bottom, spacing: 20) {
 			Text(title)
@@ -81,29 +99,11 @@ struct AddCardsViewCardCell: View {
 	}
 	
 	var front: some View {
-		WebView(
-			html: """
-			<!DOCTYPE html>
-			<html>
-				<head>
-					<link rel="stylesheet" href="froala.css">
-					<script src="froala.js"></script>
-				</head>
-				<body>
-					<div id="editor"></div>
-					<script>
-						new FroalaEditor('#editor')
-					</script>
-				</body>
-			</html>
-			""",
-			baseURL: .init(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
-		)
-		.frame(height: 200)
+		editor()
 	}
 	
 	var back: some View {
-		Text("Back")
+		editor()
 	}
 	
 	var body: some View {
@@ -118,13 +118,9 @@ struct AddCardsViewCardCell: View {
 					Rectangle()
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
-					Text("FRONT")
-						.font(.muli(.bold, size: 15))
-						.frame(maxWidth: .infinity, alignment: .leading)
+					headerText("FRONT")
 					front
-					Text("BACK")
-						.font(.muli(.bold, size: 15))
-						.frame(maxWidth: .infinity, alignment: .leading)
+					headerText("BACK")
 					back
 				}
 				.padding()
