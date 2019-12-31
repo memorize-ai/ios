@@ -1,4 +1,5 @@
 import SwiftUI
+import WebView
 
 struct AddCardsViewCardCell: View {
 	@EnvironmentObject var model: AddCardsViewModel
@@ -80,7 +81,25 @@ struct AddCardsViewCardCell: View {
 	}
 	
 	var front: some View {
-		Text("Front")
+		WebView(
+			html: """
+			<!DOCTYPE html>
+			<html>
+				<head>
+					<link rel="stylesheet" href="froala.css">
+					<script src="froala.js"></script>
+				</head>
+				<body>
+					<div id="editor"></div>
+					<script>
+						new FroalaEditor('#editor')
+					</script>
+				</body>
+			</html>
+			""",
+			baseURL: .init(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
+		)
+		.frame(height: 200)
 	}
 	
 	var back: some View {

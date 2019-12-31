@@ -10,7 +10,7 @@ struct AddCardsViewAddSectionPopUpSectionRow: View {
 	
 	var body: some View {
 		Button(action: {
-			self.card.sectionId = self.section.id
+			self.card.section = self.section
 		}) {
 			HStack(spacing: 20) {
 				if isSelected {
