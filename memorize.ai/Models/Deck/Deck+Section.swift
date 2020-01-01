@@ -19,29 +19,38 @@ extension Deck {
 		@Published var unlockLoadingState = LoadingState()
 		@Published var deleteLoadingState = LoadingState()
 		
+		var snapshotListener: ListenerRegistration?
+		
 		init(
-			id: String,
+			id: String?,
 			parent: Deck,
 			name: String,
 			index: Int,
 			numberOfCards: Int,
-			cards: [Card] = []
+			cards: [Card] = [],
+			snapshotListener: ListenerRegistration? = nil
 		) {
-			self.id = id
+			self.id = id ?? ""
 			self.parent = parent
 			self.name = name
 			self.index = index
 			self.numberOfCards = numberOfCards
 			self.cards = cards
+			self.snapshotListener = snapshotListener
 		}
 		
-		convenience init(parent: Deck, snapshot: DocumentSnapshot) {
+		convenience init(
+			parent: Deck,
+			snapshot: DocumentSnapshot,
+			snapshotListener: ListenerRegistration? = nil
+		) {
 			self.init(
 				id: snapshot.documentID,
 				parent: parent,
 				name: snapshot.get("name") as? String ?? "Unknown",
 				index: snapshot.get("index") as? Int ?? 0,
-				numberOfCards: snapshot.get("cardCount") as? Int ?? 0
+				numberOfCards: snapshot.get("cardCount") as? Int ?? 0,
+				snapshotListener: snapshotListener
 			)
 		}
 		
@@ -61,6 +70,16 @@ extension Deck {
 		
 		var unlockLink: String {
 			"\(WEB_URL)/d/\(parent.id)/s/\(id)/u"
+		}
+		
+		@discardableResult
+		func addObserver() -> Self {
+			guard snapshotListener == nil else { return self }
+			snapshotListener = documentReference.addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot else { return }
+				self.updateFromSnapshot(snapshot)
+			}
+			return self
 		}
 		
 		@discardableResult
