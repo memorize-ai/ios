@@ -58,6 +58,8 @@
 		4D3FE57523BC36BF0010FFD3 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */; };
 		4D3FE57823BC67D70010FFD3 /* EditCardViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */; };
 		4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */; };
+		4D3FE57C23BC6B0B0010FFD3 /* EditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57B23BC6B0B0010FFD3 /* EditCardViewModel.swift */; };
+		4D3FE57E23BC74A60010FFD3 /* EditCardViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57D23BC74A60010FFD3 /* EditCardViewTopControls.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -297,6 +299,8 @@
 		4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewNavigationLink.swift; sourceTree = "<group>"; };
 		4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
+		4D3FE57B23BC6B0B0010FFD3 /* EditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewModel.swift; sourceTree = "<group>"; };
+		4D3FE57D23BC74A60010FFD3 /* EditCardViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewTopControls.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -644,6 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */,
+				4D3FE57D23BC74A60010FFD3 /* EditCardViewTopControls.swift */,
 			);
 			path = EditCardView;
 			sourceTree = "<group>";
@@ -963,6 +968,7 @@
 				4DD5FEA1238B084700E70251 /* DecksViewModel.swift */,
 				4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */,
 				4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */,
+				4D3FE57B23BC6B0B0010FFD3 /* EditCardViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1439,6 +1445,7 @@
 				4D8B2EAD2398BC0000EF040B /* MarketDeckViewSectionRow.swift in Sources */,
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
 				4D3FE57823BC67D70010FFD3 /* EditCardViewNavigationLink.swift in Sources */,
+				4D3FE57C23BC6B0B0010FFD3 /* EditCardViewModel.swift in Sources */,
 				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
 				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
@@ -1506,6 +1513,7 @@
 				4D184D93236975C000A84998 /* Grid.swift in Sources */,
 				4D2C7E6323AAB20E0061B48D /* UIImage.swift in Sources */,
 				4D8B2EAF2398BDF200EF040B /* MarketDeckViewInfo.swift in Sources */,
+				4D3FE57E23BC74A60010FFD3 /* EditCardViewTopControls.swift in Sources */,
 				4D6BA53323ACB81700D3F9D1 /* AddCardsViewTopControls.swift in Sources */,
 				4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */,
 				4D36579A238CB168007C3D1F /* Card+UserData.swift in Sources */,
