@@ -120,6 +120,7 @@ struct EditCardViewCardCell: View {
 struct EditCardViewCardCell_Previews: PreviewProvider {
 	static var previews: some View {
 		EditCardViewCardCell()
+			.environmentObject(EditCardViewModel())
 			.environmentObject(Card.Draft(
 				parent: PREVIEW_CURRENT_STORE.user.decks.first!
 			))

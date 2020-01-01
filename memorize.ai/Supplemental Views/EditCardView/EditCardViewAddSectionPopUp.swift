@@ -1,15 +1,113 @@
 import SwiftUI
 
 struct EditCardViewAddSectionPopUp: View {
+	@EnvironmentObject var model: EditCardViewModel
+	@EnvironmentObject var card: Card.Draft
+	
+	@ObservedObject var deck: Deck
+	
+	var contentHeight: CGFloat {
+		.init(40 + 20 * 2) +
+		.init(22 + 12 * 2 + 1) *
+		.init(deck.sections.count + 1) -
+		1
+	}
+	
+	var sectionList: some View {
+		ForEach(deck.sections) { section in
+			VStack(spacing: 0) {
+				AddCardsViewAddSectionPopUpSectionRow(
+					section: section,
+					card: self.card
+				)
+				if section != self.deck.sections.last {
+					PopUpDivider(horizontalPadding: 20)
+				}
+			}
+		}
+	}
+	
 	var body: some View {
-		Text("Hello, World!")
+		PopUp(
+			isShowing: self.$model.isAddSectionPopUpShowing,
+			contentHeight: contentHeight
+		) {
+			Button(action: {
+				self.deck.showCreateSectionAlert { sectionId in
+					self.card.section = self.deck.sections.first {
+						$0.id == sectionId
+					}
+				}
+			}) {
+				CustomRectangle(background: Color.mediumGray) {
+					HStack(spacing: 3) {
+						if deck.createSectionLoadingState.isLoading {
+							ActivityIndicator(color: .darkBlue)
+						} else {
+							Image(systemName: .plus)
+								.font(Font.title.weight(.semibold))
+								.scaleEffect(0.65)
+							Text("ADD NEW SECTION")
+								.font(.muli(.bold, size: 16))
+						}
+					}
+					.foregroundColor(.darkBlue)
+					.frame(maxWidth: .infinity)
+					.frame(height: 40)
+				}
+				.padding(.horizontal, 30)
+				.padding(.vertical)
+			}
+			VStack(spacing: 0) {
+				Button(action: {
+					self.card.section = nil
+				}) {
+					HStack(spacing: 20) {
+						if card.sectionId == nil {
+							Image.blueCheck
+								.resizable()
+								.renderingMode(.original)
+								.aspectRatio(contentMode: .fit)
+								.frame(width: 20)
+						}
+						Text("Unsectioned")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(
+								card.sectionId == nil
+									? .darkBlue
+									: .darkGray
+							)
+						Spacer()
+						Text("(\(deck.numberOfUnsectionedCards.formatted))")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(.darkGray)
+					}
+					.frame(height: 22)
+					.padding(.leading, 25)
+					.padding(.trailing, 30)
+					.padding(.vertical, 12)
+				}
+				if !deck.sections.isEmpty {
+					PopUpDivider(horizontalPadding: 20)
+				}
+				sectionList
+			}
+		}
 	}
 }
 
 #if DEBUG
 struct EditCardViewAddSectionPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		EditCardViewAddSectionPopUp()
+		let model = EditCardViewModel()
+		model.isAddSectionPopUpShowing = true
+		return EditCardViewAddSectionPopUp(
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!
+		)
+		.environmentObject(model)
+		.environmentObject(Card.Draft(
+			parent: PREVIEW_CURRENT_STORE.user.decks.first!
+		))
 	}
 }
 #endif

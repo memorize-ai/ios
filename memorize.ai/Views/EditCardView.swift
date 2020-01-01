@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EditCardView: View {
+	@EnvironmentObject var card: Card.Draft
+	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -22,7 +24,7 @@ struct EditCardView: View {
 							)
 					}
 				}
-				EditCardViewAddSectionPopUp()
+				EditCardViewAddSectionPopUp(deck: self.card.parent)
 			}
 		}
 	}
