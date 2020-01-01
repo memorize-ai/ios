@@ -62,8 +62,8 @@ struct FroalaEditor: View {
 					<script>
 						new FroalaEditor('#editor', {
 							events: {
-								input: ({ target: { innerHTML } }) =>
-									webkit.messageHandlers.main.postMessage(innerHTML)
+								input: ({ target: { innerHTML: html } }) =>
+									webkit.messageHandlers.main.postMessage(html)
 							}
 						})
 					</script>
