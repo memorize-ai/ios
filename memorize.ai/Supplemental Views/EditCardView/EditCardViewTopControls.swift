@@ -19,7 +19,12 @@ struct EditCardViewTopControls: View {
 				.foregroundColor(.white)
 			Spacer()
 			Button(action: {
-				self.card.publishAsUpdate()
+				self.card.publishLoadingState.startLoading()
+				self.card.publishAsUpdate().done {
+					self.card.publishLoadingState.succeed()
+				}.catch { error in
+					self.card.publishLoadingState.fail(error: error)
+				}
 			}) {
 				CustomRectangle(
 					background: card.isPublishable

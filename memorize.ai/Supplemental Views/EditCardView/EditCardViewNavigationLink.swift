@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct EditCardViewNavigationLink<Label: View>: View {
-	@EnvironmentObject var currentStore: CurrentStore
-	
 	let card: Card
 	let label: Label
 	
@@ -14,7 +12,7 @@ struct EditCardViewNavigationLink<Label: View>: View {
 	var body: some View {
 		NavigationLink(
 			destination: EditCardView()
-				.environmentObject(currentStore)
+				.environmentObject(card)
 				.removeNavigationBar()
 		) {
 			label
@@ -30,7 +28,6 @@ struct EditCardViewNavigationLink_Previews: PreviewProvider {
 		) {
 			Text("Edit card")
 		}
-		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif
