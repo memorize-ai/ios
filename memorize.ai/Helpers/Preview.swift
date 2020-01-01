@@ -106,6 +106,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				front: "This is a card with some sound. <audio src=\"audio.wav\"></audio>",
 				back: "This is the back.",
 				numberOfViews: 0,
+				numberOfReviews: 0,
 				numberOfSkips: 0
 			),
 			.init(
@@ -114,6 +115,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				front: "<h1>This is a card with an image.</h1><img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\"><ul><li>First element</li><li>Second element</li><li>Third element</li></ul>",
 				back: "<b>This is the back.</b>",
 				numberOfViews: 0,
+				numberOfReviews: 0,
 				numberOfSkips: 0
 			),
 			.init(
@@ -122,6 +124,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				front: "<h1>This is a list</h1><ul><li>First element</li><li>Second element</li><li>Third element</li></ul><p><b>This is the end of the card</b></p>",
 				back: "This is the back.",
 				numberOfViews: 0,
+				numberOfReviews: 0,
 				numberOfSkips: 0
 			)
 		]

@@ -9,6 +9,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var front: String
 	@Published var back: String
 	@Published var numberOfViews: Int
+	@Published var numberOfReviews: Int
 	@Published var numberOfSkips: Int
 	
 	@Published var userData: UserData?
@@ -23,6 +24,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		front: String,
 		back: String,
 		numberOfViews: Int,
+		numberOfReviews: Int,
 		numberOfSkips: Int,
 		userData: UserData? = nil,
 		previewImage: Image? = nil
@@ -32,6 +34,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		self.front = front
 		self.back = back
 		self.numberOfViews = numberOfViews
+		self.numberOfReviews = numberOfReviews
 		self.numberOfSkips = numberOfSkips
 		self.userData = userData
 		self.previewImage = previewImage
@@ -45,6 +48,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 			front: snapshot.get("front") as? String ?? "(empty)",
 			back: snapshot.get("back") as? String ?? "(empty)",
 			numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
+			numberOfReviews: snapshot.get("reviewCount") as? Int ?? 0,
 			numberOfSkips: snapshot.get("skipCount") as? Int ?? 0
 		)
 	}
@@ -132,6 +136,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		front = snapshot.get("front") as? String ?? front
 		back = snapshot.get("back") as? String ?? back
 		numberOfViews = snapshot.get("viewCount") as? Int ?? 0
+		numberOfReviews = snapshot.get("reviewCount") as? Int ?? 0
 		numberOfSkips = snapshot.get("skipCount") as? Int ?? 0
 		return self
 	}

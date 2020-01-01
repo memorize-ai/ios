@@ -96,6 +96,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				front: #"This is the front of the card<audio src="a"></audio><h1>I am some big text</h1><img src="https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg">afadfasdfsasdsfasdfasdfasdfdafafafafafasdsfsasfsasdfasdfasdfasdfasdfasfsfsdfsdfsdfsdfsdfsdfsddsds"#,
 				back: "This is the back of the card",
 				numberOfViews: 670,
+				numberOfReviews: 0,
 				numberOfSkips: 40,
 				userData: .init(dueDate: Date().addingTimeInterval(10000))
 			))
@@ -106,6 +107,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				front: #"This is some text"#,
 				back: "This is the back of the card",
 				numberOfViews: 670,
+				numberOfReviews: 0,
 				numberOfSkips: 40,
 				userData: .init(dueDate: Date().addingTimeInterval(-10000))
 			))

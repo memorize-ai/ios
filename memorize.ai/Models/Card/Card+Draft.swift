@@ -100,6 +100,7 @@ extension Card {
 				"front": front,
 				"back": back,
 				"viewCount": 0,
+				"reviewCount": 0,
 				"skipCount": 0
 			])
 		}
