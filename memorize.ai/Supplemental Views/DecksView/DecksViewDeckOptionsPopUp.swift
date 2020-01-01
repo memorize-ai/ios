@@ -36,7 +36,7 @@ struct DecksViewDeckOptionsPopUp: View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
 			contentHeight: .init(
-				50 * (isOwner ? (7 + *canOrderSections) : 5) +
+				50 * (isOwner ? (8 + *canOrderSections) : 5) +
 				2 + *isOwner
 			)
 		) {
@@ -87,6 +87,17 @@ struct DecksViewDeckOptionsPopUp: View {
 				DecksViewPerformanceSheetView(deck: self.selectedDeck)
 			}
 			if isOwner {
+				PublishDeckViewNavigationLink(deck: selectedDeck) {
+					HStack(spacing: 20) {
+						resizeImage(.editSectionsIcon)
+						Text("Edit")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(.darkGray)
+						Spacer()
+					}
+					.padding(.horizontal, 30)
+				}
+				.frame(height: 50)
 				PopUpDivider()
 				PopUpButton(
 					icon: Image(systemName: .plusCircle)
