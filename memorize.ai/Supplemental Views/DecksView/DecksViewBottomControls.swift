@@ -32,7 +32,7 @@ struct DecksViewBottomControls: View {
 	
 	var addCardsButton: some View {
 		AddCardsViewNavigationLink(deck: selectedDeck) {
-			button(text: "Add cards", backgroundColor: .darkRed)
+			button(text: "Add cards", backgroundColor: .init(#colorLiteral(red: 0.1333333333, green: 0.631372549, blue: 1, alpha: 1)))
 		}
 	}
 	
@@ -50,7 +50,7 @@ struct DecksViewBottomControls: View {
 		) {
 			button(
 				text: "Review • \(numberOfDueCards.formatted)",
-				backgroundColor: .green
+				backgroundColor: .init(#colorLiteral(red: 0, green: 0.7647058824, blue: 0.4941176471, alpha: 1))
 			)
 		}
 	}
