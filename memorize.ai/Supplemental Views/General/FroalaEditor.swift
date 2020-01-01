@@ -1,7 +1,40 @@
 import SwiftUI
 import WebView
+import WebKit
 
 struct FroalaEditor: View {
+	final class Coordinator: NSObject, WKScriptMessageHandler {
+		@Binding var html: String
+		
+		init(html: Binding<String>) {
+			_html = html
+		}
+		
+		func userContentController(
+			_ userContentController: WKUserContentController,
+			didReceive message: WKScriptMessage
+		) {
+			guard let html = message.body as? String else { return }
+			self.html = html
+		}
+	}
+	
+	@Binding var html: String
+	
+	let configuration: WKWebViewConfiguration
+	
+	init(html: Binding<String>) {
+		_html = html
+		
+		let userContentController = WKUserContentController()
+		userContentController.add(Coordinator(html: html), name: "main")
+		
+		let configuration = WKWebViewConfiguration()
+		configuration.userContentController = userContentController
+		
+		self.configuration = configuration
+	}
+	
 	var body: some View {
 		WebView(
 			html: """
@@ -25,14 +58,20 @@ struct FroalaEditor: View {
 					</style>
 				</head>
 				<body>
-					<div id="editor"></div>
+					<div id="editor">\(html)</div>
 					<script>
-						new FroalaEditor('#editor')
+						new FroalaEditor('#editor', {
+							events: {
+								input: ({ target: { innerHTML } }) =>
+									webkit.messageHandlers.main.postMessage(innerHTML)
+							}
+						})
 					</script>
 				</body>
 			</html>
 			""",
-			baseURL: .init(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true)
+			baseURL: .init(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true),
+			configuration: configuration
 		)
 	}
 }
@@ -40,7 +79,7 @@ struct FroalaEditor: View {
 #if DEBUG
 struct FroalaEditor_Previews: PreviewProvider {
 	static var previews: some View {
-		FroalaEditor()
+		FroalaEditor(html: .constant(""))
 	}
 }
 #endif

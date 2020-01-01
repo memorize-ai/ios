@@ -34,13 +34,13 @@ struct AddCardsViewCardCell: View {
 			.padding(.top, 2)
 	}
 	
-	func editor() -> some View {
+	func editor(html: Binding<String>) -> some View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: Color.gray.opacity(0.2),
 			borderWidth: 1
 		) {
-			FroalaEditor()
+			FroalaEditor(html: html)
 				.frame(height: 200)
 		}
 	}
@@ -98,14 +98,6 @@ struct AddCardsViewCardCell: View {
 		}
 	}
 	
-	var front: some View {
-		editor()
-	}
-	
-	var back: some View {
-		editor()
-	}
-	
 	var body: some View {
 		VStack(spacing: 8) {
 			topControls
@@ -119,9 +111,9 @@ struct AddCardsViewCardCell: View {
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
 					headerText("FRONT")
-					front
+					editor(html: $card.front)
 					headerText("BACK")
-					back
+					editor(html: $card.back)
 				}
 				.padding()
 			}
