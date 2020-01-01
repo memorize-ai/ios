@@ -25,8 +25,10 @@ struct AddCardsView: View {
 									AddCardsViewCardCell(card: card)
 								}
 							}
-							.padding(.horizontal, 10)
-							.respondsToKeyboard()
+							.padding([.horizontal, .bottom], 10)
+							.respondsToKeyboard(
+								withExtraOffset: -15 - geometry.safeAreaInsets.bottom
+							)
 						}
 						Button(action: {
 							popUpWithAnimation {

@@ -17,16 +17,31 @@ struct KeyboardResponder: ViewModifier {
 	}
 	
 	@State var keyboardHeight: CGFloat = 0
+	
+	let extraOffset: CGFloat
+	
+	init(withExtraOffset extraOffset: CGFloat = 0) {
+		self.extraOffset = extraOffset
+	}
 
 	func body(content: Content) -> some View {
 		content
 			.padding(.bottom, keyboardHeight)
-			.onReceive(Self.publisher) { self.keyboardHeight = $0 }
+			.onReceive(Self.publisher) {
+				self.keyboardHeight = $0.isZero
+					? 0
+					: $0 + self.extraOffset
+			}
 	}
 }
 
 extension View {
-	func respondsToKeyboard() -> some View {
-		ModifiedContent(content: self, modifier: KeyboardResponder())
+	func respondsToKeyboard(
+		withExtraOffset extraOffset: CGFloat = 0
+	) -> some View {
+		ModifiedContent(
+			content: self,
+			modifier: KeyboardResponder(withExtraOffset: extraOffset)
+		)
 	}
 }

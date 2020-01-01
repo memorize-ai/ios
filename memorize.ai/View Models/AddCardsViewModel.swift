@@ -28,12 +28,20 @@ final class AddCardsViewModel: ViewModel {
 				}
 			}
 			self.cards = cards.isEmpty
-				? [.init(parent: deck)]
+				? self.initialCards
 				: cards
 			self.cardsLoadingState.succeed()
 		}.catch { error in
 			self.cardsLoadingState.fail(error: error)
 		}
+	}
+	
+	var initialCards: [Card.Draft] {
+		let card = Card.Draft(parent: deck)
+		card.onChange = {
+			self.cardDidChange(card)
+		}
+		return [card]
 	}
 	
 	var isPublishButtonDisabled: Bool {
@@ -59,17 +67,21 @@ final class AddCardsViewModel: ViewModel {
 			? card.removeDraft(forUser: user)
 			: card.updateDraft(forUser: user)
 		guard cards.last == card && !card.isEmpty else { return }
-		cards.append(.init(
+		let newCard = Card.Draft(
 			parent: deck,
 			sectionId: card.sectionId
-		))
+		)
+		newCard.onChange = {
+			self.cardDidChange(newCard)
+		}
+		cards.append(newCard)
 	}
 	
 	func removeCard(_ card: Card.Draft) {
 		cards.removeAll { $0 == card }
 		card.removeDraft(forUser: user)
 		if cards.isEmpty {
-			cards = [.init(parent: deck)]
+			cards = initialCards
 		}
 	}
 	
