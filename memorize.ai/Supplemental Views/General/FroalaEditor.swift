@@ -1,6 +1,7 @@
 import SwiftUI
 import WebView
 import WebKit
+import HTML
 
 struct FroalaEditor: View {
 	final class Coordinator: NSObject, WKScriptMessageHandler {
@@ -37,39 +38,60 @@ struct FroalaEditor: View {
 	
 	var body: some View {
 		WebView(
-			html: """
-			<!DOCTYPE html>
-			<html>
-				<head>
-					<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-					<link rel="stylesheet" href="froala.css">
-					<script src="froala.js"></script>
-					<style>
-						#editor :focus {
-							outline: none;
-						}
-						#editor .fr-toolbar,
-						#editor .fr-wrapper {
-							border: none;
-						}
-						#editor .second-toolbar {
-							visibility: hidden;
-						}
-					</style>
-				</head>
-				<body>
-					<div id="editor">\(html)</div>
-					<script>
-						new FroalaEditor('#editor', {
-							events: {
-								input: ({ target: { innerHTML: html } }) =>
-									webkit.messageHandlers.main.postMessage(html)
+			html: HTML.render {
+				HTMLElement.html
+					.child {
+						HTMLElement.head
+							.child {
+								HTMLElement.meta
+									.name("viewport")
+									.content("width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1")
 							}
-						})
-					</script>
-				</body>
-			</html>
-			""",
+							.child {
+								HTMLElement.link
+									.rel("stylesheet")
+									.href("froala.css")
+							}
+							.child {
+								HTMLElement.script
+									.src("froala.js")
+							}
+							.child {
+								HTMLElement.style
+								.child("""
+								#editor :focus {
+									outline: none;
+								}
+								#editor .fr-toolbar,
+								#editor .fr-wrapper {
+									border: none;
+								}
+								#editor .second-toolbar {
+									visibility: hidden;
+								}
+								""")
+							}
+					}
+					.child {
+						HTMLElement.body
+							.child {
+								HTMLElement.div
+									.id("editor")
+									.child(html)
+							}
+							.child {
+								HTMLElement.script
+									.child("""
+									new FroalaEditor('#editor', {
+										events: {
+											input: ({ target: { innerHTML: html } }) =>
+												webkit.messageHandlers.main.postMessage(html)
+										}
+									})
+									""")
+							}
+					}
+			},
 			baseURL: .init(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true),
 			configuration: configuration
 		)

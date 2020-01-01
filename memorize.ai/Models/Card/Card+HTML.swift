@@ -7,8 +7,8 @@ extension Card {
 	}
 	body > ul, ol {
 		margin-top: 0;
-		margin-left: 80px;
 		margin-right: 40px;
+		margin-left: 80px;
 	}
 	img {
 		border-radius: 32px;
