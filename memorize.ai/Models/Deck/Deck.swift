@@ -37,7 +37,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var averageRating: Double
 	@Published var numberOfDownloads: Int
 	@Published var numberOfCards: Int
-	@Published var numberOfUnsectionedCards: Int
+	@Published var numberOfUnsectionedCards: Int {
+		didSet {
+			unsectionedSection.numberOfCards = numberOfUnsectionedCards
+		}
+	}
 	@Published var numberOfCurrentUsers: Int
 	@Published var numberOfAllTimeUsers: Int
 	@Published var numberOfFavorites: Int
@@ -61,6 +65,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var createSectionLoadingState = LoadingState()
 	
 	var displayImage: Image?
+	
+	lazy var unsectionedSection = Section(
+		id: nil,
+		parent: self,
+		name: "Unsectioned",
+		index: 0,
+		numberOfCards: numberOfUnsectionedCards
+	)
 	
 	init(
 		id: String,
@@ -242,6 +254,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	var nextSectionIndex: Int {
 		sections.count
+	}
+	
+	var hasUnsectionedCards: Bool {
+		numberOfUnsectionedCards > 0
 	}
 	
 	@discardableResult
@@ -542,6 +558,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		averageRating = snapshot.get("averageRating") as? Double ?? averageRating
 		numberOfDownloads = snapshot.get("downloadCount") as? Int ?? numberOfDownloads
 		numberOfCards = snapshot.get("cardCount") as? Int ?? numberOfCards
+		numberOfUnsectionedCards = snapshot.get("unsectionedCardCount") as? Int ?? numberOfUnsectionedCards
 		numberOfCurrentUsers = snapshot.get("currentUserCount") as? Int ?? numberOfCurrentUsers
 		numberOfAllTimeUsers = snapshot.get("allTimeUserCount") as? Int ?? numberOfAllTimeUsers
 		numberOfFavorites = snapshot.get("favoriteCount") as? Int ?? numberOfFavorites

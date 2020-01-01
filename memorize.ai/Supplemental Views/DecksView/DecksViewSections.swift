@@ -4,10 +4,22 @@ struct DecksViewSections: View {
 	@ObservedObject var selectedDeck: Deck
 	
 	var body: some View {
-		ForEach(selectedDeck.sections) { section in
-			VStack {
-				DecksViewSectionHeader(section: section)
-				DecksViewSectionBody(section: section)
+		VStack(spacing: 16) {
+			if selectedDeck.hasUnsectionedCards {
+				VStack {
+					DecksViewSectionHeader(
+						section: selectedDeck.unsectionedSection
+					)
+					DecksViewSectionBody(
+						section: selectedDeck.unsectionedSection
+					)
+				}
+			}
+			ForEach(selectedDeck.sections) { section in
+				VStack {
+					DecksViewSectionHeader(section: section)
+					DecksViewSectionBody(section: section)
+				}
 			}
 		}
 	}

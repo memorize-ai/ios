@@ -27,11 +27,9 @@ struct DecksView: View {
 							Rectangle()
 								.foregroundColor(.lightGrayBackground)
 							ScrollView {
-								VStack(spacing: 16) {
-									DecksViewSections(
-										selectedDeck: self.selectedDeck
-									)
-								}
+								DecksViewSections(
+									selectedDeck: self.selectedDeck
+								)
 								.frame(maxWidth: .infinity)
 								.padding(.horizontal, Self.horizontalPadding)
 								.padding(.top, 20)
