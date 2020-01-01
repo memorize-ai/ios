@@ -8,13 +8,17 @@ struct MarketDeckViewSections: View {
 	@State var isExpanded = false
 	
 	var numberOfSections: Int {
-		deck.sections.count
+		*deck.hasUnsectionedCards + deck.sections.count
+	}
+	
+	var sectionPrefix: Int {
+		Self.sectionPrefix - *deck.hasUnsectionedCards
 	}
 	
 	var prefixedSections: [Deck.Section] {
 		isExpanded
 			? deck.sections
-			: .init(deck.sections.prefix(Self.sectionPrefix))
+			: .init(deck.sections.prefix(sectionPrefix))
 	}
 	
 	var body: some View {
@@ -28,6 +32,9 @@ struct MarketDeckViewSections: View {
 				shadowYOffset: 5
 			) {
 				VStack {
+					if deck.hasUnsectionedCards {
+						MarketDeckViewSectionRow(section: deck.unsectionedSection)
+					}
 					ForEach(prefixedSections) { section in
 						MarketDeckViewSectionRow(section: section)
 					}
