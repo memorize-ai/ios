@@ -66,7 +66,10 @@ final class AddCardsViewModel: ViewModel {
 		_ = card.isEmpty
 			? card.removeDraft(forUser: user)
 			: card.updateDraft(forUser: user)
-		guard cards.last == card && !card.isEmpty else { return }
+		guard cards.last == card && !card.isEmpty else {
+			objectWillChange.send()
+			return
+		}
 		let newCard = Card.Draft(
 			parent: deck,
 			sectionId: card.sectionId
