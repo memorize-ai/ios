@@ -2,6 +2,8 @@ import SwiftUI
 import SwiftUIX
 
 struct DecksViewCardCell: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	@ObservedObject var card: Card
 	
 	var hasPreviewImage: Bool {
@@ -9,7 +11,10 @@ struct DecksViewCardCell: View {
 	}
 	
 	var body: some View {
-		EditCardViewNavigationLink(card: card) {
+		EditCardViewNavigationLink(
+			deck: currentStore.selectedDeck!,
+			card: card
+		) {
 			ZStack(alignment: .topLeading) {
 				CustomRectangle(
 					background: Color.white,
@@ -94,6 +99,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				numberOfSkips: 40,
 				userData: .init(dueDate: Date().addingTimeInterval(10000))
 			))
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			DecksViewCardCell(card: .init(
 				id: "0",
 				sectionId: "CSS",
@@ -103,6 +109,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				numberOfSkips: 40,
 				userData: .init(dueDate: Date().addingTimeInterval(-10000))
 			))
+			.environmentObject(PREVIEW_CURRENT_STORE)
 		}
 		.padding(.horizontal, DecksView.horizontalPadding)
 	}

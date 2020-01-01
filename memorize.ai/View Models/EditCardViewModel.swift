@@ -1,3 +1,5 @@
 import Combine
 
-final class EditCardViewModel: ViewModel {}
+final class EditCardViewModel: ViewModel {
+	@Published var isAddSectionPopUpShowing = false
+}

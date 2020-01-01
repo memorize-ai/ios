@@ -127,6 +127,36 @@ extension Card {
 				.delete()
 		}
 		
+		@discardableResult
+		func showDeleteAlert(
+			title: String = "Delete card",
+			message: String? = "Are you sure? This action cannot be undone.",
+			completion: (() -> Void)? = nil
+		) -> Self {
+			let alertController = UIAlertController(
+				title: title,
+				message: message,
+				preferredStyle: .alert
+			)
+			alertController.addAction(.init(title: "Cancel", style: .cancel))
+			alertController.addAction(.init(title: "Delete", style: .destructive) { _ in
+				self.publishLoadingState.startLoading()
+				self.delete().done {
+					self.publishLoadingState.succeed()
+					completion?()
+				}.catch { error in
+					self.publishLoadingState.fail(error: error)
+				}
+			})
+			currentViewController.present(alertController, animated: true)
+			return self
+		}
+		
+		@discardableResult
+		func delete() -> Promise<Void> {
+			cards.document(id).delete()
+		}
+		
 		static func == (lhs: Draft, rhs: Draft) -> Bool {
 			lhs.id == rhs.id
 		}
