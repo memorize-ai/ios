@@ -55,6 +55,7 @@
 		4D3B949E2372BAEF002F441E /* SideBarSectionDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949D2372BAEF002F441E /* SideBarSectionDivider.swift */; };
 		4D3B94A0237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949F237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift */; };
 		4D3FE57323BC11620010FFD3 /* FroalaEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */; };
+		4D3FE57523BC36BF0010FFD3 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -291,6 +292,7 @@
 		4D3B949D2372BAEF002F441E /* SideBarSectionDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarSectionDivider.swift; sourceTree = "<group>"; };
 		4D3B949F237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRowDueCardsBadge.swift; sourceTree = "<group>"; };
 		4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FroalaEditor.swift; sourceTree = "<group>"; };
+		4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -592,6 +594,7 @@
 				4D402E93235E72B80011C6B6 /* MuliFont.swift */,
 				4D1F9B2D233EEBDB00693571 /* UnknownError.swift */,
 				4D2C7E6423AAB2E10061B48D /* CustomError.swift */,
+				4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */,
 				4DC6435A2366D80400DEEED1 /* Preview.swift */,
 				4D2ECD87235D96D1008312B1 /* Operators */,
 			);
@@ -1452,6 +1455,7 @@
 				4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */,
 				4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */,
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
+				4D3FE57523BC36BF0010FFD3 /* KeyboardResponder.swift in Sources */,
 				4DD5FE8C2387404D00E70251 /* MarketViewFilterPopUpSideBar.swift in Sources */,
 				4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */,
 				4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */,

@@ -26,6 +26,7 @@ struct AddCardsView: View {
 								}
 							}
 							.padding(.horizontal, 10)
+							.respondsToKeyboard()
 						}
 						Button(action: {
 							popUpWithAnimation {
