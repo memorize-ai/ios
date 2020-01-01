@@ -137,10 +137,13 @@ struct DecksViewDeckOptionsPopUp: View {
 				text: "Remove from library",
 				textColor: .darkGray
 			) {
-				self.selectedDeck.remove(user: self.currentStore.user)
-				popUpWithAnimation {
-					self.model.isDeckOptionsPopUpShowing = false
-					self.currentStore.reloadSelectedDeck()
+				self.selectedDeck.showRemoveFromLibraryAlert(
+					forUser: self.currentStore.user
+				) {
+					popUpWithAnimation {
+						self.model.isDeckOptionsPopUpShowing = false
+						self.currentStore.reloadSelectedDeck()
+					}
 				}
 			}
 			if isOwner {
@@ -154,7 +157,7 @@ struct DecksViewDeckOptionsPopUp: View {
 				.alert(isPresented: $model.isDestroyAlertShowing) {
 					.init(
 						title: .init("Are you sure?"),
-						message: .init("This deck and all of its content will be deleted. This cannot be undone."),
+						message: .init("\(selectedDeck.name) and all of its content will be deleted. This cannot be undone."),
 						primaryButton: .destructive(.init("Destroy")) {
 							self.selectedDeck.delete()
 							popUpWithAnimation {

@@ -641,6 +641,27 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
+	@discardableResult
+	func showRemoveFromLibraryAlert(
+		forUser user: User,
+		title: String = "Remove from library",
+		message: String? = "All of your data will be deleted, and all of your progress will be lost. This action cannot be undone.",
+		completion: (() -> Void)? = nil
+	) -> Self {
+		let alertController = UIAlertController(
+			title: title,
+			message: message,
+			preferredStyle: .alert
+		)
+		alertController.addAction(.init(title: "Cancel", style: .cancel))
+		alertController.addAction(.init(title: "Remove", style: .destructive) { _ in
+			self.remove(user: user)
+			completion?()
+		})
+		currentViewController.present(alertController, animated: true)
+		return self
+	}
+	
 	static func == (lhs: Deck, rhs: Deck) -> Bool {
 		lhs.id == rhs.id
 	}

@@ -10,7 +10,7 @@ struct MarketDeckViewHeader: View {
 	
 	func getDeck() {
 		_ = hasDeck
-			? deck.remove(user: currentStore.user)
+			? deck.showRemoveFromLibraryAlert(forUser: currentStore.user)
 			: deck.get(user: currentStore.user)
 	}
 	
