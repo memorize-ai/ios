@@ -106,14 +106,17 @@ extension Card {
 		
 		@discardableResult
 		func updateDraft(forUser user: User) -> Promise<Void> {
-			user.documentReference
+			var data = [
+				"front": front,
+				"back": back
+			]
+			if let sectionId = sectionId {
+				data["section"] = sectionId
+			}
+			return user.documentReference
 				.collection("decks/\(parent.id)/drafts")
 				.document(id)
-				.updateData([
-					"section": section?.id ?? FieldValue.delete(),
-					"front": front,
-					"back": back
-				])
+				.setData(data)
 		}
 		
 		@discardableResult
