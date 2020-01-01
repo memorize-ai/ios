@@ -9,72 +9,74 @@ struct DecksViewCardCell: View {
 	}
 	
 	var body: some View {
-		ZStack(alignment: .topLeading) {
-			CustomRectangle(
-				background: Color.white,
-				borderColor: .lightGrayBorder,
-				borderWidth: 1,
-				cornerRadius: 8,
-				shadowRadius: 5,
-				shadowYOffset: 5
-			) {
-				VStack {
-					HStack(alignment: .top) {
-						if hasPreviewImage {
-							SwitchOver(card.previewImageLoadingState)
-								.case(.loading) {
-									ZStack {
-										Color.lightGrayBackground
-										ActivityIndicator(color: .gray)
+		EditCardViewNavigationLink(card: card) {
+			ZStack(alignment: .topLeading) {
+				CustomRectangle(
+					background: Color.white,
+					borderColor: .lightGrayBorder,
+					borderWidth: 1,
+					cornerRadius: 8,
+					shadowRadius: 5,
+					shadowYOffset: 5
+				) {
+					VStack {
+						HStack(alignment: .top) {
+							if hasPreviewImage {
+								SwitchOver(card.previewImageLoadingState)
+									.case(.loading) {
+										ZStack {
+											Color.lightGrayBackground
+											ActivityIndicator(color: .gray)
+										}
 									}
-								}
-								.case(.success) {
-									card.previewImage?
-										.resizable()
-										.aspectRatio(contentMode: .fill)
-								}
-								.case(.failure) {
-									ZStack {
-										Color.lightGrayBackground
-										Image(systemName: .exclamationmarkTriangle)
-											.foregroundColor(.gray)
-											.scaleEffect(1.5)
+									.case(.success) {
+										card.previewImage?
+											.resizable()
+											.aspectRatio(contentMode: .fill)
 									}
-								}
-								.frame(width: 100, height: 100)
-								.cornerRadius(5)
-								.clipped()
+									.case(.failure) {
+										ZStack {
+											Color.lightGrayBackground
+											Image(systemName: .exclamationmarkTriangle)
+												.foregroundColor(.gray)
+												.scaleEffect(1.5)
+										}
+									}
+									.frame(width: 100, height: 100)
+									.cornerRadius(5)
+									.clipped()
+							}
+							Text(Card.stripFormatting(card.front).trimmed)
+								.font(.muli(.semiBold, size: 15))
+								.foregroundColor(.darkGray)
+								.lineLimit(5)
+								.lineSpacing(1)
+								.align(to: .leading)
+							if card.hasSound {
+								Image(systemName: .speaker3Fill)
+									.foregroundColor(.darkBlue)
+									.padding([.trailing, .top], 3)
+							}
 						}
-						Text(Card.stripFormatting(card.front).trimmed)
-							.font(.muli(.semiBold, size: 15))
-							.foregroundColor(.darkGray)
-							.lineLimit(5)
-							.lineSpacing(1)
+						.frame(minHeight: 40, alignment: .top)
+						Text(card.dueMessage)
+							.font(.muli(.bold, size: 12))
+							.foregroundColor(Color.darkGray.opacity(0.7))
+							.padding(.top, hasPreviewImage ? 0 : 4)
 							.align(to: .leading)
-						if card.hasSound {
-							Image(systemName: .speaker3Fill)
-								.foregroundColor(.darkBlue)
-								.padding([.trailing, .top], 3)
-						}
 					}
-					.frame(minHeight: 40, alignment: .top)
-					Text(card.dueMessage)
-						.font(.muli(.bold, size: 12))
-						.foregroundColor(Color.darkGray.opacity(0.7))
-						.padding(.top, hasPreviewImage ? 0 : 4)
-						.align(to: .leading)
+					.padding(8)
 				}
-				.padding(8)
+				if card.isDue {
+					Circle()
+						.foregroundColor(Color.darkBlue.opacity(0.5))
+						.frame(width: 12, height: 12)
+						.offset(x: -4, y: -4)
+				}
 			}
-			if card.isDue {
-				Circle()
-					.foregroundColor(Color.darkBlue.opacity(0.5))
-					.frame(width: 12, height: 12)
-					.offset(x: -4, y: -4)
+			.onAppear {
+				self.card.loadPreviewImage()
 			}
-		}
-		.onAppear {
-			self.card.loadPreviewImage()
 		}
 	}
 }

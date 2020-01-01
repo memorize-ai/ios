@@ -22,9 +22,11 @@ struct AddCardsViewTopControls: View {
 				self.model.publish(onDone: self.goBack)
 			}) {
 				CustomRectangle(
-					background: Color.transparent,
+					background: model.isPublishButtonDisabled
+						? Color.transparent
+						: Color.white,
 					borderColor: .transparentLightGray,
-					borderWidth: 1.5
+					borderWidth: model.isPublishButtonDisabled ? 1.5 : 0
 				) {
 					Group {
 						if model.publishLoadingState.isLoading {
@@ -33,7 +35,11 @@ struct AddCardsViewTopControls: View {
 						} else {
 							Text("PUBLISH")
 								.font(.muli(.bold, size: 17))
-								.foregroundColor(Color.white.opacity(0.7))
+								.foregroundColor(
+									model.isPublishButtonDisabled
+										? Color.white.opacity(0.7)
+										: .extraBluePurple
+								)
 								.padding(.horizontal, 10)
 						}
 					}

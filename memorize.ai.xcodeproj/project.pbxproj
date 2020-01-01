@@ -56,6 +56,8 @@
 		4D3B94A0237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B949F237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift */; };
 		4D3FE57323BC11620010FFD3 /* FroalaEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */; };
 		4D3FE57523BC36BF0010FFD3 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */; };
+		4D3FE57823BC67D70010FFD3 /* EditCardViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */; };
+		4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */; };
 		4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E6F235E50610011C6B6 /* CustomRectangle.swift */; };
 		4D402E72235E591E0011C6B6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D402E71235E591E0011C6B6 /* Color.swift */; };
 		4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */; };
@@ -293,6 +295,8 @@
 		4D3B949F237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDeckRowDueCardsBadge.swift; sourceTree = "<group>"; };
 		4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FroalaEditor.swift; sourceTree = "<group>"; };
 		4D3FE57423BC36BF0010FFD3 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewNavigationLink.swift; sourceTree = "<group>"; };
+		4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
 		4D402E6F235E50610011C6B6 /* CustomRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangle.swift; sourceTree = "<group>"; };
 		4D402E71235E591E0011C6B6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4D402E77235E6FB80011C6B6 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -636,6 +640,14 @@
 			path = Card;
 			sourceTree = "<group>";
 		};
+		4D3FE57623BC67B90010FFD3 /* EditCardView */ = {
+			isa = PBXGroup;
+			children = (
+				4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */,
+			);
+			path = EditCardView;
+			sourceTree = "<group>";
+		};
 		4D402E75235E6FA50011C6B6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +777,7 @@
 				4DDACF032395BC3F0073C004 /* MarketDeckView.swift */,
 				4D54C03D237F7C83003765C1 /* DecksView.swift */,
 				4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */,
+				4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */,
 				4DF4594B2399734E00A78ADF /* PublishDeckView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
@@ -1063,6 +1076,7 @@
 				4DD5FE972388D92E00E70251 /* DecksView */,
 				4DF4594F2399785400A78ADF /* PublishDeckView */,
 				4D6BA53123ACB38500D3F9D1 /* AddCardsView */,
+				4D3FE57623BC67B90010FFD3 /* EditCardView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -1404,6 +1418,7 @@
 				4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */,
 				4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
+				4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,
 				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,
@@ -1423,6 +1438,7 @@
 				4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */,
 				4D8B2EAD2398BC0000EF040B /* MarketDeckViewSectionRow.swift in Sources */,
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
+				4D3FE57823BC67D70010FFD3 /* EditCardViewNavigationLink.swift in Sources */,
 				4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */,
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
 				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
