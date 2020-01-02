@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct OwnedDeckCellWithPerformanceGraph: View {
+struct OwnedDeckCell: View {
 	static let defaultWidth: CGFloat = 200
 	static let imageAspectRatio: CGFloat = 3 / 5
 	
@@ -88,11 +88,6 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 				.align(to: .leading)
 				.padding(.horizontal, 8)
 				.padding(.top, 4)
-				Rectangle()
-					.frame(height: 78)
-					.padding(.horizontal, 30)
-					.padding(.top, 4)
-					.padding(.bottom, 8) // TODO: Change to graph
 				HStack {
 					if deck.userData?.isDue ?? false {
 						Button(action: {
@@ -121,7 +116,7 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 					Spacer()
 				}
 				.padding(.horizontal)
-				.padding(.bottom, 16)
+				.padding(.vertical, 16)
 			}
 			.frame(width: width)
 		}
@@ -132,14 +127,14 @@ struct OwnedDeckCellWithPerformanceGraph: View {
 }
 
 #if DEBUG
-struct OwnedDeckCellWithPerformanceGraph_Previews: PreviewProvider {
+struct OwnedDeckCell_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack(spacing: 30) {
-			OwnedDeckCellWithPerformanceGraph(
+			OwnedDeckCell(
 				deck: PREVIEW_CURRENT_STORE.user.decks[0]
 			)
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			OwnedDeckCellWithPerformanceGraph(
+			OwnedDeckCell(
 				deck: PREVIEW_CURRENT_STORE.user.decks[1]
 			)
 			.environmentObject(PREVIEW_CURRENT_STORE)

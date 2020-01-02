@@ -14,7 +14,7 @@ struct HomeViewMyDecksSection: View {
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack(alignment: .top, spacing: 8) {
 						ForEach(currentUser.decks) { deck in
-							OwnedDeckCellWithPerformanceGraph(
+							OwnedDeckCell(
 								deck: deck,
 								imageBackgroundColor: .white
 							)
