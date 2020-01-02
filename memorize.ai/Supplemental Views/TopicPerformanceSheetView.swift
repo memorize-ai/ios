@@ -41,26 +41,31 @@ struct TopicPerformanceSheetView: View {
 			.frame(height: 64)
 			ScrollView {
 				VStack(spacing: 25) {
+					Text("Decks")
+						.font(.muli(.bold, size: 18))
+						.foregroundColor(.darkGray)
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.padding(.horizontal, 25)
+						.padding(.top, -6)
 					Group {
-						Rectangle()
-							.frame(height: 200) // TODO: Change to actual graph
-						Rectangle()
-							.foregroundColor(.lightGrayBorder)
-							.frame(height: 1)
-						Text("Decks")
-							.font(.muli(.bold, size: 18))
-							.foregroundColor(.darkGray)
-							.frame(maxWidth: .infinity, alignment: .leading)
-							.padding(.top, -6)
-					}
-					.padding(.horizontal, 25)
-					VStack(spacing: 4) {
-						ForEach(decks) { deck in
-							DeckRow(
-								deck: deck,
-								unselectedBackgroundColor: .white,
-								onClick: self.hide
-							)
+						if decks.isEmpty {
+							ZStack {
+								Color.lightGrayBackground
+								Text("Go to the marketplace for more")
+									.font(.muli(.semiBold, size: 14))
+									.foregroundColor(.gray)
+							}
+							.frame(height: 150)
+						} else {
+							VStack(spacing: 4) {
+								ForEach(decks) { deck in
+									DeckRow(
+										deck: deck,
+										unselectedBackgroundColor: .white,
+										onClick: self.hide
+									)
+								}
+							}
 						}
 					}
 					.padding(.top, -12)
