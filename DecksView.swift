@@ -31,8 +31,11 @@ struct DecksView: View {
 									selectedDeck: self.selectedDeck
 								)
 								.frame(maxWidth: .infinity)
-								.padding(.horizontal, Self.horizontalPadding)
-								.padding(.top, 20)
+								.padding(
+									[.horizontal, .bottom],
+									Self.horizontalPadding
+								)
+								.padding(.top)
 							}
 						}
 						DecksViewBottomControls(
