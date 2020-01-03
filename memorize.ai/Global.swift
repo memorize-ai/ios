@@ -19,7 +19,7 @@ func popUpWithAnimation(body: () -> Void) {
 
 func playHaptic(
 	_ style: UIImpactFeedbackGenerator.FeedbackStyle = .medium,
-	handler: (UIImpactFeedbackGenerator) -> Void
+	handler: (UIImpactFeedbackGenerator) -> Void = { $0.impactOccurred() }
 ) {
 	let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
 	impactFeedbackGenerator.prepare()
@@ -37,4 +37,19 @@ func share(
 	vc.excludedActivityTypes = excludedActivityTypes
 	vc.popoverPresentationController?.sourceView = currentViewController.view
 	currentViewController.present(vc, animated: true)
+}
+
+func showAlert(
+	title: String?,
+	message: String?,
+	preferredStyle: UIAlertController.Style = .alert,
+	handler: (UIAlertController) -> Void
+) {
+	let alert = UIAlertController(
+		title: title,
+		message: message,
+		preferredStyle: preferredStyle
+	)
+	handler(alert)
+	currentViewController.present(alert, animated: true)
 }

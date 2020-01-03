@@ -134,28 +134,24 @@ extension Deck {
 		
 		@discardableResult
 		func showRenameAlert(title: String = "Rename section", message: String? = nil) -> Self {
-			let alertController = UIAlertController(
-				title: title,
-				message: message,
-				preferredStyle: .alert
-			)
-			alertController.addTextField { textField in
-				textField.placeholder = "Name"
-				textField.text = self.name
-			}
-			alertController.addAction(.init(title: "Cancel", style: .cancel))
-			alertController.addAction(.init(title: "Rename", style: .default) { _ in
-				guard let name = alertController.textFields?.first?.text else { return }
-				self.renameLoadingState.startLoading()
-				self.documentReference.updateData([
-					"name": name
-				]).done {
-					self.renameLoadingState.succeed()
-				}.catch { error in
-					self.renameLoadingState.fail(error: error)
+			showAlert(title: title, message: message) { alert in
+				alert.addTextField { textField in
+					textField.placeholder = "Name"
+					textField.text = self.name
 				}
-			})
-			currentViewController.present(alertController, animated: true)
+				alert.addAction(.init(title: "Cancel", style: .cancel))
+				alert.addAction(.init(title: "Rename", style: .default) { _ in
+					guard let name = alert.textFields?.first?.text else { return }
+					self.renameLoadingState.startLoading()
+					self.documentReference.updateData([
+						"name": name
+					]).done {
+						self.renameLoadingState.succeed()
+					}.catch { error in
+						self.renameLoadingState.fail(error: error)
+					}
+				})
+			}
 			return self
 		}
 		
@@ -165,17 +161,13 @@ extension Deck {
 			message: String? = "Are you sure?",
 			completion: (() -> Void)? = nil
 		) -> Self {
-			let alertController = UIAlertController(
-				title: "Unlock \(name)",
-				message: message,
-				preferredStyle: .alert
-			)
-			alertController.addAction(.init(title: "Cancel", style: .cancel))
-			alertController.addAction(.init(title: "Unlock", style: .default) { _ in
-				self.unlock(forUser: user)
-				completion?()
-			})
-			currentViewController.present(alertController, animated: true)
+			showAlert(title: "Unlock \(name)", message: message) { alert in
+				alert.addAction(.init(title: "Cancel", style: .cancel))
+				alert.addAction(.init(title: "Unlock", style: .default) { _ in
+					self.unlock(forUser: user)
+					completion?()
+				})
+			}
 			return self
 		}
 		
@@ -197,17 +189,13 @@ extension Deck {
 			message: String? = "Are you sure? All of the cards in this section will be permanently deleted. This action cannot be undone.",
 			completion: (() -> Void)? = nil
 		) -> Self {
-			let alertController = UIAlertController(
-				title: "Delete \(name)",
-				message: message,
-				preferredStyle: .alert
-			)
-			alertController.addAction(.init(title: "Cancel", style: .cancel))
-			alertController.addAction(.init(title: "Delete", style: .destructive) { _ in
-				self.delete()
-				completion?()
-			})
-			currentViewController.present(alertController, animated: true)
+			showAlert(title: "Delete \(name)", message: message) { alert in
+				alert.addAction(.init(title: "Cancel", style: .cancel))
+				alert.addAction(.init(title: "Delete", style: .destructive) { _ in
+					self.delete()
+					completion?()
+				})
+			}
 			return self
 		}
 		

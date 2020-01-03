@@ -615,29 +615,25 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		message: String? = nil,
 		completion: ((String) -> Void)? = nil
 	) -> Self {
-		let alertController = UIAlertController(
-			title: title,
-			message: message,
-			preferredStyle: .alert
-		)
-		alertController.addTextField { textField in
-			textField.placeholder = "Name"
-		}
-		alertController.addAction(.init(title: "Cancel", style: .cancel))
-		alertController.addAction(.init(title: "Create", style: .default) { _ in
-			guard let name = alertController.textFields?.first?.text else { return }
-			self.createSectionLoadingState.startLoading()
-			self.documentReference.collection("sections").addDocument(data: [
-				"name": name,
-				"index": self.nextSectionIndex
-			]).done { ref in
-				self.createSectionLoadingState.succeed()
-				completion?(ref.documentID)
-			}.catch { error in
-				self.createSectionLoadingState.fail(error: error)
+		showAlert(title: title, message: message) { alert in
+			alert.addTextField { textField in
+				textField.placeholder = "Name"
 			}
-		})
-		currentViewController.present(alertController, animated: true)
+			alert.addAction(.init(title: "Cancel", style: .cancel))
+			alert.addAction(.init(title: "Create", style: .default) { _ in
+				guard let name = alert.textFields?.first?.text else { return }
+				self.createSectionLoadingState.startLoading()
+				self.documentReference.collection("sections").addDocument(data: [
+					"name": name,
+					"index": self.nextSectionIndex
+				]).done { ref in
+					self.createSectionLoadingState.succeed()
+					completion?(ref.documentID)
+				}.catch { error in
+					self.createSectionLoadingState.fail(error: error)
+				}
+			})
+		}
 		return self
 	}
 	
@@ -648,17 +644,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		message: String? = "All of your data will be deleted, and all of your progress will be lost. This action cannot be undone.",
 		completion: (() -> Void)? = nil
 	) -> Self {
-		let alertController = UIAlertController(
-			title: title,
-			message: message,
-			preferredStyle: .alert
-		)
-		alertController.addAction(.init(title: "Cancel", style: .cancel))
-		alertController.addAction(.init(title: "Remove", style: .destructive) { _ in
-			self.remove(user: user)
-			completion?()
-		})
-		currentViewController.present(alertController, animated: true)
+		showAlert(title: title, message: message) { alert in
+			alert.addAction(.init(title: "Cancel", style: .cancel))
+			alert.addAction(.init(title: "Remove", style: .destructive) { _ in
+				self.remove(user: user)
+				completion?()
+			})
+		}
 		return self
 	}
 	
