@@ -1,15 +1,15 @@
 import SwiftUI
 
-struct HomeViewMyDecksSection: View {
+struct HomeViewMyInterestsSection: View {
 	@ObservedObject var currentUser: User
 	
 	var body: some View {
 		VStack {
-			if !currentUser.decks.isEmpty {
+			if !self.currentUser.interests.isEmpty {
 				CustomRectangle(
 					background: Color.lightGrayBackground.opacity(0.5)
 				) {
-					Text("My decks")
+					Text("My interests")
 						.font(.muli(.bold, size: 20))
 						.foregroundColor(.darkGray)
 						.padding(.horizontal, 8)
@@ -17,29 +17,19 @@ struct HomeViewMyDecksSection: View {
 				}
 				.align(to: .leading)
 				.padding(.horizontal, 23)
-				ScrollView(.horizontal, showsIndicators: false) {
-					HStack(alignment: .top, spacing: 8) {
-						ForEach(currentUser.decks) { deck in
-							OwnedDeckCell(
-								deck: deck,
-								imageBackgroundColor: .white
-							)
-						}
-					}
-					.padding(.horizontal, 23)
-				}
-				.padding(.bottom)
 			}
+			HomeViewTopicPerformanceList()
 		}
 	}
 }
 
 #if DEBUG
-struct HomeViewMyDecksSection_Previews: PreviewProvider {
+struct HomeViewMyInterestsSection_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeViewMyDecksSection(
+		HomeViewMyInterestsSection(
 			currentUser: PREVIEW_CURRENT_STORE.user
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

@@ -30,10 +30,10 @@ struct HomeView: View {
 							}
 						}
 						.padding(.bottom, 6)
-						HomeViewPerformanceCard(
+						HomeViewMyInterestsSection(
 							currentUser: self.currentStore.user
 						)
-						.padding(.horizontal, 23)
+						.padding(.vertical, 6)
 						HomeViewRecommendedDecksSection()
 							.padding(.top)
 						HomeViewMyDecksSection(

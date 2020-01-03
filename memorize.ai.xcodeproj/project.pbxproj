@@ -11,7 +11,7 @@
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
-		4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */; };
+		4D0C0288237CB9590062BC14 /* HomeViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */; };
 		4D0C028A237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */; };
 		4D0C028D237D3EB50062BC14 /* BasicTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C028C237D3EB50062BC14 /* BasicTopicCell.swift */; };
 		4D0C028F237D41C80062BC14 /* LoadingTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C028E237D41C80062BC14 /* LoadingTopicCell.swift */; };
@@ -253,7 +253,7 @@
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
-		4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPerformanceCard.swift; sourceTree = "<group>"; };
+		4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyInterestsSection.swift; sourceTree = "<group>"; };
 		4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTopicPerformanceList.swift; sourceTree = "<group>"; };
 		4D0C028C237D3EB50062BC14 /* BasicTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicTopicCell.swift; path = memorize.ai/BasicTopicCell.swift; sourceTree = SOURCE_ROOT; };
 		4D0C028E237D41C80062BC14 /* LoadingTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTopicCell.swift; sourceTree = "<group>"; };
@@ -701,7 +701,7 @@
 			children = (
 				4D458A62237C9AFC00A9776A /* HomeViewTopGradient.swift */,
 				4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */,
-				4D0C0287237CB9590062BC14 /* HomeViewPerformanceCard.swift */,
+				4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */,
 				4D0C0289237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift */,
 				4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */,
 				4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */,
@@ -1489,7 +1489,7 @@
 				4DD5FE8C2387404D00E70251 /* MarketViewFilterPopUpSideBar.swift in Sources */,
 				4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */,
 				4D3FE58023BC81240010FFD3 /* EditCardViewCardCell.swift in Sources */,
-				4D0C0288237CB9590062BC14 /* HomeViewPerformanceCard.swift in Sources */,
+				4D0C0288237CB9590062BC14 /* HomeViewMyInterestsSection.swift in Sources */,
 				4D6BA53523ACB83000D3F9D1 /* AddCardsViewCardCell.swift in Sources */,
 				4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */,
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,

@@ -9,11 +9,17 @@ struct HomeViewRecommendedDecksSection: View {
 	var body: some View {
 		VStack {
 			if !currentStore.recommendedDecks.isEmpty {
-				Text("Recommended decks")
-					.font(.muli(.bold, size: 20))
-					.foregroundColor(.darkGray)
-					.align(to: .leading)
-					.padding(.horizontal, 23)
+				CustomRectangle(
+					background: Color.lightGrayBackground.opacity(0.5)
+				) {
+					Text("Recommended decks")
+						.font(.muli(.bold, size: 20))
+						.foregroundColor(.darkGray)
+						.padding(.horizontal, 8)
+						.padding(.vertical, 4)
+				}
+				.align(to: .leading)
+				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack(alignment: .top) {
 						ForEach(currentStore.recommendedDecks) { deck in
