@@ -36,7 +36,7 @@ struct DecksViewDeckOptionsPopUp: View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
 			contentHeight: .init(
-				50 * (isOwner ? (8 + *canOrderSections) : 5) +
+				50 * (isOwner ? (7 + *canOrderSections) : 4) +
 				2 + *isOwner
 			)
 		) {
@@ -75,16 +75,6 @@ struct DecksViewDeckOptionsPopUp: View {
 			.disabled(!selectedDeck.creatorLoadingState.didSucceed)
 			.onAppear {
 				self.selectedDeck.loadCreator()
-			}
-			PopUpButton(
-				icon: resizeImage(.performanceCheckIcon),
-				text: "Performance",
-				textColor: .darkGray
-			) {
-				self.model.isPerformanceSheetViewShowing = true
-			}
-			.sheet(isPresented: $model.isPerformanceSheetViewShowing) {
-				DecksViewPerformanceSheetView(deck: self.selectedDeck)
 			}
 			if isOwner {
 				PublishDeckViewNavigationLink(deck: selectedDeck) {

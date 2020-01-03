@@ -8,7 +8,6 @@ final class DecksViewModel: ViewModel {
 	
 	@Published var isDestroyAlertShowing = false
 	@Published var isOrderSectionsSheetShowing = false
-	@Published var isPerformanceSheetViewShowing = false
 	
 	@Published var expandedSections = [Deck.Section]()
 	

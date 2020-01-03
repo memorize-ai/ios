@@ -137,7 +137,6 @@
 		4D9AAEC32385D25500C85EC2 /* MarketViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */; };
 		4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */; };
 		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
-		4D9BF86323BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86223BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift */; };
 		4D9BF86923BAC6A500388DEF /* froala.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86823BAC6A400388DEF /* froala.js */; };
 		4D9BF86B23BAC6AB00388DEF /* froala.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86A23BAC6AB00388DEF /* froala.css */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
@@ -380,7 +379,6 @@
 		4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopControls.swift; path = memorize.ai/MarketViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetView.swift; sourceTree = "<group>"; };
 		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
-		4D9BF86223BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewPerformanceSheetView.swift; sourceTree = "<group>"; };
 		4D9BF86823BAC6A400388DEF /* froala.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = froala.js; sourceTree = "<group>"; };
 		4D9BF86A23BAC6AB00388DEF /* froala.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = froala.css; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -1010,7 +1008,6 @@
 				4D365794238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift */,
 				4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */,
 				4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */,
-				4D9BF86223BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift */,
 			);
 			path = DecksView;
 			sourceTree = "<group>";
@@ -1463,7 +1460,6 @@
 				4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */,
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
-				4D9BF86323BA6A9D00388DEF /* DecksViewPerformanceSheetView.swift in Sources */,
 				4D3FE58223BC813D0010FFD3 /* EditCardViewAddSectionPopUp.swift in Sources */,
 				4D59FA89237E7735007CAA74 /* OwnedDeckCell.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
