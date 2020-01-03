@@ -142,10 +142,12 @@ struct MainTabView: View {
 								.case(.profile) {
 									ProfileView()
 								}
-							FloatingReviewButton(user: currentStore.user)
-								.align(to: .bottomTrailing)
-								.padding([.trailing, .bottom], 16)
-								.offset(x: floatingReviewButtonXOffset)
+							if currentStore.mainTabViewSelection == .home {
+								FloatingReviewButton(user: currentStore.user)
+									.align(to: .bottomTrailing)
+									.padding([.trailing, .bottom], 16)
+									.offset(x: floatingReviewButtonXOffset)
+							}
 						}
 						Rectangle()
 							.fill(Color.lightGrayLine.opacity(0.5))
