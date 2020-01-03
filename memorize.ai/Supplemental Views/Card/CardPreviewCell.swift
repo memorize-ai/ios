@@ -30,8 +30,14 @@ struct CardPreviewCell: View {
 			borderWidth: 1.5
 		) {
 			ZStack(alignment: .bottomTrailing) {
-				WebView(html: card.renderSide(side))
-					.cornerRadius(5)
+				WebView(
+					html: card.renderSide(side),
+					baseURL: .init(
+						fileURLWithPath: Bundle.main.bundlePath,
+						isDirectory: true
+					)
+				)
+				.cornerRadius(5)
 				HStack {
 					Text(side == .front ? "FRONT" : "BACK")
 						.font(.muli(.bold, size: 10))

@@ -153,6 +153,9 @@
 		4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */; };
 		4DACBA6C23981D4500E4BB71 /* MarketDeckViewTopicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */; };
 		4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */; };
+		4DB659D123BF0B3800E74850 /* katex.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D023BF0B3800E74850 /* katex.js */; };
+		4DB659D323BF0BC600E74850 /* katex.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D223BF0BC600E74850 /* katex.css */; };
+		4DB659D523BF0BDD00E74850 /* auto-render.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D423BF0BDD00E74850 /* auto-render.js */; };
 		4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */; };
 		4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */; };
 		4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 4DB9FF4B2396D62A00B8DD38 /* WebView */; };
@@ -401,6 +404,9 @@
 		4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewDescription.swift; sourceTree = "<group>"; };
 		4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewTopicList.swift; sourceTree = "<group>"; };
 		4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewContentBox.swift; sourceTree = "<group>"; };
+		4DB659D023BF0B3800E74850 /* katex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.js; sourceTree = "<group>"; };
+		4DB659D223BF0BC600E74850 /* katex.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.css; sourceTree = "<group>"; };
+		4DB659D423BF0BDD00E74850 /* auto-render.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "auto-render.js"; sourceTree = "<group>"; };
 		4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewContentBox.swift; sourceTree = "<group>"; };
 		4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewCell.swift; sourceTree = "<group>"; };
 		4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+HTML.swift"; sourceTree = "<group>"; };
@@ -838,6 +844,7 @@
 		4D9BF86623BAC68B00388DEF /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4DB659CF23BF0B1D00E74850 /* Katex */,
 				4D9BF86723BAC69700388DEF /* Froala */,
 			);
 			path = Libraries;
@@ -941,6 +948,16 @@
 				4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */,
 			);
 			path = AuthenticationView;
+			sourceTree = "<group>";
+		};
+		4DB659CF23BF0B1D00E74850 /* Katex */ = {
+			isa = PBXGroup;
+			children = (
+				4DB659D223BF0BC600E74850 /* katex.css */,
+				4DB659D023BF0B3800E74850 /* katex.js */,
+				4DB659D423BF0BDD00E74850 /* auto-render.js */,
+			);
+			path = Katex;
 			sourceTree = "<group>";
 		};
 		4DB9FF452396CC6100B8DD38 /* Card */ = {
@@ -1270,6 +1287,8 @@
 				4D402E86235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf in Resources */,
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
+				4DB659D323BF0BC600E74850 /* katex.css in Resources */,
+				4DB659D523BF0BDD00E74850 /* auto-render.js in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
@@ -1282,6 +1301,7 @@
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
 				4D9BF86923BAC6A500388DEF /* froala.js in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
+				4DB659D123BF0B3800E74850 /* katex.js in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
 				4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */,

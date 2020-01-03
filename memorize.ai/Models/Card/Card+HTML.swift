@@ -21,6 +21,22 @@ extension Card {
 			.child {
 				HTMLElement.head
 					.child {
+						HTMLElement.link
+							.rel("stylesheet")
+							.href("katex.css")
+					}
+					.child {
+						HTMLElement.script
+							.defer()
+							.src("katex.js")
+					}
+					.child {
+						HTMLElement.script
+							.defer()
+							.src("auto-render.js")
+							.onLoad("renderMathInElement(document.body)")
+					}
+					.child {
 						HTMLElement.style
 							.child(css)
 					}
