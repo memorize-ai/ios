@@ -53,10 +53,6 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
-	var hasSound: Bool {
-		Self.textIncludesAudioTag(front) || Self.textIncludesAudioTag(back)
-	}
-	
 	var isDue: Bool {
 		guard let dueDate = userData?.dueDate else { return false }
 		return dueDate <= .now
@@ -103,10 +99,6 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 			.replacingOccurrences(of: "&amp;", with: "&")
 			.replacingOccurrences(of: "&lt;", with: "<")
 			.replacingOccurrences(of: "&gt;", with: ">")
-	}
-	
-	private static func textIncludesAudioTag(_ text: String) -> Bool {
-		text.range(of: #"<\s*audio[^>]*src="(.+?)"[^>]*>"#, options: .regularExpression) != nil
 	}
 	
 	private static func replaceHtmlElements(_ text: String) -> String {

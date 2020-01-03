@@ -57,11 +57,6 @@ struct DecksViewCardCell: View {
 								.lineLimit(5)
 								.lineSpacing(1)
 								.align(to: .leading)
-							if card.hasSound {
-								Image(systemName: .speaker3Fill)
-									.foregroundColor(.darkBlue)
-									.padding([.trailing, .top], 3)
-							}
 						}
 						.frame(minHeight: 40, alignment: .top)
 						Text(card.dueMessage)
