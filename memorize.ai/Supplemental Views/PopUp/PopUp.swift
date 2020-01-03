@@ -1,7 +1,11 @@
 import SwiftUI
 
 struct PopUp<Content: View>: View {
-	@Binding var isShowing: Bool
+	@Binding var isShowing: Bool {
+		didSet {
+			playHaptic()
+		}
+	}
 	
 	let contentHeight: CGFloat
 	let content: Content
