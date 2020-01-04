@@ -4,13 +4,7 @@ import WebView
 struct AddCardsViewCardCell: View {
 	@EnvironmentObject var model: AddCardsViewModel
 	
-	@ObservedObject var deck: Deck
 	@ObservedObject var card: Card.Draft
-	
-	init(card: Card.Draft) {
-		deck = card.parent
-		self.card = card
-	}
 	
 	var title: String {
 		let cardTitle = card.title
