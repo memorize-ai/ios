@@ -111,7 +111,7 @@ struct FroalaEditor: View {
 										undo: true,
 										refreshAfterCallback: true,
 										callback() {
-											execCommand('insertText', `\\(${getSelection()}\\)`)
+											execCommand('insertText', `\\\\(${getSelection()}\\\\)`)
 											moveCursor(-2)
 										}
 									})
