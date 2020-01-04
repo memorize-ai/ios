@@ -24,10 +24,26 @@ struct AddCardsView: View {
 								ForEach(self.model.cards) { card in
 									AddCardsViewCardCell(card: card)
 								}
+								Button(action: self.model.addCard) {
+									CustomRectangle(background: Color.white) {
+										HStack(spacing: 3) {
+											Image(systemName: .plus)
+												.font(Font.title.weight(.bold))
+												.scaleEffect(0.65)
+											Text("ADD CARD")
+												.font(.muli(.extraBold, size: 16))
+										}
+										.foregroundColor(.darkBlue)
+										.padding(.leading, 12)
+										.padding(.trailing)
+										.padding(.vertical, 10)
+									}
+								}
+								.padding(.top, -10)
 							}
 							.padding([.horizontal, .bottom], 10)
 							.respondsToKeyboard(
-								withExtraOffset: -15 - geometry.safeAreaInsets.bottom
+								withExtraOffset: -(15 + geometry.safeAreaInsets.bottom)
 							)
 						}
 						Button(action: {
