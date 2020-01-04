@@ -221,6 +221,8 @@
 		4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */; };
 		4DEB35A0236ACE4900E3DBC4 /* DeckStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEB359F236ACE4900E3DBC4 /* DeckStar.swift */; };
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
+		4DF3879923C13E3200AA039B /* AddCardsViewCardCellSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3879823C13E3200AA039B /* AddCardsViewCardCellSection.swift */; };
+		4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3879A23C149C400AA039B /* AddCardsViewCardCellTopControls.swift */; };
 		4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594B2399734E00A78ADF /* PublishDeckView.swift */; };
 		4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */; };
 		4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */; };
@@ -467,6 +469,8 @@
 		4DEB359D236ACAEF00E3DBC4 /* DeckStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStars.swift; sourceTree = "<group>"; };
 		4DEB359F236ACE4900E3DBC4 /* DeckStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStar.swift; sourceTree = "<group>"; };
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		4DF3879823C13E3200AA039B /* AddCardsViewCardCellSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewCardCellSection.swift; sourceTree = "<group>"; };
+		4DF3879A23C149C400AA039B /* AddCardsViewCardCellTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewCardCellTopControls.swift; sourceTree = "<group>"; };
 		4DF4594B2399734E00A78ADF /* PublishDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckView.swift; sourceTree = "<group>"; usesTabs = 1; };
 		4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewModel.swift; sourceTree = "<group>"; };
 		4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewTopControls.swift; sourceTree = "<group>"; };
@@ -772,6 +776,8 @@
 				4D6BA52F23ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift */,
 				4D6BA53223ACB81700D3F9D1 /* AddCardsViewTopControls.swift */,
 				4D6BA53423ACB83000D3F9D1 /* AddCardsViewCardCell.swift */,
+				4DF3879A23C149C400AA039B /* AddCardsViewCardCellTopControls.swift */,
+				4DF3879823C13E3200AA039B /* AddCardsViewCardCellSection.swift */,
 				4D6BA53823AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift */,
 				4D6BA53A23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift */,
 			);
@@ -1434,6 +1440,7 @@
 				4DD5FE942387868700E70251 /* MarketViewFilterPopUpContentWithSlider.swift in Sources */,
 				4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */,
 				4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */,
+				4DF3879923C13E3200AA039B /* AddCardsViewCardCellSection.swift in Sources */,
 				4DD5FE8A238735F600E70251 /* MarketViewFilterPopUp.swift in Sources */,
 				4D402E70235E50610011C6B6 /* CustomRectangle.swift in Sources */,
 				4D0C028A237CD33A0062BC14 /* HomeViewTopicPerformanceList.swift in Sources */,
@@ -1447,6 +1454,7 @@
 				4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */,
 				4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
+				4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */,
 				4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,

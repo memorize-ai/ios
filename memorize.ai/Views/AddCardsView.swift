@@ -50,7 +50,6 @@ struct AddCardsView: View {
 							}
 						}
 						.edgesIgnoringSafeArea(.all)
-						.opacity(*self.model.hasDraft)
 					}
 				}
 				PopUp(

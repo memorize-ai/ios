@@ -21,13 +21,7 @@ struct AddCardsViewTopControls: View {
 			Button(action: {
 				self.model.publish(onDone: self.goBack)
 			}) {
-				CustomRectangle(
-					background: model.isPublishButtonDisabled
-						? Color.transparent
-						: Color.white,
-					borderColor: .transparentLightGray,
-					borderWidth: model.isPublishButtonDisabled ? 1.5 : 0
-				) {
+				CustomRectangle(background: Color.white) {
 					Group {
 						if model.publishLoadingState.isLoading {
 							ActivityIndicator()
@@ -35,19 +29,13 @@ struct AddCardsViewTopControls: View {
 						} else {
 							Text("PUBLISH")
 								.font(.muli(.bold, size: 17))
-								.foregroundColor(
-									model.isPublishButtonDisabled
-										? Color.white.opacity(0.7)
-										: .extraBluePurple
-								)
+								.foregroundColor(.extraBluePurple)
 								.padding(.horizontal, 10)
 						}
 					}
 					.frame(height: 30)
 				}
-				.opacity(model.isPublishButtonDisabled ? 0.5 : 1)
 			}
-			.disabled(model.isPublishButtonDisabled)
 		}
 	}
 }

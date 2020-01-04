@@ -44,32 +44,11 @@ final class AddCardsViewModel: ViewModel {
 		return [card]
 	}
 	
-	var isPublishButtonDisabled: Bool {
-		for card in cards {
-			if card.isPublishable {
-				return false
-			}
-		}
-		return true
-	}
-	
-	var hasDraft: Bool {
-		for card in cards {
-			if !card.isEmpty {
-				return true
-			}
-		}
-		return false
-	}
-	
 	func cardDidChange(_ card: Card.Draft) {
 		_ = card.isEmpty
 			? card.removeDraft(forUser: user)
 			: card.updateDraft(forUser: user)
-		guard cards.last == card && !card.isEmpty else {
-			objectWillChange.send()
-			return
-		}
+		guard cards.last == card && !card.isEmpty else { return }
 		let newCard = Card.Draft(
 			parent: deck,
 			sectionId: card.sectionId

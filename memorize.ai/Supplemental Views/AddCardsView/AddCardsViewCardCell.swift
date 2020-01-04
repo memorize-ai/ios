@@ -4,22 +4,7 @@ import WebView
 struct AddCardsViewCardCell: View {
 	@EnvironmentObject var model: AddCardsViewModel
 	
-	@ObservedObject var card: Card.Draft
-	
-	var title: String {
-		let cardTitle = card.title
-		return cardTitle.isEmpty
-			? "NEW CARD"
-			: cardTitle
-	}
-	
-	var isSectionLoading: Bool {
-		card.sectionId != nil && card.section == nil
-	}
-	
-	var sectionTitle: String {
-		card.section?.name ?? "Unsectioned"
-	}
+	let card: Card.Draft
 	
 	func headerText(_ text: String) -> some View {
 		Text(text)
@@ -39,75 +24,28 @@ struct AddCardsViewCardCell: View {
 		}
 	}
 	
-	var topControls: some View {
-		HStack(alignment: .bottom, spacing: 20) {
-			Text(title)
-				.font(.muli(.extraBold, size: 15))
-				.foregroundColor(.white)
-			Spacer()
-			if card.publishLoadingState.isLoading {
-				ActivityIndicator(color: .white)
-			} else {
-				Button(action: {
-					self.model.removeCard(self.card)
-				}) {
-					Image.whiteTrashIcon
-						.resizable()
-						.renderingMode(.original)
-						.aspectRatio(contentMode: .fit)
-						.frame(height: 17)
-				}
-			}
-		}
-	}
-	
-	var section: some View {
-		Button(action: {
-			self.model.currentCard = self.card
-			popUpWithAnimation {
-				self.model.isAddSectionPopUpShowing = true
-			}
-		}) {
-			CustomRectangle(
-				background: Color.mediumGray.opacity(0.68)
-			) {
-				HStack {
-					if isSectionLoading {
-						ActivityIndicator(color: .lightGrayText)
-					} else {
-						Text(sectionTitle)
-							.font(.muli(.regular, size: 18))
-							.foregroundColor(.lightGrayText)
-					}
-					Spacer()
-					Image.grayDropDownArrowHead
-						.resizable()
-						.renderingMode(.original)
-						.aspectRatio(contentMode: .fit)
-						.frame(width: 20)
-						.padding(.vertical)
-				}
-				.padding(.horizontal)
-			}
-		}
-	}
-	
 	var body: some View {
 		VStack(spacing: 8) {
-			topControls
+			AddCardsViewCardCellTopControls(card: card)
 				.padding(.horizontal, 6)
 			CustomRectangle(
 				background: Color.white
 			) {
 				VStack {
-					section
+					AddCardsViewCardCellSection(card: card)
 					Rectangle()
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
 					headerText("FRONT")
-					editor(html: $card.front)
+					editor(html: .init(
+						get: { self.card.front },
+						set: { self.card.front = $0 }
+					))
 					headerText("BACK")
-					editor(html: $card.back)
+					editor(html: .init(
+						get: { self.card.back },
+						set: { self.card.back = $0 }
+					))
 				}
 				.padding()
 			}
