@@ -1,7 +1,7 @@
 import HTML
 
 extension Card {
-	private static let css = """
+	private static let css = #"""
 	* {
 		font-family: sans-serif;
 		font-size: 45px;
@@ -41,7 +41,7 @@ extension Card {
 	.fr-class-transparency {
 		opacity: 0.5;
 	}
-	"""
+	"""#
 	
 	private static func htmlWithText(_ text: String) -> HTMLElement {
 		HTMLElement.html

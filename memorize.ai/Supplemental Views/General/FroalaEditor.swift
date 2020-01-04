@@ -58,21 +58,21 @@ struct FroalaEditor: View {
 							}
 							.child {
 								HTMLElement.style
-								.child("""
-								#editor :focus {
-									outline: none;
-								}
-								#editor .fr-toolbar,
-								#editor .fr-wrapper {
-									border: none;
-								}
-								#editor .second-toolbar {
-									visibility: hidden;
-								}
-								#editor #math-1 > img {
-									padding-top: 4px;
-								}
-								""")
+									.child(#"""
+									#editor :focus {
+										outline: none;
+									}
+									#editor .fr-toolbar,
+									#editor .fr-wrapper {
+										border: none;
+									}
+									#editor .second-toolbar {
+										visibility: hidden;
+									}
+									#editor #math-1 > img {
+										padding-top: 4px;
+									}
+									"""#)
 							}
 					}
 					.child {
@@ -84,7 +84,7 @@ struct FroalaEditor: View {
 							}
 							.child {
 								HTMLElement.script
-									.child("""
+									.child(#"""
 									const execCommand = (command, payload = null) =>
 										document.execCommand(command, false, payload)
 									
@@ -111,7 +111,7 @@ struct FroalaEditor: View {
 										undo: true,
 										refreshAfterCallback: true,
 										callback() {
-											execCommand('insertText', `\\\\(${getSelection()}\\\\)`)
+											execCommand('insertText', `\\(${getSelection()}\\)`)
 											moveCursor(-2)
 										}
 									})
@@ -181,7 +181,7 @@ struct FroalaEditor: View {
 											}
 										}
 									})
-									""")
+									"""#)
 							}
 					}
 			},
