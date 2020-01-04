@@ -2,17 +2,44 @@ import HTML
 
 extension Card {
 	private static let css = """
-	body > :not(ul):not(ol) {
-		margin: 0 40px 40px 40px;
+	* {
+		font-family: sans-serif;
+		font-size: 45px;
 	}
-	body > ul, ol {
-		margin-top: 0;
-		margin-right: 40px;
-		margin-left: 80px;
+	body {
+		padding-top: 36px;
 	}
-	img {
-		border-radius: 32px;
-		width: calc(100% - 80px);
+	.fr-text-gray {
+		color: #aaa;
+	}
+	.fr-text-bordered {
+		border-top: solid 1px #222;
+		border-bottom: solid 1px #222;
+		padding: 10px 0;
+	}
+	.fr-text-spaced {
+		letter-spacing: 1px;
+	}
+	.fr-text-uppercase {
+		text-transform: uppercase;
+	}
+	.fr-class-highlighted {
+		background-color: #ff0;
+	}
+	.fr-class-code {
+		border-color: #ccc;
+		border-radius: 2px;
+		-moz-border-radius: 2px;
+		-webkit-border-radius: 2px;
+		-moz-background-clip: padding;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+		background: #f5f5f5;
+		padding: 10px;
+		font-family: 'Courier New', Courier, monospace;
+	}
+	.fr-class-transparency {
+		opacity: 0.5;
 	}
 	"""
 	
@@ -43,9 +70,6 @@ extension Card {
 			}
 			.child {
 				HTMLElement.body
-					.paddingTop("36px")
-					.fontFamily("Helvetica")
-					.fontSize("45px")
 					.child(text)
 			}
 	}
