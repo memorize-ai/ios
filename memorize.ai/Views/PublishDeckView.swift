@@ -1,7 +1,13 @@
 import SwiftUI
 
-struct PublishDeckView: View { // FIXME: Doesn't update the view when model updates the first time this is opened
-	@EnvironmentObject var model: PublishDeckViewModel
+struct PublishDeckView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
+	@ObservedObject var model: PublishDeckViewModel
+	
+	init(deck: Deck? = nil) {
+		model = .init(deck: deck)
+	}
 	
 	var imagePopUp: some View {
 		PopUp(
@@ -66,9 +72,11 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 				.edgesIgnoringSafeArea(.all)
 				VStack {
 					PublishDeckViewTopControls()
+						.environmentObject(self.model)
 						.padding(.horizontal, 23)
 					ScrollView {
 						PublishDeckViewContentBox()
+							.environmentObject(self.model)
 							.padding(.horizontal, 12)
 							.respondsToKeyboard(
 								withExtraOffset: geometry.safeAreaInsets.bottom + 12
@@ -78,7 +86,13 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 				self.imagePopUp
 				if self.model.isImagePickerShowing {
 					self.imagePicker
+						.edgesIgnoringSafeArea(.all)
 				}
+			}
+		}
+		.onAppear {
+			for topic in self.currentStore.topics {
+				topic.loadImage()
 			}
 		}
 	}
@@ -87,11 +101,8 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 #if DEBUG
 struct PublishDeckView_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = PublishDeckViewModel()
-		model.isImagePopUpShowing = true
-		return PublishDeckView()
+		PublishDeckView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(model)
 	}
 }
 #endif

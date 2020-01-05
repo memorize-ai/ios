@@ -41,7 +41,7 @@ struct PublishDeckViewTopControls: View {
 							ActivityIndicator()
 								.padding(.horizontal, 25)
 						} else {
-							Text(model.deck == nil ? "Create" : "Edit")
+							Text(model.deck == nil ? "Create" : "Publish")
 								.font(.muli(.bold, size: 17))
 								.foregroundColor(Color.white.opacity(0.7))
 								.padding(.horizontal, 10)

@@ -3,6 +3,8 @@ import SwiftUI
 struct PublishDeckViewNavigationLink<Label: View>: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
+	@State var isActive = false
+	
 	let deck: Deck?
 	let label: Label
 	
@@ -13,11 +15,8 @@ struct PublishDeckViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: PublishDeckView()
+			destination: PublishDeckView(deck: deck)
 				.environmentObject(currentStore)
-				.environmentObject(
-					PublishDeckViewModel(deck: deck)
-				)
 				.removeNavigationBar()
 		) {
 			label

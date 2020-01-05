@@ -65,6 +65,16 @@ final class PublishDeckViewModel: ViewModel {
 			.putData(data, metadata: .jpeg)
 	}
 	
+	func reset() {
+		image = nil
+		topics = []
+		name = ""
+		subtitle = ""
+		description = ""
+		publishLoadingState.reset()
+		didChangeImage = false
+	}
+	
 	func publish(currentUser: User, completion: @escaping () -> Void) {
 		publishLoadingState.startLoading()
 		if let deck = deck {
@@ -82,6 +92,7 @@ final class PublishDeckViewModel: ViewModel {
 					: []
 			)).done {
 				self.publishLoadingState.succeed()
+				self.reset()
 				completion()
 			}.catch { error in
 				self.publishLoadingState.fail(error: error)
@@ -122,6 +133,7 @@ final class PublishDeckViewModel: ViewModel {
 					currentUser.getDeck(withId: deckId)
 				]).done {
 					self.publishLoadingState.succeed()
+					self.reset()
 					completion()
 				}.catch { error in
 					self.publishLoadingState.fail(error: error)

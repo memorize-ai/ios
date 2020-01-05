@@ -16,28 +16,6 @@ struct PublishDeckViewContentBox: View {
 		min(160, maxWidth)
 	}
 	
-	var topicGrid: some View {
-		ScrollView(showsIndicators: false) {
-			Grid(
-				elements: currentStore.topics.map { topic in
-					TopicCell(
-						topic: topic,
-						isSelected: model.isTopicSelected(topic)
-					) {
-						self.model.toggleTopicSelect(topic)
-					}
-				},
-				columns: Self.numberOfTopicColumns,
-				horizontalSpacing: Self.topicCellSpacing,
-				verticalSpacing: Self.topicCellSpacing
-			)
-			.frame(maxWidth: maxWidth)
-		}
-		.onAppear {
-			self.currentStore.loadAllTopics()
-		}
-	}
-	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
@@ -107,7 +85,20 @@ struct PublishDeckViewContentBox: View {
 							.foregroundColor(.darkRed)
 							.align(to: .leading)
 					}
-					topicGrid
+					Grid(
+						elements: currentStore.topics.map { topic in
+							TopicCell(
+								topic: topic,
+								isSelected: model.isTopicSelected(topic)
+							) {
+								self.model.toggleTopicSelect(topic)
+							}
+						},
+						columns: Self.numberOfTopicColumns,
+						horizontalSpacing: Self.topicCellSpacing,
+						verticalSpacing: Self.topicCellSpacing
+					)
+					.frame(maxWidth: maxWidth)
 				}
 				.padding(.top, 12)
 			}

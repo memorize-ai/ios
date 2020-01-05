@@ -36,6 +36,7 @@ final class CurrentStore: ObservableObject {
 	@discardableResult
 	func initializeIfNeeded() -> Self {
 		loadUser()
+		loadAllTopics(withImages: false)
 		user.loadDecks {
 			self.selectedDeck = $0
 		}
@@ -107,7 +108,7 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadAllTopics() -> Self {
+	func loadAllTopics(withImages loadImages: Bool = true) -> Self {
 		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
@@ -121,10 +122,14 @@ final class CurrentStore: ObservableObject {
 				switch change.type {
 				case .added:
 					if (self.topics.contains { $0.id == topicId }) { continue }
-					self.topics.append(Topic(
+					let topic = Topic(
 						id: topicId,
 						name: document.get("name") as? String ?? "Unknown"
-					).loadImage().cache())
+					)
+					if loadImages {
+						topic.loadImage()
+					}
+					self.topics.append(topic.cache())
 				case .modified:
 					if (self.topics.contains { $0.id == topicId }) { continue }
 					self.topics.first { $0.id == topicId }?
