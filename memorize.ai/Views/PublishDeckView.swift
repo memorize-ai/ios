@@ -6,7 +6,7 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 	var imagePopUp: some View {
 		PopUp(
 			isShowing: $model.isImagePopUpShowing,
-			contentHeight: 50 * 2
+			contentHeight: 50 * (2 + *(model.image != nil))
 		) {
 			PopUpButton(
 				icon: Image.camera
@@ -29,6 +29,22 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 				textColor: .darkGray
 			) {
 				self.model.showImagePicker(source: .photoLibrary)
+			}
+			if model.image != nil {
+				PopUpButton(
+					icon: Image.redTrashIcon
+						.resizable()
+						.renderingMode(.original)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 21, height: 21),
+					text: "Remove image",
+					textColor: .darkGray
+				) {
+					popUpWithAnimation {
+						self.model.image = nil
+						self.model.isImagePopUpShowing = false
+					}
+				}
 			}
 		}
 	}
