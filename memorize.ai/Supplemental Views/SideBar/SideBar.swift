@@ -61,6 +61,7 @@ struct SideBar<Content: View>: View {
 									currentUser: self.currentStore.user,
 									searchText: self.searchText
 								)
+								.frame(maxWidth: .infinity)
 							}
 						}
 						VStack(spacing: 2) {
