@@ -6,7 +6,9 @@ struct MarketViewTopButtons: View {
 	
 	func loadTopicsIfNeeded() {
 		guard model.filterPopUpSideBarSelection == .topics else { return }
-		currentStore.loadAllTopics()
+		for topic in currentStore.topics {
+			topic.loadImage()
+		}
 	}
 	
 	var body: some View {

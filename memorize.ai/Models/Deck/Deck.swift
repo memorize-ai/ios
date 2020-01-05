@@ -396,25 +396,6 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
-	@discardableResult
-	func loadTopics(
-		in allTopics: [Topic],
-		loadImages: Bool = true,
-		completion: @escaping (Topic) -> Void
-	) -> Self {
-		guard topicsLoadingState.isNone else { return self }
-		topicsLoadingState.startLoading()
-		for topicId in topics where !(allTopics.contains { $0.id == topicId }) {
-			Topic.fromId(topicId).done { topic in
-				completion(loadImages ? topic.loadImage() : topic)
-				self.topicsLoadingState.succeed()
-			}.catch { error in
-				self.topicsLoadingState.fail(error: error)
-			}
-		}
-		return self
-	}
-	
 	func topics(in allTopics: [Topic]) -> [Topic?] {
 		topics.map { topicId in
 			allTopics.first { $0.id == topicId }

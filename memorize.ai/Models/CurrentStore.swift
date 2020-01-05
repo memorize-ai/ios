@@ -82,19 +82,6 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadTopic(_ topicId: String, withImage loadImage: Bool = true) -> Self {
-		if (topics.contains { $0.id == topicId }) { return self }
-		topicLoadingState.startLoading()
-		Topic.fromId(topicId).done { topic in
-			self.topics.append(loadImage ? topic.loadImage() : topic)
-			self.topicLoadingState.succeed()
-		}.catch { error in
-			self.topicLoadingState.fail(error: error)
-		}
-		return self
-	}
-	
-	@discardableResult
 	func loadAllTopics(withImages loadImages: Bool = true) -> Self {
 		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()

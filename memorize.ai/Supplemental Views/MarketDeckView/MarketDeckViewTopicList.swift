@@ -34,8 +34,8 @@ struct MarketDeckViewTopicList: View {
 			.padding(.horizontal, 23)
 		}
 		.onAppear {
-			self.deck.loadTopics(in: self.currentStore.topics) {
-				self.currentStore.topics.append($0)
+			for topicId in self.deck.topics {
+				self.currentStore.topics.first { $0.id == topicId }?.loadImage()
 			}
 		}
 	}
