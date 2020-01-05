@@ -39,7 +39,6 @@ struct MultilineTextField: View {
 		
 		@Binding var text: String
 		@Binding var calculatedHeight: CGFloat
-		@Binding var shouldSelect: Bool
 		
 		let font: UIFont
 		let textColor: UIColor
@@ -80,78 +79,51 @@ struct MultilineTextField: View {
 		
 		func updateUIView(_ textView: UITextView, context: Context) {
 			textView.text = text
-			if shouldSelect {
-				shouldSelect = false
-				textView.becomeFirstResponder()
-			}
 			Self.recalculateHeight(forView: textView, result: $calculatedHeight)
 		}
 	}
 	
 	@Binding var text: String
 	
-	let placeholder: String
 	let font: UIFont
 	let textColor: UIColor
-	let placeholderColor: Color
 	let backgroundColor: Color
+	let minHeight: CGFloat
 	let onDone: (() -> Void)?
 	
-	@State private var dynamicHeight: CGFloat = 100
-	@State private var isShowingPlaceholder = false
-	@State private var shouldSelect = false
-	
-	private var internalText: Binding<String> {
-		.init(get: { self.text }) {
-			self.text = $0
-			self.isShowingPlaceholder = $0.isEmpty
-		}
-	}
+	@State var dynamicHeight: CGFloat = 100
 	
 	init(
 		text: Binding<String>,
-		placeholder: String = "",
 		font: UIFont = .preferredFont(forTextStyle: .body),
 		textColor: UIColor = .gray,
-		placeholderColor: Color = .black,
 		backgroundColor: Color = .transparent,
+		minHeight: CGFloat = 100,
 		onDone: (() -> Void)? = nil
 	) {
 		_text = text
-		_isShowingPlaceholder = .init(initialValue: text.wrappedValue.isEmpty)
-		self.placeholder = placeholder
 		self.font = font
 		self.textColor = textColor
-		self.placeholderColor = placeholderColor
 		self.backgroundColor = backgroundColor
+		self.minHeight = minHeight
 		self.onDone = onDone
 	}
 	
-	var placeholderView: some View {
-		Text(placeholder)
-			.font(.muli(.regular, size: 14))
-			.foregroundColor(placeholderColor)
-			.padding(.leading, 10)
-			.padding(.top, 8)
-			.opacity(*isShowingPlaceholder)
-			.onTapGesture {
-				self.shouldSelect = true
-			}
+	var height: CGFloat {
+		max(minHeight, dynamicHeight)
 	}
-		
+	
 	var body: some View {
 		Wrapper(
-			text: internalText,
+			text: $text,
 			calculatedHeight: $dynamicHeight,
-			shouldSelect: $shouldSelect,
 			font: font,
 			textColor: textColor,
 			onDone: onDone
 		)
-		.frame(minHeight: dynamicHeight, maxHeight: dynamicHeight)
+		.frame(minHeight: height, maxHeight: height)
 		.padding(.leading, 6)
 		.background(backgroundColor)
 		.cornerRadius(5)
-		.overlay(placeholderView, alignment: .topLeading)
 	}
 }

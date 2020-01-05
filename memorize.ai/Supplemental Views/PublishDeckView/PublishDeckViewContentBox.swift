@@ -67,15 +67,19 @@ struct PublishDeckViewContentBox: View {
 					placeholder: "Subtitle (eg. The best way to study for the SAT)",
 					capitalization: .sentences
 				)
+				Text("Description")
+					.font(.muli(.regular, size: 14))
+					.foregroundColor(Color.darkText.opacity(0.5))
+					.align(to: .leading)
+					.padding(.top, 6)
+					.padding(.bottom, -4)
 				MultilineTextField(
 					text: $model.description,
-					placeholder: "Description",
 					font: UIFont(
 						name: MuliFont.regular.rawValue,
 						size: 14
 					) ?? .preferredFont(forTextStyle: .body),
 					textColor: #colorLiteral(red: 0.4666666667, green: 0.4666666667, blue: 0.4666666667, alpha: 1),
-					placeholderColor: Color.darkText.opacity(0.5),
 					backgroundColor: CustomTextField.defaultBackgroundColor
 				)
 				VStack(spacing: 16) {

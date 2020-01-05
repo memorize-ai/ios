@@ -80,7 +80,7 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadTopic(_ topicId: String, loadImage: Bool = true) -> Self {
+	func loadTopic(_ topicId: String, withImage loadImage: Bool = true) -> Self {
 		if (topics.contains { $0.id == topicId }) { return self }
 		topicLoadingState.startLoading()
 		Topic.fromId(topicId).done { topic in
@@ -93,7 +93,7 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadInterests(loadImages: Bool = true) -> Self {
+	func loadInterests(withImages loadImages: Bool = true) -> Self {
 		guard interestsLoadingState.isNone else { return self }
 		interestsLoadingState.startLoading()
 		for topicId in user.interests where !(topics.contains { $0.id == topicId }) {
