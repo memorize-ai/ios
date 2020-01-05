@@ -223,6 +223,8 @@
 		4DF2E0F5235E44C300468CD1 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2E0F4235E44C300468CD1 /* InitialView.swift */; };
 		4DF3879923C13E3200AA039B /* AddCardsViewCardCellSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3879823C13E3200AA039B /* AddCardsViewCardCellSection.swift */; };
 		4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3879A23C149C400AA039B /* AddCardsViewCardCellTopControls.swift */; };
+		4DF3879D23C15C4700AA039B /* EditCardViewCardCellSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3879C23C15C4700AA039B /* EditCardViewCardCellSection.swift */; };
+		4DF3879F23C15CA100AA039B /* EditCardViewCardCellTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3879E23C15CA100AA039B /* EditCardViewCardCellTopControls.swift */; };
 		4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594B2399734E00A78ADF /* PublishDeckView.swift */; };
 		4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */; };
 		4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */; };
@@ -471,6 +473,8 @@
 		4DF2E0F4235E44C300468CD1 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		4DF3879823C13E3200AA039B /* AddCardsViewCardCellSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewCardCellSection.swift; sourceTree = "<group>"; };
 		4DF3879A23C149C400AA039B /* AddCardsViewCardCellTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardsViewCardCellTopControls.swift; sourceTree = "<group>"; };
+		4DF3879C23C15C4700AA039B /* EditCardViewCardCellSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewCardCellSection.swift; sourceTree = "<group>"; };
+		4DF3879E23C15CA100AA039B /* EditCardViewCardCellTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewCardCellTopControls.swift; sourceTree = "<group>"; };
 		4DF4594B2399734E00A78ADF /* PublishDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckView.swift; sourceTree = "<group>"; usesTabs = 1; };
 		4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewModel.swift; sourceTree = "<group>"; };
 		4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewTopControls.swift; sourceTree = "<group>"; };
@@ -662,6 +666,8 @@
 				4D3FE57723BC67D70010FFD3 /* EditCardViewNavigationLink.swift */,
 				4D3FE57D23BC74A60010FFD3 /* EditCardViewTopControls.swift */,
 				4D3FE57F23BC81240010FFD3 /* EditCardViewCardCell.swift */,
+				4DF3879E23C15CA100AA039B /* EditCardViewCardCellTopControls.swift */,
+				4DF3879C23C15C4700AA039B /* EditCardViewCardCellSection.swift */,
 				4D3FE58123BC813D0010FFD3 /* EditCardViewAddSectionPopUp.swift */,
 			);
 			path = EditCardView;
@@ -1496,6 +1502,7 @@
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */,
 				4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */,
+				4DF3879F23C15CA100AA039B /* EditCardViewCardCellTopControls.swift in Sources */,
 				4D3B94A0237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift in Sources */,
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
@@ -1538,6 +1545,7 @@
 				4DD5FE882387357F00E70251 /* MarketViewSortPopUp.swift in Sources */,
 				4D9AAEC023852F5E00C85EC2 /* UserLevelSlider.swift in Sources */,
 				4D32A5342368FC2E0072AA70 /* XButton.swift in Sources */,
+				4DF3879D23C15C4700AA039B /* EditCardViewCardCellSection.swift in Sources */,
 				4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */,

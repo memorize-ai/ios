@@ -3,7 +3,7 @@ import SwiftUI
 struct EditCardViewTopControls: View {
 	@Environment(\.presentationMode) var presentationMode
 	
-	@EnvironmentObject var card: Card.Draft
+	@ObservedObject var card: Card.Draft
 	
 	func goBack() {
 		presentationMode.wrappedValue.dismiss()
@@ -60,10 +60,9 @@ struct EditCardViewTopControls: View {
 #if DEBUG
 struct EditCardViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		EditCardViewTopControls()
-			.environmentObject(Card.Draft(
-				parent: PREVIEW_CURRENT_STORE.user.decks.first!
-			))
+		EditCardViewTopControls(card: .init(
+			parent: PREVIEW_CURRENT_STORE.user.decks.first!
+		))
 	}
 }
 #endif

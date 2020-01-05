@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct EditCardView: View {
-	@EnvironmentObject var card: Card.Draft
+	let card: Card.Draft
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -14,17 +14,17 @@ struct EditCardView: View {
 				}
 				.edgesIgnoringSafeArea(.all)
 				VStack {
-					EditCardViewTopControls()
+					EditCardViewTopControls(card: self.card)
 						.padding(.horizontal, 23)
 					ScrollView {
-						EditCardViewCardCell()
+						EditCardViewCardCell(card: self.card)
 							.padding([.horizontal, .bottom], 10)
 							.respondsToKeyboard(
-								withExtraOffset: -15 - geometry.safeAreaInsets.bottom
+								withExtraOffset: -(15 + geometry.safeAreaInsets.bottom)
 							)
 					}
 				}
-				EditCardViewAddSectionPopUp(deck: self.card.parent)
+				EditCardViewAddSectionPopUp(deck: self.card.parent, card: self.card)
 			}
 		}
 	}
@@ -33,11 +33,10 @@ struct EditCardView: View {
 #if DEBUG
 struct EditCardView_Previews: PreviewProvider {
 	static var previews: some View {
-		EditCardView()
-			.environmentObject(EditCardViewModel())
-			.environmentObject(Card.Draft(
-				parent: PREVIEW_CURRENT_STORE.user.decks.first!
-			))
+		EditCardView(card: .init(
+			parent: PREVIEW_CURRENT_STORE.user.decks.first!
+		))
+		.environmentObject(EditCardViewModel())
 	}
 }
 #endif

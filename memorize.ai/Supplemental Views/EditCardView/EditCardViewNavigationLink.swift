@@ -13,13 +13,12 @@ struct EditCardViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: EditCardView()
-				.environmentObject(EditCardViewModel())
-				.environmentObject(Card.Draft(
-					parent: deck,
-					card: card
-				))
-				.removeNavigationBar()
+			destination: EditCardView(card: .init(
+				parent: deck,
+				card: card
+			))
+			.environmentObject(EditCardViewModel())
+			.removeNavigationBar()
 		) {
 			label
 		}

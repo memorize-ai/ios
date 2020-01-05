@@ -2,9 +2,9 @@ import SwiftUI
 
 struct EditCardViewAddSectionPopUp: View {
 	@EnvironmentObject var model: EditCardViewModel
-	@EnvironmentObject var card: Card.Draft
 	
 	@ObservedObject var deck: Deck
+	@ObservedObject var card: Card.Draft
 	
 	var contentHeight: CGFloat {
 		.init(40 + 20 * 2) +
@@ -102,12 +102,12 @@ struct EditCardViewAddSectionPopUp_Previews: PreviewProvider {
 		let model = EditCardViewModel()
 		model.isAddSectionPopUpShowing = true
 		return EditCardViewAddSectionPopUp(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			card: .init(
+				parent: PREVIEW_CURRENT_STORE.user.decks.first!
+			)
 		)
 		.environmentObject(model)
-		.environmentObject(Card.Draft(
-			parent: PREVIEW_CURRENT_STORE.user.decks.first!
-		))
 	}
 }
 #endif
