@@ -46,4 +46,13 @@ extension Auth {
 			}
 		}
 	}
+	
+	func signOutWithError() -> Error? {
+		do {
+			try signOut()
+			return nil
+		} catch {
+			return error
+		}
+	}
 }

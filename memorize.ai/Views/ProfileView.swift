@@ -4,7 +4,18 @@ struct ProfileView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	var body: some View {
-		Text(currentStore.user.email)
+		VStack {
+			Text(currentStore.user.email)
+			Button(action: {
+				self.currentStore.signOut()
+			}) {
+				Text("Sign out")
+			}
+			NavigateTo(
+				InitialView(),
+				when: $currentStore.signOutLoadingState.didSucceed
+			)
+		}
 	}
 }
 

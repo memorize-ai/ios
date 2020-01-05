@@ -16,11 +16,13 @@ final class CurrentStore: ObservableObject {
 	@Published var recommendedDecks: [Deck]
 	@Published var recommendedDecksLoadingState = LoadingState()
 	
+	@Published var signOutLoadingState = LoadingState()
+	
 	@Published var selectedDeck: Deck?
 	
 	@Published var mainTabViewSelection = MainTabView.Selection.home
 	@Published var isSideBarShowing = false
-	
+		
 	init(user: User, topics: [Topic] = [], recommendedDecks: [Deck] = []) {
 		self.user = user
 		self.topics = topics
@@ -77,6 +79,16 @@ final class CurrentStore: ObservableObject {
 				self.topics.first { $0.id == topicId }?.loadImage()
 			}
 			self.loadRecommendedDecks()
+		}
+		return self
+	}
+	
+	@discardableResult
+	func signOut() -> Self {
+		if let error = auth.signOutWithError() {
+			signOutLoadingState.fail(error: error)
+		} else {
+			signOutLoadingState.succeed()
 		}
 		return self
 	}
