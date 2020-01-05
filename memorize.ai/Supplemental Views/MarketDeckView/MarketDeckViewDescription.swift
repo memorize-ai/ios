@@ -4,12 +4,17 @@ struct MarketDeckViewDescription: View {
 	@EnvironmentObject var deck: Deck
 	
 	var body: some View {
-		Text(deck.description)
-			.font(.muli(.regular, size: 17))
-			.foregroundColor(.darkGray)
-			.align(to: .leading)
-			.multilineTextAlignment(.leading)
-			.padding(.horizontal, 23)
+		CustomRectangle(
+			background: Color.lightGrayBackground.opacity(0.5)
+		) {
+			Text(deck.description)
+				.font(.muli(.regular, size: 17))
+				.foregroundColor(.darkGray)
+				.align(to: .leading)
+				.multilineTextAlignment(.leading)
+				.padding(8)
+		}
+		.padding(.horizontal, 23)
 	}
 }
 
