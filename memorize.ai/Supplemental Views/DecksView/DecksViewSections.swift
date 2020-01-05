@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct DecksViewSections: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	@EnvironmentObject var model: DecksViewModel
+	
 	@ObservedObject var selectedDeck: Deck
 	
 	var body: some View {
@@ -10,6 +13,12 @@ struct DecksViewSections: View {
 					DecksViewSectionHeader(
 						section: selectedDeck.unsectionedSection
 					)
+					.onTapGesture {
+						self.model.toggleSectionExpanded(
+							self.selectedDeck.unsectionedSection,
+							forUser: self.currentStore.user
+						)
+					}
 					DecksViewSectionBody(
 						section: selectedDeck.unsectionedSection
 					)
@@ -18,6 +27,12 @@ struct DecksViewSections: View {
 			ForEach(selectedDeck.sections) { section in
 				VStack {
 					DecksViewSectionHeader(section: section)
+						.onTapGesture {
+							self.model.toggleSectionExpanded(
+								section,
+								forUser: self.currentStore.user
+							)
+						}
 					DecksViewSectionBody(section: section)
 				}
 			}
