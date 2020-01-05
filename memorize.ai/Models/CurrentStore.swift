@@ -73,7 +73,9 @@ final class CurrentStore: ObservableObject {
 			}
 			self.user.updateFromSnapshot(snapshot)
 			self.userLoadingState.succeed()
-			self.loadInterests()
+			for topicId in self.user.interests {
+				self.topics.first { $0.id == topicId }?.loadImage()
+			}
 			self.loadRecommendedDecks()
 		}
 		return self
@@ -88,21 +90,6 @@ final class CurrentStore: ObservableObject {
 			self.topicLoadingState.succeed()
 		}.catch { error in
 			self.topicLoadingState.fail(error: error)
-		}
-		return self
-	}
-	
-	@discardableResult
-	func loadInterests(withImages loadImages: Bool = true) -> Self {
-		guard interestsLoadingState.isNone else { return self }
-		interestsLoadingState.startLoading()
-		for topicId in user.interests where !(topics.contains { $0.id == topicId }) {
-			Topic.fromId(topicId).done { topic in
-				self.topics.append(loadImages ? topic.loadImage() : topic)
-				self.interestsLoadingState.succeed()
-			}.catch { error in
-				self.interestsLoadingState.fail(error: error)
-			}
 		}
 		return self
 	}
@@ -126,7 +113,7 @@ final class CurrentStore: ObservableObject {
 						id: topicId,
 						name: document.get("name") as? String ?? "Unknown"
 					)
-					if loadImages {
+					if loadImages || self.user.interests.contains(topicId) {
 						topic.loadImage()
 					}
 					self.topics.append(topic.cache())
