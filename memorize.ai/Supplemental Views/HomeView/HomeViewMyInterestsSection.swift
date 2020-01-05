@@ -3,9 +3,13 @@ import SwiftUI
 struct HomeViewMyInterestsSection: View {
 	@ObservedObject var currentUser: User
 	
+	var hasInterests: Bool {
+		!currentUser.interests.isEmpty
+	}
+	
 	var body: some View {
 		VStack {
-			if !self.currentUser.interests.isEmpty {
+			if hasInterests {
 				CustomRectangle(
 					background: Color.lightGrayBackground.opacity(0.5)
 				) {
@@ -20,6 +24,7 @@ struct HomeViewMyInterestsSection: View {
 			}
 			HomeViewTopicPerformanceList()
 		}
+		.padding(.vertical, hasInterests ? 6 : 0)
 	}
 }
 

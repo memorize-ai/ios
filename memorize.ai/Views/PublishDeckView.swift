@@ -70,6 +70,9 @@ struct PublishDeckView: View { // FIXME: Doesn't update the view when model upda
 					ScrollView {
 						PublishDeckViewContentBox()
 							.padding(.horizontal, 12)
+							.respondsToKeyboard(
+								withExtraOffset: geometry.safeAreaInsets.bottom + 12
+							)
 					}
 				}
 				self.imagePopUp

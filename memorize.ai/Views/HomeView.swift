@@ -33,7 +33,6 @@ struct HomeView: View {
 						HomeViewMyInterestsSection(
 							currentUser: self.currentStore.user
 						)
-						.padding(.vertical, 6)
 						HomeViewRecommendedDecksSection()
 							.padding(.top)
 						HomeViewMyDecksSection(
