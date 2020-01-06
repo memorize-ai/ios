@@ -1,13 +1,22 @@
 extension Array {
-	func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> Self {
+	func sorted<T: Comparable>(
+		by keyPath: KeyPath<Element, T>,
+		with comparator: (T, T) -> Bool = { $0 < $1 }
+	) -> Self {
 		sorted {
-			$0[keyPath: keyPath] < $1[keyPath: keyPath]
+			comparator(
+				$0[keyPath: keyPath],
+				$1[keyPath: keyPath]
+			)
 		}
 	}
 	
 	@discardableResult
-	mutating func sort<T: Comparable>(by keyPath: KeyPath<Element, T>) -> Self {
-		self = sorted(by: keyPath)
+	mutating func sort<T: Comparable>(
+		by keyPath: KeyPath<Element, T>,
+		with comparator: (T, T) -> Bool = { $0 < $1 }
+	) -> Self {
+		self = sorted(by: keyPath, with: comparator)
 		return self
 	}
 }
