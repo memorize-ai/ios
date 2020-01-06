@@ -8,21 +8,6 @@ struct CardPreviewCell: View {
 	@State var side = Card.Side.front
 	@State var toggleIconDegrees = 0.0
 	
-	var toggleIcon: some View {
-		ZStack {
-			Circle()
-				.foregroundColor(.lightGray)
-			Image.swapIcon
-				.resizable()
-				.renderingMode(.original)
-				.aspectRatio(contentMode: .fit)
-				.padding(6)
-				.rotationEffect(.degrees(toggleIconDegrees))
-		}
-		.padding([.trailing, .bottom], 10)
-		.frame(width: 40, height: 40)
-	}
-	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
@@ -38,19 +23,11 @@ struct CardPreviewCell: View {
 					)
 				)
 				.cornerRadius(5)
-				HStack {
-					Text(side == .front ? "FRONT" : "BACK")
-						.font(.muli(.bold, size: 10))
-						.foregroundColor(Color.gray.opacity(0.7))
-					Button(action: {
-						self.side.toggle()
-						withAnimation {
-							self.toggleIconDegrees += 180
-						}
-					}) {
-						toggleIcon
-					}
-				}
+				CardToggleButton(
+					side: $side,
+					degrees: $toggleIconDegrees
+				)
+				.padding([.trailing, .bottom], 10)
 			}
 		}
 	}

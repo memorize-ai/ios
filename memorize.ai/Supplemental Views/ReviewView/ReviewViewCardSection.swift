@@ -18,7 +18,7 @@ struct ReviewViewCardSection: View {
 				}
 				.offset(y: 8)
 				ReviewViewCard {
-					Text("ReviewViewCard") // TODO: Change this
+					ReviewViewCardContent()
 				}
 			}
 		}
