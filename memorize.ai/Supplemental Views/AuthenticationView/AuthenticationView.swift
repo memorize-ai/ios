@@ -15,7 +15,7 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 		GeometryReader { geometry in
 			ZStack {
 				AuthenticationViewBottomGradient(self.bottomGradient)
-				.align(to: .bottomTrailing)
+					.align(to: .bottomTrailing)
 				ZStack(alignment: .top) {
 					AuthenticationViewTopGradient(
 						self.topGradient,

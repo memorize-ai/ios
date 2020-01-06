@@ -12,16 +12,18 @@ struct AuthenticationViewContentBox<Content: View>: View {
 			shadowRadius: 5,
 			shadowYOffset: 5
 		) {
-			VStack {
-				Text(title)
-					.font(.muli(.bold, size: 28))
-					.foregroundColor(.darkGray)
-					.align(to: .leading)
-					.padding(.top, 35)
-				content
-				Spacer()
+			ScrollView(showsIndicators: false) {
+				VStack {
+					Text(title)
+						.font(.muli(.bold, size: 28))
+						.foregroundColor(.darkGray)
+						.align(to: .leading)
+						.padding(.top, 35)
+					content
+					Spacer()
+				}
+				.padding(.horizontal, 16)
 			}
-			.padding(.horizontal, 16)
 			.frame(
 				width: SCREEN_SIZE.width - 96,
 				height: SCREEN_SIZE.height - 212
