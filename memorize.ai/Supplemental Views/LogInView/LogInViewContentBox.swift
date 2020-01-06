@@ -69,7 +69,8 @@ struct LogInViewContentBox: View {
 					MainTabView(currentUser: model.user!)
 						.environmentObject(CurrentStore(
 							user: model.user!
-						)),
+						))
+						.removeNavigationBar(),
 					when: $model.loadingState.didSucceed
 				)
 			}

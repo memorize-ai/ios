@@ -12,7 +12,8 @@ struct RecommendedDecksView: View {
 			trailingButtonDestination: MainTabView(
 				currentUser: currentStore.user
 			)
-			.environmentObject(currentStore),
+			.environmentObject(currentStore)
+			.removeNavigationBar(),
 			content: RecommendedDecksViewContent()
 		)
 	}

@@ -21,13 +21,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			let currentUser = User(authUser: currentUser)
 			window.rootViewController = HostingController(
 				rootView: MainTabView(currentUser: currentUser)
-					.environmentObject(CurrentStore(user: currentUser))
 					.environment(\.managedObjectContext, context)
+					.environmentObject(CurrentStore(user: currentUser))
+					.removeNavigationBar()
 			)
 		} else {
 			window.rootViewController = HostingController(
 				rootView: InitialView()
 					.environment(\.managedObjectContext, context)
+					.removeNavigationBar()
 			)
 		}
 		self.window = window

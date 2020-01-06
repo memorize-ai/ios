@@ -191,6 +191,7 @@ struct MainTabView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainTabView(currentUser: PREVIEW_CURRENT_STORE.user)
 			.environmentObject(PREVIEW_CURRENT_STORE)
+			.removeNavigationBar()
 	}
 }
 #endif
