@@ -20,4 +20,10 @@ final class Main_Tests: XCTestCase {
 		XCTAssertEqual([1, 3, 2, 1].sorted(by: \.self), [1, 1, 2, 3])
 		XCTAssertEqual([1, 3, 4, 2].sorted(by: \.self, with: >), [4, 3, 2, 1])
 	}
+	
+	func test_trimmed() {
+		XCTAssertEqual("abc ".trimmed, "abc")
+		XCTAssertTrue(" ".isTrimmedEmpty)
+		XCTAssertFalse("a".isTrimmedEmpty)
+	}
 }
