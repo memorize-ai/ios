@@ -6,15 +6,9 @@ struct ProfileView: View {
 	var body: some View {
 		VStack {
 			Text(currentStore.user.email)
-			Button(action: {
-				self.currentStore.signOut()
-			}) {
+			SignOutButton {
 				Text("Sign out")
 			}
-			NavigateTo(
-				InitialView(),
-				when: $currentStore.signOutLoadingState.didSucceed
-			)
 		}
 	}
 }

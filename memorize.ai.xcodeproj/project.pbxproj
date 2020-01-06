@@ -153,6 +153,7 @@
 		4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */; };
 		4DACBA6C23981D4500E4BB71 /* MarketDeckViewTopicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */; };
 		4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */; };
+		4DAE833023C2C26200713AAB /* SignOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE832F23C2C26200713AAB /* SignOutButton.swift */; };
 		4DB659D123BF0B3800E74850 /* katex.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D023BF0B3800E74850 /* katex.js */; };
 		4DB659D323BF0BC600E74850 /* katex.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D223BF0BC600E74850 /* katex.css */; };
 		4DB659D523BF0BDD00E74850 /* auto-render.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D423BF0BDD00E74850 /* auto-render.js */; };
@@ -408,6 +409,7 @@
 		4DACBA6923981BF500E4BB71 /* MarketDeckViewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewDescription.swift; sourceTree = "<group>"; };
 		4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewTopicList.swift; sourceTree = "<group>"; };
 		4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewContentBox.swift; sourceTree = "<group>"; };
+		4DAE832F23C2C26200713AAB /* SignOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutButton.swift; sourceTree = "<group>"; };
 		4DB659D023BF0B3800E74850 /* katex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.js; sourceTree = "<group>"; };
 		4DB659D223BF0BC600E74850 /* katex.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.css; sourceTree = "<group>"; };
 		4DB659D423BF0BDD00E74850 /* auto-render.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "auto-render.js"; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 				4DF459572399A44A00A78ADF /* MultilineTextField.swift */,
 				4D51C17C23A9DBD90093A3A2 /* ImagePicker.swift */,
 				4D3FE57223BC11620010FFD3 /* FroalaEditor.swift */,
+				4DAE832F23C2C26200713AAB /* SignOutButton.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1565,6 +1568,7 @@
 				4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */,
 				4DACBA6C23981D4500E4BB71 /* MarketDeckViewTopicList.swift in Sources */,
 				4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */,
+				4DAE833023C2C26200713AAB /* SignOutButton.swift in Sources */,
 				4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */,
 				4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */,
 				4D6BA53723ACBBBD00D3F9D1 /* Card+Draft.swift in Sources */,
