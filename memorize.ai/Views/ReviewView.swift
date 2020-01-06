@@ -16,7 +16,9 @@ struct ReviewView: View {
 				VStack {
 					ReviewViewTopControls()
 						.padding(.horizontal, 23)
+					Spacer()
 					ReviewViewCardSection()
+					Spacer()
 				}
 			}
 		}
