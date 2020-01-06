@@ -16,10 +16,18 @@ struct ReviewView: View {
 				VStack {
 					ReviewViewTopControls()
 						.padding(.horizontal, 23)
-					Spacer()
 					ReviewViewCardSection()
+						.padding(.top)
 					Spacer()
+					Text("Click anywhere to continue")
+						.font(.muli(.bold, size: 17))
+						.foregroundColor(.darkGray)
+						.padding(
+							.bottom,
+							max(30, geometry.safeAreaInsets.bottom)
+						)
 				}
+				.edgesIgnoringSafeArea(.bottom)
 			}
 		}
 	}
