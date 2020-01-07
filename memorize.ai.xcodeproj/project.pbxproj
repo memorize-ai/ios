@@ -88,6 +88,9 @@
 		4D51F5422385E02E00C6B59B /* MarketViewSearchStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */; };
 		4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54C03D237F7C83003765C1 /* DecksView.swift */; };
 		4D56FC3823C50AAA006366FD /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3723C50AAA006366FD /* StoreReview.swift */; };
+		4D56FC3A23C53369006366FD /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3923C53369006366FD /* LearnView.swift */; };
+		4D56FC3D23C533C5006366FD /* LearnViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */; };
+		4D56FC3F23C5347A006366FD /* LearnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3E23C5347A006366FD /* LearnViewModel.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
@@ -347,6 +350,9 @@
 		4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewSearchStateButton.swift; sourceTree = "<group>"; };
 		4D54C03D237F7C83003765C1 /* DecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksView.swift; sourceTree = SOURCE_ROOT; };
 		4D56FC3723C50AAA006366FD /* StoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReview.swift; sourceTree = "<group>"; };
+		4D56FC3923C53369006366FD /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewNavigationLink.swift; sourceTree = "<group>"; };
+		4D56FC3E23C5347A006366FD /* LearnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewModel.swift; sourceTree = "<group>"; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
@@ -744,6 +750,14 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
+		4D56FC3B23C533AE006366FD /* LearnView */ = {
+			isa = PBXGroup;
+			children = (
+				4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */,
+			);
+			path = LearnView;
+			sourceTree = "<group>";
+		};
 		4D64BCC42367CFA700F6FD07 /* General */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +843,7 @@
 				4D6BA52823ACB02000D3F9D1 /* AddCardsView.swift */,
 				4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */,
 				4D961FFC23C3BFB400C6BDF0 /* ReviewView.swift */,
+				4D56FC3923C53369006366FD /* LearnView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
 			path = Views;
@@ -1039,6 +1054,7 @@
 				4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */,
 				4D3FE57B23BC6B0B0010FFD3 /* EditCardViewModel.swift */,
 				4D96200923C3E27E00C6BDF0 /* ReviewViewModel.swift */,
+				4D56FC3E23C5347A006366FD /* LearnViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1153,6 +1169,7 @@
 				4D6BA53123ACB38500D3F9D1 /* AddCardsView */,
 				4D3FE57623BC67B90010FFD3 /* EditCardView */,
 				4D961FFE23C3C59800C6BDF0 /* ReviewView */,
+				4D56FC3B23C533AE006366FD /* LearnView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -1540,10 +1557,12 @@
 				4D59FA89237E7735007CAA74 /* OwnedDeckCell.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
 				4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */,
+				4D56FC3A23C53369006366FD /* LearnView.swift in Sources */,
 				4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */,
 				4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */,
+				4D56FC3D23C533C5006366FD /* LearnViewNavigationLink.swift in Sources */,
 				4DF3879F23C15CA100AA039B /* EditCardViewCardCellTopControls.swift in Sources */,
 				4D3B94A0237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift in Sources */,
 				4DD8D77C235F65B0009D1261 /* PagingScrollView.swift in Sources */,
@@ -1628,6 +1647,7 @@
 				4D0C028F237D41C80062BC14 /* LoadingTopicCell.swift in Sources */,
 				4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */,
 				4D3FE57323BC11620010FFD3 /* FroalaEditor.swift in Sources */,
+				4D56FC3F23C5347A006366FD /* LearnViewModel.swift in Sources */,
 				4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */,
 				4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */,
 				4D96200823C3D51000C6BDF0 /* ReviewViewCardContent.swift in Sources */,
