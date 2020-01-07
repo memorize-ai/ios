@@ -92,6 +92,7 @@
 		4D56FC3D23C533C5006366FD /* LearnViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */; };
 		4D56FC3F23C5347A006366FD /* LearnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3E23C5347A006366FD /* LearnViewModel.swift */; };
 		4D56FC4323C536CF006366FD /* LearnViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */; };
+		4D56FC4523C53814006366FD /* LearnViewSliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4423C53814006366FD /* LearnViewSliders.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
@@ -355,6 +356,7 @@
 		4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewNavigationLink.swift; sourceTree = "<group>"; };
 		4D56FC3E23C5347A006366FD /* LearnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewModel.swift; sourceTree = "<group>"; };
 		4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewTopControls.swift; sourceTree = "<group>"; };
+		4D56FC4423C53814006366FD /* LearnViewSliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewSliders.swift; sourceTree = "<group>"; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 			children = (
 				4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */,
 				4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */,
+				4D56FC4423C53814006366FD /* LearnViewSliders.swift */,
 			);
 			path = LearnView;
 			sourceTree = "<group>";
@@ -1503,6 +1506,7 @@
 				4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */,
 				4DD5FE942387868700E70251 /* MarketViewFilterPopUpContentWithSlider.swift in Sources */,
 				4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */,
+				4D56FC4523C53814006366FD /* LearnViewSliders.swift in Sources */,
 				4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */,
 				4DF3879923C13E3200AA039B /* AddCardsViewCardCellSection.swift in Sources */,
 				4DD5FE8A238735F600E70251 /* MarketViewFilterPopUp.swift in Sources */,

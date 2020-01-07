@@ -16,8 +16,11 @@ struct LearnView: View {
 				}
 				.edgesIgnoringSafeArea(.all)
 				VStack {
-					LearnViewTopControls()
-						.padding(.horizontal, 23)
+					Group {
+						LearnViewTopControls()
+						LearnViewSliders()
+					}
+					.padding(.horizontal, 23)
 				}
 			}
 		}
