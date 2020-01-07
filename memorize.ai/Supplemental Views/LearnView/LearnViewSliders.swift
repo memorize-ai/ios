@@ -34,15 +34,15 @@ struct LearnViewSliders: View {
 			}
 			VStack(spacing: 17.75) {
 				slider(percent:
-					.init(model.numberOfMasteredCards) /
+					.init(model.numberOfMasteredCards) &/
 					.init(model.numberOfTotalCards)
 				)
 				slider(percent:
-					.init(model.numberOfSeenCards) /
+					.init(model.numberOfSeenCards) &/
 					.init(model.numberOfTotalCards)
 				)
 				slider(percent:
-					.init(model.numberOfUnseenCards) /
+					.init(model.numberOfUnseenCards) &/
 					.init(model.numberOfTotalCards)
 				)
 			}
