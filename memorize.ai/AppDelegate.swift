@@ -12,8 +12,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
 	) -> Bool {
 		FirebaseApp.configure()
+		
 		GIDSignIn.sharedInstance().clientID = FIREBASE_CLIENT_ID
 		GIDSignIn.sharedInstance().delegate = self
+		
+		StoreReview.onStartup()
+		
 		return true
 	}
 	

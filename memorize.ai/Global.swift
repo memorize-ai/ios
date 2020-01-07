@@ -7,6 +7,8 @@ let auth = Auth.auth()
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
 
+let defaults = UserDefaults.standard
+
 let SCREEN_SIZE = UIScreen.main.bounds
 
 var currentViewController: UIViewController! {
