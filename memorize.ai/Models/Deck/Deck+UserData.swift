@@ -15,14 +15,15 @@ extension Deck {
 		init(
 			dateAdded: Date = .now,
 			isFavorite: Bool = false,
-			numberOfUnsectionedDueCards: Int = 0,
 			numberOfDueCards: Int = 0,
+			numberOfUnsectionedDueCards: Int = 0,
 			sections: [String: Int] = [:],
 			rating: Int? = nil
 		) {
 			self.dateAdded = dateAdded
 			self.isFavorite = isFavorite
 			self.numberOfDueCards = numberOfDueCards
+			self.numberOfUnsectionedDueCards = numberOfUnsectionedDueCards
 			self.sections = sections
 			self.rating = rating
 		}
@@ -31,8 +32,8 @@ extension Deck {
 		init(snapshot: DocumentSnapshot) {
 			dateAdded = snapshot.getDate("added") ?? .now
 			isFavorite = snapshot.get("favorite") as? Bool ?? false
-			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			sections = snapshot.get("sections") as? [String: Int] ?? [:]
 			let newRating = snapshot.get("rating") as? Int
 			rating = newRating == 0 ? nil : newRating
@@ -43,7 +44,9 @@ extension Deck {
 		}
 		
 		func numberOfDueCardsForSection(withId sectionId: String) -> Int? {
-			sections[sectionId]
+			sectionId.isEmpty
+				? numberOfUnsectionedDueCards
+				: sections[sectionId]
 		}
 		
 		func isSectionUnlocked(withId sectionId: String) -> Bool {

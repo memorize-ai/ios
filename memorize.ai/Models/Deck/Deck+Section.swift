@@ -58,6 +58,10 @@ extension Deck {
 			parent.documentReference.collection("sections").document(id)
 		}
 		
+		var isUnsectioned: Bool {
+			id.isEmpty
+		}
+		
 		var numberOfDueCards: Int? {
 			parent.userData?.numberOfDueCardsForSection(withId: id)
 		}
