@@ -13,17 +13,6 @@ extension CollectionReference {
 			}
 		}
 	}
-	
-	func getDocuments() -> Promise<QuerySnapshot> {
-		.init { seal in
-			getDocuments { snapshot, error in
-				guard error == nil, let snapshot = snapshot else {
-					return seal.reject(error ?? UNKNOWN_ERROR)
-				}
-				seal.fulfill(snapshot)
-			}
-		}
-	}
 }
 
 extension DocumentReference {
@@ -59,6 +48,19 @@ extension DocumentReference {
 				} else {
 					seal.fulfill(())
 				}
+			}
+		}
+	}
+}
+
+extension Query {
+	func getDocuments() -> Promise<QuerySnapshot> {
+		.init { seal in
+			getDocuments { snapshot, error in
+				guard error == nil, let snapshot = snapshot else {
+					return seal.reject(error ?? UNKNOWN_ERROR)
+				}
+				seal.fulfill(snapshot)
 			}
 		}
 	}
