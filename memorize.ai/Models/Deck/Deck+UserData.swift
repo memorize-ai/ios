@@ -7,6 +7,7 @@ extension Deck {
 		
 		var isFavorite: Bool
 		var numberOfDueCards: Int
+		var numberOfUnsectionedDueCards: Int
 		var sections: [String: Int]
 		var rating: Int?
 		
@@ -14,6 +15,7 @@ extension Deck {
 		init(
 			dateAdded: Date = .now,
 			isFavorite: Bool = false,
+			numberOfUnsectionedDueCards: Int = 0,
 			numberOfDueCards: Int = 0,
 			sections: [String: Int] = [:],
 			rating: Int? = nil
@@ -29,6 +31,7 @@ extension Deck {
 		init(snapshot: DocumentSnapshot) {
 			dateAdded = snapshot.getDate("added") ?? .now
 			isFavorite = snapshot.get("favorite") as? Bool ?? false
+			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
 			sections = snapshot.get("sections") as? [String: Int] ?? [:]
 			let newRating = snapshot.get("rating") as? Int

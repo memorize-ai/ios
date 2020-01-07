@@ -494,7 +494,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").setData([
 			"added": FieldValue.serverTimestamp(),
-			"dueCardCount": numberOfCards
+			"dueCardCount": numberOfCards,
+			"unsectionedDueCardCount": numberOfUnsectionedCards
 		]).done {
 			self.getLoadingState.succeed()
 		}.catch { error in
@@ -555,6 +556,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		} else {
 			userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
 			userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+			userData?.numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			userData?.sections = snapshot.get("sections") as? [String: Int] ?? [:]
 			let newRating = snapshot.get("rating") as? Int
 			userData?.rating = newRating == 0 ? nil : newRating
