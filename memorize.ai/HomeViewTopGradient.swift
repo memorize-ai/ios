@@ -4,7 +4,16 @@ struct HomeViewTopGradient: View {
 	static let baseHeight = SCREEN_SIZE.height / 2.25
 	static let heightDifference: CGFloat = 80.79
 	
+	let colors: [Color]
 	let addedHeight: CGFloat
+	
+	init(
+		colors: [Color] = [.extraBluePurple, .darkerLightBlue],
+		addedHeight: CGFloat
+	) {
+		self.colors = colors
+		self.addedHeight = addedHeight
+	}
 	
 	var height: CGFloat {
 		Self.baseHeight + addedHeight
@@ -23,10 +32,7 @@ struct HomeViewTopGradient: View {
 			])
 		}
 		.fill(LinearGradient(
-			gradient: .init(colors: [
-				.extraBluePurple,
-				.darkerLightBlue
-			]),
+			gradient: .init(colors: colors),
 			startPoint: .top,
 			endPoint: .bottom
 		))
