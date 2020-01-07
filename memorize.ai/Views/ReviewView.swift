@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct ReviewView: View {
-	let numberOfDueCards: Int
-	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -36,7 +34,13 @@ struct ReviewView: View {
 #if DEBUG
 struct ReviewView_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewView(numberOfDueCards: 5)
+		ReviewView()
+			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(ReviewViewModel(
+				user: PREVIEW_CURRENT_STORE.user,
+				deck: nil,
+				section: nil
+			))
 	}
 }
 #endif

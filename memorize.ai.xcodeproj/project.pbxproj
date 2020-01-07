@@ -135,6 +135,8 @@
 		4D96200423C3CA0D00C6BDF0 /* ReviewViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D96200323C3CA0D00C6BDF0 /* ReviewViewCard.swift */; };
 		4D96200623C3D39E00C6BDF0 /* CardToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D96200523C3D39E00C6BDF0 /* CardToggleButton.swift */; };
 		4D96200823C3D51000C6BDF0 /* ReviewViewCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D96200723C3D51000C6BDF0 /* ReviewViewCardContent.swift */; };
+		4D96200A23C3E27E00C6BDF0 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D96200923C3E27E00C6BDF0 /* ReviewViewModel.swift */; };
+		4D96200C23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D96200B23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift */; };
 		4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */; };
 		4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEB823851F8100C85EC2 /* MarketView.swift */; };
 		4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */; };
@@ -391,6 +393,8 @@
 		4D96200323C3CA0D00C6BDF0 /* ReviewViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCard.swift; sourceTree = "<group>"; };
 		4D96200523C3D39E00C6BDF0 /* CardToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardToggleButton.swift; sourceTree = "<group>"; };
 		4D96200723C3D51000C6BDF0 /* ReviewViewCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCardContent.swift; sourceTree = "<group>"; };
+		4D96200923C3E27E00C6BDF0 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		4D96200B23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewNavigationLink.swift; sourceTree = "<group>"; };
 		4D98A4A3238C6E4B005F0F27 /* DecksViewSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewSections.swift; sourceTree = "<group>"; };
 		4D9AAEB823851F8100C85EC2 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = SOURCE_ROOT; };
 		4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -847,6 +851,7 @@
 		4D961FFE23C3C59800C6BDF0 /* ReviewView */ = {
 			isa = PBXGroup;
 			children = (
+				4D96200B23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift */,
 				4D961FFF23C3C5A700C6BDF0 /* ReviewViewTopControls.swift */,
 				4D96200123C3C91600C6BDF0 /* ReviewViewCardSection.swift */,
 				4D96200323C3CA0D00C6BDF0 /* ReviewViewCard.swift */,
@@ -1030,6 +1035,7 @@
 				4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */,
 				4D6BA52A23ACB19E00D3F9D1 /* AddCardsViewModel.swift */,
 				4D3FE57B23BC6B0B0010FFD3 /* EditCardViewModel.swift */,
+				4D96200923C3E27E00C6BDF0 /* ReviewViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1485,6 +1491,7 @@
 				4DDACF092395BFA80073C004 /* MarketDeckViewHeader.swift in Sources */,
 				4D3B949E2372BAEF002F441E /* SideBarSectionDivider.swift in Sources */,
 				4D59FA8D237F36A0007CAA74 /* DeckIcon.swift in Sources */,
+				4D96200A23C3E27E00C6BDF0 /* ReviewViewModel.swift in Sources */,
 				4D59FA8B237F2010007CAA74 /* FloatingReviewButton.swift in Sources */,
 				4D96200223C3C91600C6BDF0 /* ReviewViewCardSection.swift in Sources */,
 				4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */,
@@ -1603,6 +1610,7 @@
 				4D6BA53723ACBBBD00D3F9D1 /* Card+Draft.swift in Sources */,
 				4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */,
 				4D8B2EA72398394B00EF040B /* MarketDeckViewSectionTitle.swift in Sources */,
+				4D96200C23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift in Sources */,
 				4DA721CD23614863002008ED /* CustomTextField.swift in Sources */,
 				4DE9722A2370DB8800616E42 /* PlusPlus.swift in Sources */,
 				4DEB35A0236ACE4900E3DBC4 /* DeckStar.swift in Sources */,
