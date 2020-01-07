@@ -20,10 +20,7 @@ struct ReviewView: View {
 					Text("Click anywhere to continue")
 						.font(.muli(.bold, size: 17))
 						.foregroundColor(.darkGray)
-						.padding(
-							.bottom,
-							max(30, geometry.safeAreaInsets.bottom)
-						)
+					Spacer()
 				}
 				.edgesIgnoringSafeArea(.bottom)
 			}

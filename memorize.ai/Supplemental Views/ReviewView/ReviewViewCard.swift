@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ReviewViewCard<Content: View>: View {
 	let width = SCREEN_SIZE.width - 8 * 2
-	let height = SCREEN_SIZE.height * 433 / 667
+	let height = SCREEN_SIZE.height * 501 / 667
 	
 	let scale: CGFloat
 	let content: Content
