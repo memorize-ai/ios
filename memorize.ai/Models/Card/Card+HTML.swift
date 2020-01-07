@@ -2,12 +2,10 @@ import HTML
 
 extension Card {
 	private static let css = #"""
-	* {
-		font-family: sans-serif;
-		font-size: 45px;
-	}
 	body {
 		padding-top: 36px;
+		font-family: sans-serif;
+		font-size: 45px;
 	}
 	.fr-text-gray {
 		color: #aaa;
