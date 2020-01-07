@@ -1,14 +1,26 @@
 import SwiftUI
 
 struct CardToggleButton: View {
+	let image: Image
+	
 	@Binding var side: Card.Side
 	@Binding var degrees: Double
+	
+	init(
+		image: Image = .swapIcon,
+		side: Binding<Card.Side>,
+		degrees: Binding<Double>
+	) {
+		self.image = image
+		_side = side
+		_degrees = degrees
+	}
 	
 	var icon: some View {
 		ZStack {
 			Circle()
 				.foregroundColor(.lightGray)
-			Image.swapIcon
+			image
 				.resizable()
 				.renderingMode(.original)
 				.aspectRatio(contentMode: .fit)

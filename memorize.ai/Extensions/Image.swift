@@ -43,6 +43,7 @@ extension Image {
 	static let lock = Self("Lock")
 	
 	static let swapIcon = Self("SwapIcon")
+	static let greenSwapIcon = Self("GreenSwapIcon")
 	
 	static let grayStar = Self("GrayStar")
 	static let greenFilledStar = Self("GreenFilledStar")
