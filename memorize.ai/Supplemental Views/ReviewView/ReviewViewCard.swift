@@ -1,32 +1,31 @@
 import SwiftUI
 
 struct ReviewViewCard<Content: View>: View {
-	let width = SCREEN_SIZE.width - 8 * 2
-	let height = SCREEN_SIZE.height * 501 / 667
-	
-	let scale: CGFloat
+	let geometry: GeometryProxy
 	let content: Content
 	
 	init(
-		scale: CGFloat = 1,
+		geometry: GeometryProxy,
 		content: () -> Content
 	) {
-		self.scale = scale
+		self.geometry = geometry
 		self.content = content()
+	}
+	
+	var size: CGSize {
+		geometry.size
 	}
 	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: .lightGray,
-			borderWidth: 1.5,
-			shadowRadius: 5,
-			shadowYOffset: 5
+			borderWidth: 1.5
 		) {
 			content
 				.frame(
-					width: width * scale,
-					height: height * scale
+					width: size.width,
+					height: size.height
 				)
 		}
 	}
@@ -35,8 +34,10 @@ struct ReviewViewCard<Content: View>: View {
 #if DEBUG
 struct ReviewViewCard_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewViewCard {
-			Text("")
+		GeometryReader { geometry in
+			ReviewViewCard(geometry: geometry) {
+				Text("Card")
+			}
 		}
 	}
 }

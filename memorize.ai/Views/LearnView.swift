@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LearnView: View {
+	@EnvironmentObject var model: LearnViewModel
+	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -21,7 +23,15 @@ struct LearnView: View {
 						LearnViewSliders()
 					}
 					.padding(.horizontal, 23)
+					LearnViewCardSection(deck: self.model.deck)
+						.padding(.top, 6)
+						.padding(.horizontal, 8)
+					Text("Tap anywhere to continue")
+						.font(.muli(.bold, size: 17))
+						.foregroundColor(.darkGray)
+						.frame(height: 80)
 				}
+				.edgesIgnoringSafeArea(.bottom)
 			}
 		}
 	}

@@ -8,17 +8,21 @@ struct ReviewViewCardSection: View {
 				.foregroundColor(.white)
 				.align(to: .leading)
 				.padding(.horizontal, 14)
-			ZStack(alignment: .bottom) {
-				ReviewViewCard(scale: 0.9) {
-					Text("")
-				}
-				.offset(y: 16)
-				ReviewViewCard(scale: 0.95) {
-					Text("")
-				}
-				.offset(y: 8)
-				ReviewViewCard {
-					ReviewViewCardContent()
+			GeometryReader { geometry in
+				ZStack(alignment: .bottom) {
+					BlankReviewViewCard(
+						geometry: geometry,
+						scale: 0.9,
+						offset: 16
+					)
+					BlankReviewViewCard(
+						geometry: geometry,
+						scale: 0.95,
+						offset: 8
+					)
+					ReviewViewCard(geometry: geometry) {
+						Text("Content")
+					}
 				}
 			}
 		}

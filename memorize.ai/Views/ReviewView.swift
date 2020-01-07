@@ -16,11 +16,10 @@ struct ReviewView: View {
 						.padding(.horizontal, 23)
 					ReviewViewCardSection()
 						.padding(.top)
-					Spacer()
 					Text("Tap anywhere to continue")
 						.font(.muli(.bold, size: 17))
 						.foregroundColor(.darkGray)
-					Spacer()
+						.frame(height: 80)
 				}
 				.edgesIgnoringSafeArea(.bottom)
 			}
