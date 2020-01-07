@@ -17,7 +17,7 @@ struct ReviewView: View {
 					ReviewViewCardSection()
 						.padding(.top)
 					Spacer()
-					Text("Click anywhere to continue")
+					Text("Tap anywhere to continue")
 						.font(.muli(.bold, size: 17))
 						.foregroundColor(.darkGray)
 					Spacer()
