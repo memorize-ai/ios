@@ -39,7 +39,7 @@ struct DecksViewSectionOptionsPopUp: View {
 				RoundedRectangle(cornerRadius: 4)
 					.stroke(Color.darkBlue, lineWidth: 1.5)
 					.background(Color.white)
-				Text(section.numberOfDueCards.formatted)
+				Text(section.numberOfDueCards?.formatted ?? "")
 					.font(.muli(.bold, size: 11))
 					.foregroundColor(.darkBlue)
 					.minimumScaleFactor(0.2)

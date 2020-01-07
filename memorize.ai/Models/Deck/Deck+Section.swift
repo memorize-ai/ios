@@ -58,14 +58,13 @@ extension Deck {
 			parent.documentReference.collection("sections").document(id)
 		}
 		
-		var numberOfDueCards: Int {
-			cards.reduce(0) { acc, card in
-				acc + *card.isDue
-			}
+		var numberOfDueCards: Int? {
+			parent.userData?.numberOfDueCardsForSection(withId: id)
 		}
 		
 		var isDue: Bool {
-			numberOfDueCards > 0
+			guard let numberOfDueCards = numberOfDueCards else { return false }
+			return numberOfDueCards > 0
 		}
 		
 		var unlockLink: String {
@@ -129,7 +128,7 @@ extension Deck {
 		
 		func isUnlocked(forUser user: User) -> Bool {
 			user.id == parent.creatorId ||
-			parent.userData?.unlockedSections.contains(id) ?? false
+			parent.userData?.isSectionUnlocked(withId: id) ?? false
 		}
 		
 		@discardableResult
@@ -175,7 +174,7 @@ extension Deck {
 		func unlock(forUser user: User) -> Self {
 			unlockLoadingState.startLoading()
 			user.documentReference.collection("decks").document(parent.id).updateData([
-				"unlockedSections": FieldValue.arrayUnion([id])
+				"sections.\(id)": numberOfCards
 			]).done {
 				self.unlockLoadingState.succeed()
 			}.catch { error in

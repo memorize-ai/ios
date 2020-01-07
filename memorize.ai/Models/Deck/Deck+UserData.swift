@@ -7,7 +7,7 @@ extension Deck {
 		
 		var isFavorite: Bool
 		var numberOfDueCards: Int
-		var unlockedSections: [String]
+		var sections: [String: Int]
 		var rating: Int?
 		
 		#if DEBUG
@@ -15,13 +15,13 @@ extension Deck {
 			dateAdded: Date = .now,
 			isFavorite: Bool = false,
 			numberOfDueCards: Int = 0,
-			unlockedSections: [String] = [],
+			sections: [String: Int] = [:],
 			rating: Int? = nil
 		) {
 			self.dateAdded = dateAdded
 			self.isFavorite = isFavorite
 			self.numberOfDueCards = numberOfDueCards
-			self.unlockedSections = unlockedSections
+			self.sections = sections
 			self.rating = rating
 		}
 		#endif
@@ -30,13 +30,21 @@ extension Deck {
 			dateAdded = snapshot.getDate("added") ?? .now
 			isFavorite = snapshot.get("favorite") as? Bool ?? false
 			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
-			unlockedSections = snapshot.get("unlockedSections") as? [String] ?? []
+			sections = snapshot.get("sections") as? [String: Int] ?? [:]
 			let newRating = snapshot.get("rating") as? Int
 			rating = newRating == 0 ? nil : newRating
 		}
 		
 		var isDue: Bool {
 			numberOfDueCards > 0
+		}
+		
+		func numberOfDueCardsForSection(withId sectionId: String) -> Int? {
+			sections[sectionId]
+		}
+		
+		func isSectionUnlocked(withId sectionId: String) -> Bool {
+			sections[sectionId] != nil
 		}
 	}
 }

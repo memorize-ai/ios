@@ -18,7 +18,7 @@ final class ReviewViewModel: ViewModel {
 		self.section = section
 		
 		if let section = section {
-			numberOfCards = section.numberOfDueCards
+			numberOfCards = section.numberOfDueCards ?? 0
 		} else if let deck = deck {
 			numberOfCards = deck.userData?.numberOfDueCards ?? 0
 		} else {
