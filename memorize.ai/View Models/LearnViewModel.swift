@@ -8,14 +8,14 @@ final class LearnViewModel: ViewModel {
 	
 	let numberOfTotalCards: Int
 	
-	@Published var currentCard: Card?
-	@Published var currentCardIndex = -1
+	@Published var current: Card.LearnData?
+	@Published var currentIndex = -1
 	
 	@Published var shouldShowRecap = false
 	
 	@Published var currentCardLoadingState = LoadingState()
 	
-	var cards: [(`self`: Int)]
+	var cards = [Card.LearnData]()
 	
 	init(deck: Deck, section: Deck.Section?) {
 		self.deck = deck
@@ -24,25 +24,35 @@ final class LearnViewModel: ViewModel {
 		numberOfTotalCards = section?.numberOfCards ?? deck.numberOfCards
 	}
 	
+	var currentCard: Card? {
+		current?.parent
+	}
+	
 	var numberOfMasteredCards: Int {
-		0 // TODO: Change this
+		cards.reduce(0) { acc, card in
+			acc + *card.isMastered
+		}
 	}
 	
 	var numberOfSeenCards: Int {
-		0 // TODO: Change this
+		cards.count - numberOfMasteredCards
 	}
 	
 	var numberOfUnseenCards: Int {
-		0 // TODO: Change this
+		numberOfTotalCards - cards.count
 	}
 	
 	func loadNextCard() {
-		currentCardIndex =
-			currentCardIndex == numberOfTotalCards - 1 ? 0 : currentCardIndex + 1
+		currentIndex =
+			currentIndex == numberOfTotalCards - 1 ? 0 : currentIndex + 1
 		
 		if let section = section {
-			if let card = section.cards[safe: currentCardIndex] {
-				currentCard = card
+			if let card = cards[safe: currentIndex] {
+				current = card
+			} else if let card = section.cards[safe: currentIndex] {
+				let card = Card.LearnData(parent: card)
+				cards.append(card)
+				current = card
 			} else {
 				currentCardLoadingState.startLoading()
 				
@@ -59,9 +69,11 @@ final class LearnViewModel: ViewModel {
 					.getDocuments()
 					.done { snapshot in
 						if let document = snapshot.documents.first {
-							let card = Card(snapshot: document)
-							section.cards.append(card)
-							self.currentCard = card
+							let card = Card.LearnData(
+								parent: .init(snapshot: document)
+							)
+							self.cards.append(card)
+							self.current = card
 						} else {
 							self.shouldShowRecap = true
 						}

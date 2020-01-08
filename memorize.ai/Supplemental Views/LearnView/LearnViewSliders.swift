@@ -3,10 +3,12 @@ import SwiftUI
 struct LearnViewSliders: View {
 	@EnvironmentObject var model: LearnViewModel
 	
-	func title(_ text: String) -> some View {
+	func title(_ text: String, isEnabled: Bool) -> some View {
 		Text(text)
 			.font(.muli(.bold, size: 14))
-			.foregroundColor(.white)
+			.foregroundColor(
+				Color.white.opacity(isEnabled ? 1 : 0.36)
+			)
 	}
 	
 	func slider(percent: CGFloat) -> some View {
@@ -28,9 +30,18 @@ struct LearnViewSliders: View {
 	var body: some View {
 		HStack {
 			VStack(alignment: .trailing, spacing: 4) {
-				title("Mastered")
-				title("Seen")
-				title("Unseen")
+				title(
+					"Mastered",
+					isEnabled: model.numberOfMasteredCards > 0
+				)
+				title(
+					"Seen",
+					isEnabled: model.numberOfSeenCards > 0
+				)
+				title(
+					"Unseen",
+					isEnabled: model.numberOfUnseenCards > 0
+				)
 			}
 			VStack(spacing: 17.75) {
 				slider(percent:

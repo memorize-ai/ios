@@ -3,8 +3,10 @@ import SwiftUI
 struct LearnViewTopControls: View {
 	@Environment(\.presentationMode) var presentationMode
 	
+	@EnvironmentObject var model: LearnViewModel
+	
 	var title: String {
-		"1 / 50" // TODO: Change this
+		"\(model.currentIndex + 1) / \(model.numberOfTotalCards)"
 	}
 	
 	var body: some View {
@@ -18,9 +20,7 @@ struct LearnViewTopControls: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			Button(action: {
-				// TODO: Skip card
-			}) {
+			Button(action: model.loadNextCard) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: .transparentLightGray,
@@ -41,6 +41,10 @@ struct LearnViewTopControls: View {
 struct LearnViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnViewTopControls()
+			.environmentObject(LearnViewModel(
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				section: nil
+			))
 	}
 }
 #endif
