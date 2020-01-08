@@ -345,11 +345,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				}
 			}
 			self.sections.sort { $0.index < $1.index }
+			self.sectionsLoadingState.succeed()
 			if isFirstIteration {
 				isFirstIteration = false
 				completion?(nil)
 			}
-			self.sectionsLoadingState.succeed()
 		}
 		return self
 	}
