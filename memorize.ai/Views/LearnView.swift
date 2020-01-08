@@ -48,9 +48,6 @@ struct LearnView: View {
 				)
 			}
 		}
-		.sheet(isPresented: $model.shouldShowRecap) {
-			LearnRecapView()
-		}
 		.onAppear {
 			self.model.loadNextCard()
 		}
