@@ -17,7 +17,7 @@ struct LearnViewCardSection: View {
 				if sectionName != nil {
 					Group {
 						Text("|")
-							.foregroundColor(Color.white.opacity(0.5))
+							.foregroundColor(Color.white.opacity(0.36))
 						Text(sectionName!)
 							.foregroundColor(.white)
 					}

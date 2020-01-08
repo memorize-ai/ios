@@ -33,9 +33,13 @@ struct LearnView: View {
 				}
 			}
 		}
+		.sheet(isPresented: $model.shouldShowRecap) {
+			LearnRecapView()
+		}
 		.onTapGesture {
 			self.model.loadNextCard() // TODO: Change this
 		}
+		.onAppear(perform: model.loadNextCard)
 	}
 }
 

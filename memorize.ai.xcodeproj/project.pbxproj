@@ -97,6 +97,9 @@
 		4D56FC4923C53E48006366FD /* LearnViewCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */; };
 		4D56FC4B23C540EB006366FD /* BlankReviewViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */; };
 		4D56FC4D23C54F29006366FD /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4C23C54F29006366FD /* Collection.swift */; };
+		4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4E23C55629006366FD /* LearnRecapView.swift */; };
+		4D56FC5123C558AF006366FD /* Card+LearnData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5023C558AF006366FD /* Card+LearnData.swift */; };
+		4D56FC5323C55A09006366FD /* Card+PerformanceRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
@@ -365,6 +368,9 @@
 		4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardContent.swift; sourceTree = "<group>"; };
 		4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankReviewViewCard.swift; sourceTree = "<group>"; };
 		4D56FC4C23C54F29006366FD /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		4D56FC4E23C55629006366FD /* LearnRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapView.swift; sourceTree = "<group>"; };
+		4D56FC5023C558AF006366FD /* Card+LearnData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+LearnData.swift"; sourceTree = "<group>"; };
+		4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+PerformanceRating.swift"; sourceTree = "<group>"; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
@@ -695,7 +701,9 @@
 				4D365799238CB168007C3D1F /* Card+UserData.swift */,
 				4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */,
 				4DB9FF522396DA1800B8DD38 /* Card+Side.swift */,
+				4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */,
 				4D6BA53623ACBBBD00D3F9D1 /* Card+Draft.swift */,
+				4D56FC5023C558AF006366FD /* Card+LearnData.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -861,6 +869,7 @@
 				4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */,
 				4D961FFC23C3BFB400C6BDF0 /* ReviewView.swift */,
 				4D56FC3923C53369006366FD /* LearnView.swift */,
+				4D56FC4E23C55629006366FD /* LearnRecapView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
 			path = Views;
@@ -1556,6 +1565,7 @@
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
 				4D6BA52723ACABB600D3F9D1 /* DecksViewBottomControls.swift in Sources */,
+				4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */,
 				4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */,
 				4D8B2EAD2398BC0000EF040B /* MarketDeckViewSectionRow.swift in Sources */,
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
@@ -1573,6 +1583,7 @@
 				4DAA4F3D233DE1A600EF7467 /* AppDelegate.swift in Sources */,
 				4D2ECD84235D90C7008312B1 /* Tilde.swift in Sources */,
 				4D3FE58223BC813D0010FFD3 /* EditCardViewAddSectionPopUp.swift in Sources */,
+				4D56FC5323C55A09006366FD /* Card+PerformanceRating.swift in Sources */,
 				4D59FA89237E7735007CAA74 /* OwnedDeckCell.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
 				4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */,
@@ -1680,6 +1691,7 @@
 				4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */,
 				4D96200623C3D39E00C6BDF0 /* CardToggleButton.swift in Sources */,
 				4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */,
+				4D56FC5123C558AF006366FD /* Card+LearnData.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
 				4D458A3B237BEBCD00A9776A /* MainTabViewItem.swift in Sources */,

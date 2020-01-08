@@ -15,13 +15,13 @@ final class LearnViewModel: ViewModel {
 	
 	@Published var currentCardLoadingState = LoadingState()
 	
+	var cards: [(`self`: Int)]
+	
 	init(deck: Deck, section: Deck.Section?) {
 		self.deck = deck
 		self.section = section
 		
 		numberOfTotalCards = section?.numberOfCards ?? deck.numberOfCards
-		
-		loadNextCard()
 	}
 	
 	var numberOfMasteredCards: Int {
