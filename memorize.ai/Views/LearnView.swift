@@ -32,6 +32,7 @@ struct LearnView: View {
 					}
 				}
 				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
+				.disabled(self.model.isPopUpShowing)
 				LearnViewPopUp()
 			}
 		}
