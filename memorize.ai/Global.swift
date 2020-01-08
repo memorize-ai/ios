@@ -10,6 +10,7 @@ let storage = Storage.storage().reference()
 let defaults = UserDefaults.standard
 
 let SCREEN_SIZE = UIScreen.main.bounds
+let MAIN_BUNDLE_PATH = Bundle.main.bundlePath
 
 var currentViewController: UIViewController! {
 	UIApplication.shared.windows.last?.rootViewController

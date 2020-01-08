@@ -185,7 +185,7 @@ struct FroalaEditor: View {
 							}
 					}
 			},
-			baseURL: .init(fileURLWithPath: Bundle.main.bundlePath, isDirectory: true),
+			baseURL: .init(fileURLWithPath: MAIN_BUNDLE_PATH, isDirectory: true),
 			configuration: configuration
 		)
 	}

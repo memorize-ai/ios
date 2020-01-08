@@ -18,7 +18,7 @@ struct CardPreviewCell: View {
 				WebView(
 					html: card.renderSide(side),
 					baseURL: .init(
-						fileURLWithPath: Bundle.main.bundlePath,
+						fileURLWithPath: MAIN_BUNDLE_PATH,
 						isDirectory: true
 					)
 				)
