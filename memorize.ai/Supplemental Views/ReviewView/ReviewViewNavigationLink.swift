@@ -7,12 +7,26 @@ struct ReviewViewNavigationLink<Label: View>: View {
 	let section: Deck.Section?
 	let label: Label
 	
+	init(label: () -> Label) {
+		deck = nil
+		section = nil
+		self.label = label()
+	}
+	
 	init(
-		deck: Deck? = nil,
-		section: Deck.Section? = nil,
+		deck: Deck,
 		label: () -> Label
 	) {
 		self.deck = deck
+		section = nil
+		self.label = label()
+	}
+	
+	init(
+		section: Deck.Section,
+		label: () -> Label
+	) {
+		deck = section.parent
 		self.section = section
 		self.label = label()
 	}
@@ -36,7 +50,7 @@ struct ReviewViewNavigationLink<Label: View>: View {
 #if DEBUG
 struct ReviewViewNavigationLink_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewViewNavigationLink(deck: nil, section: nil) {
+		ReviewViewNavigationLink {
 			Text("Review")
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)

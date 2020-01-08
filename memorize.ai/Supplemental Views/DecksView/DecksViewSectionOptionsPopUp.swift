@@ -69,7 +69,7 @@ struct DecksViewSectionOptionsPopUp: View {
 			contentHeight: contentHeight
 		) {
 			if section.isDue {
-				ReviewViewNavigationLink(deck: deck, section: section) {
+				ReviewViewNavigationLink(section: section) {
 					HStack(spacing: 20) {
 						reviewIcon
 						Text("Review")
@@ -82,7 +82,7 @@ struct DecksViewSectionOptionsPopUp: View {
 				}
 			}
 			if section.numberOfCards > 0 {
-				LearnViewNavigationLink(deck: deck, section: section) {
+				LearnViewNavigationLink(section: section) {
 					HStack(spacing: 20) {
 						learnIcon
 						Text("Learn")

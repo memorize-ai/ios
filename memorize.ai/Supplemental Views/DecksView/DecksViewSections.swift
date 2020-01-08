@@ -6,25 +6,16 @@ struct DecksViewSections: View {
 	
 	@ObservedObject var selectedDeck: Deck
 	
+	var sections: [Deck.Section] {
+		(selectedDeck.hasUnsectionedCards
+			? [selectedDeck.unsectionedSection]
+			: []) +
+		selectedDeck.sections
+	}
+	
 	var body: some View {
 		VStack(spacing: 16) {
-			if selectedDeck.hasUnsectionedCards {
-				VStack {
-					DecksViewSectionHeader(
-						section: selectedDeck.unsectionedSection
-					)
-					.onTapGesture {
-						self.model.toggleSectionExpanded(
-							self.selectedDeck.unsectionedSection,
-							forUser: self.currentStore.user
-						)
-					}
-					DecksViewSectionBody(
-						section: selectedDeck.unsectionedSection
-					)
-				}
-			}
-			ForEach(selectedDeck.sections) { section in
+			ForEach(sections) { section in
 				VStack {
 					DecksViewSectionHeader(section: section)
 						.onTapGesture {

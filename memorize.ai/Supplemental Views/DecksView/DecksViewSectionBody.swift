@@ -7,6 +7,10 @@ struct DecksViewSectionBody: View {
 	
 	@ObservedObject var section: Deck.Section
 	
+	var isUnlocked: Bool {
+		section.isUnlocked(forUser: currentStore.user)
+	}
+	
 	var isExpanded: Bool {
 		model.isSectionExpanded(section)
 	}
@@ -15,8 +19,49 @@ struct DecksViewSectionBody: View {
 		currentStore.user.id == section.parent.creatorId
 	}
 	
+	func headerButton(text: String, color: Color) -> some View {
+		CustomRectangle(
+			background: Color.transparent,
+			borderColor: color,
+			borderWidth: 1
+		) {
+			Text(text)
+				.font(.muli(.semiBold, size: 16))
+				.foregroundColor(color)
+				.lineLimit(1)
+				.minimumScaleFactor(.leastNonzeroMagnitude)
+				.padding(.vertical, 4)
+				.frame(maxWidth: .infinity)
+		}
+	}
+	
+	var learnButton: some View {
+		LearnViewNavigationLink(section: section) {
+			headerButton(text: "Learn", color: .darkBlue)
+		}
+	}
+	
+	var reviewButton: some View {
+		ReviewViewNavigationLink(section: section) {
+			headerButton(
+				text: "Review • \(section.numberOfDueCards?.formatted ?? "(error)")",
+				color: .init(#colorLiteral(red: 0, green: 0.7647058824, blue: 0.4941176471, alpha: 1))
+			)
+		}
+	}
+	
 	var body: some View {
 		VStack(spacing: 8) {
+			if isUnlocked {
+				HStack {
+					if section.numberOfCards > 0 {
+						learnButton
+					}
+					if section.isDue {
+						reviewButton
+					}
+				}
+			}
 			if isExpanded {
 				SwitchOver(section.cardsLoadingState)
 					.case(.loading) {
@@ -32,6 +77,7 @@ struct DecksViewSectionBody: View {
 							.foregroundColor(.gray)
 							.scaleEffect(1.5)
 					}
+					.padding(.top, 8)
 			}
 		}
 		.padding(.top, 6)

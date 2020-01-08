@@ -9,10 +9,18 @@ struct LearnViewNavigationLink<Label: View>: View {
 	
 	init(
 		deck: Deck,
-		section: Deck.Section? = nil,
 		label: () -> Label
 	) {
 		self.deck = deck
+		section = nil
+		self.label = label()
+	}
+	
+	init(
+		section: Deck.Section,
+		label: () -> Label
+	) {
+		deck = section.parent
 		self.section = section
 		self.label = label()
 	}
