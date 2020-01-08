@@ -10,7 +10,7 @@ extension Card {
 			self.ratings = ratings
 		}
 		
-		var isMastered: Bool {
+		var streak: Int {
 			var acc = 0
 			
 			for rating in ratings {
@@ -21,7 +21,11 @@ extension Card {
 				}
 			}
 			
-			return acc >= Self.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED
+			return acc
+		}
+		
+		var isMastered: Bool {
+			streak >= Self.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED
 		}
 		
 		@discardableResult

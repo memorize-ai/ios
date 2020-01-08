@@ -61,7 +61,8 @@ final class LearnViewModel: ViewModel {
 	func showPopUp(
 		emoji: String?,
 		message: String,
-		duration: Double = 1
+		duration: Double = 1,
+		completion: (() -> Void)? = nil
 	) {
 		popUpData = (emoji, message)
 		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
@@ -79,18 +80,29 @@ final class LearnViewModel: ViewModel {
 				repeats: false
 			) { _ in
 				self.popUpOffset = -SCREEN_SIZE.width
+				completion?()
 			}
 		}
 	}
 	
-	func showPopUp(forRating rating: Card.PerformanceRating) {
+	func showPopUp(
+		forRating rating: Card.PerformanceRating,
+		completion: (() -> Void)? = nil
+	) {
 		switch rating {
 		case .easy:
-			showPopUp(emoji: "🎉", message: "Great!")
+			switch true {
+			case current?.isMastered:
+				showPopUp(emoji: "🎉", message: "Mastered!", completion: completion)
+			case current?.streak ?? 0 > 2:
+				showPopUp(emoji: "🎉", message: "On a roll!", completion: completion)
+			default:
+				showPopUp(emoji: "🎉", message: "Great!", completion: completion)
+			}
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!")
+			showPopUp(emoji: "😎", message: "Good luck!", completion: completion)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!")
+			showPopUp(emoji: "😕", message: "Better luck next time!", completion: completion)
 		}
 	}
 	
@@ -99,9 +111,11 @@ final class LearnViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		isAllMastered
-			? shouldShowRecap = true
-			: loadNextCard()
+		showPopUp(forRating: rating) {
+			self.isAllMastered
+				? self.shouldShowRecap = true
+				: self.loadNextCard()
+		}
 	}
 	
 	func loadNextCard() {
