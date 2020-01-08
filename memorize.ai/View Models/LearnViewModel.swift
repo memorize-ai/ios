@@ -164,12 +164,12 @@ final class LearnViewModel: ViewModel {
 						self.currentCardLoadingState.succeed()
 					}
 					.catch { error in
-						print(error) // TODO: Handle error with alert
+						showAlert(title: "Unable to load card", message: "Please try again")
 						self.currentCardLoadingState.fail(error: error)
 					}
 			}
 		} else {
-			
+			// TODO: Load cards from deck
 		}
 	}
 }

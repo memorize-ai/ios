@@ -46,7 +46,7 @@ func showAlert(
 	title: String?,
 	message: String?,
 	preferredStyle: UIAlertController.Style = .alert,
-	handler: (UIAlertController) -> Void
+	handler: (UIAlertController) -> Void = { _ in }
 ) {
 	let alert = UIAlertController(
 		title: title,
