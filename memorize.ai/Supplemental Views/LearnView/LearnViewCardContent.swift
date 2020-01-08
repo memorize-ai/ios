@@ -1,4 +1,5 @@
 import SwiftUI
+import WebView
 
 struct LearnViewCardContent: View {
 	@ObservedObject var card: Card
@@ -8,7 +9,14 @@ struct LearnViewCardContent: View {
 	
 	var body: some View {
 		ZStack(alignment: .bottomTrailing) {
-			Text(card.front)
+			WebView(
+				html: card.renderSide(side),
+				baseURL: .init(
+					fileURLWithPath: Bundle.main.bundlePath,
+					isDirectory: true
+				)
+			)
+			.cornerRadius(5)
 			CardToggleButton(
 				image: .greenSwapIcon,
 				side: $side,

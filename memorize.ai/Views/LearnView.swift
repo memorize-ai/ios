@@ -31,7 +31,6 @@ struct LearnView: View {
 						.foregroundColor(.darkGray)
 						.frame(height: 80)
 				}
-				.edgesIgnoringSafeArea(.bottom)
 			}
 		}
 		.onTapGesture {
