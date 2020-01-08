@@ -30,6 +30,10 @@ final class LearnViewModel: ViewModel {
 		current?.parent
 	}
 	
+	var isAllMastered: Bool {
+		numberOfMasteredCards == numberOfTotalCards
+	}
+	
 	var numberOfMasteredCards: Int {
 		cards.reduce(0) { acc, card in
 			acc + *card.isMastered
@@ -46,10 +50,12 @@ final class LearnViewModel: ViewModel {
 	
 	func rateCurrentCard(withRating rating: Card.PerformanceRating) {
 		current?.addRating(rating)
-		withAnimation(.easeIn) {
+		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		loadNextCard()
+		isAllMastered
+			? shouldShowRecap = true
+			: loadNextCard()
 	}
 	
 	func loadNextCard() {

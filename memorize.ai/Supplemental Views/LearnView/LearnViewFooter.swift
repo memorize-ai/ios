@@ -15,8 +15,17 @@ struct LearnViewFooter: View {
 			) {
 				HStack {
 					Text(rating.emoji)
-					Text(rating.title)
+					Text(rating.title.uppercased())
+						.font(.muli(.bold, size: 14))
+						.foregroundColor(.darkGray)
+						.lineLimit(1)
+						.minimumScaleFactor(.leastNonzeroMagnitude)
 				}
+				.padding(.horizontal)
+				.frame(
+					width: (SCREEN_SIZE.width - 8 * 4) / 3,
+					height: 44
+				)
 			}
 		}
 	}
@@ -24,20 +33,18 @@ struct LearnViewFooter: View {
 	var body: some View {
 		ZStack {
 			HStack {
-				ratingButton(forRating: .easy) {
-					self.model.rateCurrentCard(withRating: .easy)
-				}
-				ratingButton(forRating: .struggled) {
-					self.model.rateCurrentCard(withRating: .struggled)
-				}
-				ratingButton(forRating: .forgot) {
-					self.model.rateCurrentCard(withRating: .forgot)
+				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+					self.ratingButton(forRating: rating) {
+						self.model.rateCurrentCard(withRating: rating)
+						playHaptic()
+					}
 				}
 			}
-			.offset(y: model.isWaitingForRating ? 0 : 80)
+			.offset(x: model.isWaitingForRating ? 0 : -SCREEN_SIZE.width)
 			Text("Tap anywhere to continue")
 				.font(.muli(.bold, size: 17))
 				.foregroundColor(.darkGray)
+				.offset(x: model.isWaitingForRating ? SCREEN_SIZE.width : 0)
 		}
 	}
 }

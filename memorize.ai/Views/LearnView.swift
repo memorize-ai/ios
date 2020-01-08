@@ -35,7 +35,10 @@ struct LearnView: View {
 			LearnRecapView()
 		}
 		.onTapGesture {
-			self.model.loadNextCard() // TODO: Change this
+			if self.model.isWaitingForRating { return }
+			withAnimation(.easeIn(duration: 0.3)) {
+				self.model.isWaitingForRating = true
+			}
 		}
 		.onAppear(perform: model.loadNextCard)
 	}

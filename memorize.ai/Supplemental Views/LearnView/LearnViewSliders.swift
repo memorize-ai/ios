@@ -59,6 +59,7 @@ struct LearnViewSliders: View {
 			}
 			.offset(y: 1)
 		}
+		.animation(.easeIn(duration: 0.3))
 	}
 }
 
