@@ -20,6 +20,8 @@ struct LearnViewCardContent: View {
 			.cornerRadius(5)
 			CardToggleButton(
 				image: .greenSwapIcon,
+				circleDimension: 40,
+				fontSize: 13,
 				side: $model.currentSide,
 				degrees: $toggleIconDegrees
 			)

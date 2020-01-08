@@ -28,18 +28,19 @@ struct LearnViewCardSection: View {
 			.padding(.horizontal, 10)
 			GeometryReader { geometry in
 				ZStack(alignment: .bottom) {
-					BlankReviewViewCard(
-						geometry: geometry,
-						scale: 0.9,
-						offset: 16
-					)
-					.blur(radius: self.model.cardOffset == 0 ? 0 : 5)
-					BlankReviewViewCard(
-						geometry: geometry,
-						scale: 0.95,
-						offset: 8
-					)
-					.blur(radius: self.model.cardOffset == 0 ? 0 : 5)
+					Group {
+						BlankReviewViewCard(
+							geometry: geometry,
+							scale: 0.9,
+							offset: 16
+						)
+						BlankReviewViewCard(
+							geometry: geometry,
+							scale: 0.95,
+							offset: 8
+						)
+					}
+					.blur(radius: self.model.cardOffset.isZero ? 0 : 5)
 					ReviewViewCard(geometry: geometry) {
 						Group {
 							if self.model.currentCard == nil {
