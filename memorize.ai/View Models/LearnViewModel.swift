@@ -113,6 +113,13 @@ final class LearnViewModel: ViewModel {
 		}
 	}
 	
+	func skipCard() {
+		withAnimation(.easeIn(duration: 0.3)) {
+			isWaitingForRating = false
+		}
+		showPopUp(emoji: "😕", message: "Skipped!", onCentered: loadNextCard)
+	}
+	
 	func waitForRating() {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = true
