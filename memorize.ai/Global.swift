@@ -16,6 +16,12 @@ var currentViewController: UIViewController! {
 	UIApplication.shared.windows.last?.rootViewController
 }
 
+func waitUntil(duration: Double, body: @escaping () -> Void) {
+	Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
+		body()
+	}
+}
+
 func popUpWithAnimation(body: () -> Void) {
 	withAnimation(.easeIn(duration: 0.15), body)
 }

@@ -35,9 +35,7 @@ struct LearnView: View {
 				.disabled(self.model.isPopUpShowing)
 				.onTapGesture {
 					if self.model.isWaitingForRating { return }
-					withAnimation(.easeIn(duration: 0.3)) {
-						self.model.isWaitingForRating = true
-					}
+					self.model.waitForRating()
 				}
 				LearnViewPopUp()
 			}

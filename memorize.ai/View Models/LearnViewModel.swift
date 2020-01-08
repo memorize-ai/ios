@@ -4,6 +4,7 @@ import LoadingState
 
 final class LearnViewModel: ViewModel {
 	static let popUpSlideDuration = 0.25
+	static let cardSlideDuration = 0.25
 	
 	let deck: Deck
 	let section: Deck.Section?
@@ -20,6 +21,8 @@ final class LearnViewModel: ViewModel {
 	
 	@Published var popUpOffset: CGFloat = -SCREEN_SIZE.width
 	@Published var popUpData: (emoji: String?, message: String)?
+	
+	@Published var cardOffset: CGFloat = 0
 	
 	@Published var currentCardLoadingState = LoadingState()
 	
@@ -67,47 +70,62 @@ final class LearnViewModel: ViewModel {
 		emoji: String?,
 		message: String,
 		duration: Double = 1,
+		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
 		popUpData = (emoji, message)
 		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
 			popUpOffset = 0
 		}
-		Timer.scheduledTimer(
-			withTimeInterval: Self.popUpSlideDuration + duration,
-			repeats: false
-		) { _ in
-			withAnimation(.easeIn(duration: Self.popUpSlideDuration)) {
-				self.popUpOffset = SCREEN_SIZE.width
-			}
-			Timer.scheduledTimer(
-				withTimeInterval: Self.popUpSlideDuration,
-				repeats: false
-			) { _ in
-				self.popUpOffset = -SCREEN_SIZE.width
-				completion?()
+		waitUntil(duration: Self.popUpSlideDuration) {
+			onCentered?()
+			waitUntil(duration: duration) {
+				withAnimation(.easeIn(duration: Self.popUpSlideDuration)) {
+					self.popUpOffset = SCREEN_SIZE.width
+				}
+				waitUntil(duration: Self.popUpSlideDuration) {
+					self.popUpOffset = -SCREEN_SIZE.width
+					completion?()
+				}
 			}
 		}
 	}
 	
 	func showPopUp(
 		forRating rating: Card.PerformanceRating,
+		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
 		switch rating {
 		case .easy:
 			switch true {
 			case current?.isMastered:
-				showPopUp(emoji: "🎉", message: "Mastered!", completion: completion)
+				showPopUp(emoji: "🎉", message: "Mastered!", onCentered: onCentered, completion: completion)
 			case current?.streak ?? 0 > 2:
-				showPopUp(emoji: "🎉", message: "On a roll!", completion: completion)
+				showPopUp(emoji: "🎉", message: "On a roll!", onCentered: onCentered, completion: completion)
 			default:
-				showPopUp(emoji: "🎉", message: "Great!", completion: completion)
+				showPopUp(emoji: "🎉", message: "Great!", onCentered: onCentered, completion: completion)
 			}
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!", completion: completion)
+			showPopUp(emoji: "😎", message: "Good luck!", onCentered: onCentered, completion: completion)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!", completion: completion)
+			showPopUp(emoji: "😕", message: "Better luck next time!", onCentered: onCentered, completion: completion)
+		}
+	}
+	
+	func waitForRating() {
+		withAnimation(.easeIn(duration: 0.3)) {
+			isWaitingForRating = true
+		}
+		withAnimation(.easeIn(duration: Self.cardSlideDuration)) {
+			cardOffset = -SCREEN_SIZE.width
+		}
+		waitUntil(duration: Self.cardSlideDuration) {
+			self.currentSide = .back
+			self.cardOffset = SCREEN_SIZE.width
+			withAnimation(.easeOut(duration: Self.cardSlideDuration)) {
+				self.cardOffset = 0
+			}
 		}
 	}
 	
@@ -116,11 +134,17 @@ final class LearnViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(forRating: rating) {
-			self.isAllMastered
-				? self.shouldShowRecap = true
-				: self.loadNextCard()
-		}
+		showPopUp(
+			forRating: rating,
+			onCentered: {
+				if self.isAllMastered { return }
+				self.loadNextCard()
+			},
+			completion: {
+				guard self.isAllMastered else { return }
+				self.shouldShowRecap = true
+			}
+		)
 	}
 	
 	func loadNextCard() {
