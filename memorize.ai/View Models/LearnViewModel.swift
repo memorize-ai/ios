@@ -20,7 +20,7 @@ final class LearnViewModel: ViewModel {
 	
 	@Published var isWaitingForRating = false
 	
-	@Published var isRecapSheetViewShowing = false
+	@Published var shouldShowRecap = false
 	
 	@Published var popUpOffset: CGFloat = -SCREEN_SIZE.width
 	@Published var popUpData: (emoji: String?, message: String)?
@@ -30,11 +30,6 @@ final class LearnViewModel: ViewModel {
 	@Published var currentCardLoadingState = LoadingState()
 	
 	var cards = [Card.LearnData]()
-	var shouldShowRecap = false {
-		didSet {
-			isRecapSheetViewShowing = shouldShowRecap
-		}
-	}
 	
 	init(deck: Deck, section: Deck.Section?) {
 		self.deck = deck

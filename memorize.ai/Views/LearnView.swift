@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LearnView: View {
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: LearnViewModel
 	
 	var body: some View {
@@ -38,6 +39,13 @@ struct LearnView: View {
 				}
 				.disabled(self.model.isPopUpShowing)
 				LearnViewPopUp()
+				NavigateTo(
+					LearnRecapView()
+						.environmentObject(self.currentStore)
+						.environmentObject(self.model)
+						.removeNavigationBar(),
+					when: self.$model.shouldShowRecap
+				)
 			}
 		}
 		.sheet(isPresented: $model.shouldShowRecap) {

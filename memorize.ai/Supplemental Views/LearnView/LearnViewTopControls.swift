@@ -9,6 +9,20 @@ struct LearnViewTopControls: View {
 		"\(model.currentIndex + 1) / \(model.numberOfTotalCards)"
 	}
 	
+	func button(text: String) -> some View {
+		CustomRectangle(
+			background: Color.transparent,
+			borderColor: .transparentLightGray,
+			borderWidth: 1.5
+		) {
+			Text(text)
+				.font(.muli(.bold, size: 17))
+				.foregroundColor(Color.white.opacity(0.7))
+				.padding(.horizontal, 10)
+				.frame(height: 30)
+		}
+	}
+	
 	var body: some View {
 		HStack(spacing: 22) {
 			Button(action: {
@@ -20,17 +34,12 @@ struct LearnViewTopControls: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			Button(action: model.skipCard) {
-				CustomRectangle(
-					background: Color.transparent,
-					borderColor: .transparentLightGray,
-					borderWidth: 1.5
-				) {
-					Text("SKIP")
-						.font(.muli(.bold, size: 17))
-						.foregroundColor(Color.white.opacity(0.7))
-						.padding(.horizontal, 10)
-						.frame(height: 30)
+			HStack {
+				Button(action: model.skipCard) {
+					button(text: "SKIP")
+				}
+				LearnRecapViewNavigationLink {
+					button(text: "DONE")
 				}
 			}
 		}
