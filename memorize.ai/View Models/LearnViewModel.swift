@@ -12,6 +12,7 @@ final class LearnViewModel: ViewModel {
 	
 	@Published var current: Card.LearnData?
 	@Published var currentIndex = -1
+	@Published var currentSide = Card.Side.front
 	
 	@Published var isWaitingForRating = false
 	
@@ -110,10 +111,12 @@ final class LearnViewModel: ViewModel {
 		if let section = section {
 			if let card = cards[safe: currentIndex] {
 				current = card
+				currentSide = .front
 			} else if let card = section.cards[safe: currentIndex] {
 				let card = Card.LearnData(parent: card)
 				cards.append(card)
 				current = card
+				currentSide = .front
 			} else {
 				currentCardLoadingState.startLoading()
 				
@@ -135,6 +138,7 @@ final class LearnViewModel: ViewModel {
 							)
 							self.cards.append(card)
 							self.current = card
+							self.currentSide = .front
 						} else {
 							self.shouldShowRecap = true
 						}

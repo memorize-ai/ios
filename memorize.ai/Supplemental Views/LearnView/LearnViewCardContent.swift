@@ -6,13 +6,12 @@ struct LearnViewCardContent: View {
 	
 	@ObservedObject var card: Card
 	
-	@State var side = Card.Side.front
 	@State var toggleIconDegrees = 0.0
 	
 	var body: some View {
 		ZStack(alignment: .bottomTrailing) {
 			WebView(
-				html: card.renderSide(side),
+				html: card.renderSide(model.currentSide),
 				baseURL: .init(
 					fileURLWithPath: MAIN_BUNDLE_PATH,
 					isDirectory: true
@@ -21,7 +20,7 @@ struct LearnViewCardContent: View {
 			.cornerRadius(5)
 			CardToggleButton(
 				image: .greenSwapIcon,
-				side: $side,
+				side: $model.currentSide,
 				degrees: $toggleIconDegrees
 			)
 			.padding([.trailing, .bottom], 10)
