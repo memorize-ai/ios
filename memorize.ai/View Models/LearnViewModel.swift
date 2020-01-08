@@ -3,6 +3,8 @@ import FirebaseFirestore
 import LoadingState
 
 final class LearnViewModel: ViewModel {
+	static let popUpSlideDuration = 0.25
+	
 	let deck: Deck
 	let section: Deck.Section?
 	
@@ -14,6 +16,9 @@ final class LearnViewModel: ViewModel {
 	@Published var isWaitingForRating = false
 	
 	@Published var shouldShowRecap = false
+	
+	@Published var popUpOffset: CGFloat = -SCREEN_SIZE.width
+	@Published var popUpData: (emoji: String?, message: String)?
 	
 	@Published var currentCardLoadingState = LoadingState()
 	
@@ -46,6 +51,46 @@ final class LearnViewModel: ViewModel {
 	
 	var numberOfUnseenCards: Int {
 		numberOfTotalCards - cards.count
+	}
+	
+	var isPopUpShowing: Bool {
+		popUpOffset.isZero
+	}
+	
+	func showPopUp(
+		emoji: String?,
+		message: String,
+		duration: Double = 1
+	) {
+		popUpData = (emoji, message)
+		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
+			popUpOffset = 0
+		}
+		Timer.scheduledTimer(
+			withTimeInterval: Self.popUpSlideDuration + duration,
+			repeats: false
+		) { _ in
+			withAnimation(.easeIn(duration: Self.popUpSlideDuration)) {
+				self.popUpOffset = SCREEN_SIZE.width
+			}
+			Timer.scheduledTimer(
+				withTimeInterval: Self.popUpSlideDuration,
+				repeats: false
+			) { _ in
+				self.popUpOffset = -SCREEN_SIZE.width
+			}
+		}
+	}
+	
+	func showPopUp(forRating rating: Card.PerformanceRating) {
+		switch rating {
+		case .easy:
+			showPopUp(emoji: "🎉", message: "Great!")
+		case .struggled:
+			showPopUp(emoji: "😎", message: "Good luck!")
+		case .forgot:
+			showPopUp(emoji: "😕", message: "Better luck next time!")
+		}
 	}
 	
 	func rateCurrentCard(withRating rating: Card.PerformanceRating) {

@@ -36,6 +36,7 @@ struct LearnViewFooter: View {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 					self.ratingButton(forRating: rating) {
 						self.model.rateCurrentCard(withRating: rating)
+						self.model.showPopUp(forRating: rating)
 						playHaptic()
 					}
 				}
