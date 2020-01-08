@@ -34,6 +34,9 @@ struct LearnView: View {
 				.edgesIgnoringSafeArea(.bottom)
 			}
 		}
+		.onTapGesture {
+			self.model.loadNextCard() // TODO: Change this
+		}
 	}
 }
 

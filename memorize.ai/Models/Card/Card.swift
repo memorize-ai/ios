@@ -18,6 +18,8 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var previewImage: Image?
 	@Published var previewImageLoadingState = LoadingState()
 	
+	var snapshot: DocumentSnapshot?
+	
 	init(
 		id: String,
 		sectionId: String?,
@@ -27,7 +29,8 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfReviews: Int,
 		numberOfSkips: Int,
 		userData: UserData? = nil,
-		previewImage: Image? = nil
+		previewImage: Image? = nil,
+		snapshot: DocumentSnapshot? = nil
 	) {
 		self.id = id
 		self.sectionId = sectionId
@@ -38,6 +41,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		self.numberOfSkips = numberOfSkips
 		self.userData = userData
 		self.previewImage = previewImage
+		self.snapshot = snapshot
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -49,7 +53,8 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 			back: snapshot.get("back") as? String ?? "(empty)",
 			numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
 			numberOfReviews: snapshot.get("reviewCount") as? Int ?? 0,
-			numberOfSkips: snapshot.get("skipCount") as? Int ?? 0
+			numberOfSkips: snapshot.get("skipCount") as? Int ?? 0,
+			snapshot: snapshot
 		)
 	}
 	
@@ -135,11 +140,14 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func updateUserDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		self.snapshot = snapshot
+		
 		if userData == nil {
 			userData = .init(snapshot: snapshot)
 		} else {
 			userData?.dueDate = snapshot.getDate("due") ?? .now
 		}
+		
 		return self
 	}
 	

@@ -5,16 +5,27 @@ struct LearnViewCardSection: View {
 	
 	@ObservedObject var deck: Deck
 	
+	var sectionName: String? {
+		model.section?.name
+	}
+	
 	var body: some View {
 		VStack(spacing: 8) {
 			HStack {
 				Text("\(deck.name)")
-					.font(.muli(.bold, size: 17))
 					.foregroundColor(.white)
-					.align(to: .leading)
-					.padding(.horizontal, 10)
-				// TODO: Add section name
+				if sectionName != nil {
+					Group {
+						Text("|")
+							.foregroundColor(Color.white.opacity(0.5))
+						Text(sectionName!)
+							.foregroundColor(.white)
+					}
+				}
+				Spacer()
 			}
+			.font(.muli(.bold, size: 17))
+			.padding(.horizontal, 10)
 			GeometryReader { geometry in
 				ZStack(alignment: .bottom) {
 					BlankReviewViewCard(
@@ -28,7 +39,7 @@ struct LearnViewCardSection: View {
 						offset: 8
 					)
 					ReviewViewCard(geometry: geometry) {
-						Text("Content")
+						LearnViewCardContent()
 					}
 				}
 			}
