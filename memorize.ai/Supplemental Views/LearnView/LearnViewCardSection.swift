@@ -6,7 +6,7 @@ struct LearnViewCardSection: View {
 	@ObservedObject var deck: Deck
 	
 	var sectionName: String? {
-		model.section?.name
+		model.section?.name ?? model.currentSection?.name
 	}
 	
 	var body: some View {
