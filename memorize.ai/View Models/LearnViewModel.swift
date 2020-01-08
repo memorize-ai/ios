@@ -1,4 +1,4 @@
-import Combine
+import SwiftUI
 import FirebaseFirestore
 import LoadingState
 
@@ -10,6 +10,8 @@ final class LearnViewModel: ViewModel {
 	
 	@Published var current: Card.LearnData?
 	@Published var currentIndex = -1
+	
+	@Published var isWaitingForRating = false
 	
 	@Published var shouldShowRecap = false
 	
@@ -40,6 +42,14 @@ final class LearnViewModel: ViewModel {
 	
 	var numberOfUnseenCards: Int {
 		numberOfTotalCards - cards.count
+	}
+	
+	func rateCurrentCard(withRating rating: Card.PerformanceRating) {
+		current?.addRating(rating)
+		withAnimation(.easeIn) {
+			isWaitingForRating = false
+		}
+		loadNextCard()
 	}
 	
 	func loadNextCard() {

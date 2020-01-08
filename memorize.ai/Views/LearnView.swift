@@ -26,9 +26,7 @@ struct LearnView: View {
 					LearnViewCardSection(deck: self.model.deck)
 						.padding(.top, 6)
 						.padding(.horizontal, 8)
-					Text("Tap anywhere to continue")
-						.font(.muli(.bold, size: 17))
-						.foregroundColor(.darkGray)
+					LearnViewFooter()
 						.frame(height: 80)
 				}
 			}

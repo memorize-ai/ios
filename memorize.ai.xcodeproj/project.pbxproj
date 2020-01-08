@@ -100,6 +100,7 @@
 		4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4E23C55629006366FD /* LearnRecapView.swift */; };
 		4D56FC5123C558AF006366FD /* Card+LearnData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5023C558AF006366FD /* Card+LearnData.swift */; };
 		4D56FC5323C55A09006366FD /* Card+PerformanceRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */; };
+		4D56FC5523C560F1006366FD /* LearnViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5423C560F1006366FD /* LearnViewFooter.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
@@ -371,6 +372,7 @@
 		4D56FC4E23C55629006366FD /* LearnRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapView.swift; sourceTree = "<group>"; };
 		4D56FC5023C558AF006366FD /* Card+LearnData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+LearnData.swift"; sourceTree = "<group>"; };
 		4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+PerformanceRating.swift"; sourceTree = "<group>"; };
+		4D56FC5423C560F1006366FD /* LearnViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewFooter.swift; sourceTree = "<group>"; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 				4D56FC4423C53814006366FD /* LearnViewSliders.swift */,
 				4D56FC4623C53D13006366FD /* LearnViewCardSection.swift */,
 				4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */,
+				4D56FC5423C560F1006366FD /* LearnViewFooter.swift */,
 			);
 			path = LearnView;
 			sourceTree = "<group>";
@@ -1623,6 +1626,7 @@
 				4DDACF042395BC3F0073C004 /* MarketDeckView.swift in Sources */,
 				4D365795238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
+				4D56FC5523C560F1006366FD /* LearnViewFooter.swift in Sources */,
 				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
 				4D56FC4723C53D13006366FD /* LearnViewCardSection.swift in Sources */,
 				4DE9722823701EE900616E42 /* Array.swift in Sources */,
