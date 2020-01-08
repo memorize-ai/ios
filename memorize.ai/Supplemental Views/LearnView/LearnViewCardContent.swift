@@ -2,6 +2,8 @@ import SwiftUI
 import WebView
 
 struct LearnViewCardContent: View {
+	@EnvironmentObject var model: LearnViewModel
+	
 	@ObservedObject var card: Card
 	
 	@State var side = Card.Side.front
@@ -23,6 +25,7 @@ struct LearnViewCardContent: View {
 				degrees: $toggleIconDegrees
 			)
 			.padding([.trailing, .bottom], 10)
+			.opacity(*model.isWaitingForRating)
 		}
 	}
 }
@@ -33,6 +36,10 @@ struct LearnViewCardContent_Previews: PreviewProvider {
 		LearnViewCardContent(
 			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
 		)
+		.environmentObject(LearnViewModel(
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			section: nil
+		))
 	}
 }
 #endif
