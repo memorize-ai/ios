@@ -81,16 +81,18 @@ struct DecksViewSectionOptionsPopUp: View {
 					.frame(height: 50)
 				}
 			}
-			LearnViewNavigationLink(deck: deck, section: section) {
-				HStack(spacing: 20) {
-					learnIcon
-					Text("Learn")
-						.font(.muli(.semiBold, size: 17))
-						.foregroundColor(.darkGray)
-					Spacer()
+			if section.numberOfCards > 0 {
+				LearnViewNavigationLink(deck: deck, section: section) {
+					HStack(spacing: 20) {
+						learnIcon
+						Text("Learn")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(.darkGray)
+						Spacer()
+					}
+					.padding(.horizontal, 30)
+					.frame(height: 50)
 				}
-				.padding(.horizontal, 30)
-				.frame(height: 50)
 			}
 			if isOwner {
 				PopUpButton(
