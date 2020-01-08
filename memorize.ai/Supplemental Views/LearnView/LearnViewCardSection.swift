@@ -39,7 +39,15 @@ struct LearnViewCardSection: View {
 						offset: 8
 					)
 					ReviewViewCard(geometry: geometry) {
-						LearnViewCardContent()
+						Group {
+							if self.model.currentCard == nil {
+								ActivityIndicator(color: .gray)
+							} else {
+								LearnViewCardContent(
+									card: self.model.currentCard!
+								)
+							}
+						}
 					}
 				}
 			}
