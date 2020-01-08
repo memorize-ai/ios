@@ -43,7 +43,9 @@ struct LearnView: View {
 		.sheet(isPresented: $model.shouldShowRecap) {
 			LearnRecapView()
 		}
-		.onAppear(perform: model.loadNextCard)
+		.onAppear {
+			self.model.loadNextCard()
+		}
 	}
 }
 

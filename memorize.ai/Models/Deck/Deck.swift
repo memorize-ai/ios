@@ -318,12 +318,17 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func loadSections() -> Self {
+	func loadSections(completion: ((Error?) -> Void)? = nil) -> Self {
 		guard sectionsLoadingState.isNone else { return self }
 		sectionsLoadingState.startLoading()
+		var isFirstIteration = true
 		documentReference.collection("sections").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
 				self.sectionsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+				if isFirstIteration {
+					isFirstIteration = false
+					completion?(error)
+				}
 				return
 			}
 			for change in documentChanges {
@@ -340,6 +345,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				}
 			}
 			self.sections.sort { $0.index < $1.index }
+			if isFirstIteration {
+				isFirstIteration = false
+				completion?(nil)
+			}
 			self.sectionsLoadingState.succeed()
 		}
 		return self

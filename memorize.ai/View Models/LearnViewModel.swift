@@ -15,6 +15,9 @@ final class LearnViewModel: ViewModel {
 	@Published var currentIndex = -1
 	@Published var currentSide = Card.Side.front
 	
+	@Published var currentSectionIndex = 0
+	@Published var currentSectionCardIndex = -1
+	
 	@Published var isWaitingForRating = false
 	
 	@Published var isRecapSheetViewShowing = false
@@ -42,6 +45,12 @@ final class LearnViewModel: ViewModel {
 	
 	var currentCard: Card? {
 		current?.parent
+	}
+	
+	var currentSection: Deck.Section? {
+		currentSectionIndex == -1
+			? deck.unsectionedSection
+			: deck.sections[safe: currentSectionIndex]
 	}
 	
 	var isAllMastered: Bool {
@@ -117,7 +126,9 @@ final class LearnViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(emoji: "😕", message: "Skipped!", onCentered: loadNextCard)
+		showPopUp(emoji: "😕", message: "Skipped!", onCentered: {
+			self.loadNextCard()
+		})
 	}
 	
 	func waitForRating() {
@@ -154,12 +165,65 @@ final class LearnViewModel: ViewModel {
 		)
 	}
 	
-	func loadNextCard() {
+	func incrementCurrentIndex() {
 		currentIndex =
 			currentIndex == numberOfTotalCards - 1 ? 0 : currentIndex + 1
+	}
+	
+	func incrementCurrentSectionIndex() {
+		guard let currentSection = currentSection else {
+			if deck.hasUnsectionedCards {
+				currentSectionIndex = -1
+			} else {
+				for i in 0..<deck.sections.count {
+					if deck.sections[i].numberOfCards > 0 {
+						currentSectionIndex = i
+					}
+				}
+			}
+			return
+		}
+		if currentSectionCardIndex == currentSection.numberOfCards - 1 {
+			if currentSectionIndex == deck.sections.count - 1 {
+				if deck.hasUnsectionedCards {
+					currentSectionIndex = -1
+				} else {
+					for i in 0..<deck.sections.count {
+						if deck.sections[i].numberOfCards > 0 {
+							currentSectionIndex = i
+						}
+					}
+				}
+			} else {
+				var didSetCurrentSectionIndex = false
+				for i in currentSectionIndex + 1..<deck.sections.count {
+					if deck.sections[i].numberOfCards > 0 {
+						currentSectionIndex = i
+						didSetCurrentSectionIndex = true
+					}
+				}
+				if !didSetCurrentSectionIndex {
+					for i in 0..<deck.sections.count {
+						if deck.sections[i].numberOfCards > 0 {
+							currentSectionIndex = i
+						}
+					}
+				}
+			}
+			currentSectionCardIndex = 0
+		} else {
+			currentSectionCardIndex++
+		}
+	}
+	
+	func loadNextCard(incrementCurrentIndex shouldIncrement: Bool = true) {
+		if shouldIncrement {
+			incrementCurrentIndex()
+		}
 		
 		if let section = section {
 			if let card = cards[safe: currentIndex] {
+				if card.isMastered { return loadNextCard() }
 				current = card
 				currentSide = .front
 			} else if let card = section.cards[safe: currentIndex] {
@@ -199,8 +263,63 @@ final class LearnViewModel: ViewModel {
 						self.currentCardLoadingState.fail(error: error)
 					}
 			}
+		} else if deck.sectionsLoadingState.didSucceed {
+			incrementCurrentSectionIndex()
+			
+			guard let currentSection = currentSection else { return }
+			
+			if let card = cards[safe: currentIndex] {
+				if card.isMastered { return loadNextCard() }
+				current = card
+				currentSide = .front
+			} else if let card = currentSection.cards[safe: currentSectionCardIndex] {
+				let card = Card.LearnData(parent: card)
+				cards.append(card)
+				current = card
+				currentSide = .front
+			} else {
+				currentCardLoadingState.startLoading()
+				
+				var query = deck.documentReference
+					.collection("cards")
+					.whereField("section", isEqualTo: currentSection.id)
+				
+				if let currentCardSnapshot = currentCard?.snapshot {
+					query = query.start(afterDocument: currentCardSnapshot)
+				}
+				
+				query
+					.limit(to: 1)
+					.getDocuments()
+					.done { snapshot in
+						if let document = snapshot.documents.first {
+							let card = Card.LearnData(
+								parent: .init(snapshot: document)
+							)
+							self.cards.append(card)
+							self.current = card
+							self.currentSide = .front
+						} else {
+							self.shouldShowRecap = true
+						}
+						self.currentCardLoadingState.succeed()
+					}
+					.catch { error in
+						showAlert(title: "Unable to load card", message: "Please try again")
+						self.currentCardLoadingState.fail(error: error)
+					}
+			}
 		} else {
-			// TODO: Load cards from deck
+			currentCardLoadingState.startLoading()
+			deck.loadSections { error in
+				if let error = error {
+					showAlert(title: "Unable to load card", message: "Please try again")
+					self.currentCardLoadingState.fail(error: error)
+				} else {
+					self.loadNextCard(incrementCurrentIndex: false)
+					self.currentCardLoadingState.succeed()
+				}
+			}
 		}
 	}
 }
