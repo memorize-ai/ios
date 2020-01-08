@@ -33,17 +33,17 @@ struct LearnView: View {
 				}
 				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
 				.disabled(self.model.isPopUpShowing)
+				.onTapGesture {
+					if self.model.isWaitingForRating { return }
+					withAnimation(.easeIn(duration: 0.3)) {
+						self.model.isWaitingForRating = true
+					}
+				}
 				LearnViewPopUp()
 			}
 		}
 		.sheet(isPresented: $model.shouldShowRecap) {
 			LearnRecapView()
-		}
-		.onTapGesture {
-			if self.model.isWaitingForRating { return }
-			withAnimation(.easeIn(duration: 0.3)) {
-				self.model.isWaitingForRating = true
-			}
 		}
 		.onAppear(perform: model.loadNextCard)
 	}
