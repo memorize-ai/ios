@@ -37,17 +37,13 @@ struct DecksViewBottomControls: View {
 	}
 	
 	var learnButton: some View {
-		NavigationLink(
-			destination: EmptyView() // TODO: Change this
-		) {
+		LearnViewNavigationLink(deck: selectedDeck) {
 			button(text: "Learn", backgroundColor: .darkBlue)
 		}
 	}
 	
 	var reviewButton: some View {
-		NavigationLink(
-			destination: EmptyView() // TODO: Change this
-		) {
+		ReviewViewNavigationLink(deck: selectedDeck) {
 			button(
 				text: "Review • \(numberOfDueCards.formatted)",
 				backgroundColor: .init(#colorLiteral(red: 0, green: 0.7647058824, blue: 0.4941176471, alpha: 1))

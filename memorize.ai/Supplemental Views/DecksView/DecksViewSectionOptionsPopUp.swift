@@ -69,20 +69,28 @@ struct DecksViewSectionOptionsPopUp: View {
 			contentHeight: contentHeight
 		) {
 			if section.isDue {
-				PopUpButton(
-					icon: reviewIcon,
-					text: "Review",
-					textColor: .darkGray
-				) {
-					// TODO: Review section
+				ReviewViewNavigationLink(deck: deck, section: section) {
+					HStack(spacing: 20) {
+						reviewIcon
+						Text("Review")
+							.font(.muli(.semiBold, size: 17))
+							.foregroundColor(.darkGray)
+						Spacer()
+					}
+					.padding(.horizontal, 30)
+					.frame(height: 50)
 				}
 			}
-			PopUpButton(
-				icon: learnIcon,
-				text: "Learn",
-				textColor: .darkGray
-			) {
-				// TODO: Learn section
+			LearnViewNavigationLink(deck: deck, section: section) {
+				HStack(spacing: 20) {
+					learnIcon
+					Text("Learn")
+						.font(.muli(.semiBold, size: 17))
+						.foregroundColor(.darkGray)
+					Spacer()
+				}
+				.padding(.horizontal, 30)
+				.frame(height: 50)
 			}
 			if isOwner {
 				PopUpButton(

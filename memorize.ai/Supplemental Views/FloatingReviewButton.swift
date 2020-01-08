@@ -18,9 +18,7 @@ struct FloatingReviewButton: View {
 	}
 	
 	var body: some View {
-		Button(action: {
-			// TODO: Review all cards
-		}) {
+		ReviewViewNavigationLink {
 			ZStack {
 				Circle()
 					.foregroundColor(color)

@@ -90,9 +90,7 @@ struct OwnedDeckCell: View {
 				.padding(.top, 4)
 				HStack {
 					if deck.userData?.isDue ?? false {
-						Button(action: {
-							// TODO: Review deck
-						}) {
+						ReviewViewNavigationLink(deck: deck) {
 							CustomRectangle(
 								background: Color.extraPurple,
 								cornerRadius: 14

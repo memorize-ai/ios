@@ -8,8 +8,8 @@ struct ReviewViewNavigationLink<Label: View>: View {
 	let label: Label
 	
 	init(
-		deck: Deck?,
-		section: Deck.Section?,
+		deck: Deck? = nil,
+		section: Deck.Section? = nil,
 		label: () -> Label
 	) {
 		self.deck = deck
