@@ -172,7 +172,6 @@ final class LearnViewModel: ViewModel {
 	}
 	
 	func incrementCurrentSectionIndex() {
-		print("start incrementCurrentSectionIndex")
 		guard let currentSection = currentSection else {
 			if deck.hasUnsectionedCards {
 				currentSectionIndex = -1
@@ -184,7 +183,6 @@ final class LearnViewModel: ViewModel {
 					}
 				}
 			}
-			print("guard incrementCurrentSectionIndex currentSectionIndex=\(currentSectionIndex) currentSectionCardIndex=\(currentSectionCardIndex)")
 			return
 		}
 		if currentSectionCardIndex == currentSection.numberOfCards - 1 {
@@ -221,7 +219,6 @@ final class LearnViewModel: ViewModel {
 		} else {
 			currentSectionCardIndex++
 		}
-		print("end incrementCurrentSectionIndex currentSectionIndex=\(currentSectionIndex) currentSectionCardIndex=\(currentSectionCardIndex)")
 	}
 	
 	func loadNextCard(incrementCurrentIndex shouldIncrement: Bool = true) {
@@ -275,27 +272,28 @@ final class LearnViewModel: ViewModel {
 			incrementCurrentSectionIndex()
 			
 			guard let currentSection = currentSection else { return }
-			print("currentSection=\(currentSection)")
+			
 			if let card = cards[safe: currentIndex] {
 				if card.isMastered { return loadNextCard() }
 				current = card
 				currentSide = .front
-				print("first if current=\(current)")
 			} else if let card = currentSection.cards[safe: currentSectionCardIndex] {
 				let card = Card.LearnData(parent: card)
 				cards.append(card)
 				current = card
 				currentSide = .front
-				print("second if current=\(current)")
 			} else {
-				print("else clause start")
 				currentCardLoadingState.startLoading()
 				
 				var query = deck.documentReference
 					.collection("cards")
 					.whereField("section", isEqualTo: currentSection.id)
 				
-				if let currentCardSnapshot = currentCard?.snapshot {
+				if
+					let currentCard = currentCard,
+					currentCard.sectionId == currentSection.id,
+					let currentCardSnapshot = currentCard.snapshot
+				{
 					query = query.start(afterDocument: currentCardSnapshot)
 				}
 				
@@ -303,7 +301,6 @@ final class LearnViewModel: ViewModel {
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
-						print("success done section=\(currentSection.name)")
 						if let document = snapshot.documents.first {
 							let card = Card.LearnData(
 								parent: .init(snapshot: document)
@@ -311,23 +308,19 @@ final class LearnViewModel: ViewModel {
 							self.cards.append(card)
 							self.current = card
 							self.currentSide = .front
-							print("done current=\(self.current)")
 						} else {
 							self.shouldShowRecap = true
 						}
 						self.currentCardLoadingState.succeed()
 					}
 					.catch { error in
-						print("done error=\(error)")
 						showAlert(title: "Unable to load card", message: "Please try again")
 						self.currentCardLoadingState.fail(error: error)
 					}
 			}
 		} else {
-			print("did not load sections")
 			currentCardLoadingState.startLoading()
 			deck.loadSections { error in
-				print("load sections error=\(error)")
 				if let error = error {
 					showAlert(title: "Unable to load card", message: "Please try again")
 					self.currentCardLoadingState.fail(error: error)

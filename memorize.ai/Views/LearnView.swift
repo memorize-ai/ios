@@ -32,11 +32,11 @@ struct LearnView: View {
 					}
 				}
 				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
-				.disabled(self.model.isPopUpShowing)
 				.onTapGesture {
 					if self.model.isWaitingForRating { return }
 					self.model.waitForRating()
 				}
+				.disabled(self.model.isPopUpShowing)
 				LearnViewPopUp()
 			}
 		}
