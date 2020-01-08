@@ -20,7 +20,13 @@ struct LearnViewTopControls: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			Button(action: model.loadNextCard) {
+			Button(action: {
+				self.model.loadNextCard()
+				withAnimation(.easeIn(duration: 0.3)) {
+					self.model.isWaitingForRating = false
+				}
+				self.model.showPopUp(emoji: "😕", message: "Skipped!")
+			}) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: .transparentLightGray,
