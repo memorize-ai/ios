@@ -45,7 +45,7 @@ struct ChooseTopicsView_Previews: PreviewProvider {
 			email: "kenmueller0@gmail.com",
 			interests: [],
 			numberOfDecks: 0,
-			xp: 930
+			xp: 0
 		)
 		return ChooseTopicsView(currentUser: currentUser)
 			.environmentObject(CurrentStore(

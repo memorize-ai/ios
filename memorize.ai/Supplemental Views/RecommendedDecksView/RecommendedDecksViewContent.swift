@@ -19,7 +19,8 @@ struct RecommendedDecksViewContent: View {
 						deck: deck,
 						user: currentStore.user,
 						width: Self.deckCellWidth,
-						shouldManuallyModifyDecks: true
+						shouldManuallyModifyDecks: true,
+						shouldShowRemoveAlert: false
 					)
 				},
 				columns: Self.numberOfColumns,

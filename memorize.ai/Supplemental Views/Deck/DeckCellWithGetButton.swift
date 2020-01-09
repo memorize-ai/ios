@@ -6,17 +6,20 @@ struct DeckCellWithGetButton: View {
 	
 	let width: CGFloat
 	let shouldManuallyModifyDecks: Bool
+	let shouldShowRemoveAlert: Bool
 	
 	init(
 		deck: Deck,
 		user: User,
 		width: CGFloat,
-		shouldManuallyModifyDecks: Bool = false
+		shouldManuallyModifyDecks: Bool = false,
+		shouldShowRemoveAlert: Bool = true
 	) {
 		self.deck = deck
 		self.user = user
 		self.width = width
 		self.shouldManuallyModifyDecks = shouldManuallyModifyDecks
+		self.shouldShowRemoveAlert = shouldShowRemoveAlert
 	}
 	
 	var hasDeck: Bool {
@@ -36,13 +39,23 @@ struct DeckCellWithGetButton: View {
 	}
 	
 	func buttonAction() {
-		_ = hasDeck
-			? deck.remove(user: user)
-			: deck.get(user: user)
-		if shouldManuallyModifyDecks {
-			hasDeck
-				? user.decks.removeAll { $0 == deck }
-				: user.decks.append(deck)
+		if hasDeck {
+			if shouldShowRemoveAlert {
+				deck.showRemoveFromLibraryAlert(forUser: user) {
+					guard self.shouldManuallyModifyDecks else { return }
+					self.user.decks.removeAll { $0 == self.deck }
+				}
+			} else {
+				deck.remove(user: user)
+				if shouldManuallyModifyDecks {
+					user.decks.removeAll { $0 == deck }
+				}
+			}
+		} else {
+			deck.get(user: user)
+			if shouldManuallyModifyDecks {
+				user.decks.append(deck)
+			}
 		}
 	}
 	
@@ -114,7 +127,7 @@ struct DeckCellWithGetButton_Previews: PreviewProvider {
 					email: "kenmueller0@gmail.com",
 					interests: [],
 					numberOfDecks: 1,
-					xp: 930,
+					xp: 0,
 					decks: [deck1]
 				),
 				width: 165

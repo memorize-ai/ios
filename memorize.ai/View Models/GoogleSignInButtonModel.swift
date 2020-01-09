@@ -20,8 +20,7 @@ final class GoogleSignInButtonModel: ViewModel {
 	
 	func logIn() {
 		GIDSignIn.completion = logInCompletion
-		GIDSignIn.sharedInstance().presentingViewController =
-			UIApplication.shared.windows.last?.rootViewController
+		GIDSignIn.sharedInstance().presentingViewController = currentViewController
 		GIDSignIn.sharedInstance().signIn()
 	}
 	
@@ -39,7 +38,7 @@ final class GoogleSignInButtonModel: ViewModel {
 				email: email,
 				interests: [],
 				numberOfDecks: 0,
-				xp: 930
+				xp: 0
 			)
 			self.user = newUser
 			if additionalInfo.isNewUser {

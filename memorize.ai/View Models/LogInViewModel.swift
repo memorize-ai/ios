@@ -48,7 +48,7 @@ final class LogInViewModel: ViewModel {
 				email: self.email,
 				interests: [],
 				numberOfDecks: 0,
-				xp: 930
+				xp: 0
 			)
 			self.loadingState.succeed()
 		}.catch(failLogIn)
