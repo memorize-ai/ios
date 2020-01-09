@@ -115,6 +115,7 @@
 		4D6300D323C698AC00274DC1 /* LearnRecapViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D223C698AC00274DC1 /* LearnRecapViewNavigationLink.swift */; };
 		4D6300D523C6AC7F00274DC1 /* ReviewRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */; };
 		4D6300D823C6ADF400274DC1 /* ReviewRecapViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D723C6ADF400274DC1 /* ReviewRecapViewNavigationLink.swift */; };
+		4D6300DA23C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */; };
 		4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */; };
 		4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */; };
 		4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */; };
@@ -391,6 +392,7 @@
 		4D6300D223C698AC00274DC1 /* LearnRecapViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewNavigationLink.swift; sourceTree = "<group>"; };
 		4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecapView.swift; sourceTree = "<group>"; };
 		4D6300D723C6ADF400274DC1 /* ReviewRecapViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecapViewNavigationLink.swift; sourceTree = "<group>"; };
+		4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardSectionSectionName.swift; sourceTree = "<group>"; };
 		4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewOrText.swift; sourceTree = "<group>"; };
 		4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledDivider.swift; sourceTree = "<group>"; };
 		4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -788,6 +790,7 @@
 				4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */,
 				4D56FC4423C53814006366FD /* LearnViewSliders.swift */,
 				4D56FC4623C53D13006366FD /* LearnViewCardSection.swift */,
+				4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */,
 				4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */,
 				4D56FC5423C560F1006366FD /* LearnViewFooter.swift */,
 				4D56FC5623C58392006366FD /* LearnViewPopUp.swift */,
@@ -1597,6 +1600,7 @@
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
 				4D6BA52723ACABB600D3F9D1 /* DecksViewBottomControls.swift in Sources */,
 				4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */,
+				4D6300DA23C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift in Sources */,
 				4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */,
 				4D8B2EAD2398BC0000EF040B /* MarketDeckViewSectionRow.swift in Sources */,
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,

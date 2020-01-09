@@ -1,28 +1,48 @@
 import SwiftUI
 
 struct ReviewView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	@EnvironmentObject var model: ReviewViewModel
+	
 	var body: some View {
 		GeometryReader { geometry in
-			ZStack(alignment: .top) {
-				Group {
-					Color.lightGrayBackground
-					HomeViewTopGradient(
-						addedHeight: geometry.safeAreaInsets.top
-					)
+			ZStack {
+				ZStack(alignment: .top) {
+					Group {
+						Color.lightGrayBackground
+						HomeViewTopGradient(
+							addedHeight: geometry.safeAreaInsets.top
+						)
+					}
+					.edgesIgnoringSafeArea(.all)
+					VStack {
+						ReviewViewTopControls()
+							.padding(.horizontal, 23)
+						ReviewViewCardSection()
+							.padding(.top, 6)
+							.padding(.horizontal, 8)
+						LearnViewFooter()
+							.frame(height: 80)
+					}
 				}
-				.edgesIgnoringSafeArea(.all)
-				VStack {
-					ReviewViewTopControls()
-						.padding(.horizontal, 23)
-					ReviewViewCardSection()
-						.padding(.top)
-					Text("Tap anywhere to continue")
-						.font(.muli(.bold, size: 17))
-						.foregroundColor(.darkGray)
-						.frame(height: 80)
+				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
+				.onTapGesture {
+					if self.model.isWaitingForRating { return }
+					self.model.waitForRating()
 				}
-				.edgesIgnoringSafeArea(.bottom)
+				.disabled(self.model.isPopUpShowing)
+				LearnViewPopUp()
+				NavigateTo(
+					ReviewRecapView()
+						.environmentObject(self.currentStore)
+						.environmentObject(self.model)
+						.removeNavigationBar(),
+					when: self.$model.shouldShowRecap
+				)
 			}
+		}
+		.onAppear {
+			self.model.loadNextCard()
 		}
 	}
 }

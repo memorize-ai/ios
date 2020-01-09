@@ -17,10 +17,7 @@ struct CardPreviewCell: View {
 			ZStack(alignment: .bottomTrailing) {
 				WebView(
 					html: card.renderSide(side),
-					baseURL: .init(
-						fileURLWithPath: MAIN_BUNDLE_PATH,
-						isDirectory: true
-					)
+					baseURL: WEB_VIEW_BASE_URL
 				)
 				.cornerRadius(5)
 				CardToggleButton(

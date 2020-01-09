@@ -5,8 +5,8 @@ struct LearnViewCardSection: View {
 	
 	@ObservedObject var deck: Deck
 	
-	var sectionName: String? {
-		model.section?.name ?? model.currentSection?.name
+	var section: Deck.Section? {
+		model.section ?? model.currentSection
 	}
 	
 	var body: some View {
@@ -14,13 +14,10 @@ struct LearnViewCardSection: View {
 			HStack {
 				Text("\(deck.name)")
 					.foregroundColor(.white)
-				if sectionName != nil {
-					Group {
-						Text("|")
-							.foregroundColor(Color.white.opacity(0.36))
-						Text(sectionName!)
-							.foregroundColor(.white)
-					}
+				section.map { section in
+					LearnViewCardSectionSectionName(
+						section: section
+					)
 				}
 				Spacer()
 			}

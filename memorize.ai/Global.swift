@@ -11,6 +11,7 @@ let defaults = UserDefaults.standard
 
 let SCREEN_SIZE = UIScreen.main.bounds
 let MAIN_BUNDLE_PATH = Bundle.main.bundlePath
+let WEB_VIEW_BASE_URL = URL(fileURLWithPath: MAIN_BUNDLE_PATH, isDirectory: true)
 
 var currentViewController: UIViewController! {
 	UIApplication.shared.windows.last?.rootViewController
