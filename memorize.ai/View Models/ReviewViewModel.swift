@@ -106,6 +106,10 @@ final class ReviewViewModel: ViewModel {
 		}
 	}
 	
+	func rateCurrentCard(withRating rating: Card.PerformanceRating) {
+		// TODO: Rate current card
+	}
+	
 	func loadNextCard() {
 		currentIndex++
 		

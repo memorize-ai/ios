@@ -21,7 +21,7 @@ struct ReviewView: View {
 						ReviewViewCardSection()
 							.padding(.top, 6)
 							.padding(.horizontal, 8)
-						LearnViewFooter()
+						ReviewViewFooter()
 							.frame(height: 80)
 					}
 				}
@@ -31,7 +31,7 @@ struct ReviewView: View {
 					self.model.waitForRating()
 				}
 				.disabled(self.model.isPopUpShowing)
-				LearnViewPopUp()
+				ReviewViewPopUp()
 				NavigateTo(
 					ReviewRecapView()
 						.environmentObject(self.currentStore)

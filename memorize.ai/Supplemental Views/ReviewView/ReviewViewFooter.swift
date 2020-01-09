@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LearnViewFooter: View {
-	@EnvironmentObject var model: LearnViewModel
+struct ReviewViewFooter: View {
+	@EnvironmentObject var model: ReviewViewModel
 	
 	func ratingButton(
 		forRating rating: Card.PerformanceRating,
@@ -50,11 +50,12 @@ struct LearnViewFooter: View {
 }
 
 #if DEBUG
-struct LearnViewFooter_Previews: PreviewProvider {
+struct ReviewViewFooter_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewFooter()
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+		ReviewViewFooter()
+			.environmentObject(ReviewViewModel(
+				user: PREVIEW_CURRENT_STORE.user,
+				deck: nil,
 				section: nil
 			))
 	}

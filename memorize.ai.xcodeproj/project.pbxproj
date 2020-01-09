@@ -116,6 +116,8 @@
 		4D6300D523C6AC7F00274DC1 /* ReviewRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */; };
 		4D6300D823C6ADF400274DC1 /* ReviewRecapViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D723C6ADF400274DC1 /* ReviewRecapViewNavigationLink.swift */; };
 		4D6300DA23C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */; };
+		4D6300DC23C7EE4F00274DC1 /* ReviewViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */; };
+		4D6300DE23C7EF2200274DC1 /* ReviewViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */; };
 		4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */; };
 		4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */; };
 		4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */; };
@@ -393,6 +395,8 @@
 		4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecapView.swift; sourceTree = "<group>"; };
 		4D6300D723C6ADF400274DC1 /* ReviewRecapViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecapViewNavigationLink.swift; sourceTree = "<group>"; };
 		4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardSectionSectionName.swift; sourceTree = "<group>"; };
+		4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewFooter.swift; sourceTree = "<group>"; };
+		4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPopUp.swift; sourceTree = "<group>"; };
 		4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewOrText.swift; sourceTree = "<group>"; };
 		4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledDivider.swift; sourceTree = "<group>"; };
 		4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -933,6 +937,8 @@
 				4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */,
 				4D96200323C3CA0D00C6BDF0 /* ReviewViewCard.swift */,
 				4D96200723C3D51000C6BDF0 /* ReviewViewCardContent.swift */,
+				4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */,
+				4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */,
 			);
 			path = ReviewView;
 			sourceTree = "<group>";
@@ -1699,9 +1705,11 @@
 				4DACBA6C23981D4500E4BB71 /* MarketDeckViewTopicList.swift in Sources */,
 				4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */,
 				4DAE833023C2C26200713AAB /* SignOutButton.swift in Sources */,
+				4D6300DC23C7EE4F00274DC1 /* ReviewViewFooter.swift in Sources */,
 				4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */,
 				4D458A63237C9AFC00A9776A /* HomeViewTopGradient.swift in Sources */,
 				4D6BA53723ACBBBD00D3F9D1 /* Card+Draft.swift in Sources */,
+				4D6300DE23C7EF2200274DC1 /* ReviewViewPopUp.swift in Sources */,
 				4DACBA6A23981BF500E4BB71 /* MarketDeckViewDescription.swift in Sources */,
 				4D8B2EA72398394B00EF040B /* MarketDeckViewSectionTitle.swift in Sources */,
 				4D96200C23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift in Sources */,

@@ -2,24 +2,13 @@ import SwiftUI
 
 struct ReviewViewCardSection: View {
 	@EnvironmentObject var model: ReviewViewModel
-		
-	var sectionName: String? {
-		model.section?.name ?? model.currentSection?.name
-	}
 	
 	var body: some View {
 		VStack(spacing: 8) {
 			HStack {
-				Text("\(deck.name)")
+				Text("DECK_NAME") // TODO: Change this
 					.foregroundColor(.white)
-				if sectionName != nil {
-					Group {
-						Text("|")
-							.foregroundColor(Color.white.opacity(0.36))
-						Text(sectionName!)
-							.foregroundColor(.white)
-					}
-				}
+				// TODO: Add section
 				Spacer()
 			}
 			.font(.muli(.bold, size: 17))
@@ -61,6 +50,11 @@ struct ReviewViewCardSection: View {
 struct ReviewViewCardSection_Previews: PreviewProvider {
 	static var previews: some View {
 		ReviewViewCardSection()
+			.environmentObject(ReviewViewModel(
+				user: PREVIEW_CURRENT_STORE.user,
+				deck: nil,
+				section: nil
+			))
 	}
 }
 #endif
