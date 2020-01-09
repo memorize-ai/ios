@@ -15,7 +15,7 @@ struct ReviewRecapViewNavigationLink<Label: View>: View {
 			destination: ReviewRecapView()
 				.environmentObject(currentStore)
 				.environmentObject(model)
-				.removeNavigationBar()
+				.navigationBarRemoved()
 		) {
 			label
 		}

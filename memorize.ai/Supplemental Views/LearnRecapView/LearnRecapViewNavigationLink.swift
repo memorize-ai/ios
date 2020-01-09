@@ -15,7 +15,7 @@ struct LearnRecapViewNavigationLink<Label: View>: View {
 			destination: LearnRecapView()
 				.environmentObject(currentStore)
 				.environmentObject(model)
-				.removeNavigationBar()
+				.navigationBarRemoved()
 		) {
 			label
 		}

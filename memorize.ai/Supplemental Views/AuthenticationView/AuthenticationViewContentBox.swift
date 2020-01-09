@@ -17,7 +17,7 @@ struct AuthenticationViewContentBox<Content: View>: View {
 					Text(title)
 						.font(.muli(.bold, size: 28))
 						.foregroundColor(.darkGray)
-						.align(to: .leading)
+						.alignment(.leading)
 						.padding(.top, 35)
 					content
 					Spacer()

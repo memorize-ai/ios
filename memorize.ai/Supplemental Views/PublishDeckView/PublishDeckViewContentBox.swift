@@ -70,7 +70,7 @@ struct PublishDeckViewContentBox: View {
 				Text("Description")
 					.font(.muli(.regular, size: 14))
 					.foregroundColor(Color.darkText.opacity(0.5))
-					.align(to: .leading)
+					.alignment(.leading)
 					.padding(.top, 6)
 					.padding(.bottom, -4)
 				MultilineTextField(
@@ -87,7 +87,7 @@ struct PublishDeckViewContentBox: View {
 						Text("Warning: Decks need topics to be recommended")
 							.font(.muli(.bold, size: 13))
 							.foregroundColor(.darkRed)
-							.align(to: .leading)
+							.alignment(.leading)
 					}
 					Grid(
 						elements: currentStore.topics.map { topic in

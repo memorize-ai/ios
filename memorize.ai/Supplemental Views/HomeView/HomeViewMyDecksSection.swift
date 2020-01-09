@@ -15,7 +15,7 @@ struct HomeViewMyDecksSection: View {
 						.padding(.horizontal, 8)
 						.padding(.vertical, 4)
 				}
-				.align(to: .leading)
+				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack(alignment: .top, spacing: 8) {

@@ -14,7 +14,7 @@ struct FloatingReviewButton: View {
 		Text(user.numberOfDueCards.formatted)
 			.font(.muli(.regular, size: 12))
 			.foregroundColor(color)
-			.minimumScaleFactor(0.25)
+			.shrinks()
 	}
 	
 	var body: some View {

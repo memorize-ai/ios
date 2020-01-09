@@ -43,7 +43,7 @@ struct LearnView: View {
 					LearnRecapView()
 						.environmentObject(self.currentStore)
 						.environmentObject(self.model)
-						.removeNavigationBar(),
+						.navigationBarRemoved(),
 					when: self.$model.shouldShowRecap
 				)
 			}

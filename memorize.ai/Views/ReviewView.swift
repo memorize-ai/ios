@@ -36,7 +36,7 @@ struct ReviewView: View {
 					ReviewRecapView()
 						.environmentObject(self.currentStore)
 						.environmentObject(self.model)
-						.removeNavigationBar(),
+						.navigationBarRemoved(),
 					when: self.$model.shouldShowRecap
 				)
 			}

@@ -15,7 +15,7 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 		GeometryReader { geometry in
 			ZStack {
 				AuthenticationViewBottomGradient(self.bottomGradient)
-					.align(to: .bottomTrailing)
+					.alignment(.bottomTrailing)
 				ZStack(alignment: .top) {
 					AuthenticationViewTopGradient(
 						self.topGradient,
@@ -32,7 +32,7 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 							}) {
 								LeftArrowHead(height: 20)
 							}
-							.align(to: .leading)
+							.alignment(.leading)
 							.padding(.leading, 33)
 						} else {
 							AuthenticationViewTopControls(
@@ -45,7 +45,7 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 					}
 					.padding(.top, geometry.safeAreaInsets.top / 2)
 				}
-				.align(to: .top)
+				.alignment(.top)
 				AuthenticationViewContentBox(
 					title: self.title,
 					content: self.contentBox
@@ -53,7 +53,7 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 			}
 			.background(Color.lightGrayBackground)
 			.edgesIgnoringSafeArea(.all)
-			.removeNavigationBar()
+			.navigationBarRemoved()
 		}
 	}
 }

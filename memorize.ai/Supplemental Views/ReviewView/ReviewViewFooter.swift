@@ -18,8 +18,7 @@ struct ReviewViewFooter: View {
 					Text(rating.title.uppercased())
 						.font(.muli(.bold, size: 14))
 						.foregroundColor(.darkGray)
-						.lineLimit(1)
-						.minimumScaleFactor(.leastNonzeroMagnitude)
+						.shrinks()
 				}
 				.padding(.horizontal)
 				.frame(

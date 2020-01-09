@@ -27,8 +27,7 @@ struct DecksViewBottomControls: View {
 			Text(text)
 				.font(.muli(.extraBold, size: 20))
 				.foregroundColor(.white)
-				.lineLimit(1)
-				.minimumScaleFactor(.leastNonzeroMagnitude)
+				.shrinks()
 			Spacer()
 		}
 		.frame(height: 50)

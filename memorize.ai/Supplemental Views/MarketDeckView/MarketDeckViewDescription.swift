@@ -10,7 +10,7 @@ struct MarketDeckViewDescription: View {
 			Text(deck.description)
 				.font(.muli(.regular, size: 17))
 				.foregroundColor(.darkGray)
-				.align(to: .leading)
+				.alignment(.leading)
 				.multilineTextAlignment(.leading)
 				.padding(8)
 		}

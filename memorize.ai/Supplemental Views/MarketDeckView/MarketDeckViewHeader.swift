@@ -70,7 +70,7 @@ struct MarketDeckViewHeader: View {
 				}
 			}
 		}
-		.align(to: .leading)
+		.alignment(.leading)
 		.padding(.horizontal, 23)
 		.onAppear {
 			self.deck.loadCreator()

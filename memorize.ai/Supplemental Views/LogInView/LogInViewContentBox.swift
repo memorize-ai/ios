@@ -70,7 +70,7 @@ struct LogInViewContentBox: View {
 						.environmentObject(CurrentStore(
 							user: model.user!
 						))
-						.removeNavigationBar(),
+						.navigationBarRemoved(),
 					when: $model.loadingState.didSucceed
 				)
 			}

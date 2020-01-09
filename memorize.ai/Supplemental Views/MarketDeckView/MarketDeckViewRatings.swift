@@ -107,7 +107,7 @@ struct MarketDeckViewRatings: View {
 						Text("Tap to rate")
 							.font(.muli(.semiBold, size: 18))
 							.foregroundColor(.lightGrayText)
-							.align(to: .leading)
+							.alignment(.leading)
 						HStack {
 							tappableStar(stars: 1)
 							tappableStar(stars: 2)

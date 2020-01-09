@@ -17,7 +17,7 @@ struct PublishDeckViewNavigationLink<Label: View>: View {
 		NavigationLink(
 			destination: PublishDeckView(deck: deck)
 				.environmentObject(currentStore)
-				.removeNavigationBar()
+				.navigationBarRemoved()
 		) {
 			label
 		}

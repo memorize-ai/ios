@@ -28,8 +28,7 @@ struct DecksViewSectionBody: View {
 			Text(text)
 				.font(.muli(.semiBold, size: 16))
 				.foregroundColor(color)
-				.lineLimit(1)
-				.minimumScaleFactor(.leastNonzeroMagnitude)
+				.shrinks()
 				.padding(.vertical, 4)
 				.frame(maxWidth: .infinity)
 		}

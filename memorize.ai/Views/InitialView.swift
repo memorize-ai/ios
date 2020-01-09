@@ -11,7 +11,7 @@ struct InitialView: View {
 								.padding(.top, -140)
 							InitialViewPaginatedFeatures()
 						}
-						.align(to: .top)
+						.alignment(.top)
 					}
 					ZStack(alignment: .bottom) {
 						InitialViewBottomGradient(
@@ -20,7 +20,7 @@ struct InitialView: View {
 						InitialViewBottomButtons()
 							.padding(.bottom, geometry.safeAreaInsets.bottom)
 					}
-					.align(to: .bottom)
+					.alignment(.bottom)
 				}
 				.background(Color.lightGrayBackground)
 				.edgesIgnoringSafeArea(.all)

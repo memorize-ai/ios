@@ -1,11 +1,15 @@
 import SwiftUI
 
 extension View {
-	func removeNavigationBar() -> some View {
+	func navigationBarRemoved() -> some View {
 		navigationBarTitle("").navigationBarHidden(true)
 	}
 	
-	func align(to alignment: Alignment) -> some View {
+	func shrinks(withLineLimit lines: Int = 1) -> some View {
+		lineLimit(lines).minimumScaleFactor(.leastNonzeroMagnitude)
+	}
+	
+	func alignment(_ alignment: Alignment) -> some View {
 		switch alignment {
 		case .leading, .trailing:
 			return frame(maxWidth: .infinity, alignment: alignment)

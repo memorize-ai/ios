@@ -45,7 +45,7 @@ struct GoogleSignInButton: View {
 						.environmentObject(CurrentStore(
 							user: model.user!
 						))
-						.removeNavigationBar(),
+						.navigationBarRemoved(),
 					when: $model.shouldProgressToHomeView
 				)
 				NavigateTo(
@@ -53,7 +53,7 @@ struct GoogleSignInButton: View {
 						.environmentObject(CurrentStore(
 							user: model.user!
 						))
-						.removeNavigationBar(),
+						.navigationBarRemoved(),
 					when: $model.shouldProgressToChooseTopicsView
 				)
 			}

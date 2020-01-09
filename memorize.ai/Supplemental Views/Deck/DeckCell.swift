@@ -79,7 +79,7 @@ struct DeckCell<Content: View>: View {
 							.padding(.leading, -1)
 					}
 				}
-				.align(to: .leading)
+				.alignment(.leading)
 				.padding(.horizontal, 8)
 				.padding(.top, 4)
 				content

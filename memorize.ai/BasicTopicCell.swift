@@ -47,8 +47,7 @@ struct BasicTopicCell: View {
 				.foregroundColor(.white)
 				.padding(.horizontal, 8)
 				.padding(.bottom, 11)
-				.lineLimit(1)
-				.minimumScaleFactor(0.25)
+				.shrinks()
 				.frame(width: dimension)
 		}
 		.cornerRadius(5)

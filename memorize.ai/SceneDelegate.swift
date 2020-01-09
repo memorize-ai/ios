@@ -23,13 +23,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 				rootView: MainTabView(currentUser: currentUser)
 					.environment(\.managedObjectContext, context)
 					.environmentObject(CurrentStore(user: currentUser))
-					.removeNavigationBar()
+					.navigationBarRemoved()
 			)
 		} else {
 			window.rootViewController = HostingController(
 				rootView: InitialView()
 					.environment(\.managedObjectContext, context)
-					.removeNavigationBar()
+					.navigationBarRemoved()
 			)
 		}
 		self.window = window

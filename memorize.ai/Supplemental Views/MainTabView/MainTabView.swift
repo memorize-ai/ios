@@ -144,7 +144,7 @@ struct MainTabView: View {
 								}
 							if currentStore.mainTabViewSelection == .home {
 								FloatingReviewButton(user: currentStore.user)
-									.align(to: .bottomTrailing)
+									.alignment(.bottomTrailing)
 									.padding([.trailing, .bottom], 16)
 									.offset(x: floatingReviewButtonXOffset)
 							}
@@ -178,7 +178,7 @@ struct MainTabView: View {
 					}
 				}
 			}
-			.removeNavigationBar()
+			.navigationBarRemoved()
 		}
 		.onAppear {
 			self.currentStore.initializeIfNeeded()
@@ -191,7 +191,7 @@ struct MainTabView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainTabView(currentUser: PREVIEW_CURRENT_STORE.user)
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.removeNavigationBar()
+			.navigationBarRemoved()
 	}
 }
 #endif

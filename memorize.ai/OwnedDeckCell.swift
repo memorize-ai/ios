@@ -85,7 +85,7 @@ struct OwnedDeckCell: View {
 						.lineLimit(1)
 						.padding(.top, 4)
 				}
-				.align(to: .leading)
+				.alignment(.leading)
 				.padding(.horizontal, 8)
 				.padding(.top, 4)
 				HStack {

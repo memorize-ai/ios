@@ -8,7 +8,7 @@ struct PostSignUpViewTitle: View {
 			.font(.muli(.bold, size: 28))
 			.foregroundColor(.white)
 			.multilineTextAlignment(.leading)
-			.align(to: .leading)
+			.alignment(.leading)
 			.padding(.leading, 50)
 			.padding(.trailing, 60)
 			.padding(.top, 8)

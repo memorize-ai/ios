@@ -16,7 +16,7 @@ struct LeftArrowHead: View {
 struct LeftArrowHead_Previews: PreviewProvider {
 	static var previews: some View {
 		LeftArrowHead(height: 50)
-			.align(to: .center)
+			.alignment(.center)
 			.background(Color.gray)
 			.edgesIgnoringSafeArea(.all)
 	}

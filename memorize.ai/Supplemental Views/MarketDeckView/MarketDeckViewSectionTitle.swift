@@ -11,7 +11,7 @@ struct MarketDeckViewSectionTitle: View {
 		Text(title)
 			.font(.muli(.bold, size: 20))
 			.foregroundColor(.darkGray)
-			.align(to: .leading)
+			.alignment(.leading)
 	}
 }
 

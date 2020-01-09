@@ -18,7 +18,7 @@ struct EditCardViewNavigationLink<Label: View>: View {
 				card: card
 			))
 			.environmentObject(EditCardViewModel())
-			.removeNavigationBar()
+			.navigationBarRemoved()
 		) {
 			label
 		}

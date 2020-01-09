@@ -76,7 +76,7 @@ struct CustomRectangle_Previews: PreviewProvider {
 					.foregroundColor(.darkBlue)
 			}
 		}
-		.align(to: .center)
+		.alignment(.center)
 		.background(Color.gray)
 		.edgesIgnoringSafeArea(.all)
 	}

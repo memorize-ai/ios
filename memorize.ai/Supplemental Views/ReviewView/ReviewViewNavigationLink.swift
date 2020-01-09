@@ -40,7 +40,7 @@ struct ReviewViewNavigationLink<Label: View>: View {
 					deck: deck,
 					section: section
 				))
-				.removeNavigationBar()
+				.navigationBarRemoved()
 		) {
 			label
 		}

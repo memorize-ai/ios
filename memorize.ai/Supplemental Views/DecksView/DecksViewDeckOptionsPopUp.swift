@@ -119,7 +119,7 @@ struct DecksViewDeckOptionsPopUp: View {
 			NavigationLink(
 				destination: MarketDeckView()
 					.environmentObject(selectedDeck)
-					.removeNavigationBar()
+					.navigationBarRemoved()
 			) {
 				HStack(spacing: 20) {
 					resizeImage(.purpleShoppingCartIcon)

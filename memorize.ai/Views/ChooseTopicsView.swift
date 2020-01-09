@@ -17,7 +17,7 @@ struct ChooseTopicsView: View {
 				currentUser: currentStore.user
 			)
 			.environmentObject(currentStore)
-			.removeNavigationBar()
+			.navigationBarRemoved()
 		) {
 			XButton(.transparentWhite, height: 15)
 		}

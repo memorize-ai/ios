@@ -56,14 +56,14 @@ struct DecksViewCardCell: View {
 								.foregroundColor(.darkGray)
 								.lineLimit(5)
 								.lineSpacing(1)
-								.align(to: .leading)
+								.alignment(.leading)
 						}
 						.frame(minHeight: 40, alignment: .top)
 						Text(card.dueMessage)
 							.font(.muli(.bold, size: 12))
 							.foregroundColor(Color.darkGray.opacity(0.7))
 							.padding(.top, hasPreviewImage ? 0 : 4)
-							.align(to: .leading)
+							.alignment(.leading)
 					}
 					.padding(8)
 				}

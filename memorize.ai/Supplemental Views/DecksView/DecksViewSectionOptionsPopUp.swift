@@ -42,7 +42,7 @@ struct DecksViewSectionOptionsPopUp: View {
 				Text(section.numberOfDueCards?.formatted ?? "")
 					.font(.muli(.bold, size: 11))
 					.foregroundColor(.darkBlue)
-					.minimumScaleFactor(0.2)
+					.shrinks()
 			}
 			.frame(width: 20, height: 14)
 		}

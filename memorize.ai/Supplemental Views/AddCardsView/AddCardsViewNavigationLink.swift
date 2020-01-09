@@ -18,7 +18,7 @@ struct AddCardsViewNavigationLink<Label: View>: View {
 					deck: deck,
 					user: currentStore.user
 				))
-				.removeNavigationBar()
+				.navigationBarRemoved()
 		) {
 			label
 		}

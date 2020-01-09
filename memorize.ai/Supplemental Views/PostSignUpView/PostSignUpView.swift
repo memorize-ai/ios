@@ -21,7 +21,7 @@ struct PostSignUpView<
 					.darkerLightBlue,
 					.extraBluePurple
 				])
-				.align(to: .bottomTrailing)
+				.alignment(.bottomTrailing)
 				ZStack(alignment: .top) {
 					PostSignUpViewTopGradient(
 						addedHeight: geometry.safeAreaInsets.top
@@ -51,10 +51,10 @@ struct PostSignUpView<
 							.padding(.top)
 					}
 				}
-				.align(to: .top)
+				.alignment(.top)
 			}
 			.background(Color.lightGrayBackground)
-			.removeNavigationBar()
+			.navigationBarRemoved()
 			.edgesIgnoringSafeArea(.all)
 		}
 	}

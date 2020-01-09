@@ -13,7 +13,7 @@ struct RecommendedDecksView: View {
 				currentUser: currentStore.user
 			)
 			.environmentObject(currentStore)
-			.removeNavigationBar(),
+			.navigationBarRemoved(),
 			content: RecommendedDecksViewContent()
 		)
 	}
