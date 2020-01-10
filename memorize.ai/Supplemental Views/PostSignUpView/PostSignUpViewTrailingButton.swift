@@ -5,7 +5,10 @@ struct PostSignUpViewTrailingButton<Destination: View>: View {
 	let destination: Destination
 	
 	var body: some View {
-		NavigationLink(destination: destination) {
+		NavigationLink(
+			destination: destination
+				.navigationBarRemoved()
+		) {
 			CustomRectangle(
 				background: Color.transparent,
 				borderColor: .transparentLightGray,

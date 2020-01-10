@@ -3,7 +3,10 @@ import SwiftUI
 struct InitialViewBottomButtons: View {
 	var body: some View {
 		HStack(spacing: 16) {
-			NavigationLink(destination: SignUpView()) {
+			NavigationLink(
+				destination: SignUpView()
+					.navigationBarRemoved()
+			) {
 				CustomRectangle(background: Color.white) {
 					Text("SIGN UP")
 						.font(.muli(.bold, size: 14))
@@ -12,7 +15,10 @@ struct InitialViewBottomButtons: View {
 						.frame(height: 40)
 				}
 			}
-			NavigationLink(destination: LogInView()) {
+			NavigationLink(
+				destination: LogInView()
+					.navigationBarRemoved()
+			) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: Color.white.opacity(0.4),

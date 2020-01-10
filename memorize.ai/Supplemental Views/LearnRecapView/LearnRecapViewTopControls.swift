@@ -12,6 +12,7 @@ struct LearnRecapViewTopControls: View {
 			NavigationLink(
 				destination: MainTabView(currentUser: currentStore.user)
 					.environmentObject(currentStore)
+					.navigationBarRemoved()
 			) {
 				CustomRectangle(
 					background: Color.transparent,

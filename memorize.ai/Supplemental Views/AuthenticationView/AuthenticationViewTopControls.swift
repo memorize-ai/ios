@@ -19,7 +19,10 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 				.font(.muli(.regular, size: 13))
 				.foregroundColor(Color.white.opacity(0.5))
 				.padding([.trailing, .bottom], 1)
-			NavigationLink(destination: alternativeButtonDestination) {
+			NavigationLink(
+				destination: alternativeButtonDestination
+					.navigationBarRemoved()
+			) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: .transparentLightGray,

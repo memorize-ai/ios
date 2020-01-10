@@ -57,7 +57,10 @@ struct LogInViewContentBox: View {
 					)
 				}
 			}
-			NavigationLink(destination: ForgotPasswordView(email: model.email)) {
+			NavigationLink(
+				destination: ForgotPasswordView(email: model.email)
+					.navigationBarRemoved()
+			) {
 				Text("Forgot password?")
 					.font(.muli(.bold, size: 12))
 					.foregroundColor(.darkBlue)
