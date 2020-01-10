@@ -1,5 +1,5 @@
-import PromiseKit
 import FirebaseAuth
+import PromiseKit
 
 extension Auth {
 	func createUser(withEmail email: String, password: String) -> Promise<AuthDataResult> {

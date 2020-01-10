@@ -2,10 +2,12 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFunctions
 
 let auth = Auth.auth()
 let firestore = Firestore.firestore()
 let storage = Storage.storage().reference()
+let functions = Functions.functions()
 
 let defaults = UserDefaults.standard
 

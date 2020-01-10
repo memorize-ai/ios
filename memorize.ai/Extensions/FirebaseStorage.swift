@@ -1,5 +1,5 @@
-import PromiseKit
 import FirebaseStorage
+import PromiseKit
 
 extension StorageReference {
 	func getData(maxSize: Int64 = FIREBASE_STORAGE_MAX_FILE_SIZE) -> Promise<Data> {

@@ -1,5 +1,5 @@
-import PromiseKit
 import FirebaseFirestore
+import PromiseKit
 
 extension CollectionReference {
 	func addDocument(data: [String: Any]) -> Promise<DocumentReference> {
