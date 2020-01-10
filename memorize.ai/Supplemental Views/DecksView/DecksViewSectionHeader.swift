@@ -34,6 +34,7 @@ struct DecksViewSectionHeader: View {
 			}
 			Text(section.name)
 				.font(.muli(.bold, size: 17))
+				.layoutPriority(1)
 			Rectangle()
 				.foregroundColor(.lightGrayBorder)
 				.frame(height: 1)

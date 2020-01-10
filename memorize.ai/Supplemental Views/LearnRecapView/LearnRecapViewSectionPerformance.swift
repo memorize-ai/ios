@@ -7,8 +7,10 @@ struct LearnRecapViewSectionPerformance: View {
 				.font(.muli(.extraBold, size: 23))
 				.foregroundColor(.darkGray)
 				.shrinks()
-			ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-				LearnRecapViewSectionPerformanceRow(rating: rating)
+			VStack(spacing: 12) {
+				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+					LearnRecapViewSectionPerformanceRow(rating: rating)
+				}
 			}
 		}
 	}
@@ -18,6 +20,10 @@ struct LearnRecapViewSectionPerformance: View {
 struct LearnRecapViewSectionPerformance_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnRecapViewSectionPerformance()
+			.environmentObject(LearnViewModel(
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				section: nil
+			))
 	}
 }
 #endif

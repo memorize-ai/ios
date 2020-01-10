@@ -85,6 +85,13 @@ final class LearnViewModel: ViewModel {
 		}
 	}
 	
+	func numberOfReviewedCardsForSection(_ section: Deck.Section) -> Int {
+		cards.filter { card in
+			card.parent.sectionId == section.id &&
+			!card.ratings.isEmpty
+		}.count
+	}
+	
 	func frequentSections(forRating rating: Card.PerformanceRating) -> [Deck.Section] {
 		deck.sections.filter { section in
 			let cards = self.cards.filter { $0.parent.sectionId == section.id }
