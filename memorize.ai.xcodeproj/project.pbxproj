@@ -120,6 +120,7 @@
 		4D5C405623C9272200511B7C /* LearnRecapViewCardPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405523C9272200511B7C /* LearnRecapViewCardPerformance.swift */; };
 		4D5C405823C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */; };
 		4D5C405A23C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */; };
+		4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth.swift */; };
 		4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage.swift */; };
 		4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */; };
@@ -412,6 +413,7 @@
 		4D5C405523C9272200511B7C /* LearnRecapViewCardPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformance.swift; sourceTree = "<group>"; };
 		4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRow.swift; sourceTree = "<group>"; };
 		4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCell.swift; sourceTree = "<group>"; };
+		4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCellContent.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		4D6097682342FEC2002F1643 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewRecommendedDecksSection.swift; path = memorize.ai/HomeViewRecommendedDecksSection.swift; sourceTree = SOURCE_ROOT; };
@@ -850,6 +852,7 @@
 				4D5C405523C9272200511B7C /* LearnRecapViewCardPerformance.swift */,
 				4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */,
 				4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */,
+				4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */,
 			);
 			path = LearnRecapView;
 			sourceTree = "<group>";
@@ -1642,6 +1645,7 @@
 				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,
 				4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */,
 				4DD5FE8E2387438400E70251 /* MarketViewFilterPopUpSideBarButton.swift in Sources */,
+				4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */,
 				4D5C404323C83B7700511B7C /* ReviewViewFooterPerformanceRatingButtonBadgeContent.swift in Sources */,
 				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
 				4DF45953239996D800A78ADF /* PublishDeckViewContentBox.swift in Sources */,

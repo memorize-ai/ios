@@ -16,7 +16,8 @@ struct LearnRecapViewSectionPerformanceRowSectionCell: View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: rating.badgeColor,
-			borderWidth: 1
+			borderWidth: 1,
+			cornerRadius: 8
 		) {
 			HStack {
 				Text(section.name)
