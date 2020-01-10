@@ -32,8 +32,6 @@ struct ReviewViewFooterPerformanceRatingButton: View {
 								)
 							}
 						}
-						.padding(.horizontal, 2)
-						.padding(.vertical, 1)
 					}
 				}
 				.padding(.horizontal)

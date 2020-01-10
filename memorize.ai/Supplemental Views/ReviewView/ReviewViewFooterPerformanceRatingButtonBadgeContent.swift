@@ -20,6 +20,8 @@ struct ReviewViewFooterPerformanceRatingButtonBadgeContent: View {
 					.lineLimit(1)
 			}
 		}
+		.padding(.horizontal, 4)
+		.padding(.vertical, 2)
 	}
 }
 

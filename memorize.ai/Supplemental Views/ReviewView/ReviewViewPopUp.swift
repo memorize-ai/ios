@@ -12,23 +12,23 @@ struct ReviewViewPopUp: View {
 			background: Color.lightGray.opacity(0.5),
 			cornerRadius: 20
 		) {
-			ZStack(alignment: .bottomTrailing) {
+			VStack(spacing: 16) {
 				if data != nil {
-					VStack(spacing: 16) {
-						Text(data!.emoji)
-							.font(.muli(.regular, size: 50))
-						Text(data!.message)
-							.font(.muli(.bold, size: 30))
+					CustomRectangle(background: data!.badge!.color) {
+						Text(data!.badge!.text)
+							.font(.muli(.semiBold, size: 15))
 							.foregroundColor(.darkGray)
+							.lineLimit(1)
+							.padding(.horizontal, 4)
+							.padding(.vertical, 2)
 					}
-					if data!.badge != nil {
-						CustomRectangle(background: data!.badge!.color) {
-							Text(data!.badge!.text)
-								.font(.muli(.semiBold, size: 13))
-								.foregroundColor(.darkGray)
-								.lineLimit(1)
-						}
-					}
+					.padding(.top, -15)
+					.padding(.bottom, 8)
+					Text(data!.emoji)
+						.font(.muli(.regular, size: 50))
+					Text(data!.message)
+						.font(.muli(.bold, size: 30))
+						.foregroundColor(.darkGray)
 				}
 			}
 			.padding(.vertical, 30)
