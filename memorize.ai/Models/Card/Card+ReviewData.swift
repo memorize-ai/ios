@@ -26,6 +26,7 @@ extension Card {
 		}
 		
 		func loadPrediction() {
+			guard predictionLoadingState.isNone else { return }
 			predictionLoadingState.startLoading()
 			functions.httpsCallable("getCardPrediction").call(data: [
 				"deck": parent.parent.id,
