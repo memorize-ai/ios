@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LearnRecapView: View {
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: LearnViewModel
 	
 	var body: some View {
@@ -22,12 +23,18 @@ struct LearnRecapView: View {
 						LearnRecapViewTopControls()
 							.padding(.horizontal, 23)
 						ScrollView {
-							LearnRecapViewMainCard(deck: self.model.deck)
-								.padding(.horizontal, 8)
+							LearnRecapViewMainCard(
+								user: self.currentStore.user,
+								deck: self.model.deck
+							)
+							.padding(.horizontal, 8)
 						}
 					}
 				}
 			}
+		}
+		.onAppear {
+			self.model.addXP(toUser: self.currentStore.user)
 		}
 	}
 }

@@ -95,13 +95,17 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 	}
 	
-	var level: Int {
+	static func levelForXP(_ xp: Int) -> Int {
 		for level in 1... {
-			if xp < Self.xpNeededForLevel(level) {
+			if xp < xpNeededForLevel(level) {
 				return level - 1
 			}
 		}
 		return -1
+	}
+	
+	var level: Int {
+		Self.levelForXP(xp)
 	}
 	
 	@discardableResult

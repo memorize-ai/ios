@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
+import PromiseKit
 import LoadingState
 
 final class LearnViewModel: ViewModel {
@@ -32,6 +33,7 @@ final class LearnViewModel: ViewModel {
 	@Published var currentCardLoadingState = LoadingState()
 	
 	var cards = [Card.LearnData]()
+	var initialXP = 0
 	
 	init(deck: Deck, section: Deck.Section?) {
 		self.deck = deck
@@ -71,6 +73,17 @@ final class LearnViewModel: ViewModel {
 	
 	var isPopUpShowing: Bool {
 		popUpOffset.isZero
+	}
+	
+	var xpGained: Int {
+		numberOfSeenCards / 10 + numberOfMasteredCards / 2
+	}
+	
+	@discardableResult
+	func addXP(toUser user: User) -> Promise<Void> {
+		user.documentReference.updateData([
+			"xp": FieldValue.increment(.init(xpGained))
+		])
 	}
 	
 	func showPopUp(

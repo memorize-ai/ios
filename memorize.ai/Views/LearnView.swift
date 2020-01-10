@@ -52,6 +52,7 @@ struct LearnView: View {
 			}
 		}
 		.onAppear {
+			self.model.initialXP = self.currentStore.user.xp
 			self.model.loadNextCard()
 		}
 	}
