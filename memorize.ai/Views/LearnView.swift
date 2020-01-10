@@ -34,7 +34,10 @@ struct LearnView: View {
 				}
 				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
 				.onTapGesture {
-					if self.model.isWaitingForRating { return }
+					if
+						self.model.isWaitingForRating ||
+						self.model.current == nil
+					{ return }
 					self.model.waitForRating()
 				}
 				.disabled(self.model.isPopUpShowing)
