@@ -59,7 +59,7 @@ struct HorizontalBarGraph: View {
 			VStack(alignment: .trailing, spacing: 16) {
 				ForEach(rows) { row in
 					Text(row.label)
-						.font(.muli(.extraBold, size: 14))
+						.font(.muli(.extraBold, size: 12))
 						.foregroundColor(.darkGray)
 						.frame(height: 12)
 						.shrinks()
