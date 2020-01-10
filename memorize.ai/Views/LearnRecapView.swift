@@ -19,6 +19,10 @@ struct LearnRecapView: View {
 					VStack {
 						LearnRecapViewTopControls()
 							.padding(.horizontal, 23)
+						ScrollView {
+							LearnRecapViewMainCard()
+								.padding(.horizontal, 8)
+						}
 					}
 				}
 			}
