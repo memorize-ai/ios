@@ -118,6 +118,7 @@
 		4D6300DA23C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */; };
 		4D6300DC23C7EE4F00274DC1 /* ReviewViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */; };
 		4D6300DE23C7EF2200274DC1 /* ReviewViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */; };
+		4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */; };
 		4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */; };
 		4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */; };
 		4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */; };
@@ -397,6 +398,7 @@
 		4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardSectionSectionName.swift; sourceTree = "<group>"; };
 		4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewFooter.swift; sourceTree = "<group>"; };
 		4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPopUp.swift; sourceTree = "<group>"; };
+		4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+ReviewData.swift"; sourceTree = "<group>"; };
 		4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewOrText.swift; sourceTree = "<group>"; };
 		4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledDivider.swift; sourceTree = "<group>"; };
 		4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 				4DB9FF522396DA1800B8DD38 /* Card+Side.swift */,
 				4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */,
 				4D6BA53623ACBBBD00D3F9D1 /* Card+Draft.swift */,
+				4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */,
 				4D56FC5023C558AF006366FD /* Card+LearnData.swift */,
 			);
 			path = Card;
@@ -1589,6 +1592,7 @@
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
 				4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */,
 				4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */,
+				4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,
 				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,

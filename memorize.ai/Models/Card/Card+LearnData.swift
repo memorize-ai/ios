@@ -1,11 +1,14 @@
+import Combine
+
 extension Card {
-	final class LearnData {
+	final class LearnData: ObservableObject, Identifiable, Equatable, Hashable {
 		static let NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED = 5
 		
 		let parent: Card
-		var ratings: [Card.PerformanceRating]
 		
-		init(parent: Card, ratings: [Card.PerformanceRating] = []) {
+		@Published var ratings: [PerformanceRating]
+		
+		init(parent: Card, ratings: [PerformanceRating] = []) {
 			self.parent = parent
 			self.ratings = ratings
 		}
@@ -29,9 +32,18 @@ extension Card {
 		}
 		
 		@discardableResult
-		func addRating(_ rating: Card.PerformanceRating) -> Self {
+		func addRating(_ rating: PerformanceRating) -> Self {
 			ratings.insert(rating, at: 0)
 			return self
+		}
+		
+		static func == (lhs: LearnData, rhs: LearnData) -> Bool {
+			lhs.parent == rhs.parent &&
+			lhs.ratings == rhs.ratings
+		}
+		
+		func hash(into hasher: inout Hasher) {
+			hasher.combine(parent)
 		}
 	}
 }

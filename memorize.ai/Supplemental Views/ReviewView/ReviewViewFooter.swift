@@ -5,6 +5,7 @@ struct ReviewViewFooter: View {
 	
 	func ratingButton(
 		forRating rating: Card.PerformanceRating,
+		dueDate: Date,
 		action: @escaping () -> Void
 	) -> some View {
 		Button(action: action) {
@@ -19,6 +20,7 @@ struct ReviewViewFooter: View {
 						.font(.muli(.bold, size: 14))
 						.foregroundColor(.darkGray)
 						.shrinks()
+					Text("+\(Date().compare(against: dueDate).split(separator: " ").dropFirst().joined())")
 				}
 				.padding(.horizontal)
 				.frame(
@@ -31,15 +33,21 @@ struct ReviewViewFooter: View {
 	
 	var body: some View {
 		ZStack {
-			HStack {
-				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-					self.ratingButton(forRating: rating) {
-						self.model.rateCurrentCard(withRating: rating)
-						playHaptic()
-					}
-				}
-			}
-			.offset(x: model.isWaitingForRating ? 0 : -SCREEN_SIZE.width)
+//			HStack {
+//				self.ratingButton(forRating: .easy) {
+//					self.model.rateCurrentCard(withRating: .easy)
+//					playHaptic()
+//				}
+//				self.ratingButton(forRating: .struggled) {
+//					self.model.rateCurrentCard(withRating: .struggled)
+//					playHaptic()
+//				}
+//				self.ratingButton(forRating: .forgot) {
+//					self.model.rateCurrentCard(withRating: .forgot)
+//					playHaptic()
+//				}
+//			}
+//			.offset(x: model.isWaitingForRating ? 0 : -SCREEN_SIZE.width)
 			Text("Tap anywhere to continue")
 				.font(.muli(.bold, size: 17))
 				.foregroundColor(.darkGray)
