@@ -87,6 +87,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 		VStack(spacing: 20) {
 			DecksViewCardCell(card: .init(
 				id: "0",
+				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				sectionId: "CSS",
 				front: #"This is the front of the card<audio src="a"></audio><h1>I am some big text</h1><img src="https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg">afadfasdfsasdsfasdfasdfasdfdafafafafafasdsfsasfsasdfasdfasdfasdfasdfasfsfsdfsdfsdfsdfsdfsdfsddsds"#,
 				back: "This is the back of the card",
@@ -98,8 +99,9 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 			.environmentObject(PREVIEW_CURRENT_STORE)
 			DecksViewCardCell(card: .init(
 				id: "0",
+				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				sectionId: "CSS",
-				front: #"This is some text"#,
+				front: "This is some text",
 				back: "This is the back of the card",
 				numberOfViews: 670,
 				numberOfReviews: 0,

@@ -96,6 +96,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 			cards: [
 				.init(
 					id: "0",
+					parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 					sectionId: "CSS",
 					front: "This is the front of the card",
 					back: "This is the back of the card",
@@ -106,6 +107,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 				),
 				.init(
 					id: "1",
+					parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 					sectionId: "CSS",
 					front: "This is the front of the second card",
 					back: "This is the back of the second card",

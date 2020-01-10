@@ -248,7 +248,7 @@ final class LearnViewModel: ViewModel {
 					.done { snapshot in
 						if let document = snapshot.documents.first {
 							let card = Card.LearnData(
-								parent: .init(snapshot: document)
+								parent: .init(snapshot: document, parent: self.deck)
 							)
 							self.cards.append(card)
 							self.current = card
@@ -298,7 +298,7 @@ final class LearnViewModel: ViewModel {
 					.done { snapshot in
 						if let document = snapshot.documents.first {
 							let card = Card.LearnData(
-								parent: .init(snapshot: document)
+								parent: .init(snapshot: document, parent: self.deck)
 							)
 							self.cards.append(card)
 							self.current = card

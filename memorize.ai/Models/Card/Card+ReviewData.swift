@@ -9,7 +9,11 @@ extension Card {
 			let struggled: Date
 			let forgot: Date
 			
-//			init(functionResponse: )
+			init(functionResponse response: [Int: Date]) {
+				easy = response[0] ?? .now
+				struggled = response[1] ?? .now
+				forgot = response[2] ?? .now
+			}
 		}
 		
 		let parent: Card
@@ -22,7 +26,20 @@ extension Card {
 		}
 		
 		func loadPrediction() {
-			// TODO: Load prediction
+			predictionLoadingState.startLoading()
+			functions.httpsCallable("getCardPrediction").call(data: [
+				"deck": parent.parent.id,
+				"card": parent.id
+			]).done { result in
+				guard let data = result.data as? [Int: Date] else {
+					self.predictionLoadingState.fail(message: "Malformed response")
+					return
+				}
+				self.prediction = .init(functionResponse: data)
+				self.predictionLoadingState.succeed()
+			}.catch { error in
+				self.predictionLoadingState.fail(error: error)
+			}
 		}
 		
 		static func == (lhs: ReviewData, rhs: ReviewData) -> Bool {

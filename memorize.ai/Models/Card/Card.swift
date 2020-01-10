@@ -4,6 +4,7 @@ import LoadingState
 
 final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	let id: String
+	let parent: Deck
 	
 	@Published var sectionId: String?
 	@Published var front: String
@@ -22,6 +23,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	init(
 		id: String,
+		parent: Deck,
 		sectionId: String?,
 		front: String,
 		back: String,
@@ -33,6 +35,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		snapshot: DocumentSnapshot? = nil
 	) {
 		self.id = id
+		self.parent = parent
 		self.sectionId = sectionId
 		self.front = front
 		self.back = back
@@ -44,10 +47,11 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		self.snapshot = snapshot
 	}
 	
-	convenience init(snapshot: DocumentSnapshot) {
+	convenience init(snapshot: DocumentSnapshot, parent: Deck) {
 		let sectionId = snapshot.get("section") as? String ?? ""
 		self.init(
 			id: snapshot.documentID,
+			parent: parent,
 			sectionId: sectionId.isEmpty ? nil : sectionId,
 			front: snapshot.get("front") as? String ?? "(empty)",
 			back: snapshot.get("back") as? String ?? "(empty)",

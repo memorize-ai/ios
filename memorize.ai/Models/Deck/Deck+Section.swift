@@ -106,7 +106,7 @@ extension Deck {
 						let cardId = document.documentID
 						switch change.type {
 						case .added:
-							let card = Card(snapshot: document)
+							let card = Card(snapshot: document, parent: self.parent)
 							self.cards.append(user.map { user in
 								card.loadUserData(forUser: user, deck: self.parent)
 							} ?? card)

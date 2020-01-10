@@ -391,7 +391,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 					let cardId = document.documentID
 					switch change.type {
 					case .added:
-						self.previewCards.append(.init(snapshot: document))
+						self.previewCards.append(.init(snapshot: document, parent: self))
 					case .modified:
 						self.previewCards.first { $0.id == cardId }?
 							.updateFromSnapshot(document)
