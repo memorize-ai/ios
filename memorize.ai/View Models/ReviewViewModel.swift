@@ -11,7 +11,7 @@ final class ReviewViewModel: ViewModel {
 	
 	let numberOfTotalCards: Int
 	
-	@Published var currentCard: Card?
+	@Published var current: Card.ReviewData?
 	@Published var currentIndex = -1
 	@Published var currentSide = Card.Side.front
 	
@@ -37,6 +37,10 @@ final class ReviewViewModel: ViewModel {
 			section?.numberOfDueCards
 				?? deck?.userData?.numberOfDueCards
 					?? user.numberOfDueCards
+	}
+	
+	var currentCard: Card? {
+		current?.parent
 	}
 	
 	var isPopUpShowing: Bool {

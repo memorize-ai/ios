@@ -43,6 +43,17 @@ extension Card {
 			}
 		}
 		
+		func predictionForRating(_ rating: PerformanceRating) -> Date? {
+			switch rating {
+			case .easy:
+				return prediction?.easy
+			case .struggled:
+				return prediction?.struggled
+			case .forgot:
+				return prediction?.forgot
+			}
+		}
+		
 		static func == (lhs: ReviewData, rhs: ReviewData) -> Bool {
 			lhs.parent == rhs.parent
 		}
