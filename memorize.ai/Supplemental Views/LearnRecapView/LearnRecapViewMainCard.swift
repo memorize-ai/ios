@@ -20,7 +20,7 @@ struct LearnRecapViewMainCard: View {
 			borderColor: .lightGray,
 			borderWidth: 1.5
 		) {
-			VStack {
+			VStack(spacing: 20) {
 				CustomRectangle(
 					background: Color.lightGrayBackground
 				) {
@@ -44,7 +44,7 @@ struct LearnRecapViewMainCard: View {
 					.frame(maxWidth: .infinity)
 				}
 				.padding([.horizontal, .top], 8)
-				Group {
+				VStack(spacing: 2) {
 					Text("Your performance ratings for")
 						.font(.muli(.semiBold, size: 18))
 						.foregroundColor(.lightGrayText)
@@ -55,6 +55,7 @@ struct LearnRecapViewMainCard: View {
 						.shrinks(withLineLimit: 3)
 				}
 				.padding(.horizontal)
+				// TODO: Add graph
 			}
 		}
 	}
