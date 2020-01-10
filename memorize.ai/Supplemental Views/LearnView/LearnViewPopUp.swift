@@ -14,6 +14,16 @@ struct LearnViewPopUp: View {
 		) {
 			VStack(spacing: 16) {
 				if data != nil {
+					CustomRectangle(background: data!.badge!.color) {
+						Text(data!.badge!.text)
+							.font(.muli(.semiBold, size: 15))
+							.foregroundColor(.darkGray)
+							.lineLimit(1)
+							.padding(.horizontal, 4)
+							.padding(.vertical, 2)
+					}
+					.padding(.top, -15)
+					.padding(.bottom, 8)
 					Text(data!.emoji)
 						.font(.muli(.regular, size: 50))
 					Text(data!.message)
@@ -36,7 +46,14 @@ struct LearnViewPopUp_Previews: PreviewProvider {
 			section: nil
 		)
 		model.popUpOffset = 0
-		model.popUpData = ("🎉", "Great!")
+		model.popUpData = (
+			emoji: "🎉",
+			message: "Great!",
+			badge: (
+				color: Color.neonGreen.opacity(0.16),
+				text: "+1 day"
+			)
+		)
 		return LearnViewPopUp()
 			.environmentObject(model)
 	}

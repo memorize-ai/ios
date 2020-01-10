@@ -4,7 +4,11 @@ import PromiseKit
 import LoadingState
 
 final class LearnViewModel: ViewModel {
-	typealias PopUpData = (emoji: String, message: String)
+	typealias PopUpData = (
+		emoji: String,
+		message: String,
+		badge: (text: String, color: Color)?
+	)
 	
 	static let popUpSlideDuration = 0.25
 	static let cardSlideDuration = 0.25
@@ -124,11 +128,12 @@ final class LearnViewModel: ViewModel {
 	func showPopUp(
 		emoji: String,
 		message: String,
+		badge: (text: String, color: Color)?,
 		duration: Double = 1,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
-		popUpData = (emoji, message)
+		popUpData = (emoji, message, badge)
 		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
 			popUpOffset = 0
 		}
@@ -153,18 +158,21 @@ final class LearnViewModel: ViewModel {
 	) {
 		switch rating {
 		case .easy:
+			let badge = current.map { current in
+				("\(current.streak)x streak", Color.neonGreen.opacity(0.16))
+			}
 			switch true {
 			case current?.isMastered:
-				showPopUp(emoji: "🎉", message: "Mastered!", onCentered: onCentered, completion: completion)
+				showPopUp(emoji: "🎉", message: "Mastered!", badge: badge, onCentered: onCentered, completion: completion)
 			case current?.streak ?? 0 > 2:
-				showPopUp(emoji: "🎉", message: "On a roll!", onCentered: onCentered, completion: completion)
+				showPopUp(emoji: "🎉", message: "On a roll!", badge: badge, onCentered: onCentered, completion: completion)
 			default:
-				showPopUp(emoji: "🎉", message: "Great!", onCentered: onCentered, completion: completion)
+				showPopUp(emoji: "🎉", message: "Great!", badge: badge, onCentered: onCentered, completion: completion)
 			}
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!", onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😎", message: "Good luck!", badge: nil, onCentered: onCentered, completion: completion)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!", onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😕", message: "Better luck next time!", badge: nil, onCentered: onCentered, completion: completion)
 		}
 	}
 	
