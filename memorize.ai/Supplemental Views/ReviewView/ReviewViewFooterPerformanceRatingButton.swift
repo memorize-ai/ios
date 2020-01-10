@@ -5,17 +5,6 @@ struct ReviewViewFooterPerformanceRatingButton: View {
 		
 	let rating: Card.PerformanceRating
 	
-	var badgeColor: Color {
-		switch rating {
-		case .easy:
-			return .neonGreen
-		case .struggled:
-			return .init(#colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1))
-		case .forgot:
-			return .init(#colorLiteral(red: 0.9607843137, green: 0.3647058824, blue: 0.137254902, alpha: 1))
-		}
-	}
-	
 	var body: some View {
 		Button(action: {
 			self.model.rateCurrentCard(withRating: self.rating)
@@ -32,7 +21,7 @@ struct ReviewViewFooterPerformanceRatingButton: View {
 						.font(.muli(.bold, size: 14))
 						.foregroundColor(.darkGray)
 						.shrinks()
-					CustomRectangle(background: badgeColor.opacity(0.16)) {
+					CustomRectangle(background: rating.badgeColor.opacity(0.16)) {
 						Group {
 							if model.current == nil {
 								ActivityIndicator(radius: 1)

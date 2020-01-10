@@ -1,3 +1,5 @@
+import SwiftUI
+
 extension Card {
 	enum PerformanceRating: Int {
 		case easy = 2
@@ -23,6 +25,17 @@ extension Card {
 				return "Struggled"
 			case .forgot:
 				return "Forgot"
+			}
+		}
+		
+		var badgeColor: Color {
+			switch self {
+			case .easy:
+				return .neonGreen
+			case .struggled:
+				return .init(#colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1))
+			case .forgot:
+				return .init(#colorLiteral(red: 0.9607843137, green: 0.3647058824, blue: 0.137254902, alpha: 1))
 			}
 		}
 	}

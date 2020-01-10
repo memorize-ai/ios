@@ -3,6 +3,8 @@ import FirebaseFirestore
 import LoadingState
 
 final class LearnViewModel: ViewModel {
+	typealias PopUpData = (emoji: String, message: String)
+	
 	static let popUpSlideDuration = 0.25
 	static let cardSlideDuration = 0.25
 	
@@ -23,7 +25,7 @@ final class LearnViewModel: ViewModel {
 	@Published var shouldShowRecap = false
 	
 	@Published var popUpOffset: CGFloat = -SCREEN_SIZE.width
-	@Published var popUpData: (emoji: String?, message: String)?
+	@Published var popUpData: PopUpData?
 	
 	@Published var cardOffset: CGFloat = 0
 	
@@ -72,7 +74,7 @@ final class LearnViewModel: ViewModel {
 	}
 	
 	func showPopUp(
-		emoji: String?,
+		emoji: String,
 		message: String,
 		duration: Double = 1,
 		onCentered: (() -> Void)? = nil,

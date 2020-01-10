@@ -5,16 +5,16 @@ struct ReviewViewFooterPerformanceRatingButtonBadgeContent: View {
 	
 	let rating: Card.PerformanceRating
 	
-	var dueDate: Date? {
-		reviewData.predictionForRating(rating)
+	var text: String? {
+		reviewData.predictionMessageForRating(rating)
 	}
 	
 	var body: some View {
 		Group {
-			if dueDate == nil {
+			if text == nil {
 				ActivityIndicator(radius: 1)
 			} else {
-				Text("+\(Date().compare(against: dueDate!).split(separator: " ").dropFirst().joined())")
+				Text(text!)
 					.font(.muli(.semiBold, size: 13))
 					.foregroundColor(.darkGray)
 					.lineLimit(1)

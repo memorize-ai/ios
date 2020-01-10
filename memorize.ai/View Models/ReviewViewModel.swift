@@ -2,6 +2,12 @@ import SwiftUI
 import LoadingState
 
 final class ReviewViewModel: ViewModel {
+	typealias PopUpData = (
+		emoji: String,
+		message: String,
+		badge: (text: String, color: Color)?
+	)
+	
 	static let popUpSlideDuration = 0.25
 	static let cardSlideDuration = 0.25
 	
@@ -20,7 +26,7 @@ final class ReviewViewModel: ViewModel {
 	@Published var shouldShowRecap = false
 	
 	@Published var popUpOffset: CGFloat = -SCREEN_SIZE.width
-	@Published var popUpData: (emoji: String?, message: String)?
+	@Published var popUpData: PopUpData?
 	
 	@Published var cardOffset: CGFloat = 0
 	
@@ -48,13 +54,14 @@ final class ReviewViewModel: ViewModel {
 	}
 	
 	func showPopUp(
-		emoji: String?,
+		emoji: String,
 		message: String,
+		badge: (text: String, color: Color)?,
 		duration: Double = 1,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
-		popUpData = (emoji, message)
+		popUpData = (emoji, message, badge)
 		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
 			popUpOffset = 0
 		}
@@ -77,13 +84,16 @@ final class ReviewViewModel: ViewModel {
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
+		let badge = current?.predictionMessageForRating(rating).map { text in
+			(text, rating.badgeColor)
+		}
 		switch rating {
 		case .easy:
-			showPopUp(emoji: "🎉", message: "+TODO", onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "🎉", message: "Great!", badge: badge, onCentered: onCentered, completion: completion)
 		case .struggled:
-			showPopUp(emoji: "😎", message: "+TODO", onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😎", message: "Good luck!", badge: badge, onCentered: onCentered, completion: completion)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "+TODO", onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😕", message: "Better luck next time!", badge: badge, onCentered: onCentered, completion: completion)
 		}
 	}
 	
@@ -91,7 +101,7 @@ final class ReviewViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(emoji: "😕", message: "Skipped!", onCentered: loadNextCard)
+		showPopUp(emoji: "😕", message: "Skipped!", badge: nil, onCentered: loadNextCard)
 	}
 	
 	func waitForRating() {

@@ -3,16 +3,20 @@ import SwiftUI
 struct LearnViewPopUp: View {
 	@EnvironmentObject var model: LearnViewModel
 	
+	var data: LearnViewModel.PopUpData? {
+		model.popUpData
+	}
+	
 	var body: some View {
 		CustomRectangle(
 			background: Color.lightGray.opacity(0.5),
 			cornerRadius: 20
 		) {
 			VStack(spacing: 16) {
-				if model.popUpData != nil {
-					Text(model.popUpData?.emoji ?? "")
+				if data != nil {
+					Text(data!.emoji)
 						.font(.muli(.regular, size: 50))
-					Text(model.popUpData?.message ?? "")
+					Text(data!.message)
 						.font(.muli(.bold, size: 30))
 						.foregroundColor(.darkGray)
 				}
@@ -31,6 +35,7 @@ struct LearnViewPopUp_Previews: PreviewProvider {
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			section: nil
 		)
+		model.popUpOffset = 0
 		model.popUpData = ("🎉", "Great!")
 		return LearnViewPopUp()
 			.environmentObject(model)
