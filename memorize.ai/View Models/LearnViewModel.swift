@@ -108,7 +108,7 @@ final class LearnViewModel: ViewModel {
 		}
 	}
 	
-	func frequentCards(forRating rating: Card.PerformanceRating) -> [Card] {
+	func frequentCards(forRating rating: Card.PerformanceRating) -> [Card.LearnData] {
 		cards
 			.filter { card in
 				rating == [.easy, .struggled, .forgot].max { a, b in
@@ -118,7 +118,6 @@ final class LearnViewModel: ViewModel {
 					return ratingCount1 < ratingCount2
 				}
 			}
-			.map { $0.parent }
 	}
 	
 	@discardableResult

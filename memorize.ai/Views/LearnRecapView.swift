@@ -32,6 +32,7 @@ struct LearnRecapView: View {
 								if self.model.section == nil {
 									LearnRecapViewSectionPerformance()
 								}
+								LearnRecapViewCardPerformance()
 							}
 						}
 					}

@@ -9,7 +9,7 @@ struct LearnRecapViewSectionPerformanceRowSectionCell: View {
 	
 	var cardCountMessage: String {
 		let count = model.numberOfReviewedCardsForSection(section)
-		return "(\(count) card\(count == 1 ? "" : "s"))"
+		return "(\(count.formatted) card\(count == 1 ? "" : "s"))"
 	}
 	
 	var body: some View {
