@@ -31,6 +31,7 @@ final class ReviewViewModel: ViewModel {
 	@Published var cardOffset: CGFloat = 0
 	
 	@Published var currentCardLoadingState = LoadingState()
+	@Published var reviewCardLoadingState = LoadingState()
 	
 	var isReviewingNewCards = false
 	
@@ -121,7 +122,34 @@ final class ReviewViewModel: ViewModel {
 	}
 	
 	func rateCurrentCard(withRating rating: Card.PerformanceRating) {
-		// TODO: Rate current card
+		guard let card = current?.parent else { return }
+		reviewCardLoadingState.startLoading()
+		functions.httpsCallable("reviewCard").call(data: [
+			"deck": card.parent.id,
+			"card": card.id,
+			"rating": rating.rawValue,
+			"viewTime": 0 // TODO: Calculate this
+		]).done { _ in
+			self.reviewCardLoadingState.succeed()
+		}.catch { error in
+			showAlert(title: "Unable to rate card", message: "Please try again")
+			self.reviewCardLoadingState.fail(error: error)
+		}
+		withAnimation(.easeIn(duration: 0.3)) {
+			isWaitingForRating = false
+		}
+		let shouldShowRecap = currentIndex == numberOfTotalCards - 1
+		showPopUp(
+			forRating: rating,
+			onCentered: {
+				if shouldShowRecap { return }
+				self.loadNextCard()
+			},
+			completion: {
+				guard shouldShowRecap else { return }
+				self.shouldShowRecap = true
+			}
+		)
 	}
 	
 	func loadNextCard() {
