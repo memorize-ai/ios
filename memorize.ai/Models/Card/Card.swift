@@ -69,11 +69,19 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	var previewImageUrl: String? {
-		guard let range = front.range(
+		guard let imgRange = front.range(
 			of: #"<\s*img[^>]*src="(.+?)"[^>]*>"#,
 			options: .regularExpression
 		) else { return nil }
-		return .init(front[range].dropFirst(10).dropLast(2))
+		
+		let img = front[imgRange]
+		
+		guard let srcRange = img.range(
+			of: #"src="(.+?)""#,
+			options: .regularExpression
+		) else { return nil }
+		
+		return .init(img[srcRange].dropFirst(5).dropLast(1))
 	}
 	
 	@discardableResult
