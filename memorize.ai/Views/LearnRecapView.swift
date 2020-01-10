@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LearnRecapView: View {
+	@EnvironmentObject var model: LearnViewModel
+	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
@@ -20,7 +22,7 @@ struct LearnRecapView: View {
 						LearnRecapViewTopControls()
 							.padding(.horizontal, 23)
 						ScrollView {
-							LearnRecapViewMainCard()
+							LearnRecapViewMainCard(deck: self.model.deck)
 								.padding(.horizontal, 8)
 						}
 					}
@@ -35,6 +37,10 @@ struct LearnRecapView_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnRecapView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(LearnViewModel(
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				section: nil
+			))
 	}
 }
 #endif
