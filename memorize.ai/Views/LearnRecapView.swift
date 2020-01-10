@@ -23,11 +23,16 @@ struct LearnRecapView: View {
 						LearnRecapViewTopControls()
 							.padding(.horizontal, 23)
 						ScrollView {
-							LearnRecapViewMainCard(
-								user: self.currentStore.user,
-								deck: self.model.deck
-							)
-							.padding(.horizontal, 8)
+							VStack(spacing: 30) {
+								LearnRecapViewMainCard(
+									user: self.currentStore.user,
+									deck: self.model.deck
+								)
+								.padding(.horizontal, 8)
+								if self.model.section == nil {
+									LearnRecapViewSectionPerformance()
+								}
+							}
 						}
 					}
 				}

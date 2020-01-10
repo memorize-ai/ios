@@ -85,6 +85,35 @@ final class LearnViewModel: ViewModel {
 		}
 	}
 	
+	func frequentSections(forRating rating: Card.PerformanceRating) -> [Deck.Section] {
+		deck.sections.filter { section in
+			let cards = self.cards.filter { $0.parent.sectionId == section.id }
+			
+			func ratingCount(forRating rating: Card.PerformanceRating) -> Int {
+				cards.reduce(0) { acc, card in
+					acc + card.ratings.filter { $0 == rating }.count
+				}
+			}
+			
+			return rating == [.easy, .struggled, .forgot].max {
+				ratingCount(forRating: $0) < ratingCount(forRating: $1)
+			}
+		}
+	}
+	
+	func frequentCards(forRating rating: Card.PerformanceRating) -> [Card] {
+		cards
+			.filter { card in
+				rating == [.easy, .struggled, .forgot].max { a, b in
+					let ratingCount1 = card.ratings.filter { $0 == a }.count
+					let ratingCount2 = card.ratings.filter { $0 == b }.count
+					
+					return ratingCount1 < ratingCount2
+				}
+			}
+			.map { $0.parent }
+	}
+	
 	@discardableResult
 	func addXP(toUser user: User) -> Promise<Void> {
 		user.documentReference.updateData([
