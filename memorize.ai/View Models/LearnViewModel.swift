@@ -180,7 +180,7 @@ final class LearnViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(emoji: "😕", message: "Skipped!", onCentered: {
+		showPopUp(emoji: "😕", message: "Skipped!", badge: nil, onCentered: {
 			self.loadNextCard()
 		})
 	}
