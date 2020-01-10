@@ -19,4 +19,16 @@ extension Array {
 		self = sorted(by: keyPath, with: comparator)
 		return self
 	}
+	
+	func max<T: Comparable>(by keyPath: KeyPath<Element, T>) -> Element? {
+		guard var max = first else { return nil }
+		
+		for element in self {
+			if element[keyPath: keyPath] > max[keyPath: keyPath] {
+				max = element
+			}
+		}
+		
+		return max
+	}
 }
