@@ -91,6 +91,7 @@ struct HorizontalBarGraph: View {
 				}
 			}
 		}
+		.padding(.bottom)
 	}
 }
 

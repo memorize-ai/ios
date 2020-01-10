@@ -55,7 +55,24 @@ struct LearnRecapViewMainCard: View {
 						.shrinks(withLineLimit: 3)
 				}
 				.padding(.horizontal)
-				// TODO: Add graph
+				HorizontalBarGraph(
+					rows: [
+						.init(
+							label: Card.PerformanceRating.easy.title.uppercased(),
+							value: model.totalRatingCount(forRating: .easy)
+						),
+						.init(
+							label: Card.PerformanceRating.struggled.title.uppercased(),
+							value: model.totalRatingCount(forRating: .struggled)
+						),
+						.init(
+							label: Card.PerformanceRating.forgot.title.uppercased(),
+							value: model.totalRatingCount(forRating: .forgot)
+						)
+					],
+					color: .init(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1))
+				)
+				.padding([.horizontal, .bottom])
 			}
 		}
 	}

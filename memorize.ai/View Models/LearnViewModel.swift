@@ -79,6 +79,12 @@ final class LearnViewModel: ViewModel {
 		numberOfSeenCards / 10 + numberOfMasteredCards / 2
 	}
 	
+	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {
+		cards.reduce(0) { acc, card in
+			acc + card.ratings.filter { $0 == rating }.count
+		}
+	}
+	
 	@discardableResult
 	func addXP(toUser user: User) -> Promise<Void> {
 		user.documentReference.updateData([
