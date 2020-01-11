@@ -62,7 +62,7 @@ struct LearnRecapViewCardPerformanceRow: View {
 				}
 			}
 			.padding(.horizontal, 23)
-			if isExpanded {
+			if isExpanded && !cards.isEmpty {
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
 						ForEach(cards) { card in
