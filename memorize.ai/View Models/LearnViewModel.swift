@@ -89,32 +89,43 @@ final class LearnViewModel: ViewModel {
 		}
 	}
 	
-	func numberOfReviewedCardsForSection(_ section: Deck.Section) -> Int {
+	func reviewedCardsForSection(_ section: Deck.Section) -> [Card.LearnData] {
 		cards.filter { card in
-			card.parent.sectionId == section.id &&
+			section.contains(card: card.parent) &&
 			!card.ratings.isEmpty
-		}.count
+		}
+	}
+	
+	func numberOfReviewedCardsForSection(_ section: Deck.Section) -> Int {
+		reviewedCardsForSection(section).count
 	}
 	
 	func frequentSections(forRating rating: Card.PerformanceRating) -> [Deck.Section] {
-		deck.sections.filter { section in
-			let cards = self.cards.filter { $0.parent.sectionId == section.id }
+		([deck.unsectionedSection] + deck.sections).filter { section in
+			let cards = reviewedCardsForSection(section)
 			
-			func ratingCount(forRating rating: Card.PerformanceRating) -> Int {
-				cards.reduce(0) { acc, card in
-					acc + card.ratings.filter { $0 == rating }.count
+			if cards.isEmpty { return false }
+			
+			return cards.reduce(0) { acc, card in
+				switch rating {
+				case .easy:
+					return acc + *(card.mostFrequentRating == .easy)
+				case .struggled, .forgot:
+					return acc + *(card.countOfRating(rating) > card.ratings.count / 3)
 				}
-			}
-			
-			return rating == [.easy, .struggled, .forgot].max {
-				ratingCount(forRating: $0) < ratingCount(forRating: $1)
-			}
+			} > numberOfReviewedCardsForSection(section) / 3
 		}
 	}
 	
 	func frequentCards(forRating rating: Card.PerformanceRating) -> [Card.LearnData] {
 		cards.filter { card in
-			rating == card.mostFrequentRating
+			if card.ratings.isEmpty { return false }
+			switch rating {
+			case .easy:
+				return card.mostFrequentRating == .easy
+			case .struggled, .forgot:
+				return card.countOfRating(rating) > card.ratings.count / 3
+			}
 		}
 	}
 	

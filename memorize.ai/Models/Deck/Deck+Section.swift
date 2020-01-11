@@ -135,6 +135,10 @@ extension Deck {
 			parent.userData?.isSectionUnlocked(withId: id) ?? false
 		}
 		
+		func contains(card: Card) -> Bool {
+			card.sectionId == (id.isEmpty ? nil : id)
+		}
+		
 		@discardableResult
 		func showRenameAlert(title: String = "Rename section", message: String? = nil) -> Self {
 			showAlert(title: title, message: message) { alert in

@@ -77,7 +77,7 @@ struct LearnRecapViewCardPerformanceRow: View {
 				}
 			}
 		}
-		.animation(.linear(duration: 0.3))
+		.animation(.linear(duration: 0.15))
 	}
 }
 
