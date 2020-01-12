@@ -2,6 +2,11 @@ import SwiftUI
 import LoadingState
 
 final class ReviewViewModel: ViewModel {
+	enum CardRetrievalState {
+		case seenCards
+		case newCards
+	}
+	
 	typealias PopUpData = (
 		emoji: String,
 		message: String,
@@ -155,6 +160,19 @@ final class ReviewViewModel: ViewModel {
 	func loadNextCard() {
 		currentIndex++
 		
-		// TODO: Load next card
+		currentCardLoadingState.startLoading()
+		
+		if let section = section { // Reviewing section
+			if isReviewingNewCards {
+				
+			} else {
+				user.documentReference
+					.parent.parent
+			}
+		} else if let deck = deck { // Reviewing deck
+			print(deck.name)
+		} else { // Reviewing all
+			print(user.name)
+		}
 	}
 }
