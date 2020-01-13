@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LearnViewFooter: View {
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: LearnViewModel
 	
 	func ratingButton(
@@ -34,7 +35,10 @@ struct LearnViewFooter: View {
 			HStack {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 					self.ratingButton(forRating: rating) {
-						self.model.rateCurrentCard(withRating: rating)
+						self.model.rateCurrentCard(
+							withRating: rating,
+							user: self.currentStore.user
+						)
 						playHaptic()
 					}
 				}
@@ -52,6 +56,7 @@ struct LearnViewFooter: View {
 struct LearnViewFooter_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnViewFooter()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 			.environmentObject(LearnViewModel(
 				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 				section: nil

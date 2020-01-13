@@ -1,7 +1,13 @@
 import SwiftUI
+import FirebaseFirestore
+import PromiseKit
 import LoadingState
 
 final class ReviewViewModel: ViewModel {
+	static let POP_UP_SLIDE_DURATION = 0.25
+	static let CARD_SLIDE_DURATION = 0.25
+	static let XP_CHANCE = 0.5
+	
 	enum CardRetrievalState {
 		case seenCards
 		case newCards
@@ -12,9 +18,6 @@ final class ReviewViewModel: ViewModel {
 		message: String,
 		badge: (text: String, color: Color)?
 	)
-	
-	static let popUpSlideDuration = 0.25
-	static let cardSlideDuration = 0.25
 	
 	let user: User
 	let deck: Deck?
@@ -38,7 +41,11 @@ final class ReviewViewModel: ViewModel {
 	@Published var currentCardLoadingState = LoadingState()
 	@Published var reviewCardLoadingState = LoadingState()
 	
+	@Published var xpGained = 0
+	
 	var isReviewingNewCards = false
+	var cards = [Card.ReviewData]()
+	var initialXP = 0
 	
 	init(user: User, deck: Deck?, section: Deck.Section?) {
 		self.user = user
@@ -59,6 +66,19 @@ final class ReviewViewModel: ViewModel {
 		popUpOffset.isZero
 	}
 	
+	var shouldGainXP: Bool {
+		.random(in: 0...1) <= Self.XP_CHANCE
+	}
+	
+	@discardableResult
+	func addXP() -> Promise<Void>? {
+		guard shouldGainXP else { return nil }
+		xpGained++
+		return user.documentReference.updateData([
+			"xp": FieldValue.increment(1.0)
+		])
+	}
+	
 	func showPopUp(
 		emoji: String,
 		message: String,
@@ -68,16 +88,16 @@ final class ReviewViewModel: ViewModel {
 		completion: (() -> Void)? = nil
 	) {
 		popUpData = (emoji, message, badge)
-		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
+		withAnimation(.easeOut(duration: Self.POP_UP_SLIDE_DURATION)) {
 			popUpOffset = 0
 		}
-		waitUntil(duration: Self.popUpSlideDuration) {
+		waitUntil(duration: Self.POP_UP_SLIDE_DURATION) {
 			onCentered?()
 			waitUntil(duration: duration) {
-				withAnimation(.easeIn(duration: Self.popUpSlideDuration)) {
+				withAnimation(.easeIn(duration: Self.POP_UP_SLIDE_DURATION)) {
 					self.popUpOffset = SCREEN_SIZE.width
 				}
-				waitUntil(duration: Self.popUpSlideDuration) {
+				waitUntil(duration: Self.POP_UP_SLIDE_DURATION) {
 					self.popUpOffset = -SCREEN_SIZE.width
 					completion?()
 				}
@@ -107,27 +127,33 @@ final class ReviewViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(emoji: "😕", message: "Skipped!", badge: nil, onCentered: loadNextCard)
+		showPopUp(emoji: "😕", message: "Skipped!", badge: nil, onCentered: {
+			self.loadNextCard()
+		})
 	}
 	
 	func waitForRating() {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = true
 		}
-		withAnimation(.easeIn(duration: Self.cardSlideDuration)) {
+		withAnimation(.easeIn(duration: Self.CARD_SLIDE_DURATION)) {
 			cardOffset = -SCREEN_SIZE.width
 		}
-		waitUntil(duration: Self.cardSlideDuration) {
+		waitUntil(duration: Self.CARD_SLIDE_DURATION) {
 			self.currentSide = .back
 			self.cardOffset = SCREEN_SIZE.width
-			withAnimation(.easeOut(duration: Self.cardSlideDuration)) {
+			withAnimation(.easeOut(duration: Self.CARD_SLIDE_DURATION)) {
 				self.cardOffset = 0
 			}
 		}
 	}
 	
 	func rateCurrentCard(withRating rating: Card.PerformanceRating) {
-		guard let card = current?.parent else { return }
+		guard let current = current else { return }
+		let card = current.parent
+		
+		cards.append(current)
+		
 		reviewCardLoadingState.startLoading()
 		functions.httpsCallable("reviewCard").call(data: [
 			"deck": card.parent.id,
@@ -135,15 +161,19 @@ final class ReviewViewModel: ViewModel {
 			"rating": rating.rawValue,
 			"viewTime": 0 // TODO: Calculate this
 		]).done { _ in
+			self.addXP()
 			self.reviewCardLoadingState.succeed()
 		}.catch { error in
 			showAlert(title: "Unable to rate card", message: "Please try again")
 			self.reviewCardLoadingState.fail(error: error)
 		}
+		
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
+		
 		let shouldShowRecap = currentIndex == numberOfTotalCards - 1
+		
 		showPopUp(
 			forRating: rating,
 			onCentered: {
@@ -177,7 +207,13 @@ final class ReviewViewModel: ViewModel {
 		
 		if let section = section { // Reviewing section
 			if isReviewingNewCards {
+				let deck = section.parent
 				
+				var query = deck.documentReference
+					.collection("cards")
+					.whereField("section", isEqualTo: section.id)
+				
+				cards.map(~\.parent.id).sorted()
 			} else {
 				if startLoading {
 					currentCardLoadingState.startLoading()

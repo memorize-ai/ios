@@ -4,14 +4,15 @@ import PromiseKit
 import LoadingState
 
 final class LearnViewModel: ViewModel {
+	static let POP_UP_SLIDE_DURATION = 0.25
+	static let CARD_SLIDE_DURATION = 0.25
+	static let XP_CHANCE = 0.2
+	
 	typealias PopUpData = (
 		emoji: String,
 		message: String,
 		badge: (text: String, color: Color)?
 	)
-	
-	static let popUpSlideDuration = 0.25
-	static let cardSlideDuration = 0.25
 	
 	let deck: Deck
 	let section: Deck.Section?
@@ -35,6 +36,8 @@ final class LearnViewModel: ViewModel {
 	@Published var cardOffset: CGFloat = 0
 	
 	@Published var currentCardLoadingState = LoadingState()
+	
+	@Published var xpGained = 0
 	
 	var cards = [Card.LearnData]()
 	var initialXP = 0
@@ -79,8 +82,17 @@ final class LearnViewModel: ViewModel {
 		popUpOffset.isZero
 	}
 	
-	var xpGained: Int {
-		numberOfSeenCards / 10 + numberOfMasteredCards / 2
+	var shouldGainXP: Bool {
+		.random(in: 0...1) <= Self.XP_CHANCE
+	}
+	
+	@discardableResult
+	func addXP(toUser user: User) -> Promise<Void>? {
+		guard shouldGainXP else { return nil }
+		xpGained++
+		return user.documentReference.updateData([
+			"xp": FieldValue.increment(1.0)
+		])
 	}
 	
 	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {
@@ -129,13 +141,6 @@ final class LearnViewModel: ViewModel {
 		}
 	}
 	
-	@discardableResult
-	func addXP(toUser user: User) -> Promise<Void> {
-		user.documentReference.updateData([
-			"xp": FieldValue.increment(.init(xpGained))
-		])
-	}
-	
 	func showPopUp(
 		emoji: String,
 		message: String,
@@ -145,16 +150,16 @@ final class LearnViewModel: ViewModel {
 		completion: (() -> Void)? = nil
 	) {
 		popUpData = (emoji, message, badge)
-		withAnimation(.easeOut(duration: Self.popUpSlideDuration)) {
+		withAnimation(.easeOut(duration: Self.POP_UP_SLIDE_DURATION)) {
 			popUpOffset = 0
 		}
-		waitUntil(duration: Self.popUpSlideDuration) {
+		waitUntil(duration: Self.POP_UP_SLIDE_DURATION) {
 			onCentered?()
 			waitUntil(duration: duration) {
-				withAnimation(.easeIn(duration: Self.popUpSlideDuration)) {
+				withAnimation(.easeIn(duration: Self.POP_UP_SLIDE_DURATION)) {
 					self.popUpOffset = SCREEN_SIZE.width
 				}
-				waitUntil(duration: Self.popUpSlideDuration) {
+				waitUntil(duration: Self.POP_UP_SLIDE_DURATION) {
 					self.popUpOffset = -SCREEN_SIZE.width
 					completion?()
 				}
@@ -200,20 +205,21 @@ final class LearnViewModel: ViewModel {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = true
 		}
-		withAnimation(.easeIn(duration: Self.cardSlideDuration)) {
+		withAnimation(.easeIn(duration: Self.CARD_SLIDE_DURATION)) {
 			cardOffset = -SCREEN_SIZE.width
 		}
-		waitUntil(duration: Self.cardSlideDuration) {
+		waitUntil(duration: Self.CARD_SLIDE_DURATION) {
 			self.currentSide = .back
 			self.cardOffset = SCREEN_SIZE.width
-			withAnimation(.easeOut(duration: Self.cardSlideDuration)) {
+			withAnimation(.easeOut(duration: Self.CARD_SLIDE_DURATION)) {
 				self.cardOffset = 0
 			}
 		}
 	}
 	
-	func rateCurrentCard(withRating rating: Card.PerformanceRating) {
+	func rateCurrentCard(withRating rating: Card.PerformanceRating, user: User) {
 		current?.addRating(rating)
+		addXP(toUser: user)
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
