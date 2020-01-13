@@ -157,17 +157,68 @@ final class ReviewViewModel: ViewModel {
 		)
 	}
 	
-	func loadNextCard() {
-		currentIndex++
-		
-		currentCardLoadingState.startLoading()
+	func failCurrentCardLoadingState(withError error: Error) {
+		showAlert(title: "Unable to load card", message: "Please try again")
+		currentCardLoadingState.fail(error: error)
+	}
+	
+	func updateCurrentCard(to card: Card) {
+		current = .init(parent: card)
+		currentSide = .front
+	}
+	
+	func loadNextCard(
+		incrementCurrentIndex: Bool = true,
+		startLoading: Bool = true
+	) {
+		if incrementCurrentIndex {
+			currentIndex++
+		}
 		
 		if let section = section { // Reviewing section
 			if isReviewingNewCards {
 				
 			} else {
-				user.documentReference
-					.parent.parent
+				if startLoading {
+					currentCardLoadingState.startLoading()
+				}
+				
+				let deck = section.parent
+				
+				var query = user.documentReference
+					.collection("decks/\(deck.id)/cards")
+					.whereField("section", isEqualTo: section.id)
+					.whereField("due", isLessThanOrEqualTo: Date())
+					.order(by: "due")
+				
+				if let currentCardSnapshot = currentCard?.snapshot {
+					query = query.start(afterDocument: currentCardSnapshot)
+				}
+				
+				query
+					.limit(to: 1)
+					.getDocuments()
+					.done { snapshot in
+						if let cardId = snapshot.documents.first?.documentID {
+							firestore
+								.document("decks/\(deck.id)/cards/\(cardId)")
+								.getDocument()
+								.done { snapshot in
+									self.updateCurrentCard(to: .init(
+										snapshot: snapshot,
+										parent: deck
+									))
+								}
+								.catch(self.failCurrentCardLoadingState)
+						} else {
+							self.isReviewingNewCards = true
+							self.loadNextCard(
+								incrementCurrentIndex: false,
+								startLoading: false
+							)
+						}
+					}
+					.catch(failCurrentCardLoadingState)
 			}
 		} else if let deck = deck { // Reviewing deck
 			print(deck.name)

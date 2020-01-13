@@ -16,6 +16,17 @@ extension CollectionReference {
 }
 
 extension DocumentReference {
+	func getDocument() -> Promise<DocumentSnapshot> {
+		.init { seal in
+			getDocument { snapshot, error in
+				guard error == nil, let snapshot = snapshot else {
+					return seal.reject(error ?? UNKNOWN_ERROR)
+				}
+				seal.fulfill(snapshot)
+			}
+		}
+	}
+	
 	func setData(_ documentData: [String: Any]) -> Promise<Void> {
 		.init { seal in
 			setData(documentData) { error in
