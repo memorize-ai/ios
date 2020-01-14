@@ -143,7 +143,7 @@ final class ReviewViewModel: ViewModel {
 		
 		cards.append(current)
 		
-		let gainXP = true//shouldGainXP
+		let gainXP = shouldGainXP
 		
 		if gainXP {
 			xpGained++
