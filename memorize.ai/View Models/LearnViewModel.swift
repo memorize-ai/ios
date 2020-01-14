@@ -86,9 +86,8 @@ final class LearnViewModel: ViewModel {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
-	@discardableResult
-	func addXP(toUser user: User) -> Promise<Void>? {
-		guard shouldGainXP else { return nil }
+	func addXP(toUser user: User) {
+		guard shouldGainXP else { return }
 		xpGained++
 		return user.documentReference.updateData([
 			"xp": FieldValue.increment(1.0)

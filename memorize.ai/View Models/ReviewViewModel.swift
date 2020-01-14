@@ -70,9 +70,8 @@ final class ReviewViewModel: ViewModel {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
-	@discardableResult
-	func addXP(_ shouldGainXP: Bool) -> Promise<Void>? {
-		guard shouldGainXP else { return nil }
+	func addXP(_ shouldGainXP: Bool) {
+		guard shouldGainXP else { return }
 		xpGained++
 		return user.documentReference.updateData([
 			"xp": FieldValue.increment(1.0)
@@ -152,7 +151,7 @@ final class ReviewViewModel: ViewModel {
 		
 		cards.append(current)
 		
-		let gainXP = shouldGainXP
+		let gainXP = true//shouldGainXP
 		
 		reviewCardLoadingState.startLoading()
 		functions.httpsCallable("reviewCard").call(data: [
@@ -161,7 +160,7 @@ final class ReviewViewModel: ViewModel {
 			"rating": rating.rawValue,
 			"viewTime": 0 // TODO: Calculate this
 		]).done { _ in
-			self.addXP(gainXP)
+//			self.addXP(gainXP)
 			self.reviewCardLoadingState.succeed()
 		}.catch { error in
 			showAlert(title: "Unable to rate card", message: "You will move on to the next card")
