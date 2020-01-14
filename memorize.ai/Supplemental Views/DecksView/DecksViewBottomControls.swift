@@ -9,8 +9,8 @@ struct DecksViewBottomControls: View {
 		currentStore.user.id == selectedDeck.creatorId
 	}
 	
-	var hasCards: Bool {
-		selectedDeck.numberOfCards > 0
+	var hasUnlockedCards: Bool {
+		selectedDeck.numberOfUnlockedCards > 0
 	}
 	
 	var isDue: Bool {
@@ -60,7 +60,7 @@ struct DecksViewBottomControls: View {
 			if isOwner {
 				addCardsButton
 			}
-			if hasCards {
+			if hasUnlockedCards {
 				learnButton
 			}
 			if isDue {

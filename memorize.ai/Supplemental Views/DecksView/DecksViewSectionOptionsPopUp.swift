@@ -11,16 +11,22 @@ struct DecksViewSectionOptionsPopUp: View {
 		deck.creatorId == currentStore.user.id
 	}
 	
-	var isLocked: Bool {
-		!section.isUnlocked
+	var isUnlocked: Bool {
+		section.isUnlocked
+	}
+	
+	var hasCards: Bool {
+		section.numberOfCards > 0
 	}
 	
 	var contentHeight: CGFloat {
-		.init(50 * (
-			*section.isDue +
-			1 +
-			(isOwner ? 4 : *isLocked)
-		) + *isOwner)
+		.init(
+			50 * (
+				(isUnlocked ? (*section.isDue + *hasCards) : 1) +
+				(isOwner ? 3 : 0)
+			) +
+			(isOwner ? 2 : 0)
+		)
 	}
 	
 	func hide() {
@@ -68,33 +74,51 @@ struct DecksViewSectionOptionsPopUp: View {
 			isShowing: $model.isSectionOptionsPopUpShowing,
 			contentHeight: contentHeight
 		) {
-			if section.isDue {
-				ReviewViewNavigationLink(section: section) {
-					HStack(spacing: 20) {
-						reviewIcon
-						Text("Review")
-							.font(.muli(.semiBold, size: 17))
-							.foregroundColor(.darkGray)
-						Spacer()
+			if isUnlocked {
+				if section.isDue {
+					ReviewViewNavigationLink(section: section) {
+						HStack(spacing: 20) {
+							reviewIcon
+							Text("Review")
+								.font(.muli(.semiBold, size: 17))
+								.foregroundColor(.darkGray)
+							Spacer()
+						}
+						.padding(.horizontal, 30)
+						.frame(height: 50)
 					}
-					.padding(.horizontal, 30)
-					.frame(height: 50)
 				}
-			}
-			if section.numberOfCards > 0 {
-				LearnViewNavigationLink(section: section) {
-					HStack(spacing: 20) {
-						learnIcon
-						Text("Learn")
-							.font(.muli(.semiBold, size: 17))
-							.foregroundColor(.darkGray)
-						Spacer()
+				if hasCards {
+					LearnViewNavigationLink(section: section) {
+						HStack(spacing: 20) {
+							learnIcon
+							Text("Learn")
+								.font(.muli(.semiBold, size: 17))
+								.foregroundColor(.darkGray)
+							Spacer()
+						}
+						.padding(.horizontal, 30)
+						.frame(height: 50)
 					}
-					.padding(.horizontal, 30)
-					.frame(height: 50)
+				}
+			} else {
+				PopUpButton(
+					icon: Image(systemName: .lockSlashFill)
+						.resizable()
+						.foregroundColor(.darkBlue)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 21, height: 21),
+					text: "Unlock",
+					textColor: .darkGray
+				) {
+					self.section.showUnlockAlert(
+						forUser: self.currentStore.user,
+						completion: self.hide
+					)
 				}
 			}
 			if isOwner {
+				PopUpDivider()
 				PopUpButton(
 					icon: Image.editSectionsIcon
 						.resizable()
@@ -128,21 +152,6 @@ struct DecksViewSectionOptionsPopUp: View {
 					textColor: .darkGray
 				) {
 					self.section.showDeleteAlert(completion: self.hide)
-				}
-			} else if isLocked {
-				PopUpButton(
-					icon: Image(systemName: .lockSlashFill)
-						.resizable()
-						.foregroundColor(.darkBlue)
-						.aspectRatio(contentMode: .fit)
-						.frame(width: 21, height: 21),
-					text: "Unlock",
-					textColor: .darkGray
-				) {
-					self.section.showUnlockAlert(
-						forUser: self.currentStore.user,
-						completion: self.hide
-					)
 				}
 			}
 		}
