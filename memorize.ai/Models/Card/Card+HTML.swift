@@ -1,7 +1,12 @@
 import HTML
 
+fileprivate let DEFAULT_FONT_SIZE = 45
+
 extension Card {
-	private static func htmlWithText(_ text: String) -> HTMLElement {
+	private static func htmlWithText(
+		_ text: String,
+		withFontSize fontSize: Int = DEFAULT_FONT_SIZE
+	) -> HTMLElement {
 		HTMLElement.html
 			.child {
 				HTMLElement.head
@@ -36,30 +41,30 @@ extension Card {
 				HTMLElement.body
 					.class("fr-view")
 					.fontFamily("sans-serif")
-					.fontSize("45px")
+					.fontSize("\(fontSize)px")
 					.margin("20px 30px")
 					.child(text)
 			}
 	}
 	
-	func renderFront() -> String {
+	func renderFront(withFontSize fontSize: Int = DEFAULT_FONT_SIZE) -> String {
 		HTML.render {
-			Self.htmlWithText(front)
+			Self.htmlWithText(front, withFontSize: fontSize)
 		}
 	}
 	
-	func renderBack() -> String {
+	func renderBack(withFontSize fontSize: Int = DEFAULT_FONT_SIZE) -> String {
 		HTML.render {
-			Self.htmlWithText(back)
+			Self.htmlWithText(back, withFontSize: fontSize)
 		}
 	}
 	
-	func renderSide(_ side: Side) -> String {
+	func renderSide(_ side: Side, withFontSize fontSize: Int = DEFAULT_FONT_SIZE) -> String {
 		switch side {
 		case .front:
-			return renderFront()
+			return renderFront(withFontSize: fontSize)
 		case .back:
-			return renderBack()
+			return renderBack(withFontSize: fontSize)
 		}
 	}
 }
