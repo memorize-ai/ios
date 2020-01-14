@@ -12,16 +12,16 @@ struct ReviewViewFooterPerformanceRatingButtonBadgeContent: View {
 	var body: some View {
 		Group {
 			if text == nil {
-				ActivityIndicator(radius: 1)
+				ActivityIndicator(radius: 5, color: .darkGray)
+					.frame(width: (SCREEN_SIZE.width - 8 * 4) / 8)
 			} else {
 				Text(text!)
-					.font(.muli(.semiBold, size: 13))
+					.font(.muli(.bold, size: 12))
 					.foregroundColor(.darkGray)
-					.lineLimit(1)
+					.shrinks()
+					.padding(.horizontal, 4)
 			}
 		}
-		.padding(.horizontal, 4)
-		.padding(.vertical, 2)
 	}
 }
 
