@@ -599,11 +599,17 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func updateUserDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		guard snapshot.exists else {
+			userData = nil
+			return self
+		}
+		
 		if userData == nil {
 			userData = .init(snapshot: snapshot)
 		} else {
 			userData?.updateFromSnapshot(snapshot)
 		}
+		
 		return self
 	}
 	

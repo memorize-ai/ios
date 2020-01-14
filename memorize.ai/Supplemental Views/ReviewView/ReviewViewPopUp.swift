@@ -14,16 +14,18 @@ struct ReviewViewPopUp: View {
 		) {
 			VStack(spacing: 16) {
 				if data != nil {
-					CustomRectangle(background: data!.badge!.color) {
-						Text(data!.badge!.text)
-							.font(.muli(.semiBold, size: 15))
-							.foregroundColor(.darkGray)
-							.lineLimit(1)
-							.padding(.horizontal, 4)
-							.padding(.vertical, 2)
+					if data!.badge != nil {
+						CustomRectangle(background: data!.badge!.color) {
+							Text(data!.badge!.text)
+								.font(.muli(.semiBold, size: 15))
+								.foregroundColor(.darkGray)
+								.lineLimit(1)
+								.padding(.horizontal, 4)
+								.padding(.vertical, 2)
+						}
+						.padding(.top, -15)
+						.padding(.bottom, 8)
 					}
-					.padding(.top, -15)
-					.padding(.bottom, 8)
 					Text(data!.emoji)
 						.font(.muli(.regular, size: 50))
 					Text(data!.message)

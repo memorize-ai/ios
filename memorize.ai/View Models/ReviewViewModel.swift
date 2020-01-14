@@ -71,7 +71,7 @@ final class ReviewViewModel: ViewModel {
 	}
 	
 	@discardableResult
-	func addXP() -> Promise<Void>? {
+	func addXP(_ shouldGainXP: Bool) -> Promise<Void>? {
 		guard shouldGainXP else { return nil }
 		xpGained++
 		return user.documentReference.updateData([
@@ -107,12 +107,10 @@ final class ReviewViewModel: ViewModel {
 	
 	func showPopUp(
 		forRating rating: Card.PerformanceRating,
+		badge: (text: String, color: Color)?,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
-		let badge = current?.predictionMessageForRating(rating).map { text in
-			(text, rating.badgeColor)
-		}
 		switch rating {
 		case .easy:
 			showPopUp(emoji: "🎉", message: "Great!", badge: badge, onCentered: onCentered, completion: completion)
@@ -154,6 +152,8 @@ final class ReviewViewModel: ViewModel {
 		
 		cards.append(current)
 		
+		let gainXP = shouldGainXP
+		
 		reviewCardLoadingState.startLoading()
 		functions.httpsCallable("reviewCard").call(data: [
 			"deck": card.parent.id,
@@ -161,11 +161,12 @@ final class ReviewViewModel: ViewModel {
 			"rating": rating.rawValue,
 			"viewTime": 0 // TODO: Calculate this
 		]).done { _ in
-			self.addXP()
+			self.addXP(gainXP)
 			self.reviewCardLoadingState.succeed()
 		}.catch { error in
-			showAlert(title: "Unable to rate card", message: "Please try again")
+			showAlert(title: "Unable to rate card", message: "You will move on to the next card")
 			self.reviewCardLoadingState.fail(error: error)
+			self.loadNextCard()
 		}
 		
 		withAnimation(.easeIn(duration: 0.3)) {
@@ -176,6 +177,9 @@ final class ReviewViewModel: ViewModel {
 		
 		showPopUp(
 			forRating: rating,
+			badge: gainXP
+				? ("+1 xp", Card.PerformanceRating.easy.badgeColor.opacity(0.16))
+				: nil,
 			onCentered: {
 				if shouldShowRecap { return }
 				self.loadNextCard()

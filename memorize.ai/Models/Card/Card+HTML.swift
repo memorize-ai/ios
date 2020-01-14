@@ -1,6 +1,6 @@
 import HTML
 
-fileprivate let DEFAULT_FONT_SIZE = 45
+fileprivate let DEFAULT_FONT_SIZE = 20
 
 extension Card {
 	private static func htmlWithText(
@@ -42,7 +42,7 @@ extension Card {
 					.class("fr-view")
 					.fontFamily("sans-serif")
 					.fontSize("\(fontSize)px")
-					.margin("20px 30px")
+					.padding("0 15px")
 					.child(text)
 			}
 	}

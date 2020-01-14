@@ -67,7 +67,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	var isDue: Bool {
-		guard let userData = userData else { return true }
+		guard let userData = userData else { return false }
 		return userData.isNew || userData.dueDate <= .now
 	}
 	
@@ -159,11 +159,17 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func updateUserDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		guard snapshot.exists else {
+			userData = nil
+			return self
+		}
+		
 		if userData == nil {
 			userData = .init(snapshot: snapshot)
 		} else {
 			userData?.updateFromSnapshot(snapshot)
 		}
+		
 		return self
 	}
 	
