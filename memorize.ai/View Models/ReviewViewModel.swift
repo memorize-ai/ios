@@ -155,7 +155,12 @@ final class ReviewViewModel: ViewModel {
 			"card": card.id,
 			"rating": rating.rawValue,
 			"viewTime": 0 // TODO: Calculate this
-		]).done { _ in
+		]).done { result in
+			guard let isNewlyMastered = result.data as? Bool else {
+				self.reviewCardLoadingState.fail(message: "Malformed response")
+				return
+			}
+			current.isNewlyMastered = isNewlyMastered
 			self.reviewCardLoadingState.succeed()
 		}.catch { error in
 			showAlert(title: "Unable to rate card", message: "You will move on to the next card")

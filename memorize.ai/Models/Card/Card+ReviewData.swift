@@ -27,6 +27,8 @@ extension Card {
 		@Published var prediction: Prediction?
 		@Published var predictionLoadingState = LoadingState()
 		
+		@Published var isNewlyMastered: Bool?
+		
 		init(parent: Card) {
 			self.parent = parent
 		}
