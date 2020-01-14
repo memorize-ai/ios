@@ -687,6 +687,18 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
+	func card(withId cardId: String, sectionId: String? = nil) -> Card? {
+		if let sectionId = sectionId {
+			return sections.first { $0.id == sectionId }?.cards.first { $0.id == cardId }
+		}
+		for section in sections {
+			if let card = (section.cards.first { $0.id == cardId }) {
+				return card
+			}
+		}
+		return nil
+	}
+	
 	static func == (lhs: Deck, rhs: Deck) -> Bool {
 		lhs.id == rhs.id
 	}

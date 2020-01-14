@@ -2,7 +2,8 @@ import Foundation
 import FirebaseFirestore
 
 extension Deck {
-	struct UserData: Hashable {
+	struct UserData: Identifiable, Equatable, Hashable {
+		let id: String
 		let dateAdded: Date
 		
 		var isFavorite: Bool
@@ -14,6 +15,7 @@ extension Deck {
 		
 		#if DEBUG
 		init(
+			id: String = "",
 			dateAdded: Date = .now,
 			isFavorite: Bool = false,
 			numberOfDueCards: Int = 0,
@@ -22,6 +24,7 @@ extension Deck {
 			numberOfUnlockedCards: Int = 0,
 			rating: Int? = nil
 		) {
+			self.id = id
 			self.dateAdded = dateAdded
 			self.isFavorite = isFavorite
 			self.numberOfDueCards = numberOfDueCards
@@ -33,6 +36,7 @@ extension Deck {
 		#endif
 		
 		init(snapshot: DocumentSnapshot) {
+			id = snapshot.documentID
 			dateAdded = snapshot.getDate("added") ?? .now
 			isFavorite = snapshot.get("favorite") as? Bool ?? false
 			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
