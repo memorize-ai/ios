@@ -12,7 +12,7 @@ struct DecksViewSectionOptionsPopUp: View {
 	}
 	
 	var isLocked: Bool {
-		!section.isUnlocked(forUser: currentStore.user)
+		!section.isUnlocked
 	}
 	
 	var contentHeight: CGFloat {

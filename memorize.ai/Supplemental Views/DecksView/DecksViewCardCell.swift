@@ -56,14 +56,17 @@ struct DecksViewCardCell: View {
 								.foregroundColor(.darkGray)
 								.lineLimit(5)
 								.lineSpacing(1)
+								.layoutPriority(1)
 								.alignment(.leading)
 						}
 						.frame(minHeight: 40, alignment: .top)
-						Text(card.dueMessage)
-							.font(.muli(.bold, size: 12))
-							.foregroundColor(Color.darkGray.opacity(0.7))
-							.padding(.top, hasPreviewImage ? 0 : 4)
-							.alignment(.leading)
+						if !card.isNew {
+							Text(card.dueMessage)
+								.font(.muli(.bold, size: 12))
+								.foregroundColor(Color.darkGray.opacity(0.7))
+								.padding(.top, hasPreviewImage ? 0 : 4)
+								.alignment(.leading)
+						}
 					}
 					.padding(8)
 				}
@@ -94,7 +97,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				numberOfViews: 670,
 				numberOfReviews: 0,
 				numberOfSkips: 40,
-				userData: .init(dueDate: Date().addingTimeInterval(10000))
+				userData: .init(isNew: false, dueDate: Date().addingTimeInterval(10000))
 			))
 			.environmentObject(PREVIEW_CURRENT_STORE)
 			DecksViewCardCell(card: .init(
@@ -106,7 +109,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				numberOfViews: 670,
 				numberOfReviews: 0,
 				numberOfSkips: 40,
-				userData: .init(dueDate: Date().addingTimeInterval(-10000))
+				userData: .init(isNew: false, dueDate: Date().addingTimeInterval(-10000))
 			))
 			.environmentObject(PREVIEW_CURRENT_STORE)
 		}

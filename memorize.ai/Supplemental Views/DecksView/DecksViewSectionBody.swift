@@ -8,7 +8,7 @@ struct DecksViewSectionBody: View {
 	@ObservedObject var section: Deck.Section
 	
 	var isUnlocked: Bool {
-		section.isUnlocked(forUser: currentStore.user)
+		section.isUnlocked
 	}
 	
 	var isExpanded: Bool {
@@ -103,7 +103,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 					numberOfViews: 670,
 					numberOfReviews: 0,
 					numberOfSkips: 40,
-					userData: .init(dueDate: .now)
+					userData: .init(isNew: true, dueDate: .now)
 				),
 				.init(
 					id: "1",
@@ -114,7 +114,7 @@ struct DecksViewSectionBody_Previews: PreviewProvider {
 					numberOfViews: 670,
 					numberOfReviews: 0,
 					numberOfSkips: 40,
-					userData: .init(dueDate: .now)
+					userData: .init(isNew: false, dueDate: .now)
 				)
 			]
 		))

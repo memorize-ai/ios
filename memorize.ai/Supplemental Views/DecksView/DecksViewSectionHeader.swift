@@ -26,7 +26,7 @@ struct DecksViewSectionHeader: View {
 	
 	var body: some View {
 		HStack(spacing: 12) {
-			if !section.isUnlocked(forUser: currentStore.user) {
+			if !section.isUnlocked {
 				Image.lock
 					.resizable()
 					.aspectRatio(contentMode: .fit)

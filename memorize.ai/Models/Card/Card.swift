@@ -62,9 +62,13 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
+	var isNew: Bool {
+		userData?.isNew ?? true
+	}
+	
 	var isDue: Bool {
-		guard let dueDate = userData?.dueDate else { return false }
-		return dueDate <= .now
+		guard let userData = userData else { return true }
+		return userData.isNew || userData.dueDate <= .now
 	}
 	
 	var dueMessage: String {
@@ -140,6 +144,8 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
+		self.snapshot = snapshot
+		
 		let sectionId = snapshot.get("section") as? String ?? ""
 		self.sectionId = sectionId.isEmpty ? nil : sectionId
 		front = snapshot.get("front") as? String ?? front
@@ -147,19 +153,17 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfViews = snapshot.get("viewCount") as? Int ?? 0
 		numberOfReviews = snapshot.get("reviewCount") as? Int ?? 0
 		numberOfSkips = snapshot.get("skipCount") as? Int ?? 0
+		
 		return self
 	}
 	
 	@discardableResult
 	func updateUserDataFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
-		self.snapshot = snapshot
-		
 		if userData == nil {
 			userData = .init(snapshot: snapshot)
 		} else {
-			userData?.dueDate = snapshot.getDate("due") ?? .now
+			userData?.updateFromSnapshot(snapshot)
 		}
-		
 		return self
 	}
 	

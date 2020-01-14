@@ -180,7 +180,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func getDeck(withId deckId: String) -> Promise<Void> {
+	func getEmptyDeck(withId deckId: String) -> Promise<Void> {
 		documentReference.collection("decks").document(deckId).setData([
 			"added": FieldValue.serverTimestamp()
 		])

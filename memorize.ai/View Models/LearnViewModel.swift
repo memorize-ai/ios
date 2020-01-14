@@ -46,7 +46,7 @@ final class LearnViewModel: ViewModel {
 		self.deck = deck
 		self.section = section
 		
-		numberOfTotalCards = section?.numberOfCards ?? deck.numberOfCards
+		numberOfTotalCards = section?.numberOfCards ?? deck.numberOfUnlockedCards
 		currentSectionIndex = deck.hasUnsectionedCards ? -1 : 0
 	}
 	
@@ -113,7 +113,7 @@ final class LearnViewModel: ViewModel {
 	}
 	
 	func frequentSections(forRating rating: Card.PerformanceRating) -> [Deck.Section] {
-		([deck.unsectionedSection] + deck.sections).filter { section in
+		([deck.unsectionedSection] + deck.unlockedSections).filter { section in
 			let cards = reviewedCardsForSection(section)
 			
 			if cards.isEmpty { return false }
@@ -246,8 +246,8 @@ final class LearnViewModel: ViewModel {
 			if deck.hasUnsectionedCards {
 				currentSectionIndex = -1
 			} else {
-				for i in 0..<deck.sections.count {
-					if deck.sections[i].numberOfCards > 0 {
+				for i in 0..<deck.unlockedSections.count {
+					if deck.unlockedSections[i].numberOfCards > 0 {
 						currentSectionIndex = i
 						break
 					}
@@ -256,12 +256,12 @@ final class LearnViewModel: ViewModel {
 			return
 		}
 		if currentSectionCardIndex == currentSection.numberOfCards - 1 {
-			if currentSectionIndex == deck.sections.count - 1 {
+			if currentSectionIndex == deck.unlockedSections.count - 1 {
 				if deck.hasUnsectionedCards {
 					currentSectionIndex = -1
 				} else {
-					for i in 0..<deck.sections.count {
-						if deck.sections[i].numberOfCards > 0 {
+					for i in 0..<deck.unlockedSections.count {
+						if deck.unlockedSections[i].numberOfCards > 0 {
 							currentSectionIndex = i
 							break
 						}
@@ -269,16 +269,16 @@ final class LearnViewModel: ViewModel {
 				}
 			} else {
 				var didSetCurrentSectionIndex = false
-				for i in currentSectionIndex + 1..<deck.sections.count {
-					if deck.sections[i].numberOfCards > 0 {
+				for i in currentSectionIndex + 1..<deck.unlockedSections.count {
+					if deck.unlockedSections[i].numberOfCards > 0 {
 						currentSectionIndex = i
 						didSetCurrentSectionIndex = true
 						break
 					}
 				}
 				if !didSetCurrentSectionIndex {
-					for i in 0..<deck.sections.count {
-						if deck.sections[i].numberOfCards > 0 {
+					for i in 0..<deck.unlockedSections.count {
+						if deck.unlockedSections[i].numberOfCards > 0 {
 							currentSectionIndex = i
 							break
 						}
@@ -334,8 +334,9 @@ final class LearnViewModel: ViewModel {
 						self.currentCardLoadingState.succeed()
 					}
 					.catch { error in
-						showAlert(title: "Unable to load card", message: "Please try again")
+						showAlert(title: "Unable to load card", message: "You will move on to the next card")
 						self.currentCardLoadingState.fail(error: error)
+						self.loadNextCard()
 					}
 			}
 		} else if deck.sectionsLoadingState.didSucceed {
@@ -384,16 +385,18 @@ final class LearnViewModel: ViewModel {
 						self.currentCardLoadingState.succeed()
 					}
 					.catch { error in
-						showAlert(title: "Unable to load card", message: "Please try again")
+						showAlert(title: "Unable to load card", message: "You will move on to the next card")
 						self.currentCardLoadingState.fail(error: error)
+						self.loadNextCard()
 					}
 			}
 		} else {
 			currentCardLoadingState.startLoading()
 			deck.loadSections { error in
 				if let error = error {
-					showAlert(title: "Unable to load card", message: "Please try again")
+					showAlert(title: "Unable to load card", message: "You will move on to the next card")
 					self.currentCardLoadingState.fail(error: error)
+					self.loadNextCard()
 				} else {
 					self.loadNextCard(incrementCurrentIndex: false)
 					self.currentCardLoadingState.succeed()

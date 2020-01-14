@@ -130,7 +130,7 @@ final class PublishDeckViewModel: ViewModel {
 						deckId: deckId,
 						data: self.image?.compressedData
 					),
-					currentUser.getDeck(withId: deckId)
+					currentUser.getEmptyDeck(withId: deckId)
 				]).done {
 					self.publishLoadingState.succeed()
 					self.reset()

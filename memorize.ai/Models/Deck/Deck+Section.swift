@@ -75,6 +75,10 @@ extension Deck {
 			"\(WEB_URL)/d/\(parent.id)/s/\(id)/u"
 		}
 		
+		var isUnlocked: Bool {
+			parent.userData?.isSectionUnlocked(withId: id) ?? false
+		}
+		
 		@discardableResult
 		func addObserver() -> Self {
 			guard snapshotListener == nil else { return self }
@@ -128,11 +132,6 @@ extension Deck {
 			index = snapshot.get("index") as? Int ?? index
 			numberOfCards = snapshot.get("cardCount") as? Int ?? 0
 			return self
-		}
-		
-		func isUnlocked(forUser user: User) -> Bool {
-			user.id == parent.creatorId ||
-			parent.userData?.isSectionUnlocked(withId: id) ?? false
 		}
 		
 		func contains(card: Card) -> Bool {

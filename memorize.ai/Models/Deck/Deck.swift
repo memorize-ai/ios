@@ -260,6 +260,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfUnsectionedCards > 0
 	}
 	
+	var unlockedSections: [Section] {
+		sections.filter { $0.isUnlocked }
+	}
+	
+	var numberOfUnlockedCards: Int {
+		userData?.numberOfUnlockedCards ?? 0
+	}
+	
 	@discardableResult
 	func addObserver() -> Self {
 		guard snapshotListener == nil else { return self }
@@ -501,16 +509,47 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func get(user: User) -> Self {
 		getLoadingState.startLoading()
-		firestore.document("users/\(user.id)/decks/\(id)").setData([
+		
+		if sectionsLoadingState.didSucceed {
+			get(user: user, firstSection: sections.first)
+		} else {
+			firestore
+				.collection("decks/\(id)/sections")
+				.order(by: "index")
+				.limit(to: 1)
+				.getDocuments()
+				.done { snapshot in
+					self.get(
+						user: user,
+						firstSection: snapshot.documents.first.map {
+							Section(parent: self, snapshot: $0)
+						}
+					)
+				}
+				.catch { error in
+					self.getLoadingState.fail(error: error)
+				}
+		}
+		
+		return self
+	}
+	
+	private func get(user: User, firstSection: Section?) {
+		var data: [String: Any] = [
 			"added": FieldValue.serverTimestamp(),
-			"dueCardCount": numberOfCards,
+			"dueCardCount": numberOfUnsectionedCards + (firstSection?.numberOfCards ?? 0),
 			"unsectionedDueCardCount": numberOfUnsectionedCards
-		]).done {
+		]
+		
+		if let firstSection = firstSection {
+			data["sections"] = [firstSection.id: firstSection.numberOfCards]
+		}
+		
+		firestore.document("users/\(user.id)/decks/\(id)").setData(data).done {
 			self.getLoadingState.succeed()
 		}.catch { error in
 			self.getLoadingState.fail(error: error)
 		}
-		return self
 	}
 	
 	@discardableResult
@@ -563,12 +602,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		if userData == nil {
 			userData = .init(snapshot: snapshot)
 		} else {
-			userData?.isFavorite = snapshot.get("favorite") as? Bool ?? false
-			userData?.numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
-			userData?.numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
-			userData?.sections = snapshot.get("sections") as? [String: Int] ?? [:]
-			let newRating = snapshot.get("rating") as? Int
-			userData?.rating = newRating == 0 ? nil : newRating
+			userData?.updateFromSnapshot(snapshot)
 		}
 		return self
 	}

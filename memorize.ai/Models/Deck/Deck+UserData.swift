@@ -9,6 +9,7 @@ extension Deck {
 		var numberOfDueCards: Int
 		var numberOfUnsectionedDueCards: Int
 		var sections: [String: Int]
+		var numberOfUnlockedCards: Int
 		var rating: Int?
 		
 		#if DEBUG
@@ -18,6 +19,7 @@ extension Deck {
 			numberOfDueCards: Int = 0,
 			numberOfUnsectionedDueCards: Int = 0,
 			sections: [String: Int] = [:],
+			numberOfUnlockedCards: Int = 0,
 			rating: Int? = nil
 		) {
 			self.dateAdded = dateAdded
@@ -25,6 +27,7 @@ extension Deck {
 			self.numberOfDueCards = numberOfDueCards
 			self.numberOfUnsectionedDueCards = numberOfUnsectionedDueCards
 			self.sections = sections
+			self.numberOfUnlockedCards = numberOfUnlockedCards
 			self.rating = rating
 		}
 		#endif
@@ -35,6 +38,7 @@ extension Deck {
 			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
 			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			sections = snapshot.get("sections") as? [String: Int] ?? [:]
+			numberOfUnlockedCards = snapshot.get("unlockedCardCount") as? Int ?? 0
 			let newRating = snapshot.get("rating") as? Int
 			rating = newRating == 0 ? nil : newRating
 		}
@@ -50,7 +54,17 @@ extension Deck {
 		}
 		
 		func isSectionUnlocked(withId sectionId: String) -> Bool {
-			sections[sectionId] != nil
+			sectionId == "" || sections[sectionId] != nil
+		}
+		
+		mutating func updateFromSnapshot(_ snapshot: DocumentSnapshot) {
+			isFavorite = snapshot.get("favorite") as? Bool ?? false
+			numberOfDueCards = snapshot.get("dueCardCount") as? Int ?? 0
+			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
+			sections = snapshot.get("sections") as? [String: Int] ?? [:]
+			numberOfUnlockedCards = snapshot.get("unlockedCardCount") as? Int ?? 0
+			let newRating = snapshot.get("rating") as? Int
+			rating = newRating == 0 ? nil : newRating
 		}
 	}
 }

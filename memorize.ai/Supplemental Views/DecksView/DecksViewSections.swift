@@ -9,7 +9,8 @@ struct DecksViewSections: View {
 	var sections: [Deck.Section] {
 		(selectedDeck.hasUnsectionedCards
 			? [selectedDeck.unsectionedSection]
-			: []) +
+			: []
+		) +
 		selectedDeck.sections
 	}
 	
