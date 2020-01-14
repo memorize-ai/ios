@@ -39,9 +39,6 @@ struct LearnRecapView: View {
 				}
 			}
 		}
-		.onAppear {
-			self.model.addXP(toUser: self.currentStore.user)
-		}
 	}
 }
 

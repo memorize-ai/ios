@@ -86,14 +86,6 @@ final class LearnViewModel: ViewModel {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
-	func addXP(toUser user: User) {
-		guard shouldGainXP else { return }
-		xpGained++
-		return user.documentReference.updateData([
-			"xp": FieldValue.increment(1.0)
-		])
-	}
-	
 	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {
 		cards.reduce(0) { acc, card in
 			acc + card.ratings.filter { $0 == rating }.count
@@ -218,7 +210,13 @@ final class LearnViewModel: ViewModel {
 	
 	func rateCurrentCard(withRating rating: Card.PerformanceRating, user: User) {
 		current?.addRating(rating)
-		addXP(toUser: user)
+		
+		let gainXP = shouldGainXP
+		
+		if gainXP {
+			xpGained++
+		}
+				
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
@@ -229,6 +227,12 @@ final class LearnViewModel: ViewModel {
 				self.loadNextCard()
 			},
 			completion: {
+				if gainXP {
+					user.documentReference.updateData([
+						"xp": FieldValue.increment(1.0)
+					]) as Void
+				}
+				
 				guard self.isAllMastered else { return }
 				self.shouldShowRecap = true
 			}

@@ -70,14 +70,6 @@ final class ReviewViewModel: ViewModel {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
-	func addXP(_ shouldGainXP: Bool) {
-		guard shouldGainXP else { return }
-		xpGained++
-		return user.documentReference.updateData([
-			"xp": FieldValue.increment(1.0)
-		])
-	}
-	
 	func showPopUp(
 		emoji: String,
 		message: String,
@@ -153,6 +145,10 @@ final class ReviewViewModel: ViewModel {
 		
 		let gainXP = true//shouldGainXP
 		
+		if gainXP {
+			xpGained++
+		}
+		
 		reviewCardLoadingState.startLoading()
 		functions.httpsCallable("reviewCard").call(data: [
 			"deck": card.parent.id,
@@ -160,7 +156,6 @@ final class ReviewViewModel: ViewModel {
 			"rating": rating.rawValue,
 			"viewTime": 0 // TODO: Calculate this
 		]).done { _ in
-//			self.addXP(gainXP)
 			self.reviewCardLoadingState.succeed()
 		}.catch { error in
 			showAlert(title: "Unable to rate card", message: "You will move on to the next card")
@@ -184,6 +179,12 @@ final class ReviewViewModel: ViewModel {
 				self.loadNextCard()
 			},
 			completion: {
+				if gainXP {
+					self.user.documentReference.updateData([
+						"xp": FieldValue.increment(1.0)
+					]) as Void
+				}
+				
 				guard shouldShowRecap else { return }
 				self.shouldShowRecap = true
 			}
