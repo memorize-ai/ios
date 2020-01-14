@@ -33,7 +33,7 @@ struct ReviewViewCardSection: View {
 							if self.model.currentCard == nil {
 								ActivityIndicator(color: .gray)
 							} else {
-								LearnViewCardContent(
+								ReviewViewCardContent(
 									card: self.model.currentCard!
 								)
 							}

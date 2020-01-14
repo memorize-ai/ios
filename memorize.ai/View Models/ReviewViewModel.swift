@@ -194,7 +194,7 @@ final class ReviewViewModel: ViewModel {
 	}
 	
 	func updateCurrentCard(to card: Card) {
-		current = .init(parent: card)
+		current = Card.ReviewData(parent: card).loadPrediction()
 		currentSide = .front
 	}
 	
@@ -215,16 +215,23 @@ final class ReviewViewModel: ViewModel {
 			let deck = section.parent
 			
 			func updateCurrentCard(withId cardId: String) {
-				firestore
-					.document("decks/\(deck.id)/cards/\(cardId)")
-					.getDocument()
-					.done { snapshot in
-						self.updateCurrentCard(to: .init(
-							snapshot: snapshot,
-							parent: deck
-						))
-					}
-					.catch(failCurrentCardLoadingState)
+				if
+					section.cardsLoadingState.didSucceed,
+					let card = (section.cards.first { $0.id == cardId })
+				{
+					self.updateCurrentCard(to: card)
+				} else {
+					firestore
+						.document("decks/\(deck.id)/cards/\(cardId)")
+						.getDocument()
+						.done { snapshot in
+							self.updateCurrentCard(to: .init(
+								snapshot: snapshot,
+								parent: deck
+							))
+						}
+						.catch(failCurrentCardLoadingState)
+				}
 			}
 			
 			var query = user.documentReference
