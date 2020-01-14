@@ -22,7 +22,7 @@ struct ReviewView: View {
 							.padding(.top, 6)
 							.padding(.horizontal, 8)
 						ReviewViewFooter()
-							.frame(height: 80)
+							.padding(.top, 16)
 					}
 				}
 				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
@@ -54,13 +54,15 @@ struct ReviewView: View {
 #if DEBUG
 struct ReviewView_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewView()
+		let model = ReviewViewModel(
+			user: PREVIEW_CURRENT_STORE.user,
+			deck: nil,
+			section: nil
+		)
+		model.isWaitingForRating = true
+		return ReviewView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(ReviewViewModel(
-				user: PREVIEW_CURRENT_STORE.user,
-				deck: nil,
-				section: nil
-			))
+			.environmentObject(model)
 	}
 }
 #endif

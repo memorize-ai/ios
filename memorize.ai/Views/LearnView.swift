@@ -29,7 +29,7 @@ struct LearnView: View {
 							.padding(.top, 6)
 							.padding(.horizontal, 8)
 						LearnViewFooter()
-							.frame(height: 80)
+							.padding(.top, 16)
 					}
 				}
 				.blur(radius: self.model.isPopUpShowing ? 5 : 0)
@@ -61,12 +61,14 @@ struct LearnView: View {
 #if DEBUG
 struct LearnView_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnView()
+		let model = LearnViewModel(
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			section: nil
+		)
+		model.isWaitingForRating = true
+		return LearnView()
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+			.environmentObject(model)
 	}
 }
 #endif
