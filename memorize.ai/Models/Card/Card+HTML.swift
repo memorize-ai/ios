@@ -6,6 +6,11 @@ extension Card {
 			.child {
 				HTMLElement.head
 					.child {
+						HTMLElement.meta
+							.name("viewport")
+							.content("width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1")
+					}
+					.child {
 						HTMLElement.link
 							.rel("stylesheet")
 							.href("froala.css")
