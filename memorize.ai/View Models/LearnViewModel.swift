@@ -229,7 +229,7 @@ final class LearnViewModel: ViewModel {
 			completion: {
 				if gainXP {
 					user.documentReference.updateData([
-						"xp": FieldValue.increment(1.0)
+						"xp": FieldValue.increment(1 as Int64)
 					]) as Void
 				}
 				
