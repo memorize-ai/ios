@@ -17,10 +17,10 @@ struct LearnViewFooter: View {
 				HStack {
 					Text(rating.emoji)
 					Text(rating.title.uppercased())
-						.font(.muli(.bold, size: 14))
 						.foregroundColor(.darkGray)
 						.shrinks()
 				}
+				.font(.muli(.extraBold, size: 14))
 				.padding(.horizontal)
 				.frame(
 					width: (SCREEN_SIZE.width - 8 * 4) / 3,
