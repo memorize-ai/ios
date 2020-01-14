@@ -13,7 +13,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	) -> Bool {
 		FirebaseApp.configure()
 		
-		GIDSignIn.sharedInstance().clientID = FIREBASE_CLIENT_ID
+		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
 		
 		StoreReview.onStartup()
