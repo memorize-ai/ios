@@ -188,8 +188,9 @@ final class ReviewViewModel: ViewModel {
 	}
 	
 	func failCurrentCardLoadingState(withError error: Error) {
-		showAlert(title: "Unable to load card", message: "Please try again")
+		showAlert(title: "Unable to load card", message: "You will move on to the next card")
 		currentCardLoadingState.fail(error: error)
+		loadNextCard()
 	}
 	
 	func updateCurrentCard(to card: Card) {
@@ -199,58 +200,69 @@ final class ReviewViewModel: ViewModel {
 	
 	func loadNextCard(
 		incrementCurrentIndex: Bool = true,
-		startLoading: Bool = true
+		startLoading: Bool = true,
+		continueFromSnapshot: Bool = true
 	) {
 		if incrementCurrentIndex {
 			currentIndex++
 		}
 		
 		if let section = section { // Reviewing section
+			if startLoading {
+				currentCardLoadingState.startLoading()
+			}
+			
+			let deck = section.parent
+			
+			func updateCurrentCard(withId cardId: String) {
+				firestore
+					.document("decks/\(deck.id)/cards/\(cardId)")
+					.getDocument()
+					.done { snapshot in
+						self.updateCurrentCard(to: .init(
+							snapshot: snapshot,
+							parent: deck
+						))
+					}
+					.catch(failCurrentCardLoadingState)
+			}
+			
+			var query = user.documentReference
+				.collection("decks/\(deck.id)/cards")
+				.limit(to: 1)
+				.whereField("section", isEqualTo: section.id)
+			
+			if continueFromSnapshot, let currentCardSnapshot = currentCard?.snapshot {
+				query = query.start(afterDocument: currentCardSnapshot)
+			}
+			
 			if isReviewingNewCards {
-				let deck = section.parent
-				
-				var query = deck.documentReference
-					.collection("cards")
-					.whereField("section", isEqualTo: section.id)
-				
-				cards.map(~\.parent.id).sorted()
-			} else {
-				if startLoading {
-					currentCardLoadingState.startLoading()
-				}
-				
-				let deck = section.parent
-				
-				var query = user.documentReference
-					.collection("decks/\(deck.id)/cards")
-					.whereField("section", isEqualTo: section.id)
-					.whereField("due", isLessThanOrEqualTo: Date())
-					.order(by: "due")
-				
-				if let currentCardSnapshot = currentCard?.snapshot {
-					query = query.start(afterDocument: currentCardSnapshot)
-				}
-				
 				query
-					.limit(to: 1)
+					.whereField("new", isEqualTo: true)
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
-							firestore
-								.document("decks/\(deck.id)/cards/\(cardId)")
-								.getDocument()
-								.done { snapshot in
-									self.updateCurrentCard(to: .init(
-										snapshot: snapshot,
-										parent: deck
-									))
-								}
-								.catch(self.failCurrentCardLoadingState)
+							updateCurrentCard(withId: cardId)
+						} else {
+							self.shouldShowRecap = true
+						}
+					}
+					.catch(failCurrentCardLoadingState)
+			} else {
+				query
+					.whereField("new", isEqualTo: false)
+					.whereField("due", isLessThanOrEqualTo: Date())
+					.order(by: "due")
+					.getDocuments()
+					.done { snapshot in
+						if let cardId = snapshot.documents.first?.documentID {
+							updateCurrentCard(withId: cardId)
 						} else {
 							self.isReviewingNewCards = true
 							self.loadNextCard(
 								incrementCurrentIndex: false,
-								startLoading: false
+								startLoading: false,
+								continueFromSnapshot: false
 							)
 						}
 					}
