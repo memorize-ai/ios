@@ -179,15 +179,19 @@ extension Deck {
 		
 		@discardableResult
 		func unlock(forUser user: User) -> Self {
+			let incrementByNumberOfCards = FieldValue.increment(Int64(numberOfCards))
+			
 			unlockLoadingState.startLoading()
 			user.documentReference.collection("decks").document(parent.id).updateData([
-				"unlockedCardCount": FieldValue.increment(Int64(numberOfCards)),
+				"dueCardCount": incrementByNumberOfCards,
+				"unlockedCardCount": incrementByNumberOfCards,
 				"sections.\(id)": numberOfCards
 			]).done {
 				self.unlockLoadingState.succeed()
 			}.catch { error in
 				self.unlockLoadingState.fail(error: error)
 			}
+			
 			return self
 		}
 		
