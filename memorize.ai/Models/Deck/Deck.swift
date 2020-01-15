@@ -346,8 +346,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				case .added:
 					self.sections.append(.init(parent: self, snapshot: document))
 				case .modified:
-					self.sections.first { $0.id == sectionId }?
-						.updateFromSnapshot(document)
+					self.section(withId: sectionId)?.updateFromSnapshot(document)
 				case .removed:
 					self.sections.removeAll { $0.id == sectionId }
 				}
@@ -687,9 +686,15 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
+	func section(withId sectionId: String) -> Section? {
+		sectionId.isEmpty
+			? unsectionedSection
+			: sections.first { $0.id == sectionId }
+	}
+	
 	func card(withId cardId: String, sectionId: String? = nil) -> Card? {
 		if let sectionId = sectionId {
-			return sections.first { $0.id == sectionId }?.cards.first { $0.id == cardId }
+			return section(withId: sectionId)?.cards.first { $0.id == cardId }
 		}
 		for section in sections {
 			if let card = (section.cards.first { $0.id == cardId }) {

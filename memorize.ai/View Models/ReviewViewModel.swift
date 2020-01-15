@@ -284,7 +284,12 @@ final class ReviewViewModel: ViewModel {
 					}
 					.catch(failCurrentCardLoadingState)
 			}
-		} else if let deck = deck, let currentSection = currentSection {
+		} else if let deck = deck {
+			guard let currentSection = currentSection else {
+				self.shouldShowRecap = true
+				return
+			}
+			
 			guard deck.sectionsLoadingState.didSucceed else {
 				deck.loadSections { error in
 					if let error = error {
@@ -301,7 +306,7 @@ final class ReviewViewModel: ViewModel {
 			}
 			
 			func updateCurrentCard(withId cardId: String, sectionId: String) {
-				self.currentSection = deck.sections.first { $0.id == sectionId }
+				self.currentSection = deck.section(withId: sectionId)
 				
 				if let card = deck.card(withId: cardId, sectionId: sectionId) {
 					self.updateCurrentCard(to: card)
@@ -385,6 +390,7 @@ final class ReviewViewModel: ViewModel {
 					.catch(failCurrentCardLoadingState)
 			}
 		} else {
+			print("deck: \(deck), currentSection: \(currentSection)")
 			print("REVIEWING_ALL_CARDS") // TODO: Review all cards
 		}
 	}

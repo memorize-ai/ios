@@ -37,7 +37,7 @@ extension Card {
 			self.id = id
 			self.parent = parent
 			self.sectionId = sectionId
-			section = parent.sections.first { $0.id == sectionId }
+			section = parent.section(withId: sectionId ?? "")
 			self.front = front
 			self.back = back
 			self.onChange = onChange

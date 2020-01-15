@@ -34,9 +34,7 @@ struct AddCardsViewAddSectionPopUp: View {
 		) {
 			Button(action: {
 				self.deck.showCreateSectionAlert { sectionId in
-					self.card.section = self.deck.sections.first {
-						$0.id == sectionId
-					}
+					self.card.section = self.deck.section(withId: sectionId)
 				}
 			}) {
 				CustomRectangle(background: Color.mediumGray) {
