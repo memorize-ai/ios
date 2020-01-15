@@ -534,10 +534,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	private func get(user: User, firstSection: Section?) {
+		let numberOfUnlockedCards = numberOfUnsectionedCards + (firstSection?.numberOfCards ?? 0)
+		
 		var data: [String: Any] = [
 			"added": FieldValue.serverTimestamp(),
-			"dueCardCount": numberOfUnsectionedCards + (firstSection?.numberOfCards ?? 0),
-			"unsectionedDueCardCount": numberOfUnsectionedCards
+			"dueCardCount": numberOfUnlockedCards,
+			"unsectionedDueCardCount": numberOfUnsectionedCards,
+			"unlockedCardCount": numberOfUnlockedCards
 		]
 		
 		if let firstSection = firstSection {
