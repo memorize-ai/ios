@@ -181,6 +181,7 @@ extension Deck {
 		func unlock(forUser user: User) -> Self {
 			unlockLoadingState.startLoading()
 			user.documentReference.collection("decks").document(parent.id).updateData([
+				"unlockedCardCount": FieldValue.increment(Int64(numberOfCards)),
 				"sections.\(id)": numberOfCards
 			]).done {
 				self.unlockLoadingState.succeed()
