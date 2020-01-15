@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
+import PromiseKit
 import LoadingState
 
 final class Card: ObservableObject, Identifiable, Equatable, Hashable {
@@ -171,6 +172,19 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 		
 		return self
+	}
+	
+	@discardableResult
+	func review(rating: PerformanceRating, viewTime: Int) -> Promise<Any> {
+		functions.httpsCallable("reviewCard")
+			.call(data: [
+				"deck": parent.id,
+				"section": sectionId ?? "",
+				"card": id,
+				"rating": rating.rawValue,
+				"viewTime": viewTime
+			])
+			.map { $0.data }
 	}
 	
 	@discardableResult

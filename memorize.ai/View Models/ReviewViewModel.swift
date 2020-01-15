@@ -29,6 +29,9 @@ final class ReviewViewModel: ViewModel {
 	@Published var currentIndex = -1
 	@Published var currentSide = Card.Side.front
 	
+	@Published var currentSection: Deck.Section?
+//	@Published var currentSectionIndex: Int
+	
 	@Published var isWaitingForRating = false
 	
 	@Published var shouldShowRecap = false
@@ -56,6 +59,10 @@ final class ReviewViewModel: ViewModel {
 			section?.numberOfDueCards
 				?? deck?.userData?.numberOfDueCards
 					?? user.numberOfDueCards
+		
+//		let hasUnsectionedDueCards = (deck?.userData?.numberOfUnsectionedDueCards ?? 0) > 0
+//		currentSectionIndex = hasUnsectionedDueCards ? -1 : 0
+		currentSection = deck?.unsectionedSection
 	}
 	
 	var currentCard: Card? {
@@ -150,13 +157,8 @@ final class ReviewViewModel: ViewModel {
 		}
 		
 		reviewCardLoadingState.startLoading()
-		functions.httpsCallable("reviewCard").call(data: [
-			"deck": card.parent.id,
-			"card": card.id,
-			"rating": rating.rawValue,
-			"viewTime": 0 // TODO: Calculate this
-		]).done { result in
-			guard let isNewlyMastered = result.data as? Bool else {
+		card.review(rating: rating, viewTime: 0 /* TODO: Calculate this */).done { response in
+			guard let isNewlyMastered = response as? Bool else {
 				self.reviewCardLoadingState.fail(message: "Malformed response")
 				return
 			}
@@ -282,8 +284,25 @@ final class ReviewViewModel: ViewModel {
 					}
 					.catch(failCurrentCardLoadingState)
 			}
-		} else if let deck = deck {
+		} else if let deck = deck, let currentSection = currentSection {
+			guard deck.sectionsLoadingState.didSucceed else {
+				deck.loadSections { error in
+					if let error = error {
+						self.failCurrentCardLoadingState(withError: error)
+					} else {
+						self.loadNextCard(
+							incrementCurrentIndex: false,
+							startLoading: false,
+							continueFromSnapshot: continueFromSnapshot
+						)
+					}
+				}
+				return
+			}
+			
 			func updateCurrentCard(withId cardId: String, sectionId: String) {
+				self.currentSection = deck.sections.first { $0.id == sectionId }
+				
 				if let card = deck.card(withId: cardId, sectionId: sectionId) {
 					self.updateCurrentCard(to: card)
 				} else {
@@ -300,32 +319,70 @@ final class ReviewViewModel: ViewModel {
 				}
 			}
 			
+			var query = user.documentReference
+				.collection("decks/\(deck.id)/cards")
+				.limit(to: 1)
+			
+			if continueFromSnapshot, let currentCardSnapshot = currentCard?.snapshot {
+				query = query.start(afterDocument: currentCardSnapshot)
+			}
+			
 			if isReviewingNewCards {
-				// TODO: Review new cards
+				query
+					.whereField("new", isEqualTo: true)
+					.whereField("section", isEqualTo: currentSection.id)
+					.getDocuments()
+					.done { snapshot in
+						if let cardId = snapshot.documents.first?.documentID {
+							updateCurrentCard(withId: cardId, sectionId: currentSection.id)
+						} else {
+							func setCurrentSection(to section: Deck.Section) {
+								self.currentSection = section
+								self.loadNextCard(
+									incrementCurrentIndex: false,
+									startLoading: false,
+									continueFromSnapshot: false
+								)
+							}
+							
+							let unlockedSections = deck.unlockedSections
+							
+							if currentSection.isUnsectioned {
+								if let newCurrentSection = unlockedSections.first {
+									setCurrentSection(to: newCurrentSection)
+								} else {
+									self.shouldShowRecap = true
+								}
+							} else if
+								let currentSectionIndex = unlockedSections.firstIndex(of: currentSection),
+								let newCurrentSection = unlockedSections[safe: currentSectionIndex + 1]
+							{
+								setCurrentSection(to: newCurrentSection)
+							} else {
+								self.shouldShowRecap = true
+							}
+						}
+					}
+					.catch(failCurrentCardLoadingState)
 			} else {
-				var query = user.documentReference
-					.collection("decks/\(deck.id)/cards")
+				query
 					.whereField("new", isEqualTo: false)
 					.whereField("due", isLessThanOrEqualTo: Date())
 					.order(by: "due")
-					.limit(to: 1)
-				
-				if continueFromSnapshot, let currentCardSnapshot = currentCard?.snapshot {
-					query = query.start(afterDocument: currentCardSnapshot)
-				}
-				
-				query.getDocuments().done { snapshot in
-					if let userData = snapshot.documents.first.map(Card.UserData.init) {
-						updateCurrentCard(withId: userData.id, sectionId: userData.sectionId)
-					} else {
-						self.isReviewingNewCards = true
-						self.loadNextCard(
-							incrementCurrentIndex: false,
-							startLoading: false,
-							continueFromSnapshot: false
-						)
+					.getDocuments()
+					.done { snapshot in
+						if let userData = snapshot.documents.first.map(Card.UserData.init) {
+							updateCurrentCard(withId: userData.id, sectionId: userData.sectionId)
+						} else {
+							self.isReviewingNewCards = true
+							self.loadNextCard(
+								incrementCurrentIndex: false,
+								startLoading: false,
+								continueFromSnapshot: false
+							)
+						}
 					}
-				}.catch(failCurrentCardLoadingState)
+					.catch(failCurrentCardLoadingState)
 			}
 		} else {
 			print("REVIEWING_ALL_CARDS") // TODO: Review all cards
