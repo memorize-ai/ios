@@ -390,7 +390,6 @@ final class ReviewViewModel: ViewModel {
 					.catch(failCurrentCardLoadingState)
 			}
 		} else {
-			print("deck: \(deck), currentSection: \(currentSection)")
 			print("REVIEWING_ALL_CARDS") // TODO: Review all cards
 		}
 	}
