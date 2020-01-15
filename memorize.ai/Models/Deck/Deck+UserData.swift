@@ -58,7 +58,7 @@ extension Deck {
 		}
 		
 		func isSectionUnlocked(withId sectionId: String) -> Bool {
-			sectionId == "" || sections[sectionId] != nil
+			sectionId.isEmpty || sections[sectionId] != nil
 		}
 		
 		mutating func updateFromSnapshot(_ snapshot: DocumentSnapshot) {
