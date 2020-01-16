@@ -30,7 +30,6 @@ final class ReviewViewModel: ViewModel {
 	@Published var currentSide = Card.Side.front
 	
 	@Published var currentSection: Deck.Section?
-//	@Published var currentSectionIndex: Int
 	
 	@Published var isWaitingForRating = false
 	
@@ -60,8 +59,6 @@ final class ReviewViewModel: ViewModel {
 				?? deck?.userData?.numberOfDueCards
 					?? user.numberOfDueCards
 		
-//		let hasUnsectionedDueCards = (deck?.userData?.numberOfUnsectionedDueCards ?? 0) > 0
-//		currentSectionIndex = hasUnsectionedDueCards ? -1 : 0
 		currentSection = deck?.unsectionedSection
 	}
 	
