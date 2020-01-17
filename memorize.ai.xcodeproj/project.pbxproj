@@ -121,6 +121,7 @@
 		4D5C405823C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */; };
 		4D5C405A23C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */; };
 		4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */; };
+		4D60858023D14C2D00437A78 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60857F23D14C2D00437A78 /* Query.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth.swift */; };
 		4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage.swift */; };
 		4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */; };
@@ -414,6 +415,7 @@
 		4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRow.swift; sourceTree = "<group>"; };
 		4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCell.swift; sourceTree = "<group>"; };
 		4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCellContent.swift; sourceTree = "<group>"; };
+		4D60857F23D14C2D00437A78 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		4D6097682342FEC2002F1643 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewRecommendedDecksSection.swift; path = memorize.ai/HomeViewRecommendedDecksSection.swift; sourceTree = SOURCE_ROOT; };
@@ -684,6 +686,7 @@
 				4D1F9B2A233EDEB200693571 /* FirebaseFirestore.swift */,
 				4D6097682342FEC2002F1643 /* FirebaseStorage.swift */,
 				4D5C403E23C81DE100511B7C /* FirebaseFunctions.swift */,
+				4D60857F23D14C2D00437A78 /* Query.swift */,
 				4DF8C96023656C9E001141C9 /* GIDSignIn.swift */,
 				4D402E71235E591E0011C6B6 /* Color.swift */,
 				4D32A5312368FB710072AA70 /* Image.swift */,
@@ -1806,6 +1809,7 @@
 				4D56FC5123C558AF006366FD /* Card+LearnData.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
+				4D60858023D14C2D00437A78 /* Query.swift in Sources */,
 				4D458A3B237BEBCD00A9776A /* MainTabViewItem.swift in Sources */,
 				4D56FC4D23C54F29006366FD /* Collection.swift in Sources */,
 				4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */,

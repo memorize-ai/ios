@@ -5,7 +5,7 @@ struct AddCardsViewAddSectionPopUpSectionRow: View {
 	@ObservedObject var card: Card.Draft
 	
 	var isSelected: Bool {
-		card.sectionId == section.id
+		section.contains(card: card)
 	}
 	
 	var body: some View {

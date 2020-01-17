@@ -312,15 +312,10 @@ final class LearnViewModel: ViewModel {
 			} else {
 				currentCardLoadingState.startLoading()
 				
-				var query = deck.documentReference
+				deck.documentReference
 					.collection("cards")
 					.whereField("section", isEqualTo: section.id)
-				
-				if let currentCardSnapshot = currentCard?.snapshot {
-					query = query.start(afterDocument: currentCardSnapshot)
-				}
-				
-				query
+					.start(afterDocument: currentCard?.snapshot)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
@@ -365,7 +360,7 @@ final class LearnViewModel: ViewModel {
 				
 				if
 					let currentCard = currentCard,
-					currentCard.sectionId == currentSection.id,
+					currentSection.contains(card: currentCard),
 					let currentCardSnapshot = currentCard.snapshot
 				{
 					query = query.start(afterDocument: currentCardSnapshot)

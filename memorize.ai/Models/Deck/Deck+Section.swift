@@ -138,6 +138,10 @@ extension Deck {
 			card.sectionId == (id.isEmpty ? nil : id)
 		}
 		
+		func contains(card: Card.Draft) -> Bool {
+			card.sectionId == (id.isEmpty ? nil : id)
+		}
+		
 		@discardableResult
 		func showRenameAlert(title: String = "Rename section", message: String? = nil) -> Self {
 			showAlert(title: title, message: message) { alert in

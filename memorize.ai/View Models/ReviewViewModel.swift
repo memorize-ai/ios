@@ -240,18 +240,13 @@ final class ReviewViewModel: ViewModel {
 				}
 			}
 			
-			var query = user.documentReference
-				.collection("decks/\(deck.id)/cards")
-				.limit(to: 1)
-				.whereField("section", isEqualTo: section.id)
-			
-			if continueFromSnapshot, let currentCardSnapshot = currentCard?.snapshot {
-				query = query.start(afterDocument: currentCardSnapshot)
-			}
-			
 			if isReviewingNewCards {
-				query
+				user.documentReference
+					.collection("decks/\(deck.id)/cards")
+					.whereField("section", isEqualTo: section.id)
 					.whereField("new", isEqualTo: true)
+					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
@@ -262,10 +257,14 @@ final class ReviewViewModel: ViewModel {
 					}
 					.catch(failCurrentCardLoadingState)
 			} else {
-				query
+				user.documentReference
+					.collection("decks/\(deck.id)/cards")
+					.whereField("section", isEqualTo: section.id)
 					.whereField("new", isEqualTo: false)
 					.whereField("due", isLessThanOrEqualTo: Date())
 					.order(by: "due")
+					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
@@ -321,18 +320,13 @@ final class ReviewViewModel: ViewModel {
 				}
 			}
 			
-			var query = user.documentReference
-				.collection("decks/\(deck.id)/cards")
-				.limit(to: 1)
-			
-			if continueFromSnapshot, let currentCardSnapshot = currentCard?.snapshot {
-				query = query.start(afterDocument: currentCardSnapshot)
-			}
-			
 			if isReviewingNewCards {
-				query
-					.whereField("new", isEqualTo: true)
+				user.documentReference
+					.collection("decks/\(deck.id)/cards")
 					.whereField("section", isEqualTo: currentSection.id)
+					.whereField("new", isEqualTo: true)
+					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
@@ -367,10 +361,13 @@ final class ReviewViewModel: ViewModel {
 					}
 					.catch(failCurrentCardLoadingState)
 			} else {
-				query
+				user.documentReference
+					.collection("decks/\(deck.id)/cards")
 					.whereField("new", isEqualTo: false)
 					.whereField("due", isLessThanOrEqualTo: Date())
 					.order(by: "due")
+					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
 						if let userData = snapshot.documents.first.map(Card.UserData.init) {
