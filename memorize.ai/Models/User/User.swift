@@ -13,9 +13,15 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfDecks: Int
 	@Published var xp: Int
 	@Published var allDecks: [String]
-	@Published var decks: [Deck]
+	@Published var decks: [Deck] {
+		didSet {
+			onDecksChange?(decks)
+		}
+	}
 	
 	@Published var decksLoadingState = LoadingState()
+	
+	var onDecksChange: (([Deck]) -> Void)?
 	
 	init(
 		id: String,
@@ -25,7 +31,8 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		numberOfDecks: Int,
 		xp: Int,
 		allDecks: [String] = [],
-		decks: [Deck] = []
+		decks: [Deck] = [],
+		onDecksChange: (([Deck]) -> Void)? = nil
 	) {
 		self.id = id
 		self.name = name
@@ -35,6 +42,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		self.xp = xp
 		self.allDecks = allDecks
 		self.decks = decks
+		self.onDecksChange = onDecksChange
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
@@ -106,6 +114,12 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	var level: Int {
 		Self.levelForXP(xp)
+	}
+	
+	@discardableResult
+	func setOnDecksChange(to handler: (([Deck]) -> Void)?) -> Self {
+		onDecksChange = handler
+		return self
 	}
 	
 	@discardableResult

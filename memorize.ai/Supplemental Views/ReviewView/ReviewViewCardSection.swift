@@ -3,13 +3,21 @@ import SwiftUI
 struct ReviewViewCardSection: View {
 	@EnvironmentObject var model: ReviewViewModel
 	
+	var section: Deck.Section? {
+		model.section ?? model.currentSection
+	}
+	
 	var body: some View {
 		VStack(spacing: 8) {
 			HStack {
-				Text("DECK_NAME") // TODO: Change this
-					.foregroundColor(.white)
-				// TODO: Add section
+				model.deck.map(ReviewViewCardSectionDeckName.init)
+				section.map { section in
+					LearnViewCardSectionSectionName(
+						section: section
+					)
+				}
 				Spacer()
+				model.current.map(ReviewViewCardSectionIsNewLabel.init)
 			}
 			.font(.muli(.bold, size: 17))
 			.padding(.horizontal, 10)

@@ -60,7 +60,8 @@ struct ReviewViewFooterPerformanceRatingButton_Previews: PreviewProvider {
 			section: nil
 		)
 		model.current = .init(
-			parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
+			parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
+			isNew: true
 		)
 		return ReviewViewFooterPerformanceRatingButton(rating: .easy)
 			.environmentObject(model)

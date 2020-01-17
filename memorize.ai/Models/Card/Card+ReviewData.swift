@@ -23,14 +23,16 @@ extension Card {
 		}
 		
 		let parent: Card
+		let isNew: Bool
 		
 		@Published var prediction: Prediction?
 		@Published var predictionLoadingState = LoadingState()
 		
 		@Published var isNewlyMastered: Bool?
 		
-		init(parent: Card) {
+		init(parent: Card, isNew: Bool) {
 			self.parent = parent
+			self.isNew = isNew
 		}
 		
 		func loadPrediction() -> Self {

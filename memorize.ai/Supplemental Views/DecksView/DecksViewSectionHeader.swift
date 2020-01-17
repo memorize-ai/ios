@@ -27,10 +27,17 @@ struct DecksViewSectionHeader: View {
 	var body: some View {
 		HStack(spacing: 12) {
 			if !section.isUnlocked {
-				Image.lock
-					.resizable()
-					.aspectRatio(contentMode: .fit)
-					.frame(width: 16, height: 21)
+				Button(action: {
+					self.section.showUnlockAlert(
+						forUser: self.currentStore.user
+					)
+				}) {
+					Image.lock
+						.resizable()
+						.renderingMode(.original)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 16, height: 21)
+				}
 			}
 			Text(section.name)
 				.font(.muli(.bold, size: 17))

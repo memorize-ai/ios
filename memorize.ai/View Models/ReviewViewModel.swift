@@ -201,8 +201,11 @@ final class ReviewViewModel: ViewModel {
 		loadNextCard()
 	}
 	
-	func updateCurrentCard(to card: Card) {
-		current = Card.ReviewData(parent: card).loadPrediction()
+	func updateCurrentCard(to card: Card, isNew: Bool) {
+		current = Card.ReviewData(
+			parent: card,
+			isNew: isNew
+		).loadPrediction()
 		currentSide = .front
 		currentCardLoadingState.succeed()
 	}
@@ -223,18 +226,21 @@ final class ReviewViewModel: ViewModel {
 		if let section = section {
 			let deck = section.parent
 			
-			func updateCurrentCard(withId cardId: String) {
+			func updateCurrentCard(withId cardId: String, isNew: Bool) {
 				if let card = (section.cards.first { $0.id == cardId }) {
-					self.updateCurrentCard(to: card)
+					self.updateCurrentCard(to: card, isNew: isNew)
 				} else {
 					firestore
 						.document("decks/\(deck.id)/cards/\(cardId)")
 						.getDocument()
 						.done { snapshot in
-							self.updateCurrentCard(to: .init(
-								snapshot: snapshot,
-								parent: deck
-							))
+							self.updateCurrentCard(
+								to: .init(
+									snapshot: snapshot,
+									parent: deck
+								),
+								isNew: isNew
+							)
 						}
 						.catch(failCurrentCardLoadingState)
 				}
@@ -250,7 +256,7 @@ final class ReviewViewModel: ViewModel {
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
-							updateCurrentCard(withId: cardId)
+							updateCurrentCard(withId: cardId, isNew: true)
 						} else {
 							self.shouldShowRecap = true
 						}
@@ -268,7 +274,7 @@ final class ReviewViewModel: ViewModel {
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
-							updateCurrentCard(withId: cardId)
+							updateCurrentCard(withId: cardId, isNew: false)
 						} else {
 							self.isReviewingNewCards = true
 							self.loadNextCard(
@@ -301,20 +307,23 @@ final class ReviewViewModel: ViewModel {
 				return
 			}
 			
-			func updateCurrentCard(withId cardId: String, sectionId: String) {
+			func updateCurrentCard(withId cardId: String, sectionId: String, isNew: Bool) {
 				self.currentSection = deck.section(withId: sectionId)
 				
 				if let card = deck.card(withId: cardId, sectionId: sectionId) {
-					self.updateCurrentCard(to: card)
+					self.updateCurrentCard(to: card, isNew: isNew)
 				} else {
 					firestore
 						.document("decks/\(deck.id)/cards/\(cardId)")
 						.getDocument()
 						.done { snapshot in
-							self.updateCurrentCard(to: .init(
-								snapshot: snapshot,
-								parent: deck
-							))
+							self.updateCurrentCard(
+								to: .init(
+									snapshot: snapshot,
+									parent: deck
+								),
+								isNew: isNew
+							)
 						}
 						.catch(failCurrentCardLoadingState)
 				}
@@ -330,7 +339,11 @@ final class ReviewViewModel: ViewModel {
 					.getDocuments()
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
-							updateCurrentCard(withId: cardId, sectionId: currentSection.id)
+							updateCurrentCard(
+								withId: cardId,
+								sectionId: currentSection.id,
+								isNew: true
+							)
 						} else {
 							func setCurrentSection(to section: Deck.Section) {
 								self.currentSection = section
@@ -371,7 +384,11 @@ final class ReviewViewModel: ViewModel {
 					.getDocuments()
 					.done { snapshot in
 						if let userData = snapshot.documents.first.map(Card.UserData.init) {
-							updateCurrentCard(withId: userData.id, sectionId: userData.sectionId)
+							updateCurrentCard(
+								withId: userData.id,
+								sectionId: userData.sectionId,
+								isNew: false
+							)
 						} else {
 							self.isReviewingNewCards = true
 							self.loadNextCard(

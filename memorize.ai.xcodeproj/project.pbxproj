@@ -122,6 +122,8 @@
 		4D5C405A23C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */; };
 		4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */; };
 		4D60858023D14C2D00437A78 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60857F23D14C2D00437A78 /* Query.swift */; };
+		4D60858223D17FA900437A78 /* ReviewViewCardSectionDeckName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60858123D17FA900437A78 /* ReviewViewCardSectionDeckName.swift */; };
+		4D60858423D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60858323D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift */; };
 		4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097662342FE8E002F1643 /* FirebaseAuth.swift */; };
 		4D6097692342FEC2002F1643 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6097682342FEC2002F1643 /* FirebaseStorage.swift */; };
 		4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */; };
@@ -416,6 +418,8 @@
 		4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCell.swift; sourceTree = "<group>"; };
 		4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCellContent.swift; sourceTree = "<group>"; };
 		4D60857F23D14C2D00437A78 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		4D60858123D17FA900437A78 /* ReviewViewCardSectionDeckName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCardSectionDeckName.swift; sourceTree = "<group>"; };
+		4D60858323D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCardSectionIsNewLabel.swift; sourceTree = "<group>"; };
 		4D6097662342FE8E002F1643 /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		4D6097682342FEC2002F1643 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewRecommendedDecksSection.swift; path = memorize.ai/HomeViewRecommendedDecksSection.swift; sourceTree = SOURCE_ROOT; };
@@ -984,6 +988,8 @@
 				4D96200B23C3E2B700C6BDF0 /* ReviewViewNavigationLink.swift */,
 				4D961FFF23C3C5A700C6BDF0 /* ReviewViewTopControls.swift */,
 				4D96200123C3C91600C6BDF0 /* ReviewViewCardSection.swift */,
+				4D60858123D17FA900437A78 /* ReviewViewCardSectionDeckName.swift */,
+				4D60858323D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift */,
 				4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */,
 				4D96200323C3CA0D00C6BDF0 /* ReviewViewCard.swift */,
 				4D96200723C3D51000C6BDF0 /* ReviewViewCardContent.swift */,
@@ -1638,6 +1644,7 @@
 				4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */,
 				4D51C17D23A9DBD90093A3A2 /* ImagePicker.swift in Sources */,
 				4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */,
+				4D60858223D17FA900437A78 /* ReviewViewCardSectionDeckName.swift in Sources */,
 				4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */,
 				4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */,
 				4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */,
@@ -1708,6 +1715,7 @@
 				4D6BA53B23ADAE4800D3F9D1 /* AddCardsViewAddSectionPopUpSectionRow.swift in Sources */,
 				4D5C404C23C9043400511B7C /* HorizontalBarGraph.swift in Sources */,
 				4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */,
+				4D60858423D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift in Sources */,
 				4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */,
 				4DD8D777235F5AC4009D1261 /* InitialViewFeaturePage.swift in Sources */,
 				4D3FE57523BC36BF0010FFD3 /* KeyboardResponder.swift in Sources */,

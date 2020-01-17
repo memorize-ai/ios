@@ -12,8 +12,9 @@ struct LearnViewCardSection: View {
 	var body: some View {
 		VStack(spacing: 8) {
 			HStack {
-				Text("\(deck.name)")
+				Text(deck.name)
 					.foregroundColor(.white)
+					.shrinks()
 				section.map { section in
 					LearnViewCardSectionSectionName(
 						section: section
