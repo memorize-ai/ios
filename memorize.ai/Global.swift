@@ -19,6 +19,10 @@ var currentViewController: UIViewController! {
 	UIApplication.shared.windows.last?.rootViewController
 }
 
+var randomId: String {
+	firestore.collection("empty").document().documentID
+}
+
 func waitUntil(duration: Double, body: @escaping () -> Void) {
 	Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
 		body()

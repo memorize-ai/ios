@@ -85,7 +85,7 @@ final class AddCardsViewModel: ViewModel {
 		cards.map { card in
 			guard card.isPublishable else { return .init() }
 			card.publishLoadingState.startLoading()
-			return card.publishAsNew().done { _ in
+			return card.publishAsNew(forUser: user).done { _ in
 				self.cards.removeAll { $0 == card }
 				card.removeDraft(forUser: self.user)
 				card.publishLoadingState.succeed()

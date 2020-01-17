@@ -27,7 +27,7 @@ extension Card {
 		var onChange: (() -> Void)?
 		
 		init(
-			id: String = UUID().uuidString,
+			id: String = randomId,
 			parent: Deck,
 			sectionId: String? = nil,
 			front: String = "",
@@ -94,15 +94,28 @@ extension Card {
 		}
 		
 		@discardableResult
-		func publishAsNew() -> Promise<DocumentReference> {
-			cards.addDocument(data: [
-				"section": section?.id ?? "",
-				"front": front,
-				"back": back,
-				"viewCount": 0,
-				"reviewCount": 0,
-				"skipCount": 0
-			])
+		func publishAsNew(forUser user: User) -> Promise<Void> {
+			when(fulfilled: [
+				cards.addDocument(data: [
+					"section": section?.id ?? "",
+					"front": front,
+					"back": back,
+					"viewCount": 0,
+					"reviewCount": 0,
+					"skipCount": 0
+				]).asVoid()
+			] + (
+				section?.isUnlocked ?? true
+					? [
+						user.documentReference
+							.collection("decks")
+							.document(parent.id)
+							.updateData([
+								"dueCardCount": FieldValue.increment(1 as Int64)
+							]).asVoid()
+					]
+					: []
+			))
 		}
 		
 		@discardableResult
