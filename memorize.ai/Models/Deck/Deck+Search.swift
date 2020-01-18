@@ -108,7 +108,7 @@ extension Deck {
 	
 	static func recommendedDecks(forUser user: User) -> Promise<[Deck]> {
 		search(
-			filterForTopics: user.interests.isEmpty ? nil : user.interests,
+			filterForTopics: user.interests.nilIfEmpty,
 			sortBy: .recommended
 		)
 	}

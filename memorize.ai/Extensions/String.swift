@@ -1,12 +1,16 @@
 import Foundation
 
 extension String {
-	var trimmed: String {
+	var trimmed: Self {
 		trimmingCharacters(in: .whitespaces)
 	}
 	
 	var isTrimmedEmpty: Bool {
 		trimmed.isEmpty
+	}
+	
+	var nilIfEmpty: Self? {
+		isEmpty ? nil : self
 	}
 	
 	func toDate(withFormat format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> Date? {

@@ -1,4 +1,8 @@
 extension Array {
+	var nilIfEmpty: Self? {
+		isEmpty ? nil : self
+	}
+	
 	func sorted<T: Comparable>(
 		by keyPath: KeyPath<Element, T>,
 		with comparator: (T, T) -> Bool = { $0 < $1 }

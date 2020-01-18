@@ -135,11 +135,11 @@ extension Deck {
 		}
 		
 		func contains(card: Card) -> Bool {
-			card.sectionId == (id.isEmpty ? nil : id)
+			card.sectionId == id.nilIfEmpty
 		}
 		
 		func contains(card: Card.Draft) -> Bool {
-			card.sectionId == (id.isEmpty ? nil : id)
+			card.sectionId == id.nilIfEmpty
 		}
 		
 		@discardableResult

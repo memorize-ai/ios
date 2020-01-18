@@ -43,8 +43,7 @@ extension Deck {
 			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			sections = snapshot.get("sections") as? [String: Int] ?? [:]
 			numberOfUnlockedCards = snapshot.get("unlockedCardCount") as? Int ?? 0
-			let newRating = snapshot.get("rating") as? Int
-			rating = newRating == 0 ? nil : newRating
+			rating = (snapshot.get("rating") as? Int)?.nilIfZero
 		}
 		
 		var isDue: Bool {
@@ -67,8 +66,7 @@ extension Deck {
 			numberOfUnsectionedDueCards = snapshot.get("unsectionedDueCardCount") as? Int ?? 0
 			sections = snapshot.get("sections") as? [String: Int] ?? [:]
 			numberOfUnlockedCards = snapshot.get("unlockedCardCount") as? Int ?? 0
-			let newRating = snapshot.get("rating") as? Int
-			rating = newRating == 0 ? nil : newRating
+			rating = (snapshot.get("rating") as? Int)?.nilIfZero
 		}
 	}
 }

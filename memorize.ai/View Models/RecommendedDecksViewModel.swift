@@ -8,7 +8,7 @@ final class RecommendedDecksViewModel: ViewModel {
 	func loadDecks(topics: [String]) {
 		decksLoadingState.startLoading()
 		Deck.search(
-			filterForTopics: topics.isEmpty ? nil : topics,
+			filterForTopics: topics.nilIfEmpty,
 			sortBy: .top
 		).done { decks in
 			self.decks = decks

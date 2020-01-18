@@ -49,11 +49,10 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	convenience init(snapshot: DocumentSnapshot, parent: Deck) {
-		let sectionId = snapshot.get("section") as? String ?? ""
 		self.init(
 			id: snapshot.documentID,
 			parent: parent,
-			sectionId: sectionId.isEmpty ? nil : sectionId,
+			sectionId: (snapshot.get("section") as? String)?.nilIfEmpty,
 			front: snapshot.get("front") as? String ?? "(empty)",
 			back: snapshot.get("back") as? String ?? "(empty)",
 			numberOfViews: snapshot.get("viewCount") as? Int ?? 0,
@@ -147,8 +146,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		self.snapshot = snapshot
 		
-		let sectionId = snapshot.get("section") as? String ?? ""
-		self.sectionId = sectionId.isEmpty ? nil : sectionId
+		sectionId = (snapshot.get("section") as? String)?.nilIfEmpty
 		front = snapshot.get("front") as? String ?? front
 		back = snapshot.get("back") as? String ?? back
 		numberOfViews = snapshot.get("viewCount") as? Int ?? 0
