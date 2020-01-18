@@ -175,7 +175,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func review(rating: PerformanceRating, viewTime: Int) -> Promise<Any> {
+	func review(rating: PerformanceRating, viewTime: Int) -> Promise<Bool> {
 		functions.httpsCallable("reviewCard")
 			.call(data: [
 				"deck": parent.id,
@@ -184,7 +184,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 				"rating": rating.rawValue,
 				"viewTime": viewTime
 			])
-			.map { $0.data }
+			.compactMap { $0.data as? Bool }
 	}
 	
 	@discardableResult

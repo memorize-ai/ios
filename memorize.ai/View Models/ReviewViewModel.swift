@@ -154,11 +154,7 @@ final class ReviewViewModel: ViewModel {
 		}
 		
 		reviewCardLoadingState.startLoading()
-		card.review(rating: rating, viewTime: 0 /* TODO: Calculate this */).done { response in
-			guard let isNewlyMastered = response as? Bool else {
-				self.reviewCardLoadingState.fail(message: "Malformed response")
-				return
-			}
+		card.review(rating: rating, viewTime: 0 /* TODO: Calculate this */).done { isNewlyMastered in
 			current.isNewlyMastered = isNewlyMastered
 			self.reviewCardLoadingState.succeed()
 		}.catch { error in
@@ -184,9 +180,9 @@ final class ReviewViewModel: ViewModel {
 			},
 			completion: {
 				if gainXP {
-					self.user.documentReference.updateData([
-						"xp": FieldValue.increment(1 as Int64)
-					]) as Void
+//					self.user.documentReference.updateData([
+//						"xp": FieldValue.increment(1 as Int64)
+//					]) as Void
 				}
 				
 				guard shouldShowRecap else { return }
