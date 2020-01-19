@@ -8,7 +8,7 @@ final class PublishDeckViewModel: ViewModel {
 	
 	@Published var image: UIImage? {
 		willSet {
-			displayImage = newValue.map { .init(uiImage: $0) }
+			displayImage = newValue.map(Image.init)
 		}
 		didSet {
 			didChangeImage = true
