@@ -1,8 +1,16 @@
 import SwiftUI
 
 struct ReviewRecapView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	var body: some View {
-		Text("Hello, World!")
+		NavigationLink(
+			destination: MainTabView(currentUser: currentStore.user)
+				.environmentObject(currentStore)
+				.navigationBarRemoved()
+		) {
+			Text("Continue")
+		}
 	}
 }
 
@@ -10,6 +18,7 @@ struct ReviewRecapView: View {
 struct ReviewRecapView_Previews: PreviewProvider {
 	static var previews: some View {
 		ReviewRecapView()
+			.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif
