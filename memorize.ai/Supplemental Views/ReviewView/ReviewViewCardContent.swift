@@ -2,7 +2,8 @@ import SwiftUI
 import WebView
 
 struct ReviewViewCardContent: View {
-	@EnvironmentObject var model: ReviewViewModel
+	@Binding var currentSide: Card.Side
+	let isWaitingForRating: Bool
 	
 	@ObservedObject var card: Card
 	
@@ -11,7 +12,7 @@ struct ReviewViewCardContent: View {
 	var body: some View {
 		ZStack(alignment: .bottomTrailing) {
 			WebView(
-				html: card.renderSide(model.currentSide),
+				html: card.renderSide(currentSide),
 				baseURL: WEB_VIEW_BASE_URL
 			)
 			.cornerRadius(5)
@@ -19,11 +20,11 @@ struct ReviewViewCardContent: View {
 				image: .greenSwapIcon,
 				circleDimension: 40,
 				fontSize: 13,
-				side: $model.currentSide,
+				side: $currentSide,
 				degrees: $toggleIconDegrees
 			)
 			.padding([.trailing, .bottom], 10)
-			.opacity(*model.isWaitingForRating)
+			.opacity(*isWaitingForRating)
 		}
 	}
 }
@@ -31,9 +32,7 @@ struct ReviewViewCardContent: View {
 #if DEBUG
 struct ReviewViewCardContent_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewViewCardContent(
-			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
-		)
+		Text("")
 		.environmentObject(ReviewViewModel(
 			user: PREVIEW_CURRENT_STORE.user,
 			deck: nil,

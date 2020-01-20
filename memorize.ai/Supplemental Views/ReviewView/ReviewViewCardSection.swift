@@ -1,23 +1,29 @@
 import SwiftUI
 
 struct ReviewViewCardSection: View {
-	@EnvironmentObject var model: ReviewViewModel
+	let deck: Deck?
+	let section: Deck.Section?
+	let currentSection: Deck.Section?
+	let current: Card.ReviewData?
+	let cardOffset: CGFloat
+	let isWaitingForRating: Bool
+	@Binding var currentSide: Card.Side
 	
-	var section: Deck.Section? {
-		model.section ?? model.currentSection
+	var _section: Deck.Section? {
+		section ?? currentSection
 	}
 	
 	var body: some View {
 		VStack(spacing: 8) {
 			HStack {
-				model.deck.map(ReviewViewCardSectionDeckName.init)
-				section.map { section in
+				deck.map(ReviewViewCardSectionDeckName.init)
+				_section.map { section in
 					LearnViewCardSectionSectionName(
 						section: section
 					)
 				}
 				Spacer()
-				model.current.map(ReviewViewCardSectionIsNewLabel.init)
+				current.map(ReviewViewCardSectionIsNewLabel.init)
 			}
 			.font(.muli(.bold, size: 17))
 			.padding(.horizontal, 10)
@@ -35,19 +41,21 @@ struct ReviewViewCardSection: View {
 							offset: 8
 						)
 					}
-					.blur(radius: self.model.cardOffset.isZero ? 0 : 5)
+					.blur(radius: self.cardOffset.isZero ? 0 : 5)
 					ReviewViewCard(geometry: geometry) {
 						Group {
-							if self.model.currentCard == nil {
+							if self.current?.parent == nil {
 								ActivityIndicator(color: .gray)
 							} else {
 								ReviewViewCardContent(
-									card: self.model.currentCard!
+									currentSide: self.$currentSide,
+									isWaitingForRating: self.isWaitingForRating,
+									card: self.current!.parent
 								)
 							}
 						}
 					}
-					.offset(x: self.model.cardOffset)
+					.offset(x: self.cardOffset)
 				}
 			}
 		}
@@ -57,7 +65,7 @@ struct ReviewViewCardSection: View {
 #if DEBUG
 struct ReviewViewCardSection_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewViewCardSection()
+		Text("")
 			.environmentObject(ReviewViewModel(
 				user: PREVIEW_CURRENT_STORE.user,
 				deck: nil,

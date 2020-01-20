@@ -3,10 +3,12 @@ import SwiftUI
 struct ReviewViewTopControls: View {
 	@Environment(\.presentationMode) var presentationMode
 	
-	@EnvironmentObject var model: ReviewViewModel
+	let currentIndex: Int
+	let numberOfTotalCards: Int
+	let skipCard: () -> Void
 	
 	var title: String {
-		"\(model.currentIndex + 1) / \(model.numberOfTotalCards)"
+		"\(currentIndex + 1) / \(numberOfTotalCards)"
 	}
 	
 	func button(text: String) -> some View {
@@ -35,7 +37,7 @@ struct ReviewViewTopControls: View {
 				.foregroundColor(.white)
 			Spacer()
 			HStack {
-				Button(action: model.skipCard) {
+				Button(action: skipCard) {
 					button(text: "SKIP")
 				}
 				ReviewRecapViewNavigationLink {
@@ -49,7 +51,7 @@ struct ReviewViewTopControls: View {
 #if DEBUG
 struct ReviewViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewViewTopControls()
+		Text("")
 			.environmentObject(ReviewViewModel(
 				user: PREVIEW_CURRENT_STORE.user,
 				deck: nil,

@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct ReviewRecapViewNavigationLink<Label: View>: View {
-	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: ReviewViewModel
 	
 	let label: Label
 	
@@ -13,8 +11,6 @@ struct ReviewRecapViewNavigationLink<Label: View>: View {
 	var body: some View {
 		NavigationLink(
 			destination: ReviewRecapView()
-				.environmentObject(currentStore)
-				.environmentObject(model)
 				.navigationBarRemoved()
 		) {
 			label

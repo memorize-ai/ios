@@ -1,13 +1,14 @@
 import SwiftUI
 
 struct ReviewViewFooterPerformanceRatingButton: View {
-	@EnvironmentObject var model: ReviewViewModel
+	let rateCurrentCard: (Card.PerformanceRating) -> Void
+	let current: Card.ReviewData?
 		
 	let rating: Card.PerformanceRating
 	
 	var body: some View {
 		Button(action: {
-			self.model.rateCurrentCard(withRating: self.rating)
+			self.rateCurrentCard(self.rating)
 			playHaptic()
 		}) {
 			CustomRectangle(
@@ -27,12 +28,12 @@ struct ReviewViewFooterPerformanceRatingButton: View {
 					Spacer()
 					CustomRectangle(background: rating.badgeColor.opacity(0.16)) {
 						Group {
-							if model.current == nil {
+							if current == nil {
 								ActivityIndicator(radius: 5, color: .darkGray)
 									.frame(width: (SCREEN_SIZE.width - 8 * 4) / 8)
 							} else {
 								ReviewViewFooterPerformanceRatingButtonBadgeContent(
-									reviewData: model.current!,
+									reviewData: current!,
 									rating: rating
 								)
 							}
@@ -63,7 +64,7 @@ struct ReviewViewFooterPerformanceRatingButton_Previews: PreviewProvider {
 			parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
 			isNew: true
 		)
-		return ReviewViewFooterPerformanceRatingButton(rating: .easy)
+		return Text("")
 			.environmentObject(model)
 	}
 }

@@ -33,14 +33,13 @@ struct ReviewViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: ReviewView()
-				.environmentObject(currentStore)
-				.environmentObject(ReviewViewModel(
-					user: currentStore.user,
-					deck: deck,
-					section: section
-				))
-				.navigationBarRemoved()
+			destination: ReviewView(
+				user: currentStore.user,
+				deck: deck,
+				section: section
+			)
+			.environmentObject(currentStore)
+			.navigationBarRemoved()
 		) {
 			label
 		}

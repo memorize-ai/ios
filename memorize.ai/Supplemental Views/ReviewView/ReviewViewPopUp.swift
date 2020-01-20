@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct ReviewViewPopUp: View {
-	@EnvironmentObject var model: ReviewViewModel
-	
-	var data: ReviewViewModel.PopUpData? {
-		model.popUpData
-	}
+	let data: ReviewViewModel.PopUpData?
+	let popUpOffset: CGFloat
 	
 	var body: some View {
 		CustomRectangle(
@@ -36,7 +33,7 @@ struct ReviewViewPopUp: View {
 			.padding(.vertical, 30)
 			.frame(width: SCREEN_SIZE.width - 30 * 2)
 		}
-		.offset(x: model.popUpOffset)
+		.offset(x: popUpOffset)
 	}
 }
 
@@ -57,7 +54,7 @@ struct ReviewViewPopUp_Previews: PreviewProvider {
 				text: "+1 day"
 			)
 		)
-		return ReviewViewPopUp()
+		return Text("")
 			.environmentObject(model)
 	}
 }
