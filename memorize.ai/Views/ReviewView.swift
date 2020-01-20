@@ -457,8 +457,8 @@ struct ReviewView: View {
 				return
 			}
 			
-			// Updates the current deck, current section, and the current card.
-			func updateCurrentCard(withId cardId: String, sectionId: String, deckId: String, isNew: Bool) {
+			// Updates the current section and the current card.
+			func updateCurrentCard(withId cardId: String, sectionId: String, isNew: Bool) {
 				self.currentSection = currentDeck.section(withId: sectionId)
 				
 				if let card = currentDeck.card(withId: cardId, sectionId: sectionId) {
@@ -497,7 +497,6 @@ struct ReviewView: View {
 							updateCurrentCard(
 								withId: cardId,
 								sectionId: currentSection.id,
-								deckId: currentDeck.id,
 								isNew: true
 							)
 						} else {
@@ -579,7 +578,6 @@ struct ReviewView: View {
 							updateCurrentCard(
 								withId: userData.id,
 								sectionId: userData.sectionId,
-								deckId: currentDeck.id,
 								isNew: false
 							)
 						} else {
@@ -648,6 +646,7 @@ struct ReviewView: View {
 						.padding(.horizontal, 23)
 						ReviewViewCardSection(
 							deck: self.deck,
+							currentDeck: self.currentDeck,
 							section: self.section,
 							currentSection: self.currentSection,
 							current: self.current,

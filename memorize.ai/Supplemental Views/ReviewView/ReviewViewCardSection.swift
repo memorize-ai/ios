@@ -2,12 +2,18 @@ import SwiftUI
 
 struct ReviewViewCardSection: View {
 	let deck: Deck?
+	let currentDeck: Deck?
 	let section: Deck.Section?
 	let currentSection: Deck.Section?
 	let current: Card.ReviewData?
 	let cardOffset: CGFloat
 	let isWaitingForRating: Bool
+	
 	@Binding var currentSide: Card.Side
+	
+	var _deck: Deck? {
+		deck ?? currentDeck
+	}
 	
 	var _section: Deck.Section? {
 		section ?? currentSection
@@ -16,7 +22,7 @@ struct ReviewViewCardSection: View {
 	var body: some View {
 		VStack(spacing: 8) {
 			HStack {
-				deck.map(ReviewViewCardSectionDeckName.init)
+				_deck.map(ReviewViewCardSectionDeckName.init)
 				_section.map { section in
 					LearnViewCardSectionSectionName(
 						section: section
@@ -67,6 +73,7 @@ struct ReviewViewCardSection_Previews: PreviewProvider {
 	static var previews: some View {
 		ReviewViewCardSection(
 			deck: nil,
+			currentDeck: nil,
 			section: nil,
 			currentSection: nil,
 			current: nil,
