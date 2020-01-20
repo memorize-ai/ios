@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ReviewViewPopUp: View {
-	let data: ReviewViewModel.PopUpData?
+	let data: ReviewView.PopUpData?
 	let offset: CGFloat
 	
 	var body: some View {

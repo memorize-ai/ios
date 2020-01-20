@@ -395,7 +395,7 @@ struct ReviewView: View {
 					.catch(failCurrentCardLoadingState)
 			}
 		} else {
-			print("REVIEWING_ALL_CARDS") // TODO: Review all cards
+			
 		}
 	}
 	
