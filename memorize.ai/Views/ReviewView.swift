@@ -28,6 +28,8 @@ struct ReviewView: View {
 	@State var currentDeck: Deck?
 	@State var currentSection: Deck.Section?
 	
+	@State var startDate: Date?
+	
 	@State var isWaitingForRating = false
 	
 	@State var shouldShowRecap = false
@@ -160,7 +162,10 @@ struct ReviewView: View {
 		let shouldShowRecap = currentIndex == numberOfTotalCards - 1
 		
 		reviewCardLoadingState.startLoading()
-		card.review(rating: rating, viewTime: 0 /* TODO: Calculate this */).done { isNewlyMastered in
+		card.review(
+			rating: rating,
+			viewTime: startDate.map { Date().timeIntervalSince($0) * 1000 } ?? 0 // Multiply by 1000 for milliseconds
+		).done { isNewlyMastered in
 			current.isNewlyMastered = isNewlyMastered
 			self.reviewCardLoadingState.succeed()
 			
@@ -208,6 +213,9 @@ struct ReviewView: View {
 		).loadPrediction()
 		currentSide = .front
 		currentCardLoadingState.succeed()
+		
+		// Set the start time to now
+		startDate = .now
 	}
 	
 	func loadNextCard(

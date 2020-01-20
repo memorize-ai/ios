@@ -172,8 +172,9 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
+	// "viewTime" is in milliseconds
 	@discardableResult
-	func review(rating: PerformanceRating, viewTime: Int) -> Promise<Bool> {
+	func review(rating: PerformanceRating, viewTime: TimeInterval) -> Promise<Bool> {
 		functions.httpsCallable("reviewCard")
 			.call(data: [
 				"deck": parent.id,
