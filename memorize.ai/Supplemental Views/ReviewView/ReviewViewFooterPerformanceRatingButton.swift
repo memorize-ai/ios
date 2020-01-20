@@ -1,10 +1,9 @@
 import SwiftUI
 
 struct ReviewViewFooterPerformanceRatingButton: View {
-	let rateCurrentCard: (Card.PerformanceRating) -> Void
 	let current: Card.ReviewData?
-		
 	let rating: Card.PerformanceRating
+	let rateCurrentCard: (Card.PerformanceRating) -> Void
 	
 	var body: some View {
 		Button(action: {
@@ -55,17 +54,14 @@ struct ReviewViewFooterPerformanceRatingButton: View {
 #if DEBUG
 struct ReviewViewFooterPerformanceRatingButton_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = ReviewViewModel(
-			user: PREVIEW_CURRENT_STORE.user,
-			deck: nil,
-			section: nil
+		ReviewViewFooter(
+			current: .init(
+				parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
+				isNew: true
+			),
+			isWaitingForRating: true,
+			rateCurrentCard: { _ in }
 		)
-		model.current = .init(
-			parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
-			isNew: true
-		)
-		return Text("")
-			.environmentObject(model)
 	}
 }
 #endif

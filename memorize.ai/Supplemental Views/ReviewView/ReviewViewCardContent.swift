@@ -2,12 +2,13 @@ import SwiftUI
 import WebView
 
 struct ReviewViewCardContent: View {
-	@Binding var currentSide: Card.Side
 	let isWaitingForRating: Bool
 	
 	@ObservedObject var card: Card
 	
 	@State var toggleIconDegrees = 0.0
+	
+	@Binding var currentSide: Card.Side
 	
 	var body: some View {
 		ZStack(alignment: .bottomTrailing) {
@@ -32,12 +33,11 @@ struct ReviewViewCardContent: View {
 #if DEBUG
 struct ReviewViewCardContent_Previews: PreviewProvider {
 	static var previews: some View {
-		Text("")
-		.environmentObject(ReviewViewModel(
-			user: PREVIEW_CURRENT_STORE.user,
-			deck: nil,
-			section: nil
-		))
+		ReviewViewCardContent(
+			isWaitingForRating: true,
+			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
+			currentSide: .constant(.front)
+		)
 	}
 }
 #endif

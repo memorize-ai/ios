@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ReviewViewPopUp: View {
 	let data: ReviewViewModel.PopUpData?
-	let popUpOffset: CGFloat
+	let offset: CGFloat
 	
 	var body: some View {
 		CustomRectangle(
@@ -33,29 +33,24 @@ struct ReviewViewPopUp: View {
 			.padding(.vertical, 30)
 			.frame(width: SCREEN_SIZE.width - 30 * 2)
 		}
-		.offset(x: popUpOffset)
+		.offset(x: offset)
 	}
 }
 
 #if DEBUG
 struct ReviewViewPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = ReviewViewModel(
-			user: PREVIEW_CURRENT_STORE.user,
-			deck: nil,
-			section: nil
+		ReviewViewPopUp(
+			data: (
+				emoji: "🎉",
+				message: "Great!",
+				badge: (
+					color: Color.neonGreen.opacity(0.16),
+					text: "+1 day"
+				)
+			),
+			offset: 0
 		)
-		model.popUpOffset = 0
-		model.popUpData = (
-			emoji: "🎉",
-			message: "Great!",
-			badge: (
-				color: Color.neonGreen.opacity(0.16),
-				text: "+1 day"
-			)
-		)
-		return Text("")
-			.environmentObject(model)
 	}
 }
 #endif

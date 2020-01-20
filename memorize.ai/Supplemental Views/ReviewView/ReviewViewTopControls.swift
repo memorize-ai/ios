@@ -51,12 +51,7 @@ struct ReviewViewTopControls: View {
 #if DEBUG
 struct ReviewViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		Text("")
-			.environmentObject(ReviewViewModel(
-				user: PREVIEW_CURRENT_STORE.user,
-				deck: nil,
-				section: nil
-			))
+		ReviewViewTopControls(currentIndex: 0, numberOfTotalCards: 3, skipCard: {})
 	}
 }
 #endif

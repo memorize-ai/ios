@@ -44,13 +44,13 @@ struct ReviewViewCardSection: View {
 					.blur(radius: self.cardOffset.isZero ? 0 : 5)
 					ReviewViewCard(geometry: geometry) {
 						Group {
-							if self.current?.parent == nil {
+							if self.current == nil {
 								ActivityIndicator(color: .gray)
 							} else {
 								ReviewViewCardContent(
-									currentSide: self.$currentSide,
 									isWaitingForRating: self.isWaitingForRating,
-									card: self.current!.parent
+									card: self.current!.parent,
+									currentSide: self.$currentSide
 								)
 							}
 						}
@@ -65,12 +65,15 @@ struct ReviewViewCardSection: View {
 #if DEBUG
 struct ReviewViewCardSection_Previews: PreviewProvider {
 	static var previews: some View {
-		Text("")
-			.environmentObject(ReviewViewModel(
-				user: PREVIEW_CURRENT_STORE.user,
-				deck: nil,
-				section: nil
-			))
+		ReviewViewCardSection(
+			deck: nil,
+			section: nil,
+			currentSection: nil,
+			current: nil,
+			cardOffset: 0,
+			isWaitingForRating: true,
+			currentSide: .constant(.front)
+		)
 	}
 }
 #endif

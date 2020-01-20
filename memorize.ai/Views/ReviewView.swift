@@ -411,13 +411,29 @@ struct ReviewView: View {
 					}
 					.edgesIgnoringSafeArea(.all)
 					VStack {
-						ReviewViewTopControls(currentIndex: self.currentIndex, numberOfTotalCards: self.numberOfTotalCards, skipCard: self.skipCard)
-							.padding(.horizontal, 23)
-						ReviewViewCardSection(deck: self.deck, section: self.section, currentSection: self.currentSection, current: self.current, cardOffset: self.cardOffset, isWaitingForRating: self.isWaitingForRating, currentSide: self.$currentSide)
-							.padding(.top, 6)
-							.padding(.horizontal, 8)
-						ReviewViewFooter(rateCurrentCard: self.rateCurrentCard, current: self.current, isWaitingForRating: self.isWaitingForRating)
-							.padding(.top, 16)
+						ReviewViewTopControls(
+							currentIndex: self.currentIndex,
+							numberOfTotalCards: self.numberOfTotalCards,
+							skipCard: self.skipCard
+						)
+						.padding(.horizontal, 23)
+						ReviewViewCardSection(
+							deck: self.deck,
+							section: self.section,
+							currentSection: self.currentSection,
+							current: self.current,
+							cardOffset: self.cardOffset,
+							isWaitingForRating: self.isWaitingForRating,
+							currentSide: self.$currentSide
+						)
+						.padding(.top, 6)
+						.padding(.horizontal, 8)
+						ReviewViewFooter(
+							current: self.current,
+							isWaitingForRating: self.isWaitingForRating,
+							rateCurrentCard: self.rateCurrentCard
+						)
+						.padding(.top, 16)
 					}
 				}
 				.blur(radius: self.isPopUpShowing ? 5 : 0)
@@ -429,9 +445,10 @@ struct ReviewView: View {
 					self.waitForRating()
 				}
 				.disabled(self.isPopUpShowing)
-				ReviewViewPopUp(data: self.popUpData, popUpOffset: self.popUpOffset)
+				ReviewViewPopUp(data: self.popUpData, offset: self.popUpOffset)
 				NavigateTo(
 					ReviewRecapView()
+						.environmentObject(self.currentStore)
 						.navigationBarRemoved(),
 					when: self.$shouldShowRecap
 				)
@@ -448,15 +465,12 @@ struct ReviewView: View {
 #if DEBUG
 struct ReviewView_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = ReviewViewModel(
+		ReviewView(
 			user: PREVIEW_CURRENT_STORE.user,
 			deck: nil,
 			section: nil
 		)
-		model.isWaitingForRating = true
-		return Text("")
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(model)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

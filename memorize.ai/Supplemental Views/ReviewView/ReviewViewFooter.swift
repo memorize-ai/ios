@@ -1,15 +1,19 @@
 import SwiftUI
 
 struct ReviewViewFooter: View {
-	let rateCurrentCard: (Card.PerformanceRating) -> Void
 	let current: Card.ReviewData?
 	let isWaitingForRating: Bool
+	let rateCurrentCard: (Card.PerformanceRating) -> Void
 	
 	var body: some View {
 		ZStack {
 			HStack {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-					ReviewViewFooterPerformanceRatingButton(rateCurrentCard: self.rateCurrentCard, current: self.current, rating: rating)
+					ReviewViewFooterPerformanceRatingButton(
+						current: self.current,
+						rating: rating,
+						rateCurrentCard: self.rateCurrentCard
+					)
 				}
 			}
 			.offset(x: isWaitingForRating ? 0 : -SCREEN_SIZE.width)
@@ -24,12 +28,7 @@ struct ReviewViewFooter: View {
 #if DEBUG
 struct ReviewViewFooter_Previews: PreviewProvider {
 	static var previews: some View {
-		Text("")
-			.environmentObject(ReviewViewModel(
-				user: PREVIEW_CURRENT_STORE.user,
-				deck: nil,
-				section: nil
-			))
+		ReviewViewFooter(current: nil, isWaitingForRating: true, rateCurrentCard: { _ in })
 	}
 }
 #endif
