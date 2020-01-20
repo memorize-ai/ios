@@ -157,10 +157,16 @@ struct ReviewView: View {
 			xpGained++
 		}
 		
+		let shouldShowRecap = currentIndex == numberOfTotalCards - 1
+		
 		reviewCardLoadingState.startLoading()
 		card.review(rating: rating, viewTime: 0 /* TODO: Calculate this */).done { isNewlyMastered in
 			current.isNewlyMastered = isNewlyMastered
 			self.reviewCardLoadingState.succeed()
+			
+			// After the card has been reviewed, load the next card if the recap should not be shown yet
+			if shouldShowRecap { return }
+			self.loadNextCard()
 		}.catch { error in
 			showAlert(title: "Unable to rate card", message: "You will move on to the next card")
 			self.reviewCardLoadingState.fail(error: error)
@@ -171,17 +177,11 @@ struct ReviewView: View {
 			isWaitingForRating = false
 		}
 		
-		let shouldShowRecap = currentIndex == numberOfTotalCards - 1
-		
 		showPopUp(
 			forRating: rating,
 			badge: gainXP
 				? ("+1 xp", Card.PerformanceRating.easy.badgeColor.opacity(0.16))
 				: nil,
-			onCentered: {
-				if shouldShowRecap { return }
-				self.loadNextCard()
-			},
 			completion: {
 				if gainXP {
 					self.user.documentReference.updateData([
