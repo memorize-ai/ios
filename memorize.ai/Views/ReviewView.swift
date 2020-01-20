@@ -65,6 +65,13 @@ struct ReviewView: View {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
+	func loadNumberOfTotalCards() {
+		numberOfTotalCards =
+			section?.numberOfDueCards
+				?? deck?.userData?.numberOfDueCards
+					?? user.numberOfDueCards
+	}
+	
 	func showPopUp(
 		emoji: String,
 		message: String,
