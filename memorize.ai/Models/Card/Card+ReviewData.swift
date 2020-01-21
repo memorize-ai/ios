@@ -69,8 +69,9 @@ extension Card {
 		}
 		
 		func predictionMessageForRating(_ rating: PerformanceRating) -> String? {
-			guard let dueDate = predictionForRating(rating) else { return nil }
-			return "+\(Date().compare(against: dueDate).split(separator: " ").dropFirst().joined(separator: " "))"
+			predictionForRating(rating).map { dueDate in
+				"+\(Date().compare(against: dueDate).split(separator: " ").dropFirst().joined(separator: " "))"
+			}
 		}
 		
 		static func == (lhs: ReviewData, rhs: ReviewData) -> Bool {

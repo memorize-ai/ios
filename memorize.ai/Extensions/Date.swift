@@ -12,25 +12,29 @@ extension Date {
 		return formatter
 	}
 	
-	func compare(against otherDate: Date = .now) -> String {
-		self == otherDate
-			? "now"
-			: self < otherDate
-				? "in \(Self.distanceFormatter.string(from: self, to: otherDate) ?? "(error)")"
-				: "\(Self.distanceFormatter.string(from: otherDate, to: self) ?? "(error)") ago"
+	func compare(against otherDate: Date = .now, equalsError: TimeInterval = 1) -> String {
+		if abs(timeIntervalSince(otherDate)) < equalsError {
+			return "now"
+		}
+		
+		let ceiling = Date(timeIntervalSince1970: ceil(otherDate.timeIntervalSince1970))
+		
+		return self < otherDate
+				? Self.distanceFormatter.string(from: self, to: ceiling).map { "in \($0)" } ?? "(error)"
+				: Self.distanceFormatter.string(from: ceiling, to: self).map { "\($0) ago" } ?? "(error)"
 	}
 	
-	func format(_ format: String) -> String {
+	func format(with format: String) -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = format
 		return dateFormatter.string(from: self)
 	}
 	
 	var formatted: String {
-		format("MMM d, yyyy @ h:mm a")
+		format(with: "MMM d, yyyy @ h:mm a")
 	}
 	
 	var formattedCompact: String {
-		format("MMM d, yyyy")
+		format(with: "MMM d, yyyy")
 	}
 }

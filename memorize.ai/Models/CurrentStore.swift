@@ -32,9 +32,19 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	func initializeUser() {
-		user.setOnDecksChange { decks in
-			if decks.isEmpty && self.mainTabViewSelection == .decks {
-				self.mainTabViewSelection = .home
+		user.setOnDecksChange { decks, event in
+			switch event {
+			case let .added(deck: deck):
+				guard decks.count == 1 else { return }
+				self.selectedDeck = deck
+			case let .removed(id: deckId):
+				if decks.isEmpty && self.mainTabViewSelection == .decks {
+					self.mainTabViewSelection = .home
+					return
+				}
+				if self.selectedDeck?.id == deckId {
+					self.selectedDeck = decks.first
+				}
 			}
 		}
 	}
@@ -49,9 +59,7 @@ final class CurrentStore: ObservableObject {
 	func initializeIfNeeded() -> Self {
 		loadUser()
 		loadAllTopics(withImages: false)
-		user.loadDecks {
-			self.selectedDeck = $0
-		}
+		user.loadDecks()
 		return self
 	}
 	

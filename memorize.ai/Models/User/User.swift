@@ -5,6 +5,11 @@ import PromiseKit
 import LoadingState
 
 final class User: ObservableObject, Identifiable, Equatable, Hashable {
+	enum DecksChangeEvent {
+		case added(deck: Deck)
+		case removed(id: String)
+	}
+	
 	let id: String
 	
 	@Published var name: String
@@ -13,15 +18,11 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var numberOfDecks: Int
 	@Published var xp: Int
 	@Published var allDecks: [String]
-	@Published var decks: [Deck] {
-		didSet {
-			onDecksChange?(decks)
-		}
-	}
+	@Published var decks: [Deck]
 	
 	@Published var decksLoadingState = LoadingState()
 	
-	var onDecksChange: (([Deck]) -> Void)?
+	var onDecksChange: (([Deck], DecksChangeEvent) -> Void)?
 	
 	init(
 		id: String,
@@ -32,7 +33,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		xp: Int,
 		allDecks: [String] = [],
 		decks: [Deck] = [],
-		onDecksChange: (([Deck]) -> Void)? = nil
+		onDecksChange: (([Deck], DecksChangeEvent) -> Void)? = nil
 	) {
 		self.id = id
 		self.name = name
@@ -117,7 +118,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func setOnDecksChange(to handler: (([Deck]) -> Void)?) -> Self {
+	func setOnDecksChange(to handler: (([Deck], DecksChangeEvent) -> Void)?) -> Self {
 		onDecksChange = handler
 		return self
 	}
@@ -134,10 +135,9 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func loadDecks(loadImages: Bool = true, setSelectedDeck: ((Deck) -> Void)? = nil) -> Self {
+	func loadDecks(loadImages: Bool = true) -> Self {
 		guard decksLoadingState.isNone else { return self }
 		var isInitialIteration = true
-		var shouldSetSelectedDeck = true
 		decksLoadingState.startLoading()
 		documentReference.collection("decks").addSnapshotListener { snapshot, error in
 			guard error == nil, let documentChanges = snapshot?.documentChanges else {
@@ -156,10 +156,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 					Deck.fromId(deckId).done { deck in
 						deck.updateUserDataFromSnapshot(userDataSnapshot)
 						self.decks.append(loadImages ? deck.loadImage() : deck)
-						if shouldSetSelectedDeck {
-							shouldSetSelectedDeck = false
-							setSelectedDeck?(deck)
-						}
+						self.onDecksChange?(self.decks, .added(deck: deck))
 					}.catch { error in
 						self.decksLoadingState.fail(error: error)
 					}
@@ -168,6 +165,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 						.updateUserDataFromSnapshot(userDataSnapshot)
 				case .removed:
 					self.decks.removeAll { $0.id == deckId }
+					self.onDecksChange?(self.decks, .removed(id: deckId))
 				}
 			}
 			self.decksLoadingState.succeed()
