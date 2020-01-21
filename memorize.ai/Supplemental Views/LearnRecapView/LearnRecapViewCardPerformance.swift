@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LearnRecapViewCardPerformance: View {
+	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	
 	var body: some View {
 		VStack {
 			Text("Card performance")
@@ -9,7 +11,10 @@ struct LearnRecapViewCardPerformance: View {
 				.shrinks()
 			VStack(spacing: 12) {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-					LearnRecapViewCardPerformanceRow(rating: rating)
+					LearnRecapViewCardPerformanceRow(
+						rating: rating,
+						frequentCardsForRating: self.frequentCardsForRating
+					)
 				}
 			}
 		}
@@ -19,11 +24,7 @@ struct LearnRecapViewCardPerformance: View {
 #if DEBUG
 struct LearnRecapViewCardPerformance_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformance()
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnRecapViewCardPerformance(frequentCardsForRating: { _ in [] })
 	}
 }
 #endif

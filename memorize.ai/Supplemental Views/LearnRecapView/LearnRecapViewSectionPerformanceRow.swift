@@ -1,13 +1,9 @@
 import SwiftUI
 
 struct LearnRecapViewSectionPerformanceRow: View {
-	@EnvironmentObject var model: LearnViewModel
-	
 	let rating: Card.PerformanceRating
-	
-	var sections: [Deck.Section] {
-		model.frequentSections(forRating: rating)
-	}
+	let sections: [Deck.Section]
+	let numberOfReviewedCardsForSection: (Deck.Section) -> Int
 	
 	var sectionCountMessage: String {
 		let count = sections.count
@@ -34,7 +30,8 @@ struct LearnRecapViewSectionPerformanceRow: View {
 					ForEach(sections) { section in
 						LearnRecapViewSectionPerformanceRowSectionCell(
 							section: section,
-							rating: self.rating
+							rating: self.rating,
+							numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
 						)
 					}
 				}
@@ -48,11 +45,11 @@ struct LearnRecapViewSectionPerformanceRow: View {
 #if DEBUG
 struct LearnRecapViewSectionPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewSectionPerformanceRow(rating: .easy)
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnRecapViewSectionPerformanceRow(
+			rating: .easy,
+			sections: [],
+			numberOfReviewedCardsForSection: { _ in 1 }
+		)
 	}
 }
 #endif

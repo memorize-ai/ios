@@ -1,11 +1,14 @@
 import SwiftUI
 
-struct LearnViewTopControls: View {
+struct LearnViewTopControls<RecapView: View>: View {
 	@Environment(\.presentationMode) var presentationMode
+	
+	@EnvironmentObject var currentStore: CurrentStore
 	
 	let currentIndex: Int
 	let numberOfTotalCards: Int
 	let skipCard: () -> Void
+	let recapView: () -> RecapView
 	
 	var title: String {
 		"\(currentIndex + 1) / \(numberOfTotalCards)"
@@ -40,7 +43,13 @@ struct LearnViewTopControls: View {
 				Button(action: skipCard) {
 					button(text: "SKIP")
 				}
-				LearnRecapViewNavigationLink {
+				NavigationLink(
+					destination: LazyView {
+						self.recapView()
+							.environmentObject(self.currentStore)
+							.navigationBarRemoved()
+					}
+				) {
 					button(text: "DONE")
 				}
 			}
@@ -54,8 +63,10 @@ struct LearnViewTopControls_Previews: PreviewProvider {
 		LearnViewTopControls(
 			currentIndex: 1,
 			numberOfTotalCards: 2,
-			skipCard: {}
+			skipCard: {},
+			recapView: { Text("Recap view") }
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

@@ -2,7 +2,19 @@ import SwiftUI
 
 struct LearnRecapView: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: LearnViewModel
+	
+	let deck: Deck
+	let section: Deck.Section?
+	let xpGained: Int
+	let initialXP: Int
+	let totalEasyRatingCount: Int
+	let totalStruggledRatingCount: Int
+	let totalForgotRatingCount: Int
+	let frequentlyEasySections: [Deck.Section]
+	let frequentlyStruggledSections: [Deck.Section]
+	let frequentlyForgotSections: [Deck.Section]
+	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	let numberOfReviewedCardsForSection: (Deck.Section) -> Int
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -26,13 +38,23 @@ struct LearnRecapView: View {
 							VStack(spacing: 30) {
 								LearnRecapViewMainCard(
 									user: self.currentStore.user,
-									deck: self.model.deck
+									deck: self.deck,
+									xpGained: self.xpGained,
+									initialXP: self.initialXP,
+									totalEasyRatingCount: self.totalEasyRatingCount,
+									totalStruggledRatingCount: self.totalStruggledRatingCount,
+									totalForgotRatingCount: self.totalForgotRatingCount
 								)
 								.padding(.horizontal, 8)
-								if self.model.section == nil {
-									LearnRecapViewSectionPerformance()
+								if self.section == nil {
+									LearnRecapViewSectionPerformance(
+										frequentlyEasySections: self.frequentlyEasySections,
+										frequentlyStruggledSections: self.frequentlyStruggledSections,
+										frequentlyForgotSections: self.frequentlyForgotSections,
+										numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
+									)
 								}
-								LearnRecapViewCardPerformance()
+								LearnRecapViewCardPerformance(frequentCardsForRating: self.frequentCardsForRating)
 							}
 						}
 					}
@@ -45,12 +67,21 @@ struct LearnRecapView: View {
 #if DEBUG
 struct LearnRecapView_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapView()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnRecapView(
+			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			section: nil,
+			xpGained: 1,
+			initialXP: 4,
+			totalEasyRatingCount: 1,
+			totalStruggledRatingCount: 3,
+			totalForgotRatingCount: 4,
+			frequentlyEasySections: [],
+			frequentlyStruggledSections: [],
+			frequentlyForgotSections: [],
+			frequentCardsForRating: { _ in [] },
+			numberOfReviewedCardsForSection: { _ in 1 }
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

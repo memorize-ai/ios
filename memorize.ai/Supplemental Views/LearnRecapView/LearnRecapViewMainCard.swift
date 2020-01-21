@@ -1,17 +1,22 @@
 import SwiftUI
 
 struct LearnRecapViewMainCard: View {
-	@EnvironmentObject var model: LearnViewModel
-	
 	@ObservedObject var user: User
 	@ObservedObject var deck: Deck
 	
+	let xpGained: Int
+	let initialXP: Int
+	
+	let totalEasyRatingCount: Int
+	let totalStruggledRatingCount: Int
+	let totalForgotRatingCount: Int
+	
 	var xpGainedMessage: String {
-		"You gained \(model.xpGained == 0 ? "no xp" : "\(model.xpGained.formatted) xp!")"
+		"You gained \(xpGained == 0 ? "no xp" : "\(xpGained.formatted) xp!")"
 	}
 	
 	var didReachNextLevel: Bool {
-		user.level > User.levelForXP(model.initialXP)
+		user.level > User.levelForXP(initialXP)
 	}
 	
 	var body: some View {
@@ -59,15 +64,15 @@ struct LearnRecapViewMainCard: View {
 					rows: [
 						.init(
 							label: Card.PerformanceRating.easy.title.uppercased(),
-							value: model.totalRatingCount(forRating: .easy)
+							value: totalEasyRatingCount
 						),
 						.init(
 							label: Card.PerformanceRating.struggled.title.uppercased(),
-							value: model.totalRatingCount(forRating: .struggled)
+							value: totalStruggledRatingCount
 						),
 						.init(
 							label: Card.PerformanceRating.forgot.title.uppercased(),
-							value: model.totalRatingCount(forRating: .forgot)
+							value: totalForgotRatingCount
 						)
 					],
 					color: .init(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1))
@@ -83,12 +88,13 @@ struct LearnRecapViewMainCard_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnRecapViewMainCard(
 			user: PREVIEW_CURRENT_STORE.user,
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!
-		)
-		.environmentObject(LearnViewModel(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: nil
-		))
+			xpGained: 1,
+			initialXP: 3,
+			totalEasyRatingCount: 2,
+			totalStruggledRatingCount: 4,
+			totalForgotRatingCount: 5
+		)
 	}
 }
 #endif

@@ -84,6 +84,23 @@ struct LearnView: View {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
+	var recapView: some View {
+		LearnRecapView(
+			deck: deck,
+			section: section,
+			xpGained: xpGained,
+			initialXP: initialXP,
+			totalEasyRatingCount: totalRatingCount(forRating: .easy),
+			totalStruggledRatingCount: totalRatingCount(forRating: .struggled),
+			totalForgotRatingCount: totalRatingCount(forRating: .forgot),
+			frequentlyEasySections: frequentSections(forRating: .easy),
+			frequentlyStruggledSections: frequentSections(forRating: .struggled),
+			frequentlyForgotSections: frequentSections(forRating: .forgot),
+			frequentCardsForRating: frequentCards,
+			numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
+		)
+	}
+	
 	func loadNumberOfTotalCards() {
 		numberOfTotalCards = section?.numberOfCards ?? deck.numberOfUnlockedCards
 	}
@@ -430,7 +447,8 @@ struct LearnView: View {
 							LearnViewTopControls(
 								currentIndex: self.currentIndex,
 								numberOfTotalCards: self.numberOfTotalCards,
-								skipCard: self.skipCard
+								skipCard: self.skipCard,
+								recapView: { self.recapView }
 							)
 							LearnViewSliders(
 								numberOfTotalCards: self.numberOfTotalCards,
@@ -469,9 +487,11 @@ struct LearnView: View {
 				.disabled(self.isPopUpShowing)
 				LearnViewPopUp(data: self.popUpData, offset: self.popUpOffset)
 				NavigateTo(
-					LearnRecapView()
-						.environmentObject(self.currentStore)
-						.navigationBarRemoved(),
+					LazyView {
+						self.recapView
+							.environmentObject(self.currentStore)
+							.navigationBarRemoved()
+					},
 					when: self.$shouldShowRecap
 				)
 			}

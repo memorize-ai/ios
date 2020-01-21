@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct LearnRecapViewCardPerformanceRow: View {
-	@EnvironmentObject var model: LearnViewModel
-	
 	@State var isExpanded = false
 	
 	let rating: Card.PerformanceRating
 	
+	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	
 	var cards: [Card.LearnData] {
-		model.frequentCards(forRating: rating)
+		frequentCardsForRating(rating)
 	}
 	
 	var cardCountMessage: String {
@@ -84,11 +84,7 @@ struct LearnRecapViewCardPerformanceRow: View {
 #if DEBUG
 struct LearnRecapViewCardPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformanceRow(rating: .easy)
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnRecapViewCardPerformanceRow(rating: .easy, frequentCardsForRating: { _ in [] })
 	}
 }
 #endif

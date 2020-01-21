@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct LearnRecapViewSectionPerformanceRowSectionCell: View {
-	@EnvironmentObject var model: LearnViewModel
-	
 	@ObservedObject var section: Deck.Section
 	
 	let rating: Card.PerformanceRating
 	
+	let numberOfReviewedCardsForSection: (Deck.Section) -> Int
+	
 	var cardCountMessage: String {
-		let count = model.numberOfReviewedCardsForSection(section)
+		let count = numberOfReviewedCardsForSection(section)
 		return "(\(count.formatted) card\(count == 1 ? "" : "s"))"
 	}
 	
@@ -38,12 +38,9 @@ struct LearnRecapViewSectionPerformanceRowSectionCell_Previews: PreviewProvider 
 	static var previews: some View {
 		LearnRecapViewSectionPerformanceRowSectionCell(
 			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
-			rating: .easy
+			rating: .easy,
+			numberOfReviewedCardsForSection: { _ in 1 }
 		)
-		.environmentObject(LearnViewModel(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: nil
-		))
 	}
 }
 #endif

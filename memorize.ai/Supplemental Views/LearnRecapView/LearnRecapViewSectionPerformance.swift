@@ -1,6 +1,11 @@
 import SwiftUI
 
 struct LearnRecapViewSectionPerformance: View {
+	let frequentlyEasySections: [Deck.Section]
+	let frequentlyStruggledSections: [Deck.Section]
+	let frequentlyForgotSections: [Deck.Section]
+	let numberOfReviewedCardsForSection: (Deck.Section) -> Int
+	
 	var body: some View {
 		VStack {
 			Text("Section performance")
@@ -8,9 +13,21 @@ struct LearnRecapViewSectionPerformance: View {
 				.foregroundColor(.darkGray)
 				.shrinks()
 			VStack(spacing: 12) {
-				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-					LearnRecapViewSectionPerformanceRow(rating: rating)
-				}
+				LearnRecapViewSectionPerformanceRow(
+					rating: .easy,
+					sections: frequentlyEasySections,
+					numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
+				)
+				LearnRecapViewSectionPerformanceRow(
+					rating: .struggled,
+					sections: frequentlyStruggledSections,
+					numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
+				)
+				LearnRecapViewSectionPerformanceRow(
+					rating: .forgot,
+					sections: frequentlyForgotSections,
+					numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
+				)
 			}
 		}
 	}
@@ -19,11 +36,12 @@ struct LearnRecapViewSectionPerformance: View {
 #if DEBUG
 struct LearnRecapViewSectionPerformance_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewSectionPerformance()
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnRecapViewSectionPerformance(
+			frequentlyEasySections: [],
+			frequentlyStruggledSections: [],
+			frequentlyForgotSections: [],
+			numberOfReviewedCardsForSection: { _ in 1 }
+		)
 	}
 }
 #endif
