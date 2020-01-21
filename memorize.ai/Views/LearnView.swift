@@ -150,13 +150,13 @@ struct LearnView: View {
 		withAnimation(.easeOut(duration: Self.POP_UP_SLIDE_DURATION)) {
 			popUpOffset = 0
 		}
-		waitUntil(duration: Self.POP_UP_SLIDE_DURATION) {
+		withDelay(Self.POP_UP_SLIDE_DURATION) {
 			onCentered?()
-			waitUntil(duration: duration) {
+			withDelay(duration) {
 				withAnimation(.easeIn(duration: Self.POP_UP_SLIDE_DURATION)) {
 					self.popUpOffset = SCREEN_SIZE.width
 				}
-				waitUntil(duration: Self.POP_UP_SLIDE_DURATION) {
+				withDelay(Self.POP_UP_SLIDE_DURATION) {
 					self.popUpOffset = -SCREEN_SIZE.width
 					completion?()
 				}
@@ -205,7 +205,7 @@ struct LearnView: View {
 		withAnimation(.easeIn(duration: Self.CARD_SLIDE_DURATION)) {
 			cardOffset = -SCREEN_SIZE.width
 		}
-		waitUntil(duration: Self.CARD_SLIDE_DURATION) {
+		withDelay(Self.CARD_SLIDE_DURATION) {
 			self.currentSide = .back
 			self.cardOffset = SCREEN_SIZE.width
 			withAnimation(.easeOut(duration: Self.CARD_SLIDE_DURATION)) {

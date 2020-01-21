@@ -23,7 +23,7 @@ var randomId: String {
 	firestore.collection("empty").document().documentID
 }
 
-func waitUntil(duration: Double, body: @escaping () -> Void) {
+func withDelay(_ duration: TimeInterval, body: @escaping () -> Void) {
 	Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
 		body()
 	}
