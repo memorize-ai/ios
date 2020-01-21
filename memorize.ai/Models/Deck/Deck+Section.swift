@@ -226,11 +226,12 @@ extension Deck {
 		}
 		
 		static func == (lhs: Section, rhs: Section) -> Bool {
-			lhs.id == rhs.id
+			lhs.id == rhs.id && lhs.parent == rhs.parent
 		}
 		
 		func hash(into hasher: inout Hasher) {
 			hasher.combine(id)
+			hasher.combine(parent)
 		}
 	}
 }
