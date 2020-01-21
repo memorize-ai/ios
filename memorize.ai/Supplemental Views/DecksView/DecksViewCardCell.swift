@@ -10,75 +10,89 @@ struct DecksViewCardCell: View {
 		!card.previewImageLoadingState.isNone
 	}
 	
-	var body: some View {
-		EditCardViewNavigationLink(
-			deck: currentStore.selectedDeck!,
-			card: card
-		) {
-			ZStack(alignment: .topLeading) {
-				CustomRectangle(
-					background: Color.white,
-					borderColor: .lightGrayBorder,
-					borderWidth: 1,
-					cornerRadius: 8,
-					shadowRadius: 5,
-					shadowYOffset: 5
-				) {
-					VStack {
-						HStack(alignment: .top) {
-							if hasPreviewImage {
-								SwitchOver(card.previewImageLoadingState)
-									.case(.loading) {
-										ZStack {
-											Color.lightGrayBackground
-											ActivityIndicator(color: .gray)
-										}
+	var isOwner: Bool {
+		card.parent.creatorId == currentStore.user.id
+	}
+	
+	var content: some View {
+		ZStack(alignment: .topLeading) {
+			CustomRectangle(
+				background: Color.white,
+				borderColor: .lightGrayBorder,
+				borderWidth: 1,
+				cornerRadius: 8,
+				shadowRadius: 5,
+				shadowYOffset: 5
+			) {
+				VStack {
+					HStack(alignment: .top) {
+						if hasPreviewImage {
+							SwitchOver(card.previewImageLoadingState)
+								.case(.loading) {
+									ZStack {
+										Color.lightGrayBackground
+										ActivityIndicator(color: .gray)
 									}
-									.case(.success) {
-										card.previewImage?
-											.resizable()
-											.aspectRatio(contentMode: .fill)
+								}
+								.case(.success) {
+									card.previewImage?
+										.resizable()
+										.aspectRatio(contentMode: .fill)
+								}
+								.case(.failure) {
+									ZStack {
+										Color.lightGrayBackground
+										Image(systemName: .exclamationmarkTriangle)
+											.foregroundColor(.gray)
+											.scaleEffect(1.5)
 									}
-									.case(.failure) {
-										ZStack {
-											Color.lightGrayBackground
-											Image(systemName: .exclamationmarkTriangle)
-												.foregroundColor(.gray)
-												.scaleEffect(1.5)
-										}
-									}
-									.frame(width: 100, height: 100)
-									.cornerRadius(5)
-									.clipped()
-							}
-							Text(Card.stripFormatting(card.front).trimmed)
-								.font(.muli(.semiBold, size: 15))
-								.foregroundColor(.darkGray)
-								.lineLimit(5)
-								.lineSpacing(1)
-								.layoutPriority(1)
-								.alignment(.leading)
+								}
+								.frame(width: 100, height: 100)
+								.cornerRadius(5)
+								.clipped()
 						}
-						.frame(minHeight: 40, alignment: .top)
-						if !card.isNew {
-							Text(card.dueMessage)
-								.font(.muli(.bold, size: 12))
-								.foregroundColor(Color.darkGray.opacity(0.7))
-								.padding(.top, hasPreviewImage ? 0 : 4)
-								.alignment(.leading)
-						}
+						Text(Card.stripFormatting(card.front).trimmed)
+							.font(.muli(.semiBold, size: 15))
+							.foregroundColor(.darkGray)
+							.lineLimit(5)
+							.lineSpacing(1)
+							.layoutPriority(1)
+							.alignment(.leading)
 					}
-					.padding(8)
+					.frame(minHeight: 40, alignment: .top)
+					if !card.isNew {
+						Text(card.dueMessage)
+							.font(.muli(.bold, size: 12))
+							.foregroundColor(Color.darkGray.opacity(0.7))
+							.padding(.top, hasPreviewImage ? 0 : 4)
+							.alignment(.leading)
+					}
 				}
-				if card.isDue {
-					Circle()
-						.foregroundColor(Color.darkBlue.opacity(0.5))
-						.frame(width: 12, height: 12)
-						.offset(x: -4, y: -4)
-				}
+				.padding(8)
 			}
-			.onAppear {
-				self.card.loadPreviewImage()
+			if card.isDue {
+				Circle()
+					.foregroundColor(Color.darkBlue.opacity(0.5))
+					.frame(width: 12, height: 12)
+					.offset(x: -4, y: -4)
+			}
+		}
+		.onAppear {
+			self.card.loadPreviewImage()
+		}
+	}
+	
+	var body: some View {
+		Group {
+			if isOwner {
+				EditCardViewNavigationLink(
+					deck: currentStore.selectedDeck!,
+					card: card
+				) {
+					content
+				}
+			} else {
+				content
 			}
 		}
 	}
