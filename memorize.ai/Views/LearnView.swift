@@ -189,7 +189,10 @@ struct LearnView: View {
 		switch rating {
 		case .easy:
 			let badge = current.map { current in
-				("\(current.streak)x streak", Color.neonGreen.opacity(0.16))
+				(
+					"\(current.streak) / \(Card.LearnData.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED) streak",
+					Color.neonGreen.opacity(0.16)
+				)
 			}
 			switch true {
 			case current?.isMastered:
@@ -239,7 +242,7 @@ struct LearnView: View {
 		if gainXP {
 			xpGained++
 		}
-				
+		
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
