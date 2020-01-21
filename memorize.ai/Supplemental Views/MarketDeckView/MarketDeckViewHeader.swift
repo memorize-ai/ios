@@ -28,6 +28,13 @@ struct MarketDeckViewHeader: View {
 						.font(.muli(.bold, size: 20))
 						.foregroundColor(.white)
 						.lineLimit(3)
+					if !deck.subtitle.isTrimmedEmpty {
+						Text(deck.subtitle)
+							.font(.muli(.bold, size: 14))
+							.foregroundColor(Color.white.opacity(0.85))
+							.padding(.vertical, 1.5)
+							.lineLimit(1)
+					}
 					HStack {
 						Image(systemName: .personFill)
 							.resizable()
