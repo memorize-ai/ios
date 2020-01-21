@@ -91,6 +91,7 @@ final class PublishDeckViewModel: ViewModel {
 					? [deck.setImage(image)]
 					: []
 			)).done {
+				deck.image = self.image
 				self.publishLoadingState.succeed()
 				self.reset()
 				completion()

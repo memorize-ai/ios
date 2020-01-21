@@ -16,7 +16,7 @@ struct DeckCell<Content: View>: View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: .lightGray,
-			borderWidth: 1.5,
+			borderWidth: deck.hasImage ? 0 : 1.5,
 			cornerRadius: 8
 		) {
 			VStack {
@@ -85,6 +85,9 @@ struct DeckCell<Content: View>: View {
 				content
 			}
 			.frame(width: width)
+		}
+		.onAppear {
+			self.deck.loadImage()
 		}
 	}
 }

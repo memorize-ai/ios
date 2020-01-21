@@ -9,6 +9,10 @@ struct MarketDeckViewRatings: View {
 		currentUser.hasDeck(deck)
 	}
 	
+	var isNotOwner: Bool {
+		deck.creatorId != currentUser.id
+	}
+	
 	var rating: Int {
 		deck.userData?.rating ?? 0
 	}
@@ -82,7 +86,7 @@ struct MarketDeckViewRatings: View {
 							HStack(spacing: 0) {
 								Text(deck.numberOfRatings.formatted)
 									.foregroundColor(.darkGray)
-								Text(" Reviews")
+								Text(" Review\(deck.numberOfRatings == 1 ? "" : "s")")
 									.foregroundColor(.lightGrayText)
 							}
 							.font(.muli(.bold, size: 13.5))
@@ -103,7 +107,7 @@ struct MarketDeckViewRatings: View {
 							starCountLabel(deck.numberOf1StarRatings)
 						}
 					}
-					if hasDeck {
+					if hasDeck && isNotOwner {
 						Text("Tap to rate")
 							.font(.muli(.semiBold, size: 18))
 							.foregroundColor(.lightGrayText)

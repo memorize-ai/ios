@@ -28,7 +28,7 @@ extension Deck {
 		self.init(
 			id: json["id"]?["raw"] as? String ?? "0",
 			topics: json["topics"]?["raw"] as? [String] ?? [],
-			hasImage: json["has_image"]?["raw"] as? Bool ?? false,
+			hasImage: (json["has_image"]?["raw"] as? String).map { Bool($0) ?? false } ?? false,
 			name: json["name"]?["raw"] as? String ?? "Unknown",
 			subtitle: json["subtitle"]?["raw"] as? String ?? "(error)",
 			description: json["description"]?["raw"] as? String ?? "(error)",
