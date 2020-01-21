@@ -27,12 +27,8 @@ struct LearnViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: LearnView()
+			destination: LearnView(deck: deck, section: section)
 				.environmentObject(currentStore)
-				.environmentObject(LearnViewModel(
-					deck: deck,
-					section: section
-				))
 				.navigationBarRemoved()
 		) {
 			label

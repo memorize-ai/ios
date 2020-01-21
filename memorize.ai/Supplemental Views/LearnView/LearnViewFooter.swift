@@ -2,7 +2,9 @@ import SwiftUI
 
 struct LearnViewFooter: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: LearnViewModel
+	
+	let isWaitingForRating: Bool
+	let rateCurrentCard: (Card.PerformanceRating, User) -> Void
 	
 	func ratingButton(
 		forRating rating: Card.PerformanceRating,
@@ -35,19 +37,16 @@ struct LearnViewFooter: View {
 			HStack {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 					self.ratingButton(forRating: rating) {
-						self.model.rateCurrentCard(
-							withRating: rating,
-							user: self.currentStore.user
-						)
+						self.rateCurrentCard(rating, self.currentStore.user)
 						playHaptic()
 					}
 				}
 			}
-			.offset(x: model.isWaitingForRating ? 0 : -SCREEN_SIZE.width)
+			.offset(x: isWaitingForRating ? 0 : -SCREEN_SIZE.width)
 			Text("Tap anywhere to continue")
 				.font(.muli(.bold, size: 17))
 				.foregroundColor(.darkGray)
-				.offset(x: model.isWaitingForRating ? SCREEN_SIZE.width : 0)
+				.offset(x: isWaitingForRating ? SCREEN_SIZE.width : 0)
 		}
 	}
 }
@@ -55,12 +54,7 @@ struct LearnViewFooter: View {
 #if DEBUG
 struct LearnViewFooter_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewFooter()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnViewFooter(isWaitingForRating: true, rateCurrentCard: { _, _ in })
 	}
 }
 #endif

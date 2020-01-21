@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct LearnViewSliders: View {
-	@EnvironmentObject var model: LearnViewModel
+	let numberOfTotalCards: Int
+	let numberOfMasteredCards: Int
+	let numberOfSeenCards: Int
+	let numberOfUnseenCards: Int
 	
 	func title(_ text: String, isEnabled: Bool) -> some View {
 		Text(text)
@@ -32,29 +35,29 @@ struct LearnViewSliders: View {
 			VStack(alignment: .trailing, spacing: 4) {
 				title(
 					"Mastered",
-					isEnabled: model.numberOfMasteredCards > 0
+					isEnabled: numberOfMasteredCards > 0
 				)
 				title(
 					"Seen",
-					isEnabled: model.numberOfSeenCards > 0
+					isEnabled: numberOfSeenCards > 0
 				)
 				title(
 					"Unseen",
-					isEnabled: model.numberOfUnseenCards > 0
+					isEnabled: numberOfUnseenCards > 0
 				)
 			}
 			VStack(spacing: 17.75) {
 				slider(percent:
-					.init(model.numberOfMasteredCards) &/
-					.init(model.numberOfTotalCards)
+					.init(numberOfMasteredCards) &/
+					.init(numberOfTotalCards)
 				)
 				slider(percent:
-					.init(model.numberOfSeenCards) &/
-					.init(model.numberOfTotalCards)
+					.init(numberOfSeenCards) &/
+					.init(numberOfTotalCards)
 				)
 				slider(percent:
-					.init(model.numberOfUnseenCards) &/
-					.init(model.numberOfTotalCards)
+					.init(numberOfUnseenCards) &/
+					.init(numberOfTotalCards)
 				)
 			}
 			.offset(y: 1)
@@ -66,11 +69,12 @@ struct LearnViewSliders: View {
 #if DEBUG
 struct LearnViewSliders_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewSliders()
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnViewSliders(
+			numberOfTotalCards: 3,
+			numberOfMasteredCards: 1,
+			numberOfSeenCards: 1,
+			numberOfUnseenCards: 1
+		)
 	}
 }
 #endif

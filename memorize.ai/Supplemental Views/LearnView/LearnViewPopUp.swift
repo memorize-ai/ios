@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct LearnViewPopUp: View {
-	@EnvironmentObject var model: LearnViewModel
-	
-	var data: LearnViewModel.PopUpData? {
-		model.popUpData
-	}
+	let data: ReviewView.PopUpData?
+	let offset: CGFloat
 	
 	var body: some View {
 		CustomRectangle(
@@ -36,28 +33,24 @@ struct LearnViewPopUp: View {
 			.padding(.vertical, 30)
 			.frame(width: SCREEN_SIZE.width - 30 * 2)
 		}
-		.offset(x: model.popUpOffset)
+		.offset(x: offset)
 	}
 }
 
 #if DEBUG
 struct LearnViewPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = LearnViewModel(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: nil
+		LearnViewPopUp(
+			data: (
+				emoji: "🎉",
+				message: "Great!",
+				badge: (
+					color: Color.neonGreen.opacity(0.16),
+					text: "+1 day"
+				)
+			),
+			offset: 0
 		)
-		model.popUpOffset = 0
-		model.popUpData = (
-			emoji: "🎉",
-			message: "Great!",
-			badge: (
-				color: Color.neonGreen.opacity(0.16),
-				text: "+1 day"
-			)
-		)
-		return LearnViewPopUp()
-			.environmentObject(model)
 	}
 }
 #endif

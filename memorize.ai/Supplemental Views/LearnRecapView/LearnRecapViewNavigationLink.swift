@@ -2,7 +2,6 @@ import SwiftUI
 
 struct LearnRecapViewNavigationLink<Label: View>: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: LearnViewModel
 	
 	let label: Label
 	
@@ -14,7 +13,6 @@ struct LearnRecapViewNavigationLink<Label: View>: View {
 		NavigationLink(
 			destination: LearnRecapView()
 				.environmentObject(currentStore)
-				.environmentObject(model)
 				.navigationBarRemoved()
 		) {
 			label

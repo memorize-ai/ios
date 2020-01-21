@@ -3,10 +3,12 @@ import SwiftUI
 struct LearnViewTopControls: View {
 	@Environment(\.presentationMode) var presentationMode
 	
-	@EnvironmentObject var model: LearnViewModel
+	let currentIndex: Int
+	let numberOfTotalCards: Int
+	let skipCard: () -> Void
 	
 	var title: String {
-		"\(model.currentIndex + 1) / \(model.numberOfTotalCards)"
+		"\(currentIndex + 1) / \(numberOfTotalCards)"
 	}
 	
 	func button(text: String) -> some View {
@@ -35,7 +37,7 @@ struct LearnViewTopControls: View {
 				.foregroundColor(.white)
 			Spacer()
 			HStack {
-				Button(action: model.skipCard) {
+				Button(action: skipCard) {
 					button(text: "SKIP")
 				}
 				LearnRecapViewNavigationLink {
@@ -49,11 +51,11 @@ struct LearnViewTopControls: View {
 #if DEBUG
 struct LearnViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewTopControls()
-			.environmentObject(LearnViewModel(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: nil
-			))
+		LearnViewTopControls(
+			currentIndex: 1,
+			numberOfTotalCards: 2,
+			skipCard: {}
+		)
 	}
 }
 #endif

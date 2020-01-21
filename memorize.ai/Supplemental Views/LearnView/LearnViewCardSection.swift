@@ -1,12 +1,18 @@
 import SwiftUI
 
 struct LearnViewCardSection: View {
-	@EnvironmentObject var model: LearnViewModel
-	
 	@ObservedObject var deck: Deck
 	
-	var section: Deck.Section? {
-		model.section ?? model.currentSection
+	@Binding var currentSide: Card.Side
+	
+	let section: Deck.Section?
+	let currentSection: Deck.Section?
+	let cardOffset: CGFloat
+	let currentCard: Card?
+	let isWaitingForRating: Bool
+	
+	var _section: Deck.Section? {
+		section ?? currentSection
 	}
 	
 	var body: some View {
@@ -15,7 +21,7 @@ struct LearnViewCardSection: View {
 				Text(deck.name)
 					.foregroundColor(.white)
 					.shrinks()
-				section.map { section in
+				_section.map { section in
 					LearnViewCardSectionSectionName(
 						section: section
 					)
@@ -38,19 +44,21 @@ struct LearnViewCardSection: View {
 							offset: 8
 						)
 					}
-					.blur(radius: self.model.cardOffset.isZero ? 0 : 5)
+					.blur(radius: self.cardOffset.isZero ? 0 : 5)
 					ReviewViewCard(geometry: geometry) {
 						Group {
-							if self.model.currentCard == nil {
+							if self.currentCard == nil {
 								ActivityIndicator(color: .gray)
 							} else {
 								LearnViewCardContent(
-									card: self.model.currentCard!
+									card: self.currentCard!,
+									currentSide: self.$currentSide,
+									isWaitingForRating: self.isWaitingForRating
 								)
 							}
 						}
 					}
-					.offset(x: self.model.cardOffset)
+					.offset(x: self.cardOffset)
 				}
 			}
 		}
@@ -61,12 +69,14 @@ struct LearnViewCardSection: View {
 struct LearnViewCardSection_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnViewCardSection(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!
-		)
-		.environmentObject(LearnViewModel(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: nil
-		))
+			currentSide: .constant(.front),
+			section: nil,
+			currentSection: nil,
+			cardOffset: 0,
+			currentCard: nil,
+			isWaitingForRating: true
+		)
 	}
 }
 #endif
