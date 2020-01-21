@@ -264,7 +264,7 @@ struct ReviewView: View {
 					.collection("decks/\(deck.id)/cards")
 					.whereField("section", isEqualTo: section.id)
 					.whereField("new", isEqualTo: true)
-					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.start(afterDocument: continueFromSnapshot && (current?.isNew ?? false) ? currentCard?.snapshot : nil)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
@@ -286,7 +286,7 @@ struct ReviewView: View {
 					.whereField("new", isEqualTo: false)
 					.whereField("due", isLessThanOrEqualTo: Date())
 					.order(by: "due")
-					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.start(afterDocument: continueFromSnapshot && !(current?.isNew ?? true) ? currentCard?.snapshot : nil)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
@@ -361,7 +361,7 @@ struct ReviewView: View {
 					.collection("decks/\(deck.id)/cards")
 					.whereField("section", isEqualTo: currentSection.id)
 					.whereField("new", isEqualTo: true)
-					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.start(afterDocument: continueFromSnapshot && (current?.isNew ?? false) ? currentCard?.snapshot : nil)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
@@ -414,7 +414,7 @@ struct ReviewView: View {
 					.whereField("new", isEqualTo: false)
 					.whereField("due", isLessThanOrEqualTo: Date())
 					.order(by: "due")
-					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.start(afterDocument: continueFromSnapshot && !(current?.isNew ?? true) ? currentCard?.snapshot : nil)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
@@ -496,7 +496,7 @@ struct ReviewView: View {
 					.collection("decks/\(currentDeck.id)/cards")
 					.whereField("section", isEqualTo: currentSection.id)
 					.whereField("new", isEqualTo: true)
-					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.start(afterDocument: continueFromSnapshot && (current?.isNew ?? false) ? currentCard?.snapshot : nil)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
@@ -577,7 +577,7 @@ struct ReviewView: View {
 					.whereField("new", isEqualTo: false)
 					.whereField("due", isLessThanOrEqualTo: Date())
 					.order(by: "due")
-					.start(afterDocument: continueFromSnapshot ? currentCard?.snapshot : nil)
+					.start(afterDocument: continueFromSnapshot && !(current?.isNew ?? true) ? currentCard?.snapshot : nil)
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
