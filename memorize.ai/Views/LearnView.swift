@@ -12,8 +12,14 @@ struct LearnView: View {
 	typealias PopUpData = (
 		emoji: String,
 		message: String,
-		badge: (text: String, color: Color)?
+		badges: [PopUpBadge]
 	)
+	
+	struct PopUpBadge: Identifiable {
+		let id = UUID()
+		let text: String
+		let color: Color
+	}
 	
 	let deck: Deck
 	let section: Deck.Section?
@@ -158,12 +164,12 @@ struct LearnView: View {
 	func showPopUp(
 		emoji: String,
 		message: String,
-		badge: (text: String, color: Color)?,
+		badges: [PopUpBadge] = [],
 		duration: Double = 1,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
-		popUpData = (emoji, message, badge)
+		popUpData = (emoji, message, badges)
 		withAnimation(.easeOut(duration: Self.POP_UP_SLIDE_DURATION)) {
 			popUpOffset = 0
 		}
@@ -183,29 +189,37 @@ struct LearnView: View {
 	
 	func showPopUp(
 		forRating rating: Card.PerformanceRating,
+		didGainXP: Bool,
+		didIncrementStreak: Bool,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
-		switch rating {
-		case .easy:
-			let badge = current.map { current in
-				(
-					"\(current.streak) / \(Card.LearnData.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED) streak",
-					Color.neonGreen.opacity(0.16)
+		let badges = [
+			didGainXP
+				? PopUpBadge(text: "+1 xp", color: Card.PerformanceRating.easy.badgeColor.opacity(0.16))
+				: nil,
+			current.map { current in
+				PopUpBadge(
+					text: "\(current.streak)/\(Card.LearnData.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED) streak",
+					color: (didIncrementStreak ? Card.PerformanceRating.easy : Card.PerformanceRating.forgot).badgeColor.opacity(0.16)
 				)
 			}
+		].compactMap { $0 }
+		
+		switch rating {
+		case .easy:
 			switch true {
 			case current?.isMastered:
-				showPopUp(emoji: "🎉", message: "Mastered!", badge: badge, onCentered: onCentered, completion: completion)
+				showPopUp(emoji: "🎉", message: "Mastered!", badges: badges, onCentered: onCentered, completion: completion)
 			case current?.streak ?? 0 > 2:
-				showPopUp(emoji: "🎉", message: "On a roll!", badge: badge, onCentered: onCentered, completion: completion)
+				showPopUp(emoji: "🎉", message: "On a roll!", badges: badges, onCentered: onCentered, completion: completion)
 			default:
-				showPopUp(emoji: "🎉", message: "Great!", badge: badge, onCentered: onCentered, completion: completion)
+				showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
 			}
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!", badge: nil, onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😎", message: "Good luck!", badges: badges, onCentered: onCentered, completion: completion)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!", badge: nil, onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😕", message: "Better luck next time!", badges: badges, onCentered: onCentered, completion: completion)
 		}
 	}
 	
@@ -213,7 +227,7 @@ struct LearnView: View {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(emoji: "😕", message: "Skipped!", badge: nil, onCentered: {
+		showPopUp(emoji: "😕", message: "Skipped!", onCentered: {
 			self.loadNextCard()
 		})
 	}
@@ -235,8 +249,6 @@ struct LearnView: View {
 	}
 	
 	func rateCurrentCard(withRating rating: Card.PerformanceRating, user: User) {
-		current?.addRating(rating)
-		
 		let gainXP = shouldGainXP
 		
 		if gainXP {
@@ -249,6 +261,8 @@ struct LearnView: View {
 		
 		showPopUp(
 			forRating: rating,
+			didGainXP: gainXP,
+			didIncrementStreak: current?.addRating(rating) ?? false,
 			onCentered: {
 				if self.isAllMastered { return }
 				self.loadNextCard()

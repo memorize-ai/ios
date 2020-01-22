@@ -70,7 +70,7 @@ extension Card {
 		
 		func predictionMessageForRating(_ rating: PerformanceRating) -> String? {
 			predictionForRating(rating).map { dueDate in
-				"+\(Date().compare(against: dueDate).split(separator: " ").dropFirst().joined(separator: " "))"
+				"+\(Date().comparisonMessage(against: dueDate))"
 			}
 		}
 		

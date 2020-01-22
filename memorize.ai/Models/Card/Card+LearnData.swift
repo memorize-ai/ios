@@ -46,9 +46,9 @@ extension Card {
 		}
 		
 		@discardableResult
-		func addRating(_ rating: PerformanceRating) -> Self {
+		func addRating(_ rating: PerformanceRating) -> Bool {
 			ratings.insert(rating, at: 0)
-			return self
+			return rating == .easy
 		}
 		
 		static func == (lhs: LearnData, rhs: LearnData) -> Bool {
