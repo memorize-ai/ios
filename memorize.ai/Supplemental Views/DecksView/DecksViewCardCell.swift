@@ -6,6 +6,8 @@ struct DecksViewCardCell: View {
 	
 	@ObservedObject var card: Card
 	
+	@State var isCardPreviewPresented = false
+	
 	var hasPreviewImage: Bool {
 		!card.previewImageLoadingState.isNone
 	}
@@ -92,7 +94,14 @@ struct DecksViewCardCell: View {
 					content
 				}
 			} else {
-				content
+				Button(action: {
+					self.isCardPreviewPresented = true
+				}) {
+					content
+				}
+				.sheet(isPresented: $isCardPreviewPresented) {
+					DecksViewCardPreviewSheetView(card: self.card)
+				}
 			}
 		}
 	}
