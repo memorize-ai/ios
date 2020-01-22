@@ -115,7 +115,6 @@ struct ReviewView: View {
 	func showPopUp(
 		forRating rating: Card.PerformanceRating,
 		didGainXP: Bool,
-		didIncrementStreak: Bool,
 		streak: Int,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
@@ -126,7 +125,7 @@ struct ReviewView: View {
 				: nil,
 			PopUpBadge(
 				text: "\(streak)/\(Card.ReviewData.NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED) streak",
-				color: (didIncrementStreak ? Card.PerformanceRating.easy : Card.PerformanceRating.forgot).badgeColor.opacity(0.16)
+				color: (streak == 0 ? Card.PerformanceRating.forgot : Card.PerformanceRating.easy).badgeColor.opacity(0.16)
 			)
 		].compactMap { $0 }
 		
@@ -169,6 +168,7 @@ struct ReviewView: View {
 		guard let current = current else { return }
 		let card = current.parent
 		
+		current.updateStreakForRating(rating)
 		cards.append(current)
 		
 		let gainXP = shouldGainXP
@@ -203,8 +203,7 @@ struct ReviewView: View {
 		showPopUp(
 			forRating: rating,
 			didGainXP: gainXP,
-			didIncrementStreak: rating.isCorrect,
-			streak: rating.isCorrect ? current.streak + 1 : 0,
+			streak: current.streak,
 			completion: {
 				if gainXP {
 					self.user.documentReference.updateData([
