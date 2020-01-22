@@ -38,5 +38,14 @@ extension Card {
 				return .init(#colorLiteral(red: 0.9607843137, green: 0.3647058824, blue: 0.137254902, alpha: 1))
 			}
 		}
+		
+		var isCorrect: Bool {
+			switch self {
+			case .easy, .struggled:
+				return true
+			case .forgot:
+				return false
+			}
+		}
 	}
 }

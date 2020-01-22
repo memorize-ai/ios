@@ -11,14 +11,18 @@ struct ReviewViewPopUp: View {
 		) {
 			VStack(spacing: 16) {
 				if data != nil {
-					if data!.badge != nil {
-						CustomRectangle(background: data!.badge!.color) {
-							Text(data!.badge!.text)
-								.font(.muli(.semiBold, size: 15))
-								.foregroundColor(.darkGray)
-								.lineLimit(1)
-								.padding(.horizontal, 4)
-								.padding(.vertical, 2)
+					if !data!.badges.isEmpty {
+						HStack {
+							ForEach(data!.badges) { badge in
+								CustomRectangle(background: badge.color) {
+									Text(badge.text)
+										.font(.muli(.semiBold, size: 15))
+										.foregroundColor(.darkGray)
+										.lineLimit(1)
+										.padding(.horizontal, 4)
+										.padding(.vertical, 2)
+								}
+							}
 						}
 						.padding(.top, -15)
 						.padding(.bottom, 8)
@@ -44,10 +48,12 @@ struct ReviewViewPopUp_Previews: PreviewProvider {
 			data: (
 				emoji: "🎉",
 				message: "Great!",
-				badge: (
-					color: Color.neonGreen.opacity(0.16),
-					text: "+1 day"
-				)
+				badges: [
+					.init(
+						text: "+1 day",
+						color: Color.neonGreen.opacity(0.16)
+					)
+				]
 			),
 			offset: 0
 		)

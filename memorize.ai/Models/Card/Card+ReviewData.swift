@@ -4,6 +4,8 @@ import LoadingState
 
 extension Card {
 	final class ReviewData: ObservableObject, Identifiable, Equatable, Hashable {
+		static let NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED = 10
+		
 		struct Prediction {
 			let easy: Date
 			let struggled: Date
@@ -23,16 +25,24 @@ extension Card {
 		}
 		
 		let parent: Card
-		let isNew: Bool
+		let userData: UserData?
 		
 		@Published var prediction: Prediction?
 		@Published var predictionLoadingState = LoadingState()
 		
 		@Published var isNewlyMastered: Bool?
 		
-		init(parent: Card, isNew: Bool) {
+		init(parent: Card, userData: UserData?) {
 			self.parent = parent
-			self.isNew = isNew
+			self.userData = userData
+		}
+		
+		var isNew: Bool {
+			userData == nil
+		}
+		
+		var streak: Int {
+			userData?.streak ?? 0
 		}
 		
 		func loadPrediction() -> Self {

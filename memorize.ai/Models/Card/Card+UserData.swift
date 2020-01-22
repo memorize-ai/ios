@@ -8,18 +8,21 @@ extension Card {
 		var isNew: Bool
 		var sectionId: String
 		var dueDate: Date
+		var streak: Int
 		
 		#if DEBUG
 		init(
 			id: String = "",
 			isNew: Bool = true,
 			sectionId: String = "",
-			dueDate: Date = .now
+			dueDate: Date = .now,
+			streak: Int = 0
 		) {
 			self.id = id
 			self.isNew = isNew
 			self.sectionId = sectionId
 			self.dueDate = dueDate
+			self.streak = streak
 		}
 		#endif
 		
@@ -28,12 +31,14 @@ extension Card {
 			isNew = snapshot.get("new") as? Bool ?? true
 			sectionId = snapshot.get("section") as? String ?? ""
 			dueDate = snapshot.getDate("due") ?? .now
+			streak = snapshot.get("streak") as? Int ?? 0
 		}
 		
 		mutating func updateFromSnapshot(_ snapshot: DocumentSnapshot) {
 			isNew = snapshot.get("new") as? Bool ?? true
 			sectionId = snapshot.get("section") as? String ?? ""
 			dueDate = snapshot.getDate("due") ?? .now
+			streak = snapshot.get("streak") as? Int ?? 0
 		}
 	}
 }

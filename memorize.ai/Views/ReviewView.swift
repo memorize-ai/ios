@@ -12,8 +12,14 @@ struct ReviewView: View {
 	typealias PopUpData = (
 		emoji: String,
 		message: String,
-		badge: (text: String, color: Color)?
+		badges: [PopUpBadge]
 	)
+	
+	struct PopUpBadge: Identifiable {
+		let id = UUID()
+		let text: String
+		let color: Color
+	}
 	
 	let user: User
 	let deck: Deck?
@@ -83,12 +89,12 @@ struct ReviewView: View {
 	func showPopUp(
 		emoji: String,
 		message: String,
-		badge: (text: String, color: Color)?,
+		badges: [PopUpBadge] = [],
 		duration: Double = 1,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
-		popUpData = (emoji, message, badge)
+		popUpData = (emoji, message, badges)
 		withAnimation(.easeOut(duration: Self.POP_UP_SLIDE_DURATION)) {
 			popUpOffset = 0
 		}
@@ -108,17 +114,29 @@ struct ReviewView: View {
 	
 	func showPopUp(
 		forRating rating: Card.PerformanceRating,
-		badge: (text: String, color: Color)?,
+		didGainXP: Bool,
+		didIncrementStreak: Bool,
+		streak: Int,
 		onCentered: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) {
+		let badges = [
+			didGainXP
+				? PopUpBadge(text: "+1 xp", color: Card.PerformanceRating.easy.badgeColor.opacity(0.16))
+				: nil,
+			PopUpBadge(
+				text: "\(streak)/\(Card.ReviewData.NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED) streak",
+				color: (didIncrementStreak ? Card.PerformanceRating.easy : Card.PerformanceRating.forgot).badgeColor.opacity(0.16)
+			)
+		].compactMap { $0 }
+		
 		switch rating {
 		case .easy:
-			showPopUp(emoji: "🎉", message: "Great!", badge: badge, onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!", badge: badge, onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😎", message: "Good luck!", badges: badges, onCentered: onCentered, completion: completion)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!", badge: badge, onCentered: onCentered, completion: completion)
+			showPopUp(emoji: "😕", message: "Better luck next time!", badges: badges, onCentered: onCentered, completion: completion)
 		}
 	}
 	
@@ -126,7 +144,7 @@ struct ReviewView: View {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = false
 		}
-		showPopUp(emoji: "😕", message: "Skipped!", badge: nil, onCentered: {
+		showPopUp(emoji: "😕", message: "Skipped!", onCentered: {
 			self.loadNextCard()
 		})
 	}
@@ -184,9 +202,9 @@ struct ReviewView: View {
 		
 		showPopUp(
 			forRating: rating,
-			badge: gainXP
-				? ("+1 xp", Card.PerformanceRating.easy.badgeColor.opacity(0.16))
-				: nil,
+			didGainXP: gainXP,
+			didIncrementStreak: rating.isCorrect,
+			streak: rating.isCorrect ? current.streak + 1 : 0,
 			completion: {
 				if gainXP {
 					self.user.documentReference.updateData([
@@ -206,10 +224,10 @@ struct ReviewView: View {
 		loadNextCard()
 	}
 	
-	func updateCurrentCard(to card: Card, isNew: Bool) {
+	func updateCurrentCard(to card: Card, userData: Card.UserData?) {
 		current = Card.ReviewData(
 			parent: card,
-			isNew: isNew
+			userData: userData
 		).loadPrediction()
 		currentSide = .front
 		currentCardLoadingState.succeed()
@@ -231,15 +249,17 @@ struct ReviewView: View {
 			currentCardLoadingState.startLoading()
 		}
 		
-		if let section = section { // Reviewing single section
+		if let section = section {
+			// MARK: - Reviewing single section
+			
 			let deck = section.parent
 			
 			// Updates the current card by searching for it in the current section.
 			// If the card hasn't been loaded yet, it loads it and then updates the current card.
-			func updateCurrentCard(withId cardId: String, isNew: Bool) {
+			func updateCurrentCard(withId cardId: String, userData: Card.UserData?) {
 				if let card = (section.cards.first { $0.id == cardId }) {
 					// Found the card in the section
-					self.updateCurrentCard(to: card, isNew: isNew)
+					self.updateCurrentCard(to: card, userData: userData)
 				} else {
 					// Load the card
 					firestore
@@ -251,7 +271,7 @@ struct ReviewView: View {
 									snapshot: snapshot,
 									parent: deck
 								),
-								isNew: isNew
+								userData: userData
 							)
 						}
 						.catch(failCurrentCardLoadingState)
@@ -270,7 +290,7 @@ struct ReviewView: View {
 					.done { snapshot in
 						if let cardId = snapshot.documents.first?.documentID {
 							// There is a card, so update the current card
-							updateCurrentCard(withId: cardId, isNew: true)
+							updateCurrentCard(withId: cardId, userData: nil)
 						} else {
 							// There are no more cards in the section. Now, show the recap.
 							self.shouldShowRecap = true
@@ -290,9 +310,9 @@ struct ReviewView: View {
 					.limit(to: 1)
 					.getDocuments()
 					.done { snapshot in
-						if let cardId = snapshot.documents.first?.documentID {
+						if let userData = snapshot.documents.first.map(Card.UserData.init) {
 							// There is a card, so update the current card
-							updateCurrentCard(withId: cardId, isNew: false)
+							updateCurrentCard(withId: userData.id, userData: userData)
 						} else {
 							// There are no more non-new cards in the section, so transition to reviewing new cards
 							self.isReviewingNewCards = true
@@ -305,7 +325,9 @@ struct ReviewView: View {
 					}
 					.catch(failCurrentCardLoadingState)
 			}
-		} else if let deck = deck { // Reviewing entire deck
+		} else if let deck = deck {
+			// MARK: - Reviewing entire deck
+			
 			// This should never happen, but if it does, then show the recap
 			guard let currentSection = currentSection else {
 				self.shouldShowRecap = true
@@ -331,12 +353,12 @@ struct ReviewView: View {
 			}
 			
 			// Updates the current section (which has been loaded by now), also the current card.
-			func updateCurrentCard(withId cardId: String, sectionId: String, isNew: Bool) {
+			func updateCurrentCard(withId cardId: String, sectionId: String, userData: Card.UserData?) {
 				self.currentSection = deck.section(withId: sectionId)
 				
 				if let card = deck.card(withId: cardId, sectionId: sectionId) {
 					// Found the card in the section, so update it immediately
-					self.updateCurrentCard(to: card, isNew: isNew)
+					self.updateCurrentCard(to: card, userData: userData)
 				} else {
 					// Load the card on the spot
 					firestore
@@ -348,7 +370,7 @@ struct ReviewView: View {
 									snapshot: snapshot,
 									parent: deck
 								),
-								isNew: isNew
+								userData: userData
 							)
 						}
 						.catch(failCurrentCardLoadingState)
@@ -370,7 +392,7 @@ struct ReviewView: View {
 							updateCurrentCard(
 								withId: cardId,
 								sectionId: currentSection.id,
-								isNew: true
+								userData: nil
 							)
 						} else {
 							// There were no more cards in the current section, so update the current section
@@ -423,7 +445,7 @@ struct ReviewView: View {
 							updateCurrentCard(
 								withId: userData.id,
 								sectionId: userData.sectionId,
-								isNew: false
+								userData: userData
 							)
 						} else {
 							// There were no more non-new cards, so transition to new cards
@@ -437,7 +459,9 @@ struct ReviewView: View {
 					}
 					.catch(failCurrentCardLoadingState)
 			}
-		} else { // Review all decks
+		} else {
+			// MARK: - Review all decks
+			
 			// 1. Review first deck's non-new cards, then the second deck's non-new cards and so on
 			// 2. Review first decks's new cards, then the second deck's new cards
 			
@@ -466,12 +490,12 @@ struct ReviewView: View {
 			}
 			
 			// Updates the current section and the current card.
-			func updateCurrentCard(withId cardId: String, sectionId: String, isNew: Bool) {
+			func updateCurrentCard(withId cardId: String, sectionId: String, userData: Card.UserData?) {
 				self.currentSection = currentDeck.section(withId: sectionId)
 				
 				if let card = currentDeck.card(withId: cardId, sectionId: sectionId) {
 					// Found the card in the current deck, now update the current card with it
-					self.updateCurrentCard(to: card, isNew: isNew)
+					self.updateCurrentCard(to: card, userData: userData)
 				} else {
 					// The card hasn't been loaded yet, so load it on the spot
 					firestore
@@ -483,7 +507,7 @@ struct ReviewView: View {
 									snapshot: snapshot,
 									parent: currentDeck
 								),
-								isNew: isNew
+								userData: userData
 							)
 						}
 						.catch(failCurrentCardLoadingState)
@@ -505,7 +529,7 @@ struct ReviewView: View {
 							updateCurrentCard(
 								withId: cardId,
 								sectionId: currentSection.id,
-								isNew: true
+								userData: nil
 							)
 						} else {
 							// There were no more cards in the current section,
@@ -586,7 +610,7 @@ struct ReviewView: View {
 							updateCurrentCard(
 								withId: userData.id,
 								sectionId: userData.sectionId,
-								isNew: false
+								userData: userData
 							)
 						} else {
 							// There are no more non-new cards in the current deck,

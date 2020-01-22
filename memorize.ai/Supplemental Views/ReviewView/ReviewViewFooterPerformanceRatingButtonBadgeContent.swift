@@ -31,7 +31,7 @@ struct ReviewViewFooterPerformanceRatingButtonBadgeContent_Previews: PreviewProv
 		ReviewViewFooterPerformanceRatingButtonBadgeContent(
 			reviewData: .init(
 				parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
-				isNew: true
+				userData: nil
 			),
 			rating: .easy
 		)

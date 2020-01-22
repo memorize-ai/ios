@@ -57,7 +57,7 @@ struct ReviewViewFooterPerformanceRatingButton_Previews: PreviewProvider {
 		ReviewViewFooter(
 			current: .init(
 				parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
-				isNew: true
+				userData: nil
 			),
 			isWaitingForRating: true,
 			rateCurrentCard: { _ in }
