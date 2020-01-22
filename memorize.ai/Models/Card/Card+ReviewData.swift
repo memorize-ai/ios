@@ -4,7 +4,7 @@ import LoadingState
 
 extension Card {
 	final class ReviewData: ObservableObject, Identifiable, Equatable, Hashable {
-		static let NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED = 10
+		static let NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED = 6
 		
 		struct Prediction {
 			let easy: Date

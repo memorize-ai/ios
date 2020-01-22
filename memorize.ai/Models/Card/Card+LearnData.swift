@@ -2,7 +2,7 @@ import Combine
 
 extension Card {
 	final class LearnData: ObservableObject, Identifiable, Equatable, Hashable {
-		static let NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED = 5
+		static let NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED = 3
 		
 		let parent: Card
 		

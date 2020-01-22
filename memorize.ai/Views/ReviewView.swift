@@ -131,6 +131,14 @@ struct ReviewView: View {
 		
 		switch rating {
 		case .easy:
+			switch true {
+			case streak >= Card.ReviewData.NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED:
+				showPopUp(emoji: "🎉", message: "Mastered!", badges: badges, onCentered: onCentered, completion: completion)
+			case streak > 2:
+				showPopUp(emoji: "🎉", message: "On a roll!", badges: badges, onCentered: onCentered, completion: completion)
+			default:
+				showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
+			}
 			showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
 		case .struggled:
 			showPopUp(emoji: "😎", message: "Good luck!", badges: badges, onCentered: onCentered, completion: completion)

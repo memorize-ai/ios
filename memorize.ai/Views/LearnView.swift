@@ -211,7 +211,7 @@ struct LearnView: View {
 			switch true {
 			case current?.isMastered:
 				showPopUp(emoji: "🎉", message: "Mastered!", badges: badges, onCentered: onCentered, completion: completion)
-			case current?.streak ?? 0 > 2:
+			case current?.streak ?? 0 > 1:
 				showPopUp(emoji: "🎉", message: "On a roll!", badges: badges, onCentered: onCentered, completion: completion)
 			default:
 				showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
