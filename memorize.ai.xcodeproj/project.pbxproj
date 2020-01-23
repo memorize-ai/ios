@@ -181,7 +181,6 @@
 		4D9AAEC32385D25500C85EC2 /* MarketViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */; };
 		4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */; };
 		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
-		4D9BF86923BAC6A500388DEF /* froala.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86823BAC6A400388DEF /* froala.js */; };
 		4D9BF86B23BAC6AB00388DEF /* froala.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86A23BAC6AB00388DEF /* froala.css */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
@@ -217,6 +216,7 @@
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
 		4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC923A523458F1900F901EA /* SwiftUIX */; };
 		4DCD641B23D910020075F724 /* DecksViewCardPreviewSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD641A23D910020075F724 /* DecksViewCardPreviewSheetView.swift */; };
+		4DCD645623DA3AF20075F724 /* froala.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD645523DA3AF20075F724 /* froala.js */; };
 		4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */; };
 		4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */; };
 		4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD2512623627D0300A83509 /* LogInViewModel.swift */; };
@@ -476,7 +476,6 @@
 		4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopControls.swift; path = memorize.ai/MarketViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetView.swift; sourceTree = "<group>"; };
 		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
-		4D9BF86823BAC6A400388DEF /* froala.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = froala.js; sourceTree = "<group>"; };
 		4D9BF86A23BAC6AB00388DEF /* froala.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = froala.css; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
@@ -515,6 +514,7 @@
 		4DC8115B2363E46400CCFF98 /* Asterisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asterisk.swift; sourceTree = "<group>"; };
 		4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCode.swift; sourceTree = "<group>"; };
 		4DCD641A23D910020075F724 /* DecksViewCardPreviewSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewCardPreviewSheetView.swift; sourceTree = "<group>"; };
+		4DCD645523DA3AF20075F724 /* froala.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = froala.js; sourceTree = "<group>"; };
 		4DD2512123624DCE00A83509 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewBottomGradient.swift; sourceTree = "<group>"; };
 		4DD2512623627D0300A83509 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
@@ -1037,7 +1037,7 @@
 			isa = PBXGroup;
 			children = (
 				4D9BF86A23BAC6AB00388DEF /* froala.css */,
-				4D9BF86823BAC6A400388DEF /* froala.js */,
+				4DCD645523DA3AF20075F724 /* froala.js */,
 			);
 			path = Froala;
 			sourceTree = "<group>";
@@ -1489,8 +1489,8 @@
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
-				4D9BF86923BAC6A500388DEF /* froala.js in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
+				4DCD645623DA3AF20075F724 /* froala.js in Resources */,
 				4DB659D123BF0B3800E74850 /* katex.js in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
