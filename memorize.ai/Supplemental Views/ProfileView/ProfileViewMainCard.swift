@@ -13,7 +13,7 @@ struct ProfileViewMainCard: View {
 		Text(text)
 			.font(.muli(.bold, size: 14))
 			.foregroundColor(.lightGrayText)
-			.frame(maxWidth: .infinity, alignment: .leading)
+			.alignment(.leading)
 	}
 	
 	var body: some View {
@@ -32,7 +32,7 @@ struct ProfileViewMainCard: View {
 					Text(user.email)
 						.font(.muli(.bold, size: 16))
 						.foregroundColor(.darkGray)
-						.frame(maxWidth: .infinity, alignment: .leading)
+						.alignment(.leading)
 				}
 			}
 			.padding()

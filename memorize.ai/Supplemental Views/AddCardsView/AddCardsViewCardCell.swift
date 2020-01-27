@@ -9,7 +9,7 @@ struct AddCardsViewCardCell: View {
 	func headerText(_ text: String) -> some View {
 		Text(text)
 			.font(.muli(.bold, size: 15))
-			.frame(maxWidth: .infinity, alignment: .leading)
+			.alignment(.leading)
 			.padding(.top, 2)
 	}
 	

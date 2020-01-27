@@ -6,7 +6,7 @@ struct ProfileViewTopControls: View {
 			Text("Profile")
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
-				.frame(maxWidth: .infinity, alignment: .leading)
+				.alignment(.leading)
 			Spacer()
 			SignOutButton {
 				CustomRectangle(background: Color(#colorLiteral(red: 0.9607843137, green: 0.3647058824, blue: 0.137254902, alpha: 1))) {

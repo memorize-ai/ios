@@ -17,7 +17,7 @@ struct SideBarSection: View {
 				}
 			}
 		}
-		.frame(maxWidth: .infinity, alignment: .leading)
+		.alignment(.leading)
 	}
 }
 

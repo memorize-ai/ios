@@ -74,7 +74,7 @@ struct AddCardsView: View {
 				) {
 					Text("Are you sure?")
 						.font(.muli(.regular, size: 18))
-						.frame(maxWidth: .infinity, alignment: .leading)
+						.alignment(.leading)
 						.frame(height: 50)
 						.padding(.horizontal, 30)
 					PopUpDivider()
