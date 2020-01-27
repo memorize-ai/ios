@@ -68,20 +68,36 @@ struct LearnRecapView: View {
 #if DEBUG
 struct LearnRecapView_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapView(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: nil,
-			xpGained: 1,
-			initialXP: 4,
-			totalEasyRatingCount: 1,
-			totalStruggledRatingCount: 3,
-			totalForgotRatingCount: 4,
-			frequentlyEasySections: [],
-			frequentlyStruggledSections: [],
-			frequentlyForgotSections: [],
-			frequentCardsForRating: { _ in [] },
-			numberOfReviewedCardsForSection: { _ in 1 }
-		)
+		Group {
+			LearnRecapView(
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				section: nil,
+				xpGained: 1,
+				initialXP: 4,
+				totalEasyRatingCount: 1,
+				totalStruggledRatingCount: 3,
+				totalForgotRatingCount: 4,
+				frequentlyEasySections: [],
+				frequentlyStruggledSections: [],
+				frequentlyForgotSections: [],
+				frequentCardsForRating: { _ in [] },
+				numberOfReviewedCardsForSection: { _ in 1 }
+			)
+			LearnRecapView(
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
+				xpGained: 1,
+				initialXP: 4,
+				totalEasyRatingCount: 1,
+				totalStruggledRatingCount: 3,
+				totalForgotRatingCount: 4,
+				frequentlyEasySections: [],
+				frequentlyStruggledSections: [],
+				frequentlyForgotSections: [],
+				frequentCardsForRating: { _ in [] },
+				numberOfReviewedCardsForSection: { _ in 1 }
+			)
+		}
 		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }

@@ -5,6 +5,10 @@ struct LearnRecapViewMainCardSectionName: View {
 	
 	var body: some View {
 		Text(section.name)
+			.font(.muli(.extraBold, size: 18))
+			.foregroundColor(.darkGray)
+			.shrinks(withLineLimit: 3)
+			.padding(.top, 6)
 	}
 }
 

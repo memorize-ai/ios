@@ -92,6 +92,7 @@ struct LearnRecapViewMainCard_Previews: PreviewProvider {
 		LearnRecapViewMainCard(
 			user: PREVIEW_CURRENT_STORE.user,
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
 			xpGained: 1,
 			initialXP: 3,
 			totalEasyRatingCount: 2,
