@@ -24,6 +24,7 @@ struct ProfileView: View {
 						ProfileViewForgotPasswordButton()
 							.padding(.top, 8)
 						ProfileViewCreatedDecksSection(user: self.currentStore.user)
+						ProfileViewMyInterestsSection(user: self.currentStore.user)
 					}
 				}
 			}

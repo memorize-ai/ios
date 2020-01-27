@@ -186,6 +186,7 @@
 		4D9D931223DF66250008B614 /* ProfileViewMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */; };
 		4D9D931423DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */; };
 		4D9D931623DF76010008B614 /* ProfileViewCreatedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */; };
+		4D9D931823DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -485,6 +486,7 @@
 		4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMainCard.swift; sourceTree = "<group>"; };
 		4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewForgotPasswordButton.swift; sourceTree = "<group>"; };
 		4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCreatedDecksSection.swift; sourceTree = "<group>"; };
+		4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMyInterestsSection.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -1057,6 +1059,7 @@
 				4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */,
 				4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */,
 				4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */,
+				4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -1817,6 +1820,7 @@
 				4D5C404723C855BA00511B7C /* LearnRecapViewTopControls.swift in Sources */,
 				4DD9CEF323691C2700EC138F /* RecommendedDecksView.swift in Sources */,
 				4D0C028F237D41C80062BC14 /* LoadingTopicCell.swift in Sources */,
+				4D9D931823DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift in Sources */,
 				4DD34CD42362D79C0007E3E6 /* NavigateTo.swift in Sources */,
 				4D3FE57323BC11620010FFD3 /* FroalaEditor.swift in Sources */,
 				4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */,
