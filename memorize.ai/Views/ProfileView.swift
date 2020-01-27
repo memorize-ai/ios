@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -17,7 +19,9 @@ struct ProfileView: View {
 						.foregroundColor(.white)
 						.frame(maxWidth: .infinity, alignment: .leading)
 						.padding(.horizontal, 23)
-					ProfileViewMainCard()
+					ScrollView {
+						ProfileViewMainCard(user: self.currentStore.user)
+					}
 				}
 			}
 		}

@@ -124,6 +124,12 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
+	func setName(to name: String) -> Self {
+		documentReference.updateData(["name": name]) as Void
+		return self
+	}
+	
+	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
 		email = snapshot.get("email") as? String ?? email
