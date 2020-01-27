@@ -183,6 +183,7 @@
 		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
 		4D9BF86B23BAC6AB00388DEF /* froala.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86A23BAC6AB00388DEF /* froala.css */; };
 		4D9D930F23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */; };
+		4D9D931223DF66250008B614 /* ProfileViewMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -479,6 +480,7 @@
 		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
 		4D9BF86A23BAC6AB00388DEF /* froala.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = froala.css; sourceTree = "<group>"; };
 		4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewMainCardSectionName.swift; sourceTree = "<group>"; };
+		4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMainCard.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,14 @@
 			path = Froala;
 			sourceTree = "<group>";
 		};
+		4D9D931023DF66150008B614 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		4DAA4F30233DE1A600EF7467 = {
 			isa = PBXGroup;
 			children = (
@@ -1296,6 +1306,7 @@
 				4D6300D623C6ADDB00274DC1 /* ReviewRecapView */,
 				4D56FC3B23C533AE006366FD /* LearnView */,
 				4D6300D123C6989100274DC1 /* LearnRecapView */,
+				4D9D931023DF66150008B614 /* ProfileView */,
 			);
 			path = "Supplemental Views";
 			sourceTree = "<group>";
@@ -1680,6 +1691,7 @@
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
 				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
 				4DD5FE9E2389E22000E70251 /* Deck+Search.swift in Sources */,
+				4D9D931223DF66250008B614 /* ProfileViewMainCard.swift in Sources */,
 				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
 				4D6BA53023ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift in Sources */,
 				4D703AF6233E728B004F1F65 /* Global.swift in Sources */,

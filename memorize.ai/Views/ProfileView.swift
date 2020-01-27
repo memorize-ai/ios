@@ -1,13 +1,24 @@
 import SwiftUI
 
 struct ProfileView: View {
-	@EnvironmentObject var currentStore: CurrentStore
-	
 	var body: some View {
-		VStack {
-			Text(currentStore.user.email)
-			SignOutButton {
-				Text("Sign out")
+		GeometryReader { geometry in
+			ZStack(alignment: .top) {
+				Group {
+					Color.lightGrayBackground
+					HomeViewTopGradient(
+						addedHeight: geometry.safeAreaInsets.top
+					)
+				}
+				.edgesIgnoringSafeArea(.all)
+				VStack {
+					Text("Profile")
+						.font(.muli(.bold, size: 20))
+						.foregroundColor(.white)
+						.frame(maxWidth: .infinity, alignment: .leading)
+						.padding(.horizontal, 23)
+					ProfileViewMainCard()
+				}
 			}
 		}
 	}
