@@ -3,6 +3,9 @@ import SwiftUI
 struct ProfileViewCreatedDecksSection: View {
 	@ObservedObject var user: User
 	
+	@State var selectedDeck: Deck!
+	@State var isDeckSelected = false
+	
 	var isEmpty: Bool {
 		user.createdDecks.isEmpty
 	}
@@ -21,17 +24,28 @@ struct ProfileViewCreatedDecksSection: View {
 				}
 				.frame(width: SCREEN_SIZE.width - 8 * 2, alignment: .leading)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack {
+					HStack(alignment: .top) {
 						ForEach(user.createdDecks) { deck in
 							DeckCellWithGetButton(
 								deck: deck,
 								user: self.user,
 								width: 165
 							)
+							.onTapGesture {
+								self.selectedDeck = deck
+								self.isDeckSelected = true
+							}
 						}
 					}
 					.padding(.horizontal, 8)
 				}
+			}
+			if isDeckSelected {
+				NavigateTo(
+					MarketDeckView()
+						.environmentObject(selectedDeck),
+					when: $isDeckSelected
+				)
 			}
 		}
 		.padding(.top, isEmpty ? 0 : 20)

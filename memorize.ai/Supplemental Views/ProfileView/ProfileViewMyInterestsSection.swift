@@ -1,6 +1,11 @@
 import SwiftUI
 
 struct ProfileViewMyInterestsSection: View {
+	static let cellSpacing: CGFloat = 8
+	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
+	
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	@ObservedObject var user: User
 	
 	var body: some View {
@@ -15,11 +20,33 @@ struct ProfileViewMyInterestsSection: View {
 					.padding(.vertical, 4)
 			}
 			.frame(width: SCREEN_SIZE.width - 8 * 2, alignment: .leading)
-			// TODO: Show topics
+			CustomRectangle(
+				background: Color.white,
+				shadowRadius: 5,
+				shadowYOffset: 5
+			) {
+				Grid(
+					elements: currentStore.topics.map { topic in
+						TopicCell(
+							topic: topic,
+							isSelected: user.interests.contains(topic.id)
+						) {
+							_ = self.user.interests.contains(topic.id)
+								? self.user.removeInterest(topicId: topic.id)
+								: self.user.addInterest(topicId: topic.id)
+						}
+					},
+					columns: Self.numberOfColumns,
+					horizontalSpacing: Self.cellSpacing,
+					verticalSpacing: Self.cellSpacing
+				)
+				.frame(maxWidth: SCREEN_SIZE.width - 8 * 4)
+				.padding(8)
+			}
 		}
 		.padding(.top)
 		.onAppear {
-			// TODO: Load all topics
+			self.currentStore.loadAllTopics()
 		}
 	}
 }
@@ -30,6 +57,7 @@ struct ProfileViewMyInterestsSection_Previews: PreviewProvider {
 		ProfileViewMyInterestsSection(
 			user: PREVIEW_CURRENT_STORE.user
 		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

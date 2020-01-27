@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct ChooseTopicsViewContent: View {
+	static let cellSpacing: CGFloat = 8
+	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
+	
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@ObservedObject var model: ChooseTopicsViewModel
@@ -8,9 +11,6 @@ struct ChooseTopicsViewContent: View {
 	init(currentUser: User) {
 		model = .init(currentUser: currentUser)
 	}
-	
-	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
 	
 	var body: some View {
 		ScrollView(showsIndicators: false) {
