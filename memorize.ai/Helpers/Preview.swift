@@ -301,7 +301,8 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 				)
 			),
 			failedDeck
-		]
+		],
+		createdDecks: [firstDeck, selectedDeck]
 	))
 	currentStore.selectedDeck = selectedDeck
 	currentStore.topics = [
