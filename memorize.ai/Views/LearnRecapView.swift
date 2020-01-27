@@ -39,6 +39,7 @@ struct LearnRecapView: View {
 								LearnRecapViewMainCard(
 									user: self.currentStore.user,
 									deck: self.deck,
+									section: self.section,
 									xpGained: self.xpGained,
 									initialXP: self.initialXP,
 									totalEasyRatingCount: self.totalEasyRatingCount,

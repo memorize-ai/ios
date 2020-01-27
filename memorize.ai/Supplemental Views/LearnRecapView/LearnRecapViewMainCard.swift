@@ -4,9 +4,9 @@ struct LearnRecapViewMainCard: View {
 	@ObservedObject var user: User
 	@ObservedObject var deck: Deck
 	
+	let section: Deck.Section?
 	let xpGained: Int
 	let initialXP: Int
-	
 	let totalEasyRatingCount: Int
 	let totalStruggledRatingCount: Int
 	let totalForgotRatingCount: Int
@@ -58,6 +58,9 @@ struct LearnRecapViewMainCard: View {
 						.font(.muli(.extraBold, size: 23))
 						.foregroundColor(.darkGray)
 						.shrinks(withLineLimit: 3)
+					if section != nil {
+						LearnRecapViewMainCardSectionName(section: section!)
+					}
 				}
 				.padding(.horizontal)
 				HorizontalBarGraph(

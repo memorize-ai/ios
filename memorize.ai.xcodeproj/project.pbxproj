@@ -182,6 +182,7 @@
 		4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */; };
 		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
 		4D9BF86B23BAC6AB00388DEF /* froala.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D9BF86A23BAC6AB00388DEF /* froala.css */; };
+		4D9D930F23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -477,6 +478,7 @@
 		4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetView.swift; sourceTree = "<group>"; };
 		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
 		4D9BF86A23BAC6AB00388DEF /* froala.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = froala.css; sourceTree = "<group>"; };
+		4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewMainCardSectionName.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -850,6 +852,7 @@
 			children = (
 				4D5C404623C855BA00511B7C /* LearnRecapViewTopControls.swift */,
 				4D5C404823C857DD00511B7C /* LearnRecapViewMainCard.swift */,
+				4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */,
 				4D5C404D23C9161400511B7C /* LearnRecapViewSectionPerformance.swift */,
 				4D5C404F23C9174400511B7C /* LearnRecapViewSectionPerformanceRow.swift */,
 				4D5C405323C9234E00511B7C /* LearnRecapViewSectionPerformanceRowSectionCell.swift */,
@@ -1646,6 +1649,7 @@
 				4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */,
 				4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */,
 				4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */,
+				4D9D930F23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,
 				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,
