@@ -12,7 +12,12 @@ struct SignOutButton<Label: View>: View {
 	var body: some View {
 		Group {
 			Button(action: {
-				self.currentStore.signOut()
+				showAlert(title: "Sign out", message: "Are you sure?") { alert in
+					alert.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+					alert.addAction(.init(title: "Sign out", style: .destructive) { _ in
+						self.currentStore.signOut()
+					})
+				}
 			}) {
 				label
 			}

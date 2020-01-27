@@ -14,10 +14,7 @@ struct ProfileView: View {
 				}
 				.edgesIgnoringSafeArea(.all)
 				VStack {
-					Text("Profile")
-						.font(.muli(.bold, size: 20))
-						.foregroundColor(.white)
-						.frame(maxWidth: .infinity, alignment: .leading)
+					ProfileViewTopControls()
 						.padding(.horizontal, 23)
 					ScrollView {
 						ProfileViewMainCard(user: self.currentStore.user)

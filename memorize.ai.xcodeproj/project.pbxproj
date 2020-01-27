@@ -187,6 +187,7 @@
 		4D9D931423DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */; };
 		4D9D931623DF76010008B614 /* ProfileViewCreatedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */; };
 		4D9D931823DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */; };
+		4D9D931A23DF84D40008B614 /* ProfileViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931923DF84D40008B614 /* ProfileViewTopControls.swift */; };
 		4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD292368364200F9F0D3 /* String.swift */; };
 		4DA0FD2C2368B0A500F9F0D3 /* FirestoreErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */; };
 		4DA16843235EAAFA009BBC2B /* InitialViewBottomGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */; };
@@ -487,6 +488,7 @@
 		4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewForgotPasswordButton.swift; sourceTree = "<group>"; };
 		4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCreatedDecksSection.swift; sourceTree = "<group>"; };
 		4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMyInterestsSection.swift; sourceTree = "<group>"; };
+		4D9D931923DF84D40008B614 /* ProfileViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTopControls.swift; sourceTree = "<group>"; };
 		4DA0FD292368364200F9F0D3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4DA0FD2B2368B0A500F9F0D3 /* FirestoreErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreErrorCode.swift; sourceTree = "<group>"; };
 		4DA16842235EAAFA009BBC2B /* InitialViewBottomGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewBottomGradient.swift; sourceTree = "<group>"; };
@@ -1056,6 +1058,7 @@
 		4D9D931023DF66150008B614 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				4D9D931923DF84D40008B614 /* ProfileViewTopControls.swift */,
 				4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */,
 				4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */,
 				4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */,
@@ -1863,6 +1866,7 @@
 				4D598E92238E3D3300B608FA /* Date.swift in Sources */,
 				4DAA4F3F233DE1A600EF7467 /* SceneDelegate.swift in Sources */,
 				4D98A4A4238C6E4B005F0F27 /* DecksViewSections.swift in Sources */,
+				4D9D931A23DF84D40008B614 /* ProfileViewTopControls.swift in Sources */,
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,
 				4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */,
 				4D35BC442385F20A00A440CF /* MarketViewModel.swift in Sources */,
