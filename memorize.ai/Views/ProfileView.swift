@@ -21,6 +21,8 @@ struct ProfileView: View {
 						.padding(.horizontal, 23)
 					ScrollView {
 						ProfileViewMainCard(user: self.currentStore.user)
+						ProfileViewForgotPasswordButton()
+							.padding(.top, 8)
 					}
 				}
 			}
