@@ -17,7 +17,6 @@ struct EditCardViewCardCell: View {
 			borderWidth: 1
 		) {
 			FroalaEditor(html: html)
-				.frame(height: 200)
 		}
 	}
 	

@@ -88,6 +88,7 @@ struct MarketDeckViewRatings: View {
 									.foregroundColor(.darkGray)
 								Text(" Review\(deck.numberOfRatings == 1 ? "" : "s")")
 									.foregroundColor(.lightGrayText)
+									.layoutPriority(1)
 							}
 							.font(.muli(.bold, size: 13.5))
 						}

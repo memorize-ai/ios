@@ -22,10 +22,12 @@ struct FroalaEditor: View {
 	
 	@Binding var html: String
 	
+	let height: CGFloat?
 	let configuration: WKWebViewConfiguration
 	
-	init(html: Binding<String>) {
+	init(html: Binding<String>, height: CGFloat? = 300) {
 		_html = html
+		self.height = height
 		
 		let userContentController = WKUserContentController()
 		userContentController.add(Coordinator(html: html), name: "main")
@@ -188,6 +190,7 @@ struct FroalaEditor: View {
 			baseURL: WEB_VIEW_BASE_URL,
 			configuration: configuration
 		)
+		.frame(height: height)
 	}
 }
 
