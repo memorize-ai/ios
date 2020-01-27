@@ -23,6 +23,7 @@ struct ProfileView: View {
 						ProfileViewMainCard(user: self.currentStore.user)
 						ProfileViewForgotPasswordButton()
 							.padding(.top, 8)
+						ProfileViewCreatedDecksSection(user: self.currentStore.user)
 					}
 				}
 			}

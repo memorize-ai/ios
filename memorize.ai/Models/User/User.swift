@@ -19,8 +19,10 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var xp: Int
 	@Published var allDecks: [String]
 	@Published var decks: [Deck]
+	@Published var createdDecks: [Deck]
 	
 	@Published var decksLoadingState = LoadingState()
+	@Published var createdDecksLoadingState = LoadingState()
 	
 	var onDecksChange: (([Deck], DecksChangeEvent) -> Void)?
 	
@@ -33,6 +35,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		xp: Int,
 		allDecks: [String] = [],
 		decks: [Deck] = [],
+		createdDecks: [Deck] = [],
 		onDecksChange: (([Deck], DecksChangeEvent) -> Void)? = nil
 	) {
 		self.id = id
@@ -43,6 +46,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		self.xp = xp
 		self.allDecks = allDecks
 		self.decks = decks
+		self.createdDecks = createdDecks
 		self.onDecksChange = onDecksChange
 	}
 	
@@ -176,6 +180,54 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			}
 			self.decksLoadingState.succeed()
 		}
+		return self
+	}
+	
+	@discardableResult
+	func loadCreatedDecks(loadImages: Bool = true) -> Self {
+		guard createdDecksLoadingState.isNone else { return self }
+		createdDecksLoadingState.startLoading()
+		firestore
+			.collection("decks")
+			.whereField("creator", isEqualTo: id)
+			.addSnapshotListener { snapshot, error in
+				guard error == nil, let documentChanges = snapshot?.documentChanges else {
+					self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+					return
+				}
+				
+				for change in documentChanges {
+					let publicDataSnapshot = change.document
+					let deckId = publicDataSnapshot.documentID
+					
+					switch change.type {
+					case .added:
+						let deck = Deck(snapshot: publicDataSnapshot, snapshotListener: nil)
+						var isInitialIteration = true
+						
+						self.documentReference
+							.collection("decks")
+							.document(deckId)
+							.addSnapshotListener { userDataSnapshot, error in
+								guard error == nil, let userDataSnapshot = userDataSnapshot else { return }
+								
+								deck.updateUserDataFromSnapshot(userDataSnapshot)
+								
+								if isInitialIteration {
+									isInitialIteration = false
+									self.createdDecks.append(loadImages ? deck.loadImage() : deck)
+								}
+							}
+					case .modified:
+						self.createdDecks.first { $0.id == deckId }?
+							.updatePublicDataFromSnapshot(publicDataSnapshot)
+					case .removed:
+						self.createdDecks.removeAll { $0.id == deckId }
+					}
+				}
+				
+				self.decksLoadingState.succeed()
+			}
 		return self
 	}
 	
