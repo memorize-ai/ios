@@ -14,6 +14,7 @@ struct ReviewRecapView: View {
 	let numberOfNewlyMasteredCards: Int
 	let numberOfNewCards: Int
 	let frequentDecksForRating: (Card.PerformanceRating) -> [Deck]
+	let countOfCardsForDeck: (Deck) -> Int
 	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
 	
 	var body: some View {
@@ -51,6 +52,7 @@ struct ReviewRecapView: View {
 									frequentlyEasyDecks: self.frequentDecksForRating(.easy),
 									frequentlyStruggledDecks: self.frequentDecksForRating(.struggled),
 									frequentlyForgotDecks: self.frequentDecksForRating(.forgot),
+									countOfCardsForDeck: self.countOfCardsForDeck,
 									countOfRatingForDeck: self.countOfRatingForDeck
 								)
 							}
@@ -80,6 +82,7 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				frequentDecksForRating: { _ in
 					PREVIEW_CURRENT_STORE.user.decks
 				},
+				countOfCardsForDeck: { _ in 20 },
 				countOfRatingForDeck: { _, _ in 10 }
 			)
 			ReviewRecapView(
@@ -96,6 +99,7 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				frequentDecksForRating: { _ in
 					PREVIEW_CURRENT_STORE.user.decks
 				},
+				countOfCardsForDeck: { _ in 20 },
 				countOfRatingForDeck: { _, _ in 10 }
 			)
 		}

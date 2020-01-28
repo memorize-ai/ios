@@ -5,6 +5,7 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 	
 	let rating: Card.PerformanceRating
 	let decks: [Deck]
+	let countOfCardsForDeck: (Deck) -> Int
 	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
 	
 	var deckCountMessage: String {
@@ -27,7 +28,7 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 	}
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 12) {
 			HStack {
 				Text("Frequently \(rating.title.lowercased())")
 					.font(.muli(.extraBold, size: 15))
@@ -63,6 +64,7 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 					ReviewRecapViewDeckPerformanceRowDeckCell(
 						deck: deck,
 						rating: self.rating,
+						numberOfCards: self.countOfCardsForDeck(deck),
 						countOfRating: {
 							self.countOfRatingForDeck(deck, $0)
 						}
@@ -81,6 +83,7 @@ struct ReviewRecapViewDeckPerformanceRow_Previews: PreviewProvider {
 		ReviewRecapViewDeckPerformanceRow(
 			rating: .easy,
 			decks: [],
+			countOfCardsForDeck: { _ in 20 },
 			countOfRatingForDeck: { _, _ in 10 }
 		)
 	}

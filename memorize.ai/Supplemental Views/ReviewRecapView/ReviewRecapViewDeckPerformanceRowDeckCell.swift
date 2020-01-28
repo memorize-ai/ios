@@ -3,7 +3,12 @@ import SwiftUI
 struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 	let deck: Deck
 	let rating: Card.PerformanceRating
+	let numberOfCards: Int
 	let countOfRating: (Card.PerformanceRating) -> Int
+	
+	var cardCountMessage: String {
+		"(\(numberOfCards.formatted) card\(numberOfCards == 1 ? "" : "s"))"
+	}
 	
 	func ratingCountBadge(forRating rating: Card.PerformanceRating) -> some View {
 		CustomRectangle(
@@ -27,7 +32,15 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 			cornerRadius: 8
 		) {
 			VStack {
-				// TODO: Add content
+				Text(deck.name)
+					.font(.muli(.extraBold, size: 18))
+					.foregroundColor(.darkGray)
+					.shrinks(withLineLimit: 3)
+					.padding(.bottom, 4)
+				Text(cardCountMessage)
+					.font(.muli(.bold, size: 15))
+					.foregroundColor(.lightGrayText)
+					.padding(.bottom, 16)
 				HStack {
 					ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 						self.ratingCountBadge(forRating: rating)
@@ -35,6 +48,7 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 				}
 			}
 			.padding(8)
+			.frame(maxWidth: .infinity)
 		}
 	}
 }
@@ -45,6 +59,7 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell_Previews: PreviewProvider {
 		ReviewRecapViewDeckPerformanceRowDeckCell(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			rating: .easy,
+			numberOfCards: 20,
 			countOfRating: { _ in 10 }
 		)
 	}
