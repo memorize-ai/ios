@@ -92,6 +92,7 @@ struct ReviewRecapViewMainCard: View {
 				.padding([.horizontal, .bottom])
 			}
 		}
+		.padding(.horizontal, 8)
 	}
 }
 

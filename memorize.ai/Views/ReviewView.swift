@@ -82,6 +82,18 @@ struct ReviewView: View {
 			: nil
 	}
 	
+	var numberOfNewlyMasteredCards: Int {
+		cards.reduce(0) { acc, card in
+			acc + *(card.isNewlyMastered ?? false)
+		}
+	}
+	
+	var numberOfNewCards: Int {
+		cards.reduce(0) { acc, card in
+			acc + *card.isNew
+		}
+	}
+	
 	var recapView: some View {
 		ReviewRecapView(
 			decks: decks,
@@ -91,7 +103,9 @@ struct ReviewView: View {
 			initialXP: initialXP,
 			totalEasyRatingCount: totalRatingCount(forRating: .easy),
 			totalStruggledRatingCount: totalRatingCount(forRating: .struggled),
-			totalForgotRatingCount: totalRatingCount(forRating: .forgot)
+			totalForgotRatingCount: totalRatingCount(forRating: .forgot),
+			numberOfNewlyMasteredCards: numberOfNewlyMasteredCards,
+			numberOfNewCards: numberOfNewCards
 		)
 		.environmentObject(currentStore)
 		.navigationBarRemoved()

@@ -48,6 +48,7 @@ extension Card {
 		func setRating(to rating: PerformanceRating) {
 			self.rating = rating
 			streak = rating.isCorrect ? streak + 1 : 0
+			isNewlyMastered = streak == Self.NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED
 		}
 		
 		func loadPrediction() -> Self {

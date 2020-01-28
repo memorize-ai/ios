@@ -11,6 +11,8 @@ struct ReviewRecapView: View {
 	let totalEasyRatingCount: Int
 	let totalStruggledRatingCount: Int
 	let totalForgotRatingCount: Int
+	let numberOfNewlyMasteredCards: Int
+	let numberOfNewCards: Int
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -26,7 +28,7 @@ struct ReviewRecapView: View {
 					LearnRecapViewTopControls()
 						.padding(.horizontal, 23)
 					ScrollView {
-						VStack(spacing: 30) {
+						VStack(spacing: 20) {
 							ReviewRecapViewMainCard(
 								user: self.currentStore.user,
 								decks: self.decks,
@@ -38,7 +40,10 @@ struct ReviewRecapView: View {
 								totalStruggledRatingCount: self.totalStruggledRatingCount,
 								totalForgotRatingCount: self.totalForgotRatingCount
 							)
-							.padding(.horizontal, 8)
+							ReviewRecapViewThisSessionSection(
+								numberOfNewlyMasteredCards: self.numberOfNewlyMasteredCards,
+								numberOfNewCards: self.numberOfNewCards
+							)
 						}
 					}
 				}
@@ -59,7 +64,9 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				initialXP: 0,
 				totalEasyRatingCount: 4,
 				totalStruggledRatingCount: 2,
-				totalForgotRatingCount: 1
+				totalForgotRatingCount: 1,
+				numberOfNewlyMasteredCards: 1,
+				numberOfNewCards: 2
 			)
 			ReviewRecapView(
 				decks: PREVIEW_CURRENT_STORE.user.decks,
@@ -69,7 +76,9 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				initialXP: 0,
 				totalEasyRatingCount: 4,
 				totalStruggledRatingCount: 2,
-				totalForgotRatingCount: 1
+				totalForgotRatingCount: 1,
+				numberOfNewlyMasteredCards: 1,
+				numberOfNewCards: 2
 			)
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)
