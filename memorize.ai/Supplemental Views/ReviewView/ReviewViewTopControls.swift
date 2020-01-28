@@ -1,11 +1,12 @@
 import SwiftUI
 
-struct ReviewViewTopControls: View {
+struct ReviewViewTopControls<RecapView: View>: View {
 	@Environment(\.presentationMode) var presentationMode
 	
 	let currentIndex: Int
 	let numberOfTotalCards: Int
 	let skipCard: () -> Void
+	let recapView: () -> RecapView
 	
 	var title: String {
 		"\(currentIndex + 1) / \(numberOfTotalCards)"
@@ -40,9 +41,11 @@ struct ReviewViewTopControls: View {
 				Button(action: skipCard) {
 					button(text: "SKIP")
 				}
-//				ReviewRecapViewNavigationLink {
-//					button(text: "DONE")
-//				}
+				NavigationLink(
+					destination: LazyView(content: recapView)
+				) {
+					button(text: "DONE")
+				}
 			}
 		}
 	}

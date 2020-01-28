@@ -2,9 +2,7 @@ import SwiftUI
 
 struct LearnViewTopControls<RecapView: View>: View {
 	@Environment(\.presentationMode) var presentationMode
-	
-	@EnvironmentObject var currentStore: CurrentStore
-	
+		
 	let currentIndex: Int
 	let numberOfTotalCards: Int
 	let skipCard: () -> Void
@@ -44,11 +42,7 @@ struct LearnViewTopControls<RecapView: View>: View {
 					button(text: "SKIP")
 				}
 				NavigationLink(
-					destination: LazyView {
-						self.recapView()
-							.environmentObject(self.currentStore)
-							.navigationBarRemoved()
-					}
+					destination: LazyView(content: recapView)
 				) {
 					button(text: "DONE")
 				}

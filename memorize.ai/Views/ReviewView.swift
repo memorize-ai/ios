@@ -74,6 +74,35 @@ struct ReviewView: View {
 		.random(in: 0...1) <= Self.XP_CHANCE
 	}
 	
+	var decks: [Deck]? {
+		deck == nil
+			? .init(Set(cards.reduce([]) { acc, card in
+				acc + [card.parent.parent]
+			}))
+			: nil
+	}
+	
+	var recapView: some View {
+		ReviewRecapView(
+			decks: decks,
+			deck: deck,
+			section: section,
+			xpGained: xpGained,
+			initialXP: initialXP,
+			totalEasyRatingCount: totalRatingCount(forRating: .easy),
+			totalStruggledRatingCount: totalRatingCount(forRating: .struggled),
+			totalForgotRatingCount: totalRatingCount(forRating: .forgot)
+		)
+		.environmentObject(currentStore)
+		.navigationBarRemoved()
+	}
+	
+	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {
+		cards.reduce(0) { acc, card in
+			acc + *(card.rating == rating)
+		}
+	}
+	
 	func loadNumberOfTotalCards() {
 		numberOfTotalCards =
 			section?.numberOfDueCards
@@ -176,7 +205,7 @@ struct ReviewView: View {
 		guard let current = current else { return }
 		let card = current.parent
 		
-		current.updateStreakForRating(rating)
+		current.setRating(to: rating)
 		cards.append(current)
 		
 		let gainXP = shouldGainXP
@@ -680,7 +709,8 @@ struct ReviewView: View {
 						ReviewViewTopControls(
 							currentIndex: self.currentIndex,
 							numberOfTotalCards: self.numberOfTotalCards,
-							skipCard: self.skipCard
+							skipCard: self.skipCard,
+							recapView: { self.recapView }
 						)
 						.padding(.horizontal, 23)
 						ReviewViewCardSection(
@@ -714,9 +744,7 @@ struct ReviewView: View {
 				.disabled(self.isPopUpShowing)
 				ReviewViewPopUp(data: self.popUpData, offset: self.popUpOffset)
 				NavigateTo(
-					ReviewRecapView()
-						.environmentObject(self.currentStore)
-						.navigationBarRemoved(),
+					LazyView { self.recapView },
 					when: self.$shouldShowRecap
 				)
 			}

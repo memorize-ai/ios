@@ -105,6 +105,8 @@ struct LearnView: View {
 			frequentCardsForRating: frequentCards,
 			numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
 		)
+		.environmentObject(currentStore)
+		.navigationBarRemoved()
 	}
 	
 	func loadNumberOfTotalCards() {
@@ -504,11 +506,7 @@ struct LearnView: View {
 				.disabled(self.isPopUpShowing)
 				LearnViewPopUp(data: self.popUpData, offset: self.popUpOffset)
 				NavigateTo(
-					LazyView {
-						self.recapView
-							.environmentObject(self.currentStore)
-							.navigationBarRemoved()
-					},
+					LazyView { self.recapView },
 					when: self.$shouldShowRecap
 				)
 			}

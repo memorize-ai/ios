@@ -31,6 +31,7 @@ extension Card {
 		@Published var predictionLoadingState = LoadingState()
 		
 		@Published var streak: Int
+		@Published var rating: PerformanceRating?
 		@Published var isNewlyMastered: Bool?
 		
 		init(parent: Card, userData: UserData?) {
@@ -44,7 +45,8 @@ extension Card {
 			userData == nil
 		}
 		
-		func updateStreakForRating(_ rating: PerformanceRating) {
+		func setRating(to rating: PerformanceRating) {
+			self.rating = rating
 			streak = rating.isCorrect ? streak + 1 : 0
 		}
 		
