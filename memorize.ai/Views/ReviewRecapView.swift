@@ -17,6 +17,10 @@ struct ReviewRecapView: View {
 	let countOfCardsForDeck: (Deck) -> Int
 	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
 	let deckHasNewCards: (Deck) -> Bool
+	let frequentSectionsForRating: (Card.PerformanceRating) -> [Deck.Section]
+	let countOfCardsForSection: (Deck.Section) -> Int
+	let countOfRatingForSection: (Deck.Section, Card.PerformanceRating) -> Int
+	let sectionHasNewCards: (Deck.Section) -> Bool
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -59,7 +63,14 @@ struct ReviewRecapView: View {
 								)
 							}
 							if self.section == nil {
-								ReviewRecapViewSectionPerformanceSection()
+								ReviewRecapViewSectionPerformanceSection(
+									frequentlyEasySections: self.frequentSectionsForRating(.easy),
+									frequentlyStruggledSections: self.frequentSectionsForRating(.struggled),
+									frequentlyForgotSections: self.frequentSectionsForRating(.forgot),
+									countOfCardsForSection: self.countOfCardsForSection,
+									countOfRatingForSection: self.countOfRatingForSection,
+									sectionHasNewCards: self.sectionHasNewCards
+								)
 							}
 							ReviewRecapViewCardPerformanceSection()
 						}
@@ -90,7 +101,13 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				},
 				countOfCardsForDeck: { _ in 20 },
 				countOfRatingForDeck: { _, _ in 10 },
-				deckHasNewCards: { _ in true }
+				deckHasNewCards: { _ in true },
+				frequentSectionsForRating: { _ in
+					PREVIEW_CURRENT_STORE.user.decks[0].sections
+				},
+				countOfCardsForSection: { _ in 15 },
+				countOfRatingForSection: { _, _ in 6 },
+				sectionHasNewCards: { _ in true }
 			)
 			ReviewRecapView(
 				decks: PREVIEW_CURRENT_STORE.user.decks,
@@ -108,7 +125,13 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				},
 				countOfCardsForDeck: { _ in 20 },
 				countOfRatingForDeck: { _, _ in 10 },
-				deckHasNewCards: { _ in true }
+				deckHasNewCards: { _ in true },
+				frequentSectionsForRating: { _ in
+					PREVIEW_CURRENT_STORE.user.decks[0].sections
+				},
+				countOfCardsForSection: { _ in 15 },
+				countOfRatingForSection: { _, _ in 6 },
+				sectionHasNewCards: { _ in true }
 			)
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)

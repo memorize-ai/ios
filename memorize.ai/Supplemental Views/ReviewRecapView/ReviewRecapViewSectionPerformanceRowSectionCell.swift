@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
-	@ObservedObject var deck: Deck
+struct ReviewRecapViewSectionPerformanceRowSectionCell: View {
+	@ObservedObject var section: Deck.Section
 	
 	let rating: Card.PerformanceRating
 	let hasNewCards: Bool
@@ -35,15 +35,21 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 				cornerRadius: 8
 			) {
 				VStack {
-					Text(deck.name)
-						.font(.muli(.extraBold, size: 18))
-						.foregroundColor(.darkGray)
-						.shrinks(withLineLimit: 3)
-						.padding(.bottom, 4)
-					Text(cardCountMessage)
-						.font(.muli(.bold, size: 15))
-						.foregroundColor(.lightGrayText)
-						.padding(.bottom, 16)
+					ReviewRecapViewSectionPerformanceRowSectionCellDeckName(
+						deck: section.parent
+					)
+					.padding(.bottom, 8)
+					HStack(alignment: .bottom) {
+						Text(section.name)
+							.font(.muli(.extraBold, size: 18))
+							.foregroundColor(.darkGray)
+							.shrinks(withLineLimit: 3)
+						Text(cardCountMessage)
+							.font(.muli(.bold, size: 13))
+							.foregroundColor(.lightGrayText)
+							.padding(.bottom, 2)
+					}
+					.padding(.bottom, 16)
 					HStack {
 						ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 							self.ratingCountBadge(forRating: rating)
@@ -64,10 +70,10 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 }
 
 #if DEBUG
-struct ReviewRecapViewDeckPerformanceRowDeckCell_Previews: PreviewProvider {
+struct ReviewRecapViewSectionPerformanceRowSectionCell_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewRecapViewDeckPerformanceRowDeckCell(
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+		ReviewRecapViewSectionPerformanceRowSectionCell(
+			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
 			rating: .easy,
 			hasNewCards: true,
 			numberOfCards: 20,
