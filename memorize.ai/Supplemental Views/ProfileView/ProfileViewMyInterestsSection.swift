@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ProfileViewMyInterestsSection: View {
 	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
+	static let numberOfColumns = Int(SCREEN_SIZE.width - 8 * 4) / Int(TopicCell.dimension)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
@@ -40,8 +40,12 @@ struct ProfileViewMyInterestsSection: View {
 					horizontalSpacing: Self.cellSpacing,
 					verticalSpacing: Self.cellSpacing
 				)
-				.frame(maxWidth: SCREEN_SIZE.width - 8 * 4)
-				.padding(8)
+				.frame(width:
+					.init(Self.numberOfColumns) * TopicCell.dimension +
+					.init(Self.numberOfColumns - 1) * Self.cellSpacing
+				)
+				.frame(width: SCREEN_SIZE.width - 8 * 2)
+				.padding(.vertical, 8)
 			}
 		}
 		.padding(.top)

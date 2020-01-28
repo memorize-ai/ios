@@ -17,11 +17,14 @@ struct ProfileView: View {
 					ProfileViewTopControls()
 						.padding(.horizontal, 23)
 					ScrollView {
-						ProfileViewMainCard(user: self.currentStore.user)
-						ProfileViewForgotPasswordButton()
-							.padding(.top, 8)
-						ProfileViewCreatedDecksSection(user: self.currentStore.user)
-						ProfileViewMyInterestsSection(user: self.currentStore.user)
+						VStack {
+							ProfileViewMainCard(user: self.currentStore.user)
+							ProfileViewForgotPasswordButton()
+								.padding(.top, 8)
+							ProfileViewCreatedDecksSection(user: self.currentStore.user)
+							ProfileViewMyInterestsSection(user: self.currentStore.user)
+						}
+						.frame(maxWidth: .infinity)
 					}
 				}
 			}
