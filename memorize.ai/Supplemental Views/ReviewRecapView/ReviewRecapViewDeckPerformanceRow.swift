@@ -5,6 +5,7 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 	
 	let rating: Card.PerformanceRating
 	let decks: [Deck]
+	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
 	
 	var deckCountMessage: String {
 		let count = decks.count
@@ -59,9 +60,15 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 			.padding(.horizontal, 23)
 			if isExpanded && !decks.isEmpty {
 				ForEach(decks) { deck in
-					Text(deck.name)
-						.padding(.horizontal, 23)
+					ReviewRecapViewDeckPerformanceRowDeckCell(
+						deck: deck,
+						rating: self.rating,
+						countOfRating: {
+							self.countOfRatingForDeck(deck, $0)
+						}
+					)
 				}
+				.padding(.horizontal, 23)
 			}
 		}
 		.animation(.linear(duration: 0.15))
@@ -71,7 +78,11 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 #if DEBUG
 struct ReviewRecapViewDeckPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewRecapViewDeckPerformanceRow(rating: .easy, decks: [])
+		ReviewRecapViewDeckPerformanceRow(
+			rating: .easy,
+			decks: [],
+			countOfRatingForDeck: { _, _ in 10 }
+		)
 	}
 }
 #endif

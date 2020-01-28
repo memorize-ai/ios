@@ -106,10 +106,19 @@ struct ReviewView: View {
 			totalForgotRatingCount: totalRatingCount(forRating: .forgot),
 			numberOfNewlyMasteredCards: numberOfNewlyMasteredCards,
 			numberOfNewCards: numberOfNewCards,
-			frequentDecksForRating: { _ in [] } // TODO: Get frequent decks for rating
+			frequentDecksForRating: { _ in [] }, // TODO: Get frequent decks for rating
+			countOfRatingForDeck: countOfRatingForDeck
 		)
 		.environmentObject(currentStore)
 		.navigationBarRemoved()
+	}
+	
+	func countOfRatingForDeck(_ deck: Deck, rating: Card.PerformanceRating) -> Int {
+		cards
+			.filter { $0.parent.parent == deck }
+			.reduce(0) { acc, card in
+				acc + *(card.rating == rating)
+			}
 	}
 	
 	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {

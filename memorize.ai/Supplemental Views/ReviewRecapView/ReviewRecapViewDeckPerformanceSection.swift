@@ -4,6 +4,7 @@ struct ReviewRecapViewDeckPerformanceSection: View {
 	let frequentlyEasyDecks: [Deck]
 	let frequentlyStruggledDecks: [Deck]
 	let frequentlyForgotDecks: [Deck]
+	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
 	
 	var body: some View {
 		VStack {
@@ -14,15 +15,18 @@ struct ReviewRecapViewDeckPerformanceSection: View {
 			VStack(spacing: 12) {
 				ReviewRecapViewDeckPerformanceRow(
 					rating: .easy,
-					decks: frequentlyEasyDecks
+					decks: frequentlyEasyDecks,
+					countOfRatingForDeck: countOfRatingForDeck
 				)
 				ReviewRecapViewDeckPerformanceRow(
 					rating: .struggled,
-					decks: frequentlyStruggledDecks
+					decks: frequentlyStruggledDecks,
+					countOfRatingForDeck: countOfRatingForDeck
 				)
 				ReviewRecapViewDeckPerformanceRow(
 					rating: .forgot,
-					decks: frequentlyForgotDecks
+					decks: frequentlyForgotDecks,
+					countOfRatingForDeck: countOfRatingForDeck
 				)
 			}
 		}
@@ -35,7 +39,8 @@ struct ReviewRecapViewDeckPerformanceSection_Previews: PreviewProvider {
 		ReviewRecapViewDeckPerformanceSection(
 			frequentlyEasyDecks: [],
 			frequentlyStruggledDecks: [],
-			frequentlyForgotDecks: []
+			frequentlyForgotDecks: [],
+			countOfRatingForDeck: { _, _ in 10 }
 		)
 	}
 }
