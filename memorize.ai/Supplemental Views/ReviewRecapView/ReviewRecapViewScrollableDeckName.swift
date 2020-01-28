@@ -6,6 +6,10 @@ struct ReviewRecapViewScrollableDeckName: View {
 	var body: some View {
 		CustomRectangle(background: Color(#colorLiteral(red: 0.1411764706, green: 0.6078431373, blue: 0.9725490196, alpha: 1)).opacity(0.08)) {
 			Text(deck.name)
+				.font(.muli(.extraBold, size: 20))
+				.foregroundColor(.darkGray)
+				.padding(.horizontal, 14)
+				.padding(.vertical, 10)
 		}
 	}
 }

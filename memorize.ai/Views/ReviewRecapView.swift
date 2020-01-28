@@ -50,16 +50,28 @@ struct ReviewRecapView: View {
 #if DEBUG
 struct ReviewRecapView_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewRecapView(
-			decks: [],
-			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			section: nil,
-			xpGained: 0,
-			initialXP: 0,
-			totalEasyRatingCount: 4,
-			totalStruggledRatingCount: 2,
-			totalForgotRatingCount: 1
-		)
+		Group {
+			ReviewRecapView(
+				decks: nil,
+				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				section: nil,
+				xpGained: 0,
+				initialXP: 0,
+				totalEasyRatingCount: 4,
+				totalStruggledRatingCount: 2,
+				totalForgotRatingCount: 1
+			)
+			ReviewRecapView(
+				decks: PREVIEW_CURRENT_STORE.user.decks,
+				deck: nil,
+				section: nil,
+				xpGained: 0,
+				initialXP: 0,
+				totalEasyRatingCount: 4,
+				totalStruggledRatingCount: 2,
+				totalForgotRatingCount: 1
+			)
+		}
 		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }

@@ -67,7 +67,9 @@ struct ReviewRecapViewMainCard: View {
 									content: ReviewRecapViewScrollableDeckName.init
 								)
 							}
+							.padding(.horizontal, 8)
 						}
+						.padding(.top, 8)
 					}
 				}
 				HorizontalBarGraph(
@@ -85,7 +87,7 @@ struct ReviewRecapViewMainCard: View {
 							value: totalForgotRatingCount
 						)
 					],
-					color: .init(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1))
+					color: .darkBlue
 				)
 				.padding([.horizontal, .bottom])
 			}
@@ -98,7 +100,7 @@ struct ReviewRecapViewMainCard_Previews: PreviewProvider {
 	static var previews: some View {
 		ReviewRecapViewMainCard(
 			user: PREVIEW_CURRENT_STORE.user,
-			decks: [],
+			decks: nil,
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			section: nil,
 			xpGained: 0,
