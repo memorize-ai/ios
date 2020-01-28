@@ -13,6 +13,7 @@ struct ReviewRecapView: View {
 	let totalForgotRatingCount: Int
 	let numberOfNewlyMasteredCards: Int
 	let numberOfNewCards: Int
+	let frequentDecksForRating: (Card.PerformanceRating) -> [Deck]
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -44,6 +45,13 @@ struct ReviewRecapView: View {
 								numberOfNewlyMasteredCards: self.numberOfNewlyMasteredCards,
 								numberOfNewCards: self.numberOfNewCards
 							)
+							if self.decks != nil {
+								ReviewRecapViewDeckPerformanceSection(
+									frequentlyEasyDecks: self.frequentDecksForRating(.easy),
+									frequentlyStruggledDecks: self.frequentDecksForRating(.struggled),
+									frequentlyForgotDecks: self.frequentDecksForRating(.forgot)
+								)
+							}
 						}
 					}
 				}
@@ -66,7 +74,10 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				totalStruggledRatingCount: 2,
 				totalForgotRatingCount: 1,
 				numberOfNewlyMasteredCards: 1,
-				numberOfNewCards: 2
+				numberOfNewCards: 2,
+				frequentDecksForRating: { _ in
+					PREVIEW_CURRENT_STORE.user.decks
+				}
 			)
 			ReviewRecapView(
 				decks: PREVIEW_CURRENT_STORE.user.decks,
@@ -78,7 +89,10 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				totalStruggledRatingCount: 2,
 				totalForgotRatingCount: 1,
 				numberOfNewlyMasteredCards: 1,
-				numberOfNewCards: 2
+				numberOfNewCards: 2,
+				frequentDecksForRating: { _ in
+					PREVIEW_CURRENT_STORE.user.decks
+				}
 			)
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)

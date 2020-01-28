@@ -17,7 +17,7 @@ struct ReviewRecapViewThisSessionSection: View {
 	}
 	
 	var body: some View {
-		VStack {
+		VStack(spacing: 8) {
 			CustomRectangle(
 				background: Color.lightGrayBackground.opacity(0.5)
 			) {

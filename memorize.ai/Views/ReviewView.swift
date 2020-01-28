@@ -105,7 +105,8 @@ struct ReviewView: View {
 			totalStruggledRatingCount: totalRatingCount(forRating: .struggled),
 			totalForgotRatingCount: totalRatingCount(forRating: .forgot),
 			numberOfNewlyMasteredCards: numberOfNewlyMasteredCards,
-			numberOfNewCards: numberOfNewCards
+			numberOfNewCards: numberOfNewCards,
+			frequentDecksForRating: { _ in [] } // TODO: Get frequent decks for rating
 		)
 		.environmentObject(currentStore)
 		.navigationBarRemoved()
