@@ -14,7 +14,7 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 	func ratingCountBadge(forRating rating: Card.PerformanceRating) -> some View {
 		CustomRectangle(
 			background: rating == self.rating
-				? Color(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1)).opacity(0.1)
+				? rating.badgeColor.opacity(0.1)
 				: .lightGrayBackground
 		) {
 			Text("\(rating.title): \(countOfRating(rating).formatted)")
