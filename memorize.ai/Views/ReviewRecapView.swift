@@ -48,7 +48,7 @@ struct ReviewRecapView: View {
 								numberOfNewlyMasteredCards: self.numberOfNewlyMasteredCards,
 								numberOfNewCards: self.numberOfNewCards
 							)
-							if self.decks != nil {
+							if self.deck == nil {
 								ReviewRecapViewDeckPerformanceSection(
 									frequentlyEasyDecks: self.frequentDecksForRating(.easy),
 									frequentlyStruggledDecks: self.frequentDecksForRating(.struggled),
@@ -58,6 +58,10 @@ struct ReviewRecapView: View {
 									deckHasNewCards: self.deckHasNewCards
 								)
 							}
+							if self.section == nil {
+								ReviewRecapViewSectionPerformanceSection()
+							}
+							ReviewRecapViewCardPerformanceSection()
 						}
 					}
 				}
