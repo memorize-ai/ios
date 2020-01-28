@@ -5,11 +5,13 @@ extension Card {
 		static let NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED = 3
 		
 		let parent: Card
+		let section: Deck.Section
 		
 		@Published var ratings: [PerformanceRating]
 		
-		init(parent: Card, ratings: [PerformanceRating] = []) {
+		init(parent: Card, section: Deck.Section, ratings: [PerformanceRating] = []) {
 			self.parent = parent
+			self.section = section
 			self.ratings = ratings
 		}
 		

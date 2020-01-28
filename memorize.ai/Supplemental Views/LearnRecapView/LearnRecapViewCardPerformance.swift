@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LearnRecapViewCardPerformance: View {
 	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	let shouldShowSectionName: Bool
 	
 	var body: some View {
 		VStack {
@@ -13,7 +14,8 @@ struct LearnRecapViewCardPerformance: View {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 					LearnRecapViewCardPerformanceRow(
 						rating: rating,
-						frequentCardsForRating: self.frequentCardsForRating
+						frequentCardsForRating: self.frequentCardsForRating,
+						shouldShowSectionName: self.shouldShowSectionName
 					)
 				}
 			}
@@ -24,7 +26,10 @@ struct LearnRecapViewCardPerformance: View {
 #if DEBUG
 struct LearnRecapViewCardPerformance_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformance(frequentCardsForRating: { _ in [] })
+		LearnRecapViewCardPerformance(
+			frequentCardsForRating: { _ in [] },
+			shouldShowSectionName: true
+		)
 	}
 }
 #endif

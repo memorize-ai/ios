@@ -348,7 +348,7 @@ struct LearnView: View {
 				current = card
 				currentSide = .front
 			} else if let card = section.cards[safe: currentIndex] {
-				let card = Card.LearnData(parent: card)
+				let card = Card.LearnData(parent: card, section: section)
 				cards.append(card)
 				current = card
 				currentSide = .front
@@ -364,7 +364,8 @@ struct LearnView: View {
 					.done { snapshot in
 						if let document = snapshot.documents.first {
 							let card = Card.LearnData(
-								parent: .init(snapshot: document, parent: self.deck)
+								parent: .init(snapshot: document, parent: self.deck),
+								section: section
 							)
 							self.cards.append(card)
 							self.current = card
@@ -390,7 +391,7 @@ struct LearnView: View {
 				current = card
 				currentSide = .front
 			} else if let card = currentSection.cards[safe: currentSectionCardIndex] {
-				let card = Card.LearnData(parent: card)
+				let card = Card.LearnData(parent: card, section: currentSection)
 				cards.append(card)
 				current = card
 				currentSide = .front
@@ -415,7 +416,8 @@ struct LearnView: View {
 					.done { snapshot in
 						if let document = snapshot.documents.first {
 							let card = Card.LearnData(
-								parent: .init(snapshot: document, parent: self.deck)
+								parent: .init(snapshot: document, parent: self.deck),
+								section: currentSection
 							)
 							self.cards.append(card)
 							self.current = card

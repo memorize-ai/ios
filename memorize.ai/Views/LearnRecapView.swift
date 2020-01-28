@@ -55,7 +55,10 @@ struct LearnRecapView: View {
 										numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
 									)
 								}
-								LearnRecapViewCardPerformance(frequentCardsForRating: self.frequentCardsForRating)
+								LearnRecapViewCardPerformance(
+									frequentCardsForRating: self.frequentCardsForRating,
+									shouldShowSectionName: self.section == nil
+								)
 							}
 						}
 					}

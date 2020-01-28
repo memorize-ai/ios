@@ -4,8 +4,8 @@ struct LearnRecapViewCardPerformanceRow: View {
 	@State var isExpanded = false
 	
 	let rating: Card.PerformanceRating
-	
 	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	let shouldShowSectionName: Bool
 	
 	var cards: [Card.LearnData] {
 		frequentCardsForRating(rating)
@@ -68,7 +68,8 @@ struct LearnRecapViewCardPerformanceRow: View {
 						ForEach(cards) { card in
 							LearnRecapViewCardPerformanceRowCardCell(
 								card: card,
-								rating: self.rating
+								rating: self.rating,
+								shouldShowSectionName: self.shouldShowSectionName
 							)
 						}
 					}
@@ -84,7 +85,11 @@ struct LearnRecapViewCardPerformanceRow: View {
 #if DEBUG
 struct LearnRecapViewCardPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformanceRow(rating: .easy, frequentCardsForRating: { _ in [] })
+		LearnRecapViewCardPerformanceRow(
+			rating: .easy,
+			frequentCardsForRating: { _ in [] },
+			shouldShowSectionName: true
+		)
 	}
 }
 #endif

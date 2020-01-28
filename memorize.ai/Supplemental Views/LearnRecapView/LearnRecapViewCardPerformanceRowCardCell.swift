@@ -3,6 +3,7 @@ import SwiftUI
 struct LearnRecapViewCardPerformanceRowCardCell: View {
 	let card: Card.LearnData
 	let rating: Card.PerformanceRating
+	let shouldShowSectionName: Bool
 	
 	func ratingCountBadge(forRating rating: Card.PerformanceRating) -> some View {
 		CustomRectangle(
@@ -27,7 +28,9 @@ struct LearnRecapViewCardPerformanceRowCardCell: View {
 		) {
 			VStack(alignment: .leading) {
 				LearnRecapViewCardPerformanceRowCardCellContent(
-					card: card.parent
+					card: card.parent,
+					section: card.section,
+					shouldShowSectionName: shouldShowSectionName
 				)
 				HStack {
 					ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
@@ -45,9 +48,11 @@ struct LearnRecapViewCardPerformanceRowCardCell_Previews: PreviewProvider {
 	static var previews: some View {
 		LearnRecapViewCardPerformanceRowCardCell(
 			card: .init(
-				parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
+				parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
+				section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0]
 			),
-			rating: .easy
+			rating: .easy,
+			shouldShowSectionName: true
 		)
 	}
 }
