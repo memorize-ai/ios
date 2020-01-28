@@ -7,6 +7,7 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 	let decks: [Deck]
 	let countOfCardsForDeck: (Deck) -> Int
 	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
+	let deckHasNewCards: (Deck) -> Bool
 	
 	var deckCountMessage: String {
 		let count = decks.count
@@ -64,6 +65,7 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 					ReviewRecapViewDeckPerformanceRowDeckCell(
 						deck: deck,
 						rating: self.rating,
+						hasNewCards: self.deckHasNewCards(deck),
 						numberOfCards: self.countOfCardsForDeck(deck),
 						countOfRating: {
 							self.countOfRatingForDeck(deck, $0)
@@ -84,7 +86,8 @@ struct ReviewRecapViewDeckPerformanceRow_Previews: PreviewProvider {
 			rating: .easy,
 			decks: [],
 			countOfCardsForDeck: { _ in 20 },
-			countOfRatingForDeck: { _, _ in 10 }
+			countOfRatingForDeck: { _, _ in 10 },
+			deckHasNewCards: { _ in true }
 		)
 	}
 }

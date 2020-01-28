@@ -108,7 +108,8 @@ struct ReviewView: View {
 			numberOfNewCards: numberOfNewCards,
 			frequentDecksForRating: { _ in [] }, // TODO: Get frequent decks for rating
 			countOfCardsForDeck: countOfCardsForDeck,
-			countOfRatingForDeck: countOfRatingForDeck
+			countOfRatingForDeck: countOfRatingForDeck,
+			deckHasNewCards: deckHasNewCards
 		)
 		.environmentObject(currentStore)
 		.navigationBarRemoved()
@@ -126,6 +127,15 @@ struct ReviewView: View {
 			.reduce(0) { acc, card in
 				acc + *(card.rating == rating)
 			}
+	}
+	
+	func deckHasNewCards(_ deck: Deck) -> Bool {
+		for card in cards where card.parent.parent == deck {
+			if card.isNew {
+				return true
+			}
+		}
+		return false
 	}
 	
 	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {

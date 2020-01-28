@@ -3,6 +3,7 @@ import SwiftUI
 struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 	let deck: Deck
 	let rating: Card.PerformanceRating
+	let hasNewCards: Bool
 	let numberOfCards: Int
 	let countOfRating: (Card.PerformanceRating) -> Int
 	
@@ -25,30 +26,38 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 	}
 	
 	var body: some View {
-		CustomRectangle(
-			background: Color.white,
-			borderColor: rating.badgeColor,
-			borderWidth: 1,
-			cornerRadius: 8
-		) {
-			VStack {
-				Text(deck.name)
-					.font(.muli(.extraBold, size: 18))
-					.foregroundColor(.darkGray)
-					.shrinks(withLineLimit: 3)
-					.padding(.bottom, 4)
-				Text(cardCountMessage)
-					.font(.muli(.bold, size: 15))
-					.foregroundColor(.lightGrayText)
-					.padding(.bottom, 16)
-				HStack {
-					ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-						self.ratingCountBadge(forRating: rating)
+		ZStack(alignment: .topLeading) {
+			CustomRectangle(
+				background: Color.white,
+				borderColor: rating.badgeColor,
+				borderWidth: 1,
+				cornerRadius: 8
+			) {
+				VStack {
+					Text(deck.name)
+						.font(.muli(.extraBold, size: 18))
+						.foregroundColor(.darkGray)
+						.shrinks(withLineLimit: 3)
+						.padding(.bottom, 4)
+					Text(cardCountMessage)
+						.font(.muli(.bold, size: 15))
+						.foregroundColor(.lightGrayText)
+						.padding(.bottom, 16)
+					HStack {
+						ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+							self.ratingCountBadge(forRating: rating)
+						}
 					}
 				}
+				.padding(8)
+				.frame(maxWidth: .infinity)
 			}
-			.padding(8)
-			.frame(maxWidth: .infinity)
+			if hasNewCards {
+				Circle()
+					.foregroundColor(Color.darkBlue.opacity(0.5))
+					.frame(width: 12, height: 12)
+					.offset(x: -4, y: -4)
+			}
 		}
 	}
 }
@@ -59,6 +68,7 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell_Previews: PreviewProvider {
 		ReviewRecapViewDeckPerformanceRowDeckCell(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			rating: .easy,
+			hasNewCards: true,
 			numberOfCards: 20,
 			countOfRating: { _ in 10 }
 		)
