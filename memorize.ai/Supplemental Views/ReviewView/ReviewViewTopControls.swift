@@ -40,9 +40,9 @@ struct ReviewViewTopControls: View {
 				Button(action: skipCard) {
 					button(text: "SKIP")
 				}
-				ReviewRecapViewNavigationLink {
-					button(text: "DONE")
-				}
+//				ReviewRecapViewNavigationLink {
+//					button(text: "DONE")
+//				}
 			}
 		}
 	}
