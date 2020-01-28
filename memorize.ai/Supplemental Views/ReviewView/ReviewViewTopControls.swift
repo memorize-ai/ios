@@ -54,7 +54,12 @@ struct ReviewViewTopControls<RecapView: View>: View {
 #if DEBUG
 struct ReviewViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewViewTopControls(currentIndex: 0, numberOfTotalCards: 3, skipCard: {})
+		ReviewViewTopControls(
+			currentIndex: 0,
+			numberOfTotalCards: 3,
+			skipCard: {},
+			recapView: { Text("Recap view") }
+		)
 	}
 }
 #endif
