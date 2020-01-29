@@ -113,7 +113,8 @@ struct ReviewView: View {
 			frequentSectionsForRating: { _ in [] }, // TODO: Get frequent sections for rating
 			countOfCardsForSection: countOfCardsForSection,
 			countOfRatingForSection: countOfRatingForSection,
-			sectionHasNewCards: sectionHasNewCards
+			sectionHasNewCards: sectionHasNewCards,
+			cardsForRating: cardsForRating
 		)
 		.environmentObject(currentStore)
 		.navigationBarRemoved()
@@ -163,6 +164,10 @@ struct ReviewView: View {
 			}
 		}
 		return false
+	}
+	
+	func cardsForRating(_ rating: Card.PerformanceRating) -> [Card.ReviewData] {
+		cards.filter { $0.rating == rating }
 	}
 	
 	func totalRatingCount(forRating rating: Card.PerformanceRating) -> Int {

@@ -42,7 +42,7 @@ extension Card {
 		}
 		
 		var isNew: Bool {
-			userData == nil
+			userData?.isNew ?? true
 		}
 		
 		func setRating(to rating: PerformanceRating) {

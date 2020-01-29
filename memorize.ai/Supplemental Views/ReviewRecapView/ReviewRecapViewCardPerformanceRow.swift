@@ -1,17 +1,16 @@
 import SwiftUI
 
-struct ReviewRecapViewDeckPerformanceRow: View {
+struct ReviewRecapViewCardPerformanceRow: View {
 	@State var isExpanded = false
 	
 	let rating: Card.PerformanceRating
-	let decks: [Deck]
-	let countOfCardsForDeck: (Deck) -> Int
-	let countOfRatingForDeck: (Deck, Card.PerformanceRating) -> Int
-	let deckHasNewCards: (Deck) -> Bool
+	let cards: [Card.ReviewData]
+	let shouldShowDeckName: Bool
+	let shouldShowSectionName: Bool
 	
-	var deckCountMessage: String {
-		let count = decks.count
-		return "(\(count.formatted) deck\(count == 1 ? "" : "s"))"
+	var cardCountMessage: String {
+		let count = cards.count
+		return "(\(count.formatted) card\(count == 1 ? "" : "s"))"
 	}
 	
 	var minusIcon: some View {
@@ -31,14 +30,14 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 	var body: some View {
 		VStack(spacing: 12) {
 			HStack {
-				Text("Frequently \(rating.title.lowercased())")
+				Text(rating.title)
 					.font(.muli(.extraBold, size: 15))
 					.foregroundColor(.darkGray)
 					.layoutPriority(1)
 				Rectangle()
 					.foregroundColor(.lightGrayBorder)
 					.frame(height: 1)
-				Text(deckCountMessage)
+				Text(cardCountMessage)
 					.font(.muli(.bold, size: 15))
 					.foregroundColor(.darkBlue)
 					.layoutPriority(1)
@@ -61,16 +60,16 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 				}
 			}
 			.padding(.horizontal, 23)
-			if isExpanded && !decks.isEmpty {
-				ForEach(decks) { deck in
-					ReviewRecapViewDeckPerformanceRowDeckCell(
-						deck: deck,
-						rating: self.rating,
-						hasNewCards: self.deckHasNewCards(deck),
-						numberOfCards: self.countOfCardsForDeck(deck),
-						countOfRating: {
-							self.countOfRatingForDeck(deck, $0)
-						}
+			if isExpanded && !cards.isEmpty {
+				ForEach(cards) { card in
+					ReviewRecapViewCardPerformanceRowCardCell(
+						deck: card.parent.parent,
+						section: card.parent.parent.section(withId: card.parent.sectionId)
+							?? card.parent.parent.unsectionedSection,
+						card: card.parent,
+						reviewData: card,
+						shouldShowDeckName: self.shouldShowDeckName,
+						shouldShowSectionName: self.shouldShowSectionName
 					)
 				}
 				.padding(.horizontal, 23)
@@ -81,14 +80,13 @@ struct ReviewRecapViewDeckPerformanceRow: View {
 }
 
 #if DEBUG
-struct ReviewRecapViewDeckPerformanceRow_Previews: PreviewProvider {
+struct ReviewRecapViewCardPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		ReviewRecapViewDeckPerformanceRow(
+		ReviewRecapViewCardPerformanceRow(
 			rating: .easy,
-			decks: [],
-			countOfCardsForDeck: { _ in 20 },
-			countOfRatingForDeck: { _, _ in 10 },
-			deckHasNewCards: { _ in true }
+			cards: [],
+			shouldShowDeckName: true,
+			shouldShowSectionName: true
 		)
 	}
 }

@@ -21,6 +21,7 @@ struct ReviewRecapView: View {
 	let countOfCardsForSection: (Deck.Section) -> Int
 	let countOfRatingForSection: (Deck.Section, Card.PerformanceRating) -> Int
 	let sectionHasNewCards: (Deck.Section) -> Bool
+	let cardsForRating: (Card.PerformanceRating) -> [Card.ReviewData]
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -72,7 +73,13 @@ struct ReviewRecapView: View {
 									sectionHasNewCards: self.sectionHasNewCards
 								)
 							}
-							ReviewRecapViewCardPerformanceSection()
+							ReviewRecapViewCardPerformanceSection(
+								easyCards: self.cardsForRating(.easy),
+								struggledCards: self.cardsForRating(.struggled),
+								forgotCards: self.cardsForRating(.forgot),
+								shouldShowDeckName: self.deck == nil,
+								shouldShowSectionName: self.section == nil
+							)
 						}
 					}
 				}
@@ -107,7 +114,14 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				},
 				countOfCardsForSection: { _ in 15 },
 				countOfRatingForSection: { _, _ in 6 },
-				sectionHasNewCards: { _ in true }
+				sectionHasNewCards: { _ in true },
+				cardsForRating: { rating in
+					PREVIEW_CURRENT_STORE.user.decks[0].previewCards.map {
+						let reviewData = Card.ReviewData(parent: $0, userData: .init())
+						reviewData.rating = rating
+						return reviewData
+					}
+				}
 			)
 			ReviewRecapView(
 				decks: PREVIEW_CURRENT_STORE.user.decks,
@@ -131,7 +145,14 @@ struct ReviewRecapView_Previews: PreviewProvider {
 				},
 				countOfCardsForSection: { _ in 15 },
 				countOfRatingForSection: { _, _ in 6 },
-				sectionHasNewCards: { _ in true }
+				sectionHasNewCards: { _ in true },
+				cardsForRating: { rating in
+					PREVIEW_CURRENT_STORE.user.decks[0].previewCards.map {
+						let reviewData = Card.ReviewData(parent: $0, userData: .init())
+						reviewData.rating = rating
+						return reviewData
+					}
+				}
 			)
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)

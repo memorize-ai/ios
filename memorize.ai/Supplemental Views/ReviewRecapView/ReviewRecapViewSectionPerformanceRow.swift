@@ -11,7 +11,7 @@ struct ReviewRecapViewSectionPerformanceRow: View {
 	
 	var sectionCountMessage: String {
 		let count = sections.count
-		return "(\(count.formatted) deck\(count == 1 ? "" : "s"))"
+		return "(\(count.formatted) section\(count == 1 ? "" : "s"))"
 	}
 	
 	var minusIcon: some View {
@@ -41,6 +41,7 @@ struct ReviewRecapViewSectionPerformanceRow: View {
 				Text(sectionCountMessage)
 					.font(.muli(.bold, size: 15))
 					.foregroundColor(.darkBlue)
+					.layoutPriority(1)
 				Button(action: {
 					self.isExpanded.toggle()
 				}) {

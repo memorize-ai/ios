@@ -689,8 +689,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
-	func section(withId sectionId: String) -> Section? {
-		sectionId.isEmpty
+	func section(withId sectionId: String?) -> Section? {
+		sectionId?.isEmpty ?? true
 			? unsectionedSection
 			: sections.first { $0.id == sectionId }
 	}
