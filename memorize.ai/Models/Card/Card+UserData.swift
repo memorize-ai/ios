@@ -9,6 +9,7 @@ extension Card {
 		var sectionId: String
 		var dueDate: Date
 		var streak: Int
+		var isMastered: Bool
 		
 		#if DEBUG
 		init(
@@ -16,13 +17,15 @@ extension Card {
 			isNew: Bool = true,
 			sectionId: String = "",
 			dueDate: Date = .now,
-			streak: Int = 0
+			streak: Int = 0,
+			isMastered: Bool = false
 		) {
 			self.id = id
 			self.isNew = isNew
 			self.sectionId = sectionId
 			self.dueDate = dueDate
 			self.streak = streak
+			self.isMastered = isMastered
 		}
 		#endif
 		
@@ -32,6 +35,7 @@ extension Card {
 			sectionId = snapshot.get("section") as? String ?? ""
 			dueDate = snapshot.getDate("due") ?? .now
 			streak = snapshot.get("streak") as? Int ?? 0
+			isMastered = snapshot.get("mastered") as? Bool ?? false
 		}
 		
 		mutating func updateFromSnapshot(_ snapshot: DocumentSnapshot) {
@@ -39,6 +43,7 @@ extension Card {
 			sectionId = snapshot.get("section") as? String ?? ""
 			dueDate = snapshot.getDate("due") ?? .now
 			streak = snapshot.get("streak") as? Int ?? 0
+			isMastered = snapshot.get("mastered") as? Bool ?? false
 		}
 	}
 }

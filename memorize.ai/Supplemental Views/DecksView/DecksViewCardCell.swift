@@ -26,7 +26,13 @@ struct DecksViewCardCell: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				VStack {
+				VStack(alignment: .leading) {
+					if card.isNew {
+						Text("NEW")
+							.font(.muli(.semiBold, size: 13))
+							.foregroundColor(.darkBlue)
+							.padding(.bottom, hasPreviewImage ? 2 : 8)
+					}
 					HStack(alignment: .top) {
 						if hasPreviewImage {
 							SwitchOver(card.previewImageLoadingState)
@@ -63,11 +69,24 @@ struct DecksViewCardCell: View {
 					}
 					.frame(minHeight: 40, alignment: .top)
 					if !card.isNew {
-						Text(card.dueMessage)
-							.font(.muli(.bold, size: 12))
-							.foregroundColor(Color.darkGray.opacity(0.7))
-							.padding(.top, hasPreviewImage ? 0 : 4)
-							.alignment(.leading)
+						HStack {
+							Text(card.dueMessage)
+								.font(.muli(.bold, size: 12))
+							Spacer()
+							if card.userData?.isMastered ?? false {
+								HStack {
+									Text("🎉")
+									Text("Mastered!")
+								}
+								.font(.muli(.bold, size: 13))
+							} else {
+								Text("⚡️ \(card.userData?.streak ?? 0)x streak")
+									.font(.muli(.bold, size: 13))
+							}
+						}
+						.foregroundColor(Color.darkGray.opacity(0.7))
+						.padding(.horizontal, 2)
+						.padding(.top, hasPreviewImage ? 6 : 10)
 					}
 				}
 				.padding(8)
@@ -120,14 +139,18 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				numberOfViews: 670,
 				numberOfReviews: 0,
 				numberOfSkips: 40,
-				userData: .init(isNew: false, dueDate: Date().addingTimeInterval(10000))
+				userData: {
+					var userData = Card.UserData(isNew: false, dueDate: Date().addingTimeInterval(10000))
+					userData.isMastered = true
+					return userData
+				}()
 			))
 			.environmentObject(PREVIEW_CURRENT_STORE)
 			DecksViewCardCell(card: .init(
 				id: "0",
 				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				sectionId: "CSS",
-				front: "This is some text",
+				front: "This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text ",
 				back: "This is the back of the card",
 				numberOfViews: 670,
 				numberOfReviews: 0,
