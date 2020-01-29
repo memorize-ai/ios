@@ -71,20 +71,21 @@ struct DecksViewCardCell: View {
 					if !card.isNew {
 						HStack {
 							Text(card.dueMessage)
-								.font(.muli(.bold, size: 12))
+								.foregroundColor(.darkBlue)
 							Spacer()
-							if card.userData?.isMastered ?? false {
-								HStack {
-									Text("🎉")
-									Text("Mastered!")
+							Group {
+								if card.userData?.isMastered ?? false {
+									HStack {
+										Text("🎉")
+										Text("Mastered!")
+									}
+								} else {
+									Text("⚡️ \(card.userData?.streak ?? 0)x streak")
 								}
-								.font(.muli(.bold, size: 13))
-							} else {
-								Text("⚡️ \(card.userData?.streak ?? 0)x streak")
-									.font(.muli(.bold, size: 13))
 							}
+							.foregroundColor(Color.darkGray.opacity(0.7))
 						}
-						.foregroundColor(Color.darkGray.opacity(0.7))
+						.font(.muli(.bold, size: 13))
 						.padding(.horizontal, 2)
 						.padding(.top, hasPreviewImage ? 6 : 10)
 					}
@@ -134,7 +135,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				id: "0",
 				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				sectionId: "CSS",
-				front: #"This is the front of the card<audio src="a"></audio><h1>I am some big text</h1><img src="https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg">afadfasdfsasdsfasdfasdfasdfdafafafafafasdsfsasfsasdfasdfasdfasdfasdfasfsfsdfsdfsdfsdfsdfsdfsddsds"#,
+				front: #"This is the front of the card<audio src="a"></audio><h1>I am some big text</h1><img src="https://cdn.vox-cdn.com/thumbor/K7b0-MAQj0C2hy707Mm8WsUIocI=/0x0:600x350/1200x800/filters:focal(252x127:348x223)/cdn.vox-cdn.com/uploads/chorus_image/image/63386642/A_Consensus_sm.0.jpg">"#,
 				back: "This is the back of the card",
 				numberOfViews: 670,
 				numberOfReviews: 0,
