@@ -14,11 +14,24 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 		!card.previewImageLoadingState.isNone
 	}
 	
+	var color: Color {
+		reviewData.rating?.badgeColor ?? .white
+	}
+	
+	var prediction: Date? {
+		guard let rating = reviewData.rating else { return nil }
+		return reviewData.predictionForRating(rating)
+	}
+	
+	var predictionMessage: String {
+		prediction.map { "Due \(Date().compare(against: $0))" } ?? "(error)"
+	}
+	
 	var body: some View {
 		ZStack(alignment: .topLeading) {
 			CustomRectangle(
 				background: Color.white,
-				borderColor: reviewData.rating?.badgeColor ?? .white,
+				borderColor: color,
 				borderWidth: 1,
 				cornerRadius: 8
 			) {
@@ -83,7 +96,15 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 							.alignment(.leading)
 					}
 					.frame(minHeight: 40, alignment: .top)
-					// TODO: Add bottom content
+					HStack {
+						CustomRectangle(background: color.opacity(0.1)) {
+							Text(predictionMessage)
+								.font(.muli(.bold, size: 13))
+								.foregroundColor(.darkGray)
+								.padding(.horizontal, 8)
+								.padding(.vertical, 4)
+						}
+					}
 				}
 				.padding(8)
 			}
@@ -113,6 +134,11 @@ struct ReviewRecapViewCardPerformanceRowCardCell_Previews: PreviewProvider {
 					userData: .init()
 				)
 				reviewData.rating = .easy
+				reviewData.prediction = .init(functionResponse: [
+					"0": .init(Date(timeIntervalSinceNow: 1000).timeIntervalSince1970 * 1000),
+					"1": .init(Date(timeIntervalSinceNow: 1000).timeIntervalSince1970 * 1000),
+					"2": .init(Date(timeIntervalSinceNow: 1000).timeIntervalSince1970 * 1000)
+				])
 				return reviewData
 			}(),
 			shouldShowDeckName: true,
