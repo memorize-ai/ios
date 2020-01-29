@@ -27,6 +27,10 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 		prediction.map { "Due \(Date().compare(against: $0))" } ?? "(error)"
 	}
 	
+	var streakMessage: String {
+		"\(reviewData.didIncreaseStreak ? "⚡️ " : "")\(reviewData.streak)x streak"
+	}
+	
 	var body: some View {
 		ZStack(alignment: .topLeading) {
 			CustomRectangle(
@@ -104,7 +108,22 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 								.padding(.horizontal, 8)
 								.padding(.vertical, 4)
 						}
+						Spacer()
+						if reviewData.isNewlyMastered ?? false {
+							HStack {
+								Text("🎉")
+								Text("Mastered!")
+							}
+							.font(.muli(.bold, size: 13))
+							.foregroundColor(.darkGray)
+						} else {
+							Text(streakMessage)
+								.font(.muli(.bold, size: 13))
+								.foregroundColor(.darkGray)
+						}
 					}
+					.padding(.top, 16)
+					.padding(.trailing, 4)
 				}
 				.padding(8)
 			}
@@ -139,6 +158,7 @@ struct ReviewRecapViewCardPerformanceRowCardCell_Previews: PreviewProvider {
 					"1": .init(Date(timeIntervalSinceNow: 1000).timeIntervalSince1970 * 1000),
 					"2": .init(Date(timeIntervalSinceNow: 1000).timeIntervalSince1970 * 1000)
 				])
+				reviewData.isNewlyMastered = true
 				return reviewData
 			}(),
 			shouldShowDeckName: true,

@@ -45,6 +45,10 @@ extension Card {
 			userData?.isNew ?? true
 		}
 		
+		var didIncreaseStreak: Bool {
+			rating?.isCorrect ?? false
+		}
+		
 		func setRating(to rating: PerformanceRating) {
 			self.rating = rating
 			streak = rating.isCorrect ? streak + 1 : 0
