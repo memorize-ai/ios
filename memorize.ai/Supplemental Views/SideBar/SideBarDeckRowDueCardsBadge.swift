@@ -17,7 +17,7 @@ struct SideBarDeckRowDueCardsBadge: View {
 			background: backgroundColor,
 			cornerRadius: 4
 		) {
-			Text(String(count))
+			Text(count.formatted)
 				.font(.muli(.bold, size: 14))
 				.foregroundColor(textColor)
 				.frame(minWidth: 27)
