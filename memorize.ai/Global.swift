@@ -59,7 +59,7 @@ func showAlert(
 	title: String?,
 	message: String?,
 	preferredStyle: UIAlertController.Style = .alert,
-	handler: (UIAlertController) -> Void = { _ in }
+	handler: (UIAlertController) -> Void
 ) {
 	let alert = UIAlertController(
 		title: title,
@@ -68,4 +68,14 @@ func showAlert(
 	)
 	handler(alert)
 	currentViewController.present(alert, animated: true)
+}
+
+func showAlert(
+	title: String?,
+	message: String?,
+	preferredStyle: UIAlertController.Style = .alert
+) {
+	showAlert(title: title, message: message, preferredStyle: preferredStyle) { alert in
+		alert.addAction(.init(title: "OK", style: .default, handler: nil))
+	}
 }

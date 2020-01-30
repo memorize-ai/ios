@@ -498,10 +498,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	@discardableResult
 	func delete() -> Self {
-		_ = documentReference.delete() as Promise<Void>
-		_ = firestore
+		documentReference.delete() as Void
+		firestore
 			.document("users/\(creatorId)/decks/\(id)")
-			.delete() as Promise<Void>
+			.delete() as Void
 		return self
 	}
 	
