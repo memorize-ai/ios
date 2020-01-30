@@ -9,6 +9,7 @@ target 'memorize.ai' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'
 	pod 'Firebase/Functions'
+	pod 'Firebase/Analytics'
 	
 	pod 'GoogleSignIn'
 	
