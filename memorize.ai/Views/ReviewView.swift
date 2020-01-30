@@ -126,12 +126,22 @@ struct ReviewView: View {
 		.navigationBarRemoved()
 	}
 	
+	func reviewedCardsForDeck(_ deck: Deck) -> [Card.ReviewData] {
+		cards.filter { $0.parent.parent == deck }
+	}
+	
 	func reviewedCardsForSection(_ section: Deck.Section) -> [Card.ReviewData] {
 		cards.filter { section.contains(card: $0.parent) }
 	}
 	
 	func frequentDecksForRating(_ rating: Card.PerformanceRating) -> [Deck] {
-		[] // TODO: Calculate this
+		decks?.filter { deck in
+			let cards = reviewedCardsForDeck(deck)
+			
+			return cards.reduce(0) { acc, card in
+				acc + *(card.rating == rating)
+			} > cards.count / 3
+		} ?? []
 	}
 	
 	func frequentSectionsForRating(_ rating: Card.PerformanceRating) -> [Deck.Section] {
