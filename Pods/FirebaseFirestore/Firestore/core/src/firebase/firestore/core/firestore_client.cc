@@ -25,11 +25,12 @@
 #include "Firestore/core/src/firebase/firestore/core/database_info.h"
 #include "Firestore/core/src/firebase/firestore/core/event_manager.h"
 #include "Firestore/core/src/firebase/firestore/core/view.h"
+#include "Firestore/core/src/firebase/firestore/local/index_free_query_engine.h"
+#include "Firestore/core/src/firebase/firestore/local/leveldb_opener.h"
 #include "Firestore/core/src/firebase/firestore/local/leveldb_persistence.h"
 #include "Firestore/core/src/firebase/firestore/local/local_serializer.h"
 #include "Firestore/core/src/firebase/firestore/local/memory_persistence.h"
 #include "Firestore/core/src/firebase/firestore/local/query_result.h"
-#include "Firestore/core/src/firebase/firestore/local/simple_query_engine.h"
 #include "Firestore/core/src/firebase/firestore/model/database_id.h"
 #include "Firestore/core/src/firebase/firestore/model/document_set.h"
 #include "Firestore/core/src/firebase/firestore/model/mutation.h"
@@ -59,13 +60,13 @@ using api::SnapshotMetadata;
 using auth::CredentialsProvider;
 using auth::User;
 using firestore::Error;
-using local::LevelDbPersistence;
+using local::IndexFreeQueryEngine;
+using local::LevelDbOpener;
 using local::LocalSerializer;
 using local::LocalStore;
 using local::LruParams;
 using local::MemoryPersistence;
 using local::QueryResult;
-using local::SimpleQueryEngine;
 using model::DatabaseId;
 using model::Document;
 using model::DocumentKeySet;
@@ -155,18 +156,10 @@ void FirestoreClient::Initialize(const User& user, const Settings& settings) {
   // more work) since external write/listen operations could get queued to run
   // before that subsequent work completes.
   if (settings.persistence_enabled()) {
-    auto maybe_data_dir = LevelDbPersistence::AppDataDirectory();
-    HARD_ASSERT(maybe_data_dir.ok(),
-                "Failed to find the App data directory for the current user.");
+    LevelDbOpener opener(database_info_);
 
-    Path dir = LevelDbPersistence::StorageDirectory(
-        database_info_, maybe_data_dir.ValueOrDie());
-
-    Serializer remote_serializer{database_info_.database_id()};
-
-    auto created = LevelDbPersistence::Create(
-        std::move(dir), LocalSerializer{std::move(remote_serializer)},
-        LruParams::WithCacheSize(settings.cache_size_bytes()));
+    auto created =
+        opener.Create(LruParams::WithCacheSize(settings.cache_size_bytes()));
     // If leveldb fails to start then just throw up our hands: the error is
     // unrecoverable. There's nothing an end-user can do and nearly all
     // failures indicate the developer is doing something grossly wrong so we
@@ -185,8 +178,7 @@ void FirestoreClient::Initialize(const User& user, const Settings& settings) {
     persistence_ = MemoryPersistence::WithEagerGarbageCollector();
   }
 
-  // TODO(index-free): Use IndexFreeQueryEngine
-  query_engine_ = absl::make_unique<SimpleQueryEngine>();
+  query_engine_ = absl::make_unique<IndexFreeQueryEngine>();
   local_store_ = absl::make_unique<LocalStore>(persistence_.get(),
                                                query_engine_.get(), user);
 
