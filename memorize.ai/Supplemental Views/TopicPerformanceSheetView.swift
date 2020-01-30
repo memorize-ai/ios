@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct TopicPerformanceSheetView: View {
 	@Environment(\.presentationMode) var presentationMode
@@ -9,6 +10,10 @@ struct TopicPerformanceSheetView: View {
 	@ObservedObject var topic: Topic
 	
 	func hide() {
+		Analytics.logEvent("hide_topic_performance_sheet_view", parameters: [
+			"view": "TopicPerformanceSheetView"
+		])
+		
 		presentationMode.wrappedValue.dismiss()
 	}
 	

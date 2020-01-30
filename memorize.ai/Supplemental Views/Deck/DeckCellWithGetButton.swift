@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct DeckCellWithGetButton: View {
 	@ObservedObject var deck: Deck
@@ -42,16 +43,28 @@ struct DeckCellWithGetButton: View {
 		if hasDeck {
 			if shouldShowRemoveAlert {
 				deck.showRemoveFromLibraryAlert(forUser: user) {
+					Analytics.logEvent("remove_deck_from_library", parameters: [
+						"view": "DeckCellWithGetButton"
+					])
+					
 					guard self.shouldManuallyModifyDecks else { return }
 					self.user.decks.removeAll { $0 == self.deck }
 				}
 			} else {
+				Analytics.logEvent("remove_deck_from_library", parameters: [
+					"view": "DeckCellWithGetButton"
+				])
+				
 				deck.remove(user: user)
 				if shouldManuallyModifyDecks {
 					user.decks.removeAll { $0 == deck }
 				}
 			}
 		} else {
+			Analytics.logEvent("get_deck", parameters: [
+				"view": "DeckCellWithGetButton"
+			])
+			
 			deck.get(user: user)
 			if shouldManuallyModifyDecks {
 				user.decks.append(deck)

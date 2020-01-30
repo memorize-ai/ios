@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct CardToggleButton: View {
 	let image: Image
@@ -46,6 +47,10 @@ struct CardToggleButton: View {
 				.foregroundColor(Color.gray.opacity(0.7))
 				.padding(.bottom, 3)
 			Button(action: {
+				Analytics.logEvent("toggle_card_side", parameters: [
+					"view": "CardToggleButton"
+				])
+				
 				self.side.toggle()
 				withAnimation {
 					self.degrees += 180

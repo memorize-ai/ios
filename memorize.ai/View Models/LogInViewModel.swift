@@ -1,5 +1,6 @@
 import Combine
 import FirebaseAuth
+import FirebaseAnalytics
 import GoogleSignIn
 import PromiseKit
 import LoadingState
@@ -35,6 +36,11 @@ final class LogInViewModel: ViewModel {
 	}
 	
 	func logIn() {
+		Analytics.logEvent(AnalyticsEventLogin, parameters: [
+			"view": "LogInView",
+			AnalyticsParameterMethod: "email"
+		])
+		
 		loadingState.startLoading()
 		shouldShowEmailRedBorder = false
 		shouldShowPasswordRedBorder = false

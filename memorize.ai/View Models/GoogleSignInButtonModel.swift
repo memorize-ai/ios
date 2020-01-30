@@ -1,6 +1,7 @@
 import Combine
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseAnalytics
 import GoogleSignIn
 import PromiseKit
 import LoadingState
@@ -19,6 +20,11 @@ final class GoogleSignInButtonModel: ViewModel {
 	var errorModal: (title: String, description: String)?
 	
 	func logIn() {
+		Analytics.logEvent(AnalyticsEventLogin, parameters: [
+			"view": "GoogleSignInButton",
+			AnalyticsParameterMethod: "google"
+		])
+		
 		GIDSignIn.completion = logInCompletion
 		GIDSignIn.sharedInstance().presentingViewController = currentViewController
 		GIDSignIn.sharedInstance().signIn()

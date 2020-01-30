@@ -76,6 +76,6 @@ func showAlert(
 	preferredStyle: UIAlertController.Style = .alert
 ) {
 	showAlert(title: title, message: message, preferredStyle: preferredStyle) { alert in
-		alert.addAction(.init(title: "OK", style: .default, handler: nil))
+		alert.addAction(.init(title: "OK", style: .default))
 	}
 }

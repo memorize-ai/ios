@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct ShowSideBarButton<Content: View>: View {
 	@EnvironmentObject var currentStore: CurrentStore
@@ -11,6 +12,10 @@ struct ShowSideBarButton<Content: View>: View {
 	
 	var body: some View {
 		Button(action: {
+			Analytics.logEvent("show_side_bar", parameters: [
+				"view": "ShowSideBarButton"
+			])
+			
 			withAnimation(SIDE_BAR_ANIMATION) {
 				self.currentStore.isSideBarShowing = true
 			}

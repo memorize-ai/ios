@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 	@Binding var presentationMode: PresentationMode
@@ -10,6 +11,11 @@ struct AuthenticationViewTopControls<AlternativeDestination: View>: View {
 	var body: some View {
 		HStack {
 			Button(action: {
+				Analytics.logEvent("authentication_view_dismissed", parameters: [
+					"view": "AuthenticationViewTopControls",
+					"alternative_message": self.alternativeMessage
+				])
+				
 				self.presentationMode.dismiss()
 			}) {
 				LeftArrowHead(height: 20)

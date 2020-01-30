@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct PopUp<Content: View>: View {
 	@Binding var isShowing: Bool {
@@ -32,6 +33,10 @@ struct PopUp<Content: View>: View {
 	}
 	
 	func hide() {
+		Analytics.logEvent("hide_pop_up", parameters: [
+			"view": "PopUp"
+		])
+		
 		popUpWithAnimation {
 			isShowing = false
 		}

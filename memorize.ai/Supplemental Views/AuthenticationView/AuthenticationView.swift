@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View {
 	@Environment(\.presentationMode) var presentationMode
@@ -28,6 +29,11 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 							self.alternativeButtonDestination == nil
 						{
 							Button(action: {
+								Analytics.logEvent("authentication_view_dismissed", parameters: [
+									"view": "AuthenticationView",
+									"title": self.title
+								])
+								
 								self.presentationMode.wrappedValue.dismiss()
 							}) {
 								LeftArrowHead(height: 20)
