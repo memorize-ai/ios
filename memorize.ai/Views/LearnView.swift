@@ -138,8 +138,6 @@ struct LearnView: View {
 		([deck.unsectionedSection] + deck.unlockedSections).filter { section in
 			let cards = reviewedCardsForSection(section)
 			
-			if cards.isEmpty { return false }
-			
 			return cards.reduce(0) { acc, card in
 				switch rating {
 				case .easy:
@@ -147,7 +145,7 @@ struct LearnView: View {
 				case .struggled, .forgot:
 					return acc + *(card.countOfRating(rating) > card.ratings.count / 3)
 				}
-			} > numberOfReviewedCardsForSection(section) / 3
+			} > cards.count / 3
 		}
 	}
 	

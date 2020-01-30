@@ -94,6 +94,12 @@ struct ReviewView: View {
 		}
 	}
 	
+	var sections: [Deck.Section] {
+		decks?.reduce([]) { acc, deck in
+			acc + [deck.unsectionedSection] + deck.sections
+		} ?? []
+	}
+	
 	var recapView: some View {
 		ReviewRecapView(
 			decks: decks,
@@ -106,11 +112,11 @@ struct ReviewView: View {
 			totalForgotRatingCount: totalRatingCount(forRating: .forgot),
 			numberOfNewlyMasteredCards: numberOfNewlyMasteredCards,
 			numberOfNewCards: numberOfNewCards,
-			frequentDecksForRating: { _ in [] }, // TODO: Get frequent decks for rating
+			frequentDecksForRating: frequentDecksForRating,
 			countOfCardsForDeck: countOfCardsForDeck,
 			countOfRatingForDeck: countOfRatingForDeck,
 			deckHasNewCards: deckHasNewCards,
-			frequentSectionsForRating: { _ in [] }, // TODO: Get frequent sections for rating
+			frequentSectionsForRating: frequentSectionsForRating,
 			countOfCardsForSection: countOfCardsForSection,
 			countOfRatingForSection: countOfRatingForSection,
 			sectionHasNewCards: sectionHasNewCards,
@@ -118,6 +124,24 @@ struct ReviewView: View {
 		)
 		.environmentObject(currentStore)
 		.navigationBarRemoved()
+	}
+	
+	func reviewedCardsForSection(_ section: Deck.Section) -> [Card.ReviewData] {
+		cards.filter { section.contains(card: $0.parent) }
+	}
+	
+	func frequentDecksForRating(_ rating: Card.PerformanceRating) -> [Deck] {
+		[] // TODO: Calculate this
+	}
+	
+	func frequentSectionsForRating(_ rating: Card.PerformanceRating) -> [Deck.Section] {
+		sections.filter { section in
+			let cards = reviewedCardsForSection(section)
+			
+			return cards.reduce(0) { acc, card in
+				acc + *(card.rating == rating)
+			} > cards.count / 3
+		}
 	}
 	
 	func countOfCardsForDeck(_ deck: Deck) -> Int {
