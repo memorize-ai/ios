@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": "master",
-          "revision": "247e8ba2c6f01d7ca28d81e262ef123eed2f3e78",
+          "revision": "e0a88a8b2992e6379ecdc19bc58aed6d4c42b5f8",
           "version": null
         }
       },
@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "537c76af4d3531c7b9d45e1cd8ed1914cc7e1336",
+          "revision": "2689929e06c414f2f6aa88803d2040d5b7bd0824",
           "version": null
         }
       },
