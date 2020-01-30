@@ -1,5 +1,3 @@
-import CoreGraphics
-
 prefix operator *
 
 prefix func * <T: Numeric>(bool: Bool) -> T {
