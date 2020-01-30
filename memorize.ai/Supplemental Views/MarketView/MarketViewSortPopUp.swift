@@ -8,60 +8,40 @@ struct MarketViewSortPopUp: View {
 			.foregroundColor(.darkBlue)
 	}
 	
+	func button(forAlgorithm algorithm: Deck.SortAlgorithm) -> some View {
+		let isSelected = model.sortAlgorithm == algorithm
+		
+		return PopUpButton(
+			icon: isSelected ? check : nil,
+			text: algorithm.rawValue,
+			textColor: isSelected ? .darkBlue : .lightGrayText
+		) {
+			self.model.sortAlgorithm = algorithm
+		}
+	}
+	
 	var body: some View {
 		PopUp(
 			isShowing: $model.isSortPopUpShowing,
-			contentHeight: 50 * 5 + 4,
+			contentHeight: 50 * 7 + 6,
 			onHide: model.loadSearchResults
 		) {
-			PopUpButton(
-				icon: model.sortAlgorithm == .recommended ? check : nil,
-				text: "Recommended",
-				textColor: model.sortAlgorithm == .recommended
-					? .darkBlue
-					: .lightGrayText
-			) {
-				self.model.sortAlgorithm = .recommended
+			Group {
+				button(forAlgorithm: .recommended)
+				PopUpDivider()
+				button(forAlgorithm: .relevance)
+				PopUpDivider()
+				button(forAlgorithm: .top)
+				PopUpDivider()
+				button(forAlgorithm: .rating)
+				PopUpDivider()
+				button(forAlgorithm: .currentUsers)
+				PopUpDivider()
 			}
-			PopUpDivider()
-			PopUpButton(
-				icon: model.sortAlgorithm == .relevance ? check : nil,
-				text: "Relevance",
-				textColor: model.sortAlgorithm == .relevance
-					? .darkBlue
-					: .lightGrayText
-			) {
-				self.model.sortAlgorithm = .relevance
-			}
-			PopUpDivider()
-			PopUpButton(
-				icon: model.sortAlgorithm == .top ? check : nil,
-				text: "Top",
-				textColor: model.sortAlgorithm == .top
-					? .darkBlue
-					: .lightGrayText
-			) {
-				self.model.sortAlgorithm = .top
-			}
-			PopUpDivider()
-			PopUpButton(
-				icon: model.sortAlgorithm == .new ? check : nil,
-				text: "New",
-				textColor: model.sortAlgorithm == .new
-					? .darkBlue
-					: .lightGrayText
-			) {
-				self.model.sortAlgorithm = .new
-			}
-			PopUpDivider()
-			PopUpButton(
-				icon: model.sortAlgorithm == .recentlyUpdated ? check : nil,
-				text: "Recently updated",
-				textColor: model.sortAlgorithm == .recentlyUpdated
-					? .darkBlue
-					: .lightGrayText
-			) {
-				self.model.sortAlgorithm = .recentlyUpdated
+			Group {
+				button(forAlgorithm: .new)
+				PopUpDivider()
+				button(forAlgorithm: .recentlyUpdated)
 			}
 		}
 	}

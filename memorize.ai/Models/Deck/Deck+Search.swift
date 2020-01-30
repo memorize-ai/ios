@@ -3,12 +3,14 @@ import Alamofire
 import PromiseKit
 
 extension Deck {
-	enum SortAlgorithm {
-		case relevance
-		case recommended
-		case top
-		case new
-		case recentlyUpdated
+	enum SortAlgorithm: String {
+		case relevance = "Relevance"
+		case recommended = "Recommended"
+		case top = "Top"
+		case rating = "Rating"
+		case currentUsers = "Popularity"
+		case new = "New"
+		case recentlyUpdated = "Recently updated"
 		
 		var jsonEncoded: [String: String]? {
 			switch self {
@@ -16,6 +18,10 @@ extension Deck {
 				return nil
 			case .recommended, .top:
 				return ["score": "desc"]
+			case .rating:
+				return ["average_rating": "desc"]
+			case .currentUsers:
+				return ["current_user_count": "desc"]
 			case .new:
 				return ["created": "desc"]
 			case .recentlyUpdated:
