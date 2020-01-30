@@ -78,7 +78,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	var previewImageUrl: String? {
 		guard let imgRange = front.range(
-			of: #"<\s*img[^>]*src="(.+?)"[^>]*>"#,
+			of: #"<img.+?src="(.+?)".*?>"#,
 			options: .regularExpression
 		) else { return nil }
 		
@@ -125,7 +125,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	private static func replaceHtmlElements(_ text: String) -> String {
 		HTML_ELEMENTS.reduce(text) { acc, element in
 			acc.replacingOccurrences(
-				of: "<\\s*\(element)[^>]*>(.*?)<\\s*/\\s*\(element)\\s*>",
+				of: "<\(element).*?>(.*?)</.*?\(element).*?>",
 				with: "$1 ",
 				options: .regularExpression
 			)
@@ -135,7 +135,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	private static func replaceHtmlVoidElements(_ text: String) -> String {
 		text.replacingOccurrences(
 			of: HTML_VOID_ELEMENTS
-				.map { "<\\s*\($0)[^>]*>" }
+				.map { "<\($0).*?>" }
 				.joined(separator: "|"),
 			with: " ",
 			options: .regularExpression
