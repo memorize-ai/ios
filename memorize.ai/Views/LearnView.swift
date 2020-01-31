@@ -313,11 +313,13 @@ struct LearnView: View {
 				}
 			} else {
 				var didSetCurrentSectionIndex = false
-				for i in currentSectionIndex + 1..<deck.unlockedSections.count {
-					if deck.unlockedSections[i].numberOfCards > 0 {
-						currentSectionIndex = i
-						didSetCurrentSectionIndex = true
-						break
+				if currentSectionIndex + 1 < deck.unlockedSections.count {
+					for i in currentSectionIndex + 1..<deck.unlockedSections.count {
+						if deck.unlockedSections[i].numberOfCards > 0 {
+							currentSectionIndex = i
+							didSetCurrentSectionIndex = true
+							break
+						}
 					}
 				}
 				if !didSetCurrentSectionIndex {
