@@ -4,6 +4,34 @@ import WebKit
 import HTML
 
 struct CKEditor: View {
+	private static let css = """
+	@font-face {
+		font-family: Muli;
+		src: url(Muli-Regular.ttf) format(truetype);
+	}
+	body {
+		font-family: Muli, sans-serif;
+		margin: 0;
+	}
+	.ck.ck-toolbar-dropdown .ck.ck-toolbar .ck.ck-toolbar__items {
+		width: calc(100vw - 10px * 2);
+		flex-wrap: wrap;
+	}
+	"""
+	
+	private static let javascript = """
+	ClassicEditor
+		.create(document.getElementById('editor'), {
+			autosave: {
+				save: editor =>
+					webkit.messageHandlers.data.postMessage(editor.getData())
+			}
+		})
+		.catch(error =>
+			webkit.messageHandlers.error.postMessage(error.toString())
+		)
+	"""
+	
 	final class Coordinator: NSObject, WKScriptMessageHandler {
 		@Binding var html: String
 		
@@ -69,16 +97,7 @@ struct CKEditor: View {
 							}
 							.child {
 								HTMLElement.style
-									.child(#"""
-									@font-face {
-										font-family: Muli;
-										src: url(Muli-Regular.ttf) format(truetype);
-									}
-									body {
-										font-family: Muli, sans-serif;
-										margin: 0;
-									}
-									"""#)
+									.child(Self.css)
 							}
 					}
 					.child {
@@ -90,18 +109,7 @@ struct CKEditor: View {
 							}
 							.child {
 								HTMLElement.script
-									.child(#"""
-									ClassicEditor
-										.create(document.getElementById('editor'), {
-											autosave: {
-												save: editor =>
-													webkit.messageHandlers.data.postMessage(editor.getData())
-											}
-										})
-										.catch(error =>
-											webkit.messageHandlers.error.postMessage(error.toString())
-										)
-									"""#)
+									.child(Self.javascript)
 							}
 					}
 			},
