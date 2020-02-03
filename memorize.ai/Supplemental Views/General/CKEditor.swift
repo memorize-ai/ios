@@ -7,7 +7,7 @@ struct CKEditor: View {
 	private static let css = """
 	@font-face {
 		font-family: Muli;
-		src: url(Muli-Regular.ttf) format(truetype);
+		src: url('Muli-Regular.ttf') format('truetype');
 	}
 	body {
 		font-family: Muli, sans-serif;
