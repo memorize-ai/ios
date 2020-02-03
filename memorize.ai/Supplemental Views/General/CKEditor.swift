@@ -49,9 +49,6 @@ struct CKEditor: View {
 		let configuration = WKWebViewConfiguration()
 		configuration.userContentController = userContentController
 		
-		configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-		configuration.setValue(true, forKey: "allowUniversalAccessFromFileURLs")
-		
 		self.configuration = configuration
 	}
 	
