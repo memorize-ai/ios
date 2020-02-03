@@ -13,7 +13,7 @@ extension Card {
 		
 		@Published var section: Deck.Section? {
 			willSet {
-				sectionId = newValue?.id
+				sectionId = newValue?.id.nilIfEmpty
 			}
 			didSet {
 				onChange?()
