@@ -26,15 +26,21 @@ struct AddCardsViewCardCell: View {
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
 					headerText("FRONT")
-					CKEditor(html: .init(
-						get: { self.card.front },
-						set: { self.card.front = $0 }
-					))
+					CKEditor(
+						html: .init(
+							get: { self.card.front },
+							set: { self.card.front = $0 }
+						),
+						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
+					)
 					headerText("BACK")
-					CKEditor(html: .init(
-						get: { self.card.back },
-						set: { self.card.back = $0 }
-					))
+					CKEditor(
+						html: .init(
+							get: { self.card.back },
+							set: { self.card.back = $0 }
+						),
+						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
+					)
 				}
 				.padding()
 			}
