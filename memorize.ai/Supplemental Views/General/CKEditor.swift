@@ -13,7 +13,7 @@ struct CKEditor: View {
 		font-family: Muli, sans-serif;
 		margin: 0;
 	}
-	.ck.ck-toolbar-dropdown .ck.ck-toolbar .ck.ck-toolbar__items {
+	.ck.ck-dropdown__panel.ck-dropdown__panel_sw > .ck.ck-toolbar > .ck.ck-toolbar__items {
 		width: calc(100vw - 10px * 2);
 		flex-wrap: wrap;
 	}
