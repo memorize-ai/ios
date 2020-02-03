@@ -275,6 +275,9 @@
 		4DDACF0B2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */; };
 		4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
+		4DE73D0823E8CAF90031DF31 /* ckeditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0723E8CAF90031DF31 /* ckeditor.css */; };
+		4DE73D0B23E8CB320031DF31 /* prism.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0A23E8CB320031DF31 /* prism.css */; };
+		4DE73D0D23E8CB360031DF31 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0C23E8CB360031DF31 /* prism.js */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
@@ -590,6 +593,9 @@
 		4DDACF082395BFA80073C004 /* MarketDeckViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewHeader.swift; sourceTree = "<group>"; };
 		4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfoPanels.swift; sourceTree = "<group>"; };
 		4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewCardPreviews.swift; sourceTree = "<group>"; };
+		4DE73D0723E8CAF90031DF31 /* ckeditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ckeditor.css; sourceTree = "<group>"; };
+		4DE73D0A23E8CB320031DF31 /* prism.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = prism.css; sourceTree = "<group>"; };
+		4DE73D0C23E8CB360031DF31 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -1028,6 +1034,7 @@
 		4D81D15823E7B9D1000E67B1 /* CKEditor */ = {
 			isa = PBXGroup;
 			children = (
+				4DE73D0723E8CAF90031DF31 /* ckeditor.css */,
 				4D81D1A123E80CCA000E67B1 /* ckeditor.js */,
 			);
 			path = CKEditor;
@@ -1090,6 +1097,7 @@
 			children = (
 				4D81D15823E7B9D1000E67B1 /* CKEditor */,
 				4DB659CF23BF0B1D00E74850 /* Katex */,
+				4DE73D0923E8CB0E0031DF31 /* Prism */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -1324,6 +1332,15 @@
 			path = MainTabView;
 			sourceTree = "<group>";
 		};
+		4DE73D0923E8CB0E0031DF31 /* Prism */ = {
+			isa = PBXGroup;
+			children = (
+				4DE73D0A23E8CB320031DF31 /* prism.css */,
+				4DE73D0C23E8CB360031DF31 /* prism.js */,
+			);
+			path = Prism;
+			sourceTree = "<group>";
+		};
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1538,11 +1555,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DE73D0823E8CAF90031DF31 /* ckeditor.css in Resources */,
 				4D1F9B19233EBF2200693571 /* README.md in Resources */,
+				4DE73D0D23E8CB360031DF31 /* prism.js in Resources */,
 				4D81D1A223E80CCA000E67B1 /* ckeditor.js in Resources */,
 				4D402E86235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf in Resources */,
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
+				4DE73D0B23E8CB320031DF31 /* prism.css in Resources */,
 				4DB659D323BF0BC600E74850 /* katex.css in Resources */,
 				4DB659D523BF0BDD00E74850 /* auto-render.js in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,

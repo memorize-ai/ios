@@ -1,12 +1,17 @@
 import HTML
 
-fileprivate let DEFAULT_FONT_SIZE = 20
-
 extension Card {
-	private static func htmlWithText(
-		_ text: String,
-		withFontSize fontSize: Int = DEFAULT_FONT_SIZE
-	) -> HTMLElement {
+	private static let displayCss = """
+	@font-face {
+		font-family: Muli;
+		src: url('Muli-Regular.ttf') format('truetype');
+	}
+	body {
+		font-family: Muli, sans-serif;
+	}
+	"""
+	
+	private static func htmlWithText(_ text: String) -> HTMLElement {
 		HTMLElement.html
 			.child {
 				HTMLElement.head
@@ -18,12 +23,17 @@ extension Card {
 					.child {
 						HTMLElement.link
 							.rel("stylesheet")
-							.href("froala.css")
+							.href("ckeditor.css")
 					}
 					.child {
 						HTMLElement.link
 							.rel("stylesheet")
 							.href("katex.css")
+					}
+					.child {
+						HTMLElement.link
+							.rel("stylesheet")
+							.href("prism.css")
 					}
 					.child {
 						HTMLElement.script
@@ -36,35 +46,41 @@ extension Card {
 							.src("auto-render.js")
 							.onLoad("renderMathInElement(document.body)")
 					}
+					.child {
+						HTMLElement.script
+							.defer()
+							.src("prism.js")
+					}
+					.child {
+						HTMLElement.style
+							.child(displayCss)
+					}
 			}
 			.child {
 				HTMLElement.body
-					.class("fr-view")
-					.fontFamily("sans-serif")
-					.fontSize("\(fontSize)px")
-					.padding("0 15px")
+					.class("ck-content")
 					.child(text)
 			}
 	}
 	
-	func renderFront(withFontSize fontSize: Int = DEFAULT_FONT_SIZE) -> String {
+	func renderFront() -> String {
 		HTML.render {
-			Self.htmlWithText(front, withFontSize: fontSize)
+			Self.htmlWithText(front)
 		}
 	}
 	
-	func renderBack(withFontSize fontSize: Int = DEFAULT_FONT_SIZE) -> String {
+	func renderBack() -> String {
 		HTML.render {
-			Self.htmlWithText(back, withFontSize: fontSize)
+			Self.htmlWithText(back)
 		}
 	}
 	
-	func renderSide(_ side: Side, withFontSize fontSize: Int = DEFAULT_FONT_SIZE) -> String {
+	func renderSide(_ side: Side) -> String {
 		switch side {
 		case .front:
-			return renderFront(withFontSize: fontSize)
+			return renderFront()
 		case .back:
-			return renderBack(withFontSize: fontSize)
+			return renderBack()
 		}
 	}
 }
