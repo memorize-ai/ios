@@ -9,6 +9,9 @@ extension Card {
 	body {
 		font-family: Muli, sans-serif;
 	}
+	:focus {
+		outline: none;
+	}
 	"""
 	
 	private static func htmlWithText(_ text: String) -> HTMLElement {

@@ -26,6 +26,7 @@ struct EditCardViewCardCell: View {
 							get: { self.card.front },
 							set: { self.card.front = $0 }
 						),
+						deckId: card.parent.id,
 						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
 					)
 					headerText("BACK")
@@ -34,6 +35,7 @@ struct EditCardViewCardCell: View {
 							get: { self.card.back },
 							set: { self.card.back = $0 }
 						),
+						deckId: card.parent.id,
 						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
 					)
 				}

@@ -21,36 +21,18 @@ struct CKEditor: View {
 	}
 	"""
 	
-	private static let javascript = """
-	ClassicEditor
-		.create(document.getElementById('editor'), {
-			autosave: {
-				save: editor =>
-					webkit.messageHandlers.data.postMessage(editor.getData())
-			}
-		})
-		.then(editor =>
-			editor.ui.focusTracker.on('change:isFocused', (event, name, isFocused) =>
-				isFocused
-					? setTimeout(() => scrollTo(0, 0), 150)
-					: null
-			)
-		)
-		.catch(error =>
-			webkit.messageHandlers.error.postMessage(error.toString())
-		)
-	"""
-	
 	struct Representable: UIViewControllerRepresentable {
 		final class Container: UIViewController, WKScriptMessageHandler {
 			@Binding var html: String
 			
+			let deckId: String
 			let width: CGFloat
 			let height: CGFloat
 						
-			init(html: Binding<String>, width: CGFloat, height: CGFloat) {
+			init(html: Binding<String>, deckId: String, width: CGFloat, height: CGFloat) {
 				_html = html
 				
+				self.deckId = deckId
 				self.width = width
 				self.height = height
 				
@@ -102,7 +84,28 @@ struct CKEditor: View {
 								}
 								.child {
 									HTMLElement.script
-										.child(javascript)
+										.child("""
+										ClassicEditor
+											.create(document.getElementById('editor'), {
+												simpleUpload: {
+													uploadUrl: '\(WEB_URL)/_api/upload-deck-asset?deck=\(deckId)&type={type}'
+												},
+												autosave: {
+													save: editor =>
+														webkit.messageHandlers.data.postMessage(editor.getData())
+												}
+											})
+											.then(editor =>
+												editor.ui.focusTracker.on('change:isFocused', (event, name, isFocused) =>
+													isFocused
+														? setTimeout(() => scrollTo(0, 0), 150)
+														: null
+												)
+											)
+											.catch(error =>
+												webkit.messageHandlers.error.postMessage(error.toString())
+											)
+										""")
 								}
 						}
 				}
@@ -132,11 +135,12 @@ struct CKEditor: View {
 		
 		@Binding var html: String
 		
+		let deckId: String
 		let width: CGFloat
 		let height: CGFloat
 		
 		func makeUIViewController(context: Context) -> Container {
-			.init(html: $html, width: width, height: height)
+			.init(html: $html, deckId: deckId, width: width, height: height)
 		}
 		
 		func updateUIViewController(_ uiViewController: Container, context: Context) {}
@@ -144,18 +148,20 @@ struct CKEditor: View {
 	
 	@Binding var html: String
 	
+	let deckId: String
 	let width: CGFloat
 	let height: CGFloat
 	
-	init(html: Binding<String>, width: CGFloat, height: CGFloat = 300) {
+	init(html: Binding<String>, deckId: String, width: CGFloat, height: CGFloat = 300) {
 		_html = html
 		
+		self.deckId = deckId
 		self.width = width
 		self.height = height
 	}
 	
 	var body: some View {
-		Representable(html: $html, width: width, height: height)
+		Representable(html: $html, deckId: deckId, width: width, height: height)
 			.frame(width: width, height: height)
 	}
 }
@@ -165,6 +171,7 @@ struct CKEditor_Previews: PreviewProvider {
 	static var previews: some View {
 		CKEditor(
 			html: .constant(""),
+			deckId: "0",
 			width: SCREEN_SIZE.width - 20 * 2
 		)
 	}
