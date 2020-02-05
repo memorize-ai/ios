@@ -89,7 +89,7 @@ struct CKEditor: View {
 										ClassicEditor
 											.create(document.getElementById('editor'), {
 												simpleUpload: {
-													uploadUrl: '\(WEB_URL)/_api/upload-deck-asset?deck=\(deckId)&type={type}'
+													uploadUrl: '\(WEB_URL)/_api/upload-deck-asset?deck=\(deckId)'
 												},
 												autosave: {
 													save: editor =>
