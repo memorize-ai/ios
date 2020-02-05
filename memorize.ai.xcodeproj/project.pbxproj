@@ -277,7 +277,7 @@
 		4DE73D0823E8CAF90031DF31 /* ckeditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0723E8CAF90031DF31 /* ckeditor.css */; };
 		4DE73D0B23E8CB320031DF31 /* prism.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0A23E8CB320031DF31 /* prism.css */; };
 		4DE73D0D23E8CB360031DF31 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0C23E8CB360031DF31 /* prism.js */; };
-		4DE73D3C23EAB66B0031DF31 /* ckeditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D3B23EAB66B0031DF31 /* ckeditor.js */; };
+		4DE73D3E23EABB7E0031DF31 /* ckeditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D3D23EABB7E0031DF31 /* ckeditor.js */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
@@ -595,7 +595,7 @@
 		4DE73D0723E8CAF90031DF31 /* ckeditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ckeditor.css; sourceTree = "<group>"; };
 		4DE73D0A23E8CB320031DF31 /* prism.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = prism.css; sourceTree = "<group>"; };
 		4DE73D0C23E8CB360031DF31 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
-		4DE73D3B23EAB66B0031DF31 /* ckeditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ckeditor.js; sourceTree = "<group>"; };
+		4DE73D3D23EABB7E0031DF31 /* ckeditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ckeditor.js; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -1035,7 +1035,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE73D0723E8CAF90031DF31 /* ckeditor.css */,
-				4DE73D3B23EAB66B0031DF31 /* ckeditor.js */,
+				4DE73D3D23EABB7E0031DF31 /* ckeditor.js */,
 			);
 			path = CKEditor;
 			sourceTree = "<group>";
@@ -1568,7 +1568,7 @@
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
-				4DE73D3C23EAB66B0031DF31 /* ckeditor.js in Resources */,
+				4DE73D3E23EABB7E0031DF31 /* ckeditor.js in Resources */,
 				4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */,
 				4D402E89235E6FB80011C6B6 /* Muli-ExtraBold.ttf in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
