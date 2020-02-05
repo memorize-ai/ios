@@ -53,9 +53,10 @@ struct CKEditor: View {
 				userContentController.add(self, name: "data")
 				userContentController.add(self, name: "error")
 				
-				let webView = WKWebView(frame: view.frame)
+				let configuration = WKWebViewConfiguration()
+				configuration.userContentController = userContentController
 				
-				webView.configuration.userContentController = userContentController
+				let webView = WKWebView(frame: view.frame, configuration: configuration)
 				
 				webView.loadHTML(baseURL: WEB_VIEW_BASE_URL) {
 					HTMLElement.html

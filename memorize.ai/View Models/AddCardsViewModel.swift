@@ -82,8 +82,8 @@ final class AddCardsViewModel: ViewModel {
 	}
 	
 	var publishCardsPromiseArray: [Promise<Void>] {
-		cards.map { card in
-			guard card.isPublishable else { return .init() }
+		cards.compactMap { card in
+			guard card.isPublishable else { return nil }
 			card.publishLoadingState.startLoading()
 			return card.publishAsNew(forUser: user).done { _ in
 				self.cards.removeAll { $0 == card }
@@ -98,6 +98,7 @@ final class AddCardsViewModel: ViewModel {
 		when(fulfilled: publishCardsPromiseArray).done {
 			self.publishLoadingState.succeed()
 			if self.cards.isEmpty {
+				self.cards = self.initialCards
 				onDone?()
 			}
 		}.catch { error in
