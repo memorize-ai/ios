@@ -117,6 +117,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	static func stripFormatting(_ text: String) -> String {
 		replaceHtmlElements(replaceHtmlVoidElements(text))
 			.replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
+			.replacingOccurrences(of: "&nbsp;", with: " ")
 			.replacingOccurrences(of: "&amp;", with: "&")
 			.replacingOccurrences(of: "&lt;", with: "<")
 			.replacingOccurrences(of: "&gt;", with: ">")

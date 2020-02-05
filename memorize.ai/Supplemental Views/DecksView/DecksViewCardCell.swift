@@ -45,6 +45,7 @@ struct DecksViewCardCell: View {
 								.case(.success) {
 									card.previewImage?
 										.resizable()
+										.renderingMode(.original)
 										.aspectRatio(contentMode: .fill)
 								}
 								.case(.failure) {
