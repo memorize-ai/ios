@@ -75,7 +75,7 @@ struct MarketDeckViewRatings: View {
 				shadowYOffset: 5
 			) {
 				VStack(spacing: 20) {
-					HStack {
+					HStack(spacing: 10) {
 						VStack(alignment: .leading, spacing: 8) {
 							DeckStars(stars: deck.averageRating)
 								.scaleEffect(1.2)
@@ -88,24 +88,27 @@ struct MarketDeckViewRatings: View {
 									.foregroundColor(.darkGray)
 								Text(" Review\(deck.numberOfRatings == 1 ? "" : "s")")
 									.foregroundColor(.lightGrayText)
-									.layoutPriority(1)
 							}
 							.font(.muli(.bold, size: 13.5))
+							.shrinks()
+							.layoutPriority(1)
 						}
 						Spacer()
-						VStack(spacing: 4) {
-							starRow(stars: 5, count: deck.numberOf5StarRatings)
-							starRow(stars: 4, count: deck.numberOf4StarRatings)
-							starRow(stars: 3, count: deck.numberOf3StarRatings)
-							starRow(stars: 2, count: deck.numberOf2StarRatings)
-							starRow(stars: 1, count: deck.numberOf1StarRatings)
-						}
-						VStack(alignment: .leading, spacing: 4) {
-							starCountLabel(deck.numberOf5StarRatings)
-							starCountLabel(deck.numberOf4StarRatings)
-							starCountLabel(deck.numberOf3StarRatings)
-							starCountLabel(deck.numberOf2StarRatings)
-							starCountLabel(deck.numberOf1StarRatings)
+						HStack {
+							VStack(spacing: 4) {
+								starRow(stars: 5, count: deck.numberOf5StarRatings)
+								starRow(stars: 4, count: deck.numberOf4StarRatings)
+								starRow(stars: 3, count: deck.numberOf3StarRatings)
+								starRow(stars: 2, count: deck.numberOf2StarRatings)
+								starRow(stars: 1, count: deck.numberOf1StarRatings)
+							}
+							VStack(alignment: .leading, spacing: 4) {
+								starCountLabel(deck.numberOf5StarRatings)
+								starCountLabel(deck.numberOf4StarRatings)
+								starCountLabel(deck.numberOf3StarRatings)
+								starCountLabel(deck.numberOf2StarRatings)
+								starCountLabel(deck.numberOf1StarRatings)
+							}
 						}
 					}
 					if hasDeck && isNotOwner {
