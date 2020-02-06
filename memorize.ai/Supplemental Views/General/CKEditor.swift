@@ -9,7 +9,7 @@ struct CKEditor: View {
 		src: url('Muli-Regular.ttf') format('truetype');
 	}
 	body {
-		font-family: Muli, sans-serif;
+		font-family: Muli, Arial, Helvetica, sans-serif;
 		margin: 0;
 	}
 	.ck.ck-dropdown__panel.ck-dropdown__panel_sw > .ck.ck-toolbar > .ck.ck-toolbar__items {

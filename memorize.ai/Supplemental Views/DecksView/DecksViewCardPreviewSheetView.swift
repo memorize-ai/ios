@@ -10,11 +10,8 @@ struct DecksViewCardPreviewSheetView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .bottomTrailing) {
-				WebView(
-					html: self.card.renderSide(self.currentSide),
-					baseURL: WEB_VIEW_BASE_URL
-				)
-				.cornerRadius(5)
+				self.card.webView(forSide: self.currentSide)
+					.cornerRadius(5)
 				CardToggleButton(
 					circleDimension: 40,
 					fontSize: 13,

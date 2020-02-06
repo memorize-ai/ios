@@ -12,11 +12,8 @@ struct ReviewViewCardContent: View {
 	
 	var body: some View {
 		ZStack(alignment: .bottomTrailing) {
-			WebView(
-				html: card.renderSide(currentSide),
-				baseURL: WEB_VIEW_BASE_URL
-			)
-			.cornerRadius(5)
+			card.webView(forSide: currentSide)
+				.cornerRadius(5)
 			CardToggleButton(
 				image: .greenSwapIcon,
 				circleDimension: 40,

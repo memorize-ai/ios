@@ -1,3 +1,4 @@
+import WebView
 import HTML
 
 extension Card {
@@ -7,7 +8,9 @@ extension Card {
 		src: url('Muli-Regular.ttf') format('truetype');
 	}
 	body {
-		font-family: Muli, sans-serif;
+		font-family: Muli, Arial, Helvetica, sans-serif;
+		margin-left: 12px;
+		margin-right: 12px;
 	}
 	:focus {
 		outline: none;
@@ -78,12 +81,16 @@ extension Card {
 		}
 	}
 	
-	func renderSide(_ side: Side) -> String {
+	func render(side: Side) -> String {
 		switch side {
 		case .front:
 			return renderFront()
 		case .back:
 			return renderBack()
 		}
+	}
+	
+	func webView(forSide side: Side) -> WebView {
+		WebView(html: render(side: side), baseURL: WEB_VIEW_BASE_URL)
 	}
 }
