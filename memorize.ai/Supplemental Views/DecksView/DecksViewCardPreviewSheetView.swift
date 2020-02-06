@@ -17,11 +17,16 @@ struct DecksViewCardPreviewSheetView: View {
 					fontSize: 13,
 					side: self.$currentSide,
 					degrees: self.$toggleIconDegrees
-				)
+				) {
+					self.card.playAudio(forSide: $0)
+				}
 				.padding([.trailing, .bottom], max(geometry.safeAreaInsets.bottom, 10))
 			}
 		}
 		.edgesIgnoringSafeArea(.all)
+		.onAppear {
+			self.card.playAudio(forSide: .front)
+		}
 	}
 }
 

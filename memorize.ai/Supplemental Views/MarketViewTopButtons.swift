@@ -4,13 +4,6 @@ struct MarketViewTopButtons: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: MarketViewModel
 	
-	func loadTopicsIfNeeded() {
-		guard model.filterPopUpSideBarSelection == .topics else { return }
-		for topic in currentStore.topics {
-			topic.loadImage()
-		}
-	}
-	
 	var body: some View {
 		HStack(spacing: 13) {
 			MarketViewSearchStateButton(
@@ -28,7 +21,6 @@ struct MarketViewTopButtons: View {
 				popUpWithAnimation {
 					self.model.isFilterPopUpShowing = true
 				}
-				self.loadTopicsIfNeeded()
 			}
 		}
 	}

@@ -65,7 +65,7 @@ extension Card {
 			.child {
 				HTMLElement.body
 					.class("ck-content")
-					.child(text)
+					.child(removeAudioUrls(fromText: text))
 			}
 	}
 	

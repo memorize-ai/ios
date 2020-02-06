@@ -241,6 +241,7 @@ struct LearnView: View {
 		}
 		withDelay(Self.CARD_SLIDE_DURATION) {
 			self.currentSide = .back
+			self.current?.parent.playAudio(forSide: .back)
 			self.cardOffset = SCREEN_SIZE.width
 			withAnimation(.easeOut(duration: Self.CARD_SLIDE_DURATION)) {
 				self.cardOffset = 0
@@ -347,11 +348,13 @@ struct LearnView: View {
 				if card.isMastered { return loadNextCard() }
 				current = card
 				currentSide = .front
+				card.parent.playAudio(forSide: .front)
 			} else if let card = section.cards[safe: currentIndex] {
 				let card = Card.LearnData(parent: card, section: section)
 				cards.append(card)
 				current = card
 				currentSide = .front
+				card.parent.playAudio(forSide: .front)
 			} else {
 				currentCardLoadingState.startLoading()
 				
@@ -370,6 +373,7 @@ struct LearnView: View {
 							self.cards.append(card)
 							self.current = card
 							self.currentSide = .front
+							card.parent.playAudio(forSide: .front)
 						} else {
 							self.shouldShowRecap = true
 						}
@@ -390,11 +394,13 @@ struct LearnView: View {
 				if card.isMastered { return loadNextCard() }
 				current = card
 				currentSide = .front
+				card.parent.playAudio(forSide: .front)
 			} else if let card = currentSection.cards[safe: currentSectionCardIndex] {
 				let card = Card.LearnData(parent: card, section: currentSection)
 				cards.append(card)
 				current = card
 				currentSide = .front
+				card.parent.playAudio(forSide: .front)
 			} else {
 				currentCardLoadingState.startLoading()
 				
@@ -422,6 +428,7 @@ struct LearnView: View {
 							self.cards.append(card)
 							self.current = card
 							self.currentSide = .front
+							card.parent.playAudio(forSide: .front)
 						} else {
 							self.shouldShowRecap = true
 						}

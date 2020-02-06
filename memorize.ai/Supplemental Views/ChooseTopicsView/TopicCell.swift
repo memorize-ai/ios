@@ -57,6 +57,9 @@ struct TopicCell: View {
 			}
 			.cornerRadius(5)
 		}
+		.onAppear {
+			self.topic.loadImage()
+		}
 	}
 }
 

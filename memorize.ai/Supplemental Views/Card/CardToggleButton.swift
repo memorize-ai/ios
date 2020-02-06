@@ -5,6 +5,7 @@ struct CardToggleButton: View {
 	let image: Image
 	let circleDimension: CGFloat
 	let fontSize: CGFloat
+	let onClick: ((Card.Side) -> Void)?
 	
 	@Binding var side: Card.Side
 	@Binding var degrees: Double
@@ -14,13 +15,15 @@ struct CardToggleButton: View {
 		circleDimension: CGFloat = 30,
 		fontSize: CGFloat = 10,
 		side: Binding<Card.Side>,
-		degrees: Binding<Double>
+		degrees: Binding<Double>,
+		onClick: ((Card.Side) -> Void)? = nil
 	) {
 		self.image = image
 		self.circleDimension = circleDimension
 		self.fontSize = fontSize
 		_side = side
 		_degrees = degrees
+		self.onClick = onClick
 	}
 	
 	var icon: some View {
@@ -52,9 +55,12 @@ struct CardToggleButton: View {
 				])
 				
 				self.side.toggle()
+				
 				withAnimation {
 					self.degrees += 180
 				}
+				
+				self.onClick?(self.side)
 			}) {
 				icon
 			}

@@ -33,11 +33,6 @@ struct MarketDeckViewTopicList: View {
 			}
 			.padding(.horizontal, 23)
 		}
-		.onAppear {
-			for topicId in self.deck.topics {
-				self.currentStore.topics.first { $0.id == topicId }?.loadImage()
-			}
-		}
 	}
 }
 

@@ -301,6 +301,7 @@ struct ReviewView: View {
 		}
 		withDelay(Self.CARD_SLIDE_DURATION) {
 			self.currentSide = .back
+			self.current?.parent.playAudio(forSide: .back)
 			self.cardOffset = SCREEN_SIZE.width
 			withAnimation(.easeOut(duration: Self.CARD_SLIDE_DURATION)) {
 				self.cardOffset = 0
@@ -372,7 +373,10 @@ struct ReviewView: View {
 			parent: card,
 			userData: userData
 		).loadPrediction()
+		
 		currentSide = .front
+		card.playAudio(forSide: .front)
+		
 		currentCardLoadingState.succeed()
 		
 		// Set the start time to now

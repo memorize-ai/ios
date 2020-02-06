@@ -50,9 +50,14 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	var interests: [Topic?] {
-		user.interests.map { topicId in
-			topics.first { $0.id == topicId }
+		var acc = [Topic?]()
+		
+		for topicId in user.interests {
+			if (acc.contains { $0?.id == topicId }) { continue }
+			acc.append(topics.first { $0.id == topicId })
 		}
+		
+		return acc
 	}
 	
 	@discardableResult
@@ -93,9 +98,6 @@ final class CurrentStore: ObservableObject {
 			}
 			self.user.updateFromSnapshot(snapshot)
 			self.userLoadingState.succeed()
-			for topicId in self.user.interests {
-				self.topics.first { $0.id == topicId }?.loadImage()
-			}
 			self.loadRecommendedDecks()
 		}
 		return self
@@ -130,9 +132,6 @@ final class CurrentStore: ObservableObject {
 						id: topicId,
 						name: document.get("name") as? String ?? "Unknown"
 					)
-					if loadImages || self.user.interests.contains(topicId) {
-						topic.loadImage()
-					}
 					self.topics.append(topic.cache())
 				case .modified:
 					if (self.topics.contains { $0.id == topicId }) { continue }

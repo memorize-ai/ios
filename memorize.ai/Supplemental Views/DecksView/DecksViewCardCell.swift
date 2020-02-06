@@ -27,12 +27,25 @@ struct DecksViewCardCell: View {
 				shadowYOffset: 5
 			) {
 				VStack(alignment: .leading) {
-					if card.isNew {
-						Text("NEW")
-							.font(.muli(.semiBold, size: 13))
-							.foregroundColor(.darkBlue)
-							.padding(.bottom, hasPreviewImage ? 2 : 8)
+					HStack(alignment: .top) {
+						if card.isNew {
+							Text("NEW")
+								.font(.muli(.semiBold, size: 13))
+								.foregroundColor(.darkBlue)
+						}
+						Spacer()
+						if card.hasAudio {
+							Image(systemName: .speaker3Fill)
+								.foregroundColor(.darkBlue)
+								.padding([.trailing, .top], 4)
+						}
 					}
+					.padding(
+						.bottom,
+						card.isNew && !card.hasAudio
+							? hasPreviewImage ? 2 : 8
+							: 0
+					)
 					HStack(alignment: .top) {
 						if hasPreviewImage {
 							SwitchOver(card.previewImageLoadingState)

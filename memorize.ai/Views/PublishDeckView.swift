@@ -90,11 +90,6 @@ struct PublishDeckView: View {
 				}
 			}
 		}
-		.onAppear {
-			for topic in self.currentStore.topics {
-				topic.loadImage()
-			}
-		}
 	}
 }
 

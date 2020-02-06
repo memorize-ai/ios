@@ -51,6 +51,9 @@ struct BasicTopicCell: View {
 				.frame(width: dimension)
 		}
 		.cornerRadius(5)
+		.onAppear {
+			self.topic.loadImage()
+		}
 	}
 }
 

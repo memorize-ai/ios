@@ -155,6 +155,8 @@
 		4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444A8236B81980043298C /* EmptyDeckCell.swift */; };
 		4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */; };
 		4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AC236BFE080043298C /* DocumentSnapshot.swift */; };
+		4D86E2FB23EC893400073998 /* Audio in Frameworks */ = {isa = PBXBuildFile; productRef = 4D86E2FA23EC893400073998 /* Audio */; };
+		4D86E2FD23EC8D0B00073998 /* Card+Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86E2FC23EC8D0B00073998 /* Card+Audio.swift */; };
 		4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */; };
 		4D89932B2363D1400042AC9F /* ForgotPasswordViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */; };
 		4D8B2EA5239838BB00EF040B /* MarketDeckViewRatings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B2EA4239838BB00EF040B /* MarketDeckViewRatings.swift */; };
@@ -472,6 +474,7 @@
 		4D8444A8236B81980043298C /* EmptyDeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDeckCell.swift; sourceTree = "<group>"; };
 		4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCellWithGetButton.swift; sourceTree = "<group>"; };
 		4D8444AC236BFE080043298C /* DocumentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSnapshot.swift; sourceTree = "<group>"; };
+		4D86E2FC23EC8D0B00073998 /* Card+Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Audio.swift"; sourceTree = "<group>"; };
 		4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		4D89932A2363D1400042AC9F /* ForgotPasswordViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewContentBox.swift; sourceTree = "<group>"; };
 		4D8B2EA4239838BB00EF040B /* MarketDeckViewRatings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewRatings.swift; sourceTree = "<group>"; };
@@ -633,6 +636,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D86E2FB23EC893400073998 /* Audio in Frameworks */,
 				4DF4595623999E6500A78ADF /* TextView in Frameworks */,
 				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
 				4DD5FE9C2389DE8500E70251 /* Alamofire in Frameworks */,
@@ -794,6 +798,7 @@
 				4D365797238CB09F007C3D1F /* Card.swift */,
 				4D365799238CB168007C3D1F /* Card+UserData.swift */,
 				4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */,
+				4D86E2FC23EC8D0B00073998 /* Card+Audio.swift */,
 				4DB9FF522396DA1800B8DD38 /* Card+Side.swift */,
 				4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */,
 				4D6BA53623ACBBBD00D3F9D1 /* Card+Draft.swift */,
@@ -1454,6 +1459,7 @@
 				4DB9FF4B2396D62A00B8DD38 /* WebView */,
 				4DB9FF4E2396D7D300B8DD38 /* HTML */,
 				4DF4595523999E6500A78ADF /* TextView */,
+				4D86E2FA23EC893400073998 /* Audio */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -1538,6 +1544,7 @@
 				4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */,
 				4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */,
 				4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */,
+				4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -1809,6 +1816,7 @@
 				4D9D931C23DFC2FE0008B614 /* ReviewRecapViewTopControls.swift in Sources */,
 				4D3FE58023BC81240010FFD3 /* EditCardViewCardCell.swift in Sources */,
 				4D0C0288237CB9590062BC14 /* HomeViewMyInterestsSection.swift in Sources */,
+				4D86E2FD23EC8D0B00073998 /* Card+Audio.swift in Sources */,
 				4D6BA53523ACB83000D3F9D1 /* AddCardsViewCardCell.swift in Sources */,
 				4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */,
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
@@ -2312,6 +2320,14 @@
 				kind = branch;
 			};
 		};
+		4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/Audio.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kenmueller/WebView";
@@ -2367,6 +2383,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
+		};
+		4D86E2FA23EC893400073998 /* Audio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */;
+			productName = Audio;
 		};
 		4DB9FF4B2396D62A00B8DD38 /* WebView */ = {
 			isa = XCSwiftPackageProductDependency;

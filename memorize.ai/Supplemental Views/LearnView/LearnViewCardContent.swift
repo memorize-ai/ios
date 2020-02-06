@@ -20,7 +20,9 @@ struct LearnViewCardContent: View {
 				fontSize: 13,
 				side: $currentSide,
 				degrees: $toggleIconDegrees
-			)
+			) {
+				self.card.playAudio(forSide: $0)
+			}
 			.padding([.trailing, .bottom], 10)
 			.opacity(*isWaitingForRating)
 		}

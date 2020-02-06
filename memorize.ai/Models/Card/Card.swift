@@ -115,7 +115,7 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	static func stripFormatting(_ text: String) -> String {
-		replaceHtmlElements(replaceHtmlVoidElements(text))
+		replaceHtmlElements(text).trimmed
 			.replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
 			.replacingOccurrences(of: "&nbsp;", with: " ")
 			.replacingOccurrences(of: "&amp;", with: "&")
@@ -124,23 +124,17 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	private static func replaceHtmlElements(_ text: String) -> String {
-		HTML_ELEMENTS.reduce(text) { acc, element in
-			acc.replacingOccurrences(
-				of: "<\(element).*?>(.*?)</.*?\(element).*?>",
-				with: "$1 ",
+		text
+			.replacingOccurrences(
+				of: "<audio.*?>.*?</.*?audio.*?>",
+				with: " ",
 				options: .regularExpression
 			)
-		}
-	}
-	
-	private static func replaceHtmlVoidElements(_ text: String) -> String {
-		text.replacingOccurrences(
-			of: HTML_VOID_ELEMENTS
-				.map { "<\($0).*?>" }
-				.joined(separator: "|"),
-			with: " ",
-			options: .regularExpression
-		)
+			.replacingOccurrences(
+				of: "<.+?>",
+				with: " ",
+				options: .regularExpression
+			)
 	}
 	
 	@discardableResult
