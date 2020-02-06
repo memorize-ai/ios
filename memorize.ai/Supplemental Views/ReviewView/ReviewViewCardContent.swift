@@ -11,20 +11,33 @@ struct ReviewViewCardContent: View {
 	@Binding var currentSide: Card.Side
 	
 	var body: some View {
-		ZStack(alignment: .bottomTrailing) {
+		ZStack(alignment: .bottom) {
 			card.webView(forSide: currentSide)
 				.cornerRadius(5)
-			CardToggleButton(
-				image: .greenSwapIcon,
-				circleDimension: 40,
-				fontSize: 13,
-				side: $currentSide,
-				degrees: $toggleIconDegrees
-			) {
-				self.card.playAudio(forSide: $0)
+			HStack(spacing: 10) {
+				Button(action: {
+					self.card.playAudio(forSide: self.currentSide)
+				}) {
+					Image(systemName: .speaker3Fill)
+						.foregroundColor(.darkBlue)
+						.scaleEffect(1.35)
+				}
+				.opacity(*card.hasAudio(forSide: currentSide))
+				.animation(.linear(duration: 0.15))
+				.padding(.leading, 16)
+				Spacer()
+				CardToggleButton(
+					image: .greenSwapIcon,
+					circleDimension: 40,
+					fontSize: 13,
+					side: $currentSide,
+					degrees: $toggleIconDegrees
+				) {
+					self.card.playAudio(forSide: $0)
+				}
+				.padding([.trailing, .bottom], 10)
+				.opacity(*isWaitingForRating)
 			}
-			.padding([.trailing, .bottom], 10)
-			.opacity(*isWaitingForRating)
 		}
 	}
 }

@@ -9,18 +9,30 @@ struct DecksViewCardPreviewSheetView: View {
 	
 	var body: some View {
 		GeometryReader { geometry in
-			ZStack(alignment: .bottomTrailing) {
+			ZStack(alignment: .bottom) {
 				self.card.webView(forSide: self.currentSide)
 					.cornerRadius(5)
-				CardToggleButton(
-					circleDimension: 40,
-					fontSize: 13,
-					side: self.$currentSide,
-					degrees: self.$toggleIconDegrees
-				) {
-					self.card.playAudio(forSide: $0)
+				HStack {
+					Button(action: {
+						self.card.playAudio(forSide: self.currentSide)
+					}) {
+						Image(systemName: .speaker3Fill)
+							.foregroundColor(.darkBlue)
+							.scaleEffect(1.35)
+					}
+					.opacity(*self.card.hasAudio(forSide: self.currentSide))
+					.animation(.linear(duration: 0.15))
+					Spacer()
+					CardToggleButton(
+						circleDimension: 40,
+						fontSize: 13,
+						side: self.$currentSide,
+						degrees: self.$toggleIconDegrees
+					) {
+						self.card.playAudio(forSide: $0)
+					}
 				}
-				.padding([.trailing, .bottom], max(geometry.safeAreaInsets.bottom, 10))
+				.padding([.horizontal, .bottom], max(geometry.safeAreaInsets.bottom, 10))
 			}
 		}
 		.edgesIgnoringSafeArea(.all)

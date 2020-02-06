@@ -35,9 +35,15 @@ struct DecksViewCardCell: View {
 						}
 						Spacer()
 						if card.hasAudio {
-							Image(systemName: .speaker3Fill)
-								.foregroundColor(.darkBlue)
-								.padding([.trailing, .top], 4)
+							Button(action: {
+								_ = self.card.hasAudio(forSide: .front)
+									? self.card.playAudio(forSide: .front)
+									: self.card.playAudio(forSide: .back)
+							}) {
+								Image(systemName: .speaker3Fill)
+									.foregroundColor(.darkBlue)
+							}
+							.padding([.trailing, .top], 4)
 						}
 					}
 					.padding(
