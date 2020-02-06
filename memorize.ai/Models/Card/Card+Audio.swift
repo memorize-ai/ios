@@ -10,6 +10,10 @@ extension Card {
 		!(audioUrls(forSide: .front).isEmpty && audioUrls(forSide: .back).isEmpty)
 	}
 	
+	func hasAudio(forSide side: Side) -> Bool {
+		!audioUrls(forSide: side).isEmpty
+	}
+	
 	@discardableResult
 	func playAudio(forSide side: Side) -> Self {
 		Self.audio.play(urls: audioUrls(forSide: side))

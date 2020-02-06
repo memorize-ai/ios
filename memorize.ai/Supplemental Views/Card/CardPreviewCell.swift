@@ -14,14 +14,28 @@ struct CardPreviewCell: View {
 			borderColor: .lightGray,
 			borderWidth: 1.5
 		) {
-			ZStack(alignment: .bottomTrailing) {
+			ZStack(alignment: .bottom) {
 				card.webView(forSide: side)
 					.cornerRadius(5)
-				CardToggleButton(
-					side: $side,
-					degrees: $toggleIconDegrees
-				)
-				.padding([.trailing, .bottom], 10)
+				HStack {
+					Button(action: {
+						self.card.playAudio(forSide: self.side)
+					}) {
+						Image(systemName: .speaker3Fill)
+							.foregroundColor(.darkBlue)
+					}
+					.opacity(*card.hasAudio(forSide: side))
+					.animation(.linear(duration: 0.15))
+					Spacer()
+					CardToggleButton(
+						side: $side,
+						degrees: $toggleIconDegrees
+					) {
+						self.card.playAudio(forSide: $0)
+					}
+					.padding(.bottom, 10)
+				}
+				.padding(.horizontal, 10)
 			}
 		}
 	}
