@@ -49,14 +49,14 @@ struct DecksViewBottomControls: View {
 	var reviewButton: some View {
 		ReviewViewNavigationLink(deck: selectedDeck) {
 			button(
-				text: "Review • \(numberOfDueCards.formatted)",
+				text: "Review \(numberOfDueCards.formatted)",
 				backgroundColor: .init(#colorLiteral(red: 0, green: 0.7647058824, blue: 0.4941176471, alpha: 1))
 			)
 		}
 	}
 	
 	var body: some View {
-		HStack {
+		HStack(spacing: 0) {
 			if isOwner {
 				addCardsButton
 			}
