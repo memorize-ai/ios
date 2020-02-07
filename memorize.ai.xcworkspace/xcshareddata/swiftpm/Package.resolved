@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/kenmueller/Audio.git",
         "state": {
           "branch": "master",
-          "revision": "db28772a2b40b53b20104283b6968d1e70d43822",
+          "revision": "7fa28faf37b95f9188c322a8e42ca141501f43ac",
           "version": null
         }
       },
@@ -51,17 +51,8 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "a96aeb80767855a3b7880b621d4829383c184442",
+          "revision": "7b695b949f62bdc489bb5717c46c3bfcebf79fb2",
           "version": null
-        }
-      },
-      {
-        "package": "SwiftySound",
-        "repositoryURL": "https://github.com/adamcichy/SwiftySound.git",
-        "state": {
-          "branch": null,
-          "revision": "ae69bc63b12a431e75963381ef8f926c4c8b7993",
-          "version": "1.2.0"
         }
       },
       {
