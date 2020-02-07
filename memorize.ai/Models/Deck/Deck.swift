@@ -519,8 +519,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		} else {
 			firestore
 				.collection("decks/\(id)/sections")
-				.order(by: "index")
-				.limit(to: 1)
+				.whereField("index", isEqualTo: 0)
 				.getDocuments()
 				.done { snapshot in
 					self.get(
