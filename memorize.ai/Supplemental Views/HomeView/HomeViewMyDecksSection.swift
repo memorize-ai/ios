@@ -22,7 +22,7 @@ struct HomeViewMyDecksSection: View {
 						ForEach(currentUser.decks) { deck in
 							OwnedDeckCell(
 								deck: deck,
-								imageBackgroundColor: .white
+								imageBackgroundColor: Color.lightGrayBackground.opacity(0.5)
 							)
 						}
 					}

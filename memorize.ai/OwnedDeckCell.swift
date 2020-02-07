@@ -65,12 +65,7 @@ struct OwnedDeckCell: View {
 								.frame(height: width * Self.imageAspectRatio)
 						}
 					} else {
-						ZStack {
-							imageBackgroundColor
-							Image(systemName: .questionmark)
-								.foregroundColor(.gray)
-								.scaleEffect(1.5)
-						}
+						imageBackgroundColor
 					}
 				}
 				.cornerRadius(8, corners: [.topLeft, .topRight])

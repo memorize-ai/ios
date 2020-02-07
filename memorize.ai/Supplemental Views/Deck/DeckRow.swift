@@ -55,9 +55,7 @@ struct DeckRow: View {
 							.aspectRatio(contentMode: .fill)
 					}
 				} else {
-					Image(systemName: .questionmark)
-						.foregroundColor(alternateImageForegroundColor)
-						.scaleEffect(1.5)
+					Text("")
 				}
 			}
 			.frame(width: 40, height: 40)

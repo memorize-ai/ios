@@ -41,12 +41,7 @@ struct DeckCell<Content: View>: View {
 								.aspectRatio(contentMode: .fill)
 						}
 					} else {
-						ZStack {
-							Color.lightGrayBackground
-							Image(systemName: .questionmark)
-								.foregroundColor(.gray)
-								.scaleEffect(1.5)
-						}
+						Color.lightGrayBackground
 					}
 				}
 				.cornerRadius(8, corners: [.topLeft, .topRight])
