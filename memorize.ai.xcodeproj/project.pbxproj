@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
+		4D05F09323EE1E8200F4456C /* display.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F09223EE1E8200F4456C /* display.css */; };
+		4D05F09523EE1E8900F4456C /* editor.css in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F09423EE1E8900F4456C /* editor.css */; };
+		4D05F09723EE1E8D00F4456C /* editor.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F09623EE1E8D00F4456C /* editor.js */; };
+		4D05F09923EE237E00F4456C /* display.js in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F09823EE237E00F4456C /* display.js */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
 		4D0C0288237CB9590062BC14 /* HomeViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */; };
@@ -218,9 +222,6 @@
 		4DACBA6C23981D4500E4BB71 /* MarketDeckViewTopicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */; };
 		4DAD2CDD2361152C001DA77B /* AuthenticationViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */; };
 		4DAE833023C2C26200713AAB /* SignOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE832F23C2C26200713AAB /* SignOutButton.swift */; };
-		4DB659D123BF0B3800E74850 /* katex.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D023BF0B3800E74850 /* katex.js */; };
-		4DB659D323BF0BC600E74850 /* katex.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D223BF0BC600E74850 /* katex.css */; };
-		4DB659D523BF0BDD00E74850 /* auto-render.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DB659D423BF0BDD00E74850 /* auto-render.js */; };
 		4DB8A67D2361A646008090BB /* LogInViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */; };
 		4DB9FF472396CC6D00B8DD38 /* CardPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */; };
 		4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 4DB9FF4B2396D62A00B8DD38 /* WebView */; };
@@ -276,10 +277,6 @@
 		4DDACF0B2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */; };
 		4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
-		4DE73D0823E8CAF90031DF31 /* ckeditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0723E8CAF90031DF31 /* ckeditor.css */; };
-		4DE73D0B23E8CB320031DF31 /* prism.css in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0A23E8CB320031DF31 /* prism.css */; };
-		4DE73D0D23E8CB360031DF31 /* prism.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D0C23E8CB360031DF31 /* prism.js */; };
-		4DE73D4023EABD140031DF31 /* ckeditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 4DE73D3F23EABD140031DF31 /* ckeditor.js */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
@@ -327,6 +324,10 @@
 
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
+		4D05F09223EE1E8200F4456C /* display.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = display.css; sourceTree = "<group>"; };
+		4D05F09423EE1E8900F4456C /* editor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = editor.css; sourceTree = "<group>"; };
+		4D05F09623EE1E8D00F4456C /* editor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = editor.js; sourceTree = "<group>"; };
+		4D05F09823EE237E00F4456C /* display.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = display.js; sourceTree = "<group>"; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyInterestsSection.swift; sourceTree = "<group>"; };
@@ -542,9 +543,6 @@
 		4DACBA6B23981D4500E4BB71 /* MarketDeckViewTopicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewTopicList.swift; sourceTree = "<group>"; };
 		4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewContentBox.swift; sourceTree = "<group>"; };
 		4DAE832F23C2C26200713AAB /* SignOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutButton.swift; sourceTree = "<group>"; };
-		4DB659D023BF0B3800E74850 /* katex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = katex.js; sourceTree = "<group>"; };
-		4DB659D223BF0BC600E74850 /* katex.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = katex.css; sourceTree = "<group>"; };
-		4DB659D423BF0BDD00E74850 /* auto-render.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "auto-render.js"; sourceTree = "<group>"; };
 		4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewContentBox.swift; sourceTree = "<group>"; };
 		4DB9FF462396CC6D00B8DD38 /* CardPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewCell.swift; sourceTree = "<group>"; };
 		4DB9FF502396D87D00B8DD38 /* Card+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+HTML.swift"; sourceTree = "<group>"; };
@@ -595,10 +593,6 @@
 		4DDACF082395BFA80073C004 /* MarketDeckViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewHeader.swift; sourceTree = "<group>"; };
 		4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfoPanels.swift; sourceTree = "<group>"; };
 		4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewCardPreviews.swift; sourceTree = "<group>"; };
-		4DE73D0723E8CAF90031DF31 /* ckeditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ckeditor.css; sourceTree = "<group>"; };
-		4DE73D0A23E8CB320031DF31 /* prism.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = prism.css; sourceTree = "<group>"; };
-		4DE73D0C23E8CB360031DF31 /* prism.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prism.js; sourceTree = "<group>"; };
-		4DE73D3F23EABD140031DF31 /* ckeditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ckeditor.js; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -673,6 +667,24 @@
 				EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D05F08E23EE1E5500F4456C /* JavaScript */ = {
+			isa = PBXGroup;
+			children = (
+				4D05F09623EE1E8D00F4456C /* editor.js */,
+				4D05F09823EE237E00F4456C /* display.js */,
+			);
+			path = JavaScript;
+			sourceTree = "<group>";
+		};
+		4D05F08F23EE1E6200F4456C /* CSS */ = {
+			isa = PBXGroup;
+			children = (
+				4D05F09423EE1E8900F4456C /* editor.css */,
+				4D05F09223EE1E8200F4456C /* display.css */,
+			);
+			path = CSS;
 			sourceTree = "<group>";
 		};
 		4D0C028B237D3EA90062BC14 /* Topic */ = {
@@ -1036,15 +1048,6 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
-		4D81D15823E7B9D1000E67B1 /* CKEditor */ = {
-			isa = PBXGroup;
-			children = (
-				4DE73D0723E8CAF90031DF31 /* ckeditor.css */,
-				4DE73D3F23EABD140031DF31 /* ckeditor.js */,
-			);
-			path = CKEditor;
-			sourceTree = "<group>";
-		};
 		4D8993292363D1120042AC9F /* ForgotPasswordView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1095,16 +1098,6 @@
 				4DD5FE932387868700E70251 /* MarketViewFilterPopUpContentWithSlider.swift */,
 			);
 			path = MarketView;
-			sourceTree = "<group>";
-		};
-		4D9BF86623BAC68B00388DEF /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				4D81D15823E7B9D1000E67B1 /* CKEditor */,
-				4DB659CF23BF0B1D00E74850 /* Katex */,
-				4DE73D0923E8CB0E0031DF31 /* Prism */,
-			);
-			path = Libraries;
 			sourceTree = "<group>";
 		};
 		4D9D931023DF66150008B614 /* ProfileView */ = {
@@ -1165,7 +1158,8 @@
 				4DAA4F47233DE1A800EF7467 /* Preview Content */,
 				4D402E75235E6FA50011C6B6 /* Fonts */,
 				4D703AF0233E7107004F1F65 /* Firebase */,
-				4D9BF86623BAC68B00388DEF /* Libraries */,
+				4D05F08E23EE1E5500F4456C /* JavaScript */,
+				4D05F08F23EE1E6200F4456C /* CSS */,
 			);
 			path = memorize.ai;
 			sourceTree = "<group>";
@@ -1208,16 +1202,6 @@
 				4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */,
 			);
 			path = AuthenticationView;
-			sourceTree = "<group>";
-		};
-		4DB659CF23BF0B1D00E74850 /* Katex */ = {
-			isa = PBXGroup;
-			children = (
-				4DB659D223BF0BC600E74850 /* katex.css */,
-				4DB659D023BF0B3800E74850 /* katex.js */,
-				4DB659D423BF0BDD00E74850 /* auto-render.js */,
-			);
-			path = Katex;
 			sourceTree = "<group>";
 		};
 		4DB9FF452396CC6100B8DD38 /* Card */ = {
@@ -1335,15 +1319,6 @@
 				4D458A3A237BEBCD00A9776A /* MainTabViewItem.swift */,
 			);
 			path = MainTabView;
-			sourceTree = "<group>";
-		};
-		4DE73D0923E8CB0E0031DF31 /* Prism */ = {
-			isa = PBXGroup;
-			children = (
-				4DE73D0A23E8CB320031DF31 /* prism.css */,
-				4DE73D0C23E8CB360031DF31 /* prism.js */,
-			);
-			path = Prism;
 			sourceTree = "<group>";
 		};
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
@@ -1562,29 +1537,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DE73D0823E8CAF90031DF31 /* ckeditor.css in Resources */,
 				4D1F9B19233EBF2200693571 /* README.md in Resources */,
-				4DE73D0D23E8CB360031DF31 /* prism.js in Resources */,
 				4D402E86235E6FB80011C6B6 /* Muli-ExtraLightItalic.ttf in Resources */,
+				4D05F09523EE1E8900F4456C /* editor.css in Resources */,
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
+				4D05F09923EE237E00F4456C /* display.js in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
-				4DE73D0B23E8CB320031DF31 /* prism.css in Resources */,
-				4DB659D323BF0BC600E74850 /* katex.css in Resources */,
-				4DB659D523BF0BDD00E74850 /* auto-render.js in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
+				4D05F09723EE1E8D00F4456C /* editor.js in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
-				4DE73D4023EABD140031DF31 /* ckeditor.js in Resources */,
 				4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */,
 				4D402E89235E6FB80011C6B6 /* Muli-ExtraBold.ttf in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
-				4DB659D123BF0B3800E74850 /* katex.js in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
+				4D05F09323EE1E8200F4456C /* display.css in Resources */,
 				4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */,
 				4D402E8C235E6FB80011C6B6 /* Muli-Italic.ttf in Resources */,
 				4D402E92235E6FB80011C6B6 /* Muli-LightItalic.ttf in Resources */,

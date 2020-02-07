@@ -2,24 +2,6 @@ import WebView
 import HTML
 
 extension Card {
-	private static let displayCss = """
-	@font-face {
-		font-family: Muli;
-		src: url('Muli-Regular.ttf') format('truetype');
-	}
-	body {
-		font-family: Muli, Arial, Helvetica, sans-serif;
-		margin-left: 12px;
-		margin-right: 12px;
-	}
-	img {
-		max-width: calc(100vw - 12px * 2);
-	}
-	:focus {
-		outline: none;
-	}
-	"""
-	
 	private static func htmlWithText(_ text: String) -> HTMLElement {
 		HTMLElement.html
 			.child {
@@ -32,37 +14,13 @@ extension Card {
 					.child {
 						HTMLElement.link
 							.rel("stylesheet")
-							.href("ckeditor.css")
-					}
-					.child {
-						HTMLElement.link
-							.rel("stylesheet")
-							.href("katex.css")
-					}
-					.child {
-						HTMLElement.link
-							.rel("stylesheet")
-							.href("prism.css")
+							.href("display.css")
 					}
 					.child {
 						HTMLElement.script
 							.defer()
-							.src("katex.js")
-					}
-					.child {
-						HTMLElement.script
-							.defer()
-							.src("auto-render.js")
+							.src("display.js")
 							.onLoad("renderMathInElement(document.body)")
-					}
-					.child {
-						HTMLElement.script
-							.defer()
-							.src("prism.js")
-					}
-					.child {
-						HTMLElement.style
-							.child(displayCss)
 					}
 			}
 			.child {

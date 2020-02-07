@@ -3,24 +3,6 @@ import WebKit
 import HTML
 
 struct CKEditor: View {
-	private static let css = """
-	@font-face {
-		font-family: Muli;
-		src: url('Muli-Regular.ttf') format('truetype');
-	}
-	body {
-		font-family: Muli, Arial, Helvetica, sans-serif;
-		margin: 0;
-	}
-	.ck.ck-dropdown__panel.ck-dropdown__panel_sw > .ck.ck-toolbar > .ck.ck-toolbar__items {
-		width: calc(100vw - 10px * 2);
-		flex-wrap: wrap;
-	}
-	.ck.ck-editor__main > .ck-editor__editable {
-		height: calc(100vh - 40.2px);
-	}
-	"""
-	
 	struct Representable: UIViewControllerRepresentable {
 		final class Container: UIViewController, WKScriptMessageHandler {
 			@Binding var html: String
@@ -68,12 +50,13 @@ struct CKEditor: View {
 										.content("width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1")
 								}
 								.child {
-									HTMLElement.script
-										.src("ckeditor.js")
+									HTMLElement.link
+										.rel("stylesheet")
+										.href("editor.css")
 								}
 								.child {
-									HTMLElement.style
-										.child(css)
+									HTMLElement.script
+										.src("editor.js")
 								}
 						}
 						.child {
@@ -85,28 +68,7 @@ struct CKEditor: View {
 								}
 								.child {
 									HTMLElement.script
-										.child("""
-										ClassicEditor
-											.create(document.getElementById('editor'), {
-												simpleUpload: {
-													uploadUrl: '\(WEB_URL)/_api/upload-deck-asset?deck=\(deckId)'
-												},
-												autosave: {
-													save: editor =>
-														webkit.messageHandlers.data.postMessage(editor.getData())
-												}
-											})
-											.then(editor =>
-												editor.ui.focusTracker.on('change:isFocused', (event, name, isFocused) =>
-													isFocused
-														? setTimeout(() => scrollTo(0, 0), 150)
-														: null
-												)
-											)
-											.catch(error =>
-												webkit.messageHandlers.error.postMessage(error.toString())
-											)
-										""")
+										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(WEB_URL)/_api/upload-deck-asset?deck=\(deckId)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>a?setTimeout(()=>scrollTo(0,0),150):null)).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
 								}
 						}
 				}
