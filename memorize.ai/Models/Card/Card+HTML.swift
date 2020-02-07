@@ -12,6 +12,9 @@ extension Card {
 		margin-left: 12px;
 		margin-right: 12px;
 	}
+	img {
+		max-width: calc(100vw - 12px * 2);
+	}
 	:focus {
 		outline: none;
 	}
