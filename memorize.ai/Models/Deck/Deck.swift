@@ -413,9 +413,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	func topics(in allTopics: [Topic]) -> [Topic?] {
-		topics.map { topicId in
-			allTopics.first { $0.id == topicId }
+		var acc = [Topic?]()
+		
+		for topicId in topics {
+			if (acc.contains { $0?.id == topicId }) { continue }
+			acc.append(allTopics.first { $0.id == topicId })
 		}
+		
+		return acc
 	}
 	
 	@discardableResult
