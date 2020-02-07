@@ -49,7 +49,7 @@ struct AuthenticationView<ContentBox: View, AlternativeDestination: View>: View 
 							)
 						}
 					}
-					.padding(.top, geometry.safeAreaInsets.top / 2)
+					.padding(.top, 20 + geometry.safeAreaInsets.top / 2)
 				}
 				.alignment(.top)
 				AuthenticationViewContentBox(
