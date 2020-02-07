@@ -7,7 +7,7 @@ extension Card {
 	static let audio = Audio()
 	
 	var hasAudio: Bool {
-		!(audioUrls(forSide: .front).isEmpty && audioUrls(forSide: .back).isEmpty)
+		hasAudio(forSide: .front) || hasAudio(forSide: .back)
 	}
 	
 	func hasAudio(forSide side: Side) -> Bool {
