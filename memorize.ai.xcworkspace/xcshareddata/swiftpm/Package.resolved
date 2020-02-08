@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/kenmueller/Audio.git",
         "state": {
           "branch": "master",
-          "revision": "7fa28faf37b95f9188c322a8e42ca141501f43ac",
+          "revision": "efe5ddcafe06bc14e1ba30722ff68087b863d40a",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "7b695b949f62bdc489bb5717c46c3bfcebf79fb2",
+          "revision": "e8118adc763dd3a870bef729c5a386f04ac9fe22",
           "version": null
         }
       },
