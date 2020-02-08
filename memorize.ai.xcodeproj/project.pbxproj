@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
-		4D05F0A123EEB6D300F4456C /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F09F23EEB6D200F4456C /* display */; };
-		4D05F0A223EEB6D300F4456C /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F0A023EEB6D300F4456C /* editor */; };
+		4D05F0A523EEB7E600F4456C /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F0A323EEB7E500F4456C /* display */; };
+		4D05F0A623EEB7E600F4456C /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4D05F0A423EEB7E500F4456C /* editor */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
 		4D0C0288237CB9590062BC14 /* HomeViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */; };
@@ -322,8 +322,8 @@
 
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
-		4D05F09F23EEB6D200F4456C /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
-		4D05F0A023EEB6D300F4456C /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
+		4D05F0A323EEB7E500F4456C /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
+		4D05F0A423EEB7E500F4456C /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyInterestsSection.swift; sourceTree = "<group>"; };
@@ -668,8 +668,8 @@
 		4D05F09A23EEB5AB00F4456C /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				4D05F09F23EEB6D200F4456C /* display */,
-				4D05F0A023EEB6D300F4456C /* editor */,
+				4D05F0A323EEB7E500F4456C /* display */,
+				4D05F0A423EEB7E500F4456C /* editor */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -1528,7 +1528,7 @@
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
-				4D05F0A223EEB6D300F4456C /* editor in Resources */,
+				4D05F0A623EEB7E600F4456C /* editor in Resources */,
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
@@ -1541,7 +1541,7 @@
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
 				4DAA4F46233DE1A800EF7467 /* Assets.xcassets in Resources */,
-				4D05F0A123EEB6D300F4456C /* display in Resources */,
+				4D05F0A523EEB7E600F4456C /* display in Resources */,
 				4D402E8C235E6FB80011C6B6 /* Muli-Italic.ttf in Resources */,
 				4D402E92235E6FB80011C6B6 /* Muli-LightItalic.ttf in Resources */,
 			);

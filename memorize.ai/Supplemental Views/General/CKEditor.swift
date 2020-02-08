@@ -52,11 +52,11 @@ struct CKEditor: View {
 								.child {
 									HTMLElement.link
 										.rel("stylesheet")
-										.href("editor.css")
+										.href("editor/index.css")
 								}
 								.child {
 									HTMLElement.script
-										.src("editor.js")
+										.src("editor/index.js")
 								}
 						}
 						.child {

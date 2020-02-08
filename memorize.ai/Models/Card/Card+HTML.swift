@@ -14,12 +14,12 @@ extension Card {
 					.child {
 						HTMLElement.link
 							.rel("stylesheet")
-							.href("display.css")
+							.href("display/index.css")
 					}
 					.child {
 						HTMLElement.script
 							.defer()
-							.src("display.js")
+							.src("display/index.js")
 							.onLoad("renderMathInElement(document.body)")
 					}
 			}
