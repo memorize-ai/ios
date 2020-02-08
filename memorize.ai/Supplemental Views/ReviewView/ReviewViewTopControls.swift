@@ -44,7 +44,7 @@ struct ReviewViewTopControls<RecapView: View>: View {
 				NavigationLink(
 					destination: LazyView(content: recapView)
 				) {
-					button(text: "DONE")
+					button(text: "RECAP")
 				}
 			}
 		}
