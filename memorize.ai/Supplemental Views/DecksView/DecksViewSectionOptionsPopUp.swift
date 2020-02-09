@@ -23,7 +23,8 @@ struct DecksViewSectionOptionsPopUp: View {
 		.init(
 			50 * (
 				(isUnlocked ? (*section.isDue + *hasCards) : 1) +
-				(isOwner ? 3 : 0)
+				(isOwner ? 2 : 0) +
+				*(!section.isUnsectioned)
 			) +
 			(isOwner ? 2 : 0)
 		)
@@ -130,6 +131,8 @@ struct DecksViewSectionOptionsPopUp: View {
 				) {
 					self.section.showRenameAlert()
 				}
+			}
+			if !section.isUnsectioned {
 				PopUpButton(
 					icon: Image(systemName: .link)
 						.resizable()
@@ -141,6 +144,8 @@ struct DecksViewSectionOptionsPopUp: View {
 				) {
 					share(items: [self.section.unlockLink])
 				}
+			}
+			if isOwner {
 				PopUpDivider()
 				PopUpButton(
 					icon: Image.trashIcon

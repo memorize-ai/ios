@@ -248,8 +248,17 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		storage.child("decks/\(id)")
 	}
 	
+	var getLink: String {
+		"\(WEB_URL)/d/\(id)/g"
+	}
+	
 	var shareMessage: String {
-		"Check out \(name) by \(creator?.name ?? "(unknown)") on memorize.ai\n\nDownload on the App Store: \(APP_STORE_URL)\nLearn more at \(WEB_URL)"
+		"""
+		Get \(name)\(creator.map { " by \($0.name)" } ?? ""): \(getLink)
+		
+		Download memorize.ai on the App Store: \(APP_STORE_URL)
+		Learn more at \(WEB_URL)
+		"""
 	}
 	
 	var nextSectionIndex: Int {
@@ -261,7 +270,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	var unlockedSections: [Section] {
-		sections.filter { $0.isUnlocked }
+		sections.filter(~\.isUnlocked)
 	}
 	
 	var numberOfUnlockedCards: Int {

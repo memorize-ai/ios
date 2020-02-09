@@ -36,7 +36,7 @@ struct DecksViewDeckOptionsPopUp: View {
 		PopUp(
 			isShowing: $model.isDeckOptionsPopUpShowing,
 			contentHeight: .init(
-				50 * (isOwner ? (7 + *canOrderSections) : 4) +
+				50 * (isOwner ? (8 + *canOrderSections) : 5) +
 				2 + *isOwner
 			)
 		) {
@@ -75,6 +75,17 @@ struct DecksViewDeckOptionsPopUp: View {
 			.disabled(!selectedDeck.creatorLoadingState.didSucceed)
 			.onAppear {
 				self.selectedDeck.loadCreator()
+			}
+			PopUpButton(
+				icon: Image(systemName: .link)
+					.resizable()
+					.foregroundColor(.darkBlue)
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 21, height: 21),
+				text: "Share get link",
+				textColor: .darkGray
+			) {
+				share(items: [self.selectedDeck.getLink])
 			}
 			if isOwner {
 				PublishDeckViewNavigationLink(deck: selectedDeck) {

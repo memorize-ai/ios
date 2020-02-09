@@ -96,21 +96,23 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadPreviewImage() -> Self {
 		guard
 			previewImageLoadingState.isNone,
-			let url = try? previewImageUrl?.asURL()
+			let urlString = previewImageUrl
 		else { return self }
-		previewImageLoadingState.startLoading()
-		URLSession.shared.dataTask(with: url) { data, _, error in
-			guard error == nil, let data = data, let image = Image(data: data) else {
-				DispatchQueue.main.async {
-					self.previewImageLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-				}
-				return
+		
+		do {
+			guard let image = Image(
+				data: try .init(contentsOf: try urlString.asURL())
+			) else {
+				previewImageLoadingState.fail(message: "Unable to load image from data")
+				return self
 			}
-			DispatchQueue.main.async {
-				self.previewImage = image
-				self.previewImageLoadingState.succeed()
-			}
-		}.resume()
+			
+			previewImage = image
+			previewImageLoadingState.succeed()
+		} catch {
+			previewImageLoadingState.fail(error: error)
+		}
+		
 		return self
 	}
 	
