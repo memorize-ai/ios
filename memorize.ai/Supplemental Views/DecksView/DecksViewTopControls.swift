@@ -37,9 +37,11 @@ struct DecksViewTopControls: View {
 						self.model.isDeckOptionsPopUpShowing = true
 					}
 				}
+				.padding(.horizontal, 23)
 			}
 		}
 		.frame(height: 40)
+		.padding(.leading, DecksView.horizontalPadding)
 	}
 }
 

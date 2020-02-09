@@ -48,34 +48,37 @@ struct DecksViewSectionHeader: View {
 			Text(cardCountMessage)
 				.font(.muli(.bold, size: 15))
 				.foregroundColor(.darkBlue)
-			Button(action: {
-				self.model.toggleSectionExpanded(
-					self.section,
-					forUser: self.currentStore.user
-				)
-			}) {
-				ZStack {
-					Circle()
-						.stroke(Color.lightGrayBorder)
-					Group {
-						if model.isSectionExpanded(section) {
-							minusIcon
-						} else {
-							plusIcon
+			HStack(spacing: 4) {
+				Button(action: {
+					self.model.toggleSectionExpanded(
+						self.section,
+						forUser: self.currentStore.user
+					)
+				}) {
+					ZStack {
+						Circle()
+							.stroke(Color.lightGrayBorder)
+						Group {
+							if model.isSectionExpanded(section) {
+								minusIcon
+							} else {
+								plusIcon
+							}
 						}
+						.padding(5)
 					}
-					.padding(5)
+					.frame(width: 21, height: 21)
 				}
-				.frame(width: 21, height: 21)
-			}
-			VerticalTripleDots(color: .darkBlue) {
-				popUpWithAnimation {
-					self.model.selectedSection = self.section
-					self.model.isSectionOptionsPopUpShowing = true
+				VerticalTripleDots(color: .darkBlue) {
+					popUpWithAnimation {
+						self.model.selectedSection = self.section
+						self.model.isSectionOptionsPopUpShowing = true
+					}
 				}
+				.padding(.horizontal, 12)
 			}
-			.padding(.leading, 3)
 		}
+		.padding(.trailing, -12)
 	}
 }
 

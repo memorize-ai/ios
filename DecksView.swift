@@ -21,7 +21,6 @@ struct DecksView: View {
 					DecksViewTopControls(
 						selectedDeck: self.selectedDeck
 					)
-					.padding(.horizontal, Self.horizontalPadding)
 					VStack(spacing: 0) {
 						ZStack {
 							Rectangle()
