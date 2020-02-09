@@ -142,7 +142,14 @@ struct DecksViewSectionOptionsPopUp: View {
 					text: "Share unlock link",
 					textColor: .darkGray
 				) {
-					share(items: [self.section.unlockLink])
+					guard let url = self.section.unlockUrl else {
+						return showAlert(
+							title: "An unknown error occurred",
+							message: "Please try again"
+						)
+					}
+					
+					share(url)
 				}
 			}
 			if isOwner {

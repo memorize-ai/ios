@@ -248,12 +248,18 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		storage.child("decks/\(id)")
 	}
 	
-	var getLink: String {
-		"\(WEB_URL)/d/\(id)/g"
+	var getUrl: URL? {
+		URL(string: "\(WEB_URL)/d/\(id)/g")
 	}
 	
-	var shareMessage: String {
-		"""
+	var getLink: String? {
+		getUrl?.absoluteString
+	}
+	
+	var shareMessage: String? {
+		guard let getLink = getLink else { return nil }
+		
+		return """
 		Get \(name)\(creator.map { " by \($0.name)" } ?? ""): \(getLink)
 		
 		Download memorize.ai on the App Store: \(APP_STORE_URL)

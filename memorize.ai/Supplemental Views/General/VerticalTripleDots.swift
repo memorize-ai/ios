@@ -4,7 +4,7 @@ struct VerticalTripleDots: View {
 	let color: Color
 	let onClick: () -> Void
 	
-	init(color: Color = .white, onClick: @escaping () -> Void) {
+	init(alignment: Alignment, color: Color = .white, onClick: @escaping () -> Void) {
 		self.color = color
 		self.onClick = onClick
 	}
@@ -22,6 +22,7 @@ struct VerticalTripleDots: View {
 				circle
 				circle
 			}
+			.frame(width: 40)
 		}
 	}
 }

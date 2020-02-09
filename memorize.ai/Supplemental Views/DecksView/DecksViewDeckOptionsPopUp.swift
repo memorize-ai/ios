@@ -70,7 +70,14 @@ struct DecksViewDeckOptionsPopUp: View {
 				text: "Share",
 				textColor: .darkGray
 			) {
-				share(items: [self.selectedDeck.shareMessage])
+				guard let message = self.selectedDeck.shareMessage else {
+					return showAlert(
+						title: "An unknown error occurred",
+						message: "Please try again"
+					)
+				}
+				
+				share(message)
 			}
 			.disabled(!selectedDeck.creatorLoadingState.didSucceed)
 			.onAppear {
@@ -85,7 +92,14 @@ struct DecksViewDeckOptionsPopUp: View {
 				text: "Share get link",
 				textColor: .darkGray
 			) {
-				share(items: [self.selectedDeck.getLink])
+				guard let url = self.selectedDeck.getUrl else {
+					return showAlert(
+						title: "An unknown error occurred",
+						message: "Please try again"
+					)
+				}
+				
+				share(url)
 			}
 			if isOwner {
 				PublishDeckViewNavigationLink(deck: selectedDeck) {

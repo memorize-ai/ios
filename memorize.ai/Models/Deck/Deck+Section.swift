@@ -71,8 +71,12 @@ extension Deck {
 			return numberOfDueCards > 0
 		}
 		
-		var unlockLink: String {
-			"\(WEB_URL)/d/\(parent.id)/s/\(id)/u"
+		var unlockUrl: URL? {
+			URL(string: "\(WEB_URL)/d/\(parent.id)/s/\(id)/u")
+		}
+		
+		var unlockLink: String? {
+			unlockUrl?.absoluteString
 		}
 		
 		var isUnlocked: Bool {

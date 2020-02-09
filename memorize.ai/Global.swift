@@ -55,6 +55,13 @@ func share(
 	currentViewController.present(vc, animated: true)
 }
 
+func share(
+	_ item: Any,
+	excludedActivityTypes: [UIActivity.ActivityType]? = nil
+) {
+	share(items: [item], excludedActivityTypes: excludedActivityTypes)
+}
+
 func showAlert(
 	title: String?,
 	message: String?,

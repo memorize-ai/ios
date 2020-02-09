@@ -50,17 +50,20 @@ struct MarketDeckViewRatings: View {
 	
 	func tappableStar(stars: Int) -> some View {
 		Button(action: {
+			playHaptic()
+			
 			_ = self.rating == stars
 				? self.deck.removeRating(forUser: self.currentUser)
 				: self.deck.addRating(stars, forUser: self.currentUser)
 		}) {
 			(rating >= stars
 				? Image.greenFilledStar
-				: Image.greenTransparentStar)
-				.resizable()
-				.renderingMode(.original)
-				.aspectRatio(contentMode: .fit)
-				.frame(width: 40, height: 40)
+				: Image.greenTransparentStar
+			)
+			.resizable()
+			.renderingMode(.original)
+			.aspectRatio(contentMode: .fit)
+			.frame(width: 40, height: 40)
 		}
 	}
 	

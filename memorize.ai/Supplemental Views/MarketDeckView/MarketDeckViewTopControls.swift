@@ -14,7 +14,14 @@ struct MarketDeckViewTopControls: View {
 			}
 			Spacer()
 			Button(action: {
-				share(items: [self.deck.shareMessage])
+				guard let message = self.deck.shareMessage else {
+					return showAlert(
+						title: "An unknown error occurred",
+						message: "Please try again"
+					)
+				}
+				
+				share(message)
 			}) {
 				Group {
 					if deck.creatorLoadingState.isLoading {
