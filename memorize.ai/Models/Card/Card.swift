@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseFirestore
 import PromiseKit
+import Audio
 import LoadingState
 
 final class Card: ObservableObject, Identifiable, Equatable, Hashable {
@@ -175,17 +176,21 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	private static func replaceHtmlElements(_ text: String) -> String {
-		text
-			.replacingOccurrences(
-				of: "<audio.*?>.*?</.*?audio.*?>",
-				with: " ",
-				options: .regularExpression
-			)
+		Audio.replaceAudioTags(inHTML: text, with: " ")
 			.replacingOccurrences(
 				of: "<.+?>",
 				with: " ",
 				options: .regularExpression
 			)
+	}
+	
+	func htmlForSide(_ side: Side) -> String {
+		switch side {
+		case .front:
+			return front
+		case .back:
+			return back
+		}
 	}
 	
 	@discardableResult

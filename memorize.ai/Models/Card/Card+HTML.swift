@@ -1,5 +1,6 @@
 import WebView
 import HTML
+import Audio
 
 extension Card {
 	private static func htmlWithText(_ text: String) -> HTMLElement {
@@ -26,7 +27,7 @@ extension Card {
 			.child {
 				HTMLElement.body
 					.class("ck-content")
-					.child(removeAudioUrls(fromText: text))
+					.child(Audio.removeAudioTags(inHTML: text))
 			}
 	}
 	
