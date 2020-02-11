@@ -72,7 +72,8 @@ final class SignUpViewModel: ViewModel {
 	func createUserInFirestore(uid: String) -> Promise<Void> {
 		firestore.document("users/\(uid)").setData([
 			"name": name,
-			"email": email
+			"email": email,
+			"joined": FieldValue.serverTimestamp()
 		])
 	}
 	

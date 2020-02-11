@@ -66,7 +66,8 @@ final class GoogleSignInButtonModel: ViewModel {
 	func createUser(from user: User) -> Promise<Void> {
 		firestore.document("users/\(user.id)").setData([
 			"name": user.name,
-			"email": user.email
+			"email": user.email,
+			"joined": FieldValue.serverTimestamp()
 		])
 	}
 	
