@@ -29,6 +29,7 @@ struct LearnRecapViewSectionPerformanceRowSectionCell: View {
 			}
 			.padding(.horizontal)
 			.padding(.vertical, 10)
+			.frame(maxWidth: .infinity)
 		}
 	}
 }

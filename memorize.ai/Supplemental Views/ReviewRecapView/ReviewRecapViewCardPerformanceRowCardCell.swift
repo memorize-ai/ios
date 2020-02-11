@@ -126,6 +126,7 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 					.padding(.trailing, 4)
 				}
 				.padding(8)
+				.frame(maxWidth: .infinity)
 			}
 			if reviewData.isNew {
 				Circle()

@@ -39,6 +39,7 @@ struct LearnRecapViewCardPerformanceRowCardCell: View {
 				}
 			}
 			.padding(8)
+			.frame(maxWidth: .infinity)
 		}
 	}
 }
