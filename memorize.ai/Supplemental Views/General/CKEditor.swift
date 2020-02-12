@@ -3,17 +3,27 @@ import WebKit
 import HTML
 
 struct CKEditor: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	struct Representable: UIViewControllerRepresentable {
 		final class Container: UIViewController, WKScriptMessageHandler {
 			@Binding var html: String
 			
+			let uid: String
 			let deckId: String
 			let width: CGFloat
 			let height: CGFloat
 						
-			init(html: Binding<String>, deckId: String, width: CGFloat, height: CGFloat) {
+			init(
+				html: Binding<String>,
+				uid: String,
+				deckId: String,
+				width: CGFloat,
+				height: CGFloat
+			) {
 				_html = html
 				
+				self.uid = uid
 				self.deckId = deckId
 				self.width = width
 				self.height = height
@@ -23,6 +33,10 @@ struct CKEditor: View {
 			
 			required init?(coder: NSCoder) {
 				fatalError("init(coder:) has not been implemented")
+			}
+			
+			var uploadUrl: String {
+				"\(WEB_URL)/_api/upload-deck-asset?user=\(uid)&deck=\(deckId)"
 			}
 			
 			override func viewDidLoad() {
@@ -68,7 +82,7 @@ struct CKEditor: View {
 								}
 								.child {
 									HTMLElement.script
-										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(WEB_URL)/_api/upload-deck-asset?deck=\(deckId)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>a?setTimeout(()=>scrollTo(0,0),150):null)).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
+										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(uploadUrl)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>a?setTimeout(()=>scrollTo(0,0),150):null)).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
 								}
 						}
 				}
@@ -98,12 +112,19 @@ struct CKEditor: View {
 		
 		@Binding var html: String
 		
+		let uid: String
 		let deckId: String
 		let width: CGFloat
 		let height: CGFloat
 		
 		func makeUIViewController(context: Context) -> Container {
-			.init(html: $html, deckId: deckId, width: width, height: height)
+			.init(
+				html: $html,
+				uid: uid,
+				deckId: deckId,
+				width: width,
+				height: height
+			)
 		}
 		
 		func updateUIViewController(_ uiViewController: Container, context: Context) {}
@@ -124,8 +145,14 @@ struct CKEditor: View {
 	}
 	
 	var body: some View {
-		Representable(html: $html, deckId: deckId, width: width, height: height)
-			.frame(width: width, height: height)
+		Representable(
+			html: $html,
+			uid: currentStore.user.id,
+			deckId: deckId,
+			width: width,
+			height: height
+		)
+		.frame(width: width, height: height)
 	}
 }
 
