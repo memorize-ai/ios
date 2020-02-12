@@ -1,4 +1,5 @@
 import SwiftUI
+import Audio
 
 struct ReviewViewFooterPerformanceRatingButton: View {
 	let current: Card.ReviewData?
@@ -8,7 +9,7 @@ struct ReviewViewFooterPerformanceRatingButton: View {
 	var body: some View {
 		Button(action: {
 			self.rateCurrentCard(self.rating)
-			playHaptic()
+			Audio.impact()
 		}) {
 			CustomRectangle(
 				background: Color.white,

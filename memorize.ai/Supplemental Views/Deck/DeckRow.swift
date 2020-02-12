@@ -1,4 +1,5 @@
 import SwiftUI
+import Audio
 
 struct DeckRow: View {
 	@EnvironmentObject var currentStore: CurrentStore
@@ -19,6 +20,7 @@ struct DeckRow: View {
 	}
 	
 	func onTapGesture() {
+		Audio.impact()
 		onClick?()
 		currentStore.goToDecksView(withDeck: deck)
 	}

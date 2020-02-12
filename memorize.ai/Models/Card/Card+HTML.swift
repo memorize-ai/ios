@@ -53,6 +53,6 @@ extension Card {
 	}
 	
 	func webView(forSide side: Side) -> WebView {
-		WebView(html: render(side: side), baseURL: WEB_VIEW_BASE_URL)
+		.init(html: render(side: side), baseURL: WEB_VIEW_BASE_URL)
 	}
 }

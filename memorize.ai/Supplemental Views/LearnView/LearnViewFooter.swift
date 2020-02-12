@@ -1,4 +1,5 @@
 import SwiftUI
+import Audio
 
 struct LearnViewFooter: View {
 	@EnvironmentObject var currentStore: CurrentStore
@@ -38,7 +39,7 @@ struct LearnViewFooter: View {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
 					self.ratingButton(forRating: rating) {
 						self.rateCurrentCard(rating, self.currentStore.user)
-						playHaptic()
+						Audio.impact()
 					}
 				}
 			}

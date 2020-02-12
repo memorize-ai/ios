@@ -33,15 +33,6 @@ func popUpWithAnimation(body: () -> Void) {
 	withAnimation(.easeIn(duration: 0.15), body)
 }
 
-func playHaptic(
-	_ style: UIImpactFeedbackGenerator.FeedbackStyle = .medium,
-	handler: (UIImpactFeedbackGenerator) -> Void = { $0.impactOccurred() }
-) {
-	let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
-	impactFeedbackGenerator.prepare()
-	handler(impactFeedbackGenerator)
-}
-
 func share(
 	items: [Any],
 	excludedActivityTypes: [UIActivity.ActivityType]? = nil

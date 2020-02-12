@@ -1,4 +1,5 @@
 import SwiftUI
+import Audio
 
 struct MarketDeckViewRatings: View {
 	@EnvironmentObject var deck: Deck
@@ -50,7 +51,7 @@ struct MarketDeckViewRatings: View {
 	
 	func tappableStar(stars: Int) -> some View {
 		Button(action: {
-			playHaptic()
+			Audio.impact()
 			
 			_ = self.rating == stars
 				? self.deck.removeRating(forUser: self.currentUser)

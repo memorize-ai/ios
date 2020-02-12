@@ -1,10 +1,11 @@
 import SwiftUI
 import FirebaseAnalytics
+import Audio
 
 struct PopUp<Content: View>: View {
 	@Binding var isShowing: Bool {
 		didSet {
-			playHaptic()
+			Audio.impact()
 		}
 	}
 	
