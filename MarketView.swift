@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct MarketView: View {
 	static let deckCellWidth: CGFloat = 165
@@ -15,22 +16,22 @@ struct MarketView: View {
 	@State var isDeckSelected = false
 	
 	var grid: some View {
-		Grid(
-			elements: model.searchResults.map { deck in
-				DeckCellWithGetButton(
-					deck: deck,
-					user: currentStore.user,
-					width: Self.deckCellWidth
-				)
-				.onTapGesture {
-					self.selectedDeck = deck
-					self.isDeckSelected = true
-				}
-			},
+		QGrid(
+			model.searchResults,
 			columns: Self.numberOfColumns,
-			horizontalSpacing: Self.horizontalCellSpacing,
-			verticalSpacing: Self.verticalCellSpacing
-		)
+			vSpacing: Self.verticalCellSpacing,
+			hSpacing: Self.horizontalCellSpacing
+		) { deck in
+			DeckCellWithGetButton(
+				deck: deck,
+				user: self.currentStore.user,
+				width: Self.deckCellWidth
+			)
+			.onTapGesture {
+				self.selectedDeck = deck
+				self.isDeckSelected = true
+			}
+		}
 		.frame(maxWidth: SCREEN_SIZE.width - Self.horizontalPadding * 2)
 	}
 	
@@ -47,7 +48,10 @@ struct MarketView: View {
 						MarketViewTopButtons()
 					}
 					.padding(.horizontal, Self.horizontalPadding)
-					ScrollView(showsIndicators: false) {
+					if self.model.searchResultsLoadingState.isLoading {
+						ActivityIndicator(color: .white)
+						Spacer()
+					} else {
 						self.grid
 					}
 				}
@@ -60,7 +64,9 @@ struct MarketView: View {
 				}
 			}
 		}
-		.onAppear(perform: self.model.loadSearchResults)
+		.onAppear {
+			self.model.loadSearchResults()
+		}
 	}
 }
 

@@ -24,7 +24,9 @@ struct MarketViewSortPopUp: View {
 		PopUp(
 			isShowing: $model.isSortPopUpShowing,
 			contentHeight: 50 * 7 + 6,
-			onHide: model.loadSearchResults
+			onHide: {
+				self.model.loadSearchResults(force: true)
+			}
 		) {
 			Group {
 				button(forAlgorithm: .recommended)

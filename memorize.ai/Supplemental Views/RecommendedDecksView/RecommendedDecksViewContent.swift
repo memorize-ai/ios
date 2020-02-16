@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct RecommendedDecksViewContent: View {
 	static let deckCellWidth: CGFloat = 165
@@ -12,23 +13,21 @@ struct RecommendedDecksViewContent: View {
 	@ObservedObject var model = RecommendedDecksViewModel()
 	
 	var body: some View {
-		ScrollView(showsIndicators: false) {
-			Grid(
-				elements: model.decks.map { deck in
-					DeckCellWithGetButton(
-						deck: deck,
-						user: currentStore.user,
-						width: Self.deckCellWidth,
-						shouldManuallyModifyDecks: true,
-						shouldShowRemoveAlert: false
-					)
-				},
-				columns: Self.numberOfColumns,
-				horizontalSpacing: Self.horizontalCellSpacing,
-				verticalSpacing: Self.verticalCellSpacing
+		QGrid(
+			model.decks,
+			columns: Self.numberOfColumns,
+			vSpacing: Self.verticalCellSpacing,
+			hSpacing: Self.horizontalCellSpacing
+		) { deck in
+			DeckCellWithGetButton(
+				deck: deck,
+				user: self.currentStore.user,
+				width: Self.deckCellWidth,
+				shouldManuallyModifyDecks: true,
+				shouldShowRemoveAlert: false
 			)
-			.frame(maxWidth: SCREEN_SIZE.width - 32)
 		}
+		.frame(maxWidth: SCREEN_SIZE.width - 32)
 		.onAppear {
 			self.model.loadDecks(
 				topics: self.currentStore.user.interests

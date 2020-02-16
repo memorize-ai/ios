@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct PublishDeckViewContentBox: View {
 	static let topicCellSpacing: CGFloat = 8
@@ -89,20 +90,27 @@ struct PublishDeckViewContentBox: View {
 							.foregroundColor(.darkRed)
 							.alignment(.leading)
 					}
-					Grid(
-						elements: currentStore.topics.map { topic in
-							TopicCell(
-								topic: topic,
-								isSelected: model.isTopicSelected(topic)
-							) {
-								self.model.toggleTopicSelect(topic)
-							}
-						},
+					QGrid(
+						currentStore.topics,
 						columns: Self.numberOfTopicColumns,
-						horizontalSpacing: Self.topicCellSpacing,
-						verticalSpacing: Self.topicCellSpacing
-					)
+						vSpacing: Self.topicCellSpacing,
+						hSpacing: Self.topicCellSpacing,
+						isScrollable: false
+					) { topic in
+						TopicCell(
+							topic: topic,
+							isSelected: self.model.isTopicSelected(topic)
+						) {
+							self.model.toggleTopicSelect(topic)
+						}
+					}
 					.frame(maxWidth: maxWidth)
+					.frame(height: heightOfGrid(
+						columns: Self.numberOfTopicColumns,
+						numberOfCells: currentStore.topics.count,
+						cellHeight: TopicCell.dimension,
+						spacing: Self.topicCellSpacing
+					))
 				}
 				.padding(.top, 12)
 			}

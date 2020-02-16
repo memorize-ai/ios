@@ -77,3 +77,15 @@ func showAlert(
 		alert.addAction(.init(title: "OK", style: .default))
 	}
 }
+
+func heightOfGrid(
+	columns: Int,
+	numberOfCells: Int,
+	cellHeight: CGFloat,
+	spacing: CGFloat
+) -> CGFloat {
+	let count = CGFloat(
+		numberOfCells / columns + min(numberOfCells % columns, 1)
+	)
+	return cellHeight * count + spacing * (count - 1)
+}

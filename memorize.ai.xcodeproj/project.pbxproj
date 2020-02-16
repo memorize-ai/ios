@@ -19,8 +19,6 @@
 		4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D99E2371EDD200FE8E5E /* SideBar.swift */; };
 		4D16D9A22371F55600FE8E5E /* DeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A12371F55600FE8E5E /* DeckRow.swift */; };
 		4D16D9A623723A6200FE8E5E /* SideBarTopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16D9A523723A6200FE8E5E /* SideBarTopGradient.swift */; };
-		4D184D93236975C000A84998 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D91236975C000A84998 /* Grid.swift */; };
-		4D184D94236975C100A84998 /* GridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D184D92236975C000A84998 /* GridColumn.swift */; };
 		4D1F9B19233EBF2200693571 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B17233EBF2200693571 /* README.md */; };
 		4D1F9B1A233EBF2200693571 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D1F9B18233EBF2200693571 /* LICENSE */; };
 		4D1F9B23233ECA0E00693571 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B22233ECA0E00693571 /* User.swift */; };
@@ -154,6 +152,7 @@
 		4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
+		4D79330223F9FFDA009BB013 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 4D79330123F9FFDA009BB013 /* QGrid */; };
 		4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444A8236B81980043298C /* EmptyDeckCell.swift */; };
 		4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */; };
 		4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AC236BFE080043298C /* DocumentSnapshot.swift */; };
@@ -332,8 +331,6 @@
 		4D16D99E2371EDD200FE8E5E /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		4D16D9A12371F55600FE8E5E /* DeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckRow.swift; sourceTree = "<group>"; };
 		4D16D9A523723A6200FE8E5E /* SideBarTopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTopGradient.swift; sourceTree = "<group>"; };
-		4D184D91236975C000A84998 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		4D184D92236975C000A84998 /* GridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumn.swift; sourceTree = "<group>"; };
 		4D1F9B0B233E83D600693571 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		4D1F9B0C233E83D600693571 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D1F9B17233EBF2200693571 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -626,6 +623,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D79330223F9FFDA009BB013 /* QGrid in Frameworks */,
 				4D86E2FB23EC893400073998 /* Audio in Frameworks */,
 				4DF4595623999E6500A78ADF /* TextView in Frameworks */,
 				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
@@ -705,15 +703,6 @@
 				4DB8A67C2361A646008090BB /* LogInViewContentBox.swift */,
 			);
 			path = LogInView;
-			sourceTree = "<group>";
-		};
-		4D184D90236975B100A84998 /* Grid */ = {
-			isa = PBXGroup;
-			children = (
-				4D184D91236975C000A84998 /* Grid.swift */,
-				4D184D92236975C000A84998 /* GridColumn.swift */,
-			);
-			path = Grid;
 			sourceTree = "<group>";
 		};
 		4D1F9B1B233EC5E400693571 /* Models */ = {
@@ -1310,7 +1299,6 @@
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
 			isa = PBXGroup;
 			children = (
-				4D184D90236975B100A84998 /* Grid */,
 				4D5C404A23C9041B00511B7C /* Graph */,
 				4D9AAEBC2385276B00C85EC2 /* User */,
 				4DFA0DC2236A8CBE0000CA7A /* Deck */,
@@ -1421,6 +1409,7 @@
 				4DB9FF4E2396D7D300B8DD38 /* HTML */,
 				4DF4595523999E6500A78ADF /* TextView */,
 				4D86E2FA23EC893400073998 /* Audio */,
+				4D79330123F9FFDA009BB013 /* QGrid */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -1506,6 +1495,7 @@
 				4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */,
 				4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */,
 				4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */,
+				4D79330023F9FFDA009BB013 /* XCRemoteSwiftPackageReference "QGrid" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -1812,7 +1802,6 @@
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */,
 				4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */,
-				4D184D93236975C000A84998 /* Grid.swift in Sources */,
 				4D2C7E6323AAB20E0061B48D /* UIImage.swift in Sources */,
 				4D8B2EAF2398BDF200EF040B /* MarketDeckViewInfo.swift in Sources */,
 				4D3FE57E23BC74A60010FFD3 /* EditCardViewTopControls.swift in Sources */,
@@ -1919,7 +1908,6 @@
 				4D9D933823E0CFF80008B614 /* ReviewRecapViewCardPerformanceRowCardCell.swift in Sources */,
 				4D1F9B2B233EDEB200693571 /* FirebaseFirestore.swift in Sources */,
 				4D9D932823E000E70008B614 /* ReviewRecapViewDeckPerformanceRow.swift in Sources */,
-				4D184D94236975C100A84998 /* GridColumn.swift in Sources */,
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
 				4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */,
 				4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */,
@@ -2276,6 +2264,14 @@
 				kind = branch;
 			};
 		};
+		4D79330023F9FFDA009BB013 /* XCRemoteSwiftPackageReference "QGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/QGrid";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kenmueller/Audio.git";
@@ -2339,6 +2335,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
+		};
+		4D79330123F9FFDA009BB013 /* QGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D79330023F9FFDA009BB013 /* XCRemoteSwiftPackageReference "QGrid" */;
+			productName = QGrid;
 		};
 		4D86E2FA23EC893400073998 /* Audio */ = {
 			isa = XCSwiftPackageProductDependency;

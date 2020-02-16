@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct MarketViewFilterPopUpTopicsContent: View {
 	static let availableWidth = SCREEN_SIZE.width - 51
@@ -16,23 +17,21 @@ struct MarketViewFilterPopUpTopicsContent: View {
 	}
 	
 	var body: some View {
-		ScrollView(showsIndicators: false) {
-			Grid(
-				elements: currentStore.topics.map { topic in
-					TopicCell(
-						topic: topic,
-						isSelected: model.isTopicSelected(topic)
-					) {
-						self.topicCellToggleSelect(forTopic: topic)
-					}
-				},
-				columns: Self.numberOfColumns,
-				horizontalSpacing: Self.cellSpacing,
-				verticalSpacing: Self.cellSpacing
-			)
-			.frame(maxWidth: .infinity)
-			.padding(.top, 8)
+		QGrid(
+			currentStore.topics,
+			columns: Self.numberOfColumns,
+			vSpacing: Self.cellSpacing,
+			hSpacing: Self.cellSpacing
+		) { topic in
+			TopicCell(
+				topic: topic,
+				isSelected: self.model.isTopicSelected(topic)
+			) {
+				self.topicCellToggleSelect(forTopic: topic)
+			}
 		}
+		.frame(maxWidth: .infinity)
+		.padding(.top, 8)
 	}
 }
 

@@ -7,30 +7,24 @@ struct HomeViewTopControls: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	var body: some View {
-		HStack(spacing: 20) {
+		ZStack {
 			ShowSideBarButton {
 				HamburgerMenu()
 			}
-			Button(action: {
-				self.currentStore.mainTabViewSelection = .market
-			}) {
-				CustomRectangle(
-					background: Self.searchBarBackgroundColor,
-					cornerRadius: 24
-				) {
-					HStack(spacing: 10) {
-						Image.whiteMagnifyingGlass
-							.resizable()
-							.renderingMode(.original)
-							.aspectRatio(contentMode: .fit)
-							.frame(width: 14)
-						Text("Anything")
-							.font(.muli(.regular, size: 17))
-							.foregroundColor(.white)
-						Spacer()
+			.alignment(.leading)
+			PublishDeckViewNavigationLink {
+				CustomRectangle(background: Color.white) {
+					HStack(spacing: 3) {
+						Image(systemName: .plus)
+							.font(Font.title.weight(.bold))
+							.scaleEffect(0.65)
+						Text("CREATE DECK")
+							.font(.muli(.extraBold, size: 16))
 					}
-					.padding(.horizontal)
-					.frame(height: 48)
+					.foregroundColor(.darkBlue)
+					.padding(.leading, 12)
+					.padding(.trailing)
+					.padding(.vertical, 10)
 				}
 			}
 		}

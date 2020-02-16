@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct ProfileViewMyInterestsSection: View {
 	static let cellSpacing: CGFloat = 8
@@ -25,26 +26,35 @@ struct ProfileViewMyInterestsSection: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				Grid(
-					elements: currentStore.topics.map { topic in
-						TopicCell(
-							topic: topic,
-							isSelected: user.interests.contains(topic.id)
-						) {
-							_ = self.user.interests.contains(topic.id)
-								? self.user.removeInterest(topicId: topic.id)
-								: self.user.addInterest(topicId: topic.id)
-						}
-					},
+				QGrid(
+					currentStore.topics,
 					columns: Self.numberOfColumns,
-					horizontalSpacing: Self.cellSpacing,
-					verticalSpacing: Self.cellSpacing
-				)
+					vSpacing: Self.cellSpacing,
+					hSpacing: Self.cellSpacing,
+					isScrollable: false
+				) { topic in
+					TopicCell(
+						topic: topic,
+						isSelected: self.user.interests.contains(topic.id)
+					) {
+						_ = self.user.interests.contains(topic.id)
+							? self.user.removeInterest(topicId: topic.id)
+							: self.user.addInterest(topicId: topic.id)
+					}
+				}
 				.frame(width:
 					.init(Self.numberOfColumns) * TopicCell.dimension +
 					.init(Self.numberOfColumns - 1) * Self.cellSpacing
 				)
-				.frame(width: SCREEN_SIZE.width - 8 * 2)
+				.frame(
+					width: SCREEN_SIZE.width - 8 * 2,
+					height: heightOfGrid(
+						columns: Self.numberOfColumns,
+						numberOfCells: currentStore.topics.count,
+						cellHeight: TopicCell.dimension,
+						spacing: Self.cellSpacing
+					)
+				)
 				.padding(.vertical, 8)
 			}
 		}

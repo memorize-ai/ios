@@ -31,7 +31,8 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func loadImage() -> Self {
+	func loadImage(file: String = #file, line: Int = #line) -> Self {
+		print(file, line)
 		guard imageLoadingState.isNone else { return self }
 		imageLoadingState.startLoading()
 		storage.child("topics/\(id)").getData().done { data in

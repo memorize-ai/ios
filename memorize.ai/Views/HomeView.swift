@@ -14,27 +14,15 @@ struct HomeView: View {
 					HomeViewTopControls()
 						.padding(.horizontal, 23)
 					ScrollView {
-						PublishDeckViewNavigationLink {
-							CustomRectangle(background: Color.white) {
-								HStack(spacing: 3) {
-									Image(systemName: .plus)
-										.font(Font.title.weight(.bold))
-										.scaleEffect(0.65)
-									Text("CREATE DECK")
-										.font(.muli(.extraBold, size: 16))
-								}
-								.foregroundColor(.darkBlue)
-								.padding(.leading, 12)
-								.padding(.trailing)
-								.padding(.vertical, 10)
-							}
+						VStack {
+							HomeViewMyDecksSection(
+								currentUser: self.currentStore.user
+							)
+							.padding(.top)
+							HomeViewRecommendedDecksSection()
+								.padding(.top, 5)
 						}
-						HomeViewMyDecksSection(
-							currentUser: self.currentStore.user
-						)
-						.padding(.top)
-						HomeViewRecommendedDecksSection()
-						.padding(.top, 5)
+						.frame(maxWidth: .infinity)
 					}
 				}
 			}

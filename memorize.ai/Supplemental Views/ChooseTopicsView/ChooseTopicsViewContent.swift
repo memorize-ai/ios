@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct ChooseTopicsViewContent: View {
 	static let cellSpacing: CGFloat = 8
@@ -13,22 +14,20 @@ struct ChooseTopicsViewContent: View {
 	}
 	
 	var body: some View {
-		ScrollView(showsIndicators: false) {
-			Grid(
-				elements: currentStore.topics.map { topic in
-					TopicCell(
-						topic: topic,
-						isSelected: model.isTopicSelected(topic)
-					) {
-						self.model.toggleTopicSelect(topic)
-					}
-				},
-				columns: Self.numberOfColumns,
-				horizontalSpacing: Self.cellSpacing,
-				verticalSpacing: Self.cellSpacing
-			)
-			.frame(maxWidth: SCREEN_SIZE.width - 32)
+		QGrid(
+			currentStore.topics,
+			columns: Self.numberOfColumns,
+			vSpacing: Self.cellSpacing,
+			hSpacing: Self.cellSpacing
+		) { topic in
+			TopicCell(
+				topic: topic,
+				isSelected: self.model.isTopicSelected(topic)
+			) {
+				self.model.toggleTopicSelect(topic)
+			}
 		}
+		.frame(maxWidth: SCREEN_SIZE.width - 32)
 		.onAppear {
 			self.currentStore.loadAllTopics()
 		}

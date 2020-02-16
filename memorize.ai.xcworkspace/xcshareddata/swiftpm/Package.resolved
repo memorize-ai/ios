@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "QGrid",
+        "repositoryURL": "https://github.com/kenmueller/QGrid",
+        "state": {
+          "branch": "master",
+          "revision": "d76328f7b4269a79c58a2d84ffaf49af543cb698",
+          "version": null
+        }
+      },
+      {
         "package": "SwiftUIX",
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {

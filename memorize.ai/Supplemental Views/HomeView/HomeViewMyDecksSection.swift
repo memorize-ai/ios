@@ -3,6 +3,17 @@ import SwiftUI
 struct HomeViewMyDecksSection: View {
 	@ObservedObject var currentUser: User
 	
+	var decks: [Deck] {
+		currentUser.decks.sorted {
+			guard
+				let a = $0.userData?.numberOfDueCards,
+				let b = $1.userData?.numberOfDueCards
+			else { return true }
+			
+			return a > b
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			if !currentUser.decks.isEmpty {
@@ -19,7 +30,7 @@ struct HomeViewMyDecksSection: View {
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack(alignment: .top, spacing: 8) {
-						ForEach(currentUser.decks) { deck in
+						ForEach(decks) { deck in
 							OwnedDeckCell(
 								deck: deck,
 								imageBackgroundColor: Color.lightGrayBackground.opacity(0.5)

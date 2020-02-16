@@ -82,7 +82,8 @@ final class MarketViewModel: ViewModel {
 			)
 	}
 	
-	func loadSearchResults() {
+	func loadSearchResults(force: Bool = false) {
+		guard force || searchResultsLoadingState.isNone else { return }
 		searchResultsLoadingState.startLoading()
 		searchResultsPromise.done { decks in
 			self.searchResults = decks.map { $0.loadImage() }
