@@ -5,7 +5,8 @@ import PromiseKit
 import LoadingState
 
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
-	static let maxNumberOfPreviewCards = 20
+	static let DEFAULT_IMAGE = Image("DefaultDeckImage")
+	static let MAX_NUMBER_OF_PREVIEW_CARDS = 20
 	
 	static var cache = [String: Deck]()
 	static var imageCache = [String: UIImage]()
@@ -402,7 +403,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		documentReference
 			.collection("cards")
 			.order(by: "viewCount")
-			.limit(to: Self.maxNumberOfPreviewCards)
+			.limit(to: Self.MAX_NUMBER_OF_PREVIEW_CARDS)
 			.addSnapshotListener { snapshot, error in
 				guard error == nil, let documentChanges = snapshot?.documentChanges else {
 					self.previewCardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)

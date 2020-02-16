@@ -15,8 +15,6 @@ struct DeckCell<Content: View>: View {
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
-			borderColor: .lightGray,
-			borderWidth: deck.hasImage ? 0 : 1.5,
 			cornerRadius: 8
 		) {
 			VStack {
@@ -41,7 +39,10 @@ struct DeckCell<Content: View>: View {
 								.aspectRatio(contentMode: .fill)
 						}
 					} else {
-						Color.lightGrayBackground
+						Deck.DEFAULT_IMAGE
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fill)
 					}
 				}
 				.cornerRadius(8, corners: [.topLeft, .topRight])

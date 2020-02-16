@@ -29,15 +29,11 @@ struct HomeView: View {
 								.padding(.vertical, 10)
 							}
 						}
-						.padding(.bottom, 6)
-						HomeViewMyInterestsSection(
-							currentUser: self.currentStore.user
-						)
-						HomeViewRecommendedDecksSection()
-							.padding(.top)
 						HomeViewMyDecksSection(
 							currentUser: self.currentStore.user
 						)
+						.padding(.top)
+						HomeViewRecommendedDecksSection()
 						.padding(.top, 5)
 					}
 				}

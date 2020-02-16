@@ -38,8 +38,6 @@ struct OwnedDeckCell: View {
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
-			borderColor: .lightGray,
-			borderWidth: 1.5,
 			cornerRadius: 8
 		) {
 			VStack {
@@ -65,7 +63,11 @@ struct OwnedDeckCell: View {
 								.frame(height: width * Self.imageAspectRatio)
 						}
 					} else {
-						imageBackgroundColor
+						Deck.DEFAULT_IMAGE
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fill)
+							.frame(height: width * Self.imageAspectRatio)
 					}
 				}
 				.cornerRadius(8, corners: [.topLeft, .topRight])

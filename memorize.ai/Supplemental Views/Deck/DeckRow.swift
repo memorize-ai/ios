@@ -57,7 +57,10 @@ struct DeckRow: View {
 							.aspectRatio(contentMode: .fill)
 					}
 				} else {
-					Text("")
+					Deck.DEFAULT_IMAGE
+						.resizable()
+						.renderingMode(.original)
+						.aspectRatio(contentMode: .fill)
 				}
 			}
 			.frame(width: 40, height: 40)
