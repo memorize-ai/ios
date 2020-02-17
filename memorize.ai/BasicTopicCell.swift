@@ -8,30 +8,13 @@ struct BasicTopicCell: View {
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			Group {
-				if topic.image == nil {
-					Color.lightGrayBackground
-					if topic.imageLoadingState.isLoading {
-						ActivityIndicator(
-							color: Color.black.opacity(0.2),
-							thickness: 1.5
-						)
-					} else {
-						Image(systemName: .exclamationmarkTriangle)
-							.resizable()
-							.scaleEffect(0.25)
-							.foregroundColor(.darkGray)
-					}
-				} else {
-					topic.image?
-						.resizable()
-						.renderingMode(.original)
-						.scaledToFill()
-				}
+				topic.image
+					.resizable()
+					.renderingMode(.original)
+					.scaledToFill()
 				LinearGradient(
 					gradient: .init(colors: [
-						Color.black.opacity(
-							topic.image == nil ? 0.25 : 0.1
-						),
+						Color.black.opacity(0.1),
 						Color.black.opacity(0.6)
 					]),
 					startPoint: .top,
@@ -51,32 +34,20 @@ struct BasicTopicCell: View {
 				.frame(width: dimension)
 		}
 		.cornerRadius(5)
-		.onAppear {
-			self.topic.loadImage()
-		}
 	}
 }
 
 #if DEBUG
 struct BasicTopicCell_Previews: PreviewProvider {
 	static var previews: some View {
-		VStack {
-			BasicTopicCell(
-				topic: .init(
-					id: "0",
-					name: "Math"
-				),
-				dimension: 109
-			)
-			BasicTopicCell(
-				topic: .init(
-					id: "0",
-					name: "Geography",
-					image: .init("GeographyTopic")
-				),
-				dimension: 109
-			)
-		}
+		BasicTopicCell(
+			topic: .init(
+				id: "0",
+				name: "English",
+				category: .language
+			),
+			dimension: 109
+		)
 	}
 }
 #endif

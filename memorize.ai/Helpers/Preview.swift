@@ -309,22 +309,22 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		.init(
 			id: "0",
 			name: "Math",
-			image: .init("HTMLTopic")
+			category: .math
 		),
 		.init(
 			id: "1",
 			name: "Geometry",
-			image: .init("GeographyTopic")
+			category: .math
 		),
 		.init(
 			id: "2",
 			name: "History",
-			image: .init("HTMLTopic")
+			category: .math
 		),
 		.init(
 			id: "3",
 			name: "Web Dev",
-			image: .init("GeographyTopic")
+			category: .math
 		)
 	]
 	currentStore.recommendedDecks = [

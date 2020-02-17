@@ -9,11 +9,7 @@ struct LearnRecapViewTopControls: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			NavigationLink(
-				destination: MainTabView(currentUser: currentStore.user)
-					.environmentObject(currentStore)
-					.navigationBarRemoved()
-			) {
+			NavigationLink(destination: currentStore.rootDestination) {
 				CustomRectangle(
 					background: Color.transparent,
 					borderColor: .transparentLightGray,

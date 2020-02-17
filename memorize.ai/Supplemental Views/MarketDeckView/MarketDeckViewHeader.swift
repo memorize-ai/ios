@@ -48,32 +48,56 @@ struct MarketDeckViewHeader: View {
 					.foregroundColor(Color.white.opacity(0.7))
 					.padding(.top, -5)
 					.padding(.bottom, 5)
-					Button(action: getDeck) {
-						CustomRectangle(
-							background: hasDeck
-								? Color.transparent
-								: Color.white,
-							borderColor: Color.white.opacity(0.3),
-							borderWidth: hasDeck ? 1.5 : 0
-						) {
-							Group {
-								if deck.getLoadingState.isLoading {
-									ActivityIndicator(color: .extraPurple)
-								} else {
-									Text(hasDeck ? "REMOVE" : "GET")
+					HStack {
+						if hasDeck {
+							NavigationLink(
+//								action: {
+//									self.currentStore.goToDecksView(
+//										withDeck: self.deck
+//									)
+//								},
+								destination: currentStore.rootDestination
+							) {
+								CustomRectangle(background: Color.white) {
+									Text("OPEN")
 										.font(.muli(.bold, size: 15))
-										.foregroundColor(
-											hasDeck
-												? Color.white.opacity(0.6)
-												: .extraPurple
-										)
+										.foregroundColor(.extraPurple)
+										.frame(maxWidth: 84)
+										.frame(height: 32)
 								}
 							}
-							.frame(maxWidth: 84)
-							.frame(height: 32)
 						}
-						.animation(.easeIn(duration: 0.3))
+						Button(action: getDeck) {
+							CustomRectangle(
+								background: hasDeck
+									? Color.transparent
+									: Color.white,
+								borderColor: Color.white.opacity(0.3),
+								borderWidth: hasDeck ? 1.5 : 0
+							) {
+								Group {
+									if deck.getLoadingState.isLoading {
+										ActivityIndicator(
+											color: hasDeck
+												? Color.white.opacity(0.3)
+												: .extraPurple
+										)
+									} else {
+										Text(hasDeck ? "REMOVE" : "GET")
+											.font(.muli(.bold, size: 15))
+											.foregroundColor(
+												hasDeck
+													? Color.white.opacity(0.6)
+													: .extraPurple
+											)
+									}
+								}
+								.frame(maxWidth: 84)
+								.frame(height: 32)
+							}
+						}
 					}
+					.animation(.easeIn(duration: 0.3))
 				}
 			}
 		}

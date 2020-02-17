@@ -13,30 +13,13 @@ struct TopicCell: View {
 			ZStack(alignment: .topTrailing) {
 				ZStack(alignment: .bottom) {
 					Group {
-						if topic.image == nil {
-							Color.lightGrayBackground
-							if topic.imageLoadingState.isLoading {
-								ActivityIndicator(
-									color: Color.black.opacity(0.2),
-									thickness: 1.5
-								)
-							} else {
-								Image(systemName: .exclamationmarkTriangle)
-									.resizable()
-									.scaleEffect(0.25)
-									.foregroundColor(.darkGray)
-							}
-						} else {
-							topic.image?
-								.resizable()
-								.renderingMode(.original)
-								.scaledToFill()
-						}
+						topic.image
+							.resizable()
+							.renderingMode(.original)
+							.scaledToFill()
 						LinearGradient(
 							gradient: .init(colors: [
-								Color.black.opacity(
-									topic.image == nil ? 0.25 : 0.1
-								),
+								Color.black.opacity(0.1),
 								Color.black.opacity(0.6)
 							]),
 							startPoint: .top,
@@ -57,49 +40,20 @@ struct TopicCell: View {
 			}
 			.cornerRadius(5)
 		}
-		.onAppear {
-			self.topic.loadImage()
-		}
 	}
 }
 
 #if DEBUG
 struct TopicCell_Previews: PreviewProvider {
 	static var previews: some View {
-		let failedTopic = Topic(
-			id: "0",
-			name: "Geography",
-			image: .init("GeographyTopic")
-		)
-		failedTopic.imageLoadingState.fail(message: "Self-invoked")
-		return VStack(spacing: 20) {
-			TopicCell(
-				topic: failedTopic,
-				isSelected: false
-			) {}
-			TopicCell(
-				topic: .init(
-					id: "0",
-					name: "Geography"
-				),
-				isSelected: true
-			) {}
-			TopicCell(
-				topic: .init(
-					id: "0",
-					name: "Geography",
-					image: .init("GeographyTopic")
-				),
-				isSelected: false
-			) {}
-			TopicCell(
-				topic: .init(
-					id: "0",
-					name: "Geography"
-				),
-				isSelected: true
-			) {}
-		}
+		TopicCell(
+			topic: .init(
+				id: "0",
+				name: "English",
+				category: .language
+			),
+			isSelected: true
+		) {}
 	}
 }
 #endif

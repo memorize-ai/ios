@@ -60,10 +60,16 @@ final class CurrentStore: ObservableObject {
 		return acc
 	}
 	
+	var rootDestination: some View {
+		MainTabView(currentUser: user)
+			.environmentObject(self)
+			.navigationBarRemoved()
+	}
+	
 	@discardableResult
 	func initializeIfNeeded() -> Self {
 		loadUser()
-		loadAllTopics(withImages: false)
+		loadAllTopics()
 		user.loadDecks()
 		return self
 	}
@@ -114,7 +120,7 @@ final class CurrentStore: ObservableObject {
 	}
 	
 	@discardableResult
-	func loadAllTopics(withImages loadImages: Bool = true) -> Self {
+	func loadAllTopics() -> Self {
 		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()
 		firestore.collection("topics").addSnapshotListener { snapshot, error in
@@ -130,7 +136,13 @@ final class CurrentStore: ObservableObject {
 					if (self.topics.contains { $0.id == topicId }) { continue }
 					let topic = Topic(
 						id: topicId,
-						name: document.get("name") as? String ?? "Unknown"
+						name: document.get("name") as? String ?? "Unknown",
+						category: {
+							guard let categoryString = document.get("category") as? String else {
+								return .language
+							}
+							return Topic.Category(rawValue: categoryString) ?? .language
+						}()
 					)
 					self.topics.append(topic.cache())
 				case .modified:

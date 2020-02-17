@@ -51,20 +51,20 @@ struct ChooseTopicsView_Previews: PreviewProvider {
 			.environmentObject(CurrentStore(
 				user: currentUser,
 				topics: [
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML"),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography"),
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography"),
-					.init(id: "0", name: "HTML"),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML", image: .init("HTMLTopic")),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic")),
-					.init(id: "0", name: "HTML"),
-					.init(id: "1", name: "Geography", image: .init("GeographyTopic"))
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language),
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language),
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language),
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language),
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language),
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language),
+					.init(id: "0", name: "HTML", category: .language),
+					.init(id: "1", name: "Geography", category: .language)
 				]
 			))
 	}

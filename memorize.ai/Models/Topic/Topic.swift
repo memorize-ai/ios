@@ -4,53 +4,75 @@ import PromiseKit
 import LoadingState
 
 final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
+	enum Category: String {
+		case language
+		case code
+		case science
+		case math
+		case art
+		case prep
+		case politics
+	}
+	
 	static var cache = [String: Topic]()
 	
 	let id: String
 	
 	@Published var name: String
-	@Published var image: Image?
+	@Published var category: Category
+	@Published var image: Image
 	
-	@Published var imageLoadingState = LoadingState()
-	
-	init(
-		id: String,
-		name: String,
-		image: Image? = nil
-	) {
+	init(id: String, name: String, category: Category) {
 		self.id = id
 		self.name = name
-		self.image = image
+		self.category = category
+		
+		if let imageFromName = UIImage(named: name) {
+			image = .init(uiImage: imageFromName)
+		} else {
+			image = .init({
+				switch category {
+				case .language:
+					return "Language"
+				case .code:
+					return "Code"
+				case .science:
+					return "Science"
+				case .math:
+					return "Math"
+				case .art:
+					return "Literature"
+				case .prep:
+					return "Competition Prep"
+				case .politics:
+					return "Politics"
+				}
+			}())
+		}
 	}
 	
 	convenience init(snapshot: DocumentSnapshot) {
 		self.init(
 			id: snapshot.documentID,
-			name: snapshot.get("name") as? String ?? "Unknown"
+			name: snapshot.get("name") as? String ?? "Unknown",
+			category: {
+				guard let category = snapshot.get("category") as? String else {
+					return .language
+				}
+				return Category(rawValue: category) ?? .language
+			}()
 		)
-	}
-	
-	@discardableResult
-	func loadImage(file: String = #file, line: Int = #line) -> Self {
-		print(file, line)
-		guard imageLoadingState.isNone else { return self }
-		imageLoadingState.startLoading()
-		storage.child("topics/\(id)").getData().done { data in
-			guard let image = Image(data: data) else {
-				self.imageLoadingState.fail(message: "Malformed data")
-				return
-			}
-			self.image = image
-			self.imageLoadingState.succeed()
-		}.catch { error in
-			self.imageLoadingState.fail(error: error)
-		}
-		return self
 	}
 	
 	@discardableResult
 	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
 		name = snapshot.get("name") as? String ?? name
+		category = {
+			guard let categoryString = snapshot.get("category") as? String else {
+				return category
+			}
+			return Category(rawValue: categoryString) ?? category
+		}()
 		return self
 	}
 	

@@ -57,11 +57,25 @@ struct PublishDeckViewContentBox: View {
 					.cornerRadius(5)
 					.clipped()
 				}
+				Text("REQUIRED")
+					.font(.muli(.bold, size: 13))
+					.foregroundColor(
+						model.name.isTrimmedEmpty
+							? .darkBlue
+							: .neonGreen
+					)
+					.alignment(.leading)
+					.padding(.top, 6)
+					.padding(.bottom, -4)
 				CustomTextField(
 					$model.name,
 					placeholder: "Name (eg. SAT Math Prep)",
 					contentType: .name,
-					capitalization: .words
+					capitalization: .words,
+					borderColor: model.name.isTrimmedEmpty
+						? .lightGrayBorder
+						: .neonGreen,
+					borderWidth: 2
 				)
 				CustomTextField(
 					$model.subtitle,
@@ -70,7 +84,7 @@ struct PublishDeckViewContentBox: View {
 				)
 				Text("Description")
 					.font(.muli(.regular, size: 14))
-					.foregroundColor(Color.darkText.opacity(0.5))
+					.foregroundColor(Color.darkText.opacity(0.7))
 					.alignment(.leading)
 					.padding(.top, 6)
 					.padding(.bottom, -4)
@@ -85,7 +99,7 @@ struct PublishDeckViewContentBox: View {
 				)
 				VStack(spacing: 16) {
 					if model.topics.isEmpty {
-						Text("Warning: Decks need topics to be recommended")
+						Text("If you want your deck to be recommended, you must select relevant topics")
 							.font(.muli(.bold, size: 13))
 							.foregroundColor(.darkRed)
 							.alignment(.leading)
@@ -111,6 +125,8 @@ struct PublishDeckViewContentBox: View {
 						cellHeight: TopicCell.dimension,
 						spacing: Self.topicCellSpacing
 					))
+					.padding(.top, -10)
+					.padding(.bottom, 10)
 				}
 				.padding(.top, 12)
 			}

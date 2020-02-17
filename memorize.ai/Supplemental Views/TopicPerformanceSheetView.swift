@@ -88,8 +88,8 @@ struct TopicPerformanceSheetView_Previews: PreviewProvider {
 			currentUser: PREVIEW_CURRENT_STORE.user,
 			topic: .init(
 				id: "0",
-				name: "Geography",
-				image: .init("GeographyTopic")
+				name: "English",
+				category: .language
 			)
 		)
 		.environmentObject(PREVIEW_CURRENT_STORE)
