@@ -14,6 +14,8 @@ final class AddCardsViewModel: ViewModel {
 	@Published var cardsLoadingState = LoadingState()
 	@Published var publishLoadingState = LoadingState()
 	
+	@Published var canPublish = false
+	
 	var currentCard: Card.Draft?
 	
 	init(deck: Deck, user: User) {
@@ -27,13 +29,23 @@ final class AddCardsViewModel: ViewModel {
 					self.cardDidChange(card)
 				}
 			}
-			self.cards = cards.isEmpty
-				? self.initialCards
-				: cards
+			
+			if cards.isEmpty {
+				self.cards = self.initialCards
+				self.canPublish = false
+			} else {
+				self.cards = cards
+				self.resetCanPublish()
+			}
+			
 			self.cardsLoadingState.succeed()
 		}.catch { error in
 			self.cardsLoadingState.fail(error: error)
 		}
+	}
+	
+	var hasDraft: Bool {
+		!(cards.count == 1 && cards.first?.isEmpty ?? true)
 	}
 	
 	var initialCards: [Card.Draft] {
@@ -44,10 +56,22 @@ final class AddCardsViewModel: ViewModel {
 		return [card]
 	}
 	
+	func resetCanPublish() {
+		for card in cards {
+			if card.isPublishable {
+				canPublish = true
+				return
+			}
+		}
+		canPublish = false
+	}
+	
 	func cardDidChange(_ card: Card.Draft) {
 		_ = card.isEmpty
 			? card.removeDraft(forUser: user)
 			: card.updateDraft(forUser: user)
+		
+		resetCanPublish()
 	}
 	
 	func addCard() {

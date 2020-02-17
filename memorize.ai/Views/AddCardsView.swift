@@ -27,19 +27,44 @@ struct AddCardsView<Destination: View>: View {
 								ForEach(self.model.cards) { card in
 									AddCardsViewCardCell(card: card)
 								}
-								Button(action: self.model.addCard) {
-									CustomRectangle(background: Color.white) {
-										HStack(spacing: 3) {
-											Image(systemName: .plus)
-												.font(Font.title.weight(.bold))
-												.scaleEffect(0.65)
-											Text("ADD CARD")
-												.font(.muli(.extraBold, size: 16))
+								HStack {
+									Button(action: self.model.addCard) {
+										CustomRectangle(background: Color.white) {
+											HStack(spacing: 3) {
+												Image(systemName: .plus)
+													.font(Font.title.weight(.bold))
+													.scaleEffect(0.65)
+												Text("Add card")
+													.font(.muli(.extraBold, size: 16))
+													.shrinks()
+											}
+											.foregroundColor(.darkBlue)
+											.padding(.leading, 12)
+											.padding(.trailing)
+											.padding(.vertical, 10)
 										}
-										.foregroundColor(.darkBlue)
-										.padding(.leading, 12)
-										.padding(.trailing)
-										.padding(.vertical, 10)
+									}
+									Button(action: {
+										popUpWithAnimation {
+											self.model.isRemoveDraftPopUpShowing = true
+										}
+									}) {
+										CustomRectangle(background: Color.white) {
+											HStack(spacing: 7) {
+												Image.redTrashIcon
+													.resizable()
+													.renderingMode(.original)
+													.aspectRatio(contentMode: .fit)
+													.frame(width: 17, height: 17)
+												Text("Remove all")
+													.font(.muli(.extraBold, size: 16))
+													.shrinks()
+											}
+											.foregroundColor(.darkRed)
+											.padding(.leading, 12)
+											.padding(.trailing)
+											.padding(.vertical, 10)
+										}
 									}
 								}
 								.padding(.top, -10)
@@ -50,26 +75,6 @@ struct AddCardsView<Destination: View>: View {
 								withExtraOffset: -(15 + geometry.safeAreaInsets.bottom)
 							)
 						}
-						Button(action: {
-							popUpWithAnimation {
-								self.model.isRemoveDraftPopUpShowing = true
-							}
-						}) {
-							VStack(spacing: 0) {
-								Rectangle()
-									.foregroundColor(.lightGrayLine)
-									.frame(height: 1)
-								ZStack {
-									Color.white
-										.edgesIgnoringSafeArea(.all)
-									Text("Remove draft")
-										.font(.muli(.semiBold, size: 18))
-										.foregroundColor(.darkRed)
-								}
-								.frame(height: 15 + geometry.safeAreaInsets.bottom)
-							}
-						}
-						.edgesIgnoringSafeArea(.all)
 					}
 				}
 				PopUp(
@@ -92,7 +97,11 @@ struct AddCardsView<Destination: View>: View {
 						textColor: .darkRed
 					) {
 						self.model.removeAllDrafts()
-						self.presentationMode.wrappedValue.dismiss()
+						self.model.cards = self.model.initialCards
+						
+						popUpWithAnimation {
+							self.model.isRemoveDraftPopUpShowing = false
+						}
 					}
 				}
 				if self.model.currentCard != nil {

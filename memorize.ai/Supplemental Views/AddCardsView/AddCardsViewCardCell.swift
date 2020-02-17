@@ -4,44 +4,57 @@ import WebView
 struct AddCardsViewCardCell: View {
 	@EnvironmentObject var model: AddCardsViewModel
 	
-	let card: Card.Draft
+	@ObservedObject var card: Card.Draft
 	
-	func headerText(_ text: String) -> some View {
-		Text(text)
-			.font(.muli(.bold, size: 15))
-			.alignment(.leading)
-			.padding(.top, 2)
+	@State var isFrontExpanded = false
+	@State var isBackExpanded = false
+	
+	func editorHeader(text: String, isValid: Bool, isExpanded: Binding<Bool>) -> some View {
+		HStack {
+			Text(text)
+				.foregroundColor(.darkGray)
+			Image(systemName: isValid ? .checkmark : .xmark)
+				.foregroundColor(isValid ? .neonGreen : .darkRed)
+			Spacer()
+			Button(action: {
+				isExpanded.wrappedValue.toggle()
+			}) {
+				Text(isExpanded.wrappedValue ? "Collapse" : "Expand")
+			}
+		}
+		.font(.muli(.bold, size: 15))
+		.padding(.top, 3)
+		.padding(.bottom, -5)
 	}
 	
 	var body: some View {
 		VStack(spacing: 8) {
 			AddCardsViewCardCellTopControls(card: card)
 				.padding(.horizontal, 6)
-			CustomRectangle(
-				background: Color.white
-			) {
+			CustomRectangle(background: Color.white) {
 				VStack {
+					Text("Choose section")
+						.font(.muli(.bold, size: 15))
+						.foregroundColor(.darkGray)
+						.alignment(.leading)
+						.padding(.vertical, -6)
 					AddCardsViewCardCellSection(card: card)
 					Rectangle()
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
-					headerText("FRONT")
+					editorHeader(text: "Front", isValid: !card.front.isTrimmedEmpty, isExpanded: $isFrontExpanded)
 					CKEditor(
-						html: .init(
-							get: { self.card.front },
-							set: { self.card.front = $0 }
-						),
+						html: $card.front,
 						deckId: model.deck.id,
-						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
+						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2,
+						height: isFrontExpanded ? 450 : 250
 					)
-					headerText("BACK")
+					editorHeader(text: "Back", isValid: !card.back.isTrimmedEmpty, isExpanded: $isBackExpanded)
 					CKEditor(
-						html: .init(
-							get: { self.card.back },
-							set: { self.card.back = $0 }
-						),
+						html: $card.back,
 						deckId: model.deck.id,
-						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
+						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2,
+						height: isBackExpanded ? 450 : 250
 					)
 				}
 				.padding()

@@ -7,6 +7,10 @@ struct AddCardsViewCardCellTopControls: View {
 	
 	var body: some View {
 		HStack {
+			Text(Card.stripFormatting(card.front).defaultIfEmpty("New card"))
+				.font(.muli(.bold, size: 15))
+				.foregroundColor(.white)
+				.lineLimit(1)
 			Spacer()
 			if card.publishLoadingState.isLoading {
 				ActivityIndicator(color: .white)

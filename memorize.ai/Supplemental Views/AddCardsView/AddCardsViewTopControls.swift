@@ -42,7 +42,9 @@ struct AddCardsViewTopControls<Destination: View>: View {
 						}
 						.frame(height: 30)
 					}
+					.opacity(model.canPublish ? 1 : 0.5)
 				}
+				.disabled(!model.canPublish)
 			}
 			destination.map {
 				NavigateTo($0, when: $shouldShowDestination)
