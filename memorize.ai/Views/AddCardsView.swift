@@ -1,9 +1,11 @@
 import SwiftUI
 
-struct AddCardsView: View {
+struct AddCardsView<Destination: View>: View {
 	@Environment(\.presentationMode) var presentationMode
 	
 	@EnvironmentObject var model: AddCardsViewModel
+	
+	let destination: Destination?
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -16,8 +18,9 @@ struct AddCardsView: View {
 				}
 				.edgesIgnoringSafeArea(.all)
 				VStack {
-					AddCardsViewTopControls()
+					AddCardsViewTopControls(destination: self.destination)
 						.padding(.horizontal, 23)
+						.padding(.bottom, self.destination == nil ? 0 : 8)
 					VStack(spacing: 0) {
 						ScrollView {
 							VStack(spacing: 20) {
@@ -42,6 +45,7 @@ struct AddCardsView: View {
 								.padding(.top, -10)
 							}
 							.padding([.horizontal, .bottom], 10)
+							.frame(maxWidth: .infinity)
 							.respondsToKeyboard(
 								withExtraOffset: -(15 + geometry.safeAreaInsets.bottom)
 							)
@@ -105,7 +109,7 @@ struct AddCardsView: View {
 #if DEBUG
 struct AddCardsView_Previews: PreviewProvider {
 	static var previews: some View {
-		AddCardsView()
+		AddCardsView<EmptyView>(destination: nil)
 			.environmentObject(AddCardsViewModel(
 				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 				user: PREVIEW_CURRENT_STORE.user

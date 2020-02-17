@@ -13,7 +13,7 @@ struct AddCardsViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: AddCardsView()
+			destination: AddCardsView<EmptyView>(destination: nil)
 				.environmentObject(AddCardsViewModel(
 					deck: deck,
 					user: currentStore.user

@@ -75,7 +75,7 @@ final class PublishDeckViewModel: ViewModel {
 		didChangeImage = false
 	}
 	
-	func publish(currentUser: User, completion: @escaping () -> Void) {
+	func publish(currentUser: User, completion: @escaping (String) -> Void) {
 		publishLoadingState.startLoading()
 		if let deck = deck {
 			when(fulfilled: [
@@ -94,7 +94,7 @@ final class PublishDeckViewModel: ViewModel {
 				deck.image = self.image
 				self.publishLoadingState.succeed()
 				self.reset()
-				completion()
+				completion(deck.id)
 			}.catch { error in
 				self.publishLoadingState.fail(error: error)
 			}
@@ -135,7 +135,7 @@ final class PublishDeckViewModel: ViewModel {
 				]).done {
 					self.publishLoadingState.succeed()
 					self.reset()
-					completion()
+					completion(deckId)
 				}.catch { error in
 					self.publishLoadingState.fail(error: error)
 				}
