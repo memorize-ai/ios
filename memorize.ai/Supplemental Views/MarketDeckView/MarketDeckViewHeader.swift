@@ -4,6 +4,8 @@ struct MarketDeckViewHeader: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var deck: Deck
 	
+	@State var shouldOpen = false
+	
 	var hasDeck: Bool {
 		currentStore.user.hasDeck(deck)
 	}
@@ -50,14 +52,16 @@ struct MarketDeckViewHeader: View {
 					.padding(.bottom, 5)
 					HStack {
 						if hasDeck {
-							NavigationLink(
-//								action: {
-//									self.currentStore.goToDecksView(
-//										withDeck: self.deck
-//									)
-//								},
-								destination: currentStore.rootDestination
-							) {
+							NavigateTo(
+								currentStore.rootDestination,
+								when: $shouldOpen
+							)
+							Button(action: {
+								self.currentStore.goToDecksView(
+									withDeck: self.deck
+								)
+								self.shouldOpen = true
+							}) {
 								CustomRectangle(background: Color.white) {
 									Text("OPEN")
 										.font(.muli(.bold, size: 15))
@@ -97,7 +101,6 @@ struct MarketDeckViewHeader: View {
 							}
 						}
 					}
-					.animation(.easeIn(duration: 0.3))
 				}
 			}
 		}
