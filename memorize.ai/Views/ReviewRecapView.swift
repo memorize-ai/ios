@@ -34,7 +34,7 @@ struct ReviewRecapView: View {
 				}
 				.edgesIgnoringSafeArea(.all)
 				VStack {
-					LearnRecapViewTopControls()
+					CramRecapViewTopControls()
 						.padding(.horizontal, 23)
 					ScrollView {
 						VStack(spacing: 20) {

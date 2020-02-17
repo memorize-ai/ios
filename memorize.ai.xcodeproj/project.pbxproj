@@ -95,7 +95,7 @@
 		4D56FC4B23C540EB006366FD /* BlankReviewViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */; };
 		4D56FC4D23C54F29006366FD /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4C23C54F29006366FD /* Collection.swift */; };
 		4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4E23C55629006366FD /* LearnRecapView.swift */; };
-		4D56FC5123C558AF006366FD /* Card+LearnData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5023C558AF006366FD /* Card+LearnData.swift */; };
+		4D56FC5123C558AF006366FD /* Card+CramData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5023C558AF006366FD /* Card+CramData.swift */; };
 		4D56FC5323C55A09006366FD /* Card+PerformanceRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */; };
 		4D56FC5523C560F1006366FD /* LearnViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5423C560F1006366FD /* LearnViewFooter.swift */; };
 		4D56FC5723C58392006366FD /* LearnViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5623C58392006366FD /* LearnViewPopUp.swift */; };
@@ -408,7 +408,7 @@
 		4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankReviewViewCard.swift; sourceTree = "<group>"; };
 		4D56FC4C23C54F29006366FD /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		4D56FC4E23C55629006366FD /* LearnRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapView.swift; sourceTree = "<group>"; };
-		4D56FC5023C558AF006366FD /* Card+LearnData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+LearnData.swift"; sourceTree = "<group>"; };
+		4D56FC5023C558AF006366FD /* Card+CramData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CramData.swift"; sourceTree = "<group>"; };
 		4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+PerformanceRating.swift"; sourceTree = "<group>"; };
 		4D56FC5423C560F1006366FD /* LearnViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewFooter.swift; sourceTree = "<group>"; };
 		4D56FC5623C58392006366FD /* LearnViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewPopUp.swift; sourceTree = "<group>"; };
@@ -791,7 +791,7 @@
 				4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */,
 				4D6BA53623ACBBBD00D3F9D1 /* Card+Draft.swift */,
 				4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */,
-				4D56FC5023C558AF006366FD /* Card+LearnData.swift */,
+				4D56FC5023C558AF006366FD /* Card+CramData.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -1861,7 +1861,7 @@
 				4D96200623C3D39E00C6BDF0 /* CardToggleButton.swift in Sources */,
 				4DCD641B23D910020075F724 /* DecksViewCardPreviewSheetView.swift in Sources */,
 				4DD2512723627D0300A83509 /* LogInViewModel.swift in Sources */,
-				4D56FC5123C558AF006366FD /* Card+LearnData.swift in Sources */,
+				4D56FC5123C558AF006366FD /* Card+CramData.swift in Sources */,
 				4D1F9B23233ECA0E00693571 /* User.swift in Sources */,
 				4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */,
 				4D60858023D14C2D00437A78 /* Query.swift in Sources */,

@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LearnRecapViewCardPerformance: View {
-	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+struct CramRecapViewCardPerformance: View {
+	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.CramData]
 	let shouldShowSectionName: Bool
 	
 	var body: some View {
@@ -12,7 +12,7 @@ struct LearnRecapViewCardPerformance: View {
 				.shrinks()
 			VStack(spacing: 12) {
 				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
-					LearnRecapViewCardPerformanceRow(
+					CramRecapViewCardPerformanceRow(
 						rating: rating,
 						frequentCardsForRating: self.frequentCardsForRating,
 						shouldShowSectionName: self.shouldShowSectionName
@@ -24,9 +24,9 @@ struct LearnRecapViewCardPerformance: View {
 }
 
 #if DEBUG
-struct LearnRecapViewCardPerformance_Previews: PreviewProvider {
+struct CramRecapViewCardPerformance_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformance(
+		CramRecapViewCardPerformance(
 			frequentCardsForRating: { _ in [] },
 			shouldShowSectionName: true
 		)

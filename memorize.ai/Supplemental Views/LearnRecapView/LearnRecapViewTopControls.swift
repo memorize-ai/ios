@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnRecapViewTopControls: View {
+struct CramRecapViewTopControls: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	var body: some View {
@@ -27,9 +27,9 @@ struct LearnRecapViewTopControls: View {
 }
 
 #if DEBUG
-struct LearnRecapViewTopControls_Previews: PreviewProvider {
+struct CramRecapViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewTopControls()
+		CramRecapViewTopControls()
 			.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }

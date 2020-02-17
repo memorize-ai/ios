@@ -56,7 +56,7 @@ struct ReviewRecapViewMainCard: View {
 					if decks == nil {
 						Group {
 							deck.map(ReviewRecapViewDeckName.init)
-							section.map(LearnRecapViewMainCardSectionName.init)
+							section.map(CramRecapViewMainCardSectionName.init)
 						}
 						.padding(.horizontal)
 					} else {

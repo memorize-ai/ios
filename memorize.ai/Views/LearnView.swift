@@ -2,7 +2,7 @@ import SwiftUI
 import FirebaseFirestore
 import LoadingState
 
-struct LearnView: View {
+struct CramView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	static let POP_UP_SLIDE_DURATION = 0.25
@@ -26,7 +26,7 @@ struct LearnView: View {
 	
 	@State var numberOfTotalCards = 0
 	
-	@State var current: Card.LearnData?
+	@State var current: Card.CramData?
 	@State var currentIndex = -1
 	@State var currentSide = Card.Side.front
 	
@@ -46,7 +46,7 @@ struct LearnView: View {
 	
 	@State var xpGained = 0
 	
-	@State var cards = [Card.LearnData]()
+	@State var cards = [Card.CramData]()
 	@State var initialXP = 0
 	
 	init(deck: Deck, section: Deck.Section?) {
@@ -91,7 +91,7 @@ struct LearnView: View {
 	}
 	
 	var recapView: some View {
-		LearnRecapView(
+		CramRecapView(
 			deck: deck,
 			section: section,
 			xpGained: xpGained,
@@ -123,7 +123,7 @@ struct LearnView: View {
 		}
 	}
 	
-	func reviewedCardsForSection(_ section: Deck.Section) -> [Card.LearnData] {
+	func reviewedCardsForSection(_ section: Deck.Section) -> [Card.CramData] {
 		cards.filter { card in
 			section.contains(card: card.parent) &&
 			!card.ratings.isEmpty
@@ -149,7 +149,7 @@ struct LearnView: View {
 		}
 	}
 	
-	func frequentCards(forRating rating: Card.PerformanceRating) -> [Card.LearnData] {
+	func frequentCards(forRating rating: Card.PerformanceRating) -> [Card.CramData] {
 		cards.filter { card in
 			if card.ratings.isEmpty { return false }
 			switch rating {
@@ -200,7 +200,7 @@ struct LearnView: View {
 				: nil,
 			current.map { current in
 				PopUpBadge(
-					text: "\(current.streak)/\(Card.LearnData.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED) streak",
+					text: "\(current.streak)/\(Card.CramData.NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED) streak",
 					color: (didIncrementStreak ? Card.PerformanceRating.easy : Card.PerformanceRating.forgot).badgeColor.opacity(0.16)
 				)
 			}
@@ -350,7 +350,7 @@ struct LearnView: View {
 				currentSide = .front
 				card.parent.playAudio(forSide: .front)
 			} else if let card = section.cards[safe: currentIndex] {
-				let card = Card.LearnData(parent: card, section: section)
+				let card = Card.CramData(parent: card, section: section)
 				cards.append(card)
 				current = card
 				currentSide = .front
@@ -366,7 +366,7 @@ struct LearnView: View {
 					.getDocuments()
 					.done { snapshot in
 						if let document = snapshot.documents.first {
-							let card = Card.LearnData(
+							let card = Card.CramData(
 								parent: .init(snapshot: document, parent: self.deck),
 								section: section
 							)
@@ -396,7 +396,7 @@ struct LearnView: View {
 				currentSide = .front
 				card.parent.playAudio(forSide: .front)
 			} else if let card = currentSection.cards[safe: currentSectionCardIndex] {
-				let card = Card.LearnData(parent: card, section: currentSection)
+				let card = Card.CramData(parent: card, section: currentSection)
 				cards.append(card)
 				current = card
 				currentSide = .front
@@ -421,7 +421,7 @@ struct LearnView: View {
 					.getDocuments()
 					.done { snapshot in
 						if let document = snapshot.documents.first {
-							let card = Card.LearnData(
+							let card = Card.CramData(
 								parent: .init(snapshot: document, parent: self.deck),
 								section: currentSection
 							)
@@ -472,13 +472,13 @@ struct LearnView: View {
 					.edgesIgnoringSafeArea(.all)
 					VStack {
 						Group {
-							LearnViewTopControls(
+							CramViewTopControls(
 								currentIndex: self.currentIndex,
 								numberOfTotalCards: self.numberOfTotalCards,
 								skipCard: self.skipCard,
 								recapView: { self.recapView }
 							)
-							LearnViewSliders(
+							CramViewSliders(
 								numberOfTotalCards: self.numberOfTotalCards,
 								numberOfMasteredCards: self.numberOfMasteredCards,
 								numberOfSeenCards: self.numberOfSeenCards,
@@ -486,7 +486,7 @@ struct LearnView: View {
 							)
 						}
 						.padding(.horizontal, 23)
-						LearnViewCardSection(
+						CramViewCardSection(
 							deck: self.deck,
 							currentSide: self.$currentSide,
 							section: self.section,
@@ -497,7 +497,7 @@ struct LearnView: View {
 						)
 						.padding(.top, 6)
 						.padding(.horizontal, 8)
-						LearnViewFooter(
+						CramViewFooter(
 							isWaitingForRating: self.isWaitingForRating,
 							rateCurrentCard: self.rateCurrentCard
 						)
@@ -513,7 +513,7 @@ struct LearnView: View {
 					self.waitForRating()
 				}
 				.disabled(self.isPopUpShowing)
-				LearnViewPopUp(data: self.popUpData, offset: self.popUpOffset)
+				CramViewPopUp(data: self.popUpData, offset: self.popUpOffset)
 				NavigateTo(
 					LazyView { self.recapView },
 					when: self.$shouldShowRecap
@@ -530,9 +530,9 @@ struct LearnView: View {
 }
 
 #if DEBUG
-struct LearnView_Previews: PreviewProvider {
+struct CramView_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnView(
+		CramView(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			section: nil
 		)

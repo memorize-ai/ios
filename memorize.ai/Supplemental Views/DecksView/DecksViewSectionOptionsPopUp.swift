@@ -55,7 +55,7 @@ struct DecksViewSectionOptionsPopUp: View {
 		}
 	}
 	
-	var learnIcon: some View {
+	var cramIcon: some View {
 		VStack(alignment: .leading, spacing: 4) {
 			Group {
 				Capsule()
@@ -90,10 +90,10 @@ struct DecksViewSectionOptionsPopUp: View {
 					}
 				}
 				if hasCards {
-					LearnViewNavigationLink(section: section) {
+					CramViewNavigationLink(section: section) {
 						HStack(spacing: 20) {
-							learnIcon
-							Text("Learn")
+							cramIcon
+							Text("Cram")
 								.font(.muli(.semiBold, size: 17))
 								.foregroundColor(.darkGray)
 							Spacer()

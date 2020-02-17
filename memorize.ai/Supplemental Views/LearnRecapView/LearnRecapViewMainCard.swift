@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnRecapViewMainCard: View {
+struct CramRecapViewMainCard: View {
 	@ObservedObject var user: User
 	@ObservedObject var deck: Deck
 	
@@ -59,7 +59,7 @@ struct LearnRecapViewMainCard: View {
 						.foregroundColor(.darkGray)
 						.shrinks(withLineLimit: 3)
 					if section != nil {
-						LearnRecapViewMainCardSectionName(section: section!)
+						CramRecapViewMainCardSectionName(section: section!)
 					}
 				}
 				.padding(.horizontal)
@@ -87,9 +87,9 @@ struct LearnRecapViewMainCard: View {
 }
 
 #if DEBUG
-struct LearnRecapViewMainCard_Previews: PreviewProvider {
+struct CramRecapViewMainCard_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewMainCard(
+		CramRecapViewMainCard(
 			user: PREVIEW_CURRENT_STORE.user,
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],

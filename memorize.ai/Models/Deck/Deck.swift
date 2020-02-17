@@ -264,7 +264,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		Get \(name)\(creator.map { " by \($0.name)" } ?? ""): \(getLink)
 		
 		Download memorize.ai on the App Store: \(APP_STORE_URL)
-		Learn more at \(WEB_URL)
+		Cram more at \(WEB_URL)
 		"""
 	}
 	

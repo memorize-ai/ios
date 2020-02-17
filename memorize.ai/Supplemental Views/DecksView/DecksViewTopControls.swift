@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DecksViewTopControls: View {
+	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var selectedDeck: Deck
@@ -32,12 +33,22 @@ struct DecksViewTopControls: View {
 					.foregroundColor(.white)
 					.lineLimit(1)
 				Spacer()
+				if currentStore.user.id == selectedDeck.creatorId {
+					PublishDeckViewNavigationLink(deck: selectedDeck) {
+						Image.whiteEditSectionsIcon
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 26, height: 26)
+					}
+				}
 				VerticalTripleDots {
 					popUpWithAnimation {
 						self.model.isDeckOptionsPopUpShowing = true
 					}
 				}
-				.padding(.horizontal, 23)
+				.padding(.leading, 12)
+				.padding(.trailing, 23)
 			}
 		}
 		.frame(height: 40)

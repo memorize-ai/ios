@@ -1,7 +1,7 @@
 import Combine
 
 extension Card {
-	final class LearnData: ObservableObject, Identifiable, Equatable, Hashable {
+	final class CramData: ObservableObject, Identifiable, Equatable, Hashable {
 		static let NUMBER_OF_CONSECUTIVE_EASY_ATTEMPTS_FOR_MASTERED = 3
 		
 		let parent: Card
@@ -53,7 +53,7 @@ extension Card {
 			return rating == .easy
 		}
 		
-		static func == (lhs: LearnData, rhs: LearnData) -> Bool {
+		static func == (lhs: CramData, rhs: CramData) -> Bool {
 			lhs.parent == rhs.parent &&
 			lhs.ratings == rhs.ratings
 		}

@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LearnRecapViewCardPerformanceRowCardCell: View {
-	let card: Card.LearnData
+struct CramRecapViewCardPerformanceRowCardCell: View {
+	let card: Card.CramData
 	let rating: Card.PerformanceRating
 	let shouldShowSectionName: Bool
 	
@@ -27,7 +27,7 @@ struct LearnRecapViewCardPerformanceRowCardCell: View {
 			cornerRadius: 8
 		) {
 			VStack(alignment: .leading) {
-				LearnRecapViewCardPerformanceRowCardCellContent(
+				CramRecapViewCardPerformanceRowCardCellContent(
 					card: card.parent,
 					section: card.section,
 					shouldShowSectionName: shouldShowSectionName
@@ -45,9 +45,9 @@ struct LearnRecapViewCardPerformanceRowCardCell: View {
 }
 
 #if DEBUG
-struct LearnRecapViewCardPerformanceRowCardCell_Previews: PreviewProvider {
+struct CramRecapViewCardPerformanceRowCardCell_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformanceRowCardCell(
+		CramRecapViewCardPerformanceRowCardCell(
 			card: .init(
 				parent: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
 				section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0]

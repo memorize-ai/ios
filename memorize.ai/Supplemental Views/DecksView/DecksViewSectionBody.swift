@@ -34,9 +34,9 @@ struct DecksViewSectionBody: View {
 		}
 	}
 	
-	var learnButton: some View {
-		LearnViewNavigationLink(section: section) {
-			headerButton(text: "Learn", color: .darkBlue)
+	var cramButton: some View {
+		CramViewNavigationLink(section: section) {
+			headerButton(text: "Cram", color: .darkBlue)
 		}
 	}
 	
@@ -54,7 +54,7 @@ struct DecksViewSectionBody: View {
 			if isUnlocked {
 				HStack {
 					if section.numberOfCards > 0 {
-						learnButton
+						cramButton
 					}
 					if section.isDue {
 						reviewButton

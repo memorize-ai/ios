@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnRecapViewSectionPerformance: View {
+struct CramRecapViewSectionPerformance: View {
 	let frequentlyEasySections: [Deck.Section]
 	let frequentlyStruggledSections: [Deck.Section]
 	let frequentlyForgotSections: [Deck.Section]
@@ -13,17 +13,17 @@ struct LearnRecapViewSectionPerformance: View {
 				.foregroundColor(.darkGray)
 				.shrinks()
 			VStack(spacing: 12) {
-				LearnRecapViewSectionPerformanceRow(
+				CramRecapViewSectionPerformanceRow(
 					rating: .easy,
 					sections: frequentlyEasySections,
 					numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
 				)
-				LearnRecapViewSectionPerformanceRow(
+				CramRecapViewSectionPerformanceRow(
 					rating: .struggled,
 					sections: frequentlyStruggledSections,
 					numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
 				)
-				LearnRecapViewSectionPerformanceRow(
+				CramRecapViewSectionPerformanceRow(
 					rating: .forgot,
 					sections: frequentlyForgotSections,
 					numberOfReviewedCardsForSection: numberOfReviewedCardsForSection
@@ -34,9 +34,9 @@ struct LearnRecapViewSectionPerformance: View {
 }
 
 #if DEBUG
-struct LearnRecapViewSectionPerformance_Previews: PreviewProvider {
+struct CramRecapViewSectionPerformance_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewSectionPerformance(
+		CramRecapViewSectionPerformance(
 			frequentlyEasySections: [],
 			frequentlyStruggledSections: [],
 			frequentlyForgotSections: [],

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnViewNavigationLink<Label: View>: View {
+struct CramViewNavigationLink<Label: View>: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	let deck: Deck
@@ -27,7 +27,7 @@ struct LearnViewNavigationLink<Label: View>: View {
 	
 	var body: some View {
 		NavigationLink(
-			destination: LearnView(deck: deck, section: section)
+			destination: CramView(deck: deck, section: section)
 				.environmentObject(currentStore)
 				.navigationBarRemoved()
 		) {
@@ -37,12 +37,12 @@ struct LearnViewNavigationLink<Label: View>: View {
 }
 
 #if DEBUG
-struct LearnViewNavigationLink_Previews: PreviewProvider {
+struct CramViewNavigationLink_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewNavigationLink(
+		CramViewNavigationLink(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!
 		) {
-			Text("Learn")
+			Text("Cram")
 		}
 		.environmentObject(PREVIEW_CURRENT_STORE)
 	}

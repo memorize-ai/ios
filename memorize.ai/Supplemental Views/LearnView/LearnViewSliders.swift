@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnViewSliders: View {
+struct CramViewSliders: View {
 	let numberOfTotalCards: Int
 	let numberOfMasteredCards: Int
 	let numberOfSeenCards: Int
@@ -67,9 +67,9 @@ struct LearnViewSliders: View {
 }
 
 #if DEBUG
-struct LearnViewSliders_Previews: PreviewProvider {
+struct CramViewSliders_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewSliders(
+		CramViewSliders(
 			numberOfTotalCards: 3,
 			numberOfMasteredCards: 1,
 			numberOfSeenCards: 1,

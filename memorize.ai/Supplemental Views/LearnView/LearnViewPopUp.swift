@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct LearnViewPopUp: View {
-	let data: LearnView.PopUpData?
+struct CramViewPopUp: View {
+	let data: CramView.PopUpData?
 	let offset: CGFloat
 	
 	var body: some View {
@@ -42,9 +42,9 @@ struct LearnViewPopUp: View {
 }
 
 #if DEBUG
-struct LearnViewPopUp_Previews: PreviewProvider {
+struct CramViewPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewPopUp(
+		CramViewPopUp(
 			data: (
 				emoji: "🎉",
 				message: "Great!",

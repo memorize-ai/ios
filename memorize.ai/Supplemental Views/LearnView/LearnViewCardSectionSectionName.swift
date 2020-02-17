@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnViewCardSectionSectionName: View {
+struct CramViewCardSectionSectionName: View {
 	@ObservedObject var section: Deck.Section
 	
 	var body: some View {
@@ -15,9 +15,9 @@ struct LearnViewCardSectionSectionName: View {
 }
 
 #if DEBUG
-struct LearnViewCardSectionSectionName_Previews: PreviewProvider {
+struct CramViewCardSectionSectionName_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewCardSectionSectionName(
+		CramViewCardSectionSectionName(
 			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0]
 		)
 	}

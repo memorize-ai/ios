@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnViewTopControls<RecapView: View>: View {
+struct CramViewTopControls<RecapView: View>: View {
 	@Environment(\.presentationMode) var presentationMode
 		
 	let currentIndex: Int
@@ -52,9 +52,9 @@ struct LearnViewTopControls<RecapView: View>: View {
 }
 
 #if DEBUG
-struct LearnViewTopControls_Previews: PreviewProvider {
+struct CramViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewTopControls(
+		CramViewTopControls(
 			currentIndex: 1,
 			numberOfTotalCards: 2,
 			skipCard: {},

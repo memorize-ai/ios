@@ -40,9 +40,9 @@ struct DecksViewBottomControls: View {
 		}
 	}
 	
-	var learnButton: some View {
-		LearnViewNavigationLink(deck: selectedDeck) {
-			button(text: "Learn", backgroundColor: .darkBlue)
+	var cramButton: some View {
+		CramViewNavigationLink(deck: selectedDeck) {
+			button(text: "Cram", backgroundColor: .darkBlue)
 		}
 	}
 	
@@ -61,7 +61,7 @@ struct DecksViewBottomControls: View {
 				addCardsButton
 			}
 			if hasUnlockedCards {
-				learnButton
+				cramButton
 			}
 			if isDue {
 				reviewButton

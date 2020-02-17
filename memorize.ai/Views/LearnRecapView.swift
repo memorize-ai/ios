@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnRecapView: View {
+struct CramRecapView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	let deck: Deck
@@ -13,7 +13,7 @@ struct LearnRecapView: View {
 	let frequentlyEasySections: [Deck.Section]
 	let frequentlyStruggledSections: [Deck.Section]
 	let frequentlyForgotSections: [Deck.Section]
-	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.CramData]
 	let numberOfReviewedCardsForSection: (Deck.Section) -> Int
 	
 	var body: some View {
@@ -32,11 +32,11 @@ struct LearnRecapView: View {
 					}
 					.edgesIgnoringSafeArea(.all)
 					VStack {
-						LearnRecapViewTopControls()
+						CramRecapViewTopControls()
 							.padding(.horizontal, 23)
 						ScrollView {
 							VStack(spacing: 30) {
-								LearnRecapViewMainCard(
+								CramRecapViewMainCard(
 									user: self.currentStore.user,
 									deck: self.deck,
 									section: self.section,
@@ -48,14 +48,14 @@ struct LearnRecapView: View {
 								)
 								.padding(.horizontal, 8)
 								if self.section == nil {
-									LearnRecapViewSectionPerformance(
+									CramRecapViewSectionPerformance(
 										frequentlyEasySections: self.frequentlyEasySections,
 										frequentlyStruggledSections: self.frequentlyStruggledSections,
 										frequentlyForgotSections: self.frequentlyForgotSections,
 										numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
 									)
 								}
-								LearnRecapViewCardPerformance(
+								CramRecapViewCardPerformance(
 									frequentCardsForRating: self.frequentCardsForRating,
 									shouldShowSectionName: self.section == nil
 								)
@@ -69,10 +69,10 @@ struct LearnRecapView: View {
 }
 
 #if DEBUG
-struct LearnRecapView_Previews: PreviewProvider {
+struct CramRecapView_Previews: PreviewProvider {
 	static var previews: some View {
 		Group {
-			LearnRecapView(
+			CramRecapView(
 				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 				section: nil,
 				xpGained: 1,
@@ -86,7 +86,7 @@ struct LearnRecapView_Previews: PreviewProvider {
 				frequentCardsForRating: { _ in [] },
 				numberOfReviewedCardsForSection: { _ in 1 }
 			)
-			LearnRecapView(
+			CramRecapView(
 				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 				section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
 				xpGained: 1,

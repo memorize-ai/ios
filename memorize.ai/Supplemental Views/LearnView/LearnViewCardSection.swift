@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnViewCardSection: View {
+struct CramViewCardSection: View {
 	@ObservedObject var deck: Deck
 	
 	@Binding var currentSide: Card.Side
@@ -22,7 +22,7 @@ struct LearnViewCardSection: View {
 					.foregroundColor(.white)
 					.shrinks()
 				_section.map { section in
-					LearnViewCardSectionSectionName(
+					CramViewCardSectionSectionName(
 						section: section
 					)
 				}
@@ -50,7 +50,7 @@ struct LearnViewCardSection: View {
 							if self.currentCard == nil {
 								ActivityIndicator(color: .gray)
 							} else {
-								LearnViewCardContent(
+								CramViewCardContent(
 									card: self.currentCard!,
 									currentSide: self.$currentSide,
 									isWaitingForRating: self.isWaitingForRating
@@ -66,9 +66,9 @@ struct LearnViewCardSection: View {
 }
 
 #if DEBUG
-struct LearnViewCardSection_Previews: PreviewProvider {
+struct CramViewCardSection_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewCardSection(
+		CramViewCardSection(
 			deck: PREVIEW_CURRENT_STORE.user.decks.first!,
 			currentSide: .constant(.front),
 			section: nil,

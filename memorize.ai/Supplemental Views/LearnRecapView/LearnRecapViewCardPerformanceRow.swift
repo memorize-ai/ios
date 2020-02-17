@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct LearnRecapViewCardPerformanceRow: View {
+struct CramRecapViewCardPerformanceRow: View {
 	@State var isExpanded = false
 	
 	let rating: Card.PerformanceRating
-	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.LearnData]
+	let frequentCardsForRating: (Card.PerformanceRating) -> [Card.CramData]
 	let shouldShowSectionName: Bool
 	
-	var cards: [Card.LearnData] {
+	var cards: [Card.CramData] {
 		frequentCardsForRating(rating)
 	}
 	
@@ -66,7 +66,7 @@ struct LearnRecapViewCardPerformanceRow: View {
 				ScrollView(.horizontal, showsIndicators: false) {
 					HStack {
 						ForEach(cards) { card in
-							LearnRecapViewCardPerformanceRowCardCell(
+							CramRecapViewCardPerformanceRowCardCell(
 								card: card,
 								rating: self.rating,
 								shouldShowSectionName: self.shouldShowSectionName
@@ -83,9 +83,9 @@ struct LearnRecapViewCardPerformanceRow: View {
 }
 
 #if DEBUG
-struct LearnRecapViewCardPerformanceRow_Previews: PreviewProvider {
+struct CramRecapViewCardPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformanceRow(
+		CramRecapViewCardPerformanceRow(
 			rating: .easy,
 			frequentCardsForRating: { _ in [] },
 			shouldShowSectionName: true

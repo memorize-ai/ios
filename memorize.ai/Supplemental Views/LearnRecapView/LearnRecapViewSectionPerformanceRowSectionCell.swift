@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnRecapViewSectionPerformanceRowSectionCell: View {
+struct CramRecapViewSectionPerformanceRowSectionCell: View {
 	@ObservedObject var section: Deck.Section
 	
 	let rating: Card.PerformanceRating
@@ -35,9 +35,9 @@ struct LearnRecapViewSectionPerformanceRowSectionCell: View {
 }
 
 #if DEBUG
-struct LearnRecapViewSectionPerformanceRowSectionCell_Previews: PreviewProvider {
+struct CramRecapViewSectionPerformanceRowSectionCell_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewSectionPerformanceRowSectionCell(
+		CramRecapViewSectionPerformanceRowSectionCell(
 			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
 			rating: .easy,
 			numberOfReviewedCardsForSection: { _ in 1 }

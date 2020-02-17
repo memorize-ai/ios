@@ -1,7 +1,7 @@
 import SwiftUI
 import WebView
 
-struct LearnViewCardContent: View {
+struct CramViewCardContent: View {
 	@ObservedObject var card: Card
 	
 	@State var toggleIconDegrees = 0.0
@@ -43,9 +43,9 @@ struct LearnViewCardContent: View {
 }
 
 #if DEBUG
-struct LearnViewCardContent_Previews: PreviewProvider {
+struct CramViewCardContent_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewCardContent(
+		CramViewCardContent(
 			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
 			currentSide: .constant(.front),
 			isWaitingForRating: true

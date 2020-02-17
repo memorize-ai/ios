@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftUIX
 
-struct LearnRecapViewCardPerformanceRowCardCellContent: View {
+struct CramRecapViewCardPerformanceRowCardCellContent: View {
 	@ObservedObject var card: Card
 	@ObservedObject var section: Deck.Section
 	
@@ -62,9 +62,9 @@ struct LearnRecapViewCardPerformanceRowCardCellContent: View {
 }
 
 #if DEBUG
-struct LearnRecapViewCardPerformanceRowCardCellContent_Previews: PreviewProvider {
+struct CramRecapViewCardPerformanceRowCardCellContent_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewCardPerformanceRowCardCellContent(
+		CramRecapViewCardPerformanceRowCardCellContent(
 			card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0],
 			section: PREVIEW_CURRENT_STORE.user.decks[0].sections[0],
 			shouldShowSectionName: true

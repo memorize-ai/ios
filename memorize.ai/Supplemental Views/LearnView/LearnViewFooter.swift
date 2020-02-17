@@ -1,7 +1,7 @@
 import SwiftUI
 import Audio
 
-struct LearnViewFooter: View {
+struct CramViewFooter: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	let isWaitingForRating: Bool
@@ -53,9 +53,9 @@ struct LearnViewFooter: View {
 }
 
 #if DEBUG
-struct LearnViewFooter_Previews: PreviewProvider {
+struct CramViewFooter_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnViewFooter(isWaitingForRating: true, rateCurrentCard: { _, _ in })
+		CramViewFooter(isWaitingForRating: true, rateCurrentCard: { _, _ in })
 	}
 }
 #endif

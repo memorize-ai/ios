@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LearnRecapViewSectionPerformanceRow: View {
+struct CramRecapViewSectionPerformanceRow: View {
 	let rating: Card.PerformanceRating
 	let sections: [Deck.Section]
 	let numberOfReviewedCardsForSection: (Deck.Section) -> Int
@@ -28,7 +28,7 @@ struct LearnRecapViewSectionPerformanceRow: View {
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack {
 					ForEach(sections) { section in
-						LearnRecapViewSectionPerformanceRowSectionCell(
+						CramRecapViewSectionPerformanceRowSectionCell(
 							section: section,
 							rating: self.rating,
 							numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
@@ -43,9 +43,9 @@ struct LearnRecapViewSectionPerformanceRow: View {
 }
 
 #if DEBUG
-struct LearnRecapViewSectionPerformanceRow_Previews: PreviewProvider {
+struct CramRecapViewSectionPerformanceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		LearnRecapViewSectionPerformanceRow(
+		CramRecapViewSectionPerformanceRow(
 			rating: .easy,
 			sections: [],
 			numberOfReviewedCardsForSection: { _ in 1 }

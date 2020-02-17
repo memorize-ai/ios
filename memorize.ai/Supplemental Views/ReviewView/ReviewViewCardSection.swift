@@ -24,7 +24,7 @@ struct ReviewViewCardSection: View {
 			HStack {
 				_deck.map(ReviewViewCardSectionDeckName.init)
 				_section.map { section in
-					LearnViewCardSectionSectionName(
+					CramViewCardSectionSectionName(
 						section: section
 					)
 				}
