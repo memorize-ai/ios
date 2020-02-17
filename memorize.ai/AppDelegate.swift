@@ -3,6 +3,7 @@ import CoreData
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
+import IQKeyboardManagerSwift
 import PromiseKit
 
 @UIApplicationMain
@@ -17,6 +18,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		GIDSignIn.sharedInstance().delegate = self
 		
 		StoreReview.onStartup()
+		
+		IQKeyboardManager.shared.enable = true
 		
 		return true
 	}

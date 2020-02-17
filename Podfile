@@ -12,6 +12,7 @@ target 'memorize.ai' do
 	pod 'Firebase/Analytics'
 	
 	pod 'GoogleSignIn'
+	pod 'IQKeyboardManagerSwift'
 	
 	target 'memorize.aiTests' do
 		inherit! :search_paths
