@@ -7,11 +7,7 @@ extension Card {
 		HTMLElement.html
 			.child {
 				HTMLElement.head
-					.child {
-						HTMLElement.meta
-							.name("viewport")
-							.content("width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1")
-					}
+					.child(VIEWPORT_META_TAG)
 					.child {
 						HTMLElement.link
 							.rel("stylesheet")

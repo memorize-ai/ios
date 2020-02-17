@@ -1,4 +1,5 @@
 import SwiftUI
+import HTML
 
 let SIDE_BAR_ANIMATION = Animation.easeOut(duration: 0.2)
 
@@ -18,3 +19,9 @@ let WEB_URL = "https://memorize.ai" // "https://memorize-ai-dev.web.app"
 #else
 let WEB_URL = "https://memorize.ai"
 #endif
+
+var VIEWPORT_META_TAG: HTMLElement {
+	HTMLElement.meta
+		.name("viewport")
+		.content("width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1")
+}

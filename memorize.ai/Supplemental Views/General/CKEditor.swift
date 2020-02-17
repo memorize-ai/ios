@@ -13,7 +13,9 @@ struct CKEditor: View {
 			let deckId: String
 			let width: CGFloat
 			let height: CGFloat
-						
+			
+			var webView: WKWebView?
+			
 			init(
 				html: Binding<String>,
 				uid: String,
@@ -53,16 +55,13 @@ struct CKEditor: View {
 				configuration.userContentController = userContentController
 				
 				let webView = WKWebView(frame: view.frame, configuration: configuration)
+				self.webView = webView
 				
 				webView.loadHTML(baseURL: WEB_VIEW_BASE_URL) {
 					HTMLElement.html
 						.child {
 							HTMLElement.head
-								.child {
-									HTMLElement.meta
-										.name("viewport")
-										.content("width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1")
-								}
+								.child(VIEWPORT_META_TAG)
 								.child {
 									HTMLElement.link
 										.rel("stylesheet")
@@ -82,7 +81,7 @@ struct CKEditor: View {
 								}
 								.child {
 									HTMLElement.script
-										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(uploadUrl)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>a?setTimeout(()=>scrollTo(0,0),150):null)).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
+										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(uploadUrl)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>a?setTimeout(()=>scrollTo(0,0),150):0)).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
 								}
 						}
 				}
@@ -127,7 +126,12 @@ struct CKEditor: View {
 			)
 		}
 		
-		func updateUIViewController(_ uiViewController: Container, context: Context) {}
+		func updateUIViewController(_ container: Container, context: Context) {
+			let frame = CGRect(x: 0, y: 0, width: width, height: height)
+			
+			container.view.frame = frame
+			container.webView?.frame = frame
+		}
 	}
 	
 	@Binding var html: String

@@ -2,6 +2,8 @@ import SwiftUI
 import WebView
 
 struct AddCardsViewCardCell: View {
+	static let editorWidth = SCREEN_SIZE.width - 7 * 2 - 20 * 2
+	
 	@EnvironmentObject var model: AddCardsViewModel
 	
 	@ObservedObject var card: Card.Draft
@@ -46,15 +48,15 @@ struct AddCardsViewCardCell: View {
 					CKEditor(
 						html: $card.front,
 						deckId: model.deck.id,
-						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2,
-						height: isFrontExpanded ? 450 : 250
+						width: Self.editorWidth,
+						height: isFrontExpanded ? 500 : 250
 					)
 					editorHeader(text: "Back", isValid: !card.back.isTrimmedEmpty, isExpanded: $isBackExpanded)
 					CKEditor(
 						html: $card.back,
 						deckId: model.deck.id,
-						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2,
-						height: isBackExpanded ? 450 : 250
+						width: Self.editorWidth,
+						height: isBackExpanded ? 500 : 250
 					)
 				}
 				.padding()
