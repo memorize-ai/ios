@@ -16,9 +16,11 @@ struct MarketDeckViewSections: View {
 	}
 	
 	var prefixedSections: [Deck.Section] {
-		isExpanded
-			? deck.sections
-			: .init(deck.sections.prefix(sectionPrefix))
+		.init(deck.sections.prefix(
+			isExpanded
+				? MAX_NUMBER_OF_VIEWABLE_SECTIONS
+				: sectionPrefix
+		))
 	}
 	
 	var body: some View {
@@ -35,9 +37,7 @@ struct MarketDeckViewSections: View {
 					if deck.hasUnsectionedCards {
 						MarketDeckViewSectionRow(section: deck.unsectionedSection)
 					}
-					ForEach(prefixedSections) { section in
-						MarketDeckViewSectionRow(section: section)
-					}
+					ForEach(prefixedSections, content: MarketDeckViewSectionRow.init)
 					if numberOfSections > Self.sectionPrefix {
 						Button(action: {
 							self.isExpanded.toggle()
@@ -45,7 +45,9 @@ struct MarketDeckViewSections: View {
 							Text(
 								isExpanded
 									? "Show less"
-									: "Show all \(numberOfSections) sections"
+									: numberOfSections > MAX_NUMBER_OF_VIEWABLE_SECTIONS
+										? "Show \(MAX_NUMBER_OF_VIEWABLE_SECTIONS) sections"
+										: "Show all \(numberOfSections) sections"
 							)
 							.font(.muli(.bold, size: 18))
 							.foregroundColor(.extraPurple)
