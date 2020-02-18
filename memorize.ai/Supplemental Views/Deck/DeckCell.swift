@@ -6,12 +6,14 @@ struct DeckCell<Content: View>: View {
 	
 	let width: CGFloat
 	let imageHeight: CGFloat
+	let titleFontSize: CGFloat
 	let content: Content
 	
-	init(deck: Deck, width: CGFloat, imageHeight: CGFloat? = nil, content: () -> Content) {
+	init(deck: Deck, width: CGFloat, imageHeight: CGFloat? = nil, titleFontSize: CGFloat = 13.5, content: () -> Content) {
 		self.deck = deck
 		self.width = width
 		self.imageHeight = imageHeight ?? width * 111 / 165
+		self.titleFontSize = titleFontSize
 		self.content = content()
 	}
 	
@@ -53,7 +55,7 @@ struct DeckCell<Content: View>: View {
 				.cornerRadius(8, corners: [.topLeft, .topRight])
 				VStack(alignment: .leading) {
 					Text(deck.name)
-						.font(.muli(.bold, size: 13.5))
+						.font(.muli(.bold, size: titleFontSize))
 						.foregroundColor(.darkGray)
 					Text(deck.subtitle)
 						.font(.muli(.regular, size: 11))

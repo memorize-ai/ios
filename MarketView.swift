@@ -23,7 +23,8 @@ struct MarketView: View {
 						deck: deck,
 						user: self.currentStore.user,
 						width: SCREEN_SIZE.width - Self.horizontalPadding * 2,
-						imageHeight: 120
+						imageHeight: 120,
+						titleFontSize: 17
 					)
 					.onTapGesture {
 						self.selectedDeck = deck

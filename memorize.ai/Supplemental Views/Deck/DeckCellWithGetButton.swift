@@ -7,6 +7,7 @@ struct DeckCellWithGetButton: View {
 	
 	let width: CGFloat
 	let imageHeight: CGFloat
+	let titleFontSize: CGFloat
 	let shouldManuallyModifyDecks: Bool
 	let shouldShowRemoveAlert: Bool
 	
@@ -15,6 +16,7 @@ struct DeckCellWithGetButton: View {
 		user: User,
 		width: CGFloat,
 		imageHeight: CGFloat? = nil,
+		titleFontSize: CGFloat = 13.5,
 		shouldManuallyModifyDecks: Bool = false,
 		shouldShowRemoveAlert: Bool = true
 	) {
@@ -22,6 +24,7 @@ struct DeckCellWithGetButton: View {
 		self.user = user
 		self.width = width
 		self.imageHeight = imageHeight ?? width * 111 / 165
+		self.titleFontSize = titleFontSize
 		self.shouldManuallyModifyDecks = shouldManuallyModifyDecks
 		self.shouldShowRemoveAlert = shouldShowRemoveAlert
 	}
@@ -76,7 +79,7 @@ struct DeckCellWithGetButton: View {
 	}
 	
 	var body: some View {
-		DeckCell(deck: deck, width: width, imageHeight: imageHeight) {
+		DeckCell(deck: deck, width: width, imageHeight: imageHeight, titleFontSize: titleFontSize) {
 			Button(action: buttonAction) {
 				CustomRectangle(
 					background: buttonBackground,
