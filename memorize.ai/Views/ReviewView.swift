@@ -325,6 +325,7 @@ struct ReviewView: View {
 		let shouldShowRecap = currentIndex == numberOfTotalCards - 1
 		
 		reviewCardLoadingState.startLoading()
+		currentCardLoadingState.startLoading()
 		card.review(
 			rating: rating,
 			viewTime: startDate.map { Date().timeIntervalSince($0) * 1000 } ?? 0 // Multiply by 1000 for milliseconds
@@ -334,7 +335,7 @@ struct ReviewView: View {
 			
 			// After the card has been reviewed, load the next card if the recap should not be shown yet
 			if shouldShowRecap { return }
-			self.loadNextCard()
+			self.loadNextCard(startLoading: false)
 		}.catch { error in
 			showAlert(title: "Unable to rate card", message: "You will move on to the next card")
 			self.reviewCardLoadingState.fail(error: error)
@@ -830,6 +831,7 @@ struct ReviewView: View {
 							section: self.section,
 							currentSection: self.currentSection,
 							current: self.current,
+							currentCardLoadingState: self.currentCardLoadingState,
 							cardOffset: self.cardOffset,
 							isWaitingForRating: self.isWaitingForRating,
 							currentSide: self.$currentSide
@@ -848,7 +850,8 @@ struct ReviewView: View {
 				.onTapGesture {
 					if
 						self.isWaitingForRating ||
-						self.current == nil
+						self.current == nil ||
+						self.currentCardLoadingState.isLoading
 					{ return }
 					self.waitForRating()
 				}
