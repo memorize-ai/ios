@@ -16,7 +16,7 @@ struct DecksViewSections: View {
 	
 	var body: some View {
 		VStack(spacing: 16) {
-			ForEach(sections) { section in
+			ForEach(sections.prefix(MAX_NUMBER_OF_VIEWABLE_SECTIONS)) { section in
 				VStack {
 					DecksViewSectionHeader(section: section)
 						.onTapGesture {
@@ -27,6 +27,11 @@ struct DecksViewSections: View {
 						}
 					DecksViewSectionBody(section: section)
 				}
+			}
+			if sections.count > MAX_NUMBER_OF_VIEWABLE_SECTIONS {
+				Text("\((sections.count - MAX_NUMBER_OF_VIEWABLE_SECTIONS).formatted) more section\(sections.count - MAX_NUMBER_OF_VIEWABLE_SECTIONS == 1 ? "" : "s")...")
+					.font(.muli(.bold, size: 15))
+					.foregroundColor(.darkGray)
 			}
 		}
 	}

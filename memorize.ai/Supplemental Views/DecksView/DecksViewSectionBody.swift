@@ -67,8 +67,13 @@ struct DecksViewSectionBody: View {
 						ActivityIndicator(color: .gray)
 					}
 					.case(.success) {
-						ForEach(section.cards) { card in
+						ForEach(section.cards.prefix(MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION)) { card in
 							DecksViewCardCell(card: card)
+						}
+						if section.cards.count > MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION {
+							Text("\((section.cards.count - MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION).formatted) more card\(section.cards.count - MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION == 1 ? "" : "s")...")
+								.font(.muli(.bold, size: 15))
+								.foregroundColor(.darkGray)
 						}
 					}
 					.case(.failure) {
