@@ -11,18 +11,13 @@ struct AddCardsViewCardCell: View {
 	@State var isFrontExpanded = false
 	@State var isBackExpanded = false
 	
-	func editorHeader(text: String, isValid: Bool, isExpanded: Binding<Bool>) -> some View {
+	func editorHeader(text: String, isValid: Bool) -> some View {
 		HStack {
 			Text(text)
 				.foregroundColor(.darkGray)
 			Image(systemName: isValid ? .checkmark : .xmark)
 				.foregroundColor(isValid ? .neonGreen : .darkRed)
 			Spacer()
-			Button(action: {
-				isExpanded.wrappedValue.toggle()
-			}) {
-				Text(isExpanded.wrappedValue ? "Collapse" : "Expand")
-			}
 		}
 		.font(.muli(.bold, size: 15))
 		.padding(.top, 3)
@@ -44,19 +39,21 @@ struct AddCardsViewCardCell: View {
 					Rectangle()
 						.foregroundColor(.lightGrayBorder)
 						.frame(height: 1)
-					editorHeader(text: "Front", isValid: !card.front.isTrimmedEmpty, isExpanded: $isFrontExpanded)
+					editorHeader(text: "Front", isValid: !card.front.isTrimmedEmpty)
 					CKEditor(
 						html: $card.front,
+						isFocused: $isFrontExpanded,
 						deckId: model.deck.id,
 						width: Self.editorWidth,
-						height: isFrontExpanded ? 500 : 250
+						height: isFrontExpanded ? 500 : 125
 					)
-					editorHeader(text: "Back", isValid: !card.back.isTrimmedEmpty, isExpanded: $isBackExpanded)
+					editorHeader(text: "Back", isValid: !card.back.isTrimmedEmpty)
 					CKEditor(
 						html: $card.back,
+						isFocused: $isBackExpanded,
 						deckId: model.deck.id,
 						width: Self.editorWidth,
-						height: isBackExpanded ? 500 : 250
+						height: isBackExpanded ? 500 : 125
 					)
 				}
 				.padding()

@@ -26,6 +26,7 @@ struct EditCardViewCardCell: View {
 							get: { self.card.front },
 							set: { self.card.front = $0 }
 						),
+						isFocused: .constant(false),
 						deckId: card.parent.id,
 						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
 					)
@@ -35,6 +36,7 @@ struct EditCardViewCardCell: View {
 							get: { self.card.back },
 							set: { self.card.back = $0 }
 						),
+						isFocused: .constant(false),
 						deckId: card.parent.id,
 						width: SCREEN_SIZE.width - 10 * 2 - 20 * 2
 					)

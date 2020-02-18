@@ -53,7 +53,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	convenience init(snapshot: DocumentSnapshot) {
 		self.init(
 			id: snapshot.documentID,
-			name: snapshot.get("name") as? String ?? "Unknown",
+			name: snapshot.get("name") as? String ?? "",
 			email: snapshot.get("email") as? String ?? "Unknown",
 			interests: snapshot.get("topics") as? [String] ?? [],
 			numberOfDecks: snapshot.get("deckCount") as? Int ?? 0,
@@ -65,7 +65,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	convenience init(authUser user: FirebaseAuth.User) {
 		self.init(
 			id: user.uid,
-			name: user.displayName ?? "Unknown",
+			name: user.displayName ?? "",
 			email: user.email ?? "Unknown",
 			interests: [],
 			numberOfDecks: 0,

@@ -18,7 +18,7 @@ final class MarketViewModel: ViewModel {
 	@Published var searchText = "" {
 		didSet {
 			switchSortAlgorithmIfNeeded()
-			loadSearchResults()
+			loadSearchResults(force: true)
 		}
 	}
 	

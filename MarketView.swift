@@ -16,23 +16,22 @@ struct MarketView: View {
 	@State var isDeckSelected = false
 	
 	var grid: some View {
-		QGrid(
-			model.searchResults,
-			columns: Self.numberOfColumns,
-			vSpacing: Self.verticalCellSpacing,
-			hSpacing: Self.horizontalCellSpacing
-		) { deck in
-			DeckCellWithGetButton(
-				deck: deck,
-				user: self.currentStore.user,
-				width: Self.deckCellWidth
-			)
-			.onTapGesture {
-				self.selectedDeck = deck
-				self.isDeckSelected = true
+		ScrollView(showsIndicators: false) {
+			VStack(spacing: Self.verticalCellSpacing) {
+				ForEach(model.searchResults) { deck in
+					DeckCellWithGetButton(
+						deck: deck,
+						user: self.currentStore.user,
+						width: SCREEN_SIZE.width - Self.horizontalPadding * 2,
+						imageHeight: 120
+					)
+					.onTapGesture {
+						self.selectedDeck = deck
+						self.isDeckSelected = true
+					}
+				}
 			}
 		}
-		.frame(maxWidth: SCREEN_SIZE.width - Self.horizontalPadding * 2)
 	}
 	
 	var body: some View {

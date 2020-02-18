@@ -15,10 +15,13 @@ struct HomeView: View {
 						.padding(.horizontal, 23)
 					ScrollView {
 						VStack {
+							HomeViewReviewSection(
+								user: self.currentStore.user
+							)
 							HomeViewMyDecksSection(
 								currentUser: self.currentStore.user
 							)
-							.padding(.top)
+							.padding(.top, 5)
 							HomeViewRecommendedDecksSection()
 								.padding(.top, 5)
 						}

@@ -8,6 +8,7 @@ struct CKEditor: View {
 	struct Representable: UIViewControllerRepresentable {
 		final class Container: UIViewController, WKScriptMessageHandler {
 			@Binding var html: String
+			@Binding var isFocused: Bool
 			
 			let uid: String
 			let deckId: String
@@ -18,12 +19,14 @@ struct CKEditor: View {
 			
 			init(
 				html: Binding<String>,
+				isFocused: Binding<Bool>,
 				uid: String,
 				deckId: String,
 				width: CGFloat,
 				height: CGFloat
 			) {
 				_html = html
+				_isFocused = isFocused
 				
 				self.uid = uid
 				self.deckId = deckId
@@ -49,6 +52,7 @@ struct CKEditor: View {
 				let userContentController = WKUserContentController()
 				
 				userContentController.add(self, name: "data")
+				userContentController.add(self, name: "focus")
 				userContentController.add(self, name: "error")
 				
 				let configuration = WKWebViewConfiguration()
@@ -81,7 +85,7 @@ struct CKEditor: View {
 								}
 								.child {
 									HTMLElement.script
-										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(uploadUrl)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>a?setTimeout(()=>scrollTo(0,0),150):0)).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
+										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(uploadUrl)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>{if(a)setTimeout(()=>scrollTo(0,0),150);webkit.messageHandlers.focus.postMessage(a)})).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
 								}
 						}
 				}
@@ -97,6 +101,9 @@ struct CKEditor: View {
 				case "data":
 					guard let html = message.body as? String else { return }
 					self.html = html
+				case "focus":
+					guard let isFocused = message.body as? Bool else { return }
+					self.isFocused = isFocused
 				case "error":
 					guard let error = message.body as? String else { return }
 					showAlert(
@@ -110,6 +117,7 @@ struct CKEditor: View {
 		}
 		
 		@Binding var html: String
+		@Binding var isFocused: Bool
 		
 		let uid: String
 		let deckId: String
@@ -119,6 +127,7 @@ struct CKEditor: View {
 		func makeUIViewController(context: Context) -> Container {
 			.init(
 				html: $html,
+				isFocused: $isFocused,
 				uid: uid,
 				deckId: deckId,
 				width: width,
@@ -135,13 +144,15 @@ struct CKEditor: View {
 	}
 	
 	@Binding var html: String
+	@Binding var isFocused: Bool
 	
 	let deckId: String
 	let width: CGFloat
 	let height: CGFloat
 	
-	init(html: Binding<String>, deckId: String, width: CGFloat, height: CGFloat = 300) {
+	init(html: Binding<String>, isFocused: Binding<Bool>, deckId: String, width: CGFloat, height: CGFloat = 300) {
 		_html = html
+		_isFocused = isFocused
 		
 		self.deckId = deckId
 		self.width = width
@@ -151,6 +162,7 @@ struct CKEditor: View {
 	var body: some View {
 		Representable(
 			html: $html,
+			isFocused: $isFocused,
 			uid: currentStore.user.id,
 			deckId: deckId,
 			width: width,
@@ -165,6 +177,7 @@ struct CKEditor_Previews: PreviewProvider {
 	static var previews: some View {
 		CKEditor(
 			html: .constant(""),
+			isFocused: .constant(false),
 			deckId: "0",
 			width: SCREEN_SIZE.width - 20 * 2
 		)

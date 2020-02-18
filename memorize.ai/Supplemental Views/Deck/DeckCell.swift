@@ -5,11 +5,13 @@ struct DeckCell<Content: View>: View {
 	@ObservedObject var deck: Deck
 	
 	let width: CGFloat
+	let imageHeight: CGFloat
 	let content: Content
 	
-	init(deck: Deck, width: CGFloat, content: () -> Content) {
+	init(deck: Deck, width: CGFloat, imageHeight: CGFloat? = nil, content: () -> Content) {
 		self.deck = deck
 		self.width = width
+		self.imageHeight = imageHeight ?? width * 111 / 165
 		self.content = content()
 	}
 	
@@ -46,8 +48,9 @@ struct DeckCell<Content: View>: View {
 							.aspectRatio(contentMode: .fill)
 					}
 				}
+				.frame(height: imageHeight)
+				.clipped()
 				.cornerRadius(8, corners: [.topLeft, .topRight])
-				.frame(height: width * 111 / 165)
 				VStack(alignment: .leading) {
 					Text(deck.name)
 						.font(.muli(.bold, size: 13.5))

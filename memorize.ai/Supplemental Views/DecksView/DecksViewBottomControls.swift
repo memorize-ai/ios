@@ -42,7 +42,7 @@ struct DecksViewBottomControls: View {
 	
 	var cramButton: some View {
 		CramViewNavigationLink(deck: selectedDeck) {
-			button(text: "Cram", backgroundColor: .darkBlue)
+			button(text: "Cram", backgroundColor: .init(#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)))
 		}
 	}
 	

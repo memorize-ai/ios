@@ -37,6 +37,7 @@ struct FloatingReviewButton: View {
 				}
 				.scaleEffect(1.2)
 			}
+			.opacity(0.75)
 		}
 	}
 }
