@@ -71,23 +71,25 @@ struct HomeViewReviewSection: View {
 						.alignment(.leading)
 						.padding(.top, 8)
 						.padding(.bottom, 6)
-					ReviewViewNavigationLink {
-						CustomRectangle(
-							background: { () -> Color in
-								let count = self.user.numberOfDueCards
-								if count < 10 { return .neonGreen }
-								if count < 100 { return .neonOrange }
-								return .neonRed
-							}(),
-							cornerRadius: 14
-						) {
-							Text("REVIEW")
-								.font(.muli(.bold, size: 12))
-								.foregroundColor(.white)
-								.frame(width: 92, height: 28)
+					if user.numberOfDueCards > 0 {
+						ReviewViewNavigationLink {
+							CustomRectangle(
+								background: { () -> Color in
+									let count = self.user.numberOfDueCards
+									if count < 10 { return .neonGreen }
+									if count < 100 { return .neonOrange }
+									return .neonRed
+								}(),
+								cornerRadius: 14
+							) {
+								Text("REVIEW")
+									.font(.muli(.bold, size: 12))
+									.foregroundColor(.white)
+									.frame(width: 92, height: 28)
+							}
 						}
+						.alignment(.leading)
 					}
-					.alignment(.leading)
 				}
 				.padding([.horizontal, .top])
 				deckList
