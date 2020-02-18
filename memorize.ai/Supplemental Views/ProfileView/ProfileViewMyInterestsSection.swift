@@ -56,9 +56,10 @@ struct ProfileViewMyInterestsSection: View {
 					)
 				)
 				.padding(.vertical, 8)
+				.padding(.bottom)
 			}
 		}
-		.padding(.top)
+		.padding(.vertical)
 		.onAppear {
 			self.currentStore.loadAllTopics()
 		}

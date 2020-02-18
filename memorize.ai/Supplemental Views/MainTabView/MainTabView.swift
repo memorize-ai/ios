@@ -29,12 +29,6 @@ struct MainTabView: View {
 		currentStore.mainTabViewSelection
 	}
 	
-	var floatingReviewButtonXOffset: CGFloat {
-		currentStore.user.numberOfDueCards > 0
-			? 0
-			: 100
-	}
-	
 	var tabBarItems: some View {
 		HStack(alignment: .bottom) {
 			Spacer()
@@ -143,10 +137,33 @@ struct MainTabView: View {
 									ProfileView()
 								}
 							if currentStore.mainTabViewSelection == .home {
-								FloatingReviewButton(user: currentStore.user)
-									.alignment(.bottomTrailing)
-									.padding([.trailing, .bottom], 16)
-									.offset(x: floatingReviewButtonXOffset)
+								VStack {
+									PublishDeckViewNavigationLink {
+										ZStack {
+											Circle()
+												.foregroundColor(.init(#colorLiteral(red: 0.262745098, green: 0.5294117647, blue: 0.9764705882, alpha: 1)))
+												.overlay(
+													Circle()
+														.stroke(Color.lightGray)
+												)
+												.shadow(
+													color: Color.black.opacity(0.3),
+													radius: 10,
+													y: 5
+												)
+												.frame(width: 64, height: 64)
+											Image(systemName: .plus)
+												.font(.largeTitle)
+												.foregroundColor(.white)
+										}
+									}
+									if currentStore.user.numberOfDueCards > 0 {
+										FloatingReviewButton(user: currentStore.user)
+									}
+								}
+								.opacity(0.95)
+								.alignment(.bottomTrailing)
+								.padding([.trailing, .bottom], 16)
 							}
 						}
 						Rectangle()

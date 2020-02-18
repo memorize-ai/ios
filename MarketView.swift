@@ -32,6 +32,7 @@ struct MarketView: View {
 					}
 				}
 			}
+			.padding(.bottom, Self.horizontalPadding)
 		}
 	}
 	
