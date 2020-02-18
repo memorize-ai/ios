@@ -1,4 +1,5 @@
 import SwiftUI
+import LoadingState
 
 struct CramViewCardSection: View {
 	@ObservedObject var deck: Deck
@@ -9,6 +10,7 @@ struct CramViewCardSection: View {
 	let currentSection: Deck.Section?
 	let cardOffset: CGFloat
 	let currentCard: Card?
+	let currentCardLoadingState: LoadingState
 	let isWaitingForRating: Bool
 	
 	var _section: Deck.Section? {
@@ -47,7 +49,7 @@ struct CramViewCardSection: View {
 					.blur(radius: self.cardOffset.isZero ? 0 : 5)
 					ReviewViewCard(geometry: geometry) {
 						Group {
-							if self.currentCard == nil {
+							if self.currentCard == nil || self.currentCardLoadingState.isLoading {
 								ActivityIndicator(color: .gray)
 							} else {
 								CramViewCardContent(
@@ -75,6 +77,7 @@ struct CramViewCardSection_Previews: PreviewProvider {
 			currentSection: nil,
 			cardOffset: 0,
 			currentCard: nil,
+			currentCardLoadingState: .none,
 			isWaitingForRating: true
 		)
 	}

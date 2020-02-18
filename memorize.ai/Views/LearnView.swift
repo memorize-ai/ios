@@ -493,6 +493,7 @@ struct CramView: View {
 							currentSection: self.currentSection,
 							cardOffset: self.cardOffset,
 							currentCard: self.currentCard,
+							currentCardLoadingState: self.currentCardLoadingState,
 							isWaitingForRating: self.isWaitingForRating
 						)
 						.padding(.top, 6)
@@ -508,7 +509,8 @@ struct CramView: View {
 				.onTapGesture {
 					if
 						self.isWaitingForRating ||
-						self.current == nil
+						self.current == nil ||
+						self.currentCardLoadingState.isLoading
 					{ return }
 					self.waitForRating()
 				}
