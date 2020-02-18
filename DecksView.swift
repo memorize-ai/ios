@@ -7,7 +7,10 @@ struct DecksView: View {
 	@EnvironmentObject var model: DecksViewModel
 	
 	var selectedDeck: Deck {
-		currentStore.selectedDeck!
+		if currentStore.selectedDeck == nil {
+			currentStore.selectedDeck = currentStore.user.decks.first
+		}
+		return currentStore.selectedDeck!
 	}
 	
 	var body: some View {
