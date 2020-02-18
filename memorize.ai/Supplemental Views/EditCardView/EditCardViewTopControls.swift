@@ -26,13 +26,7 @@ struct EditCardViewTopControls: View {
 					self.card.publishLoadingState.fail(error: error)
 				}
 			}) {
-				CustomRectangle(
-					background: card.isPublishable
-						? Color.white
-						: Color.transparent,
-					borderColor: .transparentLightGray,
-					borderWidth: card.isPublishable ? 0 : 1.5
-				) {
+				CustomRectangle(background: Color.white) {
 					Group {
 						if card.publishLoadingState.isLoading {
 							ActivityIndicator()
@@ -40,11 +34,7 @@ struct EditCardViewTopControls: View {
 						} else {
 							Text("PUBLISH")
 								.font(.muli(.bold, size: 17))
-								.foregroundColor(
-									card.isPublishable
-										? .extraBluePurple
-										: Color.white.opacity(0.7)
-								)
+								.foregroundColor(.extraBluePurple)
 								.padding(.horizontal, 10)
 						}
 					}

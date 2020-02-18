@@ -7,7 +7,7 @@ struct AddCardsViewCardCellTopControls: View {
 	
 	var body: some View {
 		HStack {
-			Text(Card.stripFormatting(card.front).defaultIfEmpty("New card"))
+			Text(Card.stripFormatting(card.front).defaultIfEmpty("Empty"))
 				.font(.muli(.bold, size: 15))
 				.foregroundColor(.white)
 				.lineLimit(1)
