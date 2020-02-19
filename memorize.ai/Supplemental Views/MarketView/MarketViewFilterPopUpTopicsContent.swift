@@ -7,13 +7,17 @@ struct MarketViewFilterPopUpTopicsContent: View {
 	static let numberOfColumns = Int(availableWidth - 16) / Int(TopicCell.dimension)
 	
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: MarketViewModel
+	
+	@Binding var topicsFilter: [Topic]?
+	
+	let isTopicSelected: (Topic) -> Bool
+	let toggleTopicSelect: (Topic) -> Void
 	
 	func topicCellToggleSelect(forTopic topic: Topic) {
-		if model.topicsFilter == nil {
-			model.topicsFilter = currentStore.topics
+		if topicsFilter == nil {
+			topicsFilter = currentStore.topics
 		}
-		model.toggleTopicSelect(topic)
+		toggleTopicSelect(topic)
 	}
 	
 	var body: some View {
@@ -25,7 +29,7 @@ struct MarketViewFilterPopUpTopicsContent: View {
 		) { topic in
 			TopicCell(
 				topic: topic,
-				isSelected: self.model.isTopicSelected(topic)
+				isSelected: self.isTopicSelected(topic)
 			) {
 				self.topicCellToggleSelect(forTopic: topic)
 			}
@@ -38,11 +42,12 @@ struct MarketViewFilterPopUpTopicsContent: View {
 #if DEBUG
 struct MarketViewFilterPopUpTopicsContent_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewFilterPopUpTopicsContent()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(MarketViewModel(
-				currentUser: PREVIEW_CURRENT_STORE.user
-			))
+		MarketViewFilterPopUpTopicsContent(
+			topicsFilter: .constant([]),
+			isTopicSelected: { _ in true },
+			toggleTopicSelect: { _ in }
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

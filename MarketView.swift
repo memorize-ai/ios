@@ -1,5 +1,7 @@
 import SwiftUI
 import QGrid
+import PromiseKit
+import LoadingState
 
 struct MarketView: View {
 	static let deckCellWidth: CGFloat = 165
@@ -9,16 +11,29 @@ struct MarketView: View {
 	static let verticalCellSpacing: CGFloat = 20
 	static let horizontalPadding: CGFloat = 23
 	
-	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: MarketViewModel
+	enum FilterPopUpSideBarSelection {
+		case topics
+		case rating
+		case downloads
+	}
 	
-	@State var selectedDeck: Deck!
+	@EnvironmentObject var currentStore: CurrentStore
+	
+	@State var selectedDeck: Deck! = nil
 	@State var isDeckSelected = false
+	
+	@Binding var searchText: String
+	@Binding var isSortPopUpShowing: Bool
+	@Binding var isFilterPopUpShowing: Bool
+	
+	var searchResults: [Deck]
+	var searchResultsLoadingState: LoadingState
+	let loadSearchResults: (Bool) -> Void
 	
 	var grid: some View {
 		ScrollView(showsIndicators: false) {
 			VStack(spacing: Self.verticalCellSpacing) {
-				ForEach(model.searchResults) { deck in
+				ForEach(searchResults) { deck in
 					DeckCellWithGetButton(
 						deck: deck,
 						user: self.currentStore.user,
@@ -45,11 +60,14 @@ struct MarketView: View {
 				.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 20) {
 					Group {
-						MarketViewTopControls()
-						MarketViewTopButtons()
+						MarketViewTopControls(searchText: self.$searchText)
+						MarketViewTopButtons(
+							isSortPopUpShowing: self.$isSortPopUpShowing,
+							isFilterPopUpShowing: self.$isFilterPopUpShowing
+						)
 					}
 					.padding(.horizontal, Self.horizontalPadding)
-					if self.model.searchResultsLoadingState.isLoading {
+					if self.searchResultsLoadingState.isLoading {
 						ActivityIndicator(color: .white)
 						Spacer()
 					} else {
@@ -59,14 +77,14 @@ struct MarketView: View {
 				if self.isDeckSelected {
 					NavigateTo(
 						MarketDeckView()
-							.environmentObject(self.selectedDeck),
+							.environmentObject(self.selectedDeck!),
 						when: self.$isDeckSelected
 					)
 				}
 			}
 		}
 		.onAppear {
-			self.model.loadSearchResults()
+			self.loadSearchResults(false)
 		}
 	}
 }
@@ -74,11 +92,15 @@ struct MarketView: View {
 #if DEBUG
 struct MarketView_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketView()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(MarketViewModel(
-				currentUser: PREVIEW_CURRENT_STORE.user
-			))
+		MarketView(
+			searchText: .constant(""),
+			isSortPopUpShowing: .constant(false),
+			isFilterPopUpShowing: .constant(true),
+			searchResults: [],
+			searchResultsLoadingState: .none,
+			loadSearchResults: { _ in }
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

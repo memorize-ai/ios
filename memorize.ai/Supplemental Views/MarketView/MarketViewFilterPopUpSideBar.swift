@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MarketViewFilterPopUpSideBar: View {
-	@EnvironmentObject var model: MarketViewModel
+	@Binding var filterPopUpSideBarSelection: MarketView.FilterPopUpSideBarSelection
 	
 	var topicsButton: some View {
 		MarketViewFilterPopUpSideBarButton(
@@ -17,9 +17,9 @@ struct MarketViewFilterPopUpSideBar: View {
 					.renderingMode(.original)
 					.aspectRatio(contentMode: .fit)
 			},
-			isSelected: model.filterPopUpSideBarSelection == .topics
+			isSelected: filterPopUpSideBarSelection == .topics
 		) {
-			self.model.filterPopUpSideBarSelection = .topics
+			self.filterPopUpSideBarSelection = .topics
 		}
 	}
 	
@@ -37,9 +37,9 @@ struct MarketViewFilterPopUpSideBar: View {
 					.renderingMode(.original)
 					.aspectRatio(contentMode: .fit)
 			},
-			isSelected: model.filterPopUpSideBarSelection == .rating
+			isSelected: filterPopUpSideBarSelection == .rating
 		) {
-			self.model.filterPopUpSideBarSelection = .rating
+			self.filterPopUpSideBarSelection = .rating
 		}
 	}
 	
@@ -57,9 +57,9 @@ struct MarketViewFilterPopUpSideBar: View {
 					.renderingMode(.original)
 					.aspectRatio(contentMode: .fit)
 			},
-			isSelected: model.filterPopUpSideBarSelection == .downloads
+			isSelected: filterPopUpSideBarSelection == .downloads
 		) {
-			self.model.filterPopUpSideBarSelection = .downloads
+			self.filterPopUpSideBarSelection = .downloads
 		}
 	}
 	
@@ -84,10 +84,9 @@ struct MarketViewFilterPopUpSideBar: View {
 #if DEBUG
 struct MarketViewFilterPopUpSideBar_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewFilterPopUpSideBar()
-			.environmentObject(MarketViewModel(
-				currentUser: PREVIEW_CURRENT_STORE.user
-			))
+		MarketViewFilterPopUpSideBar(
+			filterPopUpSideBarSelection: .constant(.topics)
+		)
 	}
 }
 #endif

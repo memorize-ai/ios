@@ -5,29 +5,43 @@ struct MarketViewFilterPopUp: View {
 	static let contentFullHeightRatio: CGFloat = 424 / 667
 	static let contentHeight = SCREEN_SIZE.height * contentFullHeightRatio
 	
-	@EnvironmentObject var model: MarketViewModel
+	@Binding var isFilterPopUpShowing: Bool
+	@Binding var topicsFilter: [Topic]?
+	@Binding var ratingFilter: Double
+	@Binding var downloadsFilter: Double
+	@Binding var filterPopUpSideBarSelection: MarketView.FilterPopUpSideBarSelection
+	
+	let loadSearchResults: (Bool) -> Void
+	let isTopicSelected: (Topic) -> Bool
+	let toggleTopicSelect: (Topic) -> Void
 	
 	var body: some View {
 		PopUp(
-			isShowing: $model.isFilterPopUpShowing,
+			isShowing: $isFilterPopUpShowing,
 			contentHeight: Self.contentHeight,
 			onHide: {
-				self.model.loadSearchResults(force: true)
+				self.loadSearchResults(true)
 			}
 		) {
 			HStack(spacing: 0) {
-				MarketViewFilterPopUpSideBar()
+				MarketViewFilterPopUpSideBar(
+					filterPopUpSideBarSelection: $filterPopUpSideBarSelection
+				)
 				Spacer()
-				SwitchOver(model.filterPopUpSideBarSelection)
+				SwitchOver(filterPopUpSideBarSelection)
 					.case(.topics) {
-						MarketViewFilterPopUpTopicsContent()
+						MarketViewFilterPopUpTopicsContent(
+							topicsFilter: $topicsFilter,
+							isTopicSelected: isTopicSelected,
+							toggleTopicSelect: toggleTopicSelect
+						)
 					}
 					.case(.rating) {
 						MarketViewFilterPopUpContentWithSlider(
-							value: $model.ratingFilter,
+							value: $ratingFilter,
 							leadingText: "Must have over",
 							trailingText:
-								"star\(model.ratingFilter == 1 ? "" : "s")",
+								"star\(ratingFilter == 1 ? "" : "s")",
 							lowerBound: 0,
 							upperBound: 5,
 							formatAsInt: false
@@ -35,10 +49,10 @@ struct MarketViewFilterPopUp: View {
 					}
 					.case(.downloads) {
 						MarketViewFilterPopUpContentWithSlider(
-							value: $model.downloadsFilter,
+							value: $downloadsFilter,
 							leadingText: "Must have over",
 							trailingText:
-								"download\(model.downloadsFilter == 1 ? "" : "s")",
+								"download\(downloadsFilter == 1 ? "" : "s")",
 							lowerBound: 0,
 							upperBound: 10e3,
 							formatAsInt: true
@@ -54,11 +68,17 @@ struct MarketViewFilterPopUp: View {
 #if DEBUG
 struct MarketViewFilterPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewFilterPopUp()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(MarketViewModel(
-				currentUser: PREVIEW_CURRENT_STORE.user
-			))
+		MarketViewFilterPopUp(
+			isFilterPopUpShowing: .constant(true),
+			topicsFilter: .constant(nil),
+			ratingFilter: .constant(20),
+			downloadsFilter: .constant(20),
+			filterPopUpSideBarSelection: .constant(.topics),
+			loadSearchResults: { _ in },
+			isTopicSelected: { _ in true },
+			toggleTopicSelect: { _ in }
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

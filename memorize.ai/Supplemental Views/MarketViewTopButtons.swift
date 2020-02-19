@@ -2,7 +2,9 @@ import SwiftUI
 
 struct MarketViewTopButtons: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: MarketViewModel
+	
+	@Binding var isSortPopUpShowing: Bool
+	@Binding var isFilterPopUpShowing: Bool
 	
 	var body: some View {
 		HStack(spacing: 13) {
@@ -11,7 +13,7 @@ struct MarketViewTopButtons: View {
 				title: "SORT"
 			) {
 				popUpWithAnimation {
-					self.model.isSortPopUpShowing = true
+					self.isSortPopUpShowing = true
 				}
 			}
 			MarketViewSearchStateButton(
@@ -19,7 +21,7 @@ struct MarketViewTopButtons: View {
 				title: "FILTER"
 			) {
 				popUpWithAnimation {
-					self.model.isFilterPopUpShowing = true
+					self.isFilterPopUpShowing = true
 				}
 			}
 		}
@@ -29,9 +31,11 @@ struct MarketViewTopButtons: View {
 #if DEBUG
 struct MarketViewTopButtons_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewTopButtons()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(MarketViewModel(currentUser: PREVIEW_CURRENT_STORE.user))
+		MarketViewTopButtons(
+			isSortPopUpShowing: .constant(false),
+			isFilterPopUpShowing: .constant(false)
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif
