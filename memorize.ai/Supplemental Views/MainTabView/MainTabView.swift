@@ -25,7 +25,7 @@ struct MainTabView: View {
 		currentStore.mainTabViewSelection
 	}
 	
-	// MARK: - Market View START
+	// MARK: - Market View [START]
 	
 	@State var searchText = "" {
 		didSet {
@@ -116,7 +116,7 @@ struct MainTabView: View {
 			: topicsFilter?.append(topic)
 	}
 	
-	// MARK: Market View END -
+	// MARK: Market View [END] -
 	
 	var tabBarItems: some View {
 		HStack(alignment: .bottom) {
