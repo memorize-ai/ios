@@ -9,25 +9,32 @@ struct RecommendedDecksViewContent: View {
 	static let verticalCellSpacing: CGFloat = 20
 	
 	@EnvironmentObject var currentStore: CurrentStore
-	
-	@ObservedObject var model = RecommendedDecksViewModel()
+	@EnvironmentObject var model: RecommendedDecksViewModel
 	
 	var body: some View {
-		QGrid(
-			model.decks,
-			columns: Self.numberOfColumns,
-			vSpacing: Self.verticalCellSpacing,
-			hSpacing: Self.horizontalCellSpacing
-		) { deck in
-			DeckCellWithGetButton(
-				deck: deck,
-				user: self.currentStore.user,
-				width: Self.deckCellWidth,
-				shouldManuallyModifyDecks: true,
-				shouldShowRemoveAlert: false
-			)
+		VStack {
+			if model.decksLoadingState.isLoading {
+				ActivityIndicator(color: .white)
+				Spacer()
+			} else {
+				QGrid(
+					model.decks,
+					columns: Self.numberOfColumns,
+					vSpacing: Self.verticalCellSpacing,
+					hSpacing: Self.horizontalCellSpacing
+				) { deck in
+					DeckCellWithGetButton(
+						deck: deck,
+						user: self.currentStore.user,
+						width: Self.deckCellWidth,
+						shouldManuallyModifyDecks: true,
+						shouldShowRemoveAlert: false
+					)
+				}
+				.frame(maxWidth: SCREEN_SIZE.width - 32)
+				.padding(.bottom)
+			}
 		}
-		.frame(maxWidth: SCREEN_SIZE.width - 32)
 		.onAppear {
 			self.model.loadDecks(
 				topics: self.currentStore.user.interests
@@ -35,3 +42,13 @@ struct RecommendedDecksViewContent: View {
 		}
 	}
 }
+
+#if DEBUG
+struct RecommendedDecksViewContent_Previews: PreviewProvider {
+	static var previews: some View {
+		RecommendedDecksViewContent()
+			.environmentObject(PREVIEW_CURRENT_STORE)
+			.environmentObject(RecommendedDecksViewModel())
+	}
+}
+#endif

@@ -3,12 +3,10 @@ import SwiftUI
 struct ChooseTopicsView: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	
-	let content: ChooseTopicsViewContent
+	@ObservedObject var model: ChooseTopicsViewModel
 	
 	init(currentUser: User) {
-		content = ChooseTopicsViewContent(
-			currentUser: currentUser
-		)
+		model = .init(currentUser: currentUser)
 	}
 	
 	var leadingButton: some View {
@@ -31,7 +29,8 @@ struct ChooseTopicsView: View {
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: RecommendedDecksView()
 				.environmentObject(currentStore),
-			content: content
+			content: ChooseTopicsViewContent()
+				.environmentObject(model)
 		)
 	}
 }

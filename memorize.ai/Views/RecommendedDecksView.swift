@@ -15,6 +15,7 @@ struct RecommendedDecksView: View {
 			.environmentObject(currentStore)
 			.navigationBarRemoved(),
 			content: RecommendedDecksViewContent()
+				.environmentObject(RecommendedDecksViewModel())
 		)
 	}
 }
