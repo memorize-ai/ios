@@ -48,6 +48,8 @@ struct DecksViewSectionHeader: View {
 			Text(cardCountMessage)
 				.font(.muli(.bold, size: 15))
 				.foregroundColor(.darkBlue)
+				.lineLimit(1)
+				.layoutPriority(1)
 			HStack(spacing: 4) {
 				Button(action: {
 					self.model.toggleSectionExpanded(
@@ -88,7 +90,7 @@ struct DecksViewSectionHeader_Previews: PreviewProvider {
 		DecksViewSectionHeader(section: .init(
 			id: "0",
 			parent: PREVIEW_CURRENT_STORE.user.decks.first!,
-			name: "CSS",
+			name: "CSS CSS CSS CSS CSS CSS",
 			index: 0,
 			numberOfCards: 56
 		))

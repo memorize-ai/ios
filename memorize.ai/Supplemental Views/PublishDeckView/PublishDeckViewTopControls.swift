@@ -26,8 +26,12 @@ struct PublishDeckViewTopControls: View {
 		
 		currentStore.goToDecksView(withDeck: deck)
 		
-		self.deck = deck
-		shouldShowAddCardsView = true
+		if model.deck == nil {
+			self.deck = deck
+			shouldShowAddCardsView = true
+		} else {
+			goBack()
+		}
 	}
 	
 	var body: some View {

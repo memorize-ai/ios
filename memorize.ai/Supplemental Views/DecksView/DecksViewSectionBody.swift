@@ -43,7 +43,7 @@ struct DecksViewSectionBody: View {
 	var reviewButton: some View {
 		ReviewViewNavigationLink(section: section) {
 			headerButton(
-				text: "Review • \(section.numberOfDueCards?.formatted ?? "(error)")",
+				text: "Review \(section.numberOfDueCards?.formatted ?? "(error)")",
 				color: .init(#colorLiteral(red: 0, green: 0.7647058824, blue: 0.4941176471, alpha: 1))
 			)
 		}

@@ -8,47 +8,7 @@ struct HomeViewReviewSection: View {
 	var deckList: some View {
 		VStack(spacing: 0) {
 			ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
-				Button(action: {
-					self.currentStore.goToDecksView(withDeck: deck)
-				}) {
-					HStack {
-						Group {
-							if deck.imageLoadingState.didFail {
-								Image(systemName: .exclamationmarkTriangle)
-									.foregroundColor(.gray)
-									.scaleEffect(1.5)
-							} else if deck.hasImage {
-								if deck.image == nil {
-									ActivityIndicator(color: .gray)
-								} else {
-									deck.displayImage?
-										.resizable()
-										.renderingMode(.original)
-										.aspectRatio(contentMode: .fill)
-								}
-							} else {
-								Deck.DEFAULT_IMAGE
-									.resizable()
-									.renderingMode(.original)
-									.aspectRatio(contentMode: .fill)
-							}
-						}
-						.frame(width: 40, height: 40)
-						.clipShape(Circle())
-						Text(deck.name)
-							.font(.muli(.bold, size: 16))
-							.foregroundColor(.darkGray)
-						Spacer()
-						if deck.userData?.isDue ?? false {
-							SideBarDeckRowDueCardsBadge(
-								count: deck.userData?.numberOfDueCards ?? 0,
-								isSelected: false
-							)
-						}
-					}
-					.padding(.horizontal)
-					.padding(.vertical, 6)
-				}
+				HomeViewReviewSectionDeckRow(deck: deck)
 			}
 		}
 	}
