@@ -95,9 +95,10 @@ struct ReviewView: View {
 	}
 	
 	var sections: [Deck.Section] {
-		decks?.reduce([]) { acc, deck in
-			acc + [deck.unsectionedSection] + deck.sections
-		} ?? []
+		(decks ?? deck.map { [$0] })?
+			.reduce([]) { acc, deck in
+				acc + [deck.unsectionedSection] + deck.sections
+			} ?? []
 	}
 	
 	var recapView: some View {
