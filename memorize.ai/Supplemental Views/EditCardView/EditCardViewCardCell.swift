@@ -25,7 +25,13 @@ struct EditCardViewCardCell: View {
 		VStack(spacing: 8) {
 			EditCardViewCardCellTopControls(card: card)
 				.padding(.horizontal, 6)
-			CustomRectangle(background: Color.white) {
+			CustomRectangle(
+				background: Color.white,
+				borderColor: .lightGray,
+				borderWidth: 1.5,
+				cornerRadius: 8,
+				shadowRadius: 5
+			) {
 				VStack {
 					Text("Choose section")
 						.font(.muli(.bold, size: 15))

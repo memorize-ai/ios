@@ -23,6 +23,8 @@ struct ProfileViewMyInterestsSection: View {
 			.frame(width: SCREEN_SIZE.width - 8 * 2, alignment: .leading)
 			CustomRectangle(
 				background: Color.white,
+				borderColor: .lightGray,
+				borderWidth: 1.5,
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {

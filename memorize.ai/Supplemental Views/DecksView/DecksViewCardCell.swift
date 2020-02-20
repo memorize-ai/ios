@@ -20,8 +20,8 @@ struct DecksViewCardCell: View {
 		ZStack(alignment: .topLeading) {
 			CustomRectangle(
 				background: Color.white,
-				borderColor: .lightGrayBorder,
-				borderWidth: 1,
+				borderColor: .lightGray,
+				borderWidth: 1.5,
 				cornerRadius: 8,
 				shadowRadius: 5,
 				shadowYOffset: 5

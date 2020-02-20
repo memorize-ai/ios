@@ -36,15 +36,16 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 			CustomRectangle(
 				background: Color.white,
 				borderColor: color,
-				borderWidth: 1,
-				cornerRadius: 8
+				borderWidth: 1.5,
+				cornerRadius: 8,
+				shadowRadius: 5,
+				shadowYOffset: 5
 			) {
 				VStack(alignment: .leading) {
 					if card.isNew {
 						Text("NEW")
 							.font(.muli(.semiBold, size: 13))
 							.foregroundColor(.darkBlue)
-							.padding(.bottom, -4)
 					}
 					HStack(alignment: .bottom) {
 						if shouldShowDeckName {

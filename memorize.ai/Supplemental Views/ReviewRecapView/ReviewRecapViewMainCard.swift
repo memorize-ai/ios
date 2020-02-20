@@ -24,7 +24,9 @@ struct ReviewRecapViewMainCard: View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: .lightGray,
-			borderWidth: 1.5
+			borderWidth: 1.5,
+			shadowRadius: 5,
+			shadowYOffset: 5
 		) {
 			VStack(spacing: 20) {
 				CustomRectangle(background: Color.lightGrayBackground) {

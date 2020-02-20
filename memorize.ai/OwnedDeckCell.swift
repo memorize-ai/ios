@@ -38,7 +38,8 @@ struct OwnedDeckCell: View {
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
-			cornerRadius: 8
+			cornerRadius: 8,
+			shadowRadius: 5
 		) {
 			VStack {
 				Group {

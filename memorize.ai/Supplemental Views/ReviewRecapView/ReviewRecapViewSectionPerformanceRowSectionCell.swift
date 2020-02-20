@@ -31,8 +31,10 @@ struct ReviewRecapViewSectionPerformanceRowSectionCell: View {
 			CustomRectangle(
 				background: Color.white,
 				borderColor: rating.badgeColor,
-				borderWidth: 1,
-				cornerRadius: 8
+				borderWidth: 1.5,
+				cornerRadius: 8,
+				shadowRadius: 5,
+				shadowYOffset: 5
 			) {
 				VStack {
 					ReviewRecapViewSectionPerformanceRowSectionCellDeckName(

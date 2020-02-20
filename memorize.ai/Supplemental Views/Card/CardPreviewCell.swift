@@ -12,7 +12,9 @@ struct CardPreviewCell: View {
 		CustomRectangle(
 			background: Color.white,
 			borderColor: .lightGray,
-			borderWidth: 1.5
+			borderWidth: 1.5,
+			cornerRadius: 8,
+			shadowRadius: 5
 		) {
 			ZStack(alignment: .bottom) {
 				card.webView(forSide: side)

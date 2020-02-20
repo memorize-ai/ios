@@ -20,7 +20,8 @@ struct DeckCell<Content: View>: View {
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
-			cornerRadius: 8
+			cornerRadius: 8,
+			shadowRadius: 5
 		) {
 			VStack {
 				Group {
@@ -115,8 +116,8 @@ struct DeckCell_Previews: PreviewProvider {
 		)
 		failedDeck.imageLoadingState.fail(message: "Self-invoked")
 		return ZStack {
-			Color.gray
-				.edgesIgnoringSafeArea(.all)
+//			Color.gray
+//				.edgesIgnoringSafeArea(.all)
 			QGrid(
 				[
 					Deck._new(

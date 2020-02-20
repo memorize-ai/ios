@@ -17,7 +17,13 @@ struct ProfileViewMainCard: View {
 	}
 	
 	var body: some View {
-		CustomRectangle(background: Color.white) {
+		CustomRectangle(
+			background: Color.white,
+			borderColor: .lightGray,
+			borderWidth: 1.5,
+			shadowRadius: 5,
+			shadowYOffset: 5
+		) {
 			VStack(spacing: 20) {
 				VStack(spacing: 8) {
 					titleLabel("Name")
