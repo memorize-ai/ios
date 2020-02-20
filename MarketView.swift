@@ -22,12 +22,13 @@ struct MarketView: View {
 	@State var selectedDeck: Deck! = nil
 	@State var isDeckSelected = false
 	
-	@Binding var searchText: String
 	@Binding var isSortPopUpShowing: Bool
 	@Binding var isFilterPopUpShowing: Bool
 	
-	var searchResults: [Deck]
-	var searchResultsLoadingState: LoadingState
+	let searchText: String
+	let setSearchText: (String) -> Void
+	let searchResults: [Deck]
+	let searchResultsLoadingState: LoadingState
 	let loadSearchResults: (Bool) -> Void
 	
 	var grid: some View {
@@ -60,7 +61,10 @@ struct MarketView: View {
 				.edgesIgnoringSafeArea(.all)
 				VStack(spacing: 20) {
 					Group {
-						MarketViewTopControls(searchText: self.$searchText)
+						MarketViewTopControls(
+							searchText: self.searchText,
+							setSearchText: self.setSearchText
+						)
 						MarketViewTopButtons(
 							isSortPopUpShowing: self.$isSortPopUpShowing,
 							isFilterPopUpShowing: self.$isFilterPopUpShowing
@@ -93,9 +97,10 @@ struct MarketView: View {
 struct MarketView_Previews: PreviewProvider {
 	static var previews: some View {
 		MarketView(
-			searchText: .constant(""),
 			isSortPopUpShowing: .constant(false),
 			isFilterPopUpShowing: .constant(true),
+			searchText: "",
+			setSearchText: { _ in },
 			searchResults: [],
 			searchResultsLoadingState: .none,
 			loadSearchResults: { _ in }

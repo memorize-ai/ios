@@ -62,6 +62,10 @@ struct MainTabView: View {
 	@State var searchResults = [Deck]()
 	@State var searchResultsLoadingState = LoadingState()
 	
+	func setSearchText(_ searchText: String) {
+		self.searchText = searchText
+	}
+	
 	func switchSortAlgorithmIfNeeded() {
 		if searchText.isEmpty && topicsFilter == nil && ratingFilter.isZero && downloadsFilter.isZero {
 			sortAlgorithm = .recommended
@@ -216,9 +220,10 @@ struct MainTabView: View {
 								}
 								.case(.market) {
 									MarketView(
-										searchText: $searchText,
 										isSortPopUpShowing: $isSortPopUpShowing,
 										isFilterPopUpShowing: $isFilterPopUpShowing,
+										searchText: searchText,
+										setSearchText: setSearchText,
 										searchResults: searchResults,
 										searchResultsLoadingState: searchResultsLoadingState,
 										loadSearchResults: loadSearchResults
