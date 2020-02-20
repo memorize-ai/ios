@@ -48,10 +48,10 @@ struct DeckCell<Content: View>: View {
 						Deck.DEFAULT_IMAGE
 							.resizable()
 							.renderingMode(.original)
-							.aspectRatio(contentMode: .fill)
+							.aspectRatio(contentMode: .fit)
 					}
 				}
-				.frame(height: imageHeight)
+				.frame(width: width, height: imageHeight)
 				.clipped()
 				.cornerRadius(8, corners: [.topLeft, .topRight])
 				VStack(alignment: .leading) {

@@ -5,7 +5,7 @@ import PromiseKit
 import LoadingState
 
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
-	static let DEFAULT_IMAGE = Image("DefaultDeckImage")
+	static let DEFAULT_IMAGE = Image("memorize.ai Logo")
 	static let MAX_NUMBER_OF_PREVIEW_CARDS = 20
 	
 	static var cache = [String: Deck]()
