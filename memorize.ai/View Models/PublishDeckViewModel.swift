@@ -25,7 +25,7 @@ final class PublishDeckViewModel: ViewModel {
 	@Published var isImagePickerShowing = false
 	
 	var displayImage: Image?
-	var imagePickerSource: ImagePicker.Source!
+	var imagePickerSource = ImagePicker.Source.photoLibrary
 	var didChangeImage = false
 	
 	init(deck: Deck? = nil) {
@@ -44,7 +44,10 @@ final class PublishDeckViewModel: ViewModel {
 	func showImagePicker(source: ImagePicker.Source) {
 		imagePickerSource = source
 		isImagePickerShowing = true
-		isImagePopUpShowing = false
+		
+		popUpWithAnimation {
+			isImagePopUpShowing = false
+		}
 	}
 	
 	func isTopicSelected(_ topic: Topic) -> Bool {

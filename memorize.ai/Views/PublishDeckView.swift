@@ -55,14 +55,6 @@ struct PublishDeckView: View {
 		}
 	}
 	
-	var imagePicker: ImagePicker {
-		.init(
-			isShowing: $model.isImagePickerShowing,
-			image: $model.image,
-			source: model.imagePickerSource
-		)
-	}
-    
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .top) {
@@ -84,11 +76,12 @@ struct PublishDeckView: View {
 					}
 				}
 				self.imagePopUp
-				if self.model.isImagePickerShowing {
-					self.imagePicker
-						.edgesIgnoringSafeArea(.all)
-				}
 			}
+			.imagePicker(
+				isShowing: self.$model.isImagePickerShowing,
+				image: self.$model.image,
+				source: self.model.imagePickerSource
+			)
 		}
 	}
 }

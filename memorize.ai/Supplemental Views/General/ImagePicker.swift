@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
-	typealias Source = UIImagePickerController.SourceType
-	
 	final class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 		@Binding var isShowing: Bool
 		@Binding var image: UIImage?
@@ -16,8 +14,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 			_ picker: UIImagePickerController,
 			didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
 		) {
-			guard let image = info[.originalImage] as? UIImage else { return }
-			self.image = image
+			image = info[.originalImage] as? UIImage
 			isShowing = false
 		}
 		
@@ -26,20 +23,12 @@ struct ImagePicker: UIViewControllerRepresentable {
 		}
 	}
 	
+	typealias Source = UIImagePickerController.SourceType
+	
 	@Binding var isShowing: Bool
 	@Binding var image: UIImage?
 	
 	let source: Source
-	
-	init(
-		isShowing: Binding<Bool>,
-		image: Binding<UIImage?>,
-		source: Source = .photoLibrary
-	) {
-		_isShowing = isShowing
-		_image = image
-		self.source = source
-	}
 	
 	func makeCoordinator() -> Coordinator {
 		.init(isShowing: $isShowing, image: $image)
@@ -47,18 +36,37 @@ struct ImagePicker: UIViewControllerRepresentable {
 	
 	func makeUIViewController(context: Context) -> UIImagePickerController {
 		let picker = UIImagePickerController()
+		
 		picker.delegate = context.coordinator
 		picker.sourceType = source
+		
 		return picker
 	}
 	
 	func updateUIViewController(_ picker: UIImagePickerController, context: Context) {}
 }
 
+extension View {
+	func imagePicker(
+		isShowing: Binding<Bool>,
+		image: Binding<UIImage?>,
+		source: ImagePicker.Source = .photoLibrary
+	) -> some View {
+		sheet(isPresented: isShowing) {
+			ImagePicker(
+				isShowing: isShowing,
+				image: image,
+				source: source
+			)
+			.edgesIgnoringSafeArea(.all)
+		}
+	}
+}
+
 #if DEBUG
 struct ImagePicker_Previews: PreviewProvider {
 	static var previews: some View {
-		ImagePicker(isShowing: .constant(true), image: .constant(nil))
+		ImagePicker(isShowing: .constant(true), image: .constant(nil), source: .photoLibrary)
 	}
 }
 #endif
