@@ -302,6 +302,7 @@
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
 		4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC3236AA3810000CA7A /* DeckCell.swift */; };
 		4DFA672623FF7D6E003C0245 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA672523FF7D6E003C0245 /* MailView.swift */; };
+		4DFA672823FF82D9003C0245 /* ProfileViewContactUsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA672723FF82D9003C0245 /* ProfileViewContactUsButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -615,6 +616,7 @@
 		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		4DFA0DC3236AA3810000CA7A /* DeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		4DFA672523FF7D6E003C0245 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		4DFA672723FF82D9003C0245 /* ProfileViewContactUsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewContactUsButton.swift; sourceTree = "<group>"; };
 		4F4C9DD2FC5AC65507BFA8D3 /* Pods-memorize.aiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.aiTests.release.xcconfig"; path = "Target Support Files/Pods-memorize.aiTests/Pods-memorize.aiTests.release.xcconfig"; sourceTree = "<group>"; };
 		601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.release.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.release.xcconfig"; sourceTree = "<group>"; };
 		64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_memorize_ai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1089,6 +1091,7 @@
 				4D9D931923DF84D40008B614 /* ProfileViewTopControls.swift */,
 				4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */,
 				4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */,
+				4DFA672723FF82D9003C0245 /* ProfileViewContactUsButton.swift */,
 				4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */,
 				4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */,
 			);
@@ -1697,6 +1700,7 @@
 				4DD5FE8E2387438400E70251 /* MarketViewFilterPopUpSideBarButton.swift in Sources */,
 				4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */,
 				4D5C404323C83B7700511B7C /* ReviewViewFooterPerformanceRatingButtonBadgeContent.swift in Sources */,
+				4DFA672823FF82D9003C0245 /* ProfileViewContactUsButton.swift in Sources */,
 				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
 				4DF45953239996D800A78ADF /* PublishDeckViewContentBox.swift in Sources */,
 				4D402E72235E591E0011C6B6 /* Color.swift in Sources */,

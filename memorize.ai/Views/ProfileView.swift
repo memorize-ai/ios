@@ -19,8 +19,13 @@ struct ProfileView: View {
 					ScrollView {
 						VStack {
 							ProfileViewMainCard(user: self.currentStore.user)
-							ProfileViewForgotPasswordButton()
-								.padding(.top, 8)
+							HStack {
+								ProfileViewForgotPasswordButton()
+								if MailView.canSendMail {
+									ProfileViewContactUsButton(user: self.currentStore.user)
+								}
+							}
+							.padding(.top, 8)
 							ProfileViewCreatedDecksSection(user: self.currentStore.user)
 							ProfileViewMyInterestsSection(user: self.currentStore.user)
 						}

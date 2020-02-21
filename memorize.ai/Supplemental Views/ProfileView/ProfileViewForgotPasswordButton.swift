@@ -37,9 +37,10 @@ struct ProfileViewForgotPasswordButton: View {
 						Text("Forgot password")
 							.font(.muli(.semiBold, size: 16))
 							.foregroundColor(.darkBlue)
+							.shrinks()
 					}
 				}
-				.frame(width: SCREEN_SIZE.width - 8 * 2, height: 40)
+				.frame(width: (SCREEN_SIZE.width - 8 * 3) / 2, height: 40)
 			}
 		}
 		.padding(.top, 1 + (loadingState.isLoading ? -12 : 0))

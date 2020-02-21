@@ -23,6 +23,10 @@ let WEB_URL = "https://memorize.ai" // "https://memorize-ai-dev.web.app"
 let WEB_URL = "https://memorize.ai"
 #endif
 
+let SUPPORT_EMAIL = "support@memorize.ai"
+
+let APP_VERSION = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
 var VIEWPORT_META_TAG: HTMLElement {
 	HTMLElement.meta
 		.name("viewport")
