@@ -45,9 +45,7 @@ struct ProfileViewContactUsButton: View {
 					.foregroundColor(.darkBlue)
 					.shrinks()
 					.frame(
-						width: MailView.canSendMail
-							? (SCREEN_SIZE.width - 8 * 3) / 2
-							: SCREEN_SIZE.width - 8 * 2,
+						width: (SCREEN_SIZE.width - 8 * 3) / 2,
 						height: 40
 					)
 			}
