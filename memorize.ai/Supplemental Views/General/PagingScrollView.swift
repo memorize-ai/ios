@@ -2,10 +2,13 @@ import SwiftUI
 
 struct PagingScrollView<PageContent: View>: View {
 	@State var dragOffset: CGFloat = 0
+	
 	@Binding var activePageIndex: Int
+	
 	let items: [PageContent]
 	let pageWidth: CGFloat
 	let tileWidth: CGFloat
+	
 	private let tilePadding: CGFloat
 	private let tileRemain: CGFloat
 	private let contentWidth: CGFloat

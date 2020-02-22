@@ -113,8 +113,10 @@ extension View {
 	}
 }
 
+#if DEBUG
 struct MailView_Previews: PreviewProvider {
     static var previews: some View {
 		MailView(options: .constant(nil), result: .constant(nil))
     }
 }
+#endif
