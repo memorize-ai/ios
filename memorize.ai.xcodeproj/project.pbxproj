@@ -82,19 +82,19 @@
 		4D51F5422385E02E00C6B59B /* MarketViewSearchStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */; };
 		4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54C03D237F7C83003765C1 /* DecksView.swift */; };
 		4D56FC3823C50AAA006366FD /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3723C50AAA006366FD /* StoreReview.swift */; };
-		4D56FC3A23C53369006366FD /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3923C53369006366FD /* LearnView.swift */; };
-		4D56FC3D23C533C5006366FD /* LearnViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */; };
-		4D56FC4323C536CF006366FD /* LearnViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */; };
-		4D56FC4523C53814006366FD /* LearnViewSliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4423C53814006366FD /* LearnViewSliders.swift */; };
-		4D56FC4723C53D13006366FD /* LearnViewCardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4623C53D13006366FD /* LearnViewCardSection.swift */; };
-		4D56FC4923C53E48006366FD /* LearnViewCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */; };
+		4D56FC3A23C53369006366FD /* CramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3923C53369006366FD /* CramView.swift */; };
+		4D56FC3D23C533C5006366FD /* CramViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC3C23C533C5006366FD /* CramViewNavigationLink.swift */; };
+		4D56FC4323C536CF006366FD /* CramViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4223C536CF006366FD /* CramViewTopControls.swift */; };
+		4D56FC4523C53814006366FD /* CramViewSliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4423C53814006366FD /* CramViewSliders.swift */; };
+		4D56FC4723C53D13006366FD /* CramViewCardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4623C53D13006366FD /* CramViewCardSection.swift */; };
+		4D56FC4923C53E48006366FD /* CramViewCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4823C53E48006366FD /* CramViewCardContent.swift */; };
 		4D56FC4B23C540EB006366FD /* BlankReviewViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */; };
 		4D56FC4D23C54F29006366FD /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4C23C54F29006366FD /* Collection.swift */; };
-		4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4E23C55629006366FD /* LearnRecapView.swift */; };
+		4D56FC4F23C55629006366FD /* CramRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC4E23C55629006366FD /* CramRecapView.swift */; };
 		4D56FC5123C558AF006366FD /* Card+CramData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5023C558AF006366FD /* Card+CramData.swift */; };
 		4D56FC5323C55A09006366FD /* Card+PerformanceRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */; };
-		4D56FC5523C560F1006366FD /* LearnViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5423C560F1006366FD /* LearnViewFooter.swift */; };
-		4D56FC5723C58392006366FD /* LearnViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5623C58392006366FD /* LearnViewPopUp.swift */; };
+		4D56FC5523C560F1006366FD /* CramViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5423C560F1006366FD /* CramViewFooter.swift */; };
+		4D56FC5723C58392006366FD /* CramViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56FC5623C58392006366FD /* CramViewPopUp.swift */; };
 		4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */; };
 		4D5772D723FB9E12003D7A49 /* HomeViewReviewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5772D623FB9E12003D7A49 /* HomeViewReviewSection.swift */; };
 		4D578C452401F75200816785 /* InitialViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D578C442401F75200816785 /* InitialViewFooter.swift */; };
@@ -110,16 +110,16 @@
 		4D5C403F23C81DE100511B7C /* FirebaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C403E23C81DE100511B7C /* FirebaseFunctions.swift */; };
 		4D5C404123C838AA00511B7C /* ReviewViewFooterPerformanceRatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404023C838AA00511B7C /* ReviewViewFooterPerformanceRatingButton.swift */; };
 		4D5C404323C83B7700511B7C /* ReviewViewFooterPerformanceRatingButtonBadgeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404223C83B7700511B7C /* ReviewViewFooterPerformanceRatingButtonBadgeContent.swift */; };
-		4D5C404723C855BA00511B7C /* LearnRecapViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404623C855BA00511B7C /* LearnRecapViewTopControls.swift */; };
-		4D5C404923C857DD00511B7C /* LearnRecapViewMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404823C857DD00511B7C /* LearnRecapViewMainCard.swift */; };
+		4D5C404723C855BA00511B7C /* CramRecapViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404623C855BA00511B7C /* CramRecapViewTopControls.swift */; };
+		4D5C404923C857DD00511B7C /* CramRecapViewMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404823C857DD00511B7C /* CramRecapViewMainCard.swift */; };
 		4D5C404C23C9043400511B7C /* HorizontalBarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404B23C9043400511B7C /* HorizontalBarGraph.swift */; };
-		4D5C404E23C9161400511B7C /* LearnRecapViewSectionPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404D23C9161400511B7C /* LearnRecapViewSectionPerformance.swift */; };
-		4D5C405023C9174400511B7C /* LearnRecapViewSectionPerformanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404F23C9174400511B7C /* LearnRecapViewSectionPerformanceRow.swift */; };
-		4D5C405423C9234E00511B7C /* LearnRecapViewSectionPerformanceRowSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405323C9234E00511B7C /* LearnRecapViewSectionPerformanceRowSectionCell.swift */; };
-		4D5C405623C9272200511B7C /* LearnRecapViewCardPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405523C9272200511B7C /* LearnRecapViewCardPerformance.swift */; };
-		4D5C405823C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */; };
-		4D5C405A23C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */; };
-		4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */; };
+		4D5C404E23C9161400511B7C /* CramRecapViewSectionPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404D23C9161400511B7C /* CramRecapViewSectionPerformance.swift */; };
+		4D5C405023C9174400511B7C /* CramRecapViewSectionPerformanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C404F23C9174400511B7C /* CramRecapViewSectionPerformanceRow.swift */; };
+		4D5C405423C9234E00511B7C /* CramRecapViewSectionPerformanceRowSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405323C9234E00511B7C /* CramRecapViewSectionPerformanceRowSectionCell.swift */; };
+		4D5C405623C9272200511B7C /* CramRecapViewCardPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405523C9272200511B7C /* CramRecapViewCardPerformance.swift */; };
+		4D5C405823C928F000511B7C /* CramRecapViewCardPerformanceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405723C928F000511B7C /* CramRecapViewCardPerformanceRow.swift */; };
+		4D5C405A23C92A4B00511B7C /* CramRecapViewCardPerformanceRowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405923C92A4B00511B7C /* CramRecapViewCardPerformanceRowCardCell.swift */; };
+		4D5C405C23C92C3800511B7C /* CramRecapViewCardPerformanceRowCardCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C405B23C92C3800511B7C /* CramRecapViewCardPerformanceRowCardCellContent.swift */; };
 		4D60858023D14C2D00437A78 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60857F23D14C2D00437A78 /* Query.swift */; };
 		4D60858223D17FA900437A78 /* ReviewViewCardSectionDeckName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60858123D17FA900437A78 /* ReviewViewCardSectionDeckName.swift */; };
 		4D60858423D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60858323D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift */; };
@@ -128,7 +128,7 @@
 		4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */; };
 		4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D60FCA8237DF23B0082B66F /* TopicPerformanceSheetView.swift */; };
 		4D6300D523C6AC7F00274DC1 /* ReviewRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */; };
-		4D6300DA23C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */; };
+		4D6300DA23C7ECEA00274DC1 /* CramViewCardSectionSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300D923C7ECEA00274DC1 /* CramViewCardSectionSectionName.swift */; };
 		4D6300DC23C7EE4F00274DC1 /* ReviewViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */; };
 		4D6300DE23C7EF2200274DC1 /* ReviewViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */; };
 		4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */; };
@@ -183,7 +183,7 @@
 		4D9AAEC32385D25500C85EC2 /* MarketViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */; };
 		4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */; };
 		4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */; };
-		4D9D930F23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */; };
+		4D9D930F23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D930E23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift */; };
 		4D9D931223DF66250008B614 /* ProfileViewMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */; };
 		4D9D931423DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */; };
 		4D9D931623DF76010008B614 /* ProfileViewCreatedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */; };
@@ -392,19 +392,19 @@
 		4D51F5412385E02E00C6B59B /* MarketViewSearchStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewSearchStateButton.swift; sourceTree = "<group>"; };
 		4D54C03D237F7C83003765C1 /* DecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksView.swift; sourceTree = SOURCE_ROOT; };
 		4D56FC3723C50AAA006366FD /* StoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReview.swift; sourceTree = "<group>"; };
-		4D56FC3923C53369006366FD /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
-		4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewNavigationLink.swift; sourceTree = "<group>"; };
-		4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewTopControls.swift; sourceTree = "<group>"; };
-		4D56FC4423C53814006366FD /* LearnViewSliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewSliders.swift; sourceTree = "<group>"; };
-		4D56FC4623C53D13006366FD /* LearnViewCardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardSection.swift; sourceTree = "<group>"; };
-		4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardContent.swift; sourceTree = "<group>"; };
+		4D56FC3923C53369006366FD /* CramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramView.swift; sourceTree = "<group>"; };
+		4D56FC3C23C533C5006366FD /* CramViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewNavigationLink.swift; sourceTree = "<group>"; };
+		4D56FC4223C536CF006366FD /* CramViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewTopControls.swift; sourceTree = "<group>"; };
+		4D56FC4423C53814006366FD /* CramViewSliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewSliders.swift; sourceTree = "<group>"; };
+		4D56FC4623C53D13006366FD /* CramViewCardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewCardSection.swift; sourceTree = "<group>"; };
+		4D56FC4823C53E48006366FD /* CramViewCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewCardContent.swift; sourceTree = "<group>"; };
 		4D56FC4A23C540EB006366FD /* BlankReviewViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankReviewViewCard.swift; sourceTree = "<group>"; };
 		4D56FC4C23C54F29006366FD /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		4D56FC4E23C55629006366FD /* LearnRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapView.swift; sourceTree = "<group>"; };
+		4D56FC4E23C55629006366FD /* CramRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapView.swift; sourceTree = "<group>"; };
 		4D56FC5023C558AF006366FD /* Card+CramData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CramData.swift"; sourceTree = "<group>"; };
 		4D56FC5223C55A09006366FD /* Card+PerformanceRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+PerformanceRating.swift"; sourceTree = "<group>"; };
-		4D56FC5423C560F1006366FD /* LearnViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewFooter.swift; sourceTree = "<group>"; };
-		4D56FC5623C58392006366FD /* LearnViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewPopUp.swift; sourceTree = "<group>"; };
+		4D56FC5423C560F1006366FD /* CramViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewFooter.swift; sourceTree = "<group>"; };
+		4D56FC5623C58392006366FD /* CramViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewPopUp.swift; sourceTree = "<group>"; };
 		4D571673235FE0CF00AB3044 /* LeftArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftArrowHead.swift; sourceTree = "<group>"; };
 		4D5772D623FB9E12003D7A49 /* HomeViewReviewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReviewSection.swift; sourceTree = "<group>"; };
 		4D578C442401F75200816785 /* InitialViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFooter.swift; sourceTree = "<group>"; };
@@ -420,16 +420,16 @@
 		4D5C403E23C81DE100511B7C /* FirebaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFunctions.swift; sourceTree = "<group>"; };
 		4D5C404023C838AA00511B7C /* ReviewViewFooterPerformanceRatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewFooterPerformanceRatingButton.swift; sourceTree = "<group>"; };
 		4D5C404223C83B7700511B7C /* ReviewViewFooterPerformanceRatingButtonBadgeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewFooterPerformanceRatingButtonBadgeContent.swift; sourceTree = "<group>"; };
-		4D5C404623C855BA00511B7C /* LearnRecapViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewTopControls.swift; sourceTree = "<group>"; };
-		4D5C404823C857DD00511B7C /* LearnRecapViewMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewMainCard.swift; sourceTree = "<group>"; };
+		4D5C404623C855BA00511B7C /* CramRecapViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewTopControls.swift; sourceTree = "<group>"; };
+		4D5C404823C857DD00511B7C /* CramRecapViewMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewMainCard.swift; sourceTree = "<group>"; };
 		4D5C404B23C9043400511B7C /* HorizontalBarGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalBarGraph.swift; sourceTree = "<group>"; };
-		4D5C404D23C9161400511B7C /* LearnRecapViewSectionPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewSectionPerformance.swift; sourceTree = "<group>"; };
-		4D5C404F23C9174400511B7C /* LearnRecapViewSectionPerformanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewSectionPerformanceRow.swift; sourceTree = "<group>"; };
-		4D5C405323C9234E00511B7C /* LearnRecapViewSectionPerformanceRowSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewSectionPerformanceRowSectionCell.swift; sourceTree = "<group>"; };
-		4D5C405523C9272200511B7C /* LearnRecapViewCardPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformance.swift; sourceTree = "<group>"; };
-		4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRow.swift; sourceTree = "<group>"; };
-		4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCell.swift; sourceTree = "<group>"; };
-		4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewCardPerformanceRowCardCellContent.swift; sourceTree = "<group>"; };
+		4D5C404D23C9161400511B7C /* CramRecapViewSectionPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewSectionPerformance.swift; sourceTree = "<group>"; };
+		4D5C404F23C9174400511B7C /* CramRecapViewSectionPerformanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewSectionPerformanceRow.swift; sourceTree = "<group>"; };
+		4D5C405323C9234E00511B7C /* CramRecapViewSectionPerformanceRowSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewSectionPerformanceRowSectionCell.swift; sourceTree = "<group>"; };
+		4D5C405523C9272200511B7C /* CramRecapViewCardPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewCardPerformance.swift; sourceTree = "<group>"; };
+		4D5C405723C928F000511B7C /* CramRecapViewCardPerformanceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewCardPerformanceRow.swift; sourceTree = "<group>"; };
+		4D5C405923C92A4B00511B7C /* CramRecapViewCardPerformanceRowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewCardPerformanceRowCardCell.swift; sourceTree = "<group>"; };
+		4D5C405B23C92C3800511B7C /* CramRecapViewCardPerformanceRowCardCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewCardPerformanceRowCardCellContent.swift; sourceTree = "<group>"; };
 		4D60857F23D14C2D00437A78 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		4D60858123D17FA900437A78 /* ReviewViewCardSectionDeckName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCardSectionDeckName.swift; sourceTree = "<group>"; };
 		4D60858323D1808C00437A78 /* ReviewViewCardSectionIsNewLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewCardSectionIsNewLabel.swift; sourceTree = "<group>"; };
@@ -438,7 +438,7 @@
 		4D60FCA6237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewRecommendedDecksSection.swift; path = memorize.ai/HomeViewRecommendedDecksSection.swift; sourceTree = SOURCE_ROOT; };
 		4D60FCA8237DF23B0082B66F /* TopicPerformanceSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopicPerformanceSheetView.swift; path = "memorize.ai/Supplemental Views/TopicPerformanceSheetView.swift"; sourceTree = SOURCE_ROOT; };
 		4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecapView.swift; sourceTree = "<group>"; };
-		4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewCardSectionSectionName.swift; sourceTree = "<group>"; };
+		4D6300D923C7ECEA00274DC1 /* CramViewCardSectionSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramViewCardSectionSectionName.swift; sourceTree = "<group>"; };
 		4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewFooter.swift; sourceTree = "<group>"; };
 		4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPopUp.swift; sourceTree = "<group>"; };
 		4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+ReviewData.swift"; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 		4D9AAEC22385D25500C85EC2 /* MarketViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarketViewTopControls.swift; path = memorize.ai/MarketViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D9BF85E23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetView.swift; sourceTree = "<group>"; };
 		4D9BF86023B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewOrderSectionsSheetViewSectionRow.swift; sourceTree = "<group>"; };
-		4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnRecapViewMainCardSectionName.swift; sourceTree = "<group>"; };
+		4D9D930E23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewMainCardSectionName.swift; sourceTree = "<group>"; };
 		4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMainCard.swift; sourceTree = "<group>"; };
 		4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewForgotPasswordButton.swift; sourceTree = "<group>"; };
 		4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCreatedDecksSection.swift; sourceTree = "<group>"; };
@@ -855,19 +855,19 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
-		4D56FC3B23C533AE006366FD /* LearnView */ = {
+		4D56FC3B23C533AE006366FD /* CramView */ = {
 			isa = PBXGroup;
 			children = (
-				4D56FC3C23C533C5006366FD /* LearnViewNavigationLink.swift */,
-				4D56FC4223C536CF006366FD /* LearnViewTopControls.swift */,
-				4D56FC4423C53814006366FD /* LearnViewSliders.swift */,
-				4D56FC4623C53D13006366FD /* LearnViewCardSection.swift */,
-				4D6300D923C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift */,
-				4D56FC4823C53E48006366FD /* LearnViewCardContent.swift */,
-				4D56FC5423C560F1006366FD /* LearnViewFooter.swift */,
-				4D56FC5623C58392006366FD /* LearnViewPopUp.swift */,
+				4D56FC3C23C533C5006366FD /* CramViewNavigationLink.swift */,
+				4D56FC4223C536CF006366FD /* CramViewTopControls.swift */,
+				4D56FC4423C53814006366FD /* CramViewSliders.swift */,
+				4D56FC4623C53D13006366FD /* CramViewCardSection.swift */,
+				4D6300D923C7ECEA00274DC1 /* CramViewCardSectionSectionName.swift */,
+				4D56FC4823C53E48006366FD /* CramViewCardContent.swift */,
+				4D56FC5423C560F1006366FD /* CramViewFooter.swift */,
+				4D56FC5623C58392006366FD /* CramViewPopUp.swift */,
 			);
-			path = LearnView;
+			path = CramView;
 			sourceTree = "<group>";
 		};
 		4D5C404A23C9041B00511B7C /* Graph */ = {
@@ -878,21 +878,21 @@
 			path = Graph;
 			sourceTree = "<group>";
 		};
-		4D6300D123C6989100274DC1 /* LearnRecapView */ = {
+		4D6300D123C6989100274DC1 /* CramRecapView */ = {
 			isa = PBXGroup;
 			children = (
-				4D5C404623C855BA00511B7C /* LearnRecapViewTopControls.swift */,
-				4D5C404823C857DD00511B7C /* LearnRecapViewMainCard.swift */,
-				4D9D930E23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift */,
-				4D5C404D23C9161400511B7C /* LearnRecapViewSectionPerformance.swift */,
-				4D5C404F23C9174400511B7C /* LearnRecapViewSectionPerformanceRow.swift */,
-				4D5C405323C9234E00511B7C /* LearnRecapViewSectionPerformanceRowSectionCell.swift */,
-				4D5C405523C9272200511B7C /* LearnRecapViewCardPerformance.swift */,
-				4D5C405723C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift */,
-				4D5C405923C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift */,
-				4D5C405B23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift */,
+				4D5C404623C855BA00511B7C /* CramRecapViewTopControls.swift */,
+				4D5C404823C857DD00511B7C /* CramRecapViewMainCard.swift */,
+				4D9D930E23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift */,
+				4D5C404D23C9161400511B7C /* CramRecapViewSectionPerformance.swift */,
+				4D5C404F23C9174400511B7C /* CramRecapViewSectionPerformanceRow.swift */,
+				4D5C405323C9234E00511B7C /* CramRecapViewSectionPerformanceRowSectionCell.swift */,
+				4D5C405523C9272200511B7C /* CramRecapViewCardPerformance.swift */,
+				4D5C405723C928F000511B7C /* CramRecapViewCardPerformanceRow.swift */,
+				4D5C405923C92A4B00511B7C /* CramRecapViewCardPerformanceRowCardCell.swift */,
+				4D5C405B23C92C3800511B7C /* CramRecapViewCardPerformanceRowCardCellContent.swift */,
 			);
-			path = LearnRecapView;
+			path = CramRecapView;
 			sourceTree = "<group>";
 		};
 		4D6300D623C6ADDB00274DC1 /* ReviewRecapView */ = {
@@ -999,8 +999,8 @@
 				4D3FE57923BC67DF0010FFD3 /* EditCardView.swift */,
 				4D961FFC23C3BFB400C6BDF0 /* ReviewView.swift */,
 				4D6300D423C6AC7F00274DC1 /* ReviewRecapView.swift */,
-				4D56FC3923C53369006366FD /* LearnView.swift */,
-				4D56FC4E23C55629006366FD /* LearnRecapView.swift */,
+				4D56FC3923C53369006366FD /* CramView.swift */,
+				4D56FC4E23C55629006366FD /* CramRecapView.swift */,
 				4D9AAEBA23851FEC00C85EC2 /* ProfileView.swift */,
 			);
 			path = Views;
@@ -1317,8 +1317,8 @@
 				4D3FE57623BC67B90010FFD3 /* EditCardView */,
 				4D961FFE23C3C59800C6BDF0 /* ReviewView */,
 				4D6300D623C6ADDB00274DC1 /* ReviewRecapView */,
-				4D56FC3B23C533AE006366FD /* LearnView */,
-				4D6300D123C6989100274DC1 /* LearnRecapView */,
+				4D56FC3B23C533AE006366FD /* CramView */,
+				4D6300D123C6989100274DC1 /* CramRecapView */,
 				4D9D931023DF66150008B614 /* ProfileView */,
 			);
 			path = "Supplemental Views";
@@ -1651,7 +1651,7 @@
 				4DA0FD2A2368364200F9F0D3 /* String.swift in Sources */,
 				4DD5FE942387868700E70251 /* MarketViewFilterPopUpContentWithSlider.swift in Sources */,
 				4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */,
-				4D56FC4523C53814006366FD /* LearnViewSliders.swift in Sources */,
+				4D56FC4523C53814006366FD /* CramViewSliders.swift in Sources */,
 				4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */,
 				4DF3879923C13E3200AA039B /* AddCardsViewCardCellSection.swift in Sources */,
 				4DD5FE8A238735F600E70251 /* MarketViewFilterPopUp.swift in Sources */,
@@ -1673,13 +1673,13 @@
 				4DF3879B23C149C400AA039B /* AddCardsViewCardCellTopControls.swift in Sources */,
 				4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */,
 				4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */,
-				4D9D930F23DF5AB60008B614 /* LearnRecapViewMainCardSectionName.swift in Sources */,
+				4D9D930F23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,
 				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,
 				4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */,
 				4DD5FE8E2387438400E70251 /* MarketViewFilterPopUpSideBarButton.swift in Sources */,
-				4D5C405C23C92C3800511B7C /* LearnRecapViewCardPerformanceRowCardCellContent.swift in Sources */,
+				4D5C405C23C92C3800511B7C /* CramRecapViewCardPerformanceRowCardCellContent.swift in Sources */,
 				4D5C404323C83B7700511B7C /* ReviewViewFooterPerformanceRatingButtonBadgeContent.swift in Sources */,
 				4DFA672823FF82D9003C0245 /* ProfileViewContactUsButton.swift in Sources */,
 				4DFA0DC4236AA3810000CA7A /* DeckCell.swift in Sources */,
@@ -1689,14 +1689,14 @@
 				4DB9FF532396DA1800B8DD38 /* Card+Side.swift in Sources */,
 				4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */,
 				4D9D933223E0C2B40008B614 /* ReviewRecapViewSectionPerformanceRowSectionCell.swift in Sources */,
-				4D5C405623C9272200511B7C /* LearnRecapViewCardPerformance.swift in Sources */,
+				4D5C405623C9272200511B7C /* CramRecapViewCardPerformance.swift in Sources */,
 				4D9BF86123B9C2E400388DEF /* DecksViewOrderSectionsSheetViewSectionRow.swift in Sources */,
 				4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */,
 				4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */,
 				4DAA4F42233DE1A600EF7467 /* memorize_ai.xcdatamodeld in Sources */,
 				4D6BA52723ACABB600D3F9D1 /* DecksViewBottomControls.swift in Sources */,
-				4D56FC4F23C55629006366FD /* LearnRecapView.swift in Sources */,
-				4D6300DA23C7ECEA00274DC1 /* LearnViewCardSectionSectionName.swift in Sources */,
+				4D56FC4F23C55629006366FD /* CramRecapView.swift in Sources */,
+				4D6300DA23C7ECEA00274DC1 /* CramViewCardSectionSectionName.swift in Sources */,
 				4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */,
 				4D8B2EAD2398BC0000EF040B /* MarketDeckViewSectionRow.swift in Sources */,
 				4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */,
@@ -1721,20 +1721,20 @@
 				4D9D932E23E0B8B80008B614 /* ReviewRecapViewCardPerformanceSection.swift in Sources */,
 				4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */,
 				4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */,
-				4D56FC3A23C53369006366FD /* LearnView.swift in Sources */,
-				4D5C405823C928F000511B7C /* LearnRecapViewCardPerformanceRow.swift in Sources */,
+				4D56FC3A23C53369006366FD /* CramView.swift in Sources */,
+				4D5C405823C928F000511B7C /* CramRecapViewCardPerformanceRow.swift in Sources */,
 				4D16D99F2371EDD200FE8E5E /* SideBar.swift in Sources */,
 				4D402E94235E72B80011C6B6 /* MuliFont.swift in Sources */,
 				4D60FCA7237DE9A00082B66F /* HomeViewRecommendedDecksSection.swift in Sources */,
 				4DD34CD62362D90F0007E3E6 /* HomeView.swift in Sources */,
-				4D56FC3D23C533C5006366FD /* LearnViewNavigationLink.swift in Sources */,
+				4D56FC3D23C533C5006366FD /* CramViewNavigationLink.swift in Sources */,
 				4DF3879F23C15CA100AA039B /* EditCardViewCardCellTopControls.swift in Sources */,
 				4D3B94A0237324F5002F441E /* SideBarDeckRowDueCardsBadge.swift in Sources */,
-				4D5C405423C9234E00511B7C /* LearnRecapViewSectionPerformanceRowSectionCell.swift in Sources */,
+				4D5C405423C9234E00511B7C /* CramRecapViewSectionPerformanceRowSectionCell.swift in Sources */,
 				4DD2512223624DCE00A83509 /* ForgotPasswordView.swift in Sources */,
 				4D6BA53923AD9AD800D3F9D1 /* AddCardsViewAddSectionPopUp.swift in Sources */,
 				4DF459582399A44A00A78ADF /* MultilineTextField.swift in Sources */,
-				4D5C404E23C9161400511B7C /* LearnRecapViewSectionPerformance.swift in Sources */,
+				4D5C404E23C9161400511B7C /* CramRecapViewSectionPerformance.swift in Sources */,
 				4D9AAEBB23851FEC00C85EC2 /* ProfileView.swift in Sources */,
 				4D16D99D2371DEA200FE8E5E /* MainTabView.swift in Sources */,
 				4DD251242362573300A83509 /* AuthenticationViewBottomGradient.swift in Sources */,
@@ -1755,24 +1755,24 @@
 				4D6BA53523ACB83000D3F9D1 /* AddCardsViewCardCell.swift in Sources */,
 				4DD5FE8423870C7200E70251 /* PopUpDivider.swift in Sources */,
 				4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */,
-				4D56FC4923C53E48006366FD /* LearnViewCardContent.swift in Sources */,
+				4D56FC4923C53E48006366FD /* CramViewCardContent.swift in Sources */,
 				4D690256235FADAD00533E20 /* AuthenticationViewTopGradient.swift in Sources */,
 				4DDB181823FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift in Sources */,
 				4D56FC3823C50AAA006366FD /* StoreReview.swift in Sources */,
-				4D56FC5723C58392006366FD /* LearnViewPopUp.swift in Sources */,
+				4D56FC5723C58392006366FD /* CramViewPopUp.swift in Sources */,
 				4D9D932A23E09FD40008B614 /* ReviewRecapViewDeckPerformanceRowDeckCell.swift in Sources */,
 				4DD5FEA8238C617800E70251 /* DecksViewSectionHeader.swift in Sources */,
 				4D0C028D237D3EB50062BC14 /* BasicTopicCell.swift in Sources */,
 				4DDACF042395BC3F0073C004 /* MarketDeckView.swift in Sources */,
 				4D365795238CA20E007C3D1F /* DecksViewSectionOptionsPopUp.swift in Sources */,
 				4D64BCCB2367FA8E00F6FD07 /* ViewModel.swift in Sources */,
-				4D56FC5523C560F1006366FD /* LearnViewFooter.swift in Sources */,
+				4D56FC5523C560F1006366FD /* CramViewFooter.swift in Sources */,
 				4DEB359E236ACAEF00E3DBC4 /* DeckStars.swift in Sources */,
 				4D5C404123C838AA00511B7C /* ReviewViewFooterPerformanceRatingButton.swift in Sources */,
-				4D56FC4723C53D13006366FD /* LearnViewCardSection.swift in Sources */,
+				4D56FC4723C53D13006366FD /* CramViewCardSection.swift in Sources */,
 				4DE9722823701EE900616E42 /* Array.swift in Sources */,
 				4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */,
-				4D5C405A23C92A4B00511B7C /* LearnRecapViewCardPerformanceRowCardCell.swift in Sources */,
+				4D5C405A23C92A4B00511B7C /* CramRecapViewCardPerformanceRowCardCell.swift in Sources */,
 				4D571674235FE0CF00AB3044 /* LeftArrowHead.swift in Sources */,
 				4D578C4D240224E700816785 /* InitialView+Page.swift in Sources */,
 				4DA800A9236A4A4D00E26FE8 /* TopicCellCheck.swift in Sources */,
@@ -1789,7 +1789,7 @@
 				4DF3879D23C15C4700AA039B /* EditCardViewCardCellSection.swift in Sources */,
 				4D9D931423DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift in Sources */,
 				4D9BF85F23B9AB4700388DEF /* DecksViewOrderSectionsSheetView.swift in Sources */,
-				4D5C405023C9174400511B7C /* LearnRecapViewSectionPerformanceRow.swift in Sources */,
+				4D5C405023C9174400511B7C /* CramRecapViewSectionPerformanceRow.swift in Sources */,
 				4D8993282363CC910042AC9F /* ForgotPasswordViewModel.swift in Sources */,
 				4D3B949A23728E19002F441E /* Deck+UserData.swift in Sources */,
 				4D458A65237C9B4700A9776A /* ShowSideBarButton.swift in Sources */,
@@ -1828,7 +1828,7 @@
 				4D690258235FADEA00533E20 /* AuthenticationViewTopControls.swift in Sources */,
 				4DD5FEAA238C620500E70251 /* Deck+Section.swift in Sources */,
 				4D365798238CB09F007C3D1F /* Card.swift in Sources */,
-				4D5C404723C855BA00511B7C /* LearnRecapViewTopControls.swift in Sources */,
+				4D5C404723C855BA00511B7C /* CramRecapViewTopControls.swift in Sources */,
 				4DD9CEF323691C2700EC138F /* RecommendedDecksView.swift in Sources */,
 				4D0C028F237D41C80062BC14 /* LoadingTopicCell.swift in Sources */,
 				4D9D931823DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift in Sources */,
@@ -1842,7 +1842,7 @@
 				4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */,
 				4D96200823C3D51000C6BDF0 /* ReviewViewCardContent.swift in Sources */,
 				4D8B2EB12398E6CC00EF040B /* MarketDeckViewSimilarDecks.swift in Sources */,
-				4D5C404923C857DD00511B7C /* LearnRecapViewMainCard.swift in Sources */,
+				4D5C404923C857DD00511B7C /* CramRecapViewMainCard.swift in Sources */,
 				4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */,
 				4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */,
 				4DD5FEA4238B249E00E70251 /* VerticalTripleDots.swift in Sources */,
@@ -1862,7 +1862,7 @@
 				4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */,
 				4D56FC4B23C540EB006366FD /* BlankReviewViewCard.swift in Sources */,
 				4DE9722C2370DC0800616E42 /* MinusMinus.swift in Sources */,
-				4D56FC4323C536CF006366FD /* LearnViewTopControls.swift in Sources */,
+				4D56FC4323C536CF006366FD /* CramViewTopControls.swift in Sources */,
 				4DDACF072395BCF20073C004 /* MarketDeckViewTopControls.swift in Sources */,
 				4DC6435B2366D80400DEEED1 /* Preview.swift in Sources */,
 				4D6BA52B23ACB19E00D3F9D1 /* AddCardsViewModel.swift in Sources */,
