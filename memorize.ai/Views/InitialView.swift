@@ -25,7 +25,7 @@ struct InitialView: View {
 					.padding(.horizontal, 20)
 					.padding(.vertical, -30)
 				Spacer()
-				Page.Heading("The ultimate memorization tool")
+				Page.Heading("Truly effective memorization")
 			}
 		),
 		Page(
