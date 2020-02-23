@@ -503,6 +503,7 @@ struct CramView: View {
 							rateCurrentCard: self.rateCurrentCard
 						)
 						.padding(.top, 16)
+						.padding(.bottom, 8)
 					}
 				}
 				.blur(radius: self.isPopUpShowing ? 5 : 0)
