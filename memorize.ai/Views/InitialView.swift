@@ -41,19 +41,22 @@ struct InitialView: View {
 	}
 	
 	var body: some View {
-		GeometryReader { geometry in
-			VStack {
-				InitialViewPages(
-					currentPageIndex: self.$currentPageIndex
-				)
-				Spacer()
-				InitialViewFooter(
-					geometry: geometry,
-					mode: self.mode,
-					currentPageIndex: self.currentPageIndex
-				)
+		NavigationView {
+			GeometryReader { geometry in
+				VStack {
+					InitialViewPages(
+						currentPageIndex: self.$currentPageIndex
+					)
+					Spacer()
+					InitialViewFooter(
+						geometry: geometry,
+						mode: self.mode,
+						currentPageIndex: self.currentPageIndex
+					)
+				}
+				.edgesIgnoringSafeArea(.all)
 			}
-			.edgesIgnoringSafeArea(.all)
+			.navigationBarRemoved()
 		}
 	}
 }
