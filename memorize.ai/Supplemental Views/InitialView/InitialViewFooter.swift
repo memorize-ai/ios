@@ -20,7 +20,7 @@ struct InitialViewFooter: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 30) {
+		VStack(spacing: padding) {
 			HStack(spacing: 6) {
 				ForEach(0..<InitialView.pages.count) { pageIndex in
 					self.dot
