@@ -49,7 +49,7 @@ struct InitialViewFooter: View {
 									: .bluePurple
 							)
 							.frame(maxWidth: 300)
-							.frame(height: 35)
+							.frame(height: 40)
 					}
 				}
 				NavigationLink(
@@ -58,7 +58,11 @@ struct InitialViewFooter: View {
 				) {
 					CustomRectangle(
 						background: Color.clear,
-						borderColor: Color.white.opacity(0.4),
+						borderColor: (
+							mode.isLight
+								? Color.bluePurple
+								: Color.white
+						).opacity(0.4),
 						borderWidth: 2
 					) {
 						Text("LOG IN")
@@ -69,13 +73,14 @@ struct InitialViewFooter: View {
 									: .white
 							)
 							.frame(maxWidth: 300)
-							.frame(height: 35)
+							.frame(height: 40)
 					}
 				}
 			}
 		}
 		.padding(padding)
 		.background(mode.isLight ? Color.white : Color.bluePurple)
+		.animation(.linear(duration: 0.15))
 	}
 }
 

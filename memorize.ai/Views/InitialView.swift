@@ -1,13 +1,16 @@
 import SwiftUI
 
 struct InitialView: View {
-	struct Page: View {
+	struct Page {
 		let mode: Mode
-		let body: AnyView
+		let content: (GeometryProxy) -> AnyView
 		
-		init<Body: View>(mode: Mode, body: () -> Body) {
+		init<Content: View>(
+			mode: Mode,
+			body: @escaping (GeometryProxy) -> Content
+		) {
 			self.mode = mode
-			self.body = .init(body())
+			self.content = { .init(body($0)) }
 		}
 	}
 	
@@ -20,23 +23,29 @@ struct InitialView: View {
 	}
 	
 	static let pages = [
-		Page(mode: .dark) {
+		Page(mode: .dark) { geometry in
 			Text("Page 1")
 		},
-		Page(mode: .light) {
+		Page(mode: .light) { geometry in
 			Text("Page 2")
 		},
-		Page(mode: .dark) {
+		Page(mode: .dark) { geometry in
 			Text("Page 3")
 		}
 	]
 	
-	@State var mode = pages.first?.mode ?? .light
 	@State var currentPageIndex = 0
+	
+	var mode: Mode {
+		Self.pages[currentPageIndex].mode
+	}
 	
 	var body: some View {
 		GeometryReader { geometry in
 			VStack {
+				InitialViewPages(
+					currentPageIndex: self.$currentPageIndex
+				)
 				Spacer()
 				InitialViewFooter(
 					geometry: geometry,

@@ -100,6 +100,7 @@
 		4D5772B523FB42FE003D7A49 /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D5772B323FB42FD003D7A49 /* display */; };
 		4D5772D723FB9E12003D7A49 /* HomeViewReviewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5772D623FB9E12003D7A49 /* HomeViewReviewSection.swift */; };
 		4D578C452401F75200816785 /* InitialViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D578C442401F75200816785 /* InitialViewFooter.swift */; };
+		4D578C492402038000816785 /* InitialViewPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D578C482402038000816785 /* InitialViewPages.swift */; };
 		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
 		4D59FA89237E7735007CAA74 /* OwnedDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA88237E7735007CAA74 /* OwnedDeckCell.swift */; };
@@ -409,6 +410,7 @@
 		4D5772B323FB42FD003D7A49 /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4D5772D623FB9E12003D7A49 /* HomeViewReviewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReviewSection.swift; sourceTree = "<group>"; };
 		4D578C442401F75200816785 /* InitialViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFooter.swift; sourceTree = "<group>"; };
+		4D578C482402038000816785 /* InitialViewPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPages.swift; sourceTree = "<group>"; };
 		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
 		4D59FA88237E7735007CAA74 /* OwnedDeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OwnedDeckCell.swift; path = memorize.ai/OwnedDeckCell.swift; sourceTree = SOURCE_ROOT; };
@@ -959,6 +961,7 @@
 		4D690254235FAC7C00533E20 /* InitialView */ = {
 			isa = PBXGroup;
 			children = (
+				4D578C482402038000816785 /* InitialViewPages.swift */,
 				4D578C442401F75200816785 /* InitialViewFooter.swift */,
 			);
 			path = InitialView;
@@ -1843,6 +1846,7 @@
 				4D32A536236910BB0072AA70 /* PostSignUpViewTrailingButton.swift in Sources */,
 				4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */,
 				4DD5FEA4238B249E00E70251 /* VerticalTripleDots.swift in Sources */,
+				4D578C492402038000816785 /* InitialViewPages.swift in Sources */,
 				4DD9CEF623691E9000EC138F /* ChooseTopicsViewContent.swift in Sources */,
 				4D96200623C3D39E00C6BDF0 /* CardToggleButton.swift in Sources */,
 				4DCD641B23D910020075F724 /* DecksViewCardPreviewSheetView.swift in Sources */,
