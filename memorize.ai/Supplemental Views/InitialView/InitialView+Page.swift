@@ -71,8 +71,6 @@ extension InitialView {
 			Image.longLogo
 				.resizable()
 				.aspectRatio(contentMode: .fit)
-				.frame(maxWidth: 225)
-				.padding(.horizontal, 30)
 		}
 		
 		let mode: Mode
@@ -92,7 +90,7 @@ extension InitialView {
 						content()
 						Spacer()
 					}
-					.padding(.top, geometry.safeAreaInsets.top)
+					.padding(.top, geometry.safeAreaInsets.top + 12)
 					bottomAlignedContent()
 				}
 				.eraseToAnyView()

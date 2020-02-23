@@ -17,6 +17,8 @@ struct InitialView: View {
 			},
 			content: {
 				Page.logo
+					.frame(maxWidth: 225)
+					.padding(.horizontal, 30)
 				Page.Heading("Spaced Repetition with Artificial Intelligence")
 				Page.Screenshot(.initialViewReviewScreenshot)
 					.padding(.horizontal, 30)
@@ -71,10 +73,19 @@ struct InitialView: View {
 		Page(
 			mode: .light,
 			background: {
-				EmptyView()
+				Color.bluePurple
 			},
 			content: {
-				EmptyView()
+				Page.logo
+					.padding(.horizontal, 40)
+				Spacer()
+				Image.initialViewBrain
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.padding(.horizontal, 20)
+					.padding(.vertical, -30)
+				Spacer()
+				Page.Heading("The ultimate memorization tool")
 			}
 		)
 	]

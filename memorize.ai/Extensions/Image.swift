@@ -75,4 +75,6 @@ extension Image {
 	static let initialViewEditorScreenshot = Self("InitialViewEditorScreenshot")
 	
 	static let initialViewMarketScreenshot = Self("InitialViewMarketScreenshot")
+	
+	static let initialViewBrain = Self("InitialViewBrain")
 }
