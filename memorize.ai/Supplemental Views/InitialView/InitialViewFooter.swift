@@ -42,7 +42,7 @@ struct InitialViewFooter: View {
 							: Color.white
 					) {
 						Text("SIGN UP")
-							.font(.muli(.bold, size: 14))
+							.font(.muli(.extraBold, size: 14))
 							.foregroundColor(
 								mode.isLight
 									? .white
@@ -66,7 +66,7 @@ struct InitialViewFooter: View {
 						borderWidth: 2
 					) {
 						Text("LOG IN")
-							.font(.muli(.bold, size: 14))
+							.font(.muli(.extraBold, size: 14))
 							.foregroundColor(
 								mode.isLight
 									? .bluePurple

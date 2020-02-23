@@ -5,7 +5,11 @@ struct InitialViewPages: View {
 	@Binding var currentPageIndex: Int
 	
 	func pages(geometry: GeometryProxy) -> [AnyView] {
-		InitialView.pages.map { $0.content(geometry) }
+		InitialView.pages.map { page in
+			page.content(geometry)
+				.edgesIgnoringSafeArea(.all)
+				.eraseToAnyView()
+		}
 	}
 	
 	var body: some View {

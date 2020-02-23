@@ -62,4 +62,9 @@ extension Image {
 	
 	static let camera = Self("Camera")
 	static let photoLibrary = Self("PhotoLibrary")
+	
+	static let longLogo = Self("LongLogo")
+	
+	static let initialViewReviewScreenshot = Self("InitialViewReviewScreenshot")
+	static let initialViewReviewScreenshotBubble = Self("InitialViewReviewScreenshotBubble")
 }
