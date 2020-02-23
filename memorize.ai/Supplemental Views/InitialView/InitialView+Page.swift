@@ -2,6 +2,18 @@ import SwiftUI
 
 extension InitialView {
 	struct Page {
+		struct Gradient: View {
+			let colors: [Color]
+			
+			var body: some View {
+				LinearGradient(
+					gradient: .init(colors: colors),
+					startPoint: .top,
+					endPoint: .bottom
+				)
+			}
+		}
+		
 		struct Heading: View {
 			let text: String
 			
@@ -51,11 +63,7 @@ extension InitialView {
 				image
 					.resizable()
 					.aspectRatio(contentMode: .fill)
-					.frame(
-						width: SCREEN_SIZE.width - 30 * 2,
-						height: 0,
-						alignment: .top
-					)
+					.frame(height: 0, alignment: .top)
 			}
 		}
 		

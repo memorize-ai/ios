@@ -71,4 +71,8 @@ extension Image {
 	static let initialViewReviewScreenshotBubble = Self("InitialViewReviewScreenshotBubble")
 	
 	static let initialViewCramScreenshot = Self("InitialViewCramScreenshot")
+	
+	static let initialViewEditorScreenshot = Self("InitialViewEditorScreenshot")
+	
+	static let initialViewMarketScreenshot = Self("InitialViewMarketScreenshot")
 }
