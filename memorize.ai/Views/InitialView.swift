@@ -1,30 +1,35 @@
 import SwiftUI
 
 struct InitialView: View {
+	enum Mode {
+		case light
+		case dark
+		
+		var isLight: Bool { self == .light }
+		var isDark: Bool { self == .dark }
+	}
+	
+	static let pages = [
+		EmptyView(),
+		EmptyView(),
+		EmptyView(),
+		EmptyView()
+	]
+	
+	@State var mode = Mode.dark
+	@State var currentPageIndex = 0
+	
 	var body: some View {
 		GeometryReader { geometry in
-			NavigationView {
-				ZStack {
-					GeometryReader { _ in
-						ZStack {
-							InitialViewStackedRectangles()
-								.padding(.top, -140)
-							InitialViewPaginatedFeatures()
-						}
-						.alignment(.top)
-					}
-					ZStack(alignment: .bottom) {
-						InitialViewBottomGradient(
-							addedHeight: geometry.safeAreaInsets.bottom
-						)
-						InitialViewBottomButtons()
-							.padding(.bottom, geometry.safeAreaInsets.bottom)
-					}
-					.alignment(.bottom)
-				}
-				.background(Color.lightGrayBackground)
-				.edgesIgnoringSafeArea(.all)
+			VStack {
+				Spacer()
+				InitialViewFooter(
+					geometry: geometry,
+					mode: self.mode,
+					currentPageIndex: self.currentPageIndex
+				)
 			}
+			.edgesIgnoringSafeArea(.all)
 		}
 	}
 }
