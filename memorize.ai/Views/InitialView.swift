@@ -11,15 +11,33 @@ struct InitialView: View {
 	
 	static let pages = [
 		Page(
+			mode: .light,
+			background: {
+				Color.bluePurple
+			},
+			content: {
+				Page.logo
+					.padding(.horizontal, 40)
+				Spacer()
+				Image.initialViewBrain
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.padding(.horizontal, 20)
+					.padding(.vertical, -30)
+				Spacer()
+				Page.Heading("The ultimate memorization tool")
+			}
+		),
+		Page(
 			mode: .dark,
 			background: {
 				Page.Gradient(colors: [.bluePurple, .lightBlue])
 			},
 			content: {
-				Page.logo
-					.frame(maxWidth: 225)
-					.padding(.horizontal, 30)
-				Page.Heading("Spaced Repetition with Artificial Intelligence")
+				Page.Heading("Artificial Intelligence")
+				Page.SubHeading(
+					"Recall attempts spaced just right for the most effective and efficient studying"
+				)
 				Page.Screenshot(.initialViewReviewScreenshot)
 					.padding(.horizontal, 30)
 			},
@@ -68,24 +86,6 @@ struct InitialView: View {
 				Page.SubHeading("Recommendations based on what you like")
 				Page.Screenshot(.initialViewMarketScreenshot)
 					.padding(.horizontal, 30)
-			}
-		),
-		Page(
-			mode: .light,
-			background: {
-				Color.bluePurple
-			},
-			content: {
-				Page.logo
-					.padding(.horizontal, 40)
-				Spacer()
-				Image.initialViewBrain
-					.resizable()
-					.aspectRatio(contentMode: .fit)
-					.padding(.horizontal, 20)
-					.padding(.vertical, -30)
-				Spacer()
-				Page.Heading("The ultimate memorization tool")
 			}
 		)
 	]
