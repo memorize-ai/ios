@@ -3,7 +3,13 @@ import SwiftUI
 struct EditCardViewCardCellTopControls: View {
 	@Environment(\.presentationMode) var presentationMode
 	
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	@ObservedObject var card: Card.Draft
+	
+	var user: User {
+		currentStore.user
+	}
 	
 	var body: some View {
 		HStack {
@@ -16,7 +22,7 @@ struct EditCardViewCardCellTopControls: View {
 				ActivityIndicator(color: .white)
 			} else {
 				Button(action: {
-					self.card.showDeleteAlert {
+					self.card.showDeleteAlert(forUser: self.user) {
 						self.presentationMode.wrappedValue.dismiss()
 					}
 				}) {

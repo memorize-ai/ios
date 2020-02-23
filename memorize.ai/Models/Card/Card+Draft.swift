@@ -111,7 +111,11 @@ extension Card {
 							.collection("decks")
 							.document(parent.id)
 							.updateData([
-								"dueCardCount": FieldValue.increment(1 as Int64)
+								"dueCardCount": FieldValue.increment(1 as Int64),
+								(section?.isUnsectioned ?? true
+									? "unsectionedDueCardCount"
+									: "sections.\(section?.id ?? "")"
+								): FieldValue.increment(1 as Int64)
 							]).asVoid()
 					]
 					: []
@@ -143,6 +147,7 @@ extension Card {
 		
 		@discardableResult
 		func showDeleteAlert(
+			forUser user: User,
 			title: String = "Delete card",
 			message: String? = "Are you sure? This action cannot be undone.",
 			completion: (() -> Void)? = nil
@@ -151,7 +156,7 @@ extension Card {
 				alert.addAction(.init(title: "Cancel", style: .cancel))
 				alert.addAction(.init(title: "Delete", style: .destructive) { _ in
 					self.publishLoadingState.startLoading()
-					self.delete().done {
+					self.delete(forUser: user).done {
 						self.publishLoadingState.succeed()
 						completion?()
 					}.catch { error in
@@ -163,8 +168,25 @@ extension Card {
 		}
 		
 		@discardableResult
-		func delete() -> Promise<Void> {
-			cards.document(id).delete()
+		func delete(forUser user: User) -> Promise<Void> {
+			when(fulfilled: [
+				cards.document(id).delete()
+			] + (
+				parent.card(withId: id, sectionId: sectionId)?.isDue ?? false
+					? [
+						user.documentReference
+							.collection("decks")
+							.document(parent.id)
+							.updateData([
+								"dueCardCount": FieldValue.increment(-1 as Int64),
+								(section?.isUnsectioned ?? true
+									? "unsectionedDueCardCount"
+									: "sections.\(section?.id ?? "")"
+								): FieldValue.increment(-1 as Int64)
+							]).asVoid()
+					]
+					: []
+			))
 		}
 		
 		static func == (lhs: Draft, rhs: Draft) -> Bool {
