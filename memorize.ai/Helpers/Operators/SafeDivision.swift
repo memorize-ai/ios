@@ -1,6 +1,6 @@
 import CoreGraphics
 
-infix operator &/
+infix operator &/: MultiplicationPrecedence
 
 func &/ (lhs: CGFloat, rhs: CGFloat) -> CGFloat {
 	rhs == 0
