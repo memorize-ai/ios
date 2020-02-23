@@ -4,18 +4,14 @@ import SwiftUIX
 struct InitialViewPages: View {
 	@Binding var currentPageIndex: Int
 	
-	func pages(geometry: GeometryProxy) -> [AnyView] {
-		InitialView.pages.map { page in
-			page.content(geometry)
-				.edgesIgnoringSafeArea(.all)
-				.eraseToAnyView()
-		}
-	}
-	
 	var body: some View {
 		GeometryReader { geometry in
 			PaginationView(
-				pages: self.pages(geometry: geometry),
+				pages: InitialView.pages.map { page in
+					page.content(geometry)
+						.edgesIgnoringSafeArea(.all)
+						.eraseToAnyView()
+				},
 				showsIndicators: false
 			)
 			.currentPageIndex(self.$currentPageIndex)

@@ -30,12 +30,31 @@ extension InitialView {
 			
 			var body: some View {
 				Text(text)
-					.font(.muli(.bold, size: 30))
+					.font(.muli(.bold, size: 24))
 					.foregroundColor(Color.white.opacity(0.8))
 					.multilineTextAlignment(.center)
 					.frame(
 						width: SCREEN_SIZE.width - 30 * 2,
 						alignment: .center
+					)
+			}
+		}
+		
+		struct Screenshot: View {
+			let image: Image
+			
+			init(_ image: Image) {
+				self.image = image
+			}
+			
+			var body: some View {
+				image
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(
+						width: SCREEN_SIZE.width - 30 * 2,
+						height: 0,
+						alignment: .top
 					)
 			}
 		}
@@ -63,11 +82,10 @@ extension InitialView {
 					background()
 					VStack(spacing: 20) {
 						content()
+						Spacer()
 					}
-					.frame(height: geometry.size.height, alignment: .top)
 					.padding(.top, geometry.safeAreaInsets.top)
 					bottomAlignedContent()
-						.padding(.bottom, geometry.safeAreaInsets.top)
 				}
 				.eraseToAnyView()
 			}

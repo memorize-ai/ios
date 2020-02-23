@@ -25,10 +25,7 @@ struct InitialView: View {
 			content: {
 				Page.logo
 				Page.Heading("Spaced Repetition with Artificial Intelligence")
-				Image.initialViewReviewScreenshot
-					.resizable()
-					.aspectRatio(contentMode: .fill)
-					.frame(width: SCREEN_SIZE.width - 30 * 2)
+				Page.Screenshot(.initialViewReviewScreenshot)
 			},
 			bottomAlignedContent: {
 				Image.initialViewReviewScreenshotBubble
@@ -41,10 +38,21 @@ struct InitialView: View {
 		Page(
 			mode: .dark,
 			background: {
-				EmptyView()
+				LinearGradient(
+					gradient: .init(colors: [
+						.init(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1)),
+						.init(#colorLiteral(red: 0.7529411765, green: 0.8862745098, blue: 0.2549019608, alpha: 1))
+					]),
+					startPoint: .top,
+					endPoint: .bottom
+				)
 			},
 			content: {
-				EmptyView()
+				Page.Heading("Got a test tomorrow?")
+				Page.SubHeading(
+					"Effectively learn faster than you ever thought was possible"
+				)
+				Page.Screenshot(.initialViewCramScreenshot)
 			}
 		),
 		Page(

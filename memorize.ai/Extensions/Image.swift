@@ -65,6 +65,10 @@ extension Image {
 	
 	static let longLogo = Self("LongLogo")
 	
+	// MARK: - Initial View Screenshots
+	
 	static let initialViewReviewScreenshot = Self("InitialViewReviewScreenshot")
 	static let initialViewReviewScreenshotBubble = Self("InitialViewReviewScreenshotBubble")
+	
+	static let initialViewCramScreenshot = Self("InitialViewCramScreenshot")
 }
