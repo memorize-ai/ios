@@ -23,7 +23,7 @@ struct KeyboardResponder: ViewModifier {
 	init(withExtraOffset extraOffset: CGFloat = 0) {
 		self.extraOffset = extraOffset
 	}
-
+	
 	func body(content: Content) -> some View {
 		content
 			.padding(.bottom, keyboardHeight)
