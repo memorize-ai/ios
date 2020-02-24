@@ -72,7 +72,7 @@ struct AddCardsView<Destination: View>: View {
 							.padding([.horizontal, .bottom], 10)
 							.frame(maxWidth: .infinity)
 							.respondsToKeyboard(
-								withExtraOffset: -(15 + geometry.safeAreaInsets.bottom)
+								withExtraOffset: 30 - (15 + geometry.safeAreaInsets.bottom)
 							)
 						}
 					}

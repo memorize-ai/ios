@@ -20,7 +20,7 @@ struct EditCardView: View {
 						EditCardViewCardCell(card: self.card)
 							.padding([.horizontal, .bottom], 10)
 							.respondsToKeyboard(
-								withExtraOffset: -(15 + geometry.safeAreaInsets.bottom)
+								withExtraOffset: 30 - (15 + geometry.safeAreaInsets.bottom)
 							)
 					}
 				}

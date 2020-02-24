@@ -71,7 +71,7 @@ struct PublishDeckView: View {
 							.environmentObject(self.model)
 							.padding(.horizontal, 12)
 							.respondsToKeyboard(
-								withExtraOffset: geometry.safeAreaInsets.bottom + 12
+								withExtraOffset: geometry.safeAreaInsets.bottom + 30 + 12
 							)
 					}
 				}
