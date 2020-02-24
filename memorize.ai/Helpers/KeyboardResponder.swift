@@ -39,9 +39,6 @@ extension View {
 	func respondsToKeyboard(
 		withExtraOffset extraOffset: CGFloat = 0
 	) -> some View {
-		ModifiedContent(
-			content: self,
-			modifier: KeyboardResponder(withExtraOffset: extraOffset)
-		)
+		modifier(KeyboardResponder(withExtraOffset: extraOffset))
 	}
 }
