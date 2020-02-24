@@ -308,6 +308,7 @@ struct MainTabView: View {
 			}
 			.navigationBarRemoved()
 		}
+		.navigationViewStyle(StackNavigationViewStyle())
 		.onAppear {
 			self.currentStore.initializeIfNeeded()
 		}

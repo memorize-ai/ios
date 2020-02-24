@@ -113,6 +113,7 @@ struct InitialView: View {
 			}
 			.navigationBarRemoved()
 		}
+		.navigationViewStyle(StackNavigationViewStyle())
 	}
 }
 

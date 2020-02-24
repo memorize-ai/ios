@@ -79,6 +79,8 @@ struct InitialViewFooter: View {
 			}
 		}
 		.padding(padding)
+		.padding(.bottom, 8)
+		.frame(maxWidth: .infinity)
 		.background(mode.isLight ? Color.white : Color.bluePurple)
 		.animation(.linear(duration: 0.15))
 	}
