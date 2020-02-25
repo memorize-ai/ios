@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": "master",
-          "revision": "5e0a0ba5e5781ad3812143f1af9275bb43dfbd03",
+          "revision": "e4cf0904668e3c47e0fabde739f4c08a0d4b6a36",
           "version": null
         }
       },
@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/mxcl/PromiseKit.git",
         "state": {
           "branch": "master",
-          "revision": "f14f16cc2602afec1030e4f492100d6d43dca544",
+          "revision": "f95e7b2614a19386b8b2618f362aa32e86951d55",
           "version": null
         }
       },
@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "ed88cb8d91812a367f38c55ab8433f3be6589fb3",
+          "revision": "0ba6d8382b3a6b8059ec7608c9cadfecac219411",
           "version": null
         }
       },
