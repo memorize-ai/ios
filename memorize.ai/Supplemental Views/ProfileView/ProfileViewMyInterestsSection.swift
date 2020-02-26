@@ -2,8 +2,13 @@ import SwiftUI
 import QGrid
 
 struct ProfileViewMyInterestsSection: View {
+	static let gridWidth = SCREEN_SIZE.width - 8 * 4
 	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = Int(SCREEN_SIZE.width - 8 * 4) / Int(TopicCell.dimension)
+	static let numberOfColumns = numberOfGridColumns(
+		width: gridWidth,
+		cellWidth: TopicCell.dimension,
+		horizontalSpacing: cellSpacing
+	)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
@@ -44,12 +49,8 @@ struct ProfileViewMyInterestsSection: View {
 							: self.user.addInterest(topicId: topic.id)
 					}
 				}
-				.frame(width:
-					.init(Self.numberOfColumns) * TopicCell.dimension +
-					.init(Self.numberOfColumns - 1) * Self.cellSpacing
-				)
 				.frame(
-					width: SCREEN_SIZE.width - 8 * 2,
+					width: Self.gridWidth,
 					height: heightOfGrid(
 						columns: Self.numberOfColumns,
 						numberOfCells: currentStore.topics.count,
@@ -57,7 +58,7 @@ struct ProfileViewMyInterestsSection: View {
 						spacing: Self.cellSpacing
 					)
 				)
-				.padding(.vertical, 8)
+				.padding(8)
 				.padding(.bottom)
 			}
 		}

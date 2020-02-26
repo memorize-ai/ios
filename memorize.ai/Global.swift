@@ -78,6 +78,14 @@ func showAlert(
 	}
 }
 
+func numberOfGridColumns(
+	width: CGFloat,
+	cellWidth: CGFloat,
+	horizontalSpacing: CGFloat
+) -> Int {
+	.init((width + horizontalSpacing) / (cellWidth + horizontalSpacing))
+}
+
 func heightOfGrid(
 	columns: Int,
 	numberOfCells: Int,

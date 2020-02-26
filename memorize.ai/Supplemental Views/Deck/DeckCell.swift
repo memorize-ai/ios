@@ -116,8 +116,8 @@ struct DeckCell_Previews: PreviewProvider {
 		)
 		failedDeck.imageLoadingState.fail(message: "Self-invoked")
 		return ZStack {
-//			Color.gray
-//				.edgesIgnoringSafeArea(.all)
+			Color.gray
+				.edgesIgnoringSafeArea(.all)
 			QGrid(
 				[
 					Deck._new(

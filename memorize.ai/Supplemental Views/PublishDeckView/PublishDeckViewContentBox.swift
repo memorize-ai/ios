@@ -2,20 +2,17 @@ import SwiftUI
 import QGrid
 
 struct PublishDeckViewContentBox: View {
+	static let maxWidth = SCREEN_SIZE.width - (12 + 20) * 2
 	static let topicCellSpacing: CGFloat = 8
-	static let numberOfTopicColumns =
-		Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
+	static let numberOfTopicColumns = numberOfGridColumns(
+		width: maxWidth,
+		cellWidth: TopicCell.dimension,
+		horizontalSpacing: topicCellSpacing
+	)
+	static let imageDimension = min(160, maxWidth)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: PublishDeckViewModel
-	
-	var maxWidth: CGFloat {
-		SCREEN_SIZE.width - (12 + 20) * 2
-	}
-	
-	var imageDimension: CGFloat {
-		min(160, maxWidth)
-	}
 	
 	var body: some View {
 		CustomRectangle(
@@ -52,7 +49,7 @@ struct PublishDeckViewContentBox: View {
 								.aspectRatio(contentMode: .fill)
 						}
 					}
-					.frame(width: imageDimension, height: imageDimension)
+					.frame(width: Self.imageDimension, height: Self.imageDimension)
 					.background(CustomTextField.defaultBackgroundColor)
 					.cornerRadius(5)
 					.clipped()
@@ -118,7 +115,7 @@ struct PublishDeckViewContentBox: View {
 							self.model.toggleTopicSelect(topic)
 						}
 					}
-					.frame(maxWidth: maxWidth)
+					.frame(maxWidth: Self.maxWidth)
 					.frame(height: heightOfGrid(
 						columns: Self.numberOfTopicColumns,
 						numberOfCells: currentStore.topics.count,

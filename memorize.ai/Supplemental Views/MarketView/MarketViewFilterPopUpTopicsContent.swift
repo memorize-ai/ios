@@ -2,9 +2,13 @@ import SwiftUI
 import QGrid
 
 struct MarketViewFilterPopUpTopicsContent: View {
-	static let availableWidth = SCREEN_SIZE.width - 51
+	static let gridWidth = SCREEN_SIZE.width - 51 - 8 * 2
 	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = Int(availableWidth - 16) / Int(TopicCell.dimension)
+	static let numberOfColumns = numberOfGridColumns(
+		width: gridWidth,
+		cellWidth: TopicCell.dimension,
+		horizontalSpacing: cellSpacing
+	)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
@@ -34,7 +38,7 @@ struct MarketViewFilterPopUpTopicsContent: View {
 				self.topicCellToggleSelect(forTopic: topic)
 			}
 		}
-		.frame(maxWidth: .infinity)
+		.frame(maxWidth: Self.gridWidth)
 		.padding(.top, 8)
 	}
 }

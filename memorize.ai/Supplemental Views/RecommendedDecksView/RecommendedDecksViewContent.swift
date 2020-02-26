@@ -2,11 +2,13 @@ import SwiftUI
 import QGrid
 
 struct RecommendedDecksViewContent: View {
-	static let deckCellWidth: CGFloat = 165
-	static let numberOfColumns =
-		Int(SCREEN_SIZE.width) / Int(deckCellWidth)
-	static let horizontalCellSpacing: CGFloat = 10
-	static let verticalCellSpacing: CGFloat = 20
+	static let cellWidth: CGFloat = 165
+	static let cellSpacing: CGFloat = 10
+	static let numberOfColumns = numberOfGridColumns(
+		width: SCREEN_SIZE.width - 32,
+		cellWidth: cellWidth,
+		horizontalSpacing: cellSpacing
+	)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: RecommendedDecksViewModel
@@ -20,13 +22,13 @@ struct RecommendedDecksViewContent: View {
 				QGrid(
 					model.decks,
 					columns: Self.numberOfColumns,
-					vSpacing: Self.verticalCellSpacing,
-					hSpacing: Self.horizontalCellSpacing
+					vSpacing: Self.cellSpacing,
+					hSpacing: Self.cellSpacing
 				) { deck in
 					DeckCellWithGetButton(
 						deck: deck,
 						user: self.currentStore.user,
-						width: Self.deckCellWidth,
+						width: Self.cellWidth,
 						shouldManuallyModifyDecks: true,
 						shouldShowRemoveAlert: false
 					)

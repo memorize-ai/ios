@@ -3,7 +3,11 @@ import QGrid
 
 struct ChooseTopicsViewContent: View {
 	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = Int(SCREEN_SIZE.width) / Int(TopicCell.dimension)
+	static let numberOfColumns = numberOfGridColumns(
+		width: SCREEN_SIZE.width - 32,
+		cellWidth: TopicCell.dimension,
+		horizontalSpacing: cellSpacing
+	)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: ChooseTopicsViewModel
