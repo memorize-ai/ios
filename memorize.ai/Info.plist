@@ -40,11 +40,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Photos are kept private, unless you upload them to the app</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Your data is kept private, and can only be reviewed by our development team</string>
+	<string>This allows you to take photos for use in deck images or cards.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos are kept private, unless you upload them to the app</string>
+	<string>This allows you to choose photos for use in deck images or cards.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Muli-ExtraLight.ttf</string>
