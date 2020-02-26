@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "2687067f0be119aaf860fd08396c19e69293165b",
+          "revision": "2d171fc3beb4b62bea73a7a5ca2918e65140346d",
           "version": null
         }
       },
@@ -69,7 +69,7 @@
         "repositoryURL": "https://github.com/kenmueller/TextView.git",
         "state": {
           "branch": "master",
-          "revision": "cb641ab266110069409c1da945333742b98487f2",
+          "revision": "155e003ddfefc0e8ba9c6f68a4b19359c587fd39",
           "version": null
         }
       },
