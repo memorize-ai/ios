@@ -155,7 +155,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				id: "0",
 				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				sectionId: "CSS",
-				front: #"This is the front of the card<audio src="a"></audio><h1>I am some big text</h1><img src="https://cdn.vox-cdn.com/thumbor/K7b0-MAQj0C2hy707Mm8WsUIocI=/0x0:600x350/1200x800/filters:focal(252x127:348x223)/cdn.vox-cdn.com/uploads/chorus_image/image/63386642/A_Consensus_sm.0.jpg">"#,
+				front: #"This is the front of the card<audio src="a"></audio><h1>I am some big text</h1><img src="https://cdn.vox-cdn.com/thumbor/K7b0-MAQj0C2hy707Mm8WsUIocI=/0x0:600x350/1200x800/filters:focal(252x127:348x223)/cdn.vox-cdn.com/uploads/chorus_image/image/63386642/A_Consensus_sm.0.jpg">"#, // swiftlint:disable:this line_length
 				back: "This is the back of the card",
 				numberOfViews: 670,
 				numberOfReviews: 0,
@@ -171,7 +171,7 @@ struct DecksViewCardCell_Previews: PreviewProvider {
 				id: "0",
 				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
 				sectionId: "CSS",
-				front: "This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text ",
+				front: "This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text This is some text ", // swiftlint:disable:this line_length
 				back: "This is the back of the card",
 				numberOfViews: 670,
 				numberOfReviews: 0,

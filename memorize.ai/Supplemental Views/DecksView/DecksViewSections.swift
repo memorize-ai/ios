@@ -14,6 +14,11 @@ struct DecksViewSections: View {
 		selectedDeck.sections
 	}
 	
+	var sectionCountMessage: String {
+		let extraCount = sections.count - MAX_NUMBER_OF_VIEWABLE_SECTIONS
+		return "\(extraCount.formatted) more section\(extraCount == 1 ? "" : "s")..."
+	}
+	
 	var body: some View {
 		VStack(spacing: 16) {
 			ForEach(sections.prefix(MAX_NUMBER_OF_VIEWABLE_SECTIONS)) { section in
@@ -29,7 +34,7 @@ struct DecksViewSections: View {
 				}
 			}
 			if sections.count > MAX_NUMBER_OF_VIEWABLE_SECTIONS {
-				Text("\((sections.count - MAX_NUMBER_OF_VIEWABLE_SECTIONS).formatted) more section\(sections.count - MAX_NUMBER_OF_VIEWABLE_SECTIONS == 1 ? "" : "s")...")
+				Text(sectionCountMessage)
 					.font(.muli(.bold, size: 15))
 					.foregroundColor(.darkGray)
 			}

@@ -79,7 +79,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 		image: .init("GeometryPrepDeck"),
 		name: "Geometry Prep #1",
 		subtitle: "Angles, lines, triangles and other polygons",
-		description: "This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons.",
+		description: "This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons. This is a deck about angles, lines, triangles and other polygons.", // swiftlint:disable:this line_length
 		numberOfViews: 1000000000,
 		numberOfUniqueViews: 200000,
 		numberOfRatings: 12400,
@@ -115,7 +115,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			id: "10",
 			parent: firstDeck,
 			sectionId: "",
-			front: "<h1>This is a card with an image.</h1><img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\"><ul><li>First element</li><li>Second element</li><li>Third element</li></ul>",
+			front: "<h1>This is a card with an image.</h1><img src=\"https://www.desktopbackground.org/p/2010/11/29/118717_seashore-desktop-wallpapers-hd-images-jpg_2560x1600_h.jpg\"><ul><li>First element</li><li>Second element</li><li>Third element</li></ul>", // swiftlint:disable:this line_length
 			back: "<b>This is the back.</b>",
 			numberOfViews: 0,
 			numberOfReviews: 0,
@@ -125,7 +125,7 @@ let PREVIEW_CURRENT_STORE: CurrentStore = {
 			id: "10",
 			parent: firstDeck,
 			sectionId: "",
-			front: "<h1>This is a list</h1><ul><li>First element</li><li>Second element</li><li>Third element</li></ul><p><b>This is the end of the card</b></p>",
+			front: "<h1>This is a list</h1><ul><li>First element</li><li>Second element</li><li>Third element</li></ul><p><b>This is the end of the card</b></p>", // swiftlint:disable:this line_length
 			back: "This is the back.",
 			numberOfViews: 0,
 			numberOfReviews: 0,

@@ -86,6 +86,7 @@ struct CKEditor: View {
 								.child {
 									HTMLElement.script
 										.child("ClassicEditor.create(document.getElementById('editor'),{simpleUpload:{uploadUrl:'\(uploadUrl)'},autosave:{save:e=>webkit.messageHandlers.data.postMessage(e.getData())}}).then(e=>e.ui.focusTracker.on('change:isFocused',(e,s,a)=>{if(a)setTimeout(()=>scrollTo(0,0),150);webkit.messageHandlers.focus.postMessage(a)})).catch(e=>webkit.messageHandlers.error.postMessage(e.toString()))")
+									// swiftlint:disable:previous line_length
 								}
 						}
 				}

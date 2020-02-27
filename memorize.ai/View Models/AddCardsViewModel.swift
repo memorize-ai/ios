@@ -57,11 +57,9 @@ final class AddCardsViewModel: ViewModel {
 	}
 	
 	func resetCanPublish() {
-		for card in cards {
-			if card.isPublishable {
-				canPublish = true
-				return
-			}
+		for card in cards where card.isPublishable {
+			canPublish = true
+			return
 		}
 		canPublish = false
 	}

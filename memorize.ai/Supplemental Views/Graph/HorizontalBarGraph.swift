@@ -102,7 +102,7 @@ struct HorizontalBarGraph_Previews: PreviewProvider {
 			rows: [
 				.init(label: "EASY", value: 12),
 				.init(label: "STRUGGLED", value: 10),
-				.init(label: "FORGOT", value: 9),
+				.init(label: "FORGOT", value: 9)
 			],
 			color: .init(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1))
 		)

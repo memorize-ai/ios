@@ -5,6 +5,11 @@ struct HomeViewReviewSection: View {
 	
 	@ObservedObject var user: User
 	
+	var dueCardsMessage: String {
+		let dueCardCount = user.numberOfDueCards
+		return "You have \(dueCardCount.nilIfZero?.formatted ?? "no") card\(dueCardCount == 1 ? "" : "s") due"
+	}
+	
 	var deckList: some View {
 		VStack(spacing: 0) {
 			ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
@@ -25,7 +30,7 @@ struct HomeViewReviewSection: View {
 					Text("Hello, \(user.name)")
 						.font(.muli(.bold, size: 20))
 						.alignment(.leading)
-					Text("You have \(user.numberOfDueCards.nilIfZero?.formatted ?? "no") card\(user.numberOfDueCards == 1 ? "" : "s") due")
+					Text(dueCardsMessage)
 						.font(.muli(.bold, size: 15))
 						.foregroundColor(.darkGray)
 						.alignment(.leading)

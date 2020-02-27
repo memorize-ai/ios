@@ -170,12 +170,9 @@ struct ReviewView: View {
 	}
 	
 	func deckHasNewCards(_ deck: Deck) -> Bool {
-		for card in cards where card.parent.parent == deck {
-			if card.isNew {
-				return true
-			}
+		cards.contains { card in
+			card.parent.parent == deck && card.isNew
 		}
-		return false
 	}
 	
 	func countOfCardsForSection(_ section: Deck.Section) -> Int {
@@ -193,12 +190,9 @@ struct ReviewView: View {
 	}
 	
 	func sectionHasNewCards(_ section: Deck.Section) -> Bool {
-		for card in cards where section.contains(card: card.parent) {
-			if card.isNew {
-				return true
-			}
+		cards.contains { card in
+			section.contains(card: card.parent) && card.isNew
 		}
-		return false
 	}
 	
 	func cardsForRating(_ rating: Card.PerformanceRating) -> [Card.ReviewData] {
@@ -270,17 +264,53 @@ struct ReviewView: View {
 		case .easy:
 			switch true {
 			case streak >= Card.ReviewData.NUMBER_OF_CONSECUTIVE_CORRECT_ATTEMPTS_FOR_MASTERED:
-				showPopUp(emoji: "🎉", message: "Mastered!", badges: badges, onCentered: onCentered, completion: completion)
+				showPopUp(
+					emoji: "🎉",
+					message: "Mastered!",
+					badges: badges,
+					onCentered: onCentered,
+					completion: completion
+				)
 			case streak > 2:
-				showPopUp(emoji: "🎉", message: "On a roll!", badges: badges, onCentered: onCentered, completion: completion)
+				showPopUp(
+					emoji: "🎉",
+					message: "On a roll!",
+					badges: badges,
+					onCentered: onCentered,
+					completion: completion
+				)
 			default:
-				showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
+				showPopUp(
+					emoji: "🎉",
+					message: "Great!",
+					badges: badges,
+					onCentered: onCentered,
+					completion: completion
+				)
 			}
-			showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
+			showPopUp(
+				emoji: "🎉",
+				message: "Great!",
+				badges: badges,
+				onCentered: onCentered,
+				completion: completion
+			)
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!", badges: badges, onCentered: onCentered, completion: completion)
+			showPopUp(
+				emoji: "😎",
+				message: "Good luck!",
+				badges: badges,
+				onCentered: onCentered,
+				completion: completion
+			)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!", badges: badges, onCentered: onCentered, completion: completion)
+			showPopUp(
+				emoji: "😕",
+				message: "Better luck next time!",
+				badges: badges,
+				onCentered: onCentered,
+				completion: completion
+			)
 		}
 	}
 	

@@ -205,7 +205,7 @@ extension Deck {
 		
 		@discardableResult
 		func showDeleteAlert(
-			message: String? = "Are you sure? All of the cards in this section will be permanently deleted. This action cannot be undone.",
+			message: String? = "Are you sure? All of the cards in this section will be permanently deleted. This action cannot be undone.", // swiftlint:disable:this line_length
 			completion: (() -> Void)? = nil
 		) -> Self {
 			showAlert(title: "Delete \(name)", message: message) { alert in

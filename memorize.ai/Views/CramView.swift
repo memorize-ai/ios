@@ -210,16 +210,46 @@ struct CramView: View {
 		case .easy:
 			switch true {
 			case current?.isMastered:
-				showPopUp(emoji: "🎉", message: "Mastered!", badges: badges, onCentered: onCentered, completion: completion)
+				showPopUp(
+					emoji: "🎉",
+					message: "Mastered!",
+					badges: badges,
+					onCentered: onCentered,
+					completion: completion
+				)
 			case current?.streak ?? 0 > 1:
-				showPopUp(emoji: "🎉", message: "On a roll!", badges: badges, onCentered: onCentered, completion: completion)
+				showPopUp(
+					emoji: "🎉",
+					message: "On a roll!",
+					badges: badges,
+					onCentered: onCentered,
+					completion: completion
+				)
 			default:
-				showPopUp(emoji: "🎉", message: "Great!", badges: badges, onCentered: onCentered, completion: completion)
+				showPopUp(
+					emoji: "🎉",
+					message: "Great!",
+					badges: badges,
+					onCentered: onCentered,
+					completion: completion
+				)
 			}
 		case .struggled:
-			showPopUp(emoji: "😎", message: "Good luck!", badges: badges, onCentered: onCentered, completion: completion)
+			showPopUp(
+				emoji: "😎",
+				message: "Good luck!",
+				badges: badges,
+				onCentered: onCentered,
+				completion: completion
+			)
 		case .forgot:
-			showPopUp(emoji: "😕", message: "Better luck next time!", badges: badges, onCentered: onCentered, completion: completion)
+			showPopUp(
+				emoji: "😕",
+				message: "Better luck next time!",
+				badges: badges,
+				onCentered: onCentered,
+				completion: completion
+			)
 		}
 	}
 	
@@ -291,11 +321,10 @@ struct CramView: View {
 			if deck.hasUnsectionedCards {
 				currentSectionIndex = -1
 			} else {
-				for i in 0..<deck.unlockedSections.count {
-					if deck.unlockedSections[i].numberOfCards > 0 {
-						currentSectionIndex = i
-						break
-					}
+				for i in 0..<deck.unlockedSections.count
+				where deck.unlockedSections[i].numberOfCards > 0 {
+					currentSectionIndex = i
+					break
 				}
 			}
 			return
@@ -305,30 +334,27 @@ struct CramView: View {
 				if deck.hasUnsectionedCards {
 					currentSectionIndex = -1
 				} else {
-					for i in 0..<deck.unlockedSections.count {
-						if deck.unlockedSections[i].numberOfCards > 0 {
-							currentSectionIndex = i
-							break
-						}
+					for i in 0..<deck.unlockedSections.count
+					where deck.unlockedSections[i].numberOfCards > 0 {
+						currentSectionIndex = i
+						break
 					}
 				}
 			} else {
 				var didSetCurrentSectionIndex = false
 				if currentSectionIndex + 1 < deck.unlockedSections.count {
-					for i in currentSectionIndex + 1..<deck.unlockedSections.count {
-						if deck.unlockedSections[i].numberOfCards > 0 {
-							currentSectionIndex = i
-							didSetCurrentSectionIndex = true
-							break
-						}
+					for i in currentSectionIndex + 1..<deck.unlockedSections.count
+					where deck.unlockedSections[i].numberOfCards > 0 {
+						currentSectionIndex = i
+						didSetCurrentSectionIndex = true
+						break
 					}
 				}
 				if !didSetCurrentSectionIndex {
-					for i in 0..<deck.unlockedSections.count {
-						if deck.unlockedSections[i].numberOfCards > 0 {
-							currentSectionIndex = i
-							break
-						}
+					for i in 0..<deck.unlockedSections.count
+					where deck.unlockedSections[i].numberOfCards > 0 {
+						currentSectionIndex = i
+						break
 					}
 				}
 			}

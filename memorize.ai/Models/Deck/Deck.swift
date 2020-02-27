@@ -696,7 +696,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func showRemoveFromLibraryAlert(
 		forUser user: User,
 		title: String = "Remove from library",
-		message: String? = "All of your data will be deleted, and all of your progress will be lost. This action cannot be undone.",
+		message: String? = "All of your data will be deleted, and all of your progress will be lost. This action cannot be undone.", // swiftlint:disable:this line_length
 		completion: (() -> Void)? = nil
 	) -> Self {
 		showAlert(title: title, message: message) { alert in

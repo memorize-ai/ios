@@ -19,6 +19,11 @@ struct DecksViewSectionBody: View {
 		currentStore.user.id == section.parent.creatorId
 	}
 	
+	var cardCountMessage: String {
+		let extraCount = section.cards.count - MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION
+		return "\(extraCount.formatted) more card\(extraCount == 1 ? "" : "s")..."
+	}
+	
 	func headerButton(text: String, color: Color) -> some View {
 		CustomRectangle(
 			background: Color.transparent,
@@ -71,7 +76,7 @@ struct DecksViewSectionBody: View {
 							DecksViewCardCell(card: card)
 						}
 						if section.cards.count > MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION {
-							Text("\((section.cards.count - MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION).formatted) more card\(section.cards.count - MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION == 1 ? "" : "s")...")
+							Text(cardCountMessage)
 								.font(.muli(.bold, size: 15))
 								.foregroundColor(.darkGray)
 						}
