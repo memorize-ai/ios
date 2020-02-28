@@ -115,7 +115,6 @@ struct PublishDeckViewContentBox: View {
 							self.model.toggleTopicSelect(topic)
 						}
 					}
-					.frame(maxWidth: Self.maxWidth)
 					.frame(height: heightOfGrid(
 						columns: Self.numberOfTopicColumns,
 						numberOfCells: currentStore.topics.count,

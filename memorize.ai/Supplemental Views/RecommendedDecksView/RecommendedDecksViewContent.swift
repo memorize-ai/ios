@@ -33,7 +33,6 @@ struct RecommendedDecksViewContent: View {
 						shouldShowRemoveAlert: false
 					)
 				}
-				.frame(maxWidth: SCREEN_SIZE.width - 32)
 				.padding(.bottom)
 			}
 		}

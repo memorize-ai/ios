@@ -38,7 +38,6 @@ struct MarketViewFilterPopUpTopicsContent: View {
 				self.topicCellToggleSelect(forTopic: topic)
 			}
 		}
-		.frame(maxWidth: Self.gridWidth)
 		.padding(.top, 8)
 	}
 }
