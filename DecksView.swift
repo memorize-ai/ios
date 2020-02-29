@@ -4,7 +4,13 @@ struct DecksView: View {
 	static let horizontalPadding: CGFloat = 23
 	
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: DecksViewModel
+	
+	@Binding var isDeckOptionsPopUpShowing: Bool
+	@Binding var selectedSection: Deck.Section?
+	@Binding var isSectionOptionsPopUpShowing: Bool
+	
+	let isSectionExpanded: (Deck.Section) -> Bool
+	let toggleSectionExpanded: (Deck.Section, User) -> Void
 	
 	var selectedDeck: Deck {
 		if currentStore.selectedDeck == nil {
@@ -22,7 +28,8 @@ struct DecksView: View {
 				.edgesIgnoringSafeArea(.all)
 				VStack {
 					DecksViewTopControls(
-						selectedDeck: self.selectedDeck
+						selectedDeck: self.selectedDeck,
+						isDeckOptionsPopUpShowing: self.$isDeckOptionsPopUpShowing
 					)
 					VStack(spacing: 0) {
 						ZStack {
@@ -30,7 +37,11 @@ struct DecksView: View {
 								.foregroundColor(.lightGrayBackground)
 							ScrollView {
 								DecksViewSections(
-									selectedDeck: self.selectedDeck
+									selectedDeck: self.selectedDeck,
+									selectedSection: self.$selectedSection,
+									isSectionOptionsPopUpShowing: self.$isSectionOptionsPopUpShowing,
+									isSectionExpanded: self.isSectionExpanded,
+									toggleSectionExpanded: self.toggleSectionExpanded
 								)
 								.frame(maxWidth: .infinity)
 								.padding(
@@ -56,9 +67,14 @@ struct DecksView: View {
 #if DEBUG
 struct DecksView_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksView()
-			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(DecksViewModel())
+		DecksView(
+			isDeckOptionsPopUpShowing: .constant(false),
+			selectedSection: .constant(nil),
+			isSectionOptionsPopUpShowing: .constant(false),
+			isSectionExpanded: { _ in true },
+			toggleSectionExpanded: { _, _ in }
+		)
+		.environmentObject(PREVIEW_CURRENT_STORE)
 	}
 }
 #endif

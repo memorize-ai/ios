@@ -28,6 +28,8 @@ struct ProfileView: View {
 							.padding(.top, 8)
 							ProfileViewCreatedDecksSection(user: self.currentStore.user)
 							ProfileViewMyInterestsSection(user: self.currentStore.user)
+								.padding(.top)
+								.padding(.bottom, 8)
 						}
 						.frame(maxWidth: .infinity)
 					}

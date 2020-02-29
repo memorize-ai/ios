@@ -15,8 +15,6 @@ struct MainTabView: View {
 	
 	@ObservedObject var currentUser: User
 	
-	@ObservedObject var decksViewModel = DecksViewModel()
-	
 	func setSelection(to selection: Selection) {
 		currentStore.mainTabViewSelection = selection
 	}
@@ -27,100 +25,132 @@ struct MainTabView: View {
 	
 	// MARK: - Market View [START]
 	
-	@State var searchText = "" {
+	@State var marketView_searchText = "" {
 		didSet {
-			switchSortAlgorithmIfNeeded()
-			loadSearchResults(force: true)
+			marketView_switchSortAlgorithmIfNeeded()
+			marketView_loadSearchResults(force: true)
 		}
 	}
 	
-	@State var isSortPopUpShowing = false
-	@State var isFilterPopUpShowing = false
+	@State var marketView_isSortPopUpShowing = false
+	@State var marketView_isFilterPopUpShowing = false
 
-	@State var filterPopUpSideBarSelection = MarketView.FilterPopUpSideBarSelection.topics
+	@State var marketView_filterPopUpSideBarSelection = MarketView.FilterPopUpSideBarSelection.topics
 
-	@State var sortAlgorithm = Deck.SortAlgorithm.recommended
+	@State var marketView_sortAlgorithm = Deck.SortAlgorithm.recommended
 
-	@State var topicsFilter: [Topic]? = nil {
+	@State var marketView_topicsFilter: [Topic]? = nil {
 		didSet {
-			switchSortAlgorithmIfNeeded()
+			marketView_switchSortAlgorithmIfNeeded()
 		}
 	}
 	
-	@State var ratingFilter = 0.0 {
+	@State var marketView_ratingFilter = 0.0 {
 		didSet {
-			switchSortAlgorithmIfNeeded()
+			marketView_switchSortAlgorithmIfNeeded()
 		}
 	}
 	
-	@State var downloadsFilter = 0.0 {
+	@State var marketView_downloadsFilter = 0.0 {
 		didSet {
-			switchSortAlgorithmIfNeeded()
+			marketView_switchSortAlgorithmIfNeeded()
 		}
 	}
 	
-	@State var searchResults = [Deck]()
-	@State var searchResultsLoadingState = LoadingState()
+	@State var marketView_searchResults = [Deck]()
+	@State var marketView_searchResultsLoadingState = LoadingState()
 	
-	func setSearchText(_ searchText: String) {
-		self.searchText = searchText
+	func marketView_setSearchText(_ searchText: String) {
+		marketView_searchText = searchText
 	}
 	
-	func switchSortAlgorithmIfNeeded() {
-		if searchText.isEmpty && topicsFilter == nil && ratingFilter.isZero && downloadsFilter.isZero {
-			sortAlgorithm = .recommended
-		} else if sortAlgorithm == .recommended {
-			sortAlgorithm = .relevance
+	func marketView_switchSortAlgorithmIfNeeded() {
+		if
+			marketView_searchText.isEmpty &&
+			marketView_topicsFilter == nil &&
+			marketView_ratingFilter.isZero &&
+			marketView_downloadsFilter.isZero
+		{
+			marketView_sortAlgorithm = .recommended
+		} else if marketView_sortAlgorithm == .recommended {
+			marketView_sortAlgorithm = .relevance
 		}
 	}
 	
-	var deckSearchRatingFilter: Double? {
-		ratingFilter.isZero
+	var marketView_deckSearchRatingFilter: Double? {
+		marketView_ratingFilter.isZero
 			? nil
-			: ratingFilter
+			: marketView_ratingFilter
 	}
 	
-	var deckSearchDownloadsFilter: Int? {
-		downloadsFilter.isZero
+	var marketView_deckSearchDownloadsFilter: Int? {
+		marketView_downloadsFilter.isZero
 			? nil
-			: .init(downloadsFilter)
+			: .init(marketView_downloadsFilter)
 	}
 	
-	var searchResultsPromise: Promise<[Deck]> {
-		sortAlgorithm == .recommended
+	var marketView_searchResultsPromise: Promise<[Deck]> {
+		marketView_sortAlgorithm == .recommended
 			? currentStore.user.recommendedDecks()
 			: Deck.search(
-				query: searchText,
-				filterForTopics: topicsFilter?.map(~\.id),
-				averageRatingGreaterThan: deckSearchRatingFilter,
-				numberOfDownloadsGreaterThan: deckSearchDownloadsFilter,
-				sortBy: sortAlgorithm
+				query: marketView_searchText,
+				filterForTopics: marketView_topicsFilter?.map(~\.id),
+				averageRatingGreaterThan: marketView_deckSearchRatingFilter,
+				numberOfDownloadsGreaterThan: marketView_deckSearchDownloadsFilter,
+				sortBy: marketView_sortAlgorithm
 			)
 	}
 	
-	func loadSearchResults(force: Bool) {
-		guard force || searchResultsLoadingState.isNone else { return }
-		searchResultsLoadingState.startLoading()
-		self.searchResultsPromise.done { decks in
-			self.searchResults = decks.map { $0.loadImage() }
-			self.searchResultsLoadingState.succeed()
+	func marketView_loadSearchResults(force: Bool) {
+		guard force || marketView_searchResultsLoadingState.isNone else { return }
+		marketView_searchResultsLoadingState.startLoading()
+		self.marketView_searchResultsPromise.done { decks in
+			self.marketView_searchResults = decks.map { $0.loadImage() }
+			self.marketView_searchResultsLoadingState.succeed()
 		}.catch { error in
-			self.searchResultsLoadingState.fail(error: error)
+			self.marketView_searchResultsLoadingState.fail(error: error)
 			showAlert(title: "An error occurred", message: error.localizedDescription)
 		}
 	}
 	
-	func isTopicSelected(_ topic: Topic) -> Bool {
-		topicsFilter?.contains(topic) ?? true
+	func marketView_isTopicSelected(_ topic: Topic) -> Bool {
+		marketView_topicsFilter?.contains(topic) ?? true
 	}
 	
-	func toggleTopicSelect(_ topic: Topic) {
-		isTopicSelected(topic)
-			? topicsFilter?.removeAll { $0 == topic }
-			: topicsFilter?.append(topic)
+	func marketView_toggleTopicSelect(_ topic: Topic) {
+		marketView_isTopicSelected(topic)
+			? marketView_topicsFilter?.removeAll { $0 == topic }
+			: marketView_topicsFilter?.append(topic)
 	}
 	
 	// MARK: Market View [END] -
+	
+	// MARK: - Decks View [START]
+	
+	@State var decksView_isDeckOptionsPopUpShowing = false
+	
+	@State var decksView_selectedSection: Deck.Section? = nil // swiftlint:disable:this redundant_optional_initialization
+	@State var decksView_isSectionOptionsPopUpShowing = false
+	
+	@State var decksView_isDestroyAlertShowing = false
+	@State var decksView_isOrderSectionsSheetShowing = false
+	
+	@State var decksView_expandedSections = [Deck.Section: Void]()
+	
+	func decksView_isSectionExpanded(_ section: Deck.Section) -> Bool {
+		decksView_expandedSections[section] != nil
+	}
+	
+	func decksView_toggleSectionExpanded(_ section: Deck.Section, forUser user: User) {
+		if decksView_isSectionExpanded(section) {
+			decksView_expandedSections[section] = nil
+		} else {
+			decksView_expandedSections[section] = ()
+			section.loadCards(withUserDataForUser: user)
+		}
+	}
+	
+	// MARK: Decks View [END] -
 	
 	var tabBarItems: some View {
 		HStack(alignment: .bottom) {
@@ -220,18 +250,23 @@ struct MainTabView: View {
 								}
 								.case(.market) {
 									MarketView(
-										isSortPopUpShowing: $isSortPopUpShowing,
-										isFilterPopUpShowing: $isFilterPopUpShowing,
-										searchText: searchText,
-										setSearchText: setSearchText,
-										searchResults: searchResults,
-										searchResultsLoadingState: searchResultsLoadingState,
-										loadSearchResults: loadSearchResults
+										isSortPopUpShowing: $marketView_isSortPopUpShowing,
+										isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
+										searchText: marketView_searchText,
+										setSearchText: marketView_setSearchText,
+										searchResults: marketView_searchResults,
+										searchResultsLoadingState: marketView_searchResultsLoadingState,
+										loadSearchResults: marketView_loadSearchResults
 									)
 								}
 								.case(.decks) {
-									DecksView()
-										.environmentObject(decksViewModel)
+									DecksView(
+										isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
+										selectedSection: $decksView_selectedSection,
+										isSectionOptionsPopUpShowing: $decksView_isSectionOptionsPopUpShowing,
+										isSectionExpanded: decksView_isSectionExpanded,
+										toggleSectionExpanded: decksView_toggleSectionExpanded
+									)
 								}
 								.case(.profile) {
 									ProfileView()
@@ -277,31 +312,32 @@ struct MainTabView: View {
 						.frame(height: 72)
 					}
 					MarketViewSortPopUp(
-						isSortPopUpShowing: $isSortPopUpShowing,
-						sortAlgorithm: $sortAlgorithm,
-						loadSearchResults: loadSearchResults
+						isSortPopUpShowing: $marketView_isSortPopUpShowing,
+						sortAlgorithm: $marketView_sortAlgorithm,
+						loadSearchResults: marketView_loadSearchResults
 					)
 					MarketViewFilterPopUp(
-						isFilterPopUpShowing: $isFilterPopUpShowing,
-						topicsFilter: $topicsFilter,
-						ratingFilter: $ratingFilter,
-						downloadsFilter: $downloadsFilter,
-						filterPopUpSideBarSelection: $filterPopUpSideBarSelection,
-						loadSearchResults: loadSearchResults,
-						isTopicSelected: isTopicSelected,
-						toggleTopicSelect: toggleTopicSelect
+						isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
+						topicsFilter: $marketView_topicsFilter,
+						ratingFilter: $marketView_ratingFilter,
+						downloadsFilter: $marketView_downloadsFilter,
+						filterPopUpSideBarSelection: $marketView_filterPopUpSideBarSelection,
+						loadSearchResults: marketView_loadSearchResults,
+						isTopicSelected: marketView_isTopicSelected,
+						toggleTopicSelect: marketView_toggleTopicSelect
 					)
 					if currentStore.selectedDeck != nil {
 						DecksViewDeckOptionsPopUp(
-							selectedDeck: currentStore.selectedDeck!
+							selectedDeck: currentStore.selectedDeck!,
+							isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
+							isOrderSectionsSheetShowing: $decksView_isOrderSectionsSheetShowing
 						)
-						.environmentObject(decksViewModel)
-						if decksViewModel.selectedSection != nil {
+						if decksView_selectedSection != nil {
 							DecksViewSectionOptionsPopUp(
 								deck: currentStore.selectedDeck!,
-								section: decksViewModel.selectedSection!
+								section: decksView_selectedSection!,
+								isSectionOptionsPopUpShowing: $decksView_isSectionOptionsPopUpShowing
 							)
-							.environmentObject(decksViewModel)
 						}
 					}
 				}

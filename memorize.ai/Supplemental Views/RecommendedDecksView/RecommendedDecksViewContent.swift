@@ -33,6 +33,11 @@ struct RecommendedDecksViewContent: View {
 						shouldShowRemoveAlert: false
 					)
 				}
+				.frame(width: widthOfGrid(
+					columns: Self.numberOfColumns,
+					cellWidth: Self.cellWidth,
+					spacing: Self.cellSpacing
+				))
 				.padding(.bottom)
 			}
 		}

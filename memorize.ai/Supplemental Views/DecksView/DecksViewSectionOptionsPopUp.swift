@@ -2,10 +2,11 @@ import SwiftUI
 
 struct DecksViewSectionOptionsPopUp: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var deck: Deck
 	@ObservedObject var section: Deck.Section
+	
+	@Binding var isSectionOptionsPopUpShowing: Bool
 	
 	var isOwner: Bool {
 		deck.creatorId == currentStore.user.id
@@ -32,7 +33,7 @@ struct DecksViewSectionOptionsPopUp: View {
 	
 	func hide() {
 		popUpWithAnimation {
-			model.isSectionOptionsPopUpShowing = false
+			isSectionOptionsPopUpShowing = false
 		}
 	}
 	
@@ -72,7 +73,7 @@ struct DecksViewSectionOptionsPopUp: View {
 	
 	var body: some View {
 		PopUp(
-			isShowing: $model.isSectionOptionsPopUpShowing,
+			isShowing: $isSectionOptionsPopUpShowing,
 			contentHeight: contentHeight
 		) {
 			if isUnlocked {
@@ -173,9 +174,7 @@ struct DecksViewSectionOptionsPopUp: View {
 #if DEBUG
 struct DecksViewSectionOptionsPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = DecksViewModel()
-		model.isSectionOptionsPopUpShowing = true
-		return ZStack {
+		ZStack {
 			Color.blue
 				.edgesIgnoringSafeArea(.all)
 			DecksViewSectionOptionsPopUp(
@@ -186,10 +185,10 @@ struct DecksViewSectionOptionsPopUp_Previews: PreviewProvider {
 					name: "CSS",
 					index: 0,
 					numberOfCards: 56
-				)
+				),
+				isSectionOptionsPopUpShowing: .constant(true)
 			)
 			.environmentObject(PREVIEW_CURRENT_STORE)
-			.environmentObject(model)
 		}
 	}
 }

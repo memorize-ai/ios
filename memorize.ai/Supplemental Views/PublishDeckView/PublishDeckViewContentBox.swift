@@ -115,16 +115,17 @@ struct PublishDeckViewContentBox: View {
 							self.model.toggleTopicSelect(topic)
 						}
 					}
-					.frame(height: heightOfGrid(
+					.gridFrame(
 						columns: Self.numberOfTopicColumns,
 						numberOfCells: currentStore.topics.count,
+						cellWidth: TopicCell.dimension,
 						cellHeight: TopicCell.dimension,
-						spacing: Self.topicCellSpacing
-					))
-					.padding(.top, -10)
-					.padding(.bottom, 10)
+						horizontalSpacing: Self.topicCellSpacing,
+						verticalSpacing: Self.topicCellSpacing
+					)
 				}
 				.padding(.top, 12)
+				.padding(.bottom, 10)
 			}
 			.padding()
 		}

@@ -86,6 +86,14 @@ func numberOfGridColumns(
 	.init((width + horizontalSpacing) / (cellWidth + horizontalSpacing))
 }
 
+func widthOfGrid(
+	columns: Int,
+	cellWidth: CGFloat,
+	spacing: CGFloat
+) -> CGFloat {
+	cellWidth * .init(columns) + spacing * .init(columns - 1)
+}
+
 func heightOfGrid(
 	columns: Int,
 	numberOfCells: Int,

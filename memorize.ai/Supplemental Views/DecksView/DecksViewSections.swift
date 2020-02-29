@@ -2,9 +2,14 @@ import SwiftUI
 
 struct DecksViewSections: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var selectedDeck: Deck
+	
+	@Binding var selectedSection: Deck.Section?
+	@Binding var isSectionOptionsPopUpShowing: Bool
+	
+	let isSectionExpanded: (Deck.Section) -> Bool
+	let toggleSectionExpanded: (Deck.Section, User) -> Void
 	
 	var sections: [Deck.Section] {
 		(selectedDeck.hasUnsectionedCards
@@ -23,14 +28,20 @@ struct DecksViewSections: View {
 		VStack(spacing: 16) {
 			ForEach(sections.prefix(MAX_NUMBER_OF_VIEWABLE_SECTIONS)) { section in
 				VStack {
-					DecksViewSectionHeader(section: section)
-						.onTapGesture {
-							self.model.toggleSectionExpanded(
-								section,
-								forUser: self.currentStore.user
-							)
-						}
-					DecksViewSectionBody(section: section)
+					DecksViewSectionHeader(
+						section: section,
+						selectedSection: self.$selectedSection,
+						isSectionOptionsPopUpShowing: self.$isSectionOptionsPopUpShowing,
+						isSectionExpanded: self.isSectionExpanded,
+						toggleSectionExpanded: self.toggleSectionExpanded
+					)
+					.onTapGesture {
+						self.toggleSectionExpanded(section, self.currentStore.user)
+					}
+					DecksViewSectionBody(
+						section: section,
+						isSectionExpanded: self.isSectionExpanded
+					)
 				}
 			}
 			if sections.count > MAX_NUMBER_OF_VIEWABLE_SECTIONS {
@@ -46,10 +57,13 @@ struct DecksViewSections: View {
 struct DecksViewSections_Previews: PreviewProvider {
 	static var previews: some View {
 		DecksViewSections(
-			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
+			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			selectedSection: .constant(nil),
+			isSectionOptionsPopUpShowing: .constant(false),
+			isSectionExpanded: { _ in true },
+			toggleSectionExpanded: { _, _ in }
 		)
 		.environmentObject(PREVIEW_CURRENT_STORE)
-		.environmentObject(DecksViewModel())
 	}
 }
 #endif

@@ -49,17 +49,18 @@ struct ProfileViewMyInterestsSection: View {
 							: self.user.addInterest(topicId: topic.id)
 					}
 				}
-				.frame(height: heightOfGrid(
+				.gridFrame(
 					columns: Self.numberOfColumns,
 					numberOfCells: currentStore.topics.count,
+					cellWidth: TopicCell.dimension,
 					cellHeight: TopicCell.dimension,
-					spacing: Self.cellSpacing
-				))
-				.padding(8)
-				.padding(.bottom)
+					horizontalSpacing: Self.cellSpacing,
+					verticalSpacing: Self.cellSpacing
+				)
+				.padding(.vertical, 8)
+				.frame(width: SCREEN_SIZE.width - 8 * 2)
 			}
 		}
-		.padding(.vertical)
 		.onAppear {
 			self.currentStore.loadAllTopics()
 		}

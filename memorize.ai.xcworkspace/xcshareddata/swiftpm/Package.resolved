@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": "master",
-          "revision": "e4cf0904668e3c47e0fabde739f4c08a0d4b6a36",
+          "revision": "ecc7bdd849227bc9c66a6442f5e71e08d8ccd2fd",
           "version": null
         }
       },
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/kenmueller/QGrid",
         "state": {
           "branch": "master",
-          "revision": "d76328f7b4269a79c58a2d84ffaf49af543cb698",
+          "revision": "0da7ec5df69d4976535b8373e6a1766a6fd06883",
           "version": null
         }
       },
@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
-          "revision": "2d171fc3beb4b62bea73a7a5ca2918e65140346d",
+          "revision": "28384eca230cd1f4f2452cead9a496f94b2f0079",
           "version": null
         }
       },

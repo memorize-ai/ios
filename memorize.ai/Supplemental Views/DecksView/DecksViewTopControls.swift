@@ -2,9 +2,10 @@ import SwiftUI
 
 struct DecksViewTopControls: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var selectedDeck: Deck
+	
+	@Binding var isDeckOptionsPopUpShowing: Bool
 	
 	var body: some View {
 		HStack(spacing: 23) {
@@ -44,7 +45,7 @@ struct DecksViewTopControls: View {
 				}
 				VerticalTripleDots {
 					popUpWithAnimation {
-						self.model.isDeckOptionsPopUpShowing = true
+						self.isDeckOptionsPopUpShowing = true
 					}
 				}
 				.padding(.leading, 12)
@@ -60,7 +61,8 @@ struct DecksViewTopControls: View {
 struct DecksViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
 		DecksViewTopControls(
-			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
+			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			isDeckOptionsPopUpShowing: .constant(true)
 		)
 	}
 }

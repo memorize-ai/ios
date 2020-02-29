@@ -2,9 +2,11 @@ import SwiftUI
 
 struct DecksViewDeckOptionsPopUp: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var selectedDeck: Deck
+	
+	@Binding var isDeckOptionsPopUpShowing: Bool
+	@Binding var isOrderSectionsSheetShowing: Bool
 		
 	var isOwner: Bool {
 		selectedDeck.creatorId == currentStore.user.id
@@ -20,7 +22,7 @@ struct DecksViewDeckOptionsPopUp: View {
 	
 	func hide() {
 		popUpWithAnimation {
-			model.isDeckOptionsPopUpShowing = false
+			isDeckOptionsPopUpShowing = false
 		}
 	}
 	
@@ -34,7 +36,7 @@ struct DecksViewDeckOptionsPopUp: View {
 	
 	var body: some View {
 		PopUp(
-			isShowing: $model.isDeckOptionsPopUpShowing,
+			isShowing: $isDeckOptionsPopUpShowing,
 			contentHeight: .init(
 				50 * (isOwner ? (8 + *canOrderSections) : 5) +
 				2 + *isOwner
@@ -133,9 +135,9 @@ struct DecksViewDeckOptionsPopUp: View {
 						text: "Order sections",
 						textColor: .darkGray
 					) {
-						self.model.isOrderSectionsSheetShowing = true
+						self.isOrderSectionsSheetShowing = true
 					}
-					.sheet(isPresented: $model.isOrderSectionsSheetShowing) {
+					.sheet(isPresented: $isOrderSectionsSheetShowing) {
 						DecksViewOrderSectionsSheetView(deck: self.selectedDeck)
 					}
 				}
@@ -167,7 +169,7 @@ struct DecksViewDeckOptionsPopUp: View {
 					forUser: self.currentStore.user
 				) {
 					popUpWithAnimation {
-						self.model.isDeckOptionsPopUpShowing = false
+						self.isDeckOptionsPopUpShowing = false
 						self.currentStore.reloadSelectedDeck()
 					}
 				}
@@ -178,21 +180,19 @@ struct DecksViewDeckOptionsPopUp: View {
 					text: "Destroy",
 					textColor: .darkGray
 				) {
-					self.model.isDestroyAlertShowing = true
-				}
-				.alert(isPresented: $model.isDestroyAlertShowing) {
-					.init(
-						title: .init("Are you sure?"),
-						message: .init("\(selectedDeck.name) and all of its content will be deleted. This cannot be undone."),
-						primaryButton: .destructive(.init("Destroy")) {
+					showAlert(
+						title: "Are you sure?",
+						message: "\(self.selectedDeck.name) and all of its content will be deleted. This cannot be undone."
+					) { alert in
+						alert.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+						alert.addAction(.init(title: "Destroy", style: .destructive) { _ in
 							self.selectedDeck.delete()
 							popUpWithAnimation {
-								self.model.isDeckOptionsPopUpShowing = false
+								self.isDeckOptionsPopUpShowing = false
 								self.currentStore.reloadSelectedDeck()
 							}
-						},
-						secondaryButton: .cancel()
-					)
+						})
+					}
 				}
 			}
 		}
@@ -202,13 +202,11 @@ struct DecksViewDeckOptionsPopUp: View {
 #if DEBUG
 struct DecksViewDeckOptionsPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		let model = DecksViewModel()
-		model.isDeckOptionsPopUpShowing = true
-		return DecksViewDeckOptionsPopUp(
-			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!
+		DecksViewDeckOptionsPopUp(
+			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!,
+			isDeckOptionsPopUpShowing: .constant(true),
+			isOrderSectionsSheetShowing: .constant(false)
 		)
-		.environmentObject(PREVIEW_CURRENT_STORE)
-		.environmentObject(model)
 	}
 }
 #endif

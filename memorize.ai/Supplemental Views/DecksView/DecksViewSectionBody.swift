@@ -3,16 +3,17 @@ import SwiftUIX
 
 struct DecksViewSectionBody: View {
 	@EnvironmentObject var currentStore: CurrentStore
-	@EnvironmentObject var model: DecksViewModel
 	
 	@ObservedObject var section: Deck.Section
+	
+	let isSectionExpanded: (Deck.Section) -> Bool
 	
 	var isUnlocked: Bool {
 		section.isUnlocked
 	}
 	
 	var isExpanded: Bool {
-		model.isSectionExpanded(section)
+		isSectionExpanded(section)
 	}
 	
 	var isOwner: Bool {
@@ -97,40 +98,42 @@ struct DecksViewSectionBody: View {
 #if DEBUG
 struct DecksViewSectionBody_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewSectionBody(section: .init(
-			id: "0",
-			parent: PREVIEW_CURRENT_STORE.user.decks.first!,
-			name: "CSS",
-			index: 0,
-			numberOfCards: 56,
-			cards: [
-				.init(
-					id: "0",
-					parent: PREVIEW_CURRENT_STORE.user.decks.first!,
-					sectionId: "CSS",
-					front: "This is the front of the card",
-					back: "This is the back of the card",
-					numberOfViews: 670,
-					numberOfReviews: 0,
-					numberOfSkips: 40,
-					userData: .init(isNew: true, dueDate: .now)
-				),
-				.init(
-					id: "1",
-					parent: PREVIEW_CURRENT_STORE.user.decks.first!,
-					sectionId: "CSS",
-					front: "This is the front of the second card",
-					back: "This is the back of the second card",
-					numberOfViews: 670,
-					numberOfReviews: 0,
-					numberOfSkips: 40,
-					userData: .init(isNew: false, dueDate: .now)
-				)
-			]
-		))
+		DecksViewSectionBody(
+			section: .init(
+				id: "0",
+				parent: PREVIEW_CURRENT_STORE.user.decks.first!,
+				name: "CSS",
+				index: 0,
+				numberOfCards: 56,
+				cards: [
+					.init(
+						id: "0",
+						parent: PREVIEW_CURRENT_STORE.user.decks.first!,
+						sectionId: "CSS",
+						front: "This is the front of the card",
+						back: "This is the back of the card",
+						numberOfViews: 670,
+						numberOfReviews: 0,
+						numberOfSkips: 40,
+						userData: .init(isNew: true, dueDate: .now)
+					),
+					.init(
+						id: "1",
+						parent: PREVIEW_CURRENT_STORE.user.decks.first!,
+						sectionId: "CSS",
+						front: "This is the front of the second card",
+						back: "This is the back of the second card",
+						numberOfViews: 670,
+						numberOfReviews: 0,
+						numberOfSkips: 40,
+						userData: .init(isNew: false, dueDate: .now)
+					)
+				]
+			),
+			isSectionExpanded: { _ in true }
+		)
 		.padding(.horizontal, DecksView.horizontalPadding)
 		.environmentObject(PREVIEW_CURRENT_STORE)
-		.environmentObject(DecksViewModel())
 	}
 }
 #endif
