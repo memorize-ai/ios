@@ -82,7 +82,7 @@ struct InitialView: View {
 				Page.Gradient(colors: [.init(#colorLiteral(red: 0.03529411765, green: 0.6156862745, blue: 0.4117647059, alpha: 1)), .init(#colorLiteral(red: 0.7529411765, green: 0.8862745098, blue: 0.2549019608, alpha: 1))])
 			},
 			content: {
-				Page.Heading("Explore 7,000+ decks")
+				Page.Heading("Explore 40,000+ decks")
 				Page.SubHeading("Recommendations based on what you like")
 				Page.Screenshot(.initialViewMarketScreenshot)
 					.padding(.horizontal, 30)
