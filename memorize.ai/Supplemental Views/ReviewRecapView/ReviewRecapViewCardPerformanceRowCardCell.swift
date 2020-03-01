@@ -46,6 +46,10 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 						Text("NEW")
 							.font(.muli(.semiBold, size: 13))
 							.foregroundColor(.darkBlue)
+							.padding(
+								.bottom,
+								shouldShowDeckName || shouldShowSectionName ? -4 : 0
+							)
 					}
 					HStack(alignment: .bottom) {
 						if shouldShowDeckName {
