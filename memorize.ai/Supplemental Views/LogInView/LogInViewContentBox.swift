@@ -43,7 +43,7 @@ struct LogInViewContentBox: View {
 						.frame(height: 40)
 					}
 				}
-				.disabled(model.isLogInButtonDisabled)
+				.disabled(model.isLogInButtonDisabled || model.loadingState.isLoading)
 				.alert(isPresented: $model.shouldShowErrorModal) {
 					guard let errorModal = model.errorModal else {
 						return .init(

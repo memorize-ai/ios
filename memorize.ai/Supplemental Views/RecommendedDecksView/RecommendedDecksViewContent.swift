@@ -2,13 +2,7 @@ import SwiftUI
 import QGrid
 
 struct RecommendedDecksViewContent: View {
-	static let cellWidth: CGFloat = 165
-	static let cellSpacing: CGFloat = 10
-	static let numberOfColumns = numberOfGridColumns(
-		width: SCREEN_SIZE.width - 32,
-		cellWidth: cellWidth,
-		horizontalSpacing: cellSpacing
-	)
+	static let cellSpacing: CGFloat = 20
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: RecommendedDecksViewModel
@@ -19,26 +13,20 @@ struct RecommendedDecksViewContent: View {
 				ActivityIndicator(color: .white)
 				Spacer()
 			} else {
-				QGrid(
-					model.decks,
-					columns: Self.numberOfColumns,
-					vSpacing: Self.cellSpacing,
-					hSpacing: Self.cellSpacing
-				) { deck in
-					DeckCellWithGetButton(
-						deck: deck,
-						user: self.currentStore.user,
-						width: Self.cellWidth,
-						shouldManuallyModifyDecks: true,
-						shouldShowRemoveAlert: false
-					)
+				ScrollView(showsIndicators: false) {
+					VStack(spacing: Self.cellSpacing) {
+						ForEach(model.decks) { deck in
+							DeckCellWithGetButton(
+								deck: deck,
+								user: self.currentStore.user,
+								width: SCREEN_SIZE.width - MarketView.horizontalPadding * 2,
+								imageHeight: 120,
+								titleFontSize: 17
+							)
+						}
+					}
+					.padding(.bottom, MarketView.horizontalPadding)
 				}
-				.frame(width: widthOfGrid(
-					columns: Self.numberOfColumns,
-					cellWidth: Self.cellWidth,
-					spacing: Self.cellSpacing
-				))
-				.padding(.bottom)
 			}
 		}
 		.onAppear {

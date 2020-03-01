@@ -51,7 +51,7 @@ struct SignUpViewContentBox: View {
 						.frame(height: 40)
 					}
 				}
-				.disabled(model.isSignUpButtonDisabled)
+				.disabled(model.isSignUpButtonDisabled || model.loadingState.isLoading)
 				.alert(isPresented: $model.shouldShowErrorModal) {
 					guard let errorModal = model.errorModal else {
 						return .init(

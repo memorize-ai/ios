@@ -31,14 +31,11 @@ struct ChooseTopicsViewContent: View {
 						self.model.toggleTopicSelect(topic)
 					}
 				}
-				.gridFrame(
+				.frame(width: widthOfGrid(
 					columns: Self.numberOfColumns,
-					numberOfCells: currentStore.topics.count,
 					cellWidth: TopicCell.dimension,
-					cellHeight: TopicCell.dimension,
-					horizontalSpacing: Self.cellSpacing,
-					verticalSpacing: Self.cellSpacing
-				)
+					spacing: Self.cellSpacing
+				))
 				.padding(.bottom)
 			}
 		}
