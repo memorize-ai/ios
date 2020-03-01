@@ -82,9 +82,6 @@ struct DecksViewDeckOptionsPopUp: View {
 				share(message)
 			}
 			.disabled(!selectedDeck.creatorLoadingState.didSucceed)
-			.onAppear {
-				self.selectedDeck.loadCreator()
-			}
 			PopUpButton(
 				icon: Image(systemName: .link)
 					.resizable()

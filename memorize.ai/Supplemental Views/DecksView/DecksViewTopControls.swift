@@ -42,13 +42,30 @@ struct DecksViewTopControls: View {
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 26, height: 26)
 					}
+					.padding(.trailing, 4)
+				}
+				Button(action: {
+					guard let url = self.selectedDeck.getUrl else {
+						return showAlert(
+							title: "An unknown error occurred",
+							message: "Please try again"
+						)
+					}
+					
+					share(url)
+				}) {
+					Image(systemName: .squareAndArrowUp)
+						.resizable()
+						.foregroundColor(.white)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 23, height: 23)
 				}
 				VerticalTripleDots {
 					popUpWithAnimation {
 						self.isDeckOptionsPopUpShowing = true
 					}
 				}
-				.padding(.leading, 12)
+				.padding(.leading, 10)
 				.padding(.trailing, 23)
 			}
 		}

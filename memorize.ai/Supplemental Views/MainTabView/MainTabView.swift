@@ -130,7 +130,12 @@ struct MainTabView: View {
 	@State var decksView_isDeckOptionsPopUpShowing = false
 	
 	@State var decksView_selectedSection: Deck.Section? = nil // swiftlint:disable:this redundant_optional_initialization
-	@State var decksView_isSectionOptionsPopUpShowing = false
+	@State var decksView_isSectionOptionsPopUpShowing = false {
+		didSet(isShowing) {
+			guard isShowing else { return }
+			currentStore.selectedDeck?.loadCreator()
+		}
+	}
 	
 	@State var decksView_isDestroyAlertShowing = false
 	@State var decksView_isOrderSectionsSheetShowing = false
