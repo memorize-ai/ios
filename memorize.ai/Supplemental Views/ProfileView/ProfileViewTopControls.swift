@@ -2,7 +2,10 @@ import SwiftUI
 
 struct ProfileViewTopControls: View {
 	var body: some View {
-		HStack {
+		HStack(spacing: 23) {
+			ShowSideBarButton {
+				HamburgerMenu()
+			}
 			Text("Profile")
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)

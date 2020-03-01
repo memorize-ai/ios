@@ -33,7 +33,7 @@ struct DeckCell<Content: View>: View {
 								.scaleEffect(1.5)
 						}
 					} else if deck.hasImage {
-						if deck.image == nil {
+						if deck.displayImage == nil {
 							ZStack {
 								Color.lightGrayBackground
 								ActivityIndicator(color: .gray)

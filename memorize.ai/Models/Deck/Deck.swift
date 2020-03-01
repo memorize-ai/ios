@@ -65,7 +65,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var similarDecksLoadingState = LoadingState()
 	@Published var createSectionLoadingState = LoadingState()
 	
-	var displayImage: Image?
+	private(set) var displayImage: Image?
 	
 	lazy var unsectionedSection = Section(
 		id: nil,
