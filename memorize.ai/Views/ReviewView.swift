@@ -314,15 +314,6 @@ struct ReviewView: View {
 		}
 	}
 	
-	func skipCard() {
-		withAnimation(.easeIn(duration: 0.3)) {
-			isWaitingForRating = false
-		}
-		showPopUp(emoji: "😕", message: "Skipped!", onCentered: {
-			self.loadNextCard()
-		})
-	}
-	
 	func waitForRating() {
 		withAnimation(.easeIn(duration: 0.3)) {
 			isWaitingForRating = true
@@ -849,7 +840,6 @@ struct ReviewView: View {
 						ReviewViewTopControls(
 							currentIndex: self.currentIndex,
 							numberOfTotalCards: self.numberOfTotalCards,
-							skipCard: self.skipCard,
 							recapView: { self.recapView }
 						)
 						.padding(.horizontal, 23)

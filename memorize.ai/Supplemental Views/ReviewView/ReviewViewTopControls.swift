@@ -5,7 +5,6 @@ struct ReviewViewTopControls<RecapView: View>: View {
 	
 	let currentIndex: Int
 	let numberOfTotalCards: Int
-	let skipCard: () -> Void
 	let recapView: () -> RecapView
 	
 	var title: String {
@@ -37,15 +36,10 @@ struct ReviewViewTopControls<RecapView: View>: View {
 				.font(.muli(.bold, size: 20))
 				.foregroundColor(.white)
 			Spacer()
-			HStack {
-				Button(action: skipCard) {
-					button(text: "SKIP")
-				}
-				NavigationLink(
-					destination: LazyView(content: recapView)
-				) {
-					button(text: "RECAP")
-				}
+			NavigationLink(
+				destination: LazyView(content: recapView)
+			) {
+				button(text: "RECAP")
 			}
 		}
 	}
@@ -57,7 +51,6 @@ struct ReviewViewTopControls_Previews: PreviewProvider {
 		ReviewViewTopControls(
 			currentIndex: 0,
 			numberOfTotalCards: 3,
-			skipCard: {},
 			recapView: { Text("Recap view") }
 		)
 	}
