@@ -1,16 +1,16 @@
 import SwiftUI
 
 struct NavigateTo<Destination: View>: View {
-	let destination: Destination
-	
 	@Binding var isActive: Bool
+	
+	let destination: Destination
 	
 	init(
 		_ destination: Destination,
 		when isActive: Binding<Bool>
 	) {
-		self.destination = destination
 		_isActive = isActive
+		self.destination = destination
 	}
 	
 	var body: some View {
@@ -19,7 +19,7 @@ struct NavigateTo<Destination: View>: View {
 				.navigationBarRemoved(),
 			isActive: $isActive
 		) {
-			EmptyView()
+			Text("NavigationLink")
 		}
 		.hidden()
 	}

@@ -6,9 +6,6 @@ struct PublishDeckViewTopControls: View {
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: PublishDeckViewModel
 	
-	@State var deck: Deck?
-	@State var shouldShowAddCardsView = false
-	
 	var title: String {
 		model.name.isEmpty
 			? model.deck?.name ?? "Create deck"
@@ -25,13 +22,7 @@ struct PublishDeckViewTopControls: View {
 		}
 		
 		currentStore.goToDecksView(withDeck: deck)
-		
-		if model.deck == nil {
-			self.deck = deck
-			shouldShowAddCardsView = true
-		} else {
-			goBack()
-		}
+		goBack()
 	}
 	
 	var body: some View {
@@ -70,17 +61,6 @@ struct PublishDeckViewTopControls: View {
 				.opacity(model.isPublishButtonDisabled ? 0.5 : 1)
 			}
 			.disabled(model.isPublishButtonDisabled)
-			deck.map {
-				NavigateTo(
-					AddCardsView(destination: currentStore.rootDestination)
-						.environmentObject(AddCardsViewModel(
-							deck: $0,
-							user: currentStore.user
-						))
-						.navigationBarRemoved(),
-					when: $shouldShowAddCardsView
-				)
-			}
 		}
 	}
 }

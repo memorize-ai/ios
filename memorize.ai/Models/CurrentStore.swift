@@ -63,7 +63,6 @@ final class CurrentStore: ObservableObject {
 	var rootDestination: some View {
 		MainTabView(currentUser: user)
 			.environmentObject(self)
-			.navigationBarRemoved()
 	}
 	
 	@discardableResult

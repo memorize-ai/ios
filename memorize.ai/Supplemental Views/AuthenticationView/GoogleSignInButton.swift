@@ -48,8 +48,7 @@ struct GoogleSignInButton: View {
 					ChooseTopicsView(currentUser: model.user!)
 						.environmentObject(CurrentStore(
 							user: model.user!
-						))
-						.navigationBarRemoved(),
+						)),
 					when: $model.shouldProgressToChooseTopicsView
 				)
 			}
