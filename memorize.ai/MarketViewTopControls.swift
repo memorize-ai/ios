@@ -1,8 +1,14 @@
 import SwiftUI
 
 struct MarketViewTopControls: View {
+	@ObservedObject var counters = Counters.shared
+	
 	let searchText: String
 	let setSearchText: (String) -> Void
+	
+	var placeholder: String {
+		"Explore \(counters[.decks]?.formatted ?? "...") decks"
+	}
 	
 	var body: some View {
 		HStack(spacing: 20) {
@@ -19,19 +25,28 @@ struct MarketViewTopControls: View {
 						.renderingMode(.original)
 						.aspectRatio(contentMode: .fit)
 						.frame(width: 14)
-					TextField("", text: .init(
-						get: { self.searchText },
-						set: setSearchText
-					))
+					ZStack(alignment: .leading) {
+						if searchText.isEmpty {
+							Text(placeholder)
+								.foregroundColor(Color.white.opacity(0.8))
+						}
+						TextField("", text: .init(
+							get: { self.searchText },
+							set: setSearchText
+						))
+						.foregroundColor(.white)
+						.padding(.vertical)
+						.offset(y: 1)
+					}
 					.font(.muli(.regular, size: 17))
-					.foregroundColor(.white)
-					.padding(.vertical)
-					.offset(y: 1)
 					Spacer()
 				}
 				.padding(.horizontal)
 				.frame(height: 48)
 			}
+		}
+		.onAppear {
+			self.counters.observe(.decks)
 		}
 	}
 }

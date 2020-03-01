@@ -26,6 +26,7 @@
 		4D1F9B28233EDE4E00693571 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D1F9B27233EDE4E00693571 /* PromiseKit */; };
 		4D1F9B2B233EDEB200693571 /* FirebaseFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2A233EDEB200693571 /* FirebaseFirestore.swift */; };
 		4D1F9B2E233EEBDB00693571 /* UnknownError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1F9B2D233EEBDB00693571 /* UnknownError.swift */; };
+		4D22A02A240B39B000EF15C7 /* Counters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D22A029240B39B000EF15C7 /* Counters.swift */; };
 		4D2AC7E5235ECFA000A3EF1E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */; };
 		4D2AC7E7235ED05F00A3EF1E /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */; };
 		4D2C7E6323AAB20E0061B48D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C7E6223AAB20E0061B48D /* UIImage.swift */; };
@@ -336,6 +337,7 @@
 		4D1F9B22233ECA0E00693571 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D1F9B2A233EDEB200693571 /* FirebaseFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestore.swift; sourceTree = "<group>"; };
 		4D1F9B2D233EEBDB00693571 /* UnknownError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownError.swift; sourceTree = "<group>"; };
+		4D22A029240B39B000EF15C7 /* Counters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counters.swift; sourceTree = "<group>"; };
 		4D2AC7E4235ECFA000A3EF1E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4D2AC7E6235ED05F00A3EF1E /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		4D2C7E6223AAB20E0061B48D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD34CD72362E33A0007E3E6 /* CurrentStore.swift */,
+				4D22A029240B39B000EF15C7 /* Counters.swift */,
 				4DD34CD92362E3930007E3E6 /* User */,
 				4DBFB7BA2369617000D75B45 /* Topic */,
 				4DFA0DBF236A7B0A0000CA7A /* Deck */,
@@ -1856,6 +1859,7 @@
 				4D3FE57323BC11620010FFD3 /* CKEditor.swift in Sources */,
 				4D9D933423E0C7B00008B614 /* ReviewRecapViewSectionPerformanceRowSectionCellDeckName.swift in Sources */,
 				4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */,
+				4D22A02A240B39B000EF15C7 /* Counters.swift in Sources */,
 				4D9D931E23DFC3640008B614 /* ReviewRecapViewMainCard.swift in Sources */,
 				4D9D932223DFDFC00008B614 /* ReviewRecapViewScrollableDeckName.swift in Sources */,
 				4D6300D523C6AC7F00274DC1 /* ReviewRecapView.swift in Sources */,
