@@ -46,7 +46,7 @@ struct MarketViewTopControls: View {
 			}
 		}
 		.onAppear {
-			self.counters.observe(.decks)
+			self.counters.get(.decks)
 		}
 	}
 }

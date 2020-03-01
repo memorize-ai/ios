@@ -2,14 +2,16 @@ import SwiftUI
 
 struct ProfileViewTopControls: View {
 	var body: some View {
-		HStack(spacing: 23) {
-			ShowSideBarButton {
-				HamburgerMenu()
+		HStack {
+			HStack(spacing: 23) {
+				ShowSideBarButton {
+					HamburgerMenu()
+				}
+				Text("Profile")
+					.font(.muli(.bold, size: 20))
+					.foregroundColor(.white)
+					.alignment(.leading)
 			}
-			Text("Profile")
-				.font(.muli(.bold, size: 20))
-				.foregroundColor(.white)
-				.alignment(.leading)
 			Spacer()
 			SignOutButton {
 				CustomRectangle(background: Color(#colorLiteral(red: 0.9607843137, green: 0.3647058824, blue: 0.137254902, alpha: 1))) {
