@@ -10,12 +10,7 @@ struct ChooseTopicsView: View {
 	}
 	
 	var leadingButton: some View {
-		NavigationLink(
-			destination: MainTabView(
-				currentUser: currentStore.user
-			)
-			.environmentObject(currentStore)
-		) {
+		NavigationLink(destination: currentStore.rootDestination) {
 			XButton(.transparentWhite, height: 15)
 		}
 	}
@@ -27,7 +22,8 @@ struct ChooseTopicsView: View {
 			leadingButtonIsBackButton: false,
 			trailingButtonTitle: "NEXT",
 			trailingButtonDestination: RecommendedDecksView()
-				.environmentObject(currentStore),
+				.environmentObject(currentStore)
+				.navigationBarRemoved(),
 			content: ChooseTopicsViewContent()
 				.environmentObject(model)
 		)

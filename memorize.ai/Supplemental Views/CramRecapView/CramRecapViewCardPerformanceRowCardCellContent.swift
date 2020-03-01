@@ -17,6 +17,7 @@ struct CramRecapViewCardPerformanceRowCardCellContent: View {
 				Text(section.name)
 					.font(.muli(.bold, size: 17))
 					.foregroundColor(.lightGrayText)
+					.layoutPriority(1)
 					.alignment(.leading)
 					.padding(.bottom, 8)
 			}
@@ -51,6 +52,7 @@ struct CramRecapViewCardPerformanceRowCardCellContent: View {
 					.foregroundColor(.darkGray)
 					.lineLimit(5)
 					.lineSpacing(1)
+					.layoutPriority(1)
 					.alignment(.leading)
 			}
 			.frame(minHeight: 40, alignment: .top)

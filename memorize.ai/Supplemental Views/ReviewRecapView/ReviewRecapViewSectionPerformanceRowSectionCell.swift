@@ -46,9 +46,11 @@ struct ReviewRecapViewSectionPerformanceRowSectionCell: View {
 							.font(.muli(.extraBold, size: 18))
 							.foregroundColor(.darkGray)
 							.shrinks(withLineLimit: 3)
+							.layoutPriority(1)
 						Text(cardCountMessage)
 							.font(.muli(.bold, size: 13))
 							.foregroundColor(.lightGrayText)
+							.layoutPriority(1)
 							.padding(.bottom, 2)
 					}
 					.padding(.bottom, 16)

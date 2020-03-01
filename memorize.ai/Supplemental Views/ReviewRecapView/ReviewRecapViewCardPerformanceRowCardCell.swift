@@ -53,6 +53,7 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 								.font(.muli(.semiBold, size: 13))
 								.foregroundColor(.darkGray)
 								.shrinks()
+								.layoutPriority(1)
 							if shouldShowSectionName {
 								Rectangle()
 									.foregroundColor(.lightGrayBorder)
@@ -64,6 +65,7 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 								.font(.muli(.semiBold, size: 13))
 								.foregroundColor(.darkGray)
 								.shrinks()
+								.layoutPriority(1)
 						}
 						Spacer()
 					}
@@ -98,6 +100,7 @@ struct ReviewRecapViewCardPerformanceRowCardCell: View {
 							.foregroundColor(.darkGray)
 							.lineLimit(5)
 							.lineSpacing(1)
+							.layoutPriority(1)
 							.alignment(.leading)
 					}
 					.frame(minHeight: 40, alignment: .top)

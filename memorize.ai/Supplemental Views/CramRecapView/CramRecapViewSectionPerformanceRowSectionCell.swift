@@ -25,9 +25,11 @@ struct CramRecapViewSectionPerformanceRowSectionCell: View {
 				Text(section.name)
 					.font(.muli(.extraBold, size: 14))
 					.foregroundColor(.darkGray)
+					.layoutPriority(1)
 				Text(cardCountMessage)
 					.font(.muli(.semiBold, size: 14))
 					.foregroundColor(.lightGrayText)
+					.layoutPriority(1)
 			}
 			.padding(.horizontal)
 			.padding(.vertical, 10)

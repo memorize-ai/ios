@@ -41,10 +41,12 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 						.font(.muli(.extraBold, size: 18))
 						.foregroundColor(.darkGray)
 						.shrinks(withLineLimit: 3)
+						.layoutPriority(1)
 						.padding(.bottom, 4)
 					Text(cardCountMessage)
 						.font(.muli(.bold, size: 15))
 						.foregroundColor(.lightGrayText)
+						.layoutPriority(1)
 						.padding(.bottom, 16)
 					HStack {
 						ForEach([.easy, .struggled, .forgot], id: \.self) { rating in

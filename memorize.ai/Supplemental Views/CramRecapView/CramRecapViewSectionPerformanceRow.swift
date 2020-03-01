@@ -26,7 +26,7 @@ struct CramRecapViewSectionPerformanceRow: View {
 			}
 			.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				HStack {
+				HStack(alignment: .top) {
 					ForEach(sections) { section in
 						CramRecapViewSectionPerformanceRowSectionCell(
 							section: section,

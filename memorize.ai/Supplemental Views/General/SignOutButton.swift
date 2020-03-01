@@ -34,10 +34,12 @@ struct SignOutButton<Label: View>: View {
 			}) {
 				label
 			}
-			NavigateTo(
-				InitialView(),
-				when: $currentStore.signOutLoadingState.didSucceed
-			)
+			if currentStore.signOutLoadingState.didSucceed {
+				NavigateTo(
+					InitialView(),
+					when: $currentStore.signOutLoadingState.didSucceed
+				)
+			}
 		}
 	}
 }

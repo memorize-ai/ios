@@ -19,7 +19,7 @@ struct NavigateTo<Destination: View>: View {
 				.navigationBarRemoved(),
 			isActive: $isActive
 		) {
-			Text("NavigationLink")
+			EmptyView()
 		}
 		.hidden()
 	}
