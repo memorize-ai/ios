@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
+		4D03797D240DD4FA00CD1F76 /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4D03797B240DD4FA00CD1F76 /* editor */; };
+		4D03797E240DD4FA00CD1F76 /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D03797C240DD4FA00CD1F76 /* display */; };
 		4D03A383240762370001884F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4D03A382240762370001884F /* .swiftlint.yml */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
@@ -102,8 +104,6 @@
 		4D578C452401F75200816785 /* InitialViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D578C442401F75200816785 /* InitialViewFooter.swift */; };
 		4D578C492402038000816785 /* InitialViewPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D578C482402038000816785 /* InitialViewPages.swift */; };
 		4D578C4D240224E700816785 /* InitialView+Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D578C4C240224E700816785 /* InitialView+Page.swift */; };
-		4D578CCF2402647D00816785 /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4D578CCD2402647D00816785 /* editor */; };
-		4D578CD02402647D00816785 /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D578CCE2402647D00816785 /* display */; };
 		4D598E92238E3D3300B608FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D598E91238E3D3300B608FA /* Date.swift */; };
 		4D59FA87237E6223007CAA74 /* HomeViewMyDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */; };
 		4D59FA89237E7735007CAA74 /* OwnedDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59FA88237E7735007CAA74 /* OwnedDeckCell.swift */; };
@@ -319,6 +319,8 @@
 
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
+		4D03797B240DD4FA00CD1F76 /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
+		4D03797C240DD4FA00CD1F76 /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4D03A382240762370001884F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; usesTabs = 0; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
@@ -413,8 +415,6 @@
 		4D578C442401F75200816785 /* InitialViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewFooter.swift; sourceTree = "<group>"; };
 		4D578C482402038000816785 /* InitialViewPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewPages.swift; sourceTree = "<group>"; };
 		4D578C4C240224E700816785 /* InitialView+Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InitialView+Page.swift"; sourceTree = "<group>"; };
-		4D578CCD2402647D00816785 /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
-		4D578CCE2402647D00816785 /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4D598E91238E3D3300B608FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4D59FA86237E6223007CAA74 /* HomeViewMyDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyDecksSection.swift; sourceTree = "<group>"; };
 		4D59FA88237E7735007CAA74 /* OwnedDeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OwnedDeckCell.swift; path = memorize.ai/OwnedDeckCell.swift; sourceTree = SOURCE_ROOT; };
@@ -662,8 +662,8 @@
 		4D05F09A23EEB5AB00F4456C /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				4D578CCE2402647D00816785 /* display */,
-				4D578CCD2402647D00816785 /* editor */,
+				4D03797C240DD4FA00CD1F76 /* display */,
+				4D03797B240DD4FA00CD1F76 /* editor */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -1513,17 +1513,17 @@
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
-				4D578CCF2402647D00816785 /* editor in Resources */,
+				4D03797D240DD4FA00CD1F76 /* editor in Resources */,
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
-				4D578CD02402647D00816785 /* display in Resources */,
 				4D03A383240762370001884F /* .swiftlint.yml in Resources */,
 				4D402E85235E6FB80011C6B6 /* Muli-ExtraLight.ttf in Resources */,
 				4D402E89235E6FB80011C6B6 /* Muli-ExtraBold.ttf in Resources */,
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
+				4D03797E240DD4FA00CD1F76 /* display in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
