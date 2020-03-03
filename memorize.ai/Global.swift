@@ -12,6 +12,7 @@ let functions = Functions.functions()
 let defaults = UserDefaults.standard
 
 let SCREEN_SIZE = UIScreen.main.bounds.size
+let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad
 let MAIN_BUNDLE_PATH = Bundle.main.bundlePath
 let WEB_VIEW_BASE_URL = URL(fileURLWithPath: MAIN_BUNDLE_PATH, isDirectory: true)
 

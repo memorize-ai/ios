@@ -9,6 +9,7 @@ struct InitialView: View {
 		var isDark: Bool { self == .dark }
 	}
 	
+	static let initialViewEditorScreenshotWidth = min(SCREEN_SIZE.width - 30 * 2, 500)
 	static let pages = [
 		Page(
 			mode: .light,
@@ -17,7 +18,7 @@ struct InitialView: View {
 			},
 			content: {
 				Page.logo
-					.padding(.horizontal, 40)
+					.frame(width: min(SCREEN_SIZE.width - 40 * 2, 500))
 				Spacer()
 				Image.initialViewBrain
 					.resizable()
@@ -39,13 +40,13 @@ struct InitialView: View {
 					"Recall attempts spaced just right for the most effective and efficient studying"
 				)
 				Page.Screenshot(.initialViewReviewScreenshot)
-					.padding(.horizontal, 30)
+					.frame(width: min(SCREEN_SIZE.width - 30 * 2, 500))
 			},
 			bottomAlignedContent: {
 				Image.initialViewReviewScreenshotBubble
 					.resizable()
 					.aspectRatio(contentMode: .fit)
-					.frame(width: SCREEN_SIZE.width - 20 * 2)
+					.frame(width: min(SCREEN_SIZE.width - 20 * 2, 540))
 					.padding(.bottom, 8)
 			}
 		),
@@ -60,7 +61,7 @@ struct InitialView: View {
 					"Effectively learn faster than you ever thought was possible"
 				)
 				Page.Screenshot(.initialViewCramScreenshot)
-					.padding(.horizontal, 30)
+					.frame(width: min(SCREEN_SIZE.width - 30 * 2, 500))
 			}
 		),
 		Page(
@@ -72,8 +73,8 @@ struct InitialView: View {
 				Page.Heading("Flash-cards have never looked so good")
 				Page.SubHeading("The most advanced editor on the market")
 				Page.Screenshot(.initialViewEditorScreenshot)
-					.padding(.leading, 30)
-					.padding(.trailing, 30 * 28 / 101)
+					.frame(width: initialViewEditorScreenshotWidth)
+					.offset(x: initialViewEditorScreenshotWidth * 28 / 101)
 			}
 		),
 		Page(
@@ -85,7 +86,7 @@ struct InitialView: View {
 				Page.Heading("Explore 40,000+ decks")
 				Page.SubHeading("Recommendations based on what you like")
 				Page.Screenshot(.initialViewMarketScreenshot)
-					.padding(.horizontal, 30)
+					.frame(width: min(SCREEN_SIZE.width - 30 * 2, 500))
 			}
 		)
 	]
