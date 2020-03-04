@@ -17,11 +17,9 @@ struct PublishDeckViewTopControls: View {
 	}
 	
 	func onPublish(deckId: String) {
-		guard let deck = currentStore.user.deckWithId(deckId) else {
-			return goBack()
+		if let deck = currentStore.user.deckWithId(deckId) {
+			currentStore.goToDecksView(withDeck: deck)
 		}
-		
-		currentStore.goToDecksView(withDeck: deck)
 		goBack()
 	}
 	
