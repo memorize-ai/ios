@@ -9,7 +9,6 @@ struct InitialView: View {
 		var isDark: Bool { self == .dark }
 	}
 	
-	static let initialViewEditorScreenshotWidth = min(SCREEN_SIZE.width - 30 * 2, 500)
 	static let pages = [
 		Page(
 			mode: .light,
@@ -73,8 +72,7 @@ struct InitialView: View {
 				Page.Heading("Flash-cards have never looked so good")
 				Page.SubHeading("The most advanced editor on the market")
 				Page.Screenshot(.initialViewEditorScreenshot)
-					.frame(width: initialViewEditorScreenshotWidth)
-					.offset(x: initialViewEditorScreenshotWidth * 28 / 101)
+					.frame(width: min(SCREEN_SIZE.width - 30 * 2, 500))
 			}
 		),
 		Page(
