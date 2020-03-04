@@ -74,7 +74,7 @@ struct MarketDeckViewHeader: View {
 						Button(action: getDeck) {
 							CustomRectangle(
 								background: hasDeck
-									? Color.transparent
+									? Color.clear
 									: Color.white,
 								borderColor: Color.white.opacity(0.3),
 								borderWidth: hasDeck ? 1.5 : 0

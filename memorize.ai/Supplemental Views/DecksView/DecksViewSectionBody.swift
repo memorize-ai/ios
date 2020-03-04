@@ -27,7 +27,7 @@ struct DecksViewSectionBody: View {
 	
 	func headerButton(text: String, color: Color) -> some View {
 		CustomRectangle(
-			background: Color.transparent,
+			background: Color.clear,
 			borderColor: color,
 			borderWidth: 1
 		) {

@@ -10,7 +10,7 @@ struct PostSignUpViewTrailingButton<Destination: View>: View {
 				.navigationBarRemoved()
 		) {
 			CustomRectangle(
-				background: Color.transparent,
+				background: Color.clear,
 				borderColor: .transparentLightGray,
 				borderWidth: 1.5
 			) {

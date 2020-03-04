@@ -42,7 +42,7 @@ struct DeckCell<Content: View>: View {
 							deck.displayImage?
 								.resizable()
 								.renderingMode(.original)
-								.aspectRatio(contentMode: .fill)
+								.aspectRatio(contentMode: .fit)
 						}
 					} else {
 						Deck.DEFAULT_IMAGE

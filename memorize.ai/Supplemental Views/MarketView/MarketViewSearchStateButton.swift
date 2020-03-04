@@ -8,7 +8,7 @@ struct MarketViewSearchStateButton: View {
 	var body: some View {
 		Button(action: onClick) {
 			CustomRectangle(
-				background: Color.transparent,
+				background: Color.clear,
 				borderColor: Color.lightGray.opacity(0.4),
 				borderWidth: 1
 			) {

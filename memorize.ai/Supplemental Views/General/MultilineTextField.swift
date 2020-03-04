@@ -97,7 +97,7 @@ struct MultilineTextField: View {
 		text: Binding<String>,
 		font: UIFont = .preferredFont(forTextStyle: .body),
 		textColor: UIColor = .gray,
-		backgroundColor: Color = .transparent,
+		backgroundColor: Color = .clear,
 		minHeight: CGFloat = 100,
 		onDone: (() -> Void)? = nil
 	) {

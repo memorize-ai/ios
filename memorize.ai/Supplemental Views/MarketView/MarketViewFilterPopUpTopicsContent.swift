@@ -29,7 +29,8 @@ struct MarketViewFilterPopUpTopicsContent: View {
 			currentStore.topics,
 			columns: Self.numberOfColumns,
 			vSpacing: Self.cellSpacing,
-			hSpacing: Self.cellSpacing
+			hSpacing: Self.cellSpacing,
+			vPadding: Self.cellSpacing
 		) { topic in
 			TopicCell(
 				topic: topic,

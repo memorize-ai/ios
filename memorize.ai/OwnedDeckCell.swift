@@ -60,19 +60,18 @@ struct OwnedDeckCell: View {
 							deck.displayImage?
 								.resizable()
 								.renderingMode(.original)
-								.aspectRatio(contentMode: .fill)
-								.frame(height: width * Self.imageAspectRatio)
+								.aspectRatio(contentMode: .fit)
 						}
 					} else {
 						Deck.DEFAULT_IMAGE
 							.resizable()
 							.renderingMode(.original)
-							.aspectRatio(contentMode: .fill)
-							.frame(height: width * Self.imageAspectRatio)
+							.aspectRatio(contentMode: .fit)
 					}
 				}
+				.frame(width: width, height: width * Self.imageAspectRatio)
+				.clipped()
 				.cornerRadius(8, corners: [.topLeft, .topRight])
-				.frame(height: width * Self.imageAspectRatio)
 				VStack(alignment: .leading) {
 					Text(deck.name)
 						.font(.muli(.bold, size: 13.5))

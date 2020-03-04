@@ -11,7 +11,7 @@ struct ReviewRecapViewTopControls: View {
 			Spacer()
 			NavigationLink(destination: currentStore.rootDestination) {
 				CustomRectangle(
-					background: Color.transparent,
+					background: Color.clear,
 					borderColor: .transparentLightGray,
 					borderWidth: 1.5
 				) {
