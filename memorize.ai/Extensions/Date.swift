@@ -1,28 +1,39 @@
 import Foundation
 
 extension Date {
+	static let SECONDS_IN_HOUR: TimeInterval = 60 * 60
+	static let SECONDS_IN_DAY: TimeInterval = SECONDS_IN_HOUR * 24
+	
 	static var now: Self { .init() }
 	
 	private static var distanceFormatter: DateComponentsFormatter {
 		let formatter = DateComponentsFormatter()
+		
 		formatter.unitsStyle = .full
 		formatter.zeroFormattingBehavior = .dropAll
 		formatter.maximumUnitCount = 1
 		formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute, .second]
+		
 		return formatter
 	}
 	
 	func comparisonMessage(against otherDate: Date = .now, equalsError: TimeInterval = 1) -> String {
-		if abs(timeIntervalSince(otherDate)) < equalsError {
+		let difference = otherDate.timeIntervalSince(self)
+		
+		if abs(difference) < equalsError {
 			return "now"
 		}
 		
-		let ceiling = Date(timeIntervalSince1970: ceil(otherDate.timeIntervalSince1970))
+		let otherDate = abs(difference) < Self.SECONDS_IN_DAY - Self.SECONDS_IN_HOUR
+			? otherDate
+			: addingTimeInterval(
+				round(difference, toClosestMultipleOf: Self.SECONDS_IN_DAY)
+			)
 		
 		return (
 			self < otherDate
-				? Self.distanceFormatter.string(from: self, to: ceiling)
-				: Self.distanceFormatter.string(from: ceiling, to: self)
+				? Self.distanceFormatter.string(from: self, to: otherDate)
+				: Self.distanceFormatter.string(from: otherDate, to: self)
 		) ?? "(error)"
 	}
 	

@@ -34,6 +34,10 @@ func popUpWithAnimation(body: () -> Void) {
 	withAnimation(.easeIn(duration: 0.15), body)
 }
 
+func round(_ number: Double, toClosestMultipleOf multiple: Double) -> Double {
+	multiple * round(number / multiple)
+}
+
 func share(
 	items: [Any],
 	excludedActivityTypes: [UIActivity.ActivityType]? = nil
