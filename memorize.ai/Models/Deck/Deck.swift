@@ -209,7 +209,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			id: id,
 			topics: topics,
 			hasImage: hasImage,
-			image: imageName.map { .init(imageLiteralResourceName: $0) },
+			image: imageName.map(UIImage.init),
 			name: name,
 			subtitle: subtitle,
 			description: description,
@@ -527,11 +527,11 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func get(user: User) -> Self {
+	func get(user: User, completion: (() -> Void)? = nil) -> Self {
 		getLoadingState.startLoading()
 		
 		if sectionsLoadingState.didSucceed {
-			get(user: user, firstSection: sections.first)
+			get(user: user, firstSection: sections.first, completion: completion)
 		} else {
 			firestore
 				.collection("decks/\(id)/sections")
@@ -542,7 +542,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 						user: user,
 						firstSection: snapshot.documents.first.map {
 							Section(parent: self, snapshot: $0)
-						}
+						},
+						completion: completion
 					)
 				}
 				.catch { error in
@@ -553,7 +554,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		return self
 	}
 	
-	private func get(user: User, firstSection: Section?) {
+	private func get(user: User, firstSection: Section?, completion: (() -> Void)?) {
 		let numberOfUnlockedCards = numberOfUnsectionedCards + (firstSection?.numberOfCards ?? 0)
 		
 		var data: [String: Any] = [
@@ -569,16 +570,18 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		
 		firestore.document("users/\(user.id)/decks/\(id)").setData(data).done {
 			self.getLoadingState.succeed()
+			completion?()
 		}.catch { error in
 			self.getLoadingState.fail(error: error)
 		}
 	}
 	
 	@discardableResult
-	func remove(user: User) -> Self {
+	func remove(user: User, completion: (() -> Void)? = nil) -> Self {
 		getLoadingState.startLoading()
 		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
 			self.getLoadingState.succeed()
+			completion?()
 		}.catch { error in
 			self.getLoadingState.fail(error: error)
 		}
@@ -697,13 +700,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		forUser user: User,
 		title: String = "Remove from library",
 		message: String? = "All of your data will be deleted, and all of your progress will be lost. This action cannot be undone.", // swiftlint:disable:this line_length
+		onConfirm: (() -> Void)? = nil,
 		completion: (() -> Void)? = nil
 	) -> Self {
 		showAlert(title: title, message: message) { alert in
 			alert.addAction(.init(title: "Cancel", style: .cancel))
 			alert.addAction(.init(title: "Remove", style: .destructive) { _ in
-				self.remove(user: user)
-				completion?()
+				onConfirm?()
+				self.remove(user: user, completion: completion)
 			})
 		}
 		return self

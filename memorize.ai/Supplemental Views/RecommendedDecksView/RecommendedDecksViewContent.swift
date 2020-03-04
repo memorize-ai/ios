@@ -21,7 +21,8 @@ struct RecommendedDecksViewContent: View {
 								user: self.currentStore.user,
 								width: SCREEN_SIZE.width - MarketView.horizontalPadding * 2,
 								imageHeight: IS_IPAD ? 240 : 120,
-								titleFontSize: 17
+								titleFontSize: 17,
+								shouldManuallyModifyDecks: true
 							)
 						}
 					}

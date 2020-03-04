@@ -163,13 +163,14 @@ struct DecksViewDeckOptionsPopUp: View {
 				textColor: .darkGray
 			) {
 				self.selectedDeck.showRemoveFromLibraryAlert(
-					forUser: self.currentStore.user
-				) {
-					popUpWithAnimation {
-						self.isDeckOptionsPopUpShowing = false
-						self.currentStore.reloadSelectedDeck()
+					forUser: self.currentStore.user,
+					onConfirm: {
+						popUpWithAnimation {
+							self.isDeckOptionsPopUpShowing = false
+							self.currentStore.reloadSelectedDeck()
+						}
 					}
-				}
+				)
 			}
 			if isOwner {
 				PopUpButton(

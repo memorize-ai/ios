@@ -48,22 +48,26 @@ struct DeckCellWithGetButton: View {
 	func buttonAction() {
 		if hasDeck {
 			if shouldShowRemoveAlert {
-				deck.showRemoveFromLibraryAlert(forUser: user) {
-					Analytics.logEvent("remove_deck_from_library", parameters: [
-						"view": "DeckCellWithGetButton"
-					])
-					
-					guard self.shouldManuallyModifyDecks else { return }
-					self.user.decks.removeAll { $0 == self.deck }
-				}
+				deck.showRemoveFromLibraryAlert(
+					forUser: user,
+					onConfirm: {
+						Analytics.logEvent("remove_deck_from_library", parameters: [
+							"view": "DeckCellWithGetButton"
+						])
+					},
+					completion: {
+						guard self.shouldManuallyModifyDecks else { return }
+						self.user.decks.removeAll { $0 == self.deck }
+					}
+				)
 			} else {
 				Analytics.logEvent("remove_deck_from_library", parameters: [
 					"view": "DeckCellWithGetButton"
 				])
 				
-				deck.remove(user: user)
-				if shouldManuallyModifyDecks {
-					user.decks.removeAll { $0 == deck }
+				deck.remove(user: user) {
+					guard self.shouldManuallyModifyDecks else { return }
+					self.user.decks.removeAll { $0 == self.deck }
 				}
 			}
 		} else {
@@ -71,9 +75,9 @@ struct DeckCellWithGetButton: View {
 				"view": "DeckCellWithGetButton"
 			])
 			
-			deck.get(user: user)
-			if shouldManuallyModifyDecks {
-				user.decks.append(deck)
+			deck.get(user: user) {
+				guard self.shouldManuallyModifyDecks else { return }
+				self.user.decks.append(self.deck)
 			}
 		}
 	}
@@ -89,7 +93,7 @@ struct DeckCellWithGetButton: View {
 				) {
 					Group {
 						if isGetLoading {
-							ActivityIndicator(radius: 8)
+							ActivityIndicator(radius: 8, color: buttonTextColor)
 						} else {
 							Text(hasDeck ? "REMOVE" : "GET")
 								.font(.muli(.bold, size: 12))
