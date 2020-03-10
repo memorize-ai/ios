@@ -23,24 +23,28 @@ final class AddCardsViewModel: ViewModel {
 		self.user = user
 		
 		cardsLoadingState.startLoading()
-		deck.loadCardDrafts(forUser: user).done { cards in
-			for card in cards {
-				card.onChange = {
-					self.cardDidChange(card)
+		onBackgroundThread {
+			deck.loadCardDrafts(forUser: user).done { cards in
+				for card in cards {
+					card.onChange = {
+						self.cardDidChange(card)
+					}
+				}
+				onMainThread {
+					if cards.isEmpty {
+						self.cards = self.initialCards
+						self.canPublish = false
+					} else {
+						self.cards = cards
+						self.resetCanPublish()
+					}
+					self.cardsLoadingState.succeed()
+				}
+			}.catch { error in
+				onMainThread {
+					self.cardsLoadingState.fail(error: error)
 				}
 			}
-			
-			if cards.isEmpty {
-				self.cards = self.initialCards
-				self.canPublish = false
-			} else {
-				self.cards = cards
-				self.resetCanPublish()
-			}
-			
-			self.cardsLoadingState.succeed()
-		}.catch { error in
-			self.cardsLoadingState.fail(error: error)
 		}
 	}
 	
@@ -92,39 +96,53 @@ final class AddCardsViewModel: ViewModel {
 	}
 	
 	@discardableResult
-	func removeAllDrafts() -> Promise<[Void]> {
-		user.documentReference
-			.collection("decks/\(deck.id)/drafts")
-			.getDocuments()
-			.map { snapshot in
-				snapshot.documents.map { document in
-					document.reference.delete()
+	func removeAllDrafts() -> Self {
+		onBackgroundThread {
+			self.user.documentReference
+				.collection("decks/\(self.deck.id)/drafts")
+				.getDocuments()
+				.done { snapshot in
+					for document in snapshot.documents {
+						document.reference.delete() as Void
+					}
 				}
-			}
+				.cauterize()
+		}
+		return self
 	}
 	
 	var publishCardsPromiseArray: [Promise<Void>] {
 		cards.compactMap { card in
 			guard card.isPublishable else { return nil }
-			card.publishLoadingState.startLoading()
+			onMainThread {
+				card.publishLoadingState.startLoading()
+			}
 			return card.publishAsNew(forUser: user).done { _ in
-				self.cards.removeAll { $0 == card }
 				card.removeDraft(forUser: self.user)
-				card.publishLoadingState.succeed()
+				onMainThread {
+					self.cards.removeAll { $0 == card }
+					card.publishLoadingState.succeed()
+				}
 			}
 		}
 	}
 	
 	func publish(onDone: (() -> Void)? = nil) {
 		publishLoadingState.startLoading()
-		when(fulfilled: publishCardsPromiseArray).done {
-			self.publishLoadingState.succeed()
-			if self.cards.isEmpty {
-				self.cards = self.initialCards
-				onDone?()
+		onBackgroundThread {
+			when(fulfilled: self.publishCardsPromiseArray).done {
+				onMainThread {
+					self.publishLoadingState.succeed()
+					if self.cards.isEmpty {
+						self.cards = self.initialCards
+						onDone?()
+					}
+				}
+			}.catch { error in
+				onMainThread {
+					self.publishLoadingState.fail(error: error)
+				}
 			}
-		}.catch { error in
-			self.publishLoadingState.fail(error: error)
 		}
 	}
 }

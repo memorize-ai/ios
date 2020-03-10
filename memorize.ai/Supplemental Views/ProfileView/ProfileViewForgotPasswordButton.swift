@@ -8,18 +8,24 @@ struct ProfileViewForgotPasswordButton: View {
 	
 	func sendEmail() {
 		loadingState.startLoading()
-		auth.sendPasswordReset(withEmail: self.currentStore.user.email).done {
-			self.loadingState.succeed()
-			showAlert(
-				title: "Sent!",
-				message: "Check your registered email to reset your password"
-			)
-		}.catch { error in
-			self.loadingState.fail(error: error)
-			showAlert(
-				title: "An unknown error occurred",
-				message: "Please try again"
-			)
+		onBackgroundThread {
+			auth.sendPasswordReset(withEmail: self.currentStore.user.email).done {
+				onMainThread {
+					self.loadingState.succeed()
+					showAlert(
+						title: "Sent!",
+						message: "Check your registered email to reset your password"
+					)
+				}
+			}.catch { error in
+				onMainThread {
+					self.loadingState.fail(error: error)
+					showAlert(
+						title: "An unknown error occurred",
+						message: "Please try again"
+					)
+				}
+			}
 		}
 	}
 	

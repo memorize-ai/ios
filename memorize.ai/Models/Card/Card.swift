@@ -241,21 +241,27 @@ final class Card: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadUserData(forUser user: User, deck: Deck) -> Self {
 		guard userDataLoadingState.isNone else { return self }
 		userDataLoadingState.startLoading()
-		user
-			.documentReference
-			.collection("decks/\(deck.id)/cards")
-			.document(id)
-			.addSnapshotListener { snapshot, error in
-				guard
-					error == nil,
-					let snapshot = snapshot
-				else {
-					self.userDataLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-					return
+		onBackgroundThread {
+			user
+				.documentReference
+				.collection("decks/\(deck.id)/cards")
+				.document(self.id)
+				.addSnapshotListener { snapshot, error in
+					guard
+						error == nil,
+						let snapshot = snapshot
+					else {
+						onMainThread {
+							self.userDataLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+						}
+						return
+					}
+					onMainThread {
+						self.updateUserDataFromSnapshot(snapshot)
+						self.userDataLoadingState.succeed()
+					}
 				}
-				self.updateUserDataFromSnapshot(snapshot)
-				self.userDataLoadingState.succeed()
-			}
+		}
 		return self
 	}
 	

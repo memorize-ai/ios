@@ -46,16 +46,28 @@ final class SignUpViewModel: ViewModel {
 	func signUp() {
 		loadingState.startLoading()
 		resetRedBorders()
-		auth.createUser(
-			withEmail: email,
-			password: password
-		).done { result in
-			let uid = result.user.uid
-			self.createUserInFirestore(uid: uid).done {
-				self.setUser(uid: uid)
-				self.loadingState.succeed()
-			}.catch(self.failFirestoreSignUp)
-		}.catch(failAuthSignUp)
+		onBackgroundThread {
+			auth.createUser(
+				withEmail: self.email,
+				password: self.password
+			).done { result in
+				let uid = result.user.uid
+				self.createUserInFirestore(uid: uid).done {
+					onMainThread {
+						self.setUser(uid: uid)
+						self.loadingState.succeed()
+					}
+				}.catch { error in
+					onMainThread {
+						self.failFirestoreSignUp(error: error)
+					}
+				}
+			}.catch { error in
+				onMainThread {
+					self.failAuthSignUp(error: error)
+				}
+			}
+		}
 	}
 	
 	func setUser(uid: String) {

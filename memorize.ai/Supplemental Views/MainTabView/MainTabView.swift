@@ -104,12 +104,18 @@ struct MainTabView: View {
 	func marketView_loadSearchResults(force: Bool) {
 		guard force || marketView_searchResultsLoadingState.isNone else { return }
 		marketView_searchResultsLoadingState.startLoading()
-		self.marketView_searchResultsPromise.done { decks in
-			self.marketView_searchResults = decks.map { $0.loadImage() }
-			self.marketView_searchResultsLoadingState.succeed()
-		}.catch { error in
-			self.marketView_searchResultsLoadingState.fail(error: error)
-			showAlert(title: "An error occurred", message: error.localizedDescription)
+		onBackgroundThread {
+			self.marketView_searchResultsPromise.done { decks in
+				onMainThread {
+					self.marketView_searchResults = decks.map { $0.loadImage() }
+					self.marketView_searchResultsLoadingState.succeed()
+				}
+			}.catch { error in
+				onMainThread {
+					self.marketView_searchResultsLoadingState.fail(error: error)
+					showAlert(title: "An error occurred", message: error.localizedDescription)
+				}
+			}
 		}
 	}
 	

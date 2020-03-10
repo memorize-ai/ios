@@ -44,20 +44,28 @@ final class LogInViewModel: ViewModel {
 		loadingState.startLoading()
 		shouldShowEmailRedBorder = false
 		shouldShowPasswordRedBorder = false
-		auth.signIn(
-			withEmail: email,
-			password: password
-		).done { result in
-			self.user = .init(
-				id: result.user.uid,
-				name: result.user.displayName ?? "Unknown",
-				email: self.email,
-				interests: [],
-				numberOfDecks: 0,
-				xp: 0
-			)
-			self.loadingState.succeed()
-		}.catch(failLogIn)
+		onBackgroundThread {
+			auth.signIn(
+				withEmail: self.email,
+				password: self.password
+			).done { result in
+				onMainThread {
+					self.user = .init(
+						id: result.user.uid,
+						name: result.user.displayName ?? "Unknown",
+						email: self.email,
+						interests: [],
+						numberOfDecks: 0,
+						xp: 0
+					)
+					self.loadingState.succeed()
+				}
+			}.catch { error in
+				onMainThread {
+					self.failLogIn(error: error)
+				}
+			}
+		}
 	}
 	
 	func failLogIn(error: Error) {

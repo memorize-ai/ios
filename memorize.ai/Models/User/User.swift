@@ -149,36 +149,52 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 		guard decksLoadingState.isNone else { return self }
 		var isInitialIteration = true
 		decksLoadingState.startLoading()
-		documentReference.collection("decks").addSnapshotListener { snapshot, error in
-			guard error == nil, let documentChanges = snapshot?.documentChanges else {
-				self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-				return
-			}
-			if isInitialIteration {
-				isInitialIteration = false
-				self.decks.removeAll()
-			}
-			for change in documentChanges {
-				let userDataSnapshot = change.document
-				let deckId = userDataSnapshot.documentID
-				switch change.type {
-				case .added:
-					Deck.fromId(deckId).done { deck in
-						deck.updateUserDataFromSnapshot(userDataSnapshot)
-						self.decks.append(loadImages ? deck.loadImage() : deck)
-						self.onDecksChange?(self.decks, .added(deck: deck))
-					}.catch { error in
-						self.decksLoadingState.fail(error: error)
+		onBackgroundThread {
+			self.documentReference.collection("decks").addSnapshotListener { snapshot, error in
+				guard error == nil, let documentChanges = snapshot?.documentChanges else {
+					onMainThread {
+						self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 					}
-				case .modified:
-					self.deckWithId(deckId)?
-						.updateUserDataFromSnapshot(userDataSnapshot)
-				case .removed:
-					self.decks.removeAll { $0.id == deckId }
-					self.onDecksChange?(self.decks, .removed(id: deckId))
+					return
+				}
+				if isInitialIteration {
+					isInitialIteration = false
+					onMainThread {
+						self.decks.removeAll()
+					}
+				}
+				for change in documentChanges {
+					let userDataSnapshot = change.document
+					let deckId = userDataSnapshot.documentID
+					switch change.type {
+					case .added:
+						Deck.fromId(deckId).done { deck in
+							onMainThread {
+								deck.updateUserDataFromSnapshot(userDataSnapshot)
+								self.decks.append(loadImages ? deck.loadImage() : deck)
+								self.onDecksChange?(self.decks, .added(deck: deck))
+							}
+						}.catch { error in
+							onMainThread {
+								self.decksLoadingState.fail(error: error)
+							}
+						}
+					case .modified:
+						onMainThread {
+							self.deckWithId(deckId)?
+								.updateUserDataFromSnapshot(userDataSnapshot)
+						}
+					case .removed:
+						onMainThread {
+							self.decks.removeAll { $0.id == deckId }
+							self.onDecksChange?(self.decks, .removed(id: deckId))
+						}
+					}
+				}
+				onMainThread {
+					self.decksLoadingState.succeed()
 				}
 			}
-			self.decksLoadingState.succeed()
 		}
 		return self
 	}
@@ -187,66 +203,96 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadCreatedDecks(loadImages: Bool = true) -> Self {
 		guard createdDecksLoadingState.isNone else { return self }
 		createdDecksLoadingState.startLoading()
-		firestore
-			.collection("decks")
-			.whereField("creator", isEqualTo: id)
-			.addSnapshotListener { snapshot, error in
-				guard error == nil, let documentChanges = snapshot?.documentChanges else {
-					self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-					return
-				}
-				
-				for change in documentChanges {
-					let publicDataSnapshot = change.document
-					let deckId = publicDataSnapshot.documentID
+		onBackgroundThread {
+			firestore
+				.collection("decks")
+				.whereField("creator", isEqualTo: self.id)
+				.addSnapshotListener { snapshot, error in
+					guard error == nil, let documentChanges = snapshot?.documentChanges else {
+						onMainThread {
+							self.decksLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+						}
+						return
+					}
 					
-					switch change.type {
-					case .added:
-						let deck = Deck(snapshot: publicDataSnapshot, snapshotListener: nil)
-						var isInitialIteration = true
+					for change in documentChanges {
+						let publicDataSnapshot = change.document
+						let deckId = publicDataSnapshot.documentID
 						
-						self.documentReference
-							.collection("decks")
-							.document(deckId)
-							.addSnapshotListener { userDataSnapshot, error in
-								guard error == nil, let userDataSnapshot = userDataSnapshot else { return }
-								
-								deck.updateUserDataFromSnapshot(userDataSnapshot)
-								
-								if isInitialIteration {
-									isInitialIteration = false
-									self.createdDecks.append(loadImages ? deck.loadImage() : deck)
+						switch change.type {
+						case .added:
+							let deck = Deck(snapshot: publicDataSnapshot, snapshotListener: nil)
+							var isInitialIteration = true
+							
+							self.documentReference
+								.collection("decks")
+								.document(deckId)
+								.addSnapshotListener { userDataSnapshot, error in
+									guard error == nil, let userDataSnapshot = userDataSnapshot else { return }
+									
+									onMainThread {
+										deck.updateUserDataFromSnapshot(userDataSnapshot)
+									}
+									
+									if isInitialIteration {
+										isInitialIteration = false
+										onMainThread {
+											self.createdDecks.append(loadImages ? deck.loadImage() : deck)
+										}
+									}
 								}
+						case .modified:
+							onMainThread {
+								self.createdDecks.first { $0.id == deckId }?
+									.updatePublicDataFromSnapshot(publicDataSnapshot)
 							}
-					case .modified:
-						self.createdDecks.first { $0.id == deckId }?
-							.updatePublicDataFromSnapshot(publicDataSnapshot)
-					case .removed:
-						self.createdDecks.removeAll { $0.id == deckId }
+						case .removed:
+							onMainThread {
+								self.createdDecks.removeAll { $0.id == deckId }
+							}
+						}
+					}
+					
+					onMainThread {
+						self.decksLoadingState.succeed()
 					}
 				}
-				
-				self.decksLoadingState.succeed()
-			}
+		}
 		return self
 	}
 	
 	@discardableResult
-	func addInterest(topicId: String) -> Promise<Void> {
-		documentReference.updateData([
-			"topics": FieldValue.arrayUnion([topicId])
-		]).done {
-			self.interests.append(topicId)
+	func addInterest(topicId: String) -> Self {
+		onBackgroundThread {
+			self.documentReference
+				.updateData([
+					"topics": FieldValue.arrayUnion([topicId])
+				])
+				.done {
+					onMainThread {
+						self.interests.append(topicId)
+					}
+				}
+				.cauterize()
 		}
+		return self
 	}
 	
 	@discardableResult
-	func removeInterest(topicId: String) -> Promise<Void> {
-		documentReference.updateData([
-			"topics": FieldValue.arrayRemove([topicId])
-		]).done {
-			self.interests.removeAll { $0 == topicId }
+	func removeInterest(topicId: String) -> Self {
+		onBackgroundThread {
+			self.documentReference
+				.updateData([
+					"topics": FieldValue.arrayRemove([topicId])
+				])
+				.done {
+					onMainThread {
+						self.interests.removeAll { $0 == topicId }
+					}
+				}
+				.cauterize()
 		}
+		return self
 	}
 	
 	@discardableResult

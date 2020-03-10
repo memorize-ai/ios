@@ -86,9 +86,13 @@ extension Deck {
 		@discardableResult
 		func addObserver() -> Self {
 			guard snapshotListener == nil else { return self }
-			snapshotListener = documentReference.addSnapshotListener { snapshot, error in
-				guard error == nil, let snapshot = snapshot else { return }
-				self.updateFromSnapshot(snapshot)
+			onBackgroundThread {
+				self.snapshotListener = self.documentReference.addSnapshotListener { snapshot, error in
+					guard error == nil, let snapshot = snapshot else { return }
+					onMainThread {
+						self.updateFromSnapshot(snapshot)
+					}
+				}
 			}
 			return self
 		}
@@ -97,36 +101,48 @@ extension Deck {
 		func loadCards(withUserDataForUser user: User? = nil) -> Self {
 			guard cardsLoadingState.isNone else { return self }
 			cardsLoadingState.startLoading()
-			parent
-				.documentReference
-				.collection("cards")
-				.whereField("section", isEqualTo: id)
-				.addSnapshotListener { snapshot, error in
-					guard
-						error == nil,
-						let documentChanges = snapshot?.documentChanges
-					else {
-						self.cardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-						return
-					}
-					for change in documentChanges {
-						let document = change.document
-						let cardId = document.documentID
-						switch change.type {
-						case .added:
-							let card = Card(snapshot: document, parent: self.parent)
-							self.cards.append(user.map { user in
-								card.loadUserData(forUser: user, deck: self.parent)
-							} ?? card)
-						case .modified:
-							self.cards.first { $0.id == cardId }?
-								.updateFromSnapshot(document)
-						case .removed:
-							self.cards.removeAll { $0.id == cardId }
+			onBackgroundThread {
+				self.parent
+					.documentReference
+					.collection("cards")
+					.whereField("section", isEqualTo: self.id)
+					.addSnapshotListener { snapshot, error in
+						guard
+							error == nil,
+							let documentChanges = snapshot?.documentChanges
+						else {
+							onMainThread {
+								self.cardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+							}
+							return
+						}
+						for change in documentChanges {
+							let document = change.document
+							let cardId = document.documentID
+							switch change.type {
+							case .added:
+								let card = Card(snapshot: document, parent: self.parent)
+								onMainThread {
+									self.cards.append(user.map { user in
+										card.loadUserData(forUser: user, deck: self.parent)
+									} ?? card)
+								}
+							case .modified:
+								onMainThread {
+									self.cards.first { $0.id == cardId }?
+										.updateFromSnapshot(document)
+								}
+							case .removed:
+								onMainThread {
+									self.cards.removeAll { $0.id == cardId }
+								}
+							}
+						}
+						onMainThread {
+							self.cardsLoadingState.succeed()
 						}
 					}
-					self.cardsLoadingState.succeed()
-				}
+			}
 			return self
 		}
 		
@@ -157,12 +173,18 @@ extension Deck {
 				alert.addAction(.init(title: "Rename", style: .default) { _ in
 					guard let name = alert.textFields?.first?.text else { return }
 					self.renameLoadingState.startLoading()
-					self.documentReference.updateData([
-						"name": name
-					]).done {
-						self.renameLoadingState.succeed()
-					}.catch { error in
-						self.renameLoadingState.fail(error: error)
+					onBackgroundThread {
+						self.documentReference.updateData([
+							"name": name
+						]).done {
+							onMainThread {
+								self.renameLoadingState.succeed()
+							}
+						}.catch { error in
+							onMainThread {
+								self.renameLoadingState.fail(error: error)
+							}
+						}
 					}
 				})
 			}
@@ -190,14 +212,20 @@ extension Deck {
 			let incrementByNumberOfCards = FieldValue.increment(Int64(numberOfCards))
 			
 			unlockLoadingState.startLoading()
-			user.documentReference.collection("decks").document(parent.id).updateData([
-				"dueCardCount": incrementByNumberOfCards,
-				"unlockedCardCount": incrementByNumberOfCards,
-				"sections.\(id)": numberOfCards
-			]).done {
-				self.unlockLoadingState.succeed()
-			}.catch { error in
-				self.unlockLoadingState.fail(error: error)
+			onBackgroundThread {
+				user.documentReference.collection("decks").document(self.parent.id).updateData([
+					"dueCardCount": incrementByNumberOfCards,
+					"unlockedCardCount": incrementByNumberOfCards,
+					"sections.\(self.id)": self.numberOfCards
+				]).done {
+					onMainThread {
+						self.unlockLoadingState.succeed()
+					}
+				}.catch { error in
+					onMainThread {
+						self.unlockLoadingState.fail(error: error)
+					}
+				}
 			}
 			
 			return self
@@ -221,10 +249,16 @@ extension Deck {
 		@discardableResult
 		func delete() -> Self {
 			deleteLoadingState.startLoading()
-			documentReference.delete().done {
-				self.deleteLoadingState.succeed()
-			}.catch { error in
-				self.deleteLoadingState.fail(error: error)
+			onBackgroundThread {
+				self.documentReference.delete().done {
+					onMainThread {
+						self.deleteLoadingState.succeed()
+					}
+				}.catch { error in
+					onMainThread {
+						self.deleteLoadingState.fail(error: error)
+					}
+				}
 			}
 			return self
 		}

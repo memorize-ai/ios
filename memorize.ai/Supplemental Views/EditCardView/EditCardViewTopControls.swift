@@ -20,10 +20,16 @@ struct EditCardViewTopControls: View {
 			Spacer()
 			Button(action: {
 				self.card.publishLoadingState.startLoading()
-				self.card.publishAsUpdate().done {
-					self.card.publishLoadingState.succeed()
-				}.catch { error in
-					self.card.publishLoadingState.fail(error: error)
+				onBackgroundThread {
+					self.card.publishAsUpdate().done {
+						onMainThread {
+							self.card.publishLoadingState.succeed()
+						}
+					}.catch { error in
+						onMainThread {
+							self.card.publishLoadingState.fail(error: error)
+						}
+					}
 				}
 			}) {
 				CustomRectangle(background: Color.white) {

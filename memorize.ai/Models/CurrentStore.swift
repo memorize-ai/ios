@@ -97,14 +97,20 @@ final class CurrentStore: ObservableObject {
 	func loadUser() -> Self {
 		guard userLoadingState.isNone else { return self }
 		userLoadingState.startLoading()
-		firestore.document("users/\(user.id)").addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot else {
-				self.userLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-				return
+		onBackgroundThread {
+			firestore.document("users/\(self.user.id)").addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot else {
+					onMainThread {
+						self.userLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+					}
+					return
+				}
+				onMainThread {
+					self.user.updateFromSnapshot(snapshot)
+					self.userLoadingState.succeed()
+					self.loadRecommendedDecks()
+				}
 			}
-			self.user.updateFromSnapshot(snapshot)
-			self.userLoadingState.succeed()
-			self.loadRecommendedDecks()
 		}
 		return self
 	}
@@ -123,38 +129,50 @@ final class CurrentStore: ObservableObject {
 	func loadAllTopics() -> Self {
 		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()
-		firestore.collection("topics").addSnapshotListener { snapshot, error in
-			guard error == nil, let documentChanges = snapshot?.documentChanges else {
-				self.topicsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-				return
-			}
-			for change in documentChanges {
-				let document = change.document
-				let topicId = document.documentID
-				switch change.type {
-				case .added:
-					if (self.topics.contains { $0.id == topicId }) { continue }
-					let topic = Topic(
-						id: topicId,
-						name: document.get("name") as? String ?? "Unknown",
-						category: {
-							guard let categoryString = document.get("category") as? String else {
-								return .language
-							}
-							return Topic.Category(rawValue: categoryString) ?? .language
-						}()
-					)
-					self.topics.append(topic.cache())
-				case .modified:
-					if (self.topics.contains { $0.id == topicId }) { continue }
-					self.topics.first { $0.id == topicId }?
-						.updateFromSnapshot(document)
-				case .removed:
-					self.topics.removeAll { $0.id == topicId }
+		onBackgroundThread {
+			firestore.collection("topics").addSnapshotListener { snapshot, error in
+				guard error == nil, let documentChanges = snapshot?.documentChanges else {
+					onMainThread {
+						self.topicsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+					}
+					return
+				}
+				for change in documentChanges {
+					let document = change.document
+					let topicId = document.documentID
+					switch change.type {
+					case .added:
+						if (self.topics.contains { $0.id == topicId }) { continue }
+						let topic = Topic(
+							id: topicId,
+							name: document.get("name") as? String ?? "Unknown",
+							category: {
+								guard let categoryString = document.get("category") as? String else {
+									return .language
+								}
+								return Topic.Category(rawValue: categoryString) ?? .language
+							}()
+						)
+						onMainThread {
+							self.topics.append(topic.cache())
+						}
+					case .modified:
+						if (self.topics.contains { $0.id == topicId }) { continue }
+						onMainThread {
+							self.topics.first { $0.id == topicId }?
+								.updateFromSnapshot(document)
+						}
+					case .removed:
+						onMainThread {
+							self.topics.removeAll { $0.id == topicId }
+						}
+					}
+				}
+				onMainThread {
+					self.topics.sort(by: \.name)
+					self.topicsLoadingState.succeed()
 				}
 			}
-			self.topics.sort(by: \.name)
-			self.topicsLoadingState.succeed()
 		}
 		return self
 	}
@@ -163,11 +181,17 @@ final class CurrentStore: ObservableObject {
 	func loadRecommendedDecks() -> Self {
 		guard recommendedDecksLoadingState.isNone else { return self }
 		recommendedDecksLoadingState.startLoading()
-		user.recommendedDecks().done { decks in
-			self.recommendedDecks = decks
-			self.recommendedDecksLoadingState.succeed()
-		}.catch { error in
-			self.recommendedDecksLoadingState.fail(error: error)
+		onBackgroundThread {
+			self.user.recommendedDecks().done { decks in
+				onMainThread {
+					self.recommendedDecks = decks
+					self.recommendedDecksLoadingState.succeed()
+				}
+			}.catch { error in
+				onMainThread {
+					self.recommendedDecksLoadingState.fail(error: error)
+				}
+			}
 		}
 		return self
 	}

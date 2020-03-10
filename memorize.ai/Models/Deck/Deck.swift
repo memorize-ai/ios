@@ -287,9 +287,13 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func addObserver() -> Self {
 		guard snapshotListener == nil else { return self }
-		snapshotListener = documentReference.addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot else { return }
-			self.updatePublicDataFromSnapshot(snapshot)
+		onBackgroundThread {
+			self.snapshotListener = self.documentReference.addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot else { return }
+				onMainThread {
+					self.updatePublicDataFromSnapshot(snapshot)
+				}
+			}
 		}
 		return self
 	}
@@ -309,16 +313,24 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			image = cachedImage
 			imageLoadingState.succeed()
 		} else {
-			storage.child("decks/\(id)").getData().done { data in
-				guard let image = UIImage(data: data) else {
-					self.imageLoadingState.fail(message: "Malformed data")
-					return
+			onBackgroundThread {
+				storage.child("decks/\(self.id)").getData().done { data in
+					guard let image = UIImage(data: data) else {
+						onMainThread {
+							self.imageLoadingState.fail(message: "Malformed data")
+						}
+						return
+					}
+					Self.imageCache[self.id] = image
+					onMainThread {
+						self.image = image
+						self.imageLoadingState.succeed()
+					}
+				}.catch { error in
+					onMainThread {
+						self.imageLoadingState.fail(error: error)
+					}
 				}
-				self.image = image
-				Self.imageCache[self.id] = image
-				self.imageLoadingState.succeed()
-			}.catch { error in
-				self.imageLoadingState.fail(error: error)
 			}
 		}
 		return self
@@ -328,15 +340,21 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadUserData(user: User) -> Self {
 		guard userDataLoadingState.isNone else { return self }
 		userDataLoadingState.startLoading()
-		firestore.document("users/\(user.id)/decks/\(id)").addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot else {
-				self.userDataLoadingState.fail(
-					error: error ?? UNKNOWN_ERROR
-				)
-				return
+		onBackgroundThread {
+			firestore.document("users/\(user.id)/decks/\(self.id)").addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot else {
+					onMainThread {
+						self.userDataLoadingState.fail(
+							error: error ?? UNKNOWN_ERROR
+						)
+					}
+					return
+				}
+				onMainThread {
+					self.updateUserDataFromSnapshot(snapshot)
+					self.userDataLoadingState.succeed()
+				}
 			}
-			self.updateUserDataFromSnapshot(snapshot)
-			self.userDataLoadingState.succeed()
 		}
 		return self
 	}
@@ -346,32 +364,40 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		guard sectionsLoadingState.isNone else { return self }
 		sectionsLoadingState.startLoading()
 		var isFirstIteration = true
-		documentReference.collection("sections").addSnapshotListener { snapshot, error in
-			guard error == nil, let documentChanges = snapshot?.documentChanges else {
-				self.sectionsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-				if isFirstIteration {
-					isFirstIteration = false
-					completion?(error)
+		onBackgroundThread {
+			self.documentReference.collection("sections").addSnapshotListener { snapshot, error in
+				guard error == nil, let documentChanges = snapshot?.documentChanges else {
+					onMainThread {
+						self.sectionsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+						if isFirstIteration {
+							isFirstIteration = false
+							completion?(error)
+						}
+					}
+					return
 				}
-				return
-			}
-			for change in documentChanges {
-				let document = change.document
-				let sectionId = document.documentID
-				switch change.type {
-				case .added:
-					self.sections.append(.init(parent: self, snapshot: document))
-				case .modified:
-					self.section(withId: sectionId)?.updateFromSnapshot(document)
-				case .removed:
-					self.sections.removeAll { $0.id == sectionId }
+				for change in documentChanges {
+					let document = change.document
+					let sectionId = document.documentID
+					onMainThread {
+						switch change.type {
+						case .added:
+							self.sections.append(.init(parent: self, snapshot: document))
+						case .modified:
+							self.section(withId: sectionId)?.updateFromSnapshot(document)
+						case .removed:
+							self.sections.removeAll { $0.id == sectionId }
+						}
+					}
 				}
-			}
-			self.sections.sort { $0.index < $1.index }
-			self.sectionsLoadingState.succeed()
-			if isFirstIteration {
-				isFirstIteration = false
-				completion?(nil)
+				onMainThread {
+					self.sections.sort { $0.index < $1.index }
+					self.sectionsLoadingState.succeed()
+					if isFirstIteration {
+						isFirstIteration = false
+						completion?(nil)
+					}
+				}
 			}
 		}
 		return self
@@ -381,17 +407,23 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadCreator() -> Self {
 		guard creatorLoadingState.isNone else { return self }
 		creatorLoadingState.startLoading()
-		firestore.document("users/\(creatorId)").addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot else {
-				self.creatorLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-				return
+		onBackgroundThread {
+			firestore.document("users/\(self.creatorId)").addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot else {
+					onMainThread {
+						self.creatorLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+					}
+					return
+				}
+				onMainThread {
+					if let creator = self.creator {
+						creator.updateFromSnapshot(snapshot)
+					} else {
+						self.creator = .init(snapshot: snapshot)
+					}
+					self.creatorLoadingState.succeed()
+				}
 			}
-			if let creator = self.creator {
-				creator.updateFromSnapshot(snapshot)
-			} else {
-				self.creator = .init(snapshot: snapshot)
-			}
-			self.creatorLoadingState.succeed()
 		}
 		return self
 	}
@@ -400,31 +432,39 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func loadPreviewCards() -> Self {
 		guard previewCardsLoadingState.isNone else { return self }
 		previewCardsLoadingState.startLoading()
-		documentReference
-			.collection("cards")
-			.order(by: "viewCount")
-			.limit(to: Self.MAX_NUMBER_OF_PREVIEW_CARDS)
-			.addSnapshotListener { snapshot, error in
-				guard error == nil, let documentChanges = snapshot?.documentChanges else {
-					self.previewCardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-					return
-				}
-				for change in documentChanges {
-					let document = change.document
-					let cardId = document.documentID
-					switch change.type {
-					case .added:
-						self.previewCards.append(.init(snapshot: document, parent: self))
-					case .modified:
-						self.previewCards.first { $0.id == cardId }?
-							.updateFromSnapshot(document)
-						self.previewCards.sort(by: \.numberOfViews)
-					case .removed:
-						self.previewCards.removeAll { $0.id == cardId }
+		onBackgroundThread {
+			self.documentReference
+				.collection("cards")
+				.order(by: "viewCount")
+				.limit(to: Self.MAX_NUMBER_OF_PREVIEW_CARDS)
+				.addSnapshotListener { snapshot, error in
+					guard error == nil, let documentChanges = snapshot?.documentChanges else {
+						onMainThread {
+							self.previewCardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+						}
+						return
+					}
+					for change in documentChanges {
+						let document = change.document
+						let cardId = document.documentID
+						onMainThread {
+							switch change.type {
+							case .added:
+								self.previewCards.append(.init(snapshot: document, parent: self))
+							case .modified:
+								self.previewCards.first { $0.id == cardId }?
+									.updateFromSnapshot(document)
+								self.previewCards.sort(by: \.numberOfViews)
+							case .removed:
+								self.previewCards.removeAll { $0.id == cardId }
+							}
+						}
+					}
+					onMainThread {
+						self.previewCardsLoadingState.succeed()
 					}
 				}
-				self.previewCardsLoadingState.succeed()
-			}
+		}
 		return self
 	}
 	
@@ -440,27 +480,34 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	private func setRating(_ rating: Any, forUser user: User) -> PMKFinalizer {
+	private func setRating(_ rating: Any, forUser user: User) -> Self {
 		ratingLoadingState.startLoading()
-		return user.documentReference
-			.collection("decks")
-			.document(id)
-			.updateData(["rating": rating])
-			.done {
-				self.ratingLoadingState.succeed()
-			}
-			.catch { error in
-				self.ratingLoadingState.fail(error: error)
-			}
+		onBackgroundThread {
+			user.documentReference
+				.collection("decks")
+				.document(self.id)
+				.updateData(["rating": rating])
+				.done {
+					onMainThread {
+						self.ratingLoadingState.succeed()
+					}
+				}
+				.catch { error in
+					onMainThread {
+						self.ratingLoadingState.fail(error: error)
+					}
+				}
+		}
+		return self
 	}
 	
 	@discardableResult
-	func addRating(_ rating: Int, forUser user: User) -> PMKFinalizer {
+	func addRating(_ rating: Int, forUser user: User) -> Self {
 		setRating(rating, forUser: user)
 	}
 	
 	@discardableResult
-	func removeRating(forUser user: User) -> PMKFinalizer {
+	func removeRating(forUser user: User) -> Self {
 		setRating(FieldValue.delete(), forUser: user)
 	}
 	
@@ -483,27 +530,34 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	@discardableResult
-	func loadSimilarDecks() -> PMKFinalizer {
+	func loadSimilarDecks() -> Self {
 		similarDecksLoadingState.startLoading()
-		return when(
-			fulfilled: [
-				Self.search(query: name),
-				Self.search(
-					filterForTopics: topics,
-					sortBy: .top
-				)
-			] + name.split(separator: " ").compactMap { word in
-				let trimmed = word.trimmingCharacters(in: .whitespaces)
-				return trimmed.isEmpty
-					? nil
-					: Self.search(query: trimmed)
+		onBackgroundThread {
+			when(
+				fulfilled: [
+					Self.search(query: self.name),
+					Self.search(
+						filterForTopics: self.topics,
+						sortBy: .top
+					)
+				] + self.name.split(separator: " ").compactMap { word in
+					let trimmed = word.trimmingCharacters(in: .whitespaces)
+					return trimmed.isEmpty
+						? nil
+						: Self.search(query: trimmed)
+				}
+			).done { result in
+				onMainThread {
+					self.similarDecks = Set(result.reduce([], +)).filter { $0 != self }
+					self.similarDecksLoadingState.succeed()
+				}
+			}.catch { error in
+				onMainThread {
+					self.similarDecksLoadingState.fail(error: error)
+				}
 			}
-		).done { result in
-			self.similarDecks = Set(result.reduce([], +)).filter { $0 != self }
-			self.similarDecksLoadingState.succeed()
-		}.catch { error in
-			self.similarDecksLoadingState.fail(error: error)
 		}
+		return self
 	}
 	
 	func loadCardDrafts(forUser user: User) -> Promise<[Card.Draft]> {
@@ -530,25 +584,29 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	func get(user: User, completion: (() -> Void)? = nil) -> Self {
 		getLoadingState.startLoading()
 		
-		if sectionsLoadingState.didSucceed {
-			get(user: user, firstSection: sections.first, completion: completion)
-		} else {
-			firestore
-				.collection("decks/\(id)/sections")
-				.whereField("index", isEqualTo: 0)
-				.getDocuments()
-				.done { snapshot in
-					self.get(
-						user: user,
-						firstSection: snapshot.documents.first.map {
-							Section(parent: self, snapshot: $0)
-						},
-						completion: completion
-					)
-				}
-				.catch { error in
-					self.getLoadingState.fail(error: error)
-				}
+		onBackgroundThread {
+			if self.sectionsLoadingState.didSucceed {
+				self.get(user: user, firstSection: self.sections.first, completion: completion)
+			} else {
+				firestore
+					.collection("decks/\(self.id)/sections")
+					.whereField("index", isEqualTo: 0)
+					.getDocuments()
+					.done { snapshot in
+						self.get(
+							user: user,
+							firstSection: snapshot.documents.first.map {
+								.init(parent: self, snapshot: $0)
+							},
+							completion: completion
+						)
+					}
+					.catch { error in
+						onMainThread {
+							self.getLoadingState.fail(error: error)
+						}
+					}
+			}
 		}
 		
 		return self
@@ -569,21 +627,31 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		}
 		
 		firestore.document("users/\(user.id)/decks/\(id)").setData(data).done {
-			self.getLoadingState.succeed()
-			completion?()
+			onMainThread {
+				self.getLoadingState.succeed()
+				completion?()
+			}
 		}.catch { error in
-			self.getLoadingState.fail(error: error)
+			onMainThread {
+				self.getLoadingState.fail(error: error)
+			}
 		}
 	}
 	
 	@discardableResult
 	func remove(user: User, completion: (() -> Void)? = nil) -> Self {
 		getLoadingState.startLoading()
-		firestore.document("users/\(user.id)/decks/\(id)").delete().done {
-			self.getLoadingState.succeed()
-			completion?()
-		}.catch { error in
-			self.getLoadingState.fail(error: error)
+		onBackgroundThread {
+			firestore.document("users/\(user.id)/decks/\(self.id)").delete().done {
+				onMainThread {
+					self.getLoadingState.succeed()
+					completion?()
+				}
+			}.catch { error in
+				onMainThread {
+					self.getLoadingState.fail(error: error)
+				}
+			}
 		}
 		return self
 	}
@@ -646,16 +714,22 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				return seal.fulfill(cachedDeck)
 			}
 			var snapshotListener: ListenerRegistration?
-			snapshotListener = firestore.document("decks/\(id)").addSnapshotListener { snapshot, error in
-				guard error == nil, let snapshot = snapshot else {
-					return seal.reject(error ?? UNKNOWN_ERROR)
-				}
-				if didFulfill {
-					deck?.updatePublicDataFromSnapshot(snapshot)
-				} else {
-					didFulfill = true
-					deck = .init(snapshot: snapshot, snapshotListener: snapshotListener)
-					seal.fulfill(deck!.cache())
+			onBackgroundThread {
+				snapshotListener = firestore.document("decks/\(id)").addSnapshotListener { snapshot, error in
+					guard error == nil, let snapshot = snapshot else {
+						return seal.reject(error ?? UNKNOWN_ERROR)
+					}
+					if didFulfill {
+						onMainThread {
+							deck?.updatePublicDataFromSnapshot(snapshot)
+						}
+					} else {
+						didFulfill = true
+						onMainThread {
+							deck = .init(snapshot: snapshot, snapshotListener: snapshotListener)
+							seal.fulfill(deck!.cache())
+						}
+					}
 				}
 			}
 		}
@@ -681,14 +755,20 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 			alert.addAction(.init(title: "Create", style: .default) { _ in
 				guard let name = alert.textFields?.first?.text else { return }
 				self.createSectionLoadingState.startLoading()
-				self.documentReference.collection("sections").addDocument(data: [
-					"name": name,
-					"index": self.nextSectionIndex
-				]).done { ref in
-					self.createSectionLoadingState.succeed()
-					completion?(ref.documentID)
-				}.catch { error in
-					self.createSectionLoadingState.fail(error: error)
+				onBackgroundThread {
+					self.documentReference.collection("sections").addDocument(data: [
+						"name": name,
+						"index": self.nextSectionIndex
+					]).done { ref in
+						onMainThread {
+							self.createSectionLoadingState.succeed()
+							completion?(ref.documentID)
+						}
+					}.catch { error in
+						onMainThread {
+							self.createSectionLoadingState.fail(error: error)
+						}
+					}
 				}
 			})
 		}

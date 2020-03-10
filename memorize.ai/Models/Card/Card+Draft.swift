@@ -156,11 +156,17 @@ extension Card {
 				alert.addAction(.init(title: "Cancel", style: .cancel))
 				alert.addAction(.init(title: "Delete", style: .destructive) { _ in
 					self.publishLoadingState.startLoading()
-					self.delete(forUser: user).done {
-						self.publishLoadingState.succeed()
-						completion?()
-					}.catch { error in
-						self.publishLoadingState.fail(error: error)
+					onBackgroundThread {
+						self.delete(forUser: user).done {
+							onMainThread {
+								self.publishLoadingState.succeed()
+								completion?()
+							}
+						}.catch { error in
+							onMainThread {
+								self.publishLoadingState.fail(error: error)
+							}
+						}
 					}
 				})
 			}

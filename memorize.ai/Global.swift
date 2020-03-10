@@ -30,6 +30,18 @@ func withDelay(_ duration: TimeInterval, body: @escaping () -> Void) {
 	}
 }
 
+func onThread(_ thread: DispatchQoS.QoSClass?, execute block: @escaping () -> Void) {
+	(thread.map { DispatchQueue.global(qos: $0) } ?? .main).async(execute: block)
+}
+
+func onBackgroundThread(execute block: @escaping () -> Void) {
+	onThread(.background, execute: block)
+}
+
+func onMainThread(execute block: @escaping () -> Void) {
+	onThread(nil, execute: block)
+}
+
 func popUpWithAnimation(body: () -> Void) {
 	withAnimation(.easeIn(duration: 0.15), body)
 }

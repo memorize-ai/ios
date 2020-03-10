@@ -80,70 +80,82 @@ final class PublishDeckViewModel: ViewModel {
 	
 	func publish(currentUser: User, completion: @escaping (String) -> Void) {
 		publishLoadingState.startLoading()
-		if let deck = deck {
-			when(fulfilled: [
-				deck.documentReference.updateData([
-					"topics": topics,
-					"hasImage": image != nil,
-					"name": name,
-					"subtitle": subtitle,
-					"description": description
-				])
-			] + (
-				didChangeImage
-					? [deck.setImage(image)]
-					: []
-			)).done {
-				deck.image = self.image
-				self.publishLoadingState.succeed()
-				self.reset()
-				completion(deck.id)
-			}.catch { error in
-				self.publishLoadingState.fail(error: error)
-			}
-		} else {
-			firestore.collection("decks").addDocument(data: [
-				"topics": topics,
-				"hasImage": image != nil,
-				"name": name,
-				"subtitle": subtitle,
-				"description": description,
-				"viewCount": 0,
-				"uniqueViewCount": 0,
-				"ratingCount": 0,
-				"1StarRatingCount": 0,
-				"2StarRatingCount": 0,
-				"3StarRatingCount": 0,
-				"4StarRatingCount": 0,
-				"5StarRatingCount": 0,
-				"averageRating": 0,
-				"downloadCount": 0,
-				"cardCount": 0,
-				"unsectionedCardCount": 0,
-				"currentUserCount": 0,
-				"allTimeUserCount": 0,
-				"favoriteCount": 0,
-				"creator": currentUser.id,
-				"created": FieldValue.serverTimestamp(),
-				"updated": FieldValue.serverTimestamp()
-			]).done { document in
-				let deckId = document.documentID
-				Deck.imageCache[deckId] = self.image
+		onBackgroundThread {
+			if let deck = self.deck {
 				when(fulfilled: [
-					self.uploadDeckImage(
-						deckId: deckId,
-						data: self.image?.compressedData
-					),
-					currentUser.getEmptyDeck(withId: deckId)
-				]).done {
-					self.publishLoadingState.succeed()
-					self.reset()
-					completion(deckId)
+					deck.documentReference.updateData([
+						"topics": self.topics,
+						"hasImage": self.image != nil,
+						"name": self.name,
+						"subtitle": self.subtitle,
+						"description": self.description
+					])
+				] + (
+					self.didChangeImage
+						? [deck.setImage(self.image)]
+						: []
+				)).done {
+					onMainThread {
+						deck.image = self.image
+						self.publishLoadingState.succeed()
+						self.reset()
+						completion(deck.id)
+					}
 				}.catch { error in
-					self.publishLoadingState.fail(error: error)
+					onMainThread {
+						self.publishLoadingState.fail(error: error)
+					}
 				}
-			}.catch { error in
-				self.publishLoadingState.fail(error: error)
+			} else {
+				firestore.collection("decks").addDocument(data: [
+					"topics": self.topics,
+					"hasImage": self.image != nil,
+					"name": self.name,
+					"subtitle": self.subtitle,
+					"description": self.description,
+					"viewCount": 0,
+					"uniqueViewCount": 0,
+					"ratingCount": 0,
+					"1StarRatingCount": 0,
+					"2StarRatingCount": 0,
+					"3StarRatingCount": 0,
+					"4StarRatingCount": 0,
+					"5StarRatingCount": 0,
+					"averageRating": 0,
+					"downloadCount": 0,
+					"cardCount": 0,
+					"unsectionedCardCount": 0,
+					"currentUserCount": 0,
+					"allTimeUserCount": 0,
+					"favoriteCount": 0,
+					"creator": currentUser.id,
+					"created": FieldValue.serverTimestamp(),
+					"updated": FieldValue.serverTimestamp()
+				]).done { document in
+					let deckId = document.documentID
+					Deck.imageCache[deckId] = self.image
+					when(fulfilled: [
+						self.uploadDeckImage(
+							deckId: deckId,
+							data: self.image?.compressedData
+						),
+						currentUser.getEmptyDeck(withId: deckId)
+					]).done {
+						onMainThread {
+							self.publishLoadingState.succeed()
+							self.reset()
+							completion(deckId)
+						}
+					}.catch { error in
+						onMainThread {
+							self.publishLoadingState.fail(error: error)
+						}
+					}
+				}.catch { error in
+					onMainThread {
+						self.publishLoadingState.fail(error: error)
+					}
+				}
 			}
 		}
 	}

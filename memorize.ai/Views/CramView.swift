@@ -384,32 +384,42 @@ struct CramView: View {
 			} else {
 				currentCardLoadingState.startLoading()
 				
-				deck.documentReference
-					.collection("cards")
-					.whereField("section", isEqualTo: section.id)
-					.start(afterDocument: currentCard?.snapshot)
-					.limit(to: 1)
-					.getDocuments()
-					.done { snapshot in
-						if let document = snapshot.documents.first {
-							let card = Card.CramData(
-								parent: .init(snapshot: document, parent: self.deck),
-								section: section
-							)
-							self.cards.append(card)
-							self.current = card
-							self.currentSide = .front
-							card.parent.playAudio(forSide: .front)
-						} else {
-							self.shouldShowRecap = true
+				onBackgroundThread {
+					self.deck.documentReference
+						.collection("cards")
+						.whereField("section", isEqualTo: section.id)
+						.start(afterDocument: self.currentCard?.snapshot)
+						.limit(to: 1)
+						.getDocuments()
+						.done { snapshot in
+							if let document = snapshot.documents.first {
+								let card = Card.CramData(
+									parent: .init(snapshot: document, parent: self.deck),
+									section: section
+								)
+								onMainThread {
+									self.cards.append(card)
+									self.current = card
+									self.currentSide = .front
+									card.parent.playAudio(forSide: .front)
+								}
+							} else {
+								onMainThread {
+									self.shouldShowRecap = true
+								}
+							}
+							onMainThread {
+								self.currentCardLoadingState.succeed()
+							}
 						}
-						self.currentCardLoadingState.succeed()
-					}
-					.catch { error in
-						showAlert(title: "Unable to load card", message: "You will move on to the next card")
-						self.currentCardLoadingState.fail(error: error)
-						self.loadNextCard()
-					}
+						.catch { error in
+							onMainThread {
+								showAlert(title: "Unable to load card", message: "You will move on to the next card")
+								self.currentCardLoadingState.fail(error: error)
+								self.loadNextCard()
+							}
+						}
+				}
 			}
 		} else if deck.sectionsLoadingState.didSucceed {
 			incrementCurrentSectionIndex()
@@ -442,29 +452,39 @@ struct CramView: View {
 					query = query.start(afterDocument: currentCardSnapshot)
 				}
 				
-				query
-					.limit(to: 1)
-					.getDocuments()
-					.done { snapshot in
-						if let document = snapshot.documents.first {
-							let card = Card.CramData(
-								parent: .init(snapshot: document, parent: self.deck),
-								section: currentSection
-							)
-							self.cards.append(card)
-							self.current = card
-							self.currentSide = .front
-							card.parent.playAudio(forSide: .front)
-						} else {
-							self.shouldShowRecap = true
+				onBackgroundThread {
+					query
+						.limit(to: 1)
+						.getDocuments()
+						.done { snapshot in
+							if let document = snapshot.documents.first {
+								let card = Card.CramData(
+									parent: .init(snapshot: document, parent: self.deck),
+									section: currentSection
+								)
+								onMainThread {
+									self.cards.append(card)
+									self.current = card
+									self.currentSide = .front
+									card.parent.playAudio(forSide: .front)
+								}
+							} else {
+								onMainThread {
+									self.shouldShowRecap = true
+								}
+							}
+							onMainThread {
+								self.currentCardLoadingState.succeed()
+							}
 						}
-						self.currentCardLoadingState.succeed()
-					}
-					.catch { error in
-						showAlert(title: "Unable to load card", message: "You will move on to the next card")
-						self.currentCardLoadingState.fail(error: error)
-						self.loadNextCard()
-					}
+						.catch { error in
+							onMainThread {
+								showAlert(title: "Unable to load card", message: "You will move on to the next card")
+								self.currentCardLoadingState.fail(error: error)
+								self.loadNextCard()
+							}
+						}
+				}
 			}
 		} else {
 			currentCardLoadingState.startLoading()

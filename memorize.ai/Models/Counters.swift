@@ -12,7 +12,7 @@ final class Counters: ObservableObject {
 	
 	static let shared = Counters()
 	
-	private(set) var values = [Key: Int]()
+	@Published private(set) var values = [Key: Int]()
 	
 	subscript(key: Key) -> Int? {
 		values[key]
@@ -22,11 +22,15 @@ final class Counters: ObservableObject {
 	func get(_ key: Key) -> Self {
 		guard values[key] == nil else { return self }
 		
-		key.document.getDocument()
-			.done { snapshot in
-				self.values[key] = snapshot.get("value") as? Int
-			}
-			.cauterize()
+		onBackgroundThread {
+			key.document.getDocument()
+				.done { snapshot in
+					onMainThread {
+						self.values[key] = snapshot.get("value") as? Int
+					}
+				}
+				.cauterize()
+		}
 		
 		return self
 	}
@@ -35,9 +39,13 @@ final class Counters: ObservableObject {
 	func observe(_ key: Key) -> Self {
 		guard values[key] == nil else { return self }
 		
-		key.document.addSnapshotListener { snapshot, error in
-			guard error == nil, let snapshot = snapshot else { return }
-			self.values[key] = snapshot.get("value") as? Int
+		onBackgroundThread {
+			key.document.addSnapshotListener { snapshot, error in
+				guard error == nil, let snapshot = snapshot else { return }
+				onMainThread {
+					self.values[key] = snapshot.get("value") as? Int
+				}
+			}
 		}
 			
 		return self

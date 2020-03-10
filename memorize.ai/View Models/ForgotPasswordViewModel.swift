@@ -31,9 +31,17 @@ final class ForgotPasswordViewModel: ViewModel {
 	func sendResetEmail() {
 		loadingState.startLoading()
 		shouldShowEmailRedBorder = false
-		auth.sendPasswordReset(withEmail: email).done {
-			self.loadingState.succeed()
-		}.catch(failPasswordReset)
+		onBackgroundThread {
+			auth.sendPasswordReset(withEmail: self.email).done {
+				onMainThread {
+					self.loadingState.succeed()
+				}
+			}.catch { error in
+				onMainThread {
+					self.failPasswordReset(error: error)
+				}
+			}
+		}
 	}
 	
 	func failPasswordReset(error: Error) {

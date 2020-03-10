@@ -60,18 +60,26 @@ extension Card {
 			
 			predictionLoadingState.startLoading()
 			
-			functions.httpsCallable("getCardPrediction").call(data: [
-				"deck": parent.parent.id,
-				"card": parent.id
-			]).done { result in
-				guard let data = result.data as? [String: Int] else {
-					self.predictionLoadingState.fail(message: "Malformed response")
-					return
+			onBackgroundThread {
+				functions.httpsCallable("getCardPrediction").call(data: [
+					"deck": self.parent.parent.id,
+					"card": self.parent.id
+				]).done { result in
+					guard let data = result.data as? [String: Int] else {
+						onMainThread {
+							self.predictionLoadingState.fail(message: "Malformed response")
+						}
+						return
+					}
+					onMainThread {
+						self.prediction = .init(functionResponse: data)
+						self.predictionLoadingState.succeed()
+					}
+				}.catch { error in
+					onMainThread {
+						self.predictionLoadingState.fail(error: error)
+					}
 				}
-				self.prediction = .init(functionResponse: data)
-				self.predictionLoadingState.succeed()
-			}.catch { error in
-				self.predictionLoadingState.fail(error: error)
 			}
 			
 			return self

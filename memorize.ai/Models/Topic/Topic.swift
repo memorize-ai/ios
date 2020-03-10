@@ -83,16 +83,22 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 			if let cachedTopic = cache[id] {
 				return seal.fulfill(cachedTopic)
 			}
-			firestore.document("topics/\(id)").addSnapshotListener { snapshot, error in
-				guard error == nil, let snapshot = snapshot else {
-					return seal.reject(error ?? UNKNOWN_ERROR)
-				}
-				if didFulfill {
-					topic?.updateFromSnapshot(snapshot)
-				} else {
-					didFulfill = true
-					topic = .init(snapshot: snapshot)
-					seal.fulfill(topic!.cache())
+			onBackgroundThread {
+				firestore.document("topics/\(id)").addSnapshotListener { snapshot, error in
+					guard error == nil, let snapshot = snapshot else {
+						return seal.reject(error ?? UNKNOWN_ERROR)
+					}
+					if didFulfill {
+						onMainThread {
+							topic?.updateFromSnapshot(snapshot)
+						}
+					} else {
+						didFulfill = true
+						topic = .init(snapshot: snapshot)
+						onMainThread {
+							seal.fulfill(topic!.cache())
+						}
+					}
 				}
 			}
 		}

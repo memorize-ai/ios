@@ -32,35 +32,49 @@ final class GoogleSignInButtonModel: ViewModel {
 	
 	func logInCompletion(promise: Promise<AuthDataResult>) {
 		loadingState.startLoading()
-		promise.done { result in
-			let user = result.user
-			guard
-				let email = user.email,
-				let additionalInfo = result.additionalUserInfo
-			else { return }
-			let newUser = User(
-				id: user.uid,
-				name: user.displayName ?? "Unknown",
-				email: email,
-				interests: [],
-				numberOfDecks: 0,
-				xp: 0
-			)
-			self.user = newUser
-			if additionalInfo.isNewUser {
-				self.handleNewUser(from: newUser)
-			} else {
-				self.shouldProgressToHomeView = true
-				self.loadingState.succeed()
+		onBackgroundThread {
+			promise.done { result in
+				let user = result.user
+				guard
+					let email = user.email,
+					let additionalInfo = result.additionalUserInfo
+				else { return }
+				let newUser = User(
+					id: user.uid,
+					name: user.displayName ?? "Unknown",
+					email: email,
+					interests: [],
+					numberOfDecks: 0,
+					xp: 0
+				)
+				self.user = newUser
+				if additionalInfo.isNewUser {
+					self.handleNewUser(from: newUser)
+				} else {
+					onMainThread {
+						self.shouldProgressToHomeView = true
+						self.loadingState.succeed()
+					}
+				}
+			}.catch { error in
+				onMainThread {
+					self.failAuthGoogleSignUp(error: error)
+				}
 			}
-		}.catch(failAuthGoogleSignUp)
+		}
 	}
 	
 	func handleNewUser(from user: User) {
 		createUser(from: user).done {
-			self.shouldProgressToChooseTopicsView = true
-			self.loadingState.succeed()
-		}.catch(failFirestoreGoogleSignUp)
+			onMainThread {
+				self.shouldProgressToChooseTopicsView = true
+				self.loadingState.succeed()
+			}
+		}.catch { error in
+			onMainThread {
+				self.failFirestoreGoogleSignUp(error: error)
+			}
+		}
 	}
 	
 	func createUser(from user: User) -> Promise<Void> {
