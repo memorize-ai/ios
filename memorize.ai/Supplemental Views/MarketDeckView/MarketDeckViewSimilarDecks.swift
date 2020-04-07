@@ -17,7 +17,7 @@ struct MarketDeckViewSimilarDecks: View {
 						DeckCellWithGetButton(
 							deck: similarDeck,
 							user: self.currentStore.user,
-							width: 144
+							width: 180
 						)
 						.onTapGesture {
 							self.selectedDeck = similarDeck

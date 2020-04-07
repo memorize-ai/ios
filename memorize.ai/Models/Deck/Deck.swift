@@ -12,6 +12,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static var imageCache = [String: UIImage]()
 	
 	let id: String
+	let slug: String
 	let creatorId: String
 	let dateCreated: Date
 	
@@ -77,6 +78,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	init(
 		id: String,
+		slug: String,
 		topics: [String],
 		hasImage: Bool,
 		image: UIImage? = nil,
@@ -109,6 +111,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		snapshotListener: ListenerRegistration?
 	) {
 		self.id = id
+		self.slug = slug
 		self.topics = topics
 		self.hasImage = hasImage
 		self.image = image
@@ -144,6 +147,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	convenience init(snapshot: DocumentSnapshot, snapshotListener: ListenerRegistration?) {
 		self.init(
 			id: snapshot.documentID,
+			slug: snapshot.get("slug") as? String ?? "",
 			topics: snapshot.get("topics") as? [String] ?? [],
 			hasImage: snapshot.get("hasImage") as? Bool ?? false,
 			name: snapshot.get("name") as? String ?? "Unknown",
@@ -174,6 +178,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	#if DEBUG
 	static func _new(
 		id: String = "0",
+		slug: String = "0",
 		topics: [String] = [],
 		hasImage: Bool = false,
 		image imageName: String? = nil,
@@ -207,6 +212,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	) -> Self {
 		.init(
 			id: id,
+			slug: slug,
 			topics: topics,
 			hasImage: hasImage,
 			image: imageName.map(UIImage.init),
@@ -250,22 +256,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	var getUrl: URL? {
-		URL(string: "\(WEB_URL)/d/\(id)/g")
-	}
-	
-	var getLink: String? {
-		getUrl?.absoluteString
-	}
-	
-	var shareMessage: String? {
-		guard let getLink = getLink else { return nil }
-		
-		return """
-		Get \(name)\(creator.map { " by \($0.name)" } ?? ""): \(getLink)
-		
-		Download memorize.ai on the App Store: \(APP_STORE_URL)
-		Cram more at \(WEB_URL)
-		"""
+		URL(string: "\(WEB_URL)/d/\(slug)")
 	}
 	
 	var nextSectionIndex: Int {
@@ -282,6 +273,10 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	var numberOfUnlockedCards: Int {
 		userData?.numberOfUnlockedCards ?? 0
+	}
+	
+	static func createSlug(id: String, name: String) -> String {
+		"\(slugify(name))-\(id)"
 	}
 	
 	@discardableResult

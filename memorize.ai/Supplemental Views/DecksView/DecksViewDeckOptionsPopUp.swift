@@ -39,7 +39,7 @@ struct DecksViewDeckOptionsPopUp: View {
 			isShowing: $isDeckOptionsPopUpShowing,
 			contentHeight: .init(
 				50 * (isOwner ? (8 + *canOrderSections) : 5) +
-				2 + *isOwner
+				1 + *isOwner
 			)
 		) {
 			PopUpButton(
@@ -58,37 +58,12 @@ struct DecksViewDeckOptionsPopUp: View {
 				)
 			}
 			PopUpButton(
-				icon: Group {
-					if selectedDeck.creatorLoadingState.isLoading {
-						ActivityIndicator(color: .darkBlue)
-					} else {
-						Image(systemName: .squareAndArrowUp)
-							.resizable()
-							.aspectRatio(contentMode: .fit)
-							.foregroundColor(.darkBlue)
-					}
-				}
-				.frame(width: 21, height: 21),
-				text: "Share",
-				textColor: .darkGray
-			) {
-				guard let message = self.selectedDeck.shareMessage else {
-					return showAlert(
-						title: "An unknown error occurred",
-						message: "Please try again"
-					)
-				}
-				
-				share(message)
-			}
-			.disabled(!selectedDeck.creatorLoadingState.didSucceed)
-			PopUpButton(
-				icon: Image(systemName: .link)
+				icon: Image(systemName: .squareAndArrowUp)
 					.resizable()
 					.foregroundColor(.darkBlue)
 					.aspectRatio(contentMode: .fit)
 					.frame(width: 21, height: 21),
-				text: "Share get link",
+				text: "Share",
 				textColor: .darkGray
 			) {
 				guard let url = self.selectedDeck.getUrl else {

@@ -107,7 +107,11 @@ final class PublishDeckViewModel: ViewModel {
 					}
 				}
 			} else {
-				firestore.collection("decks").addDocument(data: [
+				let document = firestore.collection("decks").document()
+				let deckId = document.documentID
+				
+				document.setData([
+					"slug": Deck.createSlug(id: deckId, name: self.name),
 					"topics": self.topics,
 					"hasImage": self.image != nil,
 					"name": self.name,
@@ -131,8 +135,7 @@ final class PublishDeckViewModel: ViewModel {
 					"creator": currentUser.id,
 					"created": FieldValue.serverTimestamp(),
 					"updated": FieldValue.serverTimestamp()
-				]).done { document in
-					let deckId = document.documentID
+				]).done {
 					Deck.imageCache[deckId] = self.image
 					when(fulfilled: [
 						self.uploadDeckImage(

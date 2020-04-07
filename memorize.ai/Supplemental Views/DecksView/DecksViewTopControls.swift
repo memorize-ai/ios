@@ -61,7 +61,6 @@ struct DecksViewTopControls: View {
 						.frame(width: 23, height: 23)
 				}
 				VerticalTripleDots {
-					self.selectedDeck.loadCreator()
 					popUpWithAnimation {
 						self.isDeckOptionsPopUpShowing = true
 					}

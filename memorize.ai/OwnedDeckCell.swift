@@ -32,7 +32,15 @@ struct OwnedDeckCell: View {
 	
 	var cardsDueMessage: String {
 		let count = deck.userData?.numberOfDueCards ?? 0
-		return "\(count.formatted) card\(count == 1 ? "" : "s") due"
+		let sections = deck.userData?.sections.reduce(0) { acc, section in
+			acc + (section.value > 0 ? 1 : 0)
+		} ?? 0
+		
+		return "\(count.formatted) card\(count == 1 ? "" : "s") due in \(sections) section\(sections == 1 ? "" : "s")"
+	}
+	
+	var isDue: Bool {
+		deck.userData?.isDue ?? false
 	}
 	
 	var body: some View {
@@ -85,8 +93,12 @@ struct OwnedDeckCell: View {
 				.alignment(.leading)
 				.padding(.horizontal, 8)
 				.padding(.top, 4)
-				HStack {
-					if deck.userData?.isDue ?? false {
+				VStack(alignment: .leading, spacing: 10) {
+					Text(isDue ? cardsDueMessage : "\(noCardsDueEmoji) Woohoo!")
+						.font(.muli(.bold, size: 13.5))
+						.foregroundColor(.lightGrayText)
+						.shrinks(withLineLimit: 3)
+					if isDue {
 						ReviewViewNavigationLink(deck: deck) {
 							CustomRectangle(
 								background: Color.extraPurple,
@@ -98,18 +110,9 @@ struct OwnedDeckCell: View {
 									.frame(width: 92, height: 28)
 							}
 						}
-						Text(cardsDueMessage)
-							.font(.muli(.regular, size: 10))
-							.foregroundColor(.lightGrayText)
-					} else {
-						Text(noCardsDueEmoji)
-						Text("Woohoo!")
-							.font(.muli(.regular, size: 14))
-							.foregroundColor(.lightGrayText)
-							.padding(.leading, -2)
 					}
-					Spacer()
 				}
+				.alignment(.leading)
 				.padding(.horizontal)
 				.padding(.vertical, 16)
 			}

@@ -14,14 +14,14 @@ struct MarketDeckViewTopControls: View {
 			}
 			Spacer()
 			Button(action: {
-				guard let message = self.deck.shareMessage else {
+				guard let url = self.deck.getUrl else {
 					return showAlert(
 						title: "An unknown error occurred",
 						message: "Please try again"
 					)
 				}
 				
-				share(message)
+				share(url)
 			}) {
 				Group {
 					if deck.creatorLoadingState.isLoading {

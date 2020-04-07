@@ -81,7 +81,7 @@ struct MarketDeckViewRatings: View {
 				VStack(spacing: 20) {
 					HStack(spacing: 10) {
 						VStack(alignment: .leading, spacing: 8) {
-							DeckStars(stars: deck.averageRating)
+							DeckStars(stars: deck.averageRating, dimension: 15)
 								.scaleEffect(1.2)
 								.offset(x: 9)
 							Text(deck.averageRating.oneDecimalPlace.formatted)

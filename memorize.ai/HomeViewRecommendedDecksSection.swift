@@ -26,7 +26,7 @@ struct HomeViewRecommendedDecksSection: View {
 							DeckCellWithGetButton(
 								deck: deck,
 								user: self.currentStore.user,
-								width: 144
+								width: 180
 							)
 							.onTapGesture {
 								self.selectedDeck = deck

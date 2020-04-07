@@ -122,3 +122,19 @@ func heightOfGrid(
 	)
 	return cellHeight * count + spacing * (count - 1)
 }
+
+func slugify(_ string: String, delimiter: String = "-") -> String {
+	string
+		.replacingOccurrences(
+			of: #"[\/\s\-_\:\,\+&\(\)\[\]]+"#,
+			with: " ",
+			options: .regularExpression
+		)
+		.trimmingCharacters(in: .whitespacesAndNewlines)
+		.replacingOccurrences(
+			of: #"\s+"#,
+			with: delimiter,
+			options: .regularExpression
+		)
+		.lowercased()
+}

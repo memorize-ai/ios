@@ -64,9 +64,9 @@ struct DeckCell<Content: View>: View {
 						.lineLimit(3)
 						.padding(.top, 4)
 					HStack {
-						DeckStars(stars: deck.averageRating)
+						DeckStars(stars: deck.averageRating, dimension: 20)
 						Text(deck.numberOfRatings.formatted)
-							.font(.muli(.regular, size: 11))
+							.font(.muli(.semiBold, size: 15))
 							.foregroundColor(.lightGrayText)
 							.padding(.leading, -3)
 					}
@@ -75,9 +75,20 @@ struct DeckCell<Content: View>: View {
 							.resizable()
 							.renderingMode(.original)
 							.aspectRatio(contentMode: .fit)
-							.frame(width: 10)
+							.frame(width: 15)
 						Text(deck.numberOfDownloads.formatted)
-							.font(.muli(.regular, size: 11))
+							.font(.muli(.semiBold, size: 15))
+							.foregroundColor(.lightGrayText)
+							.padding(.leading, -1)
+					}
+					HStack {
+						Image.users
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 18)
+						Text(deck.numberOfCurrentUsers.formatted)
+							.font(.muli(.semiBold, size: 15))
 							.foregroundColor(.lightGrayText)
 							.padding(.leading, -1)
 					}
