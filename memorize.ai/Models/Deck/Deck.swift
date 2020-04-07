@@ -22,7 +22,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	@Published var hasImage: Bool
 	@Published var image: UIImage? {
 		willSet {
-			displayImage = newValue.map(Image.init)
+			displayImage = newValue.map(Image.init(uiImage:))
 		}
 	}
 	@Published var name: String
