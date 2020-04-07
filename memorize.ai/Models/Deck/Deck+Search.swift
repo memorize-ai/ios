@@ -66,23 +66,36 @@ extension Deck {
 		filterForTopics topicsFilter: [String]? = nil,
 		averageRatingGreaterThan ratingFilter: Double? = nil,
 		numberOfDownloadsGreaterThan downloadsFilter: Int? = nil,
-		sortBy sortAlgorithm: SortAlgorithm = .relevance
+		sortBy sortAlgorithm: SortAlgorithm = .relevance,
+		pageSize: Int = 30,
+		pageNumber: Int = 1
 	) -> Promise<[Deck]> {
-		var filters = [String: Any]()
+		var filters = Parameters()
+		
 		if let topicsFilter = topicsFilter {
 			filters["topics"] = topicsFilter
 		}
+		
 		if let ratingFilter = ratingFilter {
 			filters["average_rating"] = ["from": ratingFilter]
 		}
+		
 		if let downloadsFilter = downloadsFilter {
 			filters["download_count"] = ["from": downloadsFilter]
 		}
 		
-		var parameters = ["query": query as Any]
+		var parameters: Parameters = [
+			"query": query,
+			"page": [
+				"size": pageSize,
+				"current": pageNumber
+			]
+		]
+		
 		if !filters.isEmpty {
 			parameters["filters"] = filters
 		}
+		
 		if let sort = sortAlgorithm.jsonEncoded {
 			parameters["sort"] = sort
 		}
@@ -90,7 +103,9 @@ extension Deck {
 		return .init { seal in
 			AF.request(
 				"\(APP_SEARCH_API_ENDPOINT)/api/as/v1/engines/\(DECKS_ENGINE_NAME)/search",
+				method: .post,
 				parameters: parameters,
+				encoding: JSONEncoding.default,
 				headers: [
 					.init(name: "Content-Type", value: "application/json"),
 					.init(name: "Authorization", value: "Bearer \(DECKS_SEARCH_KEY)")
