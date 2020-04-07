@@ -31,7 +31,7 @@ struct MarketView: View {
 	let searchResultsLoadingState: LoadingState
 	let loadSearchResults: (Bool) -> Void
 	
-	var grid: some View {
+	var scrollView: some View {
 		ScrollView(showsIndicators: false) {
 			VStack(spacing: Self.verticalCellSpacing) {
 				ForEach(searchResults) { deck in
@@ -71,11 +71,11 @@ struct MarketView: View {
 						)
 					}
 					.padding(.horizontal, Self.horizontalPadding)
-					if self.searchResultsLoadingState.isLoading {
+					if self.searchResultsLoadingState.isLoading && self.searchText.isEmpty {
 						ActivityIndicator(color: .white)
 						Spacer()
 					} else {
-						self.grid
+						self.scrollView
 					}
 				}
 				if self.isDeckSelected {
