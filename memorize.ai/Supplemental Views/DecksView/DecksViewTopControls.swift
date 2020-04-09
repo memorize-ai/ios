@@ -52,7 +52,7 @@ struct DecksViewTopControls: View {
 						)
 					}
 					
-					share(url)
+					share(url, corner: .topRight)
 				}) {
 					Image(systemName: .squareAndArrowUp)
 						.resizable()

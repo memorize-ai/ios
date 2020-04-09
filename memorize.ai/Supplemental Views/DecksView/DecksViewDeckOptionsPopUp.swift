@@ -76,7 +76,7 @@ struct DecksViewDeckOptionsPopUp: View {
 					)
 				}
 				
-				share(url)
+				share(url, corner: .topLeft)
 			}
 			if isOwner {
 				PublishDeckViewNavigationLink(deck: selectedDeck) {

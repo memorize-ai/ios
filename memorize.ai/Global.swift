@@ -50,24 +50,59 @@ func round(_ number: Double, toClosestMultipleOf multiple: Double) -> Double {
 	multiple * round(number / multiple)
 }
 
+enum Corner {
+	case topLeft
+	case topRight
+	case bottomRight
+	case bottomLeft
+	
+	func point(withPadding padding: CGFloat) -> CGPoint {
+		switch self {
+		case .topLeft:
+			return .init(x: padding, y: padding)
+		case .topRight:
+			return .init(x: SCREEN_SIZE.width - padding, y: padding)
+		case .bottomRight:
+			return .init(x: SCREEN_SIZE.width - padding, y: SCREEN_SIZE.height - padding)
+		case .bottomLeft:
+			return .init(x: padding, y: SCREEN_SIZE.height - padding)
+		}
+	}
+}
+
 func share(
 	items: [Any],
-	excludedActivityTypes: [UIActivity.ActivityType]? = nil
+	excludedActivityTypes: [UIActivity.ActivityType]? = nil,
+	corner: Corner,
+	padding: CGFloat = 30
 ) {
 	let vc = UIActivityViewController(
 		activityItems: items,
 		applicationActivities: nil
 	)
+	
 	vc.excludedActivityTypes = excludedActivityTypes
 	vc.popoverPresentationController?.sourceView = currentViewController.view
+	vc.popoverPresentationController?.sourceRect = .init(
+		origin: corner.point(withPadding: padding),
+		size: .zero
+	)
+	
 	currentViewController.present(vc, animated: true)
 }
 
 func share(
 	_ item: Any,
-	excludedActivityTypes: [UIActivity.ActivityType]? = nil
+	excludedActivityTypes: [UIActivity.ActivityType]? = nil,
+	corner: Corner,
+	padding: CGFloat = 30
 ) {
-	share(items: [item], excludedActivityTypes: excludedActivityTypes)
+	share(
+		items: [item],
+		excludedActivityTypes: excludedActivityTypes,
+		corner: corner,
+		padding: padding
+	)
 }
 
 func showAlert(

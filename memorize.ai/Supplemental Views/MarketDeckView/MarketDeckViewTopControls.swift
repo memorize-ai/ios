@@ -21,7 +21,7 @@ struct MarketDeckViewTopControls: View {
 					)
 				}
 				
-				share(url)
+				share(url, corner: .topRight)
 			}) {
 				Group {
 					if deck.creatorLoadingState.isLoading {

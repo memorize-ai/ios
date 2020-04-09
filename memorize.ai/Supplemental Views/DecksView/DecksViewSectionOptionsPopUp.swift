@@ -153,7 +153,7 @@ struct DecksViewSectionOptionsPopUp: View {
 						)
 					}
 					
-					share(url)
+					share(url, corner: .topLeft)
 				}
 			}
 			if isOwner {
