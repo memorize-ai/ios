@@ -24,7 +24,11 @@ struct EditCardView: View {
 							)
 					}
 				}
-				EditCardViewAddSectionPopUp(deck: self.card.parent, card: self.card)
+				EditCardViewAddSectionPopUp(
+					deck: self.card.parent,
+					card: self.card,
+					geometry: geometry
+				)
 			}
 		}
 	}

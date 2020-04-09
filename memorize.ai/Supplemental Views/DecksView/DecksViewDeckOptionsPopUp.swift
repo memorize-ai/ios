@@ -7,6 +7,8 @@ struct DecksViewDeckOptionsPopUp: View {
 	
 	@Binding var isDeckOptionsPopUpShowing: Bool
 	@Binding var isOrderSectionsSheetShowing: Bool
+	
+	let geometry: GeometryProxy
 		
 	var isOwner: Bool {
 		selectedDeck.creatorId == currentStore.user.id
@@ -40,7 +42,8 @@ struct DecksViewDeckOptionsPopUp: View {
 			contentHeight: .init(
 				50 * (isOwner ? (8 + *canOrderSections) : 5) +
 				1 + *isOwner
-			)
+			),
+			geometry: geometry
 		) {
 			PopUpButton(
 				icon: resizeImage(
@@ -175,11 +178,14 @@ struct DecksViewDeckOptionsPopUp: View {
 #if DEBUG
 struct DecksViewDeckOptionsPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		DecksViewDeckOptionsPopUp(
-			selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!,
-			isDeckOptionsPopUpShowing: .constant(true),
-			isOrderSectionsSheetShowing: .constant(false)
-		)
+		GeometryReader { geometry in
+			DecksViewDeckOptionsPopUp(
+				selectedDeck: PREVIEW_CURRENT_STORE.user.decks.first!,
+				isDeckOptionsPopUpShowing: .constant(true),
+				isOrderSectionsSheetShowing: .constant(false),
+				geometry: geometry
+			)
+		}
 	}
 }
 #endif

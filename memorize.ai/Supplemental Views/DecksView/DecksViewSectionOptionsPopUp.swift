@@ -8,6 +8,8 @@ struct DecksViewSectionOptionsPopUp: View {
 	
 	@Binding var isSectionOptionsPopUpShowing: Bool
 	
+	let geometry: GeometryProxy
+	
 	var isOwner: Bool {
 		deck.creatorId == currentStore.user.id
 	}
@@ -74,7 +76,8 @@ struct DecksViewSectionOptionsPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: $isSectionOptionsPopUpShowing,
-			contentHeight: contentHeight
+			contentHeight: contentHeight,
+			geometry: geometry
 		) {
 			if isUnlocked {
 				if section.isDue {
@@ -174,21 +177,24 @@ struct DecksViewSectionOptionsPopUp: View {
 #if DEBUG
 struct DecksViewSectionOptionsPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		ZStack {
-			Color.blue
-				.edgesIgnoringSafeArea(.all)
-			DecksViewSectionOptionsPopUp(
-				deck: PREVIEW_CURRENT_STORE.user.decks.first!,
-				section: .init(
-					id: "0",
-					parent: PREVIEW_CURRENT_STORE.user.decks.first!,
-					name: "CSS",
-					index: 0,
-					numberOfCards: 56
-				),
-				isSectionOptionsPopUpShowing: .constant(true)
-			)
-			.environmentObject(PREVIEW_CURRENT_STORE)
+		GeometryReader { geometry in
+			ZStack {
+				Color.blue
+					.edgesIgnoringSafeArea(.all)
+				DecksViewSectionOptionsPopUp(
+					deck: PREVIEW_CURRENT_STORE.user.decks.first!,
+					section: .init(
+						id: "0",
+						parent: PREVIEW_CURRENT_STORE.user.decks.first!,
+						name: "CSS",
+						index: 0,
+						numberOfCards: 56
+					),
+					isSectionOptionsPopUpShowing: .constant(true),
+					geometry: geometry
+				)
+				.environmentObject(PREVIEW_CURRENT_STORE)
+			}
 		}
 	}
 }

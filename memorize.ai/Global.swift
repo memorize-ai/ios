@@ -126,7 +126,7 @@ func heightOfGrid(
 func slugify(_ string: String, delimiter: String = "-") -> String {
 	string
 		.replacingOccurrences(
-			of: #"[\/\s\-_\:\,\+&\(\)\[\]]+"#,
+			of: #"[\s\:\/\?#@\[\]\-_!\$&'\(\)\*\+\.\,;=]+"#,
 			with: " ",
 			options: .regularExpression
 		)

@@ -15,13 +15,16 @@ struct MarketViewFilterPopUp: View {
 	let isTopicSelected: (Topic) -> Bool
 	let toggleTopicSelect: (Topic) -> Void
 	
+	let geometry: GeometryProxy
+	
 	var body: some View {
 		PopUp(
 			isShowing: $isFilterPopUpShowing,
 			contentHeight: Self.contentHeight,
 			onHide: {
 				self.loadSearchResults(true)
-			}
+			},
+			geometry: geometry
 		) {
 			HStack(spacing: 0) {
 				MarketViewFilterPopUpSideBar(
@@ -68,17 +71,20 @@ struct MarketViewFilterPopUp: View {
 #if DEBUG
 struct MarketViewFilterPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewFilterPopUp(
-			isFilterPopUpShowing: .constant(true),
-			topicsFilter: .constant(nil),
-			ratingFilter: .constant(20),
-			downloadsFilter: .constant(20),
-			filterPopUpSideBarSelection: .constant(.topics),
-			loadSearchResults: { _ in },
-			isTopicSelected: { _ in true },
-			toggleTopicSelect: { _ in }
-		)
-		.environmentObject(PREVIEW_CURRENT_STORE)
+		GeometryReader { geometry in
+			MarketViewFilterPopUp(
+				isFilterPopUpShowing: .constant(true),
+				topicsFilter: .constant(nil),
+				ratingFilter: .constant(20),
+				downloadsFilter: .constant(20),
+				filterPopUpSideBarSelection: .constant(.topics),
+				loadSearchResults: { _ in },
+				isTopicSelected: { _ in true },
+				toggleTopicSelect: { _ in },
+				geometry: geometry
+			)
+			.environmentObject(PREVIEW_CURRENT_STORE)
+		}
 	}
 }
 #endif

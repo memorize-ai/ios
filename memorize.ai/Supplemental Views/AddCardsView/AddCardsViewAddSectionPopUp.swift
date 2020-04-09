@@ -6,6 +6,8 @@ struct AddCardsViewAddSectionPopUp: View {
 	@ObservedObject var deck: Deck
 	@ObservedObject var card: Card.Draft
 	
+	let geometry: GeometryProxy
+	
 	var contentHeight: CGFloat {
 		.init(40 + 20 * 2) +
 		.init(22 + 12 * 2 + 1) *
@@ -30,7 +32,8 @@ struct AddCardsViewAddSectionPopUp: View {
 	var body: some View {
 		PopUp(
 			isShowing: self.$model.isAddSectionPopUpShowing,
-			contentHeight: contentHeight
+			contentHeight: contentHeight,
+			geometry: geometry
 		) {
 			Button(action: {
 				self.deck.showCreateSectionAlert { sectionId in
@@ -102,14 +105,17 @@ struct AddCardsViewAddSectionPopUp_Previews: PreviewProvider {
 			user: PREVIEW_CURRENT_STORE.user
 		)
 		model.isAddSectionPopUpShowing = true
-		return AddCardsViewAddSectionPopUp(
-			deck: PREVIEW_CURRENT_STORE.user.decks[0],
-			card: .init(
-				parent: PREVIEW_CURRENT_STORE.user.decks[0],
-				card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
+		return GeometryReader { geometry in
+			AddCardsViewAddSectionPopUp(
+				deck: PREVIEW_CURRENT_STORE.user.decks[0],
+				card: .init(
+					parent: PREVIEW_CURRENT_STORE.user.decks[0],
+					card: PREVIEW_CURRENT_STORE.user.decks[0].previewCards[0]
+				),
+				geometry: geometry
 			)
-		)
-		.environmentObject(model)
+			.environmentObject(model)
+		}
 	}
 }
 #endif

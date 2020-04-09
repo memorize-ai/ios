@@ -9,10 +9,11 @@ struct PublishDeckView: View {
 		model = .init(deck: deck)
 	}
 	
-	var imagePopUp: some View {
+	func imagePopUp(geometry: GeometryProxy) -> some View {
 		PopUp(
 			isShowing: $model.isImagePopUpShowing,
-			contentHeight: 50 * (2 + *(model.image != nil))
+			contentHeight: 50 * (2 + *(model.image != nil)),
+			geometry: geometry
 		) {
 			PopUpButton(
 				icon: Image.camera
@@ -75,7 +76,7 @@ struct PublishDeckView: View {
 							)
 					}
 				}
-				self.imagePopUp
+				self.imagePopUp(geometry: geometry)
 			}
 			.imagePicker(
 				isShowing: self.$model.isImagePickerShowing,

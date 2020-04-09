@@ -242,9 +242,9 @@ struct MainTabView: View {
 		}
 	}
 	
-	var body: some View {
+	func content(geometry: GeometryProxy) -> some View {
 		NavigationView {
-			SideBar {
+			SideBar(geometry: geometry) {
 				ZStack {
 					VStack(spacing: 0) {
 						ZStack {
@@ -320,7 +320,8 @@ struct MainTabView: View {
 					MarketViewSortPopUp(
 						isSortPopUpShowing: $marketView_isSortPopUpShowing,
 						sortAlgorithm: $marketView_sortAlgorithm,
-						loadSearchResults: marketView_loadSearchResults
+						loadSearchResults: marketView_loadSearchResults,
+						geometry: geometry
 					)
 					MarketViewFilterPopUp(
 						isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
@@ -330,19 +331,22 @@ struct MainTabView: View {
 						filterPopUpSideBarSelection: $marketView_filterPopUpSideBarSelection,
 						loadSearchResults: marketView_loadSearchResults,
 						isTopicSelected: marketView_isTopicSelected,
-						toggleTopicSelect: marketView_toggleTopicSelect
+						toggleTopicSelect: marketView_toggleTopicSelect,
+						geometry: geometry
 					)
 					if currentStore.selectedDeck != nil {
 						DecksViewDeckOptionsPopUp(
 							selectedDeck: currentStore.selectedDeck!,
 							isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
-							isOrderSectionsSheetShowing: $decksView_isOrderSectionsSheetShowing
+							isOrderSectionsSheetShowing: $decksView_isOrderSectionsSheetShowing,
+							geometry: geometry
 						)
 						if decksView_selectedSection != nil {
 							DecksViewSectionOptionsPopUp(
 								deck: currentStore.selectedDeck!,
 								section: decksView_selectedSection!,
-								isSectionOptionsPopUpShowing: $decksView_isSectionOptionsPopUpShowing
+								isSectionOptionsPopUpShowing: $decksView_isSectionOptionsPopUpShowing,
+								geometry: geometry
 							)
 						}
 					}
@@ -354,6 +358,10 @@ struct MainTabView: View {
 		.onAppear {
 			self.currentStore.initializeIfNeeded()
 		}
+	}
+	
+	var body: some View {
+		GeometryReader(content: content)
 	}
 }
 

@@ -5,6 +5,7 @@ struct MarketViewSortPopUp: View {
 	@Binding var sortAlgorithm: Deck.SortAlgorithm
 	
 	let loadSearchResults: (Bool) -> Void
+	let geometry: GeometryProxy
 	
 	var check: some View {
 		Image(systemName: .checkmark)
@@ -29,7 +30,8 @@ struct MarketViewSortPopUp: View {
 			contentHeight: 50 * 7 + 6,
 			onHide: {
 				self.loadSearchResults(true)
-			}
+			},
+			geometry: geometry
 		) {
 			Group {
 				button(forAlgorithm: .recommended)
@@ -55,11 +57,14 @@ struct MarketViewSortPopUp: View {
 #if DEBUG
 struct MarketViewSortPopUp_Previews: PreviewProvider {
 	static var previews: some View {
-		MarketViewSortPopUp(
-			isSortPopUpShowing: .constant(true),
-			sortAlgorithm: .constant(.recommended),
-			loadSearchResults: { _ in }
-		)
+		GeometryReader { geometry in
+			MarketViewSortPopUp(
+				isSortPopUpShowing: .constant(true),
+				sortAlgorithm: .constant(.recommended),
+				loadSearchResults: { _ in },
+				geometry: geometry
+			)
+		}
 	}
 }
 #endif

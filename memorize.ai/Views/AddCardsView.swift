@@ -79,7 +79,8 @@ struct AddCardsView<Destination: View>: View {
 				}
 				PopUp(
 					isShowing: self.$model.isRemoveDraftPopUpShowing,
-					contentHeight: 50 + 1 + 50
+					contentHeight: 50 + 1 + 50,
+					geometry: geometry
 				) {
 					Text("Are you sure?")
 						.font(.muli(.regular, size: 18))
@@ -107,7 +108,8 @@ struct AddCardsView<Destination: View>: View {
 				if self.model.currentCard != nil {
 					AddCardsViewAddSectionPopUp(
 						deck: self.model.deck,
-						card: self.model.currentCard!
+						card: self.model.currentCard!,
+						geometry: geometry
 					)
 				}
 			}
