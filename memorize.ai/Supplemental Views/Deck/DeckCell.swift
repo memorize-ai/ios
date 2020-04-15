@@ -17,6 +17,51 @@ struct DeckCell<Content: View>: View {
 		self.content = content()
 	}
 	
+	var isInfoHorizontal: Bool {
+		width >= 290
+	}
+	
+	var infoDivider: some View {
+		isInfoHorizontal
+			? Divider()
+			: nil
+	}
+	
+	var info: some View {
+		Group {
+			HStack(spacing: 6) {
+				DeckStars(stars: deck.averageRating, dimension: 20)
+				Text(deck.numberOfRatings.formatted)
+					.font(.muli(.semiBold, size: 15))
+					.foregroundColor(.lightGrayText)
+			}
+			infoDivider
+			HStack {
+				Image.grayDownloadIcon
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 15)
+				Text(deck.numberOfDownloads.formatted)
+					.font(.muli(.semiBold, size: 15))
+					.foregroundColor(.lightGrayText)
+					.padding(.leading, -1)
+			}
+			infoDivider
+			HStack {
+				Image.users
+					.resizable()
+					.renderingMode(.original)
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 18)
+				Text(deck.numberOfCurrentUsers.formatted)
+					.font(.muli(.semiBold, size: 15))
+					.foregroundColor(.lightGrayText)
+					.padding(.leading, -1)
+			}
+		}
+	}
+	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
@@ -63,34 +108,14 @@ struct DeckCell<Content: View>: View {
 						.foregroundColor(.lightGrayText)
 						.lineLimit(3)
 						.padding(.top, 4)
-					HStack {
-						DeckStars(stars: deck.averageRating, dimension: 20)
-						Text(deck.numberOfRatings.formatted)
-							.font(.muli(.semiBold, size: 15))
-							.foregroundColor(.lightGrayText)
-							.padding(.leading, -3)
-					}
-					HStack {
-						Image.grayDownloadIcon
-							.resizable()
-							.renderingMode(.original)
-							.aspectRatio(contentMode: .fit)
-							.frame(width: 15)
-						Text(deck.numberOfDownloads.formatted)
-							.font(.muli(.semiBold, size: 15))
-							.foregroundColor(.lightGrayText)
-							.padding(.leading, -1)
-					}
-					HStack {
-						Image.users
-							.resizable()
-							.renderingMode(.original)
-							.aspectRatio(contentMode: .fit)
-							.frame(width: 18)
-						Text(deck.numberOfCurrentUsers.formatted)
-							.font(.muli(.semiBold, size: 15))
-							.foregroundColor(.lightGrayText)
-							.padding(.leading, -1)
+					if isInfoHorizontal {
+						HStack(spacing: 16) {
+							info
+						}
+					} else {
+						VStack(alignment: .leading) {
+							info
+						}
 					}
 				}
 				.alignment(.leading)

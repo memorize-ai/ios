@@ -10,6 +10,7 @@ struct DeckCellWithGetButton: View {
 	let width: CGFloat
 	let imageHeight: CGFloat
 	let titleFontSize: CGFloat
+	let hasOpenButton: Bool
 	let shouldManuallyModifyDecks: Bool
 	let shouldShowRemoveAlert: Bool
 	
@@ -19,6 +20,7 @@ struct DeckCellWithGetButton: View {
 		width: CGFloat,
 		imageHeight: CGFloat? = nil,
 		titleFontSize: CGFloat = 13.5,
+		hasOpenButton: Bool = true,
 		shouldManuallyModifyDecks: Bool = false,
 		shouldShowRemoveAlert: Bool = true
 	) {
@@ -27,6 +29,7 @@ struct DeckCellWithGetButton: View {
 		self.width = width
 		self.imageHeight = imageHeight ?? width * 111 / 165
 		self.titleFontSize = titleFontSize
+		self.hasOpenButton = hasOpenButton
 		self.shouldManuallyModifyDecks = shouldManuallyModifyDecks
 		self.shouldShowRemoveAlert = shouldShowRemoveAlert
 	}
@@ -91,7 +94,7 @@ struct DeckCellWithGetButton: View {
 	var body: some View {
 		DeckCell(deck: deck, width: width, imageHeight: imageHeight, titleFontSize: titleFontSize) {
 			HStack(spacing: 18) {
-				if hasDeck && width >= 280 {
+				if hasOpenButton && hasDeck && width >= 280 {
 					Button(action: open) {
 						CustomRectangle(
 							background: Color(hexadecimal6: 0x00d388),
