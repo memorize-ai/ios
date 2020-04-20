@@ -7,11 +7,13 @@ import LoadingState
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static let DEFAULT_IMAGE = Image("memorize.ai Logo")
 	static let MAX_NUMBER_OF_PREVIEW_CARDS = 20
+	static let SLUG_ID_LENGTH = 10
 	
 	static var cache = [String: Deck]()
 	static var imageCache = [String: UIImage]()
 	
 	let id: String
+	let slugId: String
 	let slug: String
 	let creatorId: String
 	let dateCreated: Date
@@ -78,6 +80,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	
 	init(
 		id: String,
+		slugId: String,
 		slug: String,
 		topics: [String],
 		hasImage: Bool,
@@ -111,6 +114,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		snapshotListener: ListenerRegistration?
 	) {
 		self.id = id
+		self.slugId = slugId
 		self.slug = slug
 		self.topics = topics
 		self.hasImage = hasImage
@@ -147,6 +151,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	convenience init(snapshot: DocumentSnapshot, snapshotListener: ListenerRegistration?) {
 		self.init(
 			id: snapshot.documentID,
+			slugId: snapshot.get("slugId") as? String ?? "",
 			slug: snapshot.get("slug") as? String ?? "",
 			topics: snapshot.get("topics") as? [String] ?? [],
 			hasImage: snapshot.get("hasImage") as? Bool ?? false,
@@ -178,6 +183,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	#if DEBUG
 	static func _new(
 		id: String = "0",
+		slugId: String = "0",
 		slug: String = "0",
 		topics: [String] = [],
 		hasImage: Bool = false,
@@ -212,6 +218,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	) -> Self {
 		.init(
 			id: id,
+			slugId: slugId,
 			slug: slug,
 			topics: topics,
 			hasImage: hasImage,
@@ -256,7 +263,7 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	}
 	
 	var getUrl: URL? {
-		URL(string: "\(WEB_URL)/d/\(slug)")
+		URL(string: "\(WEB_URL)/d/\(slugId)/\(slug)")
 	}
 	
 	var nextSectionIndex: Int {
@@ -275,8 +282,8 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		userData?.numberOfUnlockedCards ?? 0
 	}
 	
-	static func createSlug(id: String, name: String) -> String {
-		"\(slugify(name))-\(id)"
+	static func createSlug(forName name: String) -> (slugId: String, slug: String) {
+		(createRandomId(withLength: SLUG_ID_LENGTH), slugify(name))
 	}
 	
 	@discardableResult

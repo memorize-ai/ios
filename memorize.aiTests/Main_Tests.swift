@@ -26,4 +26,8 @@ final class Main_Tests: XCTestCase {
 		XCTAssertTrue(" ".isTrimmedEmpty)
 		XCTAssertFalse("a".isTrimmedEmpty)
 	}
+	
+	func test_deckSlug() {
+		print(Deck.createSlug(forName: "This is a deck name"))
+	}
 }

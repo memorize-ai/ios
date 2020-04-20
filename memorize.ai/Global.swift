@@ -158,6 +158,17 @@ func heightOfGrid(
 	return cellHeight * count + spacing * (count - 1)
 }
 
+func createRandomId(withLength length: Int) -> String {
+	var acc = ""
+	
+	for _ in 0..<length {
+		guard let character = VALID_ID_CHARACTERS.randomElement() else { continue }
+		acc.append(character)
+	}
+	
+	return acc
+}
+
 func slugify(_ string: String, delimiter: String = "-") -> String {
 	string
 		.replacingOccurrences(

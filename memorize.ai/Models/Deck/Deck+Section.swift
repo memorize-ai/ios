@@ -72,7 +72,7 @@ extension Deck {
 		}
 		
 		var unlockUrl: URL? {
-			URL(string: "\(WEB_URL)/d/\(parent.id)/s/\(id)/u")
+			URL(string: "\(WEB_URL)/d/\(parent.slugId)/\(parent.slug)/u/\(id)")
 		}
 		
 		var unlockLink: String? {

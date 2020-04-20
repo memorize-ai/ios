@@ -32,3 +32,6 @@ var VIEWPORT_META_TAG: HTMLElement {
 		.name("viewport")
 		.content("width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1")
 }
+
+let VALID_ID_CHARACTERS =
+	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890~_"

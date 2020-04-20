@@ -109,9 +109,11 @@ final class PublishDeckViewModel: ViewModel {
 			} else {
 				let document = firestore.collection("decks").document()
 				let deckId = document.documentID
+				let (slugId, slug) = Deck.createSlug(forName: self.name)
 				
 				document.setData([
-					"slug": Deck.createSlug(id: deckId, name: self.name),
+					"slugId": slugId,
+					"slug": slug,
 					"topics": self.topics,
 					"hasImage": self.image != nil,
 					"name": self.name,
