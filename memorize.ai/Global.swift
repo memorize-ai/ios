@@ -170,7 +170,7 @@ func createRandomId(withLength length: Int) -> String {
 }
 
 func slugify(_ string: String, delimiter: String = "-") -> String {
-	string
+	let slug = string
 		.replacingOccurrences(
 			of: #"[\s\:\/\?#@\[\]\-_!\$&'\(\)\*\+\.\,;=]+"#,
 			with: " ",
@@ -183,4 +183,8 @@ func slugify(_ string: String, delimiter: String = "-") -> String {
 			options: .regularExpression
 		)
 		.lowercased()
+	
+	return slug.isEmpty
+		? .init(repeating: delimiter, count: string.count)
+		: slug
 }

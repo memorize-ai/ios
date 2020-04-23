@@ -14,6 +14,7 @@ struct AddCardsViewNavigationLink<Label: View>: View {
 	var body: some View {
 		NavigationLink(
 			destination: AddCardsView<EmptyView>(destination: nil)
+				.environmentObject(currentStore)
 				.environmentObject(AddCardsViewModel(
 					deck: deck,
 					user: currentStore.user

@@ -120,6 +120,7 @@ struct DecksViewDeckOptionsPopUp: View {
 			PopUpDivider()
 			NavigationLink(
 				destination: MarketDeckView()
+					.environmentObject(currentStore)
 					.environmentObject(selectedDeck)
 					.navigationBarRemoved()
 			) {

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EditCardViewNavigationLink<Label: View>: View {
+	@EnvironmentObject var currentStore: CurrentStore
+	
 	let deck: Deck
 	let card: Card
 	let label: Label
@@ -17,6 +19,7 @@ struct EditCardViewNavigationLink<Label: View>: View {
 				parent: deck,
 				card: card
 			))
+			.environmentObject(currentStore)
 			.environmentObject(EditCardViewModel())
 			.navigationBarRemoved()
 		) {

@@ -28,6 +28,8 @@ final class Main_Tests: XCTestCase {
 	}
 	
 	func test_deckSlug() {
-		print(Deck.createSlug(forName: "This is a deck name"))
+		XCTAssertEqual(Deck.createSlug(forName: "This is a deck name.").slug, "this-is-a-deck-name")
+		XCTAssertEqual(Deck.createSlug(forName: "..").slug, "--")
+		XCTAssertEqual(Deck.createSlug(forName: ".").slug, "-")
 	}
 }

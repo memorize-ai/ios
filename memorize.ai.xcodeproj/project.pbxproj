@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
-		4D03797D240DD4FA00CD1F76 /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4D03797B240DD4FA00CD1F76 /* editor */; };
-		4D03797E240DD4FA00CD1F76 /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D03797C240DD4FA00CD1F76 /* display */; };
 		4D03A383240762370001884F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4D03A382240762370001884F /* .swiftlint.yml */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
@@ -270,6 +268,8 @@
 		4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */; };
 		4DDB181823FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB181723FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
+		4DE50A3624517558007258CD /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4DE50A3424517558007258CD /* editor */; };
+		4DE50A3724517558007258CD /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4DE50A3524517558007258CD /* display */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
@@ -319,8 +319,6 @@
 
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
-		4D03797B240DD4FA00CD1F76 /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
-		4D03797C240DD4FA00CD1F76 /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4D03A382240762370001884F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; usesTabs = 0; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
@@ -580,6 +578,8 @@
 		4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfoPanels.swift; sourceTree = "<group>"; };
 		4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewCardPreviews.swift; sourceTree = "<group>"; };
 		4DDB181723FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReviewSectionDeckRow.swift; sourceTree = "<group>"; };
+		4DE50A3424517558007258CD /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
+		4DE50A3524517558007258CD /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -662,8 +662,8 @@
 		4D05F09A23EEB5AB00F4456C /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				4D03797C240DD4FA00CD1F76 /* display */,
-				4D03797B240DD4FA00CD1F76 /* editor */,
+				4DE50A3524517558007258CD /* display */,
+				4DE50A3424517558007258CD /* editor */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -1513,7 +1513,7 @@
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
-				4D03797D240DD4FA00CD1F76 /* editor in Resources */,
+				4DE50A3624517558007258CD /* editor in Resources */,
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
@@ -1523,7 +1523,7 @@
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
-				4D03797E240DD4FA00CD1F76 /* display in Resources */,
+				4DE50A3724517558007258CD /* display in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,

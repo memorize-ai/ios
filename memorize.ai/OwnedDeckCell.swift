@@ -68,7 +68,7 @@ struct OwnedDeckCell: View {
 							deck.displayImage?
 								.resizable()
 								.renderingMode(.original)
-								.aspectRatio(contentMode: .fit)
+								.aspectRatio(contentMode: .fill)
 						}
 					} else {
 						Deck.DEFAULT_IMAGE
