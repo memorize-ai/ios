@@ -23,6 +23,7 @@
 #import <GoogleDataTransport/GDTCORTargets.h>
 
 #import "GDTCCTLibrary/Private/GDTCCTNanopbHelpers.h"
+#import "GDTCCTLibrary/Private/GDTCOREvent+NetworkConnectionInfo.h"
 
 const static int64_t kMillisPerDay = 8.64e+7;
 
@@ -112,11 +113,8 @@ static NSString *ArchivePath() {
 #pragma mark - GDTCORPrioritizer Protocol
 
 - (void)prioritizeEvent:(GDTCOREvent *)event {
-  if (event.customPrioritizationParams[GDTCCTNeedsNetworkConnectionInfo]) {
-    NSData *networkInfoData = GDTCCTConstructNetworkConnectionInfoData();
-    if (networkInfoData) {
-      event.customPrioritizationParams = @{GDTCCTNetworkConnectionInfo : networkInfoData};
-    }
+  if (event.needsNetworkConnectionInfoPopulated) {
+    event.networkConnectionInfoData = GDTCCTConstructNetworkConnectionInfoData();
   }
   dispatch_async(_queue, ^{
     switch (event.target) {
@@ -133,7 +131,7 @@ static NSString *ArchivePath() {
         break;
 
       default:
-        GDTCORLogDebug("GDTCCTPrioritizer doesn't support target %ld", (long)event.target);
+        GDTCORLogDebug(@"GDTCCTPrioritizer doesn't support target %ld", (long)event.target);
         break;
     }
   });
@@ -147,7 +145,7 @@ static NSString *ArchivePath() {
                                                             conditions:conditions];
     package.events = eventsThatWillBeSent;
   });
-  GDTCORLogDebug("CCT: %lu events are in the upload package", (unsigned long)package.events.count);
+  GDTCORLogDebug(@"CCT: %lu events are in the upload package", (unsigned long)package.events.count);
   return package;
 }
 
@@ -240,17 +238,18 @@ NSNumber *GDTCCTQosTierFromGDTCOREventQosTier(GDTCOREventQoS qosTier) {
   NSMutableSet<GDTCOREvent *> *eventsThatWillBeSent = [[NSMutableSet alloc] init];
   // A high priority event effectively flushes all events to be sent.
   if ((conditions & GDTCORUploadConditionHighPriority) == GDTCORUploadConditionHighPriority) {
-    GDTCORLogDebug("%@", @"CCT: A high priority event is flushing all events.");
+    GDTCORLogDebug(@"%@", @"CCT: A high priority event is flushing all events.");
     return eventsToFilter;
   }
 
   // If on wifi, upload logs that are ok to send on wifi.
   if ((conditions & GDTCORUploadConditionWifiData) == GDTCORUploadConditionWifiData) {
     [eventsThatWillBeSent unionSet:[self logEventsOkToSendOnWifi:eventsToFilter]];
-    GDTCORLogDebug("%@", @"CCT: events ok to send on wifi are being added to the upload package");
+    GDTCORLogDebug(@"%@", @"CCT: events ok to send on wifi are being added to the upload package");
   } else {
     [eventsThatWillBeSent unionSet:[self logEventsOkToSendOnMobileData:eventsToFilter]];
-    GDTCORLogDebug("%@", @"CCT: events ok to send on mobile are being added to the upload package");
+    GDTCORLogDebug(@"%@",
+                   @"CCT: events ok to send on mobile are being added to the upload package");
   }
 
   // If it's been > 24h since the last daily upload, upload logs with the daily QoS.
@@ -259,12 +258,12 @@ NSNumber *GDTCCTQosTierFromGDTCOREventQosTier(GDTCOREventQoS qosTier) {
         [GDTCORClock snapshot].timeMillis - (*timeOfLastDailyUpload).timeMillis;
     if (millisSinceLastUpload > kMillisPerDay) {
       [eventsThatWillBeSent unionSet:[self logEventsOkToSendDaily:eventsToFilter]];
-      GDTCORLogDebug("%@", @"CCT: events ok to send daily are being added to the upload package");
+      GDTCORLogDebug(@"%@", @"CCT: events ok to send daily are being added to the upload package");
     }
   } else {
     *timeOfLastDailyUpload = [GDTCORClock snapshot];
     [eventsThatWillBeSent unionSet:[self logEventsOkToSendDaily:eventsToFilter]];
-    GDTCORLogDebug("%@", @"CCT: events ok to send daily are being added to the upload package");
+    GDTCORLogDebug(@"%@", @"CCT: events ok to send daily are being added to the upload package");
   }
   return eventsThatWillBeSent;
 }
