@@ -132,6 +132,8 @@
 		4D6300DC23C7EE4F00274DC1 /* ReviewViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */; };
 		4D6300DE23C7EF2200274DC1 /* ReviewViewPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */; };
 		4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */; };
+		4D635F4C245290240007538E /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4D635F4A245290230007538E /* editor */; };
+		4D635F4D245290240007538E /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4D635F4B245290240007538E /* display */; };
 		4D64BCC02367ACCB00F6FD07 /* AuthenticationViewOrText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */; };
 		4D64BCC22367AE4F00F6FD07 /* LabeledDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */; };
 		4D64BCC62367CFD700F6FD07 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */; };
@@ -268,8 +270,6 @@
 		4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */; };
 		4DDB181823FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB181723FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
-		4DE50A3624517558007258CD /* editor in Resources */ = {isa = PBXBuildFile; fileRef = 4DE50A3424517558007258CD /* editor */; };
-		4DE50A3724517558007258CD /* display in Resources */ = {isa = PBXBuildFile; fileRef = 4DE50A3524517558007258CD /* display */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
@@ -443,6 +443,8 @@
 		4D6300DB23C7EE4F00274DC1 /* ReviewViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewFooter.swift; sourceTree = "<group>"; };
 		4D6300DD23C7EF2200274DC1 /* ReviewViewPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPopUp.swift; sourceTree = "<group>"; };
 		4D6300DF23C807A100274DC1 /* Card+ReviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+ReviewData.swift"; sourceTree = "<group>"; };
+		4D635F4A245290230007538E /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
+		4D635F4B245290240007538E /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewOrText.swift; sourceTree = "<group>"; };
 		4D64BCC12367AE4F00F6FD07 /* LabeledDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledDivider.swift; sourceTree = "<group>"; };
 		4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -578,8 +580,6 @@
 		4DDACF0A2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewInfoPanels.swift; sourceTree = "<group>"; };
 		4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDeckViewCardPreviews.swift; sourceTree = "<group>"; };
 		4DDB181723FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReviewSectionDeckRow.swift; sourceTree = "<group>"; };
-		4DE50A3424517558007258CD /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = editor; sourceTree = "<group>"; };
-		4DE50A3524517558007258CD /* display */ = {isa = PBXFileReference; lastKnownFileType = folder; path = display; sourceTree = "<group>"; };
 		4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewContent.swift; sourceTree = "<group>"; };
 		4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedDecksViewModel.swift; sourceTree = "<group>"; };
 		4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRoundedCorners.swift; sourceTree = "<group>"; };
@@ -662,8 +662,8 @@
 		4D05F09A23EEB5AB00F4456C /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				4DE50A3524517558007258CD /* display */,
-				4DE50A3424517558007258CD /* editor */,
+				4D635F4B245290240007538E /* display */,
+				4D635F4A245290230007538E /* editor */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -1513,7 +1513,7 @@
 				4D402E88235E6FB80011C6B6 /* Muli-Black.ttf in Resources */,
 				4D402E8B235E6FB80011C6B6 /* Muli-ExtraBoldItalic.ttf in Resources */,
 				4D402E8D235E6FB80011C6B6 /* Muli-SemiBold.ttf in Resources */,
-				4DE50A3624517558007258CD /* editor in Resources */,
+				4D635F4C245290240007538E /* editor in Resources */,
 				4D402E87235E6FB80011C6B6 /* Muli-BoldItalic.ttf in Resources */,
 				4D402E8E235E6FB80011C6B6 /* Muli-SemiBoldItalic.ttf in Resources */,
 				4D402E8F235E6FB80011C6B6 /* Muli-BlackItalic.ttf in Resources */,
@@ -1523,7 +1523,7 @@
 				4DAA4F4C233DE1A800EF7467 /* LaunchScreen.storyboard in Resources */,
 				4D1F9B1A233EBF2200693571 /* LICENSE in Resources */,
 				4D402E91235E6FB80011C6B6 /* Muli-Regular.ttf in Resources */,
-				4DE50A3724517558007258CD /* display in Resources */,
+				4D635F4D245290240007538E /* display in Resources */,
 				4D402E8A235E6FB80011C6B6 /* Muli-Bold.ttf in Resources */,
 				4D402E90235E6FB80011C6B6 /* Muli-Light.ttf in Resources */,
 				4DAA4F49233DE1A800EF7467 /* Preview Assets.xcassets in Resources */,
@@ -2104,7 +2104,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.5;
+				MARKETING_VERSION = 3.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "ai.memorize.memorize-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2129,7 +2129,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.5;
+				MARKETING_VERSION = 3.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "ai.memorize.memorize-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
