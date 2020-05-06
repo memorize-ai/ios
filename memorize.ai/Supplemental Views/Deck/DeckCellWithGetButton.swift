@@ -43,11 +43,31 @@ struct DeckCellWithGetButton: View {
 	}
 	
 	var buttonBackground: Color {
-		hasDeck ? .white : .init(hexadecimal6: 0x4355f9)
+		hasDeck
+			? hasOpenButton
+				? .init(hexadecimal6: 0x00d388)
+				: .white
+			: .init(hexadecimal6: 0x4355f9)
+	}
+	
+	var buttonBorderWidth: CGFloat {
+		hasDeck && !hasOpenButton
+			? 1.5
+			: 0
+	}
+	
+	var buttonText: String {
+		hasDeck
+			? hasOpenButton
+				? "OPEN"
+				: "REMOVE"
+			: "GET"
 	}
 	
 	var buttonTextColor: Color {
-		hasDeck ? .extraPurple : .white
+		!hasDeck || hasOpenButton
+			? .white
+			: .extraPurple
 	}
 	
 	func open() {
@@ -56,6 +76,10 @@ struct DeckCellWithGetButton: View {
 	
 	func buttonAction() {
 		if hasDeck {
+			if hasOpenButton {
+				return open()
+			}
+			
 			if shouldShowRemoveAlert {
 				deck.showRemoveFromLibraryAlert(
 					forUser: user,
@@ -93,54 +117,36 @@ struct DeckCellWithGetButton: View {
 	
 	var body: some View {
 		DeckCell(deck: deck, width: width, imageHeight: imageHeight, titleFontSize: titleFontSize) {
-			HStack(spacing: 18) {
-				if hasOpenButton && hasDeck && width >= 280 {
-					Button(action: open) {
-						CustomRectangle(
-							background: Color(hexadecimal6: 0x00d388),
-							cornerRadius: 8
-						) {
-							Text("OPEN")
+			Button(action: buttonAction) {
+				CustomRectangle(
+					background: buttonBackground,
+					borderColor: .extraPurple,
+					borderWidth: buttonBorderWidth,
+					cornerRadius: 8
+				) {
+					Group {
+						if isGetLoading {
+							ActivityIndicator(radius: 8, color: .white)
+						} else {
+							Text(buttonText)
 								.font(.muli(.bold, size: 15))
-								.foregroundColor(.white)
-								.frame(height: 33)
-								.frame(maxWidth: .infinity)
+								.foregroundColor(buttonTextColor)
 						}
 					}
+					.frame(height: 33)
+					.frame(maxWidth: .infinity)
 				}
-				Button(action: buttonAction) {
-					CustomRectangle(
-						background: buttonBackground,
-						borderColor: .init(hexadecimal6: 0x4355f9),
-						borderWidth: hasDeck ? 1.5 : 0,
-						cornerRadius: 8
-					) {
-						Group {
-							if isGetLoading {
-								ActivityIndicator(radius: 8, color: .white)
-							} else {
-								Text(hasDeck ? "REMOVE" : "GET")
-									.font(.muli(.bold, size: 15))
-									.foregroundColor(
-										hasDeck ? .init(hexadecimal6: 0x4355f9) : .white
-									)
-							}
-						}
-						.frame(height: 33)
-						.frame(maxWidth: .infinity)
-					}
-				}
-				.disabled(isGetLoading)
-				.alert(isPresented: $deck.getLoadingState.didFail) {
-					.init(
-						title: .init(
-							"Unable to \(hasDeck ? "remove" : "get") deck"
-						),
-						message: .init(
-							deck.getLoadingState.errorMessage ?? "Unknown error"
-						)
+			}
+			.disabled(isGetLoading)
+			.alert(isPresented: $deck.getLoadingState.didFail) {
+				.init(
+					title: .init(
+						"Unable to \(hasDeck ? "remove" : "get") deck"
+					),
+					message: .init(
+						deck.getLoadingState.errorMessage ?? "Unknown error"
 					)
-				}
+				)
 			}
 			.padding([.horizontal, .bottom], 18)
 			.padding(.top, 10)
