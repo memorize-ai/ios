@@ -2,6 +2,8 @@ import SwiftUI
 import FirebaseAnalytics
 
 struct DeckCellWithGetButton: View {
+	static let maxWidth: CGFloat = 1000
+	
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@ObservedObject var deck: Deck
@@ -26,7 +28,7 @@ struct DeckCellWithGetButton: View {
 	) {
 		self.deck = deck
 		self.user = user
-		self.width = width
+		self.width = min(width, Self.maxWidth)
 		self.imageHeight = imageHeight ?? width * 111 / 165
 		self.titleFontSize = titleFontSize
 		self.hasOpenButton = hasOpenButton

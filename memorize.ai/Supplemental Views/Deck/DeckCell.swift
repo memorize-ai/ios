@@ -36,6 +36,7 @@ struct DeckCell<Content: View>: View {
 			HStack(spacing: 6) {
 				DeckStars(stars: deck.averageRating, dimension: 20)
 				Text(deck.numberOfRatings.formatted)
+					.fixedSize()
 					.font(.muli(.semiBold, size: 15))
 					.foregroundColor(.lightGrayText)
 			}
@@ -128,7 +129,7 @@ struct DeckCell<Content: View>: View {
 					}
 				}
 				.alignment(.leading)
-				.padding(.horizontal, 8)
+				.padding(.horizontal, 18)
 				.padding(.top, 4)
 				content
 			}

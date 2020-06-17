@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct OwnedDeckCell: View {
+	static let maxWidth: CGFloat = 1000
 	static let defaultWidth: CGFloat = 200
-	static let imageAspectRatio: CGFloat = 3 / 5
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
@@ -14,11 +14,11 @@ struct OwnedDeckCell: View {
 	
 	init(
 		deck: Deck,
-		width: CGFloat = Self.defaultWidth,
+		width: CGFloat = defaultWidth,
 		imageBackgroundColor: Color = .lightGrayBackground
 	) {
 		self.deck = deck
-		self.width = width
+		self.width = min(width, Self.maxWidth)
 		self.imageBackgroundColor = imageBackgroundColor
 		noCardsDueEmoji = [
 			"😃",
