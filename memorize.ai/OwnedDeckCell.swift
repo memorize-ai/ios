@@ -30,6 +30,10 @@ struct OwnedDeckCell: View {
 		].randomElement()!
 	}
 	
+	var imageDimension: CGFloat {
+		min(width - 80, 200)
+	}
+	
 	var cardsDueMessage: String {
 		let count = deck.userData?.numberOfDueCards ?? 0
 		let sections = deck.userData?.sections.reduce(0) { acc, section in
@@ -74,12 +78,17 @@ struct OwnedDeckCell: View {
 						Deck.DEFAULT_IMAGE
 							.resizable()
 							.renderingMode(.original)
-							.aspectRatio(contentMode: .fit)
+							.aspectRatio(contentMode: .fill)
 					}
 				}
-				.frame(width: width, height: width * Self.imageAspectRatio)
+				.frame(width: imageDimension, height: imageDimension)
+				.cornerRadius(8)
 				.clipped()
-				.cornerRadius(8, corners: [.topLeft, .topRight])
+				.overlay(
+					RoundedRectangle(cornerRadius: 8)
+						.stroke(Color(hexadecimal6: 0xEEEEEE))
+				)
+				.padding(.top, 12)
 				VStack(alignment: .leading) {
 					Text(deck.name)
 						.font(.muli(.bold, size: 13.5))

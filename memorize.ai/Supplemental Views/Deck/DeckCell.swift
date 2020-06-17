@@ -17,6 +17,10 @@ struct DeckCell<Content: View>: View {
 		self.content = content()
 	}
 	
+	var imageDimension: CGFloat {
+		min(width - 40, 200)
+	}
+	
 	var isInfoHorizontal: Bool {
 		width >= 290
 	}
@@ -93,12 +97,17 @@ struct DeckCell<Content: View>: View {
 						Deck.DEFAULT_IMAGE
 							.resizable()
 							.renderingMode(.original)
-							.aspectRatio(contentMode: .fit)
+							.aspectRatio(contentMode: .fill)
 					}
 				}
-				.frame(width: width, height: imageHeight)
+				.frame(width: imageDimension, height: imageDimension)
+				.cornerRadius(8)
 				.clipped()
-				.cornerRadius(8, corners: [.topLeft, .topRight])
+				.overlay(
+					RoundedRectangle(cornerRadius: 8)
+						.stroke(Color(hexadecimal6: 0xEEEEEE))
+				)
+				.padding(.top, 12)
 				VStack(alignment: .leading) {
 					Text(deck.name)
 						.font(.muli(.bold, size: titleFontSize))
