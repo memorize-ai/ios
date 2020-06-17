@@ -289,7 +289,6 @@
 		4DF4594E2399771200A78ADF /* PublishDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */; };
 		4DF45951239978A700A78ADF /* PublishDeckViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45950239978A700A78ADF /* PublishDeckViewTopControls.swift */; };
 		4DF45953239996D800A78ADF /* PublishDeckViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */; };
-		4DF4595623999E6500A78ADF /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = 4DF4595523999E6500A78ADF /* TextView */; };
 		4DF459582399A44A00A78ADF /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF459572399A44A00A78ADF /* MultilineTextField.swift */; };
 		4DF4595A2399ED4400A78ADF /* PublishDeckViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF459592399ED4400A78ADF /* PublishDeckViewNavigationLink.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
@@ -621,7 +620,6 @@
 			files = (
 				4D79330223F9FFDA009BB013 /* QGrid in Frameworks */,
 				4D86E2FB23EC893400073998 /* Audio in Frameworks */,
-				4DF4595623999E6500A78ADF /* TextView in Frameworks */,
 				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
 				4DD5FE9C2389DE8500E70251 /* Alamofire in Frameworks */,
 				4DB9FF4F2396D7D300B8DD38 /* HTML in Frameworks */,
@@ -1402,7 +1400,6 @@
 				4DD5FE9B2389DE8500E70251 /* Alamofire */,
 				4DB9FF4B2396D62A00B8DD38 /* WebView */,
 				4DB9FF4E2396D7D300B8DD38 /* HTML */,
-				4DF4595523999E6500A78ADF /* TextView */,
 				4D86E2FA23EC893400073998 /* Audio */,
 				4D79330123F9FFDA009BB013 /* QGrid */,
 			);
@@ -2105,7 +2102,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.6;
+				MARKETING_VERSION = 3.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "ai.memorize.memorize-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2130,7 +2127,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.6;
+				MARKETING_VERSION = 3.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "ai.memorize.memorize-ai";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2386,11 +2383,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4DDFF1BC2374F8E900999FD5 /* XCRemoteSwiftPackageReference "LoadingState" */;
 			productName = LoadingState;
-		};
-		4DF4595523999E6500A78ADF /* TextView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */;
-			productName = TextView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
