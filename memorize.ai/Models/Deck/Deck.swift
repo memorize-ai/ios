@@ -6,7 +6,7 @@ import LoadingState
 
 final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 	static let DEFAULT_IMAGE = Image("memorize.ai Logo")
-	static let MAX_NUMBER_OF_PREVIEW_CARDS = 20
+	static let MAX_NUMBER_OF_PREVIEW_CARDS = 8
 	static let SLUG_ID_LENGTH = 10
 	
 	static var cache = [String: Deck]()

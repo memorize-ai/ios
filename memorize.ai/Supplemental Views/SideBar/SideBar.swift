@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SideBar<Content: View>: View {
-	let extendedWidth = SCREEN_SIZE.width - 36
+	let extendedWidth = SCREEN_SIZE.width - (IS_IPAD ? 136 : 36)
 	
 	@EnvironmentObject var currentStore: CurrentStore
 	
