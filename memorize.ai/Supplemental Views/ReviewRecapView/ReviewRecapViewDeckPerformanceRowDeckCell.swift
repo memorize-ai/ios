@@ -49,7 +49,10 @@ struct ReviewRecapViewDeckPerformanceRowDeckCell: View {
 						.layoutPriority(1)
 						.padding(.bottom, 16)
 					HStack {
-						ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+						ForEach(
+							[.easy, .struggled, .forgot] as [Card.PerformanceRating],
+							id: \.self
+						) { rating in
 							self.ratingCountBadge(forRating: rating)
 						}
 					}

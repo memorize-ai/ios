@@ -8,7 +8,10 @@ struct ReviewViewFooter: View {
 	var body: some View {
 		ZStack {
 			HStack {
-				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+				ForEach(
+					[.easy, .struggled, .forgot] as [Card.PerformanceRating],
+					id: \.self
+				) { rating in
 					ReviewViewFooterPerformanceRatingButton(
 						current: self.current,
 						rating: rating,

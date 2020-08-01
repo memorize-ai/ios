@@ -47,7 +47,7 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 				case .politics:
 					return "Politics"
 				}
-			}())
+			}() as String)
 		}
 	}
 	

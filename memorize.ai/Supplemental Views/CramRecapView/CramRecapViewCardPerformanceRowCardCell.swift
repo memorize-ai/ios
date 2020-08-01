@@ -35,7 +35,10 @@ struct CramRecapViewCardPerformanceRowCardCell: View {
 					shouldShowSectionName: shouldShowSectionName
 				)
 				HStack {
-					ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+					ForEach(
+						[.easy, .struggled, .forgot] as [Card.PerformanceRating],
+						id: \.self
+					) { rating in
 						self.ratingCountBadge(forRating: rating)
 					}
 				}

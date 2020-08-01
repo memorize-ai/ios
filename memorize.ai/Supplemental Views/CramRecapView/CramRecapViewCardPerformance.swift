@@ -11,7 +11,10 @@ struct CramRecapViewCardPerformance: View {
 				.foregroundColor(.darkGray)
 				.shrinks()
 			VStack(spacing: 12) {
-				ForEach([.easy, .struggled, .forgot], id: \.self) { rating in
+				ForEach(
+					[.easy, .struggled, .forgot] as [Card.PerformanceRating],
+					id: \.self
+				) { rating in
 					CramRecapViewCardPerformanceRow(
 						rating: rating,
 						frequentCardsForRating: self.frequentCardsForRating,
