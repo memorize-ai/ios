@@ -410,22 +410,22 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 		guard creatorLoadingState.isNone else { return self }
 		creatorLoadingState.startLoading()
 		onBackgroundThread {
-			firestore.document("users/\(self.creatorId)").addSnapshotListener { snapshot, error in
-				guard error == nil, let snapshot = snapshot else {
+			firestore.document("users/\(self.creatorId)").getDocument()
+				.done { snapshot in
 					onMainThread {
-						self.creatorLoadingState.fail(error: error ?? UNKNOWN_ERROR)
+						if let creator = self.creator {
+							creator.updateFromSnapshot(snapshot)
+						} else {
+							self.creator = .init(snapshot: snapshot)
+						}
+						self.creatorLoadingState.succeed()
 					}
-					return
 				}
-				onMainThread {
-					if let creator = self.creator {
-						creator.updateFromSnapshot(snapshot)
-					} else {
-						self.creator = .init(snapshot: snapshot)
+				.catch { error in
+					onMainThread {
+						self.creatorLoadingState.fail(error: error)
 					}
-					self.creatorLoadingState.succeed()
 				}
-			}
 		}
 		return self
 	}
@@ -439,14 +439,9 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 				.collection("cards")
 				.order(by: "viewCount")
 				.limit(to: Self.MAX_NUMBER_OF_PREVIEW_CARDS)
-				.addSnapshotListener { snapshot, error in
-					guard error == nil, let documentChanges = snapshot?.documentChanges else {
-						onMainThread {
-							self.previewCardsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
-						}
-						return
-					}
-					for change in documentChanges {
+				.getDocuments()
+				.done { snapshot in
+					for change in snapshot.documentChanges {
 						let document = change.document
 						let cardId = document.documentID
 						onMainThread {
@@ -462,8 +457,14 @@ final class Deck: ObservableObject, Identifiable, Equatable, Hashable {
 							}
 						}
 					}
+					
 					onMainThread {
 						self.previewCardsLoadingState.succeed()
+					}
+				}
+				.catch { error in
+					onMainThread {
+						self.previewCardsLoadingState.fail(error: error)
 					}
 				}
 		}

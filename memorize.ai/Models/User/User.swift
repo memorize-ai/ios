@@ -5,6 +5,8 @@ import PromiseKit
 import LoadingState
 
 final class User: ObservableObject, Identifiable, Equatable, Hashable {
+	static let MAX_CREATED_DECKS = 20
+	
 	enum DecksChangeEvent {
 		case added(deck: Deck)
 		case removed(id: String)
@@ -207,6 +209,7 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 			firestore
 				.collection("decks")
 				.whereField("creator", isEqualTo: self.id)
+				.limit(to: Self.MAX_CREATED_DECKS)
 				.addSnapshotListener { snapshot, error in
 					guard error == nil, let documentChanges = snapshot?.documentChanges else {
 						onMainThread {

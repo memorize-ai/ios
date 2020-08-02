@@ -130,20 +130,23 @@ final class CurrentStore: ObservableObject {
 		guard topicsLoadingState.isNone else { return self }
 		topicsLoadingState.startLoading()
 		onBackgroundThread {
-			firestore.collection("topics").addSnapshotListener { snapshot, error in
-				guard error == nil, let documentChanges = snapshot?.documentChanges else {
+			firestore.collection("topics").getDocuments { snapshot, error in
+				guard error == nil, let documents = snapshot?.documents else {
 					onMainThread {
 						self.topicsLoadingState.fail(error: error ?? UNKNOWN_ERROR)
 					}
 					return
 				}
-				for change in documentChanges {
-					let document = change.document
+				
+				for document in documents {
 					let topicId = document.documentID
-					switch change.type {
-					case .added:
-						if (self.topics.contains { $0.id == topicId }) { continue }
-						let topic = Topic(
+					
+					if (self.topics.contains { $0.id == topicId }) {
+						continue
+					}
+					
+					onMainThread {
+						self.topics.append(Topic(
 							id: topicId,
 							name: document.get("name") as? String ?? "Unknown",
 							category: {
@@ -152,22 +155,10 @@ final class CurrentStore: ObservableObject {
 								}
 								return Topic.Category(rawValue: categoryString) ?? .language
 							}()
-						)
-						onMainThread {
-							self.topics.append(topic.cache())
-						}
-					case .modified:
-						if (self.topics.contains { $0.id == topicId }) { continue }
-						onMainThread {
-							self.topics.first { $0.id == topicId }?
-								.updateFromSnapshot(document)
-						}
-					case .removed:
-						onMainThread {
-							self.topics.removeAll { $0.id == topicId }
-						}
+						).cache())
 					}
 				}
+				
 				onMainThread {
 					self.topics.sort(by: \.name)
 					self.topicsLoadingState.succeed()
@@ -180,7 +171,9 @@ final class CurrentStore: ObservableObject {
 	@discardableResult
 	func loadRecommendedDecks() -> Self {
 		guard recommendedDecksLoadingState.isNone else { return self }
+		
 		recommendedDecksLoadingState.startLoading()
+		
 		onBackgroundThread {
 			self.user.recommendedDecks().done { decks in
 				onMainThread {
@@ -193,6 +186,7 @@ final class CurrentStore: ObservableObject {
 				}
 			}
 		}
+		
 		return self
 	}
 }

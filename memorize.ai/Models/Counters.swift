@@ -34,20 +34,4 @@ final class Counters: ObservableObject {
 		
 		return self
 	}
-	
-	@discardableResult
-	func observe(_ key: Key) -> Self {
-		guard values[key] == nil else { return self }
-		
-		onBackgroundThread {
-			key.document.addSnapshotListener { snapshot, error in
-				guard error == nil, let snapshot = snapshot else { return }
-				onMainThread {
-					self.values[key] = snapshot.get("value") as? Int
-				}
-			}
-		}
-			
-		return self
-	}
 }

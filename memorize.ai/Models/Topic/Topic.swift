@@ -64,43 +64,17 @@ final class Topic: ObservableObject, Identifiable, Equatable, Hashable {
 		)
 	}
 	
-	@discardableResult
-	func updateFromSnapshot(_ snapshot: DocumentSnapshot) -> Self {
-		name = snapshot.get("name") as? String ?? name
-		category = {
-			guard let categoryString = snapshot.get("category") as? String else {
-				return category
-			}
-			return Category(rawValue: categoryString) ?? category
-		}()
-		return self
-	}
-	
 	static func fromId(_ id: String) -> Promise<Topic> {
-		var didFulfill = false
-		var topic: Topic?
-		return .init { seal in
+		.init { seal in
 			if let cachedTopic = cache[id] {
 				return seal.fulfill(cachedTopic)
 			}
-			onBackgroundThread {
-				firestore.document("topics/\(id)").addSnapshotListener { snapshot, error in
-					guard error == nil, let snapshot = snapshot else {
-						return seal.reject(error ?? UNKNOWN_ERROR)
-					}
-					if didFulfill {
-						onMainThread {
-							topic?.updateFromSnapshot(snapshot)
-						}
-					} else {
-						didFulfill = true
-						topic = .init(snapshot: snapshot)
-						onMainThread {
-							seal.fulfill(topic!.cache())
-						}
-					}
+			
+			firestore.document("topics/\(id)").getDocument()
+				.done { snapshot in
+					seal.fulfill(Topic(snapshot: snapshot).cache())
 				}
-			}
+				.catch(seal.reject)
 		}
 	}
 	
