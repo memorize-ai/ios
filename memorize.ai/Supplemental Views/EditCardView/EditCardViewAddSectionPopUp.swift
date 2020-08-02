@@ -59,7 +59,7 @@ struct EditCardViewAddSectionPopUp: View {
 				.padding(.horizontal, 30)
 				.padding(.vertical)
 			}
-			VStack(spacing: 0) {
+			LazyVStack(spacing: 0) {
 				Button(action: {
 					self.card.section = nil
 				}) {

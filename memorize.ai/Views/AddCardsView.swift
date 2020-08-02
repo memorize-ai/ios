@@ -23,7 +23,7 @@ struct AddCardsView<Destination: View>: View {
 						.padding(.bottom, self.destination == nil ? 0 : 8)
 					VStack(spacing: 0) {
 						ScrollView {
-							VStack(spacing: 20) {
+							LazyVStack(spacing: 20) {
 								ForEach(self.model.cards) { card in
 									AddCardsViewCardCell(card: card)
 								}

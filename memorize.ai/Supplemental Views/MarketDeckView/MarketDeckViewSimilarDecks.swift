@@ -12,7 +12,7 @@ struct MarketDeckViewSimilarDecks: View {
 			MarketDeckViewSectionTitle("Similar decks")
 				.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				HStack(alignment: .top) {
+				LazyHStack(alignment: .top) {
 					ForEach(deck.similarDecks) { similarDeck in
 						DeckCellWithGetButton(
 							deck: similarDeck,

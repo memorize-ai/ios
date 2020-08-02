@@ -63,7 +63,7 @@ struct ReviewRecapViewMainCard: View {
 						.padding(.horizontal)
 					} else {
 						ScrollView(.horizontal, showsIndicators: false) {
-							HStack {
+							LazyHStack {
 								ForEach(
 									decks!,
 									content: ReviewRecapViewScrollableDeckName.init

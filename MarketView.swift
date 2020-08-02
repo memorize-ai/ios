@@ -33,7 +33,7 @@ struct MarketView: View {
 	
 	var scrollView: some View {
 		ScrollView(showsIndicators: false) {
-			VStack(spacing: Self.verticalCellSpacing) {
+			LazyVStack(spacing: Self.verticalCellSpacing) {
 				ForEach(searchResults) { deck in
 					DeckCellWithGetButton(
 						deck: deck,

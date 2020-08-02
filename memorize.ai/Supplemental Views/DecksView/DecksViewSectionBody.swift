@@ -20,11 +20,6 @@ struct DecksViewSectionBody: View {
 		currentStore.user.id == section.parent.creatorId
 	}
 	
-	var cardCountMessage: String {
-		let extraCount = section.cards.count - MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION
-		return "\(extraCount.formatted) more card\(extraCount == 1 ? "" : "s")..."
-	}
-	
 	func headerButton(text: String, color: Color) -> some View {
 		CustomRectangle(
 			background: Color.clear,
@@ -56,7 +51,7 @@ struct DecksViewSectionBody: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 8) {
+		LazyVStack(spacing: 8) {
 			if isUnlocked {
 				HStack {
 					if section.numberOfCards > 0 {
@@ -73,13 +68,8 @@ struct DecksViewSectionBody: View {
 						ActivityIndicator(color: .gray)
 					}
 					.case(.success) {
-						ForEach(section.cards.prefix(MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION)) { card in
+						ForEach(section.cards) { card in
 							DecksViewCardCell(card: card)
-						}
-						if section.cards.count > MAX_NUMBER_OF_VIEWABLE_CARDS_IN_SECTION {
-							Text(cardCountMessage)
-								.font(.muli(.bold, size: 15))
-								.foregroundColor(.darkGray)
 						}
 					}
 					.case(.failure) {

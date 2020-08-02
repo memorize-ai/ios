@@ -62,7 +62,7 @@ struct TopicPerformanceSheetView: View {
 							}
 							.frame(height: 150)
 						} else {
-							VStack(spacing: 4) {
+							LazyVStack(spacing: 4) {
 								ForEach(decks) { deck in
 									DeckRow(
 										deck: deck,

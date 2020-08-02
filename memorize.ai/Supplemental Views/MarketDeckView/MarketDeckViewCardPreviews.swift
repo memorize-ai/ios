@@ -8,7 +8,7 @@ struct MarketDeckViewCardPreviews: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			HStack {
+			LazyHStack {
 				ForEach(deck.previewCards) { card in
 					CardPreviewCell(card: card)
 						.frame(

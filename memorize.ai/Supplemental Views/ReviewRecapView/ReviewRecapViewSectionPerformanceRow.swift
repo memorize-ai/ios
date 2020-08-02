@@ -29,7 +29,7 @@ struct ReviewRecapViewSectionPerformanceRow: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 12) {
+		LazyVStack(spacing: 12) {
 			HStack {
 				Text("Frequently \(rating.title.lowercased())")
 					.font(.muli(.extraBold, size: 15))

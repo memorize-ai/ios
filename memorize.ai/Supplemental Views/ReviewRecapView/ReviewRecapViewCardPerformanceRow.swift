@@ -28,7 +28,7 @@ struct ReviewRecapViewCardPerformanceRow: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 12) {
+		LazyVStack(spacing: 12) {
 			HStack {
 				Text(rating.title)
 					.font(.muli(.extraBold, size: 15))

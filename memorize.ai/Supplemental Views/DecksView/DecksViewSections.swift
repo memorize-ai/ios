@@ -25,7 +25,7 @@ struct DecksViewSections: View {
 	}
 	
 	var body: some View {
-		VStack(spacing: 16) {
+		LazyVStack(spacing: 16) {
 			ForEach(sections.prefix(MAX_NUMBER_OF_VIEWABLE_SECTIONS)) { section in
 				VStack {
 					DecksViewSectionHeader(

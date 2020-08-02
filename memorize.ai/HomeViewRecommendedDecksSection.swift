@@ -21,7 +21,7 @@ struct HomeViewRecommendedDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack(alignment: .top) {
+					LazyHStack(alignment: .top) {
 						ForEach(currentStore.recommendedDecks) { deck in
 							DeckCellWithGetButton(
 								deck: deck,

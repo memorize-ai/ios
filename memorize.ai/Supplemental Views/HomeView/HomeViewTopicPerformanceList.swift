@@ -43,7 +43,7 @@ struct HomeViewTopicPerformanceList: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			HStack {
+			LazyHStack {
 				interests
 			}
 			.padding(.horizontal, 23)

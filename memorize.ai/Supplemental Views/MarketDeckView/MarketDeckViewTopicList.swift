@@ -28,10 +28,8 @@ struct MarketDeckViewTopicList: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			HStack {
-				topics
-			}
-			.padding(.horizontal, 23)
+			LazyHStack { topics }
+				.padding(.horizontal, 23)
 		}
 	}
 }

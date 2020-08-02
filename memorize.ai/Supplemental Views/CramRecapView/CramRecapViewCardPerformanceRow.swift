@@ -64,7 +64,7 @@ struct CramRecapViewCardPerformanceRow: View {
 			.padding(.horizontal, 23)
 			if isExpanded && !cards.isEmpty {
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack(alignment: .top) {
+					LazyHStack(alignment: .top) {
 						ForEach(cards) { card in
 							CramRecapViewCardPerformanceRowCardCell(
 								card: card,

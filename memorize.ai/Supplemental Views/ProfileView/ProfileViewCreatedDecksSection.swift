@@ -24,7 +24,7 @@ struct ProfileViewCreatedDecksSection: View {
 				}
 				.frame(width: SCREEN_SIZE.width - 8 * 2, alignment: .leading)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack(alignment: .top) {
+					LazyHStack(alignment: .top) {
 						ForEach(user.createdDecks) { deck in
 							DeckCellWithGetButton(
 								deck: deck,

@@ -29,7 +29,7 @@ struct HomeViewMyDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					HStack(alignment: .top, spacing: 8) {
+					LazyHStack(alignment: .top, spacing: 8) {
 						ForEach(decks) { deck in
 							OwnedDeckCell(
 								deck: deck,

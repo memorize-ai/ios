@@ -11,7 +11,7 @@ struct HomeViewReviewSection: View {
 	}
 	
 	var deckList: some View {
-		VStack(spacing: 0) {
+		LazyVStack(spacing: 0) {
 			ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
 				HomeViewReviewSectionDeckRow(deck: deck)
 			}

@@ -8,7 +8,7 @@ struct SideBarSection: View {
 		VStack(alignment: .leading, spacing: 8) {
 			SideBarSectionTitle(title)
 				.padding(.leading)
-			VStack(spacing: 4) {
+			LazyVStack(spacing: 4) {
 				ForEach(decks) { deck in
 					DeckRow(
 						deck: deck,

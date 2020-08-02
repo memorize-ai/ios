@@ -33,7 +33,7 @@ struct MarketDeckViewSections: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				VStack {
+				LazyVStack {
 					if deck.hasUnsectionedCards {
 						MarketDeckViewSectionRow(section: deck.unsectionedSection)
 					}
