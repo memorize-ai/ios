@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUIX
 
 struct DecksViewSectionBody: View {
 	@EnvironmentObject var currentStore: CurrentStore
@@ -63,21 +62,23 @@ struct DecksViewSectionBody: View {
 				}
 			}
 			if isExpanded {
-				SwitchOver(section.cardsLoadingState)
-					.case(.loading) {
+				Group {
+					switch section.cardsLoadingState {
+					case .loading:
 						ActivityIndicator(color: .gray)
-					}
-					.case(.success) {
+					case .success:
 						ForEach(section.cards) { card in
 							DecksViewCardCell(card: card)
 						}
-					}
-					.case(.failure) {
+					case .failure:
 						Image(systemName: .exclamationmarkTriangle)
 							.foregroundColor(.gray)
 							.scaleEffect(1.5)
+					default:
+						EmptyView()
 					}
-					.padding(.top, 8)
+				}
+				.padding(.top, 8)
 			}
 		}
 		.padding(.top, 6)

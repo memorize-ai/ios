@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUIX
 
 struct CramRecapViewCardPerformanceRowCardCellContent: View {
 	@ObservedObject var card: Card
@@ -23,29 +22,31 @@ struct CramRecapViewCardPerformanceRowCardCellContent: View {
 			}
 			HStack(alignment: .top) {
 				if hasPreviewImage {
-					SwitchOver(card.previewImageLoadingState)
-						.case(.loading) {
+					Group {
+						switch card.previewImageLoadingState {
+						case .loading:
 							ZStack {
 								Color.lightGrayBackground
 								ActivityIndicator(color: .gray)
 							}
-						}
-						.case(.success) {
+						case .success:
 							card.previewImage?
 								.resizable()
 								.aspectRatio(contentMode: .fill)
-						}
-						.case(.failure) {
+						case .failure:
 							ZStack {
 								Color.lightGrayBackground
 								Image(systemName: .exclamationmarkTriangle)
 									.foregroundColor(.gray)
 									.scaleEffect(1.5)
 							}
+						default:
+							EmptyView()
 						}
-						.frame(width: 100, height: 100)
-						.cornerRadius(5)
-						.clipped()
+					}
+					.frame(width: 100, height: 100)
+					.cornerRadius(5)
+					.clipped()
 				}
 				Text(Card.stripFormatting(card.front).trimmed)
 					.font(.muli(.semiBold, size: 15))

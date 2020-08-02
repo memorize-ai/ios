@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUIX
 
 struct DecksViewCardCell: View {
 	@EnvironmentObject var currentStore: CurrentStore
@@ -54,30 +53,30 @@ struct DecksViewCardCell: View {
 					)
 					HStack(alignment: .top) {
 						if hasPreviewImage {
-							SwitchOver(card.previewImageLoadingState)
-								.case(.loading) {
-									ZStack {
-										Color.lightGrayBackground
-										ActivityIndicator(color: .gray)
-									}
+							switch card.previewImageLoadingState {
+							case .loading:
+								ZStack {
+									Color.lightGrayBackground
+									ActivityIndicator(color: .gray)
 								}
-								.case(.success) {
-									card.previewImage?
-										.resizable()
-										.renderingMode(.original)
-										.aspectRatio(contentMode: .fill)
-								}
-								.case(.failure) {
-									ZStack {
-										Color.lightGrayBackground
-										Image(systemName: .exclamationmarkTriangle)
-											.foregroundColor(.gray)
-											.scaleEffect(1.5)
-									}
+							case .success:
+								card.previewImage?
+									.resizable()
+									.renderingMode(.original)
+									.aspectRatio(contentMode: .fill)
+							case .failure:
+								ZStack {
+									Color.lightGrayBackground
+									Image(systemName: .exclamationmarkTriangle)
+										.foregroundColor(.gray)
+										.scaleEffect(1.5)
 								}
 								.frame(width: 100, height: 100)
 								.cornerRadius(5)
 								.clipped()
+							default:
+								EmptyView()
+							}
 						}
 						Text(Card.stripFormatting(card.front).trimmed)
 							.font(.muli(.semiBold, size: 15))

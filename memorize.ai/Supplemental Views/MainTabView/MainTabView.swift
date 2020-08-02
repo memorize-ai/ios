@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUIX
 import PromiseKit
 import LoadingState
 
@@ -250,33 +249,30 @@ struct MainTabView: View {
 						ZStack {
 							Color.lightGrayBackground
 								.edgesIgnoringSafeArea([.horizontal, .top])
-							SwitchOver(currentSelection)
-								.case(.home) {
-									HomeView()
-								}
-								.case(.market) {
-									MarketView(
-										isSortPopUpShowing: $marketView_isSortPopUpShowing,
-										isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
-										searchText: marketView_searchText,
-										setSearchText: marketView_setSearchText,
-										searchResults: marketView_searchResults,
-										searchResultsLoadingState: marketView_searchResultsLoadingState,
-										loadSearchResults: marketView_loadSearchResults
-									)
-								}
-								.case(.decks) {
-									DecksView(
-										isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
-										selectedSection: $decksView_selectedSection,
-										isSectionOptionsPopUpShowing: $decksView_isSectionOptionsPopUpShowing,
-										isSectionExpanded: decksView_isSectionExpanded,
-										toggleSectionExpanded: decksView_toggleSectionExpanded
-									)
-								}
-								.case(.profile) {
-									ProfileView()
-								}
+							switch currentSelection {
+							case .home:
+								HomeView()
+							case .market:
+								MarketView(
+									isSortPopUpShowing: $marketView_isSortPopUpShowing,
+									isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
+									searchText: marketView_searchText,
+									setSearchText: marketView_setSearchText,
+									searchResults: marketView_searchResults,
+									searchResultsLoadingState: marketView_searchResultsLoadingState,
+									loadSearchResults: marketView_loadSearchResults
+								)
+							case .decks:
+								DecksView(
+									isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
+									selectedSection: $decksView_selectedSection,
+									isSectionOptionsPopUpShowing: $decksView_isSectionOptionsPopUpShowing,
+									isSectionExpanded: decksView_isSectionExpanded,
+									toggleSectionExpanded: decksView_toggleSectionExpanded
+								)
+							case .profile:
+								ProfileView()
+							}
 							if currentStore.mainTabViewSelection == .home {
 								VStack {
 									PublishDeckViewNavigationLink {

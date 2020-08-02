@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUIX
 
 struct MarketViewFilterPopUp: View {
 	static let contentFullHeightRatio: CGFloat = 424 / 667
@@ -31,15 +30,15 @@ struct MarketViewFilterPopUp: View {
 					filterPopUpSideBarSelection: $filterPopUpSideBarSelection
 				)
 				Spacer()
-				SwitchOver(filterPopUpSideBarSelection)
-					.case(.topics) {
+				Group {
+					switch filterPopUpSideBarSelection {
+					case .topics:
 						MarketViewFilterPopUpTopicsContent(
 							topicsFilter: $topicsFilter,
 							isTopicSelected: isTopicSelected,
 							toggleTopicSelect: toggleTopicSelect
 						)
-					}
-					.case(.rating) {
+					case .rating:
 						MarketViewFilterPopUpContentWithSlider(
 							value: $ratingFilter,
 							leadingText: "Must have over",
@@ -49,8 +48,7 @@ struct MarketViewFilterPopUp: View {
 							upperBound: 5,
 							formatAsInt: false
 						)
-					}
-					.case(.downloads) {
+					case .downloads:
 						MarketViewFilterPopUpContentWithSlider(
 							value: $downloadsFilter,
 							leadingText: "Must have over",
@@ -61,7 +59,8 @@ struct MarketViewFilterPopUp: View {
 							formatAsInt: true
 						)
 					}
-					.frame(height: Self.contentHeight)
+				}
+				.frame(height: Self.contentHeight)
 				Spacer()
 			}
 		}
