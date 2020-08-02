@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MarketViewTopControls: View {
-	@ObservedObject var counters = Counters.shared
+	@StateObject var counters = Counters.shared
 	
 	let searchText: String
 	let setSearchText: (String) -> Void

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GoogleSignInButton: View {
-	@ObservedObject var model = GoogleSignInButtonModel()
+	@StateObject var model = GoogleSignInButtonModel()
 	
 	var body: some View {
 		Group {
