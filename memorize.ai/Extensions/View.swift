@@ -39,27 +39,4 @@ extension View {
 	func foregroundColor(literal color: UIColor) -> some View {
 		foregroundColor(.init(color))
 	}
-	
-	func gridFrame(
-		columns: Int,
-		numberOfCells: Int,
-		cellWidth: CGFloat,
-		cellHeight: CGFloat,
-		horizontalSpacing: CGFloat,
-		verticalSpacing: CGFloat
-	) -> some View {
-		frame(
-			width: widthOfGrid(
-				columns: columns,
-				cellWidth: cellWidth,
-				spacing: horizontalSpacing
-			),
-			height: heightOfGrid(
-				columns: columns,
-				numberOfCells: numberOfCells,
-				cellHeight: cellHeight,
-				spacing: verticalSpacing
-			)
-		)
-	}
 }

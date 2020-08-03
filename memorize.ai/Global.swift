@@ -130,34 +130,6 @@ func showAlert(
 	}
 }
 
-func numberOfGridColumns(
-	width: CGFloat,
-	cellWidth: CGFloat,
-	horizontalSpacing: CGFloat
-) -> Int {
-	.init((width + horizontalSpacing) / (cellWidth + horizontalSpacing))
-}
-
-func widthOfGrid(
-	columns: Int,
-	cellWidth: CGFloat,
-	spacing: CGFloat
-) -> CGFloat {
-	cellWidth * .init(columns) + spacing * .init(columns - 1)
-}
-
-func heightOfGrid(
-	columns: Int,
-	numberOfCells: Int,
-	cellHeight: CGFloat,
-	spacing: CGFloat
-) -> CGFloat {
-	let count = CGFloat(
-		numberOfCells / columns + min(numberOfCells % columns, 1)
-	)
-	return cellHeight * count + spacing * (count - 1)
-}
-
 func createRandomId(withLength length: Int) -> String {
 	var acc = ""
 	
