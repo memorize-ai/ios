@@ -313,24 +313,26 @@ struct MainTabView: View {
 						}
 						.frame(height: 72)
 					}
-					MarketViewSortPopUp(
-						isSortPopUpShowing: $marketView_isSortPopUpShowing,
-						sortAlgorithm: $marketView_sortAlgorithm,
-						loadSearchResults: marketView_loadSearchResults,
-						geometry: geometry
-					)
-					MarketViewFilterPopUp(
-						isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
-						topicsFilter: $marketView_topicsFilter,
-						ratingFilter: $marketView_ratingFilter,
-						downloadsFilter: $marketView_downloadsFilter,
-						filterPopUpSideBarSelection: $marketView_filterPopUpSideBarSelection,
-						loadSearchResults: marketView_loadSearchResults,
-						isTopicSelected: marketView_isTopicSelected,
-						toggleTopicSelect: marketView_toggleTopicSelect,
-						geometry: geometry
-					)
-					if currentStore.selectedDeck != nil {
+					if currentSelection == .market {
+						MarketViewSortPopUp(
+							isSortPopUpShowing: $marketView_isSortPopUpShowing,
+							sortAlgorithm: $marketView_sortAlgorithm,
+							loadSearchResults: marketView_loadSearchResults,
+							geometry: geometry
+						)
+						MarketViewFilterPopUp(
+							isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
+							topicsFilter: $marketView_topicsFilter,
+							ratingFilter: $marketView_ratingFilter,
+							downloadsFilter: $marketView_downloadsFilter,
+							filterPopUpSideBarSelection: $marketView_filterPopUpSideBarSelection,
+							loadSearchResults: marketView_loadSearchResults,
+							isTopicSelected: marketView_isTopicSelected,
+							toggleTopicSelect: marketView_toggleTopicSelect,
+							geometry: geometry
+						)
+					}
+					if currentSelection == .decks && currentStore.selectedDeck != nil {
 						DecksViewDeckOptionsPopUp(
 							selectedDeck: currentStore.selectedDeck!,
 							isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
