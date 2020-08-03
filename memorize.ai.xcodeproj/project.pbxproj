@@ -291,6 +291,7 @@
 		4DF45953239996D800A78ADF /* PublishDeckViewContentBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */; };
 		4DF459582399A44A00A78ADF /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF459572399A44A00A78ADF /* MultilineTextField.swift */; };
 		4DF4595A2399ED4400A78ADF /* PublishDeckViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF459592399ED4400A78ADF /* PublishDeckViewNavigationLink.swift */; };
+		4DF533AA24D788BF00F661C4 /* TopicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF533A924D788BF00F661C4 /* TopicGrid.swift */; };
 		4DF8C95F23655DBC001141C9 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */; };
 		4DF8C96123656C9E001141C9 /* GIDSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8C96023656C9E001141C9 /* GIDSignIn.swift */; };
 		4DFA0DC1236A7B170000CA7A /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA0DC0236A7B170000CA7A /* Deck.swift */; };
@@ -600,6 +601,7 @@
 		4DF45952239996D800A78ADF /* PublishDeckViewContentBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewContentBox.swift; sourceTree = "<group>"; };
 		4DF459572399A44A00A78ADF /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4DF459592399ED4400A78ADF /* PublishDeckViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDeckViewNavigationLink.swift; sourceTree = "<group>"; };
+		4DF533A924D788BF00F661C4 /* TopicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicGrid.swift; sourceTree = "<group>"; };
 		4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		4DF8C96023656C9E001141C9 /* GIDSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIDSignIn.swift; sourceTree = "<group>"; };
 		4DFA0DC0236A7B170000CA7A /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 		4D0C028B237D3EA90062BC14 /* Topic */ = {
 			isa = PBXGroup;
 			children = (
+				4DF533A924D788BF00F661C4 /* TopicGrid.swift */,
 				4D0C028C237D3EB50062BC14 /* BasicTopicCell.swift */,
 				4D0C028E237D41C80062BC14 /* LoadingTopicCell.swift */,
 				4D60FCA8237DF23B0082B66F /* TopicPerformanceSheetView.swift */,
@@ -1694,6 +1697,7 @@
 				4D3FE57A23BC67DF0010FFD3 /* EditCardView.swift in Sources */,
 				4D6300E023C807A100274DC1 /* Card+ReviewData.swift in Sources */,
 				4D9D930F23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift in Sources */,
+				4DF533AA24D788BF00F661C4 /* TopicGrid.swift in Sources */,
 				4D60FCA9237DF23B0082B66F /* TopicPerformanceSheetView.swift in Sources */,
 				4D8B2EB32398FCD100EF040B /* SafeDivision.swift in Sources */,
 				4D6BA52923ACB02000D3F9D1 /* AddCardsView.swift in Sources */,
