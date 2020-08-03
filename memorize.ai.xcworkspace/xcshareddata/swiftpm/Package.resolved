@@ -47,29 +47,11 @@
         }
       },
       {
-        "package": "QGrid",
-        "repositoryURL": "https://github.com/kenmueller/QGrid",
-        "state": {
-          "branch": "master",
-          "revision": "0da7ec5df69d4976535b8373e6a1766a6fd06883",
-          "version": null
-        }
-      },
-      {
         "package": "SwiftUIX",
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": "master",
           "revision": "aa3d96109832eaac3a1fb8b76cabfd8898193472",
-          "version": null
-        }
-      },
-      {
-        "package": "TextView",
-        "repositoryURL": "https://github.com/kenmueller/TextView.git",
-        "state": {
-          "branch": "master",
-          "revision": "e9bf78313788c0bc0bc57a08edc8fa5c85a31a79",
           "version": null
         }
       },

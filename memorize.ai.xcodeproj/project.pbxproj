@@ -154,7 +154,6 @@
 		4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
-		4D79330223F9FFDA009BB013 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 4D79330123F9FFDA009BB013 /* QGrid */; };
 		4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444A8236B81980043298C /* EmptyDeckCell.swift */; };
 		4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */; };
 		4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AC236BFE080043298C /* DocumentSnapshot.swift */; };
@@ -618,7 +617,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D79330223F9FFDA009BB013 /* QGrid in Frameworks */,
 				4D86E2FB23EC893400073998 /* Audio in Frameworks */,
 				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
 				4DD5FE9C2389DE8500E70251 /* Alamofire in Frameworks */,
@@ -1401,7 +1399,6 @@
 				4DB9FF4B2396D62A00B8DD38 /* WebView */,
 				4DB9FF4E2396D7D300B8DD38 /* HTML */,
 				4D86E2FA23EC893400073998 /* Audio */,
-				4D79330123F9FFDA009BB013 /* QGrid */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -1485,9 +1482,7 @@
 				4DD5FE9A2389DE8500E70251 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */,
 				4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */,
-				4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */,
 				4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */,
-				4D79330023F9FFDA009BB013 /* XCRemoteSwiftPackageReference "QGrid" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -2279,14 +2274,6 @@
 				kind = branch;
 			};
 		};
-		4D79330023F9FFDA009BB013 /* XCRemoteSwiftPackageReference "QGrid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kenmueller/QGrid";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kenmueller/Audio.git";
@@ -2335,14 +2322,6 @@
 				kind = branch;
 			};
 		};
-		4DF4595423999E6500A78ADF /* XCRemoteSwiftPackageReference "TextView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kenmueller/TextView.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2350,11 +2329,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D1F9B26233EDE4E00693571 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
-		};
-		4D79330123F9FFDA009BB013 /* QGrid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4D79330023F9FFDA009BB013 /* XCRemoteSwiftPackageReference "QGrid" */;
-			productName = QGrid;
 		};
 		4D86E2FA23EC893400073998 /* Audio */ = {
 			isa = XCSwiftPackageProductDependency;
