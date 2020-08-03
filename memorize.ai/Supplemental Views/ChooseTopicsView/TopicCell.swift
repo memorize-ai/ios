@@ -12,24 +12,14 @@ struct TopicCell: View {
 		Button(action: toggleSelect) {
 			ZStack(alignment: .topTrailing) {
 				ZStack(alignment: .bottom) {
-					Group {
-						topic.image
-							.resizable()
-							.renderingMode(.original)
-							.scaledToFill()
-						LinearGradient(
-							gradient: .init(colors: [
-								Color.black.opacity(0.1),
-								Color.black.opacity(0.6)
-							]),
-							startPoint: .top,
-							endPoint: .bottom
+					topic.image
+						.resizable()
+						.renderingMode(.original)
+						.scaledToFill()
+						.frame(
+							width: Self.dimension,
+							height: Self.dimension
 						)
-					}
-					.frame(
-						width: Self.dimension,
-						height: Self.dimension
-					)
 					Text(topic.name)
 						.font(.muli(.regular, size: 14))
 						.foregroundColor(.white)
