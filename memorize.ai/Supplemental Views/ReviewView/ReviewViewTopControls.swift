@@ -6,6 +6,7 @@ struct ReviewViewTopControls<RecapView: View>: View {
 	let currentIndex: Int
 	let numberOfTotalCards: Int
 	let recapView: () -> RecapView
+	let onDisappear: () -> Void
 	
 	var title: String {
 		"\(currentIndex + 1) / \(numberOfTotalCards)"
@@ -28,6 +29,7 @@ struct ReviewViewTopControls<RecapView: View>: View {
 	var body: some View {
 		HStack(spacing: 22) {
 			Button(action: {
+				self.onDisappear()
 				self.presentationMode.wrappedValue.dismiss()
 			}) {
 				XButton(.transparentWhite, height: 18)
@@ -51,7 +53,8 @@ struct ReviewViewTopControls_Previews: PreviewProvider {
 		ReviewViewTopControls(
 			currentIndex: 0,
 			numberOfTotalCards: 3,
-			recapView: { Text("Recap view") }
+			recapView: { Text("Recap view") },
+			onDisappear: {}
 		)
 	}
 }

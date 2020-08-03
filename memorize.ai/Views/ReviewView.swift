@@ -54,6 +54,8 @@ struct ReviewView: View {
 	@State var cards = [Card.ReviewData]()
 	@State var initialXP = 0
 	
+	@State var isShowing = false
+	
 	init(user: User, deck: Deck?, section: Deck.Section?) {
 		self.user = user
 		self.deck = deck
@@ -809,7 +811,8 @@ struct ReviewView: View {
 						ReviewViewTopControls(
 							currentIndex: self.currentIndex,
 							numberOfTotalCards: self.numberOfTotalCards,
-							recapView: { self.recapView }
+							recapView: { self.recapView },
+							onDisappear: { self.isShowing = false }
 						)
 						.padding(.horizontal, 23)
 						ReviewViewCardSection(
@@ -830,6 +833,7 @@ struct ReviewView: View {
 							isWaitingForRating: self.isWaitingForRating,
 							rateCurrentCard: self.rateCurrentCard
 						)
+						.hidden(!isShowing)
 						.padding(.top, 16)
 						.padding(.bottom, 8)
 					}
@@ -845,6 +849,7 @@ struct ReviewView: View {
 				}
 				.disabled(self.isPopUpShowing)
 				ReviewViewPopUp(data: self.popUpData, offset: self.popUpOffset)
+					.hidden(!isShowing)
 				NavigateTo(
 					LazyView { self.recapView },
 					when: self.$shouldShowRecap
@@ -852,6 +857,7 @@ struct ReviewView: View {
 			}
 		}
 		.onAppear {
+			self.isShowing = true
 			self.initialXP = self.currentStore.user.xp
 			self.loadNumberOfTotalCards()
 			self.loadCurrentDeck()

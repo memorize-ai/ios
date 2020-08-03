@@ -7,6 +7,7 @@ struct CramViewTopControls<RecapView: View>: View {
 	let numberOfTotalCards: Int
 	let skipCard: () -> Void
 	let recapView: () -> RecapView
+	let onDisappear: () -> Void
 	
 	var title: String {
 		"\(currentIndex + 1) / \(numberOfTotalCards)"
@@ -29,6 +30,7 @@ struct CramViewTopControls<RecapView: View>: View {
 	var body: some View {
 		HStack(spacing: 22) {
 			Button(action: {
+				self.onDisappear()
 				self.presentationMode.wrappedValue.dismiss()
 			}) {
 				XButton(.transparentWhite, height: 18)
@@ -58,7 +60,8 @@ struct CramViewTopControls_Previews: PreviewProvider {
 			currentIndex: 1,
 			numberOfTotalCards: 2,
 			skipCard: {},
-			recapView: { Text("Recap view") }
+			recapView: { Text("Recap view") },
+			onDisappear: {}
 		)
 		.environmentObject(PREVIEW_CURRENT_STORE)
 	}

@@ -49,6 +49,8 @@ struct CramView: View {
 	@State var cards = [Card.CramData]()
 	@State var initialXP = 0
 	
+	@State var isShowing = false
+	
 	init(deck: Deck, section: Deck.Section?) {
 		self.deck = deck
 		self.section = section
@@ -522,7 +524,8 @@ struct CramView: View {
 								currentIndex: self.currentIndex,
 								numberOfTotalCards: self.numberOfTotalCards,
 								skipCard: self.skipCard,
-								recapView: { self.recapView }
+								recapView: { self.recapView },
+								onDisappear: { self.isShowing = false }
 							)
 							CramViewSliders(
 								numberOfTotalCards: self.numberOfTotalCards,
@@ -548,6 +551,7 @@ struct CramView: View {
 							isWaitingForRating: self.isWaitingForRating,
 							rateCurrentCard: self.rateCurrentCard
 						)
+						.hidden(!isShowing)
 						.padding(.top, 16)
 						.padding(.bottom, 8)
 					}
@@ -563,6 +567,7 @@ struct CramView: View {
 				}
 				.disabled(self.isPopUpShowing)
 				CramViewPopUp(data: self.popUpData, offset: self.popUpOffset)
+					.hidden(!isShowing)
 				NavigateTo(
 					LazyView { self.recapView },
 					when: self.$shouldShowRecap
@@ -570,6 +575,7 @@ struct CramView: View {
 			}
 		}
 		.onAppear {
+			self.isShowing = true
 			self.initialXP = self.currentStore.user.xp
 			self.loadNumberOfTotalCards()
 			self.loadCurrentSectionIndex()
