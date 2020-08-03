@@ -412,11 +412,7 @@ struct ReviewView: View {
 		startDate = .now
 	}
 	
-	func loadNextCard(
-		incrementCurrentIndex: Bool = true,
-		startLoading: Bool = true,
-		continueFromSnapshot: Bool = true
-	) {
+	func loadNextCard(incrementCurrentIndex: Bool = true, startLoading: Bool = true) {
 		if incrementCurrentIndex {
 			currentIndex++
 		}
@@ -469,11 +465,6 @@ struct ReviewView: View {
 						.collection("decks/\(deck.id)/cards")
 						.whereField("section", isEqualTo: section.id)
 						.whereField("new", isEqualTo: true)
-						.start(afterDocument:
-							continueFromSnapshot && (self.current?.isNew ?? false)
-								? self.currentCard?.snapshot
-								: nil
-						)
 						.limit(to: 1)
 						.getDocuments()
 						.done { snapshot in
@@ -513,11 +504,7 @@ struct ReviewView: View {
 								} else {
 									// There are no more non-new cards in the section, so transition to reviewing new cards
 									self.isReviewingNewCards = true
-									self.loadNextCard(
-										incrementCurrentIndex: false,
-										startLoading: false,
-										continueFromSnapshot: false
-									)
+									self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 								}
 							}
 						}
@@ -531,12 +518,6 @@ struct ReviewView: View {
 		} else if let deck = deck {
 			// MARK: - Reviewing entire deck
 			
-			// This should never happen, but if it does, then show the recap
-			guard let currentSection = currentSection else {
-				self.shouldShowRecap = true
-				return
-			}
-			
 			// Load all of the current deck's sections if they haven't been loaded already.
 			// Don't progress further until the deck's sections have been loaded successfully.
 			guard deck.sectionsLoadingState.didSucceed else {
@@ -545,11 +526,7 @@ struct ReviewView: View {
 						self.failCurrentCardLoadingState(withError: error)
 					} else {
 						// Successfully loaded sections, now call the function again
-						self.loadNextCard(
-							incrementCurrentIndex: false,
-							startLoading: false,
-							continueFromSnapshot: continueFromSnapshot
-						)
+						self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 					}
 				}
 				return
@@ -593,55 +570,20 @@ struct ReviewView: View {
 				onBackgroundThread {
 					self.user.documentReference
 						.collection("decks/\(deck.id)/cards")
-						.whereField("section", isEqualTo: currentSection.id)
 						.whereField("new", isEqualTo: true)
-						.start(afterDocument:
-							continueFromSnapshot && (self.current?.isNew ?? false)
-								? self.currentCard?.snapshot
-								: nil
-						)
 						.limit(to: 1)
 						.getDocuments()
 						.done { snapshot in
 							onMainThread {
-								if let cardId = snapshot.documents.first?.documentID {
+								if let card = snapshot.documents.first, let sectionId = card.get("section") as? String {
 									// There was another card in the current section, so update the current card
 									updateCurrentCard(
-										withId: cardId,
-										sectionId: currentSection.id,
+										withId: card.documentID,
+										sectionId: sectionId,
 										userData: nil
 									)
 								} else {
-									// There were no more cards in the current section, so update the current section
-									func setCurrentSection(to section: Deck.Section) {
-										self.currentSection = section
-										self.loadNextCard(
-											incrementCurrentIndex: false,
-											startLoading: false,
-											continueFromSnapshot: false
-										)
-									}
-									
-									let unlockedSections = deck.unlockedSections
-									
-									if currentSection.isUnsectioned {
-										// If the current section is unsectioned, then get the first section
-										if let newCurrentSection = unlockedSections.first {
-											setCurrentSection(to: newCurrentSection)
-										} else {
-											// If there are no other sections, show the recap
-											self.shouldShowRecap = true
-										}
-									} else if
-										let currentSectionIndex = unlockedSections.firstIndex(of: currentSection),
-										let newCurrentSection = unlockedSections[safe: currentSectionIndex + 1]
-									{
-										// There was a section after the current section
-										setCurrentSection(to: newCurrentSection)
-									} else {
-										// This was the last section, so show the recap
-										self.shouldShowRecap = true
-									}
+									self.shouldShowRecap = true
 								}
 							}
 						}
@@ -674,11 +616,7 @@ struct ReviewView: View {
 								} else {
 									// There were no more non-new cards, so transition to new cards
 									self.isReviewingNewCards = true
-									self.loadNextCard(
-										incrementCurrentIndex: false,
-										startLoading: false,
-										continueFromSnapshot: false
-									)
+									self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 								}
 							}
 						}
@@ -696,7 +634,7 @@ struct ReviewView: View {
 			// 2. Review first decks's new cards, then the second deck's new cards
 			
 			// This should never happen, but if it does, then show the recap
-			guard let currentDeck = currentDeck, let currentSection = currentSection else {
+			guard let currentDeck = currentDeck else {
 				self.shouldShowRecap = true
 				return
 			}
@@ -709,11 +647,7 @@ struct ReviewView: View {
 						self.failCurrentCardLoadingState(withError: error)
 					} else {
 						// Successfully loaded sections, now call the function again
-						self.loadNextCard(
-							incrementCurrentIndex: false,
-							startLoading: false,
-							continueFromSnapshot: continueFromSnapshot
-						)
+						self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 					}
 				}
 				return
@@ -757,84 +691,37 @@ struct ReviewView: View {
 				onBackgroundThread {
 					self.user.documentReference
 						.collection("decks/\(currentDeck.id)/cards")
-						.whereField("section", isEqualTo: currentSection.id)
 						.whereField("new", isEqualTo: true)
-						.start(afterDocument:
-							continueFromSnapshot && (self.current?.isNew ?? false)
-								? self.currentCard?.snapshot
-								: nil
-						)
 						.limit(to: 1)
 						.getDocuments()
 						.done { snapshot in
 							onMainThread {
-								if let cardId = snapshot.documents.first?.documentID {
+								if let card = snapshot.documents.first, let sectionId = card.get("section") as? String {
 									// There was another card, so update the current card with it
 									updateCurrentCard(
-										withId: cardId,
-										sectionId: currentSection.id,
+										withId: card.documentID,
+										sectionId: sectionId,
 										userData: nil
 									)
 								} else {
-									// There were no more cards in the current section,
-									// so try to increment the current section
-									
-									func setCurrentSection(to section: Deck.Section) {
-										self.currentSection = section
-										self.loadNextCard(
-											incrementCurrentIndex: false,
-											startLoading: false,
-											continueFromSnapshot: false
-										)
+									// Try to find the deck after the current deck
+									guard
+										let currentDeckIndex = self.user.decks.firstIndex(of: currentDeck),
+										let newCurrentDeck = self.user.decks[safe: currentDeckIndex + 1]
+									else {
+										// This was the last deck, so show the recap
+										self.shouldShowRecap = true
+										return
 									}
 									
-									func progressToNextDeck() {
-										// Try to find the deck after the current deck
-										guard
-											let currentDeckIndex = self.user.decks.firstIndex(of: currentDeck),
-											let newCurrentDeck = self.user.decks[safe: currentDeckIndex + 1]
-										else {
-											// This was the last deck, so show the recap
-											self.shouldShowRecap = true
-											return
-										}
-										
-										// Successfully found the next deck, so update the current deck with it
-										self.currentDeck = newCurrentDeck
-										
-										// Also, reset the current section so you start from the beginning with the current deck
-										self.currentSection = newCurrentDeck.unsectionedSection
-										
-										// Call the function again with the new deck and section
-										self.loadNextCard(
-											incrementCurrentIndex: false,
-											startLoading: false,
-											continueFromSnapshot: false
-										)
-									}
+									// Successfully found the next deck, so update the current deck with it
+									self.currentDeck = newCurrentDeck
 									
-									// Only look through the unlocked sections
-									let unlockedSections = currentDeck.unlockedSections
+									// Also, reset the current section so you start from the beginning with the current deck
+									self.currentSection = newCurrentDeck.unsectionedSection
 									
-									if currentSection.isUnsectioned {
-										// If the current section is unsectioned, get the first section
-										if let newCurrentSection = unlockedSections.first {
-											setCurrentSection(to: newCurrentSection)
-										} else {
-											// There were no other sections in the deck, so move on to the next deck
-											progressToNextDeck()
-										}
-									} else if
-										let currentSectionIndex = unlockedSections.firstIndex(of: currentSection),
-										let newCurrentSection = unlockedSections[safe: currentSectionIndex + 1]
-									{
-										// Found a section in the current deck after the current section,
-										// so update the current section with it
-										setCurrentSection(to: newCurrentSection)
-									} else {
-										// This was the last section in the deck, so move on to the next deck
-										progressToNextDeck()
-									}
+									// Call the function again with the new deck and section
+									self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 								}
 							}
 						}
@@ -884,11 +771,7 @@ struct ReviewView: View {
 										self.isReviewingNewCards = true
 										
 										// Call the function again with the new current deck and current section
-										self.loadNextCard(
-											incrementCurrentIndex: false,
-											startLoading: false,
-											continueFromSnapshot: false
-										)
+										self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 										
 										return
 									}
@@ -897,11 +780,7 @@ struct ReviewView: View {
 									self.currentDeck = newCurrentDeck
 									
 									// Call the function again with the new current deck
-									self.loadNextCard(
-										incrementCurrentIndex: false,
-										startLoading: false,
-										continueFromSnapshot: false
-									)
+									self.loadNextCard(incrementCurrentIndex: false, startLoading: false)
 								}
 							}
 						}
