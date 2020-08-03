@@ -3,7 +3,10 @@ import SwiftUI
 struct TopicGrid: View {
 	static let spacing: CGFloat = 8
 	static let columns = [
-		GridItem(.adaptive(minimum: TopicCell.dimension))
+		GridItem(.adaptive(
+			minimum: TopicCell.dimension,
+			maximum: TopicCell.dimension
+		))
 	]
 	
 	let topics: [Topic]
