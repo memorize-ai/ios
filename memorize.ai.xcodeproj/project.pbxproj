@@ -188,7 +188,6 @@
 		4D9D930F23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D930E23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift */; };
 		4D9D931223DF66250008B614 /* ProfileViewMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */; };
 		4D9D931423DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */; };
-		4D9D931623DF76010008B614 /* ProfileViewCreatedDecksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */; };
 		4D9D931823DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */; };
 		4D9D931A23DF84D40008B614 /* ProfileViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931923DF84D40008B614 /* ProfileViewTopControls.swift */; };
 		4D9D931C23DFC2FE0008B614 /* ReviewRecapViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D931B23DFC2FE0008B614 /* ReviewRecapViewTopControls.swift */; };
@@ -497,7 +496,6 @@
 		4D9D930E23DF5AB60008B614 /* CramRecapViewMainCardSectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramRecapViewMainCardSectionName.swift; sourceTree = "<group>"; };
 		4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMainCard.swift; sourceTree = "<group>"; };
 		4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewForgotPasswordButton.swift; sourceTree = "<group>"; };
-		4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCreatedDecksSection.swift; sourceTree = "<group>"; };
 		4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMyInterestsSection.swift; sourceTree = "<group>"; };
 		4D9D931923DF84D40008B614 /* ProfileViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTopControls.swift; sourceTree = "<group>"; };
 		4D9D931B23DFC2FE0008B614 /* ReviewRecapViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRecapViewTopControls.swift; sourceTree = "<group>"; };
@@ -1078,7 +1076,6 @@
 				4D9D931123DF66250008B614 /* ProfileViewMainCard.swift */,
 				4D9D931323DF6BD40008B614 /* ProfileViewForgotPasswordButton.swift */,
 				4DFA672723FF82D9003C0245 /* ProfileViewContactUsButton.swift */,
-				4D9D931523DF76010008B614 /* ProfileViewCreatedDecksSection.swift */,
 				4D9D931723DF7C3F0008B614 /* ProfileViewMyInterestsSection.swift */,
 			);
 			path = ProfileView;
@@ -1827,7 +1824,6 @@
 				4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */,
 				4D64BCC82367F3AF00F6FD07 /* AuthenticationView.swift in Sources */,
 				4DDACF0B2395EB3C0073C004 /* MarketDeckViewInfoPanels.swift in Sources */,
-				4D9D931623DF76010008B614 /* ProfileViewCreatedDecksSection.swift in Sources */,
 				4DD34CD82362E33A0007E3E6 /* CurrentStore.swift in Sources */,
 				4D54C03E237F7C83003765C1 /* DecksView.swift in Sources */,
 				4DACBA6C23981D4500E4BB71 /* MarketDeckViewTopicList.swift in Sources */,
@@ -2103,7 +2099,7 @@
 				DEVELOPMENT_TEAM = JUP7FZ7QC3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = memorize.ai/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2128,7 +2124,7 @@
 				DEVELOPMENT_TEAM = JUP7FZ7QC3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = memorize.ai/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
