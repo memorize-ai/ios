@@ -1,5 +1,4 @@
 import SwiftUI
-import QGrid
 
 struct RecommendedDecksViewContent: View {
 	static let cellSpacing: CGFloat = 20

@@ -1,5 +1,4 @@
 import SwiftUI
-import QGrid
 
 struct PublishDeckViewContentBox: View {
 	static let maxWidth = SCREEN_SIZE.width - (12 + 20) * 2
@@ -101,28 +100,12 @@ struct PublishDeckViewContentBox: View {
 							.foregroundColor(.darkRed)
 							.alignment(.leading)
 					}
-					QGrid(
-						currentStore.topics,
-						columns: Self.numberOfTopicColumns,
-						vSpacing: Self.topicCellSpacing,
-						hSpacing: Self.topicCellSpacing,
-						isScrollable: false
-					) { topic in
-						TopicCell(
-							topic: topic,
-							isSelected: self.model.isTopicSelected(topic)
-						) {
-							self.model.toggleTopicSelect(topic)
-						}
-					}
-					.gridFrame(
-						columns: Self.numberOfTopicColumns,
-						numberOfCells: currentStore.topics.count,
-						cellWidth: TopicCell.dimension,
-						cellHeight: TopicCell.dimension,
-						horizontalSpacing: Self.topicCellSpacing,
-						verticalSpacing: Self.topicCellSpacing
+					TopicGrid(
+						topics: currentStore.topics,
+						isSelected: model.isTopicSelected,
+						toggleSelect: model.toggleTopicSelect
 					)
+					.padding(.vertical, TopicGrid.spacing)
 				}
 				.padding(.top, 12)
 				.padding(.bottom, 10)

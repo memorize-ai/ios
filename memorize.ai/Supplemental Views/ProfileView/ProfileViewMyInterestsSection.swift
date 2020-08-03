@@ -1,5 +1,4 @@
 import SwiftUI
-import QGrid
 
 struct ProfileViewMyInterestsSection: View {
 	static let gridWidth = SCREEN_SIZE.width - 8 * 4
@@ -33,31 +32,17 @@ struct ProfileViewMyInterestsSection: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				QGrid(
-					currentStore.topics,
-					columns: Self.numberOfColumns,
-					vSpacing: Self.cellSpacing,
-					hSpacing: Self.cellSpacing,
-					isScrollable: false
-				) { topic in
-					TopicCell(
-						topic: topic,
-						isSelected: self.user.interests.contains(topic.id)
-					) {
-						_ = self.user.interests.contains(topic.id)
-							? self.user.removeInterest(topicId: topic.id)
-							: self.user.addInterest(topicId: topic.id)
+				TopicGrid(
+					topics: currentStore.topics,
+					isSelected: { self.user.interests.contains($0.id) },
+					toggleSelect: {
+						_ = self.user.interests.contains($0.id)
+							? self.user.removeInterest(topicId: $0.id)
+							: self.user.addInterest(topicId: $0.id)
 					}
-				}
-				.gridFrame(
-					columns: Self.numberOfColumns,
-					numberOfCells: currentStore.topics.count,
-					cellWidth: TopicCell.dimension,
-					cellHeight: TopicCell.dimension,
-					horizontalSpacing: Self.cellSpacing,
-					verticalSpacing: Self.cellSpacing
 				)
-				.padding(.vertical, 8)
+				.padding(.horizontal, 8)
+				.padding(.vertical, TopicGrid.spacing)
 				.frame(width: SCREEN_SIZE.width - 8 * 2)
 			}
 		}

@@ -1,5 +1,4 @@
 import SwiftUI
-import QGrid
 
 struct DeckCell<Content: View>: View {
 	@ObservedObject var deck: Deck
@@ -164,68 +163,67 @@ struct DeckCell_Previews: PreviewProvider {
 		return ZStack {
 			Color.gray
 				.edgesIgnoringSafeArea(.all)
-			QGrid(
-				[
-					Deck._new(
-						id: "0",
-						topics: [],
-						hasImage: true,
-						image: .init("GeometryPrepDeck"),
-						name: "Geometry Prep",
-						subtitle: "Angles, lines, triangles and other polygons",
-						numberOfViews: 1000000000,
-						numberOfUniqueViews: 200000,
-						numberOfRatings: 12400,
-						averageRating: 4.5,
-						numberOfDownloads: 196400,
-						numberOfCards: 19640,
-						creatorId: "0",
-						dateCreated: .now,
-						dateLastUpdated: .now
-					),
-					Deck._new(
-						id: "0",
-						topics: [],
-						hasImage: true,
-						name: "Geometry Prep",
-						subtitle: "Text here",
-						numberOfViews: 1000000000,
-						numberOfUniqueViews: 200000,
-						numberOfRatings: 12400,
-						averageRating: 4.5,
-						numberOfDownloads: 196400,
-						numberOfCards: 19640,
-						creatorId: "0",
-						dateCreated: .now,
-						dateLastUpdated: .now
-					),
-					Deck._new(
-						id: "0",
-						topics: [],
-						hasImage: false,
-						name: "Geometry Prep",
-						subtitle: "Angles, lines, triangles and other polygons. Angles, lines, triangles and other polygons.",
-						numberOfViews: 1000000000,
-						numberOfUniqueViews: 200000,
-						numberOfRatings: 12400,
-						averageRating: 4.5,
-						numberOfDownloads: 196400,
-						numberOfCards: 19640,
-						creatorId: "0",
-						dateCreated: .now,
-						dateLastUpdated: .now
-					),
-					failedDeck
-				],
-				columns: 2,
-				vSpacing: 20,
-				hSpacing: 20
-			) {
-				DeckCell(
-					deck: $0,
-					width: 165,
-					content: EmptyView.init
-				)
+			ScrollView {
+				LazyVStack {
+					ForEach([
+						Deck._new(
+							id: "0",
+							topics: [],
+							hasImage: true,
+							image: .init("GeometryPrepDeck"),
+							name: "Geometry Prep",
+							subtitle: "Angles, lines, triangles and other polygons",
+							numberOfViews: 1000000000,
+							numberOfUniqueViews: 200000,
+							numberOfRatings: 12400,
+							averageRating: 4.5,
+							numberOfDownloads: 196400,
+							numberOfCards: 19640,
+							creatorId: "0",
+							dateCreated: .now,
+							dateLastUpdated: .now
+						),
+						Deck._new(
+							id: "0",
+							topics: [],
+							hasImage: true,
+							name: "Geometry Prep",
+							subtitle: "Text here",
+							numberOfViews: 1000000000,
+							numberOfUniqueViews: 200000,
+							numberOfRatings: 12400,
+							averageRating: 4.5,
+							numberOfDownloads: 196400,
+							numberOfCards: 19640,
+							creatorId: "0",
+							dateCreated: .now,
+							dateLastUpdated: .now
+						),
+						Deck._new(
+							id: "0",
+							topics: [],
+							hasImage: false,
+							name: "Geometry Prep",
+							subtitle: "Angles, lines, triangles and other polygons. Angles, lines, triangles and other polygons.",
+							numberOfViews: 1000000000,
+							numberOfUniqueViews: 200000,
+							numberOfRatings: 12400,
+							averageRating: 4.5,
+							numberOfDownloads: 196400,
+							numberOfCards: 19640,
+							creatorId: "0",
+							dateCreated: .now,
+							dateLastUpdated: .now
+						),
+						failedDeck
+					]) { deck in
+						DeckCell(
+							deck: deck,
+							width: 165,
+							content: EmptyView.init
+						)
+					}
+				}
 			}
 		}
 	}
