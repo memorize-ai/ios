@@ -11,10 +11,8 @@ struct HomeViewReviewSection: View {
 	}
 	
 	var deckList: some View {
-		LazyVStack(spacing: 0) {
-			ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
-				HomeViewReviewSectionDeckRow(deck: deck)
-			}
+		ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
+			HomeViewReviewSectionDeckRow(deck: deck)
 		}
 	}
 	
@@ -57,8 +55,14 @@ struct HomeViewReviewSection: View {
 					}
 				}
 				.padding([.horizontal, .top])
-				deckList
-					.padding(.bottom, 8)
+				Group {
+					if #available(iOS 14.0, *) {
+						LazyVStack(spacing: 0) { deckList }
+					} else {
+						VStack(spacing: 0) { deckList }
+					}
+				}
+				.padding(.bottom, 8)
 			}
 		}
 		.padding(.horizontal, 23)

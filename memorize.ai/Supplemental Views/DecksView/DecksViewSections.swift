@@ -24,8 +24,8 @@ struct DecksViewSections: View {
 		return "\(extraCount.formatted) more section\(extraCount == 1 ? "" : "s")..."
 	}
 	
-	var body: some View {
-		LazyVStack(spacing: 16) {
+	var content: some View {
+		Group {
 			ForEach(sections) { section in
 				VStack {
 					DecksViewSectionHeader(
@@ -48,6 +48,16 @@ struct DecksViewSections: View {
 				Text(sectionCountMessage)
 					.font(.muli(.bold, size: 15))
 					.foregroundColor(.darkGray)
+			}
+		}
+	}
+	
+	var body: some View {
+		Group {
+			if #available(iOS 14.0, *) {
+				LazyVStack(spacing: 16) { content }
+			} else {
+				VStack(spacing: 16) { content }
 			}
 		}
 	}

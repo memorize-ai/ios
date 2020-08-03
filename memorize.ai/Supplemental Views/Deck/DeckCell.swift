@@ -164,7 +164,7 @@ struct DeckCell_Previews: PreviewProvider {
 			Color.gray
 				.edgesIgnoringSafeArea(.all)
 			ScrollView {
-				LazyVStack {
+				VStack {
 					ForEach([
 						Deck._new(
 							id: "0",

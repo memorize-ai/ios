@@ -28,8 +28,14 @@ struct MarketDeckViewTopicList: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			LazyHStack { topics }
-				.padding(.horizontal, 23)
+			Group {
+				if #available(iOS 14.0, *) {
+					LazyHStack { topics }
+				} else {
+					HStack { topics }
+				}
+			}
+			.padding(.horizontal, 23)
 		}
 	}
 }

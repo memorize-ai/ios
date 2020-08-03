@@ -20,6 +20,13 @@ struct ReviewRecapViewMainCard: View {
 		user.level > User.levelForXP(initialXP)
 	}
 	
+	var content: some View {
+		ForEach(
+			decks!,
+			content: ReviewRecapViewScrollableDeckName.init
+		)
+	}
+	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white,
@@ -63,11 +70,12 @@ struct ReviewRecapViewMainCard: View {
 						.padding(.horizontal)
 					} else {
 						ScrollView(.horizontal, showsIndicators: false) {
-							LazyHStack {
-								ForEach(
-									decks!,
-									content: ReviewRecapViewScrollableDeckName.init
-								)
+							Group {
+								if #available(iOS 14.0, *) {
+									LazyHStack { content }
+								} else {
+									HStack { content }
+								}
 							}
 							.padding(.horizontal, 8)
 						}

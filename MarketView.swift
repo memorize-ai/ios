@@ -30,21 +30,29 @@ struct MarketView: View {
 	let searchResultsLoadingState: LoadingState
 	let loadSearchResults: (Bool) -> Void
 	
+	var content: some View {
+		ForEach(searchResults) { deck in
+			DeckCellWithGetButton(
+				deck: deck,
+				user: self.currentStore.user,
+				width: SCREEN_SIZE.width - Self.horizontalPadding * 2,
+				imageHeight: IS_IPAD ? 300 : 200,
+				titleFontSize: 17
+			)
+			.onTapGesture {
+				self.selectedDeck = deck
+				self.isDeckSelected = true
+			}
+		}
+	}
+	
 	var scrollView: some View {
 		ScrollView(showsIndicators: false) {
-			LazyVStack(spacing: Self.verticalCellSpacing) {
-				ForEach(searchResults) { deck in
-					DeckCellWithGetButton(
-						deck: deck,
-						user: self.currentStore.user,
-						width: SCREEN_SIZE.width - Self.horizontalPadding * 2,
-						imageHeight: IS_IPAD ? 300 : 200,
-						titleFontSize: 17
-					)
-					.onTapGesture {
-						self.selectedDeck = deck
-						self.isDeckSelected = true
-					}
+			Group {
+				if #available(iOS 14.0, *) {
+					LazyVStack(spacing: Self.verticalCellSpacing) { content }
+				} else {
+					VStack(spacing: Self.verticalCellSpacing) { content }
 				}
 			}
 			.padding(.bottom, Self.horizontalPadding)

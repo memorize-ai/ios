@@ -10,6 +10,16 @@ struct CramRecapViewSectionPerformanceRow: View {
 		return "(\(count.formatted) section\(count == 1 ? "" : "s"))"
 	}
 	
+	var content: some View {
+		ForEach(sections) { section in
+			CramRecapViewSectionPerformanceRowSectionCell(
+				section: section,
+				rating: self.rating,
+				numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
+			)
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			HStack {
@@ -26,13 +36,11 @@ struct CramRecapViewSectionPerformanceRow: View {
 			}
 			.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				LazyHStack(alignment: .top) {
-					ForEach(sections) { section in
-						CramRecapViewSectionPerformanceRowSectionCell(
-							section: section,
-							rating: self.rating,
-							numberOfReviewedCardsForSection: self.numberOfReviewedCardsForSection
-						)
+				Group {
+					if #available(iOS 14.0, *) {
+						LazyHStack(alignment: .top) { content }
+					} else {
+						HStack(alignment: .top) { content }
 					}
 				}
 				.padding(.horizontal, 23)

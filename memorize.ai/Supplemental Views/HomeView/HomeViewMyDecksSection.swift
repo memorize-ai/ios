@@ -14,6 +14,15 @@ struct HomeViewMyDecksSection: View {
 		}
 	}
 	
+	var content: some View {
+		ForEach(decks) { deck in
+			OwnedDeckCell(
+				deck: deck,
+				imageBackgroundColor: Color.lightGrayBackground.opacity(0.5)
+			)
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			if !currentUser.decks.isEmpty {
@@ -29,12 +38,11 @@ struct HomeViewMyDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					LazyHStack(alignment: .top, spacing: 8) {
-						ForEach(decks) { deck in
-							OwnedDeckCell(
-								deck: deck,
-								imageBackgroundColor: Color.lightGrayBackground.opacity(0.5)
-							)
+					Group {
+						if #available(iOS 14.0, *) {
+							LazyHStack(alignment: .top, spacing: 8) { content }
+						} else {
+							HStack(alignment: .top, spacing: 8) { content }
 						}
 					}
 					.padding(.horizontal, 23)

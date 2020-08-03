@@ -23,6 +23,31 @@ struct MarketDeckViewSections: View {
 		))
 	}
 	
+	var content: some View {
+		Group {
+			if deck.hasUnsectionedCards {
+				MarketDeckViewSectionRow(section: deck.unsectionedSection)
+			}
+			ForEach(prefixedSections, content: MarketDeckViewSectionRow.init)
+			if numberOfSections > Self.sectionPrefix {
+				Button(action: {
+					self.isExpanded.toggle()
+				}) {
+					Text(
+						isExpanded
+							? "Show less"
+							: numberOfSections > MAX_NUMBER_OF_VIEWABLE_SECTIONS
+								? "Show \(MAX_NUMBER_OF_VIEWABLE_SECTIONS) sections"
+								: "Show all \(numberOfSections) sections"
+					)
+					.font(.muli(.bold, size: 18))
+					.foregroundColor(.extraPurple)
+				}
+				.padding(.top, 16)
+			}
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			MarketDeckViewSectionTitle("Sections")
@@ -33,26 +58,11 @@ struct MarketDeckViewSections: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				LazyVStack {
-					if deck.hasUnsectionedCards {
-						MarketDeckViewSectionRow(section: deck.unsectionedSection)
-					}
-					ForEach(prefixedSections, content: MarketDeckViewSectionRow.init)
-					if numberOfSections > Self.sectionPrefix {
-						Button(action: {
-							self.isExpanded.toggle()
-						}) {
-							Text(
-								isExpanded
-									? "Show less"
-									: numberOfSections > MAX_NUMBER_OF_VIEWABLE_SECTIONS
-										? "Show \(MAX_NUMBER_OF_VIEWABLE_SECTIONS) sections"
-										: "Show all \(numberOfSections) sections"
-							)
-							.font(.muli(.bold, size: 18))
-							.foregroundColor(.extraPurple)
-						}
-						.padding(.top, 16)
+				Group {
+					if #available(iOS 14.0, *) {
+						LazyVStack { content }
+					} else {
+						VStack { content }
 					}
 				}
 				.padding(16)

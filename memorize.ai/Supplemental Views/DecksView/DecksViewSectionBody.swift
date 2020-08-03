@@ -49,8 +49,8 @@ struct DecksViewSectionBody: View {
 		}
 	}
 	
-	var body: some View {
-		LazyVStack(spacing: 8) {
+	var content: some View {
+		Group {
 			if isUnlocked {
 				HStack {
 					if section.numberOfCards > 0 {
@@ -79,6 +79,16 @@ struct DecksViewSectionBody: View {
 					}
 				}
 				.padding(.top, 8)
+			}
+		}
+	}
+	
+	var body: some View {
+		Group {
+			if #available(iOS 14.0, *) {
+				LazyVStack(spacing: 8) { content }
+			} else {
+				VStack(spacing: 8) { content }
 			}
 		}
 		.padding(.top, 6)

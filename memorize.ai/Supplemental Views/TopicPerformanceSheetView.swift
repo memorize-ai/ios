@@ -29,6 +29,16 @@ struct TopicPerformanceSheetView: View {
 		}
 	}
 	
+	var content: some View {
+		ForEach(decks) { deck in
+			DeckRow(
+				deck: deck,
+				unselectedBackgroundColor: .white,
+				onClick: self.hide
+			)
+		}
+	}
+	
 	var body: some View {
 		VStack(spacing: 0) {
 			ZStack {
@@ -61,16 +71,10 @@ struct TopicPerformanceSheetView: View {
 									.foregroundColor(.gray)
 							}
 							.frame(height: 150)
+						} else if #available(iOS 14.0, *) {
+							LazyVStack(spacing: 4) { content }
 						} else {
-							LazyVStack(spacing: 4) {
-								ForEach(decks) { deck in
-									DeckRow(
-										deck: deck,
-										unselectedBackgroundColor: .white,
-										onClick: self.hide
-									)
-								}
-							}
+							VStack(spacing: 4) { content }
 						}
 					}
 					.padding(.top, -12)

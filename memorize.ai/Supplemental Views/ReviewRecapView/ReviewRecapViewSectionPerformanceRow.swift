@@ -28,8 +28,8 @@ struct ReviewRecapViewSectionPerformanceRow: View {
 		}
 	}
 	
-	var body: some View {
-		LazyVStack(spacing: 12) {
+	var content: some View {
+		Group {
 			HStack {
 				Text("Frequently \(rating.title.lowercased())")
 					.font(.muli(.extraBold, size: 15))
@@ -74,6 +74,16 @@ struct ReviewRecapViewSectionPerformanceRow: View {
 					)
 				}
 				.padding(.horizontal, 23)
+			}
+		}
+	}
+	
+	var body: some View {
+		Group {
+			if #available(iOS 14.0, *) {
+				LazyVStack(spacing: 12) { content }
+			} else {
+				VStack(spacing: 12) { content }
 			}
 		}
 		.animation(.linear(duration: 0.15))

@@ -43,8 +43,12 @@ struct HomeViewTopicPerformanceList: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			LazyHStack {
-				interests
+			Group {
+				if #available(iOS 14.0, *) {
+					LazyHStack { interests }
+				} else {
+					HStack { interests }
+				}
 			}
 			.padding(.horizontal, 23)
 		}

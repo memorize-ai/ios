@@ -6,6 +6,20 @@ struct HomeViewRecommendedDecksSection: View {
 	@State var selectedDeck: Deck!
 	@State var isDeckSelected = false
 	
+	var content: some View {
+		ForEach(currentStore.recommendedDecks) { deck in
+			DeckCellWithGetButton(
+				deck: deck,
+				user: self.currentStore.user,
+				width: 180
+			)
+			.onTapGesture {
+				self.selectedDeck = deck
+				self.isDeckSelected = true
+			}
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			if !currentStore.recommendedDecks.isEmpty {
@@ -21,17 +35,11 @@ struct HomeViewRecommendedDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					LazyHStack(alignment: .top) {
-						ForEach(currentStore.recommendedDecks) { deck in
-							DeckCellWithGetButton(
-								deck: deck,
-								user: self.currentStore.user,
-								width: 180
-							)
-							.onTapGesture {
-								self.selectedDeck = deck
-								self.isDeckSelected = true
-							}
+					Group {
+						if #available(iOS 14.0, *) {
+							LazyHStack(alignment: .top) { content }
+						} else {
+							HStack(alignment: .top) { content }
 						}
 					}
 					.padding(.horizontal, 23)

@@ -30,6 +30,16 @@ struct CramRecapViewCardPerformanceRow: View {
 		}
 	}
 	
+	var content: some View {
+		ForEach(cards) { card in
+			CramRecapViewCardPerformanceRowCardCell(
+				card: card,
+				rating: self.rating,
+				shouldShowSectionName: self.shouldShowSectionName
+			)
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			HStack {
@@ -64,13 +74,11 @@ struct CramRecapViewCardPerformanceRow: View {
 			.padding(.horizontal, 23)
 			if isExpanded && !cards.isEmpty {
 				ScrollView(.horizontal, showsIndicators: false) {
-					LazyHStack(alignment: .top) {
-						ForEach(cards) { card in
-							CramRecapViewCardPerformanceRowCardCell(
-								card: card,
-								rating: self.rating,
-								shouldShowSectionName: self.shouldShowSectionName
-							)
+					Group {
+						if #available(iOS 14.0, *) {
+							LazyHStack(alignment: .top) { content }
+						} else {
+							HStack(alignment: .top) { content }
 						}
 					}
 					.padding(.horizontal, 23)

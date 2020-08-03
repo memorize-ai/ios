@@ -29,6 +29,43 @@ struct EditCardViewAddSectionPopUp: View {
 		}
 	}
 	
+	var content: some View {
+		Group {
+			Button(action: {
+				self.card.section = nil
+			}) {
+				HStack(spacing: 20) {
+					if card.sectionId == nil {
+						Image.blueCheck
+							.resizable()
+							.renderingMode(.original)
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 20)
+					}
+					Text("Unsectioned")
+						.font(.muli(.semiBold, size: 17))
+						.foregroundColor(
+							card.sectionId == nil
+								? .darkBlue
+								: .darkGray
+						)
+					Spacer()
+					Text("(\(deck.numberOfUnsectionedCards.formatted))")
+						.font(.muli(.semiBold, size: 17))
+						.foregroundColor(.darkGray)
+				}
+				.frame(height: 22)
+				.padding(.leading, 25)
+				.padding(.trailing, 30)
+				.padding(.vertical, 12)
+			}
+			if !deck.sections.isEmpty {
+				PopUpDivider(horizontalPadding: 20)
+			}
+			sectionList
+		}
+	}
+	
 	var body: some View {
 		PopUp(
 			isShowing: self.$model.isAddSectionPopUpShowing,
@@ -59,39 +96,10 @@ struct EditCardViewAddSectionPopUp: View {
 				.padding(.horizontal, 30)
 				.padding(.vertical)
 			}
-			LazyVStack(spacing: 0) {
-				Button(action: {
-					self.card.section = nil
-				}) {
-					HStack(spacing: 20) {
-						if card.sectionId == nil {
-							Image.blueCheck
-								.resizable()
-								.renderingMode(.original)
-								.aspectRatio(contentMode: .fit)
-								.frame(width: 20)
-						}
-						Text("Unsectioned")
-							.font(.muli(.semiBold, size: 17))
-							.foregroundColor(
-								card.sectionId == nil
-									? .darkBlue
-									: .darkGray
-							)
-						Spacer()
-						Text("(\(deck.numberOfUnsectionedCards.formatted))")
-							.font(.muli(.semiBold, size: 17))
-							.foregroundColor(.darkGray)
-					}
-					.frame(height: 22)
-					.padding(.leading, 25)
-					.padding(.trailing, 30)
-					.padding(.vertical, 12)
-				}
-				if !deck.sections.isEmpty {
-					PopUpDivider(horizontalPadding: 20)
-				}
-				sectionList
+			if #available(iOS 14.0, *) {
+				LazyVStack(spacing: 0) { content }
+			} else {
+				VStack(spacing: 0) { content }
 			}
 		}
 	}

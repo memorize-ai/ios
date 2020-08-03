@@ -7,22 +7,30 @@ struct MarketDeckViewSimilarDecks: View {
 	@State var selectedDeck: Deck!
 	@State var isDeckSelected = false
 	
+	var similarDecks: some View {
+		ForEach(deck.similarDecks) { similarDeck in
+			DeckCellWithGetButton(
+				deck: similarDeck,
+				user: self.currentStore.user,
+				width: 180
+			)
+			.onTapGesture {
+				self.selectedDeck = similarDeck
+				self.isDeckSelected = true
+			}
+		}
+	}
+	
 	var body: some View {
 		VStack(spacing: 16) {
 			MarketDeckViewSectionTitle("Similar decks")
 				.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				LazyHStack(alignment: .top) {
-					ForEach(deck.similarDecks) { similarDeck in
-						DeckCellWithGetButton(
-							deck: similarDeck,
-							user: self.currentStore.user,
-							width: 180
-						)
-						.onTapGesture {
-							self.selectedDeck = similarDeck
-							self.isDeckSelected = true
-						}
+				Group {
+					if #available(iOS 14.0, *) {
+						LazyHStack(alignment: .top) { similarDecks }
+					} else {
+						HStack(alignment: .top) { similarDecks }
 					}
 				}
 				.padding(.horizontal, 23)

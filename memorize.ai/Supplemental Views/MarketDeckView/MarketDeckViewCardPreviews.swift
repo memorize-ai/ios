@@ -6,15 +6,23 @@ struct MarketDeckViewCardPreviews: View {
 	
 	@EnvironmentObject var deck: Deck
 	
+	var cards: some View {
+		ForEach(deck.previewCards) { card in
+			CardPreviewCell(card: card)
+				.frame(
+					width: Self.cellWidth,
+					height: Self.cellHeight
+				)
+		}
+	}
+	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			LazyHStack {
-				ForEach(deck.previewCards) { card in
-					CardPreviewCell(card: card)
-						.frame(
-							width: Self.cellWidth,
-							height: Self.cellHeight
-						)
+			Group {
+				if #available(iOS 14.0, *) {
+					LazyHStack { cards }
+				} else {
+					HStack { cards }
 				}
 			}
 			.padding(.horizontal, 23)
