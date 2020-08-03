@@ -2,12 +2,6 @@ import SwiftUI
 
 struct PublishDeckViewContentBox: View {
 	static let maxWidth = SCREEN_SIZE.width - (12 + 20) * 2
-	static let topicCellSpacing: CGFloat = 8
-	static let numberOfTopicColumns = numberOfGridColumns(
-		width: maxWidth,
-		cellWidth: TopicCell.dimension,
-		horizontalSpacing: topicCellSpacing
-	)
 	static let imageDimension = min(160, maxWidth)
 	
 	@EnvironmentObject var currentStore: CurrentStore
