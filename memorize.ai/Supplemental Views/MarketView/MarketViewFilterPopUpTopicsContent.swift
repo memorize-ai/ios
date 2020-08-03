@@ -1,5 +1,4 @@
 import SwiftUI
-import QGrid
 
 struct MarketViewFilterPopUpTopicsContent: View {
 	static let gridWidth = SCREEN_SIZE.width - 51 - 8 * 2
@@ -17,7 +16,7 @@ struct MarketViewFilterPopUpTopicsContent: View {
 	let isTopicSelected: (Topic) -> Bool
 	let toggleTopicSelect: (Topic) -> Void
 	
-	func topicCellToggleSelect(forTopic topic: Topic) {
+	func toggleSelect(forTopic topic: Topic) {
 		if topicsFilter == nil {
 			topicsFilter = currentStore.topics
 		}
@@ -25,25 +24,14 @@ struct MarketViewFilterPopUpTopicsContent: View {
 	}
 	
 	var body: some View {
-		QGrid(
-			currentStore.topics,
-			columns: Self.numberOfColumns,
-			vSpacing: Self.cellSpacing,
-			hSpacing: Self.cellSpacing,
-			vPadding: Self.cellSpacing
-		) { topic in
-			TopicCell(
-				topic: topic,
-				isSelected: self.isTopicSelected(topic)
-			) {
-				self.topicCellToggleSelect(forTopic: topic)
-			}
+		ScrollView {
+			TopicGrid(
+				topics: currentStore.topics,
+				isSelected: isTopicSelected,
+				toggleSelect: toggleSelect
+			)
+			.padding(.vertical, TopicGrid.spacing)
 		}
-		.frame(width: widthOfGrid(
-			columns: Self.numberOfColumns,
-			cellWidth: TopicCell.dimension,
-			spacing: Self.cellSpacing
-		))
 	}
 }
 
