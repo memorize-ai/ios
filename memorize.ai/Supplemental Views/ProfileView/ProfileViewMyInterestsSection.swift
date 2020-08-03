@@ -1,14 +1,6 @@
 import SwiftUI
 
 struct ProfileViewMyInterestsSection: View {
-	static let gridWidth = SCREEN_SIZE.width - 8 * 4
-	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = numberOfGridColumns(
-		width: gridWidth,
-		cellWidth: TopicCell.dimension,
-		horizontalSpacing: cellSpacing
-	)
-	
 	@EnvironmentObject var currentStore: CurrentStore
 	
 	@ObservedObject var user: User

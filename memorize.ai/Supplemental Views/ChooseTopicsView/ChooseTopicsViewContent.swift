@@ -1,13 +1,6 @@
 import SwiftUI
 
 struct ChooseTopicsViewContent: View {
-	static let cellSpacing: CGFloat = 8
-	static let numberOfColumns = numberOfGridColumns(
-		width: SCREEN_SIZE.width - 32,
-		cellWidth: TopicCell.dimension,
-		horizontalSpacing: cellSpacing
-	)
-	
 	@EnvironmentObject var currentStore: CurrentStore
 	@EnvironmentObject var model: ChooseTopicsViewModel
 	
