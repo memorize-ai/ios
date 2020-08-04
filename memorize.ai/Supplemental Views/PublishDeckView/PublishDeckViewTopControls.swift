@@ -24,13 +24,16 @@ struct PublishDeckViewTopControls: View {
 	}
 	
 	var body: some View {
-		HStack(spacing: 22) {
-			Button(action: goBack) {
-				XButton(.transparentWhite, height: 18)
+		HStack(spacing: 0) {
+			HStack(spacing: 22) {
+				Button(action: goBack) {
+					XButton(.transparentWhite, height: 18)
+				}
+				Text(title)
+					.font(.muli(.bold, size: 20))
+					.foregroundColor(.white)
 			}
-			Text(title)
-				.font(.muli(.bold, size: 20))
-				.foregroundColor(.white)
+			.layoutPriority(1)
 			Spacer()
 			Button(action: {
 				self.model.publish(
@@ -68,6 +71,7 @@ struct PublishDeckViewTopControls_Previews: PreviewProvider {
 	static var previews: some View {
 		PublishDeckViewTopControls()
 			.environmentObject(PublishDeckViewModel())
+			.background(Color.black)
 	}
 }
 #endif

@@ -63,7 +63,7 @@ struct PublishDeckView: View {
 					addedHeight: geometry.safeAreaInsets.top
 				)
 				.edgesIgnoringSafeArea(.all)
-				VStack {
+				VStack(spacing: 16) {
 					PublishDeckViewTopControls()
 						.environmentObject(self.model)
 						.padding(.horizontal, 23)
