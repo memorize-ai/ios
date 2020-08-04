@@ -84,15 +84,9 @@ struct DecksViewSectionBody: View {
 	}
 	
 	var body: some View {
-		Group {
-			if #available(iOS 14.0, *) {
-				LazyVStack(spacing: 8) { content }
-			} else {
-				VStack(spacing: 8) { content }
-			}
-		}
-		.padding(.top, 6)
-		.animation(.linear(duration: 0.1))
+		TryLazyVStack(spacing: 8) { content }
+			.padding(.top, 6)
+			.animation(.linear(duration: 0.1))
 	}
 }
 

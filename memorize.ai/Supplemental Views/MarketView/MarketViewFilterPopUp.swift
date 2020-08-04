@@ -33,11 +33,13 @@ struct MarketViewFilterPopUp: View {
 				Group {
 					switch filterPopUpSideBarSelection {
 					case .topics:
-						MarketViewFilterPopUpTopicsContent(
-							topicsFilter: $topicsFilter,
-							isTopicSelected: isTopicSelected,
-							toggleTopicSelect: toggleTopicSelect
-						)
+						if isFilterPopUpShowing {
+							MarketViewFilterPopUpTopicsContent(
+								topicsFilter: $topicsFilter,
+								isTopicSelected: isTopicSelected,
+								toggleTopicSelect: toggleTopicSelect
+							)
+						}
 					case .rating:
 						MarketViewFilterPopUpContentWithSlider(
 							value: $ratingFilter,

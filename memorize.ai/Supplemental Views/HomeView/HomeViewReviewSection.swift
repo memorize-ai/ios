@@ -10,12 +10,6 @@ struct HomeViewReviewSection: View {
 		return "You have \(dueCardCount.nilIfZero?.formatted ?? "no") card\(dueCardCount == 1 ? "" : "s") due"
 	}
 	
-	var deckList: some View {
-		ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
-			HomeViewReviewSectionDeckRow(deck: deck)
-		}
-	}
-	
 	var body: some View {
 		CustomRectangle(
 			background: Color.white.opacity(0.8),
@@ -55,11 +49,9 @@ struct HomeViewReviewSection: View {
 					}
 				}
 				.padding([.horizontal, .top])
-				Group {
-					if #available(iOS 14.0, *) {
-						LazyVStack(spacing: 0) { deckList }
-					} else {
-						VStack(spacing: 0) { deckList }
+				TryLazyVStack(spacing: 0) {
+					ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
+						HomeViewReviewSectionDeckRow(deck: deck)
 					}
 				}
 				.padding(.bottom, 8)

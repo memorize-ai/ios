@@ -78,14 +78,8 @@ struct ReviewRecapViewCardPerformanceRow: View {
 	}
 	
 	var body: some View {
-		Group {
-			if #available(iOS 14.0, *) {
-				LazyVStack(spacing: 12) { content }
-			} else {
-				VStack(spacing: 12) { content }
-			}
-		}
-		.animation(.linear(duration: 0.15))
+		TryLazyVStack(spacing: 12) { content }
+			.animation(.linear(duration: 0.15))
 	}
 }
 

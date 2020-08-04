@@ -35,14 +35,8 @@ struct HomeViewRecommendedDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					Group {
-						if #available(iOS 14.0, *) {
-							LazyHStack(alignment: .top) { content }
-						} else {
-							HStack(alignment: .top) { content }
-						}
-					}
-					.padding(.horizontal, 23)
+					TryLazyHStack(alignment: .top) { content }
+						.padding(.horizontal, 23)
 				}
 			}
 			if isDeckSelected {

@@ -58,14 +58,8 @@ struct MarketDeckViewSections: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				Group {
-					if #available(iOS 14.0, *) {
-						LazyVStack { content }
-					} else {
-						VStack { content }
-					}
-				}
-				.padding(16)
+				TryLazyVStack { content }
+					.padding(16)
 			}
 		}
 		.padding(.horizontal, 23)

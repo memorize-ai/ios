@@ -96,11 +96,7 @@ struct AddCardsViewAddSectionPopUp: View {
 				.padding(.horizontal, 30)
 				.padding(.vertical)
 			}
-			if #available(iOS 14.0, *) {
-				LazyVStack(spacing: 0) { content }
-			} else {
-				VStack(spacing: 0) { content }
-			}
+			TryLazyVStack(spacing: 0) { content }
 		}
 	}
 }

@@ -53,13 +53,7 @@ struct DecksViewSections: View {
 	}
 	
 	var body: some View {
-		Group {
-			if #available(iOS 14.0, *) {
-				LazyVStack(spacing: 16) { content }
-			} else {
-				VStack(spacing: 16) { content }
-			}
-		}
+		TryLazyVStack(spacing: 16) { content }
 	}
 }
 

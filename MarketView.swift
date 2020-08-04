@@ -48,14 +48,8 @@ struct MarketView: View {
 	
 	var scrollView: some View {
 		ScrollView(showsIndicators: false) {
-			Group {
-				if #available(iOS 14.0, *) {
-					LazyVStack(spacing: Self.verticalCellSpacing) { content }
-				} else {
-					VStack(spacing: Self.verticalCellSpacing) { content }
-				}
-			}
-			.padding(.bottom, Self.horizontalPadding)
+			TryLazyVStack(spacing: Self.verticalCellSpacing) { content }
+				.padding(.bottom, Self.horizontalPadding)
 		}
 	}
 	

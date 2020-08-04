@@ -38,14 +38,8 @@ struct HomeViewMyDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					Group {
-						if #available(iOS 14.0, *) {
-							LazyHStack(alignment: .top, spacing: 8) { content }
-						} else {
-							HStack(alignment: .top, spacing: 8) { content }
-						}
-					}
-					.padding(.horizontal, 23)
+					TryLazyHStack(alignment: .top, spacing: 8) { content }
+						.padding(.horizontal, 23)
 				}
 				.padding(.bottom)
 			}

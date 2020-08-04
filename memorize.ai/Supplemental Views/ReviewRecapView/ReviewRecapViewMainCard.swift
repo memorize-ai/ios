@@ -70,14 +70,8 @@ struct ReviewRecapViewMainCard: View {
 						.padding(.horizontal)
 					} else {
 						ScrollView(.horizontal, showsIndicators: false) {
-							Group {
-								if #available(iOS 14.0, *) {
-									LazyHStack { content }
-								} else {
-									HStack { content }
-								}
-							}
-							.padding(.horizontal, 8)
+							TryLazyHStack { content }
+								.padding(.horizontal, 8)
 						}
 						.padding(.top, 8)
 					}

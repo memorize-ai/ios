@@ -74,15 +74,9 @@ struct CramRecapViewCardPerformanceRow: View {
 			.padding(.horizontal, 23)
 			if isExpanded && !cards.isEmpty {
 				ScrollView(.horizontal, showsIndicators: false) {
-					Group {
-						if #available(iOS 14.0, *) {
-							LazyHStack(alignment: .top) { content }
-						} else {
-							HStack(alignment: .top) { content }
-						}
-					}
-					.padding(.horizontal, 23)
-					.padding(.vertical, 1)
+					TryLazyHStack(alignment: .top) { content }
+						.padding(.horizontal, 23)
+						.padding(.vertical, 1)
 				}
 			}
 		}

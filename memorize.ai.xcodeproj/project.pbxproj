@@ -229,6 +229,8 @@
 		4DBF49E9236595BC00F942A8 /* ChooseTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */; };
 		4DBFB7B92369553500D75B45 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7B82369553500D75B45 /* TopicCell.swift */; };
 		4DBFB7BC2369617D00D75B45 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBFB7BB2369617D00D75B45 /* Topic.swift */; };
+		4DC4CB5A24D8D75800BDFAD6 /* TryLazyVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4CB5924D8D75800BDFAD6 /* TryLazyVStack.swift */; };
+		4DC4CB5C24D8D8EB00BDFAD6 /* TryLazyHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4CB5B24D8D8EB00BDFAD6 /* TryLazyHStack.swift */; };
 		4DC6435B2366D80400DEEED1 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6435A2366D80400DEEED1 /* Preview.swift */; };
 		4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115B2363E46400CCFF98 /* Asterisk.swift */; };
 		4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */; };
@@ -541,6 +543,8 @@
 		4DBF49E8236595BC00F942A8 /* ChooseTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsView.swift; sourceTree = "<group>"; };
 		4DBFB7B82369553500D75B45 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		4DBFB7BB2369617D00D75B45 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		4DC4CB5924D8D75800BDFAD6 /* TryLazyVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryLazyVStack.swift; sourceTree = "<group>"; };
+		4DC4CB5B24D8D8EB00BDFAD6 /* TryLazyHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryLazyHStack.swift; sourceTree = "<group>"; };
 		4DC6435A2366D80400DEEED1 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		4DC8115B2363E46400CCFF98 /* Asterisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asterisk.swift; sourceTree = "<group>"; };
 		4DC8115D23641D6600CCFF98 /* AuthErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorCode.swift; sourceTree = "<group>"; };
@@ -1188,6 +1192,15 @@
 			path = Topic;
 			sourceTree = "<group>";
 		};
+		4DC4CB5824D8D74100BDFAD6 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				4DC4CB5924D8D75800BDFAD6 /* TryLazyVStack.swift */,
+				4DC4CB5B24D8D8EB00BDFAD6 /* TryLazyHStack.swift */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
 		4DD2512523627CEE00A83509 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1289,6 +1302,7 @@
 		4DF2E0F3235E440700468CD1 /* Supplemental Views */ = {
 			isa = PBXGroup;
 			children = (
+				4DC4CB5824D8D74100BDFAD6 /* Stack */,
 				4D64BCC42367CFA700F6FD07 /* General */,
 				4D5C404A23C9041B00511B7C /* Graph */,
 				4D9AAEBC2385276B00C85EC2 /* User */,
@@ -1722,6 +1736,7 @@
 				4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */,
 				4DD5FE8623870ED400E70251 /* PopUpButton.swift in Sources */,
 				4DD5FE9E2389E22000E70251 /* Deck+Search.swift in Sources */,
+				4DC4CB5A24D8D75800BDFAD6 /* TryLazyVStack.swift in Sources */,
 				4D9D931223DF66250008B614 /* ProfileViewMainCard.swift in Sources */,
 				4D32A52C2368F0E90072AA70 /* PostSignUpView.swift in Sources */,
 				4D6BA53023ACB23500D3F9D1 /* AddCardsViewNavigationLink.swift in Sources */,
@@ -1915,6 +1930,7 @@
 				4DD34CD22362D0080007E3E6 /* ActivityIndicator.swift in Sources */,
 				4DEB359A236AC3C800E3DBC4 /* Int.swift in Sources */,
 				4DC8115E23641D6600CCFF98 /* AuthErrorCode.swift in Sources */,
+				4DC4CB5C24D8D8EB00BDFAD6 /* TryLazyHStack.swift in Sources */,
 				4D51F5402385DF9300C6B59B /* MarketViewTopButtons.swift in Sources */,
 				4D9D933023E0C1F30008B614 /* ReviewRecapViewSectionPerformanceRow.swift in Sources */,
 				4DF4595A2399ED4400A78ADF /* PublishDeckViewNavigationLink.swift in Sources */,

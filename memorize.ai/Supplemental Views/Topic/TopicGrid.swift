@@ -49,37 +49,35 @@ struct TopicGrid: View {
 	}
 	
 	var body: some View {
-		Group {
-			if #available(iOS 14.0, *) {
-				LazyVGrid(
-					columns: Self.columns as? [GridItem] ?? [],
-					spacing: Self.spacing
-				) {
-					ForEach(topics) { topic in
-						TopicCell(
-							topic: topic,
-							isSelected: isSelected(topic),
-							toggleSelect: { toggleSelect(topic) }
-						)
-					}
+		if #available(iOS 14.0, *) {
+			AnyView(LazyVGrid(
+				columns: Self.columns as? [GridItem] ?? [],
+				spacing: Self.spacing
+			) {
+				ForEach(topics) { topic in
+					TopicCell(
+						topic: topic,
+						isSelected: isSelected(topic),
+						toggleSelect: { toggleSelect(topic) }
+					)
 				}
-			} else {
-				GeometryReader { geometry in
-					VStack(spacing: Self.spacing) {
-						ForEach(rows(geometry: geometry)) { row in
-							HStack(spacing: Self.spacing) {
-								ForEach(row.topics) { topic in
-									TopicCell(
-										topic: topic,
-										isSelected: isSelected(topic),
-										toggleSelect: { toggleSelect(topic) }
-									)
-								}
+			})
+		} else {
+			AnyView(GeometryReader { geometry in
+				VStack(spacing: Self.spacing) {
+					ForEach(rows(geometry: geometry)) { row in
+						HStack(spacing: Self.spacing) {
+							ForEach(row.topics) { topic in
+								TopicCell(
+									topic: topic,
+									isSelected: isSelected(topic),
+									toggleSelect: { toggleSelect(topic) }
+								)
 							}
 						}
 					}
 				}
-			}
+			})
 		}
 	}
 }

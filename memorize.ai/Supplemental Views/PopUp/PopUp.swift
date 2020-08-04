@@ -50,22 +50,22 @@ struct PopUp<Content: View>: View {
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			Color.black
-				.opacity(self.isShowing ? 0.2 : 0)
-				.onTapGesture(perform: self.hide)
+				.opacity(isShowing ? 0.2 : 0)
+				.onTapGesture(perform: hide)
 				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 0) {
-				if self.contentHeight > self.maxContentHeight {
-					ScrollView {
-						VStack(spacing: 0) {
-							self.content
-						}
-					}
-					.frame(height: self.maxContentHeight)
-				} else {
-					self.content
-				}
+//				if contentHeight > maxContentHeight {
+//					ScrollView {
+//						VStack(spacing: 0) {
+//							content
+//						}
+//					}
+//					.frame(height: self.maxContentHeight)
+//				} else {
+					content
+//				}
 				PopUpDivider(horizontalPadding: 0)
-				Button(action: self.hide) {
+				Button(action: hide) {
 					ZStack(alignment: .top) {
 						Color.lightGrayBackground
 						HStack(spacing: 20) {
@@ -84,9 +84,9 @@ struct PopUp<Content: View>: View {
 			}
 			.background(Color.white)
 			.offset(
-				y: self.isShowing
+				y: isShowing
 					? 0
-					: self.realContentHeight + geometry.safeAreaInsets.bottom + 51
+					: realContentHeight + geometry.safeAreaInsets.bottom + 51
 			)
 		}
 		.edgesIgnoringSafeArea(.all)

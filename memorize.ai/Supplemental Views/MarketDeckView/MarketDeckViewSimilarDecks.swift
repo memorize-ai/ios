@@ -26,14 +26,8 @@ struct MarketDeckViewSimilarDecks: View {
 			MarketDeckViewSectionTitle("Similar decks")
 				.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				Group {
-					if #available(iOS 14.0, *) {
-						LazyHStack(alignment: .top) { similarDecks }
-					} else {
-						HStack(alignment: .top) { similarDecks }
-					}
-				}
-				.padding(.horizontal, 23)
+				TryLazyHStack(alignment: .top) { similarDecks }
+					.padding(.horizontal, 23)
 			}
 			if isDeckSelected {
 				NavigateTo(

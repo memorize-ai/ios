@@ -27,27 +27,19 @@ struct HomeViewTopicPerformanceList: View {
 		}
 	}
 	
-	var interests: some View {
-		ForEach(currentStore.interests, id: \.self) { topic in
-			Group {
-				if topic == nil {
-					LoadingTopicCell(
-						dimension: Self.cellDimension
-					)
-				} else {
-					self.topicCell(forTopic: topic!)
-				}
-			}
-		}
-	}
-	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			Group {
-				if #available(iOS 14.0, *) {
-					LazyHStack { interests }
-				} else {
-					HStack { interests }
+			TryLazyHStack {
+				ForEach(currentStore.interests, id: \.self) { topic in
+					Group {
+						if topic == nil {
+							LoadingTopicCell(
+								dimension: Self.cellDimension
+							)
+						} else {
+							self.topicCell(forTopic: topic!)
+						}
+					}
 				}
 			}
 			.padding(.horizontal, 23)

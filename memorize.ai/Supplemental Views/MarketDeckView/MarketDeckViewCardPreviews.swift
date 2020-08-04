@@ -18,14 +18,8 @@ struct MarketDeckViewCardPreviews: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			Group {
-				if #available(iOS 14.0, *) {
-					LazyHStack { cards }
-				} else {
-					HStack { cards }
-				}
-			}
-			.padding(.horizontal, 23)
+			TryLazyHStack { cards }
+				.padding(.horizontal, 23)
 		}
 		.onAppear {
 			self.deck.loadPreviewCards()

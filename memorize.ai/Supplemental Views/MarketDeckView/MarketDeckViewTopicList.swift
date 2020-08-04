@@ -7,10 +7,7 @@ struct MarketDeckViewTopicList: View {
 	@EnvironmentObject var deck: Deck
 	
 	var topics: some View {
-		ForEach(
-			deck.topics(in: currentStore.topics),
-			id: \.self
-		) { topic in
+		ForEach(deck.topics(in: currentStore.topics), id: \.self) { topic in
 			Group {
 				if topic == nil {
 					LoadingTopicCell(
@@ -28,14 +25,8 @@ struct MarketDeckViewTopicList: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			Group {
-				if #available(iOS 14.0, *) {
-					LazyHStack { topics }
-				} else {
-					HStack { topics }
-				}
-			}
-			.padding(.horizontal, 23)
+			TryLazyHStack { topics }
+				.padding(.horizontal, 23)
 		}
 	}
 }
