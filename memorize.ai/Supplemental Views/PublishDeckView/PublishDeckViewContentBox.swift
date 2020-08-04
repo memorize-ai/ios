@@ -98,7 +98,7 @@ struct PublishDeckViewContentBox: View {
 					TopicGrid(
 						width: SCREEN_SIZE.width - (12 + 20) * 2,
 						topics: currentStore.topics,
-						isSelected: model.isTopicSelected,
+						isSelected: { self.model.isTopicSelected($0) }, // Recreate function instance each re-render
 						toggleSelect: model.toggleTopicSelect
 					)
 					.padding(.vertical, TopicGrid.spacing)
