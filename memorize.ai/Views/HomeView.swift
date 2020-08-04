@@ -18,12 +18,12 @@ struct HomeView: View {
 							HomeViewReviewSection(
 								user: self.currentStore.user
 							)
-//							HomeViewMyDecksSection(
-//								currentUser: self.currentStore.user
-//							)
-//							.padding(.top, 5)
-//							HomeViewRecommendedDecksSection()
-//								.padding(.top, 5)
+							HomeViewMyDecksSection(
+								currentUser: self.currentStore.user
+							)
+							.padding(.top, 5)
+							HomeViewRecommendedDecksSection()
+								.padding(.top, 5)
 						}
 						.frame(maxWidth: .infinity)
 					}

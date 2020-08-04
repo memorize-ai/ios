@@ -54,16 +54,16 @@ struct PopUp<Content: View>: View {
 				.onTapGesture(perform: hide)
 				.edgesIgnoringSafeArea(.all)
 			VStack(spacing: 0) {
-//				if contentHeight > maxContentHeight {
-//					ScrollView {
-//						VStack(spacing: 0) {
-//							content
-//						}
-//					}
-//					.frame(height: self.maxContentHeight)
-//				} else {
+				if contentHeight > maxContentHeight {
+					ScrollView {
+						VStack(spacing: 0) {
+							content
+						}
+					}
+					.frame(height: maxContentHeight)
+				} else {
 					content
-//				}
+				}
 				PopUpDivider(horizontalPadding: 0)
 				Button(action: hide) {
 					ZStack(alignment: .top) {
