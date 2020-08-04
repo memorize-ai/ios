@@ -270,6 +270,7 @@
 		4DDACF0F239601940073C004 /* MarketDeckViewCardPreviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDACF0E239601940073C004 /* MarketDeckViewCardPreviews.swift */; };
 		4DDB181823FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB181723FF116A00C87251 /* HomeViewReviewSectionDeckRow.swift */; };
 		4DDFF1BE2374F8E900999FD5 /* LoadingState in Frameworks */ = {isa = PBXBuildFile; productRef = 4DDFF1BD2374F8E900999FD5 /* LoadingState */; };
+		4DE43C0224D9376F0006343E /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 4DE43C0124D9376F0006343E /* QGrid */; };
 		4DE97222236FF61500616E42 /* RecommendedDecksViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97221236FF61500616E42 /* RecommendedDecksViewContent.swift */; };
 		4DE97224236FF63600616E42 /* RecommendedDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */; };
 		4DE972262370148A00616E42 /* SpecificRoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE972252370148A00616E42 /* SpecificRoundedCorners.swift */; };
@@ -624,6 +625,7 @@
 				4D86E2FB23EC893400073998 /* Audio in Frameworks */,
 				4DB9FF4C2396D62A00B8DD38 /* WebView in Frameworks */,
 				4DD5FE9C2389DE8500E70251 /* Alamofire in Frameworks */,
+				4DE43C0224D9376F0006343E /* QGrid in Frameworks */,
 				4DB9FF4F2396D7D300B8DD38 /* HTML in Frameworks */,
 				4DC923A623458F1900F901EA /* SwiftUIX in Frameworks */,
 				05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */,
@@ -1413,6 +1415,7 @@
 				4DB9FF4B2396D62A00B8DD38 /* WebView */,
 				4DB9FF4E2396D7D300B8DD38 /* HTML */,
 				4D86E2FA23EC893400073998 /* Audio */,
+				4DE43C0124D9376F0006343E /* QGrid */,
 			);
 			productName = memorize.ai;
 			productReference = 4DAA4F39233DE1A600EF7467 /* memorize.ai.app */;
@@ -1497,6 +1500,7 @@
 				4DB9FF4A2396D62A00B8DD38 /* XCRemoteSwiftPackageReference "WebView" */,
 				4DB9FF4D2396D7D300B8DD38 /* XCRemoteSwiftPackageReference "HTML" */,
 				4D86E2F923EC893400073998 /* XCRemoteSwiftPackageReference "Audio" */,
+				4DE43C0024D9376F0006343E /* XCRemoteSwiftPackageReference "QGrid" */,
 			);
 			productRefGroup = 4DAA4F3A233DE1A600EF7467 /* Products */;
 			projectDirPath = "";
@@ -2340,6 +2344,14 @@
 				kind = branch;
 			};
 		};
+		4DE43C0024D9376F0006343E /* XCRemoteSwiftPackageReference "QGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Q-Mobile/QGrid.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2377,6 +2389,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4DDFF1BC2374F8E900999FD5 /* XCRemoteSwiftPackageReference "LoadingState" */;
 			productName = LoadingState;
+		};
+		4DE43C0124D9376F0006343E /* QGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DE43C0024D9376F0006343E /* XCRemoteSwiftPackageReference "QGrid" */;
+			productName = QGrid;
 		};
 /* End XCSwiftPackageProductDependency section */
 

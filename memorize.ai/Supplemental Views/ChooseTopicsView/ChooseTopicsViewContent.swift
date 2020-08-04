@@ -11,6 +11,7 @@ struct ChooseTopicsViewContent: View {
 				Spacer()
 			} else {
 				TopicGrid(
+					width: SCREEN_SIZE.width - 32,
 					topics: currentStore.topics,
 					isSelected: model.isTopicSelected,
 					toggleSelect: model.toggleTopicSelect

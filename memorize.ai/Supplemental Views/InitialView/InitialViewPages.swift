@@ -8,9 +8,10 @@ struct InitialViewPages: View {
 		GeometryReader { geometry in
 			PaginationView(
 				pages: InitialView.pages.map { page in
-					page.content(geometry)
-						.edgesIgnoringSafeArea(.all)
-						.eraseToAnyView()
+					AnyView(
+						page.content(geometry)
+							.edgesIgnoringSafeArea(.all)
+					)
 				},
 				showsIndicators: false
 			)

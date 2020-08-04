@@ -92,9 +92,11 @@ struct PublishDeckViewContentBox: View {
 						Text("If you want your deck to be recommended, you must select relevant topics")
 							.font(.muli(.bold, size: 13))
 							.foregroundColor(.darkRed)
+							.fixedSize(horizontal: false, vertical: true)
 							.alignment(.leading)
 					}
 					TopicGrid(
+						width: SCREEN_SIZE.width - (12 + 20) * 2,
 						topics: currentStore.topics,
 						isSelected: model.isTopicSelected,
 						toggleSelect: model.toggleTopicSelect

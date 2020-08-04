@@ -1,4 +1,5 @@
 import SwiftUI
+import QGrid
 
 struct TopicGrid: View {
 	struct Row: Identifiable, Equatable, Hashable {
@@ -20,64 +21,67 @@ struct TopicGrid: View {
 		}
 	}()
 	
+	let width: CGFloat
 	let topics: [Topic]
 	
 	let isSelected: (Topic) -> Bool
 	let toggleSelect: (Topic) -> Void
 	
-	func columns(geometry: GeometryProxy) -> Int {
-		.init(
-			(geometry.size.width + Self.spacing) /
-			(TopicCell.dimension + Self.spacing)
-		)
+	var columns: Int {
+		.init((width + Self.spacing) / (TopicCell.dimension + Self.spacing))
 	}
 	
-	func rows(geometry: GeometryProxy) -> [Row] {
-		var temp = [Row]()
+	func height(rows: Int) -> CGFloat {
+		rows == 0
+			? 0
+			: .init(rows) * (TopicCell.dimension + Self.spacing) - Self.spacing
+	}
+	
+	var fallbackContent: some View {
+		let columns = self.columns
+		let rows = columns == 0
+			? 0
+			: CGFloat(topics.count / columns + min(topics.count % columns, 1))
 		
-		_ = topics
-			.publisher
-			.collect(columns(geometry: geometry))
-			.collect()
-			.sink {
-				temp = $0.enumerated().map { id, topics in
-					.init(id: id, topics: topics)
-				}
-			}
-		
-		return temp
+		return QGrid(
+			topics,
+			columns: columns,
+			vSpacing: Self.spacing,
+			hSpacing: Self.spacing,
+			vPadding: 0,
+			hPadding: 0,
+			isScrollable: false
+		) { topic in
+			TopicCell(
+				topic: topic,
+				isSelected: isSelected(topic),
+				toggleSelect: { toggleSelect(topic) }
+			)
+		}
+		.frame(
+			width: TopicCell.dimension * .init(columns) + Self.spacing * .init(columns - 1),
+			height: TopicCell.dimension * rows + Self.spacing * (rows - 1)
+		)
 	}
 	
 	var body: some View {
 		if #available(iOS 14.0, *) {
-			AnyView(LazyVGrid(
-				columns: Self.columns as? [GridItem] ?? [],
-				spacing: Self.spacing
-			) {
-				ForEach(topics) { topic in
-					TopicCell(
-						topic: topic,
-						isSelected: isSelected(topic),
-						toggleSelect: { toggleSelect(topic) }
-					)
-				}
-			})
-		} else {
-			AnyView(GeometryReader { geometry in
-				VStack(spacing: Self.spacing) {
-					ForEach(rows(geometry: geometry)) { row in
-						HStack(spacing: Self.spacing) {
-							ForEach(row.topics) { topic in
-								TopicCell(
-									topic: topic,
-									isSelected: isSelected(topic),
-									toggleSelect: { toggleSelect(topic) }
-								)
-							}
-						}
+			AnyView(
+				LazyVGrid(
+					columns: Self.columns as? [GridItem] ?? [],
+					spacing: Self.spacing
+				) {
+					ForEach(topics) { topic in
+						TopicCell(
+							topic: topic,
+							isSelected: isSelected(topic),
+							toggleSelect: { toggleSelect(topic) }
+						)
 					}
 				}
-			})
+			)
+		} else {
+			AnyView(fallbackContent)
 		}
 	}
 }
@@ -86,6 +90,7 @@ struct TopicGrid: View {
 struct TopicGrid_Previews: PreviewProvider {
 	static var previews: some View {
 		TopicGrid(
+			width: SCREEN_SIZE.width,
 			topics: [],
 			isSelected: { _ in true },
 			toggleSelect: { _ in }

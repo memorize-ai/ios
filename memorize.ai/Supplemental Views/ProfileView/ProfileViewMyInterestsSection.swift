@@ -25,6 +25,7 @@ struct ProfileViewMyInterestsSection: View {
 				shadowYOffset: 5
 			) {
 				TopicGrid(
+					width: SCREEN_SIZE.width - TopicGrid.spacing * 4,
 					topics: currentStore.topics,
 					isSelected: { self.user.interests.contains($0.id) },
 					toggleSelect: {
@@ -33,8 +34,7 @@ struct ProfileViewMyInterestsSection: View {
 							: self.user.addInterest(topicId: $0.id)
 					}
 				)
-				.padding(.horizontal, 8)
-				.padding(.vertical, TopicGrid.spacing)
+				.padding(TopicGrid.spacing)
 				.frame(width: SCREEN_SIZE.width - 8 * 2)
 			}
 		}

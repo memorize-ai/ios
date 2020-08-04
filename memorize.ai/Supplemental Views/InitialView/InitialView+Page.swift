@@ -84,16 +84,17 @@ extension InitialView {
 		) {
 			self.mode = mode
 			self.content = { geometry in
-				ZStack(alignment: .bottom) {
-					background()
-					VStack(spacing: 20) {
-						content()
-						Spacer()
+				AnyView(
+					ZStack(alignment: .bottom) {
+						background()
+						VStack(spacing: 20) {
+							content()
+							Spacer()
+						}
+						.padding(.top, geometry.safeAreaInsets.top + 12)
+						bottomAlignedContent()
 					}
-					.padding(.top, geometry.safeAreaInsets.top + 12)
-					bottomAlignedContent()
-				}
-				.eraseToAnyView()
+				)
 			}
 		}
 		

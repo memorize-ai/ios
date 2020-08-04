@@ -16,10 +16,7 @@ struct TopicCell: View {
 						.resizable()
 						.renderingMode(.original)
 						.scaledToFill()
-						.frame(
-							width: Self.dimension,
-							height: Self.dimension
-						)
+						.frame(width: Self.dimension, height: Self.dimension)
 					Text(topic.name)
 						.font(.muli(.regular, size: 14))
 						.foregroundColor(.white)
@@ -30,6 +27,7 @@ struct TopicCell: View {
 			}
 			.cornerRadius(5)
 		}
+		.frame(width: Self.dimension, height: Self.dimension)
 	}
 }
 
