@@ -154,6 +154,7 @@
 		4D6CE3D0236E104D003F162C /* ChooseTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */; };
 		4D703AEF233DFA45004F1F65 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AEE233DFA45004F1F65 /* Constants.swift */; };
 		4D703AF6233E728B004F1F65 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D703AF5233E728B004F1F65 /* Global.swift */; };
+		4D81741924DB6138000EA8BB /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D81741824DB6138000EA8BB /* AppleSignInButton.swift */; };
 		4D8444A9236B81990043298C /* EmptyDeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444A8236B81980043298C /* EmptyDeckCell.swift */; };
 		4D8444AB236B856C0043298C /* DeckCellWithGetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */; };
 		4D8444AD236BFE080043298C /* DocumentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8444AC236BFE080043298C /* DocumentSnapshot.swift */; };
@@ -467,6 +468,7 @@
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		4D81741724DB5EE5000EA8BB /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
+		4D81741824DB6138000EA8BB /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		4D8444A8236B81980043298C /* EmptyDeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDeckCell.swift; sourceTree = "<group>"; };
 		4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCellWithGetButton.swift; sourceTree = "<group>"; };
 		4D8444AC236BFE080043298C /* DocumentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSnapshot.swift; sourceTree = "<group>"; };
@@ -1174,6 +1176,7 @@
 				4DAD2CDC2361152C001DA77B /* AuthenticationViewContentBox.swift */,
 				4DD251232362573300A83509 /* AuthenticationViewBottomGradient.swift */,
 				4DF8C95E23655DBC001141C9 /* GoogleSignInButton.swift */,
+				4D81741824DB6138000EA8BB /* AppleSignInButton.swift */,
 				4D64BCBF2367ACCB00F6FD07 /* AuthenticationViewOrText.swift */,
 			);
 			path = AuthenticationView;
@@ -1918,6 +1921,7 @@
 				4D9AAEB923851F8100C85EC2 /* MarketView.swift in Sources */,
 				4DF4594C2399734E00A78ADF /* PublishDeckView.swift in Sources */,
 				4D3B949C2372A06F002F441E /* SideBarSections.swift in Sources */,
+				4D81741924DB6138000EA8BB /* AppleSignInButton.swift in Sources */,
 				4DEB359C236AC89B00E3DBC4 /* Double.swift in Sources */,
 				4DC8115C2363E46400CCFF98 /* Asterisk.swift in Sources */,
 				4D36579E238D9D5F007C3D1F /* DecksViewCardCell.swift in Sources */,
