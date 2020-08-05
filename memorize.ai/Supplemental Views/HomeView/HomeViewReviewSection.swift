@@ -31,12 +31,12 @@ struct HomeViewReviewSection: View {
 					if user.numberOfDueCards > 0 {
 						ReviewViewNavigationLink {
 							CustomRectangle(
-								background: { () -> Color in
+								background: {
 									let count = self.user.numberOfDueCards
 									if count < 10 { return .neonGreen }
 									if count < 100 { return .neonOrange }
 									return .neonRed
-								}(),
+								}() as Color,
 								cornerRadius: 14
 							) {
 								Text("REVIEW")
