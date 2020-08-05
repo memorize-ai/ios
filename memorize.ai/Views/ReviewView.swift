@@ -833,7 +833,7 @@ struct ReviewView: View {
 							isWaitingForRating: self.isWaitingForRating,
 							rateCurrentCard: self.rateCurrentCard
 						)
-						.hidden(!isShowing)
+						.hidden(!self.isShowing)
 						.padding(.top, 16)
 						.padding(.bottom, 8)
 					}
@@ -849,7 +849,7 @@ struct ReviewView: View {
 				}
 				.disabled(self.isPopUpShowing)
 				ReviewViewPopUp(data: self.popUpData, offset: self.popUpOffset)
-					.hidden(!isShowing)
+					.hidden(!self.isShowing)
 				NavigateTo(
 					LazyView { self.recapView },
 					when: self.$shouldShowRecap

@@ -18,7 +18,7 @@ struct MarketDeckViewCardPreviews: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			TryLazyHStack { cards }
+			TryLazyHStack { self.cards }
 				.padding(.horizontal, 23)
 		}
 		.onAppear {

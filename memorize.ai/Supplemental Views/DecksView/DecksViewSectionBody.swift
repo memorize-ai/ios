@@ -63,19 +63,16 @@ struct DecksViewSectionBody: View {
 			}
 			if isExpanded {
 				Group {
-					switch section.cardsLoadingState {
-					case .loading:
+					if section.cardsLoadingState == .loading {
 						ActivityIndicator(color: .gray)
-					case .success:
+					} else if section.cardsLoadingState == .success {
 						ForEach(section.cards) { card in
 							DecksViewCardCell(card: card)
 						}
-					case .failure:
+					} else if section.cardsLoadingState == .failure {
 						Image(systemName: .exclamationmarkTriangle)
 							.foregroundColor(.gray)
 							.scaleEffect(1.5)
-					default:
-						EmptyView()
 					}
 				}
 				.padding(.top, 8)
@@ -84,7 +81,7 @@ struct DecksViewSectionBody: View {
 	}
 	
 	var body: some View {
-		TryLazyVStack(spacing: 8) { content }
+		TryLazyVStack(spacing: 8) { self.content }
 			.padding(.top, 6)
 			.animation(.linear(duration: 0.1))
 	}

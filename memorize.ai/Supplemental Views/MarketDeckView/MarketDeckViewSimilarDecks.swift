@@ -26,7 +26,7 @@ struct MarketDeckViewSimilarDecks: View {
 			MarketDeckViewSectionTitle("Similar decks")
 				.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				TryLazyHStack(alignment: .top) { similarDecks }
+				TryLazyHStack(alignment: .top) { self.similarDecks }
 					.padding(.horizontal, 23)
 			}
 			if isDeckSelected {

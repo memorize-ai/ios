@@ -16,10 +16,11 @@ struct TryLazyHStack<Content: View>: View {
 	}
 	
 	var body: some View {
-		if #available(iOS 14.0, *) {
-			AnyView(LazyHStack(alignment: alignment, spacing: spacing, content: content))
-		} else {
-			AnyView(HStack(alignment: alignment, spacing: spacing, content: content))
-		}
+//		if #available(iOS 14.0, *) {
+//			AnyView(LazyHStack(alignment: alignment, spacing: spacing, content: content))
+//		} else {
+//			AnyView(HStack(alignment: alignment, spacing: spacing, content: content))
+//		}
+		HStack(alignment: alignment, spacing: spacing, content: content)
 	}
 }

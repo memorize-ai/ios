@@ -53,18 +53,17 @@ struct DecksViewCardCell: View {
 					)
 					HStack(alignment: .top) {
 						if hasPreviewImage {
-							switch card.previewImageLoadingState {
-							case .loading:
+							if card.previewImageLoadingState == .loading {
 								ZStack {
 									Color.lightGrayBackground
 									ActivityIndicator(color: .gray)
 								}
-							case .success:
+							} else if card.previewImageLoadingState == .success {
 								card.previewImage?
 									.resizable()
 									.renderingMode(.original)
 									.aspectRatio(contentMode: .fill)
-							case .failure:
+							} else if card.previewImageLoadingState == .failure {
 								ZStack {
 									Color.lightGrayBackground
 									Image(systemName: .exclamationmarkTriangle)
@@ -74,8 +73,6 @@ struct DecksViewCardCell: View {
 								.frame(width: 100, height: 100)
 								.cornerRadius(5)
 								.clipped()
-							default:
-								EmptyView()
 							}
 						}
 						Text(Card.stripFormatting(card.front).trimmed)

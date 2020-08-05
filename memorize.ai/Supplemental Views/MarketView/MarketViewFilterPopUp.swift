@@ -31,8 +31,7 @@ struct MarketViewFilterPopUp: View {
 				)
 				Spacer()
 				Group {
-					switch filterPopUpSideBarSelection {
-					case .topics:
+					if filterPopUpSideBarSelection == .topics {
 						if isFilterPopUpShowing {
 							MarketViewFilterPopUpTopicsContent(
 								topicsFilter: $topicsFilter,
@@ -40,7 +39,7 @@ struct MarketViewFilterPopUp: View {
 								toggleTopicSelect: toggleTopicSelect
 							)
 						}
-					case .rating:
+					} else if filterPopUpSideBarSelection == .rating {
 						MarketViewFilterPopUpContentWithSlider(
 							value: $ratingFilter,
 							leadingText: "Must have over",
@@ -50,7 +49,7 @@ struct MarketViewFilterPopUp: View {
 							upperBound: 5,
 							formatAsInt: false
 						)
-					case .downloads:
+					} else if filterPopUpSideBarSelection == .downloads {
 						MarketViewFilterPopUpContentWithSlider(
 							value: $downloadsFilter,
 							leadingText: "Must have over",

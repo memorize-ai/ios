@@ -38,7 +38,7 @@ struct HomeViewMyDecksSection: View {
 				.alignment(.leading)
 				.padding(.horizontal, 23)
 				ScrollView(.horizontal, showsIndicators: false) {
-					TryLazyHStack(alignment: .top, spacing: 8) { content }
+					TryLazyHStack(alignment: .top, spacing: 8) { self.content }
 						.padding(.horizontal, 23)
 				}
 				.padding(.bottom)

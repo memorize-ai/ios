@@ -36,7 +36,7 @@ struct CramRecapViewSectionPerformanceRow: View {
 			}
 			.padding(.horizontal, 23)
 			ScrollView(.horizontal, showsIndicators: false) {
-				TryLazyHStack(alignment: .top) { content }
+				TryLazyHStack(alignment: .top) { self.content }
 					.padding(.horizontal, 23)
 					.padding(.vertical, 1)
 			}

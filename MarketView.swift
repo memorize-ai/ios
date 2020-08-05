@@ -48,7 +48,7 @@ struct MarketView: View {
 	
 	var scrollView: some View {
 		ScrollView(showsIndicators: false) {
-			TryLazyVStack(spacing: Self.verticalCellSpacing) { content }
+			TryLazyVStack(spacing: Self.verticalCellSpacing) { self.content }
 				.padding(.bottom, Self.horizontalPadding)
 		}
 	}

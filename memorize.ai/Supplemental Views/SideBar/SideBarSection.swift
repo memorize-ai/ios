@@ -9,7 +9,7 @@ struct SideBarSection: View {
 			SideBarSectionTitle(title)
 				.padding(.leading)
 			TryLazyVStack(spacing: 4) {
-				ForEach(decks) { deck in
+				ForEach(self.decks) { deck in
 					DeckRow(
 						deck: deck,
 						unselectedBackgroundColor: .lightGrayBackground

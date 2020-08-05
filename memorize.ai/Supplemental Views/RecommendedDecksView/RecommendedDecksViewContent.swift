@@ -14,7 +14,7 @@ struct RecommendedDecksViewContent: View {
 			} else {
 				ScrollView(showsIndicators: false) {
 					TryLazyVStack(spacing: Self.cellSpacing) {
-						ForEach(model.decks) { deck in
+						ForEach(self.model.decks) { deck in
 							DeckCellWithGetButton(
 								deck: deck,
 								user: self.currentStore.user,

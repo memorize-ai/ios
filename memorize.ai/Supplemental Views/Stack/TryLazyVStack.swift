@@ -16,10 +16,11 @@ struct TryLazyVStack<Content: View>: View {
 	}
 	
 	var body: some View {
-		if #available(iOS 14.0, *) {
-			AnyView(LazyVStack(alignment: alignment, spacing: spacing, content: content))
-		} else {
-			AnyView(VStack(alignment: alignment, spacing: spacing, content: content))
-		}
+//		if #available(iOS 14.0, *) {
+//			AnyView(LazyVStack(alignment: alignment, spacing: spacing, content: content))
+//		} else {
+//			AnyView(VStack(alignment: alignment, spacing: spacing, content: content))
+//		}
+		VStack(alignment: alignment, spacing: spacing, content: content)
 	}
 }

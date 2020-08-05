@@ -50,7 +50,7 @@ struct HomeViewReviewSection: View {
 				}
 				.padding([.horizontal, .top])
 				TryLazyVStack(spacing: 0) {
-					ForEach(user.decks.filter { $0.userData?.isDue ?? false }) { deck in
+					ForEach(self.user.decks.filter { $0.userData?.isDue ?? false }) { deck in
 						HomeViewReviewSectionDeckRow(deck: deck)
 					}
 				}

@@ -23,25 +23,22 @@ struct CramRecapViewCardPerformanceRowCardCellContent: View {
 			HStack(alignment: .top) {
 				if hasPreviewImage {
 					Group {
-						switch card.previewImageLoadingState {
-						case .loading:
+						if card.previewImageLoadingState == .loading {
 							ZStack {
 								Color.lightGrayBackground
 								ActivityIndicator(color: .gray)
 							}
-						case .success:
+						} else if card.previewImageLoadingState == .success {
 							card.previewImage?
 								.resizable()
 								.aspectRatio(contentMode: .fill)
-						case .failure:
+						} else if card.previewImageLoadingState == .failure {
 							ZStack {
 								Color.lightGrayBackground
 								Image(systemName: .exclamationmarkTriangle)
 									.foregroundColor(.gray)
 									.scaleEffect(1.5)
 							}
-						default:
-							EmptyView()
 						}
 					}
 					.frame(width: 100, height: 100)

@@ -249,10 +249,9 @@ struct MainTabView: View {
 						ZStack {
 							Color.lightGrayBackground
 								.edgesIgnoringSafeArea([.horizontal, .top])
-							switch currentSelection {
-							case .home:
+							if currentSelection == .home {
 								HomeView()
-							case .market:
+							} else if currentSelection == .market {
 								MarketView(
 									isSortPopUpShowing: $marketView_isSortPopUpShowing,
 									isFilterPopUpShowing: $marketView_isFilterPopUpShowing,
@@ -262,7 +261,7 @@ struct MainTabView: View {
 									searchResultsLoadingState: marketView_searchResultsLoadingState,
 									loadSearchResults: marketView_loadSearchResults
 								)
-							case .decks:
+							} else if currentSelection == .decks {
 								DecksView(
 									isDeckOptionsPopUpShowing: $decksView_isDeckOptionsPopUpShowing,
 									selectedSection: $decksView_selectedSection,
@@ -270,7 +269,7 @@ struct MainTabView: View {
 									isSectionExpanded: decksView_isSectionExpanded,
 									toggleSectionExpanded: decksView_toggleSectionExpanded
 								)
-							case .profile:
+							} else if currentSelection == .profile {
 								ProfileView()
 							}
 							if currentStore.mainTabViewSelection == .home {

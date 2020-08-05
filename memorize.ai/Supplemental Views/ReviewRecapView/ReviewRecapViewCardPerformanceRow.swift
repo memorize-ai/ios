@@ -78,7 +78,7 @@ struct ReviewRecapViewCardPerformanceRow: View {
 	}
 	
 	var body: some View {
-		TryLazyVStack(spacing: 12) { content }
+		TryLazyVStack(spacing: 12) { self.content }
 			.animation(.linear(duration: 0.15))
 	}
 }

@@ -8,18 +8,18 @@ struct TopicGrid: View {
 	}
 	
 	static let spacing: CGFloat = 8
-	static let columns: [Any] = {
-		if #available(iOS 14.0, *) {
-			return [
-				GridItem(.adaptive(
-					minimum: TopicCell.dimension,
-					maximum: TopicCell.dimension
-				))
-			]
-		} else {
-			return []
-		}
-	}()
+//	static let columns: [Any] = {
+//		if #available(iOS 14.0, *) {
+//			return [
+//				GridItem(.adaptive(
+//					minimum: TopicCell.dimension,
+//					maximum: TopicCell.dimension
+//				))
+//			]
+//		} else {
+//			return []
+//		}
+//	}()
 	
 	let width: CGFloat
 	let topics: [Topic]
@@ -54,8 +54,8 @@ struct TopicGrid: View {
 		) { topic in
 			TopicCell(
 				topic: topic,
-				isSelected: isSelected(topic),
-				toggleSelect: { toggleSelect(topic) }
+				isSelected: self.isSelected(topic),
+				toggleSelect: { self.toggleSelect(topic) }
 			)
 		}
 		.frame(
@@ -65,24 +65,25 @@ struct TopicGrid: View {
 	}
 	
 	var body: some View {
-		if #available(iOS 14.0, *) {
-			AnyView(
-				LazyVGrid(
-					columns: Self.columns as? [GridItem] ?? [],
-					spacing: Self.spacing
-				) {
-					ForEach(topics) { topic in
-						TopicCell(
-							topic: topic,
-							isSelected: isSelected(topic),
-							toggleSelect: { toggleSelect(topic) }
-						)
-					}
-				}
-			)
-		} else {
-			AnyView(fallbackContent)
-		}
+//		if #available(iOS 14.0, *) {
+//			AnyView(
+//				LazyVGrid(
+//					columns: Self.columns as? [GridItem] ?? [],
+//					spacing: Self.spacing
+//				) {
+//					ForEach(topics) { topic in
+//						TopicCell(
+//							topic: topic,
+//							isSelected: isSelected(topic),
+//							toggleSelect: { toggleSelect(topic) }
+//						)
+//					}
+//				}
+//			)
+//		} else {
+//			AnyView(fallbackContent)
+//		}
+		fallbackContent
 	}
 }
 

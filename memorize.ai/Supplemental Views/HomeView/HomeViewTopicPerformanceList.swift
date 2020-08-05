@@ -30,7 +30,7 @@ struct HomeViewTopicPerformanceList: View {
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			TryLazyHStack {
-				ForEach(currentStore.interests, id: \.self) { topic in
+				ForEach(self.currentStore.interests, id: \.self) { topic in
 					Group {
 						if topic == nil {
 							LoadingTopicCell(

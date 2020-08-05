@@ -58,7 +58,7 @@ struct MarketDeckViewSections: View {
 				shadowRadius: 5,
 				shadowYOffset: 5
 			) {
-				TryLazyVStack { content }
+				TryLazyVStack { self.content }
 					.padding(16)
 			}
 		}

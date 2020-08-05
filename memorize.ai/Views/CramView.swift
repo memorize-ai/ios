@@ -551,7 +551,7 @@ struct CramView: View {
 							isWaitingForRating: self.isWaitingForRating,
 							rateCurrentCard: self.rateCurrentCard
 						)
-						.hidden(!isShowing)
+						.hidden(!self.isShowing)
 						.padding(.top, 16)
 						.padding(.bottom, 8)
 					}
@@ -567,7 +567,7 @@ struct CramView: View {
 				}
 				.disabled(self.isPopUpShowing)
 				CramViewPopUp(data: self.popUpData, offset: self.popUpOffset)
-					.hidden(!isShowing)
+					.hidden(!self.isShowing)
 				NavigateTo(
 					LazyView { self.recapView },
 					when: self.$shouldShowRecap

@@ -70,7 +70,7 @@ struct ReviewRecapViewMainCard: View {
 						.padding(.horizontal)
 					} else {
 						ScrollView(.horizontal, showsIndicators: false) {
-							TryLazyHStack { content }
+							TryLazyHStack { self.content }
 								.padding(.horizontal, 8)
 						}
 						.padding(.top, 8)

@@ -14,7 +14,7 @@ struct ChooseTopicsViewContent: View {
 					TopicGrid(
 						width: SCREEN_SIZE.width - 32,
 						topics: currentStore.topics,
-						isSelected: { model.isTopicSelected($0) },
+						isSelected: { self.model.isTopicSelected($0) },
 						toggleSelect: model.toggleTopicSelect
 					)
 					.padding(.vertical, TopicGrid.spacing)

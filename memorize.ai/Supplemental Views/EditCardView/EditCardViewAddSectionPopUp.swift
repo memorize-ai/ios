@@ -96,7 +96,7 @@ struct EditCardViewAddSectionPopUp: View {
 				.padding(.horizontal, 30)
 				.padding(.vertical)
 			}
-			TryLazyVStack(spacing: 0) { content }
+			TryLazyVStack(spacing: 0) { self.content }
 		}
 	}
 }

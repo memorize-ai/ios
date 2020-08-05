@@ -25,7 +25,7 @@ struct MarketDeckViewTopicList: View {
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			TryLazyHStack { topics }
+			TryLazyHStack { self.topics }
 				.padding(.horizontal, 23)
 		}
 	}
