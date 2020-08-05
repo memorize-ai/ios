@@ -10,14 +10,16 @@ struct ChooseTopicsViewContent: View {
 				ActivityIndicator(color: .white)
 				Spacer()
 			} else {
-				TopicGrid(
-					width: SCREEN_SIZE.width - 32,
-					topics: currentStore.topics,
-					isSelected: model.isTopicSelected,
-					toggleSelect: model.toggleTopicSelect
-				)
-				.padding(.vertical, TopicGrid.spacing)
-				.padding(.bottom)
+				ScrollView(showsIndicators: false) {
+					TopicGrid(
+						width: SCREEN_SIZE.width - 32,
+						topics: currentStore.topics,
+						isSelected: { model.isTopicSelected($0) },
+						toggleSelect: model.toggleTopicSelect
+					)
+					.padding(.vertical, TopicGrid.spacing)
+					.padding(.bottom)
+				}
 			}
 		}
 		.onAppear {

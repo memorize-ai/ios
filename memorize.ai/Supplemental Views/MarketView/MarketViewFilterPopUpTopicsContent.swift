@@ -16,7 +16,7 @@ struct MarketViewFilterPopUpTopicsContent: View {
 	}
 	
 	var body: some View {
-		ScrollView {
+		ScrollView(showsIndicators: false) {
 			TopicGrid(
 				width: SCREEN_SIZE.width - 51 - TopicGrid.spacing * 2,
 				topics: currentStore.topics,
