@@ -109,18 +109,22 @@ struct DeckCell<Content: View>: View {
 				)
 				.padding(.top, 12)
 				VStack(alignment: .leading) {
-					Text(deck.name)
-						.font(.muli(.bold, size: titleFontSize))
-						.foregroundColor(.darkGray)
-					Text(deck.subtitle)
-						.font(.muli(.regular, size: 11))
-						.foregroundColor(.lightGrayText)
-						.lineLimit(3)
-						.padding(.top, 4)
+					VStack(alignment: .leading) {
+						Text(deck.name)
+							.font(.muli(.bold, size: titleFontSize))
+							.foregroundColor(.darkGray)
+						Text(deck.subtitle)
+							.font(.muli(.regular, size: 11))
+							.foregroundColor(.lightGrayText)
+					}
+					.lineLimit(3)
+					.fixedSize(horizontal: false, vertical: true)
+					.padding(.bottom, 4)
 					if isInfoHorizontal {
 						HStack(spacing: 16) {
 							info
 						}
+						.frame(height: 20)
 					} else {
 						VStack(alignment: .leading) {
 							info
