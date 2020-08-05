@@ -6,7 +6,7 @@ struct ReviewViewCardSectionDeckName: View {
 	var body: some View {
 		Text(deck.name)
 			.foregroundColor(.white)
-			.shrinks()
+			.lineLimit(1)
 	}
 }
 

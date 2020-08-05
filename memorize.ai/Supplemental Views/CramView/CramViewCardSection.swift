@@ -22,7 +22,7 @@ struct CramViewCardSection: View {
 			HStack {
 				Text(deck.name)
 					.foregroundColor(.white)
-					.shrinks()
+					.lineLimit(1)
 				_section.map { section in
 					CramViewCardSectionSectionName(
 						section: section

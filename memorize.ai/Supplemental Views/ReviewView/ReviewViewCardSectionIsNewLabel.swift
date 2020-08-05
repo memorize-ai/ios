@@ -8,6 +8,8 @@ struct ReviewViewCardSectionIsNewLabel: View {
 			if card.isNew {
 				Text("new")
 					.foregroundColor(Color.white.opacity(0.36))
+					.lineLimit(1)
+					.layoutPriority(100)
 			}
 		}
 	}

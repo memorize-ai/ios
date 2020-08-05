@@ -9,8 +9,9 @@ struct CramViewCardSectionSectionName: View {
 				.foregroundColor(Color.white.opacity(0.36))
 			Text(section.name)
 				.foregroundColor(.white)
-				.shrinks()
 		}
+		.lineLimit(1)
+		.layoutPriority(100)
 	}
 }
 
