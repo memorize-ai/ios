@@ -466,6 +466,7 @@
 		4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTopicsViewModel.swift; sourceTree = "<group>"; };
 		4D703AEE233DFA45004F1F65 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4D703AF5233E728B004F1F65 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		4D81741724DB5EE5000EA8BB /* memorize.ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = memorize.ai.entitlements; sourceTree = "<group>"; };
 		4D8444A8236B81980043298C /* EmptyDeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDeckCell.swift; sourceTree = "<group>"; };
 		4D8444AA236B856C0043298C /* DeckCellWithGetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCellWithGetButton.swift; sourceTree = "<group>"; };
 		4D8444AC236BFE080043298C /* DocumentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSnapshot.swift; sourceTree = "<group>"; };
@@ -1113,6 +1114,7 @@
 		4DAA4F3B233DE1A600EF7467 /* memorize.ai */ = {
 			isa = PBXGroup;
 			children = (
+				4D81741724DB5EE5000EA8BB /* memorize.ai.entitlements */,
 				4DAA4F3C233DE1A600EF7467 /* AppDelegate.swift */,
 				4DAA4F3E233DE1A600EF7467 /* SceneDelegate.swift */,
 				4D0C0285237CB4940062BC14 /* HostingController.swift */,
@@ -2107,6 +2109,7 @@
 			baseConfigurationReference = 0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = memorize.ai/memorize.ai.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
@@ -2133,6 +2136,7 @@
 			baseConfigurationReference = 601346780B37F685E43F57A4 /* Pods-memorize.ai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = memorize.ai/memorize.ai.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
