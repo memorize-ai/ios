@@ -9,17 +9,17 @@ struct HamburgerMenu: View {
 	
 	var bar: some View {
 		Rectangle()
-			.frame(height: 2)
+			.frame(height: 2.5)
 	}
 	
 	var body: some View {
-		VStack(spacing: 3) {
+		VStack(spacing: 3.5) {
 			bar
 			bar
 			bar
 		}
 		.foregroundColor(color)
-		.frame(width: 18)
+		.frame(width: 20)
 	}
 }
 
