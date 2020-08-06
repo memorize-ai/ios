@@ -52,20 +52,9 @@ struct SignUpViewContentBox: View {
 					}
 				}
 				.disabled(model.isSignUpButtonDisabled || model.loadingState.isLoading)
-				.alert(isPresented: $model.shouldShowErrorModal) {
-					guard let errorModal = model.errorModal else {
-						return .init(
-							title: .init(SignUpViewModel.unknownErrorTitle),
-							message: .init(SignUpViewModel.unknownErrorDescription)
-						)
-					}
-					return .init(
-						title: .init(errorModal.title),
-						message: .init(errorModal.description)
-					)
-				}
 			}
 			AuthenticationViewOrText()
+			AppleSignInButton()
 			GoogleSignInButton()
 			if model.user != nil {
 				NavigateTo(

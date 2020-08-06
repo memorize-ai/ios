@@ -10,6 +10,7 @@
 		05D0D157DD52BCD96B12C162 /* Pods_memorize_ai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64DBC7C1944523972CF6F35A /* Pods_memorize_ai.framework */; };
 		31D345CE60CACE658E60CF6E /* Pods_memorize_aiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDA340435BD46D6DCACA737 /* Pods_memorize_aiTests.framework */; };
 		4D03A383240762370001884F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4D03A382240762370001884F /* .swiftlint.yml */; };
+		4D09199124DB6D4000AFDCE0 /* AppleSignInButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D09199024DB6D4000AFDCE0 /* AppleSignInButtonModel.swift */; };
 		4D0C0284237CAB430062BC14 /* HomeViewTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */; };
 		4D0C0286237CB4940062BC14 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0285237CB4940062BC14 /* HostingController.swift */; };
 		4D0C0288237CB9590062BC14 /* HomeViewMyInterestsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */; };
@@ -322,6 +323,7 @@
 /* Begin PBXFileReference section */
 		0015E6E932DD67838E207115 /* Pods-memorize.ai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memorize.ai.debug.xcconfig"; path = "Target Support Files/Pods-memorize.ai/Pods-memorize.ai.debug.xcconfig"; sourceTree = "<group>"; };
 		4D03A382240762370001884F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; usesTabs = 0; };
+		4D09199024DB6D4000AFDCE0 /* AppleSignInButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButtonModel.swift; sourceTree = "<group>"; };
 		4D0C0283237CAB430062BC14 /* HomeViewTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewTopControls.swift; path = memorize.ai/HomeViewTopControls.swift; sourceTree = SOURCE_ROOT; };
 		4D0C0285237CB4940062BC14 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		4D0C0287237CB9590062BC14 /* HomeViewMyInterestsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewMyInterestsSection.swift; sourceTree = "<group>"; };
@@ -1215,6 +1217,7 @@
 				4D8993272363CC910042AC9F /* ForgotPasswordViewModel.swift */,
 				4D64BCC52367CFD700F6FD07 /* SignUpViewModel.swift */,
 				4DBF49E62365947800F942A8 /* GoogleSignInButtonModel.swift */,
+				4D09199024DB6D4000AFDCE0 /* AppleSignInButtonModel.swift */,
 				4D6CE3CF236E104D003F162C /* ChooseTopicsViewModel.swift */,
 				4DE97223236FF63600616E42 /* RecommendedDecksViewModel.swift */,
 				4DF4594D2399771200A78ADF /* PublishDeckViewModel.swift */,
@@ -1908,6 +1911,7 @@
 				4D6BA52B23ACB19E00D3F9D1 /* AddCardsViewModel.swift in Sources */,
 				4D6097672342FE8E002F1643 /* FirebaseAuth.swift in Sources */,
 				4DD5FE9023875C1400E70251 /* MarketViewFilterPopUpTopicsContent.swift in Sources */,
+				4D09199124DB6D4000AFDCE0 /* AppleSignInButtonModel.swift in Sources */,
 				4DD5FE992388D93E00E70251 /* DecksViewTopControls.swift in Sources */,
 				4D3B949623727260002F441E /* SideBarSectionTitle.swift in Sources */,
 				4D2C7E6523AAB2E10061B48D /* CustomError.swift in Sources */,

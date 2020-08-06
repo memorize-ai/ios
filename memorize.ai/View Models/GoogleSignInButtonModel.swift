@@ -11,13 +11,11 @@ final class GoogleSignInButtonModel: ViewModel {
 	static let unknownErrorDescription = "Sorry about that! Please try again"
 	
 	@Published var loadingState = LoadingState()
-	@Published var shouldShowErrorModal = false
 	
 	@Published var shouldProgressToHomeView = false
 	@Published var shouldProgressToChooseTopicsView = false
 	
 	var user: User?
-	var errorModal: (title: String, description: String)?
 	
 	func logIn() {
 		Analytics.logEvent(AnalyticsEventLogin, parameters: [
@@ -35,10 +33,12 @@ final class GoogleSignInButtonModel: ViewModel {
 		onBackgroundThread {
 			promise.done { result in
 				let user = result.user
+				
 				guard
 					let email = user.email,
 					let additionalInfo = result.additionalUserInfo
 				else { return }
+				
 				let newUser = User(
 					id: user.uid,
 					name: user.displayName ?? "Unknown",
@@ -47,7 +47,9 @@ final class GoogleSignInButtonModel: ViewModel {
 					numberOfDecks: 0,
 					xp: 0
 				)
+				
 				self.user = newUser
+				
 				if additionalInfo.isNewUser {
 					self.handleNewUser(from: newUser)
 				} else {
@@ -81,7 +83,9 @@ final class GoogleSignInButtonModel: ViewModel {
 		firestore.document("users/\(user.id)").setData([
 			"name": user.name,
 			"email": user.email,
-			"joined": FieldValue.serverTimestamp()
+			"joined": FieldValue.serverTimestamp(),
+			"source": "ios",
+			"method": "google"
 		])
 	}
 	
@@ -95,22 +99,22 @@ final class GoogleSignInButtonModel: ViewModel {
 		handleFirestoreError(code: FirestoreErrorCode(error: error))
 	}
 	
-	func applyError(title: String, description: String) {
-		errorModal = (title, description)
-		shouldShowErrorModal = true
-	}
-	
 	func handleAuthError(code errorCode: AuthErrorCode?) {
 		switch errorCode {
+		case .accountExistsWithDifferentCredential:
+			showAlert(
+				title: "Invalid sign in method",
+				message: "You've already signed up with a different method"
+			)
 		case .networkError:
-			applyError(
+			showAlert(
 				title: "Network error",
-				description: "There was a problem connecting to our servers. Please try again"
+				message: "There was a problem connecting to our servers. Please try again"
 			)
 		case .tooManyRequests:
-			applyError(
+			showAlert(
 				title: "Too many requests",
-				description: "Please try again later"
+				message: "Please try again later"
 			)
 		default:
 			return
@@ -120,24 +124,24 @@ final class GoogleSignInButtonModel: ViewModel {
 	func handleFirestoreError(code errorCode: FirestoreErrorCode?) {
 		switch errorCode {
 		case .dataLoss, .deadlineExceeded:
-			applyError(
+			showAlert(
 				title: "Network error",
-				description: "There was a problem connecting to our servers. Please try again"
+				message: "There was a problem connecting to our servers. Please try again"
 			)
 		case .permissionDenied:
-			applyError(
+			showAlert(
 				title: "Permission denied",
-				description: "There was a problem with our servers. Please try again"
+				message: "There was a problem with our servers. Please try again"
 			)
 		case .resourceExhausted:
-			applyError(
+			showAlert(
 				title: "Server overload",
-				description: "Our servers are overloaded right now. Please try again"
+				message: "Our servers are overloaded right now. Please try again"
 			)
 		default:
-			applyError(
+			showAlert(
 				title: Self.unknownErrorTitle,
-				description: Self.unknownErrorDescription
+				message: Self.unknownErrorDescription
 			)
 		}
 	}

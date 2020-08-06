@@ -32,10 +32,8 @@ final class SignUpViewModel: ViewModel {
 	@Published var shouldShowPasswordRedBorder = false
 	
 	@Published var loadingState = LoadingState()
-	@Published var shouldShowErrorModal = false
 	
 	var user: User?
-	var errorModal: (title: String, description: String)?
 	
 	var isSignUpButtonDisabled: Bool {
 		name.isTrimmedEmpty ||
@@ -85,20 +83,20 @@ final class SignUpViewModel: ViewModel {
 		firestore.document("users/\(uid)").setData([
 			"name": name,
 			"email": email,
-			"joined": FieldValue.serverTimestamp()
+			"joined": FieldValue.serverTimestamp(),
+			"source": "ios",
+			"method": "email"
 		])
 	}
 	
 	func failAuthSignUp(error: Error) {
 		loadingState.fail(error: error)
 		handleAuthError(code: AuthErrorCode(error: error))
-		shouldShowErrorModal = true
 	}
 	
 	func failFirestoreSignUp(error: Error) {
 		loadingState.fail(error: error)
 		handleFirestoreError(code: FirestoreErrorCode(error: error))
-		shouldShowErrorModal = true
 	}
 	
 	func resetRedBorders() {
@@ -109,56 +107,63 @@ final class SignUpViewModel: ViewModel {
 	
 	func applyError(
 		title: String,
-		description: String,
+		message: String,
 		invalidEmail: Bool,
 		invalidPassword: Bool
 	) {
-		errorModal = (title, description)
+		showAlert(title: title, message: message)
 		shouldShowEmailRedBorder = invalidEmail
 		shouldShowPasswordRedBorder = invalidPassword
 	}
 	
 	func handleAuthError(code errorCode: AuthErrorCode?) {
 		switch errorCode {
+		case .accountExistsWithDifferentCredential:
+			applyError(
+				title: "Invalid sign in method",
+				message: "You've already signed up with a different method",
+				invalidEmail: false,
+				invalidPassword: false
+			)
 		case .emailAlreadyInUse:
 			applyError(
 				title: "User already exists",
-				description: "A user already exists with email \(email). Would you like to log in instead?",
+				message: "A user already exists with email \(email). Would you like to log in instead?",
 				invalidEmail: true,
 				invalidPassword: false
 			)
 		case .invalidEmail:
 			applyError(
 				title: "Invalid email",
-				description: "Your email should be of the form xyz@xyz.xyz",
+				message: "Your email should be of the form xyz@xyz.xyz",
 				invalidEmail: true,
 				invalidPassword: false
 			)
 		case .networkError:
 			applyError(
 				title: "Network error",
-				description: "There was a problem connecting to our servers. Please try again",
+				message: "There was a problem connecting to our servers. Please try again",
 				invalidEmail: false,
 				invalidPassword: false
 			)
 		case .tooManyRequests:
 			applyError(
 				title: "Too many requests",
-				description: "Please try again later",
+				message: "Please try again later",
 				invalidEmail: false,
 				invalidPassword: false
 			)
 		case .weakPassword:
 			applyError(
 				title: "Weak password",
-				description: "Your password is easily guessed. Try another one",
+				message: "Your password is easily guessed. Try another one",
 				invalidEmail: false,
 				invalidPassword: true
 			)
 		default:
 			applyError(
 				title: Self.unknownErrorTitle,
-				description: Self.unknownErrorDescription,
+				message: Self.unknownErrorDescription,
 				invalidEmail: false,
 				invalidPassword: false
 			)
@@ -170,28 +175,28 @@ final class SignUpViewModel: ViewModel {
 		case .dataLoss, .deadlineExceeded:
 			applyError(
 				title: "Network error",
-				description: "There was a problem connecting to our servers. Please try again",
+				message: "There was a problem connecting to our servers. Please try again",
 				invalidEmail: false,
 				invalidPassword: false
 			)
 		case .permissionDenied:
 			applyError(
 				title: "Permission denied",
-				description: "There was a problem with our servers. Please try again",
+				message: "There was a problem with our servers. Please try again",
 				invalidEmail: false,
 				invalidPassword: false
 			)
 		case .resourceExhausted:
 			applyError(
 				title: "Server overload",
-				description: "Our servers are overloaded right now. Please try again",
+				message: "Our servers are overloaded right now. Please try again",
 				invalidEmail: false,
 				invalidPassword: false
 			)
 		default:
 			applyError(
 				title: Self.unknownErrorTitle,
-				description: Self.unknownErrorDescription,
+				message: Self.unknownErrorDescription,
 				invalidEmail: false,
 				invalidPassword: false
 			)

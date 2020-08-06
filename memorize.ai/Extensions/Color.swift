@@ -25,4 +25,5 @@ extension Color {
 	static let unselectedTabBarItem = Self("UnselectedTabBarItem")
 	static let neonOrange = Self("NeonOrange")
 	static let neonRed = Self("NeonRed")
+	static let offBlack = Self("OffBlack")
 }

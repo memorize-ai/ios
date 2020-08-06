@@ -15,29 +15,17 @@ struct GoogleSignInButton: View {
 								Image("GoogleIcon")
 									.resizable()
 									.renderingMode(.original)
+									.aspectRatio(contentMode: .fit)
 									.frame(width: 22, height: 22)
 								Text("Sign in with Google")
-									.font(.muli(.regular, size: 14))
+									.font(.muli(.bold, size: 14))
 									.foregroundColor(.darkText)
-									.padding(.bottom, 3)
 							}
 						}
 					}
 					.frame(maxWidth: .infinity)
 					.frame(height: 40)
 				}
-			}
-			.alert(isPresented: $model.shouldShowErrorModal) {
-				guard let errorModal = model.errorModal else {
-					return .init(
-						title: .init(GoogleSignInButtonModel.unknownErrorTitle),
-						message: .init(GoogleSignInButtonModel.unknownErrorDescription)
-					)
-				}
-				return .init(
-					title: .init(errorModal.title),
-					message: .init(errorModal.description)
-				)
 			}
 			if model.user != nil {
 				NavigateTo(

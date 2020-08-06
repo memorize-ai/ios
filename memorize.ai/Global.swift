@@ -1,4 +1,5 @@
 import SwiftUI
+import CryptoKit
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
@@ -159,4 +160,10 @@ func slugify(_ string: String, delimiter: String = "-") -> String {
 	return slug.isEmpty
 		? .init(repeating: delimiter, count: string.count)
 		: slug
+}
+
+func sha256(_ text: String) -> String {
+	SHA256.hash(data: Data(text.utf8))
+		.compactMap { .init(format: "%02x", $0) }
+		.joined()
 }

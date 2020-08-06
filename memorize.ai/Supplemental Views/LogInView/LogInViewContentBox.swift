@@ -66,6 +66,7 @@ struct LogInViewContentBox: View {
 					.foregroundColor(.darkBlue)
 			}
 			AuthenticationViewOrText()
+			AppleSignInButton()
 			GoogleSignInButton()
 			if model.user != nil {
 				NavigateTo(
