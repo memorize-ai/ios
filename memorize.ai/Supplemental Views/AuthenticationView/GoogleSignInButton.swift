@@ -27,6 +27,7 @@ struct GoogleSignInButton: View {
 					.frame(height: 40)
 				}
 			}
+			.disabled(model.loadingState == .loading)
 			if model.user != nil {
 				NavigateTo(
 					CurrentStore(user: model.user!).rootDestination,

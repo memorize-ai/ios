@@ -40,6 +40,8 @@ final class AppleSignInButtonModel: NSObject, ViewModel, ASAuthorizationControll
 			return
 		}
 		
+		loadingState.startLoading()
+		
 		onBackgroundThread {
 			auth.signIn(with: OAuthProvider.credential(
 				withProviderID: "apple.com",
@@ -49,13 +51,19 @@ final class AppleSignInButtonModel: NSObject, ViewModel, ASAuthorizationControll
 				let user = result.user
 				
 				guard
-					let email = user.email,
+					let email = user.email ?? credential.email,
 					let additionalInfo = result.additionalUserInfo
 				else { return }
 				
+				let name = user.displayName ?? credential.fullName.map {
+					[$0.givenName, $0.familyName]
+						.compactMap { $0 }
+						.joined(separator: " ")
+				}
+				
 				let newUser = User(
 					id: user.uid,
-					name: user.displayName ?? "Unknown",
+					name: name ?? "Unknown",
 					email: email,
 					interests: [],
 					numberOfDecks: 0,
@@ -65,6 +73,10 @@ final class AppleSignInButtonModel: NSObject, ViewModel, ASAuthorizationControll
 				self.user = newUser
 				
 				if additionalInfo.isNewUser {
+					if user.displayName == nil, let name = name {
+						changeUserName(user: user, name: name)
+					}
+					
 					self.handleNewUser(from: newUser)
 				} else {
 					onMainThread {

@@ -49,7 +49,11 @@ final class SignUpViewModel: ViewModel {
 				withEmail: self.email,
 				password: self.password
 			).done { result in
-				let uid = result.user.uid
+				let user = result.user
+				let uid = user.uid
+				
+				changeUserName(user: user, name: self.name)
+				
 				self.createUserInFirestore(uid: uid).done {
 					onMainThread {
 						self.setUser(uid: uid)

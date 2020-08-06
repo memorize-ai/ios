@@ -167,3 +167,14 @@ func sha256(_ text: String) -> String {
 		.compactMap { .init(format: "%02x", $0) }
 		.joined()
 }
+
+func changeUserName(
+	user: FirebaseAuth.User,
+	name: String,
+	completion: UserProfileChangeCallback? = nil
+) {
+	let request = user.createProfileChangeRequest()
+	
+	request.displayName = name
+	request.commitChanges(completion: completion)
+}

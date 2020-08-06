@@ -132,6 +132,11 @@ final class User: ObservableObject, Identifiable, Equatable, Hashable {
 	@discardableResult
 	func setName(to name: String) -> Self {
 		documentReference.updateData(["name": name]) as Void
+		
+		if let user = auth.currentUser {
+			changeUserName(user: user, name: name)
+		}
+		
 		return self
 	}
 	
